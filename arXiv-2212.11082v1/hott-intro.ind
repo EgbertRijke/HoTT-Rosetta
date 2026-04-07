@@ -1,0 +1,2082 @@
+\begin{theindex}
+
+  \item {$\dbinomtype{A}{B}$}, 
+		\hyperindexformat{\see {binomial type}}{223}
+  \item {$\binom{n}{k}$}, 
+		\hyperindexformat{\see {binomial coefficient}}{26}, 
+		\hyperindexformat{\textbf}{26}
+  \item {$\fallingfactorial{n}{m}$}, 
+		\hyperindexformat{\see {falling factorial}}{210}
+  \item {$(x,y)$}, \hyperindexformat{\see {dependent pair}}{34}, 
+		\hyperindexformat{\textbf}{34}
+  \item {$-1_\Z$}, \hyperpage{32}
+  \item {$\negtwoT$}, \hyperpage{146}
+  \item {$\brck{A}$}, 
+		\hyperindexformat{\see {propositional truncation}}{176}
+  \item {$\trunc{0}{A}$}, \hyperindexformat{\see {set truncation}}{247}
+  \item {$\posetreflection{A}$}, 
+		\hyperindexformat{\see {poset reflection}}{250}
+  \item {$[x]_R$}, \hyperindexformat{\textbf}{230}
+  \item {$\{f(x)\mid x:A\}$}, \hyperindexformat{\textbf}{287}
+  \item {$\{t(x_0,\ldots,x_n)\mid x_0:A_0,\ldots,x_n:A_n\}$}, 
+		\hyperindexformat{\textbf}{287}
+  \item {$\stirling{A}{B}$}, 
+		\hyperindexformat{\see {Stirling type of the second kind}}{252}
+  \item {$\stirling{n}{m}$}, 
+		\hyperindexformat{\see {Stirling number of the second kind}}{210}
+  \item {$\sim_P$}, \hyperindexformat{\textbf}{249}
+  \item {$\emptyt$}, \hyperindexformat{\see {empty type}}{28}, 
+		\hyperindexformat{\textbf}{28}
+  \item {$\zeroN$}, \hyperpage{20}
+  \item {$0_\Z$}, \hyperpage{32}
+  \item {$\unit$}, \hyperindexformat{\see {unit type}}{27}, 
+		\hyperindexformat{\textbf}{27}
+  \item {$1_{\Z}$}, \hyperpage{32}
+  \item 3-for-2 property
+    \subitem of contractible types, \hyperpage{124}
+    \subitem of equivalences, \hyperpage{113}
+    \subitem of propositional truncations, \hyperpage{174}
+
+  \indexspace
+
+  \item {$\forall_{(x:A)}P(x)$}, 
+		\hyperindexformat{\see {universal quantification}}{181}
+  \item {$A+B$}, \hyperindexformat{\see {coproduct}}{30}
+    \subitem {${\blank}+{\blank}$ is a $0$-truncated map}, 
+		\hyperpage{226}
+  \item {$a = x$}, \hyperindexformat{\see {identity type}}{39}
+  \item {$A\to B$}, \hyperindexformat{\see {function type}}{14}, 
+		\hyperindexformat{\textbf}{14}
+  \item {$A\to_\ast B$}, \hyperindexformat{\see {pointed map}}{260}
+  \item {$A\hookrightarrow B$}, 
+		\hyperindexformat{\see {embedding}}{132}
+  \item {$A \demb B$}, \hyperindexformat{\textbf}{209}, 
+		\hyperindexformat{\see {decidable embedding}}{222}
+  \item {$\eqv{A}{B}$}, \hyperindexformat{\see {equivalence}}{106}
+  \item {$A\times B$}, \hyperindexformat{\see {cartesian product}}{35}, 
+		\hyperindexformat{\textbf}{35}
+  \item {$A/R$}, \hyperindexformat{\see {set quotient}}{230}
+  \item {absolute value function on $\Z$}, 
+		\hyperindexformat{\textbf}{62}
+  \item absorption laws
+    \subitem of dependent pair types, \hyperpage{109}
+  \item {abstract $G$-set}, \hyperindexformat{\textbf}{266}, 
+		\hyperpage{273}
+    \subitem fixed point, \hyperindexformat{\textbf}{273}
+    \subitem {free abstract $G$-set}, \hyperindexformat{\textbf}{273}
+    \subitem {transitive abstract $G$-set}, 
+		\hyperindexformat{\textbf}{273}
+  \item abstract group, \hyperindexformat{\textbf}{266}
+  \item action on fibers, \hyperindexformat{\textbf}{171}
+  \item action on generators for the circle, 
+		\hyperindexformat{\textbf}{302}
+  \item action on paths, \hyperindexformat{\textbf}{43}, 
+		\hyperpage{43--44}
+    \subitem {$\apbinary_f$}, \hyperindexformat{\textbf}{262}
+    \subitem {$\apcomp$}, \hyperindexformat{\textbf}{43}
+    \subitem {$\apconcat$}, \hyperindexformat{\textbf}{44}
+    \subitem {$\apid$}, \hyperindexformat{\textbf}{43}
+    \subitem {$\apinv$}, \hyperindexformat{\textbf}{44}
+    \subitem {$\aprefl$}, \hyperindexformat{\textbf}{44}
+    \subitem binary action on paths, \hyperindexformat{\textbf}{262}
+  \item {$\addN$}, \hyperindexformat{\textbf}{22}
+    \subitem {$\addN(m)$ is an embedding}, \hyperpage{149}
+  \item {$\addZ$}, \hyperindexformat{\textbf}{35}
+  \item {addition on $\N$}, \hyperindexformat{\textbf}{22}, 
+		\hyperpage{22--24}
+  \item algebra of a polynomial endofunctor, 
+		\hyperindexformat{\textbf}{293}
+  \item {$\apfunc{f}$}, \hyperindexformat{\see {action on paths}}{43}, 
+		\hyperindexformat{\textbf}{43}
+  \item {$\apbinary_f$}, \hyperindexformat{\textbf}{262}
+  \item {$\apcomp$}, \hyperindexformat{\textbf}{43}
+  \item {$\apconcat$}, \hyperindexformat{\textbf}{44}
+  \item {$\apid$}, \hyperindexformat{\textbf}{43}
+  \item {$\apinv$}, \hyperindexformat{\textbf}{44}
+  \item {$\aprefl$}, \hyperindexformat{\textbf}{44}
+  \item {$\apdfunc{f}$}, \hyperindexformat{\textbf}{45}
+  \item {$\arity$}, \hyperindexformat{\textbf}{276}
+  \item arity of constructor W-type, \hyperindexformat{\textbf}{276}
+  \item associative, \hyperindexformat{\textbf}{254}
+  \item associativity
+    \subitem {of addition on $\N$}, \hyperpage{46}
+    \subitem {of addition on $\Z$}, \hyperpage{50}
+    \subitem of cartesian products, \hyperpage{108}
+    \subitem of concatenation of identifications, \hyperpage{41}
+    \subitem of coproducts, \hyperpage{108}
+    \subitem of dependent pair types, \hyperpage{109}
+    \subitem of function composition, \hyperpage{17}
+    \subitem {of multiplication on $\N$}, \hyperpage{49}
+    \subitem {of multiplication on $\sphere{1}$}, \hyperpage{307}, 
+		\hyperpage{320}
+    \subitem {of multiplication on $\Z$}, \hyperpage{51}
+  \item {$\Aut(X)$}, \hyperindexformat{\see {automorphism group}}{256}
+  \item automorphism group, \hyperindexformat{\textbf}{256}
+  \item axiom
+    \subitem axiom K, \hyperindexformat{\textbf}{144}
+    \subitem axiom of choice, \hyperindexformat{\textbf}{221}
+    \subitem function extensionality, \hyperindexformat{\textbf}{155}, 
+		\hyperpage{152--172}
+    \subitem law of excluded middle, \hyperindexformat{\textbf}{222}, 
+		\hyperpage{225}
+    \subitem replacement axiom, \hyperindexformat{\textbf}{232}
+    \subitem univalence, \hyperindexformat{\textbf}{212}, 
+		\hyperpage{210--229}
+  \item axiom K, \hyperindexformat{\textbf}{144}
+  \item {$\axiomK(A)$}, \hyperindexformat{\textbf}{144}
+  \item axiom of choice, \hyperindexformat{\textbf}{221}
+    \subitem implies law of excluded middle, \hyperpage{249}
+
+  \indexspace
+
+  \item {$\beta$-rule for $\Pi$-types}, \hyperindexformat{\textbf}{13}
+  \item {$B^A$}, \hyperindexformat{\see {function type}}{14}
+  \item {$\base$}, \hyperpage{298}, \hyperindexformat{\textbf}{299}
+  \item base case, \hyperpage{21}
+  \item base universe, \hyperindexformat{\textbf}{55}
+  \item {B\'ezout's identity}, \hyperpage{97}
+  \item bi-implication, \hyperindexformat{\textbf}{36}, 
+		\hyperindexformat{\textbf}{181}, \hyperpage{214}
+  \item bi-invertible map, \hyperindexformat{\see {equivalence}}{107}
+  \item {$\BinTree$}, \hyperindexformat{\textbf}{278}
+  \item {$\collectBinTree$}, \hyperindexformat{\textbf}{278}
+  \item binary action on paths, \hyperindexformat{\textbf}{262}
+  \item binary correspondence, \hyperindexformat{\textbf}{226}
+    \subitem function, \hyperindexformat{\textbf}{226}
+  \item binary rooted tree, \hyperindexformat{\textbf}{278}
+    \subitem {$\collectBinTree$}, \hyperindexformat{\textbf}{278}
+    \subitem is an extensional W-type, \hyperpage{286}
+    \subitem {$\node$}, \hyperindexformat{\textbf}{278}
+  \item binomial coefficient, \hyperindexformat{\textbf}{26}
+  \item binomial theorem, \hyperpage{228}
+  \item binomial type, \hyperindexformat{\textbf}{223}, 
+		\hyperpage{222--225}, \hyperpage{228}, \hyperpage{268}
+    \subitem extended definition, \hyperindexformat{\textbf}{252}
+    \subitem is finite, \hyperpage{224}
+    \subitem recursive relations, \hyperpage{223}
+  \item Bishop on the positive integers, \hyperpage{19}
+  \item {$\bool$}, \hyperindexformat{\see {booleans}}{35}, 
+		\hyperindexformat{\textbf}{35}
+    \subitem is a set, \hyperpage{149}
+  \item boolean conjunction, \hyperindexformat{\textbf}{36}
+  \item boolean disjunction, \hyperindexformat{\textbf}{36}
+  \item boolean reflection, \hyperindexformat{\textbf}{94}, 
+		\hyperpage{93--95}
+  \item {$\booleanization$}, \hyperindexformat{\textbf}{94}
+  \item booleans, \hyperindexformat{\textbf}{35}
+    \subitem computation rules, \hyperindexformat{\textbf}{36}
+    \subitem conjunction, \hyperindexformat{\textbf}{36}
+    \subitem {$\const_b$ is not an equivalence}, \hyperpage{113}
+    \subitem disjunction, \hyperindexformat{\textbf}{36}
+    \subitem {$\bfalse$}, \hyperindexformat{\textbf}{35}
+    \subitem {$\bfalse\neq\btrue$}, \hyperpage{60}
+    \subitem induction principle, \hyperindexformat{\textbf}{36}
+    \subitem {$\negbool$}, \hyperindexformat{\textbf}{36}
+    \subitem observational equality, \hyperindexformat{\textbf}{60}
+    \subitem {$\btrue$}, \hyperindexformat{\textbf}{35}
+  \item {$\BS_2$}, \hyperpage{227}, \hyperpage{229}
+    \subitem characterization of identity type, \hyperpage{219}
+    \subitem is not contractible, \hyperpage{220}
+  \item {$\BS_n$}, \hyperindexformat{\textbf}{204}, \hyperpage{222}, 
+		\hyperpage{226--228}
+    \subitem is classifying type of symmetric group, \hyperpage{265}
+
+  \indexspace
+
+  \item Cantor's diagonal argument, \hyperpage{195--196}
+  \item cardinality
+    \subitem of a finite type, \hyperindexformat{\textbf}{204}
+    \subitem of a multiset, \hyperindexformat{\textbf}{287}
+  \item cartesian product type, \hyperindexformat{\textbf}{35}, 
+		\hyperpage{35}
+    \subitem associativity, \hyperpage{108}
+    \subitem commutativity, \hyperpage{108}
+    \subitem computation rule, \hyperindexformat{\textbf}{35}
+    \subitem distributivity of propositional truncations over products, 
+		\hyperpage{185}
+    \subitem distributivity over coproducts, \hyperpage{108}
+    \subitem {$\ind{\times}$}, \hyperindexformat{\textbf}{35}
+    \subitem induction principle, \hyperindexformat{\textbf}{35}
+    \subitem products of small types are small, \hyperpage{228}
+    \subitem unit laws, \hyperpage{108}
+    \subitem universal property, \hyperindexformat{\textbf}{160}
+    \subitem zero laws, \hyperpage{108}
+  \item case analysis, \hyperpage{83--86}
+  \item category laws
+    \subitem for functions, \hyperpage{17}
+  \item center of contraction, \hyperindexformat{\textbf}{116}
+  \item change of variables, \hyperpage{9}
+  \item characterization of identity type
+    \subitem fundamental theorem of identity types, 
+		\hyperpage{125--139}
+    \subitem of a contractible type, \hyperpage{123}
+    \subitem of a universe, \hyperpage{211}
+    \subitem {of $\BS_2$}, \hyperpage{219}
+    \subitem of coproducts, \hyperpage{132--134}
+    \subitem {of $\Group_\UU$}, \hyperpage{259}
+    \subitem {of $\monoid_\UU$}, \hyperpage{270}
+    \subitem {of $\N$}, \hyperpage{131}
+    \subitem {of $\Pi$-types}, \hyperpage{153}
+    \subitem {of $\Sigma$-types}, \hyperpage{110--112}
+    \subitem {of $\semigroup_\UU$}, \hyperpage{258}
+    \subitem of set quotients, \hyperpage{231}
+    \subitem {of subtypes of $A$}, \hyperpage{218}
+    \subitem of the circle, \hyperpage{316--319}
+    \subitem of the fiber of a map, \hyperpage{118--119}, 
+		\hyperpage{136}
+    \subitem of W-types, \hyperpage{279}
+  \item {$\choice$}, \hyperindexformat{\textbf}{156}
+  \item {$\choice^{-1}$}, \hyperindexformat{\textbf}{156}
+  \item choice of unique representatives, 
+		\hyperindexformat{\textbf}{242}
+    \subitem for integer fractions, \hyperpage{244}
+    \subitem {for the congruence relations on $\N$}, \hyperpage{243}
+  \item circle, \hyperindexformat{\textbf}{299}, \hyperpage{298--322}
+    \subitem associativity of multiplication, \hyperpage{307}, 
+		\hyperpage{320}
+    \subitem {$\base$}, \hyperpage{298}, 
+		\hyperindexformat{\textbf}{299}
+    \subitem characterization of identity type, \hyperpage{316--319}
+    \subitem commutativity of multiplication, \hyperpage{307}
+    \subitem computation rules, \hyperindexformat{\textbf}{299}
+    \subitem constant maps, \hyperpage{306}
+    \subitem {$\mathsf{deg}(k)$}, 
+		\hyperindexformat{\see {degree $k$ map}}{314}, 
+		\hyperindexformat{\textbf}{314}
+    \subitem {degree $k$ map}, \hyperindexformat{\textbf}{314}, 
+		\hyperpage{319}
+    \subitem dependent action on generators, 
+		\hyperindexformat{\textbf}{298}
+    \subitem dependent universal property, 
+		\hyperindexformat{\textbf}{300}, \hyperpage{300--303}
+    \subitem descent data, \hyperindexformat{\textbf}{308}, 
+		\hyperpage{310--313}
+    \subitem double cover, \hyperindexformat{\textbf}{319}
+    \subitem fundamental group, \hyperpage{318}
+    \subitem H-space structure, \hyperindexformat{\textbf}{304}, 
+		\hyperpage{303--306}
+    \subitem induction principle, \hyperindexformat{\textbf}{299}
+    \subitem {is a $1$-type}, \hyperpage{317}
+    \subitem is connected, \hyperpage{306}
+    \subitem is not a set, \hyperpage{317}
+    \subitem {$\lloop$}, \hyperpage{298}, 
+		\hyperindexformat{\textbf}{299}
+    \subitem Mac Lane pentagon, \hyperpage{321}
+    \subitem multiplication, \hyperindexformat{\textbf}{304}, 
+		\hyperpage{303--306}
+    \subitem {$\pi_1(\sphere{1})\cong\Z$}, \hyperpage{318}
+    \subitem twisted double cover, \hyperindexformat{\textbf}{319}
+    \subitem {type family over $\sphere{1}$}, 
+		\hyperindexformat{\textbf}{309}
+    \subitem universal cover, \hyperindexformat{\textbf}{310}, 
+		\hyperpage{308--322}
+    \subitem universal property, \hyperindexformat{\textbf}{302}, 
+		\hyperpage{300--303}
+  \item classifying type, \hyperindexformat{\textbf}{265}
+    \subitem universal property, \hyperindexformat{\textbf}{272}
+  \item cofibonacci sequence, \hyperindexformat{\textbf}{97}
+  \item coherent unit laws, \hyperindexformat{\textbf}{303}
+  \item coherently invertible map, \hyperindexformat{\textbf}{120}
+    \subitem is a contractible map, \hyperpage{120}
+  \item {$\collatz$}, \hyperindexformat{\textbf}{83}
+  \item Collatz conjecture, \hyperpage{95}
+  \item Collatz function, \hyperindexformat{\textbf}{83}
+  \item commutative binary operation, \hyperindexformat{\textbf}{271}
+  \item commutative diagram, \hyperindexformat{\textbf}{104}
+  \item commutativity
+    \subitem {of addition on $\N$}, \hyperpage{46}
+    \subitem {of addition on $\Z$}, \hyperpage{50}
+    \subitem of cartesian products, \hyperpage{108}
+    \subitem of coproducts, \hyperpage{108}
+    \subitem {of multiplication on $\N$}, \hyperpage{49}
+    \subitem {of multiplication on $\sphere{1}$}, \hyperpage{307}
+    \subitem {of multiplication on $\Z$}, \hyperpage{51}
+  \item {$\comp(g,f)$}, 
+		\hyperindexformat{\see {composition, of functions}}{16}, 
+		\hyperindexformat{\textbf}{16}
+  \item {$\singcomp$}, \hyperindexformat{\textbf}{117}
+  \item component of an element pf a W-type, 
+		\hyperindexformat{\textbf}{276}
+  \item composition
+    \subitem of equivalences, \hyperindexformat{\textbf}{113}
+    \subitem of functions, \hyperindexformat{\textbf}{16}
+    \subitem of group homomorphisms, \hyperindexformat{\textbf}{256}
+    \subitem of semigroup homomorphisms, 
+		\hyperindexformat{\textbf}{256}
+  \item computation rules
+    \subitem for cartesian products, \hyperpage{35}
+    \subitem for coproducts, \hyperindexformat{\textbf}{30}
+    \subitem {for $\N$}, \hyperindexformat{\textbf}{22}, \hyperpage{22}
+    \subitem {for $\Sigma$-types}, \hyperindexformat{\textbf}{34}
+    \subitem for the booleans, \hyperindexformat{\textbf}{36}
+    \subitem for the circle, \hyperindexformat{\textbf}{299}
+    \subitem for the unit type, \hyperindexformat{\textbf}{28}
+    \subitem for W-types, \hyperindexformat{\textbf}{275}
+  \item {$\coninv$}, \hyperindexformat{\textbf}{49}
+  \item {$\concat$}, \hyperindexformat{\textbf}{40}
+    \subitem is a family of equivalences, \hyperpage{112}
+  \item {$\concat'$}, \hyperindexformat{\textbf}{112}
+    \subitem is a family of equivalences, \hyperpage{112}
+  \item {$\concathtpy$}, \hyperindexformat{\textbf}{105}
+    \subitem is a family of equivalences, \hyperpage{166}
+  \item {$\concathtpy'$}
+    \subitem is a family of equivalences, \hyperpage{166}
+  \item {$\concatlist$}, \hyperindexformat{\textbf}{37}
+    \subitem is a $0$-truncated map, \hyperpage{151}
+  \item concatenation
+    \subitem of identifications, \hyperindexformat{\textbf}{40}
+    \subitem of lists, \hyperindexformat{\textbf}{37}
+  \item conclusion of an inference rule, \hyperindexformat{\textbf}{3}
+  \item {concrete $G$-set}, \hyperindexformat{\textbf}{266}, 
+		\hyperpage{273}
+    \subitem fixed point, \hyperindexformat{\textbf}{266}, 
+		\hyperpage{273}
+    \subitem {free concrete $G$-set}, \hyperindexformat{\textbf}{267}
+    \subitem orbit, \hyperindexformat{\textbf}{266}, \hyperpage{273}
+    \subitem {transitive concrete $G$-set}, 
+		\hyperindexformat{\textbf}{267}
+  \item concrete group, \hyperindexformat{\textbf}{266}
+  \item concrete normal subgroup, \hyperindexformat{\textbf}{274}
+  \item concrete subgroup, \hyperindexformat{\textbf}{273}
+  \item {$\concretesubgroup_\UU(G,u)$}, \hyperindexformat{\textbf}{273}
+  \item {congruence relations on $\N$}, \hyperindexformat{\textbf}{67}
+    \subitem choice of unique representatives, \hyperpage{243}
+  \item conjugation, \hyperindexformat{\textbf}{274}
+  \item conjunction, \hyperindexformat{\textbf}{181}
+    \subitem impredicative encoding, \hyperpage{186}
+  \item connected component
+    \subitem of a universe, \hyperindexformat{\textbf}{222}
+  \item connected map, \hyperindexformat{\textbf}{247}
+  \item connected type, \hyperindexformat{\textbf}{247}
+    \subitem connected types are inhabited, \hyperpage{247}
+  \item {$\cons(a,l)$}, \hyperindexformat{\textbf}{37}
+  \item {$\const_x$}, \hyperindexformat{\textbf}{18}
+  \item constant element in a W-type, \hyperindexformat{\textbf}{276}
+  \item constant family, \hyperindexformat{\textbf}{9}
+  \item constant map, \hyperindexformat{\textbf}{18}
+    \subitem is an embedding, \hyperpage{197}
+    \subitem on the circle, \hyperpage{306}
+    \subitem weakly constant map, \hyperindexformat{\textbf}{183}
+  \item context, \hyperindexformat{\textbf}{4}, \hyperpage{3--5}
+    \subitem empty context, \hyperindexformat{\textbf}{4}
+  \item contractible map, \hyperindexformat{\textbf}{119}, 
+		\hyperpage{118--123}
+    \subitem is an equivalence, \hyperpage{119}
+  \item contractible type, \hyperindexformat{\textbf}{116}, 
+		\hyperpage{115--125}, \hyperpage{225}
+    \subitem 3-for-2 property, \hyperpage{124}
+    \subitem center of contraction, \hyperindexformat{\textbf}{116}
+    \subitem characterization of identity type, \hyperpage{123}
+    \subitem closed under cartesian products, \hyperpage{124}
+    \subitem closed under retracts, \hyperpage{123}
+    \subitem contraction, \hyperindexformat{\textbf}{116}
+    \subitem dependent universal property, 
+		\hyperindexformat{\textbf}{168}
+    \subitem is a proposition, \hyperpage{140}
+    \subitem {is equivalent to $\unit$}, \hyperpage{124}
+    \subitem {is $\UU$-small}, \hyperpage{212}
+    \subitem satisfies singleton induction, \hyperpage{117}
+    \subitem universal property, \hyperindexformat{\textbf}{168}
+    \subitem weak function extensionality, 
+		\hyperindexformat{\textbf}{154}
+  \item contraction, \hyperindexformat{\textbf}{116}
+  \item conversion rule
+    \subitem element, \hyperindexformat{\textbf}{10}
+    \subitem variable, \hyperindexformat{\textbf}{7}
+  \item coproduct, \hyperindexformat{\textbf}{30}, \hyperpage{30--31}
+    \subitem associativity, \hyperpage{108}
+    \subitem characterization of identity type, \hyperpage{132--134}
+    \subitem commutativity, \hyperpage{108}
+    \subitem computation rules, \hyperindexformat{\textbf}{30}
+    \subitem dependent universal property, 
+		\hyperindexformat{\textbf}{169}
+    \subitem disjointness, \hyperpage{132--134}
+    \subitem {distributivity of $\Pi$ over coproducts}, \hyperpage{170}
+    \subitem {$\Eqcoprod_{A,B}$}, \hyperindexformat{\textbf}{133}
+    \subitem functorial action, \hyperindexformat{\textbf}{31}, 
+		\hyperpage{114}
+    \subitem {$\indcoprod$}, \hyperindexformat{\textbf}{30}
+    \subitem induction principle, \hyperindexformat{\textbf}{30}
+    \subitem {$\inl$}, \hyperindexformat{\textbf}{30}
+    \subitem {$\inr$}, \hyperindexformat{\textbf}{30}
+    \subitem is a set, \hyperpage{150}
+    \subitem is a truncated type, \hyperpage{150}
+    \subitem observational equality, \hyperpage{133}
+    \subitem unit laws, \hyperpage{108}
+    \subitem universal property, \hyperindexformat{\textbf}{169}
+  \item correspondence
+    \subitem opposite correspondence, \hyperpage{226}
+  \item {$\cnt(A)$}, \hyperindexformat{\textbf}{198}
+  \item counting, \hyperpage{197--201}
+  \item countings of a type, \hyperindexformat{\textbf}{198}
+
+  \indexspace
+
+  \item {$\delta_A$}, 
+		\hyperindexformat{\see {diagonal, of a type}}{150}, 
+		\hyperindexformat{\textbf}{150}
+  \item {$\mathcal{D}(X,e)$}, 
+		\hyperindexformat{\see {type family, over $\sphere{1}$}}{309}, 
+		\hyperindexformat{\textbf}{309}
+  \item {$D_A$}, 
+		\hyperindexformat{\see {generalized dihedral group}}{270}, 
+		\hyperindexformat{\textbf}{270}
+  \item {$D_k$}, \hyperindexformat{\see {dihedral group}}{270}, 
+		\hyperindexformat{\textbf}{270}
+  \item {$d\mid n$}, \hyperindexformat{\see{divisibility on $\N$}}{63}, 
+		\hyperindexformat{\textbf}{63}
+    \subitem {is a proposition if $d>0$}, \hyperpage{149}
+  \item decidable embedding, \hyperpage{209}, 
+		\hyperindexformat{\textbf}{222}
+  \item decidable equality, \hyperindexformat{\textbf}{81}
+    \subitem of cartesian products, \hyperpage{96}
+    \subitem of coproducts, \hyperpage{96}
+    \subitem {of $\Fin{k}$}, \hyperpage{82}
+    \subitem {of $\N$}, \hyperpage{82}
+    \subitem {of $\Sigma$-types}, \hyperpage{96}
+    \subitem {of $\Z$}, \hyperpage{96}
+  \item decidable family of types, \hyperindexformat{\textbf}{80}
+  \item decidable map, \hyperpage{209}, \hyperindexformat{\textbf}{222}
+  \item decidable proposition, \hyperindexformat{\textbf}{214}
+  \item decidable subtype, \hyperindexformat{\textbf}{181}, 
+		\hyperpage{223}
+  \item decidable type, \hyperindexformat{\textbf}{80}, \hyperpage{185}
+    \subitem empty type, \hyperpage{80}
+    \subitem type with an element, \hyperpage{80}
+    \subitem unit type, \hyperpage{80}
+  \item Dedekind finite type, \hyperindexformat{\textbf}{209}
+  \item {$\mathsf{deg}(k)$}, 
+		\hyperindexformat{\see {degree $k$ map}}{314}, 
+		\hyperindexformat{\textbf}{314}
+  \item {degree $k$ map}, \hyperindexformat{\textbf}{314}, 
+		\hyperpage{319}
+  \item delooping, \hyperindexformat{\textbf}{265}
+  \item dependent action on generators for the circle, 
+		\hyperindexformat{\textbf}{298}
+  \item dependent action on paths, \hyperindexformat{\textbf}{44}, 
+		\hyperpage{298}
+  \item dependent function type, \hyperindexformat{\textbf}{12}, 
+		\hyperpage{11--19}
+    \subitem {$\beta$-rule}, \hyperindexformat{\textbf}{13}
+    \subitem characterization of identity type, \hyperpage{153}
+    \subitem computation rules, 
+		\hyperindexformat{\see {$\beta$- and $\eta$-rules}}{13}
+    \subitem congruence rule, \hyperindexformat{\textbf}{12}
+    \subitem {distributivity of $\Pi$ over coproducts}, \hyperpage{170}, 
+		\hyperpage{253}
+    \subitem elimination rule, \hyperindexformat{\see {evaluation}}{13}
+    \subitem {$\eta$-rule}, \hyperindexformat{\textbf}{13}
+    \subitem evaluation, \hyperindexformat{\textbf}{13}
+    \subitem formation rule, \hyperindexformat{\textbf}{12}
+    \subitem identity system, \hyperpage{158}
+    \subitem introduction rule, 
+		\hyperindexformat{\see {$\lambda$-abstraction}}{12}
+    \subitem {is locally $\UU$-small}, \hyperpage{232}
+    \subitem {is $\UU$-small}, \hyperpage{212}
+    \subitem {$\lambda$-abstraction}, \hyperindexformat{\textbf}{12}
+    \subitem {$\lambda$-congruence}, \hyperpage{12}
+  \item dependent identity system, \hyperindexformat{\textbf}{135}
+  \item dependent pair, \hyperindexformat{\textbf}{33}
+  \item dependent pair type, \hyperindexformat{\textbf}{33}, 
+		\hyperpage{33--34}
+    \subitem absorption laws, \hyperpage{109}
+    \subitem associativity, \hyperpage{109}
+    \subitem computation rule, \hyperindexformat{\textbf}{34}
+    \subitem dependent universal property, 
+		\hyperindexformat{\textbf}{159}, \hyperpage{159--160}
+    \subitem distributivity over coproducts, \hyperpage{109}
+    \subitem {$\EqSigma$}, \hyperindexformat{\textbf}{111}
+    \subitem identity type, \hyperpage{110--112}
+    \subitem {$\indSigma$}, \hyperindexformat{\textbf}{34}
+    \subitem induction principle, \hyperindexformat{\textbf}{34}
+    \subitem is truncated, \hyperpage{150}
+    \subitem left unit law, \hyperpage{124}
+    \subitem observational equality, \hyperindexformat{\textbf}{111}
+    \subitem {$\pair$}, \hyperindexformat{\textbf}{33}
+    \subitem {$\proj 1$}, \hyperindexformat{\textbf}{34}
+    \subitem {$\proj 2$}, \hyperindexformat{\textbf}{34}
+    \subitem unit laws, \hyperpage{109}
+    \subitem universal property, \hyperpage{159--160}
+  \item dependent type theory, \hyperpage{3--11}
+  \item dependent universal property
+    \subitem of contractible types, \hyperindexformat{\textbf}{168}
+    \subitem of coproducts, \hyperindexformat{\textbf}{169}
+    \subitem of empty types, \hyperindexformat{\textbf}{168}
+    \subitem of identity types, \hyperindexformat{\textbf}{160}, 
+		\hyperpage{160--161}
+    \subitem of propositional truncations, 
+		\hyperindexformat{\textbf}{185}
+    \subitem {of $\Sigma$-types}, \hyperindexformat{\textbf}{159}, 
+		\hyperpage{159--160}
+    \subitem of set truncations, \hyperindexformat{\textbf}{246}
+    \subitem of surjective maps, \hyperindexformat{\textbf}{192}
+    \subitem of the circle, \hyperindexformat{\textbf}{300}, 
+		\hyperpage{300--303}
+    \subitem {of $\Z$}, \hyperindexformat{\textbf}{315}, 
+		\hyperpage{313--316}
+  \item derivation, \hyperindexformat{\textbf}{9}, \hyperpage{9--10}
+  \item {$\mathsf{desc}_{\sphere{1}}$}, \hyperindexformat{\textbf}{309}
+  \item descent data for the circle, \hyperindexformat{\textbf}{308}, 
+		\hyperpage{310--313}
+  \item {$\dgen_{\sphere{1}}$}, 
+		\hyperindexformat{\see {circle, dependent action on generators}}{298}, 
+		\hyperindexformat{\textbf}{298}
+  \item diagonal of a type, \hyperindexformat{\textbf}{150}
+  \item dihedral group, \hyperindexformat{\textbf}{270}
+  \item disjoint sum, \hyperindexformat{\see {coproduct}}{30}
+  \item disjointness of coproducts, \hyperpage{132--134}
+  \item disjunction, \hyperindexformat{\textbf}{180}, \hyperpage{181}
+    \subitem impredicative encoding, \hyperpage{186}
+    \subitem universal property, \hyperindexformat{\textbf}{180}
+  \item {$\distN(x,y)$}, \hyperindexformat{\textbf}{61}
+  \item {distance function on $\N$}, \hyperindexformat{\textbf}{61}
+  \item distributivity
+    \subitem of cartesian product over coproduct, \hyperpage{108}
+    \subitem {of $\invfunc$ over $\concat$}, \hyperpage{49}
+    \subitem {of $\mulN$ over $\addN$}, \hyperpage{49}
+    \subitem {of $\mulZ$ over $\addZ$}, \hyperpage{51}
+    \subitem {of $\Pi$ over coproducts}, \hyperpage{170}, 
+		\hyperpage{253}
+    \subitem {of $\Pi$ over $\Sigma$}, \hyperpage{156}
+    \subitem of propositional truncations over cartesian products, 
+		\hyperpage{185}
+    \subitem {of $\Sigma$-types over coproducts}, \hyperpage{109}
+  \item {divisibility on $\N$}, \hyperindexformat{\textbf}{63}
+    \subitem is a proposition, \hyperpage{149}
+    \subitem is decidable, \hyperpage{82}
+  \item double counting, \hyperpage{201--203}
+  \item {double cover of $\sphere{1}$}, \hyperindexformat{\textbf}{319}
+  \item {$\decidableProp_\UU$}, 
+		\hyperindexformat{\see {decidable proposition}}{214}, 
+		\hyperindexformat{\textbf}{214}
+    \subitem {is equivalent to $\bool$}, \hyperpage{214}
+
+  \indexspace
+
+  \item {$\in$}, 
+		\hyperindexformat{\see {elementhood relation on W-types}}{282}, 
+		\hyperindexformat{\textbf}{282}
+  \item {$\exists_{(x:A)}P(x)$}, 
+		\hyperindexformat{\see {existential quantification}}{180}, 
+		\hyperindexformat{\textbf}{180}
+  \item {$\universalcovercircle$}, 
+		\hyperindexformat{\see {universal cover of $\sphere{1}$}}{310}, 
+		\hyperindexformat{\textbf}{310}
+  \item Eckmann-Hilton argument, \hyperpage{262--265}
+  \item effective map, \hyperindexformat{\textbf}{234}
+  \item element, \hyperindexformat{\textbf}{4}
+    \subitem indexed element, \hyperindexformat{\textbf}{5}
+  \item element conversion rule, \hyperindexformat{\textbf}{10}
+  \item element of a multiset, \hyperindexformat{\textbf}{287}
+  \item elementhood relation on W-types, \hyperpage{282--286}
+    \subitem is irreflexive, \hyperpage{292}
+  \item embedding, \hyperindexformat{\textbf}{132}, 
+		\hyperpage{131--132}, \hyperpage{143}, \hyperpage{188}, 
+		\hyperpage{218}
+    \subitem closed under homotopies, \hyperpage{137}
+    \subitem factorization, \hyperpage{195}
+  \item empty context, \hyperindexformat{\textbf}{4}
+  \item empty type, \hyperindexformat{\textbf}{28}, \hyperpage{28--30}
+    \subitem dependent universal property, 
+		\hyperindexformat{\textbf}{168}
+    \subitem {$\indempty$}, \hyperindexformat{\textbf}{28}
+    \subitem induction principle, \hyperindexformat{\textbf}{28}
+    \subitem is a proposition, \hyperpage{140}
+    \subitem is decidable, \hyperpage{80}
+    \subitem universal property, \hyperindexformat{\textbf}{168}
+  \item encoding of a type in a universe, \hyperpage{51}
+  \item enough universes, \hyperindexformat{\textbf}{55}, 
+		\hyperpage{54--56}, \hyperpage{212}
+  \item {$\EqN$}, \hyperindexformat{\textbf}{57}, \hyperpage{130--131}
+  \item {$\EqSigma$}, \hyperindexformat{\textbf}{111}
+  \item {$\EqW$}, \hyperindexformat{\textbf}{279}
+  \item {$\EqBool$}, \hyperindexformat{\textbf}{60}
+  \item {$\Eqcoprod_{A,B}$}, \hyperindexformat{\textbf}{133}
+  \item {$\eqequiv$}, \hyperindexformat{\textbf}{212}
+  \item {$\Eqfib$}, \hyperindexformat{\textbf}{118}
+  \item {$\eqhtpy$}, \hyperindexformat{\textbf}{155}
+  \item {$\eqpair$}, \hyperindexformat{\textbf}{111}
+  \item {$\eqrel_\UU(A)$}, 
+		\hyperindexformat{\see {equivalence relation}}{230}, 
+		\hyperindexformat{\textbf}{230}
+  \item {$\equiveq$}, \hyperindexformat{\textbf}{211}
+    \subitem is a group isomorphism, \hyperpage{269}
+  \item equivalence, \hyperindexformat{\textbf}{106}, 
+		\hyperpage{103--115}
+    \subitem 3-for-2 property, \hyperpage{113}
+    \subitem closed under homotopies, \hyperpage{113}
+    \subitem composition, \hyperindexformat{\textbf}{113}
+    \subitem family of equivalences, \hyperindexformat{\textbf}{126}
+    \subitem has an inverse, \hyperpage{108}
+    \subitem inverse, \hyperindexformat{\textbf}{106}
+    \subitem is a contractible map, \hyperpage{123}
+    \subitem is an embedding, \hyperpage{132}
+    \subitem precomposition, \hyperpage{161}
+  \item equivalence class, \hyperindexformat{\textbf}{230}
+    \subitem choice of unique representatives, 
+		\hyperindexformat{\textbf}{242}, \hyperpage{242--245}
+  \item equivalence induction, \hyperindexformat{\textbf}{211}
+  \item equivalence relation, \hyperindexformat{\textbf}{230}, 
+		\hyperpage{234}
+    \subitem {$[x]_R$}, \hyperindexformat{\textbf}{230}
+    \subitem choice of unique representatives, 
+		\hyperindexformat{\textbf}{242}, \hyperpage{242--245}
+    \subitem effective map, \hyperindexformat{\textbf}{234}
+    \subitem equivalence class, \hyperindexformat{\textbf}{230}
+  \item {$\evpair$}, \hyperindexformat{\textbf}{159}
+    \subitem is an equivalence, \hyperpage{159, 160}
+  \item {$\evpt$}, \hyperindexformat{\textbf}{116}
+  \item {$\evrefl$}, \hyperindexformat{\textbf}{160}
+    \subitem is an equivalence, \hyperpage{160}
+  \item evaluation, \hyperindexformat{\textbf}{13}
+  \item exclusive disjunction, \hyperindexformat{\textbf}{150}
+  \item existential quantification, \hyperindexformat{\textbf}{180}, 
+		\hyperpage{181}
+    \subitem impredicative encoding, \hyperpage{186}
+    \subitem universal property, \hyperindexformat{\textbf}{180}
+  \item {exponentiation function on $\N$}, 
+		\hyperindexformat{\textbf}{26}
+  \item extensional strict ordering, \hyperindexformat{\textbf}{295}
+  \item extensional W-type, \hyperindexformat{\textbf}{284}
+  \item extensionality principle
+    \subitem for functions, \hyperindexformat{\textbf}{155}
+    \subitem for propositions, \hyperindexformat{\textbf}{214}
+    \subitem for W-types, \hyperindexformat{\textbf}{284}
+
+  \indexspace
+
+  \item {$\F$}, \hyperindexformat{\see {finite type}}{204}, 
+		\hyperindexformat{\textbf}{204}, \hyperpage{227}
+    \subitem {is $\UU$-small}, \hyperpage{233}
+  \item {$f+g$}, 
+		\hyperindexformat{\see {functorial action, of coproducts}}{31}, 
+		\hyperindexformat{\textbf}{31}
+  \item {$f\htpy g$}, \hyperindexformat{\see {homotopy}}{104}, 
+		\hyperindexformat{\textbf}{104}
+  \item factorial operation, \hyperindexformat{\textbf}{26}
+  \item falling factorial, \hyperindexformat{\textbf}{210}
+  \item {$\bfalse$}, \hyperindexformat{\textbf}{35}
+  \item {$\bfalse\neq\btrue$}, \hyperpage{60}
+  \item family of equivalences, \hyperindexformat{\textbf}{126}, 
+		\hyperpage{125--128}
+  \item family of types, \hyperindexformat{\see{type family}}{5}, 
+		\hyperindexformat{\textbf}{5}
+  \item {$\fib{f}{b}$}, \hyperindexformat{\textbf}{118}, 
+		\hyperpage{217, 218}
+  \item fiber, \hyperindexformat{\textbf}{118}
+    \subitem characterization of identity type, \hyperpage{118--119}, 
+		\hyperpage{136}
+    \subitem {$\Eqfib$}, \hyperindexformat{\textbf}{118}
+    \subitem {of $\Sigma_A$}, \hyperpage{226}
+    \subitem {of $\tot{f}$}, \hyperpage{126}
+    \subitem {of $\W(f,e)$}, \hyperpage{281}
+  \item fiber inclusion, \hyperindexformat{\textbf}{151}, 
+		\hyperpage{250}
+    \subitem is a truncated map, \hyperpage{151}
+    \subitem is an embedding, \hyperpage{151}
+  \item fiber of a type family, \hyperindexformat{\textbf}{8}
+  \item Fibonacci sequence, \hyperindexformat{\textbf}{26}
+    \subitem has left adjoint, \hyperpage{97}
+  \item fibrant replacement, \hyperindexformat{\textbf}{125}
+  \item {$\Fin{k}$}, \hyperindexformat{\see {standard finite type}}{68}, 
+		\hyperindexformat{\textbf}{68}
+    \subitem has decidable equality, \hyperpage{82}
+  \item finite choice, \hyperindexformat{\textbf}{205}
+  \item finite type, \hyperindexformat{\textbf}{204}
+    \subitem binomial type, \hyperpage{224}
+    \subitem closed under retracts, \hyperpage{208}
+    \subitem Dedekind finite type, \hyperindexformat{\textbf}{209}
+    \subitem finite choice, \hyperindexformat{\textbf}{205}
+    \subitem {is $\UU$-small}, \hyperpage{213}
+    \subitem pigeonhole principle, \hyperindexformat{\textbf}{209}
+    \subitem {$\Retr_\UU(X)$ of a finite type $X$}, \hyperpage{228}
+    \subitem Stirling type of the second kind, \hyperpage{252}
+  \item finitely branching rooted tree, \hyperindexformat{\textbf}{278}
+    \subitem is an extensional W-type, \hyperpage{286}
+  \item finitely cyclic type, \hyperindexformat{\textbf}{115}
+  \item first projection map, \hyperindexformat{\textbf}{34}
+  \item fixed point
+    \subitem {of a concrete $G$-set}, \hyperindexformat{\textbf}{266}, 
+		\hyperpage{273}
+    \subitem {of an abstract $G$-set}, \hyperindexformat{\textbf}{273}
+  \item {$\flattenlist$}, \hyperindexformat{\textbf}{37}
+  \item {$\foldlist$}, \hyperindexformat{\textbf}{37}
+  \item fraction, \hyperindexformat{\textbf}{244}
+    \subitem choice of unique representatives, \hyperpage{244}
+  \item {free abstract $G$-set}, \hyperindexformat{\textbf}{273}
+  \item {free concrete $G$-set}, \hyperindexformat{\textbf}{267}
+  \item free group with one generator, \hyperindexformat{\textbf}{270}
+  \item free loop, \hyperindexformat{\textbf}{300}, \hyperpage{306}
+  \item function
+    \subitem action on paths, \hyperindexformat{\textbf}{43}
+    \subitem binary correspondence, \hyperindexformat{\textbf}{226}
+    \subitem composition, \hyperindexformat{\textbf}{16}
+    \subitem {$\const$}, \hyperindexformat{\textbf}{18}
+    \subitem constant map, \hyperindexformat{\textbf}{18}
+    \subitem has a retraction, \hyperindexformat{\textbf}{106}
+    \subitem has an inverse, \hyperindexformat{\textbf}{107}
+    \subitem identity function, \hyperindexformat{\textbf}{15}
+    \subitem is an equivalence, \hyperindexformat{\textbf}{106}
+    \subitem opposite function, \hyperindexformat{\textbf}{226}
+    \subitem section of a map, \hyperindexformat{\textbf}{106}
+    \subitem swap, \hyperindexformat{\textbf}{18}
+  \item function extensionality, \hyperindexformat{\textbf}{153}, 
+		\hyperindexformat{\textbf}{155}, \hyperpage{152--172}
+    \subitem univalence implies function extensionality, 
+		\hyperpage{215}
+    \subitem weak function extensionality, 
+		\hyperindexformat{\textbf}{154}
+  \item function type, \hyperpage{3}, \hyperindexformat{\textbf}{14}
+  \item functorial action
+    \subitem of coproducts, \hyperindexformat{\textbf}{31}, 
+		\hyperpage{114}
+    \subitem {of $\loopspacesym$}, \hyperindexformat{\textbf}{261}
+    \subitem {of $\loopspacesym^n$}, \hyperindexformat{\textbf}{261}
+    \subitem {of $\pi_n$}, \hyperindexformat{\textbf}{261}
+    \subitem of propositional truncations, 
+		\hyperindexformat{\textbf}{179}
+    \subitem of W-types, \hyperindexformat{\textbf}{281}, 
+		\hyperpage{281--282}
+    \subitem polynomial endofunctor, \hyperindexformat{\textbf}{293}
+    \subitem set truncation, \hyperindexformat{\textbf}{250}
+  \item fundamental group, \hyperindexformat{\textbf}{260}
+    \subitem of the circle, \hyperpage{318}
+  \item fundamental theorem of identity types, \hyperpage{125--139}, 
+		\hyperpage{153}, \hyperpage{211}, \hyperpage{258}, 
+		\hyperpage{317}
+    \subitem formulation with retractions, \hyperpage{138}
+    \subitem formulation with sections, \hyperpage{138}
+    \subitem full generalization, \hyperpage{271}
+    \subitem generalization to truncated maps, \hyperpage{267}
+
+  \indexspace
+
+  \item {$g\circ f$}, \hyperindexformat{\textbf}{16}
+  \item {$G\mathsf{\usc{}}\Set_\UU$}, 
+		\hyperindexformat{\see {abstract $G$-set}}{266}, 
+		\hyperindexformat{\textbf}{266}
+  \item {$\Gamma\vdash a:A$}, \hyperpage{4}
+  \item {$\Gamma\vdash a\jdeq b:A$}, \hyperpage{4}
+  \item {$\Gamma\vdash A\jdeq B~\type$}, \hyperpage{4}
+  \item {$\Gamma\vdash A~\type$}, \hyperpage{4}
+  \item {$\gcd$}, \hyperindexformat{\textbf}{90}
+  \item {$\mathsf{gen}_{\sphere{1}}$}, \hyperindexformat{\textbf}{302}
+  \item generalized dihedral group, \hyperindexformat{\textbf}{270}
+  \item generalized fundamental theorem of identity types, 
+		\hyperpage{271}
+    \subitem truncated maps, \hyperpage{267}
+  \item generic element, \hyperindexformat{\textbf}{9}
+  \item global choice, \hyperindexformat{\textbf}{220}
+  \item global decidability, \hyperindexformat{\textbf}{221}
+  \item Goldbach's conjecture, \hyperpage{95}
+  \item greatest common divisor, \hyperindexformat{\textbf}{88}, 
+		\hyperindexformat{\textbf}{90}, \hyperpage{88--91}
+  \item {$\group_\UU$}, \hyperindexformat{\textbf}{255}
+    \subitem characterization of identity type, \hyperpage{259}
+    \subitem {is a $1$-type}, \hyperpage{259}
+  \item group, \hyperpage{52}, \hyperindexformat{\textbf}{255}, 
+		\hyperpage{253--274}
+    \subitem {abstract $G$-set}, \hyperindexformat{\textbf}{266}, 
+		\hyperpage{273}
+    \subitem abstract group, \hyperindexformat{\textbf}{266}
+    \subitem automorphism group of a set, 
+		\hyperindexformat{\textbf}{256}
+    \subitem classifying type, \hyperindexformat{\textbf}{265}
+    \subitem {concrete $G$-set}, \hyperindexformat{\textbf}{266}, 
+		\hyperpage{273}
+    \subitem concrete group, \hyperindexformat{\textbf}{266}
+    \subitem concrete normal subgroup, \hyperindexformat{\textbf}{274}
+    \subitem concrete subgroup, \hyperindexformat{\textbf}{273}
+    \subitem conjugation, \hyperindexformat{\textbf}{274}
+    \subitem delooping, \hyperindexformat{\textbf}{265}
+    \subitem dihedral group, \hyperindexformat{\textbf}{270}
+    \subitem free group with one generator, 
+		\hyperindexformat{\textbf}{270}
+    \subitem fundamental group, \hyperindexformat{\textbf}{260}
+    \subitem generalized dihedral group, 
+		\hyperindexformat{\textbf}{270}
+    \subitem homomorphism, \hyperindexformat{\textbf}{256}
+    \subitem homotopy group, \hyperindexformat{\textbf}{260}
+    \subitem isomorphism, \hyperindexformat{\textbf}{257}
+    \subitem {loop space of a $1$-type}, \hyperpage{260}
+    \subitem normal subgroup, \hyperindexformat{\textbf}{270}, 
+		\hyperpage{274}
+    \subitem {principal $G$-set}, \hyperindexformat{\textbf}{273}
+    \subitem {$S_n$}, \hyperindexformat{\textbf}{256}
+    \subitem subgroup, \hyperindexformat{\textbf}{270}, \hyperpage{273}
+    \subitem torsor, \hyperindexformat{\textbf}{269}, \hyperpage{273}
+    \subitem {$\Z$}, \hyperpage{255}
+  \item group homomorphism, \hyperindexformat{\textbf}{256}
+    \subitem preserves units and inverses, \hyperpage{269}
+  \item groupoid laws
+    \subitem of homotopies, \hyperpage{104--106}
+    \subitem of identifications, \hyperpage{40--43}
+
+  \indexspace
+
+  \item {$H\cdot f$}, 
+		\hyperindexformat{\see {homotopy, whiskering operations}}{106}, 
+		\hyperindexformat{\textbf}{106}
+  \item {$h\cdot H$}, 
+		\hyperindexformat{\see {homotopy, whiskering operations}}{106}, 
+		\hyperindexformat{\textbf}{106}
+  \item H-space, \hyperindexformat{\textbf}{303}
+    \subitem circle, \hyperindexformat{\textbf}{304}
+    \subitem coherence theorem, \hyperpage{308}
+    \subitem coherent unit laws, \hyperindexformat{\textbf}{303}
+    \subitem noncoherent H-space, \hyperindexformat{\textbf}{308}
+    \subitem structure, \hyperindexformat{\textbf}{303}
+  \item has an inverse, \hyperindexformat{\textbf}{107}
+  \item has decidable equality
+    \subitem {$\Fin{k}$}, \hyperpage{82}
+    \subitem integers, \hyperpage{96}
+    \subitem natural numbers, \hyperpage{82}
+    \subitem type equipped with a counting, \hyperpage{198}
+  \item {has $k$ elements}, \hyperindexformat{\textbf}{198}
+  \item {$\hasdecidableequality(A)$}, \hyperindexformat{\textbf}{81}
+  \item {$\hasinverse(f)$}, \hyperpage{107}
+    \subitem {$\hasinverse(f)\to\iscohinvertible(f)$}, \hyperpage{122}
+    \subitem {$\hasinverse(\idfunc)\simeq (\idfunc\htpy\idfunc)$}, 
+		\hyperpage{168}
+  \item Hedberg's theorem, \hyperpage{145}
+  \item helix, \hyperpage{310}
+  \item higher inductive type
+    \subitem circle, \hyperindexformat{\textbf}{299}
+    \subitem interval, \hyperindexformat{\textbf}{186}
+    \subitem propositional truncation, \hyperpage{175--178}
+  \item {$\homslice_X(f,g)$}, \hyperindexformat{\textbf}{171}, 
+		\hyperindexformat{\see {morphism from $f$ to $g$ over $X$}}{188}
+    \subitem is a proposition, \hyperpage{188}
+  \item {$\hom(G,H)$ for groups}, \hyperindexformat{\textbf}{256}
+  \item {$\hom(G,H)$ for semigroups}, \hyperindexformat{\textbf}{256}
+  \item homomorphism
+    \subitem of groups, \hyperindexformat{\textbf}{256}, 
+		\hyperpage{269}
+    \subitem of semigroups, \hyperindexformat{\textbf}{256}
+  \item homotopy, \hyperindexformat{\textbf}{104}, \hyperpage{103--106}
+    \subitem commutative diagram, \hyperindexformat{\textbf}{104}
+    \subitem {$\concathtpy$}, \hyperindexformat{\textbf}{105}
+    \subitem groupoid laws, \hyperpage{104--106}
+    \subitem {$\invhtpy$}, \hyperindexformat{\textbf}{105}
+    \subitem iterated homotopy, \hyperpage{104}
+    \subitem {$\nathtpy$}, \hyperindexformat{\textbf}{121}
+    \subitem naturality, \hyperindexformat{\textbf}{121}
+    \subitem {$\reflhtpy$}, \hyperindexformat{\textbf}{105}
+    \subitem whiskering operations, \hyperindexformat{\textbf}{106}
+  \item homotopy fiber, \hyperindexformat{\see {fiber}}{118}
+  \item homotopy group, \hyperindexformat{\textbf}{260}, 
+		\hyperpage{259--265}
+    \subitem {is abelian for $n\geq 2$}, \hyperpage{264}
+  \item homotopy induction, \hyperindexformat{\textbf}{154}
+  \item homotopy interpretation, \hyperpage{99}
+  \item horizontal concatenation, \hyperindexformat{\textbf}{263}
+    \subitem interchange law, \hyperpage{264}
+    \subitem unit laws, \hyperpage{263}
+  \item horizontal line, \hyperindexformat{\see {inference rule}}{3}
+  \item {$\htpyeq$}, \hyperindexformat{\textbf}{155}
+    \subitem is an equivalence, \hyperpage{155}
+  \item hypothetical elements, \hyperindexformat{\textbf}{4}
+
+  \indexspace
+
+  \item {$\I$}, \hyperindexformat{\see{interval}}{186}, 
+		\hyperindexformat{\textbf}{186}
+  \item {$\idtypevar{A}$}, \hyperindexformat{\see {identity type}}{39}, 
+		\hyperindexformat{\textbf}{39}
+    \subitem is an embedding, \hyperpage{226}
+  \item {$\idfunc[A]$}, \hyperindexformat{\see {identity function}}{15}, 
+		\hyperindexformat{\textbf}{15}
+  \item identification, \hyperindexformat{\textbf}{39}
+  \item identification elimination, \hyperindexformat{\textbf}{39}
+  \item identity function, \hyperpage{9}, 
+		\hyperindexformat{\textbf}{15}
+    \subitem is an equivalence, \hyperpage{107}
+  \item identity homomorphism
+    \subitem of groups, \hyperindexformat{\textbf}{256}
+    \subitem of semigroups, \hyperindexformat{\textbf}{256}
+  \item identity system, \hyperindexformat{\textbf}{128}, 
+		\hyperpage{128--130}, \hyperpage{317}
+    \subitem dependent identity system, \hyperindexformat{\textbf}{135}
+    \subitem of a dependent function type, \hyperpage{158}
+    \subitem {universal cover of $\sphere{1}$}, \hyperpage{316}
+  \item identity type, \hyperpage{5}, \hyperindexformat{\textbf}{39}, 
+		\hyperpage{38--51}
+    \subitem action on paths, \hyperindexformat{\textbf}{43}, 
+		\hyperpage{43--44}
+    \subitem {$\coninv$}, \hyperindexformat{\textbf}{49}
+    \subitem concatenation, \hyperindexformat{\textbf}{40}
+    \subitem dependent universal property, 
+		\hyperindexformat{\textbf}{160}, \hyperpage{160--161}
+    \subitem {$\distributiveinvconcat$}, \hyperindexformat{\textbf}{49}
+    \subitem horizontal concatenation, \hyperindexformat{\textbf}{263}
+    \subitem identification, \hyperindexformat{\textbf}{39}
+    \subitem identification elimination, \hyperindexformat{\textbf}{39}
+    \subitem induction principle, \hyperindexformat{\textbf}{39}
+    \subitem {$\invcon$}, \hyperindexformat{\textbf}{49}
+    \subitem inverse operation, \hyperindexformat{\textbf}{41}
+    \subitem {$\lift$}, \hyperindexformat{\textbf}{49}
+    \subitem Mac Lane pentagon, \hyperindexformat{\textbf}{49}
+    \subitem of a contractible type, \hyperpage{123}
+    \subitem of a coproduct, \hyperpage{132--134}
+    \subitem of a fiber, \hyperpage{118--119}, \hyperpage{136}
+    \subitem {of a $\Pi$-type}, \hyperpage{155}
+    \subitem {of a $\Sigma$-type}, \hyperpage{110--112}
+    \subitem of a universe, \hyperpage{211}
+    \subitem {of $A/R$}, \hyperpage{231}
+    \subitem {of $\group_\UU$}, \hyperpage{259}
+    \subitem {of $\monoid_\UU$}, \hyperpage{270}
+    \subitem of retract is retract, \hyperpage{150}
+    \subitem {of $\semigroup_\UU$}, \hyperpage{258}
+    \subitem of the natural numbers, \hyperpage{131}
+    \subitem {of $\W(A,B)$}, \hyperpage{279}
+    \subitem path, \hyperindexformat{\textbf}{39}
+    \subitem path induction, \hyperindexformat{\textbf}{39}
+    \subitem {$\pathind$}, \hyperindexformat{\textbf}{39}
+    \subitem {$\refl{}$}, \hyperindexformat{\textbf}{39}
+    \subitem rules, \hyperpage{39--40}
+    \subitem total space is contractible, \hyperpage{116}
+    \subitem tower of identity types, \hyperpage{43}
+    \subitem transport, \hyperindexformat{\textbf}{44}
+    \subitem uniqueness, \hyperpage{169}
+    \subitem universal property, \hyperpage{160--161}
+    \subitem vertical concatenation, \hyperindexformat{\textbf}{263}
+  \item {$\iffeq$}, \hyperindexformat{\textbf}{214}
+  \item {$\im(f)$}, \hyperindexformat{\see {image of a map}}{189}, 
+		\hyperindexformat{\textbf}{189}
+  \item image inclusion, \hyperindexformat{\textbf}{189}
+    \subitem is an embedding, \hyperpage{190}
+  \item image of a map, \hyperindexformat{\textbf}{189}
+    \subitem existence, \hyperpage{189--190}
+    \subitem uniqueness, \hyperpage{190--191}
+    \subitem universal property, \hyperpage{188--189}, \hyperpage{194}
+  \item implication, \hyperindexformat{\textbf}{181}
+    \subitem impredicative encoding, \hyperpage{186}
+  \item impredicative encodings, \hyperpage{186}
+  \item {$\indcoprod$}, \hyperindexformat{\textbf}{30}
+  \item {$\indempty$}, \hyperindexformat{\textbf}{28}
+  \item {$\indunit$}, \hyperindexformat{\textbf}{27}
+  \item {$\indN$}, \hyperindexformat{\textbf}{20}
+  \item {$\ind{\sphere{1}}$}, \hyperindexformat{\textbf}{299}
+  \item {$\indSigma$}, \hyperindexformat{\textbf}{34}
+  \item {$\ind{\times}$}, \hyperindexformat{\textbf}{35}
+  \item {$\singind$}, \hyperindexformat{\textbf}{117}
+  \item {$\indbool$}, \hyperindexformat{\textbf}{36}
+  \item {$\indW$}, \hyperindexformat{\textbf}{275}
+  \item indexed element, \hyperindexformat{\textbf}{5}
+  \item indexed type, \hyperindexformat{\textbf}{5}
+  \item induction principle
+    \subitem for equivalences, \hyperindexformat{\textbf}{211}
+    \subitem for homotopies, \hyperindexformat{\textbf}{154}
+    \subitem identification elimination, \hyperindexformat{\textbf}{39}
+    \subitem of cartesian products, \hyperindexformat{\textbf}{35}
+    \subitem of coproducts, \hyperindexformat{\textbf}{30}
+    \subitem {of $\lst(A)$}, \hyperindexformat{\textbf}{37}
+    \subitem {of $\N$}, \hyperpage{20--21}
+    \subitem of propositional truncation, 
+		\hyperindexformat{\textbf}{178}, \hyperpage{177--178}
+    \subitem {of $\Sigma$-types}, \hyperindexformat{\textbf}{34}
+    \subitem of the booleans, \hyperindexformat{\textbf}{36}
+    \subitem of the circle, \hyperindexformat{\textbf}{299}
+    \subitem of the empty type, \hyperindexformat{\textbf}{28}
+    \subitem of the identity type, \hyperindexformat{\textbf}{39}
+    \subitem of the unit type, \hyperindexformat{\textbf}{27}
+    \subitem of W-types, \hyperindexformat{\textbf}{275}, 
+		\hyperpage{282}
+    \subitem path induction, \hyperindexformat{\textbf}{39}
+    \subitem singleton induction, \hyperindexformat{\textbf}{116}, 
+		\hyperpage{116--118}
+  \item inductive step, \hyperpage{21}
+  \item inductive type, \hyperpage{19--51}, \hyperpage{274--295}
+    \subitem binary rooted trees, \hyperindexformat{\textbf}{278}
+    \subitem cartesian product, \hyperpage{35}
+    \subitem circle, \hyperindexformat{\textbf}{299}, 
+		\hyperpage{298--322}
+    \subitem coproduct, \hyperpage{30--31}
+    \subitem dependent pair type, \hyperpage{33--34}
+    \subitem empty type, \hyperpage{28--30}
+    \subitem identity type, \hyperpage{38--51}
+    \subitem {lists of elements of $A$}, \hyperindexformat{\textbf}{37}
+    \subitem natural numbers, \hyperpage{19}
+    \subitem oriented binary rooted trees, 
+		\hyperindexformat{\textbf}{278}
+    \subitem unit type, \hyperpage{27--28}
+    \subitem W-type, \hyperpage{275}
+  \item inference rule, \hyperindexformat{\see {rule}}{3}
+    \subitem conclusion, \hyperindexformat{\textbf}{3}
+    \subitem premises, \hyperindexformat{\textbf}{3}
+  \item infinitude of primes, \hyperpage{93}
+  \item inhabited type
+    \subitem connected types are inhabited, \hyperpage{247}
+  \item injective map
+    \subitem injective maps into sets are embeddings, \hyperpage{149}
+  \item {$\inl$}, \hyperindexformat{\textbf}{30}
+    \subitem is an embedding, \hyperpage{136}
+  \item {$\inr$}, \hyperindexformat{\textbf}{30}
+    \subitem is an embedding, \hyperpage{136}
+  \item integers, \hyperpage{32--33}, \hyperpage{35}
+    \subitem {$-1_\Z$}, \hyperpage{32}
+    \subitem {$0_\Z$}, \hyperpage{32}
+    \subitem {$1_\Z$}, \hyperpage{32}
+    \subitem absolute value function, \hyperindexformat{\textbf}{62}
+    \subitem {$\addZ$}, \hyperindexformat{\textbf}{35}
+    \subitem associativity of addition, \hyperpage{50}
+    \subitem associativity of multiplication, \hyperpage{51}
+    \subitem commutativity of addition, \hyperpage{50}
+    \subitem commutativity of multiplication, \hyperpage{51}
+    \subitem decidable equality, \hyperpage{96}
+    \subitem distributivity of multiplication over addition, 
+		\hyperpage{51}
+    \subitem group laws, \hyperpage{50}
+    \subitem {$\inneg$}, \hyperpage{32}
+    \subitem {$\inpos$}, \hyperpage{32}
+    \subitem initial type with a point and an automorphism, 
+		\hyperpage{315}
+    \subitem integer fractions, \hyperindexformat{\textbf}{244}
+    \subitem inverse laws for addition, \hyperpage{51}
+    \subitem is a ring, \hyperpage{51}
+    \subitem {$\mulZ$}, \hyperpage{35}
+    \subitem {$\negZ$}, \hyperpage{35}
+    \subitem {$\predZ$}, \hyperindexformat{\textbf}{35}
+    \subitem predecessor laws for addition, \hyperpage{51}
+    \subitem {$\succZ$}, \hyperindexformat{\textbf}{33}
+    \subitem successor laws for addition, \hyperpage{51}
+    \subitem unit laws for addition, \hyperpage{50}
+    \subitem zero laws for multiplication, \hyperpage{51}
+  \item interchange law
+    \subitem of horizontal and vertical concatenation, \hyperpage{264}
+  \item interchange rule, \hyperpage{10}
+  \item interpretation of logic in type theory, \hyperpage{181}
+  \item interval, \hyperindexformat{\textbf}{186}
+  \item {$\invfunc$}, \hyperindexformat{\textbf}{41}
+    \subitem is an equivalence, \hyperpage{112}
+  \item {$\invcon$}, \hyperindexformat{\textbf}{49}
+  \item {$\invhtpy$}, \hyperindexformat{\textbf}{105}
+    \subitem is an equivalence, \hyperpage{166}
+  \item inverse
+    \subitem of an equivalence, \hyperindexformat{\textbf}{106}
+      \subsubitem is an equivalence, \hyperpage{108}
+  \item inverse law operations
+    \subitem for identifications, \hyperpage{42}
+  \item inverse laws
+    \subitem for a group, \hyperpage{255}
+    \subitem {for addition on $\Z$}, \hyperpage{51}
+    \subitem for group isomorphisms, \hyperpage{257}
+    \subitem for semigroup isomorphisms, \hyperpage{257}
+  \item inverse operation
+    \subitem for identifications, \hyperindexformat{\textbf}{41}
+  \item is a contractible map, \hyperindexformat{\textbf}{119}
+    \subitem equivalence, \hyperpage{123}
+  \item is a greatest common divisor, \hyperindexformat{\textbf}{88}
+  \item is a proposition
+    \subitem contractible type, \hyperpage{140}
+    \subitem {$\delta_A$ is an equivalence}, \hyperpage{150}
+    \subitem {$d\mid n$ for $d>0$}, \hyperpage{149}
+    \subitem empty type, \hyperpage{140}
+    \subitem {$\iscohinvertible(f)$}, \hyperpage{167}
+    \subitem {$\iscontr(A)$}, \hyperpage{167}
+    \subitem {$\isequiv(f)$}, \hyperpage{167}
+    \subitem {$\pathsplit(f)$}, \hyperpage{167}
+    \subitem {$\istrunc{k}(A)$}, \hyperpage{167}
+    \subitem propositional truncation, \hyperpage{177}
+  \item is a propositional truncation, \hyperindexformat{\textbf}{173}
+  \item is a set, \hyperpage{144}
+    \subitem coproduct, \hyperpage{150}
+    \subitem natural numbers, \hyperpage{144}
+  \item is a truncated map
+    \subitem fiber inclusion, \hyperpage{151}
+    \subitem {$\tot{f}$}, \hyperpage{151}
+  \item is a truncated type
+    \subitem {$A\simeq B$}, \hyperpage{167}
+    \subitem coproduct, \hyperpage{150}
+    \subitem {$\Sigma$-type}, \hyperpage{150}
+  \item is an embedding, \hyperindexformat{\textbf}{132}
+    \subitem {$\emptyt\to A$}, \hyperpage{136}
+    \subitem {$\addN(m)$}, \hyperpage{149}
+    \subitem composite of embeddings, \hyperpage{137}
+    \subitem equivalence, \hyperpage{132}
+    \subitem fiber inclusion, \hyperpage{151}
+    \subitem {$\idtypevar{A}$}, \hyperpage{226}
+    \subitem if the action on paths have sections, \hyperpage{138}
+    \subitem image inclusion, \hyperpage{190}
+    \subitem injective map into a set, \hyperpage{149}
+    \subitem {$\inl$ (for coproducts)}, \hyperpage{136}
+    \subitem {$\inr$ (for coproducts)}, \hyperpage{136}
+    \subitem left factor of embedding if right factor is an equivalence, 
+		\hyperpage{137}
+    \subitem {$\mulN(m)$ for $m>0$}, \hyperpage{149}
+    \subitem {$\mulcircle$}, \hyperpage{306}
+    \subitem right factor of embedding if left factor is an embedding, 
+		\hyperpage{137}
+    \subitem {$\W(f,e)$}, \hyperpage{281}
+  \item is an equivalence, \hyperindexformat{\textbf}{106}
+    \subitem action on paths of an embedding, \hyperpage{132}
+    \subitem {$\choice$}, \hyperpage{156}
+    \subitem {$\concat'(q)$}, \hyperpage{112}
+    \subitem {$\concat(p)$}, \hyperpage{112}
+    \subitem {$\concathtpy'(K)$}, \hyperpage{166}
+    \subitem {$\concathtpy(H)$}, \hyperpage{166}
+    \subitem contractible map, \hyperpage{119}
+    \subitem {$\evpair$}, \hyperpage{159, 160}
+    \subitem {$\evrefl$}, \hyperpage{160}
+    \subitem {$\htpyeq$}, \hyperpage{155}
+    \subitem identity function, \hyperpage{107}
+    \subitem {$\invfunc$}, \hyperpage{112}
+    \subitem {$\invhtpy$}, \hyperpage{166}
+    \subitem inverse of an equivalence, \hyperpage{108}
+    \subitem is surjective and an embedding, \hyperpage{197}
+    \subitem {$\mulcircle(\blank,x)$}, \hyperpage{306}
+    \subitem {$\mulcircle(x,\blank)$}, \hyperpage{306}
+    \subitem {$\negbool$}, \hyperpage{107}
+    \subitem {$\paireq$}, \hyperpage{111}
+    \subitem path-split map, \hyperpage{138}
+    \subitem {$\proj 1$ of contractible family}, \hyperpage{124}
+    \subitem {$\succZ$}, \hyperpage{107}
+    \subitem {$\tot{f}$ of family of equivalences}, \hyperpage{126}
+    \subitem {$\tr_B(p)$}, \hyperpage{112}
+    \subitem {$\W(f,e)$}, \hyperpage{281}
+  \item is connected
+    \subitem circle, \hyperpage{306}
+  \item is contractible
+    \subitem dependent function type, \hyperpage{154}
+    \subitem factor of contractible cartesian product, \hyperpage{124}
+    \subitem fiber of an equivalence, \hyperpage{123}
+    \subitem identity type of contractible type, \hyperpage{123}
+    \subitem is a property, \hyperpage{167}
+    \subitem satisfies singleton induction, \hyperpage{117}
+    \subitem total space of an identity system, \hyperpage{129}
+    \subitem total space of identity type, \hyperpage{116}
+    \subitem total space of opposite identity type, \hyperpage{123}
+    \subitem unit type, \hyperpage{116}
+  \item is empty
+    \subitem W-type, \hyperpage{276}
+  \item is family of equivalences
+    \subitem {iff $\tot{f}$ is an equivalence}, \hyperpage{126}
+  \item is injective
+    \subitem {$\succN$}, \hyperpage{59}
+  \item is set quotient, \hyperpage{233}
+  \item is truncated
+    \subitem W-type, \hyperpage{280}
+  \item {$\iscohinvertible(f)$}, \hyperindexformat{\textbf}{120}
+    \subitem is a proposition, \hyperpage{167}
+  \item {$\isconn(A)$}, \hyperindexformat{\textbf}{247}
+  \item {$\isconstantW$}, \hyperindexformat{\textbf}{276}
+  \item {$\iscontr(A)$}, 
+		\hyperindexformat{\see {contractible type}}{116}
+  \item {$\iscontr(A)$}
+    \subitem is a proposition, \hyperpage{167}
+  \item {$\iscontr(f)$}, 
+		\hyperindexformat{\see {contractible map}}{119}
+  \item {$\isdecidable(A)$}, \hyperpage{80}
+  \item {$\isemb(f)$}, \hyperpage{132}
+  \item {$\isequiv(f)$}, \hyperindexformat{\textbf}{106}
+    \subitem is a proposition, \hyperpage{167}
+    \subitem {$\isequiv(f)\eqvsym\iscohinvertible(f)$}, \hyperpage{168}
+    \subitem {$\isequiv(f)\eqvsym\pathsplit(f)$}, \hyperpage{168}
+  \item {$\isfinite(X)$}, \hyperindexformat{\textbf}{204}
+  \item {$\isfinite'(X)$}, \hyperindexformat{\textbf}{204}
+    \subitem is a proposition, \hyperpage{204}
+  \item {$\isfunction(R)$}, \hyperindexformat{\textbf}{226}
+  \item {$\isgcd_{a,b}(d)$}, \hyperindexformat{\textbf}{88}
+  \item {$\isgroup$}, \hyperindexformat{\textbf}{255}
+    \subitem is a proposition, \hyperpage{255}
+  \item {$\isgroup'$}, \hyperindexformat{\textbf}{255}
+    \subitem is a proposition, \hyperpage{255}
+  \item {$\isiso(h)$}
+    \subitem for group homomorphisms, \hyperindexformat{\textbf}{257}
+    \subitem for semigroup homomorphisms, 
+		\hyperindexformat{\textbf}{257}
+    \subitem is a proposition, \hyperpage{257}
+  \item {$\isisolated(a)$}, \hyperindexformat{\textbf}{151}
+  \item {$\islocallysmall_\UU(A)$}, \hyperpage{232}
+  \item {$\islowerbound_P(n)$}, \hyperindexformat{\textbf}{86}
+  \item {$\isprime(n)$}, \hyperindexformat{\textbf}{91}
+    \subitem is decidable, \hyperpage{91}
+  \item {$\isprop'(A)$}, \hyperpage{141}
+  \item {$\isprop(A)$}, \hyperindexformat{\textbf}{140}
+    \subitem {$\isprop(A)\leftrightarrow(A\to\iscontr(A))$}, 
+		\hyperpage{141}
+    \subitem {$\isprop(A)\leftrightarrow\isemb(\const_\ttt)$}, 
+		\hyperpage{141}
+    \subitem {$\isprop(A)\leftrightarrow\isprop'(A)$}, \hyperpage{141}
+  \item {$\isproperdivisor(n,d)$}, \hyperindexformat{\textbf}{91}
+  \item {$\isset(A)$}, \hyperpage{144}
+    \subitem {$\isset(A)\leftrightarrow\axiomK(A)$}, \hyperpage{144}
+  \item {$\issmall_\UU(A)$}, \hyperindexformat{\textbf}{212}, 
+		\hyperpage{287}
+    \subitem is a proposition, \hyperpage{213}
+  \item {$\issmallmultiset{\UU}$}, \hyperindexformat{\textbf}{287}
+  \item {$\issurj(f)$}, \hyperindexformat{\see {surjective map}}{192}
+  \item {$\istrunc{k}(A)$}, \hyperpage{146}
+    \subitem {$\istrunc{k}(A)\to\istrunc{k+1}(A)$}, \hyperpage{147}
+  \item {$\isunital$}, \hyperpage{254}
+    \subitem is a proposition, \hyperpage{254}
+  \item {$\isupperbound_P(n)$}, \hyperindexformat{\textbf}{87}
+  \item {$\isweaklyconstant(f)$}, \hyperindexformat{\textbf}{183}
+  \item {$\isoeq$ for groups}, \hyperpage{259}
+  \item {$\isoeq$ for semigroups}, \hyperpage{258}
+  \item isolated element, \hyperindexformat{\textbf}{151}
+  \item isolated point, \hyperpage{227}
+  \item isomorphism
+    \subitem of groups, \hyperindexformat{\textbf}{257}
+    \subitem of semigroups, \hyperindexformat{\textbf}{257}
+      \subsubitem preserves unit, \hyperpage{270}
+    \subitem of sets, \hyperindexformat{\textbf}{172}
+  \item {$\istrunc{k}$}
+    \subitem is a proposition, \hyperpage{167}
+  \item iterated homotopies, \hyperpage{104}
+  \item iterated loop space, \hyperindexformat{\textbf}{260}
+
+  \indexspace
+
+  \item join of universes, \hyperindexformat{\textbf}{56}
+  \item judgment, \hyperpage{3--5}
+    \subitem {$\Gamma\vdash a:A$}, \hyperpage{4}
+    \subitem {$\Gamma\vdash a\jdeq b:A$}, \hyperpage{4}
+    \subitem {$\Gamma\vdash A\jdeq B~\type$}, \hyperpage{4}
+    \subitem {$\Gamma\vdash A~\type$}, \hyperpage{4}
+  \item judgmental equality
+    \subitem conversion rules, \hyperpage{7}
+    \subitem is an equivalence relation, \hyperpage{6}
+    \subitem of elements, \hyperpage{4}
+    \subitem of types, \hyperpage{4}
+
+  \indexspace
+
+  \item {$k$-truncated map}, 
+		\hyperindexformat{\see {truncated map}}{147}
+  \item {$k$-truncated type}, 
+		\hyperindexformat{\see {truncated type}}{147}
+  \item {$k$-type}, \hyperindexformat{\see {truncated type}}{147}, 
+		\hyperpage{155}
+    \subitem {universe of $k$-types}, \hyperpage{225}
+
+  \indexspace
+
+  \item {$\lambda$-abstraction}, \hyperindexformat{\textbf}{12}
+  \item {$\lambda$-congruence}, \hyperpage{12}
+  \item law of excluded middle, \hyperindexformat{\textbf}{222}, 
+		\hyperpage{225}
+  \item Lawvere's fixed point theorem, \hyperpage{197}
+  \item {$<$}
+    \subitem {on $\N$}, \hyperpage{61}
+  \item {$\leftinv$}, \hyperindexformat{\textbf}{42}
+  \item {$\leftunit$}, \hyperindexformat{\textbf}{42}
+  \item left unit law, \hyperindexformat{\see {unit laws}}{17}
+    \subitem {of $\Sigma$-types}, \hyperpage{124}
+  \item {$\lengthlist$}, \hyperindexformat{\textbf}{37}
+  \item {$\leq$}
+    \subitem {on $\N$}, \hyperpage{60}
+  \item {$\lift$}, \hyperindexformat{\textbf}{49}
+  \item {$\lst(A)$}, \hyperindexformat{\see {lists in $A$}}{37}, 
+		\hyperpage{151}
+  \item {$lst(A)$}, \hyperindexformat{\textbf}{37}
+  \item {lists in $A$}, \hyperindexformat{\textbf}{37}
+    \subitem {$\concatlist$}, \hyperindexformat{\textbf}{37}
+    \subitem {$\cons$}, \hyperindexformat{\textbf}{37}
+    \subitem {$\flattenlist$}, \hyperindexformat{\textbf}{37}
+    \subitem {$\foldlist$}, \hyperindexformat{\textbf}{37}
+    \subitem induction principle, \hyperindexformat{\textbf}{37}
+    \subitem {$\lengthlist$}, \hyperindexformat{\textbf}{37}
+    \subitem {$\nil$}, \hyperindexformat{\textbf}{37}
+    \subitem {$\reverselist$}, \hyperindexformat{\textbf}{38}
+    \subitem {$\sumlist$}, \hyperindexformat{\textbf}{37}
+  \item locally small map, \hyperindexformat{\textbf}{232}
+  \item locally small type, \hyperindexformat{\textbf}{232}, 
+		\hyperpage{252}
+    \subitem dependent function type is locally small, \hyperpage{232}
+    \subitem propositions are locally small, \hyperpage{232}
+    \subitem small types are locally small, \hyperpage{232}
+    \subitem {$\UU$ is locally $\UU$-small}, \hyperpage{232}
+  \item logic, \hyperpage{179--181}
+    \subitem impredicative encodings, \hyperpage{186}
+    \subitem interpretation of logic in type theory, \hyperpage{181}
+  \item {$\lloop$}, \hyperpage{298}, \hyperindexformat{\textbf}{299}
+  \item loop space, \hyperindexformat{\textbf}{260}
+    \subitem {of a $1$-type is a group}, \hyperpage{260}
+  \item lower bound, \hyperindexformat{\textbf}{86}
+
+  \indexspace
+
+  \item {$\multiset{\UU}$}, \hyperindexformat{\see {multiset}}{287}, 
+		\hyperindexformat{\textbf}{287}
+  \item Mac Lane pentagon, \hyperindexformat{\textbf}{49}, 
+		\hyperpage{321}
+  \item maximum function, \hyperindexformat{\textbf}{26}
+  \item mere equality, \hyperindexformat{\textbf}{185}
+    \subitem impredicative encoding, \hyperpage{186}
+  \item minimum function, \hyperindexformat{\textbf}{26}
+  \item {$\monoid_\UU$}, \hyperpage{254}
+  \item monoid, \hyperindexformat{\textbf}{254}
+  \item {morphism from $f$ to $g$ over $X$}, 
+		\hyperindexformat{\textbf}{171}, 
+		\hyperindexformat{\textbf}{188}
+    \subitem action on fibers, \hyperindexformat{\textbf}{171}
+  \item morphism of algebras
+    \subitem polynomial endofunctor, \hyperindexformat{\textbf}{293}
+  \item {$\mulN$}, \hyperindexformat{\textbf}{26}
+    \subitem {$\mulN(m)$ is an embedding if $m>0$}, \hyperpage{149}
+  \item {$\mulcircle$}, \hyperpage{304}
+  \item {$\mulZ$}, \hyperpage{35}
+    \subitem associativity, \hyperpage{51}
+    \subitem commutativity, \hyperpage{51}
+    \subitem {distributive over $\addZ$}, \hyperpage{51}
+    \subitem predecessor laws, \hyperpage{51}
+    \subitem successor laws, \hyperpage{51}
+    \subitem unit laws, \hyperpage{51}
+    \subitem zero laws, \hyperpage{51}
+  \item multiplication
+    \subitem {on $\N$}, \hyperindexformat{\textbf}{26}
+    \subitem on the circle, \hyperpage{303--306}
+  \item multiset, \hyperindexformat{\textbf}{287}, \hyperpage{286--291}
+    \subitem {$\{f(x)\mid x:A\}$}, \hyperindexformat{\textbf}{287}
+    \subitem {$\{t(x_0,\ldots,x_n)\mid x_0:A_0,\ldots,x_n:A_n\}$}, 
+		\hyperindexformat{\textbf}{287}
+    \subitem cardinality, \hyperindexformat{\textbf}{287}
+    \subitem element, \hyperindexformat{\textbf}{287}
+    \subitem {$\issmallmultiset{\UU}$}, \hyperindexformat{\textbf}{287}
+    \subitem small multiset, \hyperindexformat{\textbf}{287}
+    \subitem universal tree, \hyperindexformat{\textbf}{290}
+
+  \indexspace
+
+  \item {$\N$}, \hyperindexformat{\see {natural numbers}}{19}
+    \subitem has decidable equality, \hyperpage{82}
+    \subitem is a set, \hyperpage{144}
+    \subitem {$\leq$}, \hyperpage{149}
+  \item {$\neg A$}, \hyperindexformat{\see {negation}}{28}
+  \item {$\nathtpy$}, \hyperindexformat{\textbf}{121}
+  \item natural number
+    \subitem prime number, \hyperpage{91--93}
+  \item natural numbers, \hyperpage{4}, \hyperpage{19--26}
+    \subitem addition, \hyperindexformat{\textbf}{22}
+    \subitem as W-type, \hyperpage{277}
+    \subitem associativity of addition, \hyperpage{46}
+    \subitem {associativity of multiplication}, \hyperpage{49}
+    \subitem {B\'ezout's identity}, \hyperpage{97}
+    \subitem characterization of identity type, \hyperpage{131}
+    \subitem cofibonacci sequence, \hyperpage{97}
+    \subitem commutativity of addition, \hyperpage{46}
+    \subitem commutativity of multiplication, \hyperpage{49}
+    \subitem congruence relations, \hyperindexformat{\textbf}{67}
+    \subitem decidable equality, \hyperpage{82}
+    \subitem distance function, \hyperpage{61}
+    \subitem distributivity of multiplication over addition, 
+		\hyperpage{49}
+    \subitem divisibility, \hyperindexformat{\textbf}{63}
+    \subitem {$\EqN$}, \hyperindexformat{\textbf}{57}
+    \subitem greatest common divisor, \hyperpage{88--91}
+    \subitem identity type, \hyperpage{131}
+    \subitem {$\indN$}, \hyperindexformat{\textbf}{20}
+    \subitem infinitude of primes, \hyperpage{93}
+    \subitem is a set, \hyperpage{144}
+    \subitem is an extensional W-type, \hyperpage{286}
+    \subitem observational equality, \hyperindexformat{\textbf}{57}, 
+		\hyperpage{56--58}, \hyperpage{130--131}
+    \subitem {operations on $\N$}
+      \subsubitem {$\zeroN$}, \hyperpage{20}
+      \subsubitem {$\addN$}, \hyperindexformat{\textbf}{22}
+      \subsubitem addition, \hyperpage{22--24}
+      \subsubitem binomial coefficient, \hyperindexformat{\textbf}{26}
+      \subsubitem exponentiation, \hyperindexformat{\textbf}{26}
+      \subsubitem Fibonacci sequence, \hyperindexformat{\textbf}{26}
+      \subsubitem {$\maxN$}, \hyperindexformat{\textbf}{26}
+      \subsubitem {$\minN$}, \hyperindexformat{\textbf}{26}
+      \subsubitem {$\mulN$}, \hyperindexformat{\textbf}{26}
+      \subsubitem {$n!$}, \hyperindexformat{\textbf}{26}
+      \subsubitem {$\succN$}, \hyperpage{20}
+      \subsubitem triangle number, \hyperindexformat{\textbf}{26}
+    \subitem ordinal induction, \hyperindexformat{\textbf}{169}
+    \subitem prime function, \hyperpage{95}
+    \subitem prime number, \hyperindexformat{\textbf}{91}
+    \subitem {rules for $\N$}
+      \subsubitem computation rules, \hyperpage{22}
+      \subsubitem elimination, \hyperindexformat{\see {induction}}{20}
+      \subsubitem formation, \hyperpage{20}
+      \subsubitem induction, 21
+      \subsubitem induction principle, \hyperpage{20}
+      \subsubitem introduction rules, \hyperpage{20}
+    \subitem semi-ring laws, \hyperpage{49}
+    \subitem strong induction principle, 
+		\hyperindexformat{\textbf}{163}, \hyperpage{163--166}
+    \subitem successor laws for addition, \hyperpage{46}
+    \subitem unit laws for addition, \hyperpage{46}
+    \subitem unit laws for multiplication, \hyperpage{49}
+    \subitem universal property, \hyperindexformat{\textbf}{169}
+    \subitem well-ordering principle, \hyperindexformat{\textbf}{87}, 
+		\hyperpage{86--87}
+    \subitem zero is not a successor, \hyperpage{59}
+    \subitem zero laws for multiplication, \hyperpage{49}
+  \item naturality square of homotopies, 
+		\hyperindexformat{\textbf}{122}
+  \item {$\negbool$}, \hyperpage{103}
+    \subitem is an equivalence, \hyperpage{107}
+  \item {$\negnegbool$}, \hyperindexformat{\textbf}{103}
+  \item {$\negZ$}, \hyperpage{35}
+  \item {$\negbool$}, \hyperindexformat{\textbf}{36}
+  \item negation, \hyperpage{36}
+    \subitem impredicative encoding, \hyperpage{186}
+    \subitem of types, \hyperindexformat{\textbf}{28}
+  \item {$\nil$}, \hyperindexformat{\textbf}{37}
+  \item noncoherent H-space, \hyperindexformat{\textbf}{308}
+  \item normal subgroup, \hyperindexformat{\textbf}{270}, 
+		\hyperpage{274}
+
+  \indexspace
+
+  \item {$\loopspace{A}$}, \hyperindexformat{\see {loop space}}{260}
+  \item {$\loopspace[n]{A}$}, 
+		\hyperindexformat{\see {iterated loop space}}{260}
+  \item observational equality
+    \subitem fiber, \hyperpage{118}
+    \subitem {on $\bool$}, \hyperindexformat{\textbf}{60}
+    \subitem on coproduct types, \hyperpage{133}
+    \subitem {on $\N$}, \hyperindexformat{\textbf}{57}, 
+		\hyperpage{56--58}
+    \subitem {on $\Sigma$-types}, \hyperindexformat{\textbf}{111}
+    \subitem on W-types, \hyperpage{279--280}
+  \item opposite correspondence, \hyperpage{226}
+  \item opposite function, \hyperindexformat{\textbf}{226}
+  \item orbit, \hyperpage{266}, \hyperpage{273}
+  \item order relation
+    \subitem {$<$ on $\N$}, \hyperpage{61}
+    \subitem {$\leq$ on $\N$}, \hyperpage{60}
+  \item ordinal induction
+    \subitem {of $\N$}, \hyperpage{169}
+  \item oriented binary rooted tree, \hyperindexformat{\textbf}{278}, 
+		\hyperpage{292}
+    \subitem {$[\blank,\blank]$}, \hyperindexformat{\textbf}{278}
+    \subitem {$\node$}, \hyperindexformat{\textbf}{278}
+  \item oriented finitely branching rooted tree, 
+		\hyperindexformat{\textbf}{278}
+
+  \indexspace
+
+  \item {$\pi$}, \hyperindexformat{\see {prime counting function}}{95}
+  \item {$\pi_1(\sphere{1})\cong \Z$}, \hyperpage{318}
+  \item {$\pi_1(A)$}, \hyperindexformat{\see {fundamental group}}{260}
+  \item {$\pi_n(A)$}, \hyperindexformat{\see {homotopy group}}{260}
+  \item {$\prd{x:A}B(x)$}, 
+		\hyperindexformat{\see{dependent function type}}{12}, 
+		\hyperindexformat{\textbf}{12}
+  \item {$P \oplus Q$}, 
+		\hyperindexformat{\see {exclusive disjunction}}{150}
+  \item {$\Pi_P$}
+    \subitem is an embedding, \hyperpage{226}
+  \item {$\mathcal{P}_\UU(X)$}, 
+		\hyperindexformat{\see {power set}}{195}
+  \item {$P\vee Q$}, \hyperindexformat{\see {disjunction}}{180}
+  \item {$P$-map}, \hyperindexformat{\textbf}{271}
+  \item {$P$-separated type}, \hyperindexformat{\textbf}{271}
+  \item {$P$-type}, \hyperindexformat{\textbf}{271}
+  \item {$\pair$}, \hyperindexformat{\textbf}{33}
+  \item {$\paireq$}, \hyperindexformat{\textbf}{111}
+    \subitem is an equivalence, \hyperpage{111}
+  \item pairing function, \hyperindexformat{\textbf}{33}
+  \item partition, \hyperindexformat{\textbf}{240}, 
+		\hyperpage{239--242}
+  \item path, \hyperindexformat{\textbf}{39}
+  \item path constructor, \hyperpage{298}
+  \item path induction, \hyperindexformat{\textbf}{39}
+  \item {$\pathind$}, \hyperindexformat{\textbf}{39}
+  \item path-split, \hyperindexformat{\textbf}{138}
+    \subitem is a proposition, \hyperpage{167}
+  \item {$\pathsplit(f)$}, \hyperindexformat{\textbf}{138}
+  \item pattern matching, \hyperpage{25}
+    \subitem for W-types, \hyperpage{275}
+  \item {$\Pi$-type}, 
+		\hyperindexformat{\see {dependent function type}}{11}
+  \item pigeonhole principle, \hyperindexformat{\textbf}{209}
+  \item {pointed $1$-type}, \hyperpage{260}
+  \item pointed map, \hyperindexformat{\textbf}{167}, 
+		\hyperindexformat{\textbf}{260}
+  \item pointed type, \hyperindexformat{\textbf}{259}
+  \item pointwise identification, 
+		\hyperindexformat{\see {homotopy}}{104}, 
+		\hyperindexformat{\textbf}{104}
+  \item polynomial endofunctor, \hyperindexformat{\textbf}{293}
+    \subitem algebra, \hyperindexformat{\textbf}{293}
+    \subitem morphism of algebras, \hyperindexformat{\textbf}{293}
+  \item poset
+    \subitem is a set, \hyperpage{149}
+    \subitem poset reflection, \hyperpage{250}
+  \item poset reflection, \hyperindexformat{\textbf}{250}
+    \subitem is set quotient, \hyperpage{250}
+    \subitem universal property, \hyperindexformat{\textbf}{250}
+  \item power set, \hyperindexformat{\textbf}{195}
+  \item {$\proj 1$}, \hyperindexformat{\see{first projection map}}{34}, 
+		\hyperindexformat{\textbf}{34}
+    \subitem of contractible family is an equivalence, \hyperpage{124}
+  \item {$\proj 2$}, \hyperindexformat{\see{second projection map}}{34}, 
+		\hyperindexformat{\textbf}{34}
+  \item pre-image, \hyperindexformat{\see {fiber}}{118}
+  \item {$\prec$}, 
+		\hyperindexformat{\see {W-type, strict rank comparison relation}}{294}
+  \item {$\preceq$}, 
+		\hyperindexformat{\see {W-type, rank comparison relation}}{294}
+  \item {$\predZ$}, \hyperindexformat{\textbf}{35}
+  \item predecessor function, \hyperindexformat{\textbf}{35}
+  \item premise of an inference rule, \hyperindexformat{\textbf}{3}
+  \item preorder
+    \subitem poset reflection, \hyperpage{250}
+  \item {$\primefunction$}, 
+		\hyperindexformat{\see {prime function}}{95}
+  \item prime counting function, \hyperindexformat{\textbf}{95}
+  \item prime function, \hyperindexformat{\textbf}{95}
+  \item prime number, \hyperindexformat{\textbf}{91}, 
+		\hyperpage{91--93}, \hyperpage{229}, \hyperpage{268}
+    \subitem infinitude of primes, \hyperpage{93}
+  \item {principal $G$-set}, \hyperindexformat{\textbf}{273}
+  \item product of types, \hyperindexformat{\textbf}{35}
+  \item program, \hyperpage{11}
+  \item projection map
+    \subitem first projection, \hyperindexformat{\textbf}{34}
+    \subitem second projection, \hyperindexformat{\textbf}{34}
+  \item proof by contradiction, \hyperpage{29}
+  \item proof of negation, \hyperpage{29}
+  \item {$\prop_\UU$}, \hyperindexformat{\textbf}{140}, \hyperpage{225}
+    \subitem is a set, \hyperpage{214}
+  \item {proper $(k+1)$-type}, \hyperindexformat{\textbf}{147}
+  \item proper divisor, \hyperindexformat{\textbf}{91}
+  \item property, \hyperindexformat{\textbf}{142}
+  \item proposition, \hyperindexformat{\textbf}{140}, 
+		\hyperpage{140--142}
+    \subitem closed under equivalences, \hyperpage{143}
+    \subitem {propositions are locally $\UU$-small}, \hyperpage{232}
+  \item propositional extensionality, \hyperindexformat{\textbf}{214}, 
+		\hyperpage{213--215}
+  \item propositional truncation, \hyperpage{172--187}
+    \subitem 3-for-2 property, \hyperpage{174}
+    \subitem {$\alpha:\prd{x,y:A}x=y$}, \hyperpage{177}
+    \subitem as higher inductive type, \hyperpage{175--178}
+    \subitem dependent universal property, 
+		\hyperindexformat{\textbf}{185}
+    \subitem distributes over cartesian products, \hyperpage{185}
+    \subitem {$\eta:A\to\brck{A}$}, \hyperpage{177}
+    \subitem functorial action, \hyperindexformat{\textbf}{179}
+    \subitem impredicative encoding, \hyperpage{186}
+    \subitem induction principle, \hyperindexformat{\textbf}{178}, 
+		\hyperpage{177--178}
+    \subitem is a proposition, \hyperpage{177}
+    \subitem to be a propositional truncation, 
+		\hyperindexformat{\textbf}{173}
+    \subitem unit of propositional truncation, \hyperpage{177}
+    \subitem universal property, \hyperindexformat{\textbf}{173}, 
+		\hyperpage{178--179}
+    \subitem universal property into sets, 
+		\hyperindexformat{\textbf}{183}
+    \subitem {universal property of the image of $A\to \unit$}, 
+		\hyperpage{197}
+  \item propositions as types
+    \subitem conjunction, \hyperpage{35}
+  \item {$\pt_x$}, \hyperindexformat{\textbf}{28}
+
+  \indexspace
+
+  \item {$\Q$}, \hyperindexformat{\see {rational numbers}}{245}
+  \item {$q_R$}, \hyperindexformat{\textbf}{230}
+
+  \indexspace
+
+  \item {$\ct[h]{r}{s}$}, 
+		\hyperindexformat{\see {horizontal concatenation}}{263}
+  \item {$\op{R}$}, 
+		\hyperindexformat{\see {opposite correspondence}}{226}
+  \item {$\rank(A,B)$}, 
+		\hyperindexformat{\see {W-type, rank poset}}{295}
+  \item rank
+    \subitem of W-type, \hyperpage{295}
+      \subsubitem is extensional, \hyperpage{295}
+      \subsubitem is well-founded, \hyperpage{295}
+  \item rank comparison relation
+    \subitem W-type, \hyperindexformat{\textbf}{294}
+      \subsubitem is a preordering, \hyperpage{294}
+  \item rank poset
+    \subitem W-type, \hyperindexformat{\textbf}{295}
+  \item rational numbers, \hyperindexformat{\textbf}{245}
+  \item {$\refl{}$}, \hyperindexformat{\textbf}{39}
+  \item {$\reflhtpy$}, \hyperindexformat{\textbf}{105}
+  \item {$\booleanreflection$}, \hyperindexformat{\textbf}{94}
+  \item reflexive
+    \subitem {$\leq$ on $\N$}, \hyperpage{60}
+  \item relation
+    \subitem equivalence relation, \hyperindexformat{\textbf}{230}
+    \subitem order, \hyperpage{60}
+    \subitem reflexive, \hyperpage{230}
+    \subitem strict order, \hyperpage{61}
+    \subitem symmetric, \hyperpage{230}
+    \subitem transitive, \hyperpage{230}
+    \subitem valued in propositions, \hyperpage{230}
+  \item replacement axiom, \hyperindexformat{\textbf}{232}
+  \item {$\Retr_{\Set_\UU}(X)$}, \hyperindexformat{\textbf}{249}
+    \subitem is equivalent to equivalence relations with canonical representatives, 
+		\hyperpage{249}
+  \item {$\Retr_\UU(X)$}
+    \subitem {is a $k$-truncated type}, \hyperpage{228}
+    \subitem is finite, \hyperpage{228}
+  \item {$\retractions(f)$}, \hyperindexformat{\textbf}{106}
+  \item retract
+    \subitem identity type, \hyperpage{150}
+    \subitem of a type, \hyperindexformat{\textbf}{106}
+    \subitem retracts of small types are small, \hyperpage{228}
+    \subitem set-based retract, \hyperindexformat{\textbf}{249}
+  \item retraction, \hyperindexformat{\textbf}{106}
+  \item {$\reverselist$}, \hyperindexformat{\textbf}{38}
+  \item {$\rightinv$}, \hyperindexformat{\textbf}{42}
+  \item {$\rightunit$}, \hyperindexformat{\textbf}{42}
+  \item right unit law, \hyperindexformat{\see {unit laws}}{17}
+  \item ring
+    \subitem integers, \hyperpage{51}
+  \item rules
+    \subitem for dependent function types
+      \subsubitem {$\beta$-rule}, \hyperindexformat{\textbf}{13}
+      \subsubitem congruence, \hyperindexformat{\textbf}{12}
+      \subsubitem {$\eta$-rule}, \hyperindexformat{\textbf}{13}
+      \subsubitem evaluation, \hyperindexformat{\textbf}{13}
+      \subsubitem formation, \hyperindexformat{\textbf}{12}
+      \subsubitem {$\lambda$-abstraction}, 
+		\hyperindexformat{\textbf}{12}
+      \subsubitem {$\lambda$-congruence}, \hyperpage{12}
+    \subitem for function types, \hyperpage{15}
+    \subitem {for $\N$}
+      \subsubitem computation rules, \hyperpage{22}
+      \subsubitem formation, \hyperpage{20}
+      \subsubitem induction principle, \hyperindexformat{\textbf}{20}
+      \subsubitem introduction rules, \hyperpage{20}
+    \subitem for type dependency
+      \subsubitem change of variables, \hyperpage{9}
+      \subsubitem element conversion, \hyperindexformat{\textbf}{10}
+      \subsubitem generic element, \hyperindexformat{\textbf}{9}
+      \subsubitem interchange, \hyperpage{10}
+      \subsubitem judgmental equality is an equivalence relation, 
+		\hyperpage{6}
+      \subsubitem rules for substitution, \hyperpage{7--8}
+      \subsubitem rules for weakening, \hyperpage{8--9}
+      \subsubitem variable conversion, \hyperindexformat{\textbf}{7}, 
+		\hyperpage{7}
+      \subsubitem variable rule, \hyperindexformat{\textbf}{9}
+    \subitem identity type, \hyperpage{39--40}
+  \item Russell's paradox, \hyperindexformat{\textbf}{291}, 
+		\hyperpage{286--291}
+
+  \indexspace
+
+  \item {$\sphere{1}$}, \hyperindexformat{\see {circle}}{298, 299}, 
+		\hyperindexformat{\textbf}{299}
+  \item {$\Sigma_A$}, 
+		\hyperindexformat{\see {dependent pair type}}{226}
+    \subitem {is a $k$-truncated map}, \hyperpage{226}
+  \item {$S_n$}, \hyperindexformat{\see {symmetric group}}{256}
+  \item {$\numberofsurjectivemaps(m,n)$}, 
+		\hyperindexformat{\textbf}{210}
+  \item {$\Sigma$-decomposition}, \hyperindexformat{\textbf}{249}
+    \subitem indexing type, \hyperindexformat{\textbf}{249}
+    \subitem set indexed, \hyperindexformat{\textbf}{249}
+  \item {$\Sigma$-type}, 
+		\hyperindexformat{\see {dependent pair type}}{33}, 
+		\hyperindexformat{\textbf}{33}
+  \item {$\sections(f)$}, \hyperindexformat{\textbf}{106}
+  \item second projection map, \hyperindexformat{\textbf}{34}
+  \item section
+    \subitem of a map, \hyperindexformat{\textbf}{106}
+  \item section of a type family, \hyperpage{5}
+  \item {$\segmenthelix_k$}, \hyperindexformat{\textbf}{310}
+  \item semi-ring laws
+    \subitem {for $\N$}, \hyperpage{49}
+  \item {$\semigroup_\UU$}, \hyperindexformat{\textbf}{254}
+    \subitem identity type, \hyperpage{258}
+    \subitem {is a $1$-type}, \hyperpage{258}
+  \item semigroup, \hyperindexformat{\textbf}{254}
+    \subitem has inverses, \hyperpage{255}
+    \subitem homomorphism, \hyperindexformat{\textbf}{256}
+    \subitem isomorphism, \hyperindexformat{\textbf}{257}
+    \subitem unital, \hyperpage{254}
+  \item semigroup homomorphism, \hyperindexformat{\textbf}{256}
+  \item {$\Set_\UU$}
+    \subitem is not a set, \hyperpage{225}
+  \item set, \hyperpage{52}, \hyperindexformat{\textbf}{144}, 
+		\hyperpage{144--146}, \hyperpage{307}
+    \subitem automorphism group, \hyperindexformat{\textbf}{256}
+    \subitem Hedberg's theorem, \hyperpage{145}
+    \subitem isomorphism, \hyperindexformat{\textbf}{172}
+  \item set quotient, \hyperindexformat{\textbf}{230}, 
+		\hyperindexformat{\textbf}{233}, \hyperpage{229--253}
+    \subitem {$[x]_R$}, \hyperindexformat{\textbf}{230}
+    \subitem characterization of identity type, \hyperpage{231}
+    \subitem {is $\UU$-small}, \hyperpage{233}
+    \subitem partition, \hyperindexformat{\textbf}{240}, 
+		\hyperpage{239--242}
+    \subitem poset reflection, \hyperpage{250}
+    \subitem set truncation, \hyperindexformat{\textbf}{245}, 
+		\hyperpage{245--249}
+    \subitem surjective maps into sets are set quotients, 
+		\hyperpage{238}
+    \subitem universal property, \hyperindexformat{\textbf}{233}, 
+		\hyperpage{233--239}
+  \item set truncation, \hyperindexformat{\textbf}{245}, 
+		\hyperindexformat{\textbf}{247}, \hyperpage{245--249}
+    \subitem dependent universal property, 
+		\hyperindexformat{\textbf}{246}
+    \subitem functorial action, \hyperindexformat{\textbf}{250}
+    \subitem universal property, \hyperindexformat{\textbf}{245}
+  \item set-based retract, \hyperindexformat{\textbf}{249}
+  \item {set-indexed $\Sigma$-decomposition}, 
+		\hyperindexformat{\textbf}{249}
+  \item set-level structure, \hyperpage{254}
+  \item singleton induction, \hyperindexformat{\textbf}{116}, 
+		\hyperpage{116--118}
+    \subitem is contractible, \hyperpage{117}
+  \item small map, \hyperindexformat{\textbf}{212}
+  \item small multiset, \hyperindexformat{\textbf}{287}
+  \item small type, \hyperindexformat{\textbf}{212}, \hyperpage{287}
+    \subitem contractible type, \hyperpage{212}
+    \subitem dependent function type, \hyperpage{212}
+    \subitem {$\F$ is $\UU$-small}, \hyperpage{233}
+    \subitem finite type, \hyperpage{213}
+    \subitem products of small types are small, \hyperpage{228}
+    \subitem retracts of small types are small, \hyperpage{228}
+    \subitem {set quotient is $\UU$-small}, \hyperpage{233}
+    \subitem small types are locally small, \hyperpage{232}
+    \subitem {$\UU$ is not $\UU$-small}, \hyperpage{291}
+  \item standard finite type, \hyperpage{68}
+  \item Stirling number of the second kind, \hyperpage{210}
+  \item Stirling type of the second kind, 
+		\hyperindexformat{\textbf}{252}, \hyperpage{268}
+    \subitem is finite, \hyperpage{252}
+    \subitem is truncated, \hyperpage{252}
+  \item strict ordering
+    \subitem extensional, \hyperindexformat{\textbf}{295}
+    \subitem on W-types, \hyperindexformat{\textbf}{292}
+      \subsubitem is irreflexive, \hyperpage{292}
+      \subsubitem is transitive, \hyperpage{292}
+  \item strict rank comparison relation
+    \subitem W-type, \hyperindexformat{\textbf}{294}
+      \subsubitem extends to rank poset, \hyperpage{295}
+      \subsubitem is a strict ordering, \hyperpage{294}
+  \item strictly ordered set, \hyperindexformat{\textbf}{295}
+  \item strong induction principle
+    \subitem {of $\N$}, \hyperindexformat{\textbf}{163}, 
+		\hyperpage{163--166}
+    \subitem of W-types, \hyperindexformat{\textbf}{292}
+  \item {$\strongindN$}, \hyperindexformat{\textbf}{163}
+  \item structure identity principle, \hyperpage{134--136}, 
+		\hyperpage{219}, \hyperpage{253}
+  \item subgroup, \hyperindexformat{\textbf}{270}, \hyperpage{273}
+  \item substitution, \hyperpage{7--8}
+  \item subtype, \hyperindexformat{\textbf}{142}, \hyperpage{142--144}, 
+		\hyperpage{218}
+    \subitem characterization of identity type, \hyperpage{218}
+  \item subuniverse
+    \subitem closed under equivalences, \hyperpage{214}
+  \item {$\succN$}, \hyperpage{20}
+  \item {$\succZ$}, \hyperindexformat{\textbf}{33}
+    \subitem is an equivalence, \hyperpage{107}
+  \item successor function
+    \subitem {on $\N$}, \hyperpage{20}
+    \subitem {on $\Z$}, \hyperindexformat{\textbf}{33}
+      \subsubitem is an equivalence, \hyperpage{107}
+  \item successor laws
+    \subitem {for addition on $\N$}, \hyperpage{46}
+  \item successor universe, \hyperindexformat{\textbf}{55}
+  \item {$\succN$}
+    \subitem is injective, \hyperpage{59}
+  \item {$\succT$}, \hyperpage{146}
+  \item {$\sumlist$}, \hyperindexformat{\textbf}{37}
+  \item surjective map, \hyperindexformat{\textbf}{192}, 
+		\hyperpage{225}
+    \subitem dependent universal property, 
+		\hyperindexformat{\textbf}{192}
+    \subitem factorization, \hyperpage{195}
+    \subitem surjective maps into sets are set quotients, 
+		\hyperpage{238}
+    \subitem universal property of the image of a map, \hyperpage{194}
+  \item swap function, \hyperindexformat{\textbf}{18}
+  \item symbol of a constructor of a W-type, 
+		\hyperindexformat{\textbf}{276}
+  \item symmetric group, \hyperindexformat{\textbf}{256}
+
+  \indexspace
+
+  \item {$\T$}, \hyperindexformat{\see {truncation level}}{146}
+  \item {$\Ty$}, \hyperindexformat{\see {universal family}}{53}
+  \item {$\bot$}, \hyperindexformat{\textbf}{181}
+    \subitem impredicative encoding, \hyperpage{186}
+  \item {$\top$}, \hyperindexformat{\textbf}{181}
+    \subitem impredicative encoding, \hyperpage{186}
+  \item torsor, \hyperindexformat{\textbf}{269}, \hyperpage{273}
+  \item {$\tot{f}$}, \hyperpage{126}
+    \subitem fiber, \hyperpage{126}
+    \subitem is a truncated map, \hyperpage{151}
+    \subitem of family of equivalences is an equivalence, 
+		\hyperpage{126}
+  \item total space
+    \subitem {universal cover of $\sphere{1}$}, \hyperpage{310}
+  \item {$\tot[f]{g}$}, \hyperpage{127}
+  \item tower of identity types, \hyperpage{43}
+  \item {$\tr_B$}, \hyperindexformat{\textbf}{44}
+    \subitem is a family of equivalences, \hyperpage{112}
+  \item {transitive abstract $G$-set}, \hyperindexformat{\textbf}{273}
+  \item {transitive concrete $G$-set}, \hyperindexformat{\textbf}{267}
+  \item transport, \hyperindexformat{\textbf}{44}, \hyperpage{44--45}
+  \item tree
+    \subitem binary rooted tree, \hyperindexformat{\textbf}{278}
+    \subitem finitely branching rooted tree, 
+		\hyperindexformat{\textbf}{278}
+    \subitem oriented binary rooted tree, 
+		\hyperindexformat{\textbf}{278}, \hyperpage{292}
+    \subitem oriented finitely branching rooted tree, 
+		\hyperindexformat{\textbf}{278}
+    \subitem universal tree, \hyperindexformat{\textbf}{290}
+  \item {$\collect$}, \hyperindexformat{\textbf}{275}
+  \item triangle number, \hyperindexformat{\textbf}{26}
+  \item trivial family, \hyperindexformat{\textbf}{9}
+  \item {$\btrue$}, \hyperindexformat{\textbf}{35}
+  \item truncated map, \hyperindexformat{\textbf}{147}, \hyperpage{148}
+    \subitem {${\blank}+{\blank}$}, \hyperpage{226}
+    \subitem {${\blank}+\unit$}, \hyperpage{227}
+    \subitem concatenation of lists, \hyperpage{151}
+    \subitem {$\Sigma_A$}, \hyperpage{226}
+  \item truncated type, \hyperindexformat{\textbf}{147}, 
+		\hyperpage{140--149}, \hyperpage{152}
+    \subitem closed under embeddings, \hyperpage{148}
+    \subitem closed under equivalences, \hyperpage{147}
+    \subitem closed under retracts, \hyperpage{151}
+    \subitem dependent function type, \hyperpage{155}
+    \subitem function type, \hyperpage{156}
+    \subitem Stirling type of the second kind, \hyperpage{252}
+    \subitem {universe of $k$-types}, \hyperpage{225}
+  \item truncation level, \hyperpage{140--149}, \hyperpage{152}
+  \item twin prime conjecture, \hyperpage{95}
+  \item {twisted double cover of $\sphere{1}$}, 
+		\hyperindexformat{\textbf}{319}
+  \item type, \hyperpage{4}
+    \subitem indexed type, \hyperindexformat{\textbf}{5}
+  \item type family, \hyperindexformat{\textbf}{5}, \hyperpage{5--6}, 
+		\hyperpage{217}
+    \subitem constant family, \hyperindexformat{\textbf}{9}
+    \subitem fiber of a type family, \hyperindexformat{\textbf}{8}
+    \subitem fibers of projection map, \hyperpage{124}
+    \subitem of standard finite types, \hyperpage{68}
+    \subitem {over $\sphere{1}$}, \hyperindexformat{\textbf}{309}
+    \subitem transport, \hyperindexformat{\textbf}{44}
+    \subitem trivial family, \hyperindexformat{\textbf}{9}
+    \subitem univalent type family, \hyperindexformat{\textbf}{285}
+    \subitem universal family, \hyperindexformat{\textbf}{53}
+  \item type theoretic choice, 
+		\hyperindexformat{\see {distributivity, of $\Pi$ over $\Sigma$}}{156}
+
+  \indexspace
+
+  \item {$\UU$}, \hyperindexformat{\see {universe}}{53}
+  \item {$\UU_\ast$}, \hyperindexformat{\textbf}{259}
+  \item {$\UU^+$}, \hyperindexformat{\see {successor universe}}{55}
+  \item {$\UU_0$}, \hyperindexformat{\see {base universe}}{55}
+  \item {$\UU_A$}, \hyperindexformat{\textbf}{222}
+    \subitem {is $\UU$-small}, \hyperpage{232}
+  \item {$\UU^{\leq k}$}, \hyperindexformat{\textbf}{147}, 
+		\hyperpage{225}
+    \subitem {is a $k$-type}, \hyperpage{225}
+  \item {$U\sqcup V$}, \hyperindexformat{\see {join of universes}}{56}
+  \item {$\UU$-small map}, \hyperindexformat{\textbf}{212}
+  \item {$\UU$-small multiset}, \hyperindexformat{\textbf}{287}
+  \item {$\UU$-small type}, \hyperindexformat{\textbf}{212}, 
+		\hyperpage{287}
+    \subitem {$\UU$ is not $\UU$-small}, \hyperpage{291}
+  \item unary identity system, 
+		\hyperindexformat{\see {identity system}}{128}
+  \item unit
+    \subitem of a unital semigroup, \hyperpage{254}
+  \item unit laws
+    \subitem coherent unit laws, \hyperindexformat{\textbf}{303}
+    \subitem for a unital semigroup, \hyperpage{254}
+    \subitem {for addition on $\N$}, \hyperpage{46}
+    \subitem {for addition on $\Z$}, \hyperpage{50}
+    \subitem for cartesian products, \hyperpage{108}
+    \subitem for concatenation of identifications, \hyperpage{42}
+    \subitem for coproducts, \hyperpage{108}
+    \subitem for dependent pair types, \hyperpage{109}
+    \subitem for function composition, \hyperpage{17, 18}
+    \subitem for horizontal concatenation, \hyperpage{263}
+    \subitem {for multiplication on $\N$}, \hyperpage{49}
+    \subitem {for multiplication on $\sphere{1}$}, \hyperpage{304}
+    \subitem {for multiplication on $\Z$}, \hyperpage{51}
+  \item unit laws for multiplication, \hyperpage{51}
+  \item unit of propositional truncation, \hyperpage{177}
+  \item unit type, \hyperindexformat{\textbf}{27}, \hyperpage{27--28}
+    \subitem computation rules, \hyperindexformat{\textbf}{28}
+    \subitem induction principle, \hyperindexformat{\textbf}{27}
+    \subitem {$\indunit$}, \hyperindexformat{\textbf}{27}
+    \subitem is contractible, \hyperpage{116}
+    \subitem is decidable, \hyperpage{80}
+    \subitem singleton induction, \hyperpage{117}
+    \subitem {$\ttt$}, \hyperindexformat{\textbf}{27}
+  \item unital semigroup, \hyperpage{254}
+    \subitem has inverses, \hyperpage{255}
+  \item univalence axiom, \hyperindexformat{\textbf}{212}, 
+		\hyperpage{210--229}, \hyperpage{253}
+    \subitem families over $\sphere{1}$, \hyperpage{308}
+    \subitem implies function extensionality, \hyperpage{215}
+    \subitem implies propositional extensionality, \hyperpage{214}
+  \item univalent type family, \hyperindexformat{\textbf}{285}
+  \item univalent universe, \hyperindexformat{\textbf}{211}
+  \item {universal cover of $\sphere{1}$}, 
+		\hyperindexformat{\textbf}{310}, \hyperpage{308--322}
+    \subitem is an identity system, \hyperpage{316}
+    \subitem {$\segmenthelix_k$}, \hyperpage{310}
+    \subitem total space, \hyperpage{310}, \hyperpage{321}
+  \item universal family, \hyperindexformat{\textbf}{53}, 
+		\hyperpage{51--62}
+  \item universal property
+    \subitem of cartesian products, \hyperindexformat{\textbf}{160}
+    \subitem of contractible types, \hyperindexformat{\textbf}{168}
+    \subitem of coproducts, \hyperindexformat{\textbf}{169}
+    \subitem of disjunction, \hyperindexformat{\textbf}{180}
+    \subitem of empty types, \hyperindexformat{\textbf}{168}
+    \subitem of existential quantification, 
+		\hyperindexformat{\textbf}{180}
+    \subitem of identity types, \hyperpage{160--161}
+    \subitem {of $\N$}, \hyperindexformat{\textbf}{169}
+    \subitem of poset reflections, \hyperindexformat{\textbf}{250}
+    \subitem of propositional truncations, 
+		\hyperindexformat{\textbf}{173}, \hyperpage{178--179}
+    \subitem of propositional truncations into sets, 
+		\hyperindexformat{\textbf}{183}
+    \subitem {of $\Sigma$-types}, \hyperpage{159--160}
+    \subitem of set quotients, \hyperindexformat{\textbf}{233}, 
+		\hyperpage{233--239}
+    \subitem of set truncations, \hyperindexformat{\textbf}{245}
+    \subitem of the circle, \hyperindexformat{\textbf}{302}, 
+		\hyperpage{300--303}
+    \subitem of the classifying type of a group, 
+		\hyperindexformat{\textbf}{272}
+    \subitem of the image of a map, \hyperindexformat{\textbf}{188}, 
+		\hyperpage{188--189}
+    \subitem {of $\Z$}, \hyperindexformat{\textbf}{315}, 
+		\hyperpage{313--316}
+  \item universal quantification, \hyperindexformat{\textbf}{181}
+    \subitem impredicative encoding, \hyperpage{186}
+  \item universal tree, \hyperindexformat{\textbf}{290}
+  \item universe, \hyperindexformat{\textbf}{53}, \hyperpage{51--62}
+    \subitem base universe, \hyperindexformat{\textbf}{55}
+    \subitem characterization of identity type, \hyperpage{211}
+    \subitem connected component, \hyperindexformat{\textbf}{222}
+    \subitem enough universes, \hyperindexformat{\textbf}{55}, 
+		\hyperpage{54--56}, \hyperpage{212}
+    \subitem join of universes, \hyperindexformat{\textbf}{56}
+    \subitem of contractible types, \hyperpage{225}
+    \subitem {of $k$-types}, \hyperpage{225}
+      \subsubitem {is a $k$-type}, \hyperpage{225}
+    \subitem of propositions, \hyperpage{225}
+    \subitem of sets, \hyperpage{225}
+    \subitem successor universe, \hyperindexformat{\textbf}{55}
+    \subitem {$\UU$ is locally $\UU$-small}, \hyperpage{232}
+    \subitem {$\UU$ is not $\UU$-small}, \hyperpage{291}
+  \item upper bound, \hyperindexformat{\textbf}{87}
+
+  \indexspace
+
+  \item {$\VV$}, \hyperindexformat{\see {universe}}{53}
+  \item variable, \hyperindexformat{\textbf}{4}
+  \item variable conversion rules, \hyperindexformat{\textbf}{7}
+  \item variable declaration, \hyperindexformat{\textbf}{4}
+  \item variable rule, \hyperindexformat{\textbf}{9}
+  \item vertical concatenation, \hyperindexformat{\textbf}{263}
+    \subitem interchange law, \hyperpage{264}
+
+  \indexspace
+
+  \item {$W(A,B)$}, \hyperindexformat{\textbf}{275}
+  \item {$\W(A,B)$}, \hyperindexformat{\see {W-type}}{275}
+  \item {$\W(f,e)$}, 
+		\hyperindexformat{\see {W-type, functorial action}}{281}, 
+		\hyperindexformat{\textbf}{281}
+    \subitem fiber, \hyperpage{281}
+    \subitem is a truncated map, \hyperpage{281}
+    \subitem is an embedding, \hyperpage{281}
+    \subitem is an equivalence, \hyperpage{281}
+  \item W-type, \hyperindexformat{\textbf}{275}, \hyperpage{274--295}
+    \subitem {$\arity$}, \hyperindexformat{\textbf}{276}
+    \subitem arity of constructor, \hyperindexformat{\textbf}{276}
+    \subitem binary rooted trees, \hyperindexformat{\textbf}{278}
+    \subitem characterization of identity type, \hyperpage{279}
+    \subitem component of an element, \hyperindexformat{\textbf}{276}
+    \subitem computation rule, \hyperindexformat{\textbf}{275}
+    \subitem constant element, \hyperindexformat{\textbf}{276}
+    \subitem {$\in$}, \hyperindexformat{\textbf}{282}
+    \subitem elementhood relation, \hyperpage{282--286}
+      \subsubitem is irreflexive, \hyperpage{292}
+    \subitem {$\EqW$}, \hyperindexformat{\textbf}{279}
+    \subitem extensionality, \hyperindexformat{\textbf}{284}
+    \subitem finitely branching rooted trees, 
+		\hyperindexformat{\textbf}{278}
+    \subitem functorial action, \hyperindexformat{\textbf}{281}, 
+		\hyperpage{281--282}
+    \subitem {$\indW$}, \hyperindexformat{\textbf}{275}
+    \subitem induction principle, \hyperindexformat{\textbf}{275}, 
+		\hyperpage{282}
+    \subitem is empty, \hyperpage{276}
+    \subitem is initial algebra of polynomial endofunctor, 
+		\hyperpage{294}
+    \subitem is truncated, \hyperpage{280}
+    \subitem {$\isconstantW$}, \hyperindexformat{\textbf}{276}
+    \subitem natural numbers, \hyperpage{277}
+    \subitem no infinitely descending sequences, \hyperpage{293}
+    \subitem observational equality, \hyperpage{279--280}
+    \subitem oriented binary rooted trees, 
+		\hyperindexformat{\textbf}{278}
+    \subitem oriented finitely branching rooted trees, 
+		\hyperindexformat{\textbf}{278}
+    \subitem pattern matching, \hyperpage{275}
+    \subitem rank, \hyperpage{295}
+      \subsubitem is extensional, \hyperpage{295}
+      \subsubitem is well-founded, \hyperpage{295}
+    \subitem rank comparison relation, \hyperindexformat{\textbf}{294}
+      \subsubitem is a preordering, \hyperpage{294}
+    \subitem rank poset, \hyperindexformat{\textbf}{295}
+    \subitem strict ordering, \hyperindexformat{\textbf}{292}
+      \subsubitem is irreflexive, \hyperpage{292}
+      \subsubitem is transitive, \hyperpage{292}
+    \subitem strict rank comparison relation, 
+		\hyperindexformat{\textbf}{294}
+      \subsubitem is a strict ordering, \hyperpage{294}
+    \subitem strong induction principle, 
+		\hyperindexformat{\textbf}{292}
+    \subitem symbol of a constructor, \hyperindexformat{\textbf}{276}
+    \subitem {$\collect$}, \hyperindexformat{\textbf}{275}
+  \item weak function extensionality, \hyperindexformat{\textbf}{154}, 
+		\hyperpage{156}, \hyperpage{216}
+  \item weakening, \hyperpage{8--9}
+  \item weakly constant map, \hyperindexformat{\textbf}{183}
+  \item weakly path constant map, \hyperindexformat{\textbf}{251}
+  \item well-formed type, \hyperpage{4}
+  \item well-founded relation, \hyperindexformat{\textbf}{295}
+  \item well-founded trees, \hyperindexformat{\textbf}{275}
+  \item {well-ordering principle of $\N$}, 
+		\hyperindexformat{\textbf}{87}, \hyperpage{86--87}
+  \item {$\wellorderingprinciple(P,d)$}, \hyperindexformat{\textbf}{87}
+  \item whiskering operations
+    \subitem of homotopies, \hyperindexformat{\textbf}{106}
+  \item with-abstraction, \hyperpage{83--86}
+
+  \indexspace
+
+  \item {$\yggdrasil$}, \hyperindexformat{\see {universal tree}}{290}
+
+  \indexspace
+
+  \item {$\Z$}, \hyperindexformat{\see {integers}}{32}
+    \subitem dependent universal property, 
+		\hyperindexformat{\textbf}{315}, \hyperpage{313--316}
+    \subitem has decidable equality, \hyperpage{96}
+    \subitem is a group, \hyperpage{255}
+    \subitem is a set, \hyperpage{150}
+    \subitem is the free group with one generator, 
+		\hyperindexformat{\textbf}{270}
+    \subitem {universal cover of $\sphere{1}$}, 
+		\hyperindexformat{\textbf}{310}
+    \subitem universal property, \hyperindexformat{\textbf}{315}, 
+		\hyperpage{313--316}
+  \item zero laws
+    \subitem for cartesian products, \hyperpage{108}
+    \subitem {for $\mulZ$}, \hyperpage{51}
+
+\end{theindex}

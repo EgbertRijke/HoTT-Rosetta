@@ -1,0 +1,434 @@
+\section{Universes}\label{sec:universes}
+
+\index{universe|(}
+\index{universal family|(}
+To complete our specification of dependent type theory, we introduce type theoretic \emph{universes}. Universes can be thought of as types that consist of types. In reality, however, a universe consists of a type $\UU$ equipped with a type family $\Ty$ over $\UU$. For any $X:\UU$ we think of $X$ as an \emph{encoding}\index{encoding of a type in a universe} of the type $\Ty(X)$. The type family $\Ty$ is called a \emph{universal type family}.
+
+There are several reasons to equip type theory with universes. One important reason is that it enables us to define new type families over inductive types, using their induction principle. We use this way of defining type families to define many familiar relations over $\N$, such as the ordering relations $\leq$ and $<$. We also introduce a relation $\EqN$ called the \emph{observational equality} on $\N$. This equivalence relation can be used to show that $\zeroN\neq\oneN$.
+
+The idea of introducing an observational equality relation for a particular type is that it should help us thinking about the identity type. The identity type has been introduced in a very generic and uniform way. In specific cases, however, we have a clear idea of what the equality relation \emph{should be}. In the case of the natural numbers, for instance, we will use the observational equality $\EqN$ to characterize the identity type of $\N$. Characterizing identity types is one of the main themes in homotopy type theory.
+
+A second reason to introduce universes is that it allows us to define many types of types equipped with structure. One of the most important examples is the type of groups\index{group}, which is the type of types equipped with the group operations satisfying the group laws, and for which the underlying type is a set\index{set}. We won't discuss the condition for a type to be a set until \cref{chap:hierarchy}, so the definition of groups in type theory will be given much later.
+
+\subsection{Specification of type theoretic universes}
+
+A universe consists of a type $\UU$ of which the elements can be thought of as `codes' for types. A universe also comes equipped with a type family $\Ty$ indexed by $\UU$. Given an element $X:\UU$, we think of the type $\Ty(X)$ as the type of elements of $X$. The family $\Ty$ is called the \define{universal type family}.
+
+One of the distinguishing features of universes is that they are closed under all the type constructors. Given a universe $\UU$ with universal type family $\Ty$, how do we express that $\UU$ is closed under $\Sigma$-types, for example? Recall that a $\Sigma$-type is formed using a type $A$ and a type family $B$ over $A$. Thus, if $A$ is a type in $\UU$ and $B$ is a family of types in $\UU$, we would like to express that the $\Sigma$-type is also a type in $\UU$. However, we cannot just assert that $\sm{x:A}B(x)$ is an element of the universe, because type theory carefully distinguishes between types and elements.
+
+We express that $\UU$ is closed under $\Sigma$-types using a new operation $\check{\Sigma}$, which takes two arguments. The first argument is an element $X:\UU$, and the second argument is a family of types in $\UU$ indexed by the elements of $X$, i.e., a map $\Ty(X)\to\UU$. Thus we say that $\UU$ is closed under $\Sigma$-types by asserting that $\UU$ comes equipped with an operation
+\begin{equation*}
+  \check{\Sigma} : \prd{X:\UU} (\Ty(X)\to\UU)\to\UU
+\end{equation*}
+Furthermore, we ask that the element $\check{\Sigma}(X,Y):\UU$ satisfies the judgmental equality
+\begin{equation*}
+  \Ty(\check{\Sigma}(X,Y))\jdeq\sm{x:\Ty(X)}\Ty(Y(x)).
+\end{equation*}
+This judgmental equality asserts that the element $\check{\Sigma}(X,Y)$ of the universe $\UU$ \emph{represents} the $\Sigma$-type $\sm{x:\Ty(X)}\Ty(Y(x))$.
+
+We will similarly assume that universes are closed under $\Pi$-types and the other ways of forming types. However, there is an important restriction: it would be inconsistent to assume that the universe is contained in itself. One way of thinking about this is that universes are types of \emph{small} types, and it cannot be the case that the universe is small with respect to itself. In \cref{subsec:russell} we will use a variant of Russell's paradox to derive a contradiction when $\UU$ is assumed to be (equivalent to a type) in $\UU$. Instead of assuming that the universe contains itself, we will assume that there are plenty of universes: enough universes so that any type family can be obtained by substituting into the universal type family of some universe.
+
+\begin{defn}\label{defn:universe}
+  A \define{universe}\index{universe|textbf} in type theory is a type $\UU$\index{U@{$\UU$}|see {universe}}\index{V@{$\VV$}|see {universe}} in the empty context, equipped with a type family $\Ty$\index{T@{$\Ty$}|see {universal family}} over $\UU$ called a \define{universal family}\index{type family!universal family|textbf}\index{universal family|textbf}, that is closed under the type forming operations in the sense that it comes equipped with the following structure:
+  \begin{enumerate}
+  \item $\UU$ is closed under $\Pi$, in the sense that it comes equipped with a function
+    \begin{equation*}
+      \check{\Pi} :\prd{X:\UU}(\Ty(X)\to\UU)\to\UU
+    \end{equation*}
+    for which the judgmental equality
+    \begin{equation*}
+      \Ty\big(\check{\Pi}(X,Y)\big)\jdeq \prd{x:\Ty(X)}\Ty(Y(x)).
+    \end{equation*}
+    holds, for every $X:\UU$ and $Y:\Ty(X)\to\UU$.
+  \item $\UU$ is closed under $\Sigma$ in the sense that it comes equipped with a function
+    \begin{equation*}
+      \check{\Sigma} :\prd{X:\UU}(\Ty(X)\to\UU)\to\UU
+    \end{equation*}
+    for which the judgmental equality
+    \begin{equation*}
+      \Ty\big(\check{\Sigma}(X,Y)\big) \jdeq \sm{x:\Ty(X)}\Ty(Y(x))
+    \end{equation*}
+    holds, for every $X:\UU$ and $Y:\Ty(X)\to\UU$.
+  \item $\UU$ is closed under identity types, in the sense that it comes equipped with a function
+    \begin{equation*}
+      \check{\mathrm{I}} : \prd{X:\UU}\Ty(X)\to(\Ty(X)\to\UU)
+    \end{equation*}
+    for which the judgmental equality
+    \begin{equation*}
+      \Ty\big(\check{\mathrm{I}}(X,x,y)\big)\jdeq (\id{x}{y})
+    \end{equation*}
+    holds, for every $X:\UU$ and $x,y:\Ty(X)$.
+  \item $\UU$ is closed under coproducts, in the sense that it comes equipped with a function
+    \begin{equation*}
+      \mathbin{\check{+}}:\UU\to (\UU\to\UU)
+    \end{equation*}
+    that satisfies $\Ty\big(X\mathbin{\check{+}}Y\big)\jdeq \Ty(X)+\Ty(Y)$.
+  \item $\UU$ contains elements $\check{\emptyt},\check{\unit},\check{\N}:\UU$
+    that satisfy the judgmental equalities
+    \begin{align*}
+      \Ty(\check{\emptyt}) & \jdeq \emptyt \\
+      \Ty(\check{\unit}) & \jdeq \unit \\
+      \Ty(\check{\N}) & \jdeq \N.
+    \end{align*}
+  \end{enumerate}
+  Consider a universe $\UU$ and a type $A$ in context $\Gamma$. We say that $A$ is a type in $\UU$, or that $\UU$ \define{contains} $A$, if $\UU$ comes equipped with an element $\check{A}:\UU$ in context $\Gamma$, for which the judgment
+  \begin{equation*}
+    \Gamma\vdash\Ty\big(\check{A}\big)\jdeq A~\type
+  \end{equation*}
+  holds. If $A$ is a type in $\UU$, we usually write simply $A$ for $\check{A}$ and also $A$ for $\Ty(\check{A})$.
+\end{defn}
+
+\begin{rmk}
+  Since ordinary function types are defined as a special case of dependent function types, we don't have to assume separately that universes are closed under ordinary function types. Similarly, it follows from the assumption that universes are closed under dependent pair types that universes are closed under cartesian product types.
+\end{rmk}
+
+\subsection{Assuming enough universes}
+
+\index{enough universes|(}
+\index{universe!enough universes|(}
+  Most of the time we will get by with assuming one universe $\UU$, and indeed we recommend on a first reading of this text to simply assume that there is one universe $\UU$. However, sometimes we might want to consider the universe $\UU$ itself to be a type in some universe. In such situations we cannot get by with a single universe, because the assumption that $\UU$ is a element of itself would lead to inconsistencies like the Russell's paradox.
+
+  Russell's paradox is the famous argument that there cannot be a set of all sets. If there were such a set $S$, then we could consider Russell's subset
+  \begin{equation*}
+    R:=\{x\in S\mid x\notin x\}.
+  \end{equation*}
+  Russell then observed that $R\in R$ if and only if $R\notin R$, so we reach a contradiction. A variant of this argument reaches a similar contradiction when we assume that $\UU$ is a universe that contains an element $\check{\UU}:\UU$ such that $\mathcal{T}\big(\check{\UU}\big)\jdeq \UU$. In order to avoid such paradoxes, Russell and Whitehead formulated the \emph{ramified theory of types} in their book \emph{Principia Mathematica}. The ramified theory of types is a precursor of Martin L\"of's type theory that we are studying in this book.  
+
+  Even though the universe is not an element of itself, it is still convenient if every type, including any universe, is in \emph{some} universe. Therefore we will assume that there are sufficiently many universes:
+  
+  \begin{postulate}\label{enough-universes}
+    We assume that there are \define{enough universes}\index{universe!enough universes|textbf}\index{enough universes|textbf}, i.e., that for every finite list of types in context
+    \begin{equation*}
+      \Gamma_1\vdash A_1~\type\qquad\cdots\qquad\Gamma_n\vdash A_n~\type,
+    \end{equation*}
+    there is a universe $\UU$ that contains each $A_i$ in the sense that $\UU$ comes equipped with
+    \begin{align*}
+      \Gamma_i\vdash \check{A}_i:\UU
+    \end{align*}
+    for which the judgment
+    \begin{equation*}
+      \Gamma_i\vdash \Ty\big(\check{A}_i\big)\jdeq A_i~\type
+    \end{equation*}
+    holds.
+  \end{postulate}
+
+With this assumption it will rarely be necessary to work with more than one universe at the same time. Using the assumption that for any finite list of types in context there is a universe that contains those types, we obtain many specific universes.
+
+\begin{defn}
+  The \define{base universe}\index{base universe|textbf}\index{universe!base universe|textbf} $\UU_0$\index{U 0@{$\UU_0$}|see {base universe}} is the universe that we obtain using \cref{enough-universes} with the empty list of types in context.
+\end{defn}
+
+In other words, the base universe is a universe that is closed under all the ways of forming types, but it isn't specified to contain any further types.
+
+\begin{defn}\label{defn:successor-universe}
+  The \define{successor universe}\index{successor universe|textbf}\index{universe!successor universe|textbf} of a universe $\UU$ is the universe $\UU^+$\index{U +@{$\UU^+$}|see {successor universe}} obtained using \cref{enough-universes} with the finite list
+  \begin{align*}
+    & \vdash \UU~\type \\
+    X:\UU & \vdash \mathcal{T}(X)~\type.
+  \end{align*}
+\end{defn}
+
+\begin{rmk}\label{rmk:successor-universe}
+  The successor universe $\UU^+$ of $\UU$ therefore contains the type $\UU$ as well as every type in $\UU$, in the following sense
+  \begin{align*}
+    & \vdash \check{\UU}:\UU^+ & & \vdash \mathcal{T}^+(\check{\UU})\jdeq\UU~\type \\
+    X:\UU & \vdash \check{\mathcal{T}}(X) :\UU^+ & X:\UU & \vdash \mathcal{T}^+(\check{\mathcal{T}}(X))\jdeq \mathcal{T}(X)~\type.
+  \end{align*}
+  In particular, we obtain a function $i:\UU\to\UU^+$ that includes the types in $\UU$ into $\UU^+$, given by
+  \begin{equation*}
+    i\defeq \lam{X}\check{\mathcal{T}}(X).
+  \end{equation*}
+
+  Using successor universes we can create an infinite tower
+  \begin{equation*}
+    \UU,\ \UU^+,\ \UU^{++},\ \ldots
+  \end{equation*}
+  of universes, starting at any universe $\UU$, in which each universe is contained in the next. However, such towers of universes need not be exhaustive in the sense that it might not be the case that every type is contained in a universe in this tower.
+\end{rmk}
+
+\begin{defn}\label{defn:join-universe}
+  The \define{join}\index{join of universes|textbf}\index{universe!join of universes|textbf} of two universes $\UU$ and $\VV$ is the universe $\UU\sqcup\VV$\index{U u V@{$U\sqcup V$}|see {join of universes}} that we obtain using \cref{enough-universes} with the two types
+  \begin{align*}
+    X:\UU & \vdash \mathcal{T}_{\UU}(X)~\type \\
+    Y:\VV & \vdash \mathcal{T}_{\VV}(Y) ~\type.
+  \end{align*}
+\end{defn}
+
+\begin{rmk}\label{rmk:join-universe}
+  Since the join $\UU\sqcup\VV$ contains all the types in $\UU$ and $\VV$, there are maps
+  \begin{align*}
+    i : \UU\to\UU\sqcup\VV \\
+    j : \VV\to\UU\sqcup\VV
+  \end{align*}
+  Note that we don't postulate any relations between the universes. In general it will therefore be the case that the universes $(\UU\sqcup\VV)\sqcup\mathcal{W}$ and $\UU\sqcup(\VV\sqcup\mathcal{W})$ will be unrelated.
+\end{rmk}
+\index{enough universes|)}
+\index{universe!enough universes|)}
+
+\subsection{Observational equality of the natural numbers}
+\index{natural numbers!observational equality|(}
+\index{observational equality!on N@{on $\N$}|(}
+
+Using universes, we can define many relations on the natural numbers. We give here the example of \emph{observational equality} of $\N$. The idea of observational equality is that, if we want to prove that $m$ and $n$ are observationally equal, we may do so by looking at $m$ and $n$:
+\begin{enumerate}
+\item If both $m$ and $n$ are $\zeroN$, then they are observationally equal.
+\item If one of them is $\zeroN$ and the other is a successor, then they are not observationally equal.
+\item If both $m$ and $n$ are successors, say $m\jdeq\succN(m')$ and $n\jdeq \succN(n')$, then $m$ and $n$ are observationally equal if and only if their predecessors $m'$ and $n'$ are observationally equal.
+\end{enumerate}
+Thus, observational equality is an inductively defined relation, which gives us an algorithm for checking equality on $\N$. Indeed, it can be used to show that equality of natural numbers is \emph{decidable}, i.e., there is a program that decides for any two natural numbers $m$ and $n$ whether they are equal or not.
+
+\begin{defn}\label{defn:obs_nat}
+We define the \define{observational equality}\index{observational equality!on N@{on $\N$}|textbf}\index{natural numbers!observational equality|textbf} of $\N$ as binary relation $\EqN:\N\to(\N\to\UU_0)$\index{Eq N@{$\EqN$}|textbf}\index{natural numbers!Eq N@{$\EqN$}|textbf} satisfying
+\begin{align*}
+\EqN(\zeroN,\zeroN) & \jdeq \unit & \EqN(\succN(n),\zeroN) & \jdeq \emptyt \\
+\EqN(\zeroN,\succN(n)) & \jdeq \emptyt & \EqN(\succN(n),\succN(m)) & \jdeq \EqN(n,m).
+\end{align*}
+\end{defn}
+
+\begin{constr}
+We define $\EqN$ by double induction on $\N$. By the first application of induction it suffices to provide
+\begin{align*}
+E_0 & : \N\to\UU_0 \\
+E_S & : \N\to ((\N\to\UU_0)\to(\N\to\UU_0))
+\end{align*}
+We define $E_0$ by induction, taking $E_{00}\defeq \unit$ and $E_{0S}(n,X,m)\defeq \emptyt$. The resulting family $E_0$ satisfies
+\begin{align*}
+E_0(\zeroN) & \jdeq \unit \\
+E_0(\succN(n)) & \jdeq \emptyt.
+\end{align*} 
+We define $E_S$ by induction, taking $E_{S0}\defeq \emptyt$ and $E_{SS}(n,X,m)\defeq X(m)$. The resulting family $E_S$ satisfies
+\begin{align*}
+E_S(n,X,\zeroN) & \jdeq \emptyt \\
+E_S(n,X,\succN(m)) & \jdeq X(m) 
+\end{align*}
+Therefore we have by the computation rule for the first induction that the judgmental equality
+\begin{align*}
+\EqN(\zeroN,m) & \jdeq E_0(m) \\
+\EqN(\succN(n),m) & \jdeq E_S(n,\EqN(n),m)
+\end{align*}
+holds, from which the judgmental equalities in the statement of the definition follow.
+\end{constr}
+
+The observational equality of the natural numbers is important because it can be used to prove equalities and negations of equalities. \cref{prp:Eq-eq-N} enables us to do so.
+
+\begin{lem}
+  Observational equality of $\N$ is a reflexive relation, i.e., we have
+  \begin{equation*}
+    \reflEqN : \prd{n:\N}\EqN(n,n).
+  \end{equation*}
+\end{lem}
+
+\begin{proof}
+  The function $\reflEqN$ is defined by induction on $n$, taking
+  \begin{align*}
+    \reflEqN(\zeroN) & \defeq \ttt \\
+    \reflEqN(\succN(n)) & \defeq \reflEqN(n).\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{prp}\label{prp:Eq-eq-N}
+  For any two natural numbers $m$ and $n$, we have
+  \begin{equation*}
+    (m=n)\leftrightarrow \EqN(m,n).
+  \end{equation*}
+\end{prp}
+
+\begin{proof}
+  The function $(m=n)\to\EqN(m,n)$ is defined by the induction principle of identity types, using the reflexivity of $\EqN$.
+
+  The converse $\EqN(m,n)\to (m=n)$ is defined by induction on $m$ and $n$. If both $m$ and $n$ are zero, we have $\refl{\zeroN}:\zeroN=\zeroN$. If one of $m$ and $n$ is zero and the other is a successor, then $\EqN(m,n)$ is empty and we have a function $\emptyt\to (m=n)$ by the induction principle of the empty type. In the inductive step, suppose we have a function $f:\EqN(m,n)\to (m=n)$. Then we can define a function
+  \begin{equation*}
+    \EqN(\succN(m),\succN(n))\to (\succN(m)=\succN(n))
+  \end{equation*}
+  as the composite
+  \begin{equation*}
+    \begin{tikzcd}
+      \EqN(\succN(m),\succN(n)) \arrow[r,dashed] \arrow[d,swap,"\idfunc"] & (\succN(m)=\succN(n)). \\
+      \EqN(m,n) \arrow[r,swap,"f"] & (m=n) \arrow[u,swap,"\apfunc{\succN}"]
+    \end{tikzcd}
+  \end{equation*}
+  Note that the map on the left is the identity function, because we have the judgmental equality $\EqN(\succN(m),\succN(n))\jdeq\EqN(m,n)$ by definition of $\EqN$.
+\end{proof}
+\index{natural numbers!observational equality|)}
+\index{observational equality!on N@{on $\N$}|)}
+
+\subsection{Peano's seventh and eighth axioms}\label{sec:peano-axioms}
+Using the observational equality of $\N$, we can prove Peano's seventh and eighth axioms. In his \emph{Arithmetices Principia} \cite{Peano}, the natural numbers are based at $1$, but today it is customary to have the natural numbers based at $0$. Adapting for this, the seventh and eighth axioms assert that
+\begin{enumerate}
+\item[(P7)] For any two natural numbers $m$ and $n$, we have
+  \begin{equation*}
+    (m=n)\leftrightarrow (\succN(m)=\succN(n)).
+  \end{equation*}
+\item[(P8)] For any natural number $n$, we have $\zeroN\neq\succN(n)$.
+\end{enumerate}
+
+\begin{thm}\label{thm:is-injective-succ-N}
+  For any two natural numbers $m$ and $n$, we have\index{is injective!succN@{$\succN$}}\index{succN@{$\succN$}!is injective}
+  \begin{equation*}
+    (m=n)\leftrightarrow (\succN(m)=\succN(n)).
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  The forward implication is given by the action on paths of the successor function
+  \begin{equation*}
+    \apfunc{\succN}:(m=n)\to(\succN(m)=\succN(n)).
+  \end{equation*}
+  The direction of interest is the converse, which asserts that the successor function is injective.
+
+  Here we use \cref{prp:Eq-eq-N}, which asserts that $(m=n)\leftrightarrow \EqN(m,n)$ for all $m,n:\N$. Furthermore, we have $\EqN(\succN(m),\succN(n))\jdeq \EqN(m,n)$. Therefore, we obtain
+  \begin{equation*}
+    \begin{tikzcd}
+      (\succN(m)=\succN(n)) \arrow[r,dashed] \arrow[d] & (m=n) \\
+      \EqN(\succN(m),\succN(n)) \arrow[r,swap,"\idfunc"] & \EqN(m,n), \arrow[u]
+    \end{tikzcd}
+  \end{equation*}
+  and we define the function $(\succN(m)=\succN(n))\to(m=n)$ as the composite of the maps going down, then right, and then up.
+\end{proof}
+
+\begin{thm}\label{prp:zero-one}
+  For any natural number $n$, we have $\zeroN\neq\succN(n)$.\index{natural numbers!zero is not a successor}
+\end{thm}
+
+\begin{proof}
+  By \cref{prp:Eq-eq-N} it follows that there is a family of maps
+  \begin{equation*}
+    (\zeroN=n)\to \EqN(\zeroN,n).
+  \end{equation*}
+  indexed by $n:\N$. Since $\EqN(\zeroN,\succN(n))\jdeq\emptyt$ it follows that
+  \begin{equation*}
+    (\zeroN=\succN(n))\to \emptyt,
+  \end{equation*}
+  which is precisely the claim.
+\end{proof}
+
+\begin{exercises}
+  \exitem
+  \begin{subexenum}
+  \item Show that
+    \begin{align*}
+      (m=n) & \leftrightarrow (m+k=n+k) \\*
+      (m=n) & \leftrightarrow (m\cdot(k+1)=n\cdot(k+1))
+    \end{align*}
+    for all $m,n,k:\N$. In other words, adding $k$ and multiplying by $k+1$ are injective functions.
+  \item \label{ex:is-zero-summand-is-zero-sum-N}Show that
+    \begin{align*}
+      (m+n=0) & \leftrightarrow (m=0)\times (n=0)\\*
+      (mn=0) & \leftrightarrow (m=0)+(n=0)\\*
+      (mn=1) & \leftrightarrow (m=1)\times (n=1)
+    \end{align*}
+    for all $m,n:\N$.
+  \item Show that
+    \begin{align*}
+      m & \neq m+(n+1) \\*
+      m+1 & \neq (m+1)(n+2)
+    \end{align*}
+    for all $m,n:\N$.
+  \end{subexenum}
+  \exitem \label{ex:obs_bool}\index{observational equality!on bool@{on $\bool$}|textbf}\index{booleans!observational equality|textbf}
+  \begin{subexenum}
+  \item Define observational equality $\EqBool$\index{Eq-bool@{$\EqBool$}|textbf} by induction on the booleans.
+  \item Show that
+    \begin{equation*}
+      (x=y)\leftrightarrow \EqBool(x,y)
+    \end{equation*}
+    for any $x,y:\bool$.
+  \item \label{ex:zero-neq-one-bool}Show that $b\neq\negbool(b)$ for any $b:\bool$. Conclude that $\bfalse\neq\btrue$. \index{false neq true@{$\bfalse\neq\btrue$}}\index{booleans!false neq true@{$\bfalse\neq\btrue$}}
+  \end{subexenum}
+  \exitem \label{ex:order_N}The ordering relation\index{relation!order}\index{order relation!leq on N@{$\leq$ on $\N$}}\index{leq@{$\leq$}!on N@{on $\N$}} $\leq$ on $\N$ is defined recursively by
+    \begin{align*}
+      (\zeroN\leq\zeroN) & \defeq \unit & (\zeroN\leq n+1) & \defeq \unit \\
+      (m+1\leq\zeroN) & \defeq \emptyt & (m+1\leq n+1) & \defeq (m\leq n).
+    \end{align*}
+  \begin{subexenum}
+  \item Show that $\leq$ satisfies the axioms of a \emph{poset}, i.e., show that $\leq$ is
+    \begin{enumerate}
+    \item reflexive,\index{reflexive!leq on N@{$\leq$ on $\N$}}
+    \item antisymmetric, and
+    \item transitive.
+    \end{enumerate}
+  \item Show that
+    \begin{equation*}
+      (m\leq n)+(n\leq m)
+    \end{equation*}
+    for any $m,n:\N$.
+  \item Show that
+    \begin{align*}
+      (m \leq n) & \leftrightarrow (m+k \leq n+k)
+    \end{align*}
+    holds for any $m,n,k:\N$.
+  \item Show that
+    \begin{align*}
+      (m \leq n) & \leftrightarrow (m\cdot(k+1) \leq n\cdot(k+1))
+    \end{align*}
+    holds for any $m,n,k:\N$.
+  \item Show that $k\leq \minN(m,n)$ holds if and only if both $k\leq m$ and $k\leq n$ hold, and show that $\maxN(m,n)\leq k$ holds if and only if both $m\leq k$ and $n\leq k$ hold.
+  \end{subexenum}
+  \exitem \label{ex:strict-order-N}The strict ordering relation\index{relation!strict order}\index{order relation!le on N@{$<$ on $\N$}}\index{le@{$<$}!on N@{on $\N$}} $<$ on $\N$ is defined recursively by
+    \begin{align*}
+      (\zeroN<\zeroN) & \defeq \emptyt & (\zeroN< n+1) & \defeq \unit \\
+      (m+1<\zeroN) & \defeq \emptyt & (m+1< n+1) & \defeq (m< n).
+    \end{align*}
+  \begin{subexenum}
+  \item Show that the strict ordering relation is
+    \begin{enumerate}
+    \item antireflexive,
+    \item antisymmetric, and
+    \item transitive.
+    \end{enumerate}
+  \item Show that $n<n+1$ and
+    \begin{equation*}
+      (m<n)\to (m<n+1)
+    \end{equation*}
+    for any $m,n:\N$.
+  \item \label{ex:contradiction-le}Show that
+    \begin{align*}
+      (m<n) & \leftrightarrow (m+1\leq n) \\
+      (m<n) & \leftrightarrow (n \nleq m)
+    \end{align*}
+    for any $m,n :\N$.
+  \end{subexenum}
+  \exitem \label{ex:distN}The \define{distance function}\index{distance function on N@{distance function on $\N$}|textbf}\index{dist N x y@{$\distN(x,y)$}|textbf}\index{natural numbers!distance function}
+  \begin{equation*}
+    \distN : \N \to (\N \to \N)
+  \end{equation*}
+  is defined recursively by
+  \begin{align*}
+    \distN(0,0) & \defeq 0 & \distN(0,n+1) & \defeq n+1 \\
+    \distN(m+1,0) & \defeq m+1 & \distN(m+1,n+1) & \defeq \distN(m,n).
+  \end{align*}
+  In other words, the distance between two natural numbers is the \emph{symmetric difference} between them.
+  \begin{subexenum}
+  \item \label{ex:is-metric-distN}Show that $\distN$ satisfies the axioms of a metric:
+    \begin{enumerate}
+    \item $(m=n)\leftrightarrow (\distN(m,n)=0)$,
+    \item $\distN(m,n) = \distN(n,m)$,
+    \item $\distN(m,n) \leq\distN(m,k)+\distN(k,n)$.
+    \end{enumerate}
+  \item \label{ex:distN-triangle-equality}Show that $\distN(m,n)=\distN(m,k)+\distN(k,n)$ if and only if either both $m\leq k$ and $k\leq n$ hold or both $n\leq k$ and $k\leq m$ hold.
+  \item \label{ex:translation-invariant-distN}Show that $\distN$ is translation invariant and linear:
+    \begin{align*}
+      \distN(a+m,a+n) & = \distN(m,n),\\
+      \distN(k\cdot m,k\cdot n) & =k\cdot\distN(m,n).
+    \end{align*}
+  \item Show that $x+\distN(x,y)=y$ for any $x\leq y$. 
+  \end{subexenum}
+  \exitem Construct the \define{absolute value function}\index{absolute value function on Z@{absolute value function on $\Z$}|textbf}\index{integers!absolute value function|textbf}
+  \begin{equation*}
+    |\blank|:\Z\to\N
+  \end{equation*}
+  and show that it satisfies the following three properties:
+  \begin{enumerate}
+  \item $(x=0)\leftrightarrow (|x|=0)$,
+  \item $|x+y|\leq |x|+|y|$,
+  \item $|xy|=|x||y|$.
+  \end{enumerate}
+\end{exercises}
+\index{universe|)}
+\index{universal family|)}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

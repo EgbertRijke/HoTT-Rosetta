@@ -1,0 +1,569 @@
+\section{Propositional truncations}\label{sec:propositional-truncation}\label{chap:propositional-truncation}
+\index{propositional truncation|(}
+
+It is common in mathematics to express the property that a certain type of objects is inhabited, without imposing extra structure on those objects. For example, when we assert the property that a set is finite, then we only claim that there exists a bijection to a standard finite set $\{0,\ldots,n-1\}$ for some $n$, not that the set is equipped with such a bijection. There is indeed a conceptual difference between a finite set and a set equipped with a bijection to a standard finite set. The latter concept is that of a finite \emph{totally ordered} set. This difference is due to the fact that finiteness is a property, whereas there may be many different bijections to a standard finite set.
+
+A similar observation can be made in the case of the image of a map. Note that being in the image of a given map $f:A\to B$ is a property. When we claim that $b:B$ is in the image of $f$, then we only claim that the type of $a:A$ such that $f(a)=b$ is inhabited. On the other hand, we saw in \cref{ex:fib_replacement} that the type of $b:B$ equipped with an $a:A$ such that $f(a)=b$ is equivalent to the type $A$, i.e., we have an equivalence
+\begin{equation*}
+  A\simeq \sm{b:B}\sm{a:A}f(a)=b.
+\end{equation*}
+Something is clearly off here, because the type $A$ is often not a subtype of the type $B$, while we would expect the image of $f$ to be a subtype of $B$. Therefore we see that the type $\sm{a:A}f(a)=b$ does not quite capture the concept of $b$ being in the image of $f$. The difference is again due to the fact that $\fib{f}{b}$ is often not a proposition, whereas we are looking to express the proposition that the preimage of $f$ at $b$ is inhabited.
+
+To correctly capture the concepts of finiteness and the image of a map in type theory, and many further mathematical concepts, we need a way to assert the \emph{proposition} that a type is inhabited. The proposition that a type $A$ is inhabited is called the propositional truncation of $A$.
+
+\subsection{The universal property of propositional truncations}\label{sec:propositional-truncation-up}
+
+The propositional truncation of a type $A$ is a proposition $\brck{A}$ equipped with a map
+\begin{equation*}
+  \eta:A\to \brck{A}.
+\end{equation*}
+This map ensures that if we have an element $a:A$, then the proposition $\brck{A}$ that $A$ is inhabited holds. The complete specification of the propositional truncation includes the universal property of the map $\eta$. In this section we will specify in full generality when a map $f:A\to P$ into a proposition $P$ is a propositional truncation.
+
+\begin{defn}
+Let $A$ be a type, and let $f:A\to P$ be a map into a proposition $P$. We say that $f$ \define{is a propositional truncation}\index{is a propositional truncation|textbf}\index{propositional truncation!to be a propositional truncation|textbf} of $A$ if for every proposition $Q$, the precomposition map
+\begin{equation*}
+\blank\circ f:(P\to Q)\to (A\to Q)
+\end{equation*}
+is an equivalence. This property of $f$ is called the \define{universal property of the propositional truncation of $A$}\index{universal property!of propositional truncations|textbf}\index{propositional truncation!universal property|textbf}.
+\end{defn}
+
+\begin{rmk}\label{ex:prop_equiv}
+  Using the fact that equivalences are maps that have contractible fibers, we can reformulate the universal property of the propositional truncation. Note that the fiber of the precomposition map $\blank\circ f:(P\to Q) \to (A \to Q)$ at a map $g:A\to Q$ is the type.
+  \begin{equation*}
+    \sm{h:P\to Q}h\circ f=g
+  \end{equation*}
+  Therefore we see that if $f$ satisfies the universal property of the propositional truncation, then these fibers are contractible. In other words, for each map $g:A\to Q$ into a proposition $Q$ there is a unique map $h:P\to Q$ for which $h\circ f=g$. We also say that every map $g:A\to Q$ into a proposition $Q$ \emph{extends} uniquely along $f$, as indicated in the diagram
+  \begin{equation*}
+    \begin{tikzcd}
+      A \arrow[d,swap,"f"] \arrow[dr,"g"] \\
+      P \arrow[r,dashed] & Q.
+    \end{tikzcd}
+  \end{equation*}
+\end{rmk}
+
+\begin{rmk}\label{rmk:simplified-up-trunc-Prop}
+  For any two propositions $P$ and $P'$, a map $f:P\to P'$ is an equivalence if and only if there is a function $g:P'\to P$. To see this, simply note that any such function $g$ is an inverse of $f$, because any two elements in $P$ and any two elements in $P'$ are equal. 
+  
+  Note that the type $X\to Q$ is a proposition, for any type $X$ and any proposition $Q$. Using the previous observation, it therefore follows that the map $(P\to Q)\to (A\to Q)$ is an equivalence as soon as there is a map in the converse direction. In other words, to prove that a map $f:A\to P$ into a proposition $P$ satisfies the universal property of the propositional truncation of $A$, it suffices to construct a function
+  \begin{equation*}
+    (A\to Q)\to (P\to Q)
+  \end{equation*}
+  for every proposition $Q$.
+\end{rmk}
+
+In the following proposition we show that the propositional truncation of a type $A$ is uniquely determined up to equivalence, if it exists. In other words, any two propositional truncations of a type $A$ must be equivalent.
+
+\begin{prp}
+  Let $A$ be a type, and consider two maps
+  \begin{equation*}
+    f:A\to P \qquad\text{and}\qquad f':A\to P'
+  \end{equation*}
+  into two propositions $P$ and $P'$. If any two of the following three assertions hold, so does the third:\index{3-for-2 property!of propositional truncations}\index{propositional truncation!3-for-2 property}
+  \begin{enumerate}
+  \item\label{item:f-up-trunc-Prop} The map $f$ is a propositional truncation of $A$.
+  \item\label{item:f-up-trunc-Prop'} The map $f'$ is a propositional truncation of $A$.
+  \item\label{item:equiv-Prop} There is a (unique) equivalence $P\simeq P'$.
+  \end{enumerate}
+\end{prp}
+
+\begin{proof}
+  We first show that \ref{item:f-up-trunc-Prop} and \ref{item:f-up-trunc-Prop'} together imply \ref{item:equiv-Prop}. If $f$ and $f'$ are both propositional truncations of $A$, then we have maps $P\to P'$ and $P'\to P$ by the universal properties of $f$ and $f'$. Since $P$ and $P'$ are both propositions, it follows that $P\simeq P'$. For the uniqueness claim, note that the type $P\simeq P'$ is itself a proposition.
+
+  Finally we show that \ref{item:equiv-Prop} implies that \ref{item:f-up-trunc-Prop} holds if and only if \ref{item:f-up-trunc-Prop'} holds. Suppose we have an equivalence $P\simeq P'$, let $Q$ be an arbitrary proposition, and consider the triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=-1em]
+      \phantom{(P'\to Q)} & (A\to Q) \arrow[dl,dashed] \arrow[dr,dashed] \\
+      (P\to Q) \arrow[rr,<->] & & (P'\to Q),
+    \end{tikzcd}
+  \end{equation*}
+  where the fact that $(P\to Q)\leftrightarrow (P'\to Q)$ holds follows from the assumption that $P$ is equivalent to $P'$. We see from this triangle that
+  \begin{equation*}
+    \Big((A\to Q)\to (P\to Q)\Big)\leftrightarrow\Big((A \to Q) \to (P'\to Q)\Big),
+  \end{equation*}
+  and this implies that \ref{item:f-up-trunc-Prop} holds if and only if \ref{item:f-up-trunc-Prop'} holds.
+\end{proof}
+
+\begin{rmk}
+  One might be tempted to think that a type is inhabited if and only if it is nonempty. Recall that a type $A$ is nonempty if it satisfies the property $\neg\neg A$. Indeed, the type $\neg\neg A$ is a proposition, and it comes equipped with a map $A\to\neg\neg A$. It is therefore natural to wonder whether the map $A\to\neg\neg A$ satisfies the universal property of the propositional truncation.
+
+  Recall that we have shown in \cref{ex:dn-monad} that any map $A\to\neg\neg Q$ extends to a map $\neg\neg A\to\neg\neg Q$, as indicated in the diagram
+\begin{equation*}
+  \begin{tikzcd}
+    A \arrow[d] \arrow[dr] \\
+    \neg\neg A \arrow[r,dashed] & \neg\neg Q.
+  \end{tikzcd}
+\end{equation*}
+It follows that the natural map
+\begin{equation*}
+  (\neg\neg A\to\neg\neg Q)\to (A\to \neg\neg Q)
+\end{equation*}
+given by precomposition by $A\to\neg\neg A$ is an equivalence. However, this only gives us a universal property with respect to doubly negated propositions and there is no way to prove the more general universal property of the propositional truncation for the map $A\to\neg\neg A$. In fact, propositional truncations are not guaranteed to exist in Martin L\"of's dependent type theory, the way it is set up in \cref{chap:type-theory}. We will therefore add new rules to the type theory to ensure their existence.
+\end{rmk}
+
+\subsection{Propositional truncations as higher inductive types}\label{sec:propositional-truncation-hit}
+\index{higher inductive type!propositional truncation|(}
+\index{propositional truncation!as higher inductive type|(}
+
+We have given a specification of the propositional truncation of a type $A$, and we have seen that this specification by a universal property determines the propositional truncation up to equivalence if it exists. However, the propositional truncation is not guaranteed to exist, so we will add new rules to the type theory that ensure that any type has a propositional truncation. We do this by presenting the propositional truncation of a type $A$ as a higher inductive type. The propositional truncation $\brck{A}$ of a type $A$ was one of the first examples of a higher inductive type, along with the circle, which we will discuss in \cref{sec:circle,sec:circle-universal-cover}.
+
+The idea of higher inductive types is similar to the idea of ordinary inductive types, with the added feature that constructors of higher inductive types can also be used to generate \emph{identifications}. In other words, higher inductive types may be specified by two kinds of constructors:
+\begin{enumerate}
+\item The \emph{point constructors} are used to generate elements of the higher inductive types.
+\item The \emph{path constructors} are used to generate identifications between elements of the higher inductive type.
+\end{enumerate}
+The induction principle of the higher inductive type then tells us how to construct sections of families over it. The rules for higher inductive types therefore come in four sets, just as the rules for ordinary inductive types in \cref{sec:inductive}: the formation rule, the constructors, the induction principle, and the computation rules.
+
+\subsubsection{The formation rules and the constructors}
+The formation rule of the propositional truncation postulates that for every type $A$ we can form the propositional truncation of $A$. The formation rule is therefore as follows:\index{[[A]]@{$\brck{A}$}|see {propositional truncation}}
+  \begin{prooftree}
+    \AxiomC{$\Gamma\vdash A~\type$}
+    \UnaryInfC{$\Gamma\vdash \brck{A}~\type$.}
+  \end{prooftree}
+  Furthermore, we will assume that all universes are closed under propositional truncations. In other words, for any universe $\UU$ we will assume the rules
+
+  \medskip
+  \begin{minipage}{.4\textwidth}
+    \begin{prooftree}
+      \AxiomC{}
+      \UnaryInfC{$X:\UU\vdash \brckcheck{X}:\UU$}
+    \end{prooftree}
+  \end{minipage}
+  \begin{minipage}{.5\textwidth}
+    \begin{prooftree}
+      \AxiomC{}
+      \UnaryInfC{$X:\UU\vdash \mathcal{T}(\brckcheck{X})\jdeq\brck{\mathcal{T}(X)}~\type$}
+    \end{prooftree}
+  \end{minipage}
+
+  \medskip
+The constructors of a (higher) inductive type tell what structure the type comes equipped with. In the case of a higher inductive type there may be point constructors and path constructors. The point constructors generate elements of the higher inductive type, and the path constructors generate identifications between those elements. In the case of the propositional truncation, there is one point constructor and one path constructor:\index{propositional truncation!eta : A -> [[A]]@{$\eta:A\to\brck{A}$}}\index{propositional truncation!alpha : P (x y : A) x = y@{$\alpha:\prd{x,y:A}x=y$}}
+\begin{align*}
+  \eta & : A \to \brck{A}\\*
+  \alpha & : \prd{x,y:\brck{A}}x=y.
+\end{align*}
+The point constructor $\eta$ is sometimes called the \define{unit}\index{propositional truncation!unit of propositional truncation}\index{unit of propositional truncation} of the propositional truncation. It gives us that any element of $A$ also generates an element of $\brck{A}$. The path constructor $\alpha$ simply identifies any two elements of $\brck{A}$. Therefore it follows immediately that $\brck{A}$ is a proposition.
+
+\begin{lem}
+  For any type $A$, the type $\brck{A}$ is a proposition.\index{propositional truncation!is a proposition}\index{is a proposition!propositional truncation}\hfill $\square$ 
+\end{lem}
+
+\subsubsection{The induction principle and computation rules}
+\index{induction principle!of propositional truncation|(}
+\index{propositional truncation!induction principle|(}
+The induction principle for the propositional truncation tells us how to construct dependent functions
+\begin{equation*}
+  h:\prd{t:\brck{A}}Q(t).
+\end{equation*}
+The induction principle will imply that such a dependent function $h$ is entirely determined by its behavior on the constructors of $\brck{A}$. The type $\brck{A}$ has two constructors: a point constructor $\eta$ and a path constructor $\alpha$, so we have two cases to consider:
+\begin{enumerate}
+\item Applying $h$ to points of the form $\eta(a)$ gives us a dependent function
+  \begin{equation*}
+    h\circ \eta : \prd{a:A}Q(\eta(a)).
+  \end{equation*}
+  The induction principle of $\brck{A}$ has therefore the requirement that we can construct
+  \begin{equation*}
+    f:\prd{a:A}Q(\eta(a))
+  \end{equation*}
+\item To apply $h$ to the paths $\alpha(x,y)$, we need to use the dependent action on paths from \cref{defn:apd}. For each $x,y:\brck{A}$ we obtain an identification
+  \begin{equation*}
+    \apd{h}{\alpha(x,y)}:\tr_Q(\alpha(x,y),h(x))=h(y)
+  \end{equation*}
+  in the type $Q(y)$. Note, however, that $h(x)$ and $h(y)$ are not determined by our choice of $f:\prd{a:A}Q(\eta(a))$. The second requirement of the induction principle of $\brck{A}$ is therefore that, no matter what values $h$ takes, they must always be related via the dependent action on paths of $h$. This second requirement is therefore that
+  \begin{equation*}
+    \tr_P(\alpha(x,y),u)=v
+  \end{equation*}
+  for any $u:Q(x)$ and $v:Q(y)$. 
+\end{enumerate}
+
+\begin{defn}
+  The \define{induction principle}\index{induction principle!of propositional truncation|textbf}\index{propositional truncation!induction principle|textbf} of the propositional truncation $\brck{A}$ of $A$ asserts that for any family $Q$ of types over $\brck{A}$, if we have
+  \begin{equation*}
+    f:\prd{a:A}Q(\eta(a))
+  \end{equation*}
+  and if we can construct identifications
+  \begin{equation*}
+    \tr_Q(\alpha(x,y),u)=v
+  \end{equation*}
+  for any $u:Q(x)$, $v:Q(y)$ and any $x,y:\brck{A}$, then we obtain a dependent function
+  \begin{equation*}
+    h:\prd{t:\brck{A}}Q(t)
+  \end{equation*}
+  equipped with a homotopy $h\circ\eta\htpy f$.
+\end{defn}
+
+\begin{rmk}
+  In fact, a family $Q$ over $\brck{A}$ satisfies the second requirement in the induction principle of the propositional truncation if and only if $Q$ is a family of propositions. To see this, simply note that transporting along $\alpha(x,y)$ is an embedding. Therefore we have
+  \begin{equation*}
+    (\tr_Q(\alpha(x,y),u)=\tr_Q(\alpha(x,y),v))\simeq (u=v)
+  \end{equation*}
+  for any $u,v:Q(x)$. By assumption, there is an identification on the left hand side, so any two elements $u$ and $v$ in $Q(x)$ are equal.
+
+  Since the induction principle of the propositional truncation is only applicable to families of propositions over $\brck{A}$, it also follows that there are no interesting computation rules to state: any identification in a proposition just holds.
+\end{rmk}
+\index{induction principle!of propositional truncation|)}
+\index{propositional truncation!induction principle|)}
+\index{higher inductive type!propositional truncation|)}
+\index{propositional truncation!as higher inductive type|)}
+
+\subsubsection{The universal property}
+\index{universal property!of propositional truncations|(}
+\index{propositional truncation!universal property|(}
+We have now completed the description of the propositional truncation as a higher inductive type, so it is time to show that it meets the specification we gave for the propositional truncations. In other words, we have to show that the map $\eta:A\to\brck{A}$ satisfies the universal property of the propositional truncation.
+
+\begin{thm}
+  The map $\eta:A\to\brck{A}$ satisfies the universal property of the propositional truncation.
+\end{thm}
+
+\begin{proof}
+  In order to prove that $\eta:A\to\brck{A}$ satisfies the universal property of the propositional truncation of $A$, it suffices to construct a map
+  \begin{equation*}
+    (A\to Q)\to (\brck{A}\to Q)
+  \end{equation*}
+  for any proposition $Q$. Consider a map $f:A\to Q$. Then we will construct a function $\brck{A}\to Q$ by the induction principle of the propositional truncation. We have to provide a function $A\to Q$, which we have assumed already, and we have to show that
+  \begin{equation*}
+    \tr_{\lam{x}Q}(\alpha(x,y),u)=v.
+  \end{equation*}
+  for any $u,v:Q$ and any $x,y:\brck{A}$. However, we have such identifications by the assumption that $Q$ is a proposition, so the proof is complete.
+\end{proof}
+
+ One simple application of the universal property of the propositional truncation is that $\brck{\blank}$ acts on functions in a functorial way.
+
+\begin{prp}
+  There is a map\index{functorial action!of propositional truncations|textbf}\index{propositional truncation!functorial action|textbf}
+  \begin{equation*}
+    \brck{\blank}:(A\to B)\to (\brck{A}\to\brck{B})
+  \end{equation*}
+  for any two types $A$ and $B$, such that
+  \begin{align*}
+    \brck{\idfunc} & \htpy \idfunc \\
+    \brck{g\circ f} & \htpy \brck{g}\circ\brck{f}.
+  \end{align*}
+\end{prp}
+
+\begin{proof}
+  For any $f:A\to B$, the map $\brck{f}:\brck{A}\to\brck{B}$ is defined to be the unique extension
+  \begin{equation*}
+    \begin{tikzcd}
+      A \arrow[d,swap,"\eta"] \arrow[r,"f"] & B \arrow[d,"\eta"] \\
+      \brck{A} \arrow[r,dashed,swap,"\brck{f}"] & \brck{B}.
+    \end{tikzcd}
+  \end{equation*}
+  To see that $\brck{\blank}$ preserves identity maps and compositions, simply note that $\idfunc[\brck{A}]$ is an extension of $\idfunc[A]$, and that $\brck{g}\circ\brck{f}$ is an extension of $g\circ f$. Hence the homotopies are obtained by uniqueness.
+\end{proof}
+\index{universal property!of propositional truncations|)}
+\index{propositional truncation!universal property|)}
+
+\subsection{Logic in type theory}\label{sec:logic}
+\index{logic|(}
+
+In \cref{sec:modular-arithmetic} we interpreted logic in type theory via the Curry-Howard correspondence, which stipulates that disjunction ($\lor$) is interpreted by coproducts and the existential quantifier ($\exists$) is interpreted by $\Sigma$-types. However, when the existential quantifier is interpreted by $\Sigma$-types, then it is not possible to express certain concepts correctly, such as finiteness of a type or being in the image a map, and therefore we will add a second interpretation of logic in type theory, where logical propositions are interpreted by type theoretic propositions, i.e., the types of truncation level $-1$.
+
+We have seen that the propositions are closed under cartesian products, implication, and dependent products indexed by arbitrary types. However, they are not closed under coproducts, and if $P$ is a family of propositions over a type $A$, then it is not necessarily the case that $\sm{x:A}P(x)$ is a proposition. We will therefore use propositional truncations to interpret disjunctions and existential quantifiers in type theory.
+
+\begin{defn}
+  Given two propositions $P$ and $Q$, we define their \define{disjunction}\index{disjunction|textbf}\index{P v Q@{$P\vee Q$}|see {disjunction}}
+  \begin{equation*}
+    P\vee Q \defeq \brck{P+Q}.
+  \end{equation*}
+\end{defn}
+
+\begin{prp}
+  Consider two propositions $P$ and $Q$. Then the disjunction $P\vee Q$ comes equipped with maps $i:P\to P\vee Q$ and $j:Q\to P\vee Q$. Moreover, the proposition $P\vee Q$ satisfies the universal property of the disjunction\index{universal property!of disjunction|textbf}\index{disjunction!universal property|textbf}: For any proposition $R$, we have
+  \begin{equation*}
+    (P\vee Q\to R)\leftrightarrow ((P\to R)\times (Q\to R)).
+  \end{equation*}
+\end{prp}
+
+\begin{proof}
+  The maps $i$ and $j$ are defined by
+  \begin{align*}
+    i & \defeq \eta\circ\inl  \\
+    j & \defeq \eta\circ\inr.
+  \end{align*}
+  Now consider the following composition of maps, for an arbitrary proposition $R$:
+  \begin{equation*}
+    \begin{tikzcd}
+      (P\vee Q\to R) \arrow[r,"\blank\circ\eta"] & (P+Q\to R) \arrow[r,"{h\,\mapsto\,(h\circ \inl,h\circ \inr)}"] &[3.6em] (P\to R)\times (Q\to R).
+    \end{tikzcd}
+  \end{equation*}
+  The first map is an equivalence by the universal property of the propositional truncation, and the second map is an equivalence by the universal property of coproducts (\cref{ex:up-coproduct}).
+\end{proof}
+
+\begin{defn}
+  Given a family $P$ of propositions over a type $A$, we define the \define{existential quantification}\index{existential quantification|textbf}\index{E (x:A) P(x)@{$\exists_{(x:A)}P(x)$}|see {existential quantification}}\index{E (x:A) P(x)@{$\exists_{(x:A)}P(x)$}|textbf}
+  \begin{equation*}
+    \exists_{(x:A)}P(x)\defeq \Brck{\sm{x:A}P(x)}.
+  \end{equation*}
+\end{defn}
+
+\begin{prp}
+  Consider a family $P$ of propositions over a type $A$. Then the existential quantification $\exists_{(x:A)}P(x)$ comes equipped with a dependent function
+  \begin{equation*}
+    \prd{a:A} \big(P(a)\to \exists_{(x:A)}P(x)\big).
+  \end{equation*}
+  Furthermore, the proposition $\exists_{(x:A)}P(x)$ satisfies the universal property of the existential quantification\index{universal property!of existential quantification|textbf}\index{existential quantification!universal property|textbf}: For any proposition $Q$, we have
+  \begin{equation*}
+    \Big(\Big(\exists_{(x:A)}P(x)\Big)\to Q\Big)\leftrightarrow\Big(\prd{x:A}P(x)\to Q\Big).
+  \end{equation*}
+\end{prp}
+
+\begin{proof}
+  The dependent function $\varepsilon : \prd{a:A} \big(P(a)\to \exists_{(x:A)}P(x)\big)$ is given by $\varepsilon(a,p):=\eta(a,p)$. Now consider the following composition of maps
+  \begin{equation*}
+    \begin{tikzcd}[column sep=small]
+      \big(\big(\exists_{(x:A)}P(x)\big)\to Q\big) \arrow[r] &
+      \big(\big(\sm{x:A}P(x)\big)\to Q\big) \arrow[r] &
+      \big(\prd{x:A}P(x)\to Q\big).
+    \end{tikzcd}
+  \end{equation*}
+  The first map in this composite is an equivalence by the universal property of the propositional truncation, and the second map is an equivalence by the universal property of $\Sigma$-types (\cref{thm:up-sigma}).
+\end{proof}
+
+In the following table we give an overview of the interpretation of the logical connectives using the propositions in type theory.
+
+\begin{center}
+  \begin{tabular}{ll}
+    \toprule
+    logical connective & interpretation in type theory\index{interpretation of logic in type theory}\index{logic!interpretation of logic in type theory} \\
+    \midrule
+    $\top$\index{T@{$\top$}|textbf} & $\unit$ \\
+    $\bot$\index{T@{$\bot$}|textbf} & $\emptyt$ \\
+    $P\Rightarrow Q$\index{implication|textbf} & $P\to Q$ \\
+    $P\land Q$\index{conjunction|textbf} & $P\times Q$ \\
+    $P\lor Q$\index{disjunction} & $\brck{P+Q}$ \\
+    $P\Leftrightarrow Q$\index{bi-implication|textbf} & $P\leftrightarrow Q$ \\
+    $\exists_{(x:A)}P(x)$\index{existential quantification} & $\Brck{\sm{x:A}P(x)}$ \\
+    $\forall_{(x:A)}P(x)$\index{universal quantification|textbf}\index{A (x:A) P(x)@{$\forall_{(x:A)}P(x)$}|see {universal quantification}} & $\prd{x:A}P(x)$ \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+\index{logic|)}
+
+\subsection{Mapping propositional truncations into sets}
+
+The universal property of the propositional truncation only applies when we want to define a map into a proposition. However, in some situations we might want to map the propositional truncation into a type that is not a proposition. Here we will see what we might do in such a case.
+
+One strategy, if we want to define a map $\brck{A}\to X$, is to find a type family $P$ over $X$ such that the type $\sm{x:X}P(x)$ is a proposition. In that case, we may use the universal property of the propositional truncation to obtain a map $\brck{A}\to \sm{x:X}P(x)$ from a map $A\to \sm{x:X}P(x)$, and then we simply compose with the projection map.
+
+\begin{eg}\label{eg:global-choice-decidable-subtype-N}
+  Consider a \define{decidable subtype}\index{decidable subtype|textbf} $P$ of the natural numbers, i.e., a subtype $P:\N\to\prop_\UU$ such that each $P(n)$ is decidable. We claim that there is a function
+  \begin{equation*}
+    \Brck{\sm{x:\N}P(x)}\to\sm{x:\N}P(x).
+  \end{equation*}
+  Of course, we cannot directly use the universal property of the propositional truncation here. However, there is at most one \emph{minimal} natural number $x$ in $P$. In other words, we claim that the type
+  \begin{equation}\label{eq:is-prop-minimal-element}
+    \sm{x:\N}P(x)\times\islowerbound_P(x)\tag{\textasteriskcentered}
+  \end{equation}
+  is a proposition. To see this, note that the type $\islowerbound_P(x)$ is a proposition. By the assumption that each $P(x)$ is a proposition, it now follows that any two natural numbers $x,y:\N$ that are in $P$ and that are both lower bounds of $P$ are equal as elements in the type of \cref{eq:is-prop-minimal-element} if and only if they are equal as natural numbers. Furthermore, since both $x$ and $y$ are lower bounds of $P$, it follows that $x\leq y$ and $y\leq x$, so indeed $x=y$ holds.
+
+  By the observation that the type in \cref{eq:is-prop-minimal-element} is a proposition, we may define a map
+  \begin{equation*}
+    \Brck{\sm{x:\N}P(x)}\to \sm{x:\N}P(x)\times\islowerbound_P(x)
+  \end{equation*}
+  by the universal property of the propositional truncation. A map
+  \begin{equation*}
+    \sm{x:\N}P(x)\to\sm{x:\N}P(x)\times\islowerbound_P(x)
+  \end{equation*}
+  was constructed in \cref{thm:well-ordering-principle-N} using the decidability of $P$.
+
+  As a corollary of this observation, we observe that there is also a map
+  \begin{equation*}
+    \Brck{\sm{x:\Fin{k}}P(x)}\to\sm{x:\Fin{k}}P(x)
+  \end{equation*}
+  for any decidable subtype $P$ over $\Fin{k}$.
+\end{eg}
+
+\begin{rmk}\label{rmk:global-choice}
+  The function of type
+  \begin{equation*}
+    \Brck{\sm{x:\N}P(x)}\to\sm{x:\N}P(x)
+  \end{equation*}
+  we constructed in \cref{eg:global-choice-decidable-subtype-N} for decidable subtypes of $\N$ is a rare case in which it is possible to obtain a function
+  \begin{equation*}
+    \brck{A}\to A.
+  \end{equation*}
+  We say that the type $A$ satisfies the \define{principle of global choice} if there is such a function $\brck{A}\to A$. Using the univalence axiom, we will see in \cref{cor:no-global-choice} that not every type satisfies the principle of global choice. 
+\end{rmk}
+
+More generally, we may wish to define a map $\brck{A}\to B$ where the type $B$ is a set. In this situation it is helpful to think of the propositional truncation of $A$ as the quotient of the type $A$ by the equivalence relation that relates every two elements of $A$ with each other. Propositional truncations can therefore also be characterized by the universal property of this quotient, which can be used to extend maps $f:A\to B$ to maps $\brck{A}\to B$ when the type $B$ is a set. The idea is that a map $f:A\to B$ into a set $B$ extends to a map $\brck{A}\to B$ if it satisfies $f(x)=f(y)$ for all $x,y:A$.
+
+\begin{defn}\label{defn:weakly-constant}
+  A map $f:A\to B$ is said to be \define{weakly constant}\index{weakly constant map|textbf}\index{constant map!weakly constant map|textbf} if it comes equipped with an element of type\index{is-weakly-constant(f)@{$\isweaklyconstant(f)$}|textbf}
+  \begin{equation*}
+    \isweaklyconstant(f) \defeq \prd{x,y:A}f(x)=f(y).
+  \end{equation*}
+\end{defn}
+
+\begin{rmk}
+  A constant map $A\to B$ is a map of the form $\const_b$. A map $f:A\to B$ is therefore constant if comes equipped with an element $b:B$ and a homotopy $f\htpy \const_b$. This is a stronger notion than the notion of weakly constant maps, which doesn't require there to be an element in $B$.
+
+  One of the differences between constant maps and weakly constant maps manifests itself as follows: A type $A$ is contractible if and only if the identity map on $A$ is constant, while a type $A$ is a proposition if and only if the identity map on $A$ is weakly constant.
+\end{rmk}
+
+\begin{lem}
+  Consider a commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}
+      A \arrow[d,swap,"\eta"] \arrow[dr,"f"] \\
+      \brck{A} \arrow[r,swap,"g"] & B      
+    \end{tikzcd}
+  \end{equation*}
+  where $B$ is an arbitrary type. Then the map $f$ is weakly constant.
+\end{lem}
+
+\begin{proof}
+  Since $f$ is assumed to be homotopic to $g\circ \eta$, it suffices to show that $g\circ\eta$ is weakly constant. For any $x,y:A$, we have the identification $\alpha(x,y):\eta(x)=\eta(y)$ in $\brck{A}$. Using the action on paths of $g$, we obtain the identification
+  \begin{equation*}
+    \ap{g}{\alpha(x,y)}:g(\eta(x))=g(\eta(y))
+  \end{equation*}
+  in $B$.
+\end{proof}
+
+We now show, in a theorem due to Kraus \cite{Kraus}, that any weakly constant map $f:A\to B$ into a set $B$ extends uniquely to a map $\brck{A}\to B$. We therefore conclude that, in order to define a map $\brck{A}\to B$ into a set $B$ it suffices to define a map $f:A\to B$ and show that it is weakly constant.
+
+\begin{thm}[Kraus]\label{ex:weakly-constant-map}
+  Let $A$ be a type and let $B$ be a set. Then the map\index{universal property!of propositional truncations into sets|textbf}\index{propositional truncation!universal property into sets|textbf}
+  \begin{equation*}
+    (\brck{A}\to B)\to \sm{f:A\to B}\prd{x,y:A}f(x)=f(y)
+  \end{equation*}
+  given by $g\mapsto (g\circ\eta,\lam{x}\lam{y}\ap{g}{\alpha(x,y)})$ is an equivalence.
+\end{thm}
+
+\begin{proof}
+  Consider a map $f:A\to B$ equipped with $H:\prd{x,y:A}f(x)=f(y)$. We first show that $f$ extends in at most one way to a map $\brck{A}\to B$. Let $g,h:\brck{A}\to B$ be two maps equipped with homotopies $f\htpy g\circ\eta$ and $f\htpy h\circ\eta$. In order to construct a homotopy $g\htpy h$, note that each identity type $g(x)=h(x)$ is a proposition by the assumption that $B$ is a set. We can therefore construct a homotopy $g\htpy h$ by the induction principle of propositional truncations. By the induction principle, it suffices to construct a homotopy $g\circ \eta\htpy h\circ\eta$, which we obtain from the homotopies $f\htpy g\circ\eta$ and $f\htpy h\circ\eta$.
+
+  Since we've already proven uniqueness, it remains to construct an extension of the map $f$. We first claim that the type
+  \begin{equation*}
+    \sm{b:B}\Brck{\sm{x:A}f(x)=b}
+  \end{equation*}
+  is a proposition. To see this, consider two elements $b$ and $b'$ in this subtype of $B$. It suffices to show that $b=b'$. Since $B$ is assumed to be a set, the identity type $b=b'$ is a proposition. Therefore we may assume an element $x:A$ equipped with $p:f(x)=b$ and an element $x':A$ equipped with $p':f(x')=b'$. Using the assumption that $f$ is weakly constant, we obtain the identification
+  \begin{equation*}
+    \begin{tikzcd}
+      b \arrow[r,equals,"p^{-1}"] & f(x) \arrow[r,equals,"{H(x,x')}"] & f(x') \arrow[r,equals,"{p'}"] & b'.
+    \end{tikzcd}
+  \end{equation*}
+  Now we observe that the map $f:A\to B$ factors uniquely as follows
+  \begin{equation*}
+    \begin{tikzcd}[column sep=-1.5em]
+      A \arrow[rr,dashed,"g"] \arrow[dr,swap,"f"] & & \sm{b:B}\Brck{\sm{x:A}f(x)=b} \arrow[dl,"\proj 1"] \\
+      \phantom{\sm{b:B}\Brck{\sm{x:A}f(x)=b}} & B.
+    \end{tikzcd}
+  \end{equation*}
+  Indeed, the map $g$ is given by $x\mapsto(f(x),\eta(x,\refl{}))$. Since the codomain of $g$ is a proposition, we obtain via the universal property of the propositional truncation of $A$ a unique map $h:\brck{A}\to\sm{b:B}\left\|\sm{x:A}f(x)=b\right\|$ equipped with a homotopy $g\htpy h\circ\eta$. Now we obtain the map $\proj 1\circ h:\brck{A}\to B$ equipped with the concatenated homotopy
+  \begin{equation*}
+    (\proj 1\circ h)\circ\eta \jdeq \proj 1\circ (h\circ\eta) \htpy \proj 1\circ g \htpy f.\qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{exercises}
+  \exitem \label{ex:propositional-truncations-drill}Let $A$ be a type. Show that
+  \begin{subexenum}
+  \item $\brck{\brck{A}}\leftrightarrow\brck{A}$.
+  \item $\brck{\isdecidable(A)}\leftrightarrow\isdecidable\brck{A}$.
+  \item $\isdecidable(A)\to (\brck{A}\to A)$.
+  \item $\neg\neg\brck{A}\leftrightarrow\neg\neg A$.
+  \item $\brck{A}\vee\brck{B}\leftrightarrow \brck{A+B}$.
+  \item $\exists_{(x:A)}\brck{B(x)}\leftrightarrow \brck{\sm{x:A}B(x)}$.
+  \item $\neg\neg(\brck{A}\to A)$.
+  \end{subexenum}
+  \exitem Show that the \define{mere equality}\index{mere equality|textbf} relation given by $x,y\mapsto\brck{x=y}$ is an equivalence relation on any type.
+  \exitem \label{ex:product-propositional-truncation}Consider two maps $f:A\to P$ and $g:B\to Q$ into propositions $P$ and $Q$. Show that if both $f$ and $g$ are propositional truncations then the map $f\times g : A\times B\to P\times Q$ is also a propositional truncation. Conclude that\index{propositional truncation!distributes over cartesian products}\index{distributivity!of propositional truncations over cartesian products}\index{cartesian product type!distributivity of propositional truncations over products}
+  \begin{equation*}
+    \brck{A\times B}\simeq \brck{A}\times\brck{B}. 
+  \end{equation*}
+  \exitem \label{ex:dup-trunc-prop}Consider a map $f:A\to P$ into a proposition $P$. We say that $f$ satisfies the \define{dependent universal property of the propositional truncation}\index{dependent universal property!of propositional truncations|textbf}\index{propositional truncation!dependent universal property|textbf} of $A$, if for any family $Q$ of propositions over $P$, the precomposition function
+  \begin{equation*}
+    \blank\circ f : \Big(\prd{p:P}Q(p)\Big)\to\Big(\prd{x:A}Q(f(x))\Big)
+  \end{equation*}
+  is an equivalence. Show that the following are equivalent:
+  \begin{enumerate}
+  \item\label{item:up-dup-trunc-Prop} The map $f$ is a propositional truncation.
+  \item\label{item:dup-dup-trunc-Prop} The map $f$ satisfies the dependent universal property of the propositional truncation.
+  \end{enumerate}
+  \exitem Consider a map $f:A\to P$ into a proposition $P$.
+  \begin{subexenum}
+  \item Show that if there is a map $g:P\to A$, then $f$ is a propositional truncation. Conclude that for any type $A$ equipped with a point $a:A$, the constant map
+    \begin{equation*}
+      \const_\ttt: A\to\unit
+    \end{equation*}
+    is a propositional truncation of $A$.
+  \item Show that if $A$ is a proposition, then $f$ is a propositional truncation if and only if $f$ is an equivalence. Conclude that if $A$ is a proposition, then the identity function $\idfunc:A\to A$ is a propositional truncation.
+  \end{subexenum}
+  \exitem Consider a type $A$ equipped with an element $d:\isdecidable(A)$.\index{decidable type}
+  \begin{subexenum}
+  \item Define a function $f:A\to \sm{x:A}\inl(x)=d$ and show that $f$ is a propositional truncation of $A$.
+  \item Consider the function $\pi:\isdecidable(A)\to\Fin{2}$ defined by
+    \begin{align*}
+      \pi(\inl(x)) & := 1 \\
+      \pi(\inr(x)) & := 0.
+    \end{align*}
+    Define a function $g:A\to (\pi(d)=1)$ and show that $g$ is a propositional truncation of $A$.
+  \end{subexenum}
+  \exitem Consider a family $B$ of $(k+1)$-truncated types over the propositional truncation $\brck{A}$ of a type $A$. Show that the map
+  \begin{equation*}
+    \Big(\prd{x:\brck{A}}B(x)\Big)\to\Big(\prd{x:A}B(x)\Big)
+  \end{equation*}
+  given by $f\mapsto f\circ\eta$ is a $k$-truncated map.
+  \exitem Consider a universe $\UU$, let $P_1$ and $P_2$ be propositions in $\UU$, and furthermore, let $P$ be a family of propositions in $\UU$ over a type $A$ in $\UU$. Construct the following equivalences:
+    \begin{align*}
+      \top & \simeq \prd{Q:\prop_\UU}Q\to Q,\\
+      \bot & \simeq \prd{Q:\prop_\UU}Q,\\
+      \brck{A} & \simeq \prd{Q:\prop_\UU}(A\to Q)\to Q, \\
+      P_1\lor P_2 & \simeq \prd{Q:\prop_\UU}(P_1\to Q) \to ((P_2\to Q)\to Q), \\
+      P_1\land P_2 & \simeq \prd{Q:\prop_\UU}(P_1\to (P_2\to Q))\to Q, \\
+      P_1\Rightarrow P_2 & \simeq \prd{Q:\prop_\UU}P_1\to ((P_2\to Q)\to Q), \\
+      \neg A & \simeq \prd{Q:\prop_\UU} A\to Q, \\
+      \exists_{(x:A)}P(x) & \simeq \prd{Q:\prop_\UU} \Big(\prd{x:A}P(x)\to Q\Big)\to Q, \\
+      \forall_{(x:A)}P(x) & \simeq \prd{Q:\prop_\UU}\prd{x:A}(P(x)\to Q)\to Q\\
+      \brck{a = x} & \simeq \prd{Q:A\to\prop_\UU} Q(a)\to Q(x).
+    \end{align*}
+    These are the \define{impredicative encodings}\index{impredicative encodings}\index{logic!impredicative encodings}\index{T@{$\top$}!impredicative encoding}\index{T@{$\bot$}!impredicative encoding}\index{propositional truncation!impredicative encoding}\index{disjunction!impredicative encoding}\index{conjunction!impredicative encoding}\index{implication!impredicative encoding}\index{negation!impredicative encoding}\index{existential quantification!impredicative encoding}\index{universal quantification!impredicative encoding}\index{mere equality!impredicative encoding} of the logical operators. \emph{Note:} It has the appearance that we could have defined $\brck{A}$ by its impredicative encoding. There is, however, a subtle issue if we take this as a definition: The map
+    \begin{equation*}
+      A\to\prd{Q:\prop_\UU}(A\to Q)\to Q
+    \end{equation*}
+    only satisfies the universal property of the propositional truncation with respect to propositions that are equivalent to propositions in $\UU$. 
+  \exitem In this exercise we introduce the \define{interval}\index{interval|textbf} as a higher inductive type $\I$\index{I@{$\I$}|see{interval}}\index{I@{$\I$}|textbf}\index{higher inductive type!interval|textbf}, equipped with two point constructors and one path constructor
+  \begin{align*}
+    \source,\target & : \I \\
+    \pathI & : \source=\target.
+  \end{align*}
+  The induction principle of $\I$ asserts that for any type family $P$ over $\I$, if we have
+  \begin{align*}
+    u & : P(\source) \\
+    v & : P(\target) \\
+    p & : \tr_P(\pathI,u)=v,
+  \end{align*}
+  then there is a section $f:\prd{x:\I}P(x)$ equipped with identifications
+  \begin{align*}
+    \alpha & : f(\source) = u \\
+    \beta & : f(\target) = v 
+  \end{align*}
+  and an identification $\gamma$ witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=6em]
+      \tr_P(\pathI,f(\source)) \arrow[r,equals,"\ap{\tr_P(\pathI)}{\alpha}"] \arrow[d,equals,swap,"\apd{f}{\pathI}"] & \tr_P(\pathI,u) \arrow[d,equals,"p"] \\
+      f(\target) \arrow[r,equals,swap,"\beta"] & v
+    \end{tikzcd}
+  \end{equation*}
+  commutes. Note that the constructors of $\I$ induce a map
+    \begin{equation*}
+      \varepsilon: \Big(\prd{x:\I}P(x)\Big)\to \Big(\sm{u:P(\source)}\sm{v:P(\target)}\tr_P(\pathI,u)=v\Big).
+    \end{equation*}
+    given by $f\mapsto (f(\source),f(\target),\apd{f}{\pathI})$.
+  \begin{subexenum}
+  \item Characterize the identity types of the codomain of the map $\varepsilon$ in the following way: Construct an equivalence from the type $(u,v,q)=(u',v',q')$ to the type
+    \begin{equation*}
+      \sm{\alpha:u=u'}\sm{\beta:v=v'} \ct{q}{\beta}=\ct{\ap{\tr_P(\pathI)}{\alpha}}{q'},
+    \end{equation*}
+    for any $(u,v,q)$ and $(u',v',q')$ in the codomain of $\varepsilon$.
+  \item Prove the dependent universal property of $\I$, i.e., show that the map $\varepsilon$ is an equivalence. 
+  \item Show that $\I$ is contractible.
+  \end{subexenum}
+\end{exercises}
+\index{propositional truncation|)}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

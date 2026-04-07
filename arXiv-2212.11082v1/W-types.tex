@@ -1,0 +1,863 @@
+\section{General inductive types}\label{sec:w-types}
+
+\index{inductive type|(}
+\index{W-type|(}
+
+Most inductive types we have seen in this book have a finite number of constructors with finite arities. For example, the type $\N$ has two constructors: one constant $\zeroN$ and one unary constructor $\succN$. However, there is no objection to having an nonfinite amount of constructors, possibly with nonfinite arities. W-types are general inductive types that have a \emph{type} of constructors, whose arities are \emph{types}. W-types are therefore specified by a type $A$ of \emph{symbols} for the constructors, and a type family $B$ over $A$ specifying the arities of the constructors that the symbols represent.
+
+An example of a W-type is the type of finitely branching rooted trees. This inductive type has a constructor with arity $X$ for each finite type $X$. In other words, a finitely branching rooted tree is obtained by attaching a finitely many finitely branching rooted trees to a root. The root itself is therefore a finitely branching tree, obtained from the $0$-ary constructor corresponding to the empty type, and if we have any finite family finitely branching rooted trees, we can combine them all into one finitely branching rooted tree by attaching them to a new root.
+
+\subsection{The type of well-founded trees}
+
+\begin{defn}
+  Consider a type family $B$ over $A$. The \define{W-type}\index{W-type|textbf} $\W(A,B)$\index{W(A,B)@{$\W(A,B)$}|see {W-type}}\index{W(A,B)@{$W(A,B)$}|textbf} is defined as the inductive type with constructor\index{tree@{$\collect$}|textbf}\index{W-type!tree@{$\collect$}|textbf}\index{inductive type!W-type}
+  \begin{equation*}
+    \collect : \prd{x:A} (B(x)\to \W(A,B))\to \W(A,B).
+  \end{equation*}
+  The induction principle\index{W-type!induction principle|textbf}\index{induction principle!of W-types|textbf} of the W-type $\W(A,B)$ asserts that, for any type family $P$ over $\W(A,B)$, any dependent function
+  \begin{equation*}
+    h : \prd{x:A}\prd{\alpha:B(x)\to \W(A,B)} \Big(\prd{y:B(x)}P(\alpha(x))\Big)\to P(\collect(x,\alpha))
+  \end{equation*}
+  determines a dependent function\index{ind_W@{$\indW$}|textbf}\index{W-type!ind_W@{$\indW$}|textbf}
+  \begin{equation*}
+    \indW(h):\prd{x:\W(A,B)}P(x)
+  \end{equation*}
+  that satisfies the judgmental equality\index{computation rules!for W-types|textbf}\index{W-type!computation rule|textbf}
+  \begin{equation*}
+    \indW(h,\collect(x,\alpha))\jdeq h(x,\alpha,\lam{y}\indW(h,\alpha(y))).
+  \end{equation*}
+  The elements of W-types are called \define{(well-founded) trees}\index{well-founded trees|textbf}.
+\end{defn}
+
+\begin{rmk}
+  Some authors write $\mathsf{sup}$ for the constructor of a W-type. The intuition that $\collect(a,\alpha)$ is a supremum of the family of elements $\alpha(y)$ indexed by $y:B(a)$ is, however, somewhat misleading, because $\collect(a,\alpha)$ does not satisfy the defining properties of a supremum.
+\end{rmk}
+
+\begin{rmk}
+  When we define a dependent function
+  \begin{equation*}
+    f:\prd{x:\W(A,B)}P(x)
+  \end{equation*}
+  via the induction principle of W-types, we will often display that definition by pattern matching\index{pattern matching!for W-types}\index{W-type!pattern matching}. Such definitions are then displayed as
+  \begin{equation*}
+    f(\collect(x,\alpha))\defeq h(x,\alpha,\lam{y}f(\alpha(y))),
+  \end{equation*}
+  which contains all the information to carry out the construction via the induction principle of W-types. The advantage of definitions by pattern matching is that they directly display the defining judgmental equality the function being defined.
+\end{rmk}
+
+\begin{rmk}\label{rmk:constant-W}
+  For any $x:A$, the function
+  \begin{equation*}
+    \collect(x):(B(x)\to\W(A,B))\to\W(A,B)
+  \end{equation*}
+  takes a family of elements $\alpha(y):\W(A,B)$ indexed by $y:B(x)$ and collects them into an element $\collect(x,\alpha):\W(A,B)$. Since the element $\collect(x,\alpha)$ has been constructed out of a family $\alpha(y)$ of elements of $\W(A,B)$ indexed by $y:B(x)$, we say that the type $B(x)$ is the \define{arity}\index{arity of constructor W-type|textbf}\index{W-type!arity of constructor|textbf} of $\collect(x,\alpha)$. In other words, there is a function\index{arity@{$\arity$}|textbf}\index{W-type!arity@{$\arity$}|textbf}
+  \begin{equation*}
+    \arity : \W(A,B)\to\UU
+  \end{equation*}
+  given by $\arity(\collect(x,\alpha))\defeq B(x)$. The element $x:A$ is the \define{symbol}\index{symbol of a constructor of a W-type|textbf}\index{W-type!symbol of a constructor|textbf} of the operation $\collect(x):(B(x)\to\W(A,B))\to\W(A,B)$. Note that there might be many different symbols $x,y:A$ for which the operations $\collect(x)$ and $\collect(y)$ have equivalent arities, i.e., for which $B(x)\simeq B(y)$.
+
+  Furthermore, the \define{components}\index{component of an element pf a W-type|textbf}\index{W-type!component of an element|textbf} of $\collect(x,\alpha)$ are the elements $\alpha(y):\W(A,B)$ indexed by $y:B(x)$. In other words, we have
+  \begin{align*}
+    \component & : \prd{w:\W(A,B)} \arity(w) \to \W(A,B),
+  \end{align*}
+  given by $\component(\collect(x,\alpha))\defeq\alpha$.
+  
+  In the special case where $B(x)$ is empty, there is exactly one family of elements $\alpha(y):\W(A,B)$ indexed by $y:B(x)$. Therefore, it follows that any $x:A$ such that $B(x)$ is empty induces a constant in the W-type $\W(A,B)$. More precisely, if we are given a map $h:B(x)\to \emptyt$, then we can define the \define{constant}\index{constant element in a W-type|textbf}\index{W-type!constant element|textbf}
+  \begin{equation*}
+    c_x(h)\defeq \collect(x,\exfalso\circ h).
+  \end{equation*}
+  The elements of $w:\W(A,B)$ for which the type $B(\arity(w))$ is empty are called the \define{constants} of $\W(A,B)$. In other words, the predicate\index{is-constant@{$\isconstantW$}|textbf}\index{W-type!is-constant@{$\isconstantW$}|textbf}
+  \begin{equation*}
+    \isconstantW : \W(A,B)\to\prop_\UU
+  \end{equation*}
+  is defined by $\isconstantW(w)\defeq\isempty(B(\arity(w)))$.
+  
+  On the other hand, if each type $B(x)$ is inhabited, then there are no such constants and we will see in the following proposition that the W-type $\W(A,B)$ is empty in this case.  
+\end{rmk}
+
+\begin{prp}\label{prp:is-empty-W}
+  Consider a family $B$ of types over $A$. Then the following are equivalent:
+  \begin{enumerate}
+  \item For each $x:A$, the type $B(x)$ is nonempty.
+  \item The $W$-type $\W(A,B)$ is empty.\index{is empty!W-type}\index{W-type!is empty}
+  \end{enumerate}
+  In particular, if each $B(x)$ is inhabited, then $\W(A,B)$ is empty.
+\end{prp}
+
+\begin{proof}
+  To prove that (i) implies (ii), assume that $\neg\neg(B(x))$ holds for each $x:A$. Our goal is to construct a function $f:\W(A,B)\to \emptyt$. By the induction principle of W-types it suffices to construct a function of type
+  \begin{equation*}
+    \prd{x:A}\prd{\alpha:B(x)\to\W(A,B)}\Big(\prd{y:B(x)}\emptyt\Big)\to\emptyt.
+  \end{equation*}
+  This type is judgmentally equal to the type
+  \begin{equation*}
+    \prd{x:A}\prd{\alpha:B(x)\to\W(A,B)}\neg\neg(B(x)),
+  \end{equation*}
+  so we obtain the desired function from the assumption that $\neg\neg(B(x))$ holds for every $x:A$.
+
+  To prove that (ii) implies (i), suppose that $\W(A,B)$ is empty and let $x:A$. To show that $\neg\neg(B(x))$ holds, assume that $\neg(B(x))$ holds. In other words, assume a function $h:B(x)\to\emptyt$. Then we have the constant element $c_x(h):\W(A,B)$. This is impossible, since $\W(A,B)$ was assumed to be empty.
+\end{proof}
+
+\begin{eg}\label{eg:Nat-W}
+  Consider the type family $P$ over $\bool$ given by
+  \begin{equation*}
+    P(\bfalse) \defeq \emptyt \qquad\text{and}\qquad P(\btrue) \defeq \unit.
+  \end{equation*}
+  We claim that the W-type $N\defeq \W(\bool,P)$\index{natural numbers!as W-type}\index{W-type!natural numbers} is equivalent to $\N$. The idea is that the constructor $\collect$ of $\W(\bool,P)$ splits into one nullary constructor with symbol $\bfalse$ and arity $P(\bfalse)\jdeq\emptyt$, and one unary constructor with symbol $\btrue$ and arity $P(\btrue)\jdeq\unit$.
+
+  More formally, we define the zero element $z:N$ and the successor function $s:N\to N$ by
+  \begin{equation*}
+    z\defeq \collect(\bfalse,\exfalso) \qquad\text{and}\qquad s(x)\defeq \collect(\btrue,\const_x).
+  \end{equation*}
+  Thus, we obtain a function $f:\N\to N$ that satisfies $f(\zeroN)\jdeq z$ and $f(\succN(n))\jdeq s(f(n))$. It's inverse $g:N\to \N$ is defined via the induction principle of W-types by
+  \begin{align*}
+    g(\collect(\bfalse,\alpha)) & \defeq \zeroN \\
+    g(\collect(\btrue,\alpha)) & \defeq \succN(g(\alpha(\ttt))).
+  \end{align*}
+  It is immediate from these definitions that $g(f(n))=n$ for all $n:\N$. It remains to construct an identification $p(x):f(g(x))=x$ for all $x:N$. Such an identification is constructed inductively. First, there is an identification
+  \begin{equation*}
+    p(\collect(\bfalse,\alpha)) : \collect(\bfalse,\exfalso)=\collect(\bfalse,\alpha)
+  \end{equation*}
+  by the fact that $\exfalso=\alpha$ for any $\alpha:\emptyt\to N$. Second, there is an identification
+  \begin{equation*}
+    p(\collect(\btrue,\alpha)) : \collect(\btrue,\const_{\alpha(\ttt)})=\collect(\btrue,\alpha)
+  \end{equation*}
+  by the fact that $\const_{\alpha(\ttt)}=\alpha$ for any map $\alpha:\unit\to N$. This completes the construction of the equivalence $\N\simeq N$.
+\end{eg}
+
+\begin{eg}\label{eg:planar-binary-tree-W}
+  Consider the type family $B$ over $\bool$ given by
+  \begin{equation*}
+    B(\bfalse) \defeq \emptyt \qquad\text{and}\qquad B(\btrue) \defeq \bool.
+  \end{equation*}
+  Then the W-type $\W(\bool,B)$ is equivalent to the type of \define{oriented binary rooted trees}\index{oriented binary rooted tree|textbf}\index{tree!oriented binary rooted tree|textbf}\index{W-type!oriented binary rooted trees|textbf}, which is the inductive type with constructors\index{oriented binary rooted tree!node@{$\node$}|textbf}\index{oriented binary rooted tree![-,-]@{$[\blank,\blank]$}|textbf}\index{inductive type!oriented binary rooted trees|textbf}
+  \begin{align*}
+    \node & : \planarBinTree \\
+    {[\blank,\blank]} & : \planarBinTree\to (\planarBinTree \to \planarBinTree).
+  \end{align*}
+  We leave the construction of the equivalence $\planarBinTree\simeq\W(\bool,B)$ as \cref{ex:oriented-bin-tree}. The reason we call the elements of $\planarBinTree$ oriented binary rooted trees is that in a tree of the form $[T_1,T_2]$ we can see by inspection which branch is on the left and which branch is on the right.
+\end{eg}
+
+\begin{eg}\label{eg:binary-tree-W}
+  Consider the type $A\defeq \unit+\BS_2$, where $\BS_2$ is the type of $2$-element types. We define the family $B$ over $A$ by pattern matching:
+  \begin{align*}
+    B(\inl(x)) & \defeq \emptyt \\
+    B(\inr(X)) & \defeq X.
+  \end{align*}
+  The type of \define{binary rooted trees}\index{binary rooted tree|textbf}\index{tree!binary rooted tree|textbf}\index{W-type!binary rooted trees|textbf} is the W-type $\W(A,B)$ for this choice of $A$ and $B$. We can also present the type of binary rooted trees as an inductive type with the following constructors:\index{binary rooted tree!node@{$\node$}|textbf}\index{binary rooted tree!bin-tree@{$\collectBinTree$}|textbf}\index{bin-tree@{$\collectBinTree$}|textbf}\index{Bin-Tree@{$\BinTree$}|textbf}\index{inductive type!binary rooted trees|textbf}
+  \begin{align*}
+    \node & : \BinTree \\
+    \collectBinTree & : \prd{X:\BS_2} \BinTree^X\to \BinTree.
+  \end{align*}
+  There is an important qualitative difference between the type of oriented binary rooted trees and the type of binary rooted trees. Given two distinct oriented binary rooted trees $T_1$ and $T_2$, the two oriented binary rooted trees $[T_1,T_2]$ and $[T_2,T_1]$ will also be distinct. On the other hand, given two binary rooted trees $T_1$ and $T_2$, the binary rooted trees
+  \begin{align*}
+    & \collectBinTree (\bool,\indbool(T_1,T_2)) \\
+    & \collectBinTree(\bool,\indbool(T_2,T_1))
+  \end{align*}
+  can always be identified. In the terminology of \cref{ex:commutative-binary-operations}, the constructor $\collectBinTree$ of $\BinTree$ is equivalently described as a commutative binary operation on $\BinTree$.
+\end{eg}
+
+\begin{eg}\label{eg:finitely-branching-tree-W}
+  The W-type $\W(\N,\Fin{})$ is the type of \define{oriented finitely branching rooted trees}\index{tree!oriented finitely branching rooted tree|textbf}\index{oriented finitely branching rooted tree|textbf}\index{W-type!oriented finitely branching rooted trees|textbf}. On the other hand, we define the type of \define{(unoriented) finitely branching rooted trees}\index{tree!finitely branching rooted tree|textbf}\index{finitely branching rooted tree|textbf}\index{W-type!finitely branching rooted trees|textbf} to be the W-type $\W(\F,\mathcal{T})$. The qualitive difference between the types of oriented and unoriented finitely branching rooted trees is similar to the qualitative difference between types of oriented and unoriented binary rooted trees. In the type of oriented finitely branching rooted trees, we record the ordering of the branches while in the type of unoriented finitely branching rooted trees there are identifications between trees that have the same branches up to permutation.
+\end{eg}
+
+\subsection{Observational equality of W-types}
+
+\index{observational equality!on W-types|(}
+\index{W-type!observational equality|(}
+
+Each element $x:\W(A,B)$ has symbol $\prearity(x):A$ and a family of components $\component(x):B(\prearity(x))\to\W(A,B)$. Therefore, we have a map
+\begin{equation*}
+  \eta : \W(A,B)\to \sm{x:A}(B(x)\to\W(A,B))
+\end{equation*}
+given by $\eta(x)\defeq(\prearity(x),\component(x))$.
+
+\begin{prp}\label{prp:algebra-W}
+  The map $\eta:\W(A,B)\to\sm{x:A}(B(x)\to\W(A,B))$ is an equivalence.
+\end{prp}
+
+\begin{proof}
+  We define
+  \begin{equation*}
+    \varepsilon : \Big(\sm{x:A}(B(x)\to\W(A,B))\Big)\to\W(A,B)
+  \end{equation*}
+  by $\varepsilon(x,\alpha)\defeq\collect(x,\alpha)$. The fact that $\varepsilon$ is an inverse of $\eta$ follows easily.
+\end{proof}
+
+The fact that we have an equivalence
+\begin{equation*}
+  \W(A,B)\simeq\sm{x:A}(B(x)\to\W(A,B)),
+\end{equation*}
+suggests a way to characterize the identity type of $\W(A,B)$. Indeed, any equivalence is an embedding, and therefore we also have
+\begin{equation*}
+  (x=y)\simeq (\eta(x)=\eta(y)).
+\end{equation*}
+The latter is an identity type in a $\Sigma$-type, which can be characterized as a $\Sigma$-type of identity types. We therefore define the following observational equality relation on $\W(A,B)$.
+
+\begin{defn}
+  Suppose $A$ and each $B(x)$ are in $\UU$. We define a binary relation\index{Eq W@{$\EqW$}|textbf}\index{W-type!Eq W@{$\EqW$}|textbf}
+  \begin{equation*}
+    \EqW : \W(A,B)\to \W(A,B)\to \UU
+  \end{equation*}
+  recursively by
+  \begin{equation*}
+    \EqW(\collect(x,\alpha),\collect(y,\beta)) \defeq \sm{p:x=y}\prd{z:B(x)}\,\alpha(z)=\beta(\tr_B(p,z))%\EqW(\alpha(z),\beta(\tr_B(p,z)))
+  \end{equation*}
+\end{defn}
+
+\begin{thm}\label{thm:EqW}
+  The observational equality relation $\EqW$ on $\W(A,B)$ is reflexive, and the canonical map\index{characterization of identity type!of W-types}\index{W-type!characterization of identity type}\index{identity type!of W(A,B)@{of $\W(A,B)$}}
+  \begin{equation*}
+    (x=y)\to \EqW(x,y)
+  \end{equation*}
+  is an equivalence for each $x,y:\W(A,B)$. 
+\end{thm}
+
+\begin{proof}
+  The element $\reflEqW(x):\EqW(x,x)$ is defined recursively as
+  \begin{equation*}
+    \reflEqW(\collect(x,\alpha))\defeq (\refl{x},\reflhtpy_\alpha).
+  \end{equation*}
+  This proof of reflexivity induces the canonical map $(x=y)\to\EqW(x,y)$. To show that it is an equivalence for each $x,y:\W(A,B)$, we apply the fundamental theorem of identity types, by which it suffices to show that the type
+  \begin{equation*}
+    \sm{y:\W(A,B)}\EqW(x,y)
+  \end{equation*}
+  is contractible for each $x:\W(A,B)$. The center of contraction is the pair $(x,\reflEqW(x))$. For the contraction, we have to construct a function
+  \begin{equation*}
+    h:\prd{y:\W(A,B)}\prd{p:\EqW(x,y)}\,(x,\reflEqW(x))=(y,p).
+  \end{equation*}
+  By the induction principle of W-types, it suffices to define
+  \begin{equation*}
+    h(\collect(y,\beta),(p,H))\defeq (x,(\refl{},\reflhtpy))=(y,(p,H)).
+  \end{equation*}
+  Here we proceed by identification elimination on $p:x=y$, followed by homotopy induction on the homotopy $H:\alpha\htpy \beta$. Thus, it suffices to construct an identification
+  \begin{equation*}
+    (x,(\refl{},\reflhtpy))=(x,(\refl{},\reflhtpy)),
+  \end{equation*}
+  which we have by reflexivity.
+\end{proof}
+
+\begin{thm}
+  Consider a type family $B$ over a type $A$, and let $k:\T$ be a truncation level. If $A$ is a $(k+1)$-type, then so is $\W(A,B)$.\index{W-type!is truncated}\index{is truncated!W-type}
+\end{thm}
+
+\begin{proof}
+  Suppose that $A$ is a $(k+1)$-type. In order to show that $\W(A,B)$ is a $(k+1)$-type, we have to show that its identity types are $k$-types. The proof is by induction on $x,y:\W(A,B)$. For $x\jdeq\collect(a,\alpha)$ and $y\jdeq\collect(b,\beta)$, we have the equivalence
+  \begin{equation*}
+    (\collect(a,\alpha)=\collect(b,\beta))\simeq\sm{p:a=b}\prd{z:B(a)}\,\alpha(z)=\beta(\tr_B(p,z))
+  \end{equation*}
+  Note that the type $a=b$ is a $k$-type by the assumption that $A$ is a $(k+1)$-type. Furthermore, the type $\alpha(z)=\beta(\tr_B(p,z))$ is a $k$-type by the induction hypothesis. Therefore it follows that the type on the right-hand side of the displayed equivalence is a $k$-type, and this completes the proof.
+\end{proof}
+\index{observational equality!on W-types|)}
+\index{W-type!observational equality|)}
+
+
+\subsection{Functoriality of W-types}
+\index{functorial action!of W-types|(}
+\index{W-type!functorial action|(}
+
+\begin{defn}
+  Consider a type family $B$ over $A$, and a type family $B'$ over $A'$. Furthermore, consider a map $f:A'\to A$ and a family of equivalences
+  \begin{equation*}
+    e_x:B'(x)\simeq B(f(x))
+  \end{equation*}
+  indexed by $x:A'$. Then we define the map $\W(f,e):\W(A',B')\to\W(A,B)$\index{W(f,e)@{$\W(f,e)$}|textbf}\index{W(f,e)@{$\W(f,e)$}|see {W-type, functorial action}}\index{W-type!functorial action|textbf}\index{functorial action!of W-types|textbf} of W-types inductively by
+  \begin{equation*}
+    \W(f,e)(\collect(x,\alpha))\defeq\collect(f(x),\W(f,g)\circ \alpha\circ e_x^{-1}).
+  \end{equation*}
+\end{defn}
+
+\begin{lem}\label{lem:fib-W}
+  For any morphism $\W(f,e):\W(A',B')\to\W(A,B)$ of W-types and any $\collect(x,\alpha):\W(A,B)$, there is an equivalence\index{fiber!of W(f,e)@{of $\W(f,e)$}}\index{W(f,e)@{$\W(f,e)$}!fiber}
+  \begin{equation*}
+    \fib{\W(f,e)}{\collect(x,\alpha)} \simeq \fib{f}{x}\times\prd{b:B(x)}\fib{\W(f,e)}{\alpha(b)}.
+  \end{equation*}
+\end{lem}
+
+\begin{proof}
+  First, note that by the characterization in \cref{thm:EqW} of the identity type of $\W(A,B)$, there is an equivalence between the fiber $\fib{\W(f,e)}{\collect(x,\alpha)}$ and the type
+  \begin{align*}
+    & \sm{x':A'}\sm{\alpha':B'(x')\to\W(A',B')}\sm{p:f(x')=x} \\*
+    & \phantom{\sm{x':A'}}\prd{b:B(f(x'))}\W(f,e)(\alpha'(e_{x'}^{-1}(b)))=\alpha(\tr_{B}(p,b)). \\
+    \intertext{By rearranging the $\Sigma$-type, we see that this type is equivalent to the type}
+    & \sm{(x',p):\fib{f}{x}}\sm{\alpha':B'(x')\to\W(A',B')} \\*
+    & \phantom{\sm{x':A'}}\prd{b:B(f(x'))}\W(f,e)(\alpha'(e_{x'}^{-1}(b)))=\alpha(\tr_{B}(p,b)).
+  \end{align*}
+  Therefore, it suffices to show for each $(x',p):\fib{f}{x}$, that the type
+  \begin{equation*}
+    \sm{\alpha':B'(x')\to\W(A',B')}\prd{b:B(f(x'))}\W(f,e)(\alpha'(e_{x'}^{-1}(b)))=\alpha(\tr_{B}(p,b))
+  \end{equation*}
+  is equivalent to the type $\prd{b:B(x)}\fib{\W(f,e)}{\alpha(b)}$. Since we have an identification $p:f(x')=x$ and an equivalence $e_{x'}:B'(x')\simeq B(f(x'))$, it follows that the type above is equivalent to the type
+  \begin{equation*}
+    \sm{\alpha':B(x)\to\W(A',B')}\prd{b:B(x)}\W(f,e)(\alpha'(b))=\alpha(b).
+  \end{equation*}
+  By distributivity of $\Pi$ over $\Sigma$, i.e., by \cref{thm:choice}, this type is equivalent to the type
+  \begin{equation*}
+    \prd{b:B(x)}\sm{w:\W(A',B')}\W(f,e)(w)=\alpha(b),
+  \end{equation*}
+  completing the proof.
+\end{proof}
+
+\begin{thm}
+  Consider a morphism $\W(f,e):\W(A,B)\to\W(A',B')$ of W-types. If the map $f:A\to A'$ is $k$-truncated, then so is the map $\W(f,e)$. In particular, if $f$ is an equivalence or an embedding, then so is $\W(f,e)$.\index{W(f,e)@{$\W(f,e)$}!is a truncated map}\index{W(f,e)@{$\W(f,e)$}!is an embedding}\index{W(f,e)@{$\W(f,e)$}!is an equivalence}\index{is an equivalence!W(f,e)@{$\W(f,e)$}}\index{is an embedding!W(f,e)@{$\W(f,e)$}}
+\end{thm}
+
+\begin{proof}
+  Suppose that the map $f$ is $k$-truncated. We will prove recursively that the fibers of the morphism $\W(f,e)$ on W-types is $k$-truncated. We saw in \cref{lem:fib-W} that there is an equivalence
+  \begin{equation*}
+    \fib{\W(f,e)}{\collect(x,\alpha)}\simeq \fib{f}{x}\times\prd{b:B(x)}\fib{\W(f,e)}{\alpha(b)}.
+  \end{equation*}
+  The type $\fib{f}{x}$ is $k$-truncated by assumption, and each of the types
+  \begin{equation*}
+    \fib{\W(f,e)}{\alpha(b)}
+  \end{equation*}
+  is $k$-truncated by the inductive hypothesis, so the claim follows.
+\end{proof}
+\index{functorial action!of W-types|)}
+\index{W-type!functorial action|)}
+
+
+\subsection{The elementhood relation on W-types}
+\index{elementhood relation on W-types|(}
+\index{W-type!elementhood relation|(}
+
+The elements of a W-type $\W(A,B)$ are constructed out of families of elements of $\W(A,B)$ indexed by a type $B(x)$ for some $x:A$. More precisely, for each $\collect(x,\alpha):\W(A,B)$ we have a family of elements
+\begin{equation*}
+  \alpha(y):\W(A,B)
+\end{equation*}
+indexed by $y:B(x)$. Thus, we could say that $\alpha(y)$ is in $\collect(x,\alpha)$, for each $y:B(x)$. More abstractly, we can define an elementhood relation on $\W(A,B)$.
+
+\begin{defn}
+  Given a W-type $\W(A,B)$ and a universe $\UU$ containing both $A$ and each type in the family $B$, we define a type-valued relation\index{e@{$\in$}|see {elementhood relation on W-types}|textbf}\index{e@{$\in$}|textbf}\index{W-type!e@{$\in$}|textbf}
+  \begin{equation*}
+    {\in}:\W(A,B)\to\W(A,B)\to \UU
+  \end{equation*}
+  by $(x\in \collect(a,\alpha))\defeq \sm{y:B(a)}\alpha(y)=x$. 
+\end{defn}
+
+Using the elementhood relation on $\W(A,B)$, we can reformulate the induction principle to, perhaps, a more recognizable form:
+
+\begin{thm}
+  For any family $P$ of types over $\W(A,B)$, there is a function\index{induction principle!of W-types}\index{W-type!induction principle}
+  \begin{equation*}
+    i : \Big(\prd{x:\W(A,B)}\Big(\prd{y:\W(A,B)}(y\in x)\to P(y)\Big)\to P(x)\Big)\to \Big(\prd{x:X}P(x)\Big)
+  \end{equation*}
+  that comes equipped with an identification
+  \begin{equation*}
+    i(h,x)=h(x,\lam{y}\lam{e}i(h,y))
+  \end{equation*}
+  for every $h:\prd{x:\W(A,B)}\Big(\prd{y:\W(A,B)}(y\in x)\to P(y)\Big)\to P(x)$, and every $x:\W(A,B)$.
+\end{thm}
+
+\begin{proof}
+  For any type family $P$ over $\W(A,B)$, we first define a new type family $\square P$ over $\W(A,B)$ given by
+  \begin{equation*}
+    \square P(x):=\prd{y:\W(A,B)}(y\in x)\to P(y).
+  \end{equation*}
+  The family $\square P(x)$ comes equipped with a map
+  \begin{equation*}
+    \eta : \Big(\prd{x:\W(A,B)}P(x)\Big)\to \Big(\prd{x:\W(A,B)}\square P(x)\Big)
+  \end{equation*}
+  given by $\eta(f,x,y,e)\defeq f(y)$. Conversely, there is a map
+  \begin{equation*}
+    \varepsilon(h) : \Big(\prd{y:\W(A,B)}\square P(y)\Big) \to \Big(\prd{x:\W(A,B)}P(x)\Big)
+  \end{equation*}
+  for every $h:\prd{y:\W(A,B)}\square P (y)\to P(y)$, given by $\varepsilon(h,g,x)\defeq h(x,g(x))$. Note that the induction principle can now be stated as
+  \begin{equation*}
+    i : \Big(\prd{y:\W(A,B)}\square P (y)\to P(y)\Big)\to\Big(\prd{x:\W(A,B)}P(x)\Big),
+  \end{equation*}
+  and the computation rule states that
+  \begin{equation*}
+    i(h,x)=h(x,\eta(i(h),x)).
+  \end{equation*}
+  Before we prove the induction principle, we prove the intermediate claim that there is a function
+  \begin{equation*}
+    i' : \Big(\prd{y:\W(A,B)}\square P (y)\to P(y)\Big) \to \Big(\prd{x:\W(A,B)}\square P(x)\Big)
+  \end{equation*}
+  equipped with an identification
+  \begin{equation*}
+    j'(h,x,y,e) : i'(h,x,y,e) = h(y,i'(h,y))
+  \end{equation*}
+  for every $h:\prd{y:\W(A,B)}\square P(y)\to P(y)$ and every $x,y:\W(A,B)$ equipped with $e:y\in x$. Both $i'$ and $j'$ are defined by pattern matching:
+  \begin{align*}
+    i'(h,\collect(a,f),f(b),(b,\refl{})) & := h(f(b),i'(h,f(b))) \\
+    j'(h,\collect(a,f),f(b),(b,\refl{})) & := \refl{}.
+  \end{align*}
+  Now we define $i(h):=\varepsilon(h,i'(h))$. Note that we have the judgmental equalities
+  \begin{align*}
+    i(h,x) & \jdeq \varepsilon(h,i'(h),x) \\
+           & \jdeq h(x,i'(h,x)), \\
+    \intertext{and}
+    h(x,\lam{y}\lam{e}i(h,y))
+           & \jdeq h(x,\lam{y}\lam{e}\varepsilon(h,i'(h),y)) \\
+           & \jdeq h(x,\lam{y}\lam{e}h(y,i'(h,y))).
+  \end{align*}
+  The computation rule is therefore satisfied by the identification
+  \begin{equation*}
+    \begin{tikzcd}[column sep=12.5em]
+      h(x,i'(h,x)) \arrow[r,equals,"\ap{h(x)}{\eqhtpy(\lam{y}\eqhtpy(j'(h,x,y)))}"] & h(x,\lam{y}\lam{e} h(y,i'(h,y))).
+    \end{tikzcd}
+    \qedhere
+  \end{equation*}
+\end{proof}
+
+\subsection{Extensional W-types}\label{sec:extensional-W-types}
+
+It is tempting to think that an element $w:\W(A,B)$ is completely determined by the elements $z:\W(A,B)$ equipped with a proof $z\in w$. However, this may not be the case. For instance, a W-type $\W(A,B)$ might have \emph{two} unary constructors, e.g., when $A\defeq \unit+\bool$ and the family $B$ over $A$ is given by
+\begin{align*}
+  B(\inl(x)) & \defeq \emptyt \\
+  B(\inr(y)) & \defeq \unit.
+\end{align*}
+If we write $f$ and $g$ for the two unary constructors of $\W(A,B)$, then we see that for any element $w:\W(A,B)$, the elements
+\begin{equation*}
+  u\defeq\collect(\inr(\bfalse),\const_w)\qquad\text{and}\qquad v\defeq\collect(\inr(\btrue),\const_w)
+\end{equation*}
+both only contain the element $w$. However, the elements $u$ and $v$ are distinct in $\W(A,B)$.
+
+Something similar happens in the type of oriented binary rooted trees. Given two binary rooted trees $S$ and $T$, there are two ways to combine $S$ and $T$ into a new binary tree: we have $[S,T]$ and $[T,S]$. Both contain precisely the elements $S$ and $T$, but they are distinct. Nevertheless, there are many important W-types in which the elements $w$ are uniquely determined by the elements $z\in w$. Such W-types are called extensional.
+
+\begin{defn}
+  We say that a W-type $\W(A,B)$ is \define{extensional}\index{extensional W-type|textbf}\index{W-type!extensionality|textbf}\index{extensionality principle!for W-types|textbf} if the canonical map
+  \begin{equation*}
+    (x=y)\to\prd{z:\W(A,B)}(z\in x)\simeq (z\in y)
+  \end{equation*}
+  is an equivalence.
+\end{defn}
+
+In the following theorem we give a precise characterization of the inhabited extensional W-types. 
+
+\begin{thm}\label{thm:extensional-W}
+  Consider an inhabited W-type $\W(A,B)$. Then the following are equivalent:
+  \begin{enumerate}
+  \item The W-type $\W(A,B)$ is extensional.
+  \item The family $B$ is \define{univalent}\index{type family!univalent type family|textbf}\index{univalent type family|textbf} in the sense that the map
+  \begin{equation*}
+    \tr_B:(x=y)\to (B(x)\simeq B(y))
+  \end{equation*}
+  is an equivalence, for every $x,y:A$.
+  \end{enumerate}
+\end{thm}
+
+\begin{rmk}
+  Note that if the W-type $\W(A,B)$ is empty, then it is vacuously extensional. However, we saw in \cref{prp:is-empty-W} that any family $B$ of inhabited types over $A$ gives rise to an empty W-type $\W(A,B)$, so there is no hope of showing that $B$ is a univalent family if $\W(A,B)$ is empty.
+
+  We also note that a type family $B$ over $A$ is univalent if and only if the map $B:A\to \UU$ is an embedding. In other words, the claim in \cref{thm:extensional-W} is that an inhabited W-type $\W(A,B)$ is extensional if and only if $B$ is the canonical type family over a subuniverse $A$ of $\UU$.
+\end{rmk}
+
+\begin{proof}
+  We will first show that (ii) is equivalent to the following property:
+  \begin{enumerate}
+  \item[(ii')] The map
+    \begin{equation*}
+      \tr_B : (\prearity(x)=y)\to (B(\prearity(x))\simeq B(y))
+    \end{equation*}
+    is an equivalence for every $x:\W(A,B)$ and every $y:A$.
+  \end{enumerate}
+  Clearly, (ii) implies (ii'). For the converse we use the assumption that $\W(A,B)$ is inhabited. Since the property in (ii) is a proposition, we may assume an element $w:\W(A,B)$. Using $w$, we obtain for every $x:A$ the element
+  \begin{equation*}
+    \collect(x,\const_w):\W(A,B)
+  \end{equation*}
+  The symbol of $\collect(x,\const_w)$ is $x$, and therefore the hypothesis that (ii') holds implies that the map $(x=y)\to (B(x)\simeq B(y))$ is an equivalence. This concludes the proof that (ii) is equivalent to (ii'). It remains to show that (i) is equivalent to (ii').
+
+  Let $x:\W(A,B)$. By the fundamental theorem of identity types, the W-type $\W(A,B)$ is extensional if and only if the total space
+  \begin{equation*}
+    \sm{y:\W(A,B)}\prd{z:\W(A,B)}(z\in x)\simeq (z\in y)
+  \end{equation*}
+  is contractible, for any $x:\W(A,B)$. When $x$ is of the form $\collect(a,\alpha)$, the type $z\in x$ is just the fiber $\fib{\alpha}{z}$. Using this observation, we see that the above type is equivalent to the type
+  \begin{equation*}
+    \sm{b:A}\sm{\beta:B(b)\to\W(A,B)}\prd{z:\W(A,B)}\fib{\alpha}{z}\simeq\fib{\beta}{z}.\tag{\textasteriskcentered}
+  \end{equation*}
+  By \cref{ex:fam-equiv} it follows that this type is equivalent to the type
+  \begin{equation*}
+    \sm{y:A}\sm{\beta:B(y)\to\W(A,B)}\sm{e:B(x)\simeq B(y)}\alpha\htpy e\circ \beta.
+  \end{equation*}
+  Note that the type $\sm{\beta:B(y)\to\W(A,B)}\alpha\htpy e\circ\beta$ is contractible for any equivalence $e:B(x)\simeq B(y)$. Therefore, it follows that the above type is contractible if and  only if the type
+  \begin{equation*}
+    \sm{y:A}B(x)\simeq B(y)
+  \end{equation*}
+  is contractible, which is the case if and only if the map $(x=y)\to(B(x)\simeq B(y))$ is an equivalence for all $y:A$.
+\end{proof}
+
+\begin{eg}
+  The type $N$ of \cref{eg:Nat-W}\index{natural numbers!is an extensional W-type}, the type of binary rooted trees \cref{eg:binary-tree-W}\index{binary rooted tree!is an extensional W-type}, and the type of finitely branching rooted trees \cref{eg:finitely-branching-tree-W}\index{finitely branching rooted tree!is an extensional W-type} are all examples extensional W-types. On the other hand, the type of oriented binary rooted trees of \cref{eg:planar-binary-tree-W} and the type of oriented finitely branching rooted trees of \cref{eg:finitely-branching-tree-W} are not extensional.
+\end{eg}
+\index{elementhood relation on W-types|)}
+\index{W-type!elementhood relation|)}
+
+
+\subsection{Russell's paradox in type theory}\label{subsec:russell}
+
+\index{Russell's paradox|(}
+\index{multiset|(}
+Russell's paradox tells us that there cannot be a set of all sets. If there were such a set $S$, then we could form the set
+\begin{equation*}
+  R\defeq \{x\in S\mid x\notin x\},
+\end{equation*}
+for which we have $R\in R\leftrightarrow R\notin R$, a contradiction. To reproduce Russell's paradox in type theory, we first recall a crucial difference between the type theoritic judgment $a:A$ and the set theoretic proposition $x\in y$. Although the judgment $a:A$ plays a similar role in type theory as the elementhood relation, types and their elements are fundamentally different entities, whereas in Zermelo-Fraenkel set theory there are only sets, and the proposition $x\in y$ can be formed for any two sets $x$ and $y$. In type theory, there is no relation on the universe that is similar to the elementhood relation.
+
+However, we have seen in \cref{sec:extensional-W-types} that it is possible to define an elementhood relation on arbitrary W-types. We will use this elementhood relation on the W-type $\W(\UU,\Ty)$ to derive a paradox analogous to Russell's paradox, and we will see that $\UU$ cannot be equivalent to a type in $\UU$.
+
+The type $\W(\UU,\Ty)$ possesses a lot of further structure. In fact, it can be used to encode constructive set theory in type theory. There is, however, one significant difference with ordinary set theory: the elementhood relation is type-valued. In other words, there may be many ways in which $x\in y$ holds. The type $\W(\UU,\Ty)$ is therefore also called the type of \define{multisets}. It was first studied by Aczel in \cite{AczelCZF}, with refinements in \cite{AczelGambinoCZF}, and in the setting of univalent mathematics it has been studied extensively by Gylterud in \cite{GylterudMultisets}.
+
+\begin{defn}
+  Consider a $\UU$ with universal type family $\Ty$. We define the type\index{M_U@{$\multiset{\UU}$}|textbf}\index{M_U@{$\multiset{\UU}$}|see {multiset}}
+  \begin{equation*}
+    \multiset{\UU} \defeq \W(\UU,\Ty),
+  \end{equation*}
+  and the elements of $\multiset{\UU}$ are called \define{multisets in $\UU$}\index{multiset|textbf}. We will write\index{{f(x)"|"x:A}@{$\{f(x)\mid x:A\}$}|textbf}\index{multiset!{f(x)"|"x:A}@{$\{f(x)\mid x:A\}$}|textbf}
+  \begin{equation*}
+    \{f(x)\mid x:A\}
+  \end{equation*}
+  for the multiset in $\UU$ of the form $\collect(A,f)$. More generally, given an element $t(x_0,\ldots,x_n):\multiset{\UU}$ in context $x_0:A_0,\ldots,x_n:A_n(x_0,\ldots,x_{n-1})$, where each $A_i$ is in $\UU$, we will write\index{{t(x0,...,xn)"|"x0:A0,...,xn:An}@{$\{t(x_0,\ldots,x_n)\mid x_0:A_0,\ldots,x_n:A_n\}$}|textbf}\index{multiset!{t(x0,...,xn)"|"x0:A0,...,xn:An}@{$\{t(x_0,\ldots,x_n)\mid x_0:A_0,\ldots,x_n:A_n\}$}|textbf}
+  \begin{equation*}
+    \{t(x_0,\ldots,x_n)\mid x_0:A_0,\ldots,x_n:A_n(x_0,\ldots,x_{n-1})\}
+  \end{equation*}
+  for the multiset in $\UU$ of the form
+  \begin{equation*}
+    \collect\left(\sm{x_0:A_0}\cdots A_n(x_0,\ldots,x_{n-1}),\lam{(x_0,\ldots,x_n)}t(x_0,\ldots,x_n)\right).
+  \end{equation*}
+
+  Given a multiset $X\jdeq \{f(x)\mid x:A\}$ in $\UU$, the \define{cardinality}\index{cardinality!of a multiset|textbf}\index{multiset!cardinality|textbf} of $X$ is the type $A$, and the \define{elements}\index{element of a multiset|textbf}\index{multiset!element|textbf} of $X$ are the multisets $f(x)$ in $\UU$, for each $x:A$.
+\end{defn}
+
+In the notation of multisets, the elementhood relation ${\in}:\multiset{\UU}\to\multiset{\UU} \to\UU^+$ is defined by
+\begin{equation*}
+  (X\in \{g(y)\mid y:B\}) \jdeq \sm{y:B} g(y)=X.
+\end{equation*}
+In other words, a multiset $X$ is in a multiset of the form $\{g(y)\mid y:B\}$ if and only if $X$ comes equipped with an element $y:B$ and an identification $g(y)=X$. The W-type of multisets is extensional by \cref{thm:extensional-W} and the univalence axiom.
+
+Recall from \cref{defn:small-types}\index{small type}\index{U-small type@{$\UU$-small type}} that for a universe $\UU$, we say that a type $A$ is (essentially) $\UU$-small if $A$ comes equipped with an element of type\index{is-small@{$\issmall_\UU(A)$}}
+\begin{equation*}
+  \issmall_{\UU}(A)\defeq \sm{X:\UU}A\simeq X. 
+\end{equation*}
+Our goal in this section is to show, via Russell's paradox, that the universe $\UU$ is not $\UU$-small, i.e., that there cannot be a type $U:\UU$ equipped with an equivalence $\UU\simeq U$. We will use a similar condition of smallness for multisets.
+
+\begin{defn}
+  Let $\UU$ and $\VV$ be universes. We say that a multiset $\{f(x)\mid x:A\}$ in $\VV$ \define{is $\UU$-small}\index{small multiset|textbf}\index{U-small multiset@{$\UU$-small multiset}|textbf}\index{multiset!small multiset|textbf} if the type $A$ is $\UU$-small and if each mulitset $f(x)$ in $\VV$ is $\UU$-small. In other words, the type family\index{is-small-M@{$\issmallmultiset{\UU}$}|textbf}\index{multiset!is-small-M@{$\issmallmultiset{\UU}$}|textbf}
+  \begin{equation*}
+    \issmallmultiset{\UU} : \multiset{\VV}\to \VV\sqcup\UU^+ 
+  \end{equation*}
+  is defined recursively by
+  \begin{equation*}
+    \issmallmultiset{\UU}(\{f(x)\mid x:A\}) \defeq \issmall_{\UU}(A)\times \prd{x:A}\issmallmultiset{\UU}(f(x)).
+  \end{equation*}
+\end{defn}
+
+We will need quite a few properties of smallness before we can reproduce Russell's paradox. We begin with a simple lemma.
+
+\begin{lem}\label{lem:is-small-comprehension-multiset}
+  Consider a $\UU$-small multiset $\{f(x)\mid x:A\}$ in $\VV$, and let $B$ be a family of $\UU$-small types over $A$. Then the multiset
+  \begin{equation*}
+    \{f(x)\mid x:A, y:B(x)\}
+  \end{equation*}
+  is again $\UU$-small.
+\end{lem}
+
+\begin{proof}
+  If the multiset $\{f(x)\mid x:A\}$ is $\UU$-small, then the type $A$ is $\UU$-small. By the assumption that $B$ is a family of $\UU$-small types together with the fact that $\UU$-small types are closed under formation of $\Sigma$-types, it follows that the type
+  \begin{equation*}
+    \sm{x:A}B(x)
+  \end{equation*}
+  is $\UU$-small. Furthermore, since each $f(x)$ is $\UU$-small, we conclude that the multiset $\{f(x)\mid x:A,y:B(x)\}$ is $\UU$-small. 
+\end{proof}
+
+The main purpose of the following lemma is to know that the elementhood relation takes values in the $\UU$-small types, when it is applied to $\UU$-small multisets. We will use the univalence axiom to prove this fact. 
+
+\begin{prp}\label{prp:is-small-elementhood-multiset}
+  Consider two univalent universes $\UU$ and $\VV$, and let $X$ and $Y$ be $\UU$-small multisets in $\VV$. We make two claims:
+  \begin{enumerate}
+  \item The type $X=Y$ is $\UU$-small.
+  \item The type $X\in Y$ is $\UU$-small.
+  \end{enumerate}
+\end{prp}
+
+\begin{proof}
+  For the first claim, let $X\jdeq\{f(x)\mid x : A\}$ and let $Y\jdeq\{g(y)\mid y:B\}$. The proof is by induction. Via \cref{thm:EqW} it follows that the type $X=Y$ is equivalent to the type
+  \begin{equation*}
+    \sm{p:A=B}\prd{x:A}f(x)=g(\equiveq(p)).
+  \end{equation*}
+  The type $A=B$ is $\UU$-small because it is equivalent to the type $A\simeq B$, which is $\UU$-small. Therefore it suffices to show that the type
+  \begin{equation*}
+    \prd{x:A}f(x)=g(\equiveq(p))
+  \end{equation*}
+  is $\UU$-small, for every $p:A=B$. Here we proceed by identification elimination, and the type $\prd{x:A}f(x)=g(x)$ is a product of $\UU$-small types by the induction hypothesis. This concludes the proof of the first claim.
+
+  For the second claim, let $Y\jdeq\{g(y)\mid y:B\}$. Then the type
+  \begin{equation*}
+    \sm{y:B}g(y)=X
+  \end{equation*}
+  is a dependent sum of $\UU$-small types, indexed by an $\UU$-small type, which is again $\UU$-small.
+\end{proof}
+
+The condition that a multiset $\{f(x)\mid x:A\}$ in $\VV$ is $\UU$-small suggests that there is an `equivalent' multiset in $\UU$. 
+
+\begin{defn}\label{defn:inclusion-small-multisets}
+  Given two universes $\UU$ and $\VV$, we define an inclusion function
+  \begin{equation*}
+    i : \Big(\sm{X:\multiset{\VV}}\issmallmultiset{\UU}(X)\Big)\to\multiset{\UU},
+  \end{equation*}
+  of the $\UU$-small multisets in $\VV$ into the multisets in $\UU$, inductively by
+  \begin{equation*}
+    i(\{f(x)\mid x:A\})\defeq \{i(f(e^{-1}(y))) \mid y:B\}.
+  \end{equation*}
+  for any multiset $\{f(x)\mid x:A\}$ of which the type $A$ is equipped with an equivalence $e:A\simeq B$ for some $B$ in $\UU$, and such that the multiset $f(x)$ in $\VV$ is $\UU$-small for each $x:A$.
+\end{defn}
+
+\begin{prp}\label{prp:is-embedding-inclusion-small-multisets}
+  The inclusion function $i$ of $\UU$-small multisets in $\VV$ into the multisets in $\UU$ satisfies the following properties
+  \begin{enumerate}
+  \item For each $\UU$-small multiset $X$ in $\VV$, the multiset $i(X)$ in $\UU$ is $\VV$-small.
+  \item The induced map
+    \begin{equation*}
+      \Big(\sm{X:\multiset{\VV}}\issmallmultiset{\UU}(X)\Big)\to\Big(\sm{Y:\multiset{\UU}}\issmallmultiset{\VV}(Y)\Big)
+    \end{equation*}
+    is an equivalence.
+  \end{enumerate}
+  Consequently, the inclusion function $i$ is an embedding.
+\end{prp}
+
+\begin{proof}
+  To see that $i(\{f(x)\mid x:A\})$ is $\VV$-small for each $\UU$-small multiset $\{f(x)\mid x:A\}$ in $\VV$, note that the assumption that $\{f(x)\mid x:A\}$ is $\UU$-small gives us an equivalence $e:A\simeq B$ and an element $H(x):\issmallmultiset{\UU}(f(x))$ for each $x:A$. The type $B$ is the indexing type of $i(\{f(x)\mid x:A\})$, and $B$ is $\VV$-small because it is equivalent to the type $A$ in $\VV$. Furthermore, each multiset $i(f(e^{-1}(y)))$ is $\VV$-small by the inductive hypothesis. This completes the proof of the first claim.
+
+  We therefore have inclusion functions
+  \begin{equation*}
+    \begin{tikzcd}
+      \Big(\sm{X:\multiset{\VV}}\issmallmultiset{\UU}(X)\Big) \arrow[r,yshift=-.7ex,swap,"i"] &
+      \Big(\sm{Y:\multiset{\UU}}\issmallmultiset{\VV}(Y)\Big) \arrow[l,yshift=.7ex,swap,"i"]
+    \end{tikzcd}
+  \end{equation*}
+  To see that the maps $i$ and $i$ are mutual inverses, it suffices to show that $i(i(X))=X$. This follows by induction from the following calculation, where we assume an equivalence $e:A\simeq B$ into a $B$ in $\UU$.
+  \begin{align*}
+    i(i(\{f(x)\mid x :A\})) & \jdeq i(\{i(f(e^{-1}(y)))\mid y:B\}) \\
+                            & \jdeq \{i(i(f(e^{-1}(e(x))))) \mid x:A\} \\
+                            & = \{i(i(f(x)))\mid x:A\} \\
+                            & = \{f(x)\mid x:A\}.
+  \end{align*}
+  
+  For the last claim, note that we have factored $i$ as an equivalence followed by an embedding
+  \begin{equation*}
+    \begin{tikzcd}[column sep=2em]
+      \Big(\sm{X:\multiset{\VV}}\issmallmultiset{\UU}(X)\Big) \arrow[r] &
+      \Big(\sm{Y:\multiset{\UU}}\issmallmultiset{\VV}(Y)\Big) \arrow[r] &
+      \multiset{\VV},
+    \end{tikzcd}
+  \end{equation*}
+  and therefore $i$ is an embedding.
+\end{proof}
+
+Furthermore, the embedding $i$ induces equivalences on the elementhood relation on multisets.
+
+\begin{prp}\label{prp:elementhood-small-multisets}
+  Consider a multiset $X$ in $\UU$ and a multiset $Y$ in $\VV$. Furthermore, suppose that $X$ is $\VV$-small and that $Y$ is $\UU$-small. Then we have
+  \begin{equation*}
+    (i(X)\in Y)\simeq (X\in i(Y)).
+  \end{equation*}
+\end{prp}
+
+\begin{proof}
+  Let $X\jdeq\{f(x)\mid x:A\}$ and $Y\jdeq\{g(y)\mid y:B\}$. By the assumption that $Y$ is $\UU$-small we have an equivalence $e:B\simeq B'$ to a type $B'$ in $\UU$. Then we have the equivalences
+  \begin{align*}
+    i(X) \in \{g(y)\mid y:B\} & \jdeq \sm{y:B}g(y)=i(X) \\
+                              & \simeq \sm{y:B}i(g(y))=X \\
+                              & \simeq \sm{y':B'}i(g(e^{-1}(y')))=X \\
+                              & \jdeq X\in i(Y).\qedhere
+  \end{align*}
+\end{proof}
+
+We are now almost in position to reproduce Russell's paradox. We will need one more ingredient: the universal tree, i.e., the multiset of all multisets in $\UU$. 
+
+\begin{defn}
+  Let $\UU$ be a universe. Then we define the \define{universal tree}\index{universal tree|textbf}\index{tree!universal tree|textbf}\index{multiset!universal tree|textbf} $\yggdrasil$ to be the multiset\index{Y_U@{$\yggdrasil$}|see {universal tree}}
+  \begin{equation*}
+    \yggdrasil:=\{i(X) \mid X:\multiset{\UU}\}
+  \end{equation*}
+  in $\UU^{+}$, where $i:\multiset{\UU}\to\multiset{\UU^+}$ is the inclusion of the multisets in $\UU$ to the multisets in $\UU^+$ given by the fact that each multiset in $\UU$ is $\UU^+$-small.
+\end{defn}
+
+\begin{prp}\label{prp:is-small-universal-tree}
+  Consider two universes $\UU$ and $\VV$, and suppose that $\UU$ as well as each $X:\UU$ are $\VV$-small. Then the universal tree $\yggdrasil$ is also $\VV$-small.
+\end{prp}
+
+\begin{proof}
+  To show that the universal tree $\{i(X)\mid X:\multiset{\UU}\}$ is $\VV$-small, we first have to show that the type $\multiset{\UU}$ is $\VV$-small. This follows from the more general fact that the subuniverse of $\VV$-small types is closed under the formation of W-types. Indeed, if a type $A$ is $\VV$-small, and if $B(x)$ is $\VV$-small for each $x:A$, then we have an equivalence $\alpha:A\simeq A'$ to a type $A'$ in $\VV$, and for each $x':A'$ we have an equivalence $B(\alpha^{-1}(x'))\simeq B'(x')$ in $\VV$. These equivalences induce an equivalence
+  \begin{equation*}
+    \W(A,B)\simeq \W(A',B')
+  \end{equation*}
+  into the type $W(A',B')$, which is in $\VV$. This concludes the proof that $\multiset{\UU}$ is $\VV$-small.
+
+  It remains to show that the multiset $i(X)$ in $\UU^+$ is $\VV$-small, for each $X:\multiset{\UU}$. Equivalently, we have to show that each multiset $X$ in $\UU$ is $\VV$-small. This follows by recursion: given a multiset $\{f(x)\mid x:A\}$, the type $A$ is $\VV$-small by assumption, and the multiset $f(x)$ is $\VV$-small by the induction hypothesis.
+\end{proof}
+
+We are finally ready to employ \define{Russell's paradox} to prove that a univalent universe cannot be equivalent to any type it contains.\index{Russell's paradox|textbf}
+
+\begin{thm}\label{thm:russell}
+  Consider a univalent universe $\UU$. Then $\UU$ cannot be $\UU$-small.\index{universe!U is not U-small@{$\UU$ is not $\UU$-small}}\index{U-small type@{$\UU$-small type}!U is not U-small@{$\UU$ is not $\UU$-small}}\index{small type!U is not U-small@{$\UU$ is not $\UU$-small}}
+\end{thm}
+
+\begin{proof}
+  Suppose that $\UU$ is $\UU$-small, and consider the multiset
+  \begin{equation*}
+    R\defeq \{i(X) \mid X:\multiset{\UU}, H : X\notin X\}
+  \end{equation*}
+  in $\UU^+$, where $i:\multiset{\UU}\to\multiset{\UU^+}$ is the inclusion of the multisets in $\UU$ to the multisets in $\UU^+$ given by the fact that each multiset in $\UU$ is $\UU^+$-small.
+
+  First, we note that $R$ is $\UU$-small. This follows from \cref{lem:is-small-comprehension-multiset}, using the fact that the universal tree $\{i(X)\mid X:\multiset{\UU}\}$ is $\UU$-small by \cref{prp:is-small-universal-tree}, and the fact that $X\in X$ is $\UU$-small by \cref{prp:is-small-elementhood-multiset}.
+
+  Since $R$ is $\UU$-small, there is a multiset $R':\multiset{\UU}$ such that $i(R')=R$. Now it follows that
+  \begin{align*}
+    R\in R & \simeq \sm{X:\multiset{\UU}}\sm{H:X\notin X} i(X)=R \\
+           & \simeq \sm{X:\multiset{\UU}}\sm{H:X\notin X} X=R' \\
+           & \simeq R'\notin R' \\
+           & \simeq R\notin R.
+  \end{align*}
+  In the second step we used \cref{prp:is-embedding-inclusion-small-multisets}, where we showed that $i$ is an embedding, and in the last step we used \cref{prp:elementhood-small-multisets}. Now we obtain a contradiction, because it follows from \cref{ex:no-fixed-points-neg} that no type is (logically) equivalent to its own negation.
+\end{proof}
+\index{Russell's paradox|)}
+\index{multiset|)}
+
+\begin{exercises}
+  \exitem
+  \begin{subexenum}
+  \item \label{ex:oriented-bin-tree}Let $B:\bool\to\UU$ be the type family defined in \cref{eg:planar-binary-tree-W}. Construct an equivalence\index{oriented binary rooted tree}\index{tree!oriented binary rooted tree}
+    \begin{equation*}
+      \planarBinTree\simeq\W(\bool,B).
+    \end{equation*}
+  \item Prove that $\W(\bool,B)$ is not extensional.
+  \end{subexenum}
+  \exitem Show that for any univalent universe $\UU$ there is no type $U:\UU$ equipped with a surjection $\UU\twoheadrightarrow U$.
+  \exitem For a type family $B$ over $A$, suppose that each $B(x)$ is empty. Show that the type $\W(A,B)$ is equivalent to the type $A$.
+  \exitem
+  \begin{subexenum}
+  \item Show that the elementhood relation ${\in}$ on $\W(A,B)$ is irreflexive, for any type family $B$ over any type $A$.\index{elementhood relation on W-types!is irreflexive}\index{W-type!elementhood relation!is irreflexive}
+  \item Use the previous fact along with \cref{prp:elementhood-small-multisets} to give a second proof of the fact that there can be no type $U:\UU$ equipped with an equivalence $\UU\simeq U$.
+  \end{subexenum}
+  \exitem \label{ex:le-W} For each $x:\W(A,B)$, let ${x <(\blank)}:\W(A,B)\to\UU$ be the type family generated inductively by the following constructors:\index{W-type!strict ordering|textbf}\index{strict ordering!on W-types|textbf}
+  \begin{align*}
+    i & : \prd{y:\W(A,B)}(x\in y) \to (x < y) \\
+    j & : \prd{y,z:\W(A,B)} (y\in z) \to ((x<y) \to (x<z)).
+  \end{align*}
+  \begin{subexenum}
+  \item Show that the type-valued relation $<$ is transitive and irreflexive.\index{W-type!strict ordering!is transitive}\index{strict ordering!on W-types!is transitive}\index{W-type!strict ordering!is irreflexive}\index{strict ordering!on W-types!is irreflexive}
+  \item Suppose that the type $\W(A,B)$ is inhabited and suppose that there exists an element $a:A$ for which $B(a)$ is inhabited. Show that the following are equivalent:
+    \begin{enumerate}
+    \item The type $x<y$ is a proposition for all $x,y:\W(A,B)$.
+    \item The type $x\in y$ is a proposition for all $x,y:\W(A,B)$.
+    \item The type $A$ is a set and the type $B(a)$ is a proposition for all $a:A$.
+    \end{enumerate}
+    Thus, in general it is not the case that $<$ is a relation valued in propositions.
+  \item Show that $\W(A,B)$ satisfies the following \define{strong induction principle}\index{strong induction principle!of W-types|textbf}\index{W-type!strong induction principle|textbf}: For any type family $P$ over $\W(A,B)$, if there is a function
+    \begin{equation*}
+      h:\prd{x:\W(A,B)}\Big(\prd{y:\W(A,B)} (y<x)\to P(y)\Big)\to P(x),
+    \end{equation*}
+    then there is a function $f:\prd{x:\W(A,B)}P(x)$ equipped with an identification
+    \begin{equation*}
+      f(x)=h(x,\lam{y}\lam{p}f(y))
+    \end{equation*}
+    for all $x:\W(A,B)$.
+  \item Show that there can be no sequence of elements $x:\N\to\W(A,B)$ such that $x_{n+1}< x_n$ for all $n:\N$.\index{W-type!no infinitely descending sequences}
+  \end{subexenum}
+  \exitem (Awodey, Gambino, Sojakova \cite{AwodeyGambinoSojakova}) For any type family $B$ over $A$, the \define{polynomial endofunctor}\index{polynomial endofunctor|textbf} $P_{A,B}$ acts on types by
+  \begin{equation*}
+    P_{A,B}(X) \defeq \sm{x:A}X^{B(x)},
+  \end{equation*}
+  and it takes a map $h:X\to Y$ to the map\index{functorial action!polynomial endofunctor|textbf}
+  \begin{equation*}
+    P_{A,B}(h) : P_{A,B}(X)\to P_{A,B}(Y)
+  \end{equation*}
+  defined by $P_{A,B}(h,(x,\alpha)) \defeq (x,h\circ \alpha)$. Furthermore, there is a canonical map
+  \begin{equation*}
+    (h\htpy h') \to (P_{A,B}(h)\htpy P_{A,B}(h'))
+  \end{equation*}
+  taking a homotopy $H:h\htpy h'$ to a homotopy $P_{A,B}(H):P_{A,B}(h)\htpy P_{A,B}(h')$. 
+
+  A type $X$ is said to be equipped with the \define{structure of an algebra}\index{polynomial endofunctor!algebra|textbf}\index{algebra of a polynomial endofunctor|textbf} for the polynomial endofunctor $P_{A,B}$ if $X$ comes equipped with a map
+  \begin{equation*}
+    \mu: P_{A,B}(X)\to X.
+  \end{equation*}
+  Thus, \define{algebras} for the polynomial endofunctor $P_{A,B}$ are pairs $(X,\mu)$ where $X$ is a type and $\mu:P_{A,B}(X)\to X$. Note that $\W(A,B)$ comes equipped with the structure of an algebra for $P_{A,B}$ by \cref{prp:algebra-W}.
+  
+  Given two algebras $X$ and $Y$ for the polynomial endofunctor $P_{A,B}$, we say that a map $h:X\to Y$ is equipped with the \define{structure of a homomorphism}\index{polynomial endofunctor!morphism of algebras|textbf}\index{morphism of algebras!polynomial endofunctor|textbf} of algebras if it comes equipped with a homotopy witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=large]
+      P_{A,B}(X) \arrow[d,swap,"\mu_X"] \arrow[r,"P_{A,B}(h)"] & P_{A,B}(Y) \arrow[d,"\mu_Y"] \\
+      X \arrow[r,swap,"h"] & Y
+    \end{tikzcd}
+  \end{equation*}
+  commutes. The type $\hom((X,\mu_X),(Y,\mu_Y))$ of homomorphisms of algebras for $P_{A,B}$ is therefore defined as
+  \begin{equation*}
+    \hom((X,\mu_X),(Y,\mu_Y))\defeq \sm{h:X\to Y}h\circ\mu_X\htpy \mu_Y\circ P_{A,B}(h).
+  \end{equation*}
+  \begin{subexenum}
+  \item For any $(x,\alpha),(y,\beta):P_{A,B}(X)$, construct an equivalence
+    \begin{equation*}
+      ((x,\alpha)=(y,\beta)) \simeq \sm{p:x=y}\alpha\htpy \beta\circ\tr_B(p).
+    \end{equation*}
+  \item For any two morphisms $(f,K),(g,L):\hom((X,\mu_X),(Y,\mu_Y))$ of algebras for $P_{A,B}$, construct an equivalence
+    \begin{equation*}
+      ((f,K)=(g,L))\simeq \sm{H:f\htpy g} \ct{K}{(\mu_Y\cdot P_{A,B}(H))}\htpy \ct{(H\cdot \mu_X)}{L}.
+    \end{equation*}
+  \item Show that the W-type $\W(A,B)$ equipped with the canonical structure $\varepsilon$ of a $P_{A,B}$-algebra, constructed in \cref{prp:algebra-W}, is a \define{(homotopy) initial $P_{A,B}$-algebra} in the sense that the type
+    \begin{equation*}
+      \hom((\W(A,B),\varepsilon),(X,\mu))
+    \end{equation*}
+    is contractible, for each $P_{A,B}$-algebra $(X,\mu)$.\index{W-type!is initial algebra of polynomial endofunctor}
+  \end{subexenum}
+  \exitem Consider the \define{rank comparison relation}\index{W-type!rank comparison relation|textbf}\index{rank comparison relation!W-type|textbf} ${\preceq} : \W(A,B)\to (\W(A,B)\to\prop_\UU)$ defined recursively by\index{preceq@{$\preceq$}|see {W-type, rank comparison relation}}
+  \begin{equation*}
+    (\collect(a,\alpha)\preceq\collect(b,\beta)) \defeq \forall_{(x:B(a))}\exists_{(y:B(b))}\,\alpha(x)\preceq \beta(y).
+  \end{equation*}
+  If $x\preceq y$ holds, we say that $x$ has \define{lower rank} than $y$. Furthermore, we define the \define{strict rank comparison relation}\index{W-type!strict rank comparison relation|textbf}\index{strict rank comparison relation!W-type|textbf} ${\prec}$\index{prec@{$\prec$}|see {W-type, strict rank comparison relation}} on $\W(A,B)$ by
+  \begin{equation*}
+    (x\prec y)\defeq \exists_{(z\in y)}x\preceq z.
+  \end{equation*}
+  If $x\prec y$ holds, we say that $x$ has \define{strictly lower rank} than $y$.
+  \begin{subexenum}
+  \item Show that the rank comparison relation defines a preordering on $\W(A,B)$, i.e., show that $\preceq$ is reflexive and transitve\index{W-type!rank comparison relation!is a preordering}\index{rank comparison relation!W-type!is a preordering}. Furthermore, prove the following properties, in which $<$ is the strict ordering on $\W(A,B)$ defined in \cref{ex:le-W}:
+    \begin{enumerate}
+    \item $(x \preceq y) \leftrightarrow \forall_{(x'<x)}\exists_{(y'<y)}\,x'\preceq y'$
+    \item $(x < y)\to (x\preceq y)$
+    \item $(x < y) \to (y \npreceq x)$
+    \item $\isconstantW(x)\leftrightarrow \forall_{(y:\W(A,B))}\,x \preceq y$.
+    \end{enumerate}
+  \item Show that the relation $\prec$ on $\W(A,B)$ is a strict ordering on $\W(A,B)$, i.e., show that it is irreflexive and transitive\index{W-type!strict rank comparison relation!is a strict ordering}\index{strict rank comparison relation!W-type!is a strict ordering}. Furthermore, prove the following properties:
+    \begin{enumerate}
+    \item $(x < y)\to (x\prec y)$
+    \item $(x \prec y)\to (x\preceq y)$
+    \item $\forall_{(y\preceq y')}\forall_{(x'\preceq x)}(x\prec y)\to (x'\prec y')$.
+    \end{enumerate}
+  \end{subexenum}
+  Since $\preceq$ defines a preordering on $\W(A,B)$, it follows that the preorder $(\W(A,B),\preceq)$ has a poset reflection, in the sense of \cref{ex:poset-reflection}. We will write
+  \begin{equation*}
+    \eta : (\W(A,B),\preceq)\to(\rank(A,B),\preceq)
+  \end{equation*}
+  for the poset reflection of $(\W(A,B),\preceq)$\index{R(A,B)@{$\rank(A,B)$}|see {W-type, rank poset}}\index{W-type!rank poset|textbf}\index{rank poset!W-type|textbf} and its quotient map. We will call the poset $(\mathcal{R}(A,B),\preceq)$ the \define{rank poset} of the W-type $\W(A,B)$.
+  \begin{subexenum}[resume]
+  \item Show that if each $B(x)$ is finite, then the rank poset $(\rank(A,B),\preceq)$ is either the empty poset, the poset with one element, or it is isomorphic to the poset $(\N,\leq)$. 
+  \item Show that the strict ordering $\prec$\index{strict rank comparison relation!W-type!extends to rank poset} extends to a relation $\prec$ on $\rank(A,B)$ with the following properties:
+    \begin{enumerate}
+    \item We have $(x\prec y)\leftrightarrow (\eta(x)\prec\eta(y))$ for every $x,y:\W(A,B)$.
+    \item We have $(x\prec y)\to (x\preceq y)$ for every $x,y:\rank(A,B)$.
+    \item The relation $\prec$ is transitive and irreflexive on $\rank(A,B)$.
+    \end{enumerate}
+    We will call the strictly ordered set $(\mathcal{R}(A,B),\prec)$ the \define{(strict) rank}\index{rank!of W-type}\index{W-type!rank} of the W-type $\W(A,B)$. 
+  \item A \define{strictly ordered set}\index{strictly ordered set|textbf} $(X,<)$, i.e., a set $X$ equipped with a transitive, irreflexive relation $<$ valued in the propositions, is said to be \define{well-founded}\index{well-founded relation|textbf} if for any family $P$ of propositions over $X$, the implication
+  \begin{equation*}
+    \Big(\forall_{(x:X)}\Big(\forall_{(y<x)}P(y)\Big)\to P(x)\Big)\to \forall_{(x:X)}P(x).
+  \end{equation*}
+  holds. Show that the rank $(\rank(A,B),\prec)$ of $\W(A,B)$ is well-founded.\index{rank!of W-type!is well-founded}\index{W-type!rank!is well-founded}
+  \item A strictly ordered set $(X,<)$ is said to be \define{extensional}\index{strict ordering!extensional|textbf}\index{extensional strict ordering|textbf} if the logical equivalence
+  \begin{equation*}
+    (x=y)\leftrightarrow\forall_{(z:X)}\,(z<x)\leftrightarrow(z<y)
+  \end{equation*}
+  holds for any $x,y:X$. Show that the rank $(\rank(A,B),\prec)$ of $\W(A,B)$ is extensional.\index{rank!of W-type!is extensional}\index{W-type!rank!is extensional}
+  \end{subexenum}
+\end{exercises}
+\index{inductive type|)}
+\index{W-type|)}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:
+

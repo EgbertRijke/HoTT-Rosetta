@@ -1,0 +1,97 @@
+\chapter{The Univalent Foundations of Mathematics}\label{chap:uf}
+
+The univalent foundations program is an approach to mathematics in which mathematics is formalized in dependent type theory, using the homotopy interpretation and the univalence axiom. The homotopy interpretation of type theory fully embraces the idea that between any two elements of a type there is a \emph{type} of identifications, much like between any two points in a topological space there is a \emph{space} of paths between them. This idea was first explored by Awodey and Warren in \cite{AwodeyWarren} and independently by Voevodsky in \cite{Voevodsky06}. With the homotopy interpretation of type theory\index{homotopy interpretation}, outlined in the table below, we think of types as spaces, type families as fibrations, and identifications as paths.
+\begin{table}
+%\caption{The homotopy interpretation}
+\begin{tabular}{ll}
+\toprule
+\emph{Type theory} &  \emph{Homotopy theory} \\
+\midrule
+Types  & Spaces \\
+Dependent types & Fibrations \\
+Elements & Points \\
+Dependent pair type & Total space \\
+Identity type & Path fibration\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Voevodsky's univalence axiom characterizes the identity type of the universes in type theory, asserting that for any two types $A$ and $B$ in a universe $\UU$, we have an equivalence
+\begin{equation*}
+  (A=_{\UU}B)\simeq (A\simeq B).
+\end{equation*}
+In other words, identifications of types are equivalent to equivalences of types. A consequence of the univalence axiom is that many kinds of isomorphic objects in mathematics, such as isomorphic groups or isomorphic rings, can be identified.
+
+The concept of equivalences generalizes the concept of set-isomorphisms to type theory in a way that is suitable for the homotopy interpretation of type theory. Equivalent types are the same for all practical purposes, just as isomorphic objects are practically the same in everyday mathematics. By the univalence axiom, isomorphic objects get identified.
+
+However, the informal practice of identifying isomorphic objects is technically inconsistent with the set theoretic foundations of mathematics. The extensionality axiom of Zermelo-Fraenkel set theory implies, for instance, that there are many different singleton sets $\{x\}$. All those singleton sets are isomorphic, so the univalence axiom identifies them, which would be inconsistent within Zermelo-Fraenkel set theory. The assumption of the univalence axiom therefore marks our definitive departure from the set-theoretic foundations of mathematics.
+
+Since the univalence axiom characterizes the identity type of the universe, it is important to understand the general task of characterizing the identity type of any given type. It is a crucial observation, which we already made when we discussed the uniqueness of $\refl{}$ in \cref{sec:refl-unique}, that for any $a:A$, the type
+\begin{equation*}
+  \sm{x:A}a=x  
+\end{equation*}
+is contractible. Contractible types are types that are singletons up to homotopy, i.e., they are types $A$ that come equipped with a point $a:A$ such that $a=x$ for every $x:A$. We have seen in \cref{prp:contraction-total-space-id} that the total space of all paths starting at $a$ is such a type, so it is an example of a contractible type. The fundamental theorem of identity types asserts that a type family $B$ over $A$ with $b:B(a)$ has a contractible total space
+\begin{equation*}
+  \sm{x:A}B(x)
+\end{equation*}
+if and only if $(a=x)\simeq B(x)$ for all $x:A$. The fundamental theorem of identity types can be used to characterize the identity types of virtually any type that we will encounter. Since types are only fully understood if we also have a clear understanding of their identity types, it is one of the core tasks of a homotopy type theorist to characterize identity types, and the fundamental theorem (\cref{thm:id_fundamental}) is the main tool.
+
+Not all types have very complicated identity types. For example, some types have the property that all their identity types are contractible. For example, the types $\emptyt$ and $\unit$ satisfy this condition. Any two terms of such a type can therefore be identified, so in this sense they are \emph{proof irrelevant}. The only thing that matters about such types is whether or not they are inhabited by a term. Analogously, this is also the case for propositions in the propositional calculus or first order logic. Therefore we call such types propositions, and we see that propositions are present in type theory as certain types.
+
+Next, there are the types of which the identity types are propositions. In other words, the identity types of such types have the property of proof irrelevance. We are familiar with this situation from set theory, because equality in set theory is a proposition. Therefore we call such types sets. The types $\N$, $\Z$, and $\Fin{k}$ are all examples of sets.
+
+It is now clear that there is a hierarchy arising: at the bottom of the hierarchy we have the contractible types; then we have the propositions, of which the identity types are contractible; after the propositions we have the sets, of which the identity types are propositions. Defining sets to be of truncation level $0$, we define a type to be of truncation level $k+1$ if its identity types are of truncation level $k$. Types of truncation level $k$ for $k\geq 1$ are also called $k$-types or $k$-groupoids.
+
+This hierarchy of truncation levels is due to Voevodsky, who recognized that, when you are formalizing mathematics in type theory, it is important to specify the truncation level in which you are working. Most mathematics, for example, takes place at truncation level $0$, the level of sets. Groups, rings, posets, and so on are all set-level objects. Categories, on the other hand, are objects of truncation level $1$, the level of the $1$-groupoids. This is because two objects in a category are considered equal if they are isomorphic, and between any two objects in a category there is a set of isomorphisms.
+
+The fundamental theorem of identity types and the basic facts about truncation levels are proved without assuming any axioms. In other words, they are theorems of Martin-L\"of's dependent type theory, as introduced in \cref{chap:type-theory}. In particular, the rules of dependent type theory are sufficient to characterize the identity types of $\Sigma$-types and of the type of natural numbers, and also to prove the disjointness of coproducts. However, there are still two important characterizations of identity types missing: those of $\Pi$-types and those of universes. For those two cases we need axioms:
+\begin{enumerate}
+\item For any two dependent functions $f,g:\prd{x:A}B(x)$, the canonical map
+  \begin{equation*}
+    (f=g)\to (f\htpy g)
+  \end{equation*}
+  that maps $\refl{f}$ to the constant homotopy, is an equivalence.
+\item For any two types $A$ and $B$ in a universe $\UU$, the canonical map
+  \begin{equation*}
+    (A=B)\to (A\simeq B)
+  \end{equation*}
+  that maps $\refl{A}$ to the identity equivalence, is an equivalence.
+\end{enumerate}
+The function extensionality axiom (i) characterizes the identity types of $\Pi$-types, and the univalence axiom (ii) characterizes the identity types of universes.
+
+With the addition of the function extensionality axiom and the univalence axiom, we have almost fully specified the univalent foundations of mathematics. The one ingredient missing is that of quotients. In order to obtain quotients, we will postulate two more axioms:
+\begin{enumerate}
+  \addtocounter{enumi}{2}
+\item We will assume that every type $A$ has a propositional truncation.
+\item We will assume the type theoretic \emph{replacement axiom}. 
+\end{enumerate}
+
+Propositional truncations are the simplest kind of quotients, identifying all the elements in a type $A$. In other words, the propositional truncation of a type $A$ is a proposition $\brck{A}$ that is true if and only if $A$ is inhabited. Using propositional truncations we can construct the homotopy image of a map. A quotient of a type $A$ by an equivalence relation $R$ can then be constructed as the type of all equivalence classes of $R$, i.e., as the image of the map $R:A\to (A\to \prop_\UU)$. With this construction of the quotient, we immediately obtain a surjective map $q:A\to A/R$, and by the univalence axiom it follows that the quotient is \emph{effective}, i.e., that for any $x,y:A$ we have
+\begin{equation*}
+  (q(x)=q(y))\simeq R(x,y).
+\end{equation*}
+However, this construction does not guarantee that the quotient $A/R$ is small with respect to the universe $\UU$, because it is constructed as a subtype of the type $A\to\prop_\UU$. This is why we assume the replacement axiom, which will imply that the quotient $A/R$ is \emph{essentially} small. Essentially small types are types that are equivalent to a small type, and the replacement axiom asserts that if $f:A\to B$ is a map from an essentially small type $A$ into a type $B$ of which the identity types are essentially small, then the image of $f$ is also essentially small. The role of the replacement axiom in type theory is similar to the role of the replacement axiom in Zermelo-Fraenkel set theory: to ensure that quotients are small.
+
+We have two goals in this chapter. The first goal is to fully describe the univalent foundations of mathematics and its most important concepts. Our second goal is to show how to we can start doing ordinary mathematics from a univalent point of view. We therefore show how to derive the strong induction principle for the natural numbers using function extensionality; we give a new interpretation of logic in univalent mathematics using our definition of propositions and the propositional truncations; we show how Cantor's diagonal argument works in univalent mathematics; and we introduce finite types, binomial types, set quotients, the univalent type of all groups. We end this chapter with a variant of Russell's paradox, showing that for any univalent universe $\UU$ there can be no type $U:\UU$ that is equivalent to $\UU$. We hope that after seeing these familiar examples, you will be able to do your own mathematics from a univalent point of view.
+
+\input{equivalences}
+\input{contractible}
+\input{fundamental}
+\input{hierarchy}
+\input{funext}
+\input{propositional-truncation}
+\input{images}
+\input{finite-types}
+\input{univalence}
+\input{set-quotients}
+\input{groups}
+\input{W-types}
+
+%\input{algebra}
+%\input{real-numbers}
+\cleardoublepage
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

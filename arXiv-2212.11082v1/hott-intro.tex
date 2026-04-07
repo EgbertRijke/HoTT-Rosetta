@@ -1,0 +1,180 @@
+\pdfoutput=1
+
+\documentclass[spanningrule,twoside]{cambridge7A}
+
+\title{Introduction to Homotopy Type Theory}
+\author{Egbert Rijke}
+\date{\today}
+
+\usepackage{amsmath,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{fontawesome}
+\usepackage{newtxtext}
+\usepackage[vvarbb]{newtxmath} %new version of mathptmx
+\usepackage[final]{microtype}
+\usepackage{booktabs}
+\renewcommand{\arraystretch}{1.2}
+\usepackage{atbegshi,picture} %to display the disclaimer
+\usepackage{totcount} %to count and display the total number of exercises
+\usepackage{comment}
+\usepackage{xspace}
+\usepackage{ifthen}
+\usepackage{mathtools}
+\usepackage{tikz,tikz-cd}
+\usepackage{csquotes}
+\usepackage{chngcntr}
+\usepackage{caption}
+
+%%%% Configuring lists
+\usepackage{enumitem}
+%%%% MARGINS %%%%
+\newlength{\listindent}
+\setlength{\listindent}{2.4em}
+\setlist{leftmargin=\listindent}
+\setitemize[1]{leftmargin=\listindent}
+\setenumerate[1]{leftmargin=\listindent}
+
+%%%% Inference rules
+\usepackage{bussproofs}
+% Setup for inference rules
+\def\ScoreOverhang{2pt}
+\def\defaultHypSeparation{\hskip 1em}
+
+\usepackage{makeidx}
+\usepackage[hyphens]{url}
+\usepackage[style=numeric,maxnames=10,backend=biber]{biblatex}
+\definecolor{darkgreen}{rgb}{0,0.4,0.4}
+\usepackage[toc]{appendix}
+
+\usepackage[pdfpagelabels,colorlinks,citecolor=orange,linkcolor=darkgreen,unicode,bookmarksopen=true,bookmarksopenlevel=2]{hyperref}
+\usepackage{aliascnt}
+
+\setcounter{tocdepth}{2}
+\counterwithout{section}{chapter}
+\renewcommand{\thechapter}{\Roman{chapter}}
+
+
+% We introduce theorem environments before we load cleveref, because it doesn't
+% compile otherwise, as I tested with an mwe.
+
+\newtheorem{thm}{Theorem}[subsection]
+\def\defthm#1#2{%
+  %% Ensure all theorem types are numbered with the same counter
+  \newaliascnt{#1}{thm}
+  \newtheorem{#1}[#1]{#2}
+  \aliascntresetthe{#1}
+  %% This command tells cleveref's \cref what to call things
+}
+
+% Now define a bunch of theorem-type environments.
+\defthm{cor}{Corollary}
+\defthm{lem}{Lemma}
+\defthm{prp}{Proposition}
+\theoremstyle{definition}
+\defthm{defn}{Definition}
+\defthm{quasidefn}{Quasi-definition}
+\defthm{rmk}{Remark}
+\defthm{eg}{Example}
+\defthm{axiom}{Axiom}
+\defthm{postulate}{Postulate}
+
+% Now we load cleveref
+\usepackage[capitalize,english]{cleveref}
+
+\crefname{thm}{Theorem}{Theorems}
+\crefname{cor}{Corollary}{Corollaries}
+\crefname{lem}{Lemma}{Lemmas}
+\crefname{prp}{Proposition}{Propositions}
+\theoremstyle{definition}
+\crefname{defn}{Definition}{Definitions}
+\crefname{rmk}{Remark}{Remarks}
+\crefname{eg}{Example}{Examples}
+\crefname{axiom}{Axiom}{Axioms}
+\crefname{postulate}{Postulate}{Postulates}
+\crefname{quasidefn}{Quasi-definition}{Quasi-definitions}
+
+\input{hott}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% We configure the exercises
+
+\newtotcounter{exercisecounter}
+\newcommand{\exitem}{\item\stepcounter{exercisecounter}}
+
+\newlist{exenum}{enumerate}{1}
+\setlist[exenum]{noitemsep,leftmargin=\listindent,label=\thesection.\arabic*}
+  %,ref=\thechapter.\arabic*}
+
+\crefname{exenumi}{Exercise}{Exercises}
+  
+\newlist{subexenum}{enumerate}{1}
+\setlist[subexenum]{noitemsep,leftmargin=\listindent,label=(\alph*),ref=\theexenumi~(\alph*)}
+\crefname{subexenumi}{Exercise}{Exercises}
+  
+\renewenvironment{exercises}
+{%
+\subsection*{Exercises}%
+\addcontentsline{toc}{subsection}{Exercises}%
+\sectionmark{Exercises}%
+\begin{exenum}}
+{%
+%\addtocounter{exercisecounter}{\theexenumi}%
+\end{exenum}}
+
+
+
+\AtBeginShipout{\AtBeginShipoutUpperLeft{%
+    \put(\dimexpr1.5cm\relax,-\paperheight+1.5cm){%
+      \begin{minipage}[b]{18cm}%
+        \textnormal{\small{%
+          This material will be published by Cambridge University Press as
+          \emph{Introduction to Homotopy Type Theory} by Egbert Rijke.
+          This pre-publication version is free to view and download for
+          personal use only. Not for re-distribution, re-sale or use in
+          derivative works. \textcopyright{} Egbert Rijke 2020\\[\baselineskip]
+          The best way to support this book while it is still being prepared for publication, is to let the author know if you find inaccuracies of any kind at \faEnvelopeO~\href{mailto:egbert.rijke@fmf.uni-lj.si}{egbert.rijke@fmf.uni-lj.si}, or at the homotopy type theory chat at \faCommentsO~\href{https://hott.zulipchat.com}{https://hott.zulipchat.com}.}}% or at \faGithub~\href{https://github.com/HoTT-Intro}{https://github.com/HoTT-Intro}
+      \end{minipage}%
+    }}%
+}
+      
+\addbibresource{bibliography.bib}
+
+\makeindex
+
+\begin{document}
+
+% The following resolves the warning:
+% pdfTeX warning (ext4): destination with the same identifier (nam e{page.1}) has been already used, duplicate ignored
+\hypersetup{pageanchor=false}
+
+\setcounter{tocdepth}{2}
+
+\maketitle
+
+\frontmatter
+
+\hypersetup{pageanchor=true}
+
+\tableofcontents
+
+\include{preface}
+
+\include{intro}
+
+\mainmatter
+
+\setcounter{tocdepth}{2}
+
+\input{chapter-type-theory}
+\input{chapter-univalent-foundations}
+\input{chapter-circle}
+
+\backmatter
+
+\printindex
+
+\printbibliography
+
+\end{document}

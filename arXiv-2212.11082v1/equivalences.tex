@@ -1,0 +1,573 @@
+\section{Equivalences}\label{sec:equivalences}
+\index{equivalence|(} 
+
+In this section we will define equivalences of types. However, we have to be a bit careful in how we define the condition for a map to be an equivalence. It turns out to be important that being an equivalence is a \emph{property} of maps, and not a \emph{structure} on maps. In other words, we want to define the type
+\begin{equation*}
+  \isequiv(f)
+\end{equation*}
+in such a way that we will be able to prove that the type $\isequiv(f)$ is a \emph{proposition}. Propositions will be defined in \cref{chap:hierarchy}, and in \cref{chap:funext} we will be able to prove that $\isequiv(f)$ is indeed a proposition.
+
+It turns out that if we naively define a function $f$ to be an equivalence if it has an inverse, then we won't be able to show that $\isequiv(f)$ is a property. We will therefore say that $f$ is an equivalence if it has a separate left and right inverse. This may look odd, but when we define equivalences in this way we will be able to show that $\isequiv(f)$ is a property.
+
+\subsection{Homotopies}
+\index{homotopy|(}
+
+In type theory we are very limited in constructing identifications of functions. The following example illustrates a case where type theory provides no rules to construct an identification between two maps, even though they are pointwise equal.
+
+\begin{rmk}\label{rmk:negnegbool}
+  Consider the negation function $\negbool : \bool\to\bool$\index{neg bool@{$\negbool$}} on the booleans, which was defined in \cref{ex:bool}. Type theory does not provide any means to show that
+  \begin{equation*}
+    \negbool\circ\negbool=\idfunc.
+  \end{equation*}
+  The best we can do is to construct an identification\index{neg neg bool@{$\negnegbool$}|textbf}
+  \begin{equation*}
+    \negnegbool(b) : \negbool(\negbool(b))=b
+  \end{equation*}
+  for any $b:\bool$. Indeed, $\negnegbool$ is defined using the induction principle of $\bool$, by
+  \begin{align*}
+    \negnegbool(\btrue) & \defeq \refl{\btrue} \\
+    \negnegbool(\bfalse) & \defeq \refl{\bfalse}.
+  \end{align*}
+  Therefore we see that, while we cannot identify $\negbool\circ\negbool$ with $\idfunc$, we can define a \emph{pointwise identification} between the values of $\negbool\circ\negbool$ and $\idfunc$.
+\end{rmk}
+
+The observations in \cref{rmk:negnegbool} are an instance of a general phenomenon in type theory: it is often much easier to construct a \emph{pointwise identification} between the values of two maps, than it is to construct an identification between those two maps. In fact, the prevalent notion of sameness of maps is the notion of pointwise identification. Since they are so important, we will give them a name and call them \emph{homotopies}\index{pointwise identification|see {homotopy}}\index{pointwise identification|textbf}.
+
+\begin{defn}
+Let $f,g:\prd{x:A}B(x)$ be two dependent functions. The type of \define{homotopies}\index{homotopy|textbf} from $f$ to $g$ is defined as the type of pointwise identifications, i.e., we define\index{f htpy g@{$f\htpy g$}|see {homotopy}}\index{f htpy g@{$f\htpy g$}|textbf}
+\begin{equation*}
+f\htpy g \defeq \prd{x:A} f(x)=g(x).
+\end{equation*}
+\end{defn}
+
+\begin{eg}
+  By \cref{rmk:negnegbool} we have a homotopy
+  \begin{equation*}
+    \negnegbool : \negbool\circ\negbool\htpy\idfunc.
+  \end{equation*}
+\end{eg}
+
+\begin{rmk}\label{rmk:commuting-diagrams}
+  We will use homotopies, for example, to express the commutativity of diagrams. For example, we say that a triangle\index{homotopy!commutative diagram|textbf}
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[rr,"h"] \arrow[dr,swap,"f"] & & B \arrow[dl,"g"] \\
+      & X
+    \end{tikzcd}
+  \end{equation*}
+  \define{commutes}\index{commutative diagram|textbf} if it comes equipped with a homotopy $H:f\htpy g\circ h$. Similarly, we say that a square
+  \begin{equation*}
+    \begin{tikzcd}
+      A \arrow[r,"g"] \arrow[d,swap,"f"] & A' \arrow[d,"{f'}"] \\
+      B \arrow[r,swap,"h"] & B'
+    \end{tikzcd}
+  \end{equation*}
+  commutes if it comes equipped with a homotopy $h \circ f\htpy f'\circ g$.
+\end{rmk}
+
+Note that the type of homotopies $f\htpy g$ is defined for dependent functions, and moreover the type of homotopies is itself a dependent function type. The definition of homotopies is therefore set up in such a way that we may also consider homotopies \emph{between}\index{homotopy!iterated homotopy}\index{iterated homotopies} homotopies, and even further homotopies between those higher homotopies. More concretely, if $H,K:f\htpy g$ are two homotopies, then the type of homotopies $H\htpy K$ between them is just the type
+\begin{equation*}
+\prd{x:A} H(x)=K(x).
+\end{equation*}
+
+\index{groupoid laws!of homotopies|(}
+\index{homotopy!groupoid laws|(}
+Since homotopies are pointwise identifications, we can use the groupoidal structure of identity types to also define the groupoidal structure of homotopies. In this case, however, we state the groupoid laws as \emph{homotopies} and \emph{homotopies between homotopies} rather than as identifications.
+
+\begin{defn}\label{defn:htpy_groupoid}\index{groupoid laws!of homotopies}
+  For any type family $B$ over $A$ we define the operations on homotopies
+  \index{homotopy!refl-htpy@{$\reflhtpy$}|textbf}
+  \index{refl-htpy@{$\reflhtpy$}|textbf}
+  \index{homotopy!inv-htpy@{$\invhtpy$}|textbf}
+  \index{inv-htpy@{$\invhtpy$}|textbf}
+  \index{homotopy!concathtpy@{$\concathtpy$}|textbf}
+  \index{concat-htpy@{$\concathtpy$}|textbf}
+  \begin{align*}
+    \reflhtpy & : \prd{f:\prd{x:A}B(x)}f\htpy f \\
+    \invhtpy & : \prd{f,g:\prd{x:A}B(x)} (f\htpy g)\to(g\htpy f) \\
+    \concathtpy & : \prd{f,g,h:\prd{x:A}B(x)} (f\htpy g)\to ((g\htpy h)\to (f\htpy h))
+  \end{align*}
+  pointwise by
+  \begin{align*}
+    \reflhtpy(f) & \defeq \lam{x} \refl{f(x)} \\
+    \invhtpy(H) & \defeq \lam{x} H(x)^{-1} \\
+    \concathtpy(H,K) & \defeq \lam{x}\ct{H(x)}{K(x)}.
+  \end{align*}
+  We will often write $H^{-1}$ for $\invhtpy(H)$, and $\ct{H}{K}$ for $\concathtpy(H,K)$.
+\end{defn}
+
+\begin{prp}
+  Homotopies satisfy the groupoid laws:
+  \begin{enumerate}
+  \item Concatenation of homotopies is associative up to homotopy, i.e., there is a homotopy
+    \begin{equation*}
+      \assochtpy(H,K,L) : \ct{(\ct{H}{K})}{L}\htpy\ct{H}{(\ct{K}{L})}
+    \end{equation*}
+    for any homotopies $H:f\htpy g$, $K:g\htpy h$ and $L:h\htpy i$.
+  \item Homotopies satisfy the left and right unit laws up to homotopy, i.e., there are homotopies
+    \begin{align*}
+    \leftunithtpy(H) & : \ct{\reflhtpy_f}{H}\htpy H \\
+    \rightunithtpy(H) & : \ct{H}{\reflhtpy_g}\htpy H 
+    \end{align*}
+    for any homotopy $H$.
+  \item Homotopies satisfy the left and right inverse laws up to homotopy, i.e., there are homotopies
+    \begin{align*}
+      \leftinvhtpy(H) & : \ct{H^{-1}}{H} \htpy \reflhtpy_g \\
+      \rightinvhtpy(H) & : \ct{H}{H^{-1}} \htpy \reflhtpy_f
+    \end{align*}
+    for any homotopy $H$.
+  \end{enumerate}
+\end{prp}
+
+\begin{proof}
+  The homotopy $\assochtpy(H,K,L)$ is defined pointwise by
+  \begin{equation*}
+    \assochtpy(H,K,L,x) \defeq \assoc(H(x),K(x),L(x)).
+  \end{equation*}
+  The other homotopies are similarly defined pointwise.
+\end{proof}
+\index{groupoid laws!of homotopies|)}
+\index{homotopy!groupoid laws|)}
+
+Apart from the groupoid operations and their laws, we will occasionally need \emph{whiskering} operations. Whiskering operations are operations that allow us to compose homotopies with functions. There are two situations where we want this:
+\begin{equation*}
+  \begin{tikzcd}
+    A \arrow[r,bend left,""{name=A,below}] \arrow[r,bend right,""{name=B,above}] \arrow[from=A,to=B,draw=none,"\Downarrow" description] & B \arrow[r] & C & A \arrow[r] & B \arrow[r,bend left,""{name=C,below}] \arrow[r,bend right,""{name=D,above}] \arrow[from=C,to=D,draw=none,"\Downarrow" description] & C.
+  \end{tikzcd}
+\end{equation*}
+
+\begin{defn}
+We define the following \define{whiskering}\index{homotopy!whiskering operations|textbf}\index{whiskering operations!of homotopies|textbf} operations on homotopies:
+\begin{enumerate}
+\item Suppose $H:f\htpy g$ for two functions $f,g:A\to B$, and let $h:B\to C$. We define\index{h . H@{$h\cdot H$}|see {homotopy, whiskering operations}}\index{h . H@{$h\cdot H$}|textbf}
+\begin{equation*}
+h\cdot H\defeq \lam{x}\ap{h}{H(x)}:h\circ f\htpy h\circ g.
+\end{equation*}
+\item Suppose $f:A\to B$ and $H:g\htpy h$ for two functions $g,h:B\to C$. We define\index{H . f@{$H\cdot f$}|see {homotopy, whiskering operations}}\index{H . f@{$H\cdot f$}|textbf}
+\begin{equation*}
+H\cdot f\defeq\lam{x}H(f(x)):g\circ f\htpy h\circ f.
+\end{equation*}
+\end{enumerate}
+\end{defn}
+\index{homotopy|)}
+
+\subsection{Bi-invertible maps}
+
+We use homotopies to define sections and retractions of a map $f$, and to define what it means for a map $f$ to be an equivalence.
+
+\begin{defn}
+  Let $f:A\to B$ be a function.
+  \begin{enumerate}
+  \item The type of \define{sections} of $f$\index{section!of a map|textbf}\index{function!section of a map|textbf} is defined to be the type\index{sec(f)@{$\sections(f)$}|textbf}
+    \begin{equation*}
+      \sections(f) \defeq \sm{g:B\to A} f\circ g\htpy \idfunc[B].
+    \end{equation*}
+    In other words, a \define{section} of $f$ is a map $g:B\to A$ equipped with a homotopy $f\circ g\htpy \idfunc$. 
+  \item The type of \define{retractions} of $f$\index{retraction|textbf}\index{function!has a retraction|textbf} is defined to be the type\index{retr(f)@{$\retractions(f)$}|textbf}
+    \begin{equation*}
+      \retractions(f) \defeq \sm{h:B\to A} h\circ f\htpy \idfunc[A].
+    \end{equation*}
+    If a map $f:A \to B$ has a retraction, we also say that $A$ is a \define{retract}\index{retract!of a type|textbf} of $B$.
+  \item We say that a function $f:A\to B$ is an \define{equivalence}\index{equivalence|textbf}\index{is an equivalence|textbf}\index{function!is an equivalence|textbf} if it has both a section and a retraction, i.e., if it comes equipped with an element of type\index{is-equiv(f)@{$\isequiv(f)$}|textbf}
+    \begin{equation*}
+      \isequiv(f)\defeq\sections(f)\times\retractions(f).
+    \end{equation*}
+    We will write $\eqv{A}{B}$\index{A simeq B@{$\eqv{A}{B}$}|see {equivalence}} for the type $\sm{f:A\to B}\isequiv(f)$ of all equivalences from $A$ to $B$.
+    For any equivalence $e:A\simeq B$ we define $e^{-1}$ to be the section of $e$.\index{equivalence!inverse|textbf}\index{inverse!of an equivalence|textbf}
+  \end{enumerate}
+\end{defn}
+
+\begin{rmk}
+An equivalence, as we defined it here, can be thought of as a \emph{bi-invertible map}\index{bi-invertible map|see {equivalence}}, since it comes equipped with a separate left and right inverse. Explicitly, if $f$ is an equivalence, then there are
+\begin{align*}
+g & : B\to A & h & : B\to A \\
+G & : f\circ g \htpy \idfunc[B] & H & : h\circ f \htpy \idfunc[A].
+\end{align*}
+\end{rmk}
+
+\begin{eg}\label{thm:id_equiv}
+  For any type $A$, the identity function $\idfunc:A\to A$ is an equivalence, since it is its own section and its own retraction\index{identity function!is an equivalence}\index{is an equivalence!identity function}
+\end{eg}
+
+\begin{eg}\label{ex:neg_equiv}
+  Since we have seen in \cref{rmk:negnegbool} that the negation function $\negbool:\bool\to\bool$ on the booleans is its own inverse, it follows that $\negbool$ is an equivalence.\index{neg bool@{$\negbool$}!is an equivalence}\index{is an equivalence!neg bool@{$\negbool$}}
+\end{eg}
+
+\begin{eg}\label{eg:is-equiv-succ-Z}
+  The successor and predecessor functions on $\Z$ are equivalences by \cref{ex:is-equiv-succ-Z}\index{successor function!on Z@{on $\Z$}!is an equivalence}\index{succ Z@{$\succZ$}!is an equivalence}\index{is an equivalence!succ Z@{$\succZ$}}. Furthermore, the function
+  \begin{equation*}
+    x\mapsto x+k
+  \end{equation*}
+  is an equivalence from $\Z$ to $\Z$, for each $k:\Z$. This follows from the group laws on $\Z$, proven in \cref{ex:int_group_laws}. Indeed, the inverse of $x\mapsto x+k$ is the map $x\mapsto x+(-k)$. Finally, it also follows from the group laws on $\Z$ that the map $x\mapsto -x$ is an equivalence.
+
+  The same holds for the finite types: the maps $\succFin_{k}$, $\predFin_{k}$, $\addFin_{k}(x)$ and $\negFin_{k}$ are all equivalences on $\Fin{k}$.
+\end{eg}
+
+\begin{rmk}\label{rmk:has-inverse}
+  More generally, if $f$ \define{has an inverse}\index{has an inverse|textbf}\index{function!has an inverse|textbf} in the sense that we have a function $g:B\to A$ equipped with homotopies $f\circ g\htpy\idfunc[B]$ and $g\circ f\htpy\idfunc[A]$, then $f$ is an equivalence. We write\index{has-inverse(f)@{$\hasinverse(f)$}}
+  \begin{equation*}
+    \hasinverse(f)\defeq\sm{g:B\to A} (f\circ g\htpy \idfunc[B])\times (g\circ f\htpy\idfunc[A]).
+  \end{equation*}
+  However, we did \emph{not} define equivalences to be functions that have inverses. The reason is that we would like that being an equivalence is a \emph{property}, not a non-trivial structure on the map $f$. This fact requires the function extensionality axiom, but we can already say that if a map $f$ is an equivalence, then it has up to homotopy only one section and only one retraction (see \cref{ex:isprop_isequiv}).
+
+  The type $\hasinverse(f)$ on the other hand, turns out to be homotopically complicated. In \cref{ex:is_invertible_id_S1} we will see that the identity function $\idfunc[\sphere{1}]:\sphere{1}\to\sphere{1}$ on the circle is an example of a map for which
+  \begin{equation*}
+    \hasinverse(\idfunc[\sphere{1}])\simeq \Z.
+  \end{equation*}
+\end{rmk}
+
+Even though $\isequiv(f)$ and $\hasinverse(f)$ can be wildly different types, there are maps back and forth between the two. We have already observed in \cref{rmk:has-inverse} that there is a map
+\begin{equation*}
+  \hasinverse(f)\to\isequiv(f).
+\end{equation*}
+The following proposition gives the converse implication.
+
+\begin{prp}\label{lem:inv_equiv}
+  Any map $f:A\to B$ which is an equivalence, can be given the structure of an invertible map\index{equivalence!has an inverse} i.e., there is a map
+  \begin{equation*}
+    \isequiv(f)\to\hasinverse(f).
+  \end{equation*}
+\end{prp}
+
+\begin{proof}
+First we construct for any equivalence $f$ with right inverse $g$ and left inverse $h$ a homotopy $K:g\htpy h$. For any $y:B$, we have 
+\begin{equation*}
+\begin{tikzcd}[column sep=huge]
+g(y) \arrow[r,equals,"H(g(y))^{-1}"] & hfg(y) \arrow[r,equals,"\ap{h}{G(y)}"] & h(y).
+\end{tikzcd}
+\end{equation*} 
+In other words, the homotopy $K:g\htpy h$ is defined to be $\ct{(H\cdot g)^{-1}}{(h\cdot G)}$.
+Using the homotopy $K$ we are able to show that $g$ is also a left inverse of $f$. For $x:A$ we have the identification
+\begin{equation*}
+\begin{tikzcd}[column sep=large]
+gf(x) \arrow[r,equals,"K(f(x))"] & hf(x) \arrow[r,equals,"H(x)"] & x.
+\end{tikzcd}\qedhere
+\end{equation*}
+\end{proof}
+
+\begin{cor}
+The inverse of an equivalence is again an equivalence.\index{inverse!of an equivalence!is an equivalence}\index{is an equivalence!inverse of an equivalence}
+\end{cor}
+
+\begin{proof}
+Let $f:A\to B$ be an equivalence. By \cref{lem:inv_equiv} it follows that the section of $f$ is also a retraction. Therefore it follows that the section is itself an invertible map, with inverse $f$. Hence it is an equivalence.
+\end{proof}
+
+\begin{eg}\label{eg:laws-products-coproducts}
+  Types, just as sets in classical mathematics, satisfy the usual laws of coproducts and products, such as unit laws, commutativity, and associativity. These laws are formulated as equivalences:\index{unit laws!for coproducts}\index{associativity!of coproducts}\index{zero laws!for cartesian products}\index{unit laws!for cartesian products}\index{commutativity!of coproducts}\index{commutativity!of cartesian products}\index{associativity!of cartesian products}\index{distributivity!of cartesian product over coproduct}\index{coproduct!unit laws}\index{coproduct!associativity}\index{coproduct!commutativity}\index{cartesian product type!zero laws}\index{cartesian product type!unit laws}\index{cartesian product type!commutativity}\index{cartesian product type!associativity}\index{cartesian product type!distributivity over coproducts}
+  \begin{align*}
+    \emptyt+B & \simeq B & A+\emptyt & \simeq A \\
+    A+B & \simeq B+A & (A+B)+C & \simeq A+(B+C) \\
+    \emptyt\times B & \simeq \emptyt & A\times\emptyt & \simeq \emptyt\\
+    \unit\times B & \simeq B & A\times\unit & \simeq A \\
+    A\times B & \simeq B\times A & (A \times B) \times C & \simeq A \times (B \times C) \\
+    A\times (B+C) & \simeq (A\times B)+(A\times C) & (A+B)\times C & \simeq (A\times C)+(B\times C).
+  \end{align*}
+  All of these equivalences are constructed in a similar way: the maps back and forth as well as the required homotopies are constructed using induction, or, more efficiently, using pattern matching. For example, to show that cartesian products distribute from the left over coproducts, we construct maps
+  \begin{align*}
+    \alpha & : A\times(B+C)\to (A\times B)+(A\times C) \\
+    \beta & : (A\times B)+(A\times C)\to A\times(B+C)
+  \end{align*}
+  as follows:
+  \begin{align*}
+    \alpha(x,\inl(y)) & \defeq \inl(x,y) & \beta(\inl(x,y)) & \defeq (x,\inl(y)) \\
+    \alpha(x,\inr(z)) & \defeq \inr(x,z) & \beta(\inr(x,z)) & \defeq (x,\inr(z)).
+  \end{align*}
+  The homotopies $G:\alpha\circ\beta\htpy\idfunc$ and $H:\beta\circ\alpha\htpy \idfunc$ are then defined by
+  \begin{align*}
+    G(\inl(x,y)) & \defeq \refl{} & H(x,\inl(y)) & \defeq \refl{} \\
+    G(\inr(x,z)) & \defeq \refl{} & H(x,\inr(z)) & \defeq \refl{}.
+  \end{align*}
+  We encourage the reader to write out the definitions of at least a few of these equivalences.
+\end{eg}
+
+\begin{eg}\label{eg:laws-Sigma-types}
+  The laws for cartesian products can be generalized to arbitrary $\Sigma$-types. The absorption laws and unit laws, for instance, are as follows:
+  \index{absorption laws!of dependent pair types}\index{dependent pair type!absorption laws}\index{unit laws!for dependent pair types}\index{dependent pair type!unit laws}
+  \begin{align*}
+    \sm{x:\emptyt}B(x) & \simeq \emptyt & \sm{x:A}\emptyt & \simeq \emptyt \\
+    \sm{x:\unit}B(x) & \simeq B(\ttt) & \sm{x:A}\unit & \simeq A.
+  \end{align*}
+  Note that the right absorption law and the right unit law are exactly the same as the right absorption and unit laws for cartesian products. The left absorption and unit laws are, however, formulated with a type family $B$ over $\emptyt$ and over $\unit$, and therefore they are slightly more general.
+  
+  Commutativity cannot be generalized to $\Sigma$-types. Associativity, on the other hand, can be expressed in two ways:\index{associativity!of dependent pair types}\index{dependent pair type!associativity}
+  \begin{align*}
+    \sm{w:\sm{x:A}B(x)}C(w) & \simeq\sm{x:A}\sm{y:B}C(\pair(x,y)) \\
+    \sm{w:\sm{x:A}B(x)}C(\proj 1(w),\proj 2(w)) & \simeq \sm{x:A}\sm{y:B(x)}C(x,y). 
+  \end{align*}
+  In the first of these equivalences associativity is stated using a type family $C$ over $\sm{x:A}B(x)$ while in the second it is stated using a family of types $C(x,y)$ indexed by $x:A$ and $y:B(x)$.
+  
+  Finally, we note that $\Sigma$ also distributes over coproducts. In other words, there are the following two equivalences:\index{dependent pair type!distributivity over coproducts}\index{distributivity!of S-types over coproducts@{of $\Sigma$-types over coproducts}}
+  \begin{align*}
+    \sm{x:A}B(x)+C(x) & \simeq \Big(\sm{x:A}B(x)\Big)+\Big(\sm{x:A}C(x)\Big) \\
+    \sm{w:A+B}C(w) & \simeq \Big(\sm{x:A}C(\inl(x))\Big)+\Big(\sm{y:B}C(\inr(y))\Big).
+  \end{align*}
+\end{eg}
+
+\begin{rmk}
+    We haven't stated any laws involving function types or dependent function types, because it requires the function extensionality principle to prove them.
+\end{rmk}
+
+
+
+\subsection{Characterizing the identity types of \texorpdfstring{$\Sigma$-}{dependent pair }types}
+
+\index{identity type!of a Sigma-type@{of a $\Sigma$-type}|(}
+\index{dependent pair type!identity type|(}
+\index{characterization of identity type!of S-types@{of $\Sigma$-types}|(}
+In this section we characterize the identity type of a $\Sigma$-type as a $\Sigma$-type of identity types. Characterizing identity types is a task that a homotopy type theorist routinely performs, so we will follow the general outline of how such a characterization goes:
+\begin{enumerate}
+\item First we define a binary relation $R:A\to A\to \UU$ on the type $A$ that we are interested in. This binary relation is intended to be equivalent to its identity type.
+\item Then we will show that this binary relation is reflexive, by constructing a dependent function of type
+  \begin{equation*}
+    \prd{x:A}R(x,x)
+  \end{equation*}
+\item Using the reflexivity we will show that there is a canonical map
+  \begin{equation*}
+    (x=y)\to R(x,y)
+  \end{equation*}
+  for every $x,y:A$. This map is just constructed by path induction, using the reflexivity of $R$.
+\item Finally, it has to be shown that the map
+  \begin{equation*}
+    (x=y)\to R(x,y)
+  \end{equation*}
+  is an equivalence for each $x,y:A$. 
+\end{enumerate}
+The last step is usually the most difficult, and we will refine our methods for this step in \cref{chap:fundamental}, where we establish the fundamental theorem of identity types.
+
+In this section we consider a type family $B$ over $A$. Given two pairs
+\begin{equation*}
+  (x,y),(x',y'):\sm{x:A}B(x),
+\end{equation*}
+if we have a path $\alpha:x=x'$ then we can compare $y:B(x)$ to $y':B(x')$ by first transporting $y$ along $\alpha$, i.e., we consider the identity type
+\begin{equation*}
+  \tr_B(\alpha,y)=y'.
+\end{equation*}
+Thus it makes sense to think of $(x,y)$ to be identical to $(x',y')$ if there is an identification $\alpha:x=x'$ and an identification $\beta:\tr_B(\alpha,y)=y'$. In the following definition we turn this idea into a binary relation on the $\Sigma$-type.
+
+\begin{defn}
+  We will define a relation\index{Eq Sigma@{$\EqSigma$}|textbf}\index{dependent pair type!Eq Sigma@{$\EqSigma$}|textbf}\index{dependent pair type!observational equality|textbf}\index{observational equality!on S-types@{on $\Sigma$-types}|textbf}
+  \begin{equation*}
+    \EqSigma : \Big(\sm{x:A}B(x)\Big)\to\Big(\sm{x:A}B(x)\Big)\to\UU
+  \end{equation*}
+  by defining
+  \begin{equation*}
+    \EqSigma(s,t)\defeq\sm{\alpha:\proj 1(s)=\proj 1(t)}\tr_B(\alpha,\proj 2(s))=\proj 2 (t).
+  \end{equation*}
+\end{defn}
+
+\begin{lem}
+  The relation $\EqSigma$ is reflexive, i.e., we can construct
+  \begin{equation*}
+    \reflexiveEqSigma:\prd{s:\sm{x:A}B(x)}\EqSigma(s,s).
+  \end{equation*}
+\end{lem}
+
+\begin{constr}
+  The element $\reflexiveEqSigma$ is constructed by $\Sigma$-induction on $s:\sm{x:A}B(x)$. Thus, it suffices to construct a dependent function of type
+  \begin{equation*}
+    \prd{x:A}\prd{y:B(x)}\sm{\alpha:x=x}\tr_B(\alpha,y)=y.
+  \end{equation*}
+  Here we take $\lam{x}\lam{y}(\refl{x},\refl{y})$.
+\end{constr}
+
+\begin{defn}
+  Consider a type family $B$ over $A$. Then for any $s,t:\sm{x:A}B(x)$ we define a map\index{pair-eq@{$\paireq$}|textbf}
+  \begin{equation*}
+    \paireq: (s=t)\to \EqSigma(s,t)
+  \end{equation*}
+  by path induction, taking $\paireq(\refl{s})\defeq\reflexiveEqSigma(s)$.
+\end{defn}
+
+\begin{thm}\label{thm:eq_sigma}
+  Let $B$ be a type family over $A$. Then the map\index{pair-eq@{$\paireq$}!is an equivalence}\index{is an equivalence!pair-eq@{$\paireq$}}
+  \begin{equation*}
+    \paireq: (s=t)\to \EqSigma(s,t)
+  \end{equation*}
+  is an equivalence for every $s,t:\sm{x:A}B(x)$.\index{is an equivalence!pair-eq@{$\paireq$}}
+\end{thm}
+
+\begin{proof}
+The maps in the converse direction\index{eq-pair@{$\eqpair$}|textbf}
+\begin{equation*}
+\eqpair : \EqSigma(s,t)\to(\id{s}{t})
+\end{equation*}
+are defined by repeated $\Sigma$-induction. By $\Sigma$-induction on $s$ and $t$  we see that it suffices to define a map
+\begin{equation*}
+\eqpair : \Big(\sm{p:x=x'}\id{\tr_B(p,y)}{y'}\Big)\to(\id{(x,y)}{(x',y')}).
+\end{equation*}
+A map of this type is again defined by $\Sigma$-induction. Thus it suffices to define a dependent function of type
+\begin{equation*}
+\prd{p:x=x'} (\id{\tr_B(p,y)}{y'}) \to (\id{(x,y)}{(x',y')}).
+\end{equation*}
+Such a dependent function is defined by double path induction by sending $\pairr{\refl{x},\refl{y}}$ to $\refl{\pairr{x,y}}$. This completes the definition of the function $\eqpair$.
+
+Next, we must show that $\eqpair$ is a section of $\paireq$. In other words, we must construct an identification
+\begin{equation*}
+\paireq(\eqpair(\alpha,\beta))=\pairr{\alpha,\beta}
+\end{equation*}
+for each $\pairr{\alpha,\beta}:\sm{\alpha:x=x'}\id{\tr_B(\alpha,y)}{y'}$. We proceed by path induction on $\alpha$, followed by path induction on $\beta$. Then our goal becomes to construct an identification of type
+\begin{equation*}
+\paireq(\eqpair\pairr{\refl{x},\refl{y}})=\pairr{\refl{x},\refl{y}}
+\end{equation*}
+By the definition of $\eqpair$ we have $\eqpair\pairr{\refl{x},\refl{y}}\jdeq \refl{\pairr{x,y}}$, and by the definition of $\paireq$ we have $\paireq(\refl{\pairr{x,y}})\jdeq\pairr{\refl{x},\refl{y}}$. Thus we may take $\refl{\pairr{\refl{x},\refl{y}}}$ to complete the construction of the homotopy $\paireq\circ\eqpair\htpy\idfunc$.
+
+To complete the proof, we must show that $\eqpair$ is a retraction of $\paireq$. In other words, we must construct an identification
+\begin{equation*}
+\eqpair(\paireq(p))=p
+\end{equation*}
+for each $p:s=t$. We proceed by path induction on $p:s=t$, so it suffices to construct an identification 
+\begin{equation*}
+\eqpair\pairr{\refl{\proj 1(s)},\refl{\proj 2(s)}}=\refl{s}.
+\end{equation*}
+Now we proceed by $\Sigma$-induction on $s:\sm{x:A}B(x)$, so it suffices to construct an identification
+\begin{equation*}
+\eqpair\pairr{\refl{x},\refl{y}}=\refl{(x,y)}.
+\end{equation*}
+Since $\eqpair\pairr{\refl{x},\refl{y}}$ computes to $\refl{(x,y)}$, we may simply take $\refl{\refl{(x,y)}}$.
+\end{proof}
+\index{identity type!of a Sigma-type@{of a $\Sigma$-type}|)}
+\index{dependent pair type!identity type|)}
+\index{characterization of identity type!of S-types@{of $\Sigma$-types}|)}
+
+\begin{exercises}
+  \exitem \label{ex:equiv_grpd_ops}Show that the functions\index{inv@{$\invfunc$}!is an equivalence}\index{is an equivalence!inv@{$\invfunc$}}\index{concat@{$\concat$}!is a family of equivalences}\index{is an equivalence!concat(p)@{$\concat(p)$}}\index{concat'@{$\concat'$}!is a family of equivalences}\index{is an equivalence!concat'@{$\concat'(q)$}}\index{tr B@{$\tr_B$}!is a family of equivalences}\index{is an equivalence!tr B(p)@{$\tr_B(p)$}}
+  \begin{align*}
+    \invfunc & :(\id{x}{y})\to(\id{y}{x}) \\
+    \concat(p) & : (\id{y}{z})\to(\id{x}{z}) \\
+    \concat'(q) & : (\id{x}{y}) \to (\id{x}{z}) \\
+    \tr_B(p) & :B(x)\to B(y)
+  \end{align*}
+  are equivalences, where $\concat'(q,p)\defeq \ct{p}{q}$\index{concat'@{$\concat'$}|textbf}. Give their inverses explicitly.
+  \exitem
+  \begin{subexenum}
+  \item Use \cref{ex:zero-neq-one-bool} to show that the constant function $\const_b:\bool\to\bool$ is not an equivalence, for any $b:\bool$.\index{booleans!const b is not an equivalence@{$\const_b$ is not an equivalence}}
+  \item Show that $\bool\not\simeq \unit$.
+  \item Show that $\N\not\simeq \Fin{k}$ for any $k:\N$. 
+  \end{subexenum}
+  \exitem
+  \begin{subexenum}
+  \item \label{ex:htpy_equiv}\index{equivalence!closed under homotopies} Consider two functions $f,g:A\to B$ and a homotopy $H:f\htpy g$. Then
+    \begin{equation*}
+      \isequiv(f)\leftrightarrow\isequiv(g).
+    \end{equation*}
+  \item Show that for any two homotopic equivalences $e,e':\eqv{A}{B}$, their inverses are also homotopic.
+  \end{subexenum}
+  \exitem \label{ex:3_for_2}
+  Consider a commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[rr,"h"] \arrow[dr,swap,"f"] & & B \arrow[dl,"g"] \\
+      & X.
+    \end{tikzcd}
+  \end{equation*}
+  with $H:f\htpy g\circ h$.
+  \begin{subexenum}
+  \item Suppose that the map $h$ has a section $s:B \to A$. Show that the triangle
+    \begin{equation*}
+      \begin{tikzcd}[column sep=tiny]
+        B \arrow[rr,"s"] \arrow[dr,swap,"g"] & & A \arrow[dl,"f"] \\
+        & X.
+      \end{tikzcd}
+    \end{equation*}
+    commutes, and that $f$ has a section if and only if $g$ has a section.
+  \item Suppose that the map $g$ has a retraction $r:X\to B$. Show that the triangle
+    \begin{equation*}
+      \begin{tikzcd}[column sep=tiny]
+        A \arrow[rr,"f"] \arrow[dr,swap,"h"] & & X \arrow[dl,"r"] \\
+        & B.
+      \end{tikzcd}
+    \end{equation*}
+    commutes, and that $f$ has a retraction if and only if $h$ has a retraction.
+  \item (The \define{3-for-2 property} for equivalences.)\index{equivalence!3-for-2 property}\index{3-for-2 property!of equivalences}\index{composition!of equivalences|textbf}\index{equivalence!composition|textbf} Show that if any two of the functions
+    \begin{equation*}
+      f,\qquad g,\qquad h
+    \end{equation*}
+    are equivalences, then so is the third. Conclude that any section and any retraction of an equivalence is again an equivalence.
+  \end{subexenum}
+  \exitem \label{ex:sigma_swap}
+  \begin{subexenum}
+  \item Let $A$ and $B$ be types, and let $C$ be a family over $x:A,y:B$. Construct an equivalence
+    \begin{equation*}
+      \eqv{\Big(\sm{x:A}\sm{y:B}C(x,y)\Big)}{\Big(\sm{y:B}\sm{x:A}C(x,y)\Big)}.
+    \end{equation*}
+  \item Let $A$ be a type, and let $B$ and $C$ be type families over $A$. Construct an equivalence
+    \begin{equation*}
+      \Big(\sm{u:\sm{x:A}B(x)}C(\proj 1(u))\Big) \simeq \Big(\sm{v:\sm{x:A}C(x)}B(\proj 1(v))\Big).
+    \end{equation*}
+  \end{subexenum}
+  \exitem \label{ex:coproduct_functor}Recall from \cref{rmk:functor-coprod} that coproducts have a \define{functorial action}\index{functorial action!of coproducts}\index{coproduct!functorial action}, i.e., that for every $f:A\to A'$ and every $g:B\to B'$ we have a map
+  \begin{equation*}
+    f+g:(A+B)\to (A'+B').
+  \end{equation*}
+  \begin{subexenum}
+  \item Show that $\idfunc[A]+\idfunc[B]\htpy \idfunc[A+B]$.
+  \item Show that for any two pairs of composable functions
+    \begin{equation*}
+      \begin{tikzcd}
+        A \arrow[r,"f"] & {A'} \arrow[r,"{f'}"] & {A''}
+      \end{tikzcd}
+      \qquad\text{and}\qquad
+      \begin{tikzcd}
+        B \arrow[r,"g"] & {B'} \arrow[r,"{g'}"] & {B''}
+      \end{tikzcd}
+    \end{equation*}
+    there is a homotopy $(f'\circ f)+(g'\circ g) \htpy (f'+g')\circ (f+g)$.
+  \item Show that if $H:f\htpy f'$ and $K:g\htpy g'$, then there is a homotopy
+    \begin{equation*}
+      H+K:(f+g)\htpy (f'+g').
+    \end{equation*}
+  \item \label{ex:coproduct_functor_equivalence}Show that if both $f$ and $g$ are equivalences, then so is $f+g$. (The converse of this statement also holds, see \cref{ex:is-equiv-is-equiv-functor-coprod}.)
+  \end{subexenum}
+  \exitem
+  \begin{subexenum}
+  \item Construct for any two maps $f:A \to A'$ and $g:B\to B'$, a map
+    \begin{equation*}
+      f\times g : A\times B \to A'\times B'
+    \end{equation*}
+  \item Show that $\idfunc[A]\times\idfunc[B]\htpy\idfunc[A\times B]$.
+  \item Show that for any two pairs of composable functions
+    \begin{equation*}
+      \begin{tikzcd}
+        A \arrow[r,"f"] & {A'} \arrow[r,"{f'}"] & {A''}
+      \end{tikzcd}
+      \qquad\text{and}\qquad
+      \begin{tikzcd}
+        B \arrow[r,"g"] & {B'} \arrow[r,"{g'}"] & {B''}
+      \end{tikzcd}
+    \end{equation*}
+    there is a homotopy $(f'\circ f)\times(g'\circ g) \htpy (f'\times g')\circ (f\times g)$.
+  \item Show that if $H:f\htpy f'$ and $K:g\htpy g'$, then there is a homotopy
+    \begin{equation*}
+      H\times K:(f\times g)\htpy (f'\times g').
+    \end{equation*}
+  \item Show that for any two maps $f:A\to A'$ and $g:B\to B'$, the following are equivalent:
+    \begin{enumerate}
+    \item The map $f\times g$ is an equivalence.
+    \item There are functions
+      \begin{align*}
+        \alpha & : B \to \isequiv(f) \\
+        \beta & : A \to \isequiv(g).
+      \end{align*}
+    \end{enumerate}
+  \end{subexenum}
+  \exitem\label{ex:laws-Fin} Construct equivalences
+  \begin{align*}
+    \Fin{k+l} & \simeq \Fin{k}+\Fin{l} \\
+    \Fin{kl} & \simeq \Fin{k}\times\Fin{l}.
+  \end{align*}
+  \exitem A map $f:X\to X$ is said to be \define{finitely cyclic}\index{finitely cyclic type|textbf} if it comes equipped with an element of type
+  \begin{equation*}
+    \isfinitelycyclic(f)\defeq\prd{x,y:X}\sm{k:\N}f^k(x)=y.
+  \end{equation*}
+  \begin{subexenum}
+  \item Show that any finitely cyclic map is an equivalence.
+  \item Show that $\succFin:\Fin{k}\to\Fin{k}$ is finitely cyclic for any $k:\N$.
+  \end{subexenum}
+\end{exercises}
+\index{equivalence|)}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

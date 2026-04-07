@@ -1,0 +1,337 @@
+\section{The natural numbers}
+\label{sec:nat}
+
+\index{inductive type|(}
+\index{natural numbers|(}
+
+The set of natural numbers is the most important object in mathematics. We quote Bishop\index{Bishop on the positive integers}, from his Constructivist Manifesto, the first chapter in Foundations of Constructive Analysis \cite{Bishop1967}, where he gives a colorful illustration of its importance to mathematics.
+
+\begin{quote}
+  ``The primary concern of mathematics is number, and this means the positive integers. We feel about number the way Kant felt about space. The positive integers and their arithmetic are presupposed by the very nature of our intelligence and, we are tempted to believe, by the very nature of intelligence in general. The development of the theory of the positive integers from the primitive concept of the unit, the concept of adjoining a unit, and the process of mathematical induction carries complete conviction. In the words of Kronecker, the positive integers were created by God. Kronecker would have expressed it even better if he had said that the positive integers were created by God for the benefit of man (and other finite beings). Mathematics belongs to man, not to God. We are not interested in properties of the positive integers that have no descriptive meaning for finite man. When a man proves a positive integer to exist, he should show how to find it. If God has mathematics of his own that needs to be done, let him do it himself.''
+\end{quote}
+
+A bit later in the same chapter, he continues:
+
+\begin{quote}
+  ``Building on the positive integers, weaving a web of ever more sets and ever more functions, we get the basic structures of mathematics: the rational number system, the real number system, the euclidean spaces, the complex number system, the algebraic number fields, Hilbert space, the classical groups, and so forth. Within the framework of these structures, most mathematics is done. Everything attaches itself to number, and every mathematical statement ultimately expresses the fact that if we perform certain computations within the set of positive integers, we shall get certain results.''
+\end{quote}
+
+\subsection{The formal specification of the type of natural numbers}
+The type $\N$\index{N@{$\N$}|see {natural numbers}} of \define{natural numbers} is the archetypal example of an inductive type\index{inductive type!natural numbers}. The rules we postulate for the type of natural numbers come in four sets, just as the rules for $\Pi$-types:
+\begin{enumerate}
+\item The formation rule, which asserts that the type $\N$ can be formed.
+\item The introduction rules, which provide the zero element $\zeroN$ and the successor function $\succN$.
+\item The elimination rule. This rule is the type theoretic version of the induction principle for $\N$.
+\item The computation rules, which assert that any application of the elimination rule behaves as expected on the constructors $\zeroN$ and $\succN$ of $\N$.
+\end{enumerate}
+
+\subsubsection{The formation rule of $\N$}
+
+\index{natural numbers!rules for N@{rules for $\N$}!formation}
+\index{rules!for N@{for $\N$}!formation}
+The type $\N$ is formed by the \define{$\N$-formation} rule
+\begin{prooftree}
+  \AxiomC{}
+  \RightLabel{$\N$-form.}
+  \UnaryInfC{$\vdash \N~\type$}
+\end{prooftree}
+In other words, $\N$ is postulated to be a type in the empty context.
+
+\subsubsection{The introduction rules of $\N$}
+Unlike the set of positive integers in Bishop's remarks, Peano's first axiom postulates that $0$ is a natural number. The introduction rules for $\N$ equip it with the \define{zero element} and the \define{successor function}.
+\index{natural numbers!rules for N@{rules for $\N$}!introduction rules}
+\index{rules!for N@{for $\N$}!introduction rules}
+\index{natural numbers!operations on N@{operations on $\N$}!0 N@{$\zeroN$}}
+\index{0 N@{$\zeroN$}}
+\index{successor function!on N@{on $\N$}}
+\index{natural numbers!operations on N@{operations on $\N$}!succ N@{$\succN$}}
+\index{succ N@{$\succN$}}
+
+\bigskip
+\begin{minipage}{.45\textwidth}
+  \begin{prooftree}
+    \AxiomC{}
+    \UnaryInfC{$\vdash \zeroN:\N$}
+  \end{prooftree}
+\end{minipage}
+\begin{minipage}{.45\textwidth}
+  \begin{prooftree}
+    \AxiomC{}
+    \UnaryInfC{$\vdash \succN:\N\to\N$}
+  \end{prooftree}
+\end{minipage}
+
+\bigskip
+\begin{rmk}
+  Every element in type theory always comes equipped with its type. Therefore it is possible in type theory that all elements have a \emph{unique} type. In general, it is therefore good practice to make sure that every element is given a unique name, and in formalized mathematics in computer proof assistants this is even required. For example, the element $\zeroN$ has type $\N$, and it is not also a type of $\Z$. This is why we annotate the terms $\zeroN$ and $\succN$ with their type in the subscript. The type $\Z$ of the integers will be introduced in the next section, which will come equipped with a zero element $\zeroZ$ and a successor function $\succZ$.
+\end{rmk}
+
+\subsubsection{The induction principle of $\N$}
+
+\index{natural numbers!rules for N@{rules for $\N$}!elimination|see {induction}}
+\index{natural numbers!rules for N@{rules for $\N$}!induction principle|(}
+\index{induction principle!of N@{of $\N$}|(}
+The classical induction principle of the natural numbers tells us what we have to do in order to show that $\forall_{(n\in\N)}P(n)$ holds, for a predicate $P$ over $\N$. Recall that a predicate $P$ on a set $X$ is just a proposition $P(x)$ about an arbitrary $x\in X$. For example, the assertion that `$n$ is divisible by five' is a predicate on the natural numbers.
+
+In dependent type theory we may think of a type family $P$ over $\N$ as a predicate over $\N$. The type theoretical induction principle of $\N$ is therefore formulated using a type family $P$ over $\N$:\index{ind N@{$\indN$}|textbf}\index{rules!for N@{for $\N$}!induction principle|textbf}\index{natural numbers!indN@{$\indN$}|textbf}
+\begin{prooftree}
+  \def\fCenter{\Gamma}
+  \Axiom$\fCenter, n:\N\vdash P(n)~\type$
+  \noLine
+  \UnaryInf$\fCenter\ \vdash p_0:P(\zeroN)$
+  \noLine
+  \UnaryInf$\fCenter\ \vdash p_S:\prd{n:\N}P(n)\to P(\succN(n))$
+  \RightLabel{$\N$-ind.}
+  \UnaryInf$\fCenter\ \vdash \indN(p_0,p_S):\prd{n:\N} P(n)$
+\end{prooftree}
+In other words, the type theoretical induction principle of $\N$ tells us what we need to do in order to construct a dependent function $\prd{n:\N}P(n)$. Just as in the classical induction principle, there are two things to be constructed given a type family $P$ over $\N$: in the \define{base case}\index{base case} we need to construct an element $p_0:P(\zeroN)$, and for the \define{inductive step}\index{inductive step} we need to construct a function of type $P(n)\to P(\succN(n))$ for all $n:\N$.
+
+\begin{rmk}
+  We might alternatively present the induction principle of $\N$ as the following inference rule
+  \begin{prooftree}
+    \AxiomC{$\Gamma,n:\N\vdash P(n)~\type$}
+    \UnaryInfC{$\Gamma\vdash \indN : P(\zeroN)\to \Big(\Big(\prd{n:\N}P(n)\to P(\succN(n))\Big)\to \prd{n:\N}P(n)\Big)$.}
+  \end{prooftree}
+  In other words, for any type family $P$ over $\N$ there is a \emph{function} $\indN$ that takes two arguments, one for the base case and one for the inductive step, and returns a section of $P$. We claim that this rule is \emph{interderivable} with the rule $\N$-ind above.
+  
+  To see that indeed we get such a function from the rule $\N$-ind, we use generic elements. First, we let $\Gamma'$ be the context
+  \begin{equation*}
+    \Gamma,~p_0:P(\zeroN),~p_S:\prd{n:\N}P(n)\to P(\succN(n)).
+  \end{equation*}
+  By weakening we obtain that
+  \begin{align*}
+    & \Gamma',~n:\N\vdash P(n)~\type \\
+    & \Gamma'\vdash p_0 : P(\zeroN) \\
+    & \Gamma'\vdash p_S : \prd{n:\N}P(n)\to P(\succN(n)).
+  \end{align*}
+  Therefore, the induction principle of $\N$ provides us with a dependent function
+  \begin{equation*}
+    \Gamma' \vdash \indN(p_0,p_S) : \prd{n:\N}P(n).
+  \end{equation*}
+  Now we proceed by $\lambda$-abstraction twice to obtain a function
+  \begin{equation*}
+    \indN : P(\zeroN)\to \Big(\Big(\prd{n:\N}P(n)\to P(\succN(n))\Big) \to \prd{n:\N}P(n)\Big)
+  \end{equation*}
+  in the original context $\Gamma$. This shows that we can define the function $\indN$ from the rule $\N$-ind. Conversely, we can derive the rule $\N$-ind from the rule that presents $\indN$ as a function. We conclude that the ``official'' rule $\N$-ind and the rule that presents $\indN$ as a function are indeed interderivable.
+\end{rmk}
+\index{natural numbers!rules for N@{rules for $\N$}!induction|)}
+\index{induction principle!of N@{of $\N$}|)}
+
+\subsubsection{The computation rules of $\N$}
+
+\index{computation rules!for N@{for $\N$}|(}
+\index{natural numbers!rules for N@{rules for $\N$}!computation rules|(}
+The computation rules for $\N$ postulate that the dependent function
+\begin{equation*}
+  \indN(p_0,p_S):\prd{n:\N}P(n)
+\end{equation*}
+behaves as expected when it is applied to $\zeroN$ or a successor. There is one computation rule for each step in the induction principle, covering the base case and the inductive step.
+
+The computation rule for the base case is\index{rules!for N@{for $\N$}!computation rules|(}\index{computation rules!for N@{for $\N$}|textbf}
+\begin{prooftree}
+    \def\fCenter{\Gamma}
+  \Axiom$\fCenter, n:\N\vdash P(n)~\type$
+  \noLine
+  \UnaryInf$\fCenter\ \vdash p_0:P(\zeroN)$
+  \noLine
+  \UnaryInf$\fCenter\ \vdash p_S:\prd{n:\N}P(n)\to P(\succN(n))$
+  \UnaryInf$\fCenter\ \vdash \indN(p_0,p_S,\zeroN)\jdeq p_0 : P(\zeroN).$
+\end{prooftree}
+\begin{samepage}
+  The computation rule for the inductive step has the same premises as the computation rule for the base case:
+  \begin{prooftree}
+    \AxiomC{$\cdots$}
+    \UnaryInfC{$\Gamma, n:\N \vdash  \indN(p_0,p_S,\succN(n))\jdeq p_S(n,\indN(p_0,p_S,n)) : P(\succN(n))$.}
+  \end{prooftree}
+\end{samepage}
+This completes the formal specification of the type $\N$ of natural numbers.
+\index{rules!for N@{for $\N$}!computation rules|)}
+\index{computation rules!for N@{for $\N$}|)}
+\index{natural numbers!rules for N@{rules for $\N$}!computation rules|)}
+
+\subsection{Addition on the natural numbers}
+
+\index{addition on N@{addition on $\N$}|(}
+\index{natural numbers!operations on N@{operations on $\N$}!addition|(}
+The type theoretic induction principle of $\N$ can be used to do all the usual constructions of operations on $\N$, and to derive all the familiar properties about natural numbers. Many of those properties, however, require a few more ingredients of Martin-L\"of's dependent type theory. For example, the traditional inductive proof that the triangular numbers can be calculated by
+\begin{equation*}
+  1+\cdots+n = \frac{n(n+1)}{2}
+\end{equation*}
+is analogous in type theory, but it requires the identity type to state this equation. We will introduce the identity type in \cref{sec:identity}. Until we have fully specified all the ways of forming types in Martin-L\"of's dependent type theory, we are a bit limited in what we can do with the natural numbers, but at the present stage we can define some of the familiar operations on $\N$. We give in this section the type theoretical construction the \define{addition operation} by induction on $\N$, along with the complete derivation tree.
+
+\begin{defn}\label{defn:addN}
+  We define a function\index{add N@{$\addN$}|textbf}\index{natural numbers!operations on N@{operations on $\N$}!add N@{$\addN$}|textbf}\index{addition on N@{addition on $\N$}|textbf}\index{natural numbers!addition|textbf}
+  \begin{equation*}
+    \addN:\N\to (\N\to\N)
+  \end{equation*}
+  satisfying the specification
+  \begin{align*}
+    \addN(m,\zeroN) & \jdeq m \\
+    \addN(m,\succN(n)) & \jdeq \succN(\addN(m,n)).
+  \end{align*}
+  Usually we will write $m+n$ for $\addN(m,n)$.
+\end{defn}
+
+\begin{proof}[Construction.]
+  We will construct the binary operation $\addN:\N\to(\N\to\N)$ by induction on the second variable. In other words, we will construct an element
+  \begin{equation*}
+    m:\N \vdash \addN(m):\N\to\N.
+  \end{equation*}
+  The context $\Gamma$ we work in is therefore $m:\N$. The induction principle of $\N$ is used with the family of types $P(n)\defeq \N$ indexed by $n:\N$ in context $m:\N$. Therefore we need to construct
+  \begin{align*}
+    m:\N & \vdash \addzeroN(m) : \N\\
+    m:\N & \vdash \addsuccN(m) : \N\to(\N\to\N),\\
+    \intertext{in order to obtain}
+    m:\N & \vdash \addN(m)\defeq\indN(\addzeroN(m),\addsuccN(m)):\N\to\N.
+  \end{align*}
+  The element $\addzeroN(m):\N$ in context $m:\N$ is of course defined to be $m:\N$, i.e., by the generic element, because adding zero should just be the identity function.
+  To see how the function $\addsuccN(m):\N\to(\N\to\N)$ should be defined, we look at the specification of $\addN(m)$ when it is applied to a successor:
+  \begin{equation*}
+    \addN(m,\succN(n))\jdeq \succN(\addN(m,n)).
+  \end{equation*}
+  This shows us that we should define
+  \begin{equation*}
+    \addsuccN(m,n,x)\jdeq \succN(x),
+  \end{equation*}
+  because with this definition we will have
+  \begin{align*}
+    \addN(m,\succN(n)) & \jdeq \indN(\addzeroN(m),\addsuccN(m),\succN(n)) \\
+                       & \jdeq \addsuccN(m,n,\addN(m,n)) \\
+                       & \jdeq \succN(\addN(m,n)).
+  \end{align*}
+  The formal derivation for the construction of $\addsuccN$ is as follows:
+  \begin{prooftree}
+    \AxiomC{}
+    \UnaryInfC{$\vdash\N~\type$}
+    \AxiomC{}
+    \UnaryInfC{$\vdash\N~\type$}
+    \AxiomC{}
+    \UnaryInfC{$\vdash \succN:\N\to\N$}
+    \BinaryInfC{$n:\N\vdash \succN:\N\to\N$}
+    \BinaryInfC{$m:\N,n:\N \vdash \succN:\N\to\N$}
+    \UnaryInfC{$m:\N \vdash \lam{n}\succN:\N\to (\N \to \N)$}
+    \UnaryInfC{$m:\N \vdash \addsuccN(m) \defeq \lam{n}\succN:\N\to (\N \to \N)$.}
+  \end{prooftree}
+  We combine this derivation with the induction principle of $\N$ to complete the construction of addition:
+  \begin{prooftree}
+    \AxiomC{$\vdots$}
+    \UnaryInfC{$m:\N\vdash \addzeroN(m) \defeq m:\N$}
+    \AxiomC{$\vdots$}
+    \UnaryInfC{$m:\N\vdash \addsuccN(m):\N\to (\N \to \N)$}
+    \BinaryInfC{$m:\N\vdash\indN(\addzeroN(m),\addsuccN(m)):\N\to \N$}
+    \UnaryInfC{$m:\N\vdash\addN(m)\defeq\indN(\addzeroN(m),\addsuccN(m)):\N\to \N$.}
+  \end{prooftree}
+  The asserted judgmental equalities then hold by the computation rules for $\N$.
+\end{proof}
+
+\begin{rmk}
+  By the computation rules for $\N$ it follows that
+  \begin{equation*}
+    m+\zeroN\jdeq m,\qquad\text{and}\qquad m+\succN(n)\jdeq\succN(m+n).
+  \end{equation*}
+  A simple consequence of this definition is that $\succN(n)\jdeq n+1$, as one would expect. However, the rules that we provided so far are not sufficient to also conclude that $\zeroN+n\jdeq n$ and $\succN(m) + n\jdeq \succN(m+n)$. In fact, dependent type theory with its inductive types does not provide any means to prove such judgmental equalities.
+
+  Nevertheless, once we have introduced the \emph{identity type} in \cref{sec:identity} we will be able to \emph{identify} $\zeroN+n$ with $n$, and $\succN(m)+n$ with $\succN(m+n)$. See \cref{prp:unit-laws-add-N,prp:successor-laws-add-N}. 
+\end{rmk}
+\index{addition on N@{addition on $\N$}|)}
+\index{natural numbers!operations on N@{operations on $\N$}!addition|)}
+
+\subsection{Pattern matching}
+
+Note that in definition \cref{defn:addN} we stated that $\addN$ is a function of type $\N\to (\N\to\N)$ satisfying the specification
+\begin{align*}
+    \addN(m,\zeroN) & \jdeq m \\
+  \addN(m,\succN(n)) & \jdeq \succN(\addN(m,n)).
+\end{align*}
+Such a specification is enough to characterize the function $\addN(m)$ entirely, because it postulates the behaviour of $\addN(m)$ at the constructors of $\N$.
+It is therefore convenient to present the definition of $\addN$ recursively in the following way:
+\begin{align*}
+  \addN(m,\zeroN) & \defeq m \\
+  \addN(m,\succN(n)) & \defeq \succN(\addN(m,n)).
+\end{align*}
+
+More generally, if we want to define a dependent function $f:\prd{n:\N}P(n)$ by induction on $n$, using
+\begin{align*}
+  p_0 & : P(\zeroN) \\
+  p_S & : \prd{n:\N} P(n)\to P(\succN(n)),
+\end{align*}
+we can present that definition by writing
+\begin{align*}
+  f(\zeroN) & \defeq p_0 \\
+  f(\succN(n)) & \defeq p_S(n,f(n)). 
+\end{align*}
+When the definition of $f$ is presented in this way, we say that $f$ is defined by \define{pattern matching}\index{pattern matching} on the variable $n$. To see that $f$ is fully specified when it is defined by pattern matching, we have to recover the dependent function
+\begin{equation*}
+  p_S:\prd{n:\N}P(n)\to P(\succN(n))
+\end{equation*}
+from the expression $p_S(n,f(n))$ that was used in the definition of $f$. This can of course be done by replacing all occurrences of the term $f(n)$ in the expression $p_S(n,f(n))$ with a fresh variable $x:P(n)$. In other words, when a subexpression of $p_S(n,f(n))$ \emph{matches} $f(n)$, we replace that subexpression by $x$. This is where the name \emph{pattern matching} comes from. Many computer proof assistants have the pattern matching mechanism built in, because it is a concise way of presenting a recursive definition. Another advantage of presenting definitions by pattern matching is that the judgmental equalities by which the object is defined are immediately displayed. Those judgmental equalities are all that is known about the defined object, and often proving things about it amounts to finding a way to apply those judgmental equalities.
+
+Pattern matching can also be used in more complicated situations, such as defining a function by pattern matching on multiple variables, or by iterated pattern matching. For example, an alternative definition of addition on $\N$ could be given by pattern matching on both variables:
+\begin{align*}
+  \addpN(\zeroN,\zeroN) & \defeq \zeroN \\*
+  \addpN(\zeroN,\succN(n)) & \defeq \succN(n) \\*
+  \addpN(\succN(m),\zeroN) & \defeq \succN(m) \\*
+  \addpN(\succN(m),\succN(n)) & \defeq \succN(\succN(\addpN(m,n)).
+\end{align*}
+
+An example of a definition by iterated pattern matching is the \define{Fibonacci function} $F:\N\to\N$. This function is defined by
+\begin{align*}
+  F(\zeroN) & \defeq \zeroN \\
+  F(\oneN) & \defeq \oneN \\
+  F(\succN(\succN(n))) & \defeq F(\succN(n))+F(n).
+\end{align*}
+However, since $F(\succN(\succN(n)))$ is defined using both $F(\succN(n))$ and $F(n)$, it is not immediately clear how to present $F$ by the usual induction principle of $\N$. It is a nice puzzle, which we leave as \cref{ex:fibonacci}, to find a definition of the Fibonacci sequence with the usual induction principle of $\N$. 
+
+\begin{exercises}
+  \exitem
+  \begin{subexenum}
+  \item Define the \define{multiplication} operation
+    \index{multiplication!on N@{on $\N$}|textbf}
+    \index{natural numbers!operations on N@{operations on $\N$}!mul N@{$\mulN$}|textbf}
+    \index{mul N@{$\mulN$}|textbf}
+    \begin{equation*}
+      \mulN :\N\to(\N\to\N).
+    \end{equation*}
+  \item Define the \define{exponentiation function} $n,m\mapsto m^n$ of type $\N\to (\N\to \N)$.
+  \index{exponentiation function on N@{exponentiation function on $\N$}|textbf}
+  \index{natural numbers!operations on N@{operations on $\N$}!exponentiation|textbf}
+  \end{subexenum}
+  \exitem Define the binary \define{min} and \define{max} functions
+  \index{minimum function|textbf}
+  \index{maximum function|textbf}
+  \index{natural numbers!operations on N@{operations on $\N$}!minN@{$\minN$}|textbf}
+  \index{natural numbers!operations on N@{operations on $\N$}!maxN@{$\maxN$}|textbf}
+  \begin{equation*}
+    \minN,\maxN:\N\to(\N\to\N).
+  \end{equation*}
+  \exitem
+  \begin{subexenum}
+  \item Define the \define{triangular numbers}
+    \begin{equation*}
+      1+\cdots+n.
+    \end{equation*}
+    \index{triangle number|textbf}
+    \index{natural numbers!operations on N@{operations on $\N$}!triangle number|textbf}
+  \item Define the \define{factorial} operation $n\mapsto n!$.
+  \index{factorial operation|textbf}
+  \index{natural numbers!operations on N@{operations on $\N$}!n factorial@{$n"!$}|textbf}
+  \end{subexenum}
+  \exitem Define the \define{binomial coefficient} $\binom{n}{k}$\index{(n k)@{$\binom{n}{k}$}|see {binomial coefficient}}\index{(n k)@{$\binom{n}{k}$}|textbf}\index{binomial coefficient|textbf}\index{natural numbers@operations on N@{operations on $\N$}!binomial coefficient|textbf} for any $n,k:\N$, making sure that $\binom{n}{k}\jdeq 0$ when $n<k$.
+  \index{binomial coefficient|textbf}
+  \index{natural numbers!operations on N@{operations on $\N$}!binomial coefficient|textbf}
+  \exitem \label{ex:fibonacci}Use the induction principle of $\N$ to define the \define{Fibonacci sequence} as a function $F:\N\to\N$ that satisfies the equations\index{Fibonacci sequence|textbf}\index{natural numbers!operations on N@{operations on $\N$}!Fibonacci sequence|textbf}
+  \begin{samepage}
+    \begin{align*}
+      F(\zeroN) & \jdeq \zeroN \\
+      F(\oneN) & \jdeq \oneN \\
+      F(\succN(\succN(n))) & \jdeq F(\succN(n))+F(n).
+    \end{align*}
+  \end{samepage}
+  \exitem Define division by two rounded down as a function $\N\to\N$ in two ways: first by pattern matching, and then directly by the induction principle of $\N$.
+\end{exercises}
+\index{natural numbers|)}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

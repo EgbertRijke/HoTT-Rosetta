@@ -1,0 +1,709 @@
+\section{Decidability in elementary number theory}\label{sec:decidability}
+
+Martin-L\"of's dependent type theory is a foundation for constructive mathematics, but in constructive mathematics there is no way to show that $P\lor\neg P$ holds for an arbitrary proposition $P$. Likewise, in type theory there is no way to construct an element of type $A+\neg A$ for an arbitrary type $A$. Consequently, if we want to reason by case analysis over whether $A$ is empty or nonempty, we first have to \emph{show} that $A+\neg A$ holds.
+
+A type $A$ that comes equipped with an element of type $A+\neg A$ is said to be \emph{decidable}. Even though we cannot show that all types are decidable, many types are indeed decidable. Examples include the empty type and any type that comes equipped with a point, such as the type of natural numbers.
+
+Decidability is an important concept with many applications in number theory and finite mathematics, and in this section we will explore the applications of decidability to elementary number theory. For example, the natural numbers satisfy a well-ordering principle with respect to decidable type families over the natural numbers; decidability can be used to construct the greatest common divisor of any two natural numbers; and it can also be used to show that there are infinitely many prime numbers.
+
+\subsection{Decidability and decidable equality}
+
+\begin{defn}
+  A type $A$ is said to be \define{decidable}\index{decidable type|textbf} if it comes equipped with an element of type\index{is-decidable@{$\isdecidable(A)$}}
+  \begin{equation*}
+    \isdecidable(A)\defeq A+\neg A.
+  \end{equation*}
+  A family $P$ over a type $A$ is said to be \define{decidable}\index{decidable family of types|textbf} if $P(x)$ is decidable for every $x:A$.
+\end{defn}
+
+\begin{eg}
+  The principal way to show that a type $A$ is decidable is to either construct an element $a:A$, or to construct a function $A\to\emptyt$. For example, the types $\unit$ and $\emptyt$ are decidable. Indeed, we have\index{decidable type!unit type}\index{unit type!is decidable}\index{decidable type!empty type}\index{empty type!is decidable}\index{decidable type!type with an element}
+  \begin{align*}
+    \inl(\ttt) & :\isdecidable(\unit) \\
+    \inr(\idfunc) & : \isdecidable(\emptyt).
+  \end{align*}
+  Furthermore, any type $A$ equipped with an element $a:A$ is decidable because we have $\inl(a):\isdecidable(A)$ for such $A$.
+\end{eg}
+
+\begin{eg}\label{eg:decidability-closure}
+  The principal way to use a hypothesis that $A$ is decidable is to proceed by the induction principle of coproducts, i.e., to proceed by case analysis.
+  
+  For example, if $A$ and $B$ are decidable types, then the types $A+B$, $A\times B$, and $A\to B$ are also decidable. This is straightforward to prove directly by pattern-matching on the variables of type $\isdecidable(A)$ and $\isdecidable(B)$. When we go through these proofs, the familiar truth table emerges:
+  \begin{center}
+    \begin{tabular}{lllll}
+      \toprule
+      \multicolumn{5}{c}{$\isdecidable$} \\ \cmidrule{1-5}
+      $A$ & $B$ & $A+B$ & $A\times B$ & $A\to B$ \\
+      \midrule
+      $\inl(a)$ & $\inl(b)$ & $\inl(\inl(a))$ & $\inl(a,b)$ & $\inl(\lam{x}b)$ \\
+      $\inl(a)$ & $\inr(g)$ & $\inl(\inl(a))$ & $\inr(g\circ \proj 2)$ & $\inr(\lam{h}g(h(a)))$ \\
+      $\inr(f)$ & $\inl(b)$ & $\inl(\inr(b))$ & $\inr(f\circ\proj 1)$ & $\inl(\exfalso\circ f)$ \\
+      $\inr(f)$ & $\inr(g)$ & $\inr[f,g]$ & $\inr(f\circ\proj 1)$ & $\inl(\exfalso\circ f)$ \\
+      \bottomrule
+    \end{tabular}
+  \end{center}
+  Since $A\to B$ is decidable whenever both $A$ and $B$ are decidable, it also follows that the negation $\neg A$ of any decidable type $A$ is decidable.
+\end{eg}
+
+\begin{eg}\label{eg:is-decidable-EqN}
+  Since the empty type and the unit type are both decidable types, it also follows that the types $\EqN(m,n)$, $m\leq n$ and $m<n$ are decidable for each $m,n:\N$. The proofs in each of the three cases is by induction on $m$ and $n$.
+
+  For instance, to show that $\EqN(m,n)$ is decidable for each $m,n:\N$, we simply note that the types
+  \begin{align*}
+    \EqN(\zeroN,\zeroN) & \jdeq \unit \\
+    \EqN(\zeroN,\succN(n)) & \jdeq \emptyt \\
+    \EqN(\succN(m),\zeroN) & \jdeq \emptyt 
+  \end{align*}
+  are all decidable, and that the type $\EqN(\succN(m),\succN(n))\jdeq \EqN(m,n)$ is decidable by the inductive hypothesis.
+\end{eg}
+
+The fact that $\N$ has decidable observational equality also implies that equality itself is decidable on $\N$. This leads to the general concept of decidable equality, which is important in many results about decidability.
+
+\begin{defn}
+  We say that a type $A$ has \define{decidable equality}\index{decidable equality|textbf} if the identity type $x=y$ is decidable for every $x,y:A$. We will write\index{has-decidable-equality(A)@{$\hasdecidableequality(A)$}|textbf}
+  \begin{equation*}
+    \hasdecidableequality(A)\defeq \prd{x,y:A}\isdecidable(x=y).
+  \end{equation*}
+\end{defn}
+
+Before we show that $\N$ has decidable equality, let us show that if $A\leftrightarrow B$ and $A$ is decidable, then $B$ must be decidable.
+
+\begin{lem}\label{lem:is-decidable-iff}
+  Consider two types $A$ and $B$, and suppose that $A\leftrightarrow B$. Then $A$ is decidable if and only if $B$ is decidable.
+\end{lem}
+
+\begin{proof}
+  Since we have functions $f:A\to B$ and $g:B\to A$ by assumption, we obtain by \cref{prp:contravariant-neg} the functions
+  \begin{align*}
+    \tilde{f} & : \neg B\to\neg A \\
+    \tilde{g} & : \neg A \to \neg B.
+  \end{align*}
+  By \cref{rmk:functor-coprod} we have therefore the functions
+  \begin{align*}
+    f+\tilde{g} & : (A+\neg A) \to (B+\neg B) \\
+    g+\tilde{f} & : (B+\neg B) \to (A+\neg A).\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{prp}\label{prp:has-decidable-equality-N}
+  Equality on the natural numbers is decidable.\index{natural numbers!decidable equality}\index{N@{$\N$}!has decidable equality}\index{has decidable equality!natural numbers}\index{decidable equality!of N@{of $\N$}}
+\end{prp}
+
+\begin{proof}
+  Recall from \cref{prp:Eq-eq-N} that we have
+  \begin{equation*}
+    (m=n)\leftrightarrow \EqN(m,n).
+  \end{equation*}
+  The claim therefore follows by \cref{lem:is-decidable-iff}, since we have observed in \cref{eg:is-decidable-EqN} that $\EqN(m,n)$ is decidable for every $m,n:\N$.
+\end{proof}
+
+It is certainly not provable with the given rules of type theory that every type has decidable equality. In fact, we will show in \cref{thm:hedberg} that if a type has decidable equality, then it is a \emph{set}. However, it is also not provable that every set has decidable equality unless one assumes the \emph{law of excluded middle}. We will discuss this principle in \cref{sec:logic}. For now, it is important to remember that in order to use decidability, we must first \emph{prove that it holds}, and many familiar types do indeed have decidable equality.
+
+\begin{prp}\label{prp:has-decidable-equality-Fin}
+  The standard finite type $\Fin{k}$ has decidable equality for each $k:\N$.\index{Fin k@{$\Fin{k}$}!has decidable equality}\index{has decidable equality!Fin k@{$\Fin{k}$}}\index{decidable equality!of Fin k@{of $\Fin{k}$}}
+\end{prp}
+
+\begin{proof}
+  Recall from \cref{ex:Eq-Fin} that we constructed an observational equality relation $\EqFin_k$ on $\Fin{k}$ for each $k:\N$, which satisfies
+  \begin{equation*}
+    (x=y)\leftrightarrow \EqFin_k(x,y).
+  \end{equation*}
+  The type $\EqFin_k(x,y)$ is decidable, since it is recursively defined using the decidable types $\emptyt$ and $\unit$.
+\end{proof}
+
+We can use the fact that the finite types $\Fin{k}$ have decidable equality to show that the divisibility relation on $\N$ is decidable. 
+
+\begin{thm}\label{thm:is-decidable-div-N}
+  For any $d,x:\N$, the type $d\mid x$ is decidable.\index{divisibility on N@{divisibility on $\N$}!is decidable}
+\end{thm}
+
+\begin{proof}
+  Note that $0\mid x$ is decidable because $0\mid x$ if and only if $x=0$, which is decidable by \cref{prp:has-decidable-equality-N}. Therefore it suffices to show that $d+1\mid x$ is decidable.
+
+  By \cref{thm:effective-mod-k} it follows that $d+1\mid x$ holds if and only if we have an identification $[x]_{d+1}=0$ in $\Fin{d+1}$. Therefore the claim follows from the fact that $\Fin{d+1}$ has decidable equality.
+\end{proof}
+
+\subsection{Constructions by case analysis}
+\index{case analysis|(}
+\index{with-abstraction|(}
+
+A common way to construct functions and to prove properties about them is by case analysis. For example, a famous function of Collatz is specified by case analysis on whether $n$ is even or odd:
+  \begin{equation*}
+  \collatz(n) =
+  \begin{cases}
+    n/2 & \text{if $n$ is even}\\
+    3n+1 & \text{if $n$ is odd.}
+  \end{cases}
+\end{equation*}
+The Collatz function is of course uniquely determined by this specification, but it is important to note that there is a bit of work to be done in order to define the Collatz function according to the rules of dependent type theory. First we note that, since the Collatz function is specified by case analysis on whether $n$ is even or odd, we will have to use a dependent function witnessing the fact that every number is either even or odd. In other words, we will make use of the dependent function
+\begin{equation*}
+  d:\prd{n:\N}\isdecidable(2\mid n),
+\end{equation*}
+which we have by \cref{thm:is-decidable-div-N}. The type $\isdecidable(2\mid n)$ is the coproduct $(2\mid n)+(2\nmid n)$, so the idea is to proceed by case analysis on whether $d(n)$ is of the form $\inl(x)$ or $\inr(x)$, i.e., by the induction principle of coproducts. However, $d(n)$ is not a free variable of type $\isdecidable(2\mid n)$. Before we can proceed by induction, we must therefore first \emph{generalize} the element $d(n)$ to a free variable $y:\isdecidable(2\mid n)$. In other words, we will first define a function
+\begin{equation*}
+  h:\prd{n:\N} (\isdecidable(2\mid n)\to\N)
+\end{equation*}
+by the induction principle of coproducts, and then we obtain the Collatz function by substituting $d(n)$ for $y$ in $h(n,y)$. Putting these ideas together, we obtain the following type theoretical definition of the Collatz function.
+
+\begin{defn}
+  Write $d:\prd{n:\N}\isdecidable(2\mid n)$ for the function deciding $2\mid n$, given in \cref{thm:is-decidable-div-N}.
+  \begin{enumerate}
+  \item We define a function $h:\prd{n:\N}(\isdecidable(2\mid n)\to \N)$ by
+    \begin{align*}
+      h(n,\inl(m,p)) & \defeq m \\
+      h(n,\inr(f)) & \defeq 3n+1.
+    \end{align*}
+  \item We define the \define{collatz function}\index{Collatz function|textbf} $\collatz:\N\to \N$ by\index{collatz@{$\collatz$}|textbf}
+    \begin{equation*}
+      \collatz(n)\defeq h(n,d(n)).
+    \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+\begin{rmk}
+  The general ideas behind the formal construction of the Collatz function lead to the type theoretic concept of \emph{with-abstraction}. With-abstraction is a type-theoretically precise generalization of case analysis.
+  
+  In full generality, if our goal is to define a dependent function $f:\prd{x:A}C(x)$, and we already have a function $g:\prd{x:A}B(x)$, then it suffices to define a dependent function
+  \begin{equation*}
+    h:\prd{x:A}B(x)\to C(x).
+  \end{equation*}
+  Indeed, given $g$ and $h$ as above, we can define $f\defeq \lam{x}h(x,g(x))$. In other words, to define $f(x)$ using $g(x):B(x)$, we generalize $g(x)$ to an arbitrary element $y:B(x)$ and proceed to define an element $h(x,y):C(x)$.
+
+  With-abstraction is a concise way to present such a definition. In a definition by with-abstraction, we may write
+  \begin{equation*}
+    f(x)\with [g(x)/y]\defeq h(x,y),
+  \end{equation*}
+  to define a function $f:\prd{x:A}C(x)$ that satisfies the judgmental equality $f\jdeq \lam{x}h(x,g(x))$. In other words, $f(x)$ is defined to be $h(x,y)$ with $g(x)$ for $y$.
+  
+  The definition of the Collatz function can therefore be given by with-abstraction as
+  \begin{equation*}
+    \collatz(n)\with [d(n)/y]\defeq h(x,y).
+  \end{equation*}
+  However, recall that the function $h$ was defined by pattern matching on $y$. We can combine with-abstraction and pattern matching to obtain a \emph{direct} definition of the Collatz function that doesn't explicitly mention the function $h$ anymore. This gives us the following concise way to define the Collatz function:
+  \begin{align*}
+    \collatz(n)\with [d(n)/\inl(m,p)] & \defeq m \\
+    \collatz(n)\with [d(n)/\inr(f)] & \defeq 3n+1.
+  \end{align*}
+  Notice that in addition to the information in the specification of the Collatz function, the definition by with-abstraction also tells us which decision procedure was used to decide whether $n$ is even or not. The combination of with-abstraction and pattern matching, which allows us to skip the explicit definition of the function $h$, is what makes with-abstraction so useful.
+  \end{rmk}
+  
+  Using with-abstraction we can find a slight improvement of the decidability results of $A\to B$ and $A\times B$ in \cref{eg:decidability-closure}, and we will use these improved claims in the construction of the greatest common divisor.
+
+\begin{prp}\label{prp:is-decidable-function-type}
+  Consider a decidable type $A$, and let $B$ be a type equipped with a function
+  \begin{equation*}
+    A\to\isdecidable(B).
+  \end{equation*}
+  Then the types $A\times B$ and $A\to B$ are also decidable.
+\end{prp}
+
+\begin{proof}
+  We only prove the claim about the decidability of $A\to B$, since the claim about the decidability of $A\times B$ is proven similarly. Since $A$ is assumed to be decidable, we proceed by case analysis on $A+\neg A$. In the case where we have $f:\neg A$, we have the functions
+  \begin{equation*}
+    \begin{tikzcd}[column sep=large]
+      A \arrow[r,"f"] & \emptyt \arrow[r,"\exfalso"] & B.
+    \end{tikzcd}
+  \end{equation*}
+  Therefore we obtain the element $\inl(\exfalso\circ f):\isdec(A\to B)$. In the case where we have an element $a:A$, we have to construct a function
+  \begin{equation*}
+    d:(A\to\isdecidable(B))\to\isdecidable(A\to B)
+  \end{equation*}
+  Given $H:A\to\isdecidable(B)$, we can use with-abstraction to proceed by case analysis on $H(a):B+\neg B$. The function $d$ is therefore defined as
+  \begin{align*}
+    d(H)\with [H(a)/\inl(b)] & \defeq \inl(\lam{x}b) \\
+    d(H)\with [H(a)/\inr(g)] & \defeq \inr(\lam{h}g(h(a))).\qedhere
+  \end{align*}
+\end{proof}
+
+For a general family of decidable types $P$ over $\N$, we cannot prove that the type
+\begin{equation*}
+  \prd{x:\N}P(x)
+\end{equation*}
+is decidable. However, if we know in advance that $P(x)$ holds for any $m\leq x$, then we can decide $\prd{x:\N}P(x)$ by checking the decidability of each $P(x)$ until $m$. 
+
+\begin{prp}\label{prp:is-decidable-pi-type}
+  Consider a decidable type family $P$ over $\N$ equipped with a natural number $m$ such that the type
+  \begin{equation*}
+    \prd{x:\N}(m\leq x)\to P(x)
+  \end{equation*}
+  is decidable. Then the type $\prd{x:\N}P(x)$ is decidable. 
+\end{prp}
+
+\begin{proof}
+  Our proof is by induction on $m$, but we will first make sure that the inductive hypothesis will be strong enough by quantifying over all decidable type families over $\N$. Of course, we cannot do this directly. However, by the assumption that there are enough universes (\cref{enough-universes}), there is a universe $\UU$ that contains $P$. We fix this universe, and we will prove by induction on $m$ that for every decidable type family $Q:\N\to\UU$ for which the type
+  \begin{equation*}
+    \prd{x:\N}(m\leq x)\to Q(x),
+  \end{equation*}
+  is decidable, the type $\prd{x:\N}Q(x)$ is again decidable.
+
+  In the base case, it follows by assumption that the type $\prd{x:A}Q(x)$ is decidable. For the inductive step, let $Q:\N\to\UU$ be a decidable type family for which the type
+  \begin{equation*}
+    \prd{x:\N}(m+1\leq x)\to Q(x)
+  \end{equation*}
+  is decidable. Since $Q$ is assumed to be decidable, we can proceed by case analysis on $Q(0)+\neg Q(0)$. In the case of $\neg Q(0)$, it follows that $\neg \prd{x:\N}Q(x)$. In the case where we have $q:Q(0)$, consider the type family $Q':\N\to\UU$ given by
+  \begin{equation*}
+    Q'(x)\defeq Q(x+1).
+  \end{equation*}
+  Then $Q'$ is decidable since $Q$ is decidable, and moreover it follows that the type $\prd{x:\N} ({m\leq x})\to Q'(x)$ is decidable. The inductive hypothesis implies therefore that the type $\prd{x:\N}Q'(x)$ is decidable. In the case where $\neg\prd{x:\N}Q'(x)$, it follows that $\neg\prd{x:\N}Q(x)$, and in the case where we have a function $g:\prd{x:\N}Q'(x)$, we can construct a function $f:\prd{x:\N}Q(x)$ by
+  \begin{align*}
+    f(0) & \defeq q \\
+    f(x+1) & \defeq g(x)\qedhere.
+  \end{align*}
+\end{proof}
+
+\begin{cor}\label{cor:is-decidable-bounded-pi}
+  Consider two decidable families $P$ and $Q$ over $\N$, and suppose that $P$ comes equipped with an upper bound $m$. Then the type
+  \begin{equation*}
+    \prd{n:\N}P(n)\to Q(n)
+  \end{equation*}
+  is decidable.
+\end{cor}
+
+\begin{proof}
+  Since $m$ is assumed to be an upper bound for $P$, it follows $P(n)\to Q(n)$ for any $m\leq n$. With this observation we apply \cref{prp:is-decidable-pi-type}.
+\end{proof}
+\index{case analysis|)}
+\index{with-abstraction|)}
+
+\subsection{The well-ordering principle of \texorpdfstring{$\N$}{ℕ}}
+\index{well-ordering principle of N@{well-ordering principle of $\N$}|(}
+\index{natural numbers!well-ordering principle|(}
+
+The well-ordering principle of the natural numbers in classical mathematics asserts that any nonempty subset of $\N$ has a least element. To formulate the well-ordering principle in type theory, we will use type families over $\N$ instead of subsets of $\N$. Moreover, the classical well-ordering principle tacitly assumes that subsets are decidable. The type theoretic well-ordering principle of $\N$ is therefore formulated using \emph{decidable} families over $\N$.
+
+\begin{defn}
+  Let $P$ be a family over $\N$, not necessarily decidable.
+  \begin{enumerate}
+  \item We say that a natural number $n$ is a \define{lower bound}\index{lower bound|textbf} for $P$ if it comes equipped with an element of type\index{is-lower-bound P (n)@{$\islowerbound_P(n)$}|textbf}
+    \begin{equation*}
+      \islowerbound_P(n)\defeq \prd{x:\N}P(x)\to (n\leq x).
+    \end{equation*}
+  \item We say that a natural number $n$ is an \define{upper bound}\index{upper bound|textbf} for $P$ if it comes equipped with an element of type\index{is-upper-bound P (n)@{$\isupperbound_P(n)$}|textbf}
+    \begin{equation*}
+      \isupperbound_P(n)\defeq \prd{x:\N}P(x)\to (x\leq n).
+    \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+  A minimal element of $P$ is therefore a natural number $n$ for which $P(n)$ holds, and which is also a lower bound for $P$. The well-ordering principle of $\N$ asserts that such an element exists for any decidable family $P$, as soon as $P(n)$ holds for some $n$.
+
+  \begin{thm}[Well-ordering principle of $\N$]\label{thm:well-ordering-principle-N}\index{well-ordering principle of N@{well-ordering principle of $\N$}|textbf}\index{natural numbers!well-ordering principle|textbf}
+    Let $P$ be a decidable family over $\N$, where $d$ witnesses that $P$ is decidable. Then there is a function\index{well-ordering-principle P d@{$\wellorderingprinciple(P,d)$}|textbf}
+  \begin{equation*}
+    \wellorderingprinciple(P,d):\Big(\sm{n:\N}P(n)\Big)\to\Big(\sm{m:\N}P(m)\times\islowerbound_P(m)\Big).
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  By the assumption that there are enough universes (\cref{enough-universes}), there is a universe $\UU$ that contains $P$. Instead of proving the claim for the given type family $P$, we will show by induction on $n:\N$ that there is a function
+  \begin{equation*}\label{eq:well-ordering}
+    Q(n)\to \Big(\sm{m:\N}Q(m)\times\islowerbound_Q(m)\Big)\tag{\textasteriskcentered}
+  \end{equation*}
+  for every decidable family $Q:\N\to\UU$. Note that we are now also quantifying over the decidable families $Q:\N\to\UU$. This slightly strengthens the inductive hypothesis, which we will be able to exploit.
+
+  The base case is trivial, since $\zeroN$ is a lower bound of every type family over $\N$. For the inductive step, assume that \cref{eq:well-ordering} holds for every decidable type family $Q:\N\to \UU$. Furthermore, let $Q:\N\to\UU$ be a decidable type family equipped with an element $q:Q(\succN(n))$. Our goal is to construct an element of type
+  \begin{equation*}
+    \sm{m:\N}Q(m)\times\islowerbound_Q(m).
+  \end{equation*}
+  Since $Q(\zeroN)$ is assumed to be decidable, it suffices to construct a function
+  \begin{equation*}
+    (Q(\zeroN)+\neg Q(\zeroN))\to \sm{m:\N}Q(m)\times\islowerbound_Q(m).
+  \end{equation*}
+  Therefore we can proceed by case analysis on $Q(\zeroN)+\neg Q(\zeroN)$. In the case where we have an element of type $Q(\zeroN)$, it follows immediately that $\zeroN$ must be minimal. In the case where $\neg Q(\zeroN)$, we consider the decidable subset $Q'$ of $\N$ given by
+  \begin{equation*}
+    Q'(n)\defeq Q(\succN(n)).
+  \end{equation*}
+  Since we have $q:Q'(n)$, we obtain a minimal element in $Q'$ by the inductive hypothesis. Of course, by the assumption that $Q(\zeroN)$ doesn't hold, the minimal element of $Q'$ is also the minimal element of $Q$.
+\end{proof}
+\index{well-ordering principle of N@{well-ordering principle of $\N$}|)}
+\index{natural numbers!well-ordering principle|)}
+
+\subsection{The greatest common divisor}
+\index{natural numbers!greatest common divisor|(}
+\index{greatest common divisor|(}
+
+The greatest common divisor of two natural numbers $a$ and $b$ is a natural number $\gcd(a,b)$ that satisfies the property that
+\begin{equation*}
+  x\mid a\ \text{and}\ x\mid b\qquad\text{if and only if}\qquad x\mid\gcd(a,b)
+\end{equation*}
+for any $x:\N$. In other words, any number $x:\N$ that divides both $a$ and $b$ also divides the greatest common divisor. Moreover, since $\gcd(a,b)$ divides itself, it follows from the reverse implication that $\gcd(a,b)$ divides both $a$ and $b$.
+
+This property can also be seen as the \emph{specification} of what it means to be a greatest common divisor of $a$ and $b$. In formal developments of mathematics, when you're about to construct an object that satisfies a certain specification, it can be useful to start out with that specification. For example, there is more than one way to define the greatest common divisor. We will define it here in \cref{defn:gcd} using the well-ordering principle, but an alternative definition using Euclid's algorithm is of course just as good, since both definitions satisfy the specification that uniquely characterizes it. Hence we make the following specification of the greatest common divisor.
+
+\begin{defn}\label{defn:is-gcd}
+  Consider three natural numbers $a$, $b$, and $d$. We say that $d$ is a \define{greatest common divisor}\index{is a greatest common divisor|textbf}\index{greatest common divisor|textbf} of $a$ and $b$ if it comes equipped with an element of type\index{is-gcd a b d@{$\isgcd_{a,b}(d)$}|textbf}
+  \begin{equation*}
+    \isgcd_{a,b}(d) \defeq \prd{x:\N} (x\mid a)\times (x\mid b)\leftrightarrow (x\mid d).
+  \end{equation*}
+\end{defn}
+
+The property of being a greatest common divisor uniquely characterizes the greatest common divisor, in the following sense.
+
+\begin{prp}
+  Suppose $d$ and $d'$ are both a greatest common divisor of $a$ and $b$. Then $d=d'$.
+\end{prp}
+
+\begin{proof}
+  If both $d$ and $d'$ are a greatest common divisor of $a$ and $b$, then both $d$ and $d'$ divide both $a$ and $b$, and hence it follows that $d\mid d'$ and $d'\mid d$. Since the divisibility relation was shown to be a partial order in \cref{ex:is-poset-div}, it follows by antisymmetry that $d=d'$.
+\end{proof}
+
+Note that for any two natural numbers $a$ and $b$, the type
+\begin{equation*}\label{eq:multiples-of-gcd}
+  \sm{n:\N}\prd{x:\N} (x\mid a)\times (x\mid b)\to (x\mid n)\tag{\textasteriskcentered}
+\end{equation*}
+consists of all the multiples of the common divisors of $a$ and $b$, including $0$. On the other hand, the type
+\begin{equation*}\label{eq:common-divisors}
+  \sm{n:\N}\prd{x:\N} (x\mid n)\to (x\mid a)\times (x\mid b)\tag{\textasteriskcentered\textasteriskcentered}
+\end{equation*}
+consists of all the common divisors of $a$ and $b$ except in the case where $a=0$ and $b=0$. In this case, the type in \cref{eq:common-divisors} consists of all natural numbers.
+
+\cref{eq:multiples-of-gcd,eq:common-divisors} provide us with two ways to define the greatest common divisor. We can either define the greatest common divisor of $a$ and $b$ as the greatest natural number in the type in \cref{eq:common-divisors} or we can define it as the least \emph{nonzero} natural number of the type in \cref{eq:multiples-of-gcd}, provided that we make an exception in the case where both $a=0$ and $b=0$. Since we already have established the well-ordering principle of $\N$, we will opt for the second approach. In \cref{ex:maximal-element} you will be asked to show that any \emph{bounded} decidable family over $\N$ has a maximum as soon as it contains some natural number. 
+
+In order to correctly define the greatest common divisor using well-ordering principle of $\N$, we need a slight modification of the type family in \cref{eq:multiples-of-gcd}. We define this family as follows:
+
+\begin{defn}\label{defn:fam-gcd}
+  Given $a,b:\N$, we define the type family $\ismultipleofgcd(a,b)$ over $\N$ by
+  \begin{align*}
+    \ismultipleofgcd(a,b,n) & \defeq (a+b\neq 0) \to (n\neq 0)\times \Big(\prd{x:\N} (x\mid a)\times (x\mid b) \to (x\mid n)\Big).
+  \end{align*}
+\end{defn}
+
+In other words, if $a+b=0$ then the type $\sm{n:\N}M(a,b,n)$ consist of all the natural numbers. On the other hand, if $a+b\neq 0$ it consists of the nonzero natural numbers $n$ with the property that any common divisor of $a$ and $b$ also divides $n$. These are exactly the nonzero multiples of the greatest common divisor of $a$ and $b$.
+
+Since we intend to apply the well-ordering principle, we must show that the family $\ismultipleofgcd(a,b)$ is decidable. This is a step that one can skip in classical mathematics, because all the subsets of $\N$ are decidable there. However, in our current setting we have no choice but to prove it.
+
+\begin{prp}\label{prp:is-decidable-is-multiple-of-gcd}
+  The type family $\ismultipleofgcd(a,b)$ is decidable for each $a,b:\N$.
+\end{prp}
+
+\begin{proof}
+  The type $a+b\neq 0$ is decidable because it is the negation of the type $a+b=0$, which is decidable by \cref{prp:has-decidable-equality-N}. Therefore it suffices to show that the type
+  \begin{equation*}
+    (n\neq 0)\times \prd{x:\N} (x\mid a)\times (x\mid b)\to (x\mid n)
+  \end{equation*}
+  is decidable, and by \cref{prp:is-decidable-function-type} we also get to assume that $a+b\neq 0$. The type $n\neq 0$ is again decidable by \cref{prp:has-decidable-equality-N}, so it suffices to show that the type
+  \begin{equation*}
+    \prd{x:\N}(x\mid a)\times (x\mid b)\to (x\mid n)
+  \end{equation*}
+  is decidable. The types $(x\mid a)\times(x\mid b)$ and $(x\mid n)$ are decidable by \cref{thm:is-decidable-div-N}, so by \cref{cor:is-decidable-bounded-pi} it suffices to check that the family of types $(x\mid a)\times (x\mid b)$ indexed by $x:\N$ has an upper bound. If $x$ is a common divisor of $a$ and $b$, then it follows that $x$ divides $a+b$. Furthermore, since we have assumed that $a+b\neq 0$, it follows that $x\leq a+b$. This provides the upper bound.
+  \end{proof}
+
+We are almost in position to apply the well-ordering principle of $\N$ to define the greatest common divisor. It just remains to show that there is some $n:\N$ for which $M(a,b,n)$ holds. We prove this in the following lemma.
+
+\begin{lem}\label{lem:exists-multiple-of-gcd}
+  There is an element of type $\ismultipleofgcd(a,b,a+b)$. 
+\end{lem}
+
+\begin{proof}
+  To construct an element of type $\ismultipleofgcd(a,b,a+b)$, assume that $a+b\neq 0$. Then we have tautologically that $a+b\neq 0$, and any common divisor of $a$ and $b$ is also a divisor of $a+b$.
+\end{proof}
+
+\begin{defn}\label{defn:gcd}
+  We define the \define{greatest common divisor}\index{greatest common divisor|textbf} $\gcd:\N\to (\N\to\N)$\index{gcd@{$\gcd$}|textbf} by the well-ordering principle of $\N$ (\cref{thm:well-ordering-principle-N}) as the least natural number $n$ for which $M(a,b,n)$ holds, using the fact that $M(a,b)$ is a decidable type family (\cref{prp:is-decidable-is-multiple-of-gcd}) and that $M(a,b,a+b)$ always holds (\cref{lem:exists-multiple-of-gcd}).
+\end{defn}
+
+\begin{lem}\label{lem:is-zero-gcd}
+  For any two natural numbers $a$ and $b$, we have $\gcd(a,b)=0$ if and only if $a+b=0$.
+\end{lem}
+
+\begin{proof}
+  To prove the forward direction, assume that $\gcd(a,b)=0$. By definition of $\gcd(a,b)$ we have that $\ismultipleofgcd(a,b,\gcd(a,b))$ holds. More explicitly, the implication
+  \begin{equation*}
+    (a+b\neq 0)\to (\gcd(a,b)\neq 0)\times \prd{x:\N}(x\mid a)\times(x\mid b)\to (x\mid\gcd(a,b))
+  \end{equation*}
+  holds. However, we have assumed that $\gcd(a,b)=0$, so it follows from the above implication that $\neg(a+b\neq 0)$. In other words, we have $\neg\neg(a+b=0)$. The fact that equality on $\N$ is decidable implies via \cref{ex:dne-is-decidable} that $\neg\neg(a+b=0)\to (a+b=0)$, so we conclude that $a+b=0$.
+
+  For the converse direction, recall that the inequality $\gcd(a,b)\leq a+b$ holds by minimality, since $\ismultipleofgcd(a,b,a+b)$ holds by \cref{lem:exists-multiple-of-gcd}. If $a+b=0$, it therefore follows that $\gcd(a,b)\leq 0$, which implies that $\gcd(a,b)=0$.
+\end{proof}
+
+\begin{thm}
+  For any two natural numbers $a$ and $b$, the number $\gcd(a,b)$ is a greatest common divisor of $a$ and $b$ in the sense of \cref{defn:is-gcd}.
+\end{thm}
+
+\begin{proof}
+  We give the proof by case analysis on whether $a+b=0$.
+  If we assume that $a+b=0$, then it follows that both $a=0$ and $b=0$, and by \cref{lem:is-zero-gcd} it also follows that $\gcd(a,b)=0$. Since any number divides $0$, the claim follows immediately.
+
+  In the case where $a+b\neq 0$, it follows from \cref{lem:is-zero-gcd} that also $\gcd(a,b)\neq 0$. From the fact that $\ismultipleofgcd(a,b,\gcd(a,b))$ we therefore immediately obtain that
+  \begin{equation*}
+    \prd{x:\N} (x\mid a)\times (x\mid b)\to (x\mid \gcd(a,b)).
+  \end{equation*}
+  Therefore it remains to show that if $x$ divides $\gcd(a,b)$, then $x$ divides both $a$ and $b$. By transitivity of the divisibility relation it suffices to show that $\gcd(a,b)$ divides both $a$ and $b$. We will show only that $\gcd(a,b)$ divides $a$, the proof that $\gcd(a,b)$ divides $b$ is similar.
+
+  Since $\gcd(a,b)$ is nonzero, it follows by Euclidean division (\cref{ex:euclidean-division}) that there are numbers $q$ and $r<\gcd(a,b)$ such that
+  \begin{equation*}
+    a = q\cdot\gcd(a,b)+r.
+  \end{equation*}
+  From this equation and \cref{prp:div-3-for-2} it follows that any number $x$ which divides both $a$ and $b$ also divides $r$, because we have already noted that any such $x$ divides $\gcd(a,b)$. This observation implies that $r=0$, because we have $r<\gcd(a,b)$ by construction and $\gcd(a,b)$ is minimal. Therefore we conclude that $\gcd(a,b)$ divides $a$.
+\end{proof}
+\index{natural numbers!greatest common divisor|)}
+\index{greatest common divisor|)}
+
+\subsection{The infinitude of primes}
+\index{prime number|(}
+\index{natural number!prime number|(}
+
+When the natural numbers are ordered by the divisibility relation, the number $1$ is at the bottom. Directly above $1$ are the prime numbers. Above the prime numbers are the multiples of two primes, then the multiples of three primes, and so on. At the top of this ordering we find $0$. For any natural number $n$, the numbers strictly below $n$ are the proper divisors of $n$. A prime number is therefore a number of which has exactly one proper divisor.
+
+\begin{defn}
+  ~
+  \begin{enumerate}
+  \item Consider two natural numbers $d$ and $n$. Then $d$ is said to be a \define{proper divisor}\index{proper divisor|textbf} of $n$ if it comes equipped with an element of type\index{is-proper-divisor n d@{$\isproperdivisor(n,d)$}|textbf}
+    \begin{equation*}
+      \isproperdivisor(n,d)\defeq (d\neq n)\times (d\mid n).
+    \end{equation*}
+  \item A natural number $n$ is said to be \define{prime}\index{prime number|textbf}\index{natural numbers!prime number|textbf} if it comes equipped with an element of type\index{is-prime(n)@{$\isprime(n)$}|textbf}
+  \begin{equation*}
+    \isprime(n)\defeq \prd{x:\N}\isproperdivisor(n,x)\leftrightarrow (x=1).
+  \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+\begin{prp}
+  For any $n:\N$, the type $\isprime(n)$ is decidable.\index{is-prime(n)@{$\isprime(n)$}!is decidable}
+\end{prp}
+
+\begin{proof}
+  We will first show that $\isprime(n)\leftrightarrow\isprime'(n)$, where
+  \begin{equation*}
+    \isprime'(n)\defeq (n\neq 1)\times \prd{x:\N}\isproperdivisor(n,x)\to (x=1).
+  \end{equation*}
+  For the forward direction, simply note that $1$ is not a proper divisor of itself, and therefore $1$ is not a prime. For the converse direction, suppose that $n\neq 1$ and that any proper divisor of $n$ is $1$. Then it follows that $1$ is a proper divisor of $n$, which implies that $n$ is prime.
+
+  Now we proceed by showing that the type $\isprime'(n)$ is decidable for every $n:\N$. The proof is by case analysis on whether $n=0$ or $n\neq 0$. In the case where $n=0$, note that any nonzero number is a proper divisor of $0$, and therefore $\isprime'(0)$ doesn't hold. In particular, $\isprime'(0)$ is decidable.
+  
+  Now suppose that $n\neq 0$. In order to show that the type $\isprime'(n)$ is decidable, note that the type $n\neq 1$ is decidable since it is the negation of the decidable type $n=1$. Therefore it suffices to show that the type
+  \begin{equation*}
+    \prd{x:\N}\isproperdivisor(n,x)\to (x=1)
+  \end{equation*}
+  is decidable. Since the types $(x\neq n)\times (x\mid n)$ and $x=1$ are decidable, it follows from \cref{cor:is-decidable-bounded-pi} that it suffices to check that
+  \begin{equation*}
+    ((x\neq n)\times (x\mid n))\to (x\leq n)
+  \end{equation*}
+  for any $x:\N$. This follows from the implication $(x\mid n)\to (x\leq n)$, which holds because we have assumed that $n\neq 0$.
+\end{proof}
+
+The proof that there are infinitely many primes proceeds by constructing a prime number larger than $n$, for any $n:\N$. The number $n!+1$ is relatively prime with any number $x\leq n$. Therefore there is a least number $n<m$ that is relatively prime with any number $x\leq n$, and it follows that this number $m$ must be prime.
+
+\begin{defn}
+  For any two natural numbers $n$ and $m$, we define the type
+  \begin{equation*}
+    R(n,m)\defeq (n<m)\times \prd{x:\N}(x\leq n)\to ((x\mid m)\to (x=1)). 
+  \end{equation*}
+\end{defn}
+
+\begin{lem}
+  The type $R(n,m)$ is decidable for each $n,m:\N$.
+\end{lem}
+
+\begin{proof}
+  The type $n<m$ and, and for each $x:\N$ both types $x\leq n$ and $(x\mid m)\to (x=1)$ are decidable, so it follows via \cref{cor:is-decidable-bounded-pi} that the product
+  \begin{equation*}
+    \prd{x:\N}(x\leq n)\to ((x\mid m)\to (x=1))
+  \end{equation*}
+  is decidable.
+\end{proof}
+
+\begin{lem}\label{lem:succ-factorial-has-one-bounded-divisor}
+  There is an element of type $R(n,{n!}+1)$ for each $n:\N$.
+\end{lem}
+
+\begin{proof}
+  The fact that $n<{n!}+1$ follows from the fact that $n\leq n!$, which is shown by induction. We leave this to the reader, and focus on the second aspect of the claim: that every $x\leq n$ that divides ${n!}+1$ must be equal to $1$.
+
+  To see this, note that any divisor of ${n!}+1$ is automatically nonzero, and recall that any nonzero $x\leq n$ divides $n!$ by \cref{ex:div-factorial}. Therefore it follows that any $x\leq n$ that divides ${n!}+1$ also divides $n!$, and consequently it divides $1$ as well. Now we are done, because if $x$ divides $1$ then $x=1$.
+\end{proof}
+
+We finally show that there are infinitely many primes.
+
+\begin{thm}
+  For each $n:\N$, there is a prime number $p:\N$ such that $n< p$.\index{infinitude of primes}\index{prime number!infinitude of primes}\index{natural numbers!infinitude of primes}
+\end{thm}
+
+\begin{proof}
+  It suffices to show that for each \emph{nonzero} $n:\N$, there is a prime number $p:\N$ such that $n\leq p$. Let $n$ be a nonzero natural number.
+
+  Since the type $R(n,m)$ is decidable for each $m:\N$, and since $R(n,{n!}+1)$ holds by \cref{lem:succ-factorial-has-one-bounded-divisor}, it follows by the well-ordering principle of $\N$ (\cref{thm:well-ordering-principle-N}) that there is a minimal $m:\N$ such that $R(n,m)$ holds. In order to prove the theorem, we will show that this number $m$ is prime, i.e., that there is an element of type
+  \begin{equation*}
+    (m\neq 1)\times \prd{x:\N} \isproperdivisor(m,x)\to (x=1).
+  \end{equation*}
+
+  First, we note that $m\neq 1$ because $n<m$ holds by construction, and $n$ is assumed to be nonzero. Therefore it suffices to show that $1$ is the only proper divisor of $m$. Let $x$ be a proper divisor of $m$. Since $R(n,m)$ holds by construction, we will prove that $x=1$ by showing that $x\leq n$ holds.
+
+  Since $m$ is nonzero, it follows from the assumption that $x\mid m$ that $x<m$. By minimality of $m$, it therefore follows that $\neg R(n,x)$ holds. However, any divisor of $x$ is also a divisor of $m$ by transitivity of the divisibility relation. Therefore it follows that any $y\leq n$ that divides $x$ must be $1$. In other words:
+  \begin{equation*}
+    \prd{y:\N}(y\leq n)\to ((y\mid x)\to (y=1))
+  \end{equation*}
+  holds. Since $\neg R(n,x)$ holds, we conclude now that $n\nless x$. To finish the proof, it follows that $x\leq n$.
+\end{proof}
+\index{prime number|)}
+\index{natural number!prime number|)}
+
+\subsection{Boolean reflection}\label{sec:boolean-reflection}
+\index{boolean reflection|(}
+
+We have shown that the type $\isprime(n)$ is decidable for every $n$. In other words, there is an element $d(n):\isdecidable(\isprime(n))$ for every $n$. In principle, we can therefore check whether any \emph{specific} natural number $n$ is prime by inspecting the element $d(n)$: if it is of the form $\inl(x)$ for some $x:\isprime(n)$, then $n$ is prime; if it is of the form $\inr(f)$ for some $f:\neg\isprime(n)$, then $n$ is not prime. In other words, we evaluate the element $d(n)$ using the computation rules of type theory, and then we see whether $n$ is prime or not.
+
+Computers can perform such evaluations, but it is often unfeasible to carry out such evaluations by hand. Moreover, even for computers the task of evaluating a proof term like $\isdecidableisprime(n)$ may quickly get out of hand. With the formalization of the material in this book, the proof assistant Agda returns a proof term of 430 lines of code when we simply ask it to evaluate the term $\isdecidableisprime(7)$, and it returned a proof term of 69373 lines of code when we asked it to evaluate the term $\isdecidableisprime(37)$. There is a much better way to do this: \emph{boolean reflection}.
+
+\begin{defn}
+  For any type $A$ we define the map\index{booleanization@{$\booleanization$}|textbf}
+  \begin{equation*}
+    \booleanization:\isdecidable(A)\to\bool
+  \end{equation*}
+  by
+  \begin{align*}
+    \booleanization(\inl(a)) & \defeq \btrue \\*
+    \booleanization(\inr(f)) & \defeq \bfalse.
+  \end{align*}
+\end{defn}
+
+\begin{thm}[Boolean reflection principle]
+  For any type $A$ and any decision $d:\isdecidable(A)$, there is a map\index{boolean reflection|textbf}\index{reflect@{$\booleanreflection$}|textbf}
+  \begin{equation*}
+    \booleanreflection:(\booleanization(d)=\btrue)\to A
+  \end{equation*}
+  such that $\booleanreflection(\inl(a))\jdeq a$.
+\end{thm}
+
+\begin{proof}
+  First, recall that by \cref{ex:obs_bool} there is a map $\gamma:(\bfalse=\btrue)\to \emptyt$. We use this to construct $\booleanreflection$ by pattern matching as follows:
+  \begin{align*}
+    \booleanreflection(\inl(a),p) & \defeq a \\*
+    \booleanreflection(\inr(f),p) & \defeq \exfalso(\gamma(p)).\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{rmk}
+  Since the number 37 is a prime, it follows that the booleanization of the term
+  \begin{equation*}
+    d(37):\isdecidable(\isprime(37))
+  \end{equation*}
+  has the value $\booleanization(d(37))\jdeq\btrue$. By boolean reflection it therefore follows that
+  \begin{equation}\label{eq:is-prime-37}
+    \isprimethirtyseven\defeq \booleanreflection(d(37),\refl{}):\isprime(37).\tag{\textasteriskcentered}
+  \end{equation}
+  The term in $\isprimethirtyseven$ does not, however, contain any explicit information as to why the number 37 is prime. The reason that it type checks is simply that $d(37)$ is judgmentally equal to some term of the form $\inl(t):\isdecidable(\isprime(37))$ and therefore it follows that $\refl{}$ is an identification of type
+  \begin{equation*}
+    \booleanization(d(37))=\btrue.
+  \end{equation*}
+  To see that $\isprimethirtyseven$ is indeed an element of type $\isprime(37)$ therefore requires us to evaluate the term $d(37)$. This is not doable by hand. Computer proof assistants, however, are capable of performing this task. In a proof assistant, we may therefore use boolean reflection to offload the task of evaluating the decision algorithm of a decidable type to the computer. This technique has been essential in the formalization of the Feit-Thompson theorem in Coq \cite{Gonthier}. The book \emph{Mathematical Components} \cite{mathematical-components} contains more information about using boolean reflection effectively in formalized mathematics.
+
+  Do not, however, "solve" your homework problems with boolean reflection. If your teaching assistant cannot evaluate your solution, they will conclude that you haven't demonstrated your clear understanding of the problem.
+\end{rmk}
+\index{boolean reflection|)}
+
+\begin{exercises}
+  \exitem
+  \begin{subexenum}
+  \item State Goldbach's conjecture\index{Goldbach's conjecture} in type theory.
+  \item State the twin prime conjecture\index{twin prime conjecture} in type theory.
+  \item State the Collatz conjecture\index{Collatz conjecture} in type theory.
+  \end{subexenum}
+  \noindent If you have a solution to any of these open problems, you should certainly formalize it before you submit it to the Annals of Mathematics.
+  \exitem Show that
+  \begin{equation*}
+    \isdecidable(\isdecidable(P))\to\isdecidable(P)
+  \end{equation*}
+  for any type $P$.
+  \exitem For any family $P$ of decidable types indexed by $\Fin{k}$, construct a function
+  \begin{equation*}
+    \neg\Big(\prd{x:\Fin{k}}P(x)\Big)\to\sm{x:\Fin{k}}\neg P(x).
+  \end{equation*}
+  \exitem
+  \begin{subexenum}
+  \item Define the \define{prime function} $\primefunction:\N\to\N$\index{prime@{$\primefunction$}|see {prime function}}\index{prime function|textbf}\index{natural numbers!prime function} for which $\primefunction(n)$ is the $n$-th prime.
+
+  \item Define the \define{prime-counting function}\index{prime counting function|textbf} $\pi:\N\to\N$\index{p@{$\pi$}|see {prime counting function}}, which counts for each $n:\N$ the number of primes $p\leq n$.
+  \end{subexenum}
+  \exitem For any natural number $n$, show that
+  \begin{equation*}
+    \isprime(n)\leftrightarrow (2\leq n)\times \prd{x:\N} (x\mid n)\to (x=1)+(x=n).
+  \end{equation*}
+  \exitem Consider two types $A$ and $B$. Show that the following are equivalent:
+  \begin{enumerate}
+  \item There are functions
+    \begin{align*}
+      & B \to \hasdecidableequality(A) \\
+      & A \to \hasdecidableequality(B).
+    \end{align*}
+  \item The product $A\times B$ has decidable equality.\index{decidable equality!of cartesian products}
+  \end{enumerate}
+  Conclude that if both $A$ and $B$ have decidable equality, then so does $A\times B$.
+  \exitem Consider two types $A$ and $B$, and consider the observational equality $\Eqcoprod$ on the coproduct $A+B$ defined by
+  \begin{align*}
+    \Eqcoprod(\inl(x),\inl(x')) & \defeq x= x' & \Eqcoprod(\inl(x),\inr(y')) & \defeq \emptyt \\
+    \Eqcoprod(\inr(y),\inl(x')) & \defeq \emptyt & \Eqcoprod(\inr(y),\inr(y')) & \defeq y = y'.
+  \end{align*}
+  \begin{subexenum}
+  \item Show that $(x=y)\leftrightarrow\Eqcoprod(x,y)$ for every $x,y:A+B$.
+  \item Show that the following are equivalent:
+    \begin{enumerate}
+    \item Both $A$ and $B$ have decidable equality.\index{decidable equality!of coproducts}
+    \item The coproduct $A+B$ has decidable equality.
+    \end{enumerate}
+    Conclude that $\Z$ has decidable equality.\index{decidable equality!of Z@{of $\Z$}}\index{Z@{$\Z$}!has decidable equality}\index{integers!decidable equality}\index{has decidable equality!integers}
+  \end{subexenum}
+  \exitem \label{ex:has-decidable-equality-Sigma}Consider a family $B$ over $A$, and consider the following three conditions:
+  \begin{enumerate}
+  \item The type $A$ has decidable equality.
+  \item The type $B(x)$ has decidable equality for each $x:A$.
+  \item The type $\sm{x:A}B(x)$ has decidable equality.\index{decidable equality!of S-types@{of $\Sigma$-types}}
+  \end{enumerate}
+  Show that if (i) holds, then (ii) and (iii) are equivalent, and show that if $B$ has a section $b:\prd{x:A}B(x)$, then (ii) and (iii) together imply (i).
+  \exitem Consider a family $B$ of types over $\Fin{k}$, for some $k:\N$.
+  \begin{subexenum}
+  \item Show that if each $B(x)$ is decidable, then $\prd{x:\Fin{k}}B(x)$ is again decidable.
+  \item Show that if each $B(x)$ has decidable equality, then $\prd{x:\Fin{k}}B(x)$ also has decidable equality.
+  \end{subexenum}
+  \exitem \label{ex:maximal-element}Consider a decidable type family $P$ over $\N$ equipped with an upper bound $m$.
+  \begin{subexenum}
+  \item Show that the type $\sm{n:\N}P(n)$ is decidable.
+  \item Construct a function
+  \begin{equation*}
+    \Big(\sm{n:\N}P(n)\Big)\to\Big(\sm{n:\N}P(n)\times\isupperbound_P(n)\Big).
+  \end{equation*}
+  \item Use the function of part (b) to give a second construction of the greatest common divisor, and verify that it satisfies the specification of \cref{defn:is-gcd}.
+  \end{subexenum}
+  \exitem \label{ex:bezouts-identity-N}
+  \begin{subexenum}
+  \item For any three natural numbers $x$, $y$, and $z$, show that the type
+    \begin{equation*}
+      \sm{k:\N}\sm{l:\N}\distN(kx,ly)=z
+    \end{equation*}
+    is decidable.
+  \item (B\'ezout's identity)\index{Bezout's identity@{B\'ezout's identity}}\index{natural numbers!Bezout's identity@{B\'ezout's identity}} For any two natural numbers $x$ and $y$, construct two natural numbers $k$ and $l$ equipped with an identification
+  \begin{equation*}
+    \distN(kx,ly)=\gcd(x,y).
+  \end{equation*}
+  \end{subexenum}
+  \exitem
+  \begin{subexenum}
+  \item Show that every natural number $n\geq 2$ has a prime factor.
+  \item Define a function
+    \begin{equation*}
+      \primefactors : \Big(\sm{n:\N}2\leq n\Big)\to \lst(\N)
+    \end{equation*}
+    such that $\primefactors(n)$ is an increasing list of primes, and $n$ is the product of the primes in the list $\primefactors(n)$.
+  \item Show that any increasing list $l$ of primes of which the product is $n$ is equal to the list $\primefactors(n)$.
+  \end{subexenum}
+  \exitem Show that there are infinitely many primes $p\equiv 3\mod 4$.
+  \exitem Show that for each prime $p$, the ring $\Z/p$ of integers modulo $p$ is a field, i.e., construct a multiplicative inverse
+  \begin{equation*}
+    (\blank)^{-1} : \prd{x:\Z/p}\to (x\neq 0) \to \Z/p
+  \end{equation*}
+  equipped with identifications
+  \begin{align*}
+    x^{-1}x & = 1 & xx^{-1} & = 1.
+  \end{align*}
+  \exitem Let $F:\N\to\N$ be the Fibonacci sequence. Construct the \define{cofibonacci sequence}\index{cofibonacci sequence|textbf}\index{natural numbers!cofibonacci sequence}, i.e., the function $G:\N\to\N$ such that\index{Fibonacci sequence!has left adjoint}
+  \begin{equation*}
+    (G_m\mid n) \leftrightarrow (m\mid F_n)
+  \end{equation*}
+  for all $m,n:\N$. Hint: for $m>0$, $G_m$ is the least $x>0$ such that $m\mid F_x$. 
+\end{exercises}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

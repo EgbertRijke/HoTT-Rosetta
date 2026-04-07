@@ -1,0 +1,549 @@
+% !TEX root = hott_intro.tex
+
+\section{Propositions, sets, and the higher truncation levels}
+\sectionmark{Truncation levels}\label{chap:hierarchy}
+
+The set theoretic foundations of mathematics arise in two stages. The first stage is to specify the formal system of first order logic; the second stage is to give an axiomatization of set theory in this formal system. Unlike set theory, type theory is its own formal system. The logic of dependent types, as given by the inference rules, is all we need.
+
+However, even though type theory is not built upon a separate system of logic such as first order logic, we can find logic in type theory by recognizing certain types as propositions. Note that the propositions of first order logic have a virtue that could be rather useful sometimes: First order logic does not offer any way to distinguish between any two proofs of the same proposition. Therefore we say that propositions in type theory are those types that have at most one element.
+
+This condition can be expressed with the identity type: any two elements must be equal. Examples of such types include the empty type $\emptyt$ and the unit type $\unit$. We call such types propositions. Propositions are useful, because if we know that a certain type is a proposition, then we know that any of its inhabitants are equal. Many important conditions, such as the condition that a map is an equivalence, will turn out to be propositions. This fact implies that two equivalences $A\simeq B$ are equal if and only if their underlying maps $A\to B$ are equal. However, the claim that being an equivalence is a proposition requires function extensionality, the topic of the next section.
+
+In this section we use the idea of propositions in a different way. After we establish some basic properties of propositions, we will introduce the \emph{sets} as the types of which the identity types are propositions. This is again reminiscent of the situation in set theory, where equality is a predicate in first order logic. We will see in \cref{eg:is-set-nat} that the type of natural numbers is a set.
+
+Next, one might ask about the types of which the identity types are \emph{sets}. Such types are called \emph{$1$-types}. There is an entire hierarchy of special types that arises this way, where a type is said to be a $(k+1)$-type if its identity types are $k$-types. Since the identity types of the $1$-types are sets, we see that sets are in fact $0$-types. Most of mathematics takes place at this level, the level of sets. The types in higher levels, as well as types that do not belong to any finite level in this hierarchy, are studied extensively in synthetic homotopy theory.
+
+However, we can also go a step further down: Since the identity types of sets are propositions, we see that the propositions are $(-1)$-types. Moreover, the identity types of propositions are contractible. Hence we find at the bottom of this hierarchy the contractible types as the $(-2)$-types. There is no point in going down further, since we have seen in \cref{ex:prop_contr} that the identity types of contractible types are again contractible.
+
+\index{truncated type|(}
+\index{truncation level|(}
+
+\subsection{Propositions}
+
+\index{proposition|(}
+\begin{defn}
+A type $A$ is said to be a \define{proposition}\index{proposition|textbf} if its identity types are contractible, i.e., if it comes equipped with a term of type\index{is-prop(A)@{$\isprop(A)$}|textbf}
+\begin{equation*}
+\isprop(A)\defeq\prd{x,y:A}\iscontr(x=y).
+\end{equation*}
+Given a universe $\UU$, we define $\prop_\UU$\index{Prop@{$\prop_\UU$}|textbf} to be the type of all small propositions, i.e.,
+\begin{equation*}
+  \prop_\UU\defeq\sm{X:\UU}\isprop(X).
+\end{equation*}
+\end{defn}
+
+\begin{eg}\label{eg:prop_contr}
+  Any contractible type is a proposition by \cref{ex:prop_contr}\index{contractible type!is a proposition}\index{is a proposition!contractible type}. In particular, the unit type is a proposition. The empty type is also a proposition, since we have\index{empty type!is a proposition}\index{is a proposition!empty type}
+\begin{equation*}
+\prd{x,y:\emptyt}\iscontr(x=y)
+\end{equation*}
+by the induction principle of the empty type.
+\end{eg}
+
+There are many conditions on a type $A$ that are equivalent to the condition that $A$ is a proposition. In the following proposition we state four such conditions.
+
+\begin{prp}\label{lem:isprop_eq}
+  Let $A$ be a type. Then the following are equivalent:
+  \begin{enumerate}
+  \item The type $A$ is a proposition.
+  \item Any two terms of type $A$ can be identified, i.e., there is a dependent function of type\index{is-prop'(A)@{$\isprop'(A)$}}\index{is-prop(A)@{$\isprop(A)$}!is-prop(A) iff is-prop'(A)@{$\isprop(A)\leftrightarrow\isprop'(A)$}}
+    \begin{equation*}
+      \isprop'(A)\defeq\prd{x,y:A}\id{x}{y}.
+    \end{equation*}
+  \item The type $A$ is contractible as soon as it is inhabited, i.e., there is a function of type\index{is-prop(A)@{$\isprop(A)$}!is-prop(A) iff A to is-contr(A)@{$\isprop(A)\leftrightarrow(A\to\iscontr(A))$}}
+    \begin{equation*}
+      A \to \iscontr(A).
+    \end{equation*}
+  \item The map $\const_\ttt : A\to\unit$ is an embedding.\index{is-prop(A)@{$\isprop(A)$}!is-prop(A) iff is-emb(const star)@{$\isprop(A)\leftrightarrow\isemb(\const_\ttt)$}}
+  \end{enumerate}
+\end{prp}
+
+\begin{proof}
+  If $A$ is a proposition, then we can use the center of contraction of the identity types of $A$ to identify any two terms in $A$. This shows that (i) implies (ii).
+
+  To show that (ii) implies (iii), suppose that $A$ comes equipped with $p:\prd{x,y:A}\id{x}{y}$. Then for any $x:A$ the dependent function $p(x):\prd{y:A}\id{x}{y}$ is a contraction of $A$. Thus we obtain the function
+  \begin{equation*}
+    \lam{x}(x,p(x)):A\to\iscontr(A).
+  \end{equation*}
+
+  To show that (iii) implies (iv), suppose that $A\to\iscontr(A)$. We first make the simple observation that
+  \begin{equation*}
+    (X\to \isemb(f))\to \isemb(f)
+  \end{equation*}
+  for any map $f:X\to Y$, so it suffices to show that $A\to\isemb(\const_\ttt)$. However, assuming we have $x:A$, it follows by assumption that $A$ is contractible. Therefore, it follows by \cref{ex:contr_equiv} that the map $\const_\ttt:A\to\unit$ is an equivalence, and any equivalence is an embedding by \cref{cor:emb_equiv}.
+
+  To show that (iv) implies (i), note that if $A\to\unit$ is an embedding, then the identity types of $A$ are equivalent to contractible types and therefore they must be contractible.
+\end{proof}
+
+One useful feature of propositions, is that in order to construct an equivalence $e:P\simeq Q$ between propositions, it suffices to construct maps back and forth between them.
+
+\begin{prp}\label{prp:equiv-prop}
+  A map $f:P\to Q$ between two propositions $P$ and $Q$ is an equivalence if and only if there is a map $g:Q\to P$. Consequently, we have for any two propositions $P$ and $Q$ that
+  \begin{equation*}
+    (P\simeq Q) \leftrightarrow (P\leftrightarrow Q).
+  \end{equation*}
+\end{prp}
+
+\begin{proof}
+  Of course, if we have an equivalence $e:P\simeq Q$, then we get maps back and forth between $P$ and $Q$. Therefore it remains to show that
+  \begin{equation*}
+    (P\leftrightarrow Q) \to (P\simeq Q).
+  \end{equation*}
+  Suppose we have $f:P\to Q$ and $g:Q\to P$. Then we obtain the homotopies $f\circ g\htpy \idfunc$ and $g\circ f\htpy \idfunc$ by the fact that any two elements in $P$ and $Q$ can be identified. Therefore $f$ is an equivalence with inverse $g$. 
+\end{proof}
+\index{proposition|)}
+
+\subsection{Subtypes}
+\index{subtype|(}
+
+  In set theory, a set $y$ is said to be a subset of a set $x$, if any element of $y$ is an element of $x$, i.e., if the condition
+  \begin{equation*}
+    \forall_z\, (z\in y)\to (z\in x)
+  \end{equation*}
+  holds. We have already noted that type theory is different from set theory in that terms in type theory come equipped with a \emph{unique} type. Moreover, in set theory the proposition $x\in y$ is well-formed for any two sets $x$ and $y$, whereas in type theory we can only judge that $a:A$ by applying the rules of inference of type theory in such a manner that we arrive at the conclusion that $a:A$. Because of these differences we must find a different way to talk about subtypes.
+
+  Note that in set theory there is a correspondence between the subsets of a set $x$, and the \emph{predicates} on $x$. A predicate on $x$ is just a proposition $P(z)$ that varies over the elements $z\in x$. Indeed, if $y$ is a subset of $x$, then the corresponding predicate is the proposition $z\in y$. Conversely, if $P$ is a predicate on $x$, then we obtain the subset
+  \begin{equation*}
+    \{z\in x\mid P(z)\}
+  \end{equation*}
+  of $x$. This observation suggests that in type theory we should define a subtype of a type $A$ to be a family of propositions over $A$.
+
+\begin{defn}
+A type family $B$ over $A$ is said to be a \define{subtype}\index{subtype|textbf} of $A$ if for each $x:A$ the type $B(x)$ is a proposition. When $B$ is a subtype of $A$, we also say that $B(x)$ is a \define{property}\index{property|textbf} of $x:A$.
+\end{defn}
+
+One reason why subtypes are important and useful, is that for any
+\begin{equation*}
+  (x,p),(y,q):\sm{x:A}P(x)
+\end{equation*}
+in a subtype of $A$, we have $(x,p)=(y,q)$ if and only if $x=y$. In other words, two terms of a subtype of $A$ are equal if and only if they are equal as terms of $A$. This fact is properly expressed using embeddings: we claim that the projection map
+\begin{equation*}
+  \proj 1 : \Big(\sm{x:A}P(x)\Big)\to A
+\end{equation*}
+is an embedding, for any subtype $P$ of $A$. This claim can be strengthened slightly. We will prove the following two closely related facts:
+\begin{enumerate}
+\item A map $f:A\to B$ is an embedding if and only if its fibers are propositions.
+\item A family of types $B$ over $A$ is a subtype of $A$ if and only if the projection map
+  \begin{equation*}
+    \Big(\sm{x:A}B(x)\Big)\to A
+  \end{equation*}
+  is an embedding.
+\end{enumerate}
+The first fact is analogous to the fact that a map is an equivalence if and only if its fibers are contractible, which we saw in \cref{thm:contr_equiv,thm:equiv_contr}. To prove the above claims, we will need that propositions are closed under equivalences.
+
+\begin{lem}\label{lem:prop_equiv}
+Let $A$ and $B$ be types, and let $e:\eqv{A}{B}$. Then we have\index{proposition!closed under equivalences}
+\begin{equation*}
+\isprop(A)\leftrightarrow\isprop(B).
+\end{equation*}
+\end{lem}
+
+\begin{proof}
+We will show that $\isprop(B)$ implies $\isprop(A)$. This suffices, because the converse follows from the fact that $e^{-1}:B\to A$ is also an equivalence. 
+
+Since $e$ is assumed to be an equivalence, it follows by \cref{cor:emb_equiv} that
+\begin{equation*}
+\apfunc{e} : (x=y)\to (e(x)=e(y))
+\end{equation*}
+is an equivalence for any $x,y:A$. If $B$ is a proposition, then in particular the type $e(x)=e(y)$ is contractible for any $x,y:A$, so the claim follows from \cref{thm:contr_equiv}.
+\end{proof}
+
+\begin{thm}\label{thm:embedding}
+  Consider a map $f:A\to B$. The following are equivalent:
+  \begin{enumerate}
+  \item The map $f$ is an embedding.\index{embedding}
+  \item The fiber $\fib{f}{b}$ is a proposition for each $b:B$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  By the fundamental theorem of identity types, it follows that $f$ is an embedding if and only if
+  \begin{equation*}
+    \sm{x:A}f(x)=f(y)
+  \end{equation*}
+  is contractible for each $y:A$. In other words, $f$ is an embedding if and only if $\fib{f}{f(y)}$ is contractible for each $y:A$. Note that we obtain equivalences
+  \begin{equation*}
+    \fib{f}{f(y)}\simeq \fib{f}{b}
+  \end{equation*}
+  for any $b:B$ and $p:f(y)=b$, by transporting along $p$. Therefore it follows by \cref{lem:prop_equiv} that $\fib{f}{f(y)}$ is contractible for each $y:A$ if and only if $\fib{f}{b}$ is contractible for each $y:A$, and each $b:B$ such that $p:f(y)=b$. The latter condition holds if and only if we have
+  \begin{equation*}
+    \fib{f}{b}\to\iscontr(\fib{f}{b})
+  \end{equation*}
+  for any $b:B$, which is by \cref{lem:isprop_eq} equivalent to the condition that each $\fib{f}{b}$ is a proposition.
+\end{proof}
+
+\begin{cor}\label{cor:pr1-embedding}
+  Consider a family $B$ of types over $A$. The following are equivalent:
+  \begin{enumerate}
+  \item The map $\proj 1 : (\sm{x:A}B(x))\to A$ is an embedding.
+  \item The type $B(x)$ is a proposition for each $x:A$.
+  \end{enumerate}
+\end{cor}
+
+\begin{proof}
+  This corollary follows at once from \cref{ex:proj_fiber}, where we showed that
+  \begin{equation*}
+    \fib{\proj 1}{x}\simeq B(x).\qedhere
+  \end{equation*}
+\end{proof}
+\index{subtype|)}
+
+\subsection{Sets}
+
+\index{set|(}
+\begin{defn}
+  A type $A$ is said to be a \define{set}\index{set|textbf} if its identity types are propositions, i.e., if it comes equipped with a term of type
+  \index{is-set(A)@{$\isset(A)$}}\index{is a set}
+\begin{equation*}
+\isset(A)\defeq \prd{x,y:A}\isprop(\id{x}{y}).
+\end{equation*}
+\end{defn}
+
+\begin{eg}\label{eg:is-set-nat}
+  The type of natural numbers is a set.\index{is a set!natural numbers}\index{natural numbers!is a set}\index{N@{$\N$}!is a set} To see this, recall from \cref{thm:eq_nat} that we have an equivalence
+  \begin{equation*}
+    (m=n)\simeq \EqN(m,n)
+  \end{equation*}
+  for every $m,n:\N$. Therefore it suffices to show that each $\EqN(m,n)$ is a proposition. This follows easily by induction on both $m$ and $n$.
+\end{eg}
+
+\begin{prp}
+  Consider a type $A$. The following are equivalent:
+  \begin{enumerate}
+  \item The type $A$ is a set.
+  \item The type $A$ satisfies \define{axiom K}\index{axiom K|textbf}\index{axiom!axiom K|textbf}, i.e., if and only if it comes equipped with a term of type\index{is-set(A)@{$\isset(A)$}!is-set(A) iff axiom-K(A)@{$\isset(A)\leftrightarrow\axiomK(A)$}}\index{axiom KK(A)@{$\axiomK(A)$}|textbf}
+    \begin{equation*}
+      \axiomK(A)\defeq\prd{x:A}\prd{p:\id{x}{x}}\id{\refl{x}}{p}.
+    \end{equation*}
+  \end{enumerate}
+\end{prp}
+
+\begin{proof}
+If $A$ is a set, then $\id{x}{x}$ is a proposition, so any two of its elements are equal. 
+This implies axiom $K$. 
+
+For the converse, if $A$ satisfies axiom $K$, then for any $p,q:\id{x}{y}$ we have $\id{\ct{p}{q^{-1}}}{\refl{x}}$, and hence $\id{p}{q}$. This shows that $\id{x}{y}$ is a proposition, and hence that $A$ is a set.
+\end{proof}
+
+\begin{thm}\label{lem:prop_to_id}
+Let $A$ be a type, and let $R:A\to A\to\UU$ be a binary relation on $A$ satisfying
+\begin{enumerate}
+\item Each $R(x,y)$ is a proposition,
+\item $R$ is reflexive, as witnessed by $\rho:\prd{x:A}R(x,x)$,
+\item There is a map
+  \begin{equation*}
+    R(x,y)\to (x=y)
+  \end{equation*}
+  for each $x,y:A$.
+\end{enumerate}
+Then any family of maps
+\begin{equation*}
+\prd{x,y:A}(\id{x}{y})\to R(x,y)
+\end{equation*}
+is a family of equivalences. Consequently, the type $A$ is a set.
+\end{thm}
+
+\begin{proof}
+Let $f:\prd{x,y:A}R(x,y)\to(\id{x}{y})$. 
+Since $R$ is assumed to be reflexive, we also have a family of maps
+\begin{equation*}
+\pathind_x(\rho(x)):\prd{y:A}(\id{x}{y})\to R(x,y).
+\end{equation*}
+Since each $R(x,y)$ is assumed to be a proposition, it therefore follows that each $R(x,y)$ is a retract of $\id{x}{y}$. Therefore it follows that $\sm{y:A}R(x,y)$ is a retract of $\sm{y:A}x=y$, which is contractible. We conclude that $\sm{y:A}R(x,y)$ is contractible, and therefore that any family of maps
+\begin{equation*}
+  \prd{y:A}(x=y)\to R(x,y)
+\end{equation*}
+is a family of equivalences.
+
+Now it also follows that $A$ is a set, since its identity types are equivalent to propositions, and therefore they are propositions by \cref{lem:prop_equiv}. 
+\end{proof}
+
+\begin{thm}[Hedberg]\label{thm:hedberg}
+Any type with decidable equality is a set.\index{Hedberg's theorem}\index{set!Hedberg's theorem}
+\end{thm}
+
+\begin{proof}
+  Let $A$ be a type, and let $d:\prd{x,y:A}(\id{x}{y})+ (x\neq y)$ be the witness that $A$ has decidable equality. Furthermore, let $\UU$ be a universe containing the type $A$. We will prove that $A$ is a set by applying \cref{lem:prop_to_id}.
+
+  For every $x,y:A$, we first define a type family $R'(x,y):((\id{x}{y})+{(x\neq y)})\to\UU$ by
+\begin{align*}
+R'(x,y,\inl(p)) & \defeq \unit \\
+R'(x,y,\inr(p)) & \defeq \emptyt.
+\end{align*}
+Note that $R'(x,y,q)$ is a proposition for each $x,y:A$ and $q:(\id{x}{y})+(x\neq y)$. 
+Now we define $R(x,y)\defeq R'(x,y,d(x,y))$. Then $R$ is a reflexive binary relation on $A$, and furthermore each $R(x,y)$ is a proposition. In order to apply \cref{lem:prop_to_id}, it therefore it remains to show that $R$ implies identity. 
+
+Since $R$ is defined as an instance of $R'$, it suffices to construct a function
+\begin{equation*}
+  f(q) : R'(q)\to (\id{x}{y}). 
+\end{equation*}
+for each $q:(\id{x}{y})+(x\neq y)$. Such a function is defined by
+\begin{align*}
+  f(\inl(p),r) & := p \\
+  f(\inr(p),r) & := \exfalso(r).\qedhere
+\end{align*}
+\end{proof}
+\index{set|)}
+
+\subsection{General truncation levels}
+\index{truncated type|(}
+\index{truncation level|(}
+
+Consider a type $A$ in a universe $\UU$. The conditions
+\begin{align*}
+  \iscontr(A) & \defeq \sm{a:A}\prd{x:A}a=x \\
+  \isprop(A) & \defeq \prd{x,y:A}\iscontr(x=y) \\
+  \isset(A) & \defeq \prd{x,y:A}\isprop(x=y)
+\end{align*}
+define the first few layers of the hierarchy of truncation levels. This hierarchy starts at the level of the contractible types, which we call level $-2$. The next level is the level of propositions, and at level $0$ we have the sets.
+
+The indexing type of the truncation levels, which will be equivalent to the type $\Z_{\geq -2}$ of integers greater than $-2$, is an inductive type $\T$\index{T@{$\T$}|see {truncation level}} equipped with the constructors\index{-2 T@{$\negtwoT$}}\index{succT@{$\succT$}}
+\begin{align*}
+  \negtwoT & : \T \\
+  \succT & : \T\to\T.
+\end{align*}
+The natural inclusion $i:\N\to \T$ is defined recursively by
+\begin{align*}
+  i(\zeroN) & \defeq \succT(\succT(\negtwoT)) \\
+  i(\succN(n)) & \defeq \succT(i(n)).
+\end{align*}
+Of course, we will simply write $-2$ for $\negtwoT$ and $k+1$ for $\succT(k)$.
+
+\begin{defn}
+We define $\istrunc{} : \T\to\UU\to\UU$ recursively by\index{is-trunc k(A)@{$\istrunc{k}(A)$}}
+\begin{align*}
+\istrunc{-2}(A) & \defeq \iscontr(A) \\
+\istrunc{k+1}(A) & \defeq \prd{x,y:A}\istrunc{k}(\id{x}{y}).\qedhere
+\end{align*}
+For any type $A$, we say that $A$ is \define{$k$-truncated}\index{k-truncated type@{$k$-truncated type}|see {truncated type}}\index{truncated type|textbf}, or a \define{$k$-type}\index{k-type@{$k$-type}|see {truncated type}}, if there is a term of type $\istrunc{k}(A)$. We also say that a type $A$ is a \define{proper $(k+1)$-type}\index{proper (k+1)-type@{proper $(k+1)$-type}|textbf} if $A$ is a $(k+1)$-type and not a $k$-type.
+
+Given a universe $\UU$, we define the universe $\UU^{\leq k}$ of $k$-truncated types by\index{U leq k@{$\UU^{\leq k}$}|textbf}
+\begin{equation*}
+  \UU^{\leq k}\defeq\sm{X:\UU}\istrunc{k}(X).
+\end{equation*}
+
+Furthermore, we say that a map $f:A\to B$ is $k$-truncated if its fibers are $k$-truncated.\index{k-truncated map@{$k$-truncated map}|see {truncated map}}\index{truncated map|textbf}
+\end{defn}
+
+\begin{rmk}
+  There is a subtlety in the definition of $\istrunc{}$ regarding universes. Note that the truncation levels are defined with respect to a universe $\UU$. To be completely precise, we should therefore write $\istrunc{k}^{\UU}(A)$ for the type $\istrunc{k}(A)$ defined with respect to the universe $\UU$. If $A$ is also contained in a second universe $\VV$, then it is legitimate to ask whether
+  \begin{equation*}
+    \istrunc{k}^{\UU}(A)\leftrightarrow\istrunc{k}^{\VV}(A).
+  \end{equation*}
+  A simple inductive argument shows that this is indeed the case, where the base case follows from the judgmental equalities
+  \begin{align*}
+    \istrunc{-2}^{\UU}(A) & \jdeq \sm{x:A}\prd{y:A}x=y \\
+    \istrunc{-2}^{\VV}(A) & \jdeq \sm{x:A}\prd{y:A}x=y.
+  \end{align*}
+  We may therefore safely omit explicit reference to the universes when considering truncatedness of a type.
+\end{rmk}
+
+We show in the following theorem that the truncation levels are successively contained in one another.
+
+\begin{prp}\label{thm:istrunc_next}
+If $A$ is a $k$-type, then $A$ is also a $(k+1)$-type.\index{is-trunc k(A)@{$\istrunc{k}(A)$}!is-trunc k(A) to is-trunc k+1(A)@{$\istrunc{k}(A)\to\istrunc{k+1}(A)$}}
+\end{prp}
+
+\begin{proof}
+We have seen in \cref{eg:prop_contr} that contractible types are propositions. This proves the base case.
+For the inductive step, note that if any $k$-type is also a $(k+1)$-type, then any $(k+1)$-type is a $(k+2)$-type, since its identity types are $k$-types and therefore $(k+1)$-types.
+\end{proof}
+
+It is immediate from the proof of \cref{thm:istrunc_next} that the identity types of $k$-types are also $k$-types.
+
+\begin{cor}
+  If $A$ is a $k$-type, then its identity types are also $k$-types.\hfill $\square$
+\end{cor}
+
+\begin{prp}\label{thm:ktype_eqv}
+If $e:\eqv{A}{B}$ is an equivalence, and $B$ is a $k$-type, then so is $A$.\index{truncated type!closed under equivalences}
+\end{prp}
+
+\begin{proof}
+We have seen in \cref{ex:contr_equiv} that if $B$ is contractible and $e:\eqv{A}{B}$ is an equivalence, then $A$ is also contractible. This proves the base case.
+
+For the inductive step, assume that the $k$-types are stable under equivalences, and consider $e:\eqv{A}{B}$ where $B$ is a $(k+1)$-type. In \cref{cor:emb_equiv} we have seen that
+\begin{equation*}
+\apfunc{e}:(\id{x}{y})\to(\id{e(x)}{e(y)})
+\end{equation*}
+is an equivalence for any $x,y$. Note that $\id{e(x)}{e(y)}$ is a $k$-type, so by the induction hypothesis it follows that $\id{x}{y}$ is a $k$-type. This proves that $A$ is a $(k+1)$-type.
+\end{proof}
+
+\begin{cor}\label{cor:emb_into_ktype}
+If $f:A\to B$ is an embedding, and $B$ is a $(k+1)$-type, then so is $A$.\index{truncated type!closed under embeddings}
+\end{cor}
+
+\begin{proof}
+By the assumption that $f$ is an embedding, the action on paths
+\begin{equation*}
+\apfunc{f}:(\id{x}{y})\to (\id{f(x)}{f(y)})
+\end{equation*}
+is an equivalence for every $x,y:A$. Since $B$ is assumed to be a $(k+1)$-type, it follows that $f(x)=f(y)$ is a $k$-type for every $x,y:A$. Therefore we conclude by \cref{thm:ktype_eqv} that $\id{x}{y}$ is a $k$-type for every $x,y:A$. In other words, $A$ is a $(k+1)$-type.
+\end{proof}
+
+We end this section with a theorem that characterizes $(k+1)$-truncated maps. Note that it generalizes \cref{thm:embedding}, which asserts that a map is an embedding if and only if its fibers are propositions.
+
+\begin{thm}\label{thm:trunc_ap}
+Let $f:A\to B$ be a map. The following are equivalent:
+\begin{enumerate}
+\item The map $f$ is $(k+1)$-truncated.\index{truncated map}
+\item For each $x,y:A$, the map
+\begin{equation*}
+\apfunc{f} : (x=y)\to (f(x)=f(y))
+\end{equation*}
+is $k$-truncated. 
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+First we show that for any $s,t:\fib{f}{b}$ there is an equivalence
+\begin{equation*}
+\eqv{(s=t)}{\fib{\apfunc{f}}{\ct{\proj 2(s)}{\proj 2(t)^{-1}}}}
+\end{equation*}
+We do this by $\Sigma$-induction on $s$ and $t$, and then we calculate
+\begin{align*}
+(\pairr{x,p}=\pairr{y,q}) & \eqvsym \Eqfib_f((x,p),(y,q)) \\
+  & \jdeq \sm{\alpha:x=y} p=\ct{\ap{f}{\alpha}}{q} \\
+  & \eqvsym \sm{\alpha:x=y} \ct{\ap{f}{\alpha}}{q}=p \\
+& \eqvsym \sm{\alpha:x=y} \ap{f}{\alpha}=\ct{p}{q^{-1}} \\
+& \jdeq \fib{\apfunc{f}}{\ct{p}{q^{-1}}}.
+\end{align*}
+By these equivalences, it follows that if $\apfunc{f}$ is $k$-truncated, then for each $s,t:\fib{f}{b}$ the identity type $s=t$ is equivalent to a $k$-truncated type, and therefore we obtain by \cref{thm:ktype_eqv} that $f$ is $(k+1)$-truncated.
+
+For the converse, note that we have equivalences
+\begin{align*}
+\fib{\apfunc{f}}{p} & \eqvsym ((x,p)=(y,\refl{f(y)})).
+\end{align*}
+It follows that if $f$ is $(k+1)$-truncated, then the identity type $(x,p)=(y,\refl{f(y)})$ in $\fib{f}{f(y)}$ is $k$-truncated for any $p:f(x)=f(y)$. We conclude by \cref{thm:ktype_eqv} that the fiber $\fib{\apfunc{f}}{p}$ is $k$-truncated. 
+\end{proof}
+\index{truncated type|)}
+\index{truncation level|)}
+
+\begin{exercises}
+  \exitem \label{ex:eq_bool}Show that $\bool$ is a set\index{bool@{$\bool$}!is a set} by applying \cref{lem:prop_to_id} with the observational equality on $\bool$ defined in \cref{ex:obs_bool}.
+  \exitem Recall that a \define{partially ordered set (poset)}\index{poset!is a set} is defined to be a type $A$ equipped with a relation
+  \begin{equation*}
+    \blank\leq\blank : A \to (A \to \prop_\UU)
+  \end{equation*}
+  that is reflexive, antisymmetric, and transitive. Show that the underlying type of any poset is a set.
+  \exitem
+  \begin{subexenum}
+  \item \label{cor:is-emb-is-injective}
+    Show that any injective map $f:A\to B$ into a set $B$ is an embedding, and conclude that $A$ is automatically a set in this case.\index{is an embedding!injective map into a set}\index{injective map!injective maps into sets are embeddings}
+  \item Show that $n\mapsto m+n$ is an embedding, for each $m:\N$.\index{add N@{$\addN$}!add N(m) is an embedding@{$\addN(m)$ is an embedding}}\index{is an embedding!add N(m)@{$\addN(m)$}} Moreover, conclude that there is an equivalence\index{N@{$\N$}!leq@{$\leq$}}
+    \begin{equation*}
+      (m\leq n)\simeq \sm{k:\N}m+k=n.
+    \end{equation*}
+  \item Show that $n\mapsto mn$ is an embedding\index{mul N@{$\mulN$}!mul N(m) is an embedding if m>0@{$\mulN(m)$ is an embedding if $m>0$}}\index{is an embedding!mul N(m) for m > 0@{$\mulN(m)$ for $m>0$}}, for each nonzero number $m:\N$. Conclude that the divisibility relation\index{d {"|" n}@{$d\mid n$}!is a proposition if d>0@{is a proposition if $d>0$}}\index{is a proposition!d {"|" n} for d>0@{$d\mid n$ for $d>0$}}\index{divisibility on N@{divisibility on $\N$}!is a proposition}
+    \begin{equation*}
+      d\mid n
+    \end{equation*}
+    is a proposition for each $d,n:\N$ such that $d>0$. 
+  \end{subexenum}
+  \exitem \label{ex:set_coprod}
+  \begin{subexenum}
+  \item Show that for any two contractible types $A$ and $B$, the coproduct $A+B$ is not contractible.
+  \item Show that for any two propositions $P$ and $Q$, we have a logical equivalence
+    \begin{equation*}
+      \iscontr(P+Q)\leftrightarrow P\oplus Q,
+    \end{equation*}
+    where the \define{exclusive disjunction}\index{exclusive disjunction|textbf} $P\oplus Q$\index{P oplus Q@{$P \oplus Q$}|see {exclusive disjunction}} is defined by
+    \begin{equation*}
+      P\oplus Q:= (P\times\neg Q)+(Q\times\neg P).
+    \end{equation*}
+  \item \label{ex:is-prop-coproduct}Show that for any two propositions $P$ and $Q$, the coproduct $P+Q$ is a proposition if and only if $P\to \neg Q$.
+  \item Show that for any two $(k+2)$-types $A$ and $B$, the coproduct $A+B$ is again a $(k+2)$-type\index{coproduct!is a truncated type}\index{is a truncated type!coproduct}\index{is a set!coproduct}\index{coproduct!is a set}. Conclude that $\Z$ is a set.\index{Z@{$\Z$}!is a set}
+  \end{subexenum}
+  \exitem \label{ex:diagonal}Let $A$ be a type, and let the \define{diagonal}\index{diagonal of a type|textbf}\index{d  A@{$\delta_A$}|textbf}\index{d  A@{$\delta_A$}|see {diagonal, of a type}} of $A$ be the map $\delta_A:A\to A\times A$ given by $\lam{x}(x,x)$. 
+  \begin{subexenum}
+  \item Show that\index{is a proposition!d A is an equivalence@{$\delta_A$ is an equivalence}}
+    \begin{equation*}
+      {\isequiv(\delta_A)}\leftrightarrow{\isprop(A)}.
+    \end{equation*}
+  \item Construct an equivalence $\eqv{\fib{\delta_A}{x,y}}{(x=y)}$ for any $x,y:A$.
+  \item Show that $A$ is $(k+1)$-truncated if and only if $\delta_A:A\to A\times A$ is $k$-truncated.
+  \end{subexenum}
+  \exitem \label{ex:istrunc_sigma}
+  \begin{subexenum}
+  \item Consider a type family $B$ over a $k$-truncated type $A$. Show that the following are equivalent:
+    \begin{enumerate}
+    \item The type $B(x)$ is $k$-truncated for each $x:A$.
+    \item The type $\sm{x:A}B(x)$ is $k$-truncated.\index{is a truncated type!S-type@{$\Sigma$-type}}\index{dependent pair type!is truncated}
+    \end{enumerate}
+    Hint: for the base case, use \cref{ex:contr_in_sigma,ex:contr_equiv}.
+  \item Consider a map $f:A\to B$ into a $k$-type $B$. Show that the following are equivalent:
+    \begin{enumerate}
+    \item The type $A$ is $k$-truncated.
+    \item The map $f$ is $k$-truncated.
+    \end{enumerate}
+  \end{subexenum}
+  \exitem Consider two types $A$ and $B$. Show that the following are equivalent:
+    \begin{enumerate}
+    \item There are functions
+      \begin{align*}
+        f & : B \to \istrunc{k+1}(A) \\
+        g & : A \to \istrunc{k+1}(B).
+      \end{align*}
+    \item The type $A\times B$ is $(k+1)$-truncated.
+    \end{enumerate}
+    Conclude with \cref{ex:is-contr-prod} that, if both $A$ and $B$ come equipped with an element, then both $A$ and $B$ are $k$-truncated if and only if the product $A\times B$ is $k$-truncated.
+  \exitem
+  \begin{subexenum}
+  \item \label{ex:retr_id} Consider a section-retraction pair
+    \begin{equation*}
+      \begin{tikzcd}
+        A \arrow[r,"i"] & B \arrow[r,"r"] & A,
+      \end{tikzcd}
+    \end{equation*}
+    with $H:r\circ i\htpy \idfunc$. Show that $\id{x}{y}$ is a retract of $\id{i(x)}{i(y)}$.\index{retract!identity type}\index{identity type!of retract is retract}
+  \item Use \cref{ex:contr_retr} to show that if $A$ is a retract of a $k$-type $B$, then $A$ is also a $k$-type.\index{truncated type!closed under retracts}
+  \end{subexenum}
+  \exitem Consider an arbitrary type $A$. Recall that concatenation of lists was defined in \cref{ex:lists}. Show that the map\index{list A@{$\lst(A)$}}
+  \begin{equation*}
+    f:\lst(A)\times\lst(A)\to\lst(A).
+  \end{equation*}
+  given by $f(x,y)\defeq\concatlist(x,y)$ is $0$-truncated.\index{truncated map!concatenation of lists}\index{concat-list@{$\concatlist$}!is a $0$-truncated map}
+  \exitem \label{ex:is-trunc-const}Show that a type $A$ is a $(k+1)$-type if and only if the map $\const_x:\unit\to A$ is $k$-truncated for every $x:A$.
+  \exitem \label{ex:is-trunc-comp}Consider a commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[rr,"h"] \arrow[dr,swap,"f"] & & B \arrow[dl,"g"] \\
+      & X
+    \end{tikzcd}
+  \end{equation*}
+  with $H: f \htpy g \circ h$, and suppose that $g$ is $k$-truncated. Show that $f$ is $k$-truncated if and only if $h$ is $k$-truncated.
+  \exitem Let $f:\prd{x:A}B(x)\to C(x)$ be a family of maps. Show that the following are equivalent:
+  \begin{enumerate}
+  \item For each $x:A$ the map $f(x)$ is $k$-truncated.
+  \item The induced map\index{tot(f)@{$\tot{f}$}!is a truncated map}\index{is a truncated map!tot(f)@{$\tot{f}$}}
+    \begin{equation*}
+      \tot{f}:\Big(\sm{x:A}B(x)\Big)\to\Big(\sm{x:A}C(x)\Big)
+    \end{equation*}
+    is $k$-truncated.
+  \end{enumerate}
+  \exitem \label{ex:is-trunc-fiber-inclusion}Consider a type $A$. Show that the following are equivalent:
+  \begin{enumerate}
+  \item The type $A$ is $(k+1)$-truncated.
+  \item For any type family $B$ over $A$ and any $a:A$, the \define{fiber inclusion}\index{fiber inclusion|textbf}
+    \begin{equation*}
+      i_a: B(a)\to\sm{x:A}B(x)
+    \end{equation*}
+    given by $y\mapsto(a,y)$ is a $k$-truncated map.\index{fiber inclusion!is a truncated map}\index{is a truncated map!fiber inclusion}
+  \end{enumerate}
+  In particular, if $A$ is a set then any fiber inclusion $i_a:B(a)\to\sm{x:A}B(x)$ is an embedding.\index{fiber inclusion!is an embedding}\index{is an embedding!fiber inclusion}
+  \exitem \label{ex:isolated-point}Consider a type $A$ equipped with an element $a:A$. We say that $a$ is an \define{isolated element}\index{isolated element|textbf} of $A$ if it comes equipped with an element of type\index{is-isolated(a)@{$\isisolated(a)$}|textbf}
+  \begin{equation*}
+    \isisolated(a)\defeq\prd{x:A}(a=x)+(a\neq x).
+  \end{equation*}
+  \begin{subexenum}
+  \item Show that $a$ is isolated if and only if the map $\const_a:\unit\to A$ has decidable fibers.
+  \item Show that if $a$ is isolated, then $a=x$ is a proposition, for every $x:A$. Conclude that if $a$ is isolated, then the map $\const_a:\unit\to A$ is an embedding.
+  \end{subexenum}
+\end{exercises}
+\index{truncated type|)}
+\index{truncation level|)}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

@@ -1,0 +1,896 @@
+\section{Function extensionality}
+\label{chap:funext}
+\index{function extensionality|(}
+\index{axiom!function extensionality|(}
+
+The function extensionality axiom asserts that for any two dependent functions $f,g:\prd{x:A}B(x)$, the type of identifications $f=g$ is equivalent to the type of homotopies $f\htpy g$ from $f$ to $g$. In other words, two (dependent) functions can only be distinguished by their values. The function extensionality axiom therefore provides a characterization of the identity type of (dependent) function types. By the fundamental theorem of identity types it follows immediately that the function extensionality axiom has at least three equivalent forms. There is, however, a fourth useful equivalent form of the function extensionality axiom: the \emph{weak} function extensionality axiom. This axiom asserts that any dependent product of contractible types is again contractible. A simple consequence of the weak function extensionality axiom is that any dependent product of a family of $k$-types is again a $k$-type.
+
+The function extensionality axiom is used to derive many important properties in type theory. One class of such properties are (dependent) universal properties. Universal properties give a characterization of the type of functions into, or out of a type. For example, the universal property of the coproduct $A+B$ characterizes the type of maps $(A+B)\to X$ as the type of pairs of maps $(f,g)$ consisting of $f:A\to X$ and $g:B\to X$, i.e., the universal property of the coproduct $A+B$ is an equivalence
+\begin{equation*}
+  ((A+B)\to X)\simeq (A\to X)\times (B\to X).
+\end{equation*}
+Note that there are function types on both sides of this equivalence. Therefore we will need function extensionality in order to construct the homotopies witnessing that the inverse map is both a left and a right inverse. In fact, we leave this particular universal property as \cref{ex:up-coproduct}. The universal properties that we do show in the main text, are the universal properties of $\Sigma$-types and of the identity type. 
+
+We end this section with two further applications of the function extensionality axiom. In the first, \cref{ex:equiv_precomp}, we show that precomposition by an equivalence is again an equivalence. More precisely we show that $f:A\to B$ is an equivalence if and only if for every type family $P$ over $B$, the precomposition map
+\begin{equation*}
+  \blank\circ f :\Big(\prd{y:B}P(y)\Big)\to \Big(\prd{x:A}P(f(x))\Big)
+\end{equation*}
+is an equivalence. To prove this fact we will make use of coherently invertible maps, which were introduced in \cref{sec:is-contr-map-is-equiv}. In the second application, \cref{thm:strong-ind-N}, we prove the strong induction principle of the natural numbers. Function extensionality is needed in order to derive the computation rule for the strong induction principle.
+
+Many important consequences of the function extensionality axiom are left as exercises. For example, in \cref{ex:isprop_istrunc} you are asked to show that both $\iscontr(A)$ and $\istrunc{k}(A)$ are propositions, and in \cref{ex:isprop_isequiv} you are asked to show that $
+\isequiv(f)$ is a proposition. The universal properties of $\emptyt$, $\unit$, and $A+B$ are left as \cref{ex:up-emptyt,ex:up-unit,ex:up-coproduct}. A few more advanced properties, such as the fact that post-composition
+\begin{equation*}
+  g\circ\blank : (A\to X)\to (A\to Y)
+\end{equation*}
+by a $k$-truncated map $g:X\to Y$ is itself a $k$-truncated map, appear in the later exercises. We encourage you to read through all of them, and get at least a basic idea of why they are true.
+
+
+\subsection{Equivalent forms of function extensionality}
+
+The function extensionality principle characterizes the identity type of an arbitrary dependent function type. It asserts that the type $f=g$ of identifications between two dependent functions is equivalent to the type of homotopies $f\htpy g$. By \cref{thm:id_fundamental}\index{fundamental theorem of identity types} there are three equivalent ways of doing this.
+
+\begin{prp}\label{prp:funext}
+  Consider a dependent function $f:\prd{x:A}B(x)$. The following are equivalent:\index{function extensionality|textbf}\index{characterization of identity type!of P-types@{of $\Pi$-types}}\index{dependent function type!characterization of identity type}
+  \begin{enumerate}
+  \item The \define{function extensionality principle} holds at $f$: for each $g:\prd{x:A}B(x)$, the family of maps
+    \begin{equation*}
+      \htpyeq:(f=g)\to (f\htpy g)
+    \end{equation*}
+    defined by $\htpyeq(\refl{f}):=\reflhtpy_{f}$ is a family of equivalences.
+  \item The total space
+    \begin{equation*}
+      \sm{g:\prd{x:A}B(x)}f\htpy g
+    \end{equation*}
+    is contractible.
+  \item
+    The principle of \define{homotopy induction}\index{homotopy induction|textbf}\index{induction principle!for homotopies|textbf}:
+    for any family of types $P(g,H)$ indexed by $g:\prd{x:A}B(x)$ and $H:f\htpy g$, the evaluation function
+    \begin{equation*}
+      \Big(\prd{g:\prd{x:A}B(x)}\prd{H:f\htpy g}P(g,H)\Big)\to P(f,\reflhtpy_f),
+    \end{equation*}
+    given by $s\mapsto s(f,\reflhtpy_f)$, has a section.
+  \end{enumerate}
+\end{prp}
+
+\begin{proof}
+  This theorem follows directly from \cref{thm:id_fundamental}.
+\end{proof}
+
+There is, however, yet a fourth condition equivalent to the function extensionality principle: the \emph{weak} function extensionality principle. The weak function extensionality principle asserts that any dependent product of contractible types is again contractible.
+
+The following theorem is stated with respect to an arbitrary universe $\UU$, because we will use it in \cref{thm:funext-univalence} to show that the univalence axiom implies function extensionality.
+
+\begin{thm}\label{thm:funext_wkfunext}
+  Consider a universe $\UU$. The following are equivalent:\index{function extensionality}
+  \begin{enumerate}
+  \item The function extensionality principle holds in $\UU$: For every type family $B$ over $A$ in $\UU$ and any $f,g:\prd{x:A}B(x)$, the map
+    \begin{equation*}
+      \htpyeq : (f=g)\to (f\htpy g)
+    \end{equation*}
+    is an equivalence.
+  \item The \define{weak function extensionality principle}\index{weak function extensionality|textbf}\index{function extensionality!weak function extensionality|textbf} holds in $\UU$: For every type family $B$ over $A$ in $\UU$ one has\index{contractible type!weak function extensionality|textbf}\index{is contractible!dependent function type}
+    \begin{equation*}
+      \Big(\prd{x:A}\iscontr(B(x))\Big)\to\iscontr\Big(\prd{x:A}B(x)\Big).
+    \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  First, we show that function extensionality implies weak function extensionality, suppose that each $B(a)$ is contractible with center of contraction $c(a)$ and contraction $C_a:\prd{y:B(a)}c(a)=y$. Then we take $c\defeq \lam{a}c(a)$ to be the center of contraction of $\prd{x:A}B(x)$. To construct the contraction we have to define a term of type
+  \begin{equation*}
+    \prd{f:\prd{x:A}B(x)}c=f.
+  \end{equation*}
+  Let $f:\prd{x:A}B(x)$. By function extensionality we have a map ${(c\htpy f)}\to {(c=f)}$, so it suffices to construct a term of type $c\htpy f$. Here we take $\lam{a}C_a(f(a))$. This completes the proof that function extensionality implies weak function extensionality.
+  
+  It remains to show that weak function extensionality implies function extensionality. By \cref{prp:funext} it suffices to show that the type
+  \begin{equation*}
+    \sm{g:\prd{x:A}B(x)}f\htpy g
+  \end{equation*}
+  is contractible for any $f:\prd{x:A}B(x)$. In order to do this, we first note that we have a section-retraction pair
+  \begin{align*}
+    \Big(\sm{g:\prd{x:A}B(x)}f\htpy g\Big)
+    & \stackrel{i}{\longrightarrow} \Big(\prd{x:A}\sm{b:B(x)}f(x)=b\Big) \\
+    & \stackrel{r}{\longrightarrow} \Big(\sm{g:\prd{x:A}B(x)}f\htpy g\Big)
+  \end{align*}
+  Here we have the functions
+  \begin{align*}
+    i & \defeq \lam{(g,H)}\lam{x}(g(x),H(x)) \\
+    r & \defeq \lam{p}\pairr{\lam{x}\proj 1(p(x)),\lam{x}\proj 2(p(x))}.
+  \end{align*}
+  Their composite is homotopic to the identity function by the computation rule for $\Sigma$-types and the $\eta$-rule for $\Pi$-types:
+  \begin{align*}
+    r(i(g,H)) & \jdeq r(\lam{x}\pairr{g(x),H(x)}) \\
+              & \jdeq \pairr{\lam{x}g(x),\lam{x}H(x)} \\
+              & \jdeq \pairr{g,H}.
+  \end{align*}
+  Now we observe that the type $\prd{x:A}\sm{b:B(x)}f(x)=b$ is a product of contractible types, so it is contractible by our assumption of the weak function extensionality principle. The claim now follows, because retracts of contractible types are contractible by \cref{ex:contr_retr}.
+\end{proof}
+
+We will henceforth assume the function extensionality principle as an axiom.
+
+\begin{axiom}[Function Extensionality]\label{axiom:funext}
+  \index{function extensionality|textbf}\index{axiom!function extensionality|textbf}\index{identity type!of a Pi-type@{of a $\Pi$-type}}\index{extensionality principle!for functions|textbf}%
+  For any type family $B$ over $A$, and any two dependent functions $f,g:\prd{x:A}B(x)$, the map\index{htpy-eq@{$\htpyeq$}|textbf}\index{htpy-eq@{$\htpyeq$}!is an equivalence}\index{is an equivalence!htpy-eq@{$\htpyeq$}}
+  \begin{equation*}
+    \htpyeq:(f=g)\to (f\htpy g)
+  \end{equation*}
+  is an equivalence. We will write $\eqhtpy$\index{eq-htpy@{$\eqhtpy$}|textbf} for its inverse.
+\end{axiom}
+
+\begin{rmk}
+  The function extensionality axiom is added to type theory by adding the rule
+  \begin{prooftree}
+    \AxiomC{$\Gamma,x:A\vdash B(x)~\type$}
+    \AxiomC{$\Gamma\vdash f : \prd{x:A}B(x)$}
+    \AxiomC{$\Gamma\vdash g : \prd{x:A}B(x)$}
+    \TrinaryInfC{$\Gamma\vdash\funext:\isequiv(\htpyeq_{f,g})$}
+  \end{prooftree}
+\end{rmk}
+
+In the following theorem we extend the weak function extensionality principle to general truncation levels.
+
+\begin{thm}\label{thm:trunc_pi}\index{k-type@{$k$-type}}
+For any type family $B$ over $A$ one has\index{truncated type!dependent function type}
+\begin{equation*}
+\Big(\prd{x:A}\istrunc{k}(B(x))\Big)\to \istrunc{k}\Big(\prd{x:A}B(x)\Big).
+\end{equation*}
+\end{thm}
+
+\begin{proof}
+The theorem is proven by induction on $k\geq -2$. The base case is just the weak function extensionality principle\index{weak function extensionality}, which was shown to follow from function extensionality in \cref{thm:funext_wkfunext}.
+
+For the inductive step, assume that the $k$-truncated types are closed under $\Pi$-types, and consider a family $B$ of $(k+1)$-truncated types. To show that the type $\prd{x:A}B(x)$ is $(k+1)$-truncated, we have to show that the type $f=g$ is $k$-truncated for every $f,g:\prd{x:A}$. By function extensionality, the type $f=g$ is equivalent to $f\htpy g$ for any two dependent functions $f,g:\prd{x:A}B(x)$. Now observe that $f\htpy g$ is a dependent product of $k$-truncated types, and therefore it is $k$-truncated by the inductive hypothesis. Since the $k$-truncated types are closed under equivalences by \cref{thm:ktype_eqv}, it follows that the type $f=g$ is $k$-truncated.
+\end{proof}
+
+\begin{cor}\label{cor:funtype_trunc}\index{truncated type!function type}
+Suppose $B$ is a $k$-type. Then $A\to B$ is also a $k$-type, for any type $A$.
+\end{cor}
+
+\begin{rmk}
+  It follows that $\neg A$ is a proposition for each type $A$. Note that it requires function extensionality even just to prove that $\neg P$ is a proposition for any proposition $P$.
+\end{rmk}
+
+\subsection{Identity systems on \texorpdfstring{$\Pi$}{Π}-types}
+
+Recall from \cref{sec:structure-identity-principle} that the \emph{structure identity principle} is a way to obtain an identity system on a $\Sigma$-type. Identity systems were defined in \cref{defn:identity-system}. In this section we will describe how to obtain identity systems on a $\Pi$-type. We will first show that $\Pi$-types distribute over $\Sigma$-types\index{distributivity!of P over S@{of $\Pi$ over $\Sigma$}}. This theorem is sometimes called the \emph{type theoretic principle of choice} because it can be seen as the Curry-Howard interpretation of the axiom of choice\index{type theoretic choice|see {distributivity, of $\Pi$ over $\Sigma$}}.
+
+\begin{thm}\label{thm:choice}
+Consider a family of types $C(x,y)$ indexed by $x:A$ and $y:B(x)$. Then the map\index{choice@{$\choice$}|textbf}\index{is an equivalence!choice@{$\choice$}}
+\begin{equation*}
+  \choice:\Big(\prd{x:A}\sm{y:B(x)}C(x,y)\Big)\to \Big(\sm{f:\prd{x:A}B(x)}\prd{x:A}C(x,f(x))\Big)
+\end{equation*}
+given by
+\begin{equation*}\label{eq:choice}
+  \choice(h):=(\lam{x}\proj 1(h(x)),\lam{x}\proj 2(h(x))).
+\end{equation*}
+is an equivalence.
+\end{thm}
+
+\begin{proof}
+  We define the map\index{choice -1@{$\choice^{-1}$}|textbf}
+  \begin{equation*}
+    \choice^{-1}:\Big(\sm{f:\prd{x:A}B(x)}\prd{x:A}C(x,f(x))\Big)\to \prd{x:A}\sm{y:B(x)}C(x,y)
+  \end{equation*}
+  by $\choice^{-1}(f,g):=\lam{x}(f(x),g(x))$. Then we have to construct homotopies
+  \begin{equation*}
+    \choice\circ\choice^{-1}\htpy\idfunc,\qquad\text{and}\qquad
+    \choice^{-1}\circ\choice\htpy\idfunc.
+  \end{equation*}
+  For the first homotopy it suffices to construct an identification
+  \begin{equation*}
+    \choice(\choice^{-1}(f,g))=(f,g)
+  \end{equation*}
+  for any $f:\prd{x:A}B(x)$ and any $g:\prd{x:A}C(x,f(x))$. We compute the left-hand side as follows:
+  \begin{align*}
+    \choice(\choice^{-1}(f,g))
+    & \jdeq \choice(\lam{x}(f(x),g(x))) \\
+    & \jdeq (\lam{x}f(x),\lam{x}g(x)).
+  \end{align*}
+  By the $\eta$-rule for $\Pi$-types we have the judgmental equalities $f\jdeq \lam{x}f(x)$ and $g\jdeq\lam{x}g(x)$. Therefore we have the identification
+  \begin{equation*}
+    \refl{(f,g)}:\choice(\choice^{-1}(f,g))=(f,g).
+  \end{equation*}
+  This completes the construction of the first homotopy.
+
+  For the second homotopy we have to construct an identification
+  \begin{equation*}
+    \choice^{-1}(\choice(h))=h
+  \end{equation*}
+  for any $h:\prd{x:A}\sm{y:B(x)}C(x,y)$. We compute the left-hand side as follows:
+  \begin{align*}
+    \choice^{-1}(\choice(h))
+    & \jdeq \choice^{-1}(\lam{x}\proj 1(h(x)),(\lam{x}\proj 2(h(x)))) \\
+    & \jdeq \lam{x}(\proj 1(h(x)),\proj 2(h(x)))
+  \end{align*}
+  However, it is \emph{not} the case that $(\proj 1(h(x)),\proj 2(h(x)))\jdeq h(x)$ for any $h:\prd{x:A}\sm{y:B(x)}C(x,y)$. Nevertheless, we have the identification
+  \begin{equation*}
+    \eqpair(\refl{},\refl{}):(\proj 1(h(x)),\proj 2(h(x)))= h(x).
+  \end{equation*}
+  Therefore we obtain the required homotopy by function extensionality:
+  \begin{equation*}
+    \lam{h}\eqhtpy(\lam{x}\eqpair(\refl{\proj 1(h(x))},\refl{\proj 2(h(x))})):\choice^{-1}\circ\choice\htpy\idfunc.\qedhere
+  \end{equation*}
+\end{proof}
+
+The fact that $\Pi$-types distribute over $\Sigma$-types has many useful consequences. The most straightforward consequence is the following.
+
+\begin{cor}
+  For any two types $A$ and $B$, and any type family $C$ over $B$, we have an equivalence
+\begin{equation*}
+  \Big(A\to\sm{y:B}C(y)\Big)\simeq\Big(\sm{f:A\to B}\prd{x:A}C(f(x))\Big).
+\end{equation*}
+\end{cor}
+
+Another direct consequence of the distributivity of $\Pi$-types over $\Sigma$-types is the fact that
+\begin{equation*}
+  \prd{b:B}\fib{f}{b}\simeq\sm{g:B\to A}f\circ g\htpy \idfunc.
+\end{equation*}
+In the following corollary we use the distributivity of $\Pi$-types over $\Sigma$-types to show that dependent functions are sections of projection maps.
+
+\begin{cor}\label{ex:pi_sec}
+  Consider a type family $B$ over $A$, and consider the projection map
+  \begin{equation*}
+    \proj 1:\big(\sm{x:A}B(x)\big) \to A.  
+  \end{equation*}
+  Then we have an equivalence
+  \begin{equation*}
+    \sections(\proj 1)\simeq\prd{x:A}B(x).
+  \end{equation*}
+\end{cor}
+
+\begin{proof}
+  \cref{thm:choice} gives the first equivalence in the following calculation:
+  \begin{align*}
+    \sm{h:A\to\sm{x:A}B(x)} \proj 1\circ h\htpy \idfunc
+    & \simeq \sm{(f,g):\sm{f:A\to A}\prd{x:A}B(f(x))} f\htpy \idfunc \\
+    & \simeq \sm{(f,H):\sm{f:A\to A}f\htpy \idfunc}\prd{x:A}B(f(x)) \\
+    & \simeq \prd{x:A}B(x)
+  \end{align*}
+  In the second equivalence we used \cref{ex:sigma_swap} to swap the family $f\mapsto \prd{x:A}B(f(x))$ with the family $f\mapsto f\htpy\idfunc$, and in the third equivalence we used the fact that
+  \begin{equation*}
+    \sm{f:A\to A}f\htpy\idfunc
+  \end{equation*}
+  is contractible, with center of contraction $(\idfunc,\reflhtpy)$. One way to see that it is contractible is by \cref{ex:is-equiv-inv-htpy}. A direct way to see this, is by another application of \cref{thm:choice}. This gives an equivalence
+  \begin{equation*}
+    \left(\sm{f:A\to A}f\htpy\idfunc\right)\simeq \left(\prd{x:A}\sm{y:A}y=x\right),
+  \end{equation*}
+  and the right-hand side is a product of contractible types.
+\end{proof}
+
+In the final application of distributivity of $\Pi$-types over $\Sigma$-types we obtain a general way of constructing identity systems of $\Pi$-types.
+
+\begin{thm}\label{cor:Eq-Pi}
+  Consider a family $B$ of types over $A$, and for each $b:B(a)$ consider an identity system $E(b)$ at $b$. Furthermore, consider a dependent function $f:\prd{x:A}B(x)$. Then the family of types
+  \begin{equation*}
+    \prd{x:A}E(f(x),g(x))
+  \end{equation*}
+  indexed by $g:\prd{x:A}B(x)$ is an identity system at $f$.\index{identity system!of a dependent function type}\index{dependent function type!identity system}
+\end{thm}
+
+\begin{proof}
+  By \cref{thm:id_fundamental} it suffices to show that the type
+  \begin{equation*}
+    \sm{g:\prd{x:A}B(x)}\prd{x:A}E(f(x),g(x))
+  \end{equation*}
+  is contractible. By \cref{thm:choice} it follows that this type is equivalent to the type
+  \begin{equation*}
+    \prd{x:A}\sm{y:B(x)}E(f(x),y).
+  \end{equation*}
+  This is a product of contractible types because each $E(f(x))$ is an identity system at $f(x):B(x)$. This product is therefore contractible by the weak function extensionality principle.
+\end{proof}
+
+\subsection{Universal properties}
+The function extensionality principle allows us to prove \emph{universal properties}. Universal properties are characterizations of all maps out of or into a given type, so they are very important. Among other applications, universal properties characterize a type up to equivalence. We prove here the universal properties of dependent pair types and of identity types. In the exercises, you are asked to prove the universal properties of $\unit$, $\emptyt$, and coproducts.
+
+\subsubsection*{The universal property of $\Sigma$-types}
+\index{universal property!of S-types@{of $\Sigma$-types}|(}
+\index{dependent universal property!of S-types@{of $\Sigma$-types}|(}
+\index{dependent pair type!universal property|(}
+\index{dependent pair type!dependent universal property|(}
+
+The \define{universal property of $\Sigma$-types} characterizes maps \emph{out of} a dependent pair type $\sm{x:A}B(x)$. It asserts that the map\index{ev-pair@{$\evpair$}|textbf}
+\begin{equation*}
+\evpair:\Big(\Big(\sm{x:A}B(x)\Big)\to X\Big)\to \Big(\prd{x:A}(B(x)\to X)\Big),
+\end{equation*}
+given by $f\mapsto\lam{x}\lam{y}f(x,y)$, is an equivalence for any type $X$. In fact, we will prove a slight generalization of this universal property. We will prove the \define{dependent universal property} of $\Sigma$-types, which characterizes \emph{dependent} functions out of $\sm{x:A}B(x)$.
+
+\begin{thm}\label{thm:up-sigma}
+  \index{dependent universal property!of S-types@{of $\Sigma$-types}|textbf}
+  \index{dependent pair type!dependent universal property|textbf}
+Let $B$ be a type family over $A$, and let $C$ be a type family over $\sm{x:A}B(x)$. Then the map\index{ev-pair@{$\evpair$}!is an equivalence}
+\begin{equation*}
+\evpair:\Big(\prd{z:\sm{x:A}B(x)}C(z)\Big)\to \Big(\prd{x:A}\prd{y:B(x)}C(x,y)\Big),
+\end{equation*}
+given by $f\mapsto\lam{x}\lam{y}f(x,y)$, is an equivalence.\index{is an equivalence!ev-pair@{$\evpair$}}
+\end{thm}
+
+\begin{proof}
+The map in the converse direction is obtained by the induction principle of $\Sigma$-types. It is simply the map
+\begin{equation*}
+\indSigma : \Big(\prd{x:A}\prd{y:B(x)}C(x,y)\Big)\to \Big(\prd{z:\sm{x:A}B(x)}C(z)\Big).
+\end{equation*}
+By the computation rule for $\Sigma$-types we have the homotopy
+\begin{equation*}
+\reflhtpy:\evpair\circ\indSigma\htpy\idfunc.
+\end{equation*}
+This shows that $\indSigma$ is a section of $\evpair$.
+
+To show that $\indSigma\circ\evpair\htpy\idfunc$ we will apply the function extensionality principle. Therefore it suffices to show that $\indSigma(\lam{x}\lam{y}f(x,y))=f$. We apply function extensionality again, so it suffices to show that
+\begin{equation*}
+\prd{t:\sm{x:A}B(x)}\indSigma\big(\lam{x}\lam{y}f(x,y)\big)(t)=f(t).
+\end{equation*}
+We obtain this homotopy by another application of $\Sigma$-induction. 
+\end{proof}
+
+\begin{cor}\label{cor:times_up_out}
+  \index{universal property!of cartesian products|textbf}
+  \index{cartesian product type!universal property|textbf}
+Let $A$, $B$, and $X$ be types. Then the map\index{ev-pair@{$\evpair$}!is an equivalence}\index{is an equivalence!ev-pair@{$\evpair$}}
+\begin{equation*}
+\evpair: (A\times B \to X)\to (A\to (B\to X))
+\end{equation*}
+given by $f\mapsto\lam{a}\lam{b}f(a,b)$ is an equivalence.
+\end{cor}
+\index{universal property!of S-types@{of $\Sigma$-types}|)}
+\index{dependent universal property!of S-types@{of $\Sigma$-types}|)}
+\index{dependent pair type!universal property|)}
+\index{dependent pair type!dependent universal property|)}
+
+\subsubsection*{The universal property of identity types}
+\index{identity type!universal property|(}
+\index{identity type!dependent universal property|(}
+\index{universal property!of identity types|(}
+\index{dependent universal property!of identity types|(}
+The universal property of identity types is the fact that families of maps out of the identity type are uniquely determined by their action on the reflexivity identification. More precisely, the map
+\begin{equation*}
+  \evrefl:\Big(\prd{x:A}(a=x)\to B(x)\Big)\to B(a)
+\end{equation*}
+given by $\lam{f} f(a,\refl{a})$ is an equivalence, for every type family $B$ over $A$. Since this result is similar to the Yoneda lemma of category theory, the universal property of identity types is sometimes referred to as the \emph{type theoretic Yoneda lemma}. We will prove the \emph{dependent} universal property of identity types, a slight generalization of the universal property.
+
+\begin{thm}\label{thm:yoneda}
+  \index{dependent universal property!of identity types|textbf}
+  \index{identity type!dependent universal property|textbf}
+Consider a type $A$ equipped with $a:A$, and consider a family of types $B(x,p)$ indexed by $x:A$ and $p:a=x$. Then the map\index{ev-refl@{$\evrefl$}|textbf}
+\begin{equation*}
+\evrefl:\Big(\prd{x:A}\prd{p:a=x}B(x,p)\Big)\to B(a,\refl{a}),
+\end{equation*}
+given by $\lam{f} f(a,\refl{a})$, is an equivalence.\index{is an equivalence!ev-refl@{$\evrefl$}}\index{ev-refl@{$\evrefl$}!is an equivalence}
+\end{thm}
+
+\begin{proof}
+  The inverse is the function
+  \begin{equation*}
+    \pathind_a : B(a,\refl{a})\to \prd{x:A}\prd{p:a=x}B(x,p).
+  \end{equation*}
+  It is immediate from the computation rule of the path induction principle that $\evrefl\circ\pathind_a\htpy \idfunc$.
+
+To see that $\pathind_a\circ \evrefl\htpy\idfunc$, let $f:\prd{x:A}(a=x)\to B(x,p)$. To show that $\pathind_a(f(a,\refl{a}))=f$ we apply function extensionality twice. Therefore it suffices to show that
+\begin{equation*}
+\prd{x:A}\prd{p:a=x} \pathind_a(f(a,\refl{a}),x,p)=f(x,p).
+\end{equation*}
+This follows by path induction on $p$, since $\pathind_a(f(a,\refl{a}),a,\refl{a})\jdeq f(a,\refl{a})$ by the computation rule of path induction.
+\end{proof}
+\index{identity type!universal property|)}
+\index{identity type!dependent universal property|)}
+\index{universal property!of identity types|)}
+\index{dependent universal property!of identity types|)}
+
+\subsection{Composing with equivalences}
+
+We show in the following theorem that a map $f:A\to B$ is an equivalence if and only if precomposing by $f$ is an equivalence.
+
+\begin{thm}\label{ex:equiv_precomp}
+  \index{equivalence!precomposition}
+  For any map $f:A\to B$, the following are equivalent:
+  \begin{enumerate}
+  \item $f$ is an equivalence.
+  \item For any type family $P$ over $B$ the map
+    \begin{equation*}
+      \Big(\prd{y:B}P(y)\Big)\to\Big(\prd{x:A}P(f(x))\Big)
+    \end{equation*}
+    given by $h\mapsto h\circ f$ is an equivalence.
+  \item For any type $X$ the map
+    \begin{equation*}
+      (B\to X)\to (A\to X)
+    \end{equation*}
+    given by $g\mapsto g\circ f$ is an equivalence. 
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+To show that (i) implies (ii), we first recall from \cref{lem:coherently-invertible} that any equivalence is also coherently invertible. Therefore $f$ comes equipped with
+\begin{align*}
+g & : B \to A\\
+G & : f\circ g \htpy \idfunc[B] \\
+H & : g\circ f \htpy \idfunc[A] \\
+K & : G\cdot f \htpy f\cdot H.
+\end{align*}
+Then we define the inverse of $\blank\circ f$ to be the map
+\begin{equation*}
+\varphi:\Big(\prd{x:A}P(f(x))\Big)\to\Big(\prd{y:B}P(y)\Big)
+\end{equation*}
+given by $h\mapsto \lam{y}\tr_P(G(y),h(g(y)))$. 
+
+To see that $\varphi$ is a section of $\blank\circ f$, let $h:\prd{x:A}P(f(x))$. By function extensionality it suffices to construct a homotopy $\varphi(h)\circ f\htpy h$. In other words, we have to show that
+\begin{equation*}
+\tr_P(G(f(x)),h(g(f(x)))=h(x)
+\end{equation*}
+for any $x:A$. Now we use the additional homotopy $K$ from our assumption that $f$ is coherently invertible. Since we have $K(x):G(f(x))=\ap{f}{H(x)}$ it suffices to show that
+\begin{equation*}
+\tr_P(\ap{f}{H(x)},h(g(f(x))))=h(x).
+\end{equation*}
+A simple path-induction argument yields that
+\begin{equation*}
+\tr_P(\ap{f}{p})\htpy \tr_{P\circ f}(p)
+\end{equation*}
+for any path $p:x=y$ in $A$, so it suffices to construct an identification
+\begin{equation*}
+\tr_{P\circ f}(H(x),h(g(f(x))))=h(x).
+\end{equation*}
+We have such an identification by $\apd{h}{H(x)}$.
+
+To see that $\varphi$ is a retraction of $\blank\circ f$, let $h:\prd{y:B}P(y)$. By function extensionality it suffices to construct a homotopy $\varphi(h\circ f)\htpy h$. In other words, we have to show that
+\begin{equation*}
+\tr_P(G(y),h(f(g(y))))=h(y)
+\end{equation*}
+for any $y:B$. We have such an identification by $\apd{h}{G(y)}$. This completes the proof that (i) implies (ii).
+
+Note that (iii) is an immediate consequence of (ii), since we can just choose $P$ to be the constant family $X$.
+
+It remains to show that (iii) implies (i). Suppose that
+\begin{equation*}
+\blank\circ f:(B\to X)\to (A\to X)
+\end{equation*}
+is an equivalence for every type $X$. Then its fibers are contractible by \cref{thm:contr_equiv}. In particular, choosing $X\jdeq A$ we see that the fiber
+\begin{equation*}
+\fib{\blank\circ f}{\idfunc[A]}\jdeq \sm{h:B\to A}h\circ f=\idfunc[A]
+\end{equation*}
+is contractible. Thus we obtain a function $h:B\to A$ and a homotopy $H:h\circ f\htpy\idfunc[A]$ showing that $h$ is a retraction of $f$. We will show that $h$ is also a section of $f$. To see this, we use that the fiber
+\begin{equation*}
+\fib{\blank\circ f}{f}\jdeq \sm{i:B\to B} i\circ f=f
+\end{equation*}
+is contractible (choosing $X\defeq B$). 
+Of course we have $(\idfunc[B],\refl{f})$ in this fiber. However we claim that there also is an identification $p:(f\circ h)\circ f=f$, showing that $(f\circ h,p)$ is in this fiber, because
+\begin{align*}
+(f\circ h)\circ f & \jdeq f\circ (h\circ f) \\
+& = f\circ \idfunc[A] \\
+& \jdeq f
+\end{align*}
+From the contractibility of the fiber we obtain an identification $(\idfunc[B],\refl{f})=(f\circ h,p)$. In particular we obtain that $\idfunc[B]=f\circ h$, showing that $h$ is a section of $f$.
+\end{proof}
+
+\subsection{The strong induction principle of \texorpdfstring{$\N$}{ℕ}}
+\index{strong induction principle!of N@{of $\N$}|(}
+\index{natural numbers!strong induction principle|(}
+
+In the final application of the function extensionality principle we prove the strong induction principle for the type of natural numbers. Function extensionality is used to derive the computation rules of the strong induction principle.
+
+\begin{thm}[Strong induction for the natural numbers]\label{thm:strong-ind-N}
+  \index{strong induction principle!of N@{of $\N$}|textbf}
+  \index{natural numbers!strong induction principle|textbf}
+  Consider a type family $P$ over $\N$ equipped with
+  \begin{align*}
+    p_0 & : P(0) \\
+    p_S & : \prd{n:\N}\Big(\prd{m:\N}(m\leq n)\to P(m)\Big)\to P(n+1).
+  \end{align*}
+  Then there is a dependent function\index{strong-ind@{$\strongindN$}|textbf}
+  \begin{equation*}
+    \strongindN(p_0,p_S) : \prd{n:\N}P(n)
+  \end{equation*}
+  that satisfies the following computation rules
+  \begin{align*}
+    \strongindN(p_0,p_S,0) & = p_0 \\
+    \strongindN(p_0,p_S,n+1) & = p_S(n,(\lam{m}\lam{p}\strongindN(p_0,p_S,m))).
+  \end{align*}
+\end{thm}
+
+In order to construct $\strongindN(p_0,p_S)$, we first define the type family $\tilde{P}$ over $\N$ by
+\begin{equation*}
+  \tilde{P}(n)\defeq \prd{m:\N} (m\leq n)\to P(m).
+\end{equation*}
+The idea is then to first use $p_0$ and $p_S$ to construct
+\begin{align*}
+  \tilde{p}_0 & : \tilde{P}(0) \\
+  \tilde{p}_S & :\prd{n:\N}\tilde{P}(n)\to\tilde{P}(n+1).
+\end{align*}
+The ordinary induction principle of $\N$ then gives a function
+\begin{equation*}
+  \indN(\tilde{p}_0,\tilde{p}_S):\prd{n:\N}\tilde{P}(n),
+\end{equation*}
+which can be used to define a function $\prd{n:\N}P(n)$.
+
+Before we start by the proof of \cref{thm:strong-ind-N} we state two lemmas in which we construct $\tilde{p}_0$ and $\tilde{p}_S$ with computation rules of their own. We will assume a type family $P$ over $\N$ equipped with
+  \begin{align*}
+    p_0 & : P(0) \\
+    p_S & : \prd{n:\N}\tilde{P}(n) \to P(n+1),
+  \end{align*}
+as in the hypotheses of \cref{thm:strong-ind-N}.
+
+\begin{lem}
+  There is an element $\tilde{p}_0:\tilde{P}(0)$ that satisfies the judgmental equality
+  \begin{equation*}
+    \tilde{p}_0(0,p)\jdeq p_0
+  \end{equation*}
+  for any $p:0\leq 0$.
+\end{lem}
+
+\begin{proof}
+  The fact that we have such a dependent function $\tilde{p}_0$ follows immediately by induction on $m$ and $p:m\leq 0$.
+\end{proof}
+
+\begin{lem}\label{lem:succ-strong-ind-N}
+  There is a function
+  \begin{equation*}
+    \tilde{p}_S : \prd{n:\N}\tilde{P}(n)\to\tilde{P}(n+1)
+  \end{equation*}
+  equipped with
+  \begin{enumerate}
+  \item an identification
+    \begin{equation*}
+      \tilde{p}_S(n,H,m,p) = H(m,q)
+    \end{equation*}
+    for every $H:\tilde{P}(n)$ and every $p:m\leq n+1$ and $q:m\leq n$, and
+  \item an identification
+    \begin{equation*}
+      \tilde{p}_S(n,H,n+1,p) = p_S(n,H)
+    \end{equation*}
+    for every $p:n+1\leq n+1$.
+  \end{enumerate}
+\end{lem}
+
+\begin{proof}
+  To define the function $\tilde{p}_S(n,H)$, note that there is a function
+  \begin{equation*}
+    f : (m\leq n+1)\to (m\leq n)+(m=n+1)\tag{\textasteriskcentered}
+  \end{equation*}
+  which can be defined by induction on $n$ and $m$. Using the fact that the domain and codomain of this map are both propositions, this function is easily seen to be an equivalence. Therefore we define first a function
+  \begin{equation*}
+    h(n,H) :\prd{m:\N} ((m\leq n)+(m=n+1))\to P(m)
+  \end{equation*}
+  by case analysis on $x:(m\leq n)+(m=n+1)$. There are two cases to consider: one where we have $q:m\leq n$, and one where we have $q:m=n+1$. Note that in the second case it suffices to make a definition for $q\jdeq \refl{}$. Therefore we define
+  \begin{equation*}
+    h(n,H,m,x) =
+    \begin{cases}
+      H(m,q) & \text{if }x\jdeq\inl(q)\\
+      p_S(n,H) & \text{if }x\jdeq\inr(\refl{}).
+    \end{cases}
+  \end{equation*}
+  Now we define $\tilde{p}_S$ by
+  \begin{equation*}
+    \tilde{p}_S(n,H,m,p)\defeq h(n,H,m,f(p)),
+  \end{equation*}
+  where $f:(m\leq n+1)\to (m\leq n)+(m=n+1)$ is the map we mentioned in (\textasteriskcentered).
+  
+  To construct the identifications claimed in (i) and (ii), note that there is an equivalence
+  \begin{equation*}
+    \big(\tilde{p}_S(n,H,m,p)=y\big)\simeq \big(h(n,H,m,x)=y\big),
+  \end{equation*}
+  for any $y:P(m)$. This equivalence is obtained from the fact that $f(p)=x$ for any $x:(m\leq n)+(m=n+1)$, i.e., the fact that $(m\leq n)+(m=n+1)$ is a proposition. Now the identifications in (i) and (ii) are obtained as a simple consequence of the computation rule for coproducts.
+\end{proof}
+
+We are now ready to finish the proof of \cref{thm:strong-ind-N}.
+
+\begin{proof}[Proof of \cref{thm:strong-ind-N}]
+  Using $\tilde{p}_0$ and $\tilde{p}_S$, we obtain by induction on $n$ a function
+  \begin{equation*}
+    \tilde{s}:\prd{n:\N}\tilde{P}(n)
+  \end{equation*}
+  satisfying the computation rules
+  \begin{align*}
+    \tilde{s}(0) & \jdeq \tilde{p}_0 \\
+    \tilde{s}(n+1) & \jdeq \tilde{p}_S(n,\tilde{s}(n)).
+  \end{align*}
+  Now we define
+  \begin{equation*}
+    \strongindN(p_0,p_S,n) \defeq \tilde{s}(n,n,\reflleqN(n)),
+  \end{equation*}
+  where $\reflleqN(n):n\leq n$ is the proof of reflexivity of $\leq$.
+
+  It remains to show that $\strongindN$ satisfies the computation rules of the strong induction principle. The identification that computes $\strongindN$ at $0$ is easy to obtain, because we have the judgmental equalities
+  \begin{align*}
+    \strongindN(p_0,p_S,0) & \jdeq \tilde{s}(0,0,\reflleqN(0)) \\
+                                & \jdeq \tilde{p}_{0}(0,\reflleqN(0)) \\
+                                & \jdeq p_0.
+  \end{align*}
+  To construct the identification that computes $\strongindN$ at a successor, we start by a similar computation:
+  \begin{align*}
+    \strongindN(p_0,p_S,n+1) & \jdeq \tilde{s}(n+1,n+1,\reflleqN(n+1)) \\
+                                   & \jdeq \tilde{p}_S(n,\tilde{s}(n),n+1,\reflleqN(n+1)) \\
+    & = p_S(n,\tilde{s}(n)).
+  \end{align*}
+  The last identification is obtained from \cref{lem:succ-strong-ind-N} (ii).
+  Therefore we see that, in order to show that
+  \begin{equation*}
+    p_S(n,\tilde{s}(n))=p_S(n,(\lam{m}\lam{p}\tilde{s}(m,m,\reflleqN(m)))),
+  \end{equation*}
+  we need to prove that
+  \begin{equation*}
+    \tilde{s}(n)=\lam{m}\lam{p}\tilde{s}(m,m,\reflleqN(m)).
+  \end{equation*}
+  Here we apply function extensionality, so it suffices to show that
+  \begin{equation*}
+    \tilde{s}(n,m,p)=\tilde{s}(m,m,\reflleqN(m))
+  \end{equation*}
+  for every $m:\N$ and $p:m\leq n$. We proceed by induction on $n:\N$. The base case is trivial. For the inductive step, we note that
+  \begin{align*}
+    \tilde{s}(n+1,m,p)=\tilde{p}_S(n,\tilde{s}(n),m,p)=\begin{cases}\tilde{s}(n,m,p) & \text{if }m\leq n \\
+    p_S(n,\tilde{s}(n)) & \text{if }m=n+1.\end{cases}
+  \end{align*}
+  Therefore it follows by the inductive hypothesis that
+  \begin{equation*}
+    \tilde{s}(n+1,m,p)=\tilde{s}(m,m,\reflleqN(m))
+  \end{equation*}
+  if $m\leq n$ holds. In the remaining case, where $m=n+1$, note that we have
+  \begin{align*}
+    \tilde{s}(n+1,n+1,\reflleqN(n+1)) & = \tilde{p}_S(n,\tilde{s}(n),n+1,\reflleqN(n+1)) \\
+    & = p_S(n,\tilde{s}(n)).
+  \end{align*}
+  Therefore we see that we also have an identification
+  \begin{equation*}
+    \tilde{s}(n+1,m,p)=\tilde{s}(m,m,\reflleqN(m))
+  \end{equation*}
+  when $m=n+1$. This completes the proof of the computation rules for the strong induction principle of $\N$.
+\end{proof}
+\index{strong induction principle!of N@{of $\N$}|)}
+\index{natural numbers!strong induction principle|)}
+
+\begin{exercises}
+  \exitem \label{ex:is-equiv-inv-htpy}Show that the functions\index{inv-htpy@{$\invhtpy$}!is an equivalence}\index{concat-htpy@{$\concathtpy$}!is a family of equivalences}\index{concat-htpy'@{$\concathtpy'$}!is a family of equivalences}\index{is an equivalence!inv-htpy@{$\invhtpy$}}\index{is an equivalence!concat-htpy(H)@{$\concathtpy(H)$}}\index{is an equivalence!concat-htpy'(K)@{$\concathtpy'(K)$}}
+  \begin{align*}
+    \invhtpy & : (f \htpy g) \to (g \htpy f) \\
+    \concathtpy(H) & : (g \htpy h) \to (f \htpy h) \\
+    \concathtpy'(K) & : (f \htpy g) \to (f \htpy h)
+  \end{align*}
+  are equivalences for every $f,g,h : \prd{x:A}B(x)$. Here, $\concathtpy'(K)$ is the function defined by $H\mapsto \ct{H}{K}$.
+  \exitem Characterize the identity types of the following types:
+  \begin{subexenum}
+  \item The type $\sm{h:A\to B}h(a)=b$ of \define{pointed maps}\index{pointed map|textbf}, where $a:A$ and $b:B$ are given.
+  \item The type $\sm{h:A\to B}f\htpy g\circ h$ of commuting triangles
+    \begin{equation*}
+      \begin{tikzcd}[column sep=tiny]
+        A \arrow[rr,"h"] \arrow[dr,swap,"f"] & & B \arrow[dl,"g"] \\
+        & X,
+      \end{tikzcd}
+    \end{equation*}
+    where $f:A\to X$ and $g:B\to X$ are given.
+  \item The type $\sm{h:X\to Y}h\circ f\htpy g$ of commuting triangles
+    \begin{equation*}
+      \begin{tikzcd}[column sep=tiny]
+        & A \arrow[dl,swap,"f"] \arrow[dr,"g"] \\
+        X \arrow[rr,swap,"h"] & & Y,
+      \end{tikzcd}
+    \end{equation*}
+    where $f:A\to X$ and $g:A\to Y$ are given.
+  \item The type $\sm{i:A\to X}\sm{j:B\to Y}j\circ f\htpy g\circ i$ of commuting squares
+    \begin{equation*}
+      \begin{tikzcd}
+        A \arrow[d,swap,"f"] \arrow[r,"i"] & X \arrow[d,"g"] \\
+        B \arrow[r,swap,"j"] & Y,
+      \end{tikzcd}
+    \end{equation*}
+    where $f:A\to B$ and $g:X\to Y$ are given.
+  \end{subexenum}
+  \exitem \label{ex:isprop_istrunc}
+  \begin{subexenum}
+  \item Show that for any type $A$ the type $\iscontr(A)$ is a proposition\index{is-contr(A)@{$\iscontr(A)$}!is a proposition}\index{is contractible!is a property}\index{is a proposition!is-contr(A)@{$\iscontr(A)$}}.
+  \item Show that for any type $A$ and any $k\geq-2$, the type $\istrunc{k}(A)$ is a proposition.\index{istrunc@{$\istrunc{k}$}!is a proposition}\index{is a proposition!istrunc(A)@{$\istrunc{k}(A)$}}
+  \end{subexenum}
+  \exitem \label{ex:isprop_isequiv}Let $f:A\to B$ be a function.
+  \begin{subexenum}
+  \item Show that if $f$ is an equivalence, then the type $\sm{g:B\to A}f\circ g\htpy \idfunc$ of sections of $f$ is contractible.
+  \item Show that if $f$ is an equivalence, then the type $\sm{h:B\to A}h\circ f\htpy \idfunc$ of retractions of $f$ is contractible.
+  \item Show that $\isequiv(f)$ is a proposition.\index{is-equiv(f)@{$\isequiv(f)$}!is a proposition}\index{is a proposition!is-equiv(f)@{$\isequiv(f)$}}
+  \item Show that for any two equivalences $e,e':A\simeq B$, the canonical map
+    \begin{equation*}
+      (e=e')\to (e\htpy e')
+    \end{equation*}
+    is an equivalence.
+  \item Show that the type $A\simeq B$ is a $k$-type if both $A$ and $B$ are $k$-types.\index{is a truncated type!A simeq B@{$A\simeq B$}}
+  \end{subexenum}
+  \exitem
+  \begin{subexenum}
+  \item Show that $\pathsplit(f)$\index{path-split!is a proposition}\index{is a proposition!is-path-split(f)@{$\pathsplit(f)$}} and $\iscohinvertible(f)$\index{is-coh-invertible(f)@{$\iscohinvertible(f)$}!is a proposition}\index{is a proposition!is-coh-invertible(f)@{$\iscohinvertible(f)$}} are propositions for any map $f:A\to B$. Conclude that we have equivalences\index{is-equiv(f)@{$\isequiv(f)$}!is-equiv(f) path-split(f)@{$\isequiv(f)\eqvsym\pathsplit(f)$}}\index{is-equiv(f)@{$\isequiv(f)$}!is-equiv(f) is-coh-invertible(f)@{$\isequiv(f)\eqvsym\iscohinvertible(f)$}}
+    \begin{equation*}
+      \isequiv(f) \eqvsym \pathsplit(f) \eqvsym \iscohinvertible(f).
+    \end{equation*}
+  \item \label{ex:idfunc_autohtpy}Construct for any type $A$ an equivalence\index{has-inverse(f)@{$\hasinverse(f)$}!has-inverse(id) id htpy id@{$\hasinverse(\idfunc)\simeq (\idfunc\htpy\idfunc)$}}
+    \begin{equation*}
+      \eqv{\hasinverse(\idfunc[A])}{\Big(\idfunc[A]\htpy\idfunc[A]\Big)}.
+    \end{equation*}
+    Note: We will use this fact in \cref{ex:is_invertible_id_S1} to show that there
+    are types for which $\hasinverse(\idfunc[A])\not\eqvsym\isequiv(\idfunc[A])$.
+  \end{subexenum}
+  \exitem \label{ex:up-emptyt}Consider a type $A$. Show that the following are equivalent:
+  \begin{enumerate}
+  \item The type $A$ is empty.
+  \item \label{item:dup-empty}The type $\prd{x:A}P(x)$ is contractible for any family $P$ of types over $A$. This property is the \define{dependent universal property of an empty type}\index{dependent universal property!of empty types|textbf}\index{empty type!dependent universal property|textbf}.
+  \item \label{item:up-empty}The type $A\to X$ is contractible for any type $X$. This property is the \define{universal property of an empty type}\index{universal property!of empty types|textbf}\index{empty type!universal property|textbf}.
+  \end{enumerate}
+  \exitem \label{ex:up-unit}Consider a type $A$. Show that the following are equivalent:
+  \begin{enumerate}
+  \item \label{item:is-contr}The type $A$ is contractible.
+  \item \label{item:dup-unit}The type $A$ comes equipped with a point $a:A$, and the map
+    \begin{equation*}
+      \Big(\prd{x:A}P(x)\Big)\to P(a)
+    \end{equation*}
+    given by $f\mapsto f(a)$ is an equivalence for any type family $P$ over $A$. This property is the \define{dependent universal property of a contractible type}\index{dependent universal property!of contractible types|textbf}\index{contractible type!dependent universal property|textbf}.
+  \item \label{item:up-unit}The type $A$ comes equipped with a point $a:A$, and the map
+    \begin{equation*}
+      (A\to X)\to X
+    \end{equation*}
+    given by $f\mapsto f(a)$ is an equivalence for any type $X$. This property is the \define{universal property of a contractible type}\index{universal property!of contractible types|textbf}\index{contractible type!universal property|textbf}.
+  \item The type $A$ comes equipped with a point $a:A$, and the map
+    \begin{equation*}
+      (A\to A)\to A
+    \end{equation*}
+    given by $f\mapsto f(a)$ is an equivalence.
+  \item \label{item:is-equiv-diag-universal}The map
+    \begin{equation*}
+      X\to (A\to X)
+    \end{equation*}
+    given by $x\mapsto\lam{y}x$ is an equivalence for any type $X$.
+  \item \label{item:is-equiv-diag}The map
+    \begin{equation*}
+      A\to (A\to A)
+    \end{equation*}
+    given by $x\mapsto\lam{y}x$ is an equivalence.
+  \end{enumerate}
+  \exitem \label{ex:up-coproduct}
+  Consider two types $A$ and $B$. Show that the map
+  \begin{equation*}
+    \Big(\prd{z:A+B}P(z)\Big)\to\Big(\prd{x:A}P(\inl(x))\Big)\times\Big(\prd{y:B}P(\inr(b))\Big)
+  \end{equation*}
+  given by $f\mapsto (f\circ \inl,f\circ \inr)$ is an equivalence for any type family $P$ over $A+B$. This property is the \define{dependent universal property of the coproduct of $A$ and $B$}\index{dependent universal property!of coproducts|textbf}\index{coproduct!dependent universal property|textbf}. Conclude that the map
+  \begin{equation*}
+    (A+B\to X)\to (A\to X)\times (B\to X)
+  \end{equation*}
+  given by $f\mapsto (f\circ \inl,f\circ \inr)$ is an equivalence for any type $X$. This latter property is the \define{universal property of the coproduct of $A$ and $B$}\index{universal property!of coproducts|textbf}\index{coproduct!universal property|textbf}.
+  \exitem\label{ex:uniqueness-identity-type}Consider a type $A$ equipped with an element $a:A$ and consider a type family $B$ over $A$ equipped with an element $b:B(a)$. Show that the following are equivalent:\index{identity type!uniqueness}
+  \begin{enumerate}
+  \item The map
+    \begin{equation*}
+      \ev_b:\Big(\prd{x:A}B(x)\to C(x)\Big)\to C(a)
+    \end{equation*}
+    given by $\ev_b(h)\defeq h(a,b)$ is an equivalence for any type family $C$ over $A$.
+  \item The map
+    \begin{equation*}
+      h:\prd{x:A}(a=x)\to B(x)
+    \end{equation*}
+    given by $h(a,\refl{})\defeq b$ is an equivalence.
+  \end{enumerate}
+  \exitem Prove the \define{universal property of $\N$}\index{universal property!of N@{of $\N$}|textbf}\index{natural numbers!universal property|textbf}: For any type $X$ equipped with $x:X$ and $f:X\to X$, the type
+  \begin{equation*}
+    \sm{h:\N\to X} (h(\zeroN)= x)\times (h\circ \succN\htpy f\circ h)
+  \end{equation*}
+  is contractible.
+  \exitem Show that $\N$ satisfies \define{ordinal induction}\index{ordinal induction!of N@{of $\N$}}\index{natural numbers!ordinal induction|textbf}, i.e., construct for any type family $P$ over $\N$ a function $\ordindN$ of type
+  \begin{equation*}
+    \Big(\prd{k:\N} \Big(\prd{m:\N} (m< k) \to P(m)\Big)\to P(k)\Big) \to \prd{n:\N}P(n).
+  \end{equation*}
+  Moreover, prove that
+  \begin{equation*}
+    \ordindN(h,n)=h(n,\lam{m}\lam{p}\ordindN(h,m))
+  \end{equation*}
+  for any $n:\N$ and any $h:\prd{k:\N}\Big(\prd{m:\N}(m<k)\to P(m)\Big)\to P(k)$.
+  \exitem \label{ex:equiv-pi} 
+  \begin{subexenum}
+  \item Consider a family of $k$-truncated maps $f_i:A_i\to B_i$ indexed by $i:I$. Show that the map
+    \begin{equation*}
+      \lam{h}\lam{i}f_i(h(i)): \Big(\prd{i:I}A_i\Big)\to\Big(\prd{i:I}B_i\Big)
+    \end{equation*}
+    is also $k$-truncated.
+  \item Consider an equivalence $e:I\simeq J$, and a family of equivalences $f_i:A_i\simeq B_{e(i)}$ indexed by $i:I$, where $A$ is a family of types indexed by $I$ and $B$ family of types indexed by $J$. Show that the map
+    \begin{equation*}
+      \lam{h}\lam{j} f_{e^{-1}(j)}(h(e^{-1}(j))) : \Big(\prd{i:I}A_i\Big)\to\Big(\prd{j:J}B_j\Big)
+    \end{equation*}
+    is an equivalence.
+  \item Consider a family of maps $f_i:A_i\to B_i$ indexed by $i:I$. Show that the following are equivalent:
+    \begin{enumerate}
+    \item Each $f_i$ is $k$-truncated.
+    \item For every map $\alpha:X\to I$, the map
+      \begin{equation*}
+        \lam{h}\lam{x}f_{\alpha(x)}(h(x)):\Big(\prd{x:X}A_{\alpha(x)}\Big)\to\Big(\prd{x:X}B_{\alpha(x)}\Big)
+      \end{equation*}
+      is $k$-truncated.
+    \end{enumerate}
+  \item \label{ex:equiv-postcomp}Show that for any map $f:A\to B$ the following are equivalent:
+    \begin{enumerate}
+    \item The map $f$ is $k$-truncated.
+    \item For every type $X$, the postcomposition function
+      \begin{equation*}
+        f\circ\blank : (X\to A)\to (X\to B)
+      \end{equation*}
+      is $k$-truncated.
+    \end{enumerate}
+    In particular, $f$ is an equivalence if and only if $f\circ\blank$ is an equivalence, and $f$ is an embedding if and only if $f\circ\blank$ is an embedding.
+  \end{subexenum}
+  \exitem Show that \emph{$\Pi$-types distribute over coproducts}\index{distributivity!of P over coproducts@{of $\Pi$ over coproducts}}\index{dependent function type!distributivity of P over coproducts@{distributivity of $\Pi$ over coproducts}}\index{coproduct!distributivity of P over coproducts@{distributivity of $\Pi$ over coproducts}}, i.e., construct for any type $X$ and any two families $A$ and $B$ over $X$ an equivalence from the type $\prd{x:X}A(x)+B(x)$ to the type
+  \begin{equation*}
+    \sm{f:X\to\Fin{2}}\Big(\prd{x:X}A(x)^{f(x)=0}\Big)\times\Big(\prd{x:X}B(x)^{f(x)=1}\Big).
+  \end{equation*}
+  \exitem \label{ex:sec_retr}Consider a commuting triangle 
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[rr,"h"] \arrow[dr,swap,"f"] & & B \arrow[dl,"g"] \\
+      & X
+    \end{tikzcd}
+  \end{equation*}
+  with $H:f\htpy g\circ h$.
+  \begin{subexenum}
+  \item Show that if $h$ has a section, then $\sections(g)$ is a retract of $\sections(f)$.
+  \item Show that if $g$ has a retraction, then $\retractions(h)$ is a retract of $\sections(f)$.
+  \end{subexenum}
+  \exitem \label{ex:triangle_fib}For any two maps $f:A\to X$ and $g:B\to X$, define the type of \define{morphisms from $f$ to $g$ over $X$}\index{morphism from f to g over X@{morphism from $f$ to $g$ over $X$}|textbf} by\index{hom X (f,g)@{$\homslice_X(f,g)$}|textbf}
+  \begin{equation*}
+    \homslice_X(f,g)\defeq \sm{h:A\to B} f\htpy g\circ h.
+  \end{equation*}
+  In other words, the type $\homslice_X(f,g)$ is the type of maps $h:A\to B$ equipped with a homotopy witnessing that the triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[dr,swap,"f"] \arrow[rr,dashed,"h"] & & B \arrow[dl,"g"] \\
+      & X
+    \end{tikzcd}
+  \end{equation*}
+  commutes.
+  \begin{subexenum}
+  \item \label{ex:pi-fib}Consider a family $P$ of types over $X$. Show that the map
+    \begin{equation*}
+      \Big(\prd{x:X}\fib{f}{x}\to P(x)\Big)\to\Big(\prd{a:A}P(f(a))\Big)
+    \end{equation*}
+    given by $h\mapsto h_{f(a)}(a,\refl{f(a)})$ is an equivalence. 
+  \item Construct three equivalences $\alpha$, $\beta$, and $\gamma$ as shown in the following diagram, and show that this triangle commutes:
+    \begin{equation*}
+      \begin{tikzcd}[column sep=-3em]
+        & \homslice_X(f,g) \arrow[dl,swap,"\alpha"] \arrow[dr,"\beta"] & \phantom{\Big(\prd{x:X}\fib{f}{x}\to\fib{g}{x}\Big)} \\
+        \Big(\prd{x:X}\fib{f}{x}\to\fib{g}{x}\Big) \arrow[rr,swap,"\gamma"] & & \prd{a:A}\fib{g}{f(a)}.
+      \end{tikzcd}
+    \end{equation*}
+    Given a morphism $(h,H):\homslice_X(f,g)$ over $X$, we also say that $\alpha(h,H)$ is its \define{action on fibers}\index{action on fibers|textbf}\index{morphism from f to g over X@{morphism from $f$ to $g$ over $X$}!action on fibers|textbf}.
+  \item \label{ex:fam-equiv}Given $(h,H):\homslice_X(f,g)$, show that the following are equivalent:
+    \begin{enumerate}
+    \item The map $h:A\to B$ is an equivalence.
+    \item The action on fibers
+      \begin{equation*}
+        \alpha(h,H):\prd{x:X}\fib{f}{x}\to\fib{g}{x}
+      \end{equation*}
+      is a family of equivalences.
+    \item The precomposition function
+      \begin{equation*}
+        \blank\circ (h,H) : \homslice_X(g,i)\to\homslice_X(f,i)
+      \end{equation*}
+      given by $(k,K)\circ (h,H) \defeq (k\circ h,\ct{H}{(K\cdot h)})$ is an equivalence for each map $i:C\to X$.
+    \end{enumerate}
+    Conclude that the type $\sm{h:\eqv{A}{B}} f\htpy g\circ h$ is equivalent to the type of families of equivalences
+    \begin{equation*}
+      \prd{x:X}\fib{f}{x}\eqvsym\fib{g}{x}.
+    \end{equation*} 
+  \end{subexenum}
+\exitem \label{ex:iso_equiv}Let $A$ and $B$ be sets. Show that type $\eqv{A}{B}$ of equivalences from $A$ to $B$ is equivalent to the type $A\cong B$ of \define{isomorphisms}\index{isomorphism!of sets|textbf}\index{set!isomorphism|textbf} from $A$ to $B$, i.e., the type of quadruples $(f,g,H,K)$ consisting of
+  \begin{align*}
+    f & : A\to B \\
+    g & : B\to A \\
+    H & : f\circ g = \idfunc[B] \\
+    K & : g\circ f = \idfunc[A].
+  \end{align*}
+\exitem Suppose that $A:I\to \UU$ is a type family over a set $I$ with decidable equality. Show that
+  \begin{equation*}
+    \Big(\prd{i:I}\iscontr(A_i)\Big)\leftrightarrow \iscontr\Big(\prd{i:I}A_i\Big).
+  \end{equation*}
+  \exitem \label{ex:retracts-as-limits}(Shulman) Consider a section-retraction pair
+  \begin{equation*}
+    \begin{tikzcd}
+      A \arrow[r,"i"] & X \arrow[r,"r"] & A
+    \end{tikzcd}
+  \end{equation*}
+  with $H:r\circ i\htpy \idfunc$ and define $f\defeq i\circ r$. Construct an equivalence
+  \begin{equation*}
+    A\simeq\sm{x:\N\to X}\prd{n:\N}f(x_{n+1})=x_n.
+  \end{equation*}
+\end{exercises}
+\index{function extensionality|)}
+\index{axiom!function extensionality|)}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

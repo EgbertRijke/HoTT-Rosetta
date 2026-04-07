@@ -1,0 +1,651 @@
+% !TEX root = hott_intro.tex
+
+\section{The fundamental theorem of identity types}\label{chap:fundamental}
+\sectionmark{The fundamental theorem}
+
+\index{fundamental theorem of identity types|(}
+\index{characterization of identity type!fundamental theorem of identity types|(}
+For many types it is useful to have a characterization of their identity types. For example, we have used a characterization of the identity types of the fibers of a map in order to conclude that any equivalence is a contractible map. The fundamental theorem of identity types is our main tool to carry out such characterizations, and with the fundamental theorem it becomes a routine task to characterize an identity type whenever that is of interest. We note that the fundamental theorem also appears as Theorem 5.8.4 in \cite{hottbook}.
+
+In our first application of the fundamental theorem of identity types we show that any equivalence is an embedding. Embeddings are maps that induce equivalences on identity types, i.e., they are the homotopical analogue of injective maps. In our second application we characterize the identity types of coproducts.
+
+Throughout this book we will encounter many more occasions to characterize identity types. For example, we will show in \cref{thm:eq_nat} that the identity type of the natural numbers is equivalent to its observational equality, and we will show in \cref{thm:eq-circle} that the loop space of the circle is equivalent to $\Z$.
+
+In order to prove the fundamental theorem of identity types, we first prove the basic fact that a family of maps is a family of equivalences if and only if it induces an equivalence on total spaces. 
+
+\subsection{Families of equivalences}
+
+\index{family of equivalences|(}
+\begin{defn}
+Consider a family of maps
+\begin{equation*}
+f : \prd{x:A}B(x)\to C(x).
+\end{equation*}
+We define the map\index{tot(f)@{$\tot{f}$}}
+\begin{equation*}
+\tot{f}:\sm{x:A}B(x)\to\sm{x:A}C(x)
+\end{equation*}
+by $\lam{(x,y)}(x,f(x,y))$.
+\end{defn}
+
+\begin{lem}\label{lem:fib_total}
+  For any family of maps $f:\prd{x:A}B(x)\to C(x)$ and any $t:\sm{x:A}C(x)$,
+  there is an equivalence\index{fiber!of tot(f)@{of $\tot{f}$}}\index{tot(f)@{$\tot{f}$}!fiber}
+  \begin{equation*}
+    \eqv{\fib{\tot{f}}{t}}{\fib{f(\proj 1(t))}{\proj 2(t)}}.
+  \end{equation*}
+\end{lem}
+
+\begin{proof}
+  We first define
+  \begin{equation*}
+    \varphi : \prd{t:\sm{x:A}C(x)} \fib{\tot{f}}{t}\to\fib{f(\proj 1(t))}{\proj 2(t)}
+  \end{equation*}
+  by pattern matching by
+  \begin{equation*}
+    \varphi((x,f(x,y)),((x,y),\refl{}))\defeq(y,\refl{}).
+  \end{equation*}
+
+  For the proof that $\varphi(t)$ is an equivalence, for each $t:\sm{x:A}C(x)$, we construct a map
+  \begin{equation*}
+    \psi(t) : \fib{f(\proj 1(t))}{\proj 2(t)}\to\fib{\tot{f}}{t}
+  \end{equation*}
+  equipped with homotopies $G(t):\varphi(t)\circ\psi(t)\htpy\idfunc$ and $H(t):\psi(t)\circ\varphi(t)\htpy\idfunc$. Each of these definitions is given by pattern matching, as follows:
+  \begin{align*}
+    \psi((x,f(x,y)),(y,\refl{})) & \defeq ((x,y),\refl{}) \\
+    G((x,f(x,y)),(y,\refl{})) & \defeq \refl{} \\
+    H((x,f(x,y)),((x,y),\refl{})) & \defeq \refl{}.\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{thm}\label{thm:fib_equiv}
+  Let $f:\prd{x:A}B(x)\to C(x)$ be a family of maps. The following are equivalent:
+  \index{is an equivalence!total(f) of family of equivalences@{$\tot{f}$ of family of equivalences}}
+  \index{tot(f)@{$\tot{f}$}!of family of equivalences is an equivalence}\index{is family of equivalences!if total(f) is an equivalence@{iff $\tot{f}$ is an equivalence}}
+\begin{enumerate}
+\item For each $x:A$, the map $f(x)$ is an equivalence. In this case we say that $f$ is a \define{family of equivalences}\index{family of equivalences|textbf}\index{equivalence!family of equivalences|textbf}.
+\item The map $\tot{f}:\sm{x:A}B(x)\to\sm{x:A}C(x)$ is an equivalence.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+By \cref{thm:equiv_contr,thm:contr_equiv} it suffices to show that $f(x)$ is a contractible map for each $x:A$, if and only if $\tot{f}$ is a contractible map. Thus, we will show that $\fib{f(x)}{c}$ is contractible if and only if $\fib{\tot{f}}{x,c}$ is contractible, for each $x:A$ and $c:C(x)$. However, by \cref{lem:fib_total} these types are equivalent, so the result follows by \cref{ex:contr_equiv}.
+\end{proof}
+
+Now consider the situation where we have a map $f:A\to B$, and a family $C$ over $B$. Then we have the map
+\begin{equation*}
+  \lam{(x,z)}(f(x),z):\sm{x:A}C(f(x))\to\sm{y:B}C(y).
+\end{equation*}
+We claim that this map is an equivalence when $f$ is an equivalence. The technique to prove this claim is the same as the technique we used in \cref{thm:fib_equiv}: first we note that the fibers are equivalent to the fibers of $f$, and then we use the fact that a map is an equivalence if and only if its fibers are contractible to finish the proof.
+
+The converse of the following lemma does not hold. Why not?
+
+\begin{lem}\label{lem:total-equiv-base-equiv}
+  Consider a map $f:A\to B$, and let $C$ be a type family over $B$. If $f$ is an equivalence, then the map
+  \begin{equation*}
+    \sigma_f(C) \defeq\lam{(x,z)}(f(x),z):\sm{x:A}C(f(x))\to\sm{y:B}C(y)
+  \end{equation*}
+  is an equivalence.
+\end{lem}
+
+\begin{proof}
+  We claim that for each $t:\sm{y:B}C(y)$ there is an equivalence
+  \begin{equation*}
+    \fib{\sigma_f(C)}{t}\simeq \fib{f}{\proj 1(t)}.
+  \end{equation*}
+  We obtain such an equivalence by constructing the following functions and homotopies:
+  \begin{align*}
+    \varphi(t) & : \fib{\sigma_f(C)}{t}\to\fib{f}{\proj 1 (t)} & \varphi((f(x),z),((x,z),\refl{})) & \defeq (x,\refl{}) \\
+    \psi(t) & : \fib{f}{\proj 1(t)} \to\fib{\sigma_f(C)}{t} & \psi((f(x),z),(x,\refl{})) & \defeq ((x,z),\refl{}) \\
+    G(t) & : \varphi(t)\circ\psi(t)\htpy\idfunc & G((f(x),z),(x,\refl{})) & \defeq \refl{} \\
+    H(t) & : \psi(t)\circ\varphi(t)\htpy\idfunc & H((f(x),z),((x,z),\refl{})) & \defeq \refl{}.
+  \end{align*}
+  Now the claim follows, since we see that $\varphi$ is a contractible map if and only if $f$ is a contractible map.
+\end{proof}
+
+Now we use \cref{lem:total-equiv-base-equiv} to obtain a generalization of \cref{thm:fib_equiv}.
+
+\begin{defn}\label{defn:toto}
+  Consider a map $f:A\to B$ and a family of maps
+  \begin{equation*}
+    g:\prd{x:A}C(x)\to D(f(x)),
+  \end{equation*}
+  where $C$ is a type family over $A$, and $D$ is a type family over $B$. In this situation we also say that $g$ is a \define{family of maps over $f$}. Then we define\index{totf(g)@{$\tot[f]{g}$}}
+  \begin{equation*}
+    \tot[f]{g}:\sm{x:A}C(x)\to\sm{y:B}D(y)
+  \end{equation*}
+  by $\tot[f]{g}(x,z)\defeq (f(x),g(x,z))$.
+\end{defn}
+
+\begin{thm}\label{thm:equiv-toto}
+  Suppose that $g$ is a family of maps over $f$ as in \cref{defn:toto}, and suppose that $f$ is an equivalence. Then the following are equivalent:
+  \begin{enumerate}
+  \item The family of maps $g$ over $f$ is a family of equivalences.
+  \item The map $\tot[f]{g}$ is an equivalence.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  Note that we have a commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=0]
+      \sm{x:A}C(x) \arrow[rr,"{\tot[f]{g}}"] \arrow[dr,swap,"\tot{g}"]& & \sm{y:B}D(y) \\
+      & \sm{x:A}D(f(x)) \arrow[ur,swap,"{\lam{(x,z)}(f(x),z)}"]
+    \end{tikzcd}
+  \end{equation*}
+  By the assumption that $f$ is an equivalence, it follows that the map
+  \begin{equation*}
+    \sm{x:A}D(f(x))\to \sm{y:B}D(y)
+  \end{equation*}
+  is an equivalence. Therefore it follows that $\tot[f]{g}$ is an equivalence if and only if $\tot{g}$ is an equivalence. Now the claim follows, since $\tot{g}$ is an equivalence if and only if $g$ if a family of equivalences.
+\end{proof}
+\index{family of equivalences|)}
+
+\subsection{The fundamental theorem}
+
+\index{identity system|(}
+
+The fundamental theorem of identity types (\cref{thm:id_fundamental}) is a general theorem that can be used to characterize the identity type of a given type. It describes necessary and sufficient conditions on a type family $B$ over a type $A$ equipped with a point $a:A$ to obtain an equivalence $(a=x)\simeq B(x)$ for each $x:A$.
+
+One of those conditions is that the family $B$ satisfies an induction principle that is similar to the identification elimination principle. Such families are called \emph{identity systems}, which we will introduce now.
+
+\begin{defn}\label{defn:identity-system}
+  Let $A$ be a type equipped with a term $a:A$. A \define{(unary) identity system}\index{identity system|textbf}\index{unary identity system|see {identity system}} on $A$ at $a$ consists of a type family $B$ over $A$ equipped with $b:B(a)$, such that for any family of types $P(x,y)$ indexed by $x:A$ and $y:B(x)$,
+  the function
+  \begin{equation*}
+    h\mapsto h(a,b):\Big(\prd{x:A}\prd{y:B(x)}P(x,y)\Big)\to P(a,b)
+  \end{equation*}
+  has a section.  
+\end{defn}
+
+In other words, if $B$ is an identity system on $A$ at $a$ and $P$ is a family of types indexed by $x:A$ and $y:B(x)$, then there is for each $p:P(a,b)$ a dependent function
+\begin{equation*}
+  f:\prd{x:A}\prd{y:B(x)}P(x,y)
+\end{equation*}
+such that $f(a,b)=p$. This is of course a variant of identification elimination, where the computation rule is given by an identification rather than as a judgmental equality.
+
+We will state the fundamental theorem of identity types in a way that makes it maximally applicable. The fundamental theorem starts off with assuming a type $A$ equipped with a base point $a:A$, and a type family $B$ over $A$ equipped with a point $b:B(a)$. Furthermore it assumes an arbitrary family of maps
+\begin{equation*}
+  f:\prd{x:A}(a=x)\to B(x)
+\end{equation*}
+equipped with an identification $f(a,\refl{a})=b$. The theorem asserts conditions that are equivalent to $f$ being a family of equivalences.
+
+In the setup of the fundamental theorem of identity types we can always construct the family of maps
+\begin{equation*}
+  f\defeq\pathind_a(b):\prd{x:A}(a=x)\to B(x)
+\end{equation*}
+for which the judgmental equality $f(a,\refl{a})\jdeq b$ holds. So you may wonder why we choose to formulate the fundamental theorem of identity types using a general family of maps $f$. The reason is that it is somewhat common to apply the fundamental theorem of identity types in order to conclude that $f$ is a family of equivalences, even when $f$ is not by definition the canonical family of maps, and we want to be free to do so.
+
+The most important implication in the fundamental theorem is that (ii) implies (i). Occasionally we will also use the third equivalent statement.
+
+\begin{thm}[The fundamental theorem of identity types]\label{thm:id_fundamental}
+Let $A$ be a type with $a:A$, and let $B$ be a type family over $A$ equipped with a point $b:B(a)$. Furthermore, consider a family of maps\index{fundamental theorem of identity types}
+\begin{equation*}
+  f:\prd{x:A}(a=x)\to B(x)
+\end{equation*}
+equipped with an identification $f(a,\refl{a})=b$. Then the following are equivalent:
+\begin{enumerate}
+\item The family of maps $f$ is a family of equivalences.
+\item The total space\index{is contractible!total space of an identity system}
+\begin{equation*}
+\sm{x:A}B(x)
+\end{equation*}
+is contractible.
+\item The family $B$ equipped with $b:B(a)$ is an identity system.
+\end{enumerate}
+In particular, we see that for any $b:B(a)$, the canonical family of maps
+\begin{equation*}
+\pathind_a(b):\prd{x:A} (a=x)\to B(x)
+\end{equation*}
+is a family of equivalences if and only if $\sm{x:A}B(x)$ is contractible.
+\end{thm}
+
+\begin{proof}
+  First we show that (i) and (ii) are equivalent.
+  By \cref{thm:fib_equiv} it follows that the family of maps $f$ is a family of equivalences if and only if it induces an equivalence
+  \begin{equation*}
+    \eqv{\Big(\sm{x:A}a=x\Big)}{\Big(\sm{x:A}B(x)\Big)}
+  \end{equation*}
+  on total spaces. We have that $\sm{x:A}a=x$ is contractible, so it follows by \cref{ex:contr_equiv} that $\tot{f}$ is an equivalence if and only if $\sm{x:A}B(x)$ is contractible.
+
+  Now we show that (ii) and (iii) are equivalent. Note that we have the following commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=0]
+      \prd{t:\sm{x:A}B(x)}P(t) \arrow[rr,"\evpair"] \arrow[dr,swap,"{\evpt(a,b)}"] & & \prd{x:A}\prd{y:B(x)}P(x,y) \arrow[dl,"{\lam{h}h(a,b)}"] \\
+      \phantom{\prd{x:A}\prd{y:B(x)}P(x,y)} & P(a,b)
+    \end{tikzcd}
+  \end{equation*}
+  In this diagram the top map has a section. Therefore it follows by \cref{ex:3_for_2} that the left map has a section if and only if the right map has a section. Recall from \cref{defn:singleton-induction} that the type $\sm{x:A}B(x)$ satisfies singleton induction if and only if the left map in the triangle has a section for each $P$. Therefore we conclude our proof with \cref{thm:contractible}, which shows that the type $\sm{x:A}B(x)$ satisfies singleton induction if and only if it is contractible.
+\end{proof}
+\index{identity system|)}
+
+\subsection{Equality on the natural numbers}
+\index{natural numbers!observational equality|(}
+\index{Eq N@{$\EqN$}|(}
+
+As a first application of the fundamental theorem of identity types, we characterize the identity type of the natural numbers. We will use the observational equality $\EqN$ on $\N$. Recall from \cref{defn:obs_nat} that $\EqN$ is defined by
+\begin{align*}
+  \EqN(\zeroN,\zeroN) & \defeq \unit & \EqN(\zeroN,n+1) & \defeq \emptyt \\
+  \EqN(m+1,\zeroN) & \defeq \emptyt & \EqN(m+1,n+1) & \defeq \EqN(m,n).
+\end{align*}
+This relation is an equivalence relation. In particular, the reflexivity term $\reflEqN(m):\EqN(m,m)$ is defined inductively by
+\begin{align*}
+  \reflEqN(\zeroN) & \defeq \ttt \\
+  \reflEqN(m+1) & \defeq \reflEqN(m).
+\end{align*}
+Using the reflexivity term, we obtain a canonical map
+\begin{equation*}
+  (m=n)\to \EqN(m,n)
+\end{equation*}
+for every $m,n:\N$.
+
+\begin{thm}\label{thm:eq_nat}
+  For each $m,n:\N$, the canonical map\index{natural numbers!identity type}\index{natural numbers!characterization of identity type}\index{characterization of identity type!of N@{of $\N$}}\index{identity type!of the natural numbers}
+  \begin{equation*}
+    (m=n)\to \EqN(m,n)
+  \end{equation*}
+  is an equivalence.
+\end{thm}
+
+\begin{proof}
+  By \cref{thm:id_fundamental} it suffices to show that the type
+  \begin{equation*}
+    \sm{n:\N}\EqN(m,n)
+  \end{equation*}
+  is contractible, for each $m:\N$. The center of contraction is defined to be $(m,\reflEqN(m))$.
+
+  The contraction
+  \begin{equation*}
+    \gamma(m):\prd{n:\N}\prd{e:\EqN(m,n)}(m,\reflEqN(m))=(n,e)
+  \end{equation*}
+  is defined for each $m$ by induction on $m,n:\N$. In the base case we define
+  \begin{equation*}
+    \gamma(\zeroN,\zeroN,\ttt)\defeq \refl{}.
+  \end{equation*}
+  If one of $m$ and $n$ is zero and the other is a successor, then the type $\EqN(m,n)$ is empty, so the desired path can be obtained via the induction principle of the empty type.
+
+  The inductive step remains, in which we have to define the identification
+  \begin{equation*}
+    \gamma(m+1,n+1,e):(m+1,\reflEqN(m+1))=(n+1,e)
+  \end{equation*}
+  for each $m,n:\N$ equipped with $e:\EqN(m,n)$. We first observe that there is a map
+  \begin{equation*}
+    \begin{tikzcd}
+      \Big(\sm{n:\N}\EqN(m,n)\Big) \arrow[r,"f"] & \Big(\sm{n:\N}\EqN(m+1,n)\Big)
+    \end{tikzcd}
+  \end{equation*}
+  given by $(n,e)\mapsto (n+1,e)$. With this definition of $f$ we have
+  \begin{equation*}
+    f(m,\reflEqN(m))\jdeq (m+1,\reflEqN(m+1)).
+  \end{equation*}
+  Therefore we can define
+  \begin{equation*}
+    \gamma(m+1,n+1,e)\defeq \ap{f}{\gamma(m,n,e)}.\qedhere
+  \end{equation*}
+\end{proof}
+\index{natural numbers!observational equality|)}
+\index{Eq N@{$\EqN$}|)}
+
+\subsection{Embeddings}
+\index{embedding|(}
+In our second application of the fundamental theorem we show that equivalences are embeddings. The notion of embedding is the homotopical analogue of the set theoretic notion of injective map.
+
+\begin{defn}
+An \define{embedding}\index{embedding|textbf} is a map $f:A\to B$\index{is an embedding|textbf} that satisfies the property that\index{is an equivalence!action on paths of an embedding}
+\begin{equation*}
+\apfunc{f}:(\id{x}{y})\to(\id{f(x)}{f(y)})
+\end{equation*}
+is an equivalence, for every $x,y:A$. We write $\isemb(f)$\index{is-emb(f)@{$\isemb(f)$}} for the type of witnesses that $f$ is an embedding, and we define\index{A hookrightarrow B@{$A\hookrightarrow B$}|see {embedding}}
+\begin{equation*}
+  A\hookrightarrow B\defeq \sm{f:A\to B}\isemb(f).
+\end{equation*}
+\end{defn}
+
+Another way of phrasing the following statement is that equivalent types have equivalent identity types.
+
+\begin{thm}
+\label{cor:emb_equiv} 
+Any equivalence is an embedding.\index{is an embedding!equivalence}\index{equivalence!is an embedding}
+\end{thm}
+
+\begin{proof}
+Let $e:\eqv{A}{B}$ be an equivalence, and let $x:A$. Our goal is to show that
+\begin{equation*}
+\apfunc{e} : (\id{x}{y})\to (\id{e(x)}{e(y)})
+\end{equation*}
+is an equivalence for every $y:A$. By \cref{thm:id_fundamental} it suffices to show that 
+\begin{equation*}
+\sm{y:A}e(x)=e(y)
+\end{equation*}
+is contractible. Now observe that there is an equivalence
+\begin{samepage}
+\begin{align*}
+\sm{y:A}e(x)=e(y) & \eqvsym \sm{y:A}e(y)=e(x) \\
+& \jdeq \fib{e}{e(x)}
+\end{align*}
+\end{samepage}
+by \cref{thm:fib_equiv}, since for each $y:A$ the map
+\begin{equation*}
+\invfunc : (e(x)=e(y))\to (e(y)= e(x))
+\end{equation*}
+is an equivalence by \cref{ex:equiv_grpd_ops}.
+The fiber $\fib{e}{e(x)}$ is contractible by \cref{thm:contr_equiv}, so it follows by \cref{ex:contr_equiv} that the type $\sm{y:A}e(x)=e(y)$ is indeed contractible.
+\end{proof}
+\index{embedding|)}
+
+\subsection{Disjointness of coproducts}
+
+\index{disjointness of coproducts|(}
+\index{characterization of identity type!of coproducts|(}
+\index{identity type!of a coproduct|(}
+\index{coproduct!characterization of identity type|(}
+\index{coproduct!disjointness|(}
+In our third application of the fundamental theorem of identity types, we characterize the identity types of coproducts. Our goal in this section is to prove the following theorem.
+
+\begin{thm}\label{thm:id-coprod-compute}
+Let $A$ and $B$ be types. Then there are equivalences\index{identity type!of a coproduct}\index{characterization of identity type!of coproducts}\index{coproduct!characterization of identity type}
+\begin{align*}
+(\inl(x)=\inl(x')) & \eqvsym (x = x')\\
+(\inl(x)=\inr(y')) & \eqvsym \emptyt \\
+(\inr(y)=\inl(x')) & \eqvsym \emptyt \\
+(\inr(y)=\inr(y')) & \eqvsym (y=y')
+\end{align*}
+for any $x,x':A$ and $y,y':B$.
+\end{thm}
+
+In order to prove \cref{thm:id-coprod-compute}, we first define
+a binary relation $\Eqcoprod_{A,B}$ on the coproduct $A+B$.
+
+\begin{defn}
+Let $A$ and $B$ be types. We define\index{Eq-coprod@{$\Eqcoprod_{A,B}$}|textbf}\index{coproduct!Eq-coprod@{$\Eqcoprod_{A,B}$}|textbf}
+\begin{equation*}
+\Eqcoprod_{A,B} : (A+B)\to (A+B)\to\UU
+\end{equation*}
+by double induction on the coproduct, postulating
+\begin{align*}
+\Eqcoprod_{A,B}(\inl(x),\inl(x')) & \defeq (x=x') \\
+\Eqcoprod_{A,B}(\inl(x),\inr(y')) & \defeq \emptyt \\
+\Eqcoprod_{A,B}(\inr(y),\inl(x')) & \defeq \emptyt \\
+\Eqcoprod_{A,B}(\inr(y),\inr(y')) & \defeq (y=y').
+\end{align*}
+The relation $\Eqcoprod_{A,B}$ is also called the \define{observational equality of coproducts}\index{observational equality!on coproduct types}\index{coproduct!observational equality}.
+\end{defn}
+
+\begin{lem}
+The observational equality relation $\Eqcoprod_{A,B}$ on $A+B$ is reflexive, and therefore there is a map
+\begin{equation*}
+\Eqcoprodeq:\prd{s,t:A+B} (s=t)\to \Eqcoprod_{A,B}(s,t).
+\end{equation*}
+\end{lem}
+
+\begin{constr}
+The reflexivity term $\rho$ is constructed by induction on $t:A+B$, using
+\begin{align*}
+\rho(\inl(x))\defeq \refl{x}  & : \Eqcoprod_{A,B}(\inl(x),\inl(x)) \\
+\rho(\inr(y))\defeq \refl{y} & : \Eqcoprod_{A,B}(\inr(y),\inr(y)).\qedhere
+\end{align*}
+\end{constr}
+
+To show that $\Eqcoprodeq$ is a family of equivalences, we will use the fundamental theorem of identity types, \cref{thm:id_fundamental}. Therefore, we need to prove the following proposition.
+
+\begin{prp}\label{lem:is-contr-total-eq-coprod}
+For any $s:A+B$ the total space
+\begin{equation*}
+\sm{t:A+B}\Eqcoprod_{A,B}(s,t)
+\end{equation*}
+is contractible.
+\end{prp}
+
+\begin{proof}
+  For convenience, let us write $E\defeq \Eqcoprod_{A,B}$. By induction on $s$, it suffices to show that the total spaces
+  \begin{equation*}
+    \sm{t:A+B}E(\inl(x),t) \qquad\text{and}\qquad \sm{t:A+B}E(\inr(y),t)
+  \end{equation*}
+  are contractible. The two proofs are similar, so we only prove that the type on the left is contractible. By the laws of coproducts and $\Sigma$-types given in \cref{eg:laws-products-coproducts,eg:laws-Sigma-types}, we simply compute
+  \begin{samepage}
+    \begin{align*}
+      & \sm{t:A+B}E(\inl(x),t) \\
+      & \eqvsym \Big(\sm{x':A}E(\inl(x),\inl(x'))\Big)+\Big(\sm{y':B}E(\inl(x),\inr(y'))\Big) \\
+      & \eqvsym \Big(\sm{x':A}x=x'\Big)+\Big(\sm{y':B}\emptyt\Big) \\
+      & \eqvsym \sm{x':A}x=x'.
+    \end{align*}%
+  \end{samepage}%
+  The last type in this computation is contractible by \cref{thm:total_path}, so we conclude that the total space of $E(\inl(x))$ is contractible.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:id-coprod-compute}]
+  The proof is now concluded with an application of \cref{thm:id_fundamental}, using \cref{lem:is-contr-total-eq-coprod}.
+\end{proof}
+\index{disjointness of coproducts|)}
+\index{characterization of identity type!of coproducts|)}
+\index{identity type!of a coproduct|)}
+\index{coproduct!characterization of identity type|)}
+\index{coproduct!disjointness|)}
+
+\subsection{The structure identity principle}\label{sec:structure-identity-principle}
+\index{structure identity principle|(}
+
+We often encounter a type consisting of certain objects equipped with further structure. For example, the fiber of a map $f:A\to B$ at $b:B$ is the type of elements $a:A$ equipped with an identification $p:f(a)=b$. Such \emph{structure} types occur all over mathematics, and it is important to have an efficient characterization of their identity types. A general structure type is just a $\Sigma$-type, and we're asking for a characterization of its identity type.
+
+Recall from \cref{thm:eq_sigma} that the identity type of the type $\sm{x:A}B(x)$ at a pair $(a,b)$ can be characterized as
+\begin{equation*}
+  ((a,b)=(x,y))\simeq \sm{p:a=x}\tr_B(p,b)=y.
+\end{equation*}
+However, this characterization of the identity type of $\sm{x:A}B(x)$ is not as clear and useful as we like it to be, because it uses the transport function, which is completely generic. Our plan is to use identity systems on $A$ and on $B(a)$ to arrive at a more useful characterization of the identity type of $\sm{x:A}B(x)$.
+
+In order to abstract away this characterization of the identity type of $\sm{x:A}B(x)$, let $C:A\to\UU$ be the family of types given by $C(x)\defeq (a=x)$, and let
+\begin{equation*}
+  D:\prd{x:A}B(x)\to(C(x)\to\UU)
+\end{equation*}
+be the family of types given by $D(x,y,p)\defeq \tr_B(p,b)=y$. Then $C$ is an identity system on $A$ at $a$, and the type family $y\mapsto D(a,y,\refl{})$ is an identity system on $B(a)$ at $b$. This suggests the following definition of dependent identity systems.
+
+\begin{defn}
+  Consider a type $A$ equipped with an identity system $C$ based at $a:A$, and let $c:C(a)$. Furthermore, consider a type family $B$ over $A$. A \define{dependent identity system}\index{dependent identity system|textbf}\index{identity system!dependent identity system|textbf} over $C$ at $b:B(a)$ consists of a type family
+  \begin{equation*}
+    D : \prd{x:A} B(x) \to (C(x)\to \UU)
+  \end{equation*}
+  equipped with an element $d:D(a,b,c)$ such that $y\mapsto D(a,y,c)$ is an identity system at $b$.
+\end{defn}
+
+\begin{thm}[Structure identity principle]\label{thm:structure-identity-principle}
+  Consider a type family $B$ over $A$, elements $a:A$ and $b:B(a)$, and an identity system $C$ of $A$ with $c:C(a)$. Furthermore, consider a type family
+  \begin{equation*}
+    D : \prd{x:A} B(x) \to (C(x)\to \UU)
+  \end{equation*}
+  equipped with an element $d:D(a,b,c)$. Then the following are equivalent:
+  \begin{enumerate}
+  \item Any family of maps
+    \begin{equation*}
+      (b=y)\to D(a,y,c)
+    \end{equation*}
+    indexed by $y:B(a)$ is a family of equivalences.
+  \item The total space
+    \begin{equation*}
+      \sm{y:B(a)}D(a,y,c)
+    \end{equation*}
+    is contractible.
+  \item $D$ is a dependent identity system over $C$ at $b:B(a)$.
+  \item Any family of maps
+    \begin{equation*}
+      ((a,b)=(x,y))\to \sm{z:C(x)}D(x,y,z))
+    \end{equation*}
+    indexed by $(x,y):\sm{x:A}B(x)$ is a family of equivalences.
+  \item The total space
+    \begin{equation*}
+      \sm{(x,y):\sm{x:A}B(x)}\sm{z:C(x)}D(x,y,z)
+    \end{equation*}
+    is contractible.
+  \item The type family
+    \begin{equation*}
+      (x,y)\mapsto \sm{z:C(x)}D(x,y,z)
+    \end{equation*}
+    is an identity system at $(a,b):\sm{x:A}B(x)$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  The first three statements as well as the last three statements are equivalent by \cref{thm:id_fundamental}. Therefore it suffices to show that (ii) and (v) are equivalent. Note that there is an equivalence
+  \begin{multline*}
+    \sm{(x,y):\sm{x:A}B(x)}\sm{z:C(x)}D(x,y,z) \\
+    \simeq
+    \sm{(x,z):\sm{x:A}C(x)}\sm{y:B(x)}D(x,y,z).
+  \end{multline*}
+  This equivalence, its inverse, and the homotopies witnessing that the inverse is indeed an inverse are all straightforward to construct using pattern matching. Furthermore, notice that the type $\sm{x:A}C(x)$ is contractible with center of contraction $(a,c)$ since $C$ is assumed to be an identity system at $a:A$. Therefore it follows that
+  \begin{equation*}
+    \sm{(x,y):\sm{x:A}B(x)}\sm{z:C(x)}D(x,y,z)\simeq\sm{y:B(a)}D(a,y,c).\qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{eg}
+  By the structure identity principle of \cref{thm:structure-identity-principle} in combination with the fundamental theorem of identity types (\cref{thm:id_fundamental}), it becomes completely routine to characterize identity types of structures: We only have to show that the types
+  \begin{equation*}
+    \sm{x:A}C(x)\qquad\text{and}\qquad\sm{y:B(a)}D(a,y,c)
+  \end{equation*}
+  are contractible. To illustrate this use of the structure identity principle, we give an alternative characterization of the fiber of a map $f:A \to B$ at $b:B$. We claim that\index{identity type!of a fiber}\index{fiber!characterization of identity type}\index{characterization of identity type!of the fiber of a map}
+  \begin{align*}
+    ((x,p)=(y,q)) & \simeq \fib{\apfunc{f}}{\ct{p}{q^{-1}}} \\
+                  & \jdeq \sm{\alpha:x=y}\ap{f}{\alpha}=\ct{p}{q}^{-1}.
+  \end{align*}
+  To see this, we apply \cref{thm:structure-identity-principle}. Note that $\sm{y:A}x=y$ is contractible by \cref{thm:total_path} with center of contraction $(x,\refl{f(x)})$. Therefore it suffices to show that the type
+  \begin{equation*}
+    \sm{q:f(x)=b}\refl{f(x)}=\ct{p}{q}^{-1}
+  \end{equation*}
+  is contractible. Of course, this type is equivalent to $\sm{q:f(x)=b}p=q$, which is again contractible by \cref{thm:total_path}.
+\end{eg}
+\index{structure identity principle|)}
+
+\begin{exercises}
+  \exitem
+  \begin{subexenum}
+  \item \label{ex:is-emb-empty}Show that the map $\emptyt\to A$ is an embedding for every type $A$.\index{is an embedding!0 to A@{$\emptyt\to A$}}
+  \item \label{ex:is-emb-inl-inr}Show that $\inl:A\to A+B$ and $\inr:B\to A+B$ are embeddings for any two types $A$ and $B$.
+    \index{is an embedding!inl (for coproducts)@{$\inl$ (for coproducts)}}
+    \index{is an embedding!inr (for coproducts)@{$\inr$ (for coproducts)}}
+    \index{inl@{$\inl$}!is an embedding}
+    \index{inr@{$\inr$}!is an embedding}
+  \item Show that $\inl:A\to A+B$ is an equivalence if and only if $B$ is empty, and that $\inr : B \to A+B$ is an equivalence if and only if $A$ is empty.
+  \end{subexenum}
+  \exitem Consider an equivalence $e:A\simeq B$. Construct an equivalence
+  \begin{equation*}
+    p\mapsto \tilde{p}:(e(x)=y)\simeq(x=e^{-1}(y))
+  \end{equation*}
+  for every $x:A$ and $y:B$, such that the triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=large]
+      e(x) \arrow[r,equals,"\ap{e}{\tilde{p}}"] \arrow[dr,equals,swap,"p"] & e(e^{-1}(y)) \arrow[d,equals,"G(y)"] \\
+      & y
+    \end{tikzcd}
+  \end{equation*}
+  commutes for every $p:e(x)=y$. In this diagram, the homotopy $G:e\circ e^{-1}\htpy \idfunc$ is the homotopy witnessing that $e^{-1}$ is a section of $e$.
+  \exitem Show that\index{embedding!closed under homotopies}
+  \begin{equation*}
+    (f\htpy g)\to (\isemb(f)\leftrightarrow\isemb(g))
+  \end{equation*}
+  for any $f,g:A\to B$.
+  \exitem \label{ex:emb_triangle}Consider a commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[rr,"h"] \arrow[dr,swap,"f"] & & B \arrow[dl,"g"] \\
+      & X
+    \end{tikzcd}
+  \end{equation*}
+  with $H:f\htpy g\circ h$. 
+  \begin{subexenum}
+  \item Suppose that $g$ is an embedding. Show that $f$ is an embedding if and only if $h$ is an embedding.\index{is an embedding!composite of embeddings}\index{is an embedding!right factor of embedding if left factor is an embedding}
+  \item Suppose that $h$ is an equivalence. Show that $f$ is an embedding if and only if $g$ is an embedding.\index{is an embedding!left factor of embedding if right factor is an equivalence}
+  \end{subexenum}
+  \exitem Consider two embeddings $f:A\hookrightarrow B$ and $g:B\hookrightarrow C$. Show that the following are equivalent:
+  \begin{enumerate}
+  \item The composite $g\circ f$ is an equivalence.
+  \item Both $f$ and $g$ are equivalences.
+  \end{enumerate}
+  \exitem Consider two maps $f:A\to C$ and $g:B\to C$. Use \cref{ex:is-emb-inl-inr} to show that the following are equivalent:
+  \begin{enumerate}
+  \item The map $[f,g]:A+B\to C$ is an embedding.
+  \item Both $f$ and $g$ are embeddings, and
+    \begin{equation*}
+      f(a)\neq g(b)
+    \end{equation*}
+    for all $a:A$ and $b:B$.
+  \end{enumerate}
+  \exitem \label{ex:is-equiv-is-equiv-functor-coprod}Consider two maps $f:A\to A'$ and $g:B \to B'$.
+  \begin{subexenum}
+  \item Show that if the map
+    \begin{equation*}
+      f+g:(A+B)\to (A'+B')
+    \end{equation*}
+    is an equivalence, then so are both $f$ and $g$ (this is the converse of \cref{ex:coproduct_functor_equivalence}).
+  \item \label{ex:is-emb-coprod}Show that $f+g$ is an embedding if and only if both $f$ and $g$ are embeddings.
+  \end{subexenum}
+  \exitem \label{ex:id_fundamental_retr}
+  \begin{subexenum}
+  \item Let $f,g:\prd{x:A}B(x)\to C(x)$ be two families of maps. Show that
+    \begin{equation*}
+      \Big(\prd{x:A}f(x)\htpy g(x)\Big)\to \Big(\tot{f}\htpy \tot{g}\Big). 
+    \end{equation*}
+  \item Let $f:\prd{x:A}B(x)\to C(x)$ and let $g:\prd{x:A}C(x)\to D(x)$. Show that
+    \begin{equation*}
+      \tot{\lam{x}g(x)\circ f(x)}\htpy \tot{g}\circ\tot{f}.
+    \end{equation*}
+  \item For any family $B$ over $A$, show that
+    \begin{equation*}
+      \tot{\lam{x}\idfunc[B(x)]}\htpy\idfunc.
+    \end{equation*}
+  \item Let $a:A$, and let $B$ be a type family over $A$. Use \cref{ex:contr_retr} to show that if each $B(x)$ is a retract of $\id{a}{x}$, then $B(x)$ is equivalent to $\id{a}{x}$ for every $x:A$.
+    \index{fundamental theorem of identity types!formulation with retractions}
+  \item Conclude that for any family of maps
+    \index{fundamental theorem of identity types!formulation with sections}
+    \begin{equation*}
+      f : \prd{x:A} (a=x) \to B(x),
+    \end{equation*}
+    if each $f(x)$ has a section, then $f$ is a family of equivalences.
+  \end{subexenum} 
+  \exitem Use \cref{ex:id_fundamental_retr} to show that for any map $f:A\to B$, if
+  \begin{equation*}
+    \apfunc{f} : (x=y) \to (f(x)=f(y))
+  \end{equation*}
+  has a section for each $x,y:A$, then $f$ is an embedding.\index{is an embedding!if the action on paths have sections}
+  \exitem \label{ex:path-split}(Shulman) We say that a map $f:A\to B$ is \define{path-split}\index{path-split|textbf} if $f$ has a section, and for each $x,y:A$ the map
+  \begin{equation*}
+    \apfunc{f}(x,y):(x=y)\to (f(x)=f(y))
+  \end{equation*}
+  also has a section. We write $\pathsplit(f)$\index{path-split(f)@{$\pathsplit(f)$}|textbf} for the type
+  \begin{equation*}
+    \sections(f)\times\prd{x,y:A}\sections(\apfunc{f}(x,y)).
+  \end{equation*}
+  Show that for any map $f:A\to B$ the following are equivalent:
+  \begin{enumerate}
+  \item The map $f$ is an equivalence.
+  \item The map $f$ is path-split.\index{is an equivalence!path-split map}
+  \end{enumerate}
+  \exitem \label{ex:fiber_trans}Consider a triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=small]
+      A \arrow[rr,"h"] \arrow[dr,swap,"f"] & & B \arrow[dl,"g"] \\
+      & X
+    \end{tikzcd}
+  \end{equation*}
+  with a homotopy $H:f\htpy g\circ h$ witnessing that the triangle commutes. 
+  \begin{subexenum}
+  \item Construct a family of maps
+    \begin{equation*}
+      \fibtriangle(h,H):\prd{x:X}\fib{f}{x}\to\fib{g}{x},
+    \end{equation*}
+    for which the square
+    \begin{equation*}
+      \begin{tikzcd}[column sep=8em]
+        \sm{x:X}\fib{f}{x} \arrow[r,"\tot{\fibtriangle(h,H)}"] \arrow[d] & \sm{x:X}\fib{g}{x} \arrow[d] \\
+        A \arrow[r,swap,"h"] & B
+      \end{tikzcd}
+    \end{equation*}
+    commutes, where the vertical maps are as constructed in \cref{ex:fib_replacement}.
+  \item Show that $h$ is an equivalence if and only if $\fibtriangle(h,H)$ is a family of equivalences.
+  \end{subexenum}
+\end{exercises}
+\index{fundamental theorem of identity types|)}
+\index{characterization of identity type!fundamental theorem of identity types|)}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

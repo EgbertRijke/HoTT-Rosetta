@@ -1,0 +1,453 @@
+\section{Image factorizations}\label{chap:image}
+
+The image of a map $f:A\to X$ can be thought of as the least subtype of $X$ that contains all the values of $f$. More precisely, the image of $f$ is an embedding $i:\im(f)\hookrightarrow X$ that fits in a commuting triangle
+\begin{equation*}
+  \begin{tikzcd}[column sep=tiny]
+    A \arrow[rr,"q"] \arrow[dr,swap,"f"] & & \im(f) \arrow[dl,hook,"i"] \\
+    \phantom{\im(f)} & X
+  \end{tikzcd}
+\end{equation*}
+and satisfies the \emph{universal property} of the image of $f$, which states that if a subtype $B\hookrightarrow X$ contains all the values of $f$, then it contains the image of $f$.
+
+\subsection{The image of a map}\label{sec:image-construction}
+ 
+\subsubsection*{The universal property of the image}
+\index{universal property!of the image of a map|(}
+\index{image of a map!universal property|(}
+
+Recall from \cref{ex:triangle_fib} that we made the following definition:
+
+\begin{defn}
+  Let $f:A\to X$ and $g:B\to X$ be maps. A \define{morphism from $f$ to $g$ over $X$}\index{morphism from f to g over X@{morphism from $f$ to $g$ over $X$}|textbf} consists of a map $h:A\to B$ equipped with a homotopy $H:f\htpy g\circ h$ witnessing that the triangle
+\begin{equation*}
+\begin{tikzcd}[column sep=tiny]
+A \arrow[rr,"h"] \arrow[dr,swap,"f"] & & B \arrow[dl,"g"] \\
+& X
+\end{tikzcd}
+\end{equation*}
+commutes. Thus, we define the type\index{hom X (f,g)@{$\homslice_X(f,g)$}|see {morphism from $f$ to $g$ over $X$}}
+\begin{equation*}
+\homslice_X(f,g)\defeq\sm{h:A\to B}f\htpy g\circ h.
+\end{equation*}
+Composition of morphisms over $X$ is defined by
+\begin{equation*}
+  (k,K)\circ (h,H) \defeq (k\circ h,\ct{H}{(K\cdot h)}).
+\end{equation*}
+\end{defn}
+
+\begin{defn}
+Consider a commuting triangle
+\begin{equation*}
+\begin{tikzcd}[column sep=tiny]
+A \arrow[rr,"q"] \arrow[dr,swap,"f"] & & I \arrow[dl,"i"] \\
+& X
+\end{tikzcd}
+\end{equation*}
+with $H:f\htpy i\circ q$, where $i$ is an embedding\index{embedding}.
+We say that $i$ satisfies the \define{universal property of the image of $f$}\index{universal property!of the image of a map|textbf} if the precomposition function
+\begin{equation*}
+\blank\circ(q,H) : \homslice_X(i,m)\to\homslice_X(f,m)
+\end{equation*}
+is an equivalence for every embedding $m:B\hookrightarrow X$. 
+\end{defn}
+
+\begin{lem}
+For any $f:A\to X$ and any embedding\index{embedding} $m:B\to X$, the type $\homslice_X(f,m)$ is a proposition.\index{hom X (f,g)@{$\homslice_X(f,g)$}!is a proposition}
+\end{lem}
+
+\begin{proof}
+  Recall from \cref{ex:triangle_fib} that the type $\homslice_X(f,m)$ is equivalent to the type
+  \begin{equation*}
+    \prd{a:A}\fib{m}{f(a)}.
+  \end{equation*}
+  Furthermore, recall from \cref{thm:embedding} that a map is an embedding if and only if its fibers are propositions.
+  Thus we see that the type $\prd{a:A}\fib{m}{f(a)}$ is a product of propositions, hence it is a proposition by \cref{thm:trunc_pi}.
+\end{proof}
+
+\begin{prp}\label{prp:simplifly-universal-property-image}
+  Consider a commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[rr,"q"] \arrow[dr,swap,"f"] & & I \arrow[dl,"i"] \\
+      & X
+\end{tikzcd}
+  \end{equation*}
+  with $H:f\htpy i\circ q$, where $i$ is an embedding. Then the following are equivalent:
+  \begin{enumerate}
+  \item The embedding $i$ satisfies the universal property of the image inclusion of $f$.
+  \item For every embedding $m:B\to X$ there is a map
+    \begin{equation*}
+      \homslice_X(f,m)\to\homslice_X(i,m).
+    \end{equation*}
+  \end{enumerate}
+\end{prp}
+
+\begin{proof}
+Since $\homslice_X(f,m)$ is a proposition for every embedding $m:B\to X$, the claim follows immediately by the observation made in \cref{ex:prop_equiv}.
+\end{proof}
+\index{universal property!of the image of a map|)}
+\index{image of a map!universal property|)}
+
+\subsubsection*{The existence of the image}
+\index{image of a map!existence|(}
+
+The image of a map $f:A\to X$ can be defined using the propositional truncation.
+
+\begin{defn}\label{defn:im}
+For any map $f:A\to X$ we define the \define{image}\index{image of a map|textbf} of $f$ to be the type\index{im f@{$\im(f)$}|see {image of a map}}\index{im f@{$\im(f)$}|textbf}
+\begin{equation*}
+\im(f) \defeq \sm{x:X}\brck{\fib{f}{x}}.
+\end{equation*}
+Furthermore, we define
+\begin{enumerate}
+\item the \define{image inclusion}\index{image inclusion|textbf}
+  \begin{equation*}
+    i_f:\im(f)\to X
+  \end{equation*}
+  to be the projection $\proj 1$,
+\item the map
+  \begin{equation*}
+    q_f:A\to\im(f)
+  \end{equation*}
+  to be the map given by $q_f(x)\defeq(f(x),\eta(x,\refl{f(x)}))$, and
+\item the homotopy $I_f:f\htpy i_f\circ q_f$ witnessing that the triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[rr,"q_f"] \arrow[dr,swap,"f"] & & \im(f) \arrow[dl,"i_f"] \\
+      \phantom{\im(f)} & X
+    \end{tikzcd}
+  \end{equation*}
+  commutes, to be given by $I_f(x)\defeq\refl{f(x)}$.
+\end{enumerate}
+\end{defn}
+
+\begin{prp}
+  The image inclusion $i_f:\im(f)\to X$ of any map $f:A\to X$ is an embedding.\index{image inclusion!is an embedding}\index{is an embedding!image inclusion}
+\end{prp}
+
+\begin{proof}
+  The claim follows directly by \cref{cor:pr1-embedding}, because the type $\brck{\fib{f}{x}}$ is a proposition for each $x:X$.
+\end{proof}
+
+\begin{thm}\label{thm:im}
+  The image inclusion $i_f:\im(f)\to X$ of any map $f:A\to X$ satisfies the universal property of the image inclusion of $f$.
+\end{thm}
+
+\begin{proof}
+  Consider an embedding $m:B\hookrightarrow X$. Note that we have a commuting square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=6em]
+      \homslice_X(i_f,m) \arrow[d] \arrow[r] & \homslice_X(f,m) \arrow[d] \\
+      \Big(\prd{x:X}\fib{i_f}{x}\to\fib{m}{x}\Big) \arrow[r,swap,"h\mapsto{\lam{x}h_x\circ\varphi_x}"] & \Big(\prd{x:X}\fib{f}{x}\to\fib{m}{x}\Big)
+    \end{tikzcd}
+  \end{equation*}
+  in which all four types are propositions, and the vertical maps are equivalences. Therefore it suffices to construct a map
+  \begin{equation*}
+    \Big(\prd{x:X}\fib{f}{x}\to\fib{m}{x}\Big)\to\Big(\prd{x:X}\fib{i_f}{x}\to\fib{m}{x}\Big)
+  \end{equation*}
+  The fiber $\fib{i_f}{x}$ is equivalent to the propositional truncation $\brck{\fib{f}{x}}$ and the type $\fib{m}{x}$ is a proposition by the assumption that $m$ is an embedding. Therefore we obtain the desired map by the universal property of the propositional truncation.
+\end{proof}
+\index{image of a map!existence|)}
+
+\subsubsection*{The uniqueness of the image}
+\index{image of a map!uniqueness|(}
+
+We will now show that the universal property of the image implies that the image is determined uniquely up to equivalence.
+
+\begin{thm}\label{thm:uniqueness-image}
+  Let $f$ be a map, and consider two commuting triangles
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[dr,swap,"f"] \arrow[rr,"q"] & & B \arrow[dl,"i"] &[2em] A \arrow[dr,swap,"f"] \arrow[rr,"{q'}"] & & B' \arrow[dl,"{i'}"] \\
+      \phantom{B'} & X & \phantom{B'} & \phantom{B'} & X
+    \end{tikzcd}
+  \end{equation*}
+  with $I:f\htpy i\circ q$ and $I':f\htpy i'\circ q'$, in which $i$ and $i'$ are assumed to be embeddings. Then, if any two of the following three properties hold, so does the third:
+  \begin{enumerate}
+  \item The embedding $i$ satisfies the universal property of the image inclusion of $f$.
+  \item The embedding $i'$ satisfies the universal property of the image inclusion of $f$.
+  \item The type of equivalences $e:B\simeq B'$ equipped with a homotopy witnessing that the triangle
+    \begin{equation*}
+      \begin{tikzcd}
+        B \arrow[dr,swap,"i"] \arrow[rr,"e"] & & B' \arrow[dl,"{i'}"] \\
+        \phantom{B'} & X
+      \end{tikzcd}
+    \end{equation*}
+    commutes is contractible.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  First, we show that if (i) and (ii) hold, then (iii) holds. Note that the type $\homslice_X(i,i')$ is a proposition, since $i'$ is assumed to be an embedding. Therefore it suffices to show that the unique map $h:B\to B'$ such that the triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      B \arrow[dr,swap,"i"] \arrow[rr,"h"] & & B' \arrow[dl,"{i'}"] \\
+      & X
+    \end{tikzcd}
+  \end{equation*}
+  commutes, is an equivalence. To see this, note that by \cref{ex:triangle_fib} it suffices to show that the action on fibers
+  \begin{equation*}
+    \fib{i}{x}\to\fib{i'}{x}
+  \end{equation*}
+  is an equivalence for each $x:X$. This follows from the universal property of $i'$, since we similarly obtain a family of maps
+  \begin{equation*}
+    \fib{i'}{x}\to\fib{i}{x}
+  \end{equation*}
+  indexed by $x:X$, and the types $\fib{i}{x}$ and $\fib{i'}{x}$ are propositions by the assumptions that $i$ and $i'$ are embeddings.
+  
+  Now we will show that (iii) implies that (i) holds if and only if (ii) holds. We will assume a morphism $(e,H):\homslice_X(i,i')$ such that the map $e$ is an equivalence. Furthermore, consider an embedding $m:C\to X$. Then the fact that (i) holds if and only if (ii) holds follows from the equivalence
+  \begin{equation*}
+    \big(\homslice_X(f,m)\to\homslice_X(i,m)\big)\simeq\big(\homslice_X(f,m)\to\homslice_X(i',m)\big).\qedhere
+  \end{equation*}
+\end{proof}
+\index{image of a map!uniqueness|)}
+
+\subsection{Surjective maps}\label{subsec:surjective}
+
+A map $f:A\to B$ is surjective if for every $b:B$ there is an \emph{unspecified} element $a:A$ that maps to $b$. We define this property using the propositional truncation.
+
+\begin{defn}
+A map $f:A\to B$ is said to be \define{surjective}\index{surjective map|textbf} if there is an element of type\index{is-surj f@{$\issurj(f)$}|see {surjective map}}
+\begin{equation*}
+\issurj(f)\defeq \prd{b:B}\brck{\fib{f}{b}}.
+\end{equation*}
+\end{defn}
+
+\begin{eg}
+  Any equivalence is a surjective map, since its fibers are contractible. More generally, any map that has a section is surjective. Those are sometimes called \define{split epimorphisms}. Note that having a section is stronger than surjectivity, since in general we don't have a function $\brck{\fib{f}{b}}\to\fib{f}{b}$.
+\end{eg}
+
+In \cref{ex:dup-trunc-prop} we showed the dependent universal property of the propositional truncation: a map $f:A\to B$ into a proposition $B$ satisfies the universal property of the propositional truncation if and only if for every family of propositions $P$ over $B$, the precomposition map
+\begin{equation*}
+  \blank\circ f : \Big(\prd{b:B}P(b)\Big)\to\Big(\prd{a:A}P(f(a))\Big)
+\end{equation*}
+is an equivalence. In the following proposition we show that, if we omit the condition that $B$ is a proposition, then $f$ satisfies this dependent universal property if and only if $f$ is surjective.
+
+\begin{prp}\label{prp:surjective}
+  Consider a map $f:A\to B$. Then the following are equivalent:
+  \begin{enumerate}
+  \item \label{prp-item:surjective}The map $f:A\to B$ is surjective.
+  \item \label{prp-item:is-equiv-precomp-surjective}The map $f:A\to B$ satisfies the \define{dependent universal property of a surjective map}\index{dependent universal property!of surjective maps|textbf}\index{surjective map!dependent universal property|textbf}: For any family $P$ of propositions over $B$, the precomposition map
+    \begin{equation*}
+      \blank\circ f : \Big(\prd{y:B}P(y)\Big)\to\Big(\prd{x:A}P(f(x))\Big)
+    \end{equation*}
+    is an equivalence. In other words, any subtype of $B$ that contains all the elements of the form $f(x)$ contains all the elements of $B$.
+  \item \label{prp-item:is-trunc-map-precomp-surjective}For any $k\geq-2$, and for any family $P$ of $(k+1)$-truncated types over $B$, the precomposition map
+    \begin{equation*}
+      \blank\circ f : \Big(\prd{y:B}P(y)\Big)\to\Big(\prd{x:A}P(f(x))\Big)
+    \end{equation*}
+    is a $k$-truncated map.
+  \end{enumerate}
+\end{prp}
+
+\begin{proof}
+  To prove that \ref{prp-item:surjective} implies \ref{prp-item:is-equiv-precomp-surjective}, suppose first that $f$ is surjective, and consider the commuting square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=4.4em]
+      \Big(\prd{y:B}P(y)\Big) \arrow[r,"\blank\circ f"] \arrow[d,swap,"h\mapsto\lam{y}\const_{h(y)}"] & \Big(\prd{x:A}P(f(x))\Big)  \\
+      \Big(\prd{y:B}\brck{\fib{f}{y}}\to P(y)\Big) \arrow[r,swap,"h\mapsto h(\blank)\circ\eta"] & \Big(\prd{y:B}\fib{f}{y}\to P(y)\Big) \arrow[u,swap,"{h\mapsto\lam{x}h(f(x),(x,\refl{}))}"]
+    \end{tikzcd}
+  \end{equation*}
+  In this square, the bottom map is an equivalence by \cref{ex:equiv-pi} and by the universal property of the propositional truncation of $\fib{f}{y}$. The map on the right is an equivalence by \cref{ex:pi-fib}. Furthermore, the map on the left is an equivalence by \cref{ex:equiv-pi,ex:up-unit}, because the type $\brck{\fib{f}{y}}$ is contractible by the assumption that $f$ is surjective. Therefore it follows that the top map is an equivalence, which completes the proof that \ref{prp-item:surjective} implies \ref{prp-item:is-equiv-precomp-surjective}.
+
+  The proof that \ref{prp-item:is-equiv-precomp-surjective} implies \ref{prp-item:is-trunc-map-precomp-surjective} is by induction on $k$. The base case holds by assumption. For the inductive step, it suffices by \cref{thm:trunc_ap} to show that $\apfunc{\blank\circ f}$ is $k$-truncated for any $g,h:\prd{y:B}P(y)$. Notice that we have a commuting square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=large]
+      (g=h) \arrow[r,"\apfunc{\blank\circ f}"] \arrow[d,swap,"\htpyeq"] & (g\circ f = h\circ f) \arrow[d,"\htpyeq"] \\
+      \prd{y:B}g(y)=h(y) \arrow[r,swap,"\blank\circ f"] & \prd{x:A}g(f(x))=h(f(x))
+    \end{tikzcd}
+  \end{equation*}
+  The vertical maps on the left and right are equivalences by function extensionality, and the bottom map is $k$-truncated by the inductive hypothesis. This implies that $\apfunc{\blank\circ f}$ is $k$-truncated.
+
+  To prove that \ref{prp-item:is-trunc-map-precomp-surjective} implies \ref{prp-item:surjective}, note that the assumption in \ref{prp-item:is-trunc-map-precomp-surjective} implies that the precomposition function
+  \begin{equation*}
+    \blank\circ f : \Big(\prd{y:B}\brck{\fib{f}{y}}\Big)\to\Big(\prd{x:A}\brck{\fib{f}{f(x)}}\Big)
+  \end{equation*}
+  is an equivalence. Hence it suffices to construct an element of type $\brck{\fib{f}{f(x)}}$ for each $x:A$. This is easy, because we have
+  \begin{equation*}
+    \eta(x,\refl{f(x)}):\brck{\fib{f}{f(x)}}.\qedhere
+  \end{equation*}
+\end{proof}
+
+As a corollary we obtain that any surjective map into a proposition satisfies the universal property of the propositional truncation.
+
+\begin{cor}
+  For any map $f:A\to P$ into a proposition $P$, the following are equivalent:
+  \begin{enumerate}
+  \item The map $f$ satisfies the universal property of the propositional truncation of $A$.
+  \item The map $f$ is surjective.
+  \end{enumerate}
+\end{cor}
+
+Using the characterization of surjective maps of \cref{prp:surjective}, we can also give a new characterization of the image of a map. 
+
+\begin{thm}\label{thm:surjective}
+Consider a commuting triangle
+\begin{equation*}
+\begin{tikzcd}[column sep=tiny]
+A \arrow[rr,"q"] \arrow[dr,swap,"f"] & & B \arrow[dl,"m"] \\
+& X
+\end{tikzcd}
+\end{equation*}
+in which $m$ is an embedding. Then the following are equivalent:
+\begin{enumerate}
+\item The embedding $m$ satisfies the universal property of the image inclusion of $f$.\index{image of a map!universal property}\index{surjective map!universal property of the image of a map}
+\item The map $q$ is surjective.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+  First assume that $m$ satisfies the universal property of the image inclusion of $f$, and consider the composite function
+  \begin{equation*}
+    \begin{tikzcd}
+      \Big(\sm{y:B}\brck{\fib{q}{y}}\Big) \arrow[r,"\proj 1"] & B \arrow[r,"m"] & X.
+    \end{tikzcd}
+  \end{equation*}
+  Note that $m\circ\proj 1$ is a composition of embeddings, so it is an embedding. By the universal property of $m$ there is a unique map $h$ for which the triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=0]
+      B \arrow[dr,swap,"m"] \arrow[rr,dashed,"h"] & & \sm{y:B}\brck{\fib{q}{y}} \arrow[dl,"m\circ\proj 1"] \\
+      \phantom{\sm{y:B}\brck{\fib{q}{y}}} & X
+    \end{tikzcd}
+  \end{equation*}
+  commutes. Now note that $\proj 1\circ h$ is a map such that $m\circ (\proj 1\circ h)\htpy m$. The identity function is another map for which we have $m\circ\idfunc\htpy m$, so it follows by uniqueness that $\proj 1\circ h\htpy \idfunc$. In other words, the map $h$ is a section of the projection map. Therefore we obtain by \cref{ex:pi_sec} a dependent function
+  \begin{equation*}
+    \prd{b:B}\brck{\fib{q}{b}},
+  \end{equation*}
+  showing that $q$ is surjective.
+
+  For the converse, suppose that $q$ is surjective. To prove that $m$ satisfies the universal property of the image factorization of $f$, it suffices to construct a map
+  \begin{equation*}
+    \homslice_X(f,m')\to\homslice_X(m,m'),
+  \end{equation*}
+  for any embedding $m':B'\to X$. To see that there is such an equivalence, we make the following calculation
+  \begin{align*}
+    \homslice_X(m,m') &  \simeq \prd{b:B}\fib{m'}{m(b)} \tag{By \cref{ex:triangle_fib}}\\
+                         & \simeq \prd{a:A}\fib{m'}{m(q(a))} \tag{By \cref{prp:surjective}}\\
+                         & \simeq \prd{a:A}\fib{m'}{f(a)} \tag{By $f\htpy m\circ q$}\\
+                         & \simeq \homslice_X(f,m').\tag{By \cref{ex:triangle_fib}}
+  \end{align*}
+\end{proof}
+
+\begin{cor}
+  Every map factors uniquely as a surjective map followed by an embedding.\index{surjective map!factorization}\index{embedding!factorization}
+\end{cor}
+
+\begin{proof}
+  Consider a map $f:A\to X$, and two factorizations
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[rr,"q"] \arrow[dr,swap,"f"] & & B \arrow[dl,"i"] &[3em] A \arrow[rr,"{q'}"] \arrow[dr,swap,"f"] & & B' \arrow[dl,"{i'}"] \\
+      & X & & & X
+    \end{tikzcd}
+  \end{equation*}
+  of $f$ where $m$ and $m'$ are embeddings, and $q$ and $q'$ are surjective. Then both $m$ and $m'$ satisfy the universal property of the image factorization of $f$ by \cref{thm:surjective}. Now it follows by \cref{thm:uniqueness-image} that the type of $(e,H):\homslice_X(i,i')$ in which $e$ is an equivalence, equipped with an identification
+  \begin{equation*}
+    (e,H)\circ(q,I)=(q',I')
+  \end{equation*}
+  in $\homslice_X(f,i')$, is contractible.
+\end{proof}
+
+\subsection{Cantor's diagonal argument}
+\index{Cantor's diagonal argument|(}
+
+Now that we have introduced surjective maps, we are in position to give Cantor's famous diagonal argument, which he used to show that there are infinite sets of different cardinality. The diagonal argument gives a proof that there is no surjective map from $X$ to its power set $\mathcal{P}(X)$. The power set of a type $X$ is of course defined with respect to a universe $\UU$, as the type of families of propositions in $\UU$ indexed by $X$.
+
+\begin{defn}
+  Consider a type $X$, and a universe $\UU$. We define the \define{$\UU$-power set}\index{power set|textbf} of $X$ to be\index{P U X@{$\mathcal{P}_\UU(X)$}|see {power set}}
+  \begin{equation*}
+    \mathcal{P}_{\mathcal{U}}(X)\defeq X\to\prop_\UU.
+  \end{equation*}
+\end{defn}
+
+\begin{thm}
+  For any type $X$ and any universe $\UU$, there is no surjective function
+  \begin{equation*}
+    f : X \to \mathcal{P}_{\mathcal{U}}(X)
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Consider a function $f:X\to (X\to \prop_\UU)$, and suppose that $f$ is surjective. Following Cantor's diagonalization argument, we define the subset $P:X\to\prop_\UU$ by
+  \begin{equation*}
+    P(x)\defeq \neg(f(x,x)).
+  \end{equation*}
+  Our goal is to reach a contradiction and $f$ is assumed to be surjective. Therefore, it suffices to show that
+  \begin{equation*}
+    \Brck{\sm{x:X}f(x)=P}\to\emptyt.
+  \end{equation*}
+  The empty type is a proposition, so by the universal property of the propositional truncation it is equivalent to show that
+  \begin{equation*}
+    \Big(\sm{x:X}f(x)=P\Big)\to\emptyt.
+  \end{equation*}
+  Consider an element $x:X$ equipped with an identification $f(x)=P$. Our goal is to construct an element of the empty type, i.e, to reach a contradiction. By the identification $f(x)=P$ it follows that 
+  \begin{equation*}
+    f(x,y)\leftrightarrow P(y)
+  \end{equation*}
+  for all $y:X$. In particular, it follows that $f(x,x)\leftrightarrow P(x)$. However, since $P(x)$ is defined as $\neg(f(x,x))$, we obtain that $f(x,x)\leftrightarrow\neg(f(x,x))$. By \cref{ex:no-fixed-points-neg} this gives us the desired contradiction.
+\end{proof}
+\index{Cantor's diagonal argument|)}
+
+\begin{exercises}
+  \exitem Consider a commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[dr,swap,"f"] \arrow[rr,"h"] & & B \arrow[dl,"g"] \\
+      & X
+    \end{tikzcd}
+  \end{equation*}
+  where $g$ is an embedding.
+  \begin{subexenum}
+  \item Show that if there is a morphism
+    \begin{equation*}
+      \begin{tikzcd}[column sep=tiny]
+        B \arrow[dr,swap,"g"] \arrow[rr,"k"] & & A \arrow[dl,"f"] \\
+        & X
+      \end{tikzcd}
+    \end{equation*}
+    over $X$, then $g$ satisfies the universal property of the image of $f$.
+  \item Show that if $f$ is an embedding, then $g$ satisfies the universal property of $f$ if and only if $h$ is an equivalence.
+  \end{subexenum}
+  \exitem
+  \begin{subexenum}
+  \item Show that for any proposition $P$, the constant map\index{constant map!is an embedding}
+    \begin{equation*}
+      \const_\ttt : P \to \unit
+    \end{equation*}
+    is an embedding. Use this fact to construct an equivalence
+    \begin{equation*}
+      \Big(\sm{A:\UU}A\hookrightarrow\unit\Big)\simeq\prop_\UU.
+    \end{equation*}
+  \item Consider a map $f:A\to P$ into a proposition $P$. Show that the following are equivalent:
+    \begin{enumerate}
+    \item The map $f$ is a propositional truncation of $A$.\index{propositional truncation!universal property of the image of A arrow 1@{universal property of the image of $A\to \unit$}}
+    \item The constant map $P\to\unit$ satisfies the universal property of the image of the constant map $A\to\unit$.
+    \end{enumerate}
+  \end{subexenum}
+  \exitem \label{ex:is-equiv-is-emb-is-surjective}Consider a map $f:A\to B$. Show that the following are equivalent:
+  \begin{enumerate}
+  \item $f$ is an equivalence.\index{is an equivalence!is surjective and an embedding}
+  \item $f$ is both surjective and an embedding.
+  \end{enumerate}
+  \exitem Consider a commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[rr,"h"] \arrow[dr,swap,"f"] & & B \arrow[dl,"g"] \\
+      & X
+    \end{tikzcd}
+  \end{equation*}
+  with $H:f\htpy g\circ h$.
+  \begin{subexenum}
+  \item Show that if $f$ is surjective, then $g$ is surjective.
+  \item Show that if both $g$ and $h$ are surjective, then $f$ is surjective.
+  \item As a converse to \cref{ex:is-trunc-comp}, show that if $f$ and $h$ are $k$-truncated, then $g$ is also $k$-truncated.
+  \end{subexenum}
+  \exitem Prove \define{Lawvere's fixed point theorem}\index{Lawvere's fixed point theorem}: For any two types $A$ and $B$, if there is a surjective map $f:A\to B^A$, then for any $h:B\to B$ there exists an $x:B$ such that $h(x)=x$, i.e., show that
+  \begin{equation*}
+    \Big(\exists_{(f:A\to(A\to B))}\issurj(f)\Big)\to\Big(\forall_{(h:B\to B)}\exists_{(b:B)}h(b)=b\Big).
+  \end{equation*}
+\end{exercises}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

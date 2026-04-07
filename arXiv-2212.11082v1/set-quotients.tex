@@ -1,0 +1,928 @@
+\section{Set quotients}\label{sec:set-quotients}
+\index{set quotient|(}
+
+In this section we construct the quotient of a type by an equivalence relation. By an equivalence relation we understand a binary relation $R$ which is reflexive, symmetric, transitive, and moreover, we require that the type $R(x,y)$ relating $x$ and $y$ is a proposition. Therefore, if $\UU$ is a universe that contains $R(x,y)$ for each $x,y:A$, then we can view $R$ as a map
+\begin{equation*}
+  R:A\to(A\to\prop_\UU).
+\end{equation*}
+The quotient $A/R$ is constructed as the type of equivalence classes, which is just the image of the map $R:A\to (A\to\prop_\UU)$. This construction of the quotient by an equivalence relation is very much like the construction of a quotient set in classical set theory. Examples of set quotients are abundant in mathematics. We cover two of them in this section: the type of rational numbers and the set truncation of a type.
+
+There is, however, a subtle issue with our construction of the set quotient as the image of the map $R:A\to(A\to\prop_\UU)$. What universe is the quotient $A/R$ in? Note that $\prop_\UU$ is a type in the successor universe $\UU^+$, constructed in \cref{defn:successor-universe}. Therefore the function type $A\to \prop_\UU$ as well as the quotient $A/R$ are also types in $\UU^+$. That seems unfortunate, because in Zermelo-Fraenkel set theory the quotient of a set by an equivalence relation is an ordinary set, and not a more general class.
+
+To address the size issues of set quotients, we will introduce the type theoretic replacement axiom. This axiom is analogous to the replacement axiom in Zermelo-Fraenkel set theory, which asserts that the image of a set under any function is again a set. The type theoretic replacement property asserts that for any map $f:A\to B$ from a type $A$ in $\UU$ to a type $B$ of which the \emph{identity types} are equivalent to types in $\UU$, the image of $f$ is also equivalent to a type in $\UU$. The replacement axiom can either be assumed, or it can be proven from the assumption that universes are closed under certain \emph{higher inductive types}, and it is therefore considered to be a very mild assumption.
+
+\subsection{Equivalence relations and the replacement axiom}
+
+\begin{defn}\label{defn:eq_rel}
+Consider a type $A$ and a universe $\UU$. Let $R:A\to (A\to\prop_\UU)$ be a binary relation on $A$ valued in the propositions in $\UU$\index{relation!valued in propositions}. We say that $R$ is an \define{equivalence relation}\index{equivalence relation|textbf}\index{relation!equivalence relation|textbf} if $R$ comes equipped with
+\begin{align*}
+\rho & : \prd{x:A}R(x,x) \\*
+\sigma & : \prd{x,y:A} R(x,y)\to R(y,x) \\*
+\tau & : \prd{x,y,z:A} R(x,y)\to (R(y,z)\to R(x,z)),
+\end{align*}
+witnessing that $R$ is reflexive\index{relation!reflexive}, symmetric\index{relation!symmetric}, and transitive\index{relation!transitive}. We write $\eqrel_\UU(A)$\index{Eq-Rel@{$\eqrel_\UU(A)$}|see {equivalence relation}}\index{Eq-Rel@{$\eqrel_\UU(A)$}|textbf} for the type of all equivalence relations on $A$ valued in the propositions in $\UU$.
+\end{defn}
+
+\begin{defn}
+  Let $R:A\to (A\to\prop_\UU)$ be an equivalence relation. A subtype $P:A\to \prop_\UU$ is said to be an \define{equivalence class}\index{equivalence class|textbf}\index{equivalence relation!equivalence class|textbf} if it satisfies the condition
+  \begin{equation*}
+    \isequivalenceclass(P)\defeq\exists_{(x:A)}\forall_{(y:A)}P(y)\leftrightarrow R(x,y).
+  \end{equation*}
+  We define $A/R$\index{A/R@{$A/R$}|see {set quotient}}\index{set quotient|textbf} to be the type of equivalence classes, i.e., we define
+  \begin{equation*}
+    A/R\defeq \sm{P:A\to\prop_\UU}\isequivalenceclass(P).
+  \end{equation*}
+  Furthermore, we define \define{equivalence class of $x:A$}\index{[x] R@{$[x]_R$}|textbf}\index{equivalence relation![x] R@{$[x]_R$}|textbf}\index{set quotient![x] R@{$[x]_R$}|textbf} to be
+  \begin{equation*}
+    [x]_R\defeq R(x),
+  \end{equation*}
+  which is indeed an equivalence class. Sometimes we will write $q_R:A\to A/R$ for the map $x\mapsto [x]_R$.\index{q R@{$q_R$}|textbf}
+\end{defn}
+
+In other words, $A/R$ is the image of the map $R:A\to (A\to\prop_\UU)$. In the following proposition we characterize the identity type of $A/R$. As a corollary, we obtain equivalences
+\begin{equation*}
+  ([x]_R=[y]_R)\simeq R(x,y),
+\end{equation*}
+justifying that the quotient $A/R$ is defined to be the type of equivalence classes. Note that in our characterization of the identity type of $A/R$ we make use of propositional extensionality.
+
+\begin{prp}\label{prp:eq-quotient}
+  Let $R:A\to (A\to\prop_\UU)$ be an equivalence relation. Furthermore, consider $x:A$ and an equivalence class $P$. Then the canonical map\index{characterization of identity type!of set quotients}\index{set quotient!characterization of identity type}\index{identity type!of A/R@{of $A/R$}}
+  \begin{equation*}
+    ([x]_R=P)\to P(x)
+  \end{equation*}
+  is an equivalence.
+\end{prp}
+
+\begin{proof}
+  By \cref{thm:id_fundamental} it suffices to show that the total space
+  \begin{equation*}
+    \sm{P:A/R}P(x)
+  \end{equation*}
+  is contractible. The center of contraction is of course $[x]_R$, which satisfies $[x]_R(x)$ by reflexivity of $R$. It remains to construct a contraction. Since $\sm{P:A/R}P(x)$ is a subtype of $A/R$, we construct a contraction by showing that
+  \begin{equation*}
+    [x]_R=P
+  \end{equation*}
+  whenever $P(x)$ holds. Since $P$ is an equivalence class there exists an element $y:A$ such that $P=[y]_R$. Note that our goal is a proposition, so we may assume that we have such a $y$. From the assumption that $P(x)$ holds, it follows that $R(x,y)$ holds. To complete the proof, it therefore is suffices to show that
+  \begin{equation*}
+    [x]_R=[y]_R,
+  \end{equation*}
+  assuming that $R(x,y)$ holds. By function extensionality and propositional extensionality, it is equivalent to show that
+  \begin{equation*}
+    \prd{z:A}R(x,z)\leftrightarrow R(y,z),
+  \end{equation*}
+  which follows directly from the assumption that $R$ is an equivalence relation.
+\end{proof}
+
+\begin{cor}\label{cor:eq-quotient}
+  Consider an equivalence relation $R$ on a type $A$, and let $x,y:A$. Then there is an equivalence
+  \begin{equation*}
+    ([x]_R=[y]_R)\simeq R(x,y).
+  \end{equation*}
+\end{cor}
+
+\begin{rmk}
+  Notice that type of equivalence classes of an equivalence relation in $\UU$ is a type in the universe $\UU^+$ that contains $\UU$ and every type in $\UU$, or indeed in any universe $\VV$ containing $\UU$ and every type in $\UU$. Indeed, the type
+  \begin{equation*}
+    \prop_\UU\jdeq\sm{X:\UU}\isprop(X)
+  \end{equation*}
+  of propositions in $\UU$ is a type in $\VV$. It follows that the type $A\to\prop_\UU$ is a type in $\VV$. The type of equivalence classes of an equivalence relation $R$ on $A$ in $\UU$ is a subtype of $A\to\prop_\UU$ in $\UU$, so we conclude that $A/R$ is a type in $\VV$.
+\end{rmk}
+
+In classical mathematics, on the other hand, we consider the class of equivalence classes of an equivalence relation to be a (small) set. We will introduce the replacement axiom in order to ensure that set quotients in type theory are small.
+
+Recall that in set theory, the replacement axiom asserts that for any family of sets $\{X_i\}_{i\in I}$ indexed by a set $I$, there is a set $X[I]$ consisting of precisely those sets $x$ for which there exists an $i\in I$ such that $x\in X_i$. In other words: the image of a set-indexed family of sets is again a set. Without the replacement axiom, $X[I]$ would be a class.
+
+In type theory, we may similarly ask whether the image of a map $X:I\to\UU$ is $\UU$-small, assuming that $I$ is $\UU$-small. The replacement axiom settles a more general variant of this question. The key observation is that the identity types of $\UU$ are $\UU$-small by the univalence axiom. In other words, univalent universes are \emph{locally small} in the following sense.
+
+\begin{defn}\label{defn:locally-small-type}
+  Consider a universe $\UU$. A type $A$ is said to be \define{locally $\UU$-small}\index{locally small type|textbf} if the identity type $x=y$ is $\UU$-small for every $x,y:A$.
+    We write\index{is-locally-small(A)@{$\islocallysmall_\UU(A)$}}
+    \begin{equation*}
+      \islocallysmall_\UU(A)\defeq \prd{x,y:A}\issmall_\UU(x=y).
+    \end{equation*}
+    Similarly, a map $f:A\to B$ is said to be \define{locally $\UU$-small}\index{locally small map|textbf} if all of its fibers are locally $\UU$-small.
+\end{defn}
+
+\begin{eg}
+  ~
+  \begin{enumerate}
+  \item Any $\UU$-small type is also locally $\UU$-small.\index{small type!small types are locally small}\index{locally small type!small types are locally small}
+  \item Any proposition is locally small with respect to any universe $\UU$.\index{proposition!propositions are locally U-small@{propositions are locally $\UU$-small}}\index{locally small type!propositions are locally small}
+  \item Any univalent universe $\UU$ is locally $\UU$-small, because by the univalence axiom we have an equivalence\index{locally small type!U is locally U-small@{$\UU$ is locally $\UU$-small}}\index{universe!U is locally U-small@{$\UU$ is locally $\UU$-small}}
+    \begin{equation*}
+      (A=B)\simeq (A\simeq B)
+    \end{equation*}
+    for each $A,B:\UU$, and the type $A\simeq B$ is in $\UU$.
+  \item For any family $B$ of locally $\UU$-small types over a $\UU$-small type $A$, the dependent product $\prd{x:A}B(x)$ is locally $\UU$-small.\index{dependent function type!is locally U-small@{is locally $\UU$-small}}\index{locally small type!dependent function type is locally small}
+  \end{enumerate}
+\end{eg}
+
+We are now ready to assume the replacement axiom.
+
+\begin{axiom}[The replacement axiom]\label{axiom:replacement}
+  For any universe $\UU$, we assume that for any map $f:A\to B$ from a $\UU$-small type $A$ into a locally $\UU$-small type $B$, the image of $f$ is $\UU$-small.\index{replacement axiom|textbf}\index{axiom!replacement axiom|textbf}
+\end{axiom}
+
+\begin{eg}
+  For any type $A:\UU$, the type $\UU_A$ of all types in $\UU$ merely equivalent to $A$ is equivalent to the image of the constant map $\const_A:\unit\to \UU$ is small. Since $\unit$ is small and $\UU$ is locally $\UU$-small, it follows from the replacement axiom that $\UU_A$ is $\UU$-small.\index{U A@{$\UU_A$}!is U-small@{is $\UU$-small}}
+\end{eg}
+
+\begin{eg}
+  The type $\F$ of all finite types in $\UU$ is equivalent to be the image of the map
+  \begin{equation*}
+    \Fin{} : \N\to\UU.
+  \end{equation*}
+  Since $\N$ is $\UU$-small and $\UU$ is locally $\UU$-small, it follows from the replacement axiom that $\F$ is $\UU$-small.\index{F@{$\F$}!is U-small@{is $\UU$-small}}\index{small type!F is U-small@{$\F$ is $\UU$-small}}
+\end{eg}
+
+\begin{eg}
+  Consider a type $A$ in $\UU$ and an equivalence relation $R$ on $A$ in $\UU$. Then the type $A/R$ is $\UU$-small, since it is equivalent to the image of
+  \begin{equation*}
+    R:A\to (A\to\prop_\UU),
+  \end{equation*}
+  which maps the $\UU$-small type $A$ into the locally $\UU$-small type $A\to\prop_\UU$.\index{set quotient!is U-small@{is $\UU$-small}}\index{small type!set quotient is U-small@{set quotient is $\UU$-small}}
+\end{eg}
+
+\subsection{The universal property of set quotients}
+\index{universal property!of set quotients|(}
+\index{set quotient!universal property|(}
+
+The quotient $A/R$ is constructed as the image of $R$, so we obtain a commuting triangle
+\begin{equation*}
+  \begin{tikzcd}[column sep=-1em]
+    A \arrow[rr,"q_R"] \arrow[dr,swap,"R"] & & A/R \arrow[dl,hook,"i_R"] \\
+    \phantom{A/R} & \prop_\UU^A,
+  \end{tikzcd}
+\end{equation*}
+and the embedding $i_R:A/R\to\prop_\UU^A$ satisfies the universal property of the image of $R$. This universal property is, however, not the usual universal property of the quotient.
+
+\begin{defn}
+  Consider a map $q:A\to B$ into a set $B$ satisfying the property that
+  \begin{equation*}
+    R(x,y)\to (q(x)=q(y))
+  \end{equation*}
+  for all $x,y:A$. We say that $q:A\to B$ \define{is a set quotient}\index{is set quotient}\index{set quotient|textbf} of $R$, or that $q$ satisfies the \define{universal property of the set quotient by $R$}\index{universal property!of set quotients|textbf}\index{set quotient!universal property|textbf}, if for every map $f:A\to X$ into a set $X$ such that $f(x)=f(y)$ whenever $R(x,y)$ holds, there is a unique extension
+  \begin{equation*}
+    \begin{tikzcd}
+      A \arrow[d,swap,"q"] \arrow[dr,"f"] \\
+      B \arrow[r,dashed] & X.
+    \end{tikzcd}
+  \end{equation*}
+\end{defn}
+
+\begin{rmk}
+  Formally, we express the universal property of the quotient by $R$ as follows. Consider a map $q:A\to B$ that satisfies the property that
+  \begin{equation*}
+    H:\prd{x,y:A}R(x,y)\to (f(x)=f(y)).
+  \end{equation*}
+  Then there is for any set $X$ a map
+  \begin{equation*}
+    q^\ast:(B\to X) \to \Big(\sm{f:A\to X}\prd{x,y:A}R(x,y)\to (f(x)=f(y))\Big).
+  \end{equation*}
+  This map takes a function $h:B\to X$ to the pair
+  \begin{equation*}
+    q^\ast(h)\defeq(h\circ q,\lam{x}\lam{y}\lam{r}\ap{h}{H_{x,y}(r)}).
+  \end{equation*}
+  The universal property of the set quotient of $R$ asserts that the map $q^\ast$ is an equivalence for every set $X$. It is important to note that the universal property of set quotients is formulated with respect to sets.
+\end{rmk}
+
+\begin{thm}\label{thm:quotient_up}
+  Consider a type $A$ and a universe $\UU$ containing $A$. Furthermore, let $R:A\to (A\to \prop_\UU)$ be an equivalence relation\index{equivalence relation}, and consider a map $q:A\to B$ into a set $B$, not necessarily in $\UU$. Then the following are equivalent.
+  \begin{enumerate}
+  \item \label{item:thm-quotient-up}The map $q$ satisfies the property that
+    \begin{equation*}
+      q(x)=q(y)
+    \end{equation*}
+    for every $x,y:A$ for which $R(x,y)$ holds, and moreover $q$ satisfies the universal property of the set quotient of $R$.
+  \item \label{item:thm-quotient-effective}The map $q$ is surjective and \define{effective}\index{effective map|textbf}\index{equivalence relation!effective map|textbf}, which means that for each $x,y:A$ we have an equivalence
+    \begin{equation*}
+      (q(x)=q(y))\simeq R(x,y).
+    \end{equation*}
+  \item \label{item:thm-quotient-up-image}The map $R:A\to (A\to \prop_\UU)$ extends along $q$ to an embedding
+    \begin{equation*}
+      \begin{tikzcd}[column sep=tiny]
+        A \arrow[rr,"q"] \arrow[dr,swap,"R"] & & B \arrow[dl,dashed,"i"] \\
+        & \prop_\UU^A
+      \end{tikzcd}
+    \end{equation*}
+    and the embedding $i$ satisfies the universal property of the image inclusion of $R$.
+  \end{enumerate}
+\end{thm}
+
+In \cref{thm:quotient_up} we don't assume that $B$ is in the same universe as $A$ and $R$, because we want to apply it to $B\defeq\im(R)$. As we will see below, this extra generality only affects the proof that \ref{item:thm-quotient-effective} implies \ref{item:thm-quotient-up-image}.
+
+\begin{proof}
+  We first show that \ref{item:thm-quotient-effective} is equivalent to \ref{item:thm-quotient-up-image}, since this is the easiest part. After that, we will show that \ref{item:thm-quotient-up} is equivalent to \ref{item:thm-quotient-effective}.
+
+  Assume that \ref{item:thm-quotient-up-image} holds. Then $q$ is surjective by \cref{thm:surjective}. Moreover, we have
+  \begin{align*}
+    R(x,y) & \simeq R(x)=R(y) \\
+           & \simeq i(q(x))=i(q(y)) \\
+           & \simeq q(x)=q(y)
+  \end{align*}
+  In this calculation, the first equivalence holds by \cref{cor:eq-quotient}; the second equivalence holds since we have a homotopy $R\htpy i\circ q$; and the third equivalence holds since $i$ is an embedding. This completes the proof that \ref{item:thm-quotient-up-image} implies \ref{item:thm-quotient-effective}.
+
+  Next, we show that \ref{item:thm-quotient-effective} implies \ref{item:thm-quotient-up-image}. First, we want to define a map 
+  \begin{equation*}
+    i:B\to\prop_\UU^A.
+  \end{equation*}
+  We would like to define $i(b,a):=(b=q(a))$. This direct definition does not go through, however, because the type $B$ is not assumed to be in $\UU$. Nevertheless, observe that by the assumption that $q$ is surjective and effective, the type $B$ is locally $\UU$-small. To see this, first note that $\issmall_U(X)$ is a proposition for any type $X$ by \cref{prp:small}. Using the assumption that $q$ is surjective, it follows from \cref{prp:surjective} that it suffices to show that $q(a)=q(a')$ is $\UU$-small for each $a,a':A$. This follows by the assumption that $q$ is effective. In particular, the identity type $b=q(a)$ is a $\UU$-small proposition, for every $b:B$ and $a:A$. Let us write $s(b,a)$ for the element of type $\issmall_\UU(b=q(a))$.
+
+  Now consider a universe $\VV$ containing $B$. Then we can define a map
+  \begin{equation*}
+    j:B\to\Big(A\to\sm{P:\prop_\VV}\issmall_\UU(P)\Big)
+  \end{equation*}
+  by $j(b,a):=(b=q(a),s(b,a))$, and now we obtain $i$ from $j$ by defining
+  \begin{equation*}
+    i(b,a):=\proj 1(s(b,a)).
+  \end{equation*}
+  Note that we have an equivalence $i(b,a)\simeq (b=q(a))$ for every $b:B$ and $a:A$.
+  Then the triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[rr,"q"] \arrow[dr,swap,"R"] & & B \arrow[dl,"i"] \\
+      & \prop_\UU^A
+    \end{tikzcd}
+  \end{equation*}
+  commutes, since we have an equivalence
+  \begin{equation*}
+    i(q(a),a') \simeq (q(a)=q(a')) \simeq R(a,a')
+  \end{equation*}
+  for each $a,a':A$. To show that $i$ is an embedding, recall from \cref{cor:is-emb-is-injective} that it suffices to show that $i$ is injective, i.e., that
+  \begin{equation*}
+    \prd{b,b':B}(i(b)=i(b'))\to (b=b'),
+  \end{equation*}
+  since the codomain of $i$ is a set by \cref{prp:propositional-extensionality}. Note that injectivity of a map into a set is a property, and that $q$ is assumed to be surjective. Hence by \cref{prp:surjective} it is sufficient to show that
+  \begin{equation*}
+    \prd{a,a':A}(i(q(a))=i(q(a')))\to (q(a)=q(a')).
+  \end{equation*}
+  Since $R\htpy i\circ q$, and $q(a)=q(a')$ is assumed to be equivalent to $R(a,a')$, it suffices to show that
+  \begin{equation*}
+    \prd{a,a':A}(R(a)=R(a'))\to R(a,a'),
+  \end{equation*}
+  which follows directly from \cref{cor:eq-quotient}. Thus we have shown that the factorization $R\htpy i\circ q$ factors $R$ as a surjective map followed by an embedding. We conclude by \cref{thm:surjective} that the embedding $i$ satisfies the universal property of the image factorization of $R$, which finishes the proof that \ref{item:thm-quotient-effective} implies \ref{item:thm-quotient-up-image}.
+  
+  Now we show that \ref{item:thm-quotient-up} implies \ref{item:thm-quotient-effective}. To see that $q$ is surjective if it satisfies the assumptions in \ref{item:thm-quotient-up}, consider the image factorization
+  \begin{equation*}
+    \begin{tikzcd}[column sep=tiny]
+      A \arrow[dr,swap,"q"] \arrow[rr,"q_q"] & & \im(q) \arrow[dl,"i_q"] \\
+      \phantom{\im(q)} & B.
+    \end{tikzcd}
+  \end{equation*}
+  We claim that the map $i_q$ has a section. To see this, we first note that we have
+  \begin{equation*}
+    q_q(x)=q_q(y)
+  \end{equation*}
+  for any $x,y:A$ satisfying $R(x,y)$, because if $R(x,y)$ holds, then $q(x)=q(y)$ and hence $i_q(q_q(x))=i_q(q_q(y))$ holds and $i_q$ is an embedding. Since $\im(q)$ is a set, we may apply the universal property of $q$ and we obtain a unique extension of $q_q$ along $q$
+  \begin{equation*}
+    \begin{tikzcd}
+      A \arrow[d,swap,"q"] \arrow[dr,"q_q"] \\
+      B \arrow[r,dashed,swap,"h"] & \im(q).
+    \end{tikzcd}
+  \end{equation*}
+  Now we observe that the composite $i_q\circ h$ is an extension of $q$ along $q$, so it must be the identity function by uniqueness. Thus we have established that $h$ is a section of $i_q$. Since $i_q$ is an embedding with a section, it follows that $i_q$ is an equivalence. We conclude that $q$ is surjective, because $q$ is the composite $i_q\circ q_q$ of a surjective map followed by an equivalence.
+
+  Now we have to show that the map $q$ is effective, i.e., that $q(x)=q(y)$ is equivalent to $R(x,y)$ for every $x,y:A$. We first apply the universal property of $q$ to obtain for each $x:A$ an extension of $R(x)$ along $q$
+  \begin{equation*}
+    \begin{tikzcd}
+      A \arrow[d,swap,"q"] \arrow[dr,"R(x)"] \\
+      B \arrow[r,dashed,swap,"\tilde{R}(x)"] & \prop_\UU.
+    \end{tikzcd}
+  \end{equation*}
+  Since the triangle commutes, we have an equivalence $\tilde{R}(x,q(x'))\simeq R(x,x')$ for each $x':A$. Now we apply \cref{thm:id_fundamental} to see that the canonical family of maps
+  \begin{equation*}
+    \prd{y:B}(q(x)=y)\to \tilde{R}(x,y)
+  \end{equation*}
+  is a family of equivalences. Thus, we need to show that the type $\sm{y:B}\tilde{R}(x,y)$ is contractible. For the center of contraction, note that we have $q(x):B$, and the type $\tilde{R}(x,q(x))$ is equivalent to the type $R(x,x)$, which is inhabited by reflexivity of $R$. To construct the contraction, it suffices to show that
+  \begin{equation*}
+    \prd{y:B}\tilde{R}(x,y)\to (q(x)=y).
+  \end{equation*}
+  Since this is a property, and since we have already shown that $q$ is a surjective map, we may apply \cref{prp:surjective}, by which it suffices to show that
+  \begin{equation*}
+    \prd{x':A}\tilde{R}(x,q(x'))\to (q(x)=q(x')).
+  \end{equation*}
+  Since $\tilde{R}(x,q(x'))\simeq R(x,x')$, this is immediate from our assumption on $q$. Thus we obtain the contraction, and we conclude that we have an equivalence $\tilde{R}(x,y)\simeq (q(x)=y)$ for each $y:B$. It follows that we have an equivalence
+  \begin{equation*}
+    R(x,y)\simeq (q(x)=q(y))
+  \end{equation*}
+  for each $x,y:A$, which completes the proof that \ref{item:thm-quotient-up} implies \ref{item:thm-quotient-effective}.
+  
+  It remains to show that \ref{item:thm-quotient-effective} implies \ref{item:thm-quotient-up}. Assume \ref{item:thm-quotient-effective}, and let $f:A\to X$ be a map into a set $X$, satisfying the property that
+  \begin{equation*}
+    \prd{a,a':A}R(a,a')\to (f(a)=f(a')).
+  \end{equation*}
+  Our goal is to show that the type of extensions of $f$ along $q$ is contractible. By \cref{ex:surjective-precomp} it follows that there is at most one such an extension, so it suffices to construct one.
+
+  In order to construct an extension, we will construct for every $b:B$ a term $x:X$ satisfying the property
+  \begin{equation*}
+    P(x)\defeq \exists_{(a:A)}(f(a)=x)\land (q(a)=b).
+  \end{equation*}
+  Before we make this construction, we first observe that there is at most one such $x$, i.e., that the type of $x:X$ satisfying $P(x)$ is in fact a proposition. To see this, we need to show that $x=x'$ for any $x,x':X$ satisfying $P(x)$ and $P(x')$. Since $X$ is assumed to be a set, our goal of showing that $x=x'$ is a property. Therefore we may assume that we have $a,a':A$ satisfying
+  \begin{align*}
+    f(a) & = x & q(a) & = b \\
+    f(a') & = x' & q(a') & = b.
+  \end{align*}
+  It follows from these assumptions that $q(a)=q(a')$, and hence that $R(a,a')$ holds. This in turn implies that $f(a)=f(a')$, and hence that $x=x'$.
+
+  Now let $b:B$. Our goal is to construct an $x:X$ that satisfies the property
+  \begin{equation*}
+    \exists_{(a:A)}(f(a)=x)\land (q(a)=b).
+  \end{equation*}
+  Since $q$ is assumed to be surjective, we have $\brck{\fib{q}{b}}$. Moreover, since we have shown that at most one $x:X$ exists with the asserted property, we get to assume that we have $a:A$ satisfying $q(a)=b$. Now we see that $x\defeq f(a)$ satisfies the desired property.
+
+  Thus, we obtain a function $h:B\to X$ satisfying the property that for all $b:B$ there exists an $a:A$ such that
+  \begin{equation*}
+    f(a)=h(b)\qquad\text{and}\qquad q(a)=b.
+  \end{equation*}
+  In particular, it follows that $h(q(a))=f(a)$ for all $a:A$, which completes the proof that \ref{item:thm-quotient-effective} implies \ref{item:thm-quotient-up}.  
+\end{proof}
+
+\begin{cor}
+  Consider an equivalence relation $R$ over a type $A$. Then the quotient map
+  \begin{equation*}
+    q:A\to A/R
+  \end{equation*}
+  is surjective and effective, and it satisfies the universal property of the set quotient.
+\end{cor}
+
+\cref{thm:quotient_up} can be used to show that the type of equivalence relations is equivalent to the type of sets $X$ equipped with a surjective map $A\twoheadrightarrow X$. This may seem remarkable if you haven't tried \cref{ex:surjection-into-k-type} yet, because at first glance one might think that the type of sets $X$ equipped with a surjective map $A\twoheadrightarrow X$ is a $1$-type, while the type of equivalence relations on $A$ is a set.
+
+\begin{thm}\label{thm:eqrel-surj}
+  For any type $A$ and any universe $\UU$ containing $A$, we have an equivalence
+  \index{surjective map!surjective maps into sets are set quotients}\index{set quotient!surjective maps into sets are set quotients}
+  \begin{equation*}
+    \eqrel_\UU(A)\simeq\sm{X:\Set_\UU}A\twoheadrightarrow X.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Given an equivalence relation $R:A\to(A\to\prop_\UU)$ on $A$ we first use the replacement axiom, by which the set quotient $A/R$ is $\UU$-small, to obtain a set $Q(R):\Set_\UU$, an equivalence $e:Q(R)\simeq A/R$, and a surjective map $f:A\to Q(R)$ such that the triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=1em]
+      \phantom{Q(R)} & A \arrow[dl,swap,"f"] \arrow[dr,"q"] & \phantom{Q(R)}\\
+      Q(R) \arrow[rr,swap,"e"] & & A/R
+    \end{tikzcd}
+  \end{equation*}
+  commutes. This defines a map
+  \begin{equation*}
+    \mathcal{Q}_A:\eqrel_\UU(A)\to\sm{X:\Set_\UU}A\twoheadrightarrow X.
+  \end{equation*}
+  The map $\mathcal{K}_A:\big(\sm{X:\Set_\UU}A\twoheadrightarrow X\big)\to\eqrel_\UU(A)$ is given by
+  \begin{equation*}
+    \mathcal{K}_A(X,f,x,y)\defeq K_f(x,y) \defeq (f(x)=f(y)).
+  \end{equation*}
+  Note that $K_f$ is valued in propositions because $X$ is assumed to be a set, and obviously it is an equivalence relation.
+
+  To see that $\mathcal{K}_A(\mathcal{Q}_A(R))=R$ note that by function extensionality and propositional extensionality it follows that two equivalence relations $R$ and $S$ on $A$ are equal if and only if $R(x,y)\leftrightarrow S(x,y)$ for all $x,y:A$. Note that $\mathcal{K}_A(\mathcal{Q}_A(R))(x,y)\leftrightarrow R(x,y)$ holds for all $x,y:A$ if and only if $(q_R(x)=q_R(y))\leftrightarrow R(x,y)$ holds for all $x,y:A$. This follows from \cref{cor:eq-quotient}.
+
+  It remains to show that $\mathcal{Q}_A(\mathcal{K}_A(X,f))=(X,f)$. Note that the type of identifications $(Y,g)=(X,f)$ is by the univalence axiom equivalent to the type
+  \begin{equation*}
+    \sm{e:Y\simeq X}e\circ g\htpy f.
+  \end{equation*}
+  Therefore it suffices to construct a commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=1em]
+      \phantom{A/K_f} & A \arrow[dl,swap,"q_{K_f}"] \arrow[dr,"f"] & \phantom{A/K_f} \\
+      A/K_f \arrow[rr] & & X
+    \end{tikzcd}
+  \end{equation*}
+  We obtain such an equivalence by combining \cref{thm:quotient_up} and \cref{thm:uniqueness-image}.
+\end{proof}
+\index{universal property!of set quotients|)}
+\index{set quotient!universal property|)}
+
+
+\subsection{Partitions}
+\index{partition|(}
+\index{set quotient!partition|(}
+
+There are many equivalent ways of stating what an equivalence relation is. We saw in \cref{thm:eqrel-surj} that the type of equivalence relations on $A$ is equivalent to the type of surjective maps out of $A$ into a set. Here we will show that the type of equivalence relations on $A$ is equivalent to the type of partitions of $A$. Another type that is equivalent to the type of equivalence relations of $A$ is the type of set-indexed $\Sigma$-decompositions of $A$, i.e., the type of triples $(X,Y,e)$ consisting of a set $X$, a family $Y$ of inhabited types indexed by $X$, and an equivalence $e:A\simeq \sm{x:X}Y(x)$. The fact that the type of equivalence relations on $A$ is equivalent to the type of set-indexed $\Sigma$-decompositions of $A$ is stated as \cref{ex:sigmadecompositions}
+
+In this section we show that equivalence relations on $A$ are partitions of $A$. Recall that the type of inhabited subtypes of $A$ is defined to be
+\begin{equation*}
+  \mathcal{P}_{\mathcal{U}}^+(A)\defeq\sm{Q:A\to\prop_\UU}\Brck{\sm{a:A}Q(a)}.
+\end{equation*}
+The equivalence of equivalence relations and partitions requires some finesse regarding universes. This is why we set up the definition of partitions in the following way.
+
+\begin{defn}
+  Let $A$ be a type and let $\UU$ and $\VV$ be two universes. A \define{$(\UU,\VV)$-partition}\index{partition|textbf}\index{set quotient!partition|textbf} of a type $A$ is a subset
+  \begin{equation*}
+    P:\mathcal{P}_{\UU}^+(A)\to\prop_{\VV}
+  \end{equation*}
+  of the type of inhabited subsets of $A$ such that for each $x:A$ there is a unique inhabited subset $Q$ of $A$ in $P$ that contains $x$, i.e., if it comes equipped with an element of type
+  \begin{equation*}
+    \ispartition(P):=\prd{x:A}\iscontr\Big(\sm{Q:\mathcal{P}_{\UU}^+(A)}P(Q)\times Q(x)\Big)
+  \end{equation*}
+  The type of all $(\UU,\VV)$-partitions of $A$ is defined by
+  \begin{equation*}
+    \partition_{\UU,\VV}(A)\defeq\sm{P:\mathcal{P}_{\UU}^+(A)\to\prop_{\VV}}\ispartition(P)
+  \end{equation*}
+\end{defn}
+
+\begin{thm}
+  Consider a type $A$, a universe $\UU$, and consider a universe $\VV$ containing both $A$ and every type in $\UU$. Then we have an equivalence
+  \begin{equation*}
+    \eqrel_{\UU}(A)\simeq\partition_{\UU,\VV}(A).
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Consider an equivalence relation $R$ on $A$. Then we define
+  \begin{equation*}
+    P:\mathcal{P}_{\UU}^+(A)\to\prop_\VV
+  \end{equation*}
+  by $P(Q)\defeq\exists_{(x:A)}\forall_{(y:A)}Q(y)\leftrightarrow R(x,y)$. In other words, $P$ is the subtype of equivalence classes of $R$, which are all inhabited. To show that $P$ is a partition of $A$, let $x:A$. The type
+  \begin{equation*}
+    \sm{Q:\mathcal{P}_{\UU}^+(A)}P(Q)\times Q(x)
+  \end{equation*}
+  is equivalent to the type
+  \begin{equation*}
+    \sm{Q:\mathcal{P}_{\UU}^+(A)}\prd{y:A}Q(y)\leftrightarrow R(x,y)
+  \end{equation*}
+  since the proposition $\exists_{(z:A)}\forall_{(y:A)}Q(y)\leftrightarrow R(z,y)$ is equivalent to the type $\prd{y:A}Q(y)\leftrightarrow R(x,y)$, given an element $q:Q(x)$. By univalence it follows that the latter type is equivalent to the identity type $Q=R(x)$ in $\mathcal{P}_{\UU}^+(A)$, so the total space is contractible. Thus we obtain a map
+  \begin{equation*}
+    \psi:\eqrel_{\mathcal{U}}(A)\to\partition_{\UU,\VV}(A).
+  \end{equation*}
+  
+  For the converse map, we first define for any $(\UU,\VV)$-partition $P$ of $A$ a binary relation $R_P$ such that $R_P(x)$ is at the center of contraction in the type
+  \begin{equation*}
+    \sm{Q:\mathcal{P}^+_{\mathcal{U}}(A)}P(Q)\times Q(x).
+  \end{equation*}
+  In other words, $R_P(x)$ is defined to be the unique block in the partition $P$ such that $R_P(x,x)$ holds. It is immediate from its definition that $R_P(x,y)$ is a proposition in $\UU$. To see that $R_P$ is symmetric, note that if $R_P(x,y)$ holds, then $R_P(x)$ is an element of type
+  \begin{equation*}
+    \sm{Q:\mathcal{P}^+_{\mathcal{U}}(A)}P(Q)\times Q(y).
+  \end{equation*}
+  By contractibility, this implies that $R(x)=R(y)$, from which we obtain that $R(y,x)$ holds. To see that $R_P$ is transitive we observe similarly that if $R(x,y)$ and $R(y,z)$ hold, then we have an identification $R(x)=R(y)$ and it follows that $R(x,z)$ holds.  Thus we obtain a map
+  \begin{equation*}
+    \varphi:\partition_{\UU,\VV}(A)\to\eqrel_{\UU}(A).
+  \end{equation*}
+  It remains to prove that the maps $\psi$ and $\varphi$ are inverse to each other, first let $R$ be an equivalence relation. In order to show that $\varphi(\psi(R))=R$ it suffices by univalence to show that the equivalence relation obtained from the partition induced by $R$ is given by
+  \begin{equation*}
+    R'(x,y):=\sm{Q:\mathcal{P}_{\UU}^+(A)}\Big(\exists_{(u:A)}\forall_{(v:A)}Q(v)\leftrightarrow R(u,v)\Big)\times Q(x)\times Q(y).
+  \end{equation*}
+  is equivalent to $R$. Observe that the proposition $R'(x,y)$ is equivalent to $R(x,x)\times R(x,y)$, which is equivalent to $R(x,y)$. This shows that the composite
+  \begin{equation*}
+    \begin{tikzcd}
+      \eqrel_{\UU}(A) \arrow[r,"\psi"] & \partition_{\UU,\VV}(A) \arrow[r,"\varphi"] & \eqrel_{\UU}(A)
+    \end{tikzcd}
+  \end{equation*}
+  is homotopic to the identity function.
+
+  Finally, we have to show that for any partition $P$ of $A$ and any inhabited subtype $Q$ of $A$ we have $\psi(\varphi(P))(Q)\leftrightarrow P(Q)$. Note that this is a proposition, so we may assume an element $x:A$ such that $Q(x)$ holds. By univalence it follows that $\psi(\varphi(P))(Q)$ holds if and only if $Q=R_P(x)$, where $R_P$ is the equivalence relation constructed in the definition of the map $\varphi$. Now we see that $P(Q)$ holds if and only if $Q$ is in the contractible type
+  \begin{equation*}
+    \sm{Q':\mathcal{P}^+_{\mathcal{U}}(A)}P(Q')\times Q'(x),
+  \end{equation*}
+  which is the case if and only if $Q=R_P(x)$. This shows that the composite
+  \begin{equation*}
+    \begin{tikzcd}
+      \partition_{\UU,\VV}(A) \arrow[r,"\varphi"] & \eqrel_{\UU}(A) \arrow[r,"\psi"] & \partition_{\UU,\VV}(A)
+    \end{tikzcd}
+  \end{equation*}
+  is homotopic to the identity function.
+\end{proof}
+\index{partition|)}
+\index{set quotient!partition|)}
+
+\subsection{Unique representatives of equivalence classes}
+\index{equivalence class!choice of unique representatives|(}
+\index{equivalence relation!choice of unique representatives|(}
+
+A common way to construct set quotients is by showing that the equivalence classes of an equivalence relation have a choice of unique representatives. In this section we show that if there is a choice of unique representatives, then the set quotient can be constructed as the type of those representatives. An important reason to define set quotients as the type of canonical representatives, if that is possible, is that the universe level of the set quotient can be kept as low as possible without needing to appeal to the replacement axiom.
+
+\begin{defn}
+  Consider an equivalence relation $R$ on a type $A$, and consider a family of types $C(x)$ indexed by $x:A$. We say that $C$ is a \define{choice of (unique) representatives}\index{choice of unique representatives|textbf}\index{equivalence class!choice of unique representatives|textbf}\index{equivalence relation!choice of unique representatives|textbf} of the equivalence classes of $R$ if $C$ comes equipped with an element of type
+  \begin{equation*}
+    \ischoiceofrepresentatives(C) \defeq \prd{x:A}\iscontr\Big(\sm{y:A}C(y)\times R(x,y)\Big).
+  \end{equation*}
+\end{defn}
+
+\begin{thm}\label{thm:choice-of-representatives}
+  Consider an equivalence relation $R$ on a type $A$, and let $C$ be a choice of representatives of the equivalence classes of $R$, with $(h(x),c(x),r(x))$ at the center of contraction of $\sm{y:A}C(y)\times R(x,y)$. Then the map
+  \begin{equation*}
+    q:A\to\sm{x:A}C(x)
+  \end{equation*}
+  given by $q(x)\defeq(h(x),c(x))$ is a map into a set such that $q(x)=q(y)$ for every $x,y:A$ such that $R(x,y)$ holds, and moreover $q$ satisfies the universal property of the set quotient of $A$ by $R$. 
+\end{thm}
+
+\begin{proof}
+  First, we will use \cref{lem:prop_to_id} to show that the type $\sm{y:A}C(y)$ is a set, such that
+  \begin{equation*}
+    ((x,c)=(y,d))\simeq R(x,y)
+  \end{equation*}
+  for any $(x,c)$ and $(y,d)$ in $\sm{y:A}C(y)$. Note that we have a function
+  \begin{equation*}
+    R(x,y)\to ((x,c)=(y,d)),
+  \end{equation*}
+  since for any $r:R(x,y)$ both $(x,c,r)$ and $(y,d,r)$ are elements of the contractible type ${\sm{y:A}C(y)\times R(x,y)}$. Since $R$ is a reflexive relation valued in propositions, the claim follows. In particular, it follows that
+  \begin{equation*}
+    (q(x)=q(y))\simeq R(x,y)
+  \end{equation*}
+  for any $x,y:A$, i.e., $q$ is effective.
+  
+  To prove the universal property of set quotients, note that by characterization \ref{item:thm-quotient-effective} in \cref{thm:quotient_up} it suffices to show that $q$ is surjective and effective. We have already shown above that $q$ is effective, so it remains to show that $q$ is surjective. In fact, we will prove the stronger claim that the projection map
+  \begin{equation*}
+    \proj 1:\sm{x:A}C(x)\to A  
+  \end{equation*}
+  is a section of $q$. Let $x:A$ and $c:C(x)$. Then $(x,c,\rho(x))$ is an element of the type
+  \begin{equation*}
+    \sm{y:A}C(y)\times R(x,y),
+  \end{equation*}
+  which is contractible with center of contraction $(h(x),c(x),r(x))$. Therefore it follows that $q(x)\jdeq (h(x),c(x))=(x,c)$. In particular, we see that $q(\proj 1(x,c))=(x,c)$, i.e., that $\proj 1$ is a section of $q$.
+\end{proof}
+
+\begin{eg}
+  In \cref{prp:congruence-eqrel} we constructed the congruence relations $x\equiv y \mod k$ on the natural numbers for every natural number $k$, and in \cref{thm:effective-mod-k,thm:issec-nat-Fin} we showed that the map
+  \begin{equation*}
+    x\mapsto [x]_{k+1}:\N\to\Fin{k+1}
+  \end{equation*}
+  is effective and split surjective. By \cref{thm:quotient_up} it follows that the map
+  \begin{equation*}
+    x\mapsto [x]_{k+1}:\N\to\Fin{k+1}
+  \end{equation*}
+  satisfies the universal property of the set quotient of the equivalence relation $x,y\mapsto x\equiv y\mod k+1$.
+
+  We also claim that there is a choice of representatives of the congruence relations.\index{congruence relations on N@{congruence relations on $\N$}!choice of unique representatives}\index{choice of unique representatives!for the congruence relations on N@{for the congruence relations on $\N$}} We define our choice of representatives by
+  \begin{equation*}
+    C(y)\defeq \fib{\natFin}{y},
+  \end{equation*}
+  where $\natFin:\Fin{k+1}\to\N$ is the inclusion of $\Fin{k+1}$ into $\N$ constructed in \cref{defn:natFin}. To see that $C$ is a choice of representatives, we have to prove that
+  \begin{equation*}
+    \sm{y:\N}C(y)\times (x\equiv y\mod k+1)
+  \end{equation*}
+  is contractible for each $x:\N$. At the center of contraction we have the triple $(\natFin([x]_{k+1}),([x]_{k+1},\refl{}),p)$ where $p:x\equiv\natFin([x]_{k+1})\mod k+1$ is the proof obtained via \cref{thm:effective-mod-k,thm:issec-nat-Fin}. In order to construct the contraction, note that both $C(y)$ and $x\equiv y\mod k+1$ are propositions for each $y:\N$. Therefore it suffices to prove that for any $y:\N$ such that $C(y)$ and $x\equiv y\mod k+1$ hold, we have
+  \begin{equation*}
+    \natFin([x]_{k+1})=y.
+  \end{equation*}
+  Since $C(y)$ holds, we see that $y=\natFin([y]_{k+1})$. Therefore it suffices to prove that $[x]_{k+1}=[y]_{k+1}$. This follows from \cref{thm:effective-mod-k}, since we assumed $x\equiv y\mod k+1$.
+\end{eg}
+
+\begin{eg}
+  Consider the type of \define{(integer) fractions}\index{fraction|textbf}\index{integers!integer fractions|textbf}
+  \begin{equation*}
+    Q\defeq \Z\times\sm{y:\Z}y\neq 0.
+  \end{equation*}
+  We define an equivalence relation on $Q$ by
+  \begin{equation*}
+    ((x,y)\sim (x',y'))\defeq (xy'=x'y).
+  \end{equation*}
+  This equivalence relation has a choice of representatives defined by
+  \index{choice of unique representatives!for integer fractions}
+  \index{fraction!choice of unique representatives}
+  \begin{equation*}
+    C(x,y)\defeq (y>0)\land (\gcd(x,y)=1). 
+  \end{equation*}
+  In other words, we say that $(x,y)$ is a \define{reduced fraction} if $y>0$ and $x$ and $y$ are coprime. 
+
+  To see that $C$ defines a choice of unique representatives, we first need to construct the center of contraction of
+  \begin{equation*}
+    \sm{q:Q}C(q)\times ((x,y)\sim q).
+  \end{equation*}
+  Note that if $y<0$ then $(x,y)\sim (-x,-y)$, and we have $-y>0$. It is therefore safe to assume that $y>0$. We claim that
+  \begin{equation*}
+    (x/\gcd(x,y),y/\gcd(x,y)):Q
+  \end{equation*}
+  satisfies $C$ and is equivalent to $(x,y)$. It is immediate that $y/\gcd(x,y)>0$ and that $(x,y)\sim(x/\gcd(x,y),y/\gcd(x,y))$. The fact that $x/\gcd(x,y)$ and $y/\gcd(x,y)$ are coprime follows from the fact that
+  \begin{equation*}
+    \gcd(x/d,y/d)=\gcd(x,y)/d
+  \end{equation*}
+  for any common divisor $d$ of $x$ and $y$. 
+  
+  To construct a contraction, let $(x',y'):Q$ such that $C(x',y')$ and $(x,y)\sim (x',y')$. Since $C(q)$ and $(x,y)\sim q$ are propositions for every $q:Q$ it suffices to show that
+  \begin{equation*}
+    x'=x/\gcd(x,y)\qquad\text{and}\qquad y'=y/\gcd(x,y).
+  \end{equation*}
+  Since $x'$ and $y'$ are assumed to be coprime, it follows from the equation
+  \begin{equation*}
+    x'y/\gcd(x,y)=xy'/\gcd(x,y)
+  \end{equation*}
+  that $x'$ divides $x/\gcd(x,y)$. Similarly $x/\gcd(x,y)$ and $y/\gcd(x,y)$ are coprime, it follows from the same equation that $x/\gcd(x,y)$ divides $x'$, so we conclude that $ux'=x/\gcd(x,y)$ for some $u=\pm 1$. The fact that $vy'=y/\gcd(x,y)$ for some $v=\pm 1$ is proven similarly. However, since both $y$ and $y'$ are positive, and the $\gcd(x,y)$ of any two integers is positive, it follows that $v=1$. Using the assumption that $x'y/\gcd(x,y)=xy'/\gcd(x,y)$, this allows us to deduce that also $u=1$.
+
+  We define the type of \define{rational numbers}\index{Q@{$\Q$}|see {rational numbers}}\index{rational numbers|textbf} by
+  \begin{equation*}
+    \Q\defeq \sm{(x,y):Q}(y>0)\land \gcd(x,y)=1,
+  \end{equation*}
+  and we define the quotient map $(x,y)\mapsto x/y:Q\to \Q$ to be the quotient map $q$ in \cref{thm:choice-of-representatives}. By \cref{thm:choice-of-representatives} it also follows that $(x,y)\mapsto x/y$ satisfies the universal property of the set quotient of the equivalence relation $\sim$ on $Q$.
+\end{eg}
+\index{equivalence class!choice of unique representatives|)}
+\index{equivalence relation!choice of unique representatives|)}
+
+\subsection{Set truncations}
+\index{set truncation|(}
+\index{set quotient!set truncation|(}
+
+An important instance of set quotients in the univalent foundations of mathematics is the notion of set truncation. Analogous to the propositional truncation, the set truncation of a type $A$ is a map $\eta:A\to \trunc{0}{A}$ into a set $\trunc{0}{A}$ such that any map $f:A\to X$ into a set $X$ extends uniquely along $\eta$:
+\begin{equation*}
+  \begin{tikzcd}
+    A \arrow[dr,"f"] \arrow[d,swap,"\eta"] \\
+    \trunc{0}{A} \arrow[r,dashed] & X.
+  \end{tikzcd}
+\end{equation*}
+In other words, the set truncation $\eta:A\to\trunc{0}{A}$ is the universal way of mapping $A$ into a set. We first specify what it means for a map $f:A\to B$ into a set $B$ to be a set truncation of $A$.
+
+\begin{defn}
+  We say that a map $f:A\to B$ into a set $B$ is a \define{set truncation}\index{set truncation|textbf}\index{set quotient!set truncation|textbf}\index{universal property!of set truncations|textbf}\index{set truncation!universal property|textbf} if the precomposition function
+  \begin{equation*}
+    \blank\circ f : (B\to X)\to (A\to X)
+  \end{equation*}
+  is an equivalence for every set $X$. 
+\end{defn}
+
+In the following theorem we prove several conditions that are equivalent to being a set truncation.
+
+\begin{thm}\label{thm:set-truncation}
+  Consider a map $f:A\to B$ into a set $B$. Then the following are equivalent:
+  \begin{enumerate}
+  \item\label{item:is-set-truncation} The map $f$ is a set truncation.
+  \item\label{item:dup-set-truncation} The map $f$ satisfies the \textbf{dependent universal property}\index{set truncation!dependent universal property|textbf}\index{dependent universal property!of set truncations|textbf} of the set truncation: For every family $X$ of sets over $B$, the precomposition function
+    \begin{equation*}
+      \blank\circ f : \Big(\prd{b:B}X(b)\Big)\to\Big(\prd{a:A}X(f(a))\Big)
+    \end{equation*}
+    is an equivalence.
+  \item\label{item:is-quotient-set-truncation} The map $f$ is surjective and effective with respect to the equivalence relation $x,y\mapsto\brck{x=y}$, i.e., we have equivalences
+    \begin{equation*}
+      (f(x)=f(y))\simeq \brck{x=y}
+    \end{equation*}
+    for every $x,y:A$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  The fact that \ref{item:dup-set-truncation} implies \ref{item:is-set-truncation} is immediate. Moreover, the fact that \ref{item:is-set-truncation} is equivalent to \ref{item:is-quotient-set-truncation} follows from the fact that any map $h:A\to X$ into a set $X$ comes equipped with a function
+  \begin{equation*}
+    \brck{x=y}\to (h(x)=h(y))
+  \end{equation*}
+  for every $x,y:A$. 
+  
+  It remains to prove that \ref{item:is-set-truncation} implies \ref{item:dup-set-truncation}. Consider a family $X$ of sets over $B$, and consider the commuting square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=7em]
+      \sm{g:B\to B}\prd{b:B}X(g(b)) \arrow[d,swap,"\simeq"] \arrow[r,"{(g,s)\mapsto (g\circ f,s\circ f)}"] & \sm{h:A\to B}\prd{a:A}X(h(a)) \arrow[d,"\simeq"] \\
+      (B\to\sm{b:B}X(b)) \arrow[r,swap,"\blank\circ f"] & (A\to\sm{b:B}X(b))
+    \end{tikzcd}
+  \end{equation*}
+  The side maps are equivalences by the distributivity of $\Pi$ over $\Sigma$, and the bottom map is an equivalence by the assumption that $f$ is a set truncation. Therefore it follows that the top map is an equivalence. Furthermore, note that the map
+  \begin{equation*}
+    \blank\circ f : (B\to B)\to (A\to B)
+  \end{equation*}
+  is an equivalence by the assumption that $f$ is a set truncation. Therefore it follows from \cref{thm:equiv-toto} that the map
+  \begin{equation*}
+    \blank\circ f : \Big(\prd{b:B}X(g(b))\Big)\to \Big(\prd{a:A}X(g(f(a)))\Big)
+  \end{equation*}
+  is an equivalence for every $g:B\to B$. Now we take $g\defeq \idfunc$ to complete the proof that \ref{item:is-set-truncation} implies \ref{item:dup-set-truncation}.
+\end{proof}
+
+\begin{cor}
+  On any universe $\UU$, there is an operation $\trunc{0}{\blank}:\UU\to\Set_\UU$\index{[[A]] 0@{$\trunc{0}{A}$}|see {set truncation}} such that every type $A$ in $\UU$ comes equipped with a map
+  \begin{equation*}
+    \eta:A\to\trunc{0}{A}
+  \end{equation*}
+  that satisfies the universal property of the set truncation. The set $\trunc{0}{A}$ is called the \define{set truncation}\index{set truncation|textbf} of $A$.
+\end{cor}
+
+\begin{proof}
+  By \cref{thm:set-truncation} it follows that a map $f:A\to B$ into a set $B$ is a set truncation if and only if it is a quotient map with respect to the equivalence relation $x,y\mapsto\brck{x=y}$. Given a type $A$ in $\UU$, the quotient of $A$ by $x,y\mapsto\brck{x=y}$ is equivalent to a type in $\UU$ by the replacement axiom.
+\end{proof}
+
+\begin{cor}
+  The set truncation $\eta:A\to\trunc{0}{A}$ is surjective and effective with respect to the equivalence relation $x,y\mapsto\brck{x=y}$, i.e., we have an equivalence
+  \begin{equation*}
+    (\eta(x)=\eta(y))\simeq \brck{x=y}
+  \end{equation*}
+  for each $x,y:A$. 
+\end{cor}
+
+By this corollary, we may think of the set truncation $\trunc{0}{A}$ of $A$ as the set of connected components of $A$. Indeed, if we have an unspecified identification $\brck{x=y}$ in $A$, then we think of $x$ and $y$ as being in the same connected component. For example, any $k$-element set is a type that is in the same connected component of $\UU$ as the type $\Fin{k}$.
+
+\begin{defn}
+  A type $A$ is said to be \define{connected}\index{connected type|textbf} if its set truncation $\trunc{0}{A}$ is contractible. We define\index{is-conn@{$\isconn(A)$}|textbf}
+  \begin{equation*}
+    \isconn(A)\defeq\iscontr\trunc{0}{A}.
+  \end{equation*}
+  Furthermore, we say that a map $f:A\to B$ is \define{connected}\index{connected map|textbf} if all its fibers are connected.
+\end{defn}
+
+\begin{rmk}
+  In particular, every connected type is inhabited, because if $\trunc{0}{A}$ is contractible, then we have equivalences\index{inhabited type!connected types are inhabited}\index{connected type!connected types are inhabited}
+  \begin{equation*}
+    \brck{A}\simeq (\trunc{0}{A}\to\brck{A}) \simeq (A\to \brck{A}),
+  \end{equation*}
+  and the latter type contains the unit of the propositional truncation.
+\end{rmk}
+
+Using the notion of connectivity, we can add one more property to the list of equivalent characterizations of set truncations given in \cref{thm:set-truncation}.
+
+\begin{thm}\label{thm:unit-set-truncation-connected}
+  Consider a map $f:A\to B$ into a set $B$. Then the following are equivalent:
+  \begin{enumerate}
+  \item \label{item:unit-set-truncation-connected-i}The map $f$ is a set truncation.
+  \item \label{item:unit-set-truncation-connected-ii}The map $f$ is connected.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  First, suppose that $f$ is a set truncation, and consider $b:B$. Our goal is to show that the type
+  \begin{equation*}
+    \trunc{0}{\fib{f}{b}}
+  \end{equation*}
+  is contractible. Since $f$ is surjective by \cref{thm:set-truncation}, there exists an element $a:A$ equipped with an identification $f(a)=b$. We are proving a proposition, so it suffices to show that $\trunc{0}{\fib{f}{f(a)}}$ is contractible. At the center of contraction we have
+  \begin{equation*}
+    \eta(a,\refl{}):\trunc{0}{\fib{f}{f(a)}}.
+  \end{equation*}
+  In order to construct the contraction, we use the dependent universal property of the set truncation, by which it suffices to construct a function
+  \begin{equation*}
+    \prd{x:A}\prd{p:f(x)=f(a)}\eta(a,\refl{})=\eta(x,p)
+  \end{equation*}
+  Recall from \cref{thm:set-truncation} that the map $f$ is effective, so we have an equivalence $e:\brck{x=a}\simeq (f(x)=f(a))$ for every $x:A$. Furthermore, equality in set truncations are propositions, so we may even eliminate the propositional truncation from $\brck{x=a}$. Therefore it suffices to prove
+  \begin{equation*}
+    \prd{x:A}\prd{p:x=a}\eta(a,\refl{})=\eta(x,e(\eta(p)))
+  \end{equation*}
+  This is immediate, since $e(\eta(\refl{}))=\refl{}$. This completes the proof of \ref{item:unit-set-truncation-connected-i} implies \ref{item:unit-set-truncation-connected-ii}.
+
+  For the converse, suppose that $f$ is connected, and consider a set $X$. Note that we have a commuting square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=8em]
+      \Big(\prd{b:B}\trunc{0}{\fib{f}{b}}\to X\Big) \arrow[r,"{h\mapsto\lam{b}{t}h(b,\eta(t))}"] & \Big(\prd{b:B}\fib{f}{b}\to X\Big) \arrow[d,swap,"{h\mapsto\lam{a}h(f(a),(a,\refl{}))}"] \\
+      (B\to X) \arrow[r,swap,"\blank\circ f"] \arrow[u,"h\mapsto\lam{b}\lam{u}h(b)"] & (A\to X)
+    \end{tikzcd}
+  \end{equation*}
+  In this commuting square, the map on the left is an equivalence since $\trunc{0}{\fib{f}{b}}$ is contractible for each $b:B$. The top map is an equivalence because $X$ is a set, and the right map is an equivalence by \cref{ex:pi-fib}. Therefore it follows that the bottom map is an equivalence, which completes the proof that \ref{item:unit-set-truncation-connected-ii} implies \ref{item:unit-set-truncation-connected-i}.
+\end{proof}
+
+\begin{rmk}
+  There are truncation operations for every truncation level. That is, we can define for every type $A$ a map $\eta:A\to\trunc{k}{A}$ such that the map
+\begin{equation*}
+  \blank\circ\eta : (\trunc{k}{A}\to X)\to (A\to X)
+\end{equation*}
+is an equivalence for every $k$-truncated type $X$. To learn more about general $k$-truncations, we refer to Chapter 7 of \cite{hottbook}.
+\end{rmk}
+\index{set truncation|)}
+\index{set quotient!set truncation|)}
+
+
+\begin{exercises}
+  \exitem Consider a proposition $P$, and define the relation $\sim_P$\index{~ P@{$\sim_P$}|textbf} on $\bool$ by
+  \begin{align*}
+    (\btrue\sim_P\btrue) & \defeq \unit & (\btrue\sim_P\bfalse) & \defeq P \\
+    (\bfalse\sim_P\btrue) & \defeq P & (\bfalse\sim_P\bfalse) & \defeq \unit
+  \end{align*}
+  \begin{subexenum}
+  \item  Show that $\sim_P$ is an equivalence relation.
+  \item Consider a universe $\UU$ containing the proposition $P$. Construct an embedding ${\bool/{\sim}_P}\hookrightarrow\prop_\UU$.  
+  \item Use the quotient $\bool/\sim_P$ to show that the axiom of choice implies the law of excluded middle.\index{axiom of choice!implies law of excluded middle}
+  \end{subexenum}
+  \exitem Consider an equivalence relation $R:A\to(A\to\prop_\UU)$ on $A$, where $\UU$ is a universe containing $A$. Show that type type
+  \begin{equation*}
+    \sm{X:\UU}\sm{f:A\twoheadrightarrow X}\prd{x,y:A}(f(x)=f(y))\simeq R(x,y)
+  \end{equation*}
+  is contractible.
+  \exitem For any type $A$, show that the type of equivalence relations equipped with a choice of representatives of its equivalence classes is equivalent to the type of \define{set-based retracts} of $A$, i.e., the type\index{retract!set-based retract|textbf}\index{set-based retract|textbf}\index{Retr Set U X@{$\Retr_{\Set_\UU}(X)$}|textbf}\index{Retr Set U X@{$\Retr_{\Set_\UU}(X)$}!is equivalent to equivalence relations with canonical representatives}
+  \begin{equation*}
+    \Retr_{\Set_\UU}(A) \defeq \sm{X:\Set_\UU}\sm{i:X\to A}\sm{q:A\to X} q\circ i\htpy \idfunc.
+  \end{equation*}
+  \exitem  \label{ex:sigmadecompositions}A \define{$\Sigma$-decomposition}\index{S-decomposition@{$\Sigma$-decomposition}|textbf} of a type $A$ consists of a type $X$ (the \define{indexing type}\index{S-decomposition@{$\Sigma$-decomposition}!indexing type|textbf} of the $\Sigma$-decomposition) equipped with a family $Y$ of inhabited types indexed by $X$ and an equivalence
+  \begin{equation*}
+    e:A\simeq \sm{x:X}Y(x).
+  \end{equation*}
+  In other words, the type of all $\Sigma$-decompositions of $A$ is defined by
+  \begin{equation*}
+    \Sigmadecomposition_\UU(A) \defeq \sm{X:\UU}\sm{Y:X\to\sm{Z:\UU}\brck{Z}}A\simeq\sm{x:X}Y(x).
+  \end{equation*}
+  \begin{subexenum}
+  \item Construct an equivalence
+    \begin{equation*}
+      \Sigmadecomposition_\UU(A)\simeq \sm{X:\UU}A\twoheadrightarrow X.
+    \end{equation*}
+  \item A $\Sigma$-decomposition is said to be \define{set-indexed}\index{S-decomposition@{$\Sigma$-decomposition}!set indexed|textbf}\index{set-indexed S-decomposition@{set-indexed $\Sigma$-decomposition}|textbf} if its indexing type is a set. We will write $\Sigmadecomposition_{\Set_\UU}(A)$ for the type of all set-indexed $\Sigma$-decompositions of $A$ in $\UU$. Construct an equivalence
+    \begin{equation*}
+      \eqrel_\UU(A)\simeq \Sigmadecomposition_{\Set_\UU}(A).
+    \end{equation*}
+  \end{subexenum}
+  \exitem \label{ex:is-surjective-fiber-inclusion}Consider a type $A$ equipped with an element $a:A$. Show that the following are equivalent:
+  \begin{enumerate}
+  \item The type $A$ is connected.
+  \item There is an element of type $\brck{a=x}$ for any $x:A$.
+  \item For any family $B$ over $A$, the fiber inclusion\index{fiber inclusion}
+    \begin{equation*}
+      i_a:B(a)\to\sm{x:A}B(x)
+    \end{equation*}
+    defined in \cref{ex:is-trunc-fiber-inclusion} is surjective.
+  \end{enumerate}
+  \exitem \label{ex:poset-reflection}Consider a preorder $(A,\leq)$, and define for any $a:A$ the order preserving map
+  \begin{equation*}
+    y_a : \preord(\op{(A,\leq)},{(\prop_\UU,{\to})})
+  \end{equation*}
+  by $y_a(x)\defeq(x\leq a)$. Furthermore, define the \define{poset reflection}\index{poset reflection|textbf}\index{poset!poset reflection}\index{preorder!poset reflection} $\posetreflection{A}$\index{[[A]] Pos@{$\posetreflection{A}$}|see {poset reflection}} to be the image of the map
+  \begin{equation*}
+    a\mapsto y_a : A\to \preord(\op{(A,\leq)},{(\prop_\UU,{\to})}).
+  \end{equation*}
+  \begin{subexenum}
+  \item Show that the image of the map $a\mapsto y_a$ satisfies the universal property of the set quotient of the equivalence relation\index{set quotient!poset reflection}\index{poset reflection!is set quotient}
+    \begin{equation*}
+      x,y\mapsto (x\leq y)\land (y\leq x).
+    \end{equation*}
+  \item Equip the type $\posetreflection{A}$ with the structure of a poset and construct an order preserving map $\eta : A \to \posetreflection{A}$ that satisfies the following universal property: For any poset $P$, any order preserving map $f:A\to P$ extends uniquely along $\eta$ to an order preserving map $g:\posetreflection{A}\to P$, as indicated in the following diagram:\index{universal property!of poset reflections|textbf}\index{poset reflection!universal property|textbf}
+  \begin{equation*}
+    \begin{tikzcd}
+      A \arrow[r,"f"] \arrow[d,swap,"\eta"] & P. \\
+      \posetreflection{A} \arrow[ur,dashed]
+    \end{tikzcd}
+  \end{equation*}
+  \end{subexenum}
+  \exitem Consider a map $f:A\to B$.
+  \begin{subexenum}
+  \item Show that the type of maps $\trunc{0}{f}:\trunc{0}{A}\to\trunc{0}{B}$ equipped with a homotopy witnessing that the square
+    \begin{equation*}
+      \begin{tikzcd}
+        A \arrow[r,"f"] \arrow[d,swap,"\eta"] & B \arrow[d,"\eta"] \\
+        \trunc{0}{A} \arrow[r,swap,"\trunc{0}{f}"] & \trunc{0}{B}
+      \end{tikzcd}
+    \end{equation*}
+    commutes is contractible.\index{functorial action!set truncation|textbf}\index{set truncation!functorial action|textbf}
+  \item Show that if $f$ is injective, then $\trunc{0}{f}:\trunc{0}{A}\to\trunc{0}{B}$ is injective.
+  \item Show that the following are equivalent
+    \begin{enumerate}
+    \item The map $f$ is surjective.
+    \item the map $\trunc{0}{f}:\trunc{0}{A}\to\trunc{0}{B}$ is surjective.
+    \end{enumerate}
+  \item Construct a map $h:\im(f)\to\im\trunc{0}{f}$ such that the squares
+    \begin{equation*}
+      \begin{tikzcd}
+        A \arrow[r,"q_f"] \arrow[d,swap,"\eta"] & \im(f) \arrow[d,swap,"h"] \arrow[r,"i_f"] & B \arrow[d,"\eta"] \\
+        \trunc{0}{A} \arrow[r,swap,"q_{\trunc{0}{f}}"] & \im\trunc{0}{f} \arrow[r,swap,"i_{\trunc{0}{f}}"] & \trunc{0}{B}
+      \end{tikzcd}
+    \end{equation*}
+    commute, and show that $h$ is a set truncation of $\im(f)$.
+  \end{subexenum}
+  \exitem Consider a type $A$, and suppose that $\trunc{0}{A}$ is a finite type with $k$ elements. Show that there exists a map $f:\Fin{k}\to A$ such that $\eta\circ f$ is an equivalence, i.e., prove the proposition
+  \begin{equation*}
+    \exists_{(f:\Fin{k}\to A)}\isequiv(\eta\circ f).
+  \end{equation*}
+  \exitem Consider a type $A$ and a universe $\UU$ containing $A$. Let
+  \begin{equation*}
+    \tau:A\to ((A\to\prop_\UU)\to\prop_\UU)
+  \end{equation*}
+  be the map defined by $\tau(a)\defeq\lam{f}f(a)$. Show that the map
+  \begin{equation*}
+    q_\tau : A\to\im(\tau)
+  \end{equation*}
+  obtained from the image factorization of $A$ is a set truncation of $A$.
+  \exitem \label{ex:weakly-path-constant}A map $f:A \to B$ is called \define{weakly path-constant}\index{weakly path constant map|textbf} if it comes equipped with an element of type
+  \begin{equation*}
+    \isweaklypathconstant(f) : \prd{x,y:A}\prd{p,q:x=y}\ap{f}{p}=\ap{f}{q}.
+  \end{equation*}
+  In other words, $f$ is weakly path-constant if for each $x,y:A$ the map $\apfunc{f}:(x=y)\to (f(x)=f(y))$ is weakly constant in the sense of \cref{defn:weakly-constant}.
+  \begin{subexenum}
+  \item Show that every map $\trunc{0}{A}\to B$ is weakly path-constant. Use this to obtain a map
+    \begin{equation*}
+      \alpha : \Big(\trunc{0}{A}\to B\Big)\to\Big(\sm{f:A\to B}\isweaklypathconstant(f)\Big).
+    \end{equation*}
+  \item Show that if $B$ is a $1$-type, then the map $\alpha$ is an equivalence. In other words, show that every weakly path-constant map $f:A\to B$ into a $1$-type $B$ has a unique extension
+    \begin{equation*}
+      \begin{tikzcd}
+        A \arrow[r,"f"] \arrow[d,swap,"\eta"] & B. \\
+        \trunc{0}{A} \arrow[ur,dashed]
+      \end{tikzcd}
+    \end{equation*}
+  \end{subexenum}
+  \exitem Consider two universes $\UU$ and $\VV$. Use the type theoretic replacement axiom to show that the type of locally $\VV$-small types in $\UU$ is equivalent to the type\index{locally small type}
+  \begin{equation*}
+    \sum_{(Y:\mathsf{Locally\usc{}}\VV\mathsf{\usc{}Small\usc{}Set}_\UU)}\Big(Y\to \sm{Z:\VV}\isconn(Z)\Big)
+  \end{equation*}
+  of locally $\VV$-small sets $Y$ in $\UU$ equipped with a family of connected types in $\VV$.
+  \exitem Show that every finite type is uniquely a product of finitely many finite types of prime cardinality, in the sense that the type
+  \begin{equation*}
+    \sm{X:\F}\sm{Y:X\to\sm{p:\primeN}\BS_p}\Brck{A\simeq\prd{x:X}Y(x)}
+  \end{equation*}
+  is connected for every finite type $A$.
+  \exitem \label{ex:stirling-type-of-the-second-kind}Consider two types $A$ and $B$. The \define{Stirling type of the second kind}\index{Stirling type of the second kind|textbf}\index{{{A B}}@{$\stirling{A}{B}$}|see {Stirling type of the second kind}} is the type
+  \begin{equation*}
+    \stirling{A}{B}:=\sm{X:\UU_B}A\twoheadrightarrow X. 
+  \end{equation*}
+  \begin{subexenum}
+  \item Show that if $B$ is a $k$-type, then the type $\stirling{A}{B}$ is also a $k$-type.\index{Stirling type of the second kind!is truncated}\index{truncated type!Stirling type of the second kind}
+  \item Suppose that $B$ has decidable equality. Construct an equivalence
+  \begin{equation*}
+    \stirling{A+\unit}{B+\unit}\simeq (B+\unit)\times\stirling{A}{B+\unit}+\stirling{A}{B}
+  \end{equation*}
+  \item Suppose that $A$ and $B$ are finite types of cardinality $n$ and $k$. Show that the Stirling type $\stirling{A}{B}$ of the second kind is a finite type of cardinality $\stirling{n}{k}$, where $\stirling{n}{k}$ is the \define{Stirling number of the second kind}.\index{Stirling type of the second kind!is finite}\index{finite type!Stirling type of the second kind}
+  \end{subexenum}
+  \exitem \label{ex:distributive-pi-coprod}In this exercise we extend the definition of the binomial types to $\trunc{0}{\UU}$ as follows: For a type $X:\UU$ and $k:\trunc{0}{\UU}$, we define\index{binomial type!extended definition|textbf}
+  \begin{equation*}
+    \binomtype{X}{k}\defeq \sm{Y:\fib{\eta}{k}}Y\demb X.
+  \end{equation*}
+  Furthermore, for $(Y,i):\binomtype{X}{k}$, define
+  \begin{align*}
+    X\setminus Y & \defeq \sm{x:X}\neg(\fib{i}{x}). \\
+    \complement{i} & \defeq \proj 1.
+  \end{align*}
+  Now consider a type $X$ and two type families $A$ and $B$ over $X$, and let $\UU$ be a universe containing $X$, $A$, and $B$. Show that the type $\prd{x:X}A(x)+B(x)$ is equivalent to the type\index{distributivity!of P over coproducts@{of $\Pi$ over coproducts}}\index{dependent function type!distributivity of P over coproducts@{distributivity of $\Pi$ over coproducts}}
+  \begin{equation*}
+    \sm{k:\trunc{0}{\UU}}\sm{(Y,i):\dbinomtype{X}{k}}\Big(\prd{y:Y}A(i(y))\Big)\times\Big(\prd{y:X\setminus Y}B(\complement{i}(y))\Big).
+  \end{equation*}
+\end{exercises}
+\index{set quotient|)}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

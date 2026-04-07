@@ -1,0 +1,471 @@
+% !TEX root = hott_intro.tex
+
+\section{The circle}\label{sec:circle}
+\index{circle|(}
+\index{inductive type!circle|(}
+
+\subsection{The induction principle of the circle}
+
+The \emph{circle} is specified as a higher inductive type $\sphere{1}$\index{S 1@{$\sphere{1}$}|see {circle}} that comes equipped with\index{base@{$\base$}}\index{loop@{$\lloop$}}\index{circle!base@{$\base$}}\index{circle!loop@{$\lloop$}}
+\begin{align*}
+\base & : \sphere{1} \\
+\lloop & : \id{\base}{\base}.
+\end{align*}
+Just like for ordinary inductive types, the induction principle for higher inductive types provides us with a way of constructing sections of dependent types. However, we need to take the \emph{path constructor}\index{path constructor} $\lloop$ into account in the induction principle. 
+
+The induction principle of the circle tells us how to define a section
+\begin{equation*}
+  f:\prd{x:\sphere{1}}P(x)
+\end{equation*}
+of an arbitrary type family $P$ over $\sphere{1}$. To see what the induction principle of the circle should be, we start with an arbitrary section $f:\prd{x:\sphere{1}}P(x)$ and see how it acts on the constructors of $\sphere{1}$. By applying $f$ to the base point of the circle, we obtain an element $f(\base):P(\base)$. Moreover, using the dependent action on paths\index{dependent action on paths} of $f$ of \cref{defn:apd} we also obtain an identification
+\begin{align*}
+\apd{f}{\lloop} & : \id{\tr_P(\lloop,f(\base))}{f(\base)}
+\end{align*}
+in the type $P(\base)$. In other words, we obtain a \emph{dependent action on generators} for every section of a family of types.
+
+\begin{defn}
+Let $P$ be a type family over the circle. The \define{dependent action on generators}\index{dependent action on generators for the circle|textbf}\index{circle!dependent action on generators|textbf} is the map\index{dgen_S1@{$\dgen_{\sphere{1}}$}|see {circle, dependent action on generators}}\index{dgen_S1@{$\dgen_{\sphere{1}}$}|textbf}
+\begin{equation}\label{eq:dgen_circle}
+\dgen_{\sphere{1}}:\Big(\prd{x:\sphere{1}}P(x)\Big)\to\Big(\sm{u:P(\base)}\id{\tr_P(\lloop,u)}{u}\Big)
+\end{equation}
+given by $\dgen_{\sphere{1}}(f)\defeq\pairr{f(\base),\apd{f}{\lloop}}$.
+\end{defn}
+
+The induction principle of the circle states that in order to construct a section $f:\prd{x:\sphere{1}}P(x)$, it suffices to provide an element $u:P(\base)$ and an identification
+\begin{equation*}
+  \tr_P(\lloop,u)=u.
+\end{equation*}
+More precisely, the induction principle of the circle is formulated as follows:
+
+\begin{defn}
+The \define{circle}\index{circle|textbf}\index{inductive type!circle|textbf} is a type $\sphere{1}$\index{S 1@{$\sphere{1}$}|see {circle}}\index{S 1@{$\sphere{1}$}|textbf} that comes equipped with\index{base@{$\base$}|textbf}\index{loop@{$\lloop$}|textbf}\index{circle!base@{$\base$}|textbf}\index{circle!loop@{$\lloop$}|textbf}\index{higher inductive type!circle|textbf}
+\begin{align*}
+\base & : \sphere{1} \\
+\lloop & : \id{\base}{\base},
+\end{align*}
+and satisfies the \define{induction principle of the circle}\index{induction principle!of the circle|textbf}\index{circle!induction principle|textbf}, which provides for each type family $P$ over $\sphere{1}$ a map\index{ind S 1@{$\ind{\sphere{1}}$}|textbf}
+\begin{equation*}
+\ind{\sphere{1}}:\Big(\sm{u:P(\base)}\id{\tr_P(\lloop,u)}{u}\Big)\to \Big(\prd{x:\sphere{1}}P(x)\Big),
+\end{equation*}
+and a homotopy witnessing that $\ind{\sphere{1}}$ is a section of $\dgen_{\sphere{1}}$
+\begin{equation*}
+\comphtpy{\sphere{1}}:\dgen_{\sphere{1}}\circ \ind{\sphere{1}}\htpy \idfunc
+\end{equation*}
+for the computation rules\index{computation rules!for the circle|textbf}\index{circle!computation rules|textbf}.
+\end{defn}
+
+\begin{rmk}\label{rmk:circle-induction}
+  The type of identifications $(u,p)=(u',p')$ in the type
+  \begin{equation*}
+    \sm{u:P(\base)}\tr_P(\lloop,u)=u
+  \end{equation*}
+  is equivalent to the type of pairs $(\alpha,\beta)$ consisting of an identification $\alpha:u=u'$, and an identification $\beta$ witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=6em]
+      \tr_P(\lloop,u) \arrow[d,equals,swap,"p"] \arrow[r,equals,"\ap{\tr_P(\lloop)}{\alpha}"] & \tr_P(\lloop,u') \arrow[d,equals,"{p'}"] \\
+      u \arrow[r,equals,swap,"\alpha"] & u'
+    \end{tikzcd}
+  \end{equation*}
+  commutes. Therefore it follows from the induction principle of the circle that for any $(u,p):\sm{u:P(\base)}\tr_P(\lloop,u)=u$, there is a dependent function $f:\prd{x:\sphere{1}}P(x)$ equipped with an identification
+  \begin{equation*}
+    \alpha : f(\base)=u,
+  \end{equation*}
+  and an identification $\beta$ witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=6em]
+      \tr_P(\lloop,f(\base)) \arrow[d,equals,swap,"{\apd{f}{\lloop}}"] \arrow[r,equals,"\ap{\tr_P(\lloop)}{\alpha}"] & \tr_P(\lloop,u) \arrow[d,equals,"{p}"] \\
+      f(\base) \arrow[r,equals,swap,"\alpha"] & u
+    \end{tikzcd}
+  \end{equation*}
+  commutes.  
+\end{rmk}
+
+\subsection{The (dependent) universal property of the circle}
+\subsectionmark{The universal property of the circle}
+\index{circle!dependent universal property|(}
+\index{circle!universal property|(}
+\index{universal property!of the circle|(}
+\index{dependent universal property!of the circle|(}
+
+We will now use the induction principle of the circle to derive the \emph{dependent universal property} and the \emph{universal property} of the circle. The universal property of the circle states that, for any type $X$ the canonical map
+\begin{equation*}
+  \Big(\sphere{1}\to X\Big)\to\Big(\sm{x:X}x=x\Big)
+\end{equation*}
+given by $f\mapsto(f(\base),\ap{f}{\lloop})$ is an equivalence. The type $\sm{x:X}x=x$ is also called the type of \define{free loops}\index{free loop|textbf} in $X$. In other words, the universal property of the circle states that a map $\sphere{1}\to X$ is the same thing as a free loop in $X$.
+
+The \emph{dependent universal property} of the circle similarly states that for any type family $P$ over the circle, the canonical map
+\begin{equation*}
+  \dgen_{\sphere{1}}:\Big(\prd{x:\sphere{1}}P(x)\Big)\to\Big(\sm{y:P(\base)}\tr_P(\lloop,y)=y\Big)
+\end{equation*}
+given by $f\mapsto(f(\base),\apd{f}{\lloop})$ is an equivalence. Note that the induction principle already states that this map has a section. The dependent universal property therefore improves on this by stating that this map also has a retraction.
+
+\begin{thm}[The dependent universal property of the circle]\label{thm:circle-dependent-universal-property}
+  \index{dependent universal property!of the circle|textbf}
+  \index{circle!dependent universal property|textbf}
+  For any type family $P$ over the circle, the map
+  \begin{equation*}
+    \dgen_{\sphere{1}}:
+    \Big(\prd{x:\sphere{1}}P(x)\Big)
+    \to
+    \Big(\sm{y:P(\base)}\tr_P(\lloop,y)=y\Big)
+  \end{equation*}
+  given by $f\mapsto(f(\base),\apd{f}{\lloop})$ is an equivalence.
+\end{thm}
+
+\begin{proof}
+  By the induction principle of the circle we know that the map has a section, i.e., we have
+  \begin{align*}
+    \ind{\sphere{1}} & : \Big(\sm{y:P(\base)}\tr_P(\lloop,y)=y\Big) \to \Big(\prd{x:\sphere{1}}P(x)\Big) \\
+    \comphtpy{\sphere{1}} & : \dgen_{\sphere{1}}\circ\ind{\sphere{1}}\htpy\idfunc
+  \end{align*}
+  Therefore it remains to construct a homotopy
+  \begin{equation*}
+    \ind{\sphere{1}}\circ\dgen_{\sphere{1}}\htpy\idfunc.
+  \end{equation*}
+  Thus, for any $f:\prd{x:\sphere{1}}P(x)$ our task is to construct an identification
+  \begin{equation*}
+    \ind{\sphere{1}}(\dgen_{\sphere{1}}(f))=f.
+  \end{equation*}
+  By function extensionality it suffices to construct a homotopy
+  \begin{equation*}
+    \prd{x:\sphere{1}} \ind{\sphere{1}}(\dgen_{\sphere{1}}(f))(x)= f(x).
+  \end{equation*}
+  We proceed by the induction principle of the circle using the family of types $E_{g,f}(x)\defeq g(x)=f(x)$ indexed by $x:\sphere{1}$, where $g$ is the function
+  \begin{equation*}
+    g\defeq\ind{\sphere{1}}(\dgen_{\sphere{1}}(f)).
+  \end{equation*}
+  Thus, it suffices to construct
+  \begin{align*}
+    \alpha & : g(\base)=f(\base)\\
+    \beta  & : \tr_{E_{g,f}}(\lloop,\alpha)=\alpha. 
+  \end{align*}
+  An argument by path induction on $p$ yields that
+  \begin{equation*}
+    \Big(\ct{\apd{g}{p}}{r}=\ct{\ap{\tr_P(p)}{q}}{\apd{f}{p}}\Big)\to\Big(\tr_{E_{g,f}}(p,q)=r\Big),
+  \end{equation*}
+  for any $f,g:\prd{x:X}P(x)$ and any $p:x=x'$, $q:g(x)=f(x)$ and $r:g(x')=f(x')$.
+  Therefore it suffices to construct an identification $\alpha:g(\base)=f(\base)$ equipped with an identification $\beta$ witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=6em]
+      \tr_P(\lloop,g(\base)) \arrow[d,equals,swap,"\apd{g}{\lloop}"] \arrow[r,equals,"\ap{\tr_P(\lloop)}{\alpha}"] & \tr_P(\lloop,f(\base)) \arrow[d,equals,"\apd{f}{\lloop}"] \\
+      g(\base) \arrow[r,equals,swap,"\alpha"] & f(\base)"
+    \end{tikzcd}
+  \end{equation*}
+  commutes. Notice that we get exactly such a pair $(\alpha,\beta)$ from the computation rule of the circle, by \cref{rmk:circle-induction}.
+\end{proof}
+
+As a corollary we obtain the following uniqueness principle for dependent functions defined by the induction principle of the circle.
+
+\begin{cor}
+  Consider a type family $P$ over the circle, and let
+  \begin{align*}
+    y & : P(\base) \\
+    p & : \tr_{P}(\lloop,y)=y.
+  \end{align*}
+  Then the type of functions $f:\prd{x:\sphere{1}}P(x)$ equipped with an identification
+  \begin{equation*}
+    \alpha: f(\base)=y
+  \end{equation*}
+  and an identification $\beta$ witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=6em]
+      \tr_P(\lloop,f(\base)) \arrow[d,equals,swap,"{\apd{f}{\lloop}}"] \arrow[r,equals,"\ap{\tr_P(\lloop)}{\alpha}"] & \tr_P(\lloop,y) \arrow[d,equals,"{p}"] \\
+      f(\base) \arrow[r,equals,swap,"\alpha"] & y
+    \end{tikzcd}
+  \end{equation*}
+  commutes, is contractible.
+\end{cor}
+
+Now we use the dependent universal property to derive the ordinary universal property of the circle. It would be tempting to say that it is a direct corollary, but we need to address the transport that occurs in the dependent universal property.
+
+\begin{thm}[The universal property of the circle]\label{thm:circle_up}
+  \index{universal property!of the circle|textbf}
+  \index{circle!universal property|textbf}
+For each type $X$, the \define{action on generators}\index{action on generators for the circle|textbf}\index{gen_S1@{$\mathsf{gen}_{\sphere{1}}$}|textbf}
+\begin{equation*}
+\mathsf{gen}_{\sphere{1}}:(\sphere{1}\to X)\to \sm{x:X}x=x
+\end{equation*}
+given by $f\mapsto (f(\base),\ap{f}{\lloop})$ is an equivalence.
+\end{thm}
+
+\begin{proof}
+  We prove the claim by constructing a commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=-2em]
+      \phantom{\Big(\sm{x:X}\tr_{\const_X}(\lloop,x)=x\Big)} & (\sphere{1}\to X) \arrow[dl,swap,"\gen_{\sphere{1}}"] \arrow[dr,"\dgen_{\sphere{1}}"] \\
+      \Big(\sm{x:X}x=x\Big) \arrow[rr,swap,"\simeq"] & & \Big(\sm{x:X}\tr_{\const_X}(\lloop,x)=x\Big)
+    \end{tikzcd}
+  \end{equation*}
+  in which the bottom map is an equivalence. Indeed, once we have such a triangle, we use the fact from \cref{thm:circle-dependent-universal-property} that $\dgen_{\sphere{1}}$ is an equivalence to conclude that $\gen_{\sphere{1}}$ is an equivalence.
+
+  To construct the bottom map, we first observe that for any constant type family $\const_B$ over a type $A$, any $p:a=a'$ in $A$, and any $b:B$, there is an identification
+  \begin{equation*}
+    \mathsf{tr\usc{}const}_B(p,b):\mathsf{tr}_{\const_B}(p,b)=b.
+  \end{equation*}
+  This identification is easily constructed by path induction on $p$. Now we construct the bottom map as the induced map on total spaces of the family of maps
+  \begin{equation*}
+    l\mapsto \ct{\mathsf{tr\usc{}const}_X(\lloop,x)}{l},
+  \end{equation*}
+  indexed by $x:X$. Since concatenating by a path is an equivalence, it follows by \cref{thm:fib_equiv} that the induced map on total spaces is indeed an equivalence.
+
+  To show that the triangle commutes, it suffices to construct for any $f:\sphere{1}\to X$ an identification witnessing that the triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=1em]
+      \tr_{\const_X}(\lloop,f(\base)) \arrow[dr,equals,swap,"\apd{f}{\lloop}"] \arrow[rr,equals,"{\mathsf{tr\usc{}const}_X(\lloop,f(\base))}"] & & f(\base) \arrow[dl,equals,"\ap{f}{\lloop}"] \\
+      & f(\base) & \phantom{\tr_{\const_X}(\lloop,f(\base))}
+    \end{tikzcd}
+  \end{equation*}
+  commutes. This again follows from general considerations: for any $f:A\to B$ and any $p:a=a'$ in $A$, the triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=1em]
+      \tr_{\const_B}(p,f(a)) \arrow[dr,equals,swap,"\apd{f}{p}"] \arrow[rr,equals,"{\mathsf{tr\usc{}const}_B(p,f(a))}"] & & f(a) \arrow[dl,equals,"\ap{f}{p}"] \\
+      & f(a') & \phantom{\tr_{\const_B}(p,f(a))}
+    \end{tikzcd}
+  \end{equation*}
+  commutes by path induction on $p$.
+\end{proof}
+
+\begin{cor}
+  For any loop $l:x=x$ in a type $X$, the type of maps $f:\sphere{1}\to X$ equipped with an identification
+  \begin{equation*}
+    \alpha : f(\base)=x 
+  \end{equation*}
+  and an identification $\beta$ witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}
+      f(\base) \arrow[r,equals,"\alpha"] \arrow[d,equals,swap,"\ap{f}{\lloop}"] & x \arrow[d,equals,"l"] \\
+      f(\base) \arrow[r,equals,swap,"\alpha"] & x
+    \end{tikzcd}
+  \end{equation*}
+  commutes, is contractible.
+\end{cor}
+\index{circle!dependent universal property|)}
+\index{circle!universal property|)}
+\index{universal property!of the circle|)}
+\index{dependent universal property!of the circle|)}
+
+
+\subsection{Multiplication on the circle}
+\label{sec:mulcircle}
+\index{circle!H-space structure|(}
+\index{circle!multiplication|(}
+\index{multiplication!on the circle|(}
+
+One way the circle arises classically, is as the set of complex numbers at distance $1$ from the origin. It is an elementary fact that $|xy|=|x||y|$ for any two complex numbers $x,y\in\mathbb{C}$, so it follows that when we multiply two complex numbers that both lie on the unit circle, then the result lies again on the unit circle. This operation puts a group structure on the classical circle.
+
+This suggests that it should also be possible to construct a multiplication on the higher inductive type $\sphere{1}$. More precisely, we will equip $\sphere{1}$ with an \emph{H-space structure}, and in the exercises you will be asked to show that this multiplicative structure is associative, commutative, and has inverses.
+
+\begin{defn}
+  Consider a pointed type $A$ with a base point $\pt$. An \textbf{H-space structure}\index{H-space!structure|textbf} on $(A,\pt)$ consists of a binary operation $\mu:A\to (A\to A)$ satisfying the following \define{coherent unit laws}\index{coherent unit laws|textbf}\index{unit laws!coherent unit laws|textbf}\index{H-space!coherent unit laws|textbf}:
+  \begin{align*}
+    \leftunit_\mu(y) & : \mu(\pt,y)= y \\
+    \rightunit_\mu(x) & : \mu(x,\pt)= x \\
+    \cohunit_\mu    & : \leftunit_\mu(\pt)=\rightunit_\mu(\pt).
+  \end{align*}
+  An \define{H-space}\index{H-space|textbf} is a pointed type equipped with an H-space structure.
+\end{defn}
+
+\begin{rmk}\label{rmk:hspace}
+  The data of an H-space structure is equivalently described by a family of base point preserving maps
+  \begin{equation*}
+    \mu : \prd{x:A}\sm{f:A\to A}f(\pt)=x
+  \end{equation*}
+  equipped with an identification $\mu_\pt=(\idfunc,\refl{})$. The data $\mu(a,\pt)=a$ corresponds to the right unit law for $\mu$, whereas the data $\mu_\pt=(\idfunc,\refl{})$ combines the left unit law and the coherence in one single identification.
+
+  Note that for any identification $\alpha:x=y$ in $A$ and two base-point preserving functions $(f,p):\sm{f:A\to A}f(\pt)=x$ and $(g,q):\sm{f:A\to A}f(\pt)=y$, we have
+  \begin{equation*}
+    \tau:\Big(\sm{H:f\htpy g}\ct{p}{\alpha}=\ct{H(\pt)}{q}\Big) \to \tr(\alpha,(f,p))=(g,q)
+  \end{equation*}
+  This function is easily constructed by identification elimination on $\alpha$. We will be using this in our construction of the H-space structure on the circle.
+\end{rmk}
+
+
+
+\begin{thm}\label{defn:hspace-circle}
+  There is an H-space structure\index{H-space!circle|textbf}\index{circle!multiplication|textbf}\index{circle!H-space structure|textbf}\index{unit laws!for multiplication on S1@{for multiplication on $\sphere{1}$}}\index{mul S 1@{$\mulcircle$}}
+  \begin{align*}
+    \mulcircle & : \sphere{1}\to(\sphere{1}\to\sphere{1}) \\
+    \leftunit_{\sphere{1}} & : \prd{y:\sphere{1}}\mulcircle(\base,y)=y \\
+    \rightunit_{\sphere{1}} & : \prd{x:\sphere{1}}\mulcircle(x,\base)=x \\
+    \cohunit_{\sphere{1}} & : \leftunit_{\sphere{1}}(\base)=\rightunit_{\sphere{1}}(\base).
+  \end{align*}
+  on the circle.
+\end{thm}
+
+\begin{proof}[Construction]
+  By \cref{rmk:hspace} it suffices to construct a dependent function
+  \begin{equation*}
+    \mu:\prd{x:\sphere{1}}\sm{f:\sphere{1}\to\sphere{1}}f(\base)=x
+  \end{equation*}
+  such that $\mu(\base)=(\idfunc,\refl{})$. This provides us with a useful shortcut, because the identification will follow from the computation rule of the induction principle of the circle.
+
+  Let $P$ be the family of types given by $P(x):=\sm{f:\sphere{1}\to\sphere{1}}f(\base)=x$. By the dependent universal property of the circle there is a unique
+  \begin{equation*}
+    \mu :\prd{x:\sphere{1}}\sm{f:\sphere{1}\to\sphere{1}}f(\base)=x
+  \end{equation*}
+  equipped with an identification $\alpha:\mu(\base)=(\idfunc,\refl{})$ and an identification witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=6em]
+      \tr_P(\lloop,\mu(\base)) \arrow[d,equals,swap,"\apd{\mu}{\lloop}"] \arrow[r,equals,"\ap{\tr_P(\lloop)}{\alpha}"] & \tr_P(\lloop,(\idfunc,\refl{})) \arrow[d,equals,"{\tau(\htpyidcircle,r)}"] \\
+      \mu(\base) \arrow[r,equals,swap,"\alpha"] & (\idfunc,\refl{})
+    \end{tikzcd}
+  \end{equation*}
+  commutes. In this square, $\tau$ is the function from \cref{rmk:hspace}, and the homotopy $\htpyidcircle:\idfunc\htpy\idfunc$ equipped with an identification $r:\lloop = \ct{\htpyidcircle(\base)}{\refl{}}$ remain to be defined.
+
+  We use the dependent universal property of the circle with respect to the family $E_{\idfunc,\idfunc}$ given by
+  \begin{equation*}
+    E_{\idfunc,\idfunc}(x) \defeq (x=x),
+  \end{equation*}
+  to define $\htpyidcircle$ as the unique homotopy equipped with an identification
+  \begin{equation*}
+    \basehtpyidcircle : \htpyidcircle(\base)=\lloop
+  \end{equation*}
+  and an identification $\loophtpyidcircle$ witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=8em]
+      \tr_{E_{\idfunc,\idfunc}}(\lloop,\htpyidcircle(\base)) \arrow[r,equals,"\ap{\tr_{E_{\idfunc,\idfunc}}(\lloop)}{\basehtpyidcircle}"] \arrow[d,equals,swap,"\apd{\htpyidcircle}{\lloop}"] & \tr_{E_{\idfunc,\idfunc}}(\lloop,\lloop) \arrow[d,equals,"\gamma"] \\
+      \htpyidcircle(\base) \arrow[r,equals,swap,"\basehtpyidcircle"] & \lloop
+    \end{tikzcd}
+  \end{equation*}
+  commutes. Now it remains to define the path $\gamma:\tr_{E_{\idfunc,\idfunc}}(\lloop,\lloop)=\lloop$ in the above square. To proceed, we first observe that a simple path induction argument yields a function
+  \begin{equation*}
+    \Big(\ct{p}{r}=\ct{q}{p}\Big)\to\Big(\tr_{E_{\idfunc,\idfunc}}(p,q)=r\Big),
+  \end{equation*}
+  for any $p:\base=x$, $q:\base=\base$ and $r:x=x$. In particular, we have a function
+  \begin{equation*}
+    \Big(\ct{\lloop}{\lloop}=\ct{\lloop}{\lloop}\Big)\to\Big(\tr_{E_{\idfunc,\idfunc}}(\lloop,\lloop)=\lloop\Big).
+  \end{equation*}
+  Now we apply this function to $\refl{\ct{\lloop}{\lloop}}$ to obtain the desired identification
+  \begin{equation*}
+    \gamma:\tr_{E_{\idfunc,\idfunc}}(\lloop,\lloop)=\lloop.\qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{rmk}
+  For some of the exercises below it may be useful to know that the binary operation $\mulcircle$ is the unique map $\sphere{1}\to(\sphere{1}\to\sphere{1})$ equipped with an identification
+  \begin{equation*}
+    \basemulcircle :\mulcircle(\base)=\idfunc
+  \end{equation*}
+  and an identification $\loopmulcircle$ witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=huge]
+      \mulcircle(\base) \arrow[r,equals,"\basemulcircle"] \arrow[d,equals,swap,"\ap{\mulcircle}{\lloop}"] & \idfunc \arrow[d,equals,"\eqhtpy(\htpyidcircle)"] \\
+      \mulcircle(\base) \arrow[r,equals,swap,"\basemulcircle"] & \idfunc
+  \end{tikzcd}
+  \end{equation*}
+  commutes, where the homotopy $\htpyidcircle:\idfunc\htpy\idfunc$ is the one constructed in \cref{defn:hspace-circle}.
+\end{rmk}
+
+\index{circle!H-space structure|)}
+\index{circle!multiplication|)}
+\index{multiplication!on the circle|)}
+
+\begin{exercises}
+  \exitem \label{ex:circle-constant}
+  \begin{subexenum}
+  \item Show that for any type $X$ and any $x:X$, the map
+    \begin{equation*}
+      \ind{\sphere{1}}(x,\refl{x}):\sphere{1}\to X
+    \end{equation*}
+    is homotopic to the constant map $\mathsf{const}_x$.\index{circle!constant maps}\index{constant map!on the circle}
+  \item Show that
+    \begin{equation*}
+      \ind{\sphere{1}}(\base,\lloop) : \sphere{1}\to\sphere{1}
+    \end{equation*}
+    is homotopic to the identity function.
+  \item Consider a map $f:X\to Y$ and a free loop\index{free loop} $(x,l)$ in $X$. Construct a homotopy
+    \begin{equation*}
+      \ind{\sphere{1}}(f(x),\ap{f}{l})\htpy f\circ \ind{\sphere{1}}(x,l).
+    \end{equation*}
+  \end{subexenum}
+  \exitem \label{ex:circle-connected}
+  \begin{subexenum}
+  \item Show that the circle is connected.\index{circle!is connected}\index{is connected!circle}
+  \item Let $P:\sphere{1}\to\prop$ be a family of propositions over the circle. Show that
+    \begin{equation*}
+      P(\base)\to\prd{x:\sphere{1}}P(x).
+    \end{equation*}
+  \item Show that any embedding $m:\sphere{1}\to\sphere{1}$ is an equivalence.
+  \item Show that for any embedding $m:X\to\sphere{1}$, there is a proposition $P$ and an equivalence $e:\eqv{X}{\sphere{1}\times P}$ for which the triangle
+    \begin{equation*}
+      \begin{tikzcd}[column sep=0]
+        X \arrow[dr,swap,"m"] \arrow[rr,"e"] & & \sphere{1}\times P \arrow[dl,"\proj 1"] \\
+        \phantom{\sphere{1}\times P} & \sphere{1}
+      \end{tikzcd}
+    \end{equation*}
+    commutes. In other words, all the embeddings into the circle are of the form $\sphere{1}\times P\to \sphere{1}$.
+  \end{subexenum}
+  \exitem \label{ex:mulcircle-is-equiv}
+  \begin{subexenum}
+  \item Show that for any $x:\sphere{1}$, both functions
+    \begin{equation*}
+      \mulcircle(x,\blank)\qquad\text{and}\qquad\mulcircle(\blank,x)
+    \end{equation*}
+    are equivalences.\index{is an equivalence!mul S 1 (x,-)@{$\mulcircle(x,\blank)$}}\index{is an equivalence!mul S 1 (-,x)@{$\mulcircle(\blank,x)$}}
+  \item Show that the function\index{is an embedding!mul S 1@{$\mulcircle$}}
+    \begin{equation*}
+      \mulcircle : \sphere{1}\to(\sphere{1}\to\sphere{1})
+    \end{equation*}
+    is an embedding.
+  \end{subexenum}
+  \exitem \label{ex:circle_connected}
+  \begin{subexenum}
+  \item Show that a type $X$ is a set\index{set} if and only if the map
+    \begin{equation*}
+      \lam{x}\lam{t} x : X \to (\sphere{1}\to X)
+    \end{equation*}
+    is an equivalence.
+  \item Show that a type $X$ is a set\index{set} if and only if the map
+    \begin{equation*}
+      \lam{f}f(\base) : (\sphere{1}\to X)\to X
+    \end{equation*}
+    is an equivalence.
+  \end{subexenum}
+  \exitem Show that the multiplicative operation on the circle is associative and commutative, i.e.~construct an identifications\index{circle!associativity of multiplication}\index{associativity!of multiplication on S 1@{of multiplication on $\sphere{1}$}}\index{circle!commutativity of multiplication}\index{commutativity!of multiplication on S 1@{of multiplication on $\sphere{1}$}}
+  \begin{align*}
+    \mulcircle(\mulcircle(x,y),z) & = \mulcircle(x,\mulcircle(y,z)) \\
+    \mulcircle(x,y) & =\mulcircle(y,x).
+  \end{align*}
+  for every $x,y,z:\sphere{1}$.
+  \exitem Show that the circle, equipped with the multiplicative operation $\mulcircle$ is an abelian group, i.e.~construct an inverse operation
+  \begin{equation*}
+    \invcircle : \sphere{1}\to\sphere{1}
+  \end{equation*}
+  and construct identifications
+  \begin{align*}
+    \leftinv_{\sphere{1}} & : \mulcircle(\invcircle(x),x) = \base \\
+    \rightinv_{\sphere{1}} & : \mulcircle(x,\invcircle(x)) = \base.
+  \end{align*}
+  Moreover, show that the square
+  \begin{equation*}
+    \begin{tikzcd}
+      \invcircle(\base) \arrow[d,equals] \arrow[r,equals] & \mulcircle(\base,\invcircle(\base)) \arrow[d,equals] \\
+      \mulcircle(\invcircle(\base),\base) \arrow[r,equals] & \base
+    \end{tikzcd}
+  \end{equation*}
+  commutes.
+  \exitem Show that for any multiplicative operation
+  \begin{equation*}
+    \mu:\sphere{1}\to(\sphere{1}\to\sphere{1})
+  \end{equation*}
+  that satisfies the condition that $\mu(x,\blank)$ and $\mu(\blank,x)$ are equivalences for any $x:\sphere{1}$, there is an element $e:\sphere{1}$ such that
+  \begin{equation*}
+    \mu(x,y)=\mulcircle(x,\mulcircle(\bar{e},y))
+  \end{equation*}
+  for every $x,y:\sphere{1}$, where $\bar{e}\defeq\invcircle(e)$ is the complex conjugation of $e$ on $\sphere{1}$.
+  \exitem Consider a pointed type $(A,\pt)$ equipped with a \define{noncoherent H-space structure}\index{H-space!noncoherent H-space|textbf}\index{noncoherent H-space|textbf}\index{H-space!coherence theorem} $(\mu,H,K)$ consisting of a binary operation $\mu:A\to (A\to A)$ and homotopies
+  \begin{align*}
+    H & : \prd{y:A}\mu(\pt,y)=y \\
+    K & : \prd{x:A}\mu(x,\pt)=x.
+  \end{align*}
+  Show that the homotopy $K$ can be adjusted to a new homotopy $K':\prd{x:A}\mu(x,\pt)=x$ in such a way that
+  \begin{equation*}
+    H(\pt)=K'(\pt)
+  \end{equation*}
+  holds. In other words, any noncoherent H-space structure can be improved to an H-space structure with the same underlying binary operation. Hint: Take some inspiration from \cref{lem:coherently-invertible}, where one of the homotopies of the invertibility of a map was adjusted to obtain coherent invertibility.
+\end{exercises}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

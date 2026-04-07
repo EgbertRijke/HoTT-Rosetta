@@ -1,0 +1,648 @@
+\section{The universal cover of the circle}\label{sec:circle-universal-cover}
+\index{circle!universal cover|(}
+\index{universal cover of S 1@{universal cover of $\sphere{1}$}|(}
+
+In this section we use the univalence axiom to construct the \emph{universal cover} of the circle and show that the loop space of the circle is equivalent to $\mathbb{Z}$. The universal cover of the circle is a family of sets over the circle with contractible total space.
+Classically, the universal cover is described as a map $\mathbb{R}\to\sphere{1}$ that winds the real line around the circle. In homotopy type theory the universal cover is constructed as a map $\sphere{1}\to\Set$ into the univalent type of all sets, and we will use the dependent universal property of the circle to show that its total space is contractible.
+
+\subsection{The universal cover of the circle}
+
+The type of small families over $\sphere{1}$ is just the function type $\sphere{1}\to\UU$. Therefore, we may use the universal property of the circle to construct type families over the circle.
+
+By the universal property, $\UU$-small type families over $\sphere{1}$ are equivalently described as pairs $(X,p)$ consisting of a type $X:\UU$ and an identification $p:X=X$. The univalence axiom\index{univalence axiom!families over $\sphere{1}$} implies that the map
+\begin{equation*}
+\mathsf{eq\usc{}equiv}_{X,X}:(\eqv{X}{X})\to (X=X)
+\end{equation*}
+is an equivalence. Therefore, type families over the circle are equivalently described as pairs $(X,e)$, consisting of a type $X$ and an equivalence $e:\eqv{X}{X}$. The type $\sm{X:\UU}\eqv{X}{X}$ is also called the type of \define{descent data}\index{descent data for the circle|textbf}\index{circle!descent data|textbf} for the circle.
+
+\begin{defn}\label{defn:circle_descent}
+Consider a type $X$ and an equivalence $e:\eqv{X}{X}$.
+We will construct a dependent type $\mathcal{D}(X,e):\sphere{1}\to\UU$\index{D (X,e)@{$\mathcal{D}(X,e)$}|textbf}\index{D (X,e)@{$\mathcal{D}(X,e)$}|see {type family, over $\sphere{1}$}}\index{type family!over S 1@{over $\sphere{1}$}|textbf}\index{circle!type family over S 1@{type family over $\sphere{1}$}|textbf} equipped with an equivalence $x\mapsto x_{\mathcal{D}}:\eqv{X}{\mathcal{D}(X,e,\base)}$ for which the square
+\begin{equation*}
+\begin{tikzcd}
+X \arrow[r,"\eqvsym"] \arrow[d,swap,"e"] & \mathcal{D}(X,e,\base) \arrow[d,"\mathsf{tr}_{\mathcal{D}(X,e)}(\lloop)"] \\
+X \arrow[r,swap,"\eqvsym"] & \mathcal{D}(X,e,\base)
+\end{tikzcd}
+\end{equation*}
+commutes. We will write $d\mapsto d_{X}$ for the inverse of this equivalence, so that the relations
+\begin{samepage}%
+\begin{align*}
+(x_{\mathcal{D}})_X & =x & (e(x)_{\mathcal{D}}) & = \mathsf{tr}_{\mathcal{D}(X,e)}(\lloop,x_{\mathcal{D}}) \\
+(d_X)_{\mathcal{D}} & =d & (\mathsf{tr}_{\mathcal{D}(X,e)}(d))_X & = e(d_X)
+\end{align*}
+\end{samepage}%
+hold.
+\end{defn}
+
+\begin{constr}
+  An easy path induction argument reveals that
+\begin{equation*}
+\mathsf{equiv\usc{}eq}(\ap{P}{\lloop})=\mathsf{tr}_P(\lloop)
+\end{equation*}
+for each dependent type $P:\sphere{1}\to\UU$. Therefore we see that the triangle\index{desc_S1@{$\mathsf{desc}_{\sphere{1}}$}|textbf}
+\begin{equation*}
+\begin{tikzcd}
+& (\sphere{1}\to \UU) \arrow[dl,swap,"\mathsf{gen}_{\sphere{1}}"] \arrow[dr,"\mathsf{desc}_{\sphere{1}}"] \\
+\sm{X:\UU}X=X \arrow[rr,swap,"\tot{\lam{X}\mathsf{equiv\usc{}eq}_{X,X}}"] & & \sm{X:\UU}\eqv{X}{X}
+\end{tikzcd}
+\end{equation*}
+commutes, where the map $\mathsf{desc}_{\sphere{1}}$ is given by $P\mapsto\pairr{P(\base),\mathsf{tr}_P(\lloop)}$ and the bottom map is an equivalence by the univalence axiom and \cref{thm:fib_equiv}.
+Now it follows by the 3-for-2 property that $\mathsf{desc}_{\sphere{1}}$ is an equivalence, since $\mathsf{gen}_{\sphere{1}}$ is an equivalence by \cref{thm:circle_up}.
+This means that for every type $X$ and every $e:\eqv{X}{X}$ there is a type family $\mathcal{D}(X,e):\sphere{1}\to\UU$ equipped with an identification
+\begin{equation*}
+\pairr{\mathcal{D}(X,e,\base),\mathsf{tr}_{\mathcal{D}(X,e)}(\lloop)}=\pairr{X,e}.
+\end{equation*}
+For convenience, we invert this identification. Now we observe that the type of identifications in $\sm{X:\UU}\eqv{X}{X}$ can be characterized by
+\begin{equation*}
+  ((X,e)=(X',e'))\simeq \sm{\alpha:X\simeq X'} e'\circ \alpha\htpy \alpha\circ e'.
+\end{equation*}
+This implies that we obtain an equivalence $x\mapsto x_{\mathcal{D}}:X\simeq D(X,e,\base)$ such that the square
+\begin{equation*}
+\begin{tikzcd}[column sep=huge]
+X \arrow[d,swap,"e"] \arrow[r,"x\mapsto x_{\mathcal{D}}"] & \mathcal{D}(X,e,\base) \arrow[d,"\mathsf{tr}_{\mathcal{D}(X,e)}(\lloop)"] \\
+X \arrow[r,swap,"x\mapsto x_{\mathcal{D}}"] & \mathcal{D}(X,e,\base)
+\end{tikzcd}
+\end{equation*}
+commutes.
+\end{constr}
+
+Recall from \cref{eg:is-equiv-succ-Z} that the successor function $\succZ :\Z\to \Z$ is an equivalence. Its inverse is the predecessor function defined in \cref{ex:int_pred}. 
+
+\begin{defn}\label{defn:universal-cover-circle}
+  The \define{universal cover}\index{universal cover of S 1@{universal cover of $\sphere{1}$}|textbf}\index{circle!universal cover|textbf} of the circle is defined via \cref{defn:circle_descent} to be the unique dependent type $\universalcovercircle\defeq\mathcal{D}(\Z,\succZ ):\sphere{1}\to\UU$.\index{Z@{$\Z$}!universal cover of S 1@{universal cover of $\sphere{1}$}|textbf}\index{E S 1@{$\universalcovercircle$}|see {universal cover of $\sphere{1}$}}\index{E S 1@{$\universalcovercircle$}|textbf} equipped with an equivalence $x\mapsto x_\mathcal{E}:\Z\to\universalcovercircle(\base) $ and a homotopy witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=large]
+      \mathbb{Z} \arrow[r,"x\mapsto x_\mathcal{E}"] \arrow[d,swap,"\succZ "] & \universalcovercircle(\mathsf{base}) \arrow[d,"\mathsf{tr}_{\universalcovercircle}(\mathsf{loop})"] \\
+      \mathbb{Z} \arrow[r,swap,"x\mapsto x_\mathcal{E}"] & \universalcovercircle(\mathsf{base})
+    \end{tikzcd}
+  \end{equation*}
+  commutes. We will occasionally write $y\mapsto y_\Z$ for the inverse of $x\mapsto x_{\mathcal{E}}$.
+\end{defn}
+
+The picture of the universal cover is that of a helix\index{helix} over the circle. This picture emerges from the path liftings of $\mathsf{loop}$ in the total space. The segments of the helix connecting $k$ to $k+1$ in the total space of the helix, are constructed in the following lemma.
+
+\begin{lem}
+For any $k:\Z$, there is an identification\index{segment-helix@{$\segmenthelix_k$}|textbf}\index{universal cover of S 1@{universal cover of $\sphere{1}$}!segment-helis@{$\segmenthelix_k$}}
+\begin{equation*}
+\segmenthelix_k:(\base,k_{\mathcal{E}})=(\base,\succZ (k)_{\mathcal{E}})
+\end{equation*}
+in the total space $\sm{t:\sphere{1}}\mathcal{E}(t)$.\index{universal cover of S 1@{universal cover of $\sphere{1}$}!total space}\index{total space!universal cover of S 1@{universal cover of $\sphere{1}$}}
+\end{lem}
+
+\begin{proof}
+By \cref{thm:eq_sigma} it suffices to show that
+\begin{equation*}
+\prd{k:\Z} \sm{\alpha:\base=\base} \mathsf{tr}_{\mathcal{E}}(\alpha,k_{\mathcal{E}})= \succZ (k)_{\mathcal{E}}.
+\end{equation*}
+We just take $\alpha\defeq\lloop$. Then we have $\mathsf{tr}_{\mathcal{E}}(\alpha,k_{\mathcal{E}})= \succZ (k)_{\mathcal{E}}$ by the commuting square provided in the definition of $\mathcal{E}$.
+\end{proof}
+
+\subsection{Working with descent data}
+\index{circle!descent data|(}
+\index{descent data for the circle|(}
+
+The equivalence
+\begin{equation*}
+  (\sphere{1}\to\UU)\simeq \sm{X:\UU}X\simeq X
+\end{equation*}
+yields that for any type family $A$ over the circle the type of descent data $(X,e)$ equipped with an equivalence $\alpha:X\simeq A(\base)$ and a homotopy $H$ witnessing that the square
+\begin{equation*}
+  \begin{tikzcd}
+    X \arrow[r,"\alpha"] \arrow[d,swap,"e"] & A(\base) \arrow[d,"\tr_A(\lloop)"] \\
+    X \arrow[r,swap,"\alpha"] & A(\base)
+  \end{tikzcd}
+\end{equation*}
+commutes is contractible. In the remainder of this section we study arbitrary type families over the circle equipped with such descent data, which will put us in a good position to prove things about the universal cover of the circle.
+
+\begin{prp}
+  Consider a type family $A$ over the circle and consider descent data $(X,e)$ equipped with an equivalence $\alpha:X\simeq A(\base)$ and a homotopy witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}
+      X \arrow[r,"\alpha"] \arrow[d,swap,"e"] & A(\base) \arrow[d,"\tr_A(\lloop)"] \\
+      X \arrow[r,swap,"\alpha"] & A(\base)
+    \end{tikzcd}
+  \end{equation*}
+  commutes. Furthermore, consider two elements $x,y:X$. Then we have an equivalence
+  \begin{equation*}
+    \bar{\alpha}:(e(x)=y)\simeq (\tr_{A}(\lloop,\alpha(x))=\alpha(y)).
+  \end{equation*}
+\end{prp}
+
+\begin{proof}
+  Note that the commutativity of the square implies that
+  \begin{equation*}
+    \tr_A(\lloop,\alpha(x))=\alpha(e(x)).
+  \end{equation*}
+  By \cref{thm:id_fundamental} it therefore suffices to prove that the total space
+  \begin{equation*}
+    \sm{y:X}\tr_A(\lloop,\alpha(x))=\alpha(y)
+  \end{equation*}
+  is contractible. This type is equivalent to $\fib{\alpha}{\tr_A(\lloop,\alpha(x))}$, which is contractible because $\alpha$ is an equivalence.
+\end{proof}
+
+In the following proposition we show that sections of a type family $A$ equipped with descent data $(X,e)$ are equivalently described as fixed points for $e:X\simeq X$. 
+
+\begin{prp}
+  Consider a type family $A$ over the circle and descent data $(X,e)$ equipped with an equivalence $\alpha:X\simeq A(\base)$ and a homotopy witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}
+      X \arrow[r,"\alpha"] \arrow[d,swap,"e"] & A(\base) \arrow[d,"\tr_A(\lloop)"] \\
+      X \arrow[r,swap,"\alpha"] & A(\base)
+    \end{tikzcd}
+  \end{equation*}
+  commutes. Then there is a commuting square
+  \begin{equation*}
+    \begin{tikzcd}
+      \prd{t:\sphere{1}}A(t) \arrow[d,swap,"\ev_\base"] \arrow[r] & \sm{x:X}e(x)=x \arrow[d,"\proj 1"] \\
+      A(\base) \arrow[r,swap,"\alpha^{-1}"] & X
+    \end{tikzcd}
+  \end{equation*}
+  in which the top map is an equivalence.
+\end{prp}
+
+\begin{proof}
+  By the dependent universal property of the circle we have an equivalence
+  \begin{equation*}
+    \Big(\prd{t:\sphere{1}}A(t)\Big)\simeq \sm{x:A(\base)}\tr_A(\lloop,x)=x.
+  \end{equation*}
+  This equivalence fits in a commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=-2em]
+      \phantom{\sm{x:A(\base)}\tr_A(\lloop,x)=x} & \prd{t:\sphere{1}}A(t) \arrow[dl] \arrow[dr,"\dgen_{\sphere{1}}"] \\
+      \sm{x:X}e(x)=x \arrow[rr,swap,"{\tot[\alpha]{\bar{\alpha}}}"] & & \sm{x:A(\base)}\tr_A(\lloop,x)=x 
+    \end{tikzcd}
+  \end{equation*}
+  where the map on the left is given by $s\mapsto(\alpha^{-1}(s(\base)),\bar{\alpha}^{-1}(\apd{s}{\lloop}))$. The bottom map and the map on the right are equivalences, so it follows by the 3-for-2 property of equivalences that the map on the left is an equivalence.
+\end{proof}
+
+The following corollary can be used to compare type families over the circle. In particular, we will use it to compare the identity type of the circle with the universal cover.
+
+\begin{cor}
+  Consider two type families $A$ and $B$ over the circle equipped with descent data $(X,e)$ and $(Y,f)$, equivalences $\alpha:X\simeq A(\base)$ and $\beta:Y\simeq B(\base)$, and homotopies $H$ and $K$ witnessing that the squares
+  \begin{equation*}
+    \begin{tikzcd}
+      X \arrow[r,"\alpha"] \arrow[d,swap,"e"] & A(\base) \arrow[d,"\tr_A(\lloop)"] & Y \arrow[r,"\beta"] \arrow[d,swap,"f"] & B(\base) \arrow[d,"\tr_B(\lloop)"] \\
+      X \arrow[r,swap,"\alpha"] & A(\base) & Y \arrow[r,swap,"\beta"] & B(\base)
+    \end{tikzcd}
+  \end{equation*}
+  commute, respectively. Then there is a commuting square
+  \begin{equation*}
+    \begin{tikzcd}
+      \Big(\prd{t:\sphere{1}}A(t)\to B(t)\Big) \arrow[r] \arrow[d,swap,"\ev_\base"] & \sm{h:X\to Y}h\circ e\htpy f\circ h \arrow[d,"\proj 1"] \\
+      (A(\base)\to B(\base)) \arrow[r,swap,"h\mapsto \beta^{-1}\circ h\circ \alpha"] & (X\to Y)
+    \end{tikzcd}
+  \end{equation*}
+  in which the top map is an equivalence.
+\end{cor}
+
+\begin{proof}
+  The claim follows once we observe that $(Y^X,\lam{h}f\circ h\circ e^{-1})$ is descent data for the family of types $(A(t)\to B(t))$ indexed by $t:\sphere{1}$. Indeed, we have the equivalence $h\mapsto \beta\circ h\circ\alpha^{-1} : Y^X\simeq B(\base)^{A(\base)}$ for which the square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=6em]
+      Y^X \arrow[r,"h\mapsto\beta\circ h\circ\alpha^{-1}"] \arrow[d,swap,"h\mapsto f\circ h\circ e^{-1}"] & B(\base)^{A(\base)} \arrow[d,"\tr_{t\mapsto A(t)\to B(t)}(\lloop)"] \\
+      Y^X \arrow[r,swap,"h\mapsto\beta\circ h\circ\alpha^{-1}"] & B(\base)^{A(\base)}
+    \end{tikzcd}
+  \end{equation*}
+  commutes. 
+\end{proof}
+
+\begin{cor}\label{cor:compute-families-of-maps-universal-cover}
+  Consider a type family $A$ over the circle and descent data $(X,e)$ equipped with an equivalence $\alpha:X\simeq A(\base)$ and a homotopy witnessing that the square
+  \begin{equation*}
+    \begin{tikzcd}
+      X \arrow[r,"\alpha"] \arrow[d,swap,"e"] & A(\base) \arrow[d,"\tr_A(\lloop)"] \\
+      X \arrow[r,swap,"\alpha"] & A(\base)
+    \end{tikzcd}
+  \end{equation*}
+  commutes. Then there is a commuting square
+  \begin{equation*}
+    \begin{tikzcd}[column sep=3em]
+      \Big(\prd{t:\sphere{1}}\universalcovercircle(t)\to A(t)\Big) \arrow[r] \arrow[d,swap,"\ev_\base"] & \sm{h:\Z \to X} h\circ \succZ \htpy e\circ h \arrow[d,"\proj 1"] \\
+      (\universalcovercircle(\base)\to A(\base)) \arrow[r,swap,"h\mapsto \alpha^{-1}\circ h\circ (k\mapsto k_{\mathcal{E}})"] & (\Z \to X)
+    \end{tikzcd}
+  \end{equation*}
+  in which the top map is an equivalence.
+\end{cor}
+
+In other words, a family of maps $\universalcovercircle(t)\to A(t)$ indexed by $t:\sphere{1}$ is equivalently described as a map $h:\Z\to X$ for which the square
+\begin{equation*}
+  \begin{tikzcd}
+    \Z \arrow[r,"h"] \arrow[d,swap,"\succZ"] & X \arrow[d,"e"] \\
+    \Z \arrow[r,swap,"h"] & X
+  \end{tikzcd}
+\end{equation*}
+commutes. It is now time to prove the universal property of the integers.
+\index{circle!descent data|)}
+\index{descent data for the circle|)}  
+
+\subsection{The (dependent) universal property of the integers}
+\index{Z@{$\Z$}!dependent universal property|(}
+\index{Z@{$\Z$}!universal property|(}
+\index{dependent universal property!of Z@{of $\Z$}|(}
+\index{universal property!of Z@{of $\Z$}|(}
+
+The dependent universal property precisely characterizes sections of families over the integers, for those families $A(k)$ indexed by $k:\Z$ that come equipped with families of equivalences $A(k)\simeq A(k+1)$ for all $k:\Z$.
+
+\begin{lem}\label{lem:elim-Z}
+Let $B$ be a family over $\Z$, equipped with an element $b_0:B(0)$, and an equivalence
+\begin{equation*}
+e_k : B(k)\eqvsym B(\succZ(k))
+\end{equation*}
+for each $k:\Z$. Then there is a dependent function $f:\prd{k:\Z}B(k)$ equipped with identifications $f(0)=b_0$ and
+\begin{equation*}
+f(\succZ(k))=e_k(f(k))
+\end{equation*}
+for any $k:\Z$.
+\end{lem}
+
+\begin{proof}
+The map is defined using the induction principle for the integers, stated in \cref{lem:Z_ind}. First we take
+\begin{align*}
+f(-1) & \defeq e_{-1}^{-1}(b_0) \\
+f(0) & \defeq b_0 \\
+f(1) & \defeq e_0(b_0).
+\end{align*}
+For the induction step on the negative integers we use
+\begin{equation*}
+\lam{n}e_{\inneg(\succN(n))}^{-1} : \prd{n:\N} B(\inneg(n))\to B(\inneg(\succN(n)))
+\end{equation*}
+For the induction step on the positive integers we use
+\begin{equation*}
+\lam{n}e_{\inpos(n)} : \prd{n:\N} B(\inpos(n))\to B(\inpos(\succN(n))).
+\end{equation*}
+The computation rules follow in a straightforward way from the computation rules of $\Z$-induction and the fact that $e^{-1}$ is an inverse of $e$. 
+\end{proof}
+
+\begin{eg}
+For any type $A$, we obtain a map $f:\Z\to A$ from any $x:A$ and any equivalence $e:\eqv{A}{A}$, such that $f(0)=x$ and the square
+\begin{equation*}
+\begin{tikzcd}
+\Z \arrow[d,swap,"\succZ"] \arrow[r,"f"] & A \arrow[d,"e"] \\
+\Z \arrow[r,swap,"f"] & A
+\end{tikzcd}
+\end{equation*}
+commutes. In particular, if we take $A\defeq (x=x)$ for some $x:X$, then for any $p:x=x$ we have the equivalence $\lam{q}\ct{p}{q}:(x=x)\to (x=x)$. This equivalence induces a map
+\begin{equation*}
+k\mapsto p^k : \Z \to (x=x),
+\end{equation*}
+for any $p:x=x$. This induces the \define{degree $k$ map}\index{degree k map@{degree $k$ map}|textbf}\index{circle!degree k map@{degree $k$ map}|textbf} on the circle\index{deg(k)@{$\mathsf{deg}(k)$}|textbf}\index{deg(k)@{$\mathsf{deg}(k)$}|see {degree $k$ map}}\index{circle!deg(k)@{$\mathsf{deg}(k)$}|textbf}\index{circle!deg(k)@{$\mathsf{deg}(k)$}|see {degree $k$ map}}
+\begin{equation*}
+\mathsf{deg}(k) : \sphere{1}\to\sphere{1},
+\end{equation*}
+for any $k:\mathbb{Z}$, see \cref{ex:circle_degk}.
+\end{eg}
+
+In the following proposition we show that the dependent function constructed in \cref{lem:elim-Z} is unique. This is the \define{dependent universal property of the integers}\index{dependent universal property!of Z@{of $\Z$}|textbf}\index{Z@{$\Z$}!dependent universal property|textbf}.
+
+\begin{prp}\label{prp:unique-elim-Z}
+  Consider a type family $B:\mathbb{Z}\to\UU$ equipped with $b:B(0)$ and a family of equivalences
+  \begin{equation*}
+    e:\prd{k:\Z} \eqv{B(k)}{B(\succZ (k))}.
+  \end{equation*}
+  Then the type
+  \begin{equation*}
+    \sm{f:\prd{k:\Z}B(k)}(f(0)=b)\times\prd{k:\Z}f(\succZ (k))=e_k(f(k))
+  \end{equation*}
+  is contractible.
+\end{prp}
+
+\begin{proof}
+  In \cref{lem:elim-Z} we have already constructed an element of the asserted type.
+  Therefore it suffices to show that any two elements of this type can be identified.
+  Note that the type $(f,p,H)=(f',p',H')$ is equivalent to the type of triples $(K,\alpha,\beta)$ consisting of
+  \begin{align*}
+    K & : f\htpy f' \\
+    \alpha & : K(0)=\ct{p}{(p')^{-1}} \\
+    \beta & : \prd{k:\Z}K(\succZ (k))=\ct{(\ct{H(k)}{\ap{e_k}{K(k)}})}{H'(k)^{-1}}.
+  \end{align*}
+  We obtain such a triple by applying \cref{lem:elim-Z} to the family $C$ over $\Z$ given by $C(k)\defeq f(k)=f'(k)$, which comes equipped with the base point
+  \begin{equation*}
+    \ct{p}{(p')^{-1}} : C(0),
+  \end{equation*}
+  and the family of equivalences
+  \begin{equation*}
+    \prd{k:\Z}\eqv{C(k)}{C(\succZ (k))}
+  \end{equation*}
+  given by $r\mapsto \ct{(\ct{H(k)}{\ap{e_k}{r}})}{H'(k)^{-1}}$.
+\end{proof}
+
+The \define{universal property of the integers}\index{universal property!of Z@{of $\Z$}|textbf}\index{Z@{$\Z$}!universal property|textbf} is a simple corollary of the dependent universal property. One way of phrasing it is that $\Z$ is the \emph{initial type equipped with a point and an automorphism}\index{integers!initial type with a point and an automorphism}.
+
+\begin{cor}
+  For any type $X$ equipped with a base point $x_0:X$ and an automorphism $e:\eqv{X}{X}$, the type
+  \begin{equation*}
+    \sm{f:\Z\to X}(f(0)=x_0)\times ((f \circ \succZ )\htpy(e\circ f))
+  \end{equation*}
+  is contractible.
+\end{cor}
+
+Using the fact that equivalences are contractible maps, we can reformulate the dependent universal property of the integers as follows.
+
+\begin{thm}
+  For any type family $A$ over $\Z$ equipped with a family of equivalences
+  \begin{equation*}
+    e:\prd{k:\Z}A(k)\simeq A(\succZ(k)),
+  \end{equation*}
+  the map
+  \begin{equation*}
+    \ev_0:\Big(\sm{f:\prd{k:\Z}A(k)}\prd{k:\Z}f(\succZ(k))=e_k(f(k))\Big)\to A(0)
+  \end{equation*}
+  given by $(f,H)\mapsto f(0)$ is an equivalence.
+\end{thm}
+
+\begin{proof}
+  Note that the fibers of $\ev_0$ are equivalent to the types that are shown to be contractible in \cref{prp:unique-elim-Z}.
+\end{proof}
+
+The following corollary will be used to prove that the fundamental cover of the circle is equivalent to the identity type based at $\base:\sphere{1}$.
+
+\begin{cor}\label{cor:universal-property-Z}
+  For any type $X$ equipped with an equivalence $e:X\simeq X$, the map
+  \begin{equation*}
+    \Big(\sm{f:\Z\to X} f\circ \succZ \htpy e\circ f\Big)\to X
+  \end{equation*}
+  given by $(f,H)\mapsto f(0)$ is an equivalence.
+\end{cor}
+\index{Z@{$\Z$}!dependent universal property|)}
+\index{Z@{$\Z$}!universal property|)}
+\index{dependent universal property!of Z@{of $\Z$}|)}
+\index{universal property!of Z@{of $\Z$}|)}
+
+\subsection{The fundamental group of the circle}
+\index{characterization of identity type!of the circle|(}
+\index{circle!characterization of identity type|(}
+
+We have two goals remaining in this book. The first goal is to prove that the universal cover of the circle is an identity system at $\base:\sphere{1}$, in the sense of \cref{defn:identity-system}. Since the universal cover is a family of sets over the circle, this implies that the circle is a $1$-type.
+
+\begin{thm}
+  \label{thm:eq-circle}%
+  The universal cover of the circle is an identity system at $\base:\sphere{1}$.\index{universal cover of S 1@{universal cover of $\sphere{1}$}!is an identity system}\index{identity system!universal cover of S 1@{universal cover of $\sphere{1}$}}
+\end{thm}
+
+\begin{proof}
+  By \cref{ex:uniqueness-identity-type} it suffices to show that the map
+  \begin{equation*}
+    f\mapsto f(0_{\mathcal{E}}) : \Big(\prd{t:\sphere{1}}\universalcovercircle(t)\to A(t)\Big)\to A(\base)
+  \end{equation*}
+  is an equivalence for every type family $A$ over the circle. Note that we have a commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=5em]
+      \Big(\prd{t:\sphere{1}}\universalcovercircle(t)\to A(t)\Big) \arrow[d] \arrow[dr,"f\mapsto f(0_{\mathcal{E}})"] \\
+      \sm{h:\Z\to A(\base)}h\circ\succZ\htpy \tr_A(\lloop)\circ h \arrow[r,swap,"{(h,H)\mapsto h(0)}"] & A(\base)
+    \end{tikzcd}
+  \end{equation*}
+  in which the left map is the equivalence obtained in \cref{cor:compute-families-of-maps-universal-cover} and the bottom map is an equivalence by \cref{cor:universal-property-Z}.
+\end{proof}
+
+\begin{cor}
+  The circle is a $1$-type and not a $0$-type.\index{circle!is a 1-type@{is a $1$-type}}\index{circle!is not a set}
+\end{cor}
+
+\begin{proof}
+  To see that the circle is a $1$-type we have to show that $s=t$ is a $0$-type for every $s,t:\sphere{1}$. By \cref{ex:circle-connected} it suffices to show that the loop space of the circle is a $0$-type. This is indeed the case, because $\Z$ is a $0$-type, and we have an equivalence $(\base=\base)\simeq \Z$.
+
+  Furthermore, since $\Z$ is a $0$-type and not a $(-1)$-type, it follows that the circle is a $1$-type and not a $0$-type.
+\end{proof}
+
+Our second goal is to construct a group isomorphism
+\begin{equation*}
+  \pi_1(\sphere{1})\cong \Z.
+\end{equation*}
+However, \cref{thm:eq-circle} doesn't immediately show that the fundamental group of the circle is $\Z$. It only gives us an equivalence
+\begin{equation*}
+  \loopspace{\sphere{1}}\simeq \Z.
+\end{equation*}
+In order to compute the fundamental group of the circle we augment the fundamental theorem of identity types with the following proposition.\index{fundamental theorem of identity types}
+
+\begin{prp}\label{prp:fundamental-theorem-id-with-operation}
+  Consider a type $A$ equipped with a point $a:A$, and consider an identity system\index{identity system} $B$ on $A$ at $a$ equipped with $b:B(a)$. Furthermore, suppose that there is a binary operation
+  \begin{equation*}
+    \mu:B(a)\to (B(x)\to B(x))
+  \end{equation*}
+  for every $x:A$, equipped with a homotopy $\mu(\blank,b)\htpy \idfunc$. Then we have
+  \begin{equation*}
+    f(\ct{p}{q})=\mu(f(p),f(q))
+  \end{equation*}
+  for the unique family of maps
+  \begin{equation*}
+    f:\prd{x:A}(a=x)\to B(x)
+  \end{equation*}
+  such that $f(\refl{})=b$, and for every $p:a=a$ and $q:a=x$.
+\end{prp}
+
+\begin{proof}
+  Consider a family of maps $f:(a=x)\to B(x)$ indexed by $x:A$ such that $f(\refl{})=b$, and let $p:a=a$ and $q:a=x$. By induction on $q$ it suffices to show that
+  \begin{equation*}
+    f(p)=\mu(f(p),f(\refl{}))
+  \end{equation*}
+  This follows, since $f(\refl{})=b$ and $\mu(f(p),b)=f(p)$.
+\end{proof}
+
+We are now ready to prove that the fundamental group of the circle is $\Z$. Recall from \cref{defn:universal-cover-circle} that we write $y\mapsto y_\Z$ for the inverse of the equivalence
+\begin{equation*}
+  x\mapsto x_{\mathcal{E}}:\Z\simeq\universalcovercircle(\base).
+\end{equation*}
+
+\begin{thm}\label{thm:fundamental-group-circle}
+  There is a group isomorphism\index{circle!p 1 S 1 cong Z@{$\pi_1(\sphere{1})\cong\Z$}}\index{p  1 S 1 cong Z@{$\pi_1(\sphere{1})\cong \Z$}}\index{circle!fundamental group}\index{fundamental group!of the circle}
+  \begin{equation*}
+    \pi_1(\sphere{1})\cong \Z.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  First we observe that, since the circle is a $1$-type, we have an isomorphism of groups $\pi_1(\sphere{1})\cong\loopspace{\sphere{1}}$. In order to show that the group $\loopspace{\sphere{1}}$ is isomorphic to $\Z$, we prove that the family of equivalences
+  \begin{equation*}
+    \alpha:\prd{t:\sphere{1}} (\base=t)\to \universalcovercircle(t)
+  \end{equation*}
+  given by $\alpha(\refl{})\defeq 0_{\mathcal{E}}$ satisfies
+  \begin{equation*}
+    \alpha(\ct{p}{q})_\Z=\alpha(p)_\Z+\alpha(q)_\Z
+  \end{equation*}
+  for every $p,q:\loopspace{\sphere{1}}$.
+  
+  To see that the claim holds, note that by \cref{prp:fundamental-theorem-id-with-operation} it suffices to construct a binary operation
+  \begin{equation*}
+    \mu : \universalcovercircle(\base)\to(\universalcovercircle(x)\to\universalcovercircle(x))
+  \end{equation*}
+  equipped with a homotopy $\mu(\blank,0_{\mathcal{E}})\htpy\idfunc$, such that
+  \begin{equation*}
+    \mu(k_{\mathcal{E}},l_{\mathcal{E}})=(k+l)_{\mathcal{E}}
+  \end{equation*}
+  holds for every $k,l:\Z$. Equivalently, it suffices to construct for each $k:\Z$ a function
+  \begin{equation*}
+    \mu(k_{\mathcal{E}}):\universalcovercircle(x)\to\universalcovercircle(x)
+  \end{equation*}
+  indexed by $x:\sphere{1}$ equipped with an identification $\mu(k_{\mathcal{E}},l_{\mathcal{E}})=(k+l)_{\mathcal{E}}$ for each $k,l:\Z$. Since we have
+  \begin{equation*}
+    k+(l+1)=(k+l)+1
+  \end{equation*}
+  for all $k,l:\Z$, such a function is obtained at once from \cref{cor:compute-families-of-maps-universal-cover}.
+\end{proof}
+
+In order to prove that the fundamental group of the circle is $\Z$, we first had to use the univalence axiom to construct the universal cover of the circle. This proof was originally discovered by Mike Shulman in 2011, and later published in \cite{LicataShulman}. Its importance of this proof to the field of homotopy type theory is hard to overestimate. The proof led to the discovery of the \emph{encode-decode method}, which we presented in this book as the fundamental theorem of identity types, and it was the start of the field that is now sometimes called \emph{synthetic homotopy theory}, where the induction principle for identity types and the univalence axiom are used along with methods from algebraic topology in order to compute algebraic invariants of types.
+
+\index{characterization of identity type!of the circle|)}
+\index{circle!characterization of identity type|)}
+
+\begin{exercises}
+  \exitem
+  \begin{subexenum}
+  \item Show that
+    \begin{equation*}
+      \prd{x:\sphere{1}}\brck{\base=x}.
+    \end{equation*}
+  \item On the other hand, use the universal cover of the circle to show that
+    \begin{equation*}
+      \neg\Big(\prd{x:\sphere{1}}\base=x\Big).
+    \end{equation*}
+  \item Use the circle to conclude that
+    \begin{equation*}
+      \neg\Big(\prd{X:\UU} \brck{X}\to X\Big).
+    \end{equation*}
+  \end{subexenum}
+  \exitem \label{ex:circle_degk}
+\begin{subexenum}
+\item Show that for every $x:X$, we have an equivalence
+\begin{equation*}
+\eqv{\Big(\sm{f:\sphere{1}\to X}f(\base)= x \Big)}{(x=x)}
+\end{equation*}
+\item Show that for every $t:\sphere{1}$, we have an equivalence
+\begin{equation*}
+\eqv{\Big(\sm{f:\sphere{1}\to \sphere{1}}f(\base)= t \Big)}{\Z}
+\end{equation*}
+The base point preserving map $f:\sphere{1}\to\sphere{1}$ corresponding to $k:\Z$ is the degree $k$ map\index{circle!degree k map@{degree $k$ map}}\index{degree k map@{degree $k$ map}} on the circle.
+\item Show that for every $t:\sphere{1}$, we have an equivalence
+\begin{equation*}
+\eqv{\Big(\sm{e:\eqv{\sphere{1}}{\sphere{1}}}e(\base)= t \Big)}{\bool}
+\end{equation*}
+\end{subexenum}
+\exitem \label{ex:circle_double_cover} The \define{(twisted) double cover}\index{twisted double cover of S 1@{twisted double cover of $\sphere{1}$}|textbf}\index{circle!twisted double cover|textbf}\index{double cover of S 1@{double cover of $\sphere{1}$}|textbf}\index{circle!double cover|textbf} of the circle is defined as the type family $\mathcal{T}\defeq\mathcal{D}(\bool,\negbool):\sphere{1}\to\UU$, where $\negbool:\eqv{\bool}{\bool}$ is the negation equivalence of \cref{ex:neg_equiv}.
+\begin{subexenum}
+\item Show that $\neg(\prd{t:\sphere{1}}\mathcal{T}(t))$.
+\item Construct an equivalence $e:\eqv{\sphere{1}}{\sm{t:\sphere{1}}\mathcal{T}(t)}$ for which the triangle
+\begin{equation*}
+\begin{tikzcd}[column sep=tiny]
+\sphere{1} \arrow[rr,"e"] \arrow[dr,swap,"\mathsf{deg}(2)"] & & \sm{t:\sphere{1}}\mathcal{T}(t) \arrow[dl,"\proj 1"] \\
+\phantom{\sm{t:\sphere{1}}\mathcal{T}(t)} & \sphere{1}
+\end{tikzcd}
+\end{equation*}
+commutes.
+\end{subexenum}
+\exitem Construct an equivalence $\eqv{(\eqv{\sphere{1}}{\sphere{1}})}{\sphere{1}+\sphere{1}}$ for which the triangle
+\begin{equation*}
+  \begin{tikzcd}
+    (\eqv{\sphere{1}}{\sphere{1}}) \arrow[rr,"\simeq"] \arrow[dr,swap,"\evbase"] & & (\sphere{1}+\sphere{1}) \arrow[dl,"\fold"] \\
+    & \sphere{1}
+  \end{tikzcd}
+\end{equation*}
+commutes. Conclude that a univalent universe containing a circle is not a $1$-type.
+\exitem \label{ex:is_invertible_id_S1}
+\begin{subexenum}
+\item Construct a family of equivalences
+\begin{equation*}
+\prd{t:\sphere{1}} \big(\eqv{(t=t)}{\Z}\big).
+\end{equation*}
+\item Use \cref{ex:circle_connected} to show that $\eqv{(\idfunc[\sphere{1}]\htpy\idfunc[\sphere{1}])}{\Z}$.
+\item Use \cref{ex:idfunc_autohtpy} to show that
+\begin{equation*}
+\eqv{\mathsf{has\usc{}inverse}(\idfunc[\sphere{1}])}{\Z},
+\end{equation*}
+and conclude that ${\mathsf{has\usc{}inverse}}(\idfunc[\sphere{1}])\not\simeq{\isequiv(\idfunc[\sphere{1}])}$. 
+\end{subexenum}
+\exitem Consider a map $i:A \to \sphere{1}$, and assume that $i$ has a retraction. Construct an element of type
+  \begin{equation*}
+    \iscontr(A)+\isequiv(i).
+  \end{equation*}
+  \exitem
+  \begin{subexenum}
+  \item Show that the multiplicative operation on the circle is associative\index{associativity!of multiplication on S 1@{of multiplication on $\sphere{1}$}}\index{circle!associativity of multiplication}, i.e.~construct an identification
+    \begin{equation*}
+      \assoc_{\sphere{1}}(x,y,z) :
+      \mulcircle(\mulcircle(x,y),z)=\mulcircle(x,\mulcircle(y,z))
+    \end{equation*}
+    for any $x,y,z:\sphere{1}$.
+  \item Show that the associator satisfies unit laws, in the sense that the following triangles commute:
+    \begin{equation*}
+      \begin{tikzcd}[column sep=-1em]
+        \mulcircle(\mulcircle(\base,x),y) \arrow[rr,equals] \arrow[dr,equals] & & \mulcircle(\base,\mulcircle(x,y)) \arrow[dl,equals] \\
+        & \mulcircle(x,y)
+      \end{tikzcd}
+    \end{equation*}
+    \begin{equation*}
+      \begin{tikzcd}[column sep=-1em]
+        \mulcircle(\mulcircle(x,\base),y) \arrow[rr,equals] \arrow[dr,equals] & & \mulcircle(x,\mulcircle(\base,y)) \arrow[dl,equals] \\
+        & \mulcircle(x,y)
+      \end{tikzcd}
+    \end{equation*}
+    \begin{equation*}
+      \begin{tikzcd}[column sep=-1em]
+        \mulcircle(\mulcircle(x,y),\base) \arrow[rr,equals] \arrow[dr,equals] & & \mulcircle(x,\mulcircle(y,\base)) \arrow[dl,equals] \\
+        & \mulcircle(x,y).
+      \end{tikzcd}
+    \end{equation*}
+  \item State the laws that compute
+    \begin{align*}
+      & \assoc_{\sphere{1}}(\base,\base,x) \\
+      & \assoc_{\sphere{1}}(\base,x,\base) \\
+      & \assoc_{\sphere{1}}(x,\base,\base) \\
+      & \assoc_{\sphere{1}}(\base,\base,\base).
+    \end{align*}
+    Note: the first three laws should be $3$-cells and the last law should be a $4$-cell. The laws are automatically satisfied, since the circle is a $1$-type.
+  \end{subexenum}
+  \exitem For convenience, we will write $x\cdot_{\sphere{1}}y\defeq\mulcircle(x,y)$ in this exercise. Construct the \define{Mac Lane pentagon}\index{Mac Lane pentagon}\index{circle!Mac Lane pentagon} for the circle, i.e.~show that the pentagon
+  \begin{equation*}
+    \begin{tikzcd}[column sep=-2em]
+      &[-6em] ((x\cdot_{\sphere{1}} y)\cdot_{\sphere{1}} z)\cdot_{\sphere{1}} w \arrow[rr,equals] \arrow[dl,equals] & & (x\cdot_{\sphere{1}} y)\cdot_{\sphere{1}} (z\cdot_{\sphere{1}} w) \arrow[dr,equals] &[-6em] \\
+      (x\cdot_{\sphere{1}} (y\cdot_{\sphere{1}} z))\cdot_{\sphere{1}} w \arrow[drr,equals] & & & & x\cdot_{\sphere{1}} (y\cdot_{\sphere{1}} (z \cdot_{\sphere{1}} w)) \\
+      & & x\cdot_{\sphere{1}} ((y\cdot_{\sphere{1}} z)\cdot_{\sphere{1}} w) \arrow[urr,equals]
+    \end{tikzcd}
+  \end{equation*}
+  commutes for every $x,y,z,w:\sphere{1}$.
+  \exitem Recall from \cref{ex:surjective-precomp} that if $f:A\to B$ is a surjective map, then the precomposition map
+  \begin{equation*}
+    \blank\circ f : (B\to C)\to (A\to C)
+  \end{equation*}
+  is an embedding for every set $C$. 
+  Give an example of a surjective map $f:A\to B$, such that the precomposition function
+  \begin{equation*}
+    \blank\circ f:(B\to \sphere{1})\to (A\to \sphere{1})
+  \end{equation*}
+  is \emph{not} an embedding, showing that the condition that $C$ is a set is essential.
+  \exitem In this exercise we give an alternative proof that the total space of $\universalcovercircle$\index{universal cover of S 1@{universal cover of $\sphere{1}$}!total space} is contractible.
+  \begin{subexenum}
+  \item Construct a function
+    \begin{equation*}
+      h : \prd{k:\Z}(\base,0_{\mathcal{E}})=(\base,k_{\mathcal{E}})
+    \end{equation*}
+    equipped with a homotopy
+    \begin{equation*}
+      H : \prd{k:\Z}h(\succZ (k)_{\mathcal{E}})=\ct{h(k)}{\segmenthelix(k)}.
+    \end{equation*}
+  \item Show that the total space $\sm{t:\sphere{1}}\universalcovercircle(t)$ of the universal cover of the circle is contractible.
+  \end{subexenum}
+  \exitem Consider the type $\mathcal{C}$ of families $A:\sphere{1}\to\Set$ of sets over the circle equipped with a point $a_0:A(\base)$, such that the total space
+  \begin{equation*}
+    \sm{t:\sphere{1}}A(t)
+  \end{equation*}
+  is connected.
+  \begin{subexenum}
+  \item For any type family $A$ over the circle equipped with $a_0:A(\base)$, show that the total space $\sm{t:\sphere{1}}A(t)$ is connected if and only if $\tr_A(\lloop):A(\base)\to A(\base)$ has a single orbit in the sense that the map $k\mapsto \tr_A(\lloop)^k(a_0):\Z\to A(\base)$ is surjective. 
+  \item Let $(A,a_0)$ and $(B,b_0)$ be in $\mathcal{C}$. Show that the type
+    \begin{equation*}
+      ((A,a_0)\leq (B,b_0))\defeq \sm{f:\prd{t:\sphere{1}}A(t)\to B(t)}f(\base,a_0)=b_0
+    \end{equation*}
+    is a proposition. Furthermore, show that this inequality relation gives $\mathcal{C}$ the structure of a poset.
+  \item Show that the poset $\mathcal{C}$ is isomorphic to the poset of subgroups of $\Z$.
+  \end{subexenum}
+\end{exercises}
+
+\index{circle!universal cover|)}
+\index{universal cover of S 1@{universal cover of $\sphere{1}$}|)}
+\index{circle|)}
+\index{inductive type!circle|)}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

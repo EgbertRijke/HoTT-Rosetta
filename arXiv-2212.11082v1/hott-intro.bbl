@@ -1,0 +1,975 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{AczelCZF}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=6a53592ac19a9c095e093c84f0c8b2b5}{%
+           family={Aczel},
+           familyi={A\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {North-Holland, Amsterdam-New York}%
+      }
+      \strng{namehash}{6a53592ac19a9c095e093c84f0c8b2b5}
+      \strng{fullhash}{6a53592ac19a9c095e093c84f0c8b2b5}
+      \strng{bibnamehash}{6a53592ac19a9c095e093c84f0c8b2b5}
+      \strng{authorbibnamehash}{6a53592ac19a9c095e093c84f0c8b2b5}
+      \strng{authornamehash}{6a53592ac19a9c095e093c84f0c8b2b5}
+      \strng{authorfullhash}{6a53592ac19a9c095e093c84f0c8b2b5}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Logic {C}olloquium '77 ({P}roc. {C}onf., {W}rocław, 1977)}
+      \field{series}{Studies in Logic and the Foundations of Mathematics}
+      \field{title}{The type theoretic interpretation of constructive set theory}
+      \field{volume}{96}
+      \field{year}{1978}
+      \field{pages}{55\bibrangedash 66}
+      \range{pages}{12}
+    \endentry
+    \entry{AwodeyGambinoSojakova}{article}{}
+      \name{author}{3}{}{%
+        {{hash=b8171e993b0288bf0b7716cdcc9aa013}{%
+           family={Awodey},
+           familyi={A\bibinitperiod},
+           given={Steve},
+           giveni={S\bibinitperiod}}}%
+        {{hash=af8a720392938d32d810cac9d514d71a}{%
+           family={Gambino},
+           familyi={G\bibinitperiod},
+           given={Nicola},
+           giveni={N\bibinitperiod}}}%
+        {{hash=b5c0b0cfc77dbf25a3df28ad9c3ddff8}{%
+           family={Sojakova},
+           familyi={S\bibinitperiod},
+           given={Kristina},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{5bf7f444d8480ed8f0859094768cdf4b}
+      \strng{fullhash}{5bf7f444d8480ed8f0859094768cdf4b}
+      \strng{bibnamehash}{5bf7f444d8480ed8f0859094768cdf4b}
+      \strng{authorbibnamehash}{5bf7f444d8480ed8f0859094768cdf4b}
+      \strng{authornamehash}{5bf7f444d8480ed8f0859094768cdf4b}
+      \strng{authorfullhash}{5bf7f444d8480ed8f0859094768cdf4b}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0004-5411}
+      \field{journaltitle}{J. ACM}
+      \field{number}{6}
+      \field{title}{Homotopy-initial algebras in type theory}
+      \field{volume}{63}
+      \field{year}{2017}
+      \field{pages}{Art. 51\bibrangessep 45}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1145/3006383
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3006383
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3006383
+      \endverb
+    \endentry
+    \entry{AwodeyWarren}{article}{}
+      \name{author}{2}{}{%
+        {{hash=b8171e993b0288bf0b7716cdcc9aa013}{%
+           family={Awodey},
+           familyi={A\bibinitperiod},
+           given={Steve},
+           giveni={S\bibinitperiod}}}%
+        {{hash=af56b3803e8d08af73966f4c7b26fd30}{%
+           family={Warren},
+           familyi={W\bibinitperiod},
+           given={Michael\bibnamedelima A.},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{4d69a7ad29c7a5ebbc2eeebe17ebefbb}
+      \strng{fullhash}{4d69a7ad29c7a5ebbc2eeebe17ebefbb}
+      \strng{bibnamehash}{4d69a7ad29c7a5ebbc2eeebe17ebefbb}
+      \strng{authorbibnamehash}{4d69a7ad29c7a5ebbc2eeebe17ebefbb}
+      \strng{authornamehash}{4d69a7ad29c7a5ebbc2eeebe17ebefbb}
+      \strng{authorfullhash}{4d69a7ad29c7a5ebbc2eeebe17ebefbb}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0305-0041}
+      \field{journaltitle}{Math. Proc. Cambridge Philos. Soc.}
+      \field{number}{1}
+      \field{title}{Homotopy theoretic models of identity types}
+      \field{volume}{146}
+      \field{year}{2009}
+      \field{pages}{45\bibrangedash 55}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1017/S0305004108001783
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1017/S0305004108001783
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1017/S0305004108001783
+      \endverb
+    \endentry
+    \entry{symmetrybook}{misc}{}
+      \name{author}{5}{}{%
+        {{hash=6d232f8f72448bcec4812b308c5674c0}{%
+           family={Bezem},
+           familyi={B\bibinitperiod},
+           given={Marc},
+           giveni={M\bibinitperiod}}}%
+        {{hash=409448cb828eda10650d18b18b2f0d08}{%
+           family={Buchholtz},
+           familyi={B\bibinitperiod},
+           given={Ulrik},
+           giveni={U\bibinitperiod}}}%
+        {{hash=3cfbc8c7b7fb6beac019367f234586da}{%
+           family={Cagne},
+           familyi={C\bibinitperiod},
+           given={Pierre},
+           giveni={P\bibinitperiod}}}%
+        {{hash=50ceb7c975d5b0ffa3b5044b4f9932fd}{%
+           family={Dundas},
+           familyi={D\bibinitperiod},
+           given={Bjørn\bibnamedelima Ian},
+           giveni={B\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+        {{hash=e5b197f9abb9382c464eae92cdcc1b2c}{%
+           family={Grayson},
+           familyi={G\bibinitperiod},
+           given={Daniel\bibnamedelima R.},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{e0be90dfca6c37c2612505c7a7c3f9dc}
+      \strng{fullhash}{e0be90dfca6c37c2612505c7a7c3f9dc}
+      \strng{bibnamehash}{e0be90dfca6c37c2612505c7a7c3f9dc}
+      \strng{authorbibnamehash}{e0be90dfca6c37c2612505c7a7c3f9dc}
+      \strng{authornamehash}{e0be90dfca6c37c2612505c7a7c3f9dc}
+      \strng{authorfullhash}{e0be90dfca6c37c2612505c7a7c3f9dc}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://github.com/UniMath/SymmetryBook}}
+      \field{title}{Symmetry}
+      \field{year}{2022}
+    \endentry
+    \entry{BezemCoquandHuber}{incollection}{}
+      \name{author}{3}{}{%
+        {{hash=6d232f8f72448bcec4812b308c5674c0}{%
+           family={Bezem},
+           familyi={B\bibinitperiod},
+           given={Marc},
+           giveni={M\bibinitperiod}}}%
+        {{hash=9a0915de15d028e82e7de497c09fe93c}{%
+           family={Coquand},
+           familyi={C\bibinitperiod},
+           given={Thierry},
+           giveni={T\bibinitperiod}}}%
+        {{hash=3bbd93a8eec36945f24bd56e8a71ec58}{%
+           family={Huber},
+           familyi={H\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Schloss Dagstuhl. Leibniz-Zent. Inform., Wadern}%
+      }
+      \strng{namehash}{267c5fd2b23be8d4c1742788c6577dfd}
+      \strng{fullhash}{267c5fd2b23be8d4c1742788c6577dfd}
+      \strng{bibnamehash}{267c5fd2b23be8d4c1742788c6577dfd}
+      \strng{authorbibnamehash}{267c5fd2b23be8d4c1742788c6577dfd}
+      \strng{authornamehash}{267c5fd2b23be8d4c1742788c6577dfd}
+      \strng{authorfullhash}{267c5fd2b23be8d4c1742788c6577dfd}
+      \field{extraname}{1}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{19th {I}nternational {C}onference on {T}ypes for {P}roofs and {P}rograms}
+      \field{series}{LIPIcs. Leibniz Int. Proc. Inform.}
+      \field{title}{A model of type theory in cubical sets}
+      \field{volume}{26}
+      \field{year}{2014}
+      \field{pages}{107\bibrangedash 128}
+      \range{pages}{22}
+    \endentry
+    \entry{BCH19}{article}{}
+      \name{author}{3}{}{%
+        {{hash=6d232f8f72448bcec4812b308c5674c0}{%
+           family={Bezem},
+           familyi={B\bibinitperiod},
+           given={Marc},
+           giveni={M\bibinitperiod}}}%
+        {{hash=9a0915de15d028e82e7de497c09fe93c}{%
+           family={Coquand},
+           familyi={C\bibinitperiod},
+           given={Thierry},
+           giveni={T\bibinitperiod}}}%
+        {{hash=3bbd93a8eec36945f24bd56e8a71ec58}{%
+           family={Huber},
+           familyi={H\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{267c5fd2b23be8d4c1742788c6577dfd}
+      \strng{fullhash}{267c5fd2b23be8d4c1742788c6577dfd}
+      \strng{bibnamehash}{267c5fd2b23be8d4c1742788c6577dfd}
+      \strng{authorbibnamehash}{267c5fd2b23be8d4c1742788c6577dfd}
+      \strng{authornamehash}{267c5fd2b23be8d4c1742788c6577dfd}
+      \strng{authorfullhash}{267c5fd2b23be8d4c1742788c6577dfd}
+      \field{extraname}{2}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0168-7433}
+      \field{journaltitle}{J. Automat. Reason.}
+      \field{number}{2}
+      \field{title}{The univalence axiom in cubical sets}
+      \field{volume}{63}
+      \field{year}{2019}
+      \field{pages}{159\bibrangedash 171}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1007/s10817-018-9472-6
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s10817-018-9472-6
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s10817-018-9472-6
+      \endverb
+    \endentry
+    \entry{Bishop1967}{book}{}
+      \name{author}{1}{}{%
+        {{hash=d3407b6d0d6d0a1196d0a681ef76dff4}{%
+           family={Bishop},
+           familyi={B\bibinitperiod},
+           given={Erret},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {McGraw-Hill Book Co.}%
+      }
+      \strng{namehash}{d3407b6d0d6d0a1196d0a681ef76dff4}
+      \strng{fullhash}{d3407b6d0d6d0a1196d0a681ef76dff4}
+      \strng{bibnamehash}{d3407b6d0d6d0a1196d0a681ef76dff4}
+      \strng{authorbibnamehash}{d3407b6d0d6d0a1196d0a681ef76dff4}
+      \strng{authornamehash}{d3407b6d0d6d0a1196d0a681ef76dff4}
+      \strng{authorfullhash}{d3407b6d0d6d0a1196d0a681ef76dff4}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Foundations of constructive analysis}
+      \field{year}{1967}
+      \field{pages}{xiii+370}
+      \range{pages}{-1}
+    \endentry
+    \entry{BruneriePhD}{article}{}
+      \name{author}{1}{}{%
+        {{hash=0440997bb54868489952ceba2fb0ce68}{%
+           family={{Brunerie}},
+           familyi={B\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{0440997bb54868489952ceba2fb0ce68}
+      \strng{fullhash}{0440997bb54868489952ceba2fb0ce68}
+      \strng{bibnamehash}{0440997bb54868489952ceba2fb0ce68}
+      \strng{authorbibnamehash}{0440997bb54868489952ceba2fb0ce68}
+      \strng{authornamehash}{0440997bb54868489952ceba2fb0ce68}
+      \strng{authorfullhash}{0440997bb54868489952ceba2fb0ce68}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{math.AT}
+      \field{eprinttype}{arXiv}
+      \field{journaltitle}{ArXiv e-prints}
+      \field{month}{6}
+      \field{title}{{On the homotopy groups of spheres in homotopy type theory}}
+      \field{year}{2016}
+      \verb{eprint}
+      \verb 1606.05916
+      \endverb
+      \keyw{Mathematics - Algebraic Topology,Computer Science - Logic in Computer Science,Mathematics - Logic}
+    \endentry
+    \entry{Kraus}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=bffdc7af1b2866c21e377ec6f40235f0}{%
+           family={Capriotti},
+           familyi={C\bibinitperiod},
+           given={Paolo},
+           giveni={P\bibinitperiod}}}%
+        {{hash=b3f5382feec7de06619a7160fc059ee8}{%
+           family={Kraus},
+           familyi={K\bibinitperiod},
+           given={Nicolai},
+           giveni={N\bibinitperiod}}}%
+        {{hash=38b551d0b5ec5e2b4c915bd08649e102}{%
+           family={Vezzosi},
+           familyi={V\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Schloss Dagstuhl--Leibniz-Zentrum fuer Informatik}%
+      }
+      \strng{namehash}{061f74c38ee0f1330b99f0dd59e2064d}
+      \strng{fullhash}{061f74c38ee0f1330b99f0dd59e2064d}
+      \strng{bibnamehash}{061f74c38ee0f1330b99f0dd59e2064d}
+      \strng{authorbibnamehash}{061f74c38ee0f1330b99f0dd59e2064d}
+      \strng{authornamehash}{061f74c38ee0f1330b99f0dd59e2064d}
+      \strng{authorfullhash}{061f74c38ee0f1330b99f0dd59e2064d}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{24th EACSL Annual Conference on Computer Science Logic (CSL) 2015)}
+      \field{isbn}{978-3-939897-90-3}
+      \field{issn}{1868-8969}
+      \field{series}{Leibniz International Proceedings in Informatics (LIPIcs)}
+      \field{title}{Functions out of Higher Truncations}
+      \field{volume}{41}
+      \field{year}{2015}
+      \field{pages}{359\bibrangedash 373}
+      \range{pages}{15}
+      \verb{doi}
+      \verb http://dx.doi.org/10.4230/LIPIcs.CSL.2015.359
+      \endverb
+    \endentry
+    \entry{Corfield}{book}{}
+      \name{author}{1}{}{%
+        {{hash=76c1d9becfc1579354202a3a4ee61bd5}{%
+           family={Corfield},
+           familyi={C\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press, Oxford}%
+      }
+      \strng{namehash}{76c1d9becfc1579354202a3a4ee61bd5}
+      \strng{fullhash}{76c1d9becfc1579354202a3a4ee61bd5}
+      \strng{bibnamehash}{76c1d9becfc1579354202a3a4ee61bd5}
+      \strng{authorbibnamehash}{76c1d9becfc1579354202a3a4ee61bd5}
+      \strng{authornamehash}{76c1d9becfc1579354202a3a4ee61bd5}
+      \strng{authorfullhash}{76c1d9becfc1579354202a3a4ee61bd5}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0-19-885340-4}
+      \field{note}{The prospect of a new logic for philosophy}
+      \field{title}{Modal homotopy type theory}
+      \field{year}{2020}
+      \field{pages}{x+180}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1093/oso/9780198853404.001.0001
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1093/oso/9780198853404.001.0001
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1093/oso/9780198853404.001.0001
+      \endverb
+    \endentry
+    \entry{AczelGambinoCZF}{article}{}
+      \name{author}{2}{}{%
+        {{hash=af8a720392938d32d810cac9d514d71a}{%
+           family={Gambino},
+           familyi={G\bibinitperiod},
+           given={Nicola},
+           giveni={N\bibinitperiod}}}%
+        {{hash=6a53592ac19a9c095e093c84f0c8b2b5}{%
+           family={Aczel},
+           familyi={A\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{886f9f1a3a6967f980ac976d499c9f0f}
+      \strng{fullhash}{886f9f1a3a6967f980ac976d499c9f0f}
+      \strng{bibnamehash}{886f9f1a3a6967f980ac976d499c9f0f}
+      \strng{authorbibnamehash}{886f9f1a3a6967f980ac976d499c9f0f}
+      \strng{authornamehash}{886f9f1a3a6967f980ac976d499c9f0f}
+      \strng{authorfullhash}{886f9f1a3a6967f980ac976d499c9f0f}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0022-4812}
+      \field{journaltitle}{J. Symbolic Logic}
+      \field{number}{1}
+      \field{title}{The generalized type-theoretic interpretation of constructive set theory}
+      \field{volume}{71}
+      \field{year}{2006}
+      \field{pages}{67\bibrangedash 103}
+      \range{pages}{37}
+      \verb{doi}
+      \verb 10.2178/jsl/1140641163
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.2178/jsl/1140641163
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.2178/jsl/1140641163
+      \endverb
+    \endentry
+    \entry{Gauss}{book}{}
+      \name{author}{3}{}{%
+        {{hash=09010810e3a18dc416679ec713025811}{%
+           family={Gauss},
+           familyi={G\bibinitperiod},
+           given={C.F.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=8b85d2e06e9a0e78b10203c96b0f61f2}{%
+           family={Waterhouse},
+           familyi={W\bibinitperiod},
+           given={W.C.},
+           giveni={W\bibinitperiod}}}%
+        {{hash=e5d38b2895d56c979ca042a2d21806d0}{%
+           family={Clarke},
+           familyi={C\bibinitperiod},
+           given={A.A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{72a0133d063d7ae68ad68b4ff6dbfea2}
+      \strng{fullhash}{72a0133d063d7ae68ad68b4ff6dbfea2}
+      \strng{bibnamehash}{72a0133d063d7ae68ad68b4ff6dbfea2}
+      \strng{authorbibnamehash}{72a0133d063d7ae68ad68b4ff6dbfea2}
+      \strng{authornamehash}{72a0133d063d7ae68ad68b4ff6dbfea2}
+      \strng{authorfullhash}{72a0133d063d7ae68ad68b4ff6dbfea2}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9783540962540}
+      \field{title}{Disquisitiones Arithmeticae}
+      \field{year}{1986}
+    \endentry
+    \entry{Gonthier}{incollection}{}
+      \name{author}{4}{}{%
+        {{hash=4bde01b7cbd8a03f2e8959bcde4b3b4a}{%
+           family={Gonthier},
+           familyi={G\bibinitperiod},
+           given={Georges},
+           giveni={G\bibinitperiod}}}%
+        {{hash=97340df96bec6014ee65c30ac5781c04}{%
+           family={Asperti},
+           familyi={A\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b31cc4b873359c0cebe17020de111a47}{%
+           family={Avigad},
+           familyi={A\bibinitperiod},
+           given={Jeremy},
+           giveni={J\bibinitperiod}}}%
+        {{hash=38026ba4ee6b102b47bf3ffb41325c8f}{%
+           family={al.},
+           familyi={a\bibinitperiod},
+           prefix={et},
+           prefixi={e\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer, Heidelberg}%
+      }
+      \strng{namehash}{9fe5a04f061abbf5a73e1aa66db4402e}
+      \strng{fullhash}{9fe5a04f061abbf5a73e1aa66db4402e}
+      \strng{bibnamehash}{9fe5a04f061abbf5a73e1aa66db4402e}
+      \strng{authorbibnamehash}{9fe5a04f061abbf5a73e1aa66db4402e}
+      \strng{authornamehash}{9fe5a04f061abbf5a73e1aa66db4402e}
+      \strng{authorfullhash}{9fe5a04f061abbf5a73e1aa66db4402e}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Interactive theorem proving}
+      \field{series}{Lecture Notes in Comput. Sci.}
+      \field{title}{A machine-checked proof of the odd order theorem}
+      \field{volume}{7998}
+      \field{year}{2013}
+      \field{pages}{163\bibrangedash 179}
+      \range{pages}{17}
+      \verb{doi}
+      \verb 10.1007/978-3-642-39634-2\_14
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-642-39634-2_14
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-642-39634-2_14
+      \endverb
+    \endentry
+    \entry{GylterudMultisets}{article}{}
+      \name{author}{1}{}{%
+        {{hash=c85df20acd3668d18847ccfb78429b78}{%
+           family={Gylterud},
+           familyi={G\bibinitperiod},
+           given={Håkon\bibnamedelima Robbestad},
+           giveni={H\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{c85df20acd3668d18847ccfb78429b78}
+      \strng{fullhash}{c85df20acd3668d18847ccfb78429b78}
+      \strng{bibnamehash}{c85df20acd3668d18847ccfb78429b78}
+      \strng{authorbibnamehash}{c85df20acd3668d18847ccfb78429b78}
+      \strng{authornamehash}{c85df20acd3668d18847ccfb78429b78}
+      \strng{authorfullhash}{c85df20acd3668d18847ccfb78429b78}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0022-4812}
+      \field{journaltitle}{J. Symb. Log.}
+      \field{number}{3}
+      \field{title}{From multisets to sets in homotopy type theory}
+      \field{volume}{83}
+      \field{year}{2018}
+      \field{pages}{1132\bibrangedash 1146}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1017/jsl.2017.84
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1017/jsl.2017.84
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1017/jsl.2017.84
+      \endverb
+    \endentry
+    \entry{hs:gpd-typethy}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=d3c25d820c67e8530324893291b911d5}{%
+           family={Hofmann},
+           familyi={H\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=2fe23e7e33c4a306653b7fae358fc988}{%
+           family={Streicher},
+           familyi={S\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=6bf05c3057351e6913d624f901af7cc1}{%
+           family={Sambin},
+           familyi={S\bibinitperiod},
+           given={Giovanni},
+           giveni={G\bibinitperiod}}}%
+        {{hash=f01d9569ef1da0db4cff6c067b89a68f}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={Jan\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press}%
+      }
+      \strng{namehash}{42abeff9e8c29a933a3fc8bf4cdd7783}
+      \strng{fullhash}{42abeff9e8c29a933a3fc8bf4cdd7783}
+      \strng{bibnamehash}{42abeff9e8c29a933a3fc8bf4cdd7783}
+      \strng{authorbibnamehash}{42abeff9e8c29a933a3fc8bf4cdd7783}
+      \strng{authornamehash}{42abeff9e8c29a933a3fc8bf4cdd7783}
+      \strng{authorfullhash}{42abeff9e8c29a933a3fc8bf4cdd7783}
+      \strng{editorbibnamehash}{bc30fc74d555cbae449bf44e64541123}
+      \strng{editornamehash}{bc30fc74d555cbae449bf44e64541123}
+      \strng{editorfullhash}{bc30fc74d555cbae449bf44e64541123}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Twenty-five years of constructive type theory ({V}enice, 1995)}
+      \field{series}{Oxford Logic Guides}
+      \field{title}{The groupoid interpretation of type theory}
+      \field{volume}{36}
+      \field{year}{1998}
+      \field{pages}{83\bibrangedash 111}
+      \range{pages}{29}
+    \endentry
+    \entry{KapulkinLeFanuLumsdaine}{article}{}
+      \name{author}{2}{}{%
+        {{hash=8636affeaba3a15963fc3a3fc1b2ee5a}{%
+           family={Kapulkin},
+           familyi={K\bibinitperiod},
+           given={Krzysztof},
+           giveni={K\bibinitperiod}}}%
+        {{hash=7c4f8c4cd687c31f652591f365a798ef}{%
+           family={Lumsdaine},
+           familyi={L\bibinitperiod},
+           given={Peter\bibnamedelima LeFanu},
+           giveni={P\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{550e23c2a3cbadd7f5c62a701b81ae1e}
+      \strng{fullhash}{550e23c2a3cbadd7f5c62a701b81ae1e}
+      \strng{bibnamehash}{550e23c2a3cbadd7f5c62a701b81ae1e}
+      \strng{authorbibnamehash}{550e23c2a3cbadd7f5c62a701b81ae1e}
+      \strng{authornamehash}{550e23c2a3cbadd7f5c62a701b81ae1e}
+      \strng{authorfullhash}{550e23c2a3cbadd7f5c62a701b81ae1e}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1435-9855}
+      \field{journaltitle}{J. Eur. Math. Soc. (JEMS)}
+      \field{number}{6}
+      \field{title}{The simplicial model of univalent foundations (after {V}oevodsky)}
+      \field{volume}{23}
+      \field{year}{2021}
+      \field{pages}{2071\bibrangedash 2126}
+      \range{pages}{56}
+      \verb{doi}
+      \verb 10.4171/JEMS/1050
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.4171/JEMS/1050
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.4171/JEMS/1050
+      \endverb
+    \endentry
+    \entry{LicataShulman}{incollection}{}
+      \name{author}{2}{}{%
+        {{hash=ca5689112ca04c45bc58fbf25144a438}{%
+           family={Licata},
+           familyi={L\bibinitperiod},
+           given={Daniel\bibnamedelima R.},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=a49cc4742950659ae680e1c40f2295a9}{%
+           family={Shulman},
+           familyi={S\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE Computer Soc., Los Alamitos, CA}%
+      }
+      \strng{namehash}{ae3ffe4d7160c5c7ea4ed34301736acc}
+      \strng{fullhash}{ae3ffe4d7160c5c7ea4ed34301736acc}
+      \strng{bibnamehash}{ae3ffe4d7160c5c7ea4ed34301736acc}
+      \strng{authorbibnamehash}{ae3ffe4d7160c5c7ea4ed34301736acc}
+      \strng{authornamehash}{ae3ffe4d7160c5c7ea4ed34301736acc}
+      \strng{authorfullhash}{ae3ffe4d7160c5c7ea4ed34301736acc}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2013 28th {A}nnual {ACM}/{IEEE} {S}ymposium on {L}ogic in {C}omputer {S}cience ({LICS} 2013)}
+      \field{title}{Calculating the fundamental group of the circle in homotopy type theory}
+      \field{year}{2013}
+      \field{pages}{223\bibrangedash 232}
+      \range{pages}{10}
+    \endentry
+    \entry{mathematical-components}{unpublished}{}
+      \name{author}{2}{}{%
+        {{hash=5b76a4300ed8b7c7844ff4a71c1fde5c}{%
+           family={Mahboubi},
+           familyi={M\bibinitperiod},
+           given={Assia},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b3292a3f4fa4c32d7aefa6360e7ac540}{%
+           family={Tassi},
+           familyi={T\bibinitperiod},
+           given={Enrico},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{054019f905e54bb6acbe4b03665d1707}
+      \strng{fullhash}{054019f905e54bb6acbe4b03665d1707}
+      \strng{bibnamehash}{054019f905e54bb6acbe4b03665d1707}
+      \strng{authorbibnamehash}{054019f905e54bb6acbe4b03665d1707}
+      \strng{authornamehash}{054019f905e54bb6acbe4b03665d1707}
+      \strng{authorfullhash}{054019f905e54bb6acbe4b03665d1707}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Mathematical Components}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://math-comp.github.io/mcb/
+      \endverb
+      \verb{url}
+      \verb https://math-comp.github.io/mcb/
+      \endverb
+    \endentry
+    \entry{MartinLof84}{book}{}
+      \name{author}{1}{}{%
+        {{hash=617a4cbf763fdc17e84e14c7343bddde}{%
+           family={Martin-Löf},
+           familyi={M\bibinithyphendelim L\bibinitperiod},
+           given={Per},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Bibliopolis, Naples}%
+      }
+      \strng{namehash}{617a4cbf763fdc17e84e14c7343bddde}
+      \strng{fullhash}{617a4cbf763fdc17e84e14c7343bddde}
+      \strng{bibnamehash}{617a4cbf763fdc17e84e14c7343bddde}
+      \strng{authorbibnamehash}{617a4cbf763fdc17e84e14c7343bddde}
+      \strng{authornamehash}{617a4cbf763fdc17e84e14c7343bddde}
+      \strng{authorfullhash}{617a4cbf763fdc17e84e14c7343bddde}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{88-7088-105-9}
+      \field{note}{Notes by Giovanni Sambin}
+      \field{series}{Studies in Proof Theory. Lecture Notes}
+      \field{title}{Intuitionistic type theory}
+      \field{volume}{1}
+      \field{year}{1984}
+      \field{pages}{iv+91}
+      \range{pages}{-1}
+    \endentry
+    \entry{Peano}{book}{}
+      \name{author}{1}{}{%
+        {{hash=2b770993cca3e85511a4c09b5ae51bff}{%
+           family={Peano},
+           familyi={P\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Fratres Bocca}%
+      }
+      \strng{namehash}{2b770993cca3e85511a4c09b5ae51bff}
+      \strng{fullhash}{2b770993cca3e85511a4c09b5ae51bff}
+      \strng{bibnamehash}{2b770993cca3e85511a4c09b5ae51bff}
+      \strng{authorbibnamehash}{2b770993cca3e85511a4c09b5ae51bff}
+      \strng{authornamehash}{2b770993cca3e85511a4c09b5ae51bff}
+      \strng{authorfullhash}{2b770993cca3e85511a4c09b5ae51bff}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Arithmetices principia: nova methodo exposita}
+      \field{year}{1889}
+    \endentry
+    \entry{RSS}{article}{}
+      \name{author}{3}{}{%
+        {{hash=011cfbf1459205c195e78aa389c9f7d2}{%
+           family={{Rijke}},
+           familyi={R\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=702c1da7b69c84f09ea8909a1646b134}{%
+           family={Shulman},
+           familyi={S\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=99be59e8a95d08674579eb38d154ef48}{%
+           family={Spitters},
+           familyi={S\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{4e49a956523fd1e7fd78eb8fa3425fe8}
+      \strng{fullhash}{4e49a956523fd1e7fd78eb8fa3425fe8}
+      \strng{bibnamehash}{4e49a956523fd1e7fd78eb8fa3425fe8}
+      \strng{authorbibnamehash}{4e49a956523fd1e7fd78eb8fa3425fe8}
+      \strng{authornamehash}{4e49a956523fd1e7fd78eb8fa3425fe8}
+      \strng{authorfullhash}{4e49a956523fd1e7fd78eb8fa3425fe8}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Log. Methods Comput. Sci.}
+      \field{number}{1}
+      \field{title}{Modalities in homotopy type theory}
+      \field{volume}{16}
+      \field{year}{2020}
+      \field{pages}{Paper No. 2\bibrangessep 79 pp.}
+      \range{pages}{-1}
+    \endentry
+    \entry{Agda-UniMath}{misc}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{3}{}{%
+        {{hash=b1bb80d57e903f657e4b411a28823e28}{%
+           family={Rijke},
+           familyi={R\bibinitperiod},
+           given={Egbert},
+           giveni={E\bibinitperiod}}}%
+        {{hash=e2a7569adf0c1e98282fea50b1418399}{%
+           family={Bonnevier},
+           familyi={B\bibinitperiod},
+           given={Elisabeth},
+           giveni={E\bibinitperiod}}}%
+        {{hash=9baeed9f2f8411e89d99bc6b07fa09ea}{%
+           family={Prieto-Cubides},
+           familyi={P\bibinithyphendelim C\bibinitperiod},
+           given={Jonathan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{ee2cb901bf8676e212c593c9003c87bb}
+      \strng{fullhash}{ee2cb901bf8676e212c593c9003c87bb}
+      \strng{bibnamehash}{ee2cb901bf8676e212c593c9003c87bb}
+      \strng{authorbibnamehash}{ee2cb901bf8676e212c593c9003c87bb}
+      \strng{authornamehash}{ee2cb901bf8676e212c593c9003c87bb}
+      \strng{authorfullhash}{ee2cb901bf8676e212c593c9003c87bb}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://unimath.github.io/agda-unimath/}}
+      \field{title}{Univalent mathematics in {Agda}}
+      \verb{urlraw}
+      \verb https://github.com/UniMath/agda-unimath/
+      \endverb
+      \verb{url}
+      \verb https://github.com/UniMath/agda-unimath/
+      \endverb
+    \endentry
+    \entry{Shulman19}{article}{}
+      \name{author}{1}{}{%
+        {{hash=a49cc4742950659ae680e1c40f2295a9}{%
+           family={{Shulman}},
+           familyi={S\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{a49cc4742950659ae680e1c40f2295a9}
+      \strng{fullhash}{a49cc4742950659ae680e1c40f2295a9}
+      \strng{bibnamehash}{a49cc4742950659ae680e1c40f2295a9}
+      \strng{authorbibnamehash}{a49cc4742950659ae680e1c40f2295a9}
+      \strng{authornamehash}{a49cc4742950659ae680e1c40f2295a9}
+      \strng{authorfullhash}{a49cc4742950659ae680e1c40f2295a9}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eid}{arXiv:1904.07004}
+      \field{eprintclass}{math.AT}
+      \field{eprinttype}{arXiv}
+      \field{journaltitle}{arXiv e-prints}
+      \field{month}{4}
+      \field{title}{{All $(\infty,1)$-toposes have strict univalent universes}}
+      \field{year}{2019}
+      \field{pages}{arXiv:1904.07004}
+      \range{pages}{-1}
+      \verb{eprint}
+      \verb 1904.07004
+      \endverb
+      \keyw{Mathematics - Algebraic Topology,Mathematics - Category Theory}
+    \endentry
+    \entry{hottbook}{book}{}
+      \name{author}{1}{}{%
+        {{hash=eb3cec164c1f4cb5cd7394d2677e2a1c}{%
+           family={{Univalent Foundations Program}},
+           familyi={U\bibinitperiod},
+           given={The},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Institute for Advanced Study}%
+      }
+      \list{publisher}{1}{%
+        {\url{https://homotopytypetheory.org/book}}%
+      }
+      \strng{namehash}{eb3cec164c1f4cb5cd7394d2677e2a1c}
+      \strng{fullhash}{eb3cec164c1f4cb5cd7394d2677e2a1c}
+      \strng{bibnamehash}{eb3cec164c1f4cb5cd7394d2677e2a1c}
+      \strng{authorbibnamehash}{eb3cec164c1f4cb5cd7394d2677e2a1c}
+      \strng{authornamehash}{eb3cec164c1f4cb5cd7394d2677e2a1c}
+      \strng{authorfullhash}{eb3cec164c1f4cb5cd7394d2677e2a1c}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Homotopy Type Theory: Univalent Foundations of Mathematics}
+      \field{year}{2013}
+    \endentry
+    \entry{Voevodsky06}{unpublished}{}
+      \name{author}{1}{}{%
+        {{hash=0d96e6700be0d712c0a35b7559668f76}{%
+           family={Voevodsky},
+           familyi={V\bibinitperiod},
+           given={Vladimir},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{0d96e6700be0d712c0a35b7559668f76}
+      \strng{fullhash}{0d96e6700be0d712c0a35b7559668f76}
+      \strng{bibnamehash}{0d96e6700be0d712c0a35b7559668f76}
+      \strng{authorbibnamehash}{0d96e6700be0d712c0a35b7559668f76}
+      \strng{authornamehash}{0d96e6700be0d712c0a35b7559668f76}
+      \strng{authorfullhash}{0d96e6700be0d712c0a35b7559668f76}
+      \field{extraname}{1}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{A very short note on homotopy $\lambda$-calculus}
+      \field{year}{2006}
+      \verb{urlraw}
+      \verb http://www.math.ias.edu/~vladimir/Site3/Univalent_Foundations_files/Hlambda_short_current.pdf
+      \endverb
+      \verb{url}
+      \verb http://www.math.ias.edu/~vladimir/Site3/Univalent_Foundations_files/Hlambda_short_current.pdf
+      \endverb
+    \endentry
+    \entry{Voevodsky10}{unpublished}{}
+      \name{author}{1}{}{%
+        {{hash=0d96e6700be0d712c0a35b7559668f76}{%
+           family={Voevodsky},
+           familyi={V\bibinitperiod},
+           given={Vladimir},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{0d96e6700be0d712c0a35b7559668f76}
+      \strng{fullhash}{0d96e6700be0d712c0a35b7559668f76}
+      \strng{bibnamehash}{0d96e6700be0d712c0a35b7559668f76}
+      \strng{authorbibnamehash}{0d96e6700be0d712c0a35b7559668f76}
+      \strng{authornamehash}{0d96e6700be0d712c0a35b7559668f76}
+      \strng{authorfullhash}{0d96e6700be0d712c0a35b7559668f76}
+      \field{extraname}{2}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Univalent Foundations Project}
+      \field{year}{2010}
+      \verb{urlraw}
+      \verb http://www.math.ias.edu/~vladimir/Site3/Univalent_Foundations_files/univalent_foundations_project.pdf
+      \endverb
+      \verb{url}
+      \verb http://www.math.ias.edu/~vladimir/Site3/Univalent_Foundations_files/univalent_foundations_project.pdf
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

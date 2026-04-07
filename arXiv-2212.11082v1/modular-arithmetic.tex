@@ -1,0 +1,730 @@
+\section{Modular arithmetic via the Curry-Howard interpretation}\label{sec:modular-arithmetic}
+
+We have now fully described Martin-L\"of's dependent type theory. It is now up to us to start developing some mathematics in it, and Martin-L\"of's dependent type theory is great for elementary mathematics, such as basic number theory, some algebra, and combinatorics. The fundamental idea that is used to develop basic mathematics in type theory is the Curry-Howard interpretation. This is a translation of logic into type theory, which we will use to express concepts of mathematics such as divisibility, the congruence relations, and so on.
+
+We will also introduce the family $\Fin{}$ of the standard finite types, indexed by $\N$, and show how each $\Fin{k+1}$ can be equipped with the group structure of integers modulo $k+1$. Our goal here is to demonstrate how to do those things in type theory, so we will aim for a high degree of accuracy.
+
+\subsection{The Curry-Howard interpretation}\label{sec:Curry-Howard}
+
+The \emph{Curry-Howard interpretation} is an interpretation of logic into type theory. Recall that in type theory there is no separation between the logical framework and the general theory of collections of mathematical objects the way there is in the more traditional setup with Zermelo-Fraenkel set theory, which is postulated by axioms in first order logic. These two aspects of the foundations of mathematics are unified in type theory. The idea of the Curry-Howard interpretation is therefore to express propositions as types, and to think of the elements of those types as their proofs. We illustrate this idea with an example.
+
+\begin{eg}
+  A natural number $d$ is said to divide a natural number $n$ if there exists a natural number $k$ such that $d\cdot k=n$. To represent the divisibility predicate in type theory, we need to define a \emph{type}
+  \begin{equation*}
+    d\mid n,
+  \end{equation*}
+  of which the elements are witnesses that $d$ divides $n$. In other words, $d\mid n$ should be the type that consists of natural numbers $k$ equipped with an identification $d\cdot k=n$. In general, the type of $x:A$ equipped with $y:B(x)$ is represented as the type $\sm{x:A}B(x)$. The interpretation of the existential quantification ($\exists$) into type theory via the Curry-Howard interpretation is therefore using $\Sigma$-types.
+\end{eg}
+
+\begin{defn}
+  Consider two natural numbers $d$ and $n$. We say that $d$ \define{divides}\index{divisibility on N@{divisibility on $\N$}|textbf}\index{natural numbers!divisibility|textbf} $n$ if there is a element of type\index{d {"|" n}@{$d\mid n$}|textbf}\index{d {"|" n}@{$d\mid n$}|see{divisibility on $\N$}}
+  \begin{equation*}
+    d\mid n\defeq \sm{k:\N}d\cdot k=n.
+  \end{equation*}
+\end{defn}
+
+\begin{rmk}
+  This type-theoretical definition of the divisibility relation using $\Sigma$-types has two important consequences:
+  \begin{enumerate}
+  \item The principal way to show that $d\mid n$ holds is to construct a pair $(k,p)$ consisting of a natural number $k$ and an identification $p:d\cdot k=n$.
+  \item The principal way to use a hypothesis $H:d\mid n$ in a proof is to proceed by $\Sigma$-induction on the variable $H$. We then get to assume a natural number $k$ and an identification $p:d\cdot k=n$, in order to proceed with the proof.
+  \end{enumerate}
+\end{rmk}
+
+\begin{eg}\label{rmk:elementary-facts-div}
+  Just as existential quantification ($\exists$) is translated via the Curry-Howard interpretation to $\Sigma$-types, the translation of the universal quantification ($\forall$) in type theory via the Curry-Howard interpretation is to $\Pi$-types. For example, the assertion that every natural number is divisible by $1$ is expressed in type theory as
+  \begin{equation*}
+    \prd{x:\N} 1\mid x.
+  \end{equation*}
+  In other words, in order to show that every number $x:\N$ is divisible by $1$ we need to construct a dependent function
+  \begin{equation*}
+    \lam{x}p(x):\prd{x:\N}1\mid x.
+  \end{equation*}
+  We do this by constructing an element
+  \begin{equation*}
+    p(x):\sm{k:\N}1\cdot k=x
+  \end{equation*}
+  indexed by $x:\N$. Such an element $p(x)$ is constructed as the pair $(x,q(x))$, where the identification $q(x):1\cdot x=x$ is obtained from the left unit law of multiplication on $\N$, which was constructed in \cref{ex:semi-ring-laws-N}.
+
+  Similarly, the type theoretic proof that every natural number $k$ divides $0$, i.e., that $k\mid 0$, is the pair $(0,p)$ consisting of the natural number $0$ and the identification $p:k\cdot 0=0$ obtained from the right annihilation law of multiplication on $\N$. This identification was also constructed in \cref{ex:semi-ring-laws-N}.
+\end{eg}
+
+In the following proposition we will see examples of how a hypothesis of type $d\mid x$ can be used.
+
+\begin{prp}\label{prp:div-3-for-2}
+  Consider three natural numbers $d$, $x$ and $y$. If $d$ divides any two of the three numbers $x$, $y$, and $x+y$, then it also divides the third.
+\end{prp}
+
+\begin{proof}
+  We will only show that if $d$ divides $x$ and $y$, then it divides $x+y$. The remaining two claims, that if $d$ divides $y$ and $x+y$ then it divides $x$, and that if $d$ divides $x$ and $x+y$ then it divides $y$, are left as \cref{ex:div-3-for-2}.
+
+  Suppose that $d$ divides both $x$ and $y$. By assumption we have elements
+  \begin{equation*}
+    H:\sm{k:\N}d\cdot k=x,\qquad\text{and}\qquad K:\sm{k:\N}d\cdot k=y.
+  \end{equation*}
+  Since the types of the variables $H$ and $K$ are $\Sigma$-types, we proceed by $\Sigma$-induction on $H$ and $K$. Therefore we get to assume a natural number $k:\N$ equipped with an identification $p:d\cdot k=x$, and a natural number $l:\N$ equipped with an identification $q:d\cdot l=y$. Our goal is now to construct an identification
+  \begin{equation*}
+    d\cdot (k+l)=x+y.
+  \end{equation*}
+We construct such an identification as a concatenation $\ct{\alpha}{(\ct{\beta}{\gamma})}$, where the types of the identifications $\alpha$, $\beta$, and $\gamma$ are as follows:
+  \begin{equation*}
+    \begin{tikzcd}
+      d\cdot(k+l) \arrow[r,equals,"\alpha"] & d\cdot k+d\cdot l \arrow[r,equals,"\beta"] & x+d\cdot l \arrow[r,equals,"\gamma"] & x+y.
+    \end{tikzcd}
+  \end{equation*}
+  The identification $\alpha$ is obtained from the fact that multiplication on $\N$ distributes over addition, which was shown in \cref{ex:distributive-mul-addN}. The identifications $\beta$ and $\gamma$ are constructed using the action on paths of a function:
+  \begin{equation*}
+    \beta\defeq\ap{(\lam{t}t+d\cdot l)}{p},\qquad\text{and}\qquad \gamma\defeq \ap{(\lam{t}x+t)}{q}
+  \end{equation*}
+  To conclude the proof that $d\mid x+y$, note that we have constructed the pair
+  \begin{equation*}
+    (k+l,\ct{\alpha}{(\ct{\beta}{\gamma})}):\sm{k:\N}d\cdot k=x+y.\qedhere
+  \end{equation*}
+\end{proof}
+
+The full Curry-Howard interpretation of logic into type theory also involves interpretations of disjunction, conjunction, implication, and equality.
+
+The introduction and elimination rules for disjunction are, for instance,
+\begin{equation*}
+  \AxiomC{$P$}
+  \UnaryInfC{$P\lor Q$}
+  \DisplayProof
+  \qquad
+  \AxiomC{$Q$}
+  \UnaryInfC{$P\lor Q$}
+  \DisplayProof
+  \qquad
+  \text{and}
+  \qquad
+  \AxiomC{$P\Rightarrow R$}
+  \AxiomC{$Q\Rightarrow R$}
+  \BinaryInfC{$P\lor Q\Rightarrow R$}
+  \DisplayProof
+\end{equation*}
+The two introduction rules assert that $P\lor Q$ holds provided that $P$ holds, and that $P\lor Q$ holds provided that $Q$ holds. These rules are analogous to the introduction rules for coproduct, which assert that there are functions $\inl : A\to A+B$ and $\inr : B \to A+B$. Furthermore, the non-dependent elimination principle for coproducts gives a function
+\begin{equation*}
+  (A\to C) \to ((B \to C) \to (A+B \to C))
+\end{equation*}
+for any type $C$, which is again analogous to the elimination rule of disjunction. The Curry-Howard interpretation of disjunction into type theory is therefore as coproducts.
+
+To interpret conjunction into type theory we observe that the introduction rule and elimination rules for conjunction are
+\begin{equation*}
+  \AxiomC{$P$}
+  \AxiomC{$Q$}
+  \BinaryInfC{$P\land Q$}
+  \DisplayProof
+  \qquad
+  \text{and}
+  \qquad
+  \AxiomC{$P\land Q$}
+  \UnaryInfC{$P$}
+  \DisplayProof
+  \qquad
+  \AxiomC{$P\land Q$}
+  \UnaryInfC{$Q$}
+  \DisplayProof
+\end{equation*}
+Product types possess such structure, where we have the pairing operation $\pair:A\to (B\to A\times B)$ and the projections $\proj 1:A\times B\to A$ and $\proj 2 : A\times B\to B$ give interpretations of the introduction and elimination rules for conjunction. The Curry-Howard interpretation of conjunction into type theory is therefore by products. We summarize the full Curry-Howard interpretation in \cref{table:Curry-Howard}.
+
+\begin{table}[t]
+  \begin{tabular}{ll}
+    \toprule
+    \multicolumn{2}{c}{The Curry-Howard interpretation} \\
+    \midrule
+    Propositions & Types \\
+    Proofs & Elements \\
+    Predicates & Type families \\
+    $\top$ & $\unit$ \\
+    $\bot$ & $\emptyt$ \\
+    $P\lor Q$ & $A+B$ \\
+    $P\land Q$ & $A\times B$ \\
+    $P\Rightarrow Q$ & $A\to B$ \\
+    $\neg P$ & $A\to \emptyt$ \\
+    $\exists_{x}P(x)$ & $\sm{x:A}B(x)$ \\
+    $\forall_{x}P(x)$ & $\prd{x:A}B(x)$ \\
+    $x=y$ & $x=y$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{\label{table:Curry-Howard}The Curry-Howard interpretation of logic into type theory.}
+\end{table}
+
+\begin{rmk}
+  We should note, however, that despite the similarities between logic and type theory that are highlighted in the Curry-Howard interpretation, there are also some differences. One important difference is that types may contain many elements, whereas in logic, propositions are usually considered to be \emph{proof irrelevant}. This means that to establish the truth of a proposition it only matters \emph{whether} it can be proven, not in how many different ways it can be proven. To address this dissimilarity between general types and logic, we will introduce in \cref{chap:uf} a more refined way of interpreting logic into type theory. In \cref{chap:hierarchy} we will define the type $\isprop(A)$, which expresses the property that the type $A$ is a proposition. Furthermore, we will introduce the \emph{propositional truncation} operation in \cref{sec:propositional-truncation}, which we will use to interpret logic into type theory in such a way that all logical assertions are interpreted as types that satisfy the condition of being a proposition.
+\end{rmk}
+
+\subsection{The congruence relations on \texorpdfstring{$\N$}{ℕ}}
+
+Relations in the Curry-Howard interpretation of logic into type theory are also type valued. More specifically, a binary relation on a type $A$ is a family of types $R(x,y)$ indexed by $x,y:A$. Such relations are sometimes called \emph{typal}.
+
+\begin{defn}
+  Consider a type $A$. A \define{(typal) binary relation} on $A$ is defined to be a family of types $R(x,y)$ indexed by $x,y:A$. Given a binary relation $R$ on $A$, we say that $R$ is \define{reflexive} if it comes equipped with
+  \begin{align*}
+    \rho & : \prd{x:A}R(x,x), \\
+    \intertext{we say that $R$ is \define{symmetric} if it comes equipped with}
+    \sigma & : \prd{x,y:A} R(x,y)\to R(y,x), \\
+    \intertext{and we say that $R$ is \define{transitive} if it comes equipped with}
+    \tau & : \prd{x,y,z:A} R(x,y)\to (R(y,z)\to R(x,z)).
+  \end{align*}
+  A \define{(typal) equivalence relation} on $A$ is a reflexive, symmetric, and transitive binary typal relation on $A$.
+\end{defn}
+
+To define the congruence relation modulo $k$ in type theory using the Curry-Howard interpretation, we will define for any three natural numbers $x$, $y$, and $k$, a \emph{type}
+\begin{equation*}
+  x\equiv y\mod k
+\end{equation*}
+consisting of the proofs that $x$ is congruent to $y$ modulo $k$. We will define this type by directly interpreting Gauss' definition of the congruence relations in his \emph{Disquisitiones Arithmeticae} \cite{Gauss}: two numbers $x$ and $y$ are congruent modulo $k$ if $k$ divides the symmetric difference $\distN(x,y)$ between $x$ and $y$. Recall that $\distN(x,y)$ was defined in \cref{ex:distN} recursively by
+  \begin{align*}
+    \distN(0,0) & \defeq 0 & \distN(0,y+1) & \defeq y+1 \\
+    \distN(x+1,0) & \defeq x+1 & \distN(x+1,y+1) & \defeq \distN(x,y).
+  \end{align*}
+
+\begin{defn}
+  Consider three natural numbers $k,x,y:\N$. We say that $x$ is \define{congruent to $y$ modulo $k$}\index{congruence relations on N@{congruence relations on $\N$}|textbf}\index{natural numbers!congruence relations|textbf} if it comes equipped with an element of type
+  \begin{equation*}
+    x\equiv y \mod k \defeq k\mid\distN(x,y).
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  For example, $k\equiv 0\mod k$. To see this, we have to show that $k\mid\distN(k,0)$. Since $\distN(k,0)=k$ it suffices to show that $k\mid k$. That is, we have to construct a natural number $l$ equipped with an identification $p:kl=k$. Of course, we choose $l\defeq 1$, and the equation $k1=k$ holds by the right unit law for multiplication on $\N$, which was shown in \cref{ex:semi-ring-laws-N}.
+\end{eg}
+
+\begin{prp}\label{prp:congruence-eqrel}
+  For each $k:\N$, the congruence relation modulo $k$ is an equivalence relation.
+\end{prp}
+
+\begin{proof}
+  Reflexivity follows from the fact that $\distN(x,x)=0$, and any number divides $0$. Symmetry follows from the fact that $\distN(x,y)=\distN(y,x)$ for any two natural numbers $x$ and $y$.
+
+  The non-trivial part of the claim is therefore transitivity. Here we use the fact that for any three natural numbers $x$, $y$, and $z$, at least one of the equalities
+  \begin{align*}
+    \distN(x,y)+\distN(y,z) & =\distN(x,z) \\
+    \distN(y,z)+\distN(x,z) & =\distN(x,y) \\
+    \distN(x,z)+\distN(x,y) & =\distN(y,z)
+  \end{align*}
+  holds. A formal proof of this fact is given by case analysis on the six possible ways in which $x$, $y$, and $z$ can be ordered:
+  \begin{align*}
+    x\leq y & \text{ and }y\leq z, & x\leq z & \text{ and }z\leq y, \\
+    y\leq z & \text{ and }z\leq x, & y\leq x & \text{ and }x\leq z, \\
+    z\leq x & \text{ and }x\leq y, & z\leq y & \text{ and }y\leq x.
+  \end{align*}
+  Therefore it follows by \cref{ex:distN-triangle-equality} and \cref{prp:div-3-for-2} that ${k\mid\distN(x,z)}$ if ${k\mid\distN(x,y)}$ and ${k\mid\distN(y,z)}$.
+\end{proof}
+
+\subsection{The standard finite types}\label{sec:Fin}
+
+The standard finite sets are classically defined as the sets $\{x\in\N\mid x<k\}$. This leads to the question of how to interpret a subset $\{x\in A\mid P(x)\}$ in type theory.
+
+Since type theory is set up in such a way that elements come equipped with their types, subsets aren't formed the same way as in set theory, where the comprehension axiom is used to form the set $\{x\in A\mid P(x)\}$ for any predicate $P$ over $A$. The Curry-Howard interpretation dictates that predicates are interpreted as dependent types. Therefore, a set of elements $x\in A$ such that $P(x)$ holds is interpreted in type theory as the type of terms $x:A$ equipped with an element (a proof) $p:P(x)$. In other words, we interpret a subset $\{x\in A\mid P(x)\}$ as the type $\sm{x:A}P(x)$.
+
+\begin{rmk}
+  The alert reader may now have observed that the interpretation of a subset $\{x\in A\mid P(x)\}$ in type theory is the same as the interpretation of the proposition $\exists_{(x\in A)}P(x)$, while indeed the subset $\{x\in A\mid P(x)\}$ has a substantially different role in mathematics than the proposition $\exists_{(x\in A)}P(x)$. This points at a slight problem of the Curry-Howard interpretation of the existential quantifier. While the Curry-Howard interpretation of the existential quantifier is nevertheless useful and important, we will reinterpret the existential quantifier in type theory in \cref{sec:logic}.
+\end{rmk}
+
+Since subsets are interpreted as $\Sigma$-types, the `classical' definition of the standard finite types is
+\begin{equation*}
+  \classicalFin_k:=\sm{x:\N}x<k.
+\end{equation*}
+This is a perfectly fine definition of the standard finite types. However, the usual definition of the standard finite types in Martin-L\"of's dependent type theory is a more direct, recursive definition, which takes full advantage of the inductive constructions of dependent type theory. 
+
+\begin{defn}\label{defn:fin}
+  We define the type family $\Fin{}$ of the \define{standard finite types}\index{Fin k@{$\Fin{k}$}|see {standard finite type}}\index{Fin k@{$\Fin{k}$}|textbf}\index{standard finite type}\index{type family!of standard finite types} over $\N$ recursively by
+  \begin{align*}
+    \Fin{0} & \defeq \emptyt \\*
+    \Fin{k+1} & \defeq \Fin{k}+\unit.
+  \end{align*}
+  We will write $i$ for the inclusion $\inl:\Fin{k}\to\Fin{k+1}$ and we will write $\ttt$ for the point $\inr(\ttt)$.
+\end{defn}
+
+In \cref{ex:classical-Fin} you will be asked to show that the types $\classicalFin_k$ and $\Fin{k}$ are isomorphic.
+
+\begin{rmk}
+The type family $\Fin{}$ over $\N$ can be given its own induction principle, which is, at least for the time being, the principal way to make constructions on $\Fin{k}$ for arbitrary $k:\N$ and to prove properties about those constructions. The induction principle of the standard finite types tells us that the family of standard finite types is inductively generated by
+\begin{align*}
+  i & : \Fin{k}\to\Fin{k+1} \\*
+  \ttt & : \Fin{k+1}. 
+\end{align*}
+In other words, we can define a dependent function $f:\prd{k:\N}\prd{x:\Fin{k}}P_k(x)$ by defining
+\begin{align*}
+  g_k & : \prd{x:\Fin{k}}P_k(x)\to P_{k+1}(i(x)) \\*
+  p_k & : P_{k+1}(\ttt)
+\end{align*}
+for each $k:\N$. The function $f$ defined in this way then satisfies the judgmental equalities
+\begin{align*}
+  f_{k+1}(i(x)) & \jdeq g_k(x,f_k(x)) \\*
+  f_{k+1}(\ttt) & \jdeq p_k.
+\end{align*}
+These judgmental equalities completely determine the function $f$, and therefore we may also present such inductive definitions by pattern matching:
+  \begin{align*}
+    f_{k+1}(i(x)) & \defeq g_k(x,f_k(x)) \\*
+    f_{k+1}(\ttt) & \defeq p_k.
+  \end{align*}
+\end{rmk}
+
+We will often use definitions by pattern matching for two reasons: (i) such definitions are concise, and (ii) they display the judgmental equalities that hold for the defined object. Those judgmental equalities are the only thing we know about that object, and proving a claim about it often amounts to finding a way to apply these judgmental equalities.
+
+To illustrate this way of working with the standard finite types, we define the inclusion functions $\Fin{k}\to\N$, and show that these are injective. In order to show that $\natFin_k$ is injective, we will also show that $\natFin_k$ is bounded.
+
+\begin{defn}\label{defn:natFin}
+  We define the inclusion $\natFin_k : \Fin{k}\to\N$ inductively by
+  \begin{align*}
+    \natFin_{k+1}(i(x)) & \defeq \natFin_{k}(x) \\
+    \natFin_{k+1}(\ttt) & \defeq k.
+  \end{align*}
+\end{defn}
+
+\begin{lem}\label{lem:is-bounded-natFin}
+  The function $\natFin:\Fin{k}\to\N$ is bounded, in the sense that $\natFin(x)< k$ for each $x:\Fin{k}$.
+\end{lem}
+
+\begin{proof}
+  The proof is by induction. In the base case there is nothing to show. In the inductive step, we have the inequalities $\natFin_{k+1}(i(x))\jdeq\natFin_{k}(x)<k<k+1$, where the first inequality holds by the inductive hypothesis, and we also have
+  \begin{equation*}
+    \natFin_{k+1}(\ttt)\jdeq k<k+1.\qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{prp}\label{prp:is-injective-natFin}
+  The inclusion function $\natFin_k : \Fin{k}\to \N$ is injective, for each $k:\N$.
+\end{prp}
+
+\begin{proof}
+  We define a function $\alpha_k(x,y):(\natFin_k(x)=\natFin_k(y))\to (x=y)$ recursively by
+  \begin{align*}
+    \alpha_{k+1}(i(x),i(y),p) & \defeq \ap{i}{\alpha_k(x,y,p)} & \alpha_{k+1}(i(x),\ttt,p) & \defeq \exfalso(f(p)) \\
+    \alpha_{k+1}(\ttt,i(y),p) & \defeq \exfalso(g(p)) & \alpha_{k+1}(\ttt,\ttt,p) & \defeq \refl{},
+  \end{align*}
+  where $f:(\natFin_{k+1}(i(x))=\natFin_{k+1}(\ttt))\to\emptyt$ and $g:(\natFin_{k+1}(\ttt)=\natFin_{k+1}(i(y)))\to\emptyt$ are obtained from the fact that $\natFin_{k+1}(i(z))\jdeq\natFin_k(z)<k$ for any $z:\Fin{k}$, and the fact that $\natFin_{k+1}(\ttt)\jdeq k$.
+\end{proof}
+
+\subsection{The natural numbers modulo \texorpdfstring{$k+1$}{k+1}}\label{subsec:finite-types-quotient-maps}
+
+Given an equivalence relation $\sim$ on a set $A$ in classical mathematics, the quotient $A/{\sim}$ comes equipped with a quotient map $q:A\to A/{\sim}$ that satisfies two important properties: (1) The map $q$ satisfies the condition
+\begin{equation*}
+  q(x)=q(y)\leftrightarrow x\sim y,
+\end{equation*}
+and (2) the map $q$ is surjective. The first condition is called the \define{effectiveness} of the quotient map.
+
+In classical mathematics, a map $f:A\to B$ is said to be surjective if for every $b\in B$ there exists an element $a\in A$ such that $f(a)=b$. Following the Curry-Howard interpretation, a map $f:A\to B$ is therefore surjective if it comes equipped with a dependent function
+\begin{equation*}
+  \prd{b:B}\sm{a:A}f(a)=b.
+\end{equation*}
+However, there is a subtle issue with this interpretation of surjectivity. It is somewhat stronger than the classical notion of surjectivity, because a dependent function $\prd{b:B}\sm{a:A}f(a)=b$ provides for every element $b:B$ an \emph{explicit} element $a:A$ equipped with an explicit identification $p:f(a)=b$, whereas in the classical notion of surjectivity such an element $a\in A$ is merely asserted to exist. To emphasize that the Curry-Howard interpretation of surjectivity is stronger than intended we make the following definition, and we will properly introduce surjective maps in \cref{subsec:surjective}.
+
+\begin{defn}
+  Consider a function $f:A\to B$. We say that $f$ is \define{split surjective} if it comes equipped with an element of type
+  \begin{equation*}
+    \issplitsurjective(f):=\prd{b:B}\sm{a:A}f(a)=b.
+  \end{equation*}
+\end{defn}
+
+Martin-L\"of's dependent type theory doesn't have a general way of forming quotients of types. However, in the specific case of the congruence relations on $\N$ we can define the type of natural numbers modulo $k+1$ as the standard finite type $\Fin{k+1}$. We will show that $\Fin{k+1}$ comes equipped with a map
+\begin{equation*}
+  [\blank]_{k+1}:\N\to \Fin{k+1}
+\end{equation*}
+for each $k:\N$, and we will show in \cref{thm:effective-mod-k,thm:issec-nat-Fin} that this map satisfies conditions (1) and (2) in the split surjective sense.
+
+To prepare for the definition of the quotient map $[\blank]_{k+1}$, we will first define a zero element of $\Fin{k+1}$ and successor function on each $\Fin{k}$. We will also define an auxiliary function $\skipzeroFin_k:\Fin{k}\to\Fin{k+1}$, which is used in the definition of the successor function. The map $[\blank]_{k+1}$ is then defined by iterating the successor function. 
+
+\begin{defn} ~\nopagebreak
+  \begin{enumerate}
+  \item We define the \define{zero element} $\zeroFin_k:\Fin{k+1}$ recursively by
+    \begin{align*}
+      \zeroFin_0 & \defeq\ttt \\*
+      \zeroFin_{k+1} & \defeq i(\zeroFin_k).
+                       \intertext{Since there is a mismatch between the index of $\zeroFin_k$ and the index of its type, we will often simply write $\zeroFin$ or $0$ for the zero element of $\Fin{k+1}$.
+    \item We define the function $\skipzeroFin_k:\Fin{k}\to\Fin{k+1}$ recursively by}
+      \skipzeroFin_{k+1}(i(x)) & \defeq i(\skipzeroFin_k(x)) \\*
+      \skipzeroFin_{k+1}(\ttt) & \defeq \ttt.
+    \intertext{\item We define the \define{successor function} $\succFin_k:\Fin{k}\to\Fin{k}$ recursively by}
+      \succFin_{k+1}(i(x)) & \defeq \skipzeroFin_k(x) \\*                       
+      \succFin_{k+1}(\ttt)    & \defeq \zeroFin_k.
+    \end{align*}
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}
+  For any $k:\N$, we define the map $[\blank]_{k+1}:\N\to\Fin{k+1}$ recursively on $x$ by
+  \begin{align*}
+    [0]_{k+1} & \defeq 0 \\*
+    [x+1]_{k+1} & \defeq \succFin_{k+1}[x]_{k+1}.
+  \end{align*}
+\end{defn}
+
+Our next intermediate goal is to show that $x\equiv \natFin[x]_{k+1}\mod k+1$ for any natural number $x$. This fact is a consequence of the following simple lemma, that will help us compute with the maps $\natFin : \Fin{k}\to\N$.
+
+\begin{lem}\label{lem:nat-Fin}
+  We make three claims:
+  \begin{enumerate}
+  \item For any $k:\N$ there is an identification
+    \begin{align*}
+      \natFin(\zeroFin_k) & = 0
+  \intertext{\item For any $k:\N$ and any $x:\Fin{k}$, we have}
+      \natFin(\skipzeroFin_k(x)) & = \natFin(x)+1.
+  \intertext{\item For any $k:\N$ and any $x:\Fin{k}$, we have}
+      \natFin(\succFin_k(x)) & \equiv \natFin(x)+1 \mod k.
+    \end{align*}
+  \end{enumerate}
+\end{lem}
+
+\begin{proof}
+  For the first claim, we define an identification $\alpha_k:\natFin(\zeroFin_k)=0$ recursively by
+  \begin{align*}
+    \alpha_0 & \defeq \refl{} \\
+    \alpha_{k+1} & \defeq \alpha_k.
+  \intertext{For the second claim, we define an identification $\beta_k(x):\natFin(\skipzeroFin_k(x))=\natFin(x)+1$ recursively by}
+    \beta_{k+1}(i(x)) & \defeq \beta_k(x) \\
+    \beta_{k+1}(\ttt) & \defeq \refl{}.
+  \end{align*}
+  For the third claim, we again define an element $\gamma_k(x):\natFin(\succFin_k(x)) \equiv \natFin(x)+1\mod{k}$ recursively. To obtain
+  \begin{equation*}
+    \gamma_{k+1}(i(x)) : \natFin(\succFin_{k+1}(i(x))) \equiv\natFin(i(x))+1\mod{k+1},
+  \end{equation*}
+  we calculate
+  \begin{align*}
+    \natFin(\succFin_{k+1}(i(x))) & \jdeq \natFin(\skipzeroFin(x)) & & \text{by definition of }\succFin\\
+                                  & = \natFin(x)+1 & & \text{by claim (ii).}
+  \end{align*}
+  Since the congruence relation modulo $k+1$ is reflexive, we obtain $\gamma_{k+1}(i(x))$ from the identification of the above calculation. To obtain
+  \begin{equation*}
+    \gamma_{k+1}(\ttt) : \natFin(\succFin_{k+1}(\ttt)) \equiv \natFin(\ttt)+1\mod{k+1},
+  \end{equation*}
+  we calculate
+  \begin{align*}
+    \natFin(\succFin_{k+1}(\ttt)) & \jdeq \natFin(0) & & \text{by definition of }\succFin \\
+                                  & = 0 & & \text{by claim (i)} \\
+                                  & \equiv k+1 & & \text{by \cref{rmk:elementary-facts-div}} \\
+                                  & \jdeq \natFin(\ttt)+1 & & \text{by definition of }\natFin.\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{prp}\label{prp:cong-nat-mod-succ}
+  For any $x:\N$ we have
+  \begin{equation*}
+    \natFin[x]_{k+1}\equiv x \mod k+1.
+  \end{equation*}
+\end{prp}
+
+\begin{proof}
+  The proof by induction on $x$. The fact that
+  \begin{equation*}
+    \natFin[0]_{k+1}\equiv 0 \mod {k+1}
+  \end{equation*}
+  is immediate from the fact that $\natFin[0]_{k+1}\jdeq\natFin(0)=0$, which was shown in \cref{lem:nat-Fin}. In the inductive step, we have to show that
+  \begin{equation*}
+    \natFin[x+1]_{k+1}\equiv x+1\mod k+1.
+  \end{equation*}
+  This follows from the following computation
+  \begin{align*}
+    \natFin[x+1]_{k+1} & \jdeq \natFin(\succFin_{k+1}[x]_{k+1}) & & \text{by definition of }[\blank]_{k+1} \\
+                       & \equiv \natFin[x]_{k+1}+1 & & \text{by \cref{lem:nat-Fin}} \\
+                       & \equiv x+1 & & \text{by the inductive hypothesis.}\qedhere
+  \end{align*}
+\end{proof}
+
+We need one more fact before we can prove \cref{thm:effective-mod-k,thm:issec-nat-Fin}.
+
+\begin{prp}\label{cor:eq-congN}
+  For any natural number $x<d$ we have
+  \begin{equation*}
+  d\mid x\leftrightarrow x=0.  
+  \end{equation*}
+  Consequently, for any two natural numbers $x$ and $y$ such that $\distN(x,y)<k$, we have
+  \begin{equation*}
+    x\equiv y\mod k\leftrightarrow x=y.
+  \end{equation*}
+\end{prp}
+
+\begin{proof}
+  Note that the implication $x=0\to d\mid x$ is trivial, so it suffices to prove the forward implication
+  \begin{equation*}
+    d\mid x \to x=0.
+  \end{equation*}
+  This implication clearly holds if $x\jdeq 0$. Therefore we only have to show that $d\mid x+1$ implies $x+1=0$, if we assume that $x+1<d$. In other words, we will derive a contradiction from the hypotheses that $x+1<d$ and $d\mid x+1$. To reach a contradiction we use \cref{ex:contradiction-le}, by which it suffices to show that $d\leq x+1$.
+  
+  We proceed by $\Sigma$-induction on the (unnamed) variable of type $d\mid x+1$, so we get to assume a natural number $k$ equipped with an identification $p:dk=x+1$. In the case where $k\jdeq 0$ we reach an immediate contradiction via \cref{prp:zero-one}, because we obtain that $0=d\cdot 0=x+1$. In the case where $k\jdeq\succN(k')$ it follows that
+  \begin{equation*}
+    d\leq dk'+ d\jdeq dk = x+1.\qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{thm}\label{thm:effective-mod-k}
+  Consider a natural number $k$. Then we have
+  \begin{equation*}
+    [x]_{k+1}=[y]_{k+1} \leftrightarrow x\equiv y\mod k+1,
+  \end{equation*}
+  for any $x,y:\N$.
+\end{thm}
+
+\begin{proof}
+  First note that, since $\natFin$ is injective by \cref{prp:is-injective-natFin}, we have
+  \begin{align*}
+    [x]_{k+1}=[y]_{k+1} & \leftrightarrow \natFin[x]_{k+1}=\natFin[y]_{k+1}.
+  \end{align*}
+  Since the inequalities $\natFin[x]_{k+1}<k+1$ and $\natFin[y]_{k+1}<k+1$ hold by \cref{lem:is-bounded-natFin}, it follows by \cref{cor:eq-congN} that
+  \begin{equation*}
+    \natFin[x]_{k+1}=\natFin[y]_{k+1}\leftrightarrow \natFin[x]_{k+1}\equiv\natFin[y]_{k+1}\mod k+1.   
+  \end{equation*}
+  The latter condition is by \cref{prp:cong-nat-mod-succ} equivalent to the condition that $x\equiv y\mod k+1$.
+\end{proof}
+
+\begin{thm}\label{thm:issec-nat-Fin}
+  For any $x:\Fin{k+1}$ there is an identification
+  \begin{equation*}
+    [\natFin(x)]_{k+1}=x.
+  \end{equation*}
+  In other words, the map $[\blank]_{k+1}:\N\to \Fin{k+1}$ is split surjective.
+\end{thm}
+
+\begin{proof}
+  Since $\natFin:\Fin{k+1}\to\N$ is injective by \cref{prp:is-injective-natFin}, it suffices to show that
+  \begin{equation*}
+    \natFin[\natFin(x)]_{k+1}=\natFin(x).
+  \end{equation*}
+  Now observe that $\natFin[\natFin(x)]_{k+1}<k+1$ and $\natFin(x)<k+1$. By \cref{cor:eq-congN} it therefore suffices to show that
+  \begin{equation*}
+    \natFin[\natFin(x)]_{k+1}\equiv\natFin(x)\mod{k+1}.
+  \end{equation*}
+  This fact is an instance of \cref{prp:cong-nat-mod-succ}.
+\end{proof}
+
+\subsection{The cyclic groups}
+We can now define the cyclic groups $\Z/k$ for each $k:\N$. Note that $\Z/k$ must come equipped with the structure of a quotient $\Z/{\equiv}$ of $\Z$ by the congruence relation modulo $k$. In the case where $k\jdeq 0$, we have that $x\equiv y\mod{0}$ if and only if $x=y$. This motivates the following definition:
+
+\begin{defn}\label{defn:Zk}
+  We define the type $\Z/k$ for each $k:\N$ by
+  \begin{equation*}
+    \Z/0\defeq \Z\qquad\text{and}\qquad \Z/{(k+1)}\defeq\Fin{k+1}.
+  \end{equation*}
+\end{defn}
+
+Recall from \cref{ex:int_group_laws} that $\Z/0$ already comes equipped with the structure of a group, but the group structure on $\Z/{(k+1)}$ remains to be defined.
+
+\begin{defn}
+  We define the \define{addition} operation on $\Z/{(k+1)}$ by
+  \begin{equation*}
+    x+y\defeq[\natFin(x)+\natFin(y)]_{k+1},
+  \end{equation*}
+  and we define the \define{additive inverse} operation on $\Z/{(k+1)}$ by
+  \begin{equation*}
+    -x\defeq[\distN(\natFin(x),k+1)]_{k+1}.
+  \end{equation*}
+\end{defn}
+
+\begin{rmk}
+  The following congruences modulo $k+1$ follow immediately from \cref{prp:cong-nat-mod-succ}:
+  \begin{align*}
+    \natFin(0) & \equiv 0 \\
+    \natFin(x+y) & \equiv \natFin(x)+\natFin(y) \\
+    \natFin(-x) & \equiv \distN(\natFin(x),k+1).
+  \end{align*}
+\end{rmk}
+
+Before we show that addition on $\Z/{k}$ satisfies the group laws, we have to show that addition on $\N$ preserves the congruence relation.
+
+\begin{prp}
+  Consider $x,y,x',y':\N$. If any two of the following three properties hold, then so does the third:
+  \begin{enumerate}
+  \item $x\equiv x'\mod k$,
+  \item $y\equiv y'\mod k$,
+  \item $x+y\equiv x'+y'\mod k$.
+  \end{enumerate}
+\end{prp}
+
+\begin{proof}
+  Recall that the distance function $\distN$ is translation invariant by \cref{ex:translation-invariant-distN}. Therefore it follows that
+  \begin{equation}\label{eq:translation-invariant-congN}
+    a\equiv b\mod k \leftrightarrow a+c\equiv b+c\mod k.\tag{\textasteriskcentered}
+  \end{equation}
+  We will use this observation to prove the claim.
+  
+  First, suppose that $x\equiv x'$ and $y\equiv y'$ modulo $k$. Then it follows by \cref{eq:translation-invariant-congN} that
+  \begin{equation*}
+    x+y\equiv x'+y\equiv x'+y'.
+  \end{equation*}
+  This shows that (i) and (ii) together imply (iii).
+
+  Next, suppose that $x\equiv x'$ and $x+y\equiv x'+y'$ modulo $k$. Then it follows that
+  \begin{equation*}
+    x+y\equiv x'+y'\equiv x+y'.
+  \end{equation*}
+  Applying \cref{eq:translation-invariant-congN} once more in the reverse direction, we obtain that $y\equiv y'$ modulo $k$. This shows that (i) and (iii) together imply (ii).
+
+  The remaining claim, that (ii) and (iii) together imply (i), follows by commutativity of addition from the fact that (i) and (iii) together imply (ii).
+\end{proof}
+
+\begin{thm}
+  The addition operation on $\Z/{k}$ satisfies the laws of an abelian group:
+  \begin{align*}
+    0+x & = x & x+0 & = x \\
+    (-x)+x & = 0 & x+(-x) & = 0 \\
+    (x+y)+z & = x+(y+z) & x+y & = y+x. 
+  \end{align*}
+\end{thm}
+
+\begin{proof}
+  The fact that the addition operation on $\Z/0$ satisfies the laws of an abelian group was stated as \cref{ex:int_group_laws}. Therefore we will only show that addition on $\Z/{(k+1)}$ satisfies the laws of an abelian group.
+
+  We first note that by commutativity of addition on $\N$, it follows immediately that addition on $\Z/{(k+1)}$ is commutative.
+
+  To prove associativity, note that by \cref{thm:effective-mod-k} it suffices to show that
+  \begin{equation*}
+    \natFin(x+y)+\natFin(z)\equiv\natFin(x)+\natFin(y+z)\mod k+1.
+  \end{equation*}
+  Since addition on $\Z/{(k+1)}$ maps preserves the congruence relation, and since we have the congruences
+  \begin{align*}
+    \natFin(x+y) & \equiv \natFin(x)+\natFin(y) \mod k+1 \\
+    \natFin(y+z) & \equiv \natFin(y)+\natFin(z) \mod k+1,
+  \end{align*}
+  it suffices to show that
+  \begin{equation*}
+    (\natFin(x)+\natFin(y))+\natFin(z) \equiv \natFin(x)+(\natFin(y)+\natFin(z)) \mod k+1.
+  \end{equation*}
+  This follows immediately by associativity of addition on $\N$.
+
+  To show that addition on $\Z/{(k+1)}$ satisfies the right unit law, we first observe that it suffices to show that
+  \begin{equation*}
+    [\natFin(x)+\natFin(0)]_{k+1}=[\natFin(x)]_{k+1}
+  \end{equation*}
+  because there is an identification $[\natFin(x)]_{k+1}=x$ by \cref{thm:issec-nat-Fin}. By \cref{thm:effective-mod-k} it now suffices tho show that
+  \begin{equation*}
+    \natFin(x)+\natFin(0)\equiv\natFin(x)\mod k+1. 
+  \end{equation*}
+  This follows immediately from the fact that $\natFin(0)=0$. The left unit law now follows from the right unit law by commutativity. We leave the inverse laws as an exercise.
+\end{proof}
+
+\begin{exercises}
+  \exitem \label{ex:div-3-for-2}Complete the proof of \cref{prp:div-3-for-2}.
+  \exitem \label{ex:is-poset-div}Show that the divisibility relation satisfies the axioms of a poset, i.e., that it is reflexive, antisymmetric, and transitive.
+  \exitem \label{ex:div-factorial}Construct a dependent function
+  \begin{equation*}
+    \prd{x:\N}(x\neq 0)\to ((x\leq n)\to (x\mid n!))
+  \end{equation*}
+  for every $n:\N$.
+  \exitem Define $1\defeq[1]_{k+1}:\Fin{k+1}$. Show that
+  \begin{equation*}
+    \succFin_{k+1}(x)=x+1
+  \end{equation*}
+  for any $x:\Fin{k+1}$.
+  \exitem \label{ex:Eq-Fin}The observational equality on $\Fin{k}$ is a binary relation
+  \begin{equation*}
+    \EqFin_{k}:\Fin{k}\to(\Fin{k}\to\UU_0)
+  \end{equation*}
+  defined recursively by
+  \begin{align*}
+    \EqFin_{k+1}(i(x),i(y)) & \defeq \EqFin_k(x,y) & \EqFin_{k+1}(i(x),\ttt) & \defeq \emptyt \\*
+    \EqFin_{k+1}(\ttt,i(y)) & \defeq \emptyt & \EqFin_{k+1}(\ttt,\ttt) & \defeq \unit.
+  \end{align*}
+  \begin{subexenum}
+  \item \label{ex:eq-iff-Eq-Fin}Show that
+  \begin{equation*}
+    (x=y)\leftrightarrow \EqFin_k(x,y)
+  \end{equation*}
+  for any two elements $x,y:\Fin{k}$.
+  \item \label{ex:is-injective-i-Fin}Show that the function $i:\Fin{k}\to\Fin{k+1}$ is injective, for each $k:\N$.
+  \item \label{ex:neq-zero-succ-Fin}
+  Show that
+  \begin{equation*}
+    \succFin_{k+1}(i(x))\neq 0
+  \end{equation*}
+  for any $x:\Fin{k}$.
+  \item Show that function $\succFin_k:\Fin{k}\to\Fin{k}$ is injective, for each $k:\N$.
+  \end{subexenum}
+  \exitem \label{ex:has-inverse-succ-Fin}The predecessor function $\predFin_k:\Fin{k}\to\Fin{k}$ is defined in three steps, just as in the definition of the successor function on $\Fin{k}$.
+  \begin{enumerate}
+  \item We define the element $\negtwoFin_k:\Fin{k+1}$ by
+    \begin{align*}
+      \negtwoFin_0 & \defeq\ttt \\*
+      \negtwoFin_{k+1} & \defeq i(\ttt).
+    \intertext{\item We define the function $\skipnegtwoFin_k:\Fin{k}\to\Fin{k+1}$ recursively by}
+      \skipnegtwoFin_{k+1}(i(x)) & \defeq i(i(x)) \\*
+      \skipnegtwoFin_{k+1}(\ttt) & \defeq \ttt.
+    \intertext{\item Finally, we define the \define{predecessor function} $\predFin_k:\Fin{k}\to\Fin{k}$ recursively by}
+      \predFin_{k+1}(i(x)) & \defeq \skipnegtwoFin_k(\predFin_k(x)) \\*                       
+      \predFin_{k+1}(\ttt)    & \defeq \negtwoFin_k.
+    \end{align*}
+  \end{enumerate}
+  Show that $\predFin_k$ is an inverse to $\succFin_k$, i.e., construct identifications
+  \begin{equation*}
+    \succFin_k(\predFin_k(x))=x,\qquad\text{and}\qquad\predFin_k(\succFin_k(x))=x
+  \end{equation*}
+  for each $x:\Fin{k}$.
+  \exitem \label{ex:classical-Fin}Recall that
+  \begin{equation*}
+    \classicalFin_k:=\sm{x:\N}x<k.
+  \end{equation*}
+  \begin{subexenum}
+  \item Show that
+    \begin{equation*}
+      (x=y)\leftrightarrow (\proj 1(x)=\proj 1(y))
+    \end{equation*}
+    for each $x,y:\classicalFin_k$.
+  \item By \cref{lem:is-bounded-natFin} it follows that the map $\natFin :\Fin{k}\to\N$ induces a map $\natFin:\Fin{k}\to\classicalFin_k$. Construct a map
+    \begin{equation*}
+      \alpha_k:\classicalFin_k \to \Fin{k}  
+    \end{equation*}
+    for each $k:\N$, and show that
+  \begin{equation*}
+    \alpha_k(\natFin(x)) = x \qquad\text{and}\qquad \natFin(\alpha_k(y)) = y
+  \end{equation*}
+  for each $x:\Fin{k}$ and each $y:\classicalFin_k$. 
+  \end{subexenum}
+  \exitem \label{ex:ring-Fin}The multiplication operation $x,y\mapsto xy$ on $\Z/{(k+1)}$ is defined by
+  \begin{equation*}
+    xy \defeq [\natFin(x)\natFin(y)]_{k+1}.
+  \end{equation*}
+  \begin{subexenum}
+  \item Show that $\natFin(xy)\equiv\natFin(x)\natFin(y)\mod{k+1}$ for each $x,y:\Z/{(k+1)}$.
+  \item \label{ex:congruence-mulN}Show that
+    \begin{equation*}
+      xy\equiv x'y'\mod k
+    \end{equation*}
+    for any $x,y,x',y':\N$ such that $x\equiv x'$ and $y\equiv y' \mod k$.
+  \item Show that multiplication on $\Z/{(k+1)}$ satisfies the laws of a commutative ring:
+    \begin{align*}
+      (xy)z & = x(yz) & xy & = yx \\
+      1x & = x & x1 & = x \\
+      x(y+z) & = xy+xz & (x+y)z & = xz+yz.
+    \end{align*}
+  \end{subexenum}
+  \exitem \label{ex:euclidean-division}(Euclidean division) Consider two natural numbers $a$ and $b$.
+  \begin{subexenum}
+  \item Construct two natural numbers $q$ and $r$ such that $(b\neq 0) \to (r<b)$, along with an identification
+    \begin{equation*}
+      a=qb+r.
+    \end{equation*}
+  \item Show that for any four natural numbers $q,q'$ and $r,r'$ such that the implications $(b\neq 0) \to (r<b)$ and $(b\neq 0)\to (r'<b)$ hold, and for which there are identifications
+    \begin{equation*}
+      a=qb+r\qquad\text{and}\qquad a=q'b+r',
+    \end{equation*}
+    we have $q=q'$ and $r=r'$.
+  \end{subexenum}
+  \exitem The type $\N_k$ of \define{$k$-ary natural numbers} is an inductive type with the following constructors:
+  \begin{align*}
+    \constantbasedN{k} & : \Fin{k}\to\basedN{k} \\
+    \unaryopbasedN{k} & : \Fin{k}\to (\basedN{k}\to\basedN{k}).
+  \end{align*}
+  A $k$-ary natural number can be converted back into an ordinary natural number via the function $\convertbasedN{k}:\basedN{k}\to\N$, which is defined recursively by
+  \begin{align*}
+    \convertbasedN{k}(\constantbasedN{k}(x)) & \defeq \natFin(x) \\
+    \convertbasedN{k}(\unaryopbasedN{k}(x,n)) & \defeq k(\convertbasedN{k}(n)+1)+\natFin(x).
+  \end{align*}
+  \begin{subexenum}
+  \item Show that the type $\basedN{0}$ is empty.
+  \item Show that the function $\convertbasedN{k}:\basedN{k}\to\N$ is injective.
+  \item Show that the function $\convertbasedN{k+1}:\basedN{k+1}\to\N$ has an inverse, i.e. construct a function
+    \begin{equation*}
+      g_{k} : \N\to\basedN{k+1}
+    \end{equation*}
+    equipped with identifications
+    \begin{align*}
+      \convertbasedN{k+1}(g_k(n)) & = n \\
+      g_{k}(\convertbasedN{k+1}(x)) & = x
+    \end{align*}
+    for each $n:\N$ and each $x:\basedN{k+1}$.
+  \end{subexenum}
+\end{exercises}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

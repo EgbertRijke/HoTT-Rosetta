@@ -1,0 +1,524 @@
+\section{Finite types}\label{chap:finite}
+
+\subsection{Counting in type theory}
+\index{counting|(}
+When someone counts the elements of a finite set $A$, they go through the elements of $A$ one by one, at each stage keeping track of how many elements have been counted so far. This process results in the number $|A|$ of elements of the set $A$, and moreover it gives a bijection from the standard finite set with $|A|$ elements. In other words, to count the elements of $A$ is to give an equivalence from one of the standard finite sets to the set $A$. We turn this into a definition.
+
+\begin{defn}
+  For each type $A$, we define the type\index{count(A)@{$\cnt(A)$}|textbf}
+  \begin{equation*}
+    \cnt(A)\defeq\sm{k:\N}(\Fin{k}\simeq A).
+  \end{equation*}
+  The elements of $\cnt(A)$ are called \define{countings}\index{countings of a type|textbf} of $A$. When we have $(k,e):\cnt(A)$, we also say that $A$ \define{has $k$ elements}\index{has k elements@{has $k$ elements}|textbf}.
+\end{defn}
+
+Note that the type $\cnt(A)$ is often not a proposition. For instance, different equivalences of type $\Fin{k}\simeq\Fin{k}$ induce different elements of type $\cnt(\Fin{k})$.
+
+\begin{eg}
+  It follows immediately from the definition of countings that every standard finite type can be counted in a canonical way: For any $k:\N$ we have $(k,\idfunc) : \cnt(\Fin{k})$. It also follows immediately from the definition of countings that types equipped with countings are closed under equivalences.
+\end{eg}
+
+\begin{eg}
+  Suppose $A$ comes equipped with a counting $(k,e):\cnt(A)$. Then $k=0$ if and only if $A$ is empty. Indeed, the inverse of $e$ is a map $e^{-1}:A\to\emptyt$. Conversely, if we have $f:\isempty(A)$, then the map $f:A\to\emptyt$ is automatically an equivalence. This shows that $\Fin{k}\simeq\emptyt$, and a short argument by induction on $k$ yields that $k=0$. 
+\end{eg}
+
+\begin{eg}
+  A type $A$ has one element if and only if it is contractible. Indeed, the type $\Fin{1}$ is contractible, so it follows from the 3-for-2 property of contractible types (\cref{ex:contr_retr}) that there is an equivalence $\Fin{1}\simeq A$ if and only if $A$ is contractible.   
+\end{eg}
+
+\begin{eg}\label{rmk:count-decidable-proposition}
+  A proposition $P$ comes equipped with a counting if and only if it is decidable. To see this, note that for any type $X$, if we have $(k,e):\cnt(X)$, then it follows that $X$ is decidable. This is shown by induction on $k$. In the case where $k=0$, it follows that $X$ is empty, and hence that $X$ is decidable. In the case where $k$ is a successor, the bijection $e:\Fin{k}\simeq X$ gives us the element $e(\ttt):X$. Again we conclude that $X$ is decidable.
+
+  Conversely, if $P$ is decidable, then we can construct a counting of $P$ by case analysis on $d:P+\neg P$. If $P$ holds, then it is contractible and hence equivalent to $\Fin{1}$. If $\neg P$ holds, then $P$ is equivalent to $\Fin{0}$.  
+\end{eg}
+
+\begin{rmk}\label{rmk:has-decidable-equality-count}
+  We also note that any type $A$ equipped with a counting $e:\Fin{k}\simeq A$ has decidable equality.\index{has decidable equality!type equipped with a counting} This follows from \cref{prp:has-decidable-equality-Fin}, where we showed that $\Fin{k}$ has decidable equality, for any $k:\N$.
+\end{rmk}
+
+\begin{thm}\label{thm:count}
+  We make the following claims about countings:
+  \begin{enumerate}
+  \item\label{item:count-coprod} Consider two types $A$ and $B$. The following are equivalent:
+    \begin{enumerate}
+    \item Both $A$ and $B$ come equipped with a counting.
+    \item The coproduct $A+B$ comes equipped with a counting.
+    \end{enumerate}
+  \item\label{item:count-Sigma} Consider a type family $B$ indexed by a type $A$. Consider the following three conditions:
+    \begin{enumerate}
+    \item \label{item:count-Sigma-count-base}The type $A$ comes equipped with a counting.
+    \item \label{item:count-Sigma-count-fibers}The type $B(x)$ comes equipped with a counting, for each $x:A$.
+    \item \label{item:count-Sigma-count-total}The type $\sm{x:A}B(x)$ comes equipped with a counting.
+    \end{enumerate}
+    If (a) holds, then (b) holds if and only if (c) holds. Furthermore, if both (b) and (c) hold and if $B$ comes equipped with a section $f:\prd{x:A}B(x)$, then (a) holds.
+
+    Consequently, if $P$ is a subtype of a type $A$ equipped with a counting, then we have
+    \begin{equation*}
+      \cnt\Big(\sm{x:A}P(x)\Big)\leftrightarrow \prd{x:A}\isdecidable(P(x)).
+    \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  We will first prove the forward direction of \ref{item:count-coprod}. Then we will prove both claims in \ref{item:count-Sigma}, and we will prove the reverse direction of claim \ref{item:count-coprod} last.
+
+  For the forward direction of claim \ref{item:count-coprod}, suppose we have equivalences $e:\Fin{k}\simeq A$ and $f:\Fin{l}\simeq B$. The equivalences $e$ and $f$ induce via \cref{ex:coproduct_functor,ex:laws-Fin} a composite equivalence
+  \begin{equation*}
+    \begin{tikzcd}
+      A+B \arrow[r,"\simeq"] & \Fin{k}+\Fin{l} \arrow[r,"\simeq"] & \Fin{k+l},
+    \end{tikzcd}
+  \end{equation*}
+  from which we obtain an element of type $\cnt(A+B)$.
+
+  Next, we will prove the forward direction in the first claim of \ref{item:count-Sigma}, i.e., we will prove that if $A$ comes equipped with an equivalence $e:\Fin{k}\simeq A$, and if $B$ is a family of types over $A$ equipped with
+  \begin{equation*}
+    f:\prd{x:A}\cnt(B(x)),
+  \end{equation*}
+  then the total space $\sm{x:A}B(x)$ also has a counting. The proof is by induction on $k$. Note that in the base case, where $k=0$, the type $\sm{x:A}B(x)$ is empty, so it has a counting. For the inductive step, note $\Sigma$ distributes from the right over coproducts. This gives an equivalence
+  \begin{align*}
+    \sm{x:A}B(x) & \simeq \sm{x:\Fin{k+1}}B(e(x)) \\
+    & \simeq \Big(\sm{x:\Fin{k}}B(e(\inl(x)))\Big)+ B(e(\inr(\ttt))).
+  \end{align*}
+  The type $\sm{x:\Fin{k}}B(e(\inl(x)))$ has a counting by the inductive hypothesis, and the type $B(e(\inr(\ttt)))$ has a counting by assumption. Therefore, it follows that the total space $\sm{x:A}B(x)$ has a counting.
+  
+  Now we will prove the converse direction of the first claim in \ref{item:count-Sigma}. Suppose that $A$ comes equipped with $e:\Fin{k}\simeq A$, and that $\sm{x:A}B(x)$ comes equipped with $f:\Fin{l}\simeq\sm{x:A}B(x)$. By \cref{rmk:count-decidable-proposition} it suffices to show that, for $a:A$, the type $B(a)$ is a decidable subtype of $\sm{x:A}B(x)$. Consider the map
+  \begin{equation*}
+    i: B(a)\to \sm{x:A}B(x)
+  \end{equation*}
+  given by $b\mapsto (a,b)$. For $(x,y):\sm{x:A}B(x)$, we have the equivalences
+  \begin{align*}
+    \fibf{i}(x,y) & \simeq \sm{b:B(a)}(a,b)=(x,y) \\
+                  & \simeq \sm{b:B(a)}\sm{p:a=x}\tr_B(p,b)=y \\
+                  & \simeq \sm{p:a=x}\fib{\tr_B(p)}{y} \\
+                  & \simeq a=x.
+  \end{align*}
+  Here we used that $\tr_B(p)$ is an equivalence, and therefore has contractible fibers. Now note that the type $a=x$ is a decidable proposition by \cref{rmk:has-decidable-equality-count}.
+
+  Next, we will prove the second claim in \ref{item:count-Sigma}. Suppose that $B$ is a family over $A$ that comes equipped with a section $b:\prd{x:A}B(x)$, and suppose that each $B(x)$ has a counting, and that the total space $\sm{x:A}B(x)$ has a counting. Then we have a map
+  \begin{equation*}
+    g : A\to\sm{x:A}B(x)
+  \end{equation*}
+  given by $a\mapsto (a,b(a))$. The fibers of $g$ can be computed by the following equivalences:
+  \begin{align*}
+    \fibf{g}(x,y) & \simeq \sm{a:A}(a,b(a))=(x,y) \\
+                  & \simeq \sm{a:A}\sm{p:a=x}\tr_B(p,b(a))=y \\
+    & \simeq \tr_B(p,b(x))=y.
+  \end{align*}
+  Note that the type $\tr_B(p,b(x))=y$ is a decidable proposition by \cref{rmk:has-decidable-equality-count}. Now it follows by the forward direction of the first claim in \ref{item:count-Sigma} that $A$ has a counting.
+
+  It remains to prove the converse direction of \ref{item:count-coprod}. Note that the forward direction of the first claim in \ref{item:count-Sigma} implies that countings on a type $X$ induce countings on any decidable subtype of $X$. Note that both $A$ and $B$ are decidable subtypes of the coproduct $A+B$. Any counting of $A+B$ therefore induces countings of $A$ and of $B$.
+\end{proof}
+
+\begin{cor}\label{cor:count-prod}
+  Consider two types $A$ and $B$. We make two claims:
+  \begin{enumerate}
+  \item If both $A$ and $B$ come equipped with a counting, then the product $A\times B$ has a counting.
+  \item If the product $A\times B$ comes equipped with a counting, then we have two functions
+    \begin{align*}
+      B & \to \cnt(A) \\
+      A & \to \cnt(B).
+    \end{align*}
+  \end{enumerate}
+\end{cor}
+
+\begin{proof}
+  The first claim follows from \ref{item:count-Sigma-count-base} in \cref{thm:count}, and the second claim follows from \ref{item:count-Sigma-count-fibers} in \cref{thm:count}. 
+\end{proof}
+\index{counting|)}
+
+\subsection{Double counting in type theory}
+\index{double counting|(}
+
+In combinatorics, counting arguments often proceed by showing that two finite sets are isomorphic---or, in the language of type theory, by showing that two finite types are equivalent. The idea here is, of course, that when we count the elements of a type twice correctly, then both countings must result in the same number. However, this is something that we must prove before we can use it. In other words, we must show that
+\begin{equation*}
+  (\Fin{k}\simeq\Fin{l})\to (k=l)
+\end{equation*}
+for any two natural numbers $k$ and $l$. We will prove this claim as a consequence of the following general fact.
+
+\begin{prp}\label{prp:is-injective-maybe}
+  For any two types $X$ and $Y$, there is a map
+  \begin{equation*}
+    (X+\unit\simeq Y+\unit)\to (X\simeq Y).
+  \end{equation*}
+\end{prp}
+
+\begin{proof}
+  We prove the claim in four steps. We will write $i$ for $\inl:X\to X+\unit$ and also for $\inl:Y\to Y+\unit$, and we will write $\star$ for $\inr(\star):X+\unit$ and also for $\inr(\star):Y+\unit$.
+  \begin{enumerate}
+  \item We first show that for any equivalence $e:X+\unit\simeq Y+\unit$ and any $x:X$ equipped with an identification $p:e(i(x))=\star$, that there is an element
+    \begin{equation*}
+      \starvalue(e,x,p):Y
+    \end{equation*}
+    equipped with an identification
+    \begin{equation*}
+      \alpha:i(\starvalue(e,x,p))=e(\star).  
+    \end{equation*}
+    To see this, note that the map $e$ is injective. The elements $i(x)$ and $\star$ are distinct, so it follows that the elements $e(i(x))$ and $e(\star)$ are distinct. In particular, we have $e(\star)\neq\star$. Therefore it follows that there is an element $y:Y$ equipped with an identification $i(y)=e(\star)$. 
+  \item Next, we construct for every equivalence $e:X+\unit\simeq Y+\unit$ a map $f:X\to Y$ equipped with identifications
+    \begin{align*}
+      \beta & : \prd{y:Y} (e(i(x))=i(y))\to (f(x)=y) \\
+      \gamma & : \prd{p:e(i(x))=\star} f(x)=\starvalue(e,x,p).
+    \end{align*}
+    In order to construct the map $f:X\to Y$, we first construct a dependent function
+    \begin{equation*}
+      f':\prd{x:X}\prd{u:Y+\unit}((e(i(x))=u)\to Y).
+    \end{equation*}
+    This function is defined by pattern matching on $u$, by
+    \begin{align*}
+      f'(x,i(y),p) & \defeq y \\
+      f'(x,\star,p) & \defeq \starvalue(e,x,p)
+    \end{align*}
+    Then we define $f(x):=f'(x,e(i(x)),\refl{})$. By the definition of $f'$ it then follows that we have an identification
+    \begin{align*}
+      f(x) & \jdeq f'(x,e(i(x)),\refl{}) \\
+           & = f'(x,i(y),p) \\
+           & \jdeq y
+    \end{align*}
+    for any $y:Y$ and $p:e(i(x))=i(y)$, and that we have an identification
+    \begin{align*}
+      f(x) & \jdeq f'(x,e(i(x)),\refl{}) \\
+           & = f'(x,\ttt,p) \\
+           & \jdeq \starvalue(e,x,p)
+    \end{align*}
+    for any $p:e(i(x))=\ttt$. 
+  \item The inverse function $g:Y\to X$ is constructed in the same way as the function $f:X\to Y$, using the equivalence $e^{-1}:Y+\unit\simeq X+\unit$. This function comes equipped with
+    \begin{align*}
+      \delta & : \prd{x:X}(e^{-1}(i(y))=i(x))\to (g(y)=x) \\
+      \varepsilon & : \prd{p:e^{-1}(i(y))=\star}g(y)=\starvalue(e^{-1},y,p). 
+    \end{align*}
+  \item It remains to show that $f$ and $g$ are inverse to each other. The proof that $g$ is a retraction of $f$ is similar to the proof that $g$ is a section of $f$, so we will only prove the latter. In other words, we will construct an identification
+    \begin{equation*}
+      f(g(y))=y
+    \end{equation*}
+    for any $y:Y$. The proof is by case analysis on $(e^{-1}(i(y))=\ttt)+(e^{-1}(i(y))\neq \ttt)$. In the case where $p:e^{-1}(i(y))=\ttt$, we have the identification
+    \begin{equation*}
+      \varepsilon(p):g(y)=\starvalue(e^{-1},y,p).
+    \end{equation*}
+    Furthermore, we have the identification
+    \begin{equation*}
+      \gamma(q) : f(g(y)) = \starvalue(e,g(y),q),
+    \end{equation*}
+    where $q:e(i(g(y)))=\ttt$ is the composite of the identifications
+    \begin{align*}
+      e(i(g(y))) & = e(i(\starvalue(e^{-1},y,p))) \\
+                 & = e(e^{-1}(\ttt)) \\
+      & =\ttt.
+    \end{align*}
+    Using the identification $\gamma(q)$, we obtain
+    \begin{align*}
+      i(f(g(y))) & = i(\starvalue(e,g(y),q)) \\
+                 & = e(\ttt) \\
+                 & = e(e^{-1}(i(y))) \\
+                 & = i(y).
+    \end{align*}
+    Since $i:Y\to Y+\unit$ is injective, it follows that $f(g(y))=y$. 
+    \qedhere
+  \end{enumerate}
+\end{proof}
+
+\begin{thm}\label{thm:is-injective-Fin}
+  For any two natural numbers $k$ and $l$, there is a map
+  \begin{equation*}
+    (\Fin{k}\simeq\Fin{l})\to (k=l).
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  The proof is by induction on $k$ and $l$. In the base case, where both $k$ and $l$ are zero, the claim is obvious. If $k$ is zero and $l$ is a successor, then we have $0:\Fin{l}$. Any equivalence $e:\Fin{k}\simeq \Fin{l}$ now gives us the element
+  \begin{equation*}
+    e^{-1}(0):\emptyt,
+  \end{equation*}
+  which is of course absurd. Similarly, if $k$ is a successor and $l$ is zero, we obtain $e(0):\emptyt$, which is again absurd. If both $k$ and $l$ are a successor, then we have by \cref{prp:is-injective-maybe} the composite
+  \begin{equation*}
+    \begin{tikzcd}[column sep=1.5em]
+      (\Fin{k+1}\simeq\Fin{l+1}) \arrow[r] & (\Fin{k}\simeq\Fin{l}) \arrow[r] & (k=l) \arrow[r] & (k+1=l+1).
+    \end{tikzcd}\qedhere
+  \end{equation*}
+\end{proof}
+\index{double counting|)}
+
+\subsection{Finite types}
+
+The type of all finite types is the subtype of the base universe $\UU_0$ consisting of all types $X$ for which there exists an unspecified equivalence $\Fin{k}\simeq X$ for some $k:\N$.
+
+\begin{defn}\label{defn:finite}
+  A type $X$ is said to be \define{finite}\index{finite type|textbf} if it comes equipped with an element of type\index{is-finite@{$\isfinite(X)$}|textbf}
+  \begin{equation*}
+    \isfinite(X) \defeq \Brck{\sm{k:\N}\Fin{k}\simeq X}
+  \end{equation*}
+  The type $\F$ of all finite types is defined to be\index{F@{$\F$}|see {finite type}}\index{F@{$\F$}|textbf}
+  \begin{equation*}
+    \F:=\sm{X:\UU_0}\isfinite(X).
+  \end{equation*}
+  In other words, the type $\F$ of finite types is the image of the map $\Fin{} : \N \to \UU_0$.
+  We also define the type $\BS_k$\index{BS n@{$\BS_n$}|textbf} of \define{$k$-element types} by
+  \begin{equation*}
+    \BS_k\defeq \sm{X:\UU_0}\brck{\Fin{k}\simeq X}.
+  \end{equation*}
+\end{defn}
+
+\begin{rmk}
+  It follows directly from the definition of finiteness that any type $X$ equipped with a counting is finite. In particular, any $\Fin{k}$ is finite. Furthermore, it follows that if $X$ is equivalent to a finite type $Y$, then $X$ is also finite. Indeed, we can use the functoriality of the propositional truncation to obtain a function
+  \begin{equation*}
+    \Brck{\sm{k:\N}\Fin{k}\simeq Y}\to\Brck{\sm{k:\N}\Fin{k}\simeq X}
+  \end{equation*}
+  from a map $\big(\sm{k:\N}\Fin{k}\simeq Y\big)\to\big(\sm{k:\N}\Fin{k}\simeq X\big)$. Given an equivalence $e:X\simeq Y$, such a map is given as the map induced on total spaces from the family of maps $f\mapsto e^{-1}\circ f$.
+
+  Similarly, it follows that any finite type has decidable equality, and that every finite type is a set.
+\end{rmk}
+
+In the following proposition we will show that each finite type can be assigned a unique cardinality.
+
+\begin{thm}
+  For any type $X$, consider the type $\isfinite'(X)$ defined by\index{is-finite'@{$\isfinite'(X)$}|textbf}
+  \begin{equation*}
+    \isfinite'(X) \defeq \sm{k:\N}\brck{\Fin{k}\simeq X}.
+  \end{equation*}
+  Then the type $\isfinite'(X)$\index{is-finite'@{$\isfinite'(X)$}!is a proposition} is a proposition, and there is an equivalence
+  \begin{equation*}
+    \isfinite(X)\leftrightarrow\isfinite'(X).
+  \end{equation*}
+  If $X$ is a finite type, then the unique number $k$ such that $\brck{\Fin{k}\simeq X}$ is the \define{cardinality}\index{cardinality!of a finite type|textbf} of $X$. We write $|X|$\index{{"|"}X{"|"}@{$|X|$}|see {cardinality, of a finite type}} for the cardinality of $X$.
+\end{thm}
+
+\begin{proof}
+  We first prove the claim that the type $\isfinite'(X)$ is a proposition. In other words, we need to show that any two natural numbers $k$ and $k'$ for which there are respective elements of the types $\brck{\Fin{k}\simeq X}$ and $\brck{\Fin{k'}\simeq X}$, can be identified.
+
+  Since the type of natural numbers is a set, the type $k=k'$ is a proposition. Therefore, we may assume that we have equivalences $\Fin{k}\simeq X$ and $\Fin{k'}\simeq X$. Consequently, we have an equivalence $\Fin{k}\simeq\Fin{k'}$. Now it follows from \cref{thm:is-injective-Fin} that $k=k'$.
+
+  The second claim is that the propositions $\isfinite(X)$ and $\isfinite'(X)$ are equivalent, which we will show by constructing functions back and forth.
+  Since we have shown that the type $\isfinite'(X)$ is a proposition, we obtain a map $\isfinite(X)\to\isfinite'(X)$ via the universal property of the propositional truncation, from the map
+  \begin{equation*}
+    \Big(\sm{k:\N}\Fin{k}\simeq X\Big)\to \sm{k:\N}\brck{\Fin{k}\simeq X}
+  \end{equation*}
+  given by $(k,e)\mapsto (k,\eta(e))$. 
+  
+  To construct a map $\isfinite'(X)\to\isfinite(X)$, it suffices to construct a map
+  \begin{equation*}
+    \brck{\Fin{k'}\simeq X}\to \Brck{\sm{k:\N}\Fin{k}\simeq X}
+  \end{equation*}
+  for each $k':\N$. Again by the universal property of the propositional truncation, we obtain this map from the function
+  \begin{equation*}
+    (\Fin{k'}\simeq X) \to \Brck{\sm{k:\N}\Fin{k}\simeq X}
+  \end{equation*}
+  given by $e\mapsto \eta(k',e)$. 
+\end{proof}
+
+\begin{cor}
+  There is an equivalence
+  \begin{equation*}
+    \F \simeq \sm{k:\N}\BS_k.
+  \end{equation*}
+\end{cor}
+
+\begin{proof}
+  This equivalence can be obtained by composing the equivalences
+  \begin{align*}
+    \sm{X:\UU_0}\isfinite(X) & \simeq \sm{X:\UU_0}\sm{k:\N}\brck{\Fin{k}\simeq X} \\
+    & \simeq \sm{k:\N}\sm{X:\UU_0}\brck{\Fin{k}\simeq X}. \qedhere
+  \end{align*}
+\end{proof}
+
+We now aim to extend \cref{thm:count} to obtain some closure properties of finite types. Before we do so, we prove the \textbf{principle of finite choice}.
+
+\begin{prp}\label{prp:finite-choice}
+  Consider a type family $B$ over a finite type $A$. Then there is a \define{finite choice}\index{finite choice|textbf}\index{finite type!finite choice|textbf} map
+  \begin{equation*}
+    \Big(\prd{x:A}\brck{B(x)}\Big)\to\Brck{\prd{x:A}B(x)}
+  \end{equation*}
+\end{prp}
+
+\begin{proof}
+  Note that the type $\big\|\prd{x:A}B(x)\big\|$ is a proposition. Therefore we may assume that the type $A$ comes equipped with a counting $e:\Fin{k}\simeq A$. By this equivalence, it suffices to show that for every type family $B$ over $\Fin{k}$, there is a map
+  \begin{equation*}
+    \Big(\prd{x:\Fin{k}}\brck{B(x)}\Big)\to\Brck{\prd{x:\Fin{k}}B(x)}.
+  \end{equation*}
+  We proceed by induction on $k$. In the base case, $\Fin{k}$ is empty and therefore the type $\prd{x:\Fin{k}}B(x)$ is contractible. The asserted function therefore exists.
+
+  For the inductive step, note that by the dependent universal property of coproducts (\cref{ex:up-coproduct}) we have the equivalences
+  \begin{align*}
+    \Big(\prd{x:\Fin{k+1}}\brck{B(x)}\Big) & \simeq \Big(\prd{x:\Fin{k}}\brck{B(i(x))}\Big)\times \brck{B(\ttt)} \\
+    \Brck{\prd{x:\Fin{k}}B(x)} & \simeq \Brck{\Big(\prd{x:\Fin{k}}B(i(x))\Big)\times B(\ttt)}.
+  \end{align*}
+  Recall from \cref{ex:product-propositional-truncation} that $\brck{X\times Y}\simeq \brck{X}\times\brck{Y}$ for any two types $X$ and $Y$. This fact together with the inductive hypothesis finishes the proof.
+\end{proof}
+
+\begin{thm} ~
+  \begin{enumerate}
+    \item \label{item:coproduct-finite-types}For any two types $X$ and $Y$, the following are equivalent:
+    \begin{enumerate}
+    \item Both $X$ and $Y$ are finite.
+    \item The coproduct $X+Y$ is finite.
+    \end{enumerate}
+  \item \label{item:product-finite-types}For any two types $X$ and $Y$, we make two claims:
+    \begin{enumerate}
+    \item If both $X$ and $Y$ are finite, then the cartesian product $X\times Y$ is finite.
+    \item If the type $X\times Y$ is finite, then we have two functions
+      \begin{align*}
+        Y & \to \isfinite(X) \\
+        X & \to \isfinite(Y).
+      \end{align*}
+    \end{enumerate}
+  \item \label{item:Sigma-finite-types}Consider a type family $B$ over $A$, and consider the following three conditions:
+    \begin{enumerate}
+    \item The type $A$ is finite.
+    \item The type $B(x)$ is finite for each $x:A$.
+    \item The type $\sm{x:A}B(x)$ is finite.
+    \end{enumerate}
+    If (a) holds, then (b) is equivalent to (c). Moreover, if (b) and (c) hold, then (a) holds if and only if $A$ is a set and the type $\sm{x:A}\neg B(x)$ is finite. Furthermore, if (b) and (c) hold and $B$ has a section, then (a) holds.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  To prove claim \ref{item:coproduct-finite-types}, first suppose that both $X$ and $Y$ are finite. Since the type $\isfinite(X+Y)$ is a proposition, we may assume that $X$ and $Y$ come equipped with countings. It follows from \cref{thm:count} that $X+Y$ has a counting, so it is finite. Conversely, suppose that the type $X+Y$ is finite. Since the types $\isfinite(X)$ and $\isfinite(Y)$ are both propositions, we may assume that the coproduct $X+Y$ comes equipped with a counting. Again it follows from \cref{thm:count} that the types $X$ and $Y$ have countings, so they are finite.
+
+  The proof of claim \ref{item:product-finite-types} is similar to the proof of claim \ref{item:coproduct-finite-types}, hence we omit it.
+
+  It remains to prove claim \ref{item:Sigma-finite-types}. First, suppose that the type $A$ is finite, and that each $B(x)$ is finite. By \cref{prp:finite-choice} we have a map
+  \begin{equation*}
+    \Big(\prd{x:A}\isfinite(B(x))\Big)\to \Brck{\prd{x:A}\cnt(B(x))}.
+  \end{equation*}
+  Since our goal is to construct an element of a proposition, we may therefore assume that each $B(x)$ comes equipped with a counting. We may also assume that $A$ comes equipped with a counting. It follows from \cref{thm:count} that the type $\sm{x:A}B(x)$ has a counting, so it is finite.
+
+  Next, assume that $A$ is finite and that the type $\sm{x:A}B(x)$ is finite, and let $a:A$. The type $\isfinite(B(a))$ is a proposition, so we may assume that the types $A$ and $\sm{x:A}B(x)$ come equipped with countings. It follows from \cref{thm:count} that $B(a)$ has a counting, so it is finite.
+
+  The final claim has two parts. First, assume that each $B(x)$ is finite, that the type $\sm{x:A}B(x)$ is finite, and that the type family $B$ has a section $f:\prd{x:A}B(x)$. It follows that the map
+  \begin{equation*}
+    A\to\sm{x:A}B(x)
+  \end{equation*}
+  given by $x\mapsto (x,f(x))$ is a decidable embedding, because the fiber at $(x,y)$ of this map is equivalent to the identity type $f(x)=y$ in $B(x)$, which is a decidable proposition. It follows from the fact that (a) and (b) together imply (c) that $A$ is finite.
+
+  For the remaining part of the final claim, assume that $A$ is a set. Note that the assumption that each $B(x)$ is finite implies that each $B(x)$ is either inhabited or empty. It follows that we have an equivalence
+  \begin{equation*}
+    A\simeq \Big(\sm{x:A}\brck{B(x)}\Big)+\Big(\sm{x:A}\neg B(x)\Big).
+  \end{equation*}
+  We assume that the type $\sm{x:A}\neg B(x)$ is finite. In order to show that $A$ is finite, it therefore suffices to show that the type $\sm{x:A}\brck{B(x)}$ is finite. Without loss of generality, we assume that each $B(x)$ is inhabited. To finish the proof, it suffices to show that there is an element of type
+  \begin{equation*}
+    \Brck{\prd{x:A}B(x)}
+  \end{equation*}
+  using the assumption that $\prd{x:A}\brck{B(x)}$. To construct such an element, we may assume a counting $e:\Fin{k}\simeq\sm{x:A}B(x)$. We claim that there is a function
+  \begin{equation*}
+    \brck{B(a)}\to B(a),
+  \end{equation*}
+  i.e., that the type $B(a)$ satisfies the principle of global choice of \cref{rmk:global-choice} for each $a:A$. Recall from \cref{eg:global-choice-decidable-subtype-N} that the decidable subtypes of $\Fin{k}$ satisfy global choice. Therefore it also follows that the decidable subtypes of $\sm{x:A}B(x)$ satisfy global choice. Thus, it suffices to show that $B(x)$ is a decidable subtype of $\sm{x:A}B(x)$.
+  
+   The assumption that $A$ is a set implies by \cref{ex:is-trunc-fiber-inclusion} that the fiber inclusion $i_a:B(a)\to\sm{x:A}B(x)$ is an embedding for each $a:A$. Furthermore, we note that we have the following equivalence computing the fibers of $i_a$ at $(x,y)$:
+  \begin{equation*}
+    \Big(\sm{z:B(a)}(a,z)=(x,y)\Big)\simeq (a=x).
+  \end{equation*}
+  The type on the left hand side is decidable, so it follows that the type $A$ has decidable equality. We conclude that each $B(a)$ is a decidable subtype of $\sm{x:A}B(x)$.
+\end{proof}
+
+\begin{exercises}
+  \exitem
+  \begin{subexenum}
+  \item Construct an equivalence $\Fin{n^m}\simeq(\Fin{m}\to\Fin{n})$. Conclude that if $A$ and $B$ are finite types, then $A\to B$ is finite.
+  \item Construct an equivalence $\Fin{n!}\simeq(\Fin{n}\simeq\Fin{n})$. Conclude that if $A$ is finite, then $A\simeq A$ is finite.
+  \end{subexenum}
+  \exitem Suppose that $A$ is a retract of $B$. Show that $\cnt(B)\to\cnt(A)$.
+  Conclude that $\isfinite(B)\to\isfinite(A)$.\index{finite type!closed under retracts}
+  \exitem 
+  \begin{subexenum}
+  \item Consider a family of decidable types $A_i$ indexed by a finite type $I$. Show that the dependent product
+    \begin{equation*}
+      \prd{i:I}A_i
+    \end{equation*}
+    is decidable.
+  \item Show that $\isemb(f)$ is decidable, for any map $f:I\to J$ between finite types.
+  \item Show that $\issurj(f)$ is decidable, for any map $f:I\to J$ between finite types.
+  \item Show that $\isequiv(f)$ is decidable, for any map $f:I\to J$ between finite types.
+  \end{subexenum}
+  \exitem \label{item:quotient-finite-types}Consider a surjective map $f:A\to B$, and suppose that $A$ is finite. Show that the following are equivalent:
+    \begin{enumerate}
+    \item The type $B$ has decidable equality.
+    \item The type $B$ is finite.
+    \end{enumerate}
+  \exitem Consider a family $B$ of types over $A$.
+  \begin{subexenum}
+  \item Show that if $A$ is finite and if each $B(x)$ is finite, then the type
+    \begin{equation*}
+      \prd{x:A}B(x)
+    \end{equation*}
+    is finite.
+  \item Show that if $A$ is finite and if $\prd{x:A}B(x)$ is finite, then we have
+    \begin{equation*}
+      \Big(\prd{x:A}\brck{B(x)}\Big)\to\Big(\prd{x:A}\isfinite(B(x))\Big).
+    \end{equation*}
+  \item Show that if $\prd{x:A}B(x)$ is finite and if each $B(x)$ is finite, then $A$ is finite if and only if the following three conditions hold:
+    \begin{enumerate}
+    \item $A$ has decidable equality.
+    \item The type
+      \begin{equation*}
+        \sm{x:A}|B(x)|\leq 1
+      \end{equation*}
+      is finite.
+    \item The type
+      \begin{equation*}
+        \prd{x:A}(2\leq|B(x)|)\to B(x)
+      \end{equation*}
+      is finite.
+    \end{enumerate}
+  \end{subexenum}
+  \exitem Consider two finite types $X$ and $Y$ with $m$ and $n$ elements, respectively, and let $f:X\to Y$ be a map.
+  \begin{subexenum}
+  \item Show that
+    \begin{equation*}
+      \isinj(f)\to (m\leq n).
+    \end{equation*}
+  \item Prove the \define{pigeonhole principle}\index{pigeonhole principle|textbf}\index{finite type!pigeonhole principle|textbf}, i.e., show that
+    \begin{equation*}
+      (n>m)\to \exists_{(x,x':X)}(x\neq x')\times(f(x)=f(x')).
+    \end{equation*}
+  \item Show that there is no embedding $\N\hookrightarrow \Fin{k}$, for any $k:\N$.
+  \end{subexenum}
+  \exitem Consider a finite type $X$.
+  \begin{subexenum}
+  \item Show that any embedding $f:X\to X$ is an equivalence. Sets $X$ such that every embedding $X\hookrightarrow X$ is an equivalence are also called \define{Dedekind finite}.\index{Dedekind finite type|textbf}\index{finite type!Dedekind finite type|textbf}
+  \item Show that any surjective map $f:X\to X$ is an equivalence.
+  \end{subexenum}
+  \exitem Consider two arbitrary types $A$ and $B$. For any $2$-element type $X$, construct an equivalence
+  \begin{equation*}
+    (A+B)^X\simeq A^X+X\times (A\times B)+B^X.
+  \end{equation*}
+  \exitem
+  \begin{subexenum}
+  \item Consider a set $A$ and an arbitrary type $B$. Show that any embedding $A\hookrightarrow B$ factors uniquely through the embedding $(\unit\hookrightarrow B)\hookrightarrow B$ given by $e\mapsto e(\ttt)$. 
+  \item A map $f:A\to B$ is said to be \define{decidable}\index{decidable map} if the type $\fib{f}{b}$ is decidable for all $b:B$. Write $A\demb B$\index{A hookrightarrow d B@{$A \demb B$}|textbf} for the type of decidable embeddings\index{decidable embedding} from $A$ to $B$. Show that for any type $A$ with decidable equality and an arbitrary type $B$, any decidable embedding $A\demb B$ factors uniquely through the embedding $(\unit\demb B)\emb B$.
+  \item (Escard\'o) For any two types $A$ and $B$, construct an equivalence
+  \begin{equation*}
+    ((A+\unit)\simeq(B+\unit))\simeq (\unit\demb (B+\unit))\times(A\simeq B).
+  \end{equation*}
+  \end{subexenum}
+  \exitem
+  \begin{subexenum}
+  \item For any two types $A$ and $B$, construct an equivalence
+    \begin{equation*}
+      ((A+\unit)\demb(B+\unit))\simeq (\unit \demb (B+\unit))\times (A\demb B).
+    \end{equation*}
+  \item Construct an equivalence $\Fin{\fallingfactorial{n}{m}}\simeq(\Fin{m}\hookrightarrow\Fin{n})$, where $\fallingfactorial{n}{m}$ is the \define{$m$-th falling factorial}\index{falling factorial|textbf}\index{(n) m@{$\fallingfactorial{n}{m}$}|see {falling factorial}} of $n$, which is defined recursively by
+    \begin{align*}
+      \fallingfactorial{0}{0} & \defeq 1 & \fallingfactorial{0}{m+1} & \defeq 0 \\*
+      \fallingfactorial{n+1}{0} & \defeq 1 & \fallingfactorial{n+1}{m+1} & \defeq (n+1)\fallingfactorial{n}{m}.
+    \end{align*}
+    Conclude that if $A$ and $B$ are finite with cardinality $m$ and $n$, then the type $A\hookrightarrow B$ is finite with cardinality $\fallingfactorial{n}{m}$.
+  \end{subexenum}
+  \exitem
+  \begin{subexenum}
+  \item Consider an arbitrary type $A$ and a type $B$ with decidable equality. Construct an equivalence
+    \begin{equation*}
+      ((A+\unit)\twoheadrightarrow(B+\unit))\simeq (B+\unit)\times(A\twoheadrightarrow B)+(A\twoheadrightarrow B+\unit).
+    \end{equation*}
+  \item Construct an equivalence $\Fin{\numberofsurjectivemaps{m}{n}}\simeq(\Fin{m}\twoheadrightarrow\Fin{n})$, where $\numberofsurjectivemaps{m}{n}$\index{S(m,n)@{$\numberofsurjectivemaps(m,n)$}|textbf} is defined recursively by
+    \begin{align*}
+      \numberofsurjectivemaps{0}{0} & \defeq 1 \\*
+      \numberofsurjectivemaps{0}{n+1} & \defeq 0 \\*
+      \numberofsurjectivemaps{m+1}{0} & \defeq 0 \\*
+      \numberofsurjectivemaps{m+1}{n+1} & \defeq (n+1)\numberofsurjectivemaps{m}{n}+\numberofsurjectivemaps{m}{n+1}.
+    \end{align*}
+    Conclude that if $A$ and $B$ are finite with cardinality $m$ and $n$, then the type $A\twoheadrightarrow B$ is finite with cardinality $\numberofsurjectivemaps{m}{n}$. Note: the number $\numberofsurjectivemaps{m}{n}$ is $n!\stirling{m}{n}$, where $\stirling{m}{n}$\index{{{n m}}@{$\stirling{n}{m}$}|see {Stirling number of the second kind}} is the \define{Stirling number of the second kind}\index{Stirling number of the second kind} at $(m,n)$.
+  \end{subexenum}
+\end{exercises}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:

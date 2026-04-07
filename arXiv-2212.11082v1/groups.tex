@@ -1,0 +1,857 @@
+\section{Groups in univalent mathematics}\label{sec:groups}
+\index{group|(}
+
+In this section we demonstrate a very common way to use the univalence axiom\index{univalence axiom}, showing that isomorphic groups can be identified. When you introduce a certain kind of structure in type theory, such as groups or rings, you automatically obtain the type of all such structures. In other words, we define what a group is by defining the type of all groups, we define what a ring is by defining the type of all rings, and so on. The elements of the type of all groups are of course groups, such as the group of integers, integers modulo $k$, automorphism groups, and so on. The next important question is how two elements in the type of groups can be identified. This question is answered with the help of the univalence axiom: isomorphic groups can be identified. This is an instance of the \emph{structure identity principle}\index{structure identity principle}, which we covered in \cref{sec:structure-identity-principle}.
+
+Identifiying isomorphic groups is a common \emph{informal} practice in classical mathematics. For example, by the third isomorphism theorem we have an isomorphism
+\begin{equation*}
+  (G/N)/(K/N)\cong (G/K)
+\end{equation*}
+for any sequence $N \trianglelefteq K \trianglelefteq G$ of normal subgroups of $G$, and it is common to simply write $(G/N)/(K/N)=G/K$. Of course, classical mathematicians know that this convention is incompatible with the axioms of Zermelo-Fraenkel set theory, but that does not stop them from applying this useful abuse of notation. In univalent mathematics we make this informal practice precise and formal.
+
+\subsection{The type of all groups}
+
+In order to efficiently characterize the identity type of the type of all groups in a universe $\UU$, we introduce the type of groups in two stages: first we introduce the type of \emph{semigroups}, and then we introduce groups as semigroups that possess a unit element and inverses. Since semigroups can have at most one unit element and since elements of semigroups can have at most one inverse, it follows that the type of groups is a subtype of the type of semigroups, and this will help us with the characterization of the identity type of the type of all groups.
+
+\begin{rmk}
+  In order to show that isomorphic (semi)groups can be identified, it has to be part of the definition of a (semi)group that its underlying type is a set. This is an important observation: in many branches of algebra the objects of study are \emph{set-level} structures\index{set-level structure}.
+
+  A notable exception is formed by categories, which are objects at truncation level $1$, i.e., at the level of \emph{groupoids}. We will not cover categories in this book. For more about categories we recommend Chapter 9 of \cite{hottbook}.
+\end{rmk}
+
+\begin{defn}
+  A \define{semigroup}\index{semigroup|textbf} in a universe $\UU$ is a triple $(G,\mu,\alpha)$ consisting of a set $G$ in $\UU$ equipped with a binary operation $\mu:G\to (G\to G)$ and a homotopy
+  \begin{equation*}
+    \alpha : \prd{x,y,z:G}\mu(\mu(x,y),z)=\mu(x,\mu(y,z))
+  \end{equation*}
+  witnessing that $\mu$ is \define{associative}\index{associative|textbf}.
+  We write $\semigroup_\UU$\index{Semigroup@{$\semigroup_\UU$}|textbf} for the type of all semigroups in $\UU$, i.e., for the type
+  \begin{equation*}
+    \sm{G:\Set_\UU}\sm{\mu:G\to(G\to G)}\prd{x,y,z:G}\mu(\mu(x,y),z)=\mu(x,\mu(y,z)).
+  \end{equation*}
+\end{defn}
+
+\begin{defn}
+  A semigroup $G$ is said to be \define{unital}\index{semigroup!unital}\index{unital semigroup} if it comes equipped with a \define{unit}\index{unit!of a unital semigroup} $e:G$ that satisfies the left and right unit laws\index{unit laws!for a unital semigroup}
+  \begin{align*}
+    \leftunit : \prd{y:G}\mu(e,y)=y \\
+    \rightunit : \prd{x:G}\mu(x,e)=x.
+  \end{align*}
+  We write $\isunital(G)$\index{is-unital@{$\isunital$}} for the type of such triples $(e,\leftunit,\rightunit)$. Unital semigroups are also called \define{monoids}\index{monoid|textbf}, so we define\index{Monoid@{$\monoid_\UU$}}
+  \begin{equation*}
+    \monoid_\UU\defeq\sm{G:\semigroup_\UU}\isunital(G).
+  \end{equation*}
+\end{defn}
+
+The unit of a semigroup is of course unique once it exists. In univalent mathematics we express this fact by asserting that the type $\isunital(G)$ is a proposition for each semigroup $G$. In other words, being unital is a \emph{property} of semigroups rather than structure on it. This is typical for univalent mathematics: we express that a structure is a property by proving that this structure is a proposition.
+
+\begin{lem}
+  For a semigroup $G$ the type $\isunital(G)$ is a proposition.\index{is-unital@{$\isunital$}!is a proposition}
+\end{lem}
+
+\begin{proof}
+  Let $G$ be a semigroup. Note that since $G$ is a set, it follows that the types of the left and right unit laws are propositions. Therefore it suffices to show that any two elements $e,e':G$ satisfying the left and right unit laws can be identified. This is easy:
+  \begin{equation*}
+    e = \mu(e,e') = e'.\qedhere
+  \end{equation*}
+\end{proof}
+
+\begin{defn}
+  Let $G$ be a unital semigroup. We say that $G$ \define{has inverses}\index{unital semigroup!has inverses}\index{semigroup!has inverses} if it comes equipped with an operation $x\mapsto x^{-1}$ of type $G\to G$, satisfying the left and right inverse laws\index{inverse laws!for a group}
+  \begin{align*}
+    \leftinv & : \prd{x:G}\mu(x^{-1},x)=e \\
+    \rightinv & : \prd{x:G}\mu(x,x^{-1}) = e.
+  \end{align*}
+  We write $\isgroup'(G,e)$\index{is-group'@{$\isgroup'$}|textbf} for the type of such triples $((\blank)^{-1},\leftinv,\rightinv)$, and we write\index{is-group@{$\isgroup$}|textbf}
+  \begin{equation*}
+    \isgroup(G)\defeq\sm{e:\isunital(G)}\isgroup'(G,e)
+  \end{equation*}
+  A \define{group}\index{group|textbf} is a unital semigroup with inverses. We write $\group$\index{Group@{$\group_\UU$}|textbf} for the type of all groups in $\UU$.
+\end{defn}
+
+\begin{lem}
+  For any semigroup $G$ the type $\isgroup(G)$ is a proposition.\index{is-group@{$\isgroup$}!is a proposition}
+\end{lem}
+
+\begin{proof}
+  We have already seen that the type $\isunital(G)$ is a proposition. Therefore it suffices to show that the type $\isgroup'(G,e)$ is a proposition\index{is-group'@{$\isgroup'$}!is a proposition} for any $e:\isunital(G)$.
+
+  Since a semigroup $G$ is assumed to be a set, we note that the types of the inverse laws are propositions. Therefore it suffices to show that any two inverse operations satisfying the inverse laws are homotopic.
+
+  Let $x\mapsto x^{-1}$ and $x\mapsto x^{-1'}$ be two inverse operations on a unital semigroup $G$, both satisfying the inverse laws. Then we have the following identifications
+  \begin{align*}
+    x^{-1} & = \mu(e,x^{-1}) \\
+    & = \mu(\mu(x^{-1'},x),x^{-1}) \\
+    & = \mu(x^{-1'},\mu(x,x^{-1})) \\
+    & = \mu(x^{-1'},e) \\
+    & = x^{-1'}
+  \end{align*}
+  for any $x:G$. Thus the two inverses of $x$ are the same, and the claim follows.
+\end{proof}
+
+\begin{eg}
+  The type $\Z$ of integers\index{Z@{$\Z$}!is a group}\index{group!Z@{$\Z$}} has the structure of a group, with the group operation being addition. The fact that $\Z$ is a set was shown in \cref{ex:set_coprod}, and the group laws were shown in \cref{ex:int_group_laws}. 
+\end{eg}
+
+\begin{eg}
+  Given a set $X$, we define  the \define{automorphism group}\index{automorphism group|textbf}\index{group!automorphism group of a set|textbf}\index{set!automorphism group|textbf} of $X$ by\index{Aut(X)@{$\Aut(X)$}|see {automorphism group}}
+  \begin{equation*}
+    \Aut(X)\defeq (X\simeq X).
+  \end{equation*}
+  The group operation of $\Aut(X)$ is given by composition of equivalences, and the unit of the group is the identity function. An important special case of the automorphism groups is the \define{symmetric group}\index{symmetric group|textbf}\index{S n@{$S_n$}|see {symmetric group}}\index{group!S n@{$S_n$}|textbf}
+  \begin{equation*}
+    S_n\defeq \Aut(\Fin{n}).
+  \end{equation*}
+\end{eg}
+
+\subsection{Group homomorphisms}
+
+\begin{defn}
+  Let $G$ and $H$ be (semi)groups. A \define{homomorphism}\index{homomorphism!of semigroups|textbf}\index{semigroup!homomorphism|textbf}\index{homomorphism!of groups|textbf}\index{group!homomorphism|textbf}\index{group homomorphism|textbf}\index{semigroup homomorphism|textbf} of (semi)groups from $G$ to $H$ is a pair $(f,\mu_f)$ consisting of a function $f:G\to H$ between their underlying types, and a homotopy
+  \begin{equation*}
+    \mu_f:\prd{x,y:G} f(\mu_G(x,y))=\mu_H(f(x),f(y))
+  \end{equation*}
+  witnessing that $f$ preserves the binary operation of $G$. We will write\index{hom(G,H) for semigroups@{$\hom(G,H)$ for semigroups}|textbf}\index{hom(G,H) for groups@{$\hom(G,H)$ for groups}|textbf}
+  \begin{equation*}
+    \hom(G,H)
+  \end{equation*}
+  for the type of all (semi)group homomorphisms from $G$ to $H$.
+\end{defn}
+
+\begin{rmk}\label{rmk:is-set-hom-semigroup}
+  Since it is a property for a function to preserve the multiplication of a semigroup, it follows easily that equality of semigroup homomorphisms is equivalent to the type of homotopies between their underlying functions. In particular, it follows that the type of homomorphisms of semigroups is a set.
+\end{rmk}
+
+\begin{rmk}\label{rmk:category-semigroup}
+  The \define{identity homomorphism}\index{identity homomorphism!of semigroups|textbf}\index{identity homomorphism!of groups|textbf} on a (semi)group $G$ is defined to be the pair consisting of
+  \begin{align*}
+    \idfunc & : G \to G \\
+    \lam{x}\lam{y}\refl{} & : \prd{x,y:G} \mu_G(x,y) = \mu_G(x,y).
+  \end{align*}
+  Let $f:G\to H$ and $g:H\to K$ be (semi)group homomorphisms. Then the composite function $g\circ f:G\to K$ is also a (semi)group homomorphism\index{composition!of semigroup homomorphisms|textbf}\index{composition!of group homomorphisms|textbf}, since we have the identifications
+  \begin{equation*}
+    \begin{tikzcd}
+      {g(f(\mu_G(x,y)))} \arrow[r,equals] & {g(\mu_H(f(x),f(y)))} \arrow[r,equals] & {\mu_K(g(f(x)),g(f(y)))}.
+    \end{tikzcd}
+  \end{equation*}
+  Since the identity type of (semi)group homomorphisms is equivalent to the type of homotopies between (semi)group homomorphisms it is easy to see that (semi)group homomorphisms satisfy the laws of a category, i.e., that we have the identifications
+  \begin{align*}
+    \idfunc\circ f & = f \\
+    g\circ \idfunc & = g \\
+    (h\circ g) \circ f & = h \circ (g \circ f)
+  \end{align*}
+  for any composable (semi)group homomorphisms $f$, $g$, and $h$.
+\end{rmk}
+
+\begin{defn}
+Let $h:\hom(G,H)$ be a homomorphism of (semi)groups. Then $h$ is said to be an \define{isomorphism}\index{group!isomorphism|textbf}\index{isomorphism!of groups|textbf}\index{semigroup!isomorphism|textbf}\index{isomorphism!of semigroups|textbf} if it comes equipped with an element of type $\isiso(h)$\index{is-iso@{$\isiso(h)$}!for semigroup homomorphisms|textbf}\index{is-iso@{$\isiso(h)$}!for group homomorphisms|textbf}, consisting of triples $(h^{-1},p,q)$ consisting of a homomorphism $h^{-1}:\hom(H,G)$ of semigroups and identifications
+\begin{equation*}
+p:h^{-1}\circ h=\idfunc[G]\qquad\text{and}\qquad q:h\circ h^{-1}=\idfunc[H]
+\end{equation*}
+witnessing that $h^{-1}$ satisfies the inverse laws\index{inverse laws!for semigroup isomorphisms}\index{inverse laws!for group isomorphisms}We write $G\cong H$ for the type of all isomorphisms of semigroups from $G$ to $H$, i.e.,
+\begin{equation*}
+G\cong H \defeq \sm{h:\hom(G,H)}\sm{k:\hom(H,G)} (k\circ h = \idfunc[G])\times (h\circ k=\idfunc[H]).
+\end{equation*}
+\end{defn}
+
+If $f$ is an isomorphism, then its inverse is unique. In other words, being an isomorphism is a property.
+
+\begin{lem}
+  For any semigroup homomorphism $h:\hom(G,H)$, the type
+  \begin{equation*}
+    \isiso(h)
+  \end{equation*}
+  is a proposition.\index{is-iso@{$\isiso(h)$}!is a proposition} It follows that the type $G\cong H$ is a set for any two semigroups $G$ and $H$.
+\end{lem}
+
+\begin{proof}
+  Let $k$ and $k'$ be two inverses of $h$. In \cref{rmk:is-set-hom-semigroup} we have observed that the type of semigroup homomorphisms between any two semigroups is a set. Therefore it follows that the types $h\circ k=\idfunc$ and $k\circ h=\idfunc$ are propositions, so it suffices to check that $k=k'$. In \cref{rmk:is-set-hom-semigroup} we also observed that the equality type $k=k'$ is equivalent to the type of homotopies $k\htpy k'$ between their underlying functions. We construct a homotopy $k\htpy k'$ by the usual argument:
+  \begin{equation*}
+    \begin{tikzcd}
+      k(y) \arrow[r,equals] & k(h(k'(y)) \arrow[r,equals] & k'(y).
+    \end{tikzcd}\qedhere
+  \end{equation*}
+\end{proof}
+
+\subsection{Isomorphic groups are equal}
+
+\begin{lem}\label{lem:grp_iso}
+  A (semi)group homomorphism $h:\hom(G,H)$ is an isomorphism if and only if its underlying map is an equivalence. Consequently, there is an equivalence
+  \begin{equation*}
+    (G\cong H)\simeq \sm{e:G\simeq H}\prd{x,y:G}e(\mu_G(x,y))=\mu_H(e(x),e(y))
+  \end{equation*}
+\end{lem}
+
+\begin{proof}
+  If $h:\hom(G,H)$ is an isomorphism, then the inverse semigroup homomorphism also provides an inverse of the underlying map of $h$. Thus we obtain that $h$ is an equivalence. For the converse, suppose that the underlying map of $f:G\to H$ is an equivalence. Then its inverse is also a semigroup homomorphism, since we have
+  \begin{align*}
+    f^{-1}(\mu_H(x,y)) & = f^{-1}(\mu_H(f(f^{-1}(x)),f(f^{-1}(y)))) \\
+               & = f^{-1}(f(\mu_G(f^{-1}(x),f^{-1}(y)))) \\
+               & = \mu_G(f^{-1}(x),f^{-1}(y)). \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{defn}
+Let $G$ and $H$ be a semigroups in a univalent universe $\UU$. We define the family of maps\index{iso-eq for semigroups@{$\isoeq$ for semigroups}}
+\begin{equation*}
+\isoeq : (G=H)\to (G\cong H)
+\end{equation*}
+indexed by $H:\semigroup_\UU$ by $\isoeq(\refl{})\defeq\idfunc[G]$.
+\end{defn}
+
+\begin{thm}\label{thm:iso-eq-semigroup}
+Consider a semigroup $G$ in a univalent universe $\UU$. Then the family of maps\index{identity type!of Semigroup@{of $\semigroup_\UU$}}\index{Semigroup@{$\semigroup_\UU$}!identity type}\index{characterization of identity type!of Semigroup@{of $\semigroup_\UU$}}
+\begin{equation*}
+\isoeq : (G=H)\to (G\cong H)
+\end{equation*}
+indexed by $H:\semigroup_\UU$ is a family of equivalences.
+\end{thm}
+
+\begin{proof}
+By the fundamental theorem of identity types \cref{thm:id_fundamental}\index{fundamental theorem of identity types} it suffices to show that the total space
+\begin{equation*}
+\sm{H:\semigroup_\UU}G\cong H
+\end{equation*}
+is contractible. Since the type of isomorphisms from $G$ to $H$ is equivalent to the type of equivalences from $G$ to $H$ it suffices to show that the type
+\begin{equation*}
+  \sm{H:\semigroup_\UU}\sm{e:\eqv{G}{H}}\prd{x,y:G}e(\mu_G(x,y))=\mu_{H}(e(x),e(y)))
+\end{equation*}
+is contractible. Since $\semigroup_\UU\jdeq\sm{H:\Set_\UU}\hasassociativemul(H)$ we are in position to apply the structure identity principle stated in \cref{thm:structure-identity-principle}. Note that $H\mapsto G\simeq H$ is an identity system on $\Set_\UU$ at the set $G$. By condition (v) of \cref{thm:structure-identity-principle} it therefore suffices to show that the type
+\begin{equation*}
+  \sm{\mu':\hasassociativemul(G)}\prd{x,y:G}\mu_G(x,y)=\mu'(x,y)
+\end{equation*}
+is contractible. This follows by function extensionality, since associativity of a binary operation on a set is a proposition.
+\end{proof}
+
+\begin{cor}
+The type $\semigroup_\UU$ is a $1$-type.\index{Semigroup@{$\semigroup_\UU$}!is a 1-type@{is a $1$-type}}
+\end{cor}
+
+\begin{proof}
+  The identity types of $\semigroup_\UU$ are sets because they are equivalent to the sets of isomorphisms between semigroups.
+\end{proof}
+
+We now turn to the proof that isomorphic groups are equal. Analogously to the map $\isoeq$ of semigroups, we have a map $\isoeq$ of groups. Note, however, that the domain of this map is now the identity type $G=H$ of the \emph{groups} $G$ and $H$, so the maps $\isoeq$ of semigroups and groups are not exactly the same maps.
+
+\begin{defn}
+  Let $G$ and $H$ be groups in a univalent universe $\UU$. We define the family of maps\index{iso-eq for groups@{$\isoeq$ for groups}}
+  \begin{equation*}
+    \isoeq : (G=H)\to (G\cong H)
+  \end{equation*}
+  indexed by $H:\Group_\UU$ by $\isoeq(\refl{})\defeq\idfunc[G]$.
+\end{defn}
+
+\begin{thm}
+  For any two groups $G$ and $H$ in a univalent universe $\UU$, the map\index{identity type!of Group@{of $\group_\UU$}}\index{Group@{$\group_\UU$}!characterization of identity type}\index{characterization of identity type!of Group@{of $\Group_\UU$}}
+  \begin{equation*}
+    \isoeq:(G=H)\to (G\cong H)
+  \end{equation*}
+  is an equivalence.
+\end{thm}
+
+\begin{proof}
+  Let $G$ and $H$ be groups in $\UU$, and write $UG$ and $UH$ for their underlying semigroups, respectively. Then we have a commuting triangle
+  \begin{equation*}
+    \begin{tikzcd}[column sep=0]
+      (G=H) \arrow[rr,"\apfunc{\proj 1}"] \arrow[dr,swap,"\isoeq"] & & (UG=UH) \arrow[dl,"\isoeq"] \\
+      \phantom{(UG=UH)} & (G\cong H)
+    \end{tikzcd}
+  \end{equation*}
+  Since being a group is a property of semigroups it follows that the projection map $\group_\UU\to\semigroup_\UU$ forgetting the unit and inverses, is an embedding. Thus the top map in this triangle is an equivalence. The map on the right is an equivalence by \cref{thm:iso-eq-semigroup}, so the claim follows by the 3-for-2 property.
+\end{proof}
+
+\begin{cor}
+  The type of groups is a $1$-type.\index{Group@{$\group_\UU$}!is a 1-type@{is a $1$-type}}
+\end{cor}
+
+\subsection{Homotopy groups of types}
+\index{homotopy group|(}
+
+Since the identity type gives every type groupoidal structure, we can construct for every type $A$ equipped with a base point $a:A$ a sequence of groups $\pi_n(A,a)$ indexed by $n\geq 1$. In order to construct this sequence of groups, we first define the \emph{loop space} operation, which takes pointed types to pointed types.
+
+\begin{defn}
+  The type of \define{pointed types}\index{pointed type|textbf} in a universe $\UU$ is defined as\index{U *@{$\UU_\ast$}|textbf}
+  \begin{equation*}
+    \UU_\ast\defeq\sm{X:\UU}X.
+  \end{equation*}
+  Given two pointed types $A$ and $B$ with base points $a$ and $b$ respectively, we define the type of \define{pointed maps}\index{pointed map|textbf}\index{A arrow* B@{$A\to_\ast B$}|see {pointed map}}
+  \begin{equation*}
+    (A\to_\ast B)\defeq\sm{f:A\to B}f(a)=b.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}\label{defn:loop-spaces}
+  Consider a universe $\UU$. We define the \define{loop space}\index{loop space|textbf}\index{O (A)@{$\loopspace{A}$}|see {loop space}} operation
+  \begin{equation*}
+    \loopspacesym : \UU_\ast\to\UU_\ast
+  \end{equation*}
+  by $\loopspace{A,a}\defeq(a=a,\refl{})$. Furthermore, we define for every $A:\UU_\ast$ the \define{iterated loop space}\index{iterated loop space|textbf}\index{O n(A)@{$\loopspace[n]{A}$}|see {iterated loop space}} $\loopspace[n]{A}$ recursively by
+  \begin{align*}
+    \loopspace[0]{A}\defeq A \\
+    \loopspace[n+1]{A}\defeq\loopspace{\loopspace[n]{A}}.
+  \end{align*}
+\end{defn}
+
+\begin{eg}\label{eg:loop-spaces}
+  If $A$ is a pointed $1$-type\index{pointed 1-type@{pointed $1$-type}}, then the loop space $\loopspace{A}$ is a set. Furthermore, it has the structure of a group. Its unit is $\refl{}$, and the group operation is given by concatenation of identifications. This satisfies the group laws, since the group laws are just a special case of the groupoid laws for identity types, constructed in \cref{sec:groupoid}. Thus we see that the loop space of a pointed $1$-type is a group\index{loop space!of a 1-type is a group@{of a $1$-type is a group}}\index{group!loop space of a 1-type@{loop space of a $1$-type}}.
+\end{eg}
+
+If $A$ is a pointed type, but not assumed to be $1$-truncated, then we can still get 
+
+\begin{defn}
+  Consider a pointed type $A$ with base point $a:A$, and let $n\geq 1$. Then we define the \define{$n$-th homotopy group}\index{homotopy group|textbf}\index{group!homotopy group|textbf} $\pi_n(A)$\index{p  n(A)@{$\pi_n(A)$}|see {homotopy group}} of $A$ at $a$ to be the group with underlying set
+  \begin{equation*}
+    \pi_n(A)\defeq\trunc{0}{\loopspace[n]{A}}
+  \end{equation*}
+  The unit of the group is $\eta(\refl{})$ and the group operation is the unique binary operation such that
+  \begin{equation*}
+    \eta(r)\eta(s)=\eta(\ct{r}{s})
+  \end{equation*}
+  for every $r,s:\loopspace[n]{A}$. The group $\pi_1(A)$\index{p  1(A)@{$\pi_1(A)$}|see {fundamental group}} of a pointed type is called the \define{fundamental group}\index{fundamental group|textbf}\index{group!fundamental group|textbf} of $A$ at its base point $a:A$.
+\end{defn}
+
+\begin{rmk}
+  Note that for $n=0$, we can still define the set
+  \begin{equation*}
+    \pi_0(A)\defeq\trunc{0}{A}.
+  \end{equation*}
+  However, this set does not necessarily come equipped with the structure of a group.
+\end{rmk}
+
+\begin{prp}\label{prp:homotopy-group-loop-space}
+  For any pointed type $A$ and any $n\geq 1$ we have an isomorphism
+  \begin{equation*}
+    \pi_{n+1}(A)\cong \pi_n(\loopspace{A}).
+  \end{equation*}
+\end{prp}
+
+\begin{proof}
+  First, observe that we have a pointed equivalence
+  \begin{equation*}
+    \loopspace{\loopspace[n]{A}}\equiv_\ast\loopspace[n]{\loopspace{A}}.
+  \end{equation*}
+  This equivalence is constructed by induction on $n$, and also preserves the concatenation operation. Using this equivalence, we obtain a group isomorphism
+  \begin{equation*}
+    \pi_{n+1}(A)\jdeq \trunc{0}{\loopspace{\loopspace[n]{A}}}\cong\trunc{0}{\loopspace[n]{\loopspace{A}}} \jdeq \pi_n(\loopspace{A}).\qedhere
+  \end{equation*}
+\end{proof}
+
+Homotopy groups are important algebraic invariants of a type. For example, they can be used to show that two pointed types $A$ and $B$ are not equivalent by showing that two types $A$ and $B$ have non-isomorphic homotopy groups. The study of homotopy groups of types is an intricate and complicated subject, analogous to algebraic topology. Since the homotopy groups of types are obtained in such a canonical manner from the identity types, which are inductively generated by just the reflexivity identification, the subject of studying homotopy groups of types is also called \emph{synthetic homotopy theory}. In the final section of this book we will show that the fundamental group of the circle, which is introduced as a \emph{higher inductive type}, is $\Z$. In this section we will show that equivalent types have isomorphic homotopy groups, and that the homotopy groups $\pi_n(A)$ are abelian if $n\geq 2$.
+
+\begin{defn}
+  Consider a pointed map $f:A\to_\ast B$ between two pointed types $A$ and $B$, where $p:f(a)=b$. Then we define the pointed map\index{functorial action!of O@{of $\loopspacesym$}|textbf}
+  \begin{equation*}
+    \loopspace{f}:\loopspace{A}\to_\ast\loopspace{B}
+  \end{equation*}
+  by $\loopspace{f}(r)\defeq \ct{(\ct{p^{-1}}{\ap{f}{r}})}{p}$. The identification witnessing that this is indeed a pointed map is obtained from the fact that $\ap{f}{\refl{}}\jdeq\refl{}$ and $\ct{p^{-1}}{p}=\refl{}$.
+
+  Similarly, we define $\loopspace[n]{f}:\loopspace[n]{A}\to_\ast\loopspace[n]{B}$ recursively by\index{functorial action!of O n@{of $\loopspacesym^n$}|textbf}
+  \begin{align*}
+    \loopspace[0]{f} & \defeq f \\
+    \loopspace[n+1]{f} & \defeq \loopspace{\loopspace[n]{f}}.
+  \end{align*}
+  The functorial action of $\Omega^n$ together with the functorial action of set truncation yield a functorial action\index{functorial action!of p n@{of $\pi_n$}|textbf}
+  \begin{equation*}
+    \pi_n(f):\pi_n(A)\to\pi_n(B)
+  \end{equation*}
+  for every pointed map $f:A\to_\ast B$. 
+\end{defn}
+
+\begin{rmk}
+  Since action of paths preserves path concatenation, it follows that $\Omega^n(f)$ preserves path concatenation, for each $n\geq 1$. Consequently, the maps
+  \begin{equation*}
+    \pi_n(f):\pi_n(A)\to\pi_n(B)
+  \end{equation*}
+  are group homomorphisms.
+\end{rmk}
+
+\begin{prp}
+  Consider a pointed equivalence $e:A\simeq_\ast B$ between two pointed types $A$ and $B$. Then we obtain group isomorphisms
+  \begin{equation*}
+    \pi_n(e):\pi_n(A)\cong\pi_n(B)
+  \end{equation*}
+  for all $n\geq 1$.
+\end{prp}
+
+\begin{proof}
+  For any pointed equivalence $e:A\simeq_\ast B$ it follows that $\pi_n(e)$ is also an equivalence. Using \cref{lem:grp_iso}, the claim now follows.
+\end{proof}
+
+\subsection{The Eckmann-Hilton argument}
+
+\index{Eckmann-Hilton argument|(}
+The Eckmann-Hilton argument is used to show that $\pi_n(A)$ is an abelian group for all $n\geq 2$. This is achieved by constructing an identification
+\begin{equation*}
+  \ct{p}{q}=\ct{q}{p}
+\end{equation*}
+for all $p,q:\loopspace[2]{A}$. Note that identification elimination is not immediately applicable here, since both $p$ and $q$ are identifications of type $\refl{a}=\refl{a}$ with neither endpoint free. Therefore, we must come up with something else.
+
+\begin{defn}
+  Consider a binary operation $f:A\to(B\to C)$. The \define{binary action on paths}\index{binary action on paths|textbf}\index{action on paths!binary action on paths|textbf}\index{action on paths!ap-binary@{$\apbinary_f$}|textbf} of $f$ is the family of functions\index{ap-binary@{$\apbinary_f$}|textbf}
+  \begin{equation*}
+    \apbinary_f:(x=x')\to ((y=y') \to (f(x,y)=f(x',y'))
+  \end{equation*}
+  indexed by $x,x':A$ and $y,y':B$ given by $\apbinary_f(\refl{},\refl{})\defeq\refl{}$.
+\end{defn}
+
+\begin{lem}\label{lem:laws-ap-binary}
+  The binary action on paths of $f:A\to(B\to C)$ satisfies the following laws:
+  \begin{align*}
+    \apbinary_f(\refl{},q) & = \ap{f(x)}{q} \\
+    \apbinary_f(p,\refl{}) & = \ap{f(\blank,y)}{p}
+  \end{align*}
+  and moreover both triangles in the following diagram commute:
+  \begin{equation*}
+    \begin{tikzcd}[column sep=10em,row sep=4em]
+      f(x,y) \arrow[r,equals,"{\ap{f(\blank,y)}{p}}"] \arrow[d,equals,swap,"{\ap{f(x,\blank)}{q}}"] \arrow[dr,equals,"{\apbinary_f(p,q)}"] & f(x',y) \arrow[d,equals,"{\ap{f(x',\blank)}{q}}"] \\
+      f(x,y') \arrow[r,equals,swap,"{\ap{f(\blank,y')}{p}}"] & f(x',y')
+    \end{tikzcd}
+  \end{equation*}
+\end{lem}
+
+\begin{proof}
+  The proof is immediate by identification elimination on $p$ and $q$, where applicable.
+\end{proof}
+
+\begin{eg}
+  One particular binary operation to which we can apply the binary action on paths is concatenation of identifications
+  \begin{equation*}
+    \ct{\blank}{\blank}:(x=y)\to((y=z)\to (x=z))
+  \end{equation*}
+  This results in the \define{horizontal concatenation}\index{identity type!horizontal concatenation|textbf}\index{horizontal concatenation|textbf} operation\index{r .h s@{$\ct[h]{r}{s}$}|see {horizontal concatenation}}
+  \begin{equation*}
+    \ct[h]{\blank}{\blank} : (p=p')\to ((q=q') \to (\ct{p}{q}=\ct{p'}{q'})).
+  \end{equation*}
+  In other words, for any two identifications $r:p=p'$ and $s:q=q'$ as in the diagram
+  \begin{equation*}
+    \begin{tikzcd}[column sep=huge]
+      x \arrow[r,equals,bend left=30,"p",""{name=A,below}] \arrow[r,equals,bend right=30,""{name=B,above},"{p'}"{below}] \arrow[from=A,to=B,phantom,"r\Downarrow"] & y \arrow[r,equals,bend left=30,"q",""{name=C,below}] \arrow[r,equals,bend right=30,""{name=D,above},"{q'}"{below}] \arrow[from=C,to=D,phantom,"s\Downarrow"] & z.
+    \end{tikzcd}
+  \end{equation*}
+  we obtain $\ct[h]{r}{s}\defeq\apbinary_{\ct{\blank}{\blank}}(r,s):\ct{p}{q}=\ct{p'}{q'}$. The \define{vertical concatenation}\index{identity type!vertical concatenation|textbf}\index{vertical concatenation|textbf} operation, which concatenates $r:p=p'$ and $r':p'=p''$ as in the diagram
+  \begin{equation*}
+    \begin{tikzcd}[column sep=7em]
+      x \arrow[r,equals,bend left=60,"p",""{name=A,below}] \arrow[r,equals,""{name=B},""{name=E,below},"{p'}"{near end}] \arrow[r,equals,bend right=60,"{p''}"{below},""{name=F,above}] \arrow[from=A,to=B,phantom,"r\Downarrow"] \arrow[from=E,to=F,phantom,"{r'\Downarrow}"] 
+      & y
+    \end{tikzcd}
+  \end{equation*}
+  is given by ordinary concatenation of identifications.
+\end{eg}
+
+\begin{lem}\label{lem:unit-laws-horizontal-concat}
+  Horizontal concatenation satisfies the following left and right unit laws:\index{unit laws!for horizontal concatenation}\index{horizontal concatenation!unit laws}
+  \begin{align*}
+    \ct[h]{\refl{\refl{}}}{s} & = s \\
+    \ct[h]{r}{\refl{\refl{}}} & = r.
+  \end{align*}
+\end{lem}
+
+\begin{proof}
+  This follows by identification elimination on $r$ and $s$, or alternatively via \cref{lem:laws-ap-binary}.
+\end{proof}
+
+In the following lemma we establish the \define{interchange law} for horizontal and vertical concatenation.
+
+\begin{lem}\label{lem:interchange-law}
+Consider a diagram of the form\index{interchange law!of horizontal and vertical concatenation}\index{horizontal concatenation!interchange law}\index{vertical concatenation!interchange law}
+\begin{equation*}
+\begin{tikzcd}[column sep=7em]
+x \arrow[r,equals,bend left=60,"p",""{name=A,below}] \arrow[r,equals,""{name=B},""{name=E,below}] \arrow[r,equals,bend right=60,"{p''}"{below},""{name=F,above}] \arrow[from=A,to=B,phantom,"r\Downarrow"] \arrow[from=E,to=F,phantom,"{r'\Downarrow}"] 
+& y \arrow[r,equals,bend left=60,"q",""{name=C,below}] \arrow[r,equals,""{name=G,above},""{name=H,below}] \arrow[r,equals,bend right=60,""{name=D,above},"{q''}"{below}] \arrow[from=C,to=G,phantom,"s\Downarrow"] \arrow[from=H,to=D,phantom,"{s'\Downarrow}"] & z.
+\end{tikzcd}
+\end{equation*}
+Then there is an identification
+\begin{equation*}
+  \ct[h]{(\ct{r}{r'})}{(\ct{s}{s'})}=\ct{(\ct[h]{r}{s})}{(\ct[h]{r'}{s'})}.
+\end{equation*}
+\end{lem}
+
+\begin{proof}
+  We use path induction on both $r$ and $s$. Then it suffices to show that
+  \begin{equation*}
+    \ct[h]{(\ct{\refl{}}{r'})}{(\ct{\refl{}}{s'})}=\ct{(\ct[h]{\refl{}}{\refl{}})}{(\ct[h]{r'}{s'})}
+  \end{equation*}
+  Using the unit laws for ordinary concatenation, we see that both sides reduce to $\ct[h]{r'}{s'}$.
+\end{proof}
+
+\begin{thm}
+  Consider a pointed type $A$, and let $r,s:\loopspace[2]{A}$. Then there is an identification
+  \begin{equation*}
+    \ct{r}{s}=\ct{s}{r}
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  First we observe that $\ct{r}{s}=\ct[h]{r}{s}$ by the following calculation using the unit laws from \cref{lem:unit-laws-horizontal-concat} and the interchange law from \cref{lem:interchange-law}:
+  \begin{align*}
+    \ct{r}{s} & = \ct{(\ct[h]{r}{\refl{\refl{}}})}{(\ct[h]{\refl{\refl{}}}{s})} \\
+              & = \ct[h]{(\ct{r}{\refl{\refl{}}})}{(\ct{\refl{\refl{}}}{s})} \\
+              & = \ct[h]{r}{s}
+  \end{align*}
+  Similarly, we observe that $\ct[h]{r}{s}=\ct{s}{r}$ by the following calculation:
+  \begin{align*}
+    \ct[h]{r}{s} & = \ct[h]{(\ct{\refl{\refl{}}}{r})}{(\ct{s}{\refl{\refl{}}})} \\
+                 & = \ct{(\ct[h]{\refl{\refl{}}}{s})}{(\ct[h]{r}{\refl{\refl{}}})} \\
+                 & = \ct{s}{r}.
+  \end{align*}
+  These two calculations combined prove the claim.
+\end{proof}
+
+\begin{cor}
+For $n\geq 2$, the $n$-th homotopy group of any pointed type is abelian.\index{homotopy group!is abelian for n geq 2@{is abelian for $n\geq 2$}}
+\end{cor}
+
+\begin{proof}
+  By \cref{prp:homotopy-group-loop-space} it follows that $\pi_n(A)$ is isomorphic to the second homotopy group of some pointed type, for every $n\geq 2$. Therefore it suffices to prove the claim for $\pi_2(A)$ for every pointed type $A$.
+  
+  Our goal is to show that 
+  \begin{equation*}
+    \prd{r,s:\pi_2(A)} rs=sr.
+  \end{equation*}
+  Since we are constructing an identification in a set, we can use the dependent universal property of $0$-truncation on both $r$ and $s$, stated in \cref{thm:set-truncation}. Therefore it suffices to show that
+  \begin{equation*}
+    \prd{r,s:\loopspace[2]{A}} \eta(r)\eta(s)=\eta(s)\eta(r).
+  \end{equation*}
+  The claim now follows, because
+  \begin{equation*}
+    \eta(r)\eta(s)=\eta(\ct{r}{s})=\eta(\ct{s}{r})=\eta(s)\eta(r).\qedhere
+  \end{equation*}
+\end{proof}
+\index{homotopy group|)}
+\index{Eckmann-Hilton argument|)}
+
+\subsection{Concrete versus abstract groups in univalent mathematics}
+
+In univalent mathematics there is another exciting perspective on group theory. We won't be able to go in full details here, but we can sketch some of key ideas. To learn more about this beautiful univalent perspective on group theory, I recommend the forthcoming \emph{Symmetry} book \cite{symmetrybook}.
+
+We saw in \cref{eg:loop-spaces} that for every pointed connected $1$-type $X$ we obtain a group with underlying type $\loopspace{X}$. All groups can be constructed in this way. In fact, for every group $G$ in $\UU$ the type
+\begin{equation*}
+  \sm{B:\mathsf{Pointed\usc{}Connected\usc{}}1\mathsf{\usc{}Type}_\UU}G\cong\loopspace{B}
+\end{equation*}
+of pointed connected $1$-types $B$ equipped with a group isomorphism from $G$ to $\loopspace{B}$ is contractible. We write $BG$ for the unique pointed connected $1$-type whose loop space is isomorphic to $G$. The pointed type $BG$ is also called the \define{delooping}\index{delooping|textbf}\index{group!delooping|textbf} of $G$, or the \define{classifying type}\index{classifying type|textbf}\index{group!classifying type|textbf} of $G$. The fact that the above type is contractible is of course heavily reliant on the univalence axiom.
+
+\begin{eg}
+  We have already seen that
+  \begin{equation*}
+    S_n\cong\loopspace{\BS_n},
+  \end{equation*}
+  i.e., that the loop space of the type of all finite types of cardinality $n$ is equivalent to the symmetric group $S_n$. The type $\BS_n$ is of course a pointed connected $1$-type, so $BS_n$ is indeed the classifying type of the symmetric group $S_n$.\index{BS n@{$\BS_n$}!is classifying type of symmetric group}
+\end{eg}
+
+Since the map
+\begin{equation*}
+  \loopspacesym:\mathsf{Pointed\usc{}Connected\usc{}}1\mathsf{\usc{}Type}_\UU\to\Grp_\UU
+\end{equation*}
+is an equivalence, we obtain two perspectives on the type of all groups. The elements of the type $\Grp_\UU$ are groups according to the traditional definition of groups. We call such groups \define{abstract groups}\index{group!abstract group|textbf}\index{abstract group|textbf}. On the other hand, pointed connected $1$-types $B$ are \define{concrete groups}\index{concrete group|textbf}\index{group!concrete group|textbf} in the sense that the contain an object $\ast:B$, and the group $B$ represents is the group of self-identifications (i.e., symmetries) of the base point $\ast:B$. Thus we see that when we present a group as a pointed connected $1$-type, then we \emph{concretely} manifest that group as the group of symmetries of some object.
+
+We can also bring group homomorphisms into the mix: for every group homomorphism $f:G\to H$ the type of pointed maps $b:BG\to_\ast BH$ equipped with a homotopy witnessing 
+\begin{equation*}
+  \begin{tikzcd}
+    G \arrow[d,swap,"\cong"] \arrow[r,"f"] & H \arrow[d,"\cong"] \\
+    \loopspace{BG} \arrow[r,swap,"\loopspace{b}"] & \loopspace{BH}
+  \end{tikzcd}
+\end{equation*}
+commutes is contractible. In other words, every group homomorphism $f:G\to H$ has a unique \define{delooping} $Bf:BG\to BH$.
+
+We can do all of group theory in this way. For example, traditionally a $G$-set is defined to be a set $X$ equipped with a group homomorphism $G\to\Aut(X)$. That is, the type of \define{abstract $G$-sets}\index{abstract G-set@{abstract $G$-set}|textbf}\index{group!abstract G-set@{abstract $G$-set}|textbf} is defined to be\index{G-Set@{$G\mathsf{\usc{}}\Set_\UU$}|see {abstract $G$-set}}\index{G-Set@{$G\mathsf{\usc{}}\Set_\UU$}|textbf}
+\begin{equation*}
+  G\mathsf{\usc{}}\Set_\UU\defeq\sm{X:\Set_\UU}\hom(G,\Aut(X)).
+\end{equation*}
+However, this definition is equivalent to family $X:BG\to\Set_\UU$ of sets indexed by the classifying type $BG$. Therefore we define \define{concrete $G$-sets}\index{concrete G-set@{concrete $G$-set}|textbf}\index{group!concrete G-set@{concrete $G$-set}|textbf} to be type families $X:BG\to\Set_\UU$. Given a concrete $G$-set $X:BG\to\Set_\UU$, the set being acted upon is the set $X(\ast)$, and the action of $G$ on $X(\ast)$ is given by transport, since the elements of $G$ are equivalent to loops in $BG$.
+
+The type of \define{orbits}\index{orbit}\index{concrete G-set@{concrete $G$-set}!orbit|textbf} of a concrete $G$-set $X:BG\to\Set_\UU$ can then be defined as
+\begin{equation*}
+  X/G\defeq \sm{u:BG}X(u)
+\end{equation*}
+and the type of \define{fixed points}\index{fixed point!of a concrete G-set@{of a concrete $G$-set}|textbf}\index{concrete G-set@{concrete $G$-set}!fixed point|textbf} of $X$ can be defined as
+\begin{equation*}
+  X_G\defeq \prd{u:BG}X(u).
+\end{equation*}
+To see that these definitions make sense, note that the fiber inclusion $X(\ast)\to X/G$ maps each element in the $G$-set $X$ to its orbit. The fiber inclusion is surjective by \cref{ex:is-surjective-fiber-inclusion}, and it maps two elements $x,y:X(\ast)$ to the same orbit precisely when there is a group element $g$ such that $gx=y$. Similarly, for the type of fixed points notice that each $x:X_G$ determines an element $x_\ast:X(\ast)$, which comes equipped with an identification
+\begin{equation*}
+  \apd{x}{g}:gx_\ast=x_\ast
+\end{equation*}
+since the group action of $G$ on $X$ is given by transport.
+
+Also, notice that a subgroup $H$ of $G$ determines an inclusion homomorphism $i:H\to G$, and this inclusion function corresponds uniquely to a pointed map $Bi:BG\to BH$. Since $\loopspace{Bi}$ is an embedding, we note that $Bi$ must be a $0$-truncated map. Therefore, a concrete subgroup of a concrete group $BG$ is defined to be a concrete $G$-set $X$ such that the type of orbits is connected. Such concrete $G$-sets are called \define{transitive}\index{transitive concrete G-set@{transitive concrete $G$-set}|textbf}\index{concrete G-set@{concrete $G$-set}!transitive concrete G-set@{transitive concrete $G$-set}|textbf}.
+
+Dually, we say that a concrete $G$-set $X$ is \define{free}\index{concrete G-set@{concrete $G$-set}!free concrete G-set@{free concrete $G$-set}|textbf}\index{free concrete G-set@{free concrete $G$-set}|textbf} if the type of orbits $X/G$ is a set. To see that this definition makes sense, we use the following generalization of the fundamental theorem of identity types:
+
+\begin{thm}\label{thm:truncated-fundamental}
+  Consider a connected type $A$ equipped with an element $a:A$, and consider a family of types $B(x)$ indexed by $x:A$. Then the following are equivalent:\index{fundamental theorem of identity types!generalization to truncated maps}\index{generalized fundamental theorem of identity types!truncated maps}
+  \begin{enumerate}
+  \item Every family of maps
+    \begin{equation*}
+      f:\prd{x:A}(a=x)\to B(x)
+    \end{equation*}
+    is a family of $k$-truncated maps.
+  \item The total space
+    \begin{equation*}
+      \sm{x:A}B(x)
+    \end{equation*}
+    is $(k+1)$-truncated.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  Recall from \cref{ex:is-trunc-const} that the total space $\sm{x:A}B(x)$ is $(k+1)$-truncated if and only if the base point inclusion
+  \begin{equation*}
+    (x,y):\unit\to\sm{x:A}B(x)
+  \end{equation*}
+  is $k$-truncated for every $(x,y):\sm{x:A}B(x)$. Since the type $A$ is assumed to be connected, this is equivalent to the condition that every base point inclusion of the form
+  \begin{equation*}
+    (a,y):\unit\to\sm{x:A}B(x)
+  \end{equation*}
+  is $k$-truncated. Base point inclusions of this form are homotopic to $\tot{f}$, where
+  \begin{equation*}
+    f:\prd{x:A}(a=x)\to B(x)
+  \end{equation*}
+  is given by $f(a,\refl{})\defeq y$. The condition that $\tot{f}$ is $k$-truncated is by \cref{lem:fib_total} equivalent to the condition that $f$ is a family of $k$-truncated maps. Furthermore, every family of maps $f:\prd{x:A}(a=x)\to B(x)$ is of the above form by the type theoretic Yoneda lemma (\cref{thm:yoneda}), completing the proof. 
+\end{proof}
+
+By the previous theorem it follows that if the type of orbits of a concrete $G$-set $X$ is a set, then the map $g\mapsto gx$ must be an embedding for every $x:X(\ast)$. In other words, the action of $G$ on $X$ is free.
+
+\begin{rmk}
+  \cref{thm:truncated-fundamental} can be generalized further. We include this generalization in \cref{ex:connected-fundamental}.
+\end{rmk}
+
+\begin{eg}
+  Consider two sets $A$ and $B$, and a universe $\UU$ containing both of them. Then the automorphism group $\Aut(B)$ acts on the decidable embeddings $B\demb A$ by precomposition. Its type of orbits is the binomial type\index{binomial type}
+  \begin{equation*}
+    \dbinomtype{A}{B}\defeq\sm{X:\UU_B}X\demb A,
+  \end{equation*}
+  which we introduced in \cref{defn:binomial-type}. By \cref{prp:equiv-binom-type} it follows that $\dbinomtype{A}{B}$ is a set, so the action of $\Aut(B)$ on $B\demb A$ is free. Note that we didn't need to assume that $A$ and $B$ are sets: the action of $\Aut(B)$ on $B\demb A$ is always free.
+
+  Similarly, we have an action of the automorphism group $\Aut(B)$ on the surjective maps $A\twoheadrightarrow B$ by postcomposition. Its type of orbits is the stirling type of the second kind\index{Stirling type of the second kind}
+  \begin{equation*}
+    \stirling{A}{B}\defeq\sm{X:\UU_B}A\twoheadrightarrow X,
+  \end{equation*}
+  which we introduced in \cref{ex:stirling-type-of-the-second-kind}. Assuming that $B$ is a set, it was shown in \cref{ex:stirling-type-of-the-second-kind} that $\stirling{A}{B}$ is a set. In other words, the action of $\Aut(B)$ on $A\twoheadrightarrow B$ is free.
+\end{eg}
+
+\begin{eg}
+  In \cref{ex:prime} we introduced the type\index{prime number}
+  \begin{equation*}
+    \tilde{D}_n\defeq \sm{X:\BS_2}\sm{Y:X\to\F}\Big(\Fin{n}\simeq\prd{x:X}Y(x)\Big).
+  \end{equation*}
+  Notice that this type is the type of orbits of the $\Z/2$-set $D_n$ given by
+  \begin{equation*}
+    D_n(X)\defeq \sm{Y:X\to\F}\Big(\Fin{n}\simeq\prd{x:X}Y(x)\Big).
+  \end{equation*}
+  The fact that this is a family of sets is a nice exercise. Note that there is a surjective morphism of $\Z/2$-sets from $D_n(\Fin{2})$ to the $\Z/2$ set of divisors of $n$, where the action is given by $d\mapsto n/d$. The concrete $\Z/2$-action $D_n$ is transitive precisely when $n$ is either $1$ or a prime, and it is is free precisely when $n$ is not a square. Combining these two observations, we see that $n$ is prime if and only if this action is both transitive and free. In other words, $n$ is prime if and only if the type $\tilde{D}_n$ of orbits is contractible.
+\end{eg}
+
+$G$-sets which are both transitive and free are very special. Such $G$-sets are called \define{$G$-torsors}\index{torsor|textbf}\index{group!torsor|textbf}. Note that a $G$-set $X$ is a $G$-torsor if and only if the type of orbits $X/G$ is contractible. By the fundamental theorem of identity types, this implies that the family of maps
+\begin{equation*}
+  \prd{v:BG}(u=v)\to X(v)
+\end{equation*}
+is a family of equivalences, where $(u,x)$ is the center of contraction of $X/G$. It follows that a concrete $G$-set $X:BG\to\Set_\UU$ is a $G$-torsor if and only if it is in the image of
+\begin{equation*}
+  \idtypevar{} : BG\to (BG\to \Set_\UU).
+\end{equation*}
+However, we know from \cref{ex:idtype-is-emb} that this map is an embedding, so it follows that the type of concrete $G$-torsors is equivalent to $BG$. On the other hand, the type of concrete $G$-torsors is equivalent to the type of abstract $G$-torsors. This suggests that the classifying type $BG$ of any group $G$ can be constructed as the type of abstract $G$-torsors, and this is indeed one way to construct the classifying type of a group $G$.
+
+\begin{exercises}
+  \exitem Consider a set $X$ equipped with an associative binary operation $\mu:X\to (X\to X)$, and suppose that
+  \begin{enumerate}
+  \item The type $X$ is inhabited, i.e., $\brck{X}$ holds.
+  \item The maps $\mu(x,\blank)$ and $\mu(\blank,y)$ are equivalences, for each $x,y:X$.
+  \end{enumerate}
+  Show that $X$ is a group.\index{group}
+  \exitem Let $f:\hom(G,H)$ be a group homomorphism\index{homomorphism!of groups}. Show that $f$ preserves units and inverses, i.e., show that\index{group homomorphism!preserves units and inverses}
+  \begin{align*}
+    f(e_G) & = e_H \\
+    f(x^{-1}) & = f(x)^{-1}.
+  \end{align*}
+  \exitem \label{ex:groupop-embedding}
+  Consider a group $G$. Show that the function
+  \begin{equation*}
+    \mu_G:G\to (G\simeq G)
+  \end{equation*}
+  is an injective group homomorphism.
+  \exitem Let $X$ be a set. Show that the map\index{equiv-eq@{$\equiveq$}!is a group isomorphism}
+  \begin{equation*}
+    \equiveq : (X=X)\to (\eqv{X}{X})
+  \end{equation*}
+  is a group isomorphism.
+  \exitem Consider a group $G$. Show that the map\index{Z@{$\Z$}!is the free group with one generator|textbf}\index{group!free group with one generator|textbf}
+  \begin{equation*}
+    \Grp(\Z,G)\to G
+  \end{equation*}
+  given by $h\mapsto h(\oneZ)$, is an equivalence. In other words, the group $\Z$ satisfies the universal property of the \define{free group on one generator}\index{free group with one generator|textbf}.
+  \exitem Give a direct proof and a proof using the univalence axiom of the fact that all semigroup isomorphisms between unital semigroups preserve the unit. Conclude that isomorphic monoids are equal.\index{isomorphism!of semigroups!preserves unit}\index{characterization of identity type!of Monoid@{of $\monoid_\UU$}}\index{identity type!of Monoid@{of $\monoid_\UU$}}
+  \exitem \label{ex:dihedral-group}Consider an abelian group $A$, and let $D_A\defeq A+A$\index{D A@{$D_A$}|see {generalized dihedral group}}\index{D A@{$D_A$}|textbf} be the set equipped with $1\defeq\inl(0)$, the binary operation ${\blank}\cdot{\blank}:D_A\to (D_A\to D_A)$ defined by
+    \begin{align*}
+    \inl(x)\cdot\inl(y) & \defeq \inl(x+y) \\
+    \inl(x)\cdot\inr(y) & \defeq \inr(-x+y) \\
+    \inr(x)\cdot\inl(y) & \defeq \inr(x+y) \\
+    \inr(x)\cdot\inr(y) & \defeq \inl(-x+y),
+  \end{align*}
+  and the unary operation $(\blank)^{-1}:D_A\to D_A$ defined by
+  \begin{align*}
+    \inl(x)^{-1} & \defeq \inl(-x) \\
+    \inr(x)^{-1} & \defeq \inr(x).
+  \end{align*}
+  Show that $D_A$ equipped with these operations is a group. The group $D_A$ is called the \define{generalized dihedral group}\index{generalized dihedral group|textbf}\index{group!generalized dihedral group|textbf} on $A$. The (ordinary) \define{dihedral group}\index{dihedral group|textbf}\index{group!dihedral group|textbf} $D_k$\index{D k@{$D_k$}|see {dihedral group}}\index{D k@{$D_k$}|textbf} is defined to be $D_k\defeq D_{\Z/k}$.
+  \exitem Recall that a \define{subgroup}\index{subgroup|textbf}\index{group!subgroup|textbf} of a group $G$ in $\UU$ consists of a subtype
+  \begin{equation*}
+    P:G\to\prop_\UU
+  \end{equation*}
+  such that $P$ contains the unit and is closed under the group operation and under inverses.
+  \begin{subexenum}
+  \item Consider a proposition $P$, and let $N_P$ be the subtype of $\Z/2$ given by
+    \begin{equation*}
+      N_P(x)\defeq (x=0)\vee P.
+    \end{equation*}
+    Show that $N_P$ is a subgroup of $\Z/2$.
+  \item Show that the map $P\mapsto N_P$ is an embedding
+    \begin{equation*}
+      \prop_\UU\hookrightarrow\subgroup_\UU(\Z/2).
+    \end{equation*}
+  \end{subexenum}
+  \exitem Recall that a \define{normal subgroup}\index{normal subgroup|textbf}\index{group!normal subgroup|textbf} $H$ of a group $G$ is a subgroup of $G$ such that $xyx^{-1}$ is in $H$ for every $y:H$ and $x:G$. Show that the type of normal subgroups of $G$ in $\UU$ is equivalent to the type
+  \begin{equation*}
+    \sm{H:\Grp_\UU}\sm{f:\hom(G,H)}\issurj(f).
+  \end{equation*}
+  \exitem \label{ex:commutative-binary-operations}For any type $A$, we define the type of \define{commutative binary operations}\index{commutative binary operation|textbf} on $A$ to be
+  \begin{equation*}
+    \Big(\sm{X:\BS_2}A^X\Big)\to A.
+  \end{equation*}
+  If $A$ is a set, show that the map
+  \begin{equation*}
+    \Big(\Big(\sm{X:\BS_2}A^X\Big)\to A\Big)\to\Big(\sm{f:A\to (A\to A)}\prd{x,y:A}f(x,y)=f(y,x)\Big)
+  \end{equation*}
+  given by $h\mapsto \lam{x}\lam{y}h(\Fin{2},(x,y))$ is an equivalence. In other words, show that every commutative operation $f:A\to(A\to A)$ extends uniquely along the map $f\mapsto(\Fin{2},f)$ as in the diagram
+  \begin{equation*}
+    \begin{tikzcd}
+      A^{\Fin{2}} \arrow[dr,"\mu"] \arrow[d,swap,"f\mapsto{(\Fin{2},f)}"] \\
+      \sm{X:\BS_2}A^X \arrow[r,dashed] & A.
+    \end{tikzcd}
+  \end{equation*}
+  Give an informal explanation of this fact in terms fixed points of the concrete $\Z/2$-action on the set of binary operations $A\to (A\to A)$.
+  \exitem Consider a commutative monoid $M$. Define an operation
+  \begin{equation*}
+    \prd{X:\mathbb{F}} M^X\to M
+  \end{equation*}
+  that extends the (binary) monoid operation to the finite unordered $n$-tuples of elements in $M$.
+  \exitem Show that the type of $3$-element groups is equivalent to the type of $2$-element types.
+  \exitem Show that the number of connected components in the type of all groups of order $n$ is as follows, for $n\leq 8$:
+  \begin{center}
+    \begin{tabular}{rllllllll}
+      \emph{order:} & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+      \midrule
+      \emph{number of groups:} & 1 & 1 & 1 & 2 & 1 & 2 & 1 & 5
+    \end{tabular}
+  \end{center}
+  \exitem \label{ex:connected-fundamental}Consider a subtype\index{fundamental theorem of identity types!full generalization}\index{generalized fundamental theorem of identity types}
+  \begin{equation*}
+    P:\UU\to\prop_\VV
+  \end{equation*}
+  of a universe $\UU$. We say that a type $A:\UU$ is a \define{$P$-type}\index{P-type@{$P$-type}|textbf} if $P(A)$ holds, we say that a map $f:A\to B$ is a \define{$P$-map}\index{P-map@{$P$-map}|textbf} if its fibers are $P$-types, and we say that $A$ is \define{$P$-separated}\index{P-separated type@{$P$-separated type}|textbf} if its identity types are $P$-types.
+  
+  Now consider a connected type $A:\UU$ equipped with an element $a:A$, and consider a family of types $B(x):\UU$ indexed by $x:A$. Show that the following are equivalent:
+  \begin{enumerate}
+  \item Every family of maps
+    \begin{equation*}
+      f:\prd{x:A}(a=x)\to B(x)
+    \end{equation*}
+    is a family of $P$-maps.
+  \item The total space
+    \begin{equation*}
+      \sm{x:A}B(x)
+    \end{equation*}
+    is $P$-separated.
+  \end{enumerate}
+  For readers familiar with the notion of $k$-connectedness: Conclude that every $f:\prd{x:A}(a=x)\to B(x)$ is a family of $k$-connected maps if and only if $\sm{x:A}B(x)$ is a $(k+1)$-connected type.
+  \exitem Consider a group $G$ in a universe $\UU$ and a pointed connected $1$-type $B$. In analogy with \cref{thm:quotient_up}, show that the following are equivalent:
+  \begin{enumerate}
+  \item The pointed connected $1$-type $B$ comes equipped with a group homomorphism\index{universal property!of the classifying type of a group|textbf}\index{classifying type!universal property|textbf}
+    \begin{equation*}
+      \varphi:G \to \loopspace{B}
+    \end{equation*}
+    and for every pointed connected $1$-type $C$ that comes equipped with a group homomorphism $\psi:G\to \loopspace{C}$ there is a unique pointed map $f:B\to_\ast C$ equipped with a homotopy witnessing that the triangle
+    \begin{equation*}
+      \begin{tikzcd}[column sep=tiny]
+        & G \arrow[dl,swap,"\varphi"] \arrow[dr,"\psi"] \\
+        \loopspace{B} \arrow[rr,swap,"\loopspace{f}"] & & \loopspace{C}
+      \end{tikzcd}
+    \end{equation*}
+    commutes.
+  \item The pointed connected $1$-type $B$ comes equipped with a group isomorphism
+    \begin{equation*}
+      \varphi:G\cong \loopspace{B}.
+    \end{equation*}
+  \item There is an embedding $i:B\hookrightarrow G\mathsf{\usc{}}\Set_\UU$ such that the triangle
+    \begin{equation*}
+      \begin{tikzcd}[column sep=tiny]
+        \unit \arrow[rr] \arrow[dr,swap,"\mathsf{Pr}_G"] & & B \arrow[dl,"i"] \\
+        & G\mathsf{\usc{}}\Set_\UU
+      \end{tikzcd}
+    \end{equation*}
+    commutes, where $\mathsf{Pr}_G$ is the \define{principal $G$-set}\index{principal G-set@{principal $G$-set}|textbf}\index{group!principal G-set@{principal $G$-set}|textbf}, i.e., $G$ acting on itself from the left.
+  \end{enumerate}
+  \exitem Consider a group $G$ and a pointed connected $1$-type $B$ equipped with a group isomorphism
+  \begin{equation*}
+    \varphi:G\cong \loopspace{B}.
+  \end{equation*}
+  \begin{subexenum}
+  \item Show that the map
+    \begin{equation*}
+      \ev_\ast:(B\to\Set_\UU)\to \sm{X:\Set_\UU}\hom(G,\Aut(X))
+    \end{equation*}
+    sending concrete $G$-sets\index{concrete G-set@{concrete $G$-set}}\index{group!concrete G-set@{concrete $G$-set}} to abstract $G$-sets\index{abstract G-set@{abstract $G$-set}}\index{group!abstract G-set@{abstract $G$-set}} defined by
+    \begin{equation*}
+      \ev_\ast(X)\defeq (X(\ast),g\mapsto \tr_X(\varphi(g)))
+    \end{equation*}
+    is an equivalence. In the remainder of this exercise we will write $gx$ for $\tr_X(\varphi(g),x)$.
+  \item Show that the type $X_G\defeq\prd{u:BG}X(u)$ of concrete fixed points of $X$\index{fixed point!of a concrete G-set@{of a concrete $G$-set}}\index{concrete G-set@{concrete $G$-set}!fixed point} is equivalent to the type
+    \begin{equation*}
+      \sm{x:X(\ast)}gx=x
+    \end{equation*}
+    of \define{fixed points} of the abstract $G$-set $\ev_\ast(X)$.\index{fixed point!of an abstract G-set@{of an abstract $G$-set}|textbf}\index{abstract G-set@{abstract $G$-set}!fixed point|textbf}
+  \item Show that the type $X/G$ of orbits\index{concrete G-set@{concrete $G$-set}!orbit}\index{orbit} of $X$ is connected if and only if the abstract $G$-set $\ev_\ast(X)$ is transitive in the sense that\index{abstract G-set@{abstract $G$-set}!transitive abstract G-set@{transitive abstract $G$-set}|textbf}\index{transitive abstract G-set@{transitive abstract $G$-set}|textbf}
+    \begin{equation*}
+      \forall_{(x:X(\ast))}\issurj(g\mapsto gx)
+    \end{equation*}
+  \item Show that the type $X/G$ of orbits\index{concrete G-set@{concrete $G$-set}!orbit}\index{orbit} of $X$ is a set if and only if the abstract $G$-set $\ev_\ast(X)$ is free\index{abstract G-set@{abstract $G$-set}!free abstract G-set@{free abstract $G$-set}|textbf}\index{free abstract G-set@{free abstract $G$-set}|textbf} in the sense that
+    \begin{equation*}
+      \forall_{(x:X(\ast))}\isinj(g\mapsto gx).
+    \end{equation*}
+  \item Show that the type of abstract $G$-torsors\index{torsor}\index{group!torsor} is equivalent to the type of families $X:B\to\Set_\UU$ with contractible total space.\index{torsor}\index{group!torsor}
+  \end{subexenum}
+  \exitem (Buchholtz) Consider a group $G$ with classifying type $BG$ equipped with a group isomorphism
+  \begin{equation*}
+    \varphi:G\cong \loopspace{BG}.
+  \end{equation*}
+  Define the $G$-type $\concretesubgroup_\UU(G) : BG\to\UU$ of \define{concrete subgroups} of $G$ by\index{concrete subgroup|textbf}\index{group!concrete subgroup|textbf}\index{Concrete-Subgroup@{$\concretesubgroup_\UU(G,u)$}|textbf}
+  \begin{equation*}
+    \concretesubgroup_\UU(G,u)\defeq \sum_{(X:BG\to\Set_\UU)}\sum_{(x:X(u))}\isconn(X/G).
+  \end{equation*}
+  \begin{subexenum}
+  \item Construct an equivalence\index{subgroup}\index{group!subgroup}
+    \begin{equation*}
+      \concretesubgroup_\UU(G,\ast)\simeq\subgroup_\UU(G).
+    \end{equation*}
+  \item Show that $G$ acts on $\concretesubgroup_\UU(G,\ast)$ by conjugation\index{conjugation|textbf}\index{group!conjugation|textbf}, i.e., show that for any $g:G$ we have a commuting square
+    \begin{equation*}
+      \begin{tikzcd}[column sep=1.6em]
+        \concretesubgroup_\UU(G,\ast) \arrow[r,"g"] \arrow[d,swap,"\simeq"] & \concretesubgroup_\UU(G,\ast) \arrow[d,"\simeq"] \\
+        \subgroup_\UU(G) \arrow[r,swap,"H\mapsto\{ghg^{-1}\mid h\in H\}"] & \subgroup_\UU(G)
+      \end{tikzcd}
+    \end{equation*}
+  \item Conclude that the type of normal subgroups of a group $G$\index{normal subgroup}\index{group!normal subgroup} is equivalent to the type of \define{concrete normal subgroups}\index{concrete normal subgroup|textbf}\index{group!concrete normal subgroup|textbf}
+    \begin{equation*}
+      \prd{u:BG}\concretesubgroup_\UU(G,u).
+    \end{equation*}
+  \item Show that the type of normal subgroups of a group $G$ is also equivalent to the type
+    \begin{equation*}
+      \sm{BH:\concretegroup_\UU}\sm{f:BG\to_\ast BH}\isconn(f)
+    \end{equation*}
+  \end{subexenum}
+\end{exercises}
+\index{group|)}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "hott-intro"
+%%% End:
