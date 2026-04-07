@@ -1,0 +1,114 @@
+# =========================
+# Agda / generated files
+# =========================
+
+# Agda interface files
+*.agdai
+
+# HTML / docs output (uncomment if generated locally)
+# html/
+# docs/
+
+# LaTeX / PDF build output (uncomment if relevant)
+# *.aux
+# *.bbl
+# *.bcf
+# *.blg
+# *.fdb_latexmk
+# *.fls
+# *.log
+# *.out
+# *.pdf
+# *.run.xml
+# *.synctex.gz
+# *.toc
+
+# =========================
+# Emacs
+# =========================
+
+# Backup files
+*~
+\#*\#
+
+# Autosave files
+.#*
+
+# Lockfiles
+.emacs.desktop
+.emacs.desktop.lock
+
+# Directory-local settings cache
+.dir-locals.el
+
+# Projectile / transient / lsp caches
+.projectile
+.transient/
+.lsp-session-v1
+.lsp-session-v2
+
+# Eglot / eln / native compilation caches
+.eglot/
+eln-cache/
+
+# Org / flycheck / tramp sometimes leave these around
+*.elc
+
+# =========================
+# VS Code
+# =========================
+
+.vscode/
+
+# If you want to keep shared workspace settings, use this instead:
+# .vscode/*
+# !.vscode/settings.json
+# !.vscode/extensions.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+
+# =========================
+# macOS
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails / filesystem metadata
+._*
+.Spotlight-V100
+.Trashes
+
+# =========================
+# General editor / OS junk
+# =========================
+
+*.swp
+*.swo
+*.tmp
+*.bak
+
+# =========================
+# Language / tooling caches
+# =========================
+
+# Haskell / cabal / stack artifacts, if used in tooling around Agda
+dist/
+dist-newstyle/
+.cabal-sandbox/
+cabal.sandbox.config
+.stack-work/
+
+# Nix / direnv, if local-only
+.direnv/
+
+# Python virtualenvs, if scripts are used
+.venv/
+venv/
+
+# =========================
+# Test / coverage / misc
+# =========================
+
+coverage/
