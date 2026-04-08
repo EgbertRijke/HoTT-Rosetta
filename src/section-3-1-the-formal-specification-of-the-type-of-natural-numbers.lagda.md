@@ -1,7 +1,7 @@
 # 3.1 The formal specification of the type of natural numbers 
 
 ```agda
-module 3-1 where
+module section-3-1-the-formal-specification-of-the-type-of-natural-numbers where
 
 open import universe-levels
 ```

@@ -1,10 +1,10 @@
 # 3.3 Pattern matching
 
 ```agda
-module 3-3 where
+module section-3-3-pattern-matching where
 
-open import 3-1
-open import 3-2
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
+open import section-3-2-addition-on-the-natural-numbers
 ```
 
 Note that in definition 3.2.1 we stated that `add-ℕ` is a function of type `ℕ → (ℕ → ℕ)` satisfying the specification

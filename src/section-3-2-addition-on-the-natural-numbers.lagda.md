@@ -1,9 +1,9 @@
 # 3.2 Addition on the natural numbers
 
 ```agda
-module 3-2 where
+module section-3-2-addition-on-the-natural-numbers where
 
-open import 3-1
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 ```
 
 The type theoretic induction principle of `ℕ` can be used to do all the usual constructions of operations on `ℕ`, and to derive all the familiar properties about natural numbers.

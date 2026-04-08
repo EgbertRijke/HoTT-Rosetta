@@ -1,7 +1,7 @@
 # Chapter 3 The natural numbers
 
 ```agda
-module 3-0 where
+module chapter-3-the-natural-numbers where
 ```
 
 The set of natural numbers is the most important object in mathematics. We quote Bishop, from his Constructivist Manifesto, the first chapter in Foundations of Constructive Analysis [Bishop1967], where he gives a colorful illustration of its importance to mathematics.
@@ -22,3 +22,9 @@ A bit later in the same chapter, he continues:
 > Building on the positive integers, weaving a web of ever more sets and ever more functions, we get the basic structures of mathematics: the rational number system, the real number system, the euclidean spaces, the complex number system, the algebraic number fields, Hilbert space, the classical groups, and so forth.
 > Within the framework of these structures, most mathematics is done.
 > Everything attaches itself to number, and every mathematical statement ultimately expresses the fact that if we perform certain computations within the set of positive integers, we shall get certain results.
+
+```agda
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
+open import section-3-2-addition-on-the-natural-numbers
+open import section-3-3-pattern-matching
+```
