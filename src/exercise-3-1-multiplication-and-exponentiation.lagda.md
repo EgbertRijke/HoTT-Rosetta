@@ -49,8 +49,9 @@ _^ℕ_ = exp-ℕ
 - The definition of multiplication of natural numbers is implemented in `elementary-number-theory.multiplication-natural-numbers`
 - The definition of exponentiation of natural numbers is implemented in `elementary-number-theory.exponentiation-natural-numbers`. This definition fits in the following tower of instantiations:
 
-  ```text
-    power-Commutative-Semiring    from    commutative-algebra.powers-of-elements-semirings
-    power-Semiring                from    ring-theory.powers-of-elements-semirings
-    power-Monoid                  from    group-theory.powers-of-elements-monoids
-  ```
+  | Name                         | Module                                               |
+  | ---------------------------- | -------------------------------------------------- |
+  | `power-ℕ`                    | [`elementary-number-theory.exponentiation-natural-numbers`](https://unimath.github.io/agda-unimath/elementary-number-theory.exponentiation-natural-numbers.html) |
+  | `power-Commutative-Semiring` | [`commutative-algebra.powers-of-elements-semirings`](https://unimath.github.io/agda-unimath/commutative-algebra.powers-of-elements-commutative-semirings.html) |
+  | `power-Semiring`             | [`ring-theory.powers-of-elements-semirings`](https://unimath.github.io/agda-unimath/ring-theory.powers-of-elements-semirings.html)         |
+  | `power-Monoid`               | [`group-theory.powers-of-elements-monoids`](https://unimath.github.io/agda-unimath/group-theory.powers-of-elements-monoids.html)          |
