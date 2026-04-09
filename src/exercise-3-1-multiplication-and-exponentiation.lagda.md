@@ -47,11 +47,11 @@ _^ℕ_ = exp-ℕ
 ## Agda-unimath sources
 
 - The definition of multiplication of natural numbers is implemented in `elementary-number-theory.multiplication-natural-numbers`
-- The definition of exponentiation of natural numbers is implemented in `elementary-number-theory.exponentiation-natural-numbers`. This definition fits in the following tower of instantiations:
+- The definition of exponentiation of natural numbers is implemented in `elementary-number-theory.exponentiation-natural-numbers`. This definition fits in the following tower of instantiations, where each next entry is more specialized than the previous:
 
   | Name                         | Module                                               |
   | ---------------------------- | -------------------------------------------------- |
-  | `power-ℕ`                    | [`elementary-number-theory.exponentiation-natural-numbers`](https://unimath.github.io/agda-unimath/elementary-number-theory.exponentiation-natural-numbers.html) |
-  | `power-Commutative-Semiring` | [`commutative-algebra.powers-of-elements-semirings`](https://unimath.github.io/agda-unimath/commutative-algebra.powers-of-elements-commutative-semirings.html) |
-  | `power-Semiring`             | [`ring-theory.powers-of-elements-semirings`](https://unimath.github.io/agda-unimath/ring-theory.powers-of-elements-semirings.html)         |
   | `power-Monoid`               | [`group-theory.powers-of-elements-monoids`](https://unimath.github.io/agda-unimath/group-theory.powers-of-elements-monoids.html)          |
+  | `power-Semiring`             | [`ring-theory.powers-of-elements-semirings`](https://unimath.github.io/agda-unimath/ring-theory.powers-of-elements-semirings.html)         |
+  | `power-Commutative-Semiring` | [`commutative-algebra.powers-of-elements-semirings`](https://unimath.github.io/agda-unimath/commutative-algebra.powers-of-elements-commutative-semirings.html) |
+  | `power-ℕ`                    | [`elementary-number-theory.exponentiation-natural-numbers`](https://unimath.github.io/agda-unimath/elementary-number-theory.exponentiation-natural-numbers.html) |
