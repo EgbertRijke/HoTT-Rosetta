@@ -43,3 +43,14 @@ exp-ℕ m (succ-ℕ (succ-ℕ n)) = mul-ℕ (exp-ℕ m (succ-ℕ n)) m
 infixr 45 _^ℕ_
 _^ℕ_ = exp-ℕ
 ```
+
+## Agda-unimath sources
+
+- The definition of multiplication of natural numbers is implemented in `elementary-number-theory.multiplication-natural-numbers`
+- The definition of exponentiation of natural numbers is implemented in `elementary-number-theory.exponentiation-natural-numbers`. This definition fits in the following tower of instantiations:
+
+  ```text
+    power-Commutative-Semiring    from    commutative-algebra.powers-of-elements-semirings
+    power-Semiring                from    ring-theory.powers-of-elements-semirings
+    power-Monoid                  from    group-theory.powers-of-elements-monoids
+  ```

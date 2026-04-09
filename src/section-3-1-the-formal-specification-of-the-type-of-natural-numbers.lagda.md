@@ -169,3 +169,7 @@ The computation rule for the inductive step has the same premises as the computa
 ```
 
 This completes the formal specification of the type `ℕ` of natural numbers.
+
+## Agda-unimath sources
+
+- The type of natural numbers and its induction principle are defined in `elementary-number-theory.natural-numbers`.

@@ -79,3 +79,7 @@ fibonacci-ℕ (succ-ℕ (succ-ℕ n)) = fibonacci-ℕ (succ-ℕ n) +ℕ fibonacc
 
 However, since `F(succ-ℕ(succ-ℕ(n)))` is defined using both `F(succ-ℕ(n))` and `F(n)`, it is not immediately clear how to present `F` by the usual induction principle of `ℕ`.
 It is a nice puzzle, which we leave as Exercise 3.5, to find a definition of the Fibonacci sequence with the usual induction principle of `ℕ`. 
+
+## Agda-unimath sources
+
+- The Fibonacci sequence is defined in `elementary-number-theory.fibonacci-sequence`.

@@ -138,3 +138,7 @@ In fact, dependent type theory with its inductive types does not provide any mea
 
 Nevertheless, once we have introduced the *identity type* in Chapter 5 we will be able to *identify* `0 + n` with `n`, and `succ-ℕ(m) + n` with `succ-ℕ(m + n)`.
 See Propositions 5.6.1 and 5.6.2.
+
+## Agda-unimath sources
+
+- The addition function on the natural numbers is defined in `elementary-number-theory.addition-natural-numbers`
