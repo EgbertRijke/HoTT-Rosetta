@@ -29,4 +29,5 @@ open import section-3-2-addition-on-the-natural-numbers
 open import section-3-3-pattern-matching
 open import exercise-3-1-multiplication-and-exponentiation
 open import exercise-3-2-min-and-max
+open import exercise-3-3-triangular-numbers-and-factorials
 ```
