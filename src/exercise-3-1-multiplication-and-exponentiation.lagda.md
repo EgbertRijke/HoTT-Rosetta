@@ -11,16 +11,12 @@ open import universe-levels
 
 ## Problem statement
 
-1. Define the **multiplication** operation
+Define the **multiplication** operation
 
    ```text
       mul-ℕ : ℕ → (ℕ → ℕ).
    ```
-2. Define the **exponentiation function** `n,m ↦ m^n` of type `ℕ → (ℕ → ℕ)`.
-
 ## Solution
-
-**Note.** Our definition of `exp-ℕ` is a reimplementation of the function `power-Monoid` in agda-unimath. A reimplementation was necessary, so as to avoid loading the theory of semirings, which is built on the theory of monoids, which is in turn built on a large portion of the foundation files, the development of which is the purpose of this book and which could therefore not be superseeded.
 
 ```agda
 mul-ℕ : ℕ → ℕ → ℕ
@@ -34,7 +30,17 @@ _*ℕ_ = mul-ℕ
 
 mul-ℕ' : ℕ → ℕ → ℕ
 mul-ℕ' x y = mul-ℕ y x
+```
 
+## Problem statement
+
+Define the **exponentiation function** `n,m ↦ m^n` of type `ℕ → (ℕ → ℕ)`.
+
+## Solution
+
+**Note.** Our definition of `exp-ℕ` is a reimplementation of the function `power-Monoid` in agda-unimath. A reimplementation was necessary, so as to avoid loading the theory of semirings, which is built on the theory of monoids, which is in turn built on a large portion of the foundation files, the development of which is the purpose of this book and which could therefore not be superseeded.
+
+```agda
 exp-ℕ : ℕ → ℕ → ℕ
 exp-ℕ m zero-ℕ = 1
 exp-ℕ m (succ-ℕ zero-ℕ) = m
