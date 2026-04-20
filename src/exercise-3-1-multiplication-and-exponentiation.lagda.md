@@ -14,7 +14,7 @@ open import universe-levels
 1. Define the **multiplication** operation
 
    ```text
-      mul-ℕ :ℕ→(ℕ→ℕ).
+      mul-ℕ : ℕ → (ℕ → ℕ).
    ```
 2. Define the **exponentiation function** `n,m ↦ m^n` of type `ℕ → (ℕ → ℕ)`.
 
