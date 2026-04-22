@@ -59,9 +59,9 @@ In other words, by the induction principle for the unit type we obtain for every
 
 ```agda
 module _
-  {l : Level} {A : UU l}
+  {l : Level} {A : Type l}
   where
 
   point : A → (unit → A)
-  point = diagonal-exponential A unit
+  point a x = a
 ```

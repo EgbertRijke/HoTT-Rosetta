@@ -2,6 +2,8 @@
 
 ```agda
 module section-4-3-the-empty-type where
+
+open import universe-levels
 ```
 
 The empty type is a degenerate example of an inductive type.
@@ -17,6 +19,13 @@ We define the **empty type** to be a type `∅` satisfying the induction princip
   ind_∅ : Π{x : ∅} P(x).
 ```
 
+```agda
+data empty : Type lzero where
+
+ind-empty : {l : Level} {P : empty → Type l} → ((x : empty) → P x)
+ind-empty ()
+```
+
 It is again a special case of the induction principle that we have a function
 
 ```text
@@ -24,6 +33,12 @@ It is again a special case of the induction principle that we have a function
 ```
 
 for any type `A`.
+
+```agda
+ex-falso : {l : Level} {A : Type l} → empty → A
+ex-falso = ind-empty
+```
+
 Indeed, to obtain this function one first weakens `A` to obtain the constant family over `∅` with value `A`, and then the induction principle gives the desired function.
 The function `ex-falso` can be used to draw any conclusion after deriving a contradiction, because *ex falso quodlibet*.
 
@@ -37,11 +52,23 @@ For any type `A` we define **negation** of `A` by
   ¬ A ≔ A → ∅.
 ```
 
+```agda
+infix 25 ¬_
+
+¬_ : {l : Level} → Type l → Type l
+¬ A = A → empty
+```
+
 We also say that a type `A` **is empty** if it comes equipped with an element of type `¬ A`.
 Therefore, we also define
 
 ```text
   is-empty(A) ≔ A → ∅.
+```
+
+```agda
+is-empty : {l : Level} → Type l → Type l
+is-empty A = A → empty
 ```
 
 ### Remark 4.3.3
@@ -58,6 +85,13 @@ In type theory, however, note that the type `¬¬ A` is the type of functions
   
 ```text
   (A → ∅) → ∅.
+```
+
+```agda
+infix 25 ¬¬_
+
+¬¬_ : {l : Level} → Type l → Type l
+¬¬ P = ¬ ¬ P
 ```
 
 This type is quite different from the type `A` itself, and with the given rules of type theory it is not possible to construct a function `¬¬ A → A` unless more is known about the type `A`.
@@ -106,4 +140,9 @@ We leave it to the reader to construct the corresponding natural deduction tree,
 
 ```text
   (P → Q) → (¬ Q → ¬ P).
+```
+
+```agda
+map-neg : {l1 l2 : Level} {P : Type l1} {Q : Type l2} → (P → Q) → (¬ Q → ¬ P)
+map-neg f nq p = nq (f p)
 ```
