@@ -60,8 +60,15 @@ The main contents of this repository are literate agda files, with agda codebloc
 
 This repository has been developed by 
 
+* [Yuriy Brun](http://www.cs.umass.edu/~brun/)
 * [Daniel Carranza](https://daniel-carranza.github.io/)
+* [Arnav Dandu](https://dandu.dev)
+* [Kevin Fisher](https://github.com/kfish610)
+* [Kiran Gopinathan](https://kirancodes.me)
+* [Audra Aurora Izzani](https://github.com/aizzani2)
+* [Trey Plante](https://github.com/trey3p)
 * [Emily Riehl](https://emilyriehl.github.io/)
 * [Egbert Rijke](https://egbertrijke.github.io/)
+* [Talia Ringer](https://dependenttyp.es)
 
 as part of ASTRAL: Automated Synthetic Theorem-Proving by Reasonining with Language Models, a team funded by DARPA's [expMath program](https://www.darpa.mil/research/programs/expmath-exponential-mathematics). 
