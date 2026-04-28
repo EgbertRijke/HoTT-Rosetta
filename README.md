@@ -66,6 +66,7 @@ This repository has been developed by
 * [Kevin Fisher](https://github.com/kfish610)
 * [Kiran Gopinathan](https://kirancodes.me)
 * [Audra Aurora Izzani](https://github.com/aizzani2)
+* [Eyad Loutfi](https://github.com/eloutf)
 * [Trey Plante](https://github.com/trey3p)
 * [Emily Riehl](https://emilyriehl.github.io/)
 * [Egbert Rijke](https://egbertrijke.github.io/)
