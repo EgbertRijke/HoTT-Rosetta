@@ -49,7 +49,7 @@ law-of-non-contradiction (p , np) = np p
 
 ## Problem statement
 
-For a proposition `P`, `¬ (P ↔ ¬ P)`.
+For a type `P`, `¬ (P ↔ ¬ P)`.
 
 ## Solution
 
@@ -63,7 +63,13 @@ _↔_ : {l1 l2 : Level} (A : Type l1) (B : Type l2) → Type (l1 ⊔ l2)
 _↔_ = iff
 
 law-of-non-contradiction' : {l : Level} {P : Type l} → ¬ (P ↔ (¬ P))
-law-of-non-contradiction' (pnp , npp) = {!   !}
+law-of-non-contradiction' {P = P} (pnp , npp) = nnp np
+    where 
+        np : ¬ P  
+        np p = (pnp p) p 
+
+        nnp : ¬ ¬ P 
+        nnp np = np (npp np)
 
 ```
 
@@ -71,7 +77,7 @@ law-of-non-contradiction' (pnp , npp) = {!   !}
 
 Construction the unit of the double negation monad: 
 
-For a proposition `P`, `P → ¬¬ P`.
+For a type `P`, `P → ¬¬ P`.
 
 ## Solution
 
@@ -85,7 +91,7 @@ double-negation-introduction p np = np p
 
 Construction the action on maps of the double negation monad: 
 
-For propositions `P` and `Q`, `(P → Q) → (¬¬ P → ¬¬ Q)`.
+For types `P` and `Q`, `(P → Q) → (¬¬ P → ¬¬ Q)`.
 
 ## Solution
 
@@ -100,13 +106,16 @@ double-negation-map pq nnp nq = nnp (λ p → nq (pq p))
 
 Construction the Kleisli map of the double negation monad: 
 
-For propositions `P` and `Q`, `(P → ¬¬ Q) → (¬¬ P → ¬¬ Q)`.
+For types `P` and `Q`, `(P → ¬¬ Q) → (¬¬ P → ¬¬ Q)`.
 
 
 ## Solution
 
 ```agda 
 double-negation-kleisli-map : {l1 l2 : Level} {P : Type l1} {Q : Type l2} → (P → ¬¬ Q) → (¬¬ P → ¬¬ Q)
-double-negation-kleisli-map pnnq nnp nq = {!   !}
+double-negation-kleisli-map {Q = Q} pnnq nnp = mu (double-negation-map pnnq nnp)
+    where 
+        mu : ¬¬ ¬¬ Q → ¬¬ Q
+        mu nnnnq nq = nnnnq (λ nnq → nnq nq) 
 
 ``` 
