@@ -1,4 +1,4 @@
-# Exercise 3.2 Boolean operations
+# Exercise 4.2 Boolean operations
 
 ```agda
 module exercise-4-2-boolean-operations where
@@ -8,7 +8,7 @@ open import universe-levels
 
 ## Problem statement
 
-The type of **booleans** is defined to be an inductive type `bool` that comes equipped with
+Define the type of **booleans** to be an inductive type `bool` that comes equipped with
 
 ```text
     false : bool
@@ -33,13 +33,26 @@ for which the computation rules
      ind-bool(p₀, p₁, true) ≐ p₁
 ```
 
-hold.
+hold. Formalize this.
+
+## Solution
+
+We implement the definition of the type `bool` with its induction principle.
+
+```agda
+data bool : Type lzero where
+  true false : bool
+
+ind-bool : {l : Level} {P : bool → Type l} → P true → P false → (b : bool) → P b
+ind-bool pt pf true = pt
+ind-bool pt pf false = pf
+```
+
+## Problem statement
 
 Construct the **boolean negation function** `neg-bool : bool → bool`.
 
 ## Solution
-
-Before we can solve the exercise, we must implement the definition of the type `bool` with its induction principle.
 
 ```agda
 data bool : Type lzero where

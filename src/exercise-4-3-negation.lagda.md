@@ -1,0 +1,112 @@
+# Exercise 4.3 Negation
+
+```agda
+module exercise-4-3-negation where
+
+open import universe-levels
+open import section-4-3-the-empty-type
+```
+
+Let `P` and `Q` be types. We will write `P ↔ Q` for the type of *bi-implication* `P → Q × Q → P`. Use the fact that `¬ P` is defined as the type `P → ∅` of functions from `P` to the empty type to give type theoretic proofs of the constructive tautologies in this exercise.
+
+## Problem statement
+
+For a proposition `P`, `¬ (P × ¬ P)`.
+
+## Solution
+
+```agda 
+
+record Σ {l1 l2 : Level} (A : Type l1) (B : A → Type l2) : Type (l1 ⊔ l2) where
+  constructor pair
+  field
+    pr1 : A
+    pr2 : B pr1
+
+open Σ public
+
+{-# BUILTIN SIGMA Σ #-}
+{-# INLINE pair #-}
+
+infixr 3 _,_
+pattern _,_ a b = pair a b
+
+product : {l1 l2 : Level} (A : Type l1) (B : Type l2) → Type (l1 ⊔ l2)
+product A B = Σ A (λ _ → B)
+
+pair' :
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} → A → B → product A B
+pair' = pair
+
+infixr 15 _×_
+_×_ : {l1 l2 : Level} (A : Type l1) (B : Type l2) → Type (l1 ⊔ l2)
+_×_ = product
+
+law-of-non-contradiction : {l : Level} {P : Type l} → ¬ (P × ¬ P) 
+law-of-non-contradiction (p , np) = np p 
+
+```
+
+## Problem statement
+
+For a proposition `P`, `¬ (P ↔ ¬ P)`.
+
+## Solution
+
+```agda 
+
+iff : {l1 l2 : Level} (A : Type l1) (B : Type l2) → Type (l1 ⊔ l2)
+iff A B = (A → B) × (B → A) 
+
+infixr 15 _↔_
+_↔_ : {l1 l2 : Level} (A : Type l1) (B : Type l2) → Type (l1 ⊔ l2)
+_↔_ = iff
+
+law-of-non-contradiction' : {l : Level} {P : Type l} → ¬ (P ↔ (¬ P))
+law-of-non-contradiction' (pnp , npp) = {!   !}
+
+```
+
+## Problem statement
+
+Construction the unit of the double negation monad: 
+
+For a proposition `P`, `P → ¬¬ P`.
+
+## Solution
+
+```agda 
+
+double-negation-introduction : {l : Level} {P : Type l} → P → ¬¬ P 
+double-negation-introduction p np = np p 
+```
+
+## Problem statement
+
+Construction the action on maps of the double negation monad: 
+
+For propositions `P` and `Q`, `(P → Q) → (¬¬ P → ¬¬ Q)`.
+
+## Solution
+
+```agda 
+
+double-negation-map : {l1 l2 : Level} {P : Type l1} {Q : Type l2} → (P → Q) → (¬¬ P → ¬¬ Q)
+double-negation-map pq nnp nq = nnp (λ p → nq (pq p))
+
+```
+
+## Problem statement
+
+Construction the Kleisli map of the double negation monad: 
+
+For propositions `P` and `Q`, `(P → ¬¬ Q) → (¬¬ P → ¬¬ Q)`.
+
+
+## Solution
+
+```agda 
+double-negation-kleisli-map : {l1 l2 : Level} {P : Type l1} {Q : Type l2} → (P → ¬¬ Q) → (¬¬ P → ¬¬ Q)
+double-negation-kleisli-map pnnq nnp nq = {!   !}
+
+``` 
