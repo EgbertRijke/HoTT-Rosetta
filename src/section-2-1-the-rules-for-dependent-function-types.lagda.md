@@ -1,5 +1,9 @@
 # The rules for dependent function types
 
+```agda
+module section-2-1-the-rules-for-dependent-function-types where
+```
+
 Consider a section `b` of a family `B` over `A` in context `Γ`, i.e., consider
 
 ```text
