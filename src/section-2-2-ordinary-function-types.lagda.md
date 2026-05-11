@@ -1,5 +1,11 @@
 # Ordinary function types
 
+```agda
+module section-2-2-ordinary-function-types where
+
+open import universe-levels
+```
+
 An important special case of `Π`-types arises when both `A` and `B` are types in context `Γ`. In this case, we can first weaken `B` by `A` and then apply the `Π`-formation rule to obtain the type `A → B` of *ordinary* functions from `A` to `B`, as in the following derivation:
 
 ```text
@@ -143,6 +149,19 @@ The identity function therefore satisfies the following inference rules:
    Γ ⊢ id ≐ λ x. x : A → A.
 ```
 
+## Agda implementation
+
+```agda
+id : {l : Level} {A : Type l} → A → A
+id a = a
+
+id' : {l : Level} (A : Type l) → A → A
+id' A = id
+
+idω : {A : Typeω} → A → A
+idω a = a
+```
+
 Next, we define the composition of functions. We will introduce the composition operation itself as a function `comp` that takes two arguments: the first argument is a function `g : B → C`, and the second argument is a function `f : A → B`. The output is a function `comp(g,f) : A → C`, for which we often write `g ∘ f`.
 
 ## Rermark 2.2.4
@@ -194,21 +213,21 @@ The derivation we use to construct `comp` is as follows:
 
 ```text
 
-                                                  Γ ⊢ B type     Γ ⊢ C type
-                                                ----------------------------- (b)
-        Γ ⊢ A type    Γ ⊢ B type                 Γ, g : Cᴮ, y : B ⊢ g(y) : C
-      ----------------------------- (a)     -------------------------------------
-       Γ, f : Bᴬ, x : A ⊢ f(x) : B           Γ, g : Cᴮ, f : Bᴬ, y : B ⊢ g(y) : C
-   ------------------------------------  --------------------------------------------
-    Γ, g : Cᴮ, f : Bᴬ, x : A⊢ f(x) : B    Γ, g : Cᴮ, f : Bᴬ, x : A, y : B ⊢ g(y) : C
+                                                   Γ ⊢ B type     Γ ⊢ C type
+                                                 ----------------------------- (b)
+         Γ ⊢ A type    Γ ⊢ B type                 Γ, g : Cᴮ, y : B ⊢ g(y) : C
+       ----------------------------- (a)     -------------------------------------
+        Γ, f : Bᴬ, x : A ⊢ f(x) : B           Γ, g : Cᴮ, f : Bᴬ, y : B ⊢ g(y) : C
+   -------------------------------------  --------------------------------------------
+    Γ, g : Cᴮ, f : Bᴬ, x : A ⊢ f(x) : B    Γ, g : Cᴮ, f : Bᴬ, x : A, y : B ⊢ g(y) : C
    ----------------------------------------------------------------------------------
                       Γ, g : Cᴮ, f : Bᴬ, x : A ⊢ g(f(x)) : C
                      ----------------------------------------
                        Γ, g : Cᴮ, f : Bᴬ ⊢ λ x. g(f(x)) : Cᴬ
                    --------------------------------------------
                     Γ, g : B → C ⊢ λ f. λ x. g(f(x)) : Bᴬ → Cᴬ
-                   --------------------------------------------
-                    Γ ⊢ λ g. λ f. λ x. g(f(x)): Cᴮ → (Bᴬ → Cᴬ)
+                   ---------------------------------------------
+                    Γ ⊢ λ g. λ f. λ x. g(f(x)) : Cᴮ → (Bᴬ → Cᴬ)
                ------------------------------------------------------  
                 Γ ⊢ comp := λ g. λ f. λ x. g(f(x)) : Cᴮ → (Bᴬ → Cᴬ).
 ```
@@ -227,70 +246,101 @@ Note, however, that we haven't derived the rules (a) and (b) yet. These rules as
 
 This completes the construction of `comp`.
 
+## Agda implementation
+
+In the implementation we use a slightly more general definition of composition, which allows us to compose dependent functions.
+
+```agda
+infixr 15 _∘_
+
+_∘_ :
+  {l1 l2 l3 : Level}
+  {A : Type l1} {B : A → Type l2} {C : (a : A) → B a → Type l3} →
+  ({a : A} → (b : B a) → C a b) → (f : (a : A) → B a) → (a : A) → C a (f a)
+(g ∘ f) a = g (f a)
+```
+
 In the remainder of this section we will see how to use the given rules for function types to derive the laws of a category for functions. These are the laws that assert that function composition is associative and that the identity function satisfies the unit laws.
 
-\begin{lem}
-Composition of functions is associative\index{associativity!of function composition}, i.e., we can derive
-\begin{prooftree}
-\AxiomC{`Γ⊢ f:A→ B`}
-\AxiomC{`Γ⊢ g:B→ C`}
-\AxiomC{`Γ⊢ h:C→ D`}
-\TrinaryInfC{`Γ ⊢ (h∘ g)∘ f≐ h∘(g∘ f):A→ D`.}
-\end{prooftree}
-\end{lem}
+## Lemma 2.2.6
 
-\begin{proof}
-  The main idea of the proof is that both `((h∘ g)∘ f)(x)` and `(h∘ (g∘ f))(x)` evaluate to `h(g(f(x))`, and therefore `(h∘ g)∘ f` and `h∘(g∘ f)` must be judgmentally equal. This idea is made formal in the following derivation:
-  \begin{prooftree}
-    \AxiomC{`Γ⊢ f:A→ B`}
-    \UnaryInfC{`Γ,x:A⊢ f(x):B`}
-    \AxiomC{`Γ⊢ g:B→ C`}
-    \UnaryInfC{`Γ,y:B⊢ g(y):C`}
-    \UnaryInfC{`Γ,x:A,y:B⊢ g(y):C`}
-    \BinaryInfC{`Γ,x:A⊢ g(f(x)):C`}
-    \AxiomC{`Γ⊢ h:C→ D`}
-    \UnaryInfC{`Γ,z:C⊢ h(z):D`}
-    \UnaryInfC{`Γ,x:A,z:C⊢ h(z):D`}
-    \BinaryInfC{`Γ,x:A⊢ h(g(f(x))):D`}
-    \UnaryInfC{`Γ,x:A⊢ h(g(f(x)))≐ h(g(f(x))):D`}
-    \UnaryInfC{`Γ,x:A⊢ (h∘ g)(f(x))≐ h((g∘ f)(x)):D`}
-    \UnaryInfC{`Γ,x:A⊢ ((h∘ g)∘ f)(x)≐ (h∘ (g ∘ f))(x):D`}
-    \UnaryInfC{`Γ⊢ (h∘ g)∘ f≐ h∘(g∘ f):A→ D`.}
-  \end{prooftree}
-\end{proof}
+Composition of functions is associative, i.e., we can derive
 
-\begin{lem}\label{lem:fun_unit}
-Composition of functions satisfies the left and right unit laws\index{left unit law|see {unit laws}}\index{right unit law|see {unit laws}}\index{unit laws!for function composition}, i.e., we can derive
-\begin{prooftree}
-\AxiomC{`Γ⊢ f:A→ B`}
-\UnaryInfC{`Γ⊢ id [B]∘ f≐ f:A→ B`}
-\end{prooftree}
+```text
+   Γ ⊢ f : A → B    Γ ⊢ g : B → C    Γ ⊢ h : C → D
+  -------------------------------------------------
+       Γ ⊢ (h ∘ g) ∘ f ≐ h ∘ (g ∘ f) : A → D.
+```
+
+## Proof
+
+The main idea of the proof is that both `((h ∘ g) ∘ f)(x)` and `(h ∘ (g ∘ f))(x)` evaluate to `h(g(f(x))`, and therefore `(h ∘ g) ∘ f` and `h ∘ (g ∘ f)` must be judgmentally equal. This idea is made formal in the following derivation:
+
+```text
+
+                                   Γ ⊢ g : B → C
+                               ---------------------
+        Γ ⊢ f : A → B           Γ, y : B ⊢ g(y) : C               Γ ⊢ h : C → D
+    ---------------------  ----------------------------      ---------------------
+     Γ, x : A ⊢ f(x) : B    Γ, x : A, y : B ⊢ g(y) : C        Γ, z : C ⊢ h(z) : D
+    ---------------------------------------------------  ----------------------------
+                 Γ, x : A ⊢ g(f(x)) : C                   Γ, x : A, z : C ⊢ h(z) : D
+                ----------------------------------------------------------------------
+                                   Γ, x : A ⊢ h(g(f(x))) : D
+                           ----------------------------------------
+                            Γ, x : A ⊢ h(g(f(x))) ≐ h(g(f(x))) : D
+                         ---------------------------------------------
+                          Γ, x : A ⊢ (h∘ g)(f(x)) ≐ h((g ∘ f)(x)) : D
+                      ----------------------------------------------------
+                       Γ, x : A ⊢ ((h ∘ g) ∘ f)(x) ≐ (h ∘ (g ∘ f))(x) : D
+                      ----------------------------------------------------
+                             Γ ⊢ (h ∘ g) ∘ f ≐ h ∘ (g ∘ f) : A → D.
+```
+
+## Lemma 2.2.7
+
+Composition of functions satisfies the left and right unit laws, i.e., we can derive
+
+```text
+       Γ ⊢ f : A → B
+  ------------------------
+   Γ ⊢ id ∘ f ≐ f : A → B
+```
+
 and
-\begin{prooftree}
-\AxiomC{`Γ⊢ f:A→ B`}
-\UnaryInfC{`Γ⊢ f∘id [A]≐ f:A→ B`.}
-\end{prooftree}
-\end{lem}
 
-\begin{proof}
-  Note that it suffices to derive that `id (f(x))≐ f(x)` in context `Γ,x:A`, because once we derived this equality we can finish the derivation with
-  \begin{prooftree}
-    \AxiomC{`\vdots`}
-    \UnaryInfC{`Γ,x:A⊢id (f(x))≐ f(x):B`}
-    \UnaryInfC{`Γ⊢λ x. id (f(x))≐λ x. f(x):A→ B`}
-    \AxiomC{`Γ⊢ f:A→ B`}
-    \UnaryInfC{`Γ⊢λ x. f(x)≐ f:A→ B`}
-    \BinaryInfC{`Γ⊢id ∘ f≐ f:A→ B`.}  
-  \end{prooftree}
-  The derivation of the equality `id (f(x))≐ f(x)` in context `Γ,x:A` is as follows:
-  \begin{prooftree}
-    \AxiomC{`Γ⊢ f:A→ B`}
-    \UnaryInfC{`Γ,x:A⊢ f(x):B`}
-    \AxiomC{`Γ⊢ A type`}
-    \AxiomC{`Γ⊢ B type`}
-    \UnaryInfC{`Γ,y:B⊢id (y)≐ y:B`}
-    \BinaryInfC{`Γ,x:A,y:B⊢id (y)≐ y:B`}
-    \BinaryInfC{`Γ,x:A⊢id (f(x))≐ f(x):B`.}
-  \end{prooftree}
-  We leave the right unit law as \cref{ex:fun_right_unit}.
-\end{proof}
+```text
+        Γ ⊢ f : A → B
+  -------------------------
+   Γ ⊢ f ∘ id ≐ f : A → B.
+```
+
+
+## Proof
+
+Note that it suffices to derive that `id (f(x)) ≐ f(x)` in context `Γ, x : A`, because once we derived this equality we can finish the derivation with
+
+```text
+                      ⋮
+      ---------------------------------
+       Γ, x : A ⊢ id (f(x)) ≐ f(x) : B               Γ ⊢ f : A → B
+   ----------------------------------------  ---------------------------
+    Γ ⊢ λ x. id (f(x)) ≐ λ x. f(x) : A → B    Γ ⊢ λ x. f(x) ≐ f : A → B
+   ---------------------------------------------------------------------
+                       Γ ⊢ id ∘ f ≐ f : A → B.
+```
+
+The derivation of the equality `id (f(x))≐ f(x)` in context `Γ,x:A` is as follows:
+
+```text
+                                                   Γ ⊢ B type
+                                          --------------------------
+         Γ ⊢ f : A → B       Γ ⊢ A type    Γ, y : B ⊢ id(y) ≐ y : B
+     ---------------------  ----------------------------------------
+      Γ, x : A ⊢ f(x) : B        Γ, x : A, y : B ⊢ id(y) ≐ y : B
+     ------------------------------------------------------------
+                Γ, x : A ⊢ id (f(x)) ≐ f(x) : B.
+```
+
+We leave the right unit law as Exercise 2.2.
+  
