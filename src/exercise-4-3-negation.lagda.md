@@ -108,7 +108,6 @@ Construction the Kleisli map of the double negation monad:
 
 For types `P` and `Q`, `(P → ¬¬ Q) → (¬¬ P → ¬¬ Q)`.
 
-
 ## Solution
 
 ```agda 
@@ -117,5 +116,65 @@ double-negation-kleisli-map {Q = Q} pnnq nnp = mu (double-negation-map pnnq nnp)
     where 
         mu : ¬¬ ¬¬ Q → ¬¬ Q
         mu nnnnq nq = nnnnq (λ nnq → nnq nq) 
-
 ``` 
+
+## Problem statement
+
+For a type `P`, construct a canonical map `¬¬(¬¬ P → P)`.
+
+## Solution
+
+```agda 
+
+not-not-double-negation-elimination : {l : Level} {P : Type l} → ¬¬(¬¬ P → P)
+not-not-double-negation-elimination = ?
+
+```
+
+## Problem statement
+
+For types `P` and `Q`, construct a canonical map `¬¬ (((P → Q) → P) → P)`.
+
+
+## Problem statement
+
+For type `P` and `Q`, construct a canonical map `¬¬ ((P → Q) + (Q → P))`.
+
+## Problem statement
+
+For a type `P`, construct a canonical map `¬¬ (P + ¬ P)`.
+
+## Problem statement
+
+For a type `P`, construct a canonical map `(P + ¬ P) → (¬¬ P → P)`.
+
+## Problem statement
+
+For type `P` and `Q`, show `¬¬ (Q → P) ↔ ((P + ¬ P) → (Q → P))`.    
+
+## Problem Statement
+
+For a type `P`, show that `¬ P` is **double negation stable**: `¬¬¬ P → ¬ P`.
+
+## Problem Statement
+
+For types `P` and `Q`, show that `P → ¬¬ Q` is double negation stable:  
+
+`¬¬(P → ¬¬ Q)→ (P → ¬¬ Q)`
+
+## Problem Statement
+For types `P` and `Q`, show that `¬¬ P × ¬¬ Q` is double negation stable:
+
+`¬¬((¬¬ P) × (¬¬ Q)) → (¬¬ P) × (¬¬ Q)`.
+
+## Problem Statement
+
+For types `P` and `Q`, show `¬¬ (P × Q) ↔ (¬¬ P) × (¬¬ Q)`.
+
+## Problem Statement
+
+For types `P` and `Q`, show `¬¬ (P+Q) ↔ ¬ (¬ P × ¬ Q)`.
+
+## Problem Statement
+
+For types `P` and `Q`, show `¬¬ (P → Q) ↔ (¬¬ P → ¬ Q)`.
