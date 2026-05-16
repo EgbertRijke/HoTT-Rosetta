@@ -5,6 +5,7 @@ module exercise-4-3-negation where
 
 open import universe-levels
 open import section-4-3-the-empty-type
+open import section-4-4-coproducts
 ```
 
 Let `P` and `Q` be types. We will write `P ↔ Q` for the type of *bi-implication* `P → Q × Q → P`. Use the fact that `¬ P` is defined as the type `P → ∅` of functions from `P` to the empty type to give type theoretic proofs of the constructive tautologies in this exercise.
@@ -127,8 +128,10 @@ For a type `P`, construct a canonical map `¬¬(¬¬ P → P)`.
 ```agda 
 
 not-not-double-negation-elimination : {l : Level} {P : Type l} → ¬¬(¬¬ P → P)
-not-not-double-negation-elimination = ?
-
+not-not-double-negation-elimination {P = P} ndne = ndne (λ nnp → ex-falso (nnp np))
+    where 
+        np : ¬ P
+        np p = ndne (λ _ → p)
 ```
 
 ## Problem statement
@@ -143,6 +146,20 @@ For type `P` and `Q`, construct a canonical map `¬¬ ((P → Q) + (Q → P))`.
 ## Problem statement
 
 For a type `P`, construct a canonical map `¬¬ (P + ¬ P)`.
+
+## Solution
+
+```agda 
+not-not-lem : {l : Level} {P : Type l} → ¬¬ (P + (¬ P)) 
+not-not-lem {P = P} nlem = {!   !}
+    where 
+        np : ¬ P
+        np p = nlem (inl p)
+
+        nnp : ¬¬ P
+        nnp np' = nlem (inr np')
+
+```
 
 ## Problem statement
 
