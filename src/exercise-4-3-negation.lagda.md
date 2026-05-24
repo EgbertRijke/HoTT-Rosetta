@@ -151,7 +151,7 @@ For a type `P`, construct a canonical map `¬¬ (P + ¬ P)`.
 
 ```agda 
 not-not-lem : {l : Level} {P : Type l} → ¬¬ (P + (¬ P)) 
-not-not-lem {P = P} nlem = {!   !}
+not-not-lem {P = P} nlem = nnp np
     where 
         np : ¬ P
         np p = nlem (inl p)
@@ -177,7 +177,7 @@ For a type `P`, show that `¬ P` is **double negation stable**: `¬¬¬ P → ¬
 
 For types `P` and `Q`, show that `P → ¬¬ Q` is double negation stable:  
 
-`¬¬(P → ¬¬ Q)→ (P → ¬¬ Q)`
+`¬¬ (P → ¬¬ Q) → (P → ¬¬ Q)`
 
 ## Problem Statement
 For types `P` and `Q`, show that `¬¬ P × ¬¬ Q` is double negation stable:
@@ -190,7 +190,7 @@ For types `P` and `Q`, show `¬¬ (P × Q) ↔ (¬¬ P) × (¬¬ Q)`.
 
 ## Problem Statement
 
-For types `P` and `Q`, show `¬¬ (P+Q) ↔ ¬ (¬ P × ¬ Q)`.
+For types `P` and `Q`, show `¬¬ (P + Q) ↔ ¬ (¬ P × ¬ Q)`.
 
 ## Problem Statement
 
