@@ -8,7 +8,7 @@ open import universe-levels
 
 ## Problem statement
 
-Define the type of **booleans** to be an inductive type `bool` that comes equipped with
+The type of **booleans** is an inductive type `bool` that comes equipped with
 
 ```text
     false : bool
@@ -54,15 +54,6 @@ Construct the **boolean negation function** `neg-bool : bool → bool`.
 
 ## Solution
 
-```agda
-data bool : Type lzero where
-  true false : bool
-
-ind-bool : {l : Level} {P : bool → Type l} → P true → P false → (b : bool) → P b
-ind-bool pt pf true = pt
-ind-bool pt pf false = pf
-```
-
 We can now define the boolean negation function.
 
 ```agda
@@ -73,28 +64,29 @@ neg-bool false = true
 
 ## Problem Statement
 
-Construct the **boolean conjunction** operation `- ∧ -: bool → (bool → bool)`.
+Construct the **boolean conjunction** operation `and-bool : bool → (bool → bool)`.
 
 ## Solution
 
 ```agda
-_∧_ : bool → bool → bool
-true ∧ q = q
-false ∧ q = false
+and-bool : bool → bool → bool
+and-bool true q = q
+and-bool false q = false
 ```
 
 ## Problem Statement
 
-Construct the **boolean disjunction** operation `- ∨ - : bool → (bool → bool)`.
+Construct the **boolean disjunction** operation `or-bool : bool → (bool → bool)`.
 
 ## Solution
 
 ```agda
-_∨_ : bool → bool → bool
-true ∨ q = true
-false ∨ q = q
+or-bool : bool → bool → bool
+or-bool true q = true
+or-bool false q = q
 ```
 
 ## Agda-unimath sources
 
-- The definitions of the type of booleans, boolean negation, conjunction, and disjunction are implemented in `foundation-core.booleans`.
+- The definitions of the type of booleans is implemented in `foundation-core.booleans`.
+- The definitions of boolean negation, conjunction, and disjunction are implemented in `foundation.boolean-operations`.
