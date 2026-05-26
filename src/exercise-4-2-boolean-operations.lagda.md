@@ -1,4 +1,4 @@
-# Exercise 3.2 Boolean operations
+# Exercise 4.2 Boolean operations
 
 ```agda
 module exercise-4-2-boolean-operations where
@@ -8,7 +8,7 @@ open import universe-levels
 
 ## Problem statement
 
-The type of **booleans** is defined to be an inductive type `bool` that comes equipped with
+The type of **booleans** is an inductive type `bool` that comes equipped with
 
 ```text
     false : bool
@@ -33,13 +33,11 @@ for which the computation rules
      ind-bool(p₀, p₁, true) ≐ p₁
 ```
 
-hold.
-
-Construct the **boolean negation function** `neg-bool : bool → bool`.
+hold. Formalize this.
 
 ## Solution
 
-Before we can solve the exercise, we must implement the definition of the type `bool` with its induction principle.
+We implement the definition of the type `bool` with its induction principle.
 
 ```agda
 data bool : Type lzero where
@@ -49,6 +47,12 @@ ind-bool : {l : Level} {P : bool → Type l} → P true → P false → (b : bo
 ind-bool pt pf true = pt
 ind-bool pt pf false = pf
 ```
+
+## Problem statement
+
+Construct the **boolean negation function** `neg-bool : bool → bool`.
+
+## Solution
 
 We can now define the boolean negation function.
 
@@ -60,28 +64,29 @@ neg-bool false = true
 
 ## Problem Statement
 
-Construct the **boolean conjunction** operation `- ∧ -: bool → (bool → bool)`.
+Construct the **boolean conjunction** operation `and-bool : bool → (bool → bool)`.
 
 ## Solution
 
 ```agda
-_∧_ : bool → bool → bool
-true ∧ q = q
-false ∧ q = false
+and-bool : bool → bool → bool
+and-bool true q = q
+and-bool false q = false
 ```
 
 ## Problem Statement
 
-Construct the **boolean disjunction** operation `- ∨ - : bool → (bool → bool)`.
+Construct the **boolean disjunction** operation `or-bool : bool → (bool → bool)`.
 
 ## Solution
 
 ```agda
-_∨_ : bool → bool → bool
-true ∨ q = true
-false ∨ q = q
+or-bool : bool → bool → bool
+or-bool true q = true
+or-bool false q = q
 ```
 
 ## Agda-unimath sources
 
-- The definitions of the type of booleans, boolean negation, conjunction, and disjunction are implemented in `foundation-core.booleans`.
+- The definitions of the type of booleans is implemented in `foundation-core.booleans`.
+- The definitions of boolean negation, conjunction, and disjunction are implemented in `foundation.boolean-operations`.
