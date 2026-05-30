@@ -1,4 +1,4 @@
-# Exercise 4.2 Boolean operations
+# Exercise 4.4 Lists
 
 ```agda
 module exercise-4-4-lists where
