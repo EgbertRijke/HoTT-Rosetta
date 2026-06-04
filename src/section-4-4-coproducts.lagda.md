@@ -69,7 +69,7 @@ By the induction principle of coproducts we obtain a function
 for any type `X`. Note that this special case of the induction principle of coproducts is very similar to the elimination rule of disjunction in first order logic: if `P`, `P'`, and `Q` are propositions, then we have
 
 ```text
-  (P → Q) → ((P' → Q)→ (P\lor P' → Q)).
+  (P → Q) → ((P' → Q)→ (P ∨ P' → Q)).
 ```
 
 Indeed, we can think of \emph{propositions as types} and of terms as their constructive proofs. Under this interpretation of type theory the coproduct is indeed the disjunction.
