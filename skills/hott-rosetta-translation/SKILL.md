@@ -22,11 +22,13 @@ Whenever asked to create a new chapter, section, or exercise file:
 2. Update `skills/hott-rosetta-translation/STATUS.md` from the current repository contents.
 3. Check whether the requested file is still listed as missing.
 4. If the requested file is no longer missing, stop without creating a duplicate file and instead describe the contents of the existing file to the user.
+5. If the requested file exists but appears incomplete, partially translated, or inconsistent with `STATUS.md`, stop and ask the user how to proceed.
 
 ## Editing Existing Files
 
 Do not edit, cut, reorganize, or delete existing file contents without checking with the user, unless the user has explicitly instructed you to do so.
 Adding missing material is usually acceptable when it is needed for the requested translation work, but preserve existing text and Agda code unless the user approves a change.
+Adding a missing import to an existing chapter file after creating a new section or exercise file counts as adding missing material.
 
 ## Source Order
 
@@ -118,7 +120,8 @@ Follow existing Markdown conventions:
 - Display mathematics becomes fenced `text` blocks, preceded and followed by one blank line.
 - Definitions, propositions, remarks, examples, and similar theorem environments become Markdown headings such as `## Definition N.M.K` or `### Remark N.M.K`, following nearby files.
 - Proofs may use `### Construction` or ordinary prose, matching the source and existing local style.
-- Preserve meaningful citations and references in readable prose, e.g. `Chapter 5`, `Proposition 5.6.1`, or source labels when no converted target exists yet.
+- Preserve ordinary citations in readable prose.
+- For cross references such as `\cref{...}` or `\ref{...}`, ask the user for the intended Markdown wording before proceeding.
 - Drop LaTeX indexing commands.
 - Translate common HoTT notation into the Unicode/plain-text notation already used in `src/`.
 
@@ -126,6 +129,8 @@ Put Agda code blocks close to the mathematical definition or result they formali
 Prefer definitions already present in earlier repository files over importing large external developments.
 
 ## Exercise Files
+
+For detailed exercise-file creation instructions, read `references/exercise-files.md`.
 
 Exercise files should contain:
 
