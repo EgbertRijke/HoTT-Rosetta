@@ -8,10 +8,25 @@ description: Translate LaTeX sources in book/ into literate Agda Markdown files 
 ## Scope
 
 Use this workflow to translate the LaTeX files in `book/` into literate Agda Markdown files in `src/`.
+Treat `README.md` as the repository-level source of truth for file organization, file structure, Markdown formatting, and self-contained Agda compilation conventions.
 
 In this repository, a `src/chapter-N-...lagda.md` file corresponds to a globally numbered LaTeX `\section`, not to a LaTeX `\chapter`.
 A `src/section-N-M-...lagda.md` file corresponds to a LaTeX `\subsection` inside that `\section`.
 A `src/exercise-N-K-...lagda.md` file corresponds to the `K`th `\exitem` in that `\section`'s exercises block.
+
+## New File Preflight
+
+Whenever asked to create a new chapter, section, or exercise file:
+
+1. Pull remote changes to the repository first.
+2. Update `skills/hott-rosetta-translation/STATUS.md` from the current repository contents.
+3. Check whether the requested file is still listed as missing.
+4. If the requested file is no longer missing, stop without creating a duplicate file and instead describe the contents of the existing file to the user.
+
+## Editing Existing Files
+
+Do not edit, cut, reorganize, or delete existing file contents without checking with the user, unless the user has explicitly instructed you to do so.
+Adding missing material is usually acceptable when it is needed for the requested translation work, but preserve existing text and Agda code unless the user approves a change.
 
 ## Source Order
 
@@ -38,6 +53,8 @@ For exercise slugs, choose a concise mathematical topic slug from the exercise s
 ## File Headers And Modules
 
 Every file starts with a level-1 Markdown heading, then an Agda module declaration.
+The heading should include the chapter, section, or exercise number and title.
+The module declaration is written in an `agda` code block immediately after the title.
 
 Chapter:
 
@@ -73,6 +90,8 @@ The module name must exactly match the file basename.
 
 ## Chapter Files
 
+For detailed chapter-file creation instructions, read `references/chapter-files.md`.
+
 A chapter file contains the introductory prose from the corresponding LaTeX `\section` before its first `\subsection`.
 Then import every created section and exercise file for that chapter.
 
@@ -88,12 +107,13 @@ Do not import files that do not exist unless the task is to create them in the s
 ## Section Files
 
 A section file contains the translated body of the corresponding LaTeX `\subsection`.
+For detailed LaTeX-to-Markdown conversion hints, read `references/latex-to-markdown.md`.
 
 Follow existing Markdown conventions:
 
 - One sentence per line.
 - Inline mathematics becomes code spans where practical.
-- Display mathematics becomes fenced `text` blocks.
+- Display mathematics becomes fenced `text` blocks, preceded and followed by one blank line.
 - Definitions, propositions, remarks, examples, and similar theorem environments become Markdown headings such as `## Definition N.M.K` or `### Remark N.M.K`, following nearby files.
 - Proofs may use `### Construction` or ordinary prose, matching the source and existing local style.
 - Preserve meaningful citations and references in readable prose, e.g. `Chapter 5`, `Proposition 5.6.1`, or source labels when no converted target exists yet.
@@ -124,6 +144,12 @@ If the exercise has multiple parts, keep the statement structure clear with Mark
 ## Agda Conventions
 
 Inspect nearby files before writing code.
+Agda code should follow the naming and coding conventions of the agda-unimath library, especially the upstream style guide at `https://github.com/UniMath/agda-unimath/blob/master/docs/CODINGSTYLE.md`.
+Before writing an Agda code block, search the agda-unimath library at `https://github.com/UniMath/agda-unimath` for corresponding definitions, theorems, and proofs.
+If corresponding agda-unimath code exists, copy it or adapt it as closely as the local self-contained repository context permits, preserving agda-unimath names and structure where possible.
+The `.lagda.md` files in this repository must typecheck without depending on agda-unimath.
+Do not import agda-unimath modules or any other external library modules in translated files.
+Only import files that are present in this repository, such as `universe-levels`.
 
 - Keep imports minimal.
 - Reuse earlier chapter/section files where possible.
