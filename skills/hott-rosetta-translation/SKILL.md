@@ -106,6 +106,8 @@ Do not import files that do not exist unless the task is to create them in the s
 
 ## Section Files
 
+For detailed section-file creation instructions, read `references/section-files.md`.
+
 A section file contains the translated body of the corresponding LaTeX `\subsection`.
 For detailed LaTeX-to-Markdown conversion hints, read `references/latex-to-markdown.md`.
 
@@ -146,7 +148,8 @@ If the exercise has multiple parts, keep the statement structure clear with Mark
 Inspect nearby files before writing code.
 Agda code should follow the naming and coding conventions of the agda-unimath library, especially the upstream style guide at `https://github.com/UniMath/agda-unimath/blob/master/docs/CODINGSTYLE.md`.
 Before writing an Agda code block, search the agda-unimath library at `https://github.com/UniMath/agda-unimath` for corresponding definitions, theorems, and proofs.
-If corresponding agda-unimath code exists, copy it or adapt it as closely as the local self-contained repository context permits, preserving agda-unimath names and structure where possible.
+If corresponding agda-unimath code exists, copy it verbatim when possible, preserving agda-unimath names and structure.
+Do not write new Agda code unless the relevant task-specific reference explicitly permits it or the user explicitly asks for it.
 The `.lagda.md` files in this repository must typecheck without depending on agda-unimath.
 Do not import agda-unimath modules or any other external library modules in translated files.
 Only import files that are present in this repository, such as `universe-levels`.
