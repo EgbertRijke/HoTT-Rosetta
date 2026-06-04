@@ -5,19 +5,19 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 
 Current totals:
 
-- Chapter files: 3/22 created
+- Chapter files: 5/22 created
 - Section files: 10/97 created
-- Exercise files: 9/216 created
+- Exercise files: 10/216 created
 
 ## Summary By Source
 
 | No. | Title | Source | Chapter | Sections | Exercises |
 | --- | --- | --- | --- | ---: | ---: |
 | 1 | Dependent type theory | `book/dtt.tex` | created | 2/4 | 0/1 |
-| 2 | Dependent function types | `book/pi.tex` | created | 2/2 | 0/4 |
+| 2 | Dependent function types | `book/pi.tex` | created | 2/2 | 1/4 |
 | 3 | The natural numbers | `book/nat.tex` | created | 3/3 | 6/6 |
-| 4 | More inductive types | `book/inductive.tex` | missing | 3/6 | 3/4 |
-| 5 | Identity types | `book/identity.tex` | missing | 0/5 | 0/8 |
+| 4 | More inductive types | `book/inductive.tex` | created | 3/6 | 3/4 |
+| 5 | Identity types | `book/identity.tex` | created | 0/5 | 0/8 |
 | 6 | Universes | `book/universes.tex` | missing | 0/4 | 0/6 |
 | 7 | Modular arithmetic via the Curry-Howard interpretation | `book/modular-arithmetic.tex` | missing | 0/5 | 0/10 |
 | 8 | Decidability in elementary number theory | `book/number-theory.tex` | missing | 0/6 | 0/15 |
@@ -43,6 +43,8 @@ Chapter files:
 - `src/chapter-1-dependent-type-theory.lagda.md`
 - `src/chapter-2-dependent-function-types.lagda.md`
 - `src/chapter-3-the-natural-numbers.lagda.md`
+- `src/chapter-4-more-inductive-types.lagda.md`
+- `src/chapter-5-identity-types.lagda.md`
 
 Section files:
 
@@ -59,6 +61,7 @@ Section files:
 
 Exercise files:
 
+- `src/exercise-2-1-judgmental-extensionality.lagda.md`
 - `src/exercise-3-1-multiplication-and-exponentiation.lagda.md`
 - `src/exercise-3-2-min-and-max.lagda.md`
 - `src/exercise-3-3-triangular-numbers-and-factorials.lagda.md`
@@ -71,8 +74,6 @@ Exercise files:
 
 ## Missing Chapter Files
 
-- `src/chapter-4-more-inductive-types.lagda.md`
-- `src/chapter-5-identity-types.lagda.md`
 - `src/chapter-6-universes.lagda.md`
 - `src/chapter-7-modular-arithmetic-via-the-curry-howard-interpretation.lagda.md`
 - `src/chapter-8-decidability-in-elementary-number-theory.lagda.md`
@@ -248,7 +249,7 @@ Chapter 22:
 Exercise files still to create:
 
 - Chapter 1: `src/exercise-1-1-<slug>.lagda.md`
-- Chapter 2: `src/exercise-2-1-<slug>.lagda.md` through `src/exercise-2-4-<slug>.lagda.md`
+- Chapter 2: `src/exercise-2-2-<slug>.lagda.md` through `src/exercise-2-4-<slug>.lagda.md`
 - Chapter 4: `src/exercise-4-1-<slug>.lagda.md`
 - Chapter 5: `src/exercise-5-1-<slug>.lagda.md` through `src/exercise-5-8-<slug>.lagda.md`
 - Chapter 6: `src/exercise-6-1-<slug>.lagda.md` through `src/exercise-6-6-<slug>.lagda.md`
