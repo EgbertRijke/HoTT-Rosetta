@@ -10,7 +10,7 @@ open import section-4-3-the-empty-type
 
 ## Definition 4.4.1
 
-Let `A` and `B` be types. We define the \define{coproduct} to be a type that comes equipped with
+Let `A` and `B` be types. We define the **coproduct** to be a type that comes equipped with
 
 ```text
   inl : A → A + B
@@ -37,7 +37,7 @@ hold. Alternatively, a definition of a dependent function `h : Π{x : A + B} P(x
   h(inr(y)) ≔ g(y).
 ```
 
-Sometimes we write `[f,g]` for the function `ind-coprod(f,g)`. The coproduct of two types is sometimes also called the \define{disjoint sum}.
+Sometimes we write `[f,g]` for the function `ind-coprod(f,g)`. The coproduct of two types is sometimes also called the **disjoint sum**.
 
 ```agda
 infixr 10 _+_
@@ -72,7 +72,7 @@ for any type `X`. Note that this special case of the induction principle of copr
   (P → Q) → ((P' → Q)→ (P ∨ P' → Q)).
 ```
 
-Indeed, we can think of \emph{propositions as types} and of terms as their constructive proofs. Under this interpretation of type theory the coproduct is indeed the disjunction.
+Indeed, we can think of *propositions as types* and of terms as their constructive proofs. Under this interpretation of type theory the coproduct is indeed the disjunction.
 
 ### Remark 4.4.2
 
