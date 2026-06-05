@@ -2,6 +2,11 @@
 
 ```agda
 module section-5-3-the-action-on-identifications-of-functions where
+
+open import universe-levels
+open import section-2-2-ordinary-function-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
 ```
 
 Using the induction principle of the identity type we can show that every
@@ -50,6 +55,27 @@ types, taking
   ap-comp(f, g, refl) ≔ refl.
 ```
 
+```agda
+ap :
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) {x y : A} →
+  x ＝ y → f x ＝ f y
+ap f refl = refl
+
+module _
+  {l : Level} {A : Type l} {x y : A}
+  where
+
+  ap-id : (p : x ＝ y) → ap id p ＝ p
+  ap-id refl = refl
+
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3} (g : B → C) (f : A → B)
+  where
+
+  ap-comp : {x y : A} (p : x ＝ y) → ap (g ∘ f) p ＝ (ap g ∘ ap f) p
+  ap-comp refl = refl
+```
+
 ## Definition 5.3.2
 
 Let `f : A → B` be a map.
@@ -84,3 +110,23 @@ taking
 ```text
   ap-concat(f, refl, q)  ≔  refl.
 ```
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (x y : A)
+  where
+
+  ap-refl : ap f (refl {x = x}) ＝ refl
+  ap-refl = refl
+
+  ap-inv : (p : x ＝ y) → ap f (inv p) ＝ inv (ap f p)
+  ap-inv refl = refl
+
+  ap-concat :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) → ap f (p ∙ q) ＝ ap f p ∙ ap f q
+  ap-concat refl q = refl
+```
+
+## Agda-unimath sources
+
+- The action on identifications of functions, with all its identifications, is defined in `foundation.action-on-identifications-functions`

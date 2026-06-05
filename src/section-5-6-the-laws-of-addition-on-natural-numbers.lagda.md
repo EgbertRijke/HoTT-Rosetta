@@ -2,6 +2,12 @@
 
 ```agda
 module section-5-6-the-laws-of-addition-on-natural-numbers where
+
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
+open import section-3-2-addition-on-the-natural-numbers
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
+open import section-5-3-the-action-on-identifications-of-functions
 ```
 
 Now that we have introduced the identity type, we can start proving equations.
@@ -77,6 +83,17 @@ The left unit law is therefore defined by
   left-unit-law-add-ℕ(n) ≔ ind-ℕ(refl, λ p. ap_(succ-ℕ)(p)).
 ```
 
+```agda
+right-unit-law-add-ℕ :
+  (x : ℕ) → x +ℕ zero-ℕ ＝ x
+right-unit-law-add-ℕ x = refl
+
+left-unit-law-add-ℕ :
+  (x : ℕ) → zero-ℕ +ℕ x ＝ x
+left-unit-law-add-ℕ zero-ℕ = refl
+left-unit-law-add-ℕ (succ-ℕ x) = ap succ-ℕ (left-unit-law-add-ℕ x)
+```
+
 ## Proposition 5.6.2
 
 For any natural numbers `m` and `n`, there are identifications
@@ -123,6 +140,19 @@ Therefore it suffices to construct an identification
 
 Such an identification is given by `ap_(succ-ℕ)(p)`.
 
+```agda
+abstract
+  left-successor-law-add-ℕ :
+    (x y : ℕ) → (succ-ℕ x) +ℕ y ＝ succ-ℕ (x +ℕ y)
+  left-successor-law-add-ℕ x zero-ℕ = refl
+  left-successor-law-add-ℕ x (succ-ℕ y) =
+    ap succ-ℕ (left-successor-law-add-ℕ x y)
+
+right-successor-law-add-ℕ :
+  (x y : ℕ) → x +ℕ (succ-ℕ y) ＝ succ-ℕ (x +ℕ y)
+right-successor-law-add-ℕ x y = refl
+```
+
 ## Proposition 5.6.3
 
 Addition on the natural numbers is associative, i.e., for any three natural
@@ -166,6 +196,14 @@ Therefore it suffices to construct an identification
 
 which we have by `ap_(succ-ℕ)(p)`.
 
+```agda
+abstract
+  associative-add-ℕ :
+    (x y z : ℕ) → (x +ℕ y) +ℕ z ＝ x +ℕ (y +ℕ z)
+  associative-add-ℕ x y zero-ℕ = refl
+  associative-add-ℕ x y (succ-ℕ z) = ap succ-ℕ (associative-add-ℕ x y z)
+```
+
 ## Proposition 5.6.4
 
 Addition on the natural numbers is commutative, i.e., for any two natural
@@ -193,3 +231,15 @@ Now it is clear why we first proved the successor laws: we compute
 
 The first identification is obtained by Proposition 5.6.2, and the
 second identification is the identification `ap_(succ-ℕ)(p)`.
+
+```agda
+abstract
+  commutative-add-ℕ : (x y : ℕ) → x +ℕ y ＝ y +ℕ x
+  commutative-add-ℕ zero-ℕ y = left-unit-law-add-ℕ y
+  commutative-add-ℕ (succ-ℕ x) y =
+    (left-successor-law-add-ℕ x y) ∙ (ap succ-ℕ (commutative-add-ℕ x y))
+```
+
+## Agda-unimath sources
+
+- The proofs of the unit laws, the succesor laws, and both associativity and commutativity of addition are given in `elementary-number-theory.addition-natural-numbers`

@@ -2,6 +2,8 @@
 
 ```agda
 module section-5-1-the-inductive-definition-of-identity-types where
+
+open import universe-levels
 ```
 
 ## Definition 5.1.1
@@ -14,6 +16,21 @@ types `a = x` indexed by `x : A`, of which the constructor is
   refl : a = a.
 ```
 
+```agda
+module _
+  {l : Level} {A : Type l}
+  where
+
+  data Id (x : A) : A → Type l where
+    instance refl : Id x x
+
+  infix 6 _＝_
+  _＝_ : A → A → Type l
+  (a ＝ b) = Id a b
+
+{-# BUILTIN EQUALITY Id #-}
+```
+
 The induction principle of the identity type postulates that for any family of
 types `P(x, p)` indexed by `x : A` and `p : a = x`, there is a function
 
@@ -22,6 +39,14 @@ types `P(x, p)` indexed by `x : A` and `p : a = x`, there is a function
 ```
 
 which satisfies `path-ind_a(u, a, refl) ≐ u`, given `u : P(a, refl)`.
+
+```agda
+ind-Id :
+  {l1 l2 : Level} {A : Type l1}
+  (x : A) (B : (y : A) (p : x ＝ y) → Type l2) →
+  B x refl → (y : A) (p : x ＝ y) → B y p
+ind-Id x B b y refl = b
+```
 
 An element of type `a = x` is also called an **identification** of `a` with `x`,
 and sometimes it is called a **path** from `a` to `x`.
@@ -105,3 +130,7 @@ We have the following introduction rule
 ```
 
 and similarly we have elimination and computation rules.
+
+## Agda-unimath sources
+
+- The identity type and its induction principle are defined in `foundation-core.identity-types`

@@ -2,6 +2,9 @@
 
 ```agda
 module section-5-2-the-groupoidal-structure-of-types where
+
+open import universe-levels
+open import section-5-1-the-inductive-definition-of-identity-types
 ```
 
 We show that identifications can be *concatenated* and *inverted*, which
@@ -48,6 +51,19 @@ the third and fourth variable of `f`, i.e., we define
   concat(p, q) ≔ f(x, y, p, z, q).
 ```
 
+```agda
+module _
+  {l : Level} {A : Type l}
+  where
+
+  infixl 15 _∙_
+  _∙_ : {x y z : A} → x ＝ y → y ＝ z → x ＝ z
+  refl ∙ q = q
+
+  concat : {x y : A} → x ＝ y → (z : A) → y ＝ z → x ＝ z
+  concat p z q = p ∙ q
+```
+
 ## Definition 5.2.2
 
 Let `A` be a type.
@@ -69,6 +85,15 @@ By the induction principle for identity types, it suffices to construct
 
 for any `x : A`.
 Here we take `inv(refl) ≔ refl`.
+
+```agda
+module _
+  {l : Level} {A : Type l}
+  where
+
+  inv : {x y : A} → x ＝ y → y ＝ x
+  inv refl = refl
+```
 
 ## Prelude to Definition 5.2.3
 
@@ -152,6 +177,17 @@ Thus we see that the left-hand side and the right-hand side in
 
 are judgmentally equal, so we can simply define `assoc(refl, q, r) ≔ refl`.
 
+```agda
+module _
+  {l : Level} {A : Type l}
+  where
+
+  assoc :
+    {x y z w : A} (p : x ＝ y) (q : y ＝ z) (r : z ＝ w) →
+    (p ∙ q) ∙ r ＝ p ∙ (q ∙ r)
+  assoc refl q r = refl
+```
+
 ## Definition 5.2.4
 
 Let `A` be a type.
@@ -175,6 +211,14 @@ By identification elimination it suffices to construct
 ```
 
 In both cases we take `refl`.
+
+```agda
+  left-unit : {x y : A} {p : x ＝ y} → refl ∙ p ＝ p
+  left-unit = refl
+
+  right-unit : {x y : A} {p : x ＝ y} → p ∙ refl ＝ p
+  right-unit {p = refl} = refl
+```
 
 ## Definition 5.2.5
 
@@ -210,6 +254,18 @@ Similarly it follows from the computation rules that
 
 so we again define `right-inv(refl) ≔ refl`.
 
+```agda
+module _
+  {l : Level} {A : Type l}
+  where
+
+  left-inv : {x y : A} (p : x ＝ y) → inv p ∙ p ＝ refl
+  left-inv refl = refl
+
+  right-inv : {x y : A} (p : x ＝ y) → p ∙ inv p ＝ refl
+  right-inv refl = refl
+```
+
 ## Remark 5.2.6
 
 We have seen that the associator, the unit laws, and the inverse laws, are all
@@ -223,3 +279,7 @@ The iterated identity types give types in homotopy type theory a very intricate
 structure.
 One important way of studying this structure is via the homotopy groups of
 types, a subject that we will gradually be working towards.
+
+## Agda-unimath sources
+
+- The concatenation operation, inverse operation, and all higher identifications are defined in `foundation-core.identity-types`
