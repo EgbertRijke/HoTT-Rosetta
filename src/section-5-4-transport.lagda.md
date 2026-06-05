@@ -2,6 +2,9 @@
 
 ```agda
 module section-5-4-transport where
+
+open import universe-levels
+open import section-5-1-the-inductive-definition-of-identity-types
 ```
 
 Dependent types also come with an action on identifications:  the *transport*
@@ -24,6 +27,15 @@ We construct `tr_B(p)` by induction on `p : x = y`, taking
 
 ```text
   tr_B(refl) ≔  id.
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x y : A}
+  where
+
+  tr : x ＝ y → B x → B y
+  tr refl b = b
 ```
 
 ## Prelude to Definition 5.4.2
@@ -64,3 +76,21 @@ Thus, it suffices to construct an identification
 
 Since transporting along `refl` is the identity function on `B(x)`, we simply
 take `apd_f(refl) ≔ refl`.
+
+TODO: this is copied from agda-unimath - do we want to keep `dependent-identification`, or inline it into the definition of `apd`?
+```agda
+dependent-identification :
+  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x x' : A} (p : x ＝ x') →
+  B x → B x' → Type l2
+dependent-identification B p u v = (tr B p u ＝ v)
+
+apd :
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (f : (x : A) → B x) {x y : A}
+  (p : x ＝ y) → dependent-identification B p (f x) (f y)
+apd f refl = refl
+```
+
+## Agda-unimath sources
+
+- The transport operation for non-dependent functions is defined in `foundation-core.transport-along-identifications`
+- The dependent action on paths of a dependent function is defined in `foundation.action-on-identifications-dependent-functions`
