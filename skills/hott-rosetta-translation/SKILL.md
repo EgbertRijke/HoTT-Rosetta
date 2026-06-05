@@ -120,6 +120,8 @@ Follow existing Markdown conventions:
   The only exceptions are named module declarations, `open import` statements,
   and lines consisting of a single, possibly parenthesized token that may be
   followed by one of `;`, `:`, `=`, or `→`, matching agda-unimath style.
+  For Agda code copied from agda-unimath, preserve agda-unimath line breaks
+  verbatim even when the copied source exceeds 80 characters.
 - Inline mathematics becomes code spans where practical.
 - Display mathematics becomes fenced `text` blocks, preceded and followed by one blank line.
 - Definitions, propositions, remarks, examples, and similar theorem environments become Markdown headings such as `## Definition N.M.K` or `### Remark N.M.K`, following nearby files.
@@ -157,7 +159,10 @@ If the exercise has multiple parts, keep the statement structure clear with Mark
 Inspect nearby files before writing code.
 Agda code should follow the naming and coding conventions of the agda-unimath library, especially the upstream style guide at `https://github.com/UniMath/agda-unimath/blob/master/docs/CODINGSTYLE.md`.
 Before writing an Agda code block, search the agda-unimath library at `https://github.com/UniMath/agda-unimath` for corresponding definitions, theorems, and proofs.
-If corresponding agda-unimath code exists, copy it verbatim when possible, preserving agda-unimath names and structure.
+If corresponding agda-unimath code exists, copy it verbatim when possible,
+preserving agda-unimath names, structure, line breaks, and indentation.
+Do not introduce extra line breaks into copied Agda code unless a local
+adaptation is required for this repository to typecheck.
 Do not write new Agda code unless the relevant task-specific reference explicitly permits it or the user explicitly asks for it.
 The `.lagda.md` files in this repository must typecheck without depending on agda-unimath.
 Do not import agda-unimath modules or any other external library modules in translated files.

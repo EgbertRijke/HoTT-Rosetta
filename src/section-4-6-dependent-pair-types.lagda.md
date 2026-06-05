@@ -50,9 +50,7 @@ matching as
 We will usually write `(x , y)` for `pair(x , y)`.
 
 ```agda
-record Σ {l1 l2 : Level} (A : Type l1) (B : A → Type l2) :
-  Type (l1 ⊔ l2)
-  where
+record Σ {l1 l2 : Level} (A : Type l1) (B : A → Type l2) : Type (l1 ⊔ l2) where
   constructor pair
   field
     pr1 : A
@@ -67,14 +65,12 @@ infixr 3 _,_
 pattern _,_ a b = pair a b
 
 ind-Σ :
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2}
-  {C : Σ A B → Type l3} →
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : Σ A B → Type l3} →
   ((x : A) (y : B x) → C (x , y)) → (t : Σ A B) → C t
 ind-Σ f (x , y) = f x y
 
 rec-Σ :
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2}
-  {C : Type l3} →
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : Type l3} →
   ((x : A) → B x → C) → Σ A B → C
 rec-Σ = ind-Σ
 ```
@@ -137,8 +133,7 @@ The induction principle `ind-Σ` is therefore also known as the
 
 ```agda
 ev-pair :
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2}
-  {C : Σ A B → Type l3} →
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : Σ A B → Type l3} →
   ((t : Σ A B) → C t) → (x : A) (y : B x) → C (x , y)
 ev-pair f x y = f (x , y)
 ```
@@ -167,8 +162,7 @@ product : {l1 l2 : Level} (A : Type l1) (B : Type l2) → Type (l1 ⊔ l2)
 product A B = Σ A (λ _ → B)
 
 pair' :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} →
-  A → B → product A B
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} → A → B → product A B
 pair' = pair
 
 infixr 15 _×_
@@ -197,8 +191,7 @@ that satisfies the computation rule
 
 ```agda
 ind-product :
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2}
-  {C : A × B → Type l3} →
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : A × B → Type l3} →
   ((x : A) (y : B) → C (x , y)) → (t : A × B) → C t
 ind-product = ind-Σ
 

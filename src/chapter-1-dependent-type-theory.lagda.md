@@ -12,4 +12,7 @@ The system of inference rules that we call type theory offers a principled way o
 
 ```agda
 open import section-1-1-judgments-and-contexts-in-type-theory
+open import section-1-2-type-families
+open import section-1-3-inference-rules
+open import section-1-4-derivations
 ```

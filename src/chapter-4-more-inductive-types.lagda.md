@@ -14,6 +14,7 @@ The inductive types will be specified by a description of their constructors and
 It is a good exercise for the reader to formally specify at least some of the inductive types of this section by stating their formal rules.
 
 ```agda
+open import section-4-1-the-idea-of-general-inductive-types
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts

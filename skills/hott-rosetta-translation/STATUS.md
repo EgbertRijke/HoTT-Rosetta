@@ -6,17 +6,17 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 Current totals:
 
 - Chapter files: 5/22 created
-- Section files: 12/97 created
+- Section files: 15/97 created
 - Exercise files: 10/216 created
 
 ## Summary By Source
 
 | No. | Title | Source | Chapter | Sections | Exercises |
 | --- | --- | --- | --- | ---: | ---: |
-| 1 | Dependent type theory | `book/dtt.tex` | created | 2/4 | 0/1 |
+| 1 | Dependent type theory | `book/dtt.tex` | created | 4/4 | 0/1 |
 | 2 | Dependent function types | `book/pi.tex` | created | 2/2 | 1/4 |
 | 3 | The natural numbers | `book/nat.tex` | created | 3/3 | 6/6 |
-| 4 | More inductive types | `book/inductive.tex` | created | 5/6 | 3/4 |
+| 4 | More inductive types | `book/inductive.tex` | created | 6/6 | 3/4 |
 | 5 | Identity types | `book/identity.tex` | created | 0/5 | 0/8 |
 | 6 | Universes | `book/universes.tex` | missing | 0/4 | 0/6 |
 | 7 | Modular arithmetic via the Curry-Howard interpretation | `book/modular-arithmetic.tex` | missing | 0/5 | 0/10 |
@@ -50,11 +50,14 @@ Section files:
 
 - `src/section-1-1-judgments-and-contexts-in-type-theory.lagda.md`
 - `src/section-1-2-type-families.lagda.md`
+- `src/section-1-3-inference-rules.lagda.md`
+- `src/section-1-4-derivations.lagda.md`
 - `src/section-2-1-the-rules-for-dependent-function-types.lagda.md`
 - `src/section-2-2-ordinary-function-types.lagda.md`
 - `src/section-3-1-the-formal-specification-of-the-type-of-natural-numbers.lagda.md`
 - `src/section-3-2-addition-on-the-natural-numbers.lagda.md`
 - `src/section-3-3-pattern-matching.lagda.md`
+- `src/section-4-1-the-idea-of-general-inductive-types.lagda.md`
 - `src/section-4-2-the-unit-type.lagda.md`
 - `src/section-4-3-the-empty-type.lagda.md`
 - `src/section-4-4-coproducts.lagda.md`
@@ -98,15 +101,6 @@ Exercise files:
 
 These filenames are mechanically generated from the current source titles.
 When a title contains mathematical notation, the final slug may need a small human adjustment to match nearby style.
-
-Chapter 1:
-
-- `src/section-1-3-inference-rules.lagda.md`
-- `src/section-1-4-derivations.lagda.md`
-
-Chapter 4:
-
-- `src/section-4-1-the-idea-of-general-inductive-types.lagda.md`
 
 Chapter 5:
 
