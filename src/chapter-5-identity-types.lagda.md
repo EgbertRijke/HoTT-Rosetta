@@ -491,7 +491,7 @@ We will prove here that there are identifications
 
 ```text
           0 + n = n                        m + 0 = m
-  succ-ℕ(m) + n = succ-ℕ(m + n)      m+succ-ℕ(n) = succ-ℕ(m + n)
+  succ-ℕ(m) + n = succ-ℕ(m + n)    m + succ-ℕ(n) = succ-ℕ(m + n)
     (m + n) + k = m + (n + k)              m + n = n + m.
 ```
 
@@ -565,10 +565,10 @@ We can define
   right-successor-law-add-ℕ(m,n) ≔ refl
 ```
 
-because we have a judgmental equality `m+succ-ℕ(n)≐succ-ℕ(m+n)` by the computation rules for `add-ℕ`.
+because we have a judgmental equality `m + succ-ℕ(n) ≐ succ-ℕ(m + n)` by the computation rules for `add-ℕ`.
 
 The left successor law is constructed by induction on `n`.
-In the base case we have to construct an identification `succ-ℕ(m)+0=succ-ℕ(m+0)`, which is obtained by reflexivity.
+In the base case we have to construct an identification `succ-ℕ(m) + 0 = succ-ℕ(m + 0)`, which is obtained by reflexivity.
 For the inductive step, assume that we have an identification `p : succ-ℕ(m) + n = succ-ℕ(m + n)`.
 Our goal is to show that
 
@@ -634,75 +634,92 @@ which we have by `ap_(succ-ℕ)(p)`.
 ## Proposition 5.6.4
 
 Addition on the natural numbers is commutative, i.e., for any two natural numbers `m` and `n` there is an identification
+
 ```text
   commutative-add-ℕ(m,n) :  m+n=n+m.
 ```
 
 ## Proof
 
-  We construct `commutative-add-ℕ(m,n)` by induction on `m`. In the base case we have to show that `0+n=n+0`, which holds by the unit laws for `n`, proven in \cref{prp:unit-laws-add-N}.
+We construct `commutative-add-ℕ(m,n)` by induction on `m`.
+In the base case we have to show that `0 + n = n + 0`, which holds by the unit laws for `n`, proven in \cref{prp:unit-laws-add-N}.
 
-  For the inductive step, let `p : m+n=n+m`. Our goal is to construct an identification `succ-ℕ(m)+n=n+succ-ℕ(m)`. Now it is clear why we first proved the successor laws:  we compute
-  ```text
-    succ-ℕ(m)+n = succ-ℕ(m+n) \\
-                = succ-ℕ(n+m) \\
-                ≐ n+succ-ℕ(m).
-  ```
-  The first identification is obtained by \cref{prp:successor-laws-add-N}, and the second identification is the identification `ap_(succ-ℕ){p}`.
+For the inductive step, let `p : m + n = n + m`. Our goal is to construct an identification `succ-ℕ(m) + n = n + succ-ℕ(m)`.
+Now it is clear why we first proved the successor laws: we compute
+
+```text
+  succ-ℕ(m) + n = succ-ℕ(m + n)
+                = succ-ℕ(n + m)
+                ≐ n + succ-ℕ(m).
+```
+
+The first identification is obtained by \cref{prp:successor-laws-add-N}, and the second identification is the identification `ap_(succ-ℕ)(p)`.
 
 # Exercise 5.1
 
 ## Problem statement
 
 Show that the operation inverting identifications distributes over the concatenation operation, i.e., construct an identification
-  ```text
-    \distributiveinvconcat(p,q) : (\ct{p}{q})⁻¹ = \ct{q⁻¹}{p⁻¹}.
-  ```
-  for any `p : x = y` and `q : y = z`.
+
+```text
+  distributive-inv-concat(p,q) : (p ∙ q)⁻¹ = q⁻¹ ∙ p⁻¹.
+```
+
+for any `p : x = y` and `q : y = z`.
 
 # Exercise 5.2
 
 ## Problem statement
 
-For any `p : x=y`, `q : y=z`, and `r : x=z`, construct maps
-  ```text
-    \invcon(p,q,r)  :  (\ct{p}{q}=r)→ (q=\ct{p⁻¹}{r}) \\
-    \coninv(p,q,r)  :  (\ct{p}{q}=r)→ (p=\ct{r}{q⁻¹}).
-  ```
+For any `p : x = y`, `q : y = z`, and `r : x = z`, construct maps
+
+```text
+  inv-con(p,q,r)  :  (p ∙ q = r) → (q = p⁻¹ ∙ r) \\
+  con-inv(p,q,r)  :  (p ∙ q = r) → (p = r ∙ q⁻¹).
+```
 
 # Exercise 5.3
 
-Let `B` be a type family over `A`, and consider an identification `p : a = x` in `A`. Construct for any `b : B(a)` an identification
-  ```text
-    \lift_B(p,b)  :  (a,b) = (x,tr_B(p,b)).
-  ```
+Let `B` be a type family over `A`, and consider an identification `p : a = x` in `A`.
+Construct for any `b : B(a)` an identification
 
-In other words, an identification `p : x=y` in the *base type* `A` *lifts* to an identification in `\sm{x : A}B(x)` for every element in `B(x)`, analogous to the path lifting property for fibrations in homotopy theory.
+```text
+  lift_B(p,b) : (a, b) = (x, tr_B(p, b)).
+```
+
+In other words, an identification `p : x = y` in the *base type* `A` *lifts* to an identification in `Σ(x : A) B(x)` for every element in `B(x)`, analogous to the path lifting property for fibrations in homotopy theory.
 
 # Exercise 5.4
 
 Consider four consecutive identifications
-  ```text
-    \begin{tikzcd}
-      a \arrow[r,equals,"p"] b \arrow[r,equals,"q"] c \arrow[r,equals,"r"] d \arrow[r,equals,"s"] e
-    \end{tikzcd}
-  ```
-  in a type `A`. In this exercise we will show that the **Mac Lane pentagon** for identifications commutes.
-  \begin{subexenum}
-  \item Construct the five identifications `\alpha_1,\ldots,\alpha_5` in the pentagon
-    ```text
-      \begin{tikzcd}[column sep=-1.5em]
-        &[-2em] \ct{((p ∙ q) ∙ r)}{s} \arrow[rr,equals,"\alpha_4"] \arrow[dl,equals,swap,"\alpha_1"] \ct{(\ct{p}{q})}{(\ct{r}{s})} \arrow[dr,equals,"\alpha_5"] &[-2em] \\
-        \ct{(p ∙ (q ∙ r))}{s} \arrow[drr,equals,swap,"\alpha_2"] \ct{p}{(\ct{q}{(\ct{r}{s})})}, \\
-        \ct{p}{(\ct{(\ct{q}{r})}{s})} \arrow[urr,equals,swap,"\alpha_3"]
-      \end{tikzcd}
-    ```
-    where `\alpha_1`, `\alpha_2`, and `\alpha_3` run counter-clockwise, and `\alpha_4` and `\alpha_5` run clockwise.
-  \item Show that
-    ```text
-      \ct{(\ct{\alpha_1}{\alpha_2})}{\alpha_3} = \ct{\alpha_4}{\alpha_5}.
-    ```
-  \end{subexenum}
+
+```text
+      p       q       r       s
+  a ===== b ===== c ===== d ===== e
+```
+
+in a type `A`.
+In this exercise we will show that the **Mac Lane pentagon** for identifications commutes.
+
+## Problem 5.4(a)
+
+Construct the five identifications `\alpha_1,\ldots,\alpha_5` in the pentagon
+
+```text
+&[-2em] \ct{((p ∙ q) ∙ r)}{s} \arrow[rr,equals,"\alpha_4"] \arrow[dl,equals,swap,"\alpha_1"] \ct{(p ∙ q)}{(\ct{r}{s})} \arrow[dr,equals,"\alpha_5"] &[-2em] \\
+  \ct{(p ∙ (q ∙ r))}{s} \arrow[drr,equals,swap,"\alpha_2"] \ct{p}{(\ct{q}{(\ct{r}{s})})}, \\
+    \ct{p}{(\ct{(\ct{q}{r})}{s})} \arrow[urr,equals,swap,"\alpha_3"]
+
+
+```
+  where `\alpha_1`, `\alpha_2`, and `\alpha_3` run counter-clockwise, and `\alpha_4` and `\alpha_5` run clockwise.
+
+## Problem 5.4(b)
+
+Show that
+```text
+  \ct{(\ct{\alpha_1}{\alpha_2})}{\alpha_3} = \ct{\alpha_4}{\alpha_5}.
+```
 
 ## Exercise 5.5
 
