@@ -6,7 +6,7 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 Current totals:
 
 - Chapter files: 5/22 created
-- Section files: 10/97 created
+- Section files: 11/97 created
 - Exercise files: 10/216 created
 
 ## Summary By Source
@@ -16,7 +16,7 @@ Current totals:
 | 1 | Dependent type theory | `book/dtt.tex` | created | 2/4 | 0/1 |
 | 2 | Dependent function types | `book/pi.tex` | created | 2/2 | 1/4 |
 | 3 | The natural numbers | `book/nat.tex` | created | 3/3 | 6/6 |
-| 4 | More inductive types | `book/inductive.tex` | created | 3/6 | 3/4 |
+| 4 | More inductive types | `book/inductive.tex` | created | 4/6 | 3/4 |
 | 5 | Identity types | `book/identity.tex` | created | 0/5 | 0/8 |
 | 6 | Universes | `book/universes.tex` | missing | 0/4 | 0/6 |
 | 7 | Modular arithmetic via the Curry-Howard interpretation | `book/modular-arithmetic.tex` | missing | 0/5 | 0/10 |
@@ -58,6 +58,7 @@ Section files:
 - `src/section-4-2-the-unit-type.lagda.md`
 - `src/section-4-3-the-empty-type.lagda.md`
 - `src/section-4-4-coproducts.lagda.md`
+- `src/section-4-5-the-type-of-integers.lagda.md`
 
 Exercise files:
 
@@ -105,7 +106,6 @@ Chapter 1:
 Chapter 4:
 
 - `src/section-4-1-the-idea-of-general-inductive-types.lagda.md`
-- `src/section-4-5-the-type-of-integers.lagda.md`
 - `src/section-4-6-dependent-pair-types.lagda.md`
 
 Chapter 5:
