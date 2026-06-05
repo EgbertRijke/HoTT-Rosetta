@@ -6,6 +6,7 @@ module exercise-4-3-negation where
 open import universe-levels
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
+open import section-4-6-dependent-pair-types
 ```
 
 Let `P` and `Q` be types. We will write `P ↔ Q` for the type of *bi-implication* `P → Q × Q → P`. Use the fact that `¬ P` is defined as the type `P → ∅` of functions from `P` to the empty type to give type theoretic proofs of the constructive tautologies in this exercise.
@@ -17,31 +18,6 @@ For a proposition `P`, `¬ (P × ¬ P)`.
 ## Solution
 
 ```agda 
-
-record Σ {l1 l2 : Level} (A : Type l1) (B : A → Type l2) : Type (l1 ⊔ l2) where
-  constructor pair
-  field
-    pr1 : A
-    pr2 : B pr1
-
-open Σ public
-
-{-# BUILTIN SIGMA Σ #-}
-{-# INLINE pair #-}
-
-infixr 3 _,_
-pattern _,_ a b = pair a b
-
-product : {l1 l2 : Level} (A : Type l1) (B : Type l2) → Type (l1 ⊔ l2)
-product A B = Σ A (λ _ → B)
-
-pair' :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} → A → B → product A B
-pair' = pair
-
-infixr 15 _×_
-_×_ : {l1 l2 : Level} (A : Type l1) (B : Type l2) → Type (l1 ⊔ l2)
-_×_ = product
 
 law-of-non-contradiction : {l : Level} {P : Type l} → ¬ (P × ¬ P) 
 law-of-non-contradiction (p , np) = np p 

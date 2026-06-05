@@ -116,6 +116,10 @@ For detailed LaTeX-to-Markdown conversion hints, read `references/latex-to-markd
 Follow existing Markdown conventions:
 
 - One sentence per line.
+- Text and Agda code block lines should be no longer than 80 characters.
+  The only exceptions are named module declarations, `open import` statements,
+  and lines consisting of a single, possibly parenthesized token that may be
+  followed by one of `;`, `:`, `=`, or `→`, matching agda-unimath style.
 - Inline mathematics becomes code spans where practical.
 - Display mathematics becomes fenced `text` blocks, preceded and followed by one blank line.
 - Definitions, propositions, remarks, examples, and similar theorem environments become Markdown headings such as `## Definition N.M.K` or `### Remark N.M.K`, following nearby files.
