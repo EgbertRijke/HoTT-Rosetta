@@ -6,8 +6,8 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 Current totals:
 
 - Chapter files: 5/22 created
-- Section files: 15/97 created
-- Exercise files: 10/216 created
+- Section files: 21/98 created
+- Exercise files: 18/216 created
 
 ## Summary By Source
 
@@ -17,7 +17,7 @@ Current totals:
 | 2 | Dependent function types | `book/pi.tex` | created | 2/2 | 1/4 |
 | 3 | The natural numbers | `book/nat.tex` | created | 3/3 | 6/6 |
 | 4 | More inductive types | `book/inductive.tex` | created | 6/6 | 3/4 |
-| 5 | Identity types | `book/identity.tex` | created | 0/5 | 0/8 |
+| 5 | Identity types | `book/identity.tex` | created | 6/6 | 8/8 |
 | 6 | Universes | `book/universes.tex` | missing | 0/4 | 0/6 |
 | 7 | Modular arithmetic via the Curry-Howard interpretation | `book/modular-arithmetic.tex` | missing | 0/5 | 0/10 |
 | 8 | Decidability in elementary number theory | `book/number-theory.tex` | missing | 0/6 | 0/15 |
@@ -63,6 +63,12 @@ Section files:
 - `src/section-4-4-coproducts.lagda.md`
 - `src/section-4-5-the-type-of-integers.lagda.md`
 - `src/section-4-6-dependent-pair-types.lagda.md`
+- `src/section-5-1-the-inductive-definition-of-identity-types.lagda.md`
+- `src/section-5-2-the-groupoidal-structure-of-types.lagda.md`
+- `src/section-5-3-the-action-on-identifications-of-functions.lagda.md`
+- `src/section-5-4-transport.lagda.md`
+- `src/section-5-5-the-uniqueness-of-refl.lagda.md`
+- `src/section-5-6-the-laws-of-addition-on-natural-numbers.lagda.md`
 
 Exercise files:
 
@@ -76,6 +82,14 @@ Exercise files:
 - `src/exercise-4-2-boolean-operations.lagda.md`
 - `src/exercise-4-3-negation.lagda.md`
 - `src/exercise-4-4-lists.lagda.md`
+- `src/exercise-5-1-distributive-inv-concat.lagda.md`
+- `src/exercise-5-2-inverse-concatenation-maps.lagda.md`
+- `src/exercise-5-3-lift.lagda.md`
+- `src/exercise-5-4-mac-lane-pentagon.lagda.md`
+- `src/exercise-5-5-semiring-laws-natural-numbers.lagda.md`
+- `src/exercise-5-6-successor-predecessor-integers.lagda.md`
+- `src/exercise-5-7-group-laws-integers.lagda.md`
+- `src/exercise-5-8-ring-laws-integers.lagda.md`
 
 ## Missing Chapter Files
 
@@ -101,14 +115,6 @@ Exercise files:
 
 These filenames are mechanically generated from the current source titles.
 When a title contains mathematical notation, the final slug may need a small human adjustment to match nearby style.
-
-Chapter 5:
-
-- `src/section-5-1-the-inductive-definition-of-identity-types.lagda.md`
-- `src/section-5-2-the-groupoidal-structure-of-types.lagda.md`
-- `src/section-5-3-the-action-on-identifications-of-functions.lagda.md`
-- `src/section-5-4-transport.lagda.md`
-- `src/section-5-5-the-laws-of-addition-on.lagda.md`
 
 Chapter 6:
 
@@ -245,7 +251,6 @@ Exercise files still to create:
 - Chapter 1: `src/exercise-1-1-<slug>.lagda.md`
 - Chapter 2: `src/exercise-2-2-<slug>.lagda.md` through `src/exercise-2-4-<slug>.lagda.md`
 - Chapter 4: `src/exercise-4-1-<slug>.lagda.md`
-- Chapter 5: `src/exercise-5-1-<slug>.lagda.md` through `src/exercise-5-8-<slug>.lagda.md`
 - Chapter 6: `src/exercise-6-1-<slug>.lagda.md` through `src/exercise-6-6-<slug>.lagda.md`
 - Chapter 7: `src/exercise-7-1-<slug>.lagda.md` through `src/exercise-7-10-<slug>.lagda.md`
 - Chapter 8: `src/exercise-8-1-<slug>.lagda.md` through `src/exercise-8-15-<slug>.lagda.md`
