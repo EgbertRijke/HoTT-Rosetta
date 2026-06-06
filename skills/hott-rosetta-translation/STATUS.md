@@ -5,9 +5,9 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 
 Current totals:
 
-- Chapter files: 8/22 created
-- Section files: 36/98 created
-- Exercise files: 49/216 created
+- Chapter files: 9/22 created
+- Section files: 39/98 created
+- Exercise files: 58/216 created
 
 ## Summary By Source
 
@@ -21,7 +21,7 @@ Current totals:
 | 6 | Universes | `book/universes.tex` | created | 4/4 | 6/6 |
 | 7 | Modular arithmetic via the Curry-Howard interpretation | `book/modular-arithmetic.tex` | created | 5/5 | 10/10 |
 | 8 | Decidability in elementary number theory | `book/number-theory.tex` | created | 6/6 | 15/15 |
-| 9 | Equivalences | `book/equivalences.tex` | missing | 0/3 | 0/9 |
+| 9 | Equivalences | `book/equivalences.tex` | created | 3/3 | 9/9 |
 | 10 | Contractible types and contractible maps | `book/contractible.tex` | missing | 0/4 | 0/8 |
 | 11 | The fundamental theorem of identity types | `book/fundamental.tex` | missing | 0/6 | 0/11 |
 | 12 | Propositions, sets, and the higher truncation levels | `book/hierarchy.tex` | missing | 0/4 | 0/14 |
@@ -48,6 +48,7 @@ Chapter files:
 - `src/chapter-6-universes.lagda.md`
 - `src/chapter-7-modular-arithmetic-via-the-curry-howard-interpretation.lagda.md`
 - `src/chapter-8-decidability-in-elementary-number-theory.lagda.md`
+- `src/chapter-9-equivalences.lagda.md`
 
 Section files:
 
@@ -87,6 +88,9 @@ Section files:
 - `src/section-8-4-the-greatest-common-divisor.lagda.md`
 - `src/section-8-5-the-infinitude-of-primes.lagda.md`
 - `src/section-8-6-boolean-reflection.lagda.md`
+- `src/section-9-1-homotopies.lagda.md`
+- `src/section-9-2-bi-invertible-maps.lagda.md`
+- `src/section-9-3-characterizing-the-identity-types-of-dependent-pair-types.lagda.md`
 
 Exercise files:
 
@@ -139,10 +143,18 @@ Exercise files:
 - `src/exercise-8-13-primes-congruent-three-mod-four.lagda.md`
 - `src/exercise-8-14-fields-integers-modulo-prime.lagda.md`
 - `src/exercise-8-15-cofibonacci-sequence.lagda.md`
+- `src/exercise-9-1-groupoid-operations-equivalences.lagda.md`
+- `src/exercise-9-2-nonequivalences-booleans-natural-numbers.lagda.md`
+- `src/exercise-9-3-homotopic-equivalences.lagda.md`
+- `src/exercise-9-4-three-for-two-equivalences.lagda.md`
+- `src/exercise-9-5-sigma-swap.lagda.md`
+- `src/exercise-9-6-coproduct-functor-equivalences.lagda.md`
+- `src/exercise-9-7-product-functor-equivalences.lagda.md`
+- `src/exercise-9-8-finite-type-arithmetic-equivalences.lagda.md`
+- `src/exercise-9-9-finitely-cyclic-maps.lagda.md`
 
 ## Missing Chapter Files
 
-- `src/chapter-9-equivalences.lagda.md`
 - `src/chapter-10-contractible-types-and-contractible-maps.lagda.md`
 - `src/chapter-11-the-fundamental-theorem-of-identity-types.lagda.md`
 - `src/chapter-12-propositions-sets-and-the-higher-truncation-levels.lagda.md`
@@ -161,12 +173,6 @@ Exercise files:
 
 These filenames are mechanically generated from the current source titles.
 When a title contains mathematical notation, the final slug may need a small human adjustment to match nearby style.
-
-Chapter 9:
-
-- `src/section-9-1-homotopies.lagda.md`
-- `src/section-9-2-bi-invertible-maps.lagda.md`
-- `src/section-9-3-characterizing-the-identity-types-of-dependent-pair-types.lagda.md`
 
 Chapter 10:
 
@@ -273,7 +279,6 @@ Exercise files still to create:
 - Chapter 1: `src/exercise-1-1-<slug>.lagda.md`
 - Chapter 2: `src/exercise-2-2-<slug>.lagda.md` through `src/exercise-2-4-<slug>.lagda.md`
 - Chapter 4: `src/exercise-4-1-<slug>.lagda.md`
-- Chapter 9: `src/exercise-9-1-<slug>.lagda.md` through `src/exercise-9-9-<slug>.lagda.md`
 - Chapter 10: `src/exercise-10-1-<slug>.lagda.md` through `src/exercise-10-8-<slug>.lagda.md`
 - Chapter 11: `src/exercise-11-1-<slug>.lagda.md` through `src/exercise-11-11-<slug>.lagda.md`
 - Chapter 12: `src/exercise-12-1-<slug>.lagda.md` through `src/exercise-12-14-<slug>.lagda.md`
