@@ -5,9 +5,9 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 
 Current totals:
 
-- Chapter files: 14/22 created
-- Section files: 62/98 created
-- Exercise files: 118/216 created
+- Chapter files: 15/22 created
+- Section files: 65/98 created
+- Exercise files: 123/216 created
 
 ## Summary By Source
 
@@ -27,7 +27,7 @@ Current totals:
 | 12 | Propositions, sets, and the higher truncation levels | `book/hierarchy.tex` | created | 4/4 | 14/14 |
 | 13 | Function extensionality | `book/funext.tex` | created | 5/5 | 18/18 |
 | 14 | Propositional truncations | `book/propositional-truncation.tex` | created | 4/4 | 9/9 |
-| 15 | Image factorizations | `book/images.tex` | missing | 0/3 | 0/5 |
+| 15 | Image factorizations | `book/images.tex` | created | 3/3 | 5/5 |
 | 16 | Finite types | `book/finite-types.tex` | missing | 0/3 | 0/11 |
 | 17 | The univalence axiom | `book/univalence.tex` | missing | 0/6 | 0/20 |
 | 18 | Set quotients | `book/set-quotients.tex` | missing | 0/5 | 0/14 |
@@ -54,6 +54,7 @@ Chapter files:
 - `src/chapter-12-propositions-sets-and-the-higher-truncation-levels.lagda.md`
 - `src/chapter-13-function-extensionality.lagda.md`
 - `src/chapter-14-propositional-truncations.lagda.md`
+- `src/chapter-15-image-factorizations.lagda.md`
 
 Section files:
 
@@ -119,6 +120,9 @@ Section files:
 - `src/section-14-2-propositional-truncations-as-higher-inductive-types.lagda.md`
 - `src/section-14-3-logic-in-type-theory.lagda.md`
 - `src/section-14-4-mapping-propositional-truncations-into-sets.lagda.md`
+- `src/section-15-1-the-image-of-a-map.lagda.md`
+- `src/section-15-2-surjective-maps.lagda.md`
+- `src/section-15-3-cantor-s-diagonal-argument.lagda.md`
 
 Exercise files:
 
@@ -240,10 +244,14 @@ Exercise files:
 - `src/exercise-14-7-precomposition-with-truncation.lagda.md`
 - `src/exercise-14-8-impredicative-encodings.lagda.md`
 - `src/exercise-14-9-interval.lagda.md`
+- `src/exercise-15-1-image-universal-property-triangles.lagda.md`
+- `src/exercise-15-2-subtypes-of-the-unit-type.lagda.md`
+- `src/exercise-15-3-equivalences-are-surjective-embeddings.lagda.md`
+- `src/exercise-15-4-surjective-triangles.lagda.md`
+- `src/exercise-15-5-lawveres-fixed-point-theorem.lagda.md`
 
 ## Missing Chapter Files
 
-- `src/chapter-15-image-factorizations.lagda.md`
 - `src/chapter-16-finite-types.lagda.md`
 - `src/chapter-17-the-univalence-axiom.lagda.md`
 - `src/chapter-18-set-quotients.lagda.md`
@@ -256,12 +264,6 @@ Exercise files:
 
 These filenames are mechanically generated from the current source titles.
 When a title contains mathematical notation, the final slug may need a small human adjustment to match nearby style.
-
-Chapter 15:
-
-- `src/section-15-1-the-image-of-a-map.lagda.md`
-- `src/section-15-2-surjective-maps.lagda.md`
-- `src/section-15-3-cantor-s-diagonal-argument.lagda.md`
 
 Chapter 16:
 
@@ -324,7 +326,6 @@ Exercise files still to create:
 - Chapter 1: `src/exercise-1-1-<slug>.lagda.md`
 - Chapter 2: `src/exercise-2-2-<slug>.lagda.md` through `src/exercise-2-4-<slug>.lagda.md`
 - Chapter 4: `src/exercise-4-1-<slug>.lagda.md`
-- Chapter 15: `src/exercise-15-1-<slug>.lagda.md` through `src/exercise-15-5-<slug>.lagda.md`
 - Chapter 16: `src/exercise-16-1-<slug>.lagda.md` through `src/exercise-16-11-<slug>.lagda.md`
 - Chapter 17: `src/exercise-17-1-<slug>.lagda.md` through `src/exercise-17-20-<slug>.lagda.md`
 - Chapter 18: `src/exercise-18-1-<slug>.lagda.md` through `src/exercise-18-14-<slug>.lagda.md`
