@@ -5,9 +5,9 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 
 Current totals:
 
-- Chapter files: 13/22 created
-- Section files: 58/98 created
-- Exercise files: 109/216 created
+- Chapter files: 14/22 created
+- Section files: 62/98 created
+- Exercise files: 118/216 created
 
 ## Summary By Source
 
@@ -26,7 +26,7 @@ Current totals:
 | 11 | The fundamental theorem of identity types | `book/fundamental.tex` | created | 6/6 | 11/11 |
 | 12 | Propositions, sets, and the higher truncation levels | `book/hierarchy.tex` | created | 4/4 | 14/14 |
 | 13 | Function extensionality | `book/funext.tex` | created | 5/5 | 18/18 |
-| 14 | Propositional truncations | `book/propositional-truncation.tex` | missing | 0/4 | 0/9 |
+| 14 | Propositional truncations | `book/propositional-truncation.tex` | created | 4/4 | 9/9 |
 | 15 | Image factorizations | `book/images.tex` | missing | 0/3 | 0/5 |
 | 16 | Finite types | `book/finite-types.tex` | missing | 0/3 | 0/11 |
 | 17 | The univalence axiom | `book/univalence.tex` | missing | 0/6 | 0/20 |
@@ -53,6 +53,7 @@ Chapter files:
 - `src/chapter-11-the-fundamental-theorem-of-identity-types.lagda.md`
 - `src/chapter-12-propositions-sets-and-the-higher-truncation-levels.lagda.md`
 - `src/chapter-13-function-extensionality.lagda.md`
+- `src/chapter-14-propositional-truncations.lagda.md`
 
 Section files:
 
@@ -114,6 +115,10 @@ Section files:
 - `src/section-13-3-universal-properties.lagda.md`
 - `src/section-13-4-composing-with-equivalences.lagda.md`
 - `src/section-13-5-the-strong-induction-principle-of-the-natural-numbers.lagda.md`
+- `src/section-14-1-the-universal-property-of-propositional-truncations.lagda.md`
+- `src/section-14-2-propositional-truncations-as-higher-inductive-types.lagda.md`
+- `src/section-14-3-logic-in-type-theory.lagda.md`
+- `src/section-14-4-mapping-propositional-truncations-into-sets.lagda.md`
 
 Exercise files:
 
@@ -226,10 +231,18 @@ Exercise files:
 - `src/exercise-13-16-equivalences-and-isomorphisms-of-sets.lagda.md`
 - `src/exercise-13-17-contractible-products-over-decidable-sets.lagda.md`
 - `src/exercise-13-18-retracts-as-limits.lagda.md`
+- `src/exercise-14-1-propositional-truncation-properties.lagda.md`
+- `src/exercise-14-2-mere-equality.lagda.md`
+- `src/exercise-14-3-products-of-propositional-truncations.lagda.md`
+- `src/exercise-14-4-dependent-universal-property-truncations.lagda.md`
+- `src/exercise-14-5-propositional-truncations-with-sections.lagda.md`
+- `src/exercise-14-6-propositional-truncations-of-decidable-types.lagda.md`
+- `src/exercise-14-7-precomposition-with-truncation.lagda.md`
+- `src/exercise-14-8-impredicative-encodings.lagda.md`
+- `src/exercise-14-9-interval.lagda.md`
 
 ## Missing Chapter Files
 
-- `src/chapter-14-propositional-truncations.lagda.md`
 - `src/chapter-15-image-factorizations.lagda.md`
 - `src/chapter-16-finite-types.lagda.md`
 - `src/chapter-17-the-univalence-axiom.lagda.md`
@@ -243,13 +256,6 @@ Exercise files:
 
 These filenames are mechanically generated from the current source titles.
 When a title contains mathematical notation, the final slug may need a small human adjustment to match nearby style.
-
-Chapter 14:
-
-- `src/section-14-1-the-universal-property-of-propositional-truncations.lagda.md`
-- `src/section-14-2-propositional-truncations-as-higher-inductive-types.lagda.md`
-- `src/section-14-3-logic-in-type-theory.lagda.md`
-- `src/section-14-4-mapping-propositional-truncations-into-sets.lagda.md`
 
 Chapter 15:
 
@@ -318,7 +324,6 @@ Exercise files still to create:
 - Chapter 1: `src/exercise-1-1-<slug>.lagda.md`
 - Chapter 2: `src/exercise-2-2-<slug>.lagda.md` through `src/exercise-2-4-<slug>.lagda.md`
 - Chapter 4: `src/exercise-4-1-<slug>.lagda.md`
-- Chapter 14: `src/exercise-14-1-<slug>.lagda.md` through `src/exercise-14-9-<slug>.lagda.md`
 - Chapter 15: `src/exercise-15-1-<slug>.lagda.md` through `src/exercise-15-5-<slug>.lagda.md`
 - Chapter 16: `src/exercise-16-1-<slug>.lagda.md` through `src/exercise-16-11-<slug>.lagda.md`
 - Chapter 17: `src/exercise-17-1-<slug>.lagda.md` through `src/exercise-17-20-<slug>.lagda.md`
