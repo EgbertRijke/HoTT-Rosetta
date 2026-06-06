@@ -5,9 +5,9 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 
 Current totals:
 
-- Chapter files: 6/22 created
-- Section files: 25/98 created
-- Exercise files: 24/216 created
+- Chapter files: 7/22 created
+- Section files: 30/98 created
+- Exercise files: 34/216 created
 
 ## Summary By Source
 
@@ -19,7 +19,7 @@ Current totals:
 | 4 | More inductive types | `book/inductive.tex` | created | 6/6 | 3/4 |
 | 5 | Identity types | `book/identity.tex` | created | 6/6 | 8/8 |
 | 6 | Universes | `book/universes.tex` | created | 4/4 | 6/6 |
-| 7 | Modular arithmetic via the Curry-Howard interpretation | `book/modular-arithmetic.tex` | missing | 0/5 | 0/10 |
+| 7 | Modular arithmetic via the Curry-Howard interpretation | `book/modular-arithmetic.tex` | created | 5/5 | 10/10 |
 | 8 | Decidability in elementary number theory | `book/number-theory.tex` | missing | 0/6 | 0/15 |
 | 9 | Equivalences | `book/equivalences.tex` | missing | 0/3 | 0/9 |
 | 10 | Contractible types and contractible maps | `book/contractible.tex` | missing | 0/4 | 0/8 |
@@ -46,6 +46,7 @@ Chapter files:
 - `src/chapter-4-more-inductive-types.lagda.md`
 - `src/chapter-5-identity-types.lagda.md`
 - `src/chapter-6-universes.lagda.md`
+- `src/chapter-7-modular-arithmetic-via-the-curry-howard-interpretation.lagda.md`
 
 Section files:
 
@@ -74,6 +75,11 @@ Section files:
 - `src/section-6-2-assuming-enough-universes.lagda.md`
 - `src/section-6-3-observational-equality-of-the-natural-numbers.lagda.md`
 - `src/section-6-4-peanos-seventh-and-eighth-axioms.lagda.md`
+- `src/section-7-1-the-curry-howard-interpretation.lagda.md`
+- `src/section-7-2-the-congruence-relations-on-natural-numbers.lagda.md`
+- `src/section-7-3-the-standard-finite-types.lagda.md`
+- `src/section-7-4-the-natural-numbers-modulo-k-plus-one.lagda.md`
+- `src/section-7-5-the-cyclic-groups.lagda.md`
 
 Exercise files:
 
@@ -101,10 +107,19 @@ Exercise files:
 - `src/exercise-6-4-strict-order-natural-numbers.lagda.md`
 - `src/exercise-6-5-distance-natural-numbers.lagda.md`
 - `src/exercise-6-6-absolute-value-integers.lagda.md`
+- `src/exercise-7-1-divisibility-three-for-two.lagda.md`
+- `src/exercise-7-2-divisibility-poset.lagda.md`
+- `src/exercise-7-3-divisibility-factorials.lagda.md`
+- `src/exercise-7-4-successor-finite-types-addition.lagda.md`
+- `src/exercise-7-5-observational-equality-finite-types.lagda.md`
+- `src/exercise-7-6-predecessor-finite-types.lagda.md`
+- `src/exercise-7-7-classical-finite-types.lagda.md`
+- `src/exercise-7-8-ring-laws-finite-cyclic-types.lagda.md`
+- `src/exercise-7-9-euclidean-division.lagda.md`
+- `src/exercise-7-10-k-ary-natural-numbers.lagda.md`
 
 ## Missing Chapter Files
 
-- `src/chapter-7-modular-arithmetic-via-the-curry-howard-interpretation.lagda.md`
 - `src/chapter-8-decidability-in-elementary-number-theory.lagda.md`
 - `src/chapter-9-equivalences.lagda.md`
 - `src/chapter-10-contractible-types-and-contractible-maps.lagda.md`
@@ -125,14 +140,6 @@ Exercise files:
 
 These filenames are mechanically generated from the current source titles.
 When a title contains mathematical notation, the final slug may need a small human adjustment to match nearby style.
-
-Chapter 7:
-
-- `src/section-7-1-the-curry-howard-interpretation.lagda.md`
-- `src/section-7-2-the-congruence-relations-on.lagda.md`
-- `src/section-7-3-the-standard-finite-types.lagda.md`
-- `src/section-7-4-the-natural-numbers-modulo-k-1.lagda.md`
-- `src/section-7-5-the-cyclic-groups.lagda.md`
 
 Chapter 8:
 
@@ -254,7 +261,6 @@ Exercise files still to create:
 - Chapter 1: `src/exercise-1-1-<slug>.lagda.md`
 - Chapter 2: `src/exercise-2-2-<slug>.lagda.md` through `src/exercise-2-4-<slug>.lagda.md`
 - Chapter 4: `src/exercise-4-1-<slug>.lagda.md`
-- Chapter 7: `src/exercise-7-1-<slug>.lagda.md` through `src/exercise-7-10-<slug>.lagda.md`
 - Chapter 8: `src/exercise-8-1-<slug>.lagda.md` through `src/exercise-8-15-<slug>.lagda.md`
 - Chapter 9: `src/exercise-9-1-<slug>.lagda.md` through `src/exercise-9-9-<slug>.lagda.md`
 - Chapter 10: `src/exercise-10-1-<slug>.lagda.md` through `src/exercise-10-8-<slug>.lagda.md`
