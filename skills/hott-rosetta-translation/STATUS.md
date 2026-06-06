@@ -5,9 +5,9 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 
 Current totals:
 
-- Chapter files: 10/22 created
-- Section files: 43/98 created
-- Exercise files: 66/216 created
+- Chapter files: 11/22 created
+- Section files: 49/98 created
+- Exercise files: 77/216 created
 
 ## Summary By Source
 
@@ -23,7 +23,7 @@ Current totals:
 | 8 | Decidability in elementary number theory | `book/number-theory.tex` | created | 6/6 | 15/15 |
 | 9 | Equivalences | `book/equivalences.tex` | created | 3/3 | 9/9 |
 | 10 | Contractible types and contractible maps | `book/contractible.tex` | created | 4/4 | 8/8 |
-| 11 | The fundamental theorem of identity types | `book/fundamental.tex` | missing | 0/6 | 0/11 |
+| 11 | The fundamental theorem of identity types | `book/fundamental.tex` | created | 6/6 | 11/11 |
 | 12 | Propositions, sets, and the higher truncation levels | `book/hierarchy.tex` | missing | 0/4 | 0/14 |
 | 13 | Function extensionality | `book/funext.tex` | missing | 0/5 | 0/18 |
 | 14 | Propositional truncations | `book/propositional-truncation.tex` | missing | 0/4 | 0/9 |
@@ -50,6 +50,7 @@ Chapter files:
 - `src/chapter-8-decidability-in-elementary-number-theory.lagda.md`
 - `src/chapter-9-equivalences.lagda.md`
 - `src/chapter-10-contractible-types-and-contractible-maps.lagda.md`
+- `src/chapter-11-the-fundamental-theorem-of-identity-types.lagda.md`
 
 Section files:
 
@@ -96,6 +97,12 @@ Section files:
 - `src/section-10-2-singleton-induction.lagda.md`
 - `src/section-10-3-contractible-maps.lagda.md`
 - `src/section-10-4-equivalences-are-contractible-maps.lagda.md`
+- `src/section-11-1-families-of-equivalences.lagda.md`
+- `src/section-11-2-the-fundamental-theorem.lagda.md`
+- `src/section-11-3-equality-on-the-natural-numbers.lagda.md`
+- `src/section-11-4-embeddings.lagda.md`
+- `src/section-11-5-disjointness-of-coproducts.lagda.md`
+- `src/section-11-6-the-structure-identity-principle.lagda.md`
 
 Exercise files:
 
@@ -165,10 +172,20 @@ Exercise files:
 - `src/exercise-10-6-dependent-pair-contractible-base.lagda.md`
 - `src/exercise-10-7-fibers-of-projections.lagda.md`
 - `src/exercise-10-8-fiber-replacement.lagda.md`
+- `src/exercise-11-1-coproduct-embeddings.lagda.md`
+- `src/exercise-11-2-paths-along-equivalences.lagda.md`
+- `src/exercise-11-3-homotopic-embeddings.lagda.md`
+- `src/exercise-11-4-embedding-triangles.lagda.md`
+- `src/exercise-11-5-composite-embeddings-equivalences.lagda.md`
+- `src/exercise-11-6-embeddings-from-coproducts.lagda.md`
+- `src/exercise-11-7-coproduct-functor-reflection.lagda.md`
+- `src/exercise-11-8-total-map-retractions.lagda.md`
+- `src/exercise-11-9-embedding-from-path-sections.lagda.md`
+- `src/exercise-11-10-path-split-maps.lagda.md`
+- `src/exercise-11-11-fiber-triangles.lagda.md`
 
 ## Missing Chapter Files
 
-- `src/chapter-11-the-fundamental-theorem-of-identity-types.lagda.md`
 - `src/chapter-12-propositions-sets-and-the-higher-truncation-levels.lagda.md`
 - `src/chapter-13-function-extensionality.lagda.md`
 - `src/chapter-14-propositional-truncations.lagda.md`
@@ -185,15 +202,6 @@ Exercise files:
 
 These filenames are mechanically generated from the current source titles.
 When a title contains mathematical notation, the final slug may need a small human adjustment to match nearby style.
-
-Chapter 11:
-
-- `src/section-11-1-families-of-equivalences.lagda.md`
-- `src/section-11-2-the-fundamental-theorem.lagda.md`
-- `src/section-11-3-equality-on-the-natural-numbers.lagda.md`
-- `src/section-11-4-embeddings.lagda.md`
-- `src/section-11-5-disjointness-of-coproducts.lagda.md`
-- `src/section-11-6-the-structure-identity-principle.lagda.md`
 
 Chapter 12:
 
@@ -284,7 +292,6 @@ Exercise files still to create:
 - Chapter 1: `src/exercise-1-1-<slug>.lagda.md`
 - Chapter 2: `src/exercise-2-2-<slug>.lagda.md` through `src/exercise-2-4-<slug>.lagda.md`
 - Chapter 4: `src/exercise-4-1-<slug>.lagda.md`
-- Chapter 11: `src/exercise-11-1-<slug>.lagda.md` through `src/exercise-11-11-<slug>.lagda.md`
 - Chapter 12: `src/exercise-12-1-<slug>.lagda.md` through `src/exercise-12-14-<slug>.lagda.md`
 - Chapter 13: `src/exercise-13-1-<slug>.lagda.md` through `src/exercise-13-18-<slug>.lagda.md`
 - Chapter 14: `src/exercise-14-1-<slug>.lagda.md` through `src/exercise-14-9-<slug>.lagda.md`
