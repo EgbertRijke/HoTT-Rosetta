@@ -5,9 +5,9 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 
 Current totals:
 
-- Chapter files: 11/22 created
-- Section files: 49/98 created
-- Exercise files: 77/216 created
+- Chapter files: 12/22 created
+- Section files: 53/98 created
+- Exercise files: 91/216 created
 
 ## Summary By Source
 
@@ -24,7 +24,7 @@ Current totals:
 | 9 | Equivalences | `book/equivalences.tex` | created | 3/3 | 9/9 |
 | 10 | Contractible types and contractible maps | `book/contractible.tex` | created | 4/4 | 8/8 |
 | 11 | The fundamental theorem of identity types | `book/fundamental.tex` | created | 6/6 | 11/11 |
-| 12 | Propositions, sets, and the higher truncation levels | `book/hierarchy.tex` | missing | 0/4 | 0/14 |
+| 12 | Propositions, sets, and the higher truncation levels | `book/hierarchy.tex` | created | 4/4 | 14/14 |
 | 13 | Function extensionality | `book/funext.tex` | missing | 0/5 | 0/18 |
 | 14 | Propositional truncations | `book/propositional-truncation.tex` | missing | 0/4 | 0/9 |
 | 15 | Image factorizations | `book/images.tex` | missing | 0/3 | 0/5 |
@@ -51,6 +51,7 @@ Chapter files:
 - `src/chapter-9-equivalences.lagda.md`
 - `src/chapter-10-contractible-types-and-contractible-maps.lagda.md`
 - `src/chapter-11-the-fundamental-theorem-of-identity-types.lagda.md`
+- `src/chapter-12-propositions-sets-and-the-higher-truncation-levels.lagda.md`
 
 Section files:
 
@@ -103,6 +104,10 @@ Section files:
 - `src/section-11-4-embeddings.lagda.md`
 - `src/section-11-5-disjointness-of-coproducts.lagda.md`
 - `src/section-11-6-the-structure-identity-principle.lagda.md`
+- `src/section-12-1-propositions.lagda.md`
+- `src/section-12-2-subtypes.lagda.md`
+- `src/section-12-3-sets.lagda.md`
+- `src/section-12-4-general-truncation-levels.lagda.md`
 
 Exercise files:
 
@@ -183,10 +188,23 @@ Exercise files:
 - `src/exercise-11-9-embedding-from-path-sections.lagda.md`
 - `src/exercise-11-10-path-split-maps.lagda.md`
 - `src/exercise-11-11-fiber-triangles.lagda.md`
+- `src/exercise-12-1-booleans-are-sets.lagda.md`
+- `src/exercise-12-2-posets-are-sets.lagda.md`
+- `src/exercise-12-3-injective-maps-into-sets.lagda.md`
+- `src/exercise-12-4-coproduct-truncation.lagda.md`
+- `src/exercise-12-5-diagonal.lagda.md`
+- `src/exercise-12-6-truncated-sigma-types.lagda.md`
+- `src/exercise-12-7-truncated-products.lagda.md`
+- `src/exercise-12-8-retracts-of-truncated-types.lagda.md`
+- `src/exercise-12-9-list-concatenation-truncated-map.lagda.md`
+- `src/exercise-12-10-constant-maps-truncated.lagda.md`
+- `src/exercise-12-11-truncated-maps-triangles.lagda.md`
+- `src/exercise-12-12-total-maps-truncated.lagda.md`
+- `src/exercise-12-13-fiber-inclusions-truncated.lagda.md`
+- `src/exercise-12-14-isolated-elements.lagda.md`
 
 ## Missing Chapter Files
 
-- `src/chapter-12-propositions-sets-and-the-higher-truncation-levels.lagda.md`
 - `src/chapter-13-function-extensionality.lagda.md`
 - `src/chapter-14-propositional-truncations.lagda.md`
 - `src/chapter-15-image-factorizations.lagda.md`
@@ -202,13 +220,6 @@ Exercise files:
 
 These filenames are mechanically generated from the current source titles.
 When a title contains mathematical notation, the final slug may need a small human adjustment to match nearby style.
-
-Chapter 12:
-
-- `src/section-12-1-propositions.lagda.md`
-- `src/section-12-2-subtypes.lagda.md`
-- `src/section-12-3-sets.lagda.md`
-- `src/section-12-4-general-truncation-levels.lagda.md`
 
 Chapter 13:
 
@@ -292,7 +303,6 @@ Exercise files still to create:
 - Chapter 1: `src/exercise-1-1-<slug>.lagda.md`
 - Chapter 2: `src/exercise-2-2-<slug>.lagda.md` through `src/exercise-2-4-<slug>.lagda.md`
 - Chapter 4: `src/exercise-4-1-<slug>.lagda.md`
-- Chapter 12: `src/exercise-12-1-<slug>.lagda.md` through `src/exercise-12-14-<slug>.lagda.md`
 - Chapter 13: `src/exercise-13-1-<slug>.lagda.md` through `src/exercise-13-18-<slug>.lagda.md`
 - Chapter 14: `src/exercise-14-1-<slug>.lagda.md` through `src/exercise-14-9-<slug>.lagda.md`
 - Chapter 15: `src/exercise-15-1-<slug>.lagda.md` through `src/exercise-15-5-<slug>.lagda.md`
