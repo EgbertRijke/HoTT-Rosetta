@@ -5,9 +5,9 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 
 Current totals:
 
-- Chapter files: 7/22 created
-- Section files: 30/98 created
-- Exercise files: 34/216 created
+- Chapter files: 8/22 created
+- Section files: 36/98 created
+- Exercise files: 49/216 created
 
 ## Summary By Source
 
@@ -20,7 +20,7 @@ Current totals:
 | 5 | Identity types | `book/identity.tex` | created | 6/6 | 8/8 |
 | 6 | Universes | `book/universes.tex` | created | 4/4 | 6/6 |
 | 7 | Modular arithmetic via the Curry-Howard interpretation | `book/modular-arithmetic.tex` | created | 5/5 | 10/10 |
-| 8 | Decidability in elementary number theory | `book/number-theory.tex` | missing | 0/6 | 0/15 |
+| 8 | Decidability in elementary number theory | `book/number-theory.tex` | created | 6/6 | 15/15 |
 | 9 | Equivalences | `book/equivalences.tex` | missing | 0/3 | 0/9 |
 | 10 | Contractible types and contractible maps | `book/contractible.tex` | missing | 0/4 | 0/8 |
 | 11 | The fundamental theorem of identity types | `book/fundamental.tex` | missing | 0/6 | 0/11 |
@@ -47,6 +47,7 @@ Chapter files:
 - `src/chapter-5-identity-types.lagda.md`
 - `src/chapter-6-universes.lagda.md`
 - `src/chapter-7-modular-arithmetic-via-the-curry-howard-interpretation.lagda.md`
+- `src/chapter-8-decidability-in-elementary-number-theory.lagda.md`
 
 Section files:
 
@@ -80,6 +81,12 @@ Section files:
 - `src/section-7-3-the-standard-finite-types.lagda.md`
 - `src/section-7-4-the-natural-numbers-modulo-k-plus-one.lagda.md`
 - `src/section-7-5-the-cyclic-groups.lagda.md`
+- `src/section-8-1-decidability-and-decidable-equality.lagda.md`
+- `src/section-8-2-constructions-by-case-analysis.lagda.md`
+- `src/section-8-3-the-well-ordering-principle-of-natural-numbers.lagda.md`
+- `src/section-8-4-the-greatest-common-divisor.lagda.md`
+- `src/section-8-5-the-infinitude-of-primes.lagda.md`
+- `src/section-8-6-boolean-reflection.lagda.md`
 
 Exercise files:
 
@@ -117,10 +124,24 @@ Exercise files:
 - `src/exercise-7-8-ring-laws-finite-cyclic-types.lagda.md`
 - `src/exercise-7-9-euclidean-division.lagda.md`
 - `src/exercise-7-10-k-ary-natural-numbers.lagda.md`
+- `src/exercise-8-1-open-number-theory-conjectures.lagda.md`
+- `src/exercise-8-2-decidability-of-decidability.lagda.md`
+- `src/exercise-8-3-finite-choice-decidable.lagda.md`
+- `src/exercise-8-4-prime-and-prime-counting-functions.lagda.md`
+- `src/exercise-8-5-characterization-prime.lagda.md`
+- `src/exercise-8-6-decidable-equality-products.lagda.md`
+- `src/exercise-8-7-decidable-equality-coproducts.lagda.md`
+- `src/exercise-8-8-decidable-equality-sigma-types.lagda.md`
+- `src/exercise-8-9-finite-dependent-products.lagda.md`
+- `src/exercise-8-10-maximal-elements.lagda.md`
+- `src/exercise-8-11-bezouts-identity.lagda.md`
+- `src/exercise-8-12-prime-factorization.lagda.md`
+- `src/exercise-8-13-primes-congruent-three-mod-four.lagda.md`
+- `src/exercise-8-14-fields-integers-modulo-prime.lagda.md`
+- `src/exercise-8-15-cofibonacci-sequence.lagda.md`
 
 ## Missing Chapter Files
 
-- `src/chapter-8-decidability-in-elementary-number-theory.lagda.md`
 - `src/chapter-9-equivalences.lagda.md`
 - `src/chapter-10-contractible-types-and-contractible-maps.lagda.md`
 - `src/chapter-11-the-fundamental-theorem-of-identity-types.lagda.md`
@@ -140,15 +161,6 @@ Exercise files:
 
 These filenames are mechanically generated from the current source titles.
 When a title contains mathematical notation, the final slug may need a small human adjustment to match nearby style.
-
-Chapter 8:
-
-- `src/section-8-1-decidability-and-decidable-equality.lagda.md`
-- `src/section-8-2-constructions-by-case-analysis.lagda.md`
-- `src/section-8-3-the-well-ordering-principle-of.lagda.md`
-- `src/section-8-4-the-greatest-common-divisor.lagda.md`
-- `src/section-8-5-the-infinitude-of-primes.lagda.md`
-- `src/section-8-6-boolean-reflection.lagda.md`
 
 Chapter 9:
 
@@ -261,7 +273,6 @@ Exercise files still to create:
 - Chapter 1: `src/exercise-1-1-<slug>.lagda.md`
 - Chapter 2: `src/exercise-2-2-<slug>.lagda.md` through `src/exercise-2-4-<slug>.lagda.md`
 - Chapter 4: `src/exercise-4-1-<slug>.lagda.md`
-- Chapter 8: `src/exercise-8-1-<slug>.lagda.md` through `src/exercise-8-15-<slug>.lagda.md`
 - Chapter 9: `src/exercise-9-1-<slug>.lagda.md` through `src/exercise-9-9-<slug>.lagda.md`
 - Chapter 10: `src/exercise-10-1-<slug>.lagda.md` through `src/exercise-10-8-<slug>.lagda.md`
 - Chapter 11: `src/exercise-11-1-<slug>.lagda.md` through `src/exercise-11-11-<slug>.lagda.md`
