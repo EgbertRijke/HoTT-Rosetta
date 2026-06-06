@@ -5,9 +5,9 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 
 Current totals:
 
-- Chapter files: 5/22 created
-- Section files: 21/98 created
-- Exercise files: 18/216 created
+- Chapter files: 6/22 created
+- Section files: 25/98 created
+- Exercise files: 24/216 created
 
 ## Summary By Source
 
@@ -18,7 +18,7 @@ Current totals:
 | 3 | The natural numbers | `book/nat.tex` | created | 3/3 | 6/6 |
 | 4 | More inductive types | `book/inductive.tex` | created | 6/6 | 3/4 |
 | 5 | Identity types | `book/identity.tex` | created | 6/6 | 8/8 |
-| 6 | Universes | `book/universes.tex` | missing | 0/4 | 0/6 |
+| 6 | Universes | `book/universes.tex` | created | 4/4 | 6/6 |
 | 7 | Modular arithmetic via the Curry-Howard interpretation | `book/modular-arithmetic.tex` | missing | 0/5 | 0/10 |
 | 8 | Decidability in elementary number theory | `book/number-theory.tex` | missing | 0/6 | 0/15 |
 | 9 | Equivalences | `book/equivalences.tex` | missing | 0/3 | 0/9 |
@@ -45,6 +45,7 @@ Chapter files:
 - `src/chapter-3-the-natural-numbers.lagda.md`
 - `src/chapter-4-more-inductive-types.lagda.md`
 - `src/chapter-5-identity-types.lagda.md`
+- `src/chapter-6-universes.lagda.md`
 
 Section files:
 
@@ -69,6 +70,10 @@ Section files:
 - `src/section-5-4-transport.lagda.md`
 - `src/section-5-5-the-uniqueness-of-refl.lagda.md`
 - `src/section-5-6-the-laws-of-addition-on-natural-numbers.lagda.md`
+- `src/section-6-1-specification-of-type-theoretic-universes.lagda.md`
+- `src/section-6-2-assuming-enough-universes.lagda.md`
+- `src/section-6-3-observational-equality-of-the-natural-numbers.lagda.md`
+- `src/section-6-4-peanos-seventh-and-eighth-axioms.lagda.md`
 
 Exercise files:
 
@@ -90,10 +95,15 @@ Exercise files:
 - `src/exercise-5-6-successor-predecessor-integers.lagda.md`
 - `src/exercise-5-7-group-laws-integers.lagda.md`
 - `src/exercise-5-8-ring-laws-integers.lagda.md`
+- `src/exercise-6-1-injectivity-addition-multiplication.lagda.md`
+- `src/exercise-6-2-observational-equality-booleans.lagda.md`
+- `src/exercise-6-3-order-natural-numbers.lagda.md`
+- `src/exercise-6-4-strict-order-natural-numbers.lagda.md`
+- `src/exercise-6-5-distance-natural-numbers.lagda.md`
+- `src/exercise-6-6-absolute-value-integers.lagda.md`
 
 ## Missing Chapter Files
 
-- `src/chapter-6-universes.lagda.md`
 - `src/chapter-7-modular-arithmetic-via-the-curry-howard-interpretation.lagda.md`
 - `src/chapter-8-decidability-in-elementary-number-theory.lagda.md`
 - `src/chapter-9-equivalences.lagda.md`
@@ -115,13 +125,6 @@ Exercise files:
 
 These filenames are mechanically generated from the current source titles.
 When a title contains mathematical notation, the final slug may need a small human adjustment to match nearby style.
-
-Chapter 6:
-
-- `src/section-6-1-specification-of-type-theoretic-universes.lagda.md`
-- `src/section-6-2-assuming-enough-universes.lagda.md`
-- `src/section-6-3-observational-equality-of-the-natural-numbers.lagda.md`
-- `src/section-6-4-peano-s-seventh-and-eighth-axioms.lagda.md`
 
 Chapter 7:
 
@@ -251,7 +254,6 @@ Exercise files still to create:
 - Chapter 1: `src/exercise-1-1-<slug>.lagda.md`
 - Chapter 2: `src/exercise-2-2-<slug>.lagda.md` through `src/exercise-2-4-<slug>.lagda.md`
 - Chapter 4: `src/exercise-4-1-<slug>.lagda.md`
-- Chapter 6: `src/exercise-6-1-<slug>.lagda.md` through `src/exercise-6-6-<slug>.lagda.md`
 - Chapter 7: `src/exercise-7-1-<slug>.lagda.md` through `src/exercise-7-10-<slug>.lagda.md`
 - Chapter 8: `src/exercise-8-1-<slug>.lagda.md` through `src/exercise-8-15-<slug>.lagda.md`
 - Chapter 9: `src/exercise-9-1-<slug>.lagda.md` through `src/exercise-9-9-<slug>.lagda.md`

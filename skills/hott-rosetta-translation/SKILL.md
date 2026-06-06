@@ -24,6 +24,14 @@ Whenever asked to create a new chapter, section, or exercise file:
 4. If the requested file is no longer missing, stop without creating a duplicate file and instead describe the contents of the existing file to the user.
 5. If the requested file exists but appears incomplete, partially translated, or inconsistent with `STATUS.md`, stop and ask the user how to proceed.
 
+## New File Completion
+
+Whenever new chapter, section, or exercise files are created:
+
+1. Add all new files and related status or instruction updates to the git repository.
+2. Commit the completed translation work.
+3. Push the commit to the remote repository.
+
 ## Editing Existing Files
 
 Do not edit, cut, reorganize, or delete existing file contents without checking with the user, unless the user has explicitly instructed you to do so.
