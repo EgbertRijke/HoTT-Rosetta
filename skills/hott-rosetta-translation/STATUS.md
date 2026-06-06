@@ -5,9 +5,9 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 
 Current totals:
 
-- Chapter files: 16/22 created
-- Section files: 68/98 created
-- Exercise files: 134/216 created
+- Chapter files: 17/22 created
+- Section files: 74/98 created
+- Exercise files: 154/216 created
 
 ## Summary By Source
 
@@ -29,7 +29,7 @@ Current totals:
 | 14 | Propositional truncations | `book/propositional-truncation.tex` | created | 4/4 | 9/9 |
 | 15 | Image factorizations | `book/images.tex` | created | 3/3 | 5/5 |
 | 16 | Finite types | `book/finite-types.tex` | created | 3/3 | 11/11 |
-| 17 | The univalence axiom | `book/univalence.tex` | missing | 0/6 | 0/20 |
+| 17 | The univalence axiom | `book/univalence.tex` | created | 6/6 | 20/20 |
 | 18 | Set quotients | `book/set-quotients.tex` | missing | 0/5 | 0/14 |
 | 19 | Groups in univalent mathematics | `book/groups.tex` | missing | 0/6 | 0/17 |
 | 20 | General inductive types | `book/W-types.tex` | missing | 0/6 | 0/7 |
@@ -56,6 +56,7 @@ Chapter files:
 - `src/chapter-14-propositional-truncations.lagda.md`
 - `src/chapter-15-image-factorizations.lagda.md`
 - `src/chapter-16-finite-types.lagda.md`
+- `src/chapter-17-the-univalence-axiom.lagda.md`
 
 Section files:
 
@@ -127,6 +128,12 @@ Section files:
 - `src/section-16-1-counting-in-type-theory.lagda.md`
 - `src/section-16-2-double-counting-in-type-theory.lagda.md`
 - `src/section-16-3-finite-types.lagda.md`
+- `src/section-17-1-equivalent-forms-of-the-univalence-axiom.lagda.md`
+- `src/section-17-2-propositional-extensionality.lagda.md`
+- `src/section-17-3-univalence-implies-function-extensionality.lagda.md`
+- `src/section-17-4-maps-and-families-of-types.lagda.md`
+- `src/section-17-5-classical-mathematics-with-the-univalence-axiom.lagda.md`
+- `src/section-17-6-the-binomial-types.lagda.md`
 
 Exercise files:
 
@@ -264,10 +271,29 @@ Exercise files:
 - `src/exercise-16-9-decidable-embeddings-with-unit.lagda.md`
 - `src/exercise-16-10-falling-factorials-and-embeddings.lagda.md`
 - `src/exercise-16-11-surjections-between-finite-types.lagda.md`
+- `src/exercise-17-1-universes-of-truncated-types.lagda.md`
+- `src/exercise-17-2-not-all-negated-products.lagda.md`
+- `src/exercise-17-3-excluded-middle-and-decidable-equality.lagda.md`
+- `src/exercise-17-4-object-classifier-points.lagda.md`
+- `src/exercise-17-5-surjective-precomposition.lagda.md`
+- `src/exercise-17-6-identity-type-embedding.lagda.md`
+- `src/exercise-17-7-sigma-and-coproduct-truncated-maps.lagda.md`
+- `src/exercise-17-8-pi-over-propositions.lagda.md`
+- `src/exercise-17-9-binary-correspondences.lagda.md`
+- `src/exercise-17-10-complements-of-finite-subtypes.lagda.md`
+- `src/exercise-17-11-complements-of-pointed-finite-types.lagda.md`
+- `src/exercise-17-12-automorphisms-of-k-element-types.lagda.md`
+- `src/exercise-17-13-binomial-types-and-isolated-points.lagda.md`
+- `src/exercise-17-14-binomial-theorem.lagda.md`
+- `src/exercise-17-15-small-retracts-and-products.lagda.md`
+- `src/exercise-17-16-finite-retracts.lagda.md`
+- `src/exercise-17-17-truncated-retracts.lagda.md`
+- `src/exercise-17-18-surjections-into-truncated-types.lagda.md`
+- `src/exercise-17-19-embeddings-between-uniform-finite-types.lagda.md`
+- `src/exercise-17-20-prime-decompositions.lagda.md`
 
 ## Missing Chapter Files
 
-- `src/chapter-17-the-univalence-axiom.lagda.md`
 - `src/chapter-18-set-quotients.lagda.md`
 - `src/chapter-19-groups-in-univalent-mathematics.lagda.md`
 - `src/chapter-20-general-inductive-types.lagda.md`
@@ -278,15 +304,6 @@ Exercise files:
 
 These filenames are mechanically generated from the current source titles.
 When a title contains mathematical notation, the final slug may need a small human adjustment to match nearby style.
-
-Chapter 17:
-
-- `src/section-17-1-equivalent-forms-of-the-univalence-axiom.lagda.md`
-- `src/section-17-2-propositional-extensionality.lagda.md`
-- `src/section-17-3-univalence-implies-function-extensionality.lagda.md`
-- `src/section-17-4-maps-and-families-of-types.lagda.md`
-- `src/section-17-5-classical-mathematics-with-the-univalence-axiom.lagda.md`
-- `src/section-17-6-the-binomial-types.lagda.md`
 
 Chapter 18:
 
@@ -334,7 +351,6 @@ Exercise files still to create:
 - Chapter 1: `src/exercise-1-1-<slug>.lagda.md`
 - Chapter 2: `src/exercise-2-2-<slug>.lagda.md` through `src/exercise-2-4-<slug>.lagda.md`
 - Chapter 4: `src/exercise-4-1-<slug>.lagda.md`
-- Chapter 17: `src/exercise-17-1-<slug>.lagda.md` through `src/exercise-17-20-<slug>.lagda.md`
 - Chapter 18: `src/exercise-18-1-<slug>.lagda.md` through `src/exercise-18-14-<slug>.lagda.md`
 - Chapter 19: `src/exercise-19-1-<slug>.lagda.md` through `src/exercise-19-17-<slug>.lagda.md`
 - Chapter 20: `src/exercise-20-1-<slug>.lagda.md` through `src/exercise-20-7-<slug>.lagda.md`
