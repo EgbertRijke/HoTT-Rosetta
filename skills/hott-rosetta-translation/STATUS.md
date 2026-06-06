@@ -5,9 +5,9 @@ The source inventory follows `book/hott-intro.tex` and the uncommented `\input` 
 
 Current totals:
 
-- Chapter files: 12/22 created
-- Section files: 53/98 created
-- Exercise files: 91/216 created
+- Chapter files: 13/22 created
+- Section files: 58/98 created
+- Exercise files: 109/216 created
 
 ## Summary By Source
 
@@ -25,7 +25,7 @@ Current totals:
 | 10 | Contractible types and contractible maps | `book/contractible.tex` | created | 4/4 | 8/8 |
 | 11 | The fundamental theorem of identity types | `book/fundamental.tex` | created | 6/6 | 11/11 |
 | 12 | Propositions, sets, and the higher truncation levels | `book/hierarchy.tex` | created | 4/4 | 14/14 |
-| 13 | Function extensionality | `book/funext.tex` | missing | 0/5 | 0/18 |
+| 13 | Function extensionality | `book/funext.tex` | created | 5/5 | 18/18 |
 | 14 | Propositional truncations | `book/propositional-truncation.tex` | missing | 0/4 | 0/9 |
 | 15 | Image factorizations | `book/images.tex` | missing | 0/3 | 0/5 |
 | 16 | Finite types | `book/finite-types.tex` | missing | 0/3 | 0/11 |
@@ -52,6 +52,7 @@ Chapter files:
 - `src/chapter-10-contractible-types-and-contractible-maps.lagda.md`
 - `src/chapter-11-the-fundamental-theorem-of-identity-types.lagda.md`
 - `src/chapter-12-propositions-sets-and-the-higher-truncation-levels.lagda.md`
+- `src/chapter-13-function-extensionality.lagda.md`
 
 Section files:
 
@@ -108,6 +109,11 @@ Section files:
 - `src/section-12-2-subtypes.lagda.md`
 - `src/section-12-3-sets.lagda.md`
 - `src/section-12-4-general-truncation-levels.lagda.md`
+- `src/section-13-1-equivalent-forms-of-function-extensionality.lagda.md`
+- `src/section-13-2-identity-systems-on-pi-types.lagda.md`
+- `src/section-13-3-universal-properties.lagda.md`
+- `src/section-13-4-composing-with-equivalences.lagda.md`
+- `src/section-13-5-the-strong-induction-principle-of-the-natural-numbers.lagda.md`
 
 Exercise files:
 
@@ -202,10 +208,27 @@ Exercise files:
 - `src/exercise-12-12-total-maps-truncated.lagda.md`
 - `src/exercise-12-13-fiber-inclusions-truncated.lagda.md`
 - `src/exercise-12-14-isolated-elements.lagda.md`
+- `src/exercise-13-1-homotopy-operations-equivalences.lagda.md`
+- `src/exercise-13-2-identity-types-of-structured-function-types.lagda.md`
+- `src/exercise-13-3-truncatedness-is-a-proposition.lagda.md`
+- `src/exercise-13-4-equivalence-structure-is-a-proposition.lagda.md`
+- `src/exercise-13-5-path-split-and-coherently-invertible-propositions.lagda.md`
+- `src/exercise-13-6-universal-property-empty-types.lagda.md`
+- `src/exercise-13-7-universal-property-contractible-types.lagda.md`
+- `src/exercise-13-8-universal-property-coproducts.lagda.md`
+- `src/exercise-13-9-uniqueness-of-identity-types.lagda.md`
+- `src/exercise-13-10-universal-property-natural-numbers.lagda.md`
+- `src/exercise-13-11-ordinal-induction-natural-numbers.lagda.md`
+- `src/exercise-13-12-dependent-products-of-truncated-maps.lagda.md`
+- `src/exercise-13-13-pi-types-distribute-over-coproducts.lagda.md`
+- `src/exercise-13-14-section-retraction-triangles.lagda.md`
+- `src/exercise-13-15-morphisms-over-a-type.lagda.md`
+- `src/exercise-13-16-equivalences-and-isomorphisms-of-sets.lagda.md`
+- `src/exercise-13-17-contractible-products-over-decidable-sets.lagda.md`
+- `src/exercise-13-18-retracts-as-limits.lagda.md`
 
 ## Missing Chapter Files
 
-- `src/chapter-13-function-extensionality.lagda.md`
 - `src/chapter-14-propositional-truncations.lagda.md`
 - `src/chapter-15-image-factorizations.lagda.md`
 - `src/chapter-16-finite-types.lagda.md`
@@ -220,14 +243,6 @@ Exercise files:
 
 These filenames are mechanically generated from the current source titles.
 When a title contains mathematical notation, the final slug may need a small human adjustment to match nearby style.
-
-Chapter 13:
-
-- `src/section-13-1-equivalent-forms-of-function-extensionality.lagda.md`
-- `src/section-13-2-identity-systems-on-types.lagda.md`
-- `src/section-13-3-universal-properties.lagda.md`
-- `src/section-13-4-composing-with-equivalences.lagda.md`
-- `src/section-13-5-the-strong-induction-principle-of.lagda.md`
 
 Chapter 14:
 
@@ -303,7 +318,6 @@ Exercise files still to create:
 - Chapter 1: `src/exercise-1-1-<slug>.lagda.md`
 - Chapter 2: `src/exercise-2-2-<slug>.lagda.md` through `src/exercise-2-4-<slug>.lagda.md`
 - Chapter 4: `src/exercise-4-1-<slug>.lagda.md`
-- Chapter 13: `src/exercise-13-1-<slug>.lagda.md` through `src/exercise-13-18-<slug>.lagda.md`
 - Chapter 14: `src/exercise-14-1-<slug>.lagda.md` through `src/exercise-14-9-<slug>.lagda.md`
 - Chapter 15: `src/exercise-15-1-<slug>.lagda.md` through `src/exercise-15-5-<slug>.lagda.md`
 - Chapter 16: `src/exercise-16-1-<slug>.lagda.md` through `src/exercise-16-11-<slug>.lagda.md`
