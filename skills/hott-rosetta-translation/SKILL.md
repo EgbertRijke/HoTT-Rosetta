@@ -166,10 +166,11 @@ If the exercise has multiple parts, keep the statement structure clear with Mark
 
 Inspect nearby files before writing code.
 Agda code should follow the naming and coding conventions of the agda-unimath library, especially the upstream style guide at `https://github.com/UniMath/agda-unimath/blob/master/docs/CODINGSTYLE.md`.
-Before writing an Agda code block, search the local agda-unimath checkout at
-`/Users/egbertrijke/Repositories/agda-unimath` when it is available, falling
-back to `https://github.com/UniMath/agda-unimath` only if the local checkout is
-missing or insufficient.
+Before writing an Agda code block, search the in-repository agda-unimath
+submodule at `external/agda-unimath` when it is available.
+If that submodule is missing or insufficient, fall back to the local checkout at
+`/Users/egbertrijke/Repositories/agda-unimath`, and fall back to
+`https://github.com/UniMath/agda-unimath` only if no local source is available.
 If corresponding agda-unimath code exists, copy it verbatim.
 Preserve the agda-unimath names, structure, line breaks, and indentation.
 Do not translate agda-unimath names into book notation, and do not write
