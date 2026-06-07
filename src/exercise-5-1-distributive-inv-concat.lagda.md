@@ -2,6 +2,11 @@
 
 ```agda
 module exercise-5-1-distributive-inv-concat where
+
+open import universe-levels renaming (Type to UU ; Typeω to UUω)
+
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
 ```
 
 ## Problem statement
@@ -17,3 +22,14 @@ for any `p : x = y` and `q : y = z`.
 
 
 ## Solution
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  distributive-inv-concat :
+    {x y : A} (p : x ＝ y) {z : A} (q : y ＝ z) →
+    inv (p ∙ q) ＝ inv q ∙ inv p
+  distributive-inv-concat refl refl = refl
+```
