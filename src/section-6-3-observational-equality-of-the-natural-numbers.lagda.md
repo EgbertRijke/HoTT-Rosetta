@@ -2,6 +2,13 @@
 
 ```agda
 module section-6-3-observational-equality-of-the-natural-numbers where
+
+open import universe-levels
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
+open import section-4-2-the-unit-type
+open import section-4-3-the-empty-type
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-3-the-action-on-identifications-of-functions
 ```
 
 Using universes, we can define many relations on the natural numbers.
@@ -30,6 +37,14 @@ We define the **observational equality** of `ℕ` as binary relation
 ```text
   EqN(0, 0)             ≐ 𝟙      EqN(succ(n), 0)       ≐ ∅
   EqN(0, succ(n))       ≐ ∅      EqN(succ(n), succ(m)) ≐ EqN(n, m).
+```
+
+```agda
+EqN : ℕ → ℕ → Type lzero
+EqN zero-ℕ zero-ℕ = unit
+EqN zero-ℕ (succ-ℕ n) = empty
+EqN (succ-ℕ m) zero-ℕ = empty
+EqN (succ-ℕ m) (succ-ℕ n) = EqN m n
 ```
 
 ## Construction
@@ -92,6 +107,12 @@ The function `refl-EqN` is defined by induction on `n`, taking
   refl-EqN(succ(n)) := refl-EqN(n).
 ```
 
+```agda
+refl-EqN : (n : ℕ) → EqN n n
+refl-EqN zero-ℕ = star
+refl-EqN (succ-ℕ n) = refl-EqN n
+```
+
 ## Proposition 6.3.3
 
 For any two natural numbers `m` and `n`, we have
@@ -127,3 +148,18 @@ as the composite
 Note that the map on the left is the identity function, because we have the
 judgmental equality `EqN(succ(m), succ(n)) ≐ EqN(m, n)` by definition of
 `EqN`.
+
+```agda
+EqN-eq : {x y : ℕ} → x ＝ y → EqN x y
+EqN-eq {x} {.x} refl = refl-EqN x
+
+eq-EqN : (x y : ℕ) → EqN x y → x ＝ y
+eq-EqN zero-ℕ zero-ℕ e = refl
+eq-EqN (succ-ℕ x) (succ-ℕ y) e = ap succ-ℕ (eq-EqN x y e)
+```
+
+## Agda-unimath sources
+
+- The observational equality `Eq-ℕ`, its reflexivity proof, and the comparison
+  maps with identity are defined in
+  `elementary-number-theory.equality-natural-numbers`.
