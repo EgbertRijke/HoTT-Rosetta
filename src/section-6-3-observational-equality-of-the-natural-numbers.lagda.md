@@ -3,7 +3,7 @@
 ```agda
 module section-6-3-observational-equality-of-the-natural-numbers where
 
-open import universe-levels
+open import universe-levels renaming (Type to UU ; Typeω to UUω)
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
@@ -40,11 +40,11 @@ We define the **observational equality** of `ℕ` as binary relation
 ```
 
 ```agda
-EqN : ℕ → ℕ → Type lzero
-EqN zero-ℕ zero-ℕ = unit
-EqN zero-ℕ (succ-ℕ n) = empty
-EqN (succ-ℕ m) zero-ℕ = empty
-EqN (succ-ℕ m) (succ-ℕ n) = EqN m n
+Eq-ℕ : ℕ → ℕ → UU lzero
+Eq-ℕ zero-ℕ zero-ℕ = unit
+Eq-ℕ zero-ℕ (succ-ℕ n) = empty
+Eq-ℕ (succ-ℕ m) zero-ℕ = empty
+Eq-ℕ (succ-ℕ m) (succ-ℕ n) = Eq-ℕ m n
 ```
 
 ## Construction
@@ -108,9 +108,9 @@ The function `refl-EqN` is defined by induction on `n`, taking
 ```
 
 ```agda
-refl-EqN : (n : ℕ) → EqN n n
-refl-EqN zero-ℕ = star
-refl-EqN (succ-ℕ n) = refl-EqN n
+refl-Eq-ℕ : (n : ℕ) → Eq-ℕ n n
+refl-Eq-ℕ zero-ℕ = star
+refl-Eq-ℕ (succ-ℕ n) = refl-Eq-ℕ n
 ```
 
 ## Proposition 6.3.3
@@ -150,16 +150,16 @@ judgmental equality `EqN(succ(m), succ(n)) ≐ EqN(m, n)` by definition of
 `EqN`.
 
 ```agda
-EqN-eq : {x y : ℕ} → x ＝ y → EqN x y
-EqN-eq {x} {.x} refl = refl-EqN x
+Eq-eq-ℕ : {x y : ℕ} → x ＝ y → Eq-ℕ x y
+Eq-eq-ℕ {x} {.x} refl = refl-Eq-ℕ x
 
-eq-EqN : (x y : ℕ) → EqN x y → x ＝ y
-eq-EqN zero-ℕ zero-ℕ e = refl
-eq-EqN (succ-ℕ x) (succ-ℕ y) e = ap succ-ℕ (eq-EqN x y e)
+eq-Eq-ℕ : (x y : ℕ) → Eq-ℕ x y → x ＝ y
+eq-Eq-ℕ zero-ℕ zero-ℕ e = refl
+eq-Eq-ℕ (succ-ℕ x) (succ-ℕ y) e = ap succ-ℕ (eq-Eq-ℕ x y e)
 ```
 
 ## Agda-unimath sources
 
-- The observational equality `Eq-ℕ`, its reflexivity proof, and the comparison
-  maps with identity are defined in
+- The code above is copied from
   `elementary-number-theory.equality-natural-numbers`.
+  The upstream name `Eq-ℕ` corresponds to the book notation `EqN`.

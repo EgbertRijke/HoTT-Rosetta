@@ -63,7 +63,7 @@ composite of the maps
 ```agda
 is-injective-succ-ℕ :
   {m n : ℕ} → succ-ℕ m ＝ succ-ℕ n → m ＝ n
-is-injective-succ-ℕ {m} {n} p = eq-EqN m n (EqN-eq p)
+is-injective-succ-ℕ {m} {n} p = eq-Eq-ℕ m n (Eq-eq-ℕ p)
 
 peano-7-ℕ :
   (m n : ℕ) →
@@ -99,7 +99,7 @@ is-nonzero-succ-ℕ : (n : ℕ) → succ-ℕ n ＝ zero-ℕ → empty
 is-nonzero-succ-ℕ n ()
 
 neq-zero-succ-ℕ : (n : ℕ) → zero-ℕ ＝ succ-ℕ n → empty
-neq-zero-succ-ℕ n p = EqN-eq p
+neq-zero-succ-ℕ n p = Eq-eq-ℕ p
 
 peano-8-ℕ : (n : ℕ) → zero-ℕ ＝ succ-ℕ n → empty
 peano-8-ℕ = neq-zero-succ-ℕ

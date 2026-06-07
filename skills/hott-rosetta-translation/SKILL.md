@@ -166,11 +166,21 @@ If the exercise has multiple parts, keep the statement structure clear with Mark
 
 Inspect nearby files before writing code.
 Agda code should follow the naming and coding conventions of the agda-unimath library, especially the upstream style guide at `https://github.com/UniMath/agda-unimath/blob/master/docs/CODINGSTYLE.md`.
-Before writing an Agda code block, search the agda-unimath library at `https://github.com/UniMath/agda-unimath` for corresponding definitions, theorems, and proofs.
-If corresponding agda-unimath code exists, copy it verbatim when possible,
-preserving agda-unimath names, structure, line breaks, and indentation.
+Before writing an Agda code block, search the local agda-unimath checkout at
+`/Users/egbertrijke/Repositories/agda-unimath` when it is available, falling
+back to `https://github.com/UniMath/agda-unimath` only if the local checkout is
+missing or insufficient.
+If corresponding agda-unimath code exists, copy it verbatim.
+Preserve the agda-unimath names, structure, line breaks, and indentation.
+Do not translate agda-unimath names into book notation, and do not write
+agda-unimath-like replacement code.
+Such approximations are not acceptable for this project.
 Do not introduce extra line breaks into copied Agda code unless a local
 adaptation is required for this repository to typecheck.
+Keep such adaptations at the import or compatibility boundary whenever
+possible, and leave the copied definitions and proofs themselves exact.
+If exact copied code cannot be made to typecheck without changing the copied
+definition or proof, stop and ask the user how to proceed.
 Do not write new Agda code unless the relevant task-specific reference explicitly permits it or the user explicitly asks for it.
 The `.lagda.md` files in this repository must typecheck without depending on agda-unimath.
 Do not import agda-unimath modules or any other external library modules in translated files.
