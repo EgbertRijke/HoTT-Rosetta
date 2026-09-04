@@ -84,6 +84,8 @@ Therefore it follows immediately that `‖A‖` is a proposition.
 
 For any type `A`, the type `‖A‖` is a proposition.`□`
 
+<!-- rosetta-item-end: lemma-14.2.1 -->
+
 ### The induction principle and computation rules
 
 <!-- rosetta-item: subheading-14.2-the-induction-principle-and-computation-rules -->
@@ -133,6 +135,8 @@ h:Π(t:‖A‖) Q(t)
 ```
 equipped with a homotopy `h∘η~ f`.
 
+<!-- rosetta-item-end: definition-14.2.2 -->
+
 ## Remark 14.2.3
 
 <!-- rosetta-item: remark-14.2.3 -->
@@ -147,6 +151,8 @@ for any `u,v:Q(x)`.
 By assumption, there is an identification on the left hand side, so any two elements `u` and `v` in `Q(x)` are equal.
 
 Since the induction principle of the propositional truncation is only applicable to families of propositions over `‖A‖`, it also follows that there are no interesting computation rules to state: any identification in a proposition just holds.
+
+<!-- rosetta-item-end: remark-14.2.3 -->
 
 ### The universal property
 
@@ -178,6 +184,8 @@ tr_{λ x. Q}(α(x,y),u)=v.
 ```
 for any `u,v:Q` and any `x,y:‖A‖`.
 However, we have such identifications by the assumption that `Q` is a proposition, so the proof is complete. ◻
+
+<!-- rosetta-item-end: theorem-14.2.4 -->
 
 One simple application of the universal property of the propositional truncation is that `‖_‖` acts on functions in a functorial way.
 
@@ -217,3 +225,5 @@ Arrows:
 ```
 To see that `‖_‖` preserves identity maps and compositions, simply note that `id[‖A‖]` is an extension of `id[A]`, and that `‖g‖∘‖f‖` is an extension of `g∘ f`.
 Hence the homotopies are obtained by uniqueness. ◻
+
+<!-- rosetta-item-end: proposition-14.2.5 -->

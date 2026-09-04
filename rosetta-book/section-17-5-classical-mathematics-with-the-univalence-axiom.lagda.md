@@ -49,6 +49,8 @@ g(i(⋆)) ≔ succ-Fin_2,
 ```
 and it is a straightforward verification that `f` and `g` are inverse to each other. ◻
 
+<!-- rosetta-item-end: proposition-17.5.1 -->
+
 ## Corollary 17.5.2
 
 <!-- rosetta-item: corollary-17.5.2; latex-label: cor:no-section-F2 -->
@@ -72,6 +74,8 @@ Recall from Exercise 10.1 that the identity types of contractible types are cont
 On the other hand, it follows from Proposition 17.5.1 that the identity type `Fin{2}=Fin{2}` in `BS_2` is equivalent to `Fin{2}`.
 This type isn’t contractible by Exercise 10.4.
 We conclude that `BS_2` is not contractible. ◻
+
+<!-- rosetta-item-end: corollary-17.5.2 -->
 
 The family `X↦ X` over `BS_2` is therefore an example of a family of nonempty types for which there are provably no sections.
 In the following corollary we conclude more generally that there is no way to construct an element of an arbitrary inhabited type.
@@ -100,6 +104,8 @@ To obtain an element of type `‖A‖`, we may assume an equivalence `e:Fin{2}�
 Then we have `η(e(0)):‖A‖`.
 
 Since every `2`-element type is inhabited, we obtain a function `Π(A:BS_2) A`, which is impossible by Corollary 17.5.2. ◻
+
+<!-- rosetta-item-end: corollary-17.5.3 -->
 
 Corollary 17.5.3 is of philosophical importance.
 It shows that the **principle of global choice** is incompatible with the univalence axiom, i.e., that there is no way to obtain construct a function `‖A‖→ A` for all types `A`.
@@ -132,6 +138,8 @@ AC_{𝒰}(A,B)≔ (Π(x:A) ‖B(x)‖)→‖Π(x:A) B(x)‖,
 ```
 for every `A:Set_𝒰` and `B:A→Set_𝒰`.
 
+<!-- rosetta-item-end: definition-17.5.4 -->
+
 Similar care has to be taken with the type theoretic formulation of the law of excluded middle.
 It is again inconsistent to assume that every type is decidable.
 
@@ -161,6 +169,8 @@ is-decidable(X)→ X
 for each `2`-element type `X`.
 Therefore, we obtain from `d` a dependent function `Π(X:BS_2) X`, which does not exist by Corollary 17.5.2. ◻
 
+<!-- rosetta-item-end: theorem-17.5.5 -->
+
 The law of excluded middle is really an axiom of propositional logic, and it is indeed consistent with the univalence axiom that every *proposition* is decidable.
 
 ## Definition 17.5.6
@@ -171,6 +181,8 @@ The **law of excluded middle** asserts that every proposition is decidable, i.e.
 ```text
 LEM_𝒰≔ Π(P:Prop_𝒰) is-decidable(P).
 ```
+
+<!-- rosetta-item-end: definition-17.5.6 -->
 
 We will again not assume the law of excluded middle, unless we say otherwise.
 Nevertheless, we have seen in Chapter 8 that some propositions are already decidable without assuming the law of excluded middle, and decidability remains an important concept in type theory and mathematics.

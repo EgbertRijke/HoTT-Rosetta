@@ -39,25 +39,6 @@ and with the constants
 1_ℤ ≔ in-pos(0).
 ```
 
-The definition of the integers as the coproduct `ℕ+(unit+ℕ)` can be pictured as follows:
-<!-- rosetta-diagram: f27eeb60ac6f; review: pending -->
-
-*3-by-4 diagram (automatic draft).*
-
-```text
-          [unit]                   [ℕ]
-
- [ℕ]                 [unit+ℕ]
-
-           [ℤ]
-
-Arrows:
-- unit --unlabeled--> unit+ℕ
-- ℕ --unlabeled--> unit+ℕ
-- ℕ --unlabeled--> ℤ
-- unit+ℕ --unlabeled--> ℤ
-```
-
 <!-- rosetta-agda-block: definition-4.5.1-integers-adapted -->
 
 ```agda
@@ -80,6 +61,26 @@ in-pos-ℤ n = inr (inr n)
 
 one-ℤ : ℤ
 one-ℤ = in-pos-ℤ zero-ℕ
+```
+<!-- rosetta-item-end: definition-4.5.1 -->
+
+The definition of the integers as the coproduct `ℕ+(unit+ℕ)` can be pictured as follows:
+<!-- rosetta-diagram: f27eeb60ac6f; review: pending -->
+
+*3-by-4 diagram (automatic draft).*
+
+```text
+          [unit]                   [ℕ]
+
+ [ℕ]                 [unit+ℕ]
+
+           [ℤ]
+
+Arrows:
+- unit --unlabeled--> unit+ℕ
+- ℕ --unlabeled--> unit+ℕ
+- ℕ --unlabeled--> ℤ
+- unit+ℕ --unlabeled--> ℤ
 ```
 
 ## Remark 4.5.2
@@ -124,6 +125,7 @@ ind-ℤ P p-1 p-S p0 p1 pS (inr (inr zero-ℕ)) = p1
 ind-ℤ P p-1 p-S p0 p1 pS (inr (inr (succ-ℕ x))) =
   pS x (ind-ℤ P p-1 p-S p0 p1 pS (inr (inr x)))
 ```
+<!-- rosetta-item-end: remark-4.5.2 -->
 
 ## Definition 4.5.3
 
@@ -147,3 +149,4 @@ succ-ℤ (inl (succ-ℕ x)) = inl x
 succ-ℤ (inr (inl star)) = one-ℤ
 succ-ℤ (inr (inr x)) = inr (inr (succ-ℕ x))
 ```
+<!-- rosetta-item-end: definition-4.5.3 -->

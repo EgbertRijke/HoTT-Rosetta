@@ -60,6 +60,8 @@ e:X≃ Σ(a:A) fib(f, a)
 equipped with a homotopy `f~ pr 1∘ e`.
 Such an equivalence `e` equipped with a homotopy was constructed in Exercise 10.8. ◻
 
+<!-- rosetta-item-end: theorem-17.4.1 -->
+
 The following corollary is so important, that we call it again a theorem.
 
 ## Theorem 17.4.2
@@ -90,6 +92,8 @@ given by `(X,f,p)↦ λ a. (fib(f, a),p(a))` is an equivalence.
 ```
  ◻
 
+<!-- rosetta-item-end: theorem-17.4.2 -->
+
 Theorem 17.4.2 applies to any subuniverse.
 Examples include the subuniverse of `k`-types, for any truncation level `k`, the subuniverse of decidable propositions, the subuniverse of finite types, the subuniverse of inhabited types, and so on.
 It also applies to type families over `𝒰` that aren’t families of propositions.
@@ -105,6 +109,8 @@ Then the map
 (Σ(X:𝒰) X↪ A)→ (A→Prop_𝒰)
 ```
 given by `(X,f)↦ fib_f` is an equivalence.
+
+<!-- rosetta-item-end: corollary-17.4.3 -->
 
 In other words, a subtype of a type `A` is equivalently described as a type `X` equipped with an embedding `e:X↪ A`.
 This brings us to an important point about equality of subtypes.
@@ -129,3 +135,5 @@ In other words, two subtypes `(X,f)` and `(Y,g)` of `A` are equal if and only if
 Indeed, this condition is equivalent to the previous condition that two subtypes are the same if and only if they have the same elements.
 
 We see that the combination of the structure identity principle and the univalence axiom automatically characterizes equality of subtypes in the most natural way, and we will see similar natural characterizations of identity types throughout the remainder of this book.
+
+<!-- rosetta-item-end: remark-17.4.4 -->

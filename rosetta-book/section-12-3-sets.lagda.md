@@ -15,6 +15,8 @@ A type `A` is said to be a **set** if its identity types are propositions, i.e.,
 is-set(A)≔ Π(x,y:A) is-prop(x = y).
 ```
 
+<!-- rosetta-item-end: definition-12.3.1 -->
+
 ## Example 12.3.2
 
 <!-- rosetta-item: example-12.3.2; latex-label: eg:is-set-nat -->
@@ -27,6 +29,8 @@ To see this, recall from Theorem 11.3.1 that we have an equivalence
 for every `m,n:ℕ`.
 Therefore it suffices to show that each `Eq-ℕ(m,n)` is a proposition.
 This follows easily by induction on both `m` and `n`.
+
+<!-- rosetta-item-end: example-12.3.2 -->
 
 ## Proposition 12.3.3
 
@@ -51,6 +55,8 @@ This implies axiom `K`.
 
 For the converse, if `A` satisfies axiom `K`, then for any `p,q:x = y` we have `p ∙ q^{-1} = refl`, and hence `p = q`.
 This shows that `x = y` is a proposition, and hence that `A` is a set. ◻
+
+<!-- rosetta-item-end: proposition-12.3.3 -->
 
 ## Theorem 12.3.4
 
@@ -94,6 +100,8 @@ is a family of equivalences.
 
 Now it also follows that `A` is a set, since its identity types are equivalent to propositions, and therefore they are propositions by Lemma 12.2.2. ◻
 
+<!-- rosetta-item-end: theorem-12.3.4 -->
+
 ## Theorem 12.3.5
 
 <!-- rosetta-item: theorem-12.3.5; latex-label: thm:hedberg -->
@@ -129,3 +137,5 @@ f(inl(p),r) := p
 f(inr(p),r) := ex-falso(r).
 ```
  ◻
+
+<!-- rosetta-item-end: theorem-12.3.5 -->

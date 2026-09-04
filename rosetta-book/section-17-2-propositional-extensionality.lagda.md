@@ -42,6 +42,8 @@ Arrows:
 ```
  ◻
 
+<!-- rosetta-item-end: proposition-17.2.1 -->
+
 ## Remark 17.2.2
 
 <!-- rosetta-item: remark-17.2.2 -->
@@ -51,6 +53,8 @@ Using this shorthand notation, the equivalence in Proposition 17.2.1 is displaye
 ```text
 (A=B)≃ (A≃ B).
 ```
+
+<!-- rosetta-item-end: remark-17.2.2 -->
 
 Important examples of subuniverses include the subuniverse `Prop_𝒰` of propositions in `𝒰`, the subuniverse `Set_𝒰` of sets in `𝒰`, and the subuniverse `𝒰^{≤ k}` of `k`-truncated types in `𝒰`.
 The subuniverse `𝔽` of finite types in `𝒰_0`, and the subuniverses `BS_k` of `k`-element types are further important subuniverses to which Proposition 17.2.1 applies.
@@ -79,6 +83,8 @@ Proposition 17.2.1 therefore applies, which gives
 ```
 The last equivalence follows from Proposition 12.1.4, using the fact that `(P≃ Q)` is a proposition by Exercise 13.4. ◻
 
+<!-- rosetta-item-end: theorem-17.2.3 -->
+
 ## Corollary 17.2.4
 
 <!-- rosetta-item: corollary-17.2.4; latex-label: cor:decidable-Prop -->
@@ -102,3 +108,5 @@ At the centers of contraction we have `(unit,⋆)` and `(empty,id)`, respectivel
 For the contractions, note that both types are subtypes of the types of propositions.
 Therefore it suffices to show that `unit=P` for any proposition `P` equipped with `p:P`, and that `empty=Q` for any proposition `Q` equipped with `q:¬ Q`.
 Both identifications are obtained immediately from propositional extensionality. ◻
+
+<!-- rosetta-item-end: corollary-17.2.4 -->

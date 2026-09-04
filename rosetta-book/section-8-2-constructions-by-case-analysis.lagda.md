@@ -68,6 +68,7 @@ collatz n with is-decidable-div-ℕ 2 n
 ... | inl (pair y p) = y
 ... | inr f = succ-ℕ (3 *ℕ n)
 ```
+<!-- rosetta-item-end: definition-8.2.1 -->
 
 ## Remark 8.2.2
 
@@ -104,6 +105,8 @@ collatz(n)\with [d(n)/inr(f)] ≔ 3n+1.
 ```
 Notice that in addition to the information in the specification of the Collatz function, the definition by with-abstraction also tells us which decision procedure was used to decide whether `n` is even or not.
 The combination of with-abstraction and pattern matching, which allows us to skip the explicit definition of the function `h`, is what makes with-abstraction so useful.
+
+<!-- rosetta-item-end: remark-8.2.2 -->
 
 Using with-abstraction we can find a slight improvement of the decidability results of `A→ B` and `A× B` in Example 8.1.3, and we will use these improved claims in the construction of the greatest common divisor.
 
@@ -148,13 +151,6 @@ d(H)\with [H(a)/inr(g)] ≔ inr(λ h. g(h(a))).
 ```
  ◻
 
-For a general family of decidable types `P` over `ℕ`, we cannot prove that the type
-```text
-Π(x:ℕ) P(x)
-```
-is decidable.
-However, if we know in advance that `P(x)` holds for any `m≤ x`, then we can decide `Π(x:ℕ) P(x)` by checking the decidability of each `P(x)` until `m`.
-
 <!-- rosetta-agda-block: proposition-8.2.3-decidable-product -->
 
 ```agda
@@ -176,6 +172,14 @@ is-decidable-function-type' (inl a) d =
   rec-coproduct (λ b → inl (λ _ → b)) (λ nb → inr (map-neg (ev a) nb)) (d a)
 is-decidable-function-type' (inr na) d = inl (ex-falso ∘ na)
 ```
+<!-- rosetta-item-end: proposition-8.2.3 -->
+
+For a general family of decidable types `P` over `ℕ`, we cannot prove that the type
+```text
+Π(x:ℕ) P(x)
+```
+is decidable.
+However, if we know in advance that `P(x)` holds for any `m≤ x`, then we can decide `Π(x:ℕ) P(x)` by checking the decidability of each `P(x)` until `m`.
 
 ## Proposition 8.2.4
 
@@ -249,6 +253,7 @@ is-decidable-Π-ℕ P d (succ-ℕ m) (inl H) with d zero-ℕ
 ... | inl g = inl (ind-ℕ p (λ x y → g x))
 ... | inr ng = inr (λ f → ng (λ x → f (succ-ℕ x)))
 ```
+<!-- rosetta-item-end: proposition-8.2.4 -->
 
 ## Corollary 8.2.5
 
@@ -291,3 +296,4 @@ is-decidable-bounded-Π-ℕ P Q dP dQ m H =
     ( succ-ℕ m)
     ( inl (λ x l p → ex-falso (contradiction-leq-ℕ x m (H x p) l)))
 ```
+<!-- rosetta-item-end: corollary-8.2.5 -->

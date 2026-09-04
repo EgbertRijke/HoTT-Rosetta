@@ -24,6 +24,8 @@ class AgdaBlock:
     source_note: str = ""
     conversion_status: str = "ready"
     conversion_note: str = ""
+    after_text: str = ""
+    display_heading: str = ""
 
     @classmethod
     def from_dict(cls, value):
@@ -48,6 +50,8 @@ class AgdaBlock:
         fields["source_note"] = value.get("source_note", "")
         fields["conversion_status"] = value.get("conversion_status", "ready")
         fields["conversion_note"] = value.get("conversion_note", "")
+        fields["after_text"] = value.get("after_text", "")
+        fields["display_heading"] = value.get("display_heading", "")
         block = cls(**fields)
         if block.provenance_kind not in {"exact", "adapted", "handwritten"}:
             raise ValueError(f"Invalid provenance kind for {block.block_id}")
@@ -130,7 +134,7 @@ def verify_block_source(block: AgdaBlock, upstream_root: Path) -> List[str]:
 
 
 def inject_agda_blocks(document: str, destination: str, blocks: List[AgdaBlock]) -> str:
-    """Insert destination blocks before the next numbered item heading."""
+    """Insert destination blocks at their curated narrative locations."""
 
     selected = sorted(
         (
@@ -145,11 +149,24 @@ def inject_agda_blocks(document: str, destination: str, blocks: List[AgdaBlock])
         anchor_position = result.find(anchor)
         if anchor_position < 0:
             raise ValueError(f"No item anchor for Agda block {block.block_id}: {block.item_id}")
-        next_item = result.find("\n## ", anchor_position)
-        insertion = len(result) if next_item < 0 else next_item
+        if block.after_text:
+            text_position = result.find(block.after_text, anchor_position)
+            if text_position < 0:
+                raise ValueError(
+                    f"No narrative anchor for Agda block {block.block_id}: "
+                    f"{block.after_text}"
+                )
+            insertion = text_position + len(block.after_text)
+        else:
+            end_marker = f"<!-- rosetta-item-end: {block.item_id} -->"
+            insertion = result.find(end_marker, anchor_position)
+            if insertion < 0:
+                next_item = result.find("\n## ", anchor_position)
+                insertion = len(result) if next_item < 0 else next_item
         marker = f"<!-- rosetta-agda-block: {block.block_id} -->"
         if marker in result:
             raise ValueError(f"Agda block already inserted: {block.block_id}")
-        fenced = f"\n\n{marker}\n\n```agda\n{block.code.rstrip()}\n```\n"
+        heading = f"\n\n### {block.display_heading}" if block.display_heading else ""
+        fenced = f"{heading}\n\n{marker}\n\n```agda\n{block.code.rstrip()}\n```\n"
         result = result[:insertion].rstrip() + fenced + result[insertion:]
     return result

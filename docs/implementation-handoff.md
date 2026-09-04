@@ -1,6 +1,56 @@
 # Implementation handoff
 
-Updated 2026-08-12.
+Updated 2026-09-04.
+
+## Current review branch
+
+The narrative-placement work is on `fix/agda-narrative-placement`, tracking
+`fork/fix/agda-narrative-placement`. It has been pushed to the
+`daniel-carranza/HoTT-Rosetta` fork but must not be merged until the project
+collaborators reach consensus. Key commits leading into this handoff are:
+
+- `d33e710 fix(converter): place Agda blocks by narrative scope`
+- `47b17f3 docs(review): record Agda placement feedback`
+
+The first commit adds stable `rosetta-item-end` markers, curated narrative
+anchors, optional headings for prerequisite groups, manifest relocations, and
+regenerated products. The second preserves the collaborator's Agda review
+comments separately. At the start of this documentation handoff,
+`data/agda-reviews.json` also had an unstaged one-line `review_sha256` refresh
+for `definition-8.5.1-prime`; inspect and preserve that review metadata rather
+than overwriting it.
+
+The branch passed the full unit suite, `python3 rosetta.py check`, and
+`git diff --check`. Candidate typechecks passed for the affected sections 8.1,
+8.5, 9.1, 9.2, 9.3, and 10.4. Regeneration also brought two exercise products
+into agreement with existing notation conversion rules; those small notation
+changes were generated consequences rather than hand edits.
+
+### What changed and what remains to review
+
+- The renderer now closes a numbered item's scope after its adjacent proof or
+  construction, not merely at the closing theorem div emitted by Pandoc.
+  Consequently, ordinary block insertion no longer captures transition prose.
+- Section 8.5's general-purpose helpers are visibly grouped as **Agda
+  prerequisites for Section 8.5**. Logical-equivalence projections and
+  decidability of equality with one moved to their earlier narrative homes in
+  Section 8.1. Other helpers stayed at section scope because moving them into
+  earlier modules caused dependency-order or name-resolution failures.
+- Section 9.2's combined invertibility material was split into the forward
+  prerequisite at Definition 9.2.1 and the converse at Proposition 9.2.7. The
+  involution material moved beside the homotopy/involution examples it
+  formalizes. Anonymous module wrappers were restored where separated upstream
+  excerpts otherwise lost their required scope.
+- In Theorem 9.3.4, the inverse-map code now follows the prose that finishes
+  defining `eq-pair`; the equivalence proof remains after the rest of the proof
+  narrative.
+
+Before proposing a merge, collaborators should review the generated Sections
+8.1, 8.5, 9.1, 9.2, and 9.3 for mathematical narrative, then repeat the
+required checks and affected typechecks. In particular, decide whether the
+Section 8.5 prerequisite group is the desired editorial presentation. Do not
+move those helpers solely for visual proximity: first establish that every
+definition is in Agda scope at its new location.
 
 ## Current goal
 
@@ -27,6 +77,8 @@ For each incomplete section:
    infer completeness from filenames or review state.
 2. List the section items that still lack substantive Agda or whose existing
    block is incomplete, misplaced, incorrectly sourced, or not typechecking.
+   For placement work, follow
+   `skills/hott-rosetta-translation/references/agda-block-placement.md`.
 3. Search the pinned `external/agda-unimath` checkout for exact material first,
    then for the closest analogous implementation. Follow the search and
    dependency procedure in `skills/hott-rosetta-translation/SKILL.md` and its

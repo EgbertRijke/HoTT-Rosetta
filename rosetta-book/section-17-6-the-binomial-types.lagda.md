@@ -20,6 +20,8 @@ is-decidable(f) ≔ Π(b:B) is-decidable(fib(f, b)).
 ```
 We will write `A↪ᵈ B` for the type of **decidable embeddings** from `A` to `B`, i.e., for the type of embeddings that are also decidable maps.
 
+<!-- rosetta-item-end: definition-17.6.1 -->
+
 ## Definition 17.6.2
 
 <!-- rosetta-item: definition-17.6.2 -->
@@ -30,12 +32,16 @@ We define the **connected component** of `𝒰` at `A` by
 𝒰_A≔ Σ(X:𝒰) ‖A≃ X‖.
 ```
 
+<!-- rosetta-item-end: definition-17.6.2 -->
+
 ## Example 17.6.3
 
 <!-- rosetta-item: example-17.6.3 -->
 
 Note that type `𝒰_{Fin{n}}` is the type `BS_n` of all `n`-element types.
 Note also that if `A≃ B`, then `𝒰_A≃𝒰_B`.
+
+<!-- rosetta-item-end: example-17.6.3 -->
 
 ## Definition 17.6.4
 
@@ -47,12 +53,16 @@ We define the **binomial type** `binom_𝒰(A, B)` by
 binom_𝒰(A, B) ≔ Σ(X:𝒰_B) X↪ᵈ A.
 ```
 
+<!-- rosetta-item-end: definition-17.6.4 -->
+
 ## Remark 17.6.5
 
 <!-- rosetta-item: remark-17.6.5 -->
 
 We define the binomial types using decidable embeddings because the usual properties of binomial coefficients generalize most naturally under the extra assumption of decidability.
 In particular the binomial theorem for types, which is stated as Exercise 17.14 and generalized in Exercise 18.14, rely on the use of decidable embeddings.
+
+<!-- rosetta-item-end: remark-17.6.5 -->
 
 ## Proposition 17.6.6
 
@@ -75,6 +85,8 @@ from the binomial type `binom_𝒰(A, B)` to the type of decidable subtypes of `
 ```
  ◻
 
+<!-- rosetta-item-end: proposition-17.6.6 -->
+
 ## Remark 17.6.7
 
 <!-- rosetta-item: remark-17.6.7 -->
@@ -86,6 +98,8 @@ binom_𝒰(A, B)≃ \sum_{(f:A→bool)}‖B≃Σ(a:A) f(a)=true‖.
 for any universe `𝒰` that contains both `A` and `B`.
 This equivalence is important, because the right hand side doesn’t depend on the universe `𝒰`.
 Therefore we will simply write `binom(A, B)` for `binom_𝒰(A, B)`, if the universe `𝒰` contains both `A` and `B`.
+
+<!-- rosetta-item-end: remark-17.6.7 -->
 
 ## Lemma 17.6.8
 
@@ -133,6 +147,8 @@ binom(A+unit, B+unit) ≃ (Σ(P:A→decidable-Prop_𝒰) ‖B≃Σ(a:A) P(a)‖)
 ```
  ◻
 
+<!-- rosetta-item-end: lemma-17.6.8 -->
+
 ## Theorem 17.6.9
 
 <!-- rosetta-item: theorem-17.6.9 -->
@@ -145,6 +161,8 @@ If `A` and `B` are finite types of cardinality `n` and `k`, respectively, then t
 
 *Proof.* The claim that the type `binom(A, B)` is finite of cardinality `binom(n, k)` is a proposition, so we may assume `e:Fin{n}≃ A` and `f:Fin{k}≃ B`.
 The claim now follows by induction on `n` and `k`, using Lemma 17.6.8. ◻
+
+<!-- rosetta-item-end: theorem-17.6.9 -->
 
 ## Remark 17.6.10
 
@@ -162,3 +180,5 @@ Therefore it follows that for any two decidable embeddings `f,g:B↪ᵈ A`, if `
 
 From a group theoretic perspective we may observe that the automorphism group `B≃ B` acts freely on the set of decidable embeddings `B↪ᵈ A`, and the type `Σ(X:𝒰_B) X↪ A` can be viewed as the type of orbits of that action.
 Since this action of `Aut(B)` on `B↪ᵈ A` is free, we see that the number of orbits is `1/k!` times the number of elements in `B↪ᵈ A`.
+
+<!-- rosetta-item-end: remark-17.6.10 -->

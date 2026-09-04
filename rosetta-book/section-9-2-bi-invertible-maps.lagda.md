@@ -109,17 +109,6 @@ module _
   is-section-map-section = pr2
 ```
 
-<!-- rosetta-agda-block: remark-9.2.6-involutions -->
-
-```agda
-module _
-  {l : Level} {A : Type l}
-  where
-
-  is-involution : (A → A) → Type l
-  is-involution f = (f ∘ f) ~ id
-```
-
 <!-- rosetta-agda-block: definition-9.2.1-retractions -->
 
 ```agda
@@ -232,7 +221,7 @@ module _
     is-retraction-map-retraction map-equiv retraction-map-equiv
 ```
 
-<!-- rosetta-agda-block: proposition-9.2.7-equivalence-is-invertible -->
+<!-- rosetta-agda-block: definition-9.2.1-invertible-implies-equivalence -->
 
 ```agda
 module _
@@ -245,30 +234,8 @@ module _
   is-equiv-is-invertible :
     (g : B → A) (H : f ∘ g ~ id) (K : g ∘ f ~ id) → is-equiv f
   is-equiv-is-invertible g H K = is-equiv-is-invertible' (g , H , K)
-
-  is-retraction-map-section-is-equiv :
-    (H : is-equiv f) → is-retraction f (map-section-is-equiv H)
-  is-retraction-map-section-is-equiv H =
-    ( ( inv-htpy
-        ( ( is-retraction-map-retraction-is-equiv H) ·r
-          ( map-section-is-equiv H ∘ f))) ∙h
-      ( map-retraction-is-equiv H ·l is-section-map-section-is-equiv H ·r f)) ∙h
-    ( is-retraction-map-retraction-is-equiv H)
-
-  is-invertible-is-equiv : is-equiv f → is-invertible f
-  pr1 (is-invertible-is-equiv H) = map-section-is-equiv H
-  pr1 (pr2 (is-invertible-is-equiv H)) = is-section-map-section-is-equiv H
-  pr2 (pr2 (is-invertible-is-equiv H)) = is-retraction-map-section-is-equiv H
 ```
-
-<!-- rosetta-agda-block: remark-9.2.6-involutions-are-equivalences -->
-
-```agda
-is-equiv-is-involution :
-  {l : Level} {A : Type l} {f : A → A} → is-involution f → is-equiv f
-is-equiv-is-involution {f = f} is-involution-f =
-  is-equiv-is-invertible f is-involution-f is-involution-f
-```
+<!-- rosetta-item-end: definition-9.2.1 -->
 
 ## Remark 9.2.2
 
@@ -280,6 +247,8 @@ Explicitly, if `f` is an equivalence, then there are
 g : B→ A h : B→ A
 G : f∘ g ~ id[B] H : h∘ f ~ id[A].
 ```
+
+<!-- rosetta-item-end: remark-9.2.2 -->
 
 ## Example 9.2.3
 
@@ -304,12 +273,22 @@ module _
   pr1 id-equiv = id
   pr2 id-equiv = is-equiv-id
 ```
+<!-- rosetta-item-end: example-9.2.3 -->
 
 ## Example 9.2.4
 
 <!-- rosetta-item: example-9.2.4; latex-label: ex:neg_equiv -->
 
 Since we have seen in Remark 9.1.1 that the negation function `neg-bool:bool→bool` on the booleans is its own inverse, it follows that `neg-bool` is an equivalence.
+
+<!-- rosetta-agda-block: remark-9.2.6-involutions-are-equivalences -->
+
+```agda
+is-equiv-is-involution :
+  {l : Level} {A : Type l} {f : A → A} → is-involution f → is-equiv f
+is-equiv-is-involution {f = f} is-involution-f =
+  is-equiv-is-invertible f is-involution-f is-involution-f
+```
 
 <!-- rosetta-agda-block: example-9.2.4-boolean-negation-equivalence -->
 
@@ -322,6 +301,7 @@ equiv-neg-bool : bool ≃ bool
 pr1 equiv-neg-bool = neg-bool
 pr2 equiv-neg-bool = is-equiv-neg-bool
 ```
+<!-- rosetta-item-end: example-9.2.4 -->
 
 ## Example 9.2.5
 
@@ -396,6 +376,7 @@ equiv-pred-Fin : (k : ℕ) → Fin k ≃ Fin k
 pr1 (equiv-pred-Fin k) = pred-Fin k
 pr2 (equiv-pred-Fin k) = is-equiv-pred-Fin k
 ```
+<!-- rosetta-item-end: example-9.2.5 -->
 
 ## Remark 9.2.6
 
@@ -415,6 +396,8 @@ In Exercise 22.5 we will see that the identity function `id[S^1]:S^1→S^1` on t
 ```text
 has-inverse(id[S^1])≃ ℤ.
 ```
+
+<!-- rosetta-item-end: remark-9.2.6 -->
 
 Even though `is-equiv(f)` and `has-inverse(f)` can be wildly different types, there are maps back and forth between the two.
 We have already observed in Remark 9.2.6 that there is a map
@@ -465,6 +448,29 @@ Arrows:
 ```
  ◻
 
+<!-- rosetta-agda-block: proposition-9.2.7-equivalence-has-inverse -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}
+  where
+
+  is-retraction-map-section-is-equiv :
+    (H : is-equiv f) → is-retraction f (map-section-is-equiv H)
+  is-retraction-map-section-is-equiv H =
+    ( ( inv-htpy
+        ( ( is-retraction-map-retraction-is-equiv H) ·r
+          ( map-section-is-equiv H ∘ f))) ∙h
+      ( map-retraction-is-equiv H ·l is-section-map-section-is-equiv H ·r f)) ∙h
+    ( is-retraction-map-retraction-is-equiv H)
+
+  is-invertible-is-equiv : is-equiv f → is-invertible f
+  pr1 (is-invertible-is-equiv H) = map-section-is-equiv H
+  pr1 (pr2 (is-invertible-is-equiv H)) = is-section-map-section-is-equiv H
+  pr2 (pr2 (is-invertible-is-equiv H)) = is-retraction-map-section-is-equiv H
+```
+<!-- rosetta-item-end: proposition-9.2.7 -->
+
 ## Corollary 9.2.8
 
 <!-- rosetta-item: corollary-9.2.8 -->
@@ -479,6 +485,8 @@ The inverse of an equivalence is again an equivalence.
 By Proposition 9.2.7 it follows that the section of `f` is also a retraction.
 Therefore it follows that the section is itself an invertible map, with inverse `f`.
 Hence it is an equivalence. ◻
+
+<!-- rosetta-item-end: corollary-9.2.8 -->
 
 ## Example 9.2.9
 
@@ -512,6 +520,8 @@ G(inr(x,z)) ≔ refl H(x,inr(z)) ≔ refl.
 ```
 We encourage the reader to write out the definitions of at least a few of these equivalences.
 
+<!-- rosetta-item-end: example-9.2.9 -->
+
 ## Example 9.2.10
 
 <!-- rosetta-item: example-9.2.10; latex-label: eg:laws-Sigma-types -->
@@ -540,8 +550,12 @@ In other words, there are the following two equivalences:
 Σ(w:A+B) C(w) ≃ (Σ(x:A) C(inl(x)))+(Σ(y:B) C(inr(y))).
 ```
 
+<!-- rosetta-item-end: example-9.2.10 -->
+
 ## Remark 9.2.11
 
 <!-- rosetta-item: remark-9.2.11 -->
 
 We haven’t stated any laws involving function types or dependent function types, because it requires the function extensionality principle to prove them.
+
+<!-- rosetta-item-end: remark-9.2.11 -->

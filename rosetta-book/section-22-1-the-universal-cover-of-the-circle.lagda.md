@@ -102,6 +102,8 @@ Arrows:
 ```
 commutes.
 
+<!-- rosetta-item-end: definition-22.1.1 -->
+
 Recall from Example 9.2.5 that the successor function `succ-ℤ :ℤ→ ℤ` is an equivalence.
 Its inverse is the predecessor function defined in Exercise 4.1.
 
@@ -128,6 +130,8 @@ Arrows:
 commutes.
 We will occasionally write `y↦ y_ℤ` for the inverse of `x↦ x_{E}`.
 
+<!-- rosetta-item-end: definition-22.1.2 -->
+
 The picture of the universal cover is that of a helix over the circle.
 This picture emerges from the path liftings of `loop` in the total space.
 The segments of the helix connecting `k` to `k+1` in the total space of the helix, are constructed in the following lemma.
@@ -152,3 +156,5 @@ in the total space `Σ(t:S^1) E(t)`.
 ```
 We just take `α≔loop`.
 Then we have `tr_{E}(α,k_{E})= succ-ℤ (k)_{E}` by the commuting square provided in the definition of `E`. ◻
+
+<!-- rosetta-item-end: lemma-22.1.3 -->

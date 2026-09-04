@@ -23,6 +23,8 @@ Then there are equivalences
 ```
 for any `x,x':A` and `y,y':B`.
 
+<!-- rosetta-item-end: theorem-11.5.1 -->
+
 In order to prove Theorem 11.5.1, we first define a binary relation `Eq-coproduct_{A,B}` on the coproduct `A+B`.
 
 ## Definition 11.5.2
@@ -43,6 +45,8 @@ Eq-coproduct_{A,B}(inr(y),inr(y')) ≔ (y=y').
 ```
 The relation `Eq-coproduct_{A,B}` is also called the **observational equality of coproducts**.
 
+<!-- rosetta-item-end: definition-11.5.2 -->
+
 ## Lemma 11.5.3
 
 <!-- rosetta-item: lemma-11.5.3 -->
@@ -61,6 +65,8 @@ The reflexivity term `ρ` is constructed by induction on `t:A+B`, using
 ρ(inl(x))≔ refl : Eq-coproduct_{A,B}(inl(x),inl(x))
 ρ(inr(y))≔ refl : Eq-coproduct_{A,B}(inr(y),inr(y)).
 ```
+
+<!-- rosetta-item-end: lemma-11.5.3 -->
 
 To show that `Eq-coproduct-eq` is a family of equivalences, we will use the fundamental theorem of identity types, Theorem 11.2.2.
 Therefore, we need to prove the following proposition.
@@ -96,6 +102,8 @@ By the laws of coproducts and `Σ`-types given in Examples 9.2.9 and 9.2.10, we 
 ```
 
 The last type in this computation is contractible by Theorem 10.1.4, so we conclude that the total space of `E(inl(x))` is contractible. ◻
+
+<!-- rosetta-item-end: proposition-11.5.4 -->
 
 ### Proof
 

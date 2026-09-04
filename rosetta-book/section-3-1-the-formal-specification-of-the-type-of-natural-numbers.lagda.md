@@ -90,6 +90,8 @@ For example, the element `0` has type `ℕ`, and it is not also a type of `ℤ`.
 This is why we annotate the terms `0` and `succ-ℕ` with their type in the subscript.
 The type `ℤ` of the integers will be introduced in the next section, which will come equipped with a zero element `0-ℤ` and a successor function `succ-ℤ`.
 
+<!-- rosetta-item-end: remark-3.1.1 -->
+
 ### The induction principle of `ℕ`
 
 <!-- rosetta-item: subheading-3.1-the-induction-principle-of-natural-numbers -->
@@ -161,6 +163,20 @@ This shows that we can define the function `ind-ℕ` from the rule `ℕ`-ind.
 Conversely, we can derive the rule `ℕ`-ind from the rule that presents `ind-ℕ` as a function.
 We conclude that the “official” rule `ℕ`-ind and the rule that presents `ind-ℕ` as a function are indeed interderivable.
 
+<!-- rosetta-agda-block: remark-3.1.2-induction-and-recursion-natural-numbers-local -->
+
+```agda
+ind-ℕ :
+  {l : Level} {P : ℕ → Type l} →
+  P 0 → ((n : ℕ) → P n → P (succ-ℕ n)) → ((n : ℕ) → P n)
+ind-ℕ p-zero p-succ 0 = p-zero
+ind-ℕ p-zero p-succ (succ-ℕ n) = p-succ n (ind-ℕ p-zero p-succ n)
+
+rec-ℕ : {l : Level} {A : Type l} → A → (ℕ → A → A) → (ℕ → A)
+rec-ℕ = ind-ℕ
+```
+<!-- rosetta-item-end: remark-3.1.2 -->
+
 ### The computation rules of `ℕ`
 
 <!-- rosetta-item: subheading-3.1-the-computation-rules-of-natural-numbers -->
@@ -201,16 +217,3 @@ $Γ, n:ℕ ⊢ ind-ℕ(p_0,p_S,succ-ℕ(n))≐ p_S(n,ind-ℕ(p_0,p_S,n)) : P(suc
 ```
 
 This completes the formal specification of the type `ℕ` of natural numbers.
-
-<!-- rosetta-agda-block: remark-3.1.2-induction-and-recursion-natural-numbers-local -->
-
-```agda
-ind-ℕ :
-  {l : Level} {P : ℕ → Type l} →
-  P 0 → ((n : ℕ) → P n → P (succ-ℕ n)) → ((n : ℕ) → P n)
-ind-ℕ p-zero p-succ 0 = p-zero
-ind-ℕ p-zero p-succ (succ-ℕ n) = p-succ n (ind-ℕ p-zero p-succ n)
-
-rec-ℕ : {l : Level} {A : Type l} → A → (ℕ → A → A) → (ℕ → A)
-rec-ℕ = ind-ℕ
-```

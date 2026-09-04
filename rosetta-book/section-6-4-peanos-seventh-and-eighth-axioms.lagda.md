@@ -83,6 +83,7 @@ peano-7-ℕ :
   ((succ-ℕ m ＝ succ-ℕ n) → m ＝ n)
 peano-7-ℕ m n = ap-succ-ℕ , is-injective-succ-ℕ
 ```
+<!-- rosetta-item-end: theorem-6.4.1 -->
 
 ## Theorem 6.4.2
 
@@ -117,3 +118,4 @@ neq-zero-succ-ℕ n p = Eq-eq-ℕ p
 peano-8-ℕ : (n : ℕ) → zero-ℕ ＝ succ-ℕ n → empty
 peano-8-ℕ = neq-zero-succ-ℕ
 ```
+<!-- rosetta-item-end: theorem-6.4.2 -->

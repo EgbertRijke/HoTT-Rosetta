@@ -154,12 +154,44 @@ class AgdaManifestTests(unittest.TestCase):
         document = (
             "## Definition 3.2.1\n\n"
             "<!-- rosetta-item: definition-3.2.1 -->\n\nText.\n\n"
+            "<!-- rosetta-item-end: definition-3.2.1 -->\n\n"
+            "Transition to the remark.\n\n"
             "## Remark 3.2.2\n"
         )
         result = inject_agda_blocks(
             document, "section-3-2-example.lagda.md", [block]
         )
         self.assertLess(result.index("answer = 42"), result.index("## Remark"))
+        self.assertLess(result.index("answer = 42"), result.index("Transition"))
+
+    def test_block_insertion_uses_narrative_anchor(self):
+        block = AgdaBlock(
+            block_id="second-clause", provenance_kind="exact",
+            item_id="definition-3.2.1", destination="example.lagda.md",
+            source_file="example", source_commit="abc", source_start_line=1,
+            source_end_line=1, source_sha256="abc", code="second = 2", order=1,
+            imports=[], after_text="Second clause.",
+        )
+        document = (
+            "<!-- rosetta-item: definition-3.2.1 -->\n\n"
+            "First clause.\n\nSecond clause.\n\n"
+            "<!-- rosetta-item-end: definition-3.2.1 -->\n"
+        )
+        result = inject_agda_blocks(document, "example.lagda.md", [block])
+        self.assertGreater(result.index("second = 2"), result.index("Second clause."))
+        self.assertLess(result.index("second = 2"), result.index("rosetta-item-end"))
+
+    def test_block_insertion_can_add_a_display_heading(self):
+        block = AgdaBlock(
+            block_id="prerequisite", provenance_kind="exact",
+            item_id="section-8.5", destination="example.lagda.md",
+            source_file="example", source_commit="abc", source_start_line=1,
+            source_end_line=1, source_sha256="abc", code="helper = 1", order=1,
+            imports=[], display_heading="Agda prerequisites",
+        )
+        document = "<!-- rosetta-item: section-8.5 -->\n\nText.\n\n## Definition\n"
+        result = inject_agda_blocks(document, "example.lagda.md", [block])
+        self.assertIn("### Agda prerequisites\n\n<!-- rosetta-agda-block:", result)
 
     def test_block_insertion_uses_unnumbered_heading_anchor(self):
         block = AgdaBlock(

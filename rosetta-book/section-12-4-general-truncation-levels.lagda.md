@@ -48,6 +48,8 @@ Given a universe `𝒰`, we define the universe `𝒰^{≤ k}` of `k`-truncated 
 
 Furthermore, we say that a map `f:A→ B` is `k`-truncated if its fibers are `k`-truncated.
 
+<!-- rosetta-item-end: definition-12.4.1 -->
+
 ## Remark 12.4.2
 
 <!-- rosetta-item: remark-12.4.2 -->
@@ -66,6 +68,8 @@ is-trunc{-2}^{𝒱}(A) ≐ Σ(x:A) Π(y:A) x=y.
 ```
 We may therefore safely omit explicit reference to the universes when considering truncatedness of a type.
 
+<!-- rosetta-item-end: remark-12.4.2 -->
+
 We show in the following theorem that the truncation levels are successively contained in one another.
 
 ## Proposition 12.4.3
@@ -82,6 +86,8 @@ If `A` is a `k`-type, then `A` is also a `(k+1)`-type.
 This proves the base case.
 For the inductive step, note that if any `k`-type is also a `(k+1)`-type, then any `(k+1)`-type is a `(k+2)`-type, since its identity types are `k`-types and therefore `(k+1)`-types. ◻
 
+<!-- rosetta-item-end: proposition-12.4.3 -->
+
 It is immediate from the proof of Proposition 12.4.3 that the identity types of `k`-types are also `k`-types.
 
 ## Corollary 12.4.4
@@ -89,6 +95,8 @@ It is immediate from the proof of Proposition 12.4.3 that the identity types of 
 <!-- rosetta-item: corollary-12.4.4 -->
 
 If `A` is a `k`-type, then its identity types are also `k`-types.`□`
+
+<!-- rosetta-item-end: corollary-12.4.4 -->
 
 ## Proposition 12.4.5
 
@@ -112,6 +120,8 @@ is an equivalence for any `x,y`.
 Note that `e(x) = e(y)` is a `k`-type, so by the induction hypothesis it follows that `x = y` is a `k`-type.
 This proves that `A` is a `(k+1)`-type. ◻
 
+<!-- rosetta-item-end: proposition-12.4.5 -->
+
 ## Corollary 12.4.6
 
 <!-- rosetta-item: corollary-12.4.6; latex-label: cor:emb_into_ktype -->
@@ -130,6 +140,8 @@ is an equivalence for every `x,y:A`.
 Since `B` is assumed to be a `(k+1)`-type, it follows that `f(x)=f(y)` is a `k`-type for every `x,y:A`.
 Therefore we conclude by Proposition 12.4.5 that `x = y` is a `k`-type for every `x,y:A`.
 In other words, `A` is a `(k+1)`-type. ◻
+
+<!-- rosetta-item-end: corollary-12.4.6 -->
 
 We end this section with a theorem that characterizes `(k+1)`-truncated maps.
 Note that it generalizes Theorem 12.2.3, which asserts that a map is an embedding if and only if its fibers are propositions.
@@ -173,3 +185,5 @@ fib(ap{f}, p) ≃ ((x,p)=(y,refl)).
 ```
 It follows that if `f` is `(k+1)`-truncated, then the identity type `(x,p)=(y,refl)` in `fib(f, f(y))` is `k`-truncated for any `p:f(x)=f(y)`.
 We conclude by Proposition 12.4.5 that the fiber `fib(ap{f}, p)` is `k`-truncated. ◻
+
+<!-- rosetta-item-end: theorem-12.4.7 -->

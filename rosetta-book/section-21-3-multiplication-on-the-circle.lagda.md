@@ -26,6 +26,8 @@ coh-unit_μ : left-unit_μ(pt)=right-unit_μ(pt).
 ```
 An **H-space** is a pointed type equipped with an H-space structure.
 
+<!-- rosetta-item-end: definition-21.3.1 -->
+
 ## Remark 21.3.2
 
 <!-- rosetta-item: remark-21.3.2; latex-label: rmk:hspace -->
@@ -43,6 +45,8 @@ Note that for any identification `α:x=y` in `A` and two base-point preserving f
 ```
 This function is easily constructed by identification elimination on `α`.
 We will be using this in our construction of the H-space structure on the circle.
+
+<!-- rosetta-item-end: remark-21.3.2 -->
 
 ## Theorem 21.3.3
 
@@ -133,6 +137,8 @@ Now we apply this function to `refl` to obtain the desired identification
 ```
  ◻
 
+<!-- rosetta-item-end: theorem-21.3.3 -->
+
 ## Remark 21.3.4
 
 <!-- rosetta-item: remark-21.3.4 -->
@@ -158,3 +164,5 @@ Arrows:
 - mul_(S^1)(base) --base-mul_(S^1)--> id
 ```
 commutes, where the homotopy `H:id~id` is the one constructed in Theorem 21.3.3.
+
+<!-- rosetta-item-end: remark-21.3.4 -->

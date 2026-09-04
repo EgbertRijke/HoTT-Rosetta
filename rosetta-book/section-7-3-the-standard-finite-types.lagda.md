@@ -33,19 +33,20 @@ The alert reader may now have observed that the interpretation of a subset `{x�
 This points at a slight problem of the Curry-Howard interpretation of the existential quantifier.
 While the Curry-Howard interpretation of the existential quantifier is nevertheless useful and important, we will reinterpret the existential quantifier in type theory in Section 14.3.
 
-Since subsets are interpreted as `Σ`-types, the ‘classical’ definition of the standard finite types is
-```text
-classical-Fin_k:=Σ(x:ℕ) x<k.
-```
-This is a perfectly fine definition of the standard finite types.
-However, the usual definition of the standard finite types in Martin-Löf’s dependent type theory is a more direct, recursive definition, which takes full advantage of the inductive constructions of dependent type theory.
-
 <!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-56 -->
 
 ```agda
 classical-Fin : ℕ → Type lzero
 classical-Fin k = Σ ℕ (λ x → le-ℕ x k)
 ```
+<!-- rosetta-item-end: remark-7.3.1 -->
+
+Since subsets are interpreted as `Σ`-types, the ‘classical’ definition of the standard finite types is
+```text
+classical-Fin_k:=Σ(x:ℕ) x<k.
+```
+This is a perfectly fine definition of the standard finite types.
+However, the usual definition of the standard finite types in Martin-Löf’s dependent type theory is a more direct, recursive definition, which takes full advantage of the inductive constructions of dependent type theory.
 
 ## Definition 7.3.2
 
@@ -57,8 +58,6 @@ Fin{0} ≔ empty
 Fin{k+1} ≔ Fin{k}+unit.
 ```
 We will write `i` for the inclusion `inl:Fin{k}→Fin{k+1}` and we will write `⋆` for the point `inr(⋆)`.
-
-In Exercise 7.7 you will be asked to show that the types `classical-Fin_k` and `Fin{k}` are isomorphic.
 
 <!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-77 -->
 
@@ -75,6 +74,9 @@ inl-Fin :
   (k : ℕ) → Fin k → Fin (succ-ℕ k)
 inl-Fin k = inl
 ```
+<!-- rosetta-item-end: definition-7.3.2 -->
+
+In Exercise 7.7 you will be asked to show that the types `classical-Fin_k` and `Fin{k}` are isomorphic.
 
 ## Remark 7.3.3
 
@@ -103,12 +105,6 @@ f_{k+1}(i(x)) ≔ g_k(x,f_k(x))
 f_{k+1}(⋆) ≔ p_k.
 ```
 
-We will often use definitions by pattern matching for two reasons: (i) such definitions are concise, and (ii) they display the judgmental equalities that hold for the defined object.
-Those judgmental equalities are the only thing we know about that object, and proving a claim about it often amounts to finding a way to apply these judgmental equalities.
-
-To illustrate this way of working with the standard finite types, we define the inclusion functions `Fin{k}→ℕ`, and show that these are injective.
-In order to show that `nat-Fin_k` is injective, we will also show that `nat-Fin_k` is bounded.
-
 <!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-136 -->
 
 ```agda
@@ -119,6 +115,13 @@ ind-Fin :
 ind-Fin g p {succ-ℕ k} (inl x) = g {k} x (ind-Fin g p {k} x)
 ind-Fin g p {succ-ℕ k} (inr star) = p {k}
 ```
+<!-- rosetta-item-end: remark-7.3.3 -->
+
+We will often use definitions by pattern matching for two reasons: (i) such definitions are concise, and (ii) they display the judgmental equalities that hold for the defined object.
+Those judgmental equalities are the only thing we know about that object, and proving a claim about it often amounts to finding a way to apply these judgmental equalities.
+
+To illustrate this way of working with the standard finite types, we define the inclusion functions `Fin{k}→ℕ`, and show that these are injective.
+In order to show that `nat-Fin_k` is injective, we will also show that `nat-Fin_k` is bounded.
 
 ## Definition 7.3.4
 
@@ -137,6 +140,7 @@ nat-Fin : (k : ℕ) → Fin k → ℕ
 nat-Fin (succ-ℕ k) (inl x) = nat-Fin k x
 nat-Fin (succ-ℕ k) (inr x) = k
 ```
+<!-- rosetta-item-end: definition-7.3.4 -->
 
 ## Lemma 7.3.5
 
@@ -170,6 +174,7 @@ strict-upper-bound-nat-Fin (succ-ℕ k) (inl x) =
 strict-upper-bound-nat-Fin (succ-ℕ k) (inr star) =
   succ-le-ℕ k
 ```
+<!-- rosetta-item-end: lemma-7.3.5 -->
 
 ## Proposition 7.3.6
 
@@ -204,3 +209,4 @@ is-injective-nat-Fin (succ-ℕ k) {inr star} {inl y} p =
 is-injective-nat-Fin (succ-ℕ k) {inr star} {inr star} p =
   refl
 ```
+<!-- rosetta-item-end: proposition-7.3.6 -->

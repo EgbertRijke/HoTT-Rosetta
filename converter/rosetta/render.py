@@ -51,14 +51,21 @@ def _structure_theorem_divs(markdown: str, expected_items) -> str:
     """Replace Pandoc HTML theorem divs with numbered Markdown headings."""
 
     item_index = 0
-    stack: List[str] = []
+    stack: List[tuple[str, str]] = []
     output: List[str] = []
+    pending_item_end = ""
     theorem_classes = set(ITEM_NAMES)
     for line in markdown.splitlines():
         opening = DIV_OPEN_RE.match(line)
+        if pending_item_end and not (
+            opening and opening.group(1) in {"proof", "constr"}
+        ) and line.strip():
+            output.extend(
+                ["", f"<!-- rosetta-item-end: {pending_item_end} -->", ""]
+            )
+            pending_item_end = ""
         if opening:
             class_name = opening.group(1)
-            stack.append(class_name)
             if class_name in theorem_classes:
                 if item_index >= len(expected_items):
                     raise ValueError(
@@ -71,18 +78,30 @@ def _structure_theorem_divs(markdown: str, expected_items) -> str:
                     marker += f"; latex-label: {item.label}"
                 marker += " -->"
                 output.extend([f"## {item.kind} {item.number}", "", marker, ""])
+                stack.append((class_name, item.stable_id))
             elif class_name == "proof":
+                stack.append((class_name, pending_item_end))
+                pending_item_end = ""
                 output.extend(["### Proof", ""])
             elif class_name == "constr":
+                stack.append((class_name, pending_item_end))
+                pending_item_end = ""
                 output.extend(["### Construction", ""])
             else:
+                stack.append((class_name, ""))
                 # Unknown divs remain explicit diagnostics in the preview.
                 output.extend([f"<!-- unsupported LaTeX environment: {class_name} -->", ""])
             continue
         if DIV_CLOSE_RE.match(line) and stack:
-            stack.pop()
+            class_name, stable_id = stack.pop()
+            if class_name in theorem_classes:
+                pending_item_end = stable_id
+            elif class_name in {"proof", "constr"} and stable_id:
+                output.extend(["", f"<!-- rosetta-item-end: {stable_id} -->", ""])
             continue
         output.append(line)
+    if pending_item_end:
+        output.extend(["", f"<!-- rosetta-item-end: {pending_item_end} -->", ""])
     if item_index != len(expected_items):
         missing = ", ".join(item.number for item in expected_items[item_index:])
         raise ValueError(f"Pandoc did not preserve numbered items: {missing}")

@@ -20,6 +20,8 @@ We define the **`𝒰`-power set** of `X` to be
 P_{U}(X)≔ X→Prop_𝒰.
 ```
 
+<!-- rosetta-item-end: definition-15.3.1 -->
+
 ## Theorem 15.3.2
 
 <!-- rosetta-item: theorem-15.3.2 -->
@@ -57,3 +59,5 @@ for all `y:X`.
 In particular, it follows that `f(x,x)↔ P(x)`.
 However, since `P(x)` is defined as `¬(f(x,x))`, we obtain that `f(x,x)↔¬(f(x,x))`.
 By Exercise 4.3 this gives us the desired contradiction. ◻
+
+<!-- rosetta-item-end: theorem-15.3.2 -->

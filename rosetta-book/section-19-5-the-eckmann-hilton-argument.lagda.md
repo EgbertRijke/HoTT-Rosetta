@@ -26,6 +26,8 @@ ap-binary_f:(x=x')→ ((y=y') → (f(x,y)=f(x',y'))
 ```
 indexed by `x,x':A` and `y,y':B` given by `ap-binary_f(refl,refl)≔refl`.
 
+<!-- rosetta-item-end: definition-19.5.1 -->
+
 ## Lemma 19.5.2
 
 <!-- rosetta-item: lemma-19.5.2; latex-label: lem:laws-ap-binary -->
@@ -58,6 +60,8 @@ Arrows:
 <!-- rosetta-item: subheading-19.5-proof -->
 
 *Proof.* The proof is immediate by identification elimination on `p` and `q`, where applicable. ◻
+
+<!-- rosetta-item-end: lemma-19.5.2 -->
 
 ## Example 19.5.3
 
@@ -105,6 +109,8 @@ Arrows:
 ```
 is given by ordinary concatenation of identifications.
 
+<!-- rosetta-item-end: example-19.5.3 -->
+
 ## Lemma 19.5.4
 
 <!-- rosetta-item: lemma-19.5.4; latex-label: lem:unit-laws-horizontal-concat -->
@@ -120,6 +126,8 @@ Horizontal concatenation satisfies the following left and right unit laws:
 <!-- rosetta-item: subheading-19.5-proof-2 -->
 
 *Proof.* This follows by identification elimination on `r` and `s`, or alternatively via Lemma 19.5.2. ◻
+
+<!-- rosetta-item-end: lemma-19.5.4 -->
 
 In the following lemma we establish the **interchange law** for horizontal and vertical concatenation.
 
@@ -163,6 +171,8 @@ Then it suffices to show that
 ```
 Using the unit laws for ordinary concatenation, we see that both sides reduce to `∙[h]{r'}{s'}`. ◻
 
+<!-- rosetta-item-end: lemma-19.5.5 -->
+
 ## Theorem 19.5.6
 
 <!-- rosetta-item: theorem-19.5.6 -->
@@ -191,6 +201,8 @@ Similarly, we observe that `∙[h]{r}{s}=s ∙ r` by the following calculation:
 ```
 These two calculations combined prove the claim. ◻
 
+<!-- rosetta-item-end: theorem-19.5.6 -->
+
 ## Corollary 19.5.7
 
 <!-- rosetta-item: corollary-19.5.7 -->
@@ -218,3 +230,5 @@ The claim now follows, because
 η(r)η(s)=η(r ∙ s)=η(s ∙ r)=η(s)η(r).
 ```
  ◻
+
+<!-- rosetta-item-end: corollary-19.5.7 -->

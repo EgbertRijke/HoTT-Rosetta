@@ -59,6 +59,7 @@ abstract
     (contraction is-contr-A (center is-contr-A)) ＝ refl
   coh-contraction (pair c C) = left-inv (C c)
 ```
+<!-- rosetta-item-end: definition-10.1.1 -->
 
 ## Remark 10.1.2
 
@@ -70,6 +71,8 @@ Then the type of `C` is (judgmentally) equal to the type
 const_c~id[A].
 ```
 In other words, the contraction `C` is a *homotopy* from the constant function to the identity function.
+
+<!-- rosetta-item-end: remark-10.1.2 -->
 
 ## Example 10.1.3
 
@@ -88,6 +91,7 @@ abstract
   pr1 is-contr-unit = star
   pr2 is-contr-unit _ = refl
 ```
+<!-- rosetta-item-end: example-10.1.3 -->
 
 ## Theorem 10.1.4
 
@@ -122,3 +126,4 @@ module _
     pr2 (pr1 (is-contr-Id a)) = refl
     pr2 (is-contr-Id a) (.a , refl) = refl
 ```
+<!-- rosetta-item-end: theorem-10.1.4 -->

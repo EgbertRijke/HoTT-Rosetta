@@ -57,6 +57,7 @@ compute-ind-is-singleton :
   (B : A → Type l2) → (ev-point a {B} ∘ ind-is-singleton a H B) ~ id
 compute-ind-is-singleton a H B = pr2 (H B)
 ```
+<!-- rosetta-item-end: definition-10.2.1 -->
 
 ## Example 10.2.2
 
@@ -73,6 +74,8 @@ Therefore, we obtain the homotopy
 λ b. refl:ev-pt∘ind-unit ~id,
 ```
 and we conclude that the unit type satisfies singleton induction.
+
+<!-- rosetta-item-end: example-10.2.2 -->
 
 ## Theorem 10.2.3
 
@@ -172,3 +175,4 @@ abstract
     ({l2 : Level} → is-singleton l2 A a) → is-contr A
   is-contr-is-singleton A a S = is-contr-ind-singleton A a (pr1 ∘ S)
 ```
+<!-- rosetta-item-end: theorem-10.2.3 -->

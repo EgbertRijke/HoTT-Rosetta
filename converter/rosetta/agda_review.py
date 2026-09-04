@@ -16,6 +16,14 @@ from .missing_agda import discover_missing_agda
 from .layout import rosetta_directory
 
 
+AGDA_REVIEW_STATES = (
+    "pending",
+    "needs-further-review",
+    "approved",
+    "rejected",
+)
+
+
 @dataclass(frozen=True)
 class AgdaReviewRecord:
     block_id: str
@@ -163,7 +171,7 @@ def _with_stored_review(record: AgdaReviewRecord, store: dict) -> AgdaReviewReco
         else:
             raise ValueError(f"Invalid comments for Agda block {record.block_id}")
     state = saved.get("state", "pending")
-    if state not in {"pending", "approved", "rejected"}:
+    if state not in AGDA_REVIEW_STATES:
         raise ValueError(f"Invalid review state for Agda block {record.block_id}")
     if saved.get("review_sha256") and saved.get("review_sha256") != _review_digest(record):
         state = "stale"
@@ -288,8 +296,13 @@ def update_agda_review(
         if current_record.block_id != block_id:
             raise ValueError(f"Agda block not found: {block_id}")
         current = current_record
+    if state is not None and state not in AGDA_REVIEW_STATES:
+        raise ValueError(f"Unsupported Agda review state: {state}")
     if current.provenance_kind == "missing" and state not in {None, "pending"}:
-        raise ValueError("An item with no Agda code cannot be approved or rejected")
+        raise ValueError(
+            "An item with no Agda code cannot be approved, rejected, or marked "
+            "as needing further review"
+        )
     path = root / "data" / "agda-reviews.json"
     if not path.exists():
         path.write_text(json.dumps(_empty_store(), indent=2) + "\n")
@@ -297,8 +310,6 @@ def update_agda_review(
     saved = store["blocks"].setdefault(block_id, {})
     saved["review_sha256"] = _review_digest(current)
     if state is not None:
-        if state not in {"pending", "approved", "rejected"}:
-            raise ValueError(f"Unsupported Agda review state: {state}")
         saved["state"] = state
     else:
         saved.setdefault("state", current.state if current.state != "stale" else "pending")

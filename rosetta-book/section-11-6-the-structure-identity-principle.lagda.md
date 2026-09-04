@@ -38,6 +38,8 @@ D : Π(x:A) B(x) → (C(x)→ 𝒰)
 ```
 equipped with an element `d:D(a,b,c)` such that `y↦ D(a,y,c)` is an identity system at `b`.
 
+<!-- rosetta-item-end: definition-11.6.1 -->
+
 ## Theorem 11.6.2
 
 <!-- rosetta-item: theorem-11.6.2; latex-label: thm:structure-identity-principle -->
@@ -104,6 +106,8 @@ Therefore it follows that
 ```
  ◻
 
+<!-- rosetta-item-end: theorem-11.6.2 -->
+
 ## Example 11.6.3
 
 <!-- rosetta-item: example-11.6.3 -->
@@ -127,3 +131,5 @@ Therefore it suffices to show that the type
 ```
 is contractible.
 Of course, this type is equivalent to `Σ(q:f(x)=b) p=q`, which is again contractible by Theorem 10.1.4.
+
+<!-- rosetta-item-end: example-11.6.3 -->

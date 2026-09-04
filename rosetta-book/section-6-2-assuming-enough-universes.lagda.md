@@ -41,6 +41,8 @@ for which the judgment
 ```
 holds.
 
+<!-- rosetta-item-end: postulate-6.2.1 -->
+
 With this assumption it will rarely be necessary to work with more than one universe at the same time.
 Using the assumption that for any finite list of types in context there is a universe that contains those types, we obtain many specific universes.
 
@@ -49,6 +51,8 @@ Using the assumption that for any finite list of types in context there is a uni
 <!-- rosetta-item: definition-6.2.2 -->
 
 The **base universe** `𝒰_0` is the universe that we obtain using Postulate 6.2.1 with the empty list of types in context.
+
+<!-- rosetta-item-end: definition-6.2.2 -->
 
 In other words, the base universe is a universe that is closed under all the ways of forming types, but it isn’t specified to contain any further types.
 
@@ -61,6 +65,8 @@ The **successor universe** of a universe `𝒰` is the universe `𝒰^+` obtaine
 ⊢ 𝒰 \type
 X:𝒰 ⊢ T(X) \type.
 ```
+
+<!-- rosetta-item-end: definition-6.2.3 -->
 
 ## Remark 6.2.4
 
@@ -83,6 +89,8 @@ Using successor universes we can create an infinite tower
 of universes, starting at any universe `𝒰`, in which each universe is contained in the next.
 However, such towers of universes need not be exhaustive in the sense that it might not be the case that every type is contained in a universe in this tower.
 
+<!-- rosetta-item-end: remark-6.2.4 -->
+
 ## Definition 6.2.5
 
 <!-- rosetta-item: definition-6.2.5; latex-label: defn:join-universe -->
@@ -92,6 +100,8 @@ The **join** of two universes `𝒰` and `𝒱` is the universe `𝒰⊔𝒱` th
 X:𝒰 ⊢ T_{𝒰}(X) \type
 Y:𝒱 ⊢ T_{𝒱}(Y) \type.
 ```
+
+<!-- rosetta-item-end: definition-6.2.5 -->
 
 ## Remark 6.2.6
 
@@ -104,3 +114,5 @@ j : 𝒱→𝒰⊔𝒱
 ```
 Note that we don’t postulate any relations between the universes.
 In general it will therefore be the case that the universes `(𝒰⊔𝒱)⊔W` and `𝒰⊔(𝒱⊔W)` will be unrelated.
+
+<!-- rosetta-item-end: remark-6.2.6 -->

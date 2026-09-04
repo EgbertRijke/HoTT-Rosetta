@@ -36,6 +36,8 @@ We say that a W-type `W(A,B)` is **extensional** if the canonical map
 ```
 is an equivalence.
 
+<!-- rosetta-item-end: definition-20.5.1 -->
+
 In the following theorem we give a precise characterization of the inhabited extensional W-types.
 
 ## Theorem 20.5.2
@@ -52,6 +54,8 @@ Then the following are equivalent:
 tr_B:(x=y)→ (B(x)≃ B(y))
 ```
     is an equivalence, for every `x,y:A`.
+
+<!-- rosetta-item-end: theorem-20.5.2 -->
 
 ## Remark 20.5.3
 
@@ -108,9 +112,13 @@ Therefore, it follows that the above type is contractible if and only if the typ
 ```
 is contractible, which is the case if and only if the map `(x=y)→(B(x)≃ B(y))` is an equivalence for all `y:A`. ◻
 
+<!-- rosetta-item-end: remark-20.5.3 -->
+
 ## Example 20.5.4
 
 <!-- rosetta-item: example-20.5.4 -->
 
 The type `N` of Example 20.1.6, the type of binary rooted trees Example 20.1.8, and the type of finitely branching rooted trees Example 20.1.9 are all examples extensional W-types.
 On the other hand, the type of oriented binary rooted trees of Example 20.1.7 and the type of oriented finitely branching rooted trees of Example 20.1.9 are not extensional.
+
+<!-- rosetta-item-end: example-20.5.4 -->

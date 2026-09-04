@@ -23,6 +23,8 @@ We write `is-emb(f)` for the type of witnesses that `f` is an embedding, and we 
 A↪ B≔ Σ(f:A→ B) is-emb(f).
 ```
 
+<!-- rosetta-item-end: definition-11.4.1 -->
+
 Another way of phrasing the following statement is that equivalent types have equivalent identity types.
 
 ## Theorem 11.4.2
@@ -59,3 +61,5 @@ inv : (e(x)=e(y))→ (e(y)= e(x))
 ```
 is an equivalence by Exercise 9.1.
 The fiber `fib(e, e(x))` is contractible by Theorem 10.4.6, so it follows by Exercise 10.3 that the type `Σ(y:A) e(x)=e(y)` is indeed contractible. ◻
+
+<!-- rosetta-item-end: theorem-11.4.2 -->

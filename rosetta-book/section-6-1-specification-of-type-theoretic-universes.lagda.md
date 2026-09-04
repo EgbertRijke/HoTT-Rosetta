@@ -92,9 +92,13 @@ We say that `A` is a type in `𝒰`, or that `𝒰` **contains** `A`, if `𝒰` 
 holds.
 If `A` is a type in `𝒰`, we usually write simply `A` for `Ǎ` and also `A` for `Ty(Ǎ)`.
 
+<!-- rosetta-item-end: definition-6.1.1 -->
+
 ## Remark 6.1.2
 
 <!-- rosetta-item: remark-6.1.2 -->
 
 Since ordinary function types are defined as a special case of dependent function types, we don’t have to assume separately that universes are closed under ordinary function types.
 Similarly, it follows from the assumption that universes are closed under dependent pair types that universes are closed under cartesian product types.
+
+<!-- rosetta-item-end: remark-6.1.2 -->

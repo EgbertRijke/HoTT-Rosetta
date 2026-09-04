@@ -61,11 +61,43 @@ Agda blocks are curated independently of mechanical LaTeX conversion.
   upstream copies or used as precedent for new handwritten blocks.
 - Typecheck every changed section containing Agda and affected aggregates.
 
+## Agda narrative placement
+
+Agda blocks must appear where their declarations are both narratively relevant
+and valid in Agda's sequential scope. Visual proximity alone is not sufficient.
+
+- Numbered items have stable opening `rosetta-item` markers and closing
+  `rosetta-item-end` markers. A closing marker belongs after an immediately
+  following proof or construction, because Pandoc may render that material as
+  a separate div.
+- The default manifest insertion point is immediately before the matching item
+  end marker. It must not absorb transition prose that belongs between items.
+- Use a manifest `after_text` anchor only when one block implements a specific
+  intermediate step within a longer narrative. The exact anchor must occur in
+  the generated item; a missing anchor is an error rather than permission to
+  fall back silently.
+- General prerequisites may use a section item and `display_heading` when
+  dependency order prevents a more local narrative home. Apply the heading to
+  the first generated block in the group and verify the resulting order.
+- A reusable lemma should move to the earliest genuine mathematical home only
+  when its own dependencies are already available there and every consumer
+  remains later in generated Agda order. Splitting an upstream excerpt may
+  require restoring its enclosing anonymous module; that is an adaptation and
+  must be recorded as such.
+- Treat relocation as a code change: regenerate all affected products,
+  typecheck every changed Agda section and downstream consumer, and add
+  regression tests for item boundaries and any curated narrative anchor.
+
 ## Review UI
 
 Review is optional metadata and cannot affect conversion or ordinary checks.
 The UI may display files, provenance, diffs, typechecks, gaps, comments, and
 decisions. Changed content makes prior review evidence stale.
+
+For Agda blocks, `pending` means that no review decision has been recorded.
+`needs-further-review` means that a reviewer inspected the block but did not
+approve or reject it. An evidence mismatch displays as `stale` regardless of
+the saved decision until the block is reviewed against its current content.
 
 Edits to existing curated blocks are staged in a temporary scratchpad. Only an
 exact passing draft may be promoted; promotion shows the manifest diff, writes

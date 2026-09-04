@@ -20,6 +20,8 @@ e∘_ : (A → X) → (A→ Y)
 ```
 is an equivalence.
 
+<!-- rosetta-item-end: lemma-17.3.1 -->
+
 Note that this statement was also part of Exercise 13.12.
 That exercise is solved using function extensionality.
 However, since our present goal is to derive function extensionality from the univalence axiom, we cannot make use of that exercise.
@@ -105,3 +107,5 @@ r(i(f)) ≐ r(λ x. (x,f(x)),refl)
 ```
 Thus we see that `r∘ i≐ id` by an application of the `η`-rule for `Π`-types.
 Therefore we simply define `H(f)≔refl`. ◻
+
+<!-- rosetta-item-end: theorem-17.3.2 -->

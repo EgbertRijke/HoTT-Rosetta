@@ -50,6 +50,8 @@ As a corollary of this observation, we observe that there is also a map
 ```
 for any decidable subtype `P` over `Fin{k}`.
 
+<!-- rosetta-item-end: example-14.4.1 -->
+
 ## Remark 14.4.2
 
 <!-- rosetta-item: remark-14.4.2; latex-label: rmk:global-choice -->
@@ -65,6 +67,8 @@ we constructed in Example 14.4.1 for decidable subtypes of `ℕ` is a rare case 
 We say that the type `A` satisfies the **principle of global choice** if there is such a function `‖A‖→ A`.
 Using the univalence axiom, we will see in Corollary 17.5.3 that not every type satisfies the principle of global choice.
 
+<!-- rosetta-item-end: remark-14.4.2 -->
+
 More generally, we may wish to define a map `‖A‖→ B` where the type `B` is a set.
 In this situation it is helpful to think of the propositional truncation of `A` as the quotient of the type `A` by the equivalence relation that relates every two elements of `A` with each other.
 Propositional truncations can therefore also be characterized by the universal property of this quotient, which can be used to extend maps `f:A→ B` to maps `‖A‖→ B` when the type `B` is a set.
@@ -79,6 +83,8 @@ A map `f:A→ B` is said to be **weakly constant** if it comes equipped with an 
 is-weakly-constant(f) ≔ Π(x,y:A) f(x)=f(y).
 ```
 
+<!-- rosetta-item-end: definition-14.4.3 -->
+
 ## Remark 14.4.4
 
 <!-- rosetta-item: remark-14.4.4 -->
@@ -88,6 +94,8 @@ A map `f:A→ B` is therefore constant if comes equipped with an element `b:B` a
 This is a stronger notion than the notion of weakly constant maps, which doesn’t require there to be an element in `B`.
 
 One of the differences between constant maps and weakly constant maps manifests itself as follows: A type `A` is contractible if and only if the identity map on `A` is constant, while a type `A` is a proposition if and only if the identity map on `A` is weakly constant.
+
+<!-- rosetta-item-end: remark-14.4.4 -->
 
 ## Lemma 14.4.5
 
@@ -122,6 +130,8 @@ Using the action on paths of `g`, we obtain the identification
 ap_{g}(α(x,y)):g(η(x))=g(η(y))
 ```
 in `B`. ◻
+
+<!-- rosetta-item-end: lemma-14.4.5 -->
 
 We now show, in a theorem due to Kraus , that any weakly constant map `f:A→ B` into a set `B` extends uniquely to a map `‖A‖→ B`.
 We therefore conclude that, in order to define a map `‖A‖→ B` into a set `B` it suffices to define a map `f:A→ B` and show that it is weakly constant.
@@ -193,3 +203,5 @@ Now we obtain the map `pr 1∘ h:‖A‖→ B` equipped with the concatenated ho
 (pr 1∘ h)∘η ≐ pr 1∘ (h∘η) ~ pr 1∘ g ~ f.
 ```
  ◻
+
+<!-- rosetta-item-end: theorem-14.4.6 -->

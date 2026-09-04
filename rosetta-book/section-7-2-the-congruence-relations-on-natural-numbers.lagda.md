@@ -45,18 +45,6 @@ and we say that `R` is **transitive** if it comes equipped with
 ```
 A **(typal) equivalence relation** on `A` is a reflexive, symmetric, and transitive binary typal relation on `A`.
 
-To define the congruence relation modulo `k` in type theory using the Curry-Howard interpretation, we will define for any three natural numbers `x`, `y`, and `k`, a *type*
-```text
-x≡ ymod k
-```
-consisting of the proofs that `x` is congruent to `y` modulo `k`.
-We will define this type by directly interpreting Gauss’ definition of the congruence relations in his *Disquisitiones Arithmeticae* : two numbers `x` and `y` are congruent modulo `k` if `k` divides the symmetric difference `dist-ℕ(x,y)` between `x` and `y`.
-Recall that `dist-ℕ(x,y)` was defined in Exercise 6.5 recursively by
-```text
-dist-ℕ(0,0) ≔ 0 dist-ℕ(0,y+1) ≔ y+1
-dist-ℕ(x+1,0) ≔ x+1 dist-ℕ(x+1,y+1) ≔ dist-ℕ(x,y).
-```
-
 <!-- rosetta-agda-block: section-7-2-the-congruence-relations-on-natural-numbers-block-31 -->
 
 ```agda
@@ -111,6 +99,19 @@ equivalence-relation :
   (l : Level) {l1 : Level} (A : Type l1) → Type (lsuc l ⊔ l1)
 equivalence-relation l A = Σ (Relation l A) is-equivalence-relation
 ```
+<!-- rosetta-item-end: definition-7.2.1 -->
+
+To define the congruence relation modulo `k` in type theory using the Curry-Howard interpretation, we will define for any three natural numbers `x`, `y`, and `k`, a *type*
+```text
+x≡ ymod k
+```
+consisting of the proofs that `x` is congruent to `y` modulo `k`.
+We will define this type by directly interpreting Gauss’ definition of the congruence relations in his *Disquisitiones Arithmeticae* : two numbers `x` and `y` are congruent modulo `k` if `k` divides the symmetric difference `dist-ℕ(x,y)` between `x` and `y`.
+Recall that `dist-ℕ(x,y)` was defined in Exercise 6.5 recursively by
+```text
+dist-ℕ(0,0) ≔ 0 dist-ℕ(0,y+1) ≔ y+1
+dist-ℕ(x+1,0) ≔ x+1 dist-ℕ(x+1,y+1) ≔ dist-ℕ(x,y).
+```
 
 ## Definition 7.2.2
 
@@ -129,6 +130,7 @@ cong-ℕ :
   ℕ → ℕ → ℕ → Type lzero
 cong-ℕ k x y = div-ℕ k (dist-ℕ x y)
 ```
+<!-- rosetta-item-end: definition-7.2.2 -->
 
 ## Example 7.2.3
 
@@ -149,6 +151,7 @@ pr1 (cong-zero-ℕ k) = 1
 pr2 (cong-zero-ℕ k) =
   (left-unit-law-mul-ℕ k) ∙ (inv (right-unit-law-dist-ℕ k))
 ```
+<!-- rosetta-item-end: example-7.2.3 -->
 
 ## Proposition 7.2.4
 
@@ -210,3 +213,4 @@ transitive-cong-ℕ k x y z e d | inr (inr α) =
   div-left-summand-ℕ k (dist-ℕ x z) (dist-ℕ x y) d
     ( concatenate-div-eq-ℕ e (inv α))
 ```
+<!-- rosetta-item-end: proposition-7.2.4 -->

@@ -20,6 +20,8 @@ tot(f):Σ(x:A) B(x)→Σ(x:A) C(x)
 ```
 by `λ (x,y). (x,f(x,y))`.
 
+<!-- rosetta-item-end: definition-11.1.1 -->
+
 ## Lemma 11.1.2
 
 <!-- rosetta-item: lemma-11.1.2; latex-label: lem:fib_total -->
@@ -55,6 +57,8 @@ H((x,f(x,y)),((x,y),refl)) ≔ refl.
 ```
  ◻
 
+<!-- rosetta-item-end: lemma-11.1.2 -->
+
 ## Theorem 11.1.3
 
 <!-- rosetta-item: theorem-11.1.3; latex-label: thm:fib_equiv -->
@@ -74,6 +78,8 @@ In this case we say that `f` is a **family of equivalences**.
 *Proof.* By Theorems 10.3.5 and 10.4.6 it suffices to show that `f(x)` is a contractible map for each `x:A`, if and only if `tot(f)` is a contractible map.
 Thus, we will show that `fib(f(x), c)` is contractible if and only if `fib(tot(f), x,c)` is contractible, for each `x:A` and `c:C(x)`.
 However, by Lemma 11.1.2 these types are equivalent, so the result follows by Exercise 10.3. ◻
+
+<!-- rosetta-item-end: theorem-11.1.3 -->
 
 Now consider the situation where we have a map `f:A→ B`, and a family `C` over `B`.
 Then we have the map
@@ -114,6 +120,8 @@ H(t) : ψ(t)∘φ(t)~id H((f(x),z),((x,z),refl)) ≔ refl.
 ```
 Now the claim follows, since we see that `φ` is a contractible map if and only if `f` is a contractible map. ◻
 
+<!-- rosetta-item-end: lemma-11.1.4 -->
+
 Now we use Lemma 11.1.4 to obtain a generalization of Theorem 11.1.3.
 
 ## Definition 11.1.5
@@ -131,6 +139,8 @@ Then we define
 tot([f]{g}:Σ(x:A) C(x)→Σ(y:B) D(y)
 ```
 by `tot([f]{g}(x,z)≔ (f(x),g(x,z))`.
+
+<!-- rosetta-item-end: definition-11.1.5 -->
 
 ## Theorem 11.1.6
 
@@ -169,3 +179,5 @@ By the assumption that `f` is an equivalence, it follows that the map
 is an equivalence.
 Therefore it follows that `tot([f]{g}` is an equivalence if and only if `tot(g)` is an equivalence.
 Now the claim follows, since `tot(g)` is an equivalence if and only if `g` if a family of equivalences. ◻
+
+<!-- rosetta-item-end: theorem-11.1.6 -->

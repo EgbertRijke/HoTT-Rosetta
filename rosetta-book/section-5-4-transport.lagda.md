@@ -31,14 +31,6 @@ We construct `tr_B(p)` by induction on `p:x=_A y`, taking
 tr_B(refl) ≔ id[B(x)].
 ```
 
-Thus we see that type theory cannot distinguish between identified elements `x` and `y`, because for any type family `B` over `A` one obtains an element of `B(y)` from the elements of `B(x)`.
-
-As an application of the transport function we construct the *dependent* action on paths of a dependent function `f:Π(x:A) B(x)`.
-Note that for such a dependent function `f`, and an identification `p:x =_A y`, it does not make sense to directly compare `f(x)` and `f(y)`, since the type of `f(x)` is `B(x)` whereas the type of `f(y)` is `B(y)`, which might not be exactly the same type.
-However, we can first *transport* `f(x)` along `p`, so that we obtain the element `tr_B(p,f(x))` which is of type `B(y)`.
-Now we can ask whether it is the case that `tr_B(p,f(x))=f(y)`.
-The dependent action on paths of `f` establishes this identification.
-
 <!-- rosetta-agda-block: section-5-4-transport-block-33 -->
 
 ```agda
@@ -49,6 +41,15 @@ module _
   tr : x ＝ y → B x → B y
   tr refl b = b
 ```
+<!-- rosetta-item-end: definition-5.4.1 -->
+
+Thus we see that type theory cannot distinguish between identified elements `x` and `y`, because for any type family `B` over `A` one obtains an element of `B(y)` from the elements of `B(x)`.
+
+As an application of the transport function we construct the *dependent* action on paths of a dependent function `f:Π(x:A) B(x)`.
+Note that for such a dependent function `f`, and an identification `p:x =_A y`, it does not make sense to directly compare `f(x)` and `f(y)`, since the type of `f(x)` is `B(x)` whereas the type of `f(y)` is `B(y)`, which might not be exactly the same type.
+However, we can first *transport* `f(x)` along `p`, so that we obtain the element `tr_B(p,f(x))` which is of type `B(y)`.
+Now we can ask whether it is the case that `tr_B(p,f(x))=f(y)`.
+The dependent action on paths of `f` establishes this identification.
 
 ## Definition 5.4.2
 
@@ -83,3 +84,4 @@ apd :
   (p : x ＝ y) → dependent-identification B p (f x) (f y)
 apd f refl = refl
 ```
+<!-- rosetta-item-end: definition-5.4.2 -->

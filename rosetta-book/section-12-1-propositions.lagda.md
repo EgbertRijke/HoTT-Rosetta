@@ -19,6 +19,8 @@ Given a universe `𝒰`, we define `Prop_𝒰` to be the type of all small propo
 Prop_𝒰≔Σ(X:𝒰) is-prop(X).
 ```
 
+<!-- rosetta-item-end: definition-12.1.1 -->
+
 ## Example 12.1.2
 
 <!-- rosetta-item: example-12.1.2; latex-label: eg:prop_contr -->
@@ -30,6 +32,8 @@ The empty type is also a proposition, since we have
 Π(x,y:empty) is-contr(x=y)
 ```
 by the induction principle of the empty type.
+
+<!-- rosetta-item-end: example-12.1.2 -->
 
 There are many conditions on a type `A` that are equivalent to the condition that `A` is a proposition.
 In the following proposition we state four such conditions.
@@ -80,6 +84,8 @@ Therefore, it follows by Exercise 10.3 that the map `const_⋆:A→unit` is an e
 
 To show that (iv) implies (i), note that if `A→unit` is an embedding, then the identity types of `A` are equivalent to contractible types and therefore they must be contractible. ◻
 
+<!-- rosetta-item-end: proposition-12.1.3 -->
+
 One useful feature of propositions, is that in order to construct an equivalence `e:P≃ Q` between propositions, it suffices to construct maps back and forth between them.
 
 ## Proposition 12.1.4
@@ -104,3 +110,5 @@ Therefore it remains to show that
 Suppose we have `f:P→ Q` and `g:Q→ P`.
 Then we obtain the homotopies `f∘ g~ id` and `g∘ f~ id` by the fact that any two elements in `P` and `Q` can be identified.
 Therefore `f` is an equivalence with inverse `g`. ◻
+
+<!-- rosetta-item-end: proposition-12.1.4 -->

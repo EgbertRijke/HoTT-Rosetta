@@ -81,6 +81,8 @@ Therefore we obtain the required homotopy by function extensionality:
 ```
  ◻
 
+<!-- rosetta-item-end: theorem-13.2.1 -->
+
 The fact that `Π`-types distribute over `Σ`-types has many useful consequences.
 The most straightforward consequence is the following.
 
@@ -92,6 +94,8 @@ For any two types `A` and `B`, and any type family `C` over `B`, we have an equi
 ```text
 (A→Σ(y:B) C(y))≃(Σ(f:A→ B) Π(x:A) C(f(x))).
 ```
+
+<!-- rosetta-item-end: corollary-13.2.2 -->
 
 Another direct consequence of the distributivity of `Π`-types over `Σ`-types is the fact that
 ```text
@@ -136,6 +140,8 @@ This gives an equivalence
 ```
 and the right-hand side is a product of contractible types. ◻
 
+<!-- rosetta-item-end: corollary-13.2.3 -->
+
 In the final application of distributivity of `Π`-types over `Σ`-types we obtain a general way of constructing identity systems of `Π`-types.
 
 ## Theorem 13.2.4
@@ -165,3 +171,5 @@ By Theorem 13.2.1 it follows that this type is equivalent to the type
 ```
 This is a product of contractible types because each `E(f(x))` is an identity system at `f(x):B(x)`.
 This product is therefore contractible by the weak function extensionality principle. ◻
+
+<!-- rosetta-item-end: theorem-13.2.4 -->

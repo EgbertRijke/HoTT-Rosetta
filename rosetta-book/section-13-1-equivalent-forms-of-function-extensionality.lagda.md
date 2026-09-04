@@ -41,6 +41,8 @@ htpy-eq:(f=g)→ (f~ g)
 
 *Proof.* This theorem follows directly from Theorem 11.2.2. ◻
 
+<!-- rosetta-item-end: proposition-13.1.1 -->
+
 There is, however, yet a fourth condition equivalent to the function extensionality principle: the *weak* function extensionality principle.
 The weak function extensionality principle asserts that any dependent product of contractible types is again contractible.
 
@@ -106,6 +108,8 @@ r(i(g,H)) ≐ r(λ x. (g(x),H(x)))
 Now we observe that the type `Π(x:A) Σ(b:B(x)) f(x)=b` is a product of contractible types, so it is contractible by our assumption of the weak function extensionality principle.
 The claim now follows, because retracts of contractible types are contractible by Exercise 10.2. ◻
 
+<!-- rosetta-item-end: theorem-13.1.2 -->
+
 We will henceforth assume the function extensionality principle as an axiom.
 
 ## Axiom 13.1.3
@@ -118,6 +122,8 @@ htpy-eq:(f=g)→ (f~ g)
 ```
 is an equivalence.
 We will write `eq-htpy` for its inverse.
+
+<!-- rosetta-item-end: axiom-13.1.3 -->
 
 ## Remark 13.1.4
 
@@ -134,6 +140,8 @@ The function extensionality axiom is added to type theory by adding the rule
 ───────────────────────────────────────────────────────────
               Γ⊢funext:is-equiv(htpy-eq_{f,g})
 ```
+
+<!-- rosetta-item-end: remark-13.1.4 -->
 
 In the following theorem we extend the weak function extensionality principle to general truncation levels.
 
@@ -159,6 +167,8 @@ By function extensionality, the type `f=g` is equivalent to `f~ g` for any two d
 Now observe that `f~ g` is a dependent product of `k`-truncated types, and therefore it is `k`-truncated by the inductive hypothesis.
 Since the `k`-truncated types are closed under equivalences by Proposition 12.4.5, it follows that the type `f=g` is `k`-truncated. ◻
 
+<!-- rosetta-item-end: theorem-13.1.5 -->
+
 ## Corollary 13.1.6
 
 <!-- rosetta-item: corollary-13.1.6; latex-label: cor:funtype_trunc -->
@@ -166,9 +176,13 @@ Since the `k`-truncated types are closed under equivalences by Proposition 12.4.
 Suppose `B` is a `k`-type.
 Then `A→ B` is also a `k`-type, for any type `A`.
 
+<!-- rosetta-item-end: corollary-13.1.6 -->
+
 ## Remark 13.1.7
 
 <!-- rosetta-item: remark-13.1.7 -->
 
 It follows that `¬ A` is a proposition for each type `A`.
 Note that it requires function extensionality even just to prove that `¬ P` is a proposition for any proposition `P`.
+
+<!-- rosetta-item-end: remark-13.1.7 -->

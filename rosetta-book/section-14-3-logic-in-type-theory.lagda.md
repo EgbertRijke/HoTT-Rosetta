@@ -22,6 +22,8 @@ Given two propositions `P` and `Q`, we define their **disjunction**
 P∨ Q ≔ ‖P+Q‖.
 ```
 
+<!-- rosetta-item-end: definition-14.3.1 -->
+
 ## Proposition 14.3.2
 
 <!-- rosetta-item: proposition-14.3.2 -->
@@ -56,6 +58,8 @@ Arrows:
 ```
 The first map is an equivalence by the universal property of the propositional truncation, and the second map is an equivalence by the universal property of coproducts (Exercise 13.8). ◻
 
+<!-- rosetta-item-end: proposition-14.3.2 -->
+
 ## Definition 14.3.3
 
 <!-- rosetta-item: definition-14.3.3 -->
@@ -64,6 +68,8 @@ Given a family `P` of propositions over a type `A`, we define the **existential 
 ```text
 ∃_{(x:A)}P(x)≔ ‖Σ(x:A) P(x)‖.
 ```
+
+<!-- rosetta-item-end: definition-14.3.3 -->
 
 ## Proposition 14.3.4
 
@@ -97,6 +103,8 @@ Arrows:
 - ((Σ(x:A) P(x))→ Q) --unlabeled--> (Π(x:A) P(x)→ Q)
 ```
 The first map in this composite is an equivalence by the universal property of the propositional truncation, and the second map is an equivalence by the universal property of `Σ`-types (Theorem 13.3.1). ◻
+
+<!-- rosetta-item-end: proposition-14.3.4 -->
 
 In the following table we give an overview of the interpretation of the logical connectives using the propositions in type theory.
 

@@ -90,6 +90,8 @@ Arrows:
 commutes.
 Notice that we get exactly such a pair `(α,β)` from the computation rule of the circle, by Remark 21.1.3. ◻
 
+<!-- rosetta-item-end: theorem-21.2.1 -->
+
 As a corollary we obtain the following uniqueness principle for dependent functions defined by the induction principle of the circle.
 
 ## Corollary 21.2.2
@@ -122,6 +124,8 @@ Arrows:
 - f(base) --α--> y
 ```
 commutes, is contractible.
+
+<!-- rosetta-item-end: corollary-21.2.2 -->
 
 Now we use the dependent universal property to derive the ordinary universal property of the circle.
 It would be tempting to say that it is a direct corollary, but we need to address the transport that occurs in the dependent universal property.
@@ -203,6 +207,8 @@ Arrows:
 ```
 commutes by path induction on `p`. ◻
 
+<!-- rosetta-item-end: theorem-21.2.3 -->
+
 ## Corollary 21.2.4
 
 <!-- rosetta-item: corollary-21.2.4 -->
@@ -228,3 +234,5 @@ Arrows:
 - f(base) --α--> x
 ```
 commutes, is contractible.
+
+<!-- rosetta-item-end: corollary-21.2.4 -->

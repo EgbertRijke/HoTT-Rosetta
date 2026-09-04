@@ -112,6 +112,8 @@ Since `i:Y→ Y+unit` is injective, it follows that `f(g(y))=y`.
 
  ◻
 
+<!-- rosetta-item-end: proposition-16.2.1 -->
+
 ## Theorem 16.2.2
 
 <!-- rosetta-item: theorem-16.2.2; latex-label: thm:is-injective-Fin -->
@@ -148,3 +150,5 @@ Arrows:
 - (k=l) --unlabeled--> (k+1=l+1)
 ```
  ◻
+
+<!-- rosetta-item-end: theorem-16.2.2 -->

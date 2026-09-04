@@ -69,6 +69,7 @@ module _
   ap-comp : {x y : A} (p : x ＝ y) → ap (g ∘ f) p ＝ (ap g ∘ ap f) p
   ap-comp refl = refl
 ```
+<!-- rosetta-item-end: definition-5.3.1 -->
 
 ## Definition 5.3.2
 
@@ -117,3 +118,4 @@ module _
     {x y z : A} (p : x ＝ y) (q : y ＝ z) → ap f (p ∙ q) ＝ ap f p ∙ ap f q
   ap-concat refl q = refl
 ```
+<!-- rosetta-item-end: definition-5.3.2 -->

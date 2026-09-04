@@ -32,6 +32,8 @@ This observation suggests that in type theory we should define a subtype of a ty
 A type family `B` over `A` is said to be a **subtype** of `A` if for each `x:A` the type `B(x)` is a proposition.
 When `B` is a subtype of `A`, we also say that `B(x)` is a **property** of `x:A`.
 
+<!-- rosetta-item-end: definition-12.2.1 -->
+
 One reason why subtypes are important and useful, is that for any
 ```text
 (x,p),(y,q):Σ(x:A) P(x)
@@ -81,6 +83,8 @@ ap{e} : (x=y)→ (e(x)=e(y))
 is an equivalence for any `x,y:A`.
 If `B` is a proposition, then in particular the type `e(x)=e(y)` is contractible for any `x,y:A`, so the claim follows from Theorem 10.4.6. ◻
 
+<!-- rosetta-item-end: lemma-12.2.2 -->
+
 ## Theorem 12.2.3
 
 <!-- rosetta-item: theorem-12.2.3; latex-label: thm:embedding -->
@@ -114,6 +118,8 @@ fib(f, b)→is-contr(fib(f, b))
 ```
 for any `b:B`, which is by Proposition 12.1.3 equivalent to the condition that each `fib(f, b)` is a proposition. ◻
 
+<!-- rosetta-item-end: theorem-12.2.3 -->
+
 ## Corollary 12.2.4
 
 <!-- rosetta-item: corollary-12.2.4; latex-label: cor:pr1-embedding -->
@@ -134,3 +140,5 @@ The following are equivalent:
 fib(pr 1, x)≃ B(x).
 ```
  ◻
+
+<!-- rosetta-item-end: corollary-12.2.4 -->

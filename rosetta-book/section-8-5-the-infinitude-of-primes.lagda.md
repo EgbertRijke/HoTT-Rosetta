@@ -44,22 +44,7 @@ At the top of this ordering we find `0`.
 For any natural number `n`, the numbers strictly below `n` are the proper divisors of `n`.
 A prime number is therefore a number of which has exactly one proper divisor.
 
-## Definition 8.5.1
-
-<!-- rosetta-item: definition-8.5.1 -->
-
- 
-
-1.  Consider two natural numbers `d` and `n`.
-Then `d` is said to be a **proper divisor** of `n` if it comes equipped with an element of type
-```text
-is-proper-divisor(n,d)≔ (d≠ n)× (d| n).
-```
-
-2.  A natural number `n` is said to be **prime** if it comes equipped with an element of type
-```text
-is-prime(n)≔ Π(x:ℕ) is-proper-divisor(n,x)↔ (x=1).
-```
+### Agda prerequisites for Section 8.5
 
 <!-- rosetta-agda-block: definition-8.5.1-multiplication-bound -->
 
@@ -135,6 +120,31 @@ abstract
       (eq-or-le-leq-ℕ x y x≤y)
 ```
 
+<!-- rosetta-agda-block: theorem-8.5.6-empty-product-factor -->
+
+```agda
+is-empty-left-factor-is-empty-product :
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} → is-empty (A × B) → B → is-empty A
+is-empty-left-factor-is-empty-product f b a = f (pair a b)
+```
+
+## Definition 8.5.1
+
+<!-- rosetta-item: definition-8.5.1 -->
+
+ 
+
+1.  Consider two natural numbers `d` and `n`.
+Then `d` is said to be a **proper divisor** of `n` if it comes equipped with an element of type
+```text
+is-proper-divisor(n,d)≔ (d≠ n)× (d| n).
+```
+
+2.  A natural number `n` is said to be **prime** if it comes equipped with an element of type
+```text
+is-prime(n)≔ Π(x:ℕ) is-proper-divisor(n,x)↔ (x=1).
+```
+
 <!-- rosetta-agda-block: definition-8.5.1-proper-divisor -->
 
 ```agda
@@ -164,6 +174,7 @@ le-is-proper-divisor-ℕ x y H K =
 is-prime-ℕ : ℕ → Type lzero
 is-prime-ℕ n = (x : ℕ) → (is-proper-divisor-ℕ n x ↔ is-one-ℕ x)
 ```
+<!-- rosetta-item-end: definition-8.5.1 -->
 
 ## Proposition 8.5.2
 
@@ -202,10 +213,6 @@ Since the types `(x≠ n)× (x| n)` and `x=1` are decidable, it follows from Cor
 for any `x:ℕ`.
 This follows from the implication `(x| n)→ (x≤ n)`, which holds because we have assumed that `n≠ 0`. ◻
 
-The proof that there are infinitely many primes proceeds by constructing a prime number larger than `n`, for any `n:ℕ`.
-The number `n!+1` is relatively prime with any number `x≤ n`.
-Therefore there is a least number `n<m` that is relatively prime with any number `x≤ n`, and it follows that this number `m` must be prime.
-
 <!-- rosetta-agda-block: proposition-8.5.2-divisor-of-one -->
 
 ```agda
@@ -234,20 +241,6 @@ is-one-is-proper-divisor-ℕ n =
 
 is-prime-easy-ℕ : ℕ → Type lzero
 is-prime-easy-ℕ n = (is-not-one-ℕ n) × (is-one-is-proper-divisor-ℕ n)
-```
-
-<!-- rosetta-agda-block: proposition-8.5.2-logical-equivalence-projections -->
-
-```agda
-module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (H : A ↔ B)
-  where
-
-  forward-implication : A → B
-  forward-implication = pr1 H
-
-  backward-implication : B → A
-  backward-implication = pr2 H
 ```
 
 <!-- rosetta-agda-block: proposition-8.5.2-one-not-prime -->
@@ -280,13 +273,6 @@ is-not-one-two-ℕ : is-not-one-ℕ 2
 is-not-one-two-ℕ ()
 ```
 
-<!-- rosetta-agda-block: proposition-8.5.2-one-decidable -->
-
-```agda
-is-decidable-is-one-ℕ : (n : ℕ) → is-decidable (is-one-ℕ n)
-is-decidable-is-one-ℕ n = has-decidable-equality-ℕ n 1
-```
-
 <!-- rosetta-agda-block: proposition-8.5.2-prime-decidable -->
 
 ```agda
@@ -313,6 +299,11 @@ is-decidable-is-prime-ℕ n =
     ( is-prime-easy-is-prime-ℕ n)
     ( is-decidable-is-prime-easy-ℕ n)
 ```
+<!-- rosetta-item-end: proposition-8.5.2 -->
+
+The proof that there are infinitely many primes proceeds by constructing a prime number larger than `n`, for any `n:ℕ`.
+The number `n!+1` is relatively prime with any number `x≤ n`.
+Therefore there is a least number `n<m` that is relatively prime with any number `x≤ n`, and it follows that this number `m` must be prime.
 
 ## Definition 8.5.3
 
@@ -338,6 +329,7 @@ le-in-sieve-of-eratosthenes-ℕ :
   (n a : ℕ) → in-sieve-of-eratosthenes-ℕ n a → le-ℕ n a
 le-in-sieve-of-eratosthenes-ℕ n a = pr1
 ```
+<!-- rosetta-item-end: definition-8.5.3 -->
 
 ## Lemma 8.5.4
 
@@ -374,6 +366,7 @@ is-decidable-in-sieve-of-eratosthenes-ℕ n a =
       ( n)
       ( λ x → section-2-2-ordinary-function-types.id))
 ```
+<!-- rosetta-item-end: lemma-8.5.4 -->
 
 ## Lemma 8.5.5
 
@@ -391,8 +384,6 @@ We leave this to the reader, and focus on the second aspect of the claim: that e
 To see this, note that any divisor of `{n!}+1` is automatically nonzero, and recall that any nonzero `x≤ n` divides `n!` by Exercise 7.3.
 Therefore it follows that any `x≤ n` that divides `{n!}+1` also divides `n!`, and consequently it divides `1` as well.
 Now we are done, because if `x` divides `1` then `x=1`. ◻
-
-We finally show that there are infinitely many primes.
 
 <!-- rosetta-agda-block: lemma-8.5.5-zero-divisor -->
 
@@ -478,6 +469,9 @@ pr2 (in-sieve-of-eratosthenes-succ-factorial-ℕ (succ-ℕ n)) x l (pair y p) wi
     ( div-factorial-ℕ (succ-ℕ n) x l f)
     ( pair y p)
 ```
+<!-- rosetta-item-end: lemma-8.5.5 -->
+
+We finally show that there are infinitely many primes.
 
 ## Theorem 8.5.6
 
@@ -514,14 +508,6 @@ In other words:
 holds.
 Since `¬ R(n,x)` holds, we conclude now that `n≮ x`.
 To finish the proof, it follows that `x≤ n`. ◻
-
-<!-- rosetta-agda-block: theorem-8.5.6-empty-product-factor -->
-
-```agda
-is-empty-left-factor-is-empty-product :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} → is-empty (A × B) → B → is-empty A
-is-empty-left-factor-is-empty-product f b a = f (pair a b)
-```
 
 <!-- rosetta-agda-block: theorem-8.5.6-two-prime -->
 
@@ -642,3 +628,4 @@ infinitude-of-primes-ℕ n with is-decidable-is-zero-ℕ n
       ( is-prime-larger-prime-ℕ n H)
       ( le-larger-prime-ℕ n))
 ```
+<!-- rosetta-item-end: theorem-8.5.6 -->

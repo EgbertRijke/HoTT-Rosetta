@@ -52,6 +52,18 @@ We say that `f` is **split surjective** if it comes equipped with an element of 
 is-split-surjective(f):=Π(b:B) Σ(a:A) f(a)=b.
 ```
 
+<!-- rosetta-agda-block: definition-7.4.1-split-surjective-adapted -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  where
+
+  is-split-surjective : (A → B) → Type (l1 ⊔ l2)
+  is-split-surjective f = (b : B) → Σ A (λ x → f x ＝ b)
+```
+<!-- rosetta-item-end: definition-7.4.1 -->
+
 Martin-Löf’s dependent type theory doesn’t have a general way of forming quotients of types.
 However, in the specific case of the congruence relations on `ℕ` we can define the type of natural numbers modulo `k+1` as the standard finite type `Fin{k+1}`.
 We will show that `Fin{k+1}` comes equipped with a map
@@ -63,17 +75,6 @@ for each `k:ℕ`, and we will show in Theorems 7.4.7 and 7.4.8 that this map sat
 To prepare for the definition of the quotient map `[_]_{k+1}`, we will first define a zero element of `Fin{k+1}` and successor function on each `Fin{k}`.
 We will also define an auxiliary function `skip-zero-Fin_k:Fin{k}→Fin{k+1}`, which is used in the definition of the successor function.
 The map `[_]_{k+1}` is then defined by iterating the successor function.
-
-<!-- rosetta-agda-block: definition-7.4.1-split-surjective-adapted -->
-
-```agda
-module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
-  where
-
-  is-split-surjective : (A → B) → Type (l1 ⊔ l2)
-  is-split-surjective f = (b : B) → Σ A (λ x → f x ＝ b)
-```
 
 ## Definition 7.4.2
 
@@ -118,6 +119,7 @@ succ-Fin : (k : ℕ) → Fin k → Fin k
 succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
 succ-Fin (succ-ℕ k) (inr star) = zero-Fin k
 ```
+<!-- rosetta-item-end: definition-7.4.2 -->
 
 ## Definition 7.4.3
 
@@ -128,9 +130,6 @@ For any `k:ℕ`, we define the map `[_]_{k+1}:ℕ→Fin{k+1}` recursively on `x`
 [0]_{k+1} ≔ 0
 [x+1]_{k+1} ≔ succ-Fin_{k+1}[x]_{k+1}.
 ```
-
-Our next intermediate goal is to show that `x≡ nat-Fin[x]_{k+1}mod k+1` for any natural number `x`.
-This fact is a consequence of the following simple lemma, that will help us compute with the maps `nat-Fin : Fin{k}→ℕ`.
 
 <!-- rosetta-agda-block: definition-7.4.3-mod-succ-natural-numbers -->
 
@@ -145,6 +144,10 @@ mod-two-ℕ = mod-succ-ℕ 1
 mod-three-ℕ : ℕ → Fin 3
 mod-three-ℕ = mod-succ-ℕ 2
 ```
+<!-- rosetta-item-end: definition-7.4.3 -->
+
+Our next intermediate goal is to show that `x≡ nat-Fin[x]_{k+1}mod k+1` for any natural number `x`.
+This fact is a consequence of the following simple lemma, that will help us compute with the maps `nat-Fin : Fin{k}→ℕ`.
 
 ## Lemma 7.4.4
 
@@ -227,6 +230,7 @@ nat-succ-Fin :
   nat-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x)) ＝ succ-ℕ (nat-Fin k x)
 nat-succ-Fin k x = nat-skip-zero-Fin k x
 ```
+<!-- rosetta-item-end: lemma-7.4.4 -->
 
 ## Proposition 7.4.5
 
@@ -258,8 +262,6 @@ nat-Fin[x+1]_{k+1} ≐ nat-Fin(succ-Fin_{k+1}[x]_{k+1})  by definition of [_]_{k
 ≡ x+1  by the inductive hypothesis.
 ```
  ◻
-
-We need one more fact before we can prove Theorems 7.4.7 and 7.4.8.
 
 <!-- rosetta-agda-block: proposition-7.4.5-congruence-mod-successor-adapted -->
 
@@ -293,6 +295,9 @@ cong-nat-mod-succ-ℕ k (succ-ℕ x) =
     (cong-nat-mod-succ-ℕ k x)
     (cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
 ```
+<!-- rosetta-item-end: proposition-7.4.5 -->
+
+We need one more fact before we can prove Theorems 7.4.7 and 7.4.8.
 
 ## Proposition 7.4.6
 
@@ -372,6 +377,7 @@ eq-cong-nat-Fin (succ-ℕ k) x y H =
       (strict-upper-bound-nat-Fin (succ-ℕ k) x)
       (strict-upper-bound-nat-Fin (succ-ℕ k) y) H)
 ```
+<!-- rosetta-item-end: proposition-7.4.6 -->
 
 ## Theorem 7.4.7
 
@@ -430,6 +436,7 @@ eq-mod-succ-cong-ℕ k x y H =
           (cong-nat-mod-succ-ℕ k y)) H)
       (cong-nat-mod-succ-ℕ k x))
 ```
+<!-- rosetta-item-end: theorem-7.4.7 -->
 
 ## Theorem 7.4.8
 
@@ -478,3 +485,4 @@ is-split-surjective-mod-succ-ℕ :
 pr1 (is-split-surjective-mod-succ-ℕ k x) = nat-Fin (succ-ℕ k) x
 pr2 (is-split-surjective-mod-succ-ℕ k x) = is-section-nat-Fin k x
 ```
+<!-- rosetta-item-end: theorem-7.4.8 -->

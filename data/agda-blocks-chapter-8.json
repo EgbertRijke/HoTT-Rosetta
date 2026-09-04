@@ -1046,7 +1046,7 @@
     {
       "block_id": "definition-8.5.1-negated-equality",
       "provenance_kind": "adapted",
-      "item_id": "definition-8.5.1",
+      "item_id": "section-8.5",
       "destination": "section-8-5-the-infinitude-of-primes.lagda.md",
       "source_file": "src/foundation/negated-equality.lagda.md",
       "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
@@ -1061,7 +1061,7 @@
     {
       "block_id": "definition-8.5.1-strict-from-weak-unequal",
       "provenance_kind": "adapted",
-      "item_id": "definition-8.5.1",
+      "item_id": "section-8.5",
       "destination": "section-8-5-the-infinitude-of-primes.lagda.md",
       "source_file": "src/elementary-number-theory/strict-inequality-natural-numbers.lagda.md",
       "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
@@ -1076,7 +1076,7 @@
     {
       "block_id": "definition-8.5.1-weak-order-split",
       "provenance_kind": "adapted",
-      "item_id": "definition-8.5.1",
+      "item_id": "section-8.5",
       "destination": "section-8-5-the-infinitude-of-primes.lagda.md",
       "source_file": "src/elementary-number-theory/strict-inequality-natural-numbers.lagda.md",
       "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
@@ -1091,7 +1091,7 @@
     {
       "block_id": "definition-8.5.1-divisor-bound",
       "provenance_kind": "adapted",
-      "item_id": "definition-8.5.1",
+      "item_id": "section-8.5",
       "destination": "section-8-5-the-infinitude-of-primes.lagda.md",
       "source_file": "src/elementary-number-theory/divisibility-natural-numbers.lagda.md",
       "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
@@ -1106,7 +1106,7 @@
     {
       "block_id": "definition-8.5.1-multiplication-bound",
       "provenance_kind": "exact",
-      "item_id": "definition-8.5.1",
+      "item_id": "section-8.5",
       "destination": "section-8-5-the-infinitude-of-primes.lagda.md",
       "source_file": "src/elementary-number-theory/inequality-natural-numbers.lagda.md",
       "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
@@ -1115,7 +1115,8 @@
       "source_sha256": "91129089e310bf31fb820dcf1fc382da4b9259babee4a775e2b785790d2b689e",
       "order": -3,
       "imports": [],
-      "code": "abstract\n  leq-mul-ℕ :\n    (k x : ℕ) → x ≤-ℕ (x *ℕ (succ-ℕ k))\n  leq-mul-ℕ k x =\n    concatenate-eq-leq-ℕ\n      ( x *ℕ (succ-ℕ k))\n      ( inv (right-unit-law-mul-ℕ x))\n      ( preserves-leq-right-mul-ℕ x 1 (succ-ℕ k) (leq-zero-ℕ k))\n\n  leq-mul-ℕ' :\n    (k x : ℕ) → x ≤-ℕ ((succ-ℕ k) *ℕ x)\n  leq-mul-ℕ' k x =\n    concatenate-leq-eq-ℕ x\n      ( leq-mul-ℕ k x)\n      ( commutative-mul-ℕ x (succ-ℕ k))\n\n  leq-mul-is-nonzero-ℕ :\n    (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (x *ℕ k)\n  leq-mul-is-nonzero-ℕ k x H with is-successor-is-nonzero-ℕ H\n  ... | (l , refl) = leq-mul-ℕ l x\n\n  leq-mul-is-nonzero-ℕ' :\n    (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (k *ℕ x)\n  leq-mul-is-nonzero-ℕ' k x H with is-successor-is-nonzero-ℕ H\n  ... | (l , refl) = leq-mul-ℕ' l x"
+      "code": "abstract\n  leq-mul-ℕ :\n    (k x : ℕ) → x ≤-ℕ (x *ℕ (succ-ℕ k))\n  leq-mul-ℕ k x =\n    concatenate-eq-leq-ℕ\n      ( x *ℕ (succ-ℕ k))\n      ( inv (right-unit-law-mul-ℕ x))\n      ( preserves-leq-right-mul-ℕ x 1 (succ-ℕ k) (leq-zero-ℕ k))\n\n  leq-mul-ℕ' :\n    (k x : ℕ) → x ≤-ℕ ((succ-ℕ k) *ℕ x)\n  leq-mul-ℕ' k x =\n    concatenate-leq-eq-ℕ x\n      ( leq-mul-ℕ k x)\n      ( commutative-mul-ℕ x (succ-ℕ k))\n\n  leq-mul-is-nonzero-ℕ :\n    (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (x *ℕ k)\n  leq-mul-is-nonzero-ℕ k x H with is-successor-is-nonzero-ℕ H\n  ... | (l , refl) = leq-mul-ℕ l x\n\n  leq-mul-is-nonzero-ℕ' :\n    (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (k *ℕ x)\n  leq-mul-is-nonzero-ℕ' k x H with is-successor-is-nonzero-ℕ H\n  ... | (l , refl) = leq-mul-ℕ' l x",
+      "display_heading": "Agda prerequisites for Section 8.5"
     },
     {
       "block_id": "proposition-8.5.2-divisor-of-one",
@@ -1134,8 +1135,8 @@
     {
       "block_id": "proposition-8.5.2-logical-equivalence-projections",
       "provenance_kind": "adapted",
-      "item_id": "proposition-8.5.2",
-      "destination": "section-8-5-the-infinitude-of-primes.lagda.md",
+      "item_id": "lemma-8.1.6",
+      "destination": "section-8-1-decidability-and-decidable-equality.lagda.md",
       "source_file": "src/foundation-core/logical-equivalences.lagda.md",
       "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
       "source_start_line": 56,
@@ -1163,14 +1164,14 @@
     {
       "block_id": "proposition-8.5.2-one-decidable",
       "provenance_kind": "exact",
-      "item_id": "proposition-8.5.2",
-      "destination": "section-8-5-the-infinitude-of-primes.lagda.md",
+      "item_id": "proposition-8.1.7",
+      "destination": "section-8-1-decidability-and-decidable-equality.lagda.md",
       "source_file": "src/elementary-number-theory/equality-natural-numbers.lagda.md",
       "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
       "source_start_line": 150,
       "source_end_line": 151,
       "source_sha256": "e97d35d8a1ad3c0e75bc381cef0f0221eb2c05456b70971612b33a7f09f4ca28",
-      "order": 4,
+      "order": 999,
       "imports": [],
       "code": "is-decidable-is-one-ℕ : (n : ℕ) → is-decidable (is-one-ℕ n)\nis-decidable-is-one-ℕ n = has-decidable-equality-ℕ n 1"
     },
@@ -1205,7 +1206,7 @@
     {
       "block_id": "theorem-8.5.6-empty-product-factor",
       "provenance_kind": "adapted",
-      "item_id": "theorem-8.5.6",
+      "item_id": "section-8.5",
       "destination": "section-8-5-the-infinitude-of-primes.lagda.md",
       "source_file": "src/foundation/type-arithmetic-empty-type.lagda.md",
       "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",

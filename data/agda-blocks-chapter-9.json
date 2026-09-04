@@ -357,7 +357,7 @@
     {
       "block_id": "proposition-9.2.7-equivalence-is-invertible",
       "provenance_kind": "adapted",
-      "item_id": "definition-9.2.1",
+      "item_id": "proposition-9.2.7",
       "destination": "section-9-2-bi-invertible-maps.lagda.md",
       "source_file": "src/foundation-core/equivalences.lagda.md",
       "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
@@ -368,8 +368,8 @@
       "imports": [],
       "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}\n  where\n\n  is-equiv-is-invertible' : is-invertible f → is-equiv f\n  is-equiv-is-invertible' (g , H , K) = ((g , H) , (g , K))\n\n  is-equiv-is-invertible :\n    (g : B → A) (H : f ∘ g ~ id) (K : g ∘ f ~ id) → is-equiv f\n  is-equiv-is-invertible g H K = is-equiv-is-invertible' (g , H , K)\n\n  is-retraction-map-section-is-equiv :\n    (H : is-equiv f) → is-retraction f (map-section-is-equiv H)\n  is-retraction-map-section-is-equiv H =\n    ( ( inv-htpy\n        ( ( is-retraction-map-retraction-is-equiv H) ·r\n          ( map-section-is-equiv H ∘ f))) ∙h\n      ( map-retraction-is-equiv H ·l is-section-map-section-is-equiv H ·r f)) ∙h\n    ( is-retraction-map-retraction-is-equiv H)\n\n  is-invertible-is-equiv : is-equiv f → is-invertible f\n  pr1 (is-invertible-is-equiv H) = map-section-is-equiv H\n  pr1 (pr2 (is-invertible-is-equiv H)) = is-section-map-section-is-equiv H\n  pr2 (pr2 (is-invertible-is-equiv H)) = is-retraction-map-section-is-equiv H",
       "source_note": "Copied from the pinned source with only the requested local substitutions.",
-      "conversion_status": "ready",
-      "conversion_note": ""
+      "conversion_status": "blocked",
+      "conversion_note": "Superseded by separately placed prerequisite and converse excerpts."
     },
     {
       "block_id": "section-9.3-transport-action",
@@ -444,6 +444,7 @@
       "block_id": "theorem-9.3.4-inverse-map",
       "provenance_kind": "exact",
       "item_id": "theorem-9.3.4",
+      "after_text": "This completes the definition of the function `eq-pair`.",
       "destination": "section-9-3-characterizing-the-identity-types-of-dependent-pair-types.lagda.md",
       "source_file": "src/foundation-core/equality-dependent-pair-types.lagda.md",
       "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
@@ -471,8 +472,8 @@
     {
       "block_id": "remark-9.2.6-involutions",
       "provenance_kind": "adapted",
-      "item_id": "definition-9.2.1",
-      "destination": "section-9-2-bi-invertible-maps.lagda.md",
+      "item_id": "example-9.1.3",
+      "destination": "section-9-1-homotopies.lagda.md",
       "source_file": "src/foundation/involutions.lagda.md",
       "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
       "source_start_line": 44,
@@ -486,14 +487,14 @@
     {
       "block_id": "remark-9.2.6-involutions-are-equivalences",
       "provenance_kind": "adapted",
-      "item_id": "definition-9.2.1",
+      "item_id": "example-9.2.4",
       "destination": "section-9-2-bi-invertible-maps.lagda.md",
       "source_file": "src/foundation/involutions.lagda.md",
       "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
       "source_start_line": 77,
       "source_end_line": 80,
       "source_sha256": "509873c853ffe054b24136174ec4cd69c4ec8a20767053f35b9ad090bee9d2d5",
-      "order": 8,
+      "order": -1,
       "imports": [],
       "code": "is-equiv-is-involution :\n  {l : Level} {A : Type l} {f : A → A} → is-involution f → is-equiv f\nis-equiv-is-involution {f = f} is-involution-f =\n  is-equiv-is-invertible f is-involution-f is-involution-f",
       "source_note": "Copied from the pinned source with only the requested local substitutions."
@@ -574,7 +575,7 @@
     },
     {
       "block_id": "definition-9.2.1-invertible-implies-equivalence",
-      "provenance_kind": "exact",
+      "provenance_kind": "adapted",
       "item_id": "definition-9.2.1",
       "destination": "section-9-2-bi-invertible-maps.lagda.md",
       "source_file": "src/foundation-core/equivalences.lagda.md",
@@ -584,13 +585,14 @@
       "source_sha256": "7ce409940263749c5d390b4be321649044df9e78364ed24af85421c14981b660",
       "order": 8,
       "imports": [],
-      "code": "  is-equiv-is-invertible' : is-invertible f → is-equiv f\n  is-equiv-is-invertible' (g , H , K) = ((g , H) , (g , K))\n\n  is-equiv-is-invertible :\n    (g : B → A) (H : f ∘ g ~ id) (K : g ∘ f ~ id) → is-equiv f\n  is-equiv-is-invertible g H K = is-equiv-is-invertible' (g , H , K)",
-      "conversion_status": "blocked",
-      "conversion_note": "Superseded by the complete upstream module range, which must remain contiguous for Agda module scope."
+      "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}\n  where\n\n  is-equiv-is-invertible' : is-invertible f → is-equiv f\n  is-equiv-is-invertible' (g , H , K) = ((g , H) , (g , K))\n\n  is-equiv-is-invertible :\n    (g : B → A) (H : f ∘ g ~ id) (K : g ∘ f ~ id) → is-equiv f\n  is-equiv-is-invertible g H K = is-equiv-is-invertible' (g , H , K)",
+      "source_note": "Copied from the pinned excerpt with the locally necessary surrounding anonymous module restored.",
+      "conversion_status": "ready",
+      "conversion_note": ""
     },
     {
       "block_id": "proposition-9.2.7-equivalence-has-inverse",
-      "provenance_kind": "exact",
+      "provenance_kind": "adapted",
       "item_id": "proposition-9.2.7",
       "destination": "section-9-2-bi-invertible-maps.lagda.md",
       "source_file": "src/foundation-core/equivalences.lagda.md",
@@ -600,9 +602,10 @@
       "source_sha256": "88d554ee385568869f4aa483383b1e75547a6e9472bef404431b42e2bab33268",
       "order": 0,
       "imports": [],
-      "code": "  is-retraction-map-section-is-equiv :\n    (H : is-equiv f) → is-retraction f (map-section-is-equiv H)\n  is-retraction-map-section-is-equiv H =\n    ( ( inv-htpy\n        ( ( is-retraction-map-retraction-is-equiv H) ·r\n          ( map-section-is-equiv H ∘ f))) ∙h\n      ( map-retraction-is-equiv H ·l is-section-map-section-is-equiv H ·r f)) ∙h\n    ( is-retraction-map-retraction-is-equiv H)\n\n  is-invertible-is-equiv : is-equiv f → is-invertible f\n  pr1 (is-invertible-is-equiv H) = map-section-is-equiv H\n  pr1 (pr2 (is-invertible-is-equiv H)) = is-section-map-section-is-equiv H\n  pr2 (pr2 (is-invertible-is-equiv H)) = is-retraction-map-section-is-equiv H",
-      "conversion_status": "blocked",
-      "conversion_note": "Superseded by the complete upstream module range, which must remain contiguous for Agda module scope."
+      "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}\n  where\n\n  is-retraction-map-section-is-equiv :\n    (H : is-equiv f) → is-retraction f (map-section-is-equiv H)\n  is-retraction-map-section-is-equiv H =\n    ( ( inv-htpy\n        ( ( is-retraction-map-retraction-is-equiv H) ·r\n          ( map-section-is-equiv H ∘ f))) ∙h\n      ( map-retraction-is-equiv H ·l is-section-map-section-is-equiv H ·r f)) ∙h\n    ( is-retraction-map-retraction-is-equiv H)\n\n  is-invertible-is-equiv : is-equiv f → is-invertible f\n  pr1 (is-invertible-is-equiv H) = map-section-is-equiv H\n  pr1 (pr2 (is-invertible-is-equiv H)) = is-section-map-section-is-equiv H\n  pr2 (pr2 (is-invertible-is-equiv H)) = is-retraction-map-section-is-equiv H",
+      "source_note": "Copied from the pinned excerpt with the locally necessary surrounding anonymous module restored.",
+      "conversion_status": "ready",
+      "conversion_note": ""
     }
   ]
 }

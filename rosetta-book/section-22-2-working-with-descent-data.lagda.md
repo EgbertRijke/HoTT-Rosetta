@@ -71,6 +71,8 @@ By Theorem 11.2.2 it therefore suffices to prove that the total space
 is contractible.
 This type is equivalent to `fib(α, tr_A(loop,α(x)))`, which is contractible because `α` is an equivalence. ◻
 
+<!-- rosetta-item-end: proposition-22.2.1 -->
+
 In the following proposition we show that sections of a type family `A` equipped with descent data `(X,e)` are equivalently described as fixed points for `e:X≃ X`.
 
 ## Proposition 22.2.2
@@ -137,6 +139,8 @@ Arrows:
 ```
 where the map on the left is given by `s↦(α^{-1}(s(base)),ᾱ^{-1}(apd_{s}(loop)))`.
 The bottom map and the map on the right are equivalences, so it follows by the 3-for-2 property of equivalences that the map on the left is an equivalence. ◻
+
+<!-- rosetta-item-end: proposition-22.2.2 -->
 
 The following corollary can be used to compare type families over the circle.
 In particular, we will use it to compare the identity type of the circle with the universal cover.
@@ -207,6 +211,8 @@ Arrows:
 ```
 commutes. ◻
 
+<!-- rosetta-item-end: corollary-22.2.3 -->
+
 ## Corollary 22.2.4
 
 <!-- rosetta-item: corollary-22.2.4; latex-label: cor:compute-families-of-maps-universal-cover -->
@@ -245,6 +251,8 @@ Arrows:
 - (E_(S^1)(base)→ A(base)) --h↦ α^{-1}∘ h∘ (k↦ k_{E})--> (ℤ → X)
 ```
 in which the top map is an equivalence.
+
+<!-- rosetta-item-end: corollary-22.2.4 -->
 
 In other words, a family of maps `E_(S^1)(t)→ A(t)` indexed by `t:S^1` is equivalently described as a map `h:ℤ→ X` for which the square
 <!-- rosetta-diagram: 84d63923e835; review: pending -->

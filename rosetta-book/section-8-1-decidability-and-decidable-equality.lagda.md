@@ -47,6 +47,7 @@ A family `P` over a type `A` is said to be **decidable** if `P(x)` is decidable 
 is-decidable : {l : Level} (A : Type l) → Type l
 is-decidable A = A + (¬ A)
 ```
+<!-- rosetta-item-end: definition-8.1.1 -->
 
 ## Example 8.1.2
 
@@ -70,6 +71,7 @@ is-decidable-unit = inl star
 is-decidable-empty : is-decidable empty
 is-decidable-empty = inr id
 ```
+<!-- rosetta-item-end: example-8.1.2 -->
 
 ## Example 8.1.3
 
@@ -144,6 +146,7 @@ is-decidable-neg :
   {l : Level} {A : Type l} → is-decidable A → is-decidable (¬ A)
 is-decidable-neg d = is-decidable-function-type d is-decidable-empty
 ```
+<!-- rosetta-item-end: example-8.1.3 -->
 
 ## Example 8.1.4
 
@@ -159,9 +162,6 @@ Eq-ℕ(0,succ-ℕ(n)) ≐ empty
 Eq-ℕ(succ-ℕ(m),0) ≐ empty
 ```
 are all decidable, and that the type `Eq-ℕ(succ-ℕ(m),succ-ℕ(n))≐ Eq-ℕ(m,n)` is decidable by the inductive hypothesis.
-
-The fact that `ℕ` has decidable observational equality also implies that equality itself is decidable on `ℕ`.
-This leads to the general concept of decidable equality, which is important in many results about decidability.
 
 <!-- rosetta-agda-block: example-8.1.4-equality-natural-decidable -->
 
@@ -195,6 +195,10 @@ is-decidable-le-ℕ zero-ℕ (succ-ℕ n) = inl star
 is-decidable-le-ℕ (succ-ℕ m) zero-ℕ = inr id
 is-decidable-le-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-le-ℕ m n
 ```
+<!-- rosetta-item-end: example-8.1.4 -->
+
+The fact that `ℕ` has decidable observational equality also implies that equality itself is decidable on `ℕ`.
+This leads to the general concept of decidable equality, which is important in many results about decidability.
 
 ## Definition 8.1.5
 
@@ -206,14 +210,15 @@ We will write
 has-decidable-eq(A)≔ Π(x,y:A) is-decidable(x=y).
 ```
 
-Before we show that `ℕ` has decidable equality, let us show that if `A↔ B` and `A` is decidable, then `B` must be decidable.
-
 <!-- rosetta-agda-block: definition-8.1.5-decidable-equality -->
 
 ```agda
 has-decidable-equality : {l : Level} → Type l → Type l
 has-decidable-equality A = (x y : A) → is-decidable (x ＝ y)
 ```
+<!-- rosetta-item-end: definition-8.1.5 -->
+
+Before we show that `ℕ` has decidable equality, let us show that if `A↔ B` and `A` is decidable, then `B` must be decidable.
 
 ## Lemma 8.1.6
 
@@ -237,6 +242,20 @@ f+g̃ : (A+¬ A) → (B+¬ B)
 g+f̃ : (B+¬ B) → (A+¬ A).
 ```
  ◻
+
+<!-- rosetta-agda-block: proposition-8.5.2-logical-equivalence-projections -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (H : A ↔ B)
+  where
+
+  forward-implication : A → B
+  forward-implication = pr1 H
+
+  backward-implication : B → A
+  backward-implication = pr2 H
+```
 
 <!-- rosetta-agda-block: lemma-8.1.6-inverse-logical-equivalence -->
 
@@ -270,6 +289,7 @@ module _
   iff-is-decidable : A ↔ B → is-decidable A ↔ is-decidable B
   iff-is-decidable e = is-decidable-iff' e , is-decidable-iff' (inv-iff e)
 ```
+<!-- rosetta-item-end: lemma-8.1.6 -->
 
 ## Proposition 8.1.7
 
@@ -287,12 +307,6 @@ Equality on the natural numbers is decidable.
 ```
 The claim therefore follows by Lemma 8.1.6, since we have observed in Example 8.1.4 that `Eq-ℕ(m,n)` is decidable for every `m,n:ℕ`. ◻
 
-It is certainly not provable with the given rules of type theory that every type has decidable equality.
-In fact, we will show in Theorem 12.3.5 that if a type has decidable equality, then it is a *set*.
-However, it is also not provable that every set has decidable equality unless one assumes the *law of excluded middle*.
-We will discuss this principle in Section 14.3.
-For now, it is important to remember that in order to use decidability, we must first *prove that it holds*, and many familiar types do indeed have decidable equality.
-
 <!-- rosetta-agda-block: proposition-8.1.7-natural-decidable-equality -->
 
 ```agda
@@ -300,6 +314,20 @@ has-decidable-equality-ℕ : has-decidable-equality ℕ
 has-decidable-equality-ℕ x y =
   is-decidable-iff (eq-Eq-ℕ x y) Eq-eq-ℕ (is-decidable-Eq-ℕ x y)
 ```
+
+<!-- rosetta-agda-block: proposition-8.5.2-one-decidable -->
+
+```agda
+is-decidable-is-one-ℕ : (n : ℕ) → is-decidable (is-one-ℕ n)
+is-decidable-is-one-ℕ n = has-decidable-equality-ℕ n 1
+```
+<!-- rosetta-item-end: proposition-8.1.7 -->
+
+It is certainly not provable with the given rules of type theory that every type has decidable equality.
+In fact, we will show in Theorem 12.3.5 that if a type has decidable equality, then it is a *set*.
+However, it is also not provable that every set has decidable equality unless one assumes the *law of excluded middle*.
+We will discuss this principle in Section 14.3.
+For now, it is important to remember that in order to use decidability, we must first *prove that it holds*, and many familiar types do indeed have decidable equality.
 
 ## Proposition 8.1.8
 
@@ -316,8 +344,6 @@ The standard finite type `Fin{k}` has decidable equality for each `k:ℕ`.
 (x=y)↔ Eq-Fin_k(x,y).
 ```
 The type `Eq-Fin_k(x,y)` is decidable, since it is recursively defined using the decidable types `empty` and `unit`. ◻
-
-We can use the fact that the finite types `Fin{k}` have decidable equality to show that the divisibility relation on `ℕ` is decidable.
 
 <!-- rosetta-agda-block: proposition-8.1.8-finite-decidable-equality -->
 
@@ -336,6 +362,9 @@ has-decidable-equality-Fin k x y =
     ( map-neg (Eq-Fin-eq k))
     ( is-decidable-Eq-Fin k x y)
 ```
+<!-- rosetta-item-end: proposition-8.1.8 -->
+
+We can use the fact that the finite types `Fin{k}` have decidable equality to show that the divisibility relation on `ℕ` is decidable.
 
 ## Theorem 8.1.9
 
@@ -411,3 +440,4 @@ is-decidable-div-ℕ (succ-ℕ d) x =
     ( is-zero-mod-succ-ℕ d x)
     ( is-decidable-is-zero-Fin (mod-succ-ℕ d x))
 ```
+<!-- rosetta-item-end: theorem-8.1.9 -->

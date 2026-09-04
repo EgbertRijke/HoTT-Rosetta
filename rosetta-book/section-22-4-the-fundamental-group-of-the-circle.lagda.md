@@ -42,6 +42,8 @@ Arrows:
 ```
 in which the left map is the equivalence obtained in Corollary 22.2.4 and the bottom map is an equivalence by Corollary 22.3.6. ◻
 
+<!-- rosetta-item-end: theorem-22.4.1 -->
+
 ## Corollary 22.4.2
 
 <!-- rosetta-item: corollary-22.4.2 -->
@@ -57,6 +59,8 @@ By Exercise 21.2 it suffices to show that the loop space of the circle is a `0`-
 This is indeed the case, because `ℤ` is a `0`-type, and we have an equivalence `(base=base)≃ ℤ`.
 
 Furthermore, since `ℤ` is a `0`-type and not a `(-1)`-type, it follows that the circle is a `1`-type and not a `0`-type. ◻
+
+<!-- rosetta-item-end: corollary-22.4.2 -->
 
 Our second goal is to construct a group isomorphism
 ```text
@@ -99,6 +103,8 @@ By induction on `q` it suffices to show that
 f(p)=μ(f(p),f(refl))
 ```
 This follows, since `f(refl)=b` and `μ(f(p),b)=f(p)`. ◻
+
+<!-- rosetta-item-end: proposition-22.4.3 -->
 
 We are now ready to prove that the fundamental group of the circle is `ℤ`.
 Recall from Definition 22.1.2 that we write `y↦ y_ℤ` for the inverse of the equivalence
@@ -149,6 +155,8 @@ Since we have
 k+(l+1)=(k+l)+1
 ```
 for all `k,l:ℤ`, such a function is obtained at once from Corollary 22.2.4. ◻
+
+<!-- rosetta-item-end: theorem-22.4.4 -->
 
 In order to prove that the fundamental group of the circle is `ℤ`, we first had to use the univalence axiom to construct the universal cover of the circle.
 This proof was originally discovered by Mike Shulman in 2011, and later published in .

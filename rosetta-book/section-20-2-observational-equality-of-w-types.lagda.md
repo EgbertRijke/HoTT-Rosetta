@@ -30,6 +30,8 @@ The map `η:W(A,B)→Σ(x:A) (B(x)→W(A,B))` is an equivalence.
 by `ε(x,α)≔tree(x,α)`.
 The fact that `ε` is an inverse of `η` follows easily. ◻
 
+<!-- rosetta-item-end: proposition-20.2.1 -->
+
 The fact that we have an equivalence
 ```text
 W(A,B)≃Σ(x:A) (B(x)→W(A,B)),
@@ -55,6 +57,8 @@ recursively by
 ```text
 Eq_W(tree(x,α),tree(y,β)) ≔ Σ(p:x=y) Π(z:B(x)) α(z)=β(tr_B(p,z))
 ```
+
+<!-- rosetta-item-end: definition-20.2.2 -->
 
 ## Theorem 20.2.3
 
@@ -96,6 +100,8 @@ Thus, it suffices to construct an identification
 ```
 which we have by reflexivity. ◻
 
+<!-- rosetta-item-end: theorem-20.2.3 -->
+
 ## Theorem 20.2.4
 
 <!-- rosetta-item: theorem-20.2.4 -->
@@ -117,3 +123,5 @@ For `x≐tree(a,α)` and `y≐tree(b,β)`, we have the equivalence
 Note that the type `a=b` is a `k`-type by the assumption that `A` is a `(k+1)`-type.
 Furthermore, the type `α(z)=β(tr_B(p,z))` is a `k`-type by the induction hypothesis.
 Therefore it follows that the type on the right-hand side of the displayed equivalence is a `k`-type, and this completes the proof. ◻
+
+<!-- rosetta-item-end: theorem-20.2.4 -->

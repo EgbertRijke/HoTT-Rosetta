@@ -18,6 +18,8 @@ A map `f:A→ B` is said to be **surjective** if there is an element of type
 is-surj(f)≔ Π(b:B) ‖fib(f, b)‖.
 ```
 
+<!-- rosetta-item-end: definition-15.2.1 -->
+
 ## Example 15.2.2
 
 <!-- rosetta-item: example-15.2.2 -->
@@ -26,6 +28,8 @@ Any equivalence is a surjective map, since its fibers are contractible.
 More generally, any map that has a section is surjective.
 Those are sometimes called **split epimorphisms**.
 Note that having a section is stronger than surjectivity, since in general we don’t have a function `‖fib(f, b)‖→fib(f, b)`.
+
+<!-- rosetta-item-end: example-15.2.2 -->
 
 In Exercise 14.4 we showed the dependent universal property of the propositional truncation: a map `f:A→ B` into a proposition `B` satisfies the universal property of the propositional truncation if and only if for every family of propositions `P` over `B`, the precomposition map
 ```text
@@ -114,6 +118,8 @@ This is easy, because we have
 ```
  ◻
 
+<!-- rosetta-item-end: proposition-15.2.3 -->
+
 As a corollary we obtain that any surjective map into a proposition satisfies the universal property of the propositional truncation.
 
 ## Corollary 15.2.4
@@ -125,6 +131,8 @@ For any map `f:A→ P` into a proposition `P`, the following are equivalent:
 1.  The map `f` satisfies the universal property of the propositional truncation of `A`.
 
 2.  The map `f` is surjective.
+
+<!-- rosetta-item-end: corollary-15.2.4 -->
 
 Using the characterization of surjective maps of Proposition 15.2.3, we can also give a new characterization of the image of a map.
 
@@ -211,6 +219,8 @@ hom-slice_X(m,m') ≃ Π(b:B) fib(m', m(b)) (By \cref{ex:triangle_fib})
 ```
  ◻
 
+<!-- rosetta-item-end: theorem-15.2.5 -->
+
 ## Corollary 15.2.6
 
 <!-- rosetta-item: corollary-15.2.6 -->
@@ -246,3 +256,5 @@ Now it follows by Theorem 15.1.8 that the type of `(e,H):hom-slice_X(i,i')` in w
 (e,H)∘(q,I)=(q',I')
 ```
 in `hom-slice_X(f,i')`, is contractible. ◻
+
+<!-- rosetta-item-end: corollary-15.2.6 -->

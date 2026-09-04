@@ -43,6 +43,8 @@ neg-neg-bool(false) ≔ refl.
 ```
 Therefore we see that, while we cannot identify `neg-bool∘neg-bool` with `id`, we can define a *pointwise identification* between the values of `neg-bool∘neg-bool` and `id`.
 
+<!-- rosetta-item-end: remark-9.1.1 -->
+
 The observations in Remark 9.1.1 are an instance of a general phenomenon in type theory: it is often much easier to construct a *pointwise identification* between the values of two maps, than it is to construct an identification between those two maps.
 In fact, the prevalent notion of sameness of maps is the notion of pointwise identification.
 Since they are so important, we will give them a name and call them *homotopies*.
@@ -68,6 +70,7 @@ module _
   _~_ : (f g : (x : A) → B x) → Type (l1 ⊔ l2)
   f ~ g = (x : A) → f x ＝ g x
 ```
+<!-- rosetta-item-end: definition-9.1.2 -->
 
 ## Example 9.1.3
 
@@ -85,6 +88,18 @@ neg-neg-bool : (neg-bool ∘ neg-bool) ~ id
 neg-neg-bool true = refl
 neg-neg-bool false = refl
 ```
+
+<!-- rosetta-agda-block: remark-9.2.6-involutions -->
+
+```agda
+module _
+  {l : Level} {A : Type l}
+  where
+
+  is-involution : (A → A) → Type l
+  is-involution f = (f ∘ f) ~ id
+```
+<!-- rosetta-item-end: example-9.1.3 -->
 
 ## Remark 9.1.4
 
@@ -124,6 +139,8 @@ Arrows:
 - B --h--> B'
 ```
 commutes if it comes equipped with a homotopy `h ∘ f~ f'∘ g`.
+
+<!-- rosetta-item-end: remark-9.1.4 -->
 
 Note that the type of homotopies `f~ g` is defined for dependent functions, and moreover the type of homotopies is itself a dependent function type.
 The definition of homotopies is therefore set up in such a way that we may also consider homotopies *between* homotopies, and even further homotopies between those higher homotopies.
@@ -195,6 +212,7 @@ module _
     g ~ h → f ~ g → f ~ h
   concat-htpy' f K H = H ∙h K
 ```
+<!-- rosetta-item-end: definition-9.1.5 -->
 
 ## Proposition 9.1.6
 
@@ -231,27 +249,6 @@ right-inv-htpy(H) : H ∙ H^{-1} ~ refl-htpy_f
 assoc-htpy(H,K,L,x) ≔ assoc(H(x),K(x),L(x)).
 ```
 The other homotopies are similarly defined pointwise. ◻
-
-Apart from the groupoid operations and their laws, we will occasionally need *whiskering* operations.
-Whiskering operations are operations that allow us to compose homotopies with functions.
-There are two situations where we want this:
-<!-- rosetta-diagram: ffc214eead5e; review: pending -->
-
-*Linear diagram (automatic draft).*
-
-```text
- [A] ----> [B] ----> [C]       [A] ----> [B] ----> [C]
-
-Arrows:
-- A --unlabeled--> B
-- A --unlabeled--> B
-- A --⇓--> custom target
-- B --unlabeled--> C
-- A --unlabeled--> B
-- B --unlabeled--> C
-- B --unlabeled--> C
-- B --⇓--> custom target
-```
 
 <!-- rosetta-agda-block: proposition-9.1.6-associativity -->
 
@@ -309,6 +306,28 @@ module _
   inv-htpy-right-inv-htpy : refl-htpy ~ H ∙h inv-htpy H
   inv-htpy-right-inv-htpy = inv-htpy right-inv-htpy
 ```
+<!-- rosetta-item-end: proposition-9.1.6 -->
+
+Apart from the groupoid operations and their laws, we will occasionally need *whiskering* operations.
+Whiskering operations are operations that allow us to compose homotopies with functions.
+There are two situations where we want this:
+<!-- rosetta-diagram: ffc214eead5e; review: pending -->
+
+*Linear diagram (automatic draft).*
+
+```text
+ [A] ----> [B] ----> [C]       [A] ----> [B] ----> [C]
+
+Arrows:
+- A --unlabeled--> B
+- A --unlabeled--> B
+- A --⇓--> custom target
+- B --unlabeled--> C
+- A --unlabeled--> B
+- B --unlabeled--> C
+- B --unlabeled--> C
+- B --⇓--> custom target
+```
 
 ## Definition 9.1.7
 
@@ -360,3 +379,4 @@ module _
   infixl 16 _·r_
   _·r_ = right-whisker-comp
 ```
+<!-- rosetta-item-end: definition-9.1.7 -->

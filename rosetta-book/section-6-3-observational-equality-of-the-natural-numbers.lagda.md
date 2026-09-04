@@ -65,9 +65,6 @@ Eq-ℕ(succ-ℕ(n),m) ≐ E_S(n,Eq-ℕ(n),m)
 ```
 holds, from which the judgmental equalities in the statement of the definition follow.
 
-The observational equality of the natural numbers is important because it can be used to prove equalities and negations of equalities.
-Proposition 6.3.3 enables us to do so.
-
 <!-- rosetta-agda-block: definition-6.3.1-observational-equality-natural-numbers -->
 
 ```agda
@@ -77,6 +74,10 @@ Eq-ℕ zero-ℕ (succ-ℕ n) = empty
 Eq-ℕ (succ-ℕ m) zero-ℕ = empty
 Eq-ℕ (succ-ℕ m) (succ-ℕ n) = Eq-ℕ m n
 ```
+<!-- rosetta-item-end: definition-6.3.1 -->
+
+The observational equality of the natural numbers is important because it can be used to prove equalities and negations of equalities.
+Proposition 6.3.3 enables us to do so.
 
 ## Lemma 6.3.2
 
@@ -105,6 +106,7 @@ refl-Eq-ℕ : (n : ℕ) → Eq-ℕ n n
 refl-Eq-ℕ zero-ℕ = star
 refl-Eq-ℕ (succ-ℕ n) = refl-Eq-ℕ n
 ```
+<!-- rosetta-item-end: lemma-6.3.2 -->
 
 ## Proposition 6.3.3
 
@@ -157,3 +159,4 @@ eq-Eq-ℕ : (x y : ℕ) → Eq-ℕ x y → x ＝ y
 eq-Eq-ℕ zero-ℕ zero-ℕ e = refl
 eq-Eq-ℕ (succ-ℕ x) (succ-ℕ y) e = ap succ-ℕ (eq-Eq-ℕ x y e)
 ```
+<!-- rosetta-item-end: proposition-6.3.3 -->

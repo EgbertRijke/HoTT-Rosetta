@@ -20,6 +20,8 @@ We say that `C` is a **choice of (unique) representatives** of the equivalence c
 is-choice-of-reps(C) ≔ Π(x:A) is-contr(Σ(y:A) C(y)× R(x,y)).
 ```
 
+<!-- rosetta-item-end: definition-18.4.1 -->
+
 ## Theorem 18.4.2
 
 <!-- rosetta-item: theorem-18.4.2; latex-label: thm:choice-of-representatives -->
@@ -68,11 +70,13 @@ which is contractible with center of contraction `(h(x),c(x),r(x))`.
 Therefore it follows that `q(x)≐ (h(x),c(x))=(x,c)`.
 In particular, we see that `q(pr 1(x,c))=(x,c)`, i.e., that `pr 1` is a section of `q`. ◻
 
+<!-- rosetta-item-end: theorem-18.4.2 -->
+
 ## Example 18.4.3
 
 <!-- rosetta-item: example-18.4.3 -->
 
-In Proposition 7.2.4 we constructed the congruence relations `x≃ y mod k` on the natural numbers for every natural number `k`, and in Theorems 7.4.7 and 7.4.8 we showed that the map
+In Proposition 7.2.4 we constructed the congruence relations `x≡ y mod k` on the natural numbers for every natural number `k`, and in Theorems 7.4.7 and 7.4.8 we showed that the map
 ```text
 x↦ [x]_{k+1}:ℕ→Fin{k+1}
 ```
@@ -81,7 +85,7 @@ By Theorem 18.2.3 it follows that the map
 ```text
 x↦ [x]_{k+1}:ℕ→Fin{k+1}
 ```
-satisfies the universal property of the set quotient of the equivalence relation `x,y↦ x≃ ymod k+1`.
+satisfies the universal property of the set quotient of the equivalence relation `x,y↦ x≡ ymod k+1`.
 
 We also claim that there is a choice of representatives of the congruence relations.
 We define our choice of representatives by
@@ -91,18 +95,20 @@ C(y)≔ fib(nat-Fin, y),
 where `nat-Fin:Fin{k+1}→ℕ` is the inclusion of `Fin{k+1}` into `ℕ` constructed in Definition 7.3.4.
 To see that `C` is a choice of representatives, we have to prove that
 ```text
-Σ(y:ℕ) C(y)× (x≃ ymod k+1)
+Σ(y:ℕ) C(y)× (x≡ ymod k+1)
 ```
 is contractible for each `x:ℕ`.
-At the center of contraction we have the triple `(nat-Fin([x]_{k+1}),([x]_{k+1},refl),p)` where `p:x≃nat-Fin([x]_{k+1})mod k+1` is the proof obtained via Theorems 7.4.7 and 7.4.8.
-In order to construct the contraction, note that both `C(y)` and `x≃ ymod k+1` are propositions for each `y:ℕ`.
-Therefore it suffices to prove that for any `y:ℕ` such that `C(y)` and `x≃ ymod k+1` hold, we have
+At the center of contraction we have the triple `(nat-Fin([x]_{k+1}),([x]_{k+1},refl),p)` where `p:x≡nat-Fin([x]_{k+1})mod k+1` is the proof obtained via Theorems 7.4.7 and 7.4.8.
+In order to construct the contraction, note that both `C(y)` and `x≡ ymod k+1` are propositions for each `y:ℕ`.
+Therefore it suffices to prove that for any `y:ℕ` such that `C(y)` and `x≡ ymod k+1` hold, we have
 ```text
 nat-Fin([x]_{k+1})=y.
 ```
 Since `C(y)` holds, we see that `y=nat-Fin([y]_{k+1})`.
 Therefore it suffices to prove that `[x]_{k+1}=[y]_{k+1}`.
-This follows from Theorem 7.4.7, since we assumed `x≃ ymod k+1`.
+This follows from Theorem 7.4.7, since we assumed `x≡ ymod k+1`.
+
+<!-- rosetta-item-end: example-18.4.3 -->
 
 ## Example 18.4.4
 
@@ -161,3 +167,5 @@ We define the type of **rational numbers** by
 ```
 and we define the quotient map `(x,y)↦ x/y:Q→ ℚ` to be the quotient map `q` in Theorem 18.4.2.
 By Theorem 18.4.2 it also follows that `(x,y)↦ x/y` satisfies the universal property of the set quotient of the equivalence relation `~` on `Q`.
+
+<!-- rosetta-item-end: example-18.4.4 -->

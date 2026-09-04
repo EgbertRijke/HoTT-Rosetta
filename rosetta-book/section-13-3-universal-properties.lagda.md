@@ -59,6 +59,8 @@ We apply function extensionality again, so it suffices to show that
 ```
 We obtain this homotopy by another application of `Σ`-induction. ◻
 
+<!-- rosetta-item-end: theorem-13.3.1 -->
+
 ## Corollary 13.3.2
 
 <!-- rosetta-item: corollary-13.3.2; latex-label: cor:times_up_out -->
@@ -69,6 +71,8 @@ Then the map
 ev-pair: (A× B → X)→ (A→ (B→ X))
 ```
 given by `f↦λ a. λ b. f(a,b)` is an equivalence.
+
+<!-- rosetta-item-end: corollary-13.3.2 -->
 
 ### The universal property of identity types
 
@@ -111,3 +115,5 @@ Therefore it suffices to show that
 Π(x:A) Π(p:a=x) path-ind_a(f(a,refl),x,p)=f(x,p).
 ```
 This follows by path induction on `p`, since `path-ind_a(f(a,refl),a,refl)≐ f(a,refl)` by the computation rule of path induction. ◻
+
+<!-- rosetta-item-end: theorem-13.3.3 -->

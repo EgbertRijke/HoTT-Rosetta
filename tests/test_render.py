@@ -22,7 +22,8 @@ class RenderTests(unittest.TestCase):
         self.assertEqual(
             result,
             "## Definition 3.2.1\n\n"
-            "<!-- rosetta-item: definition-3.2.1 -->\n\nBody.\n",
+            "<!-- rosetta-item: definition-3.2.1 -->\n\nBody.\n\n"
+            "<!-- rosetta-item-end: definition-3.2.1 -->\n",
         )
 
     def test_chapter_3_section_2_preserves_structure(self):

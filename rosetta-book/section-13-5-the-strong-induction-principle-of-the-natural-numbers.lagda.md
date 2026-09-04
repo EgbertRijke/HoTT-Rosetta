@@ -28,6 +28,8 @@ strong-ind-ℕ(p_0,p_S,0) = p_0
 strong-ind-ℕ(p_0,p_S,n+1) = p_S(n,(λ m. λ p. strong-ind-ℕ(p_0,p_S,m))).
 ```
 
+<!-- rosetta-item-end: theorem-13.5.1 -->
+
 In order to construct `strong-ind-ℕ(p_0,p_S)`, we first define the type family `P̃` over `ℕ` by
 ```text
 P̃(n)≔ Π(m:ℕ) (m≤ n)→ P(m).
@@ -66,6 +68,8 @@ for any `p:0≤ 0`.
 <!-- rosetta-item: subheading-13.5-proof -->
 
 *Proof.* The fact that we have such a dependent function `p̃_0` follows immediately by induction on `m` and `p:m≤ 0`. ◻
+
+<!-- rosetta-item-end: lemma-13.5.2 -->
 
 ## Lemma 13.5.3
 
@@ -127,6 +131,8 @@ To construct the identifications claimed in (i) and (ii), note that there is an 
 for any `y:P(m)`.
 This equivalence is obtained from the fact that `f(p)=x` for any `x:(m≤ n)+(m=n+1)`, i.e., the fact that `(m≤ n)+(m=n+1)` is a proposition.
 Now the identifications in (i) and (ii) are obtained as a simple consequence of the computation rule for coproducts. ◻
+
+<!-- rosetta-item-end: lemma-13.5.3 -->
 
 We are now ready to finish the proof of Theorem 13.5.1.
 

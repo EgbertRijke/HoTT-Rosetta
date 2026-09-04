@@ -108,3 +108,5 @@ However we claim that there also is an identification `p:(f∘ h)∘ f=f`, showi
 ```
 From the contractibility of the fiber we obtain an identification `(id[B],refl)=(f∘ h,p)`.
 In particular we obtain that `id[B]=f∘ h`, showing that `h` is a section of `f`. ◻
+
+<!-- rosetta-item-end: theorem-13.4.1 -->

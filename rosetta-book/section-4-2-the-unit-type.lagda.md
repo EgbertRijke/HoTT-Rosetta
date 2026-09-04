@@ -33,14 +33,6 @@ Alternatively, a definition of a dependent function `f:Π(x:unit) P(x)` by induc
 f(⋆)≔ p.
 ```
 
-A special case of the induction principle arises when `P` does not actually depend on `unit`.
-If we are given a type `A`, then we can first weaken it to obtain the constant family over `unit`, with value `A`.
-Then the induction principle of the unit type provides a function
-```text
-ind-unit : A → (unit→ A).
-```
-In other words, by the induction principle for the unit type we obtain for every `x:A` a function `pt_x≔ind-unit(x):unit→ A`.
-
 <!-- rosetta-agda-block: section-4-2-the-unit-type-block-35 -->
 
 ```agda
@@ -63,3 +55,12 @@ module _
   point : A → (unit → A)
   point a x = a
 ```
+<!-- rosetta-item-end: definition-4.2.1 -->
+
+A special case of the induction principle arises when `P` does not actually depend on `unit`.
+If we are given a type `A`, then we can first weaken it to obtain the constant family over `unit`, with value `A`.
+Then the induction principle of the unit type provides a function
+```text
+ind-unit : A → (unit→ A).
+```
+In other words, by the induction principle for the unit type we obtain for every `x:A` a function `pt_x≔ind-unit(x):unit→ A`.

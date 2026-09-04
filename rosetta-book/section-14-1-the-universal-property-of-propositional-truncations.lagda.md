@@ -26,6 +26,8 @@ _∘ f:(P→ Q)→ (A→ Q)
 is an equivalence.
 This property of `f` is called the **universal property of the propositional truncation of `A`**.
 
+<!-- rosetta-item-end: definition-14.1.1 -->
+
 ## Remark 14.1.2
 
 <!-- rosetta-item: remark-14.1.2; latex-label: ex:prop_equiv -->
@@ -53,6 +55,8 @@ Arrows:
 - P --unlabeled--> Q
 ```
 
+<!-- rosetta-item-end: remark-14.1.2 -->
+
 ## Remark 14.1.3
 
 <!-- rosetta-item: remark-14.1.3; latex-label: rmk:simplified-up-trunc-Prop -->
@@ -67,6 +71,8 @@ In other words, to prove that a map `f:A→ P` into a proposition `P` satisfies 
 (A→ Q)→ (P→ Q)
 ```
 for every proposition `Q`.
+
+<!-- rosetta-item-end: remark-14.1.3 -->
 
 In the following proposition we show that the propositional truncation of a type `A` is uniquely determined up to equivalence, if it exists.
 In other words, any two propositional truncations of a type `A` must be equivalent.
@@ -120,6 +126,8 @@ We see from this triangle that
 ```
 and this implies that (i) holds if and only if (ii) holds. ◻
 
+<!-- rosetta-item-end: proposition-14.1.4 -->
+
 ## Remark 14.1.5
 
 <!-- rosetta-item: remark-14.1.5 -->
@@ -152,3 +160,5 @@ given by precomposition by `A→¬¬ A` is an equivalence.
 However, this only gives us a universal property with respect to doubly negated propositions and there is no way to prove the more general universal property of the propositional truncation for the map `A→¬¬ A`.
 In fact, propositional truncations are not guaranteed to exist in Martin Löf’s dependent type theory, the way it is set up in Chapter I.
 We will therefore add new rules to the type theory to ensure their existence.
+
+<!-- rosetta-item-end: remark-14.1.5 -->

@@ -32,6 +32,8 @@ S_n≅Ω(BS_n),
 i.e., that the loop space of the type of all finite types of cardinality `n` is equivalent to the symmetric group `S_n`.
 The type `BS_n` is of course a pointed connected `1`-type, so `BS_n` is indeed the classifying type of the symmetric group `S_n`.
 
+<!-- rosetta-item-end: example-19.6.1 -->
+
 Since the map
 ```text
 Ω:Pointed-Connected-1-Type_𝒰→Group_𝒰
@@ -136,6 +138,8 @@ is given by `f(a,refl)≔ y`.
 The condition that `tot(f)` is `k`-truncated is by Lemma 11.1.2 equivalent to the condition that `f` is a family of `k`-truncated maps.
 Furthermore, every family of maps `f:Π(x:A) (a=x)→ B(x)` is of the above form by the type theoretic Yoneda lemma (Theorem 13.3.3), completing the proof. ◻
 
+<!-- rosetta-item-end: theorem-19.6.2 -->
+
 By the previous theorem it follows that if the type of orbits of a concrete `G`-set `X` is a set, then the map `g↦ gx` must be an embedding for every `x:X(⋆)`.
 In other words, the action of `G` on `X` is free.
 
@@ -145,6 +149,8 @@ In other words, the action of `G` on `X` is free.
 
 Theorem 19.6.2 can be generalized further.
 We include this generalization in Exercise 19.14.
+
+<!-- rosetta-item-end: remark-19.6.3 -->
 
 ## Example 19.6.4
 
@@ -169,6 +175,8 @@ which we introduced in Exercise 18.13.
 Assuming that `B` is a set, it was shown in Exercise 18.13 that `Stirling(A, B)` is a set.
 In other words, the action of `Aut(B)` on `A↠ B` is free.
 
+<!-- rosetta-item-end: example-19.6.4 -->
+
 ## Example 19.6.5
 
 <!-- rosetta-item: example-19.6.5 -->
@@ -186,6 +194,8 @@ Note that there is a surjective morphism of `ℤ/2`-sets from `D_n(Fin{2})` to t
 The concrete `ℤ/2`-action `D_n` is transitive precisely when `n` is either `1` or a prime, and it is is free precisely when `n` is not a square.
 Combining these two observations, we see that `n` is prime if and only if this action is both transitive and free.
 In other words, `n` is prime if and only if the type `D̃_n` of orbits is contractible.
+
+<!-- rosetta-item-end: example-19.6.5 -->
 
 `G`-sets which are both transitive and free are very special.
 Such `G`-sets are called **`G`-torsors**.

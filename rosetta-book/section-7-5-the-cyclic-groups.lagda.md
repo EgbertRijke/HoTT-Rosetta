@@ -37,8 +37,6 @@ We define the type `ℤ/k` for each `k:ℕ` by
 ℤ/0≔ ℤ and ℤ/{(k+1)}≔Fin{k+1}.
 ```
 
-Recall from Exercise 5.7 that `ℤ/0` already comes equipped with the structure of a group, but the group structure on `ℤ/{(k+1)}` remains to be defined.
-
 <!-- rosetta-agda-block: definition-7.5.1-integers-modulo-adapted -->
 
 ```agda
@@ -46,6 +44,9 @@ Recall from Exercise 5.7 that `ℤ/0` already comes equipped with the structure 
 ℤ-Mod zero-ℕ = ℤ
 ℤ-Mod (succ-ℕ k) = Fin (succ-ℕ k)
 ```
+<!-- rosetta-item-end: definition-7.5.1 -->
+
+Recall from Exercise 5.7 that `ℤ/0` already comes equipped with the structure of a group, but the group structure on `ℤ/{(k+1)}` remains to be defined.
 
 ## Definition 7.5.2
 
@@ -79,6 +80,7 @@ neg-Fin :
 neg-Fin (succ-ℕ k) x =
   mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k))
 ```
+<!-- rosetta-item-end: definition-7.5.2 -->
 
 ## Remark 7.5.3
 
@@ -90,8 +92,6 @@ nat-Fin(0) ≡ 0
 nat-Fin(x+y) ≡ nat-Fin(x)+nat-Fin(y)
 nat-Fin(-x) ≡ dist-ℕ(nat-Fin(x),k+1).
 ```
-
-Before we show that addition on `ℤ/{k}` satisfies the group laws, we have to show that addition on `ℕ` preserves the congruence relation.
 
 <!-- rosetta-agda-block: remark-7.5.3-natural-value-congruences -->
 
@@ -108,6 +108,9 @@ cong-neg-Fin :
 cong-neg-Fin {succ-ℕ k} x =
   cong-nat-mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k))
 ```
+<!-- rosetta-item-end: remark-7.5.3 -->
+
+Before we show that addition on `ℤ/{k}` satisfies the group laws, we have to show that addition on `ℕ` preserves the congruence relation.
 
 ## Proposition 7.5.4
 
@@ -224,6 +227,7 @@ cong-left-summand-ℕ k {x} {y} {x'} {y'} H K =
         ( K)
         ( commutative-add-ℕ x' y')))
 ```
+<!-- rosetta-item-end: proposition-7.5.4 -->
 
 ## Theorem 7.5.5
 
@@ -392,3 +396,4 @@ right-inverse-law-add-Fin k x =
   ( commutative-add-Fin (succ-ℕ k) x (neg-Fin (succ-ℕ k) x)) ∙
   ( left-inverse-law-add-Fin k x)
 ```
+<!-- rosetta-item-end: theorem-7.5.5 -->

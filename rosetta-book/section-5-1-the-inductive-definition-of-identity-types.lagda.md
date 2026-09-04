@@ -53,6 +53,7 @@ ind-Id :
   B x refl → (y : A) (p : x ＝ y) → B y p
 ind-Id x B b y refl = b
 ```
+<!-- rosetta-item-end: definition-5.1.1 -->
 
 ## Remark 5.1.2
 
@@ -62,6 +63,8 @@ We see that the identity type is not just an inductive type, like the inductive 
 Even though we have a type `a=_A x` for any `x:A`, the constructor only provides an element `refl:a=_A a`, identifying `a` with itself.
 The induction principle then asserts that in order to prove something about all identifications of `a` with some `x:A`, it suffices to prove this assertion about `refl` only.
 We will see in the next sections that this induction principle is strong enough to derive many familiar facts about equality, namely that it is a symmetric and transitive relation, and that all functions preserve equality.
+
+<!-- rosetta-item-end: remark-5.1.2 -->
 
 ## Remark 5.1.3
 
@@ -116,6 +119,8 @@ And finally the computation rule is:
 Γ,u:P(a,refl) ⊢ path-ind_a(u,a,refl)≐ u : P(a,refl)
 ```
 
+<!-- rosetta-item-end: remark-5.1.3 -->
+
 ## Remark 5.1.4
 
 <!-- rosetta-item: remark-5.1.4 -->
@@ -148,3 +153,5 @@ We have the following introduction rule
 ```
 
 and similarly we have elimination and computation rules.
+
+<!-- rosetta-item-end: remark-5.1.4 -->

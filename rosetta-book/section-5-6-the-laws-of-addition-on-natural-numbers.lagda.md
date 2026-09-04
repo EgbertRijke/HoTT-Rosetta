@@ -85,6 +85,7 @@ left-unit-law-add-ℕ :
 left-unit-law-add-ℕ zero-ℕ = refl
 left-unit-law-add-ℕ (succ-ℕ x) = ap succ-ℕ (left-unit-law-add-ℕ x)
 ```
+<!-- rosetta-item-end: proposition-5.6.1 -->
 
 ## Proposition 5.6.2
 
@@ -138,6 +139,7 @@ right-successor-law-add-ℕ :
   (x y : ℕ) → x +ℕ (succ-ℕ y) ＝ succ-ℕ (x +ℕ y)
 right-successor-law-add-ℕ x y = refl
 ```
+<!-- rosetta-item-end: proposition-5.6.2 -->
 
 ## Proposition 5.6.3
 
@@ -185,6 +187,7 @@ abstract
   associative-add-ℕ x y zero-ℕ = refl
   associative-add-ℕ x y (succ-ℕ z) = ap succ-ℕ (associative-add-ℕ x y z)
 ```
+<!-- rosetta-item-end: proposition-5.6.3 -->
 
 ## Proposition 5.6.4
 
@@ -221,3 +224,4 @@ abstract
   commutative-add-ℕ (succ-ℕ x) y =
     (left-successor-law-add-ℕ x y) ∙ (ap succ-ℕ (commutative-add-ℕ x y))
 ```
+<!-- rosetta-item-end: proposition-5.6.4 -->

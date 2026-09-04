@@ -52,6 +52,8 @@ tree(Σ(x_0:A_0) ⋯ A_n(x_0,…,x_{n-1}),λ (x_0,…,x_n). t(x_0,…,x_n)).
 
 Given a multiset `X≐ {f(x)| x:A}` in `𝒰`, the **cardinality** of `X` is the type `A`, and the **elements** of `X` are the multisets `f(x)` in `𝒰`, for each `x:A`.
 
+<!-- rosetta-item-end: definition-20.6.1 -->
+
 In the notation of multisets, the elementhood relation `{∈}:M_𝒰→M_𝒰 →𝒰^+` is defined by
 ```text
 (X∈ {g(y)| y:B}) ≐ Σ(y:B) g(y)=X.
@@ -81,6 +83,8 @@ is defined recursively by
 is-small_M_𝒰({f(x)| x:A}) ≔ is-small_{𝒰}(A)× Π(x:A) is-small_M_𝒰(f(x)).
 ```
 
+<!-- rosetta-item-end: definition-20.6.2 -->
+
 We will need quite a few properties of smallness before we can reproduce Russell’s paradox.
 We begin with a simple lemma.
 
@@ -106,6 +110,8 @@ By the assumption that `B` is a family of `𝒰`-small types together with the f
 ```
 is `𝒰`-small.
 Furthermore, since each `f(x)` is `𝒰`-small, we conclude that the multiset `{f(x)| x:A,y:B(x)}` is `𝒰`-small. ◻
+
+<!-- rosetta-item-end: lemma-20.6.3 -->
 
 The main purpose of the following lemma is to know that the elementhood relation takes values in the `𝒰`-small types, when it is applied to `𝒰`-small multisets.
 We will use the univalence axiom to prove this fact.
@@ -147,6 +153,8 @@ Then the type
 ```
 is a dependent sum of `𝒰`-small types, indexed by an `𝒰`-small type, which is again `𝒰`-small. ◻
 
+<!-- rosetta-item-end: proposition-20.6.4 -->
+
 The condition that a multiset `{f(x)| x:A}` in `𝒱` is `𝒰`-small suggests that there is an ‘equivalent’ multiset in `𝒰`.
 
 ## Definition 20.6.5
@@ -162,6 +170,8 @@ of the `𝒰`-small multisets in `𝒱` into the multisets in `𝒰`, inductivel
 i({f(x)| x:A})≔ {i(f(e^{-1}(y))) | y:B}.
 ```
 for any multiset `{f(x)| x:A}` of which the type `A` is equipped with an equivalence `e:A≃ B` for some `B` in `𝒰`, and such that the multiset `f(x)` in `𝒱` is `𝒰`-small for each `x:A`.
+
+<!-- rosetta-item-end: definition-20.6.5 -->
 
 ## Proposition 20.6.6
 
@@ -223,6 +233,8 @@ Arrows:
 ```
 and therefore `i` is an embedding. ◻
 
+<!-- rosetta-item-end: proposition-20.6.6 -->
+
 Furthermore, the embedding `i` induces equivalences on the elementhood relation on multisets.
 
 ## Proposition 20.6.7
@@ -251,6 +263,8 @@ i(X) ∈ {g(y)| y:B} ≐ Σ(y:B) g(y)=i(X)
 ```
  ◻
 
+<!-- rosetta-item-end: proposition-20.6.7 -->
+
 We are now almost in position to reproduce Russell’s paradox.
 We will need one more ingredient: the universal tree, i.e., the multiset of all multisets in `𝒰`.
 
@@ -264,6 +278,8 @@ Then we define the **universal tree** `Y_𝒰` to be the multiset
 Y_𝒰:={i(X) | X:M_𝒰}
 ```
 in `𝒰^{+}`, where `i:M_𝒰→M_𝒰^+` is the inclusion of the multisets in `𝒰` to the multisets in `𝒰^+` given by the fact that each multiset in `𝒰` is `𝒰^+`-small.
+
+<!-- rosetta-item-end: definition-20.6.8 -->
 
 ## Proposition 20.6.9
 
@@ -289,6 +305,8 @@ This concludes the proof that `M_𝒰` is `𝒱`-small.
 It remains to show that the multiset `i(X)` in `𝒰^+` is `𝒱`-small, for each `X:M_𝒰`.
 Equivalently, we have to show that each multiset `X` in `𝒰` is `𝒱`-small.
 This follows by recursion: given a multiset `{f(x)| x:A}`, the type `A` is `𝒱`-small by assumption, and the multiset `f(x)` is `𝒱`-small by the induction hypothesis. ◻
+
+<!-- rosetta-item-end: proposition-20.6.9 -->
 
 We are finally ready to employ **Russell’s paradox** to prove that a univalent universe cannot be equivalent to any type it contains.
 
@@ -322,3 +340,5 @@ R∈ R ≃ Σ(X:M_𝒰) Σ(H:X∉ X) i(X)=R
 ```
 In the second step we used Proposition 20.6.6, where we showed that `i` is an embedding, and in the last step we used Proposition 20.6.7.
 Now we obtain a contradiction, because it follows from Exercise 4.3 that no type is (logically) equivalent to its own negation. ◻
+
+<!-- rosetta-item-end: theorem-20.6.10 -->

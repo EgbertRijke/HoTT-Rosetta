@@ -36,8 +36,6 @@ f(pair(x,y))≔ g(x,y).
 ```
 We will usually write `(x,y)` for `pair(x,y)`.
 
-The induction principle of `Σ`-types can be used to define the projection functions.
-
 <!-- rosetta-agda-block: section-4-6-dependent-pair-types-block-53 -->
 
 ```agda
@@ -65,6 +63,9 @@ rec-Σ :
   ((x : A) → B x → C) → Σ A B → C
 rec-Σ = ind-Σ
 ```
+<!-- rosetta-item-end: definition-4.6.1 -->
+
+The induction principle of `Σ`-types can be used to define the projection functions.
 
 ## Definition 4.6.2
 
@@ -90,6 +91,8 @@ pr 2 : Π(p:Σ(x:A) B(x)) B(pr 1(p)),
 pr 2(x,y) ≔ y.
 ```
 
+<!-- rosetta-item-end: definition-4.6.2 -->
+
 ## Remark 4.6.3
 
 <!-- rosetta-item: remark-4.6.3 -->
@@ -106,10 +109,6 @@ ev-pair : (Π(z:Σ(x:A) B(x)) P(z))→ (Π(x:A) Π(y:B(x)) P(x,y))
 given by `f↦λ x. λ y. f(x,y)`.
 The induction principle `ind-Σ` is therefore also known as the **uncurrying operation**.
 
-A common special case of the `Σ`-type occurs when the `B` is a constant family over `A`, i.e., when `B` is just a type weakened by `A`.
-In this case, the type `Σ(x:A) B` is the type of *ordinary* pairs `(x,y)` where `x:A` and `y:B`, where the type of `y` does not depend on `x`.
-The type of ordinary pairs `(x,y)` consisting of `x:A` and `y:B` is of course the *product* of `A` and `B`, so we see that product types arise as a special case of `Σ`-types in a similar way to how function types were defined as a special case of `Π`-types.
-
 <!-- rosetta-agda-block: section-4-6-dependent-pair-types-block-135 -->
 
 ```agda
@@ -118,6 +117,11 @@ ev-pair :
   ((t : Σ A B) → C t) → (x : A) (y : B x) → C (x , y)
 ev-pair f x y = f (x , y)
 ```
+<!-- rosetta-item-end: remark-4.6.3 -->
+
+A common special case of the `Σ`-type occurs when the `B` is a constant family over `A`, i.e., when `B` is just a type weakened by `A`.
+In this case, the type `Σ(x:A) B` is the type of *ordinary* pairs `(x,y)` where `x:A` and `y:B`, where the type of `y` does not depend on `x`.
+The type of ordinary pairs `(x,y)` consisting of `x:A` and `y:B` is of course the *product* of `A` and `B`, so we see that product types arise as a special case of `Σ`-types in a similar way to how function types were defined as a special case of `Π`-types.
 
 ## Definition 4.6.4
 
@@ -143,6 +147,7 @@ infixr 15 _×_
 _×_ : {l1 l2 : Level} (A : Type l1) (B : Type l2) → Type (l1 ⊔ l2)
 _×_ = product
 ```
+<!-- rosetta-item-end: definition-4.6.4 -->
 
 ## Remark 4.6.5
 
@@ -158,9 +163,6 @@ that satisfies the computation rule
 ind-×(g,(x,y)) ≐ g(x,y).
 ```
 
-The projection maps are defined similarly to the projection maps of `Σ`-types.
-When one thinks of types as propositions, then `A× B` is interpreted as the conjunction of `A` and `B`.
-
 <!-- rosetta-agda-block: section-4-6-dependent-pair-types-block-193 -->
 
 ```agda
@@ -174,3 +176,7 @@ rec-product :
   (A → B → C) → A × B → C
 rec-product = ind-product
 ```
+<!-- rosetta-item-end: remark-4.6.5 -->
+
+The projection maps are defined similarly to the projection maps of `Σ`-types.
+When one thinks of types as propositions, then `A× B` is interpreted as the conjunction of `A` and `B`.

@@ -28,29 +28,6 @@ The **fiber** of `f` at `b` is defined to be the type
 fib(f, b)≔Σ(a:A) f(a)=b.
 ```
 
-In other words, the fiber of `f` at `b` is the type of `a:A` that get mapped by `f` to `b`.
-One may think of the fiber as a type theoretic version of the preimage of a point.
-
-It will be useful to have a characterization of the identity type of a fiber.
-In order to identify any `(x,p)` and `(x',p')` in `fib(f, y)`, we may first construct an identification `α:x=x'`.
-Then we obtain a triangle
-<!-- rosetta-diagram: 64b5b852d28b; review: pending -->
-
-*Triangle-shaped diagram (automatic draft).*
-
-```text
-[f(x)]               [f(x')]
-
-            [y]
-
-Arrows:
-- f(x) --p--> y
-- f(x) --{ap_{f}(α)}--> f(x')
-- f(x') --{p'}--> y
-```
-so we may consider the type of identifications `β:p=ap_{f}(α) ∙ p'`.
-We will show that the type of all identifications `(x,p)=(x',p')` is equivalent to the type of such pairs `(α,β)`.
-
 <!-- rosetta-agda-block: definition-10.3.1-fibers -->
 
 ```agda
@@ -81,6 +58,30 @@ module _
     (y : fiber' f b) → b ＝ f (inclusion-fiber' y)
   compute-value-inclusion-fiber' = pr2
 ```
+<!-- rosetta-item-end: definition-10.3.1 -->
+
+In other words, the fiber of `f` at `b` is the type of `a:A` that get mapped by `f` to `b`.
+One may think of the fiber as a type theoretic version of the preimage of a point.
+
+It will be useful to have a characterization of the identity type of a fiber.
+In order to identify any `(x,p)` and `(x',p')` in `fib(f, y)`, we may first construct an identification `α:x=x'`.
+Then we obtain a triangle
+<!-- rosetta-diagram: 64b5b852d28b; review: pending -->
+
+*Triangle-shaped diagram (automatic draft).*
+
+```text
+[f(x)]               [f(x')]
+
+            [y]
+
+Arrows:
+- f(x) --p--> y
+- f(x) --{ap_{f}(α)}--> f(x')
+- f(x') --{p'}--> y
+```
+so we may consider the type of identifications `β:p=ap_{f}(α) ∙ p'`.
+We will show that the type of all identifications `(x,p)=(x',p')` is equivalent to the type of such pairs `(α,β)`.
 
 ## Definition 10.3.2
 
@@ -120,6 +121,7 @@ module _
     {s t : fiber f b} (α : pr1 s ＝ pr1 t) → ap f α ∙ pr2 t ＝ pr2 s → s ＝ t
   eq-Eq-fiber α β = eq-Eq-fiber-uncurry (α , β)
 ```
+<!-- rosetta-item-end: definition-10.3.2 -->
 
 ## Proposition 10.3.3
 
@@ -142,8 +144,6 @@ Eq-fib_f((x,p),(x',p'))→ ((x,p)=(x',p'))
 ```
 is easily defined by `Σ`-induction, and then path induction twice.
 The homotopies witnessing that this converse map is indeed a right inverse as well as a left inverse are similarly constructed by induction. ◻
-
-Now we define at the notion of contractible map.
 
 <!-- rosetta-agda-block: proposition-10.3.3-equality-fiber-equivalence -->
 
@@ -170,6 +170,9 @@ Now we define at the notion of contractible map.
   pr1 equiv-Eq-eq-fiber = Eq-eq-fiber
   pr2 equiv-Eq-eq-fiber = is-equiv-Eq-eq-fiber
 ```
+<!-- rosetta-item-end: proposition-10.3.3 -->
+
+Now we define at the notion of contractible map.
 
 ## Definition 10.3.4
 
@@ -190,6 +193,7 @@ module _
   is-contr-map : (A → B) → Type (l1 ⊔ l2)
   is-contr-map f = (y : B) → is-contr (fiber f y)
 ```
+<!-- rosetta-item-end: definition-10.3.4 -->
 
 ## Theorem 10.3.5
 
@@ -258,3 +262,4 @@ module _
         ( is-section-map-inv-is-contr-map)
         ( is-retraction-map-inv-is-contr-map)
 ```
+<!-- rosetta-item-end: theorem-10.3.5 -->

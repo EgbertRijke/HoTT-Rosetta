@@ -7,7 +7,7 @@ module exercise-8-13-primes-congruent-three-mod-four where
 
 ## Problem statement
 
-Show that there are infinitely many primes `p≃ 3mod 4`.
+Show that there are infinitely many primes `p≡ 3mod 4`.
 
 ## Solution
 

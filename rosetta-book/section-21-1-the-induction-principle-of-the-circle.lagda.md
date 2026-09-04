@@ -39,6 +39,8 @@ dgen_{S^1}:(Π(x:S^1) P(x))→(Σ(u:P(base)) tr_P(loop,u) = u)
 ```
 given by `dgen_{S^1}(f)≔(f(base),apd_{f}(loop))`.
 
+<!-- rosetta-item-end: definition-21.1.1 -->
+
 The induction principle of the circle states that in order to construct a section `f:Π(x:S^1) P(x)`, it suffices to provide an element `u:P(base)` and an identification
 ```text
 tr_P(loop,u)=u.
@@ -63,6 +65,8 @@ and a homotopy witnessing that `ind-S^1` is a section of `dgen_{S^1}`
 comp_S^1:dgen_{S^1}∘ ind-S^1~ id
 ```
 for the computation rules.
+
+<!-- rosetta-item-end: definition-21.1.2 -->
 
 ## Remark 21.1.3
 
@@ -110,3 +114,5 @@ Arrows:
 - f(base) --α--> u
 ```
 commutes.
+
+<!-- rosetta-item-end: remark-21.1.3 -->

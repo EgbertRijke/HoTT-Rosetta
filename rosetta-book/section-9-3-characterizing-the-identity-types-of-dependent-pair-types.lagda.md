@@ -89,6 +89,7 @@ module _
   Eq-Σ s t =
     Σ (pr1 s ＝ pr1 t) (λ α → dependent-identification B α (pr2 s) (pr2 t))
 ```
+<!-- rosetta-item-end: definition-9.3.1 -->
 
 ## Lemma 9.3.2
 
@@ -116,6 +117,7 @@ Here we take `λ x. λ y. (refl,refl)`.
   refl-Eq-Σ : (s : Σ A B) → Eq-Σ s s
   refl-Eq-Σ s = refl , refl
 ```
+<!-- rosetta-item-end: lemma-9.3.2 -->
 
 ## Definition 9.3.3
 
@@ -142,6 +144,7 @@ by path induction, taking `pair-eq(refl)≔reflexive-Eq-Σ(s)`.
   pair-eq-Σ : {s t : Σ A B} → s ＝ t → Eq-Σ s t
   pair-eq-Σ p = eq-base-eq-pair p , dependent-identification-eq-pair p
 ```
+<!-- rosetta-item-end: definition-9.3.3 -->
 
 ## Theorem 9.3.4
 
@@ -175,6 +178,32 @@ Thus it suffices to define a dependent function of type
 Such a dependent function is defined by double path induction by sending `(refl,refl)` to `refl`.
 This completes the definition of the function `eq-pair`.
 
+<!-- rosetta-agda-block: theorem-9.3.4-inverse-map -->
+
+```agda
+  eq-pair-eq-base :
+    {x y : A} {s : B x} (p : x ＝ y) → (x , s) ＝ (y , tr B p s)
+  eq-pair-eq-base refl = refl
+
+  eq-pair-eq-base' :
+    {x y : A} {t : B y} (p : x ＝ y) → (x , tr B (inv p) t) ＝ (y , t)
+  eq-pair-eq-base' refl = refl
+
+  eq-pair-eq-fiber :
+    {x : A} {s t : B x} → s ＝ t → (x , s) ＝ (x , t)
+  eq-pair-eq-fiber {x} = ap {B = Σ A B} (pair x)
+
+  eq-pair-Σ :
+    {s t : Σ A B}
+    (α : pr1 s ＝ pr1 t) →
+    dependent-identification B α (pr2 s) (pr2 t) → s ＝ t
+  eq-pair-Σ refl = eq-pair-eq-fiber
+
+  eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t
+  eq-pair-Σ' p = eq-pair-Σ (pr1 p) (pr2 p)
+```
+
+
 Next, we must show that `eq-pair` is a section of `pair-eq`.
 In other words, we must construct an identification
 ```text
@@ -204,31 +233,6 @@ Now we proceed by `Σ`-induction on `s:Σ(x:A) B(x)`, so it suffices to construc
 eq-pair(refl,refl)=refl.
 ```
 Since `eq-pair(refl,refl)` computes to `refl`, we may simply take `refl{refl}`. ◻
-
-<!-- rosetta-agda-block: theorem-9.3.4-inverse-map -->
-
-```agda
-  eq-pair-eq-base :
-    {x y : A} {s : B x} (p : x ＝ y) → (x , s) ＝ (y , tr B p s)
-  eq-pair-eq-base refl = refl
-
-  eq-pair-eq-base' :
-    {x y : A} {t : B y} (p : x ＝ y) → (x , tr B (inv p) t) ＝ (y , t)
-  eq-pair-eq-base' refl = refl
-
-  eq-pair-eq-fiber :
-    {x : A} {s t : B x} → s ＝ t → (x , s) ＝ (x , t)
-  eq-pair-eq-fiber {x} = ap {B = Σ A B} (pair x)
-
-  eq-pair-Σ :
-    {s t : Σ A B}
-    (α : pr1 s ＝ pr1 t) →
-    dependent-identification B α (pr2 s) (pr2 t) → s ＝ t
-  eq-pair-Σ refl = eq-pair-eq-fiber
-
-  eq-pair-Σ' : {s t : Σ A B} → Eq-Σ s t → s ＝ t
-  eq-pair-Σ' p = eq-pair-Σ (pr1 p) (pr2 p)
-```
 
 <!-- rosetta-agda-block: theorem-9.3.4-equivalence-proof -->
 
@@ -268,3 +272,4 @@ Since `eq-pair(refl,refl)` computes to `refl`, we may simply take `refl{refl}`.�
   equiv-pair-eq-Σ : (s t : Σ A B) → (s ＝ t) ≃ Eq-Σ s t
   equiv-pair-eq-Σ s t = (pair-eq-Σ , is-equiv-pair-eq-Σ s t)
 ```
+<!-- rosetta-item-end: theorem-9.3.4 -->

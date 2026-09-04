@@ -59,6 +59,7 @@ module _
   concat : {x y : A} → x ＝ y → (z : A) → y ＝ z → x ＝ z
   concat p z q = p ∙ q
 ```
+<!-- rosetta-item-end: definition-5.2.1 -->
 
 ## Definition 5.2.2
 
@@ -82,6 +83,18 @@ inv(refl): x=x,
 for any `x:A`.
 Here we take `inv(refl)≔ refl`.
 
+<!-- rosetta-agda-block: definition-5.2.2-inverse-adapted -->
+
+```agda
+module _
+  {l : Level} {A : Type l}
+  where
+
+  inv : {x y : A} → x ＝ y → y ＝ x
+  inv refl = refl
+```
+<!-- rosetta-item-end: definition-5.2.2 -->
+
 The next question is whether the concatenation and inverting operations on identifications behave as expected.
 More concretely: is concatenation of identifications associative, does it satisfy the unit laws, and is the inverse of an identification indeed a two-sided inverse?
 
@@ -100,17 +113,6 @@ This is a very useful idea: while it is often impossible to show that two elemen
 Indeed, we identify two elements by constructing an element of the identity type, and we can use all the type theory at our disposal in order to construct such an element.
 In this way we can show, for example, that addition on the natural numbers or on the integers is associative and satisfies the unit laws.
 And indeed, here we will show that concatenation of identifications is associative and satisfies the unit laws.
-
-<!-- rosetta-agda-block: definition-5.2.2-inverse-adapted -->
-
-```agda
-module _
-  {l : Level} {A : Type l}
-  where
-
-  inv : {x y : A} → x ＝ y → y ＝ x
-  inv refl = refl
-```
 
 ## Definition 5.2.3
 
@@ -168,6 +170,7 @@ module _
     (p ∙ q) ∙ r ＝ p ∙ (q ∙ r)
   assoc refl q r = refl
 ```
+<!-- rosetta-item-end: definition-5.2.3 -->
 
 ## Definition 5.2.4
 
@@ -201,6 +204,7 @@ In both cases we take `refl{refl}`.
   right-unit : {x y : A} {p : x ＝ y} → p ∙ refl ＝ p
   right-unit {p = refl} = refl
 ```
+<!-- rosetta-item-end: definition-5.2.4 -->
 
 ## Definition 5.2.5
 
@@ -246,6 +250,7 @@ module _
   right-inv : {x y : A} (p : x ＝ y) → p ∙ inv p ＝ refl
   right-inv refl = refl
 ```
+<!-- rosetta-item-end: definition-5.2.5 -->
 
 ## Remark 5.2.6
 
@@ -257,3 +262,5 @@ We can go up as far as we like in the *tower of identity types*, which is obtain
 
 The iterated identity types give types in homotopy type theory a very intricate structure.
 One important way of studying this structure is via the homotopy groups of types, a subject that we will gradually be working towards.
+
+<!-- rosetta-item-end: remark-5.2.6 -->

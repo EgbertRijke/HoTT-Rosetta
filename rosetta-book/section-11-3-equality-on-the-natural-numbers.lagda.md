@@ -83,3 +83,5 @@ Therefore we can define
 γ(m+1,n+1,e)≔ ap_{f}(γ(m,n,e)).
 ```
  ◻
+
+<!-- rosetta-item-end: theorem-11.3.1 -->

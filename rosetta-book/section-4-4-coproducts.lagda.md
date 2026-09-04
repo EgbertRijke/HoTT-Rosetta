@@ -37,18 +37,6 @@ h(inr(y)) ≔ g(y).
 Sometimes we write `[f,g]` for the function `ind-coproduct(f,g)`.
 The coproduct of two types is sometimes also called the **disjoint sum**.
 
-By the induction principle of coproducts we obtain a function
-```text
-ind-coproduct:(A→ X) → ((B→ X) → (A+B→ X))
-```
-for any type `X`.
-Note that this special case of the induction principle of coproducts is very similar to the elimination rule of disjunction in first order logic: if `P`, `P'`, and `Q` are propositions, then we have
-```text
-(P→ Q)→ ((P'→ Q)→ (P∨ P'→ Q)).
-```
-Indeed, we can think of *propositions as types* and of terms as their constructive proofs.
-Under this interpretation of type theory the coproduct is indeed the disjunction.
-
 <!-- rosetta-agda-block: section-4-4-coproducts-block-43 -->
 
 ```agda
@@ -71,6 +59,19 @@ rec-coproduct :
   (A → C) → (B → C) → (A + B) → C
 rec-coproduct {C = C} = ind-coproduct (λ _ → C)
 ```
+<!-- rosetta-item-end: definition-4.4.1 -->
+
+By the induction principle of coproducts we obtain a function
+```text
+ind-coproduct:(A→ X) → ((B→ X) → (A+B→ X))
+```
+for any type `X`.
+Note that this special case of the induction principle of coproducts is very similar to the elimination rule of disjunction in first order logic: if `P`, `P'`, and `Q` are propositions, then we have
+```text
+(P→ Q)→ ((P'→ Q)→ (P∨ P'→ Q)).
+```
+Indeed, we can think of *propositions as types* and of terms as their constructive proofs.
+Under this interpretation of type theory the coproduct is indeed the disjunction.
 
 ## Remark 4.4.2
 
@@ -97,6 +98,7 @@ map-coproduct :
 map-coproduct f g (inl x) = inl (f x)
 map-coproduct f g (inr y) = inr (g y)
 ```
+<!-- rosetta-item-end: remark-4.4.2 -->
 
 ## Proposition 4.4.3
 
@@ -107,6 +109,8 @@ Then there is a function
 ```text
 (A+B)→ A.
 ```
+
+<!-- rosetta-item-end: proposition-4.4.3 -->
 
 ## Remark 4.4.4
 
@@ -153,3 +157,4 @@ map-right-unit-law-coproduct :
 map-right-unit-law-coproduct H (inl x) = x
 map-right-unit-law-coproduct H (inr x) = ex-falso (H x)
 ```
+<!-- rosetta-item-end: remark-4.4.4 -->

@@ -49,8 +49,6 @@ K : G · f ~ f · H.
 ```
 We will write `is-coh-invertible(f)` for the type of quadruples `(g,G,H,K)`.
 
-Although we will encounter the notion of coherently invertible map on some further occasions, the following proposition is our main motivation for considering it.
-
 <!-- rosetta-agda-block: definition-10.4.1-coherently-invertible -->
 
 ```agda
@@ -114,6 +112,9 @@ module _
   pr2 retraction-is-coherently-invertible =
     is-retraction-map-inv-is-coherently-invertible
 ```
+<!-- rosetta-item-end: definition-10.4.1 -->
+
+Although we will encounter the notion of coherently invertible map on some further occasions, the following proposition is our main motivation for considering it.
 
 ## Proposition 10.4.2
 
@@ -157,17 +158,6 @@ K'≔ K ∙ right-unit-htpy(f· H)^{-1}.
 ```
  ◻
 
-Our next goal is to show that for any map `f:A→ B` equipped with
-```text
-g:B→ A, G:f∘ g ~ id, and H:g∘ f~ id,
-```
-we can improve the homotopy `G` to a new homotopy `G':f∘ g~ id` for which there is a further homotopy
-```text
-f· H~ G'· f.
-```
-Note that this situation is analogous to the situation in the proof of Theorem 10.2.3, where we improved the contraction `C` so that it satisfied `C(c)=refl`.
-The extra coherence `f· H~ G'· f` is then used in the proof that the fibers of an equivalence are contractible.
-
 <!-- rosetta-agda-block: proposition-10.4.2-coherently-invertible-contractible -->
 
 ```agda
@@ -199,6 +189,18 @@ module _
   pr2 (is-contr-map-is-coherently-invertible H y) =
     contraction-fiber-is-coherently-invertible H y
 ```
+<!-- rosetta-item-end: proposition-10.4.2 -->
+
+Our next goal is to show that for any map `f:A→ B` equipped with
+```text
+g:B→ A, G:f∘ g ~ id, and H:g∘ f~ id,
+```
+we can improve the homotopy `G` to a new homotopy `G':f∘ g~ id` for which there is a further homotopy
+```text
+f· H~ G'· f.
+```
+Note that this situation is analogous to the situation in the proof of Theorem 10.2.3, where we improved the contraction `C` so that it satisfied `C(c)=refl`.
+The extra coherence `f· H~ G'· f` is then used in the proof that the fibers of an equivalence are contractible.
 
 ## Definition 10.4.3
 
@@ -247,6 +249,7 @@ nat-htpy :
   H x ∙ ap g p ＝ ap f p ∙ H y
 nat-htpy H refl = right-unit
 ```
+<!-- rosetta-item-end: definition-10.4.3 -->
 
 ## Definition 10.4.4
 
@@ -286,6 +289,7 @@ nat-htpy-id :
   {x y : A} (p : x ＝ y) → H x ∙ p ＝ ap f p ∙ H y
 nat-htpy-id H refl = right-unit
 ```
+<!-- rosetta-item-end: definition-10.4.4 -->
 
 ## Lemma 10.4.5
 
@@ -356,8 +360,6 @@ Arrows:
 ```
 commutes.
 Now we observe that this is just a naturality square the homotopy `G· f:fgf~ f`, which commutes by Definition 10.4.3. ◻
-
-Now we put the pieces together to conclude that any equivalence has contractible fibers.
 
 <!-- rosetta-agda-block: lemma-10.4.5-concatenation-injective-helper -->
 
@@ -528,6 +530,9 @@ module _
       is-retraction-map-inv-is-coherently-invertible-is-invertible ,
       coh-is-coherently-invertible-is-invertible)
 ```
+<!-- rosetta-item-end: lemma-10.4.5 -->
+
+Now we put the pieces together to conclude that any equivalence has contractible fibers.
 
 ## Theorem 10.4.6
 
@@ -542,10 +547,6 @@ Any equivalence is a contractible map.
 *Proof.* We have seen in Proposition 10.4.2 that any coherently invertible map is a contractible map.
 Moreover, any equivalence has the structure of an invertible map by Proposition 9.2.7, and any invertible map is coherently invertible by Lemma 10.4.5. ◻
 
-The following corollary is very similar to Theorem 10.1.4, which asserts that the type `Σ(x:A) a=x` is contractible.
-However, we haven’t yet established that the equivalence `(a=x)≃ (x=a)` induces an equivalence on total spaces.
-However, using the fact that equivalences are contractible maps we can give a direct proof.
-
 <!-- rosetta-agda-block: theorem-10.4.6-equivalence-contractible-map -->
 
 ```agda
@@ -558,6 +559,11 @@ module _
     is-contr-map-is-equiv =
       is-contr-map-is-coherently-invertible ∘ (is-coherently-invertible-is-invertible ∘ is-invertible-is-equiv)
 ```
+<!-- rosetta-item-end: theorem-10.4.6 -->
+
+The following corollary is very similar to Theorem 10.1.4, which asserts that the type `Σ(x:A) a=x` is contractible.
+However, we haven’t yet established that the equivalence `(a=x)≃ (x=a)` induces an equivalence on total spaces.
+However, using the fact that equivalences are contractible maps we can give a direct proof.
 
 ## Corollary 10.4.7
 
@@ -591,3 +597,4 @@ module _
     pr2 (pr1 (is-contr-Id' a)) = refl
     pr2 (is-contr-Id' a) (.a , refl) = refl
 ```
+<!-- rosetta-item-end: corollary-10.4.7 -->

@@ -58,8 +58,6 @@ We say that `d` is a **greatest common divisor** of `a` and `b` if it comes equi
 is-gcd_{a,b}(d) ≔ Π(x:ℕ) (x| a)× (x| b)↔ (x| d).
 ```
 
-The property of being a greatest common divisor uniquely characterizes the greatest common divisor, in the following sense.
-
 <!-- rosetta-agda-block: definition-8.4.1-common-divisor -->
 
 ```agda
@@ -73,6 +71,9 @@ is-common-divisor-ℕ a b x = (div-ℕ x a) × (div-ℕ x b)
 is-gcd-ℕ : (a b d : ℕ) → Type lzero
 is-gcd-ℕ a b d = (x : ℕ) → (is-common-divisor-ℕ a b x) ↔ (div-ℕ x d)
 ```
+<!-- rosetta-item-end: definition-8.4.1 -->
+
+The property of being a greatest common divisor uniquely characterizes the greatest common divisor, in the following sense.
 
 ## Proposition 8.4.2
 
@@ -87,26 +88,6 @@ Then `d=d'`.
 
 *Proof.* If both `d` and `d'` are a greatest common divisor of `a` and `b`, then both `d` and `d'` divide both `a` and `b`, and hence it follows that `d| d'` and `d'| d`.
 Since the divisibility relation was shown to be a partial order in Exercise 7.2, it follows by antisymmetry that `d=d'`. ◻
-
-Note that for any two natural numbers `a` and `b`, the type
-```text
-Σ(n:ℕ) Π(x:ℕ) (x| a)× (x| b)→ (x| n)(*)
-```
-consists of all the multiples of the common divisors of `a` and `b`, including `0`.
-On the other hand, the type
-```text
-Σ(n:ℕ) Π(x:ℕ) (x| n)→ (x| a)× (x| b)(**)
-```
-consists of all the common divisors of `a` and `b` except in the case where `a=0` and `b=0`.
-In this case, the type in (\*\*) consists of all natural numbers.
-
-The two displayed types provide us with two ways to define the greatest common divisor.
-We can either define the greatest common divisor of `a` and `b` as the greatest natural number in the type in (\*\*) or we can define it as the least *nonzero* natural number of the type in (\*), provided that we make an exception in the case where both `a=0` and `b=0`.
-Since we already have established the well-ordering principle of `ℕ`, we will opt for the second approach.
-In Exercise 8.10 you will be asked to show that any *bounded* decidable family over `ℕ` has a maximum as soon as it contains some natural number.
-
-In order to correctly define the greatest common divisor using well-ordering principle of `ℕ`, we need a slight modification of the type family in (\*).
-We define this family as follows:
 
 <!-- rosetta-agda-block: proposition-8.4.2-common-divisor-gcd -->
 
@@ -134,6 +115,27 @@ abstract
       ( pr1 (H' d) (is-common-divisor-is-gcd-ℕ a b d H))
       ( pr1 (H d') (is-common-divisor-is-gcd-ℕ a b d' H'))
 ```
+<!-- rosetta-item-end: proposition-8.4.2 -->
+
+Note that for any two natural numbers `a` and `b`, the type
+```text
+Σ(n:ℕ) Π(x:ℕ) (x| a)× (x| b)→ (x| n)(*)
+```
+consists of all the multiples of the common divisors of `a` and `b`, including `0`.
+On the other hand, the type
+```text
+Σ(n:ℕ) Π(x:ℕ) (x| n)→ (x| a)× (x| b)(**)
+```
+consists of all the common divisors of `a` and `b` except in the case where `a=0` and `b=0`.
+In this case, the type in (\*\*) consists of all natural numbers.
+
+The two displayed types provide us with two ways to define the greatest common divisor.
+We can either define the greatest common divisor of `a` and `b` as the greatest natural number in the type in (\*\*) or we can define it as the least *nonzero* natural number of the type in (\*), provided that we make an exception in the case where both `a=0` and `b=0`.
+Since we already have established the well-ordering principle of `ℕ`, we will opt for the second approach.
+In Exercise 8.10 you will be asked to show that any *bounded* decidable family over `ℕ` has a maximum as soon as it contains some natural number.
+
+In order to correctly define the greatest common divisor using well-ordering principle of `ℕ`, we need a slight modification of the type family in (\*).
+We define this family as follows:
 
 ## Definition 8.4.3
 
@@ -144,14 +146,6 @@ Given `a,b:ℕ`, we define the type family `M(a,b)` over `ℕ` by
 M(a,b,n) ≔ (a+b≠ 0) → (n≠ 0)× (Π(x:ℕ) (x| a)× (x| b) → (x| n)).
 ```
 
-In other words, if `a+b=0` then the type `Σ(n:ℕ) M(a,b,n)` consist of all the natural numbers.
-On the other hand, if `a+b≠ 0` it consists of the nonzero natural numbers `n` with the property that any common divisor of `a` and `b` also divides `n`.
-These are exactly the nonzero multiples of the greatest common divisor of `a` and `b`.
-
-Since we intend to apply the well-ordering principle, we must show that the family `M(a,b)` is decidable.
-This is a step that one can skip in classical mathematics, because all the subsets of `ℕ` are decidable there.
-However, in our current setting we have no choice but to prove it.
-
 <!-- rosetta-agda-block: definition-8.4.3-multiple-gcd -->
 
 ```agda
@@ -160,6 +154,15 @@ is-multiple-of-gcd-ℕ a b n =
   is-nonzero-ℕ (a +ℕ b) →
   (is-nonzero-ℕ n) × ((x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x n)
 ```
+<!-- rosetta-item-end: definition-8.4.3 -->
+
+In other words, if `a+b=0` then the type `Σ(n:ℕ) M(a,b,n)` consist of all the natural numbers.
+On the other hand, if `a+b≠ 0` it consists of the nonzero natural numbers `n` with the property that any common divisor of `a` and `b` also divides `n`.
+These are exactly the nonzero multiples of the greatest common divisor of `a` and `b`.
+
+Since we intend to apply the well-ordering principle, we must show that the family `M(a,b)` is decidable.
+This is a step that one can skip in classical mathematics, because all the subsets of `ℕ` are decidable there.
+However, in our current setting we have no choice but to prove it.
 
 ## Proposition 8.4.4
 
@@ -186,10 +189,6 @@ The types `(x| a)×(x| b)` and `(x| n)` are decidable by Theorem 8.1.9, so by Co
 If `x` is a common divisor of `a` and `b`, then it follows that `x` divides `a+b`.
 Furthermore, since we have assumed that `a+b≠ 0`, it follows that `x≤ a+b`.
 This provides the upper bound. ◻
-
-We are almost in position to apply the well-ordering principle of `ℕ` to define the greatest common divisor.
-It just remains to show that there is some `n:ℕ` for which `M(a,b,n)` holds.
-We prove this in the following lemma.
 
 <!-- rosetta-agda-block: proposition-8.4.4-common-divisor-decidable -->
 
@@ -253,6 +252,11 @@ abstract
             ( a +ℕ b)
             ( λ x → leq-sum-is-common-divisor-ℕ a b x np)))
 ```
+<!-- rosetta-item-end: proposition-8.4.4 -->
+
+We are almost in position to apply the well-ordering principle of `ℕ` to define the greatest common divisor.
+It just remains to show that there is some `n:ℕ` for which `M(a,b,n)` holds.
+We prove this in the following lemma.
 
 ## Lemma 8.4.5
 
@@ -275,6 +279,7 @@ abstract
   pr1 (sum-is-multiple-of-gcd-ℕ a b np) = np
   pr2 (sum-is-multiple-of-gcd-ℕ a b np) x H = div-add-ℕ x a b (pr1 H) (pr2 H)
 ```
+<!-- rosetta-item-end: lemma-8.4.5 -->
 
 ## Definition 8.4.6
 
@@ -303,6 +308,7 @@ is-lower-bound-gcd-ℕ :
   (a b : ℕ) → is-lower-bound-ℕ (is-multiple-of-gcd-ℕ a b) (gcd-ℕ a b)
 is-lower-bound-gcd-ℕ a b = pr2 (pr2 (GCD-ℕ a b))
 ```
+<!-- rosetta-item-end: definition-8.4.6 -->
 
 ## Lemma 8.4.7
 
@@ -363,6 +369,7 @@ abstract
       ( is-decidable-is-zero-ℕ (a +ℕ b))
       ( λ f → pr1 (is-multiple-of-gcd-gcd-ℕ a b f) H)
 ```
+<!-- rosetta-item-end: lemma-8.4.7 -->
 
 ## Theorem 8.4.8
 
@@ -529,3 +536,4 @@ is-gcd-gcd-ℕ : (a b : ℕ) → is-gcd-ℕ a b (gcd-ℕ a b)
 pr1 (is-gcd-gcd-ℕ a b x) = div-gcd-is-common-divisor-ℕ a b x
 pr2 (is-gcd-gcd-ℕ a b x) = is-common-divisor-div-gcd-ℕ a b x
 ```
+<!-- rosetta-item-end: theorem-8.4.8 -->

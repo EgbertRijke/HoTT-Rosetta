@@ -20,6 +20,8 @@ A notable exception is formed by categories, which are objects at truncation lev
 We will not cover categories in this book.
 For more about categories we recommend Chapter 9 of .
 
+<!-- rosetta-item-end: remark-19.1.1 -->
+
 ## Definition 19.1.2
 
 <!-- rosetta-item: definition-19.1.2 -->
@@ -33,6 +35,8 @@ We write `Semigroup_𝒰` for the type of all semigroups in `𝒰`, i.e., for th
 ```text
 Σ(G:Set_𝒰) Σ(μ:G→(G→ G)) Π(x,y,z:G) μ(μ(x,y),z)=μ(x,μ(y,z)).
 ```
+
+<!-- rosetta-item-end: definition-19.1.2 -->
 
 ## Definition 19.1.3
 
@@ -48,6 +52,8 @@ Unital semigroups are also called **monoids**, so we define
 ```text
 Monoid_𝒰≔Σ(G:Semigroup_𝒰) is-unital(G).
 ```
+
+<!-- rosetta-item-end: definition-19.1.3 -->
 
 The unit of a semigroup is of course unique once it exists.
 In univalent mathematics we express this fact by asserting that the type `is-unital(G)` is a proposition for each semigroup `G`.
@@ -73,6 +79,8 @@ e = μ(e,e') = e'.
 ```
  ◻
 
+<!-- rosetta-item-end: lemma-19.1.4 -->
+
 ## Definition 19.1.5
 
 <!-- rosetta-item: definition-19.1.5 -->
@@ -89,6 +97,8 @@ is-group(G)≔Σ(e:is-unital(G)) is-group'(G,e)
 ```
 A **group** is a unital semigroup with inverses.
 We write `Group` for the type of all groups in `𝒰`.
+
+<!-- rosetta-item-end: definition-19.1.5 -->
 
 ## Lemma 19.1.6
 
@@ -118,12 +128,16 @@ x^{-1} = μ(e,x^{-1})
 for any `x:G`.
 Thus the two inverses of `x` are the same, and the claim follows. ◻
 
+<!-- rosetta-item-end: lemma-19.1.6 -->
+
 ## Example 19.1.7
 
 <!-- rosetta-item: example-19.1.7 -->
 
 The type `ℤ` of integers has the structure of a group, with the group operation being addition.
 The fact that `ℤ` is a set was shown in Exercise 12.4, and the group laws were shown in Exercise 5.7.
+
+<!-- rosetta-item-end: example-19.1.7 -->
 
 ## Example 19.1.8
 
@@ -138,3 +152,5 @@ An important special case of the automorphism groups is the **symmetric group**
 ```text
 S_n≔ Aut(Fin{n}).
 ```
+
+<!-- rosetta-item-end: example-19.1.8 -->

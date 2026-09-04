@@ -38,6 +38,8 @@ The type of all `(𝒰,𝒱)`-partitions of `A` is defined by
 Partition_{𝒰,𝒱}(A)≔Σ(P:P_{𝒰}^+(A)→Prop_{𝒱}) is-partition(P)
 ```
 
+<!-- rosetta-item-end: definition-18.3.1 -->
+
 ## Theorem 18.3.2
 
 <!-- rosetta-item: theorem-18.3.2 -->
@@ -133,3 +135,5 @@ Arrows:
 - Eq-Rel_{𝒰}(A) --ψ--> Partition_{𝒰,𝒱}(A)
 ```
 is homotopic to the identity function. ◻
+
+<!-- rosetta-item-end: theorem-18.3.2 -->

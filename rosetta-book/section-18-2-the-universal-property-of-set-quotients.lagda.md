@@ -49,6 +49,8 @@ Arrows:
 - B --unlabeled--> X
 ```
 
+<!-- rosetta-item-end: definition-18.2.1 -->
+
 ## Remark 18.2.2
 
 <!-- rosetta-item: remark-18.2.2 -->
@@ -68,6 +70,8 @@ q^⋆(h)≔(h∘ q,λ x. λ y. λ r. ap_{h}(H_{x,y}(r))).
 ```
 The universal property of the set quotient of `R` asserts that the map `q^⋆` is an equivalence for every set `X`.
 It is important to note that the universal property of set quotients is formulated with respect to sets.
+
+<!-- rosetta-item-end: remark-18.2.2 -->
 
 ## Theorem 18.2.3
 
@@ -104,6 +108,8 @@ Arrows:
 - B --i--> Prop_𝒰^A
 ```
     and the embedding `i` satisfies the universal property of the image inclusion of `R`.
+
+<!-- rosetta-item-end: theorem-18.2.3 -->
 
 In Theorem 18.2.3 we don’t assume that `B` is in the same universe as `A` and `R`, because we want to apply it to `B≔im(R)`.
 As we will see below, this extra generality only affects the proof that (2) implies (3).
@@ -319,6 +325,8 @@ q:A→ A/R
 ```
 is surjective and effective, and it satisfies the universal property of the set quotient.
 
+<!-- rosetta-item-end: corollary-18.2.4 -->
+
 Theorem 18.2.3 can be used to show that the type of equivalence relations is equivalent to the type of sets `X` equipped with a surjective map `A↠ X`.
 This may seem remarkable if you haven’t tried Exercise 17.18 yet, because at first glance one might think that the type of sets `X` equipped with a surjective map `A↠ X` is a `1`-type, while the type of equivalence relations on `A` is a set.
 
@@ -386,3 +394,5 @@ Arrows:
 - A/K_f --unlabeled--> X
 ```
 We obtain such an equivalence by combining Theorem 18.2.3 and Theorem 15.1.8. ◻
+
+<!-- rosetta-item-end: theorem-18.2.5 -->

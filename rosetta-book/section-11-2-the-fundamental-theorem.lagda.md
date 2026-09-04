@@ -23,6 +23,8 @@ h↦ h(a,b):(Π(x:A) Π(y:B(x)) P(x,y))→ P(a,b)
 ```
 has a section.
 
+<!-- rosetta-item-end: definition-11.2.1 -->
+
 In other words, if `B` is an identity system on `A` at `a` and `P` is a family of types indexed by `x:A` and `y:B(x)`, then there is for each `p:P(a,b)` a dependent function
 ```text
 f:Π(x:A) Π(y:B(x)) P(x,y)
@@ -110,3 +112,5 @@ In this diagram the top map has a section.
 Therefore it follows by Exercise 9.4 that the left map has a section if and only if the right map has a section.
 Recall from Definition 10.2.1 that the type `Σ(x:A) B(x)` satisfies singleton induction if and only if the left map in the triangle has a section for each `P`.
 Therefore we conclude our proof with Theorem 10.2.3, which shows that the type `Σ(x:A) B(x)` satisfies singleton induction if and only if it is contractible. ◻
+
+<!-- rosetta-item-end: theorem-11.2.2 -->

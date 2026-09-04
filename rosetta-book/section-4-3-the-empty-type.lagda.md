@@ -22,16 +22,6 @@ We define the **empty type** to be a type `empty` satisfying the induction princ
 ind : Π(x:empty) P(x).
 ```
 
-It is again a special case of the induction principle that we have a function
-```text
-ex-falso≔ind:empty→ A
-```
-for any type `A`.
-Indeed, to obtain this function one first weakens `A` to obtain the constant family over `empty` with value `A`, and then the induction principle gives the desired function.
-The function `ex-falso` can be used to draw any conclusion after deriving a contradiction, because *ex falso quodlibet*.
-
-We can also use the empty type to define the negation operation on types.
-
 <!-- rosetta-agda-block: section-4-3-the-empty-type-block-23 -->
 
 ```agda
@@ -47,6 +37,17 @@ ind-empty ()
 ex-falso : {l : Level} {A : Type l} → empty → A
 ex-falso = ind-empty
 ```
+<!-- rosetta-item-end: definition-4.3.1 -->
+
+It is again a special case of the induction principle that we have a function
+```text
+ex-falso≔ind:empty→ A
+```
+for any type `A`.
+Indeed, to obtain this function one first weakens `A` to obtain the constant family over `empty` with value `A`, and then the induction principle gives the desired function.
+The function `ex-falso` can be used to draw any conclusion after deriving a contradiction, because *ex falso quodlibet*.
+
+We can also use the empty type to define the negation operation on types.
 
 ## Definition 4.3.2
 
@@ -79,6 +80,7 @@ infix 25 ¬_
 is-empty : {l : Level} → Type l → Type l
 is-empty A = A → empty
 ```
+<!-- rosetta-item-end: definition-4.3.2 -->
 
 ## Remark 4.3.3
 
@@ -101,8 +103,6 @@ In other words, before one can prove by contradiction that there is an element i
 In Exercise 4.3 we will see a situation where we can indeed construct a function `¬¬ A→ A`.
 In practice, however, we will rarely use double negation elimination.
 
-In the following proposition we illustrate how to work with the type theoretic definition of negation.
-
 <!-- rosetta-agda-block: section-4-3-the-empty-type-block-91 -->
 
 ```agda
@@ -111,6 +111,9 @@ infix 25 ¬¬_
 ¬¬_ : {l : Level} → Type l → Type l
 ¬¬ P = ¬ ¬ P
 ```
+<!-- rosetta-item-end: remark-4.3.3 -->
+
+In the following proposition we illustrate how to work with the type theoretic definition of negation.
 
 ## Proposition 4.3.4
 
@@ -148,14 +151,15 @@ The function we have constructed is
 ```
  ◻
 
-We leave it to the reader to construct the corresponding natural deduction tree, that formally constructs a function
-```text
-(P→ Q)→(¬ Q→ ¬ P).
-```
-
 <!-- rosetta-agda-block: section-4-3-the-empty-type-block-146 -->
 
 ```agda
 map-neg : {l1 l2 : Level} {P : Type l1} {Q : Type l2} → (P → Q) → (¬ Q → ¬ P)
 map-neg f nq p = nq (f p)
+```
+<!-- rosetta-item-end: proposition-4.3.4 -->
+
+We leave it to the reader to construct the corresponding natural deduction tree, that formally constructs a function
+```text
+(P→ Q)→(¬ Q→ ¬ P).
 ```
