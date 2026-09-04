@@ -2,7 +2,7 @@
   "blocks": {
     "corollary-8.2.5-bounded-dependent-products": {
       "comments": [],
-      "review_sha256": "eecf94bdda2cdc9a1b4a7b1a24956b9fbf78bd4b2a1237ba7b1fc0141215478c",
+      "review_sha256": "8c4b303c15bd9b937705585e1a6bf08217161553b61dcb75848877223b597e11",
       "state": "approved"
     },
     "corollary-8.2.5-upper-bound": {
@@ -12,17 +12,17 @@
           "text": "It is unfortunate that the roles of m and n in the book become swapped in the agda code. Should we overwrite this?"
         }
       ],
-      "review_sha256": "1b376e225547345a2a6c95cea57da1b6f7777fa39ebc60cbc13fce80ae231f40",
-      "state": "pending"
+      "review_sha256": "59db8940b6b9135ebe7554d36078cb341c3168cc2491cd0a223537c7ad5bdfeb",
+      "state": "needs-further-review"
     },
     "definition-7.4.1-split-surjective-adapted": {
       "comments": [],
-      "review_sha256": "4b6f1d6f85829fbd3eea5d14c6fd803bada5f45ce188698999a102345eca8452",
+      "review_sha256": "468ef8c0ab9ec4cfe43739ec4452301cd1b6165fe768bf4f221f54a5cf740c13",
       "state": "approved"
     },
     "definition-7.4.2-finite-zero-and-successor-adapted": {
       "comments": [],
-      "review_sha256": "130dc915d96308746d4a0550c3124b409f9d87612c15f9ff66a85ba330d8212d",
+      "review_sha256": "c00e5fcd7d44daee2c34921f62ab33212776334c7749105ff9c36ececb9788b4",
       "state": "approved"
     },
     "definition-7.4.3-mod-succ-natural-numbers": {
@@ -32,12 +32,12 @@
           "text": "Do we need the definitions of `mod-two` and `mod-three` here (e.g. for a later section) or can they be removed?"
         }
       ],
-      "review_sha256": "0e069a14b4a0cccd047f5c3ff35a9693d14110c63e1a66cdac354da4ba479570",
-      "state": "pending"
+      "review_sha256": "cb6bbc38b231c6b980760b4ce6616088a5e1946ace039197aa4cdc6bd9f77a49",
+      "state": "needs-further-review"
     },
     "definition-7.5.1-integers-modulo-adapted": {
       "comments": [],
-      "review_sha256": "46a7135ea64a7a633a5fb2be99a4e197f06948d1a2ec86f8dbc2169dd65f167f",
+      "review_sha256": "614f76f3b971f0bbf651082d9a96082a7098bc62b5fd9582a892b4cfcc0954c4",
       "state": "approved"
     },
     "definition-7.5.2-addition-and-negation-finite": {
@@ -55,12 +55,12 @@
           "text": "Do we need add-Fin'?"
         }
       ],
-      "review_sha256": "68af78e2d595e9669ed7e73abcadec5ec3b44a00b9f635a3420072a6ae500eac",
-      "state": "pending"
+      "review_sha256": "7f2baa22f27c91fc5fb190cc0aaa81e171c1915be6c588308b3e89f0e80a4902",
+      "state": "needs-further-review"
     },
     "definition-7.5.2-negation-finite": {
       "comments": [],
-      "review_sha256": "d2bf94b59b0fc826911ec287827545444f7241ef5473144f2aee08b801f9642e",
+      "review_sha256": "36f392273b1fecf978dad4171537e17e480db3790eab89694160d55bc098661d",
       "state": "approved"
     },
     "definition-8.1.1-decidable": {
@@ -75,32 +75,32 @@
     },
     "definition-8.2.1-collatz": {
       "comments": [],
-      "review_sha256": "59555e95217d84067e12f160bfab464f50681e19d47c1a8952013cb83d3b70f9",
+      "review_sha256": "07819d85aab60f565767eb0cf0e162d051ab6778cfefe0e2833c1849a5f158a7",
       "state": "approved"
     },
     "definition-8.3.1-lower-bound": {
       "comments": [],
-      "review_sha256": "76606face8dc07a9d526e38212e9819d72a41099f532dbfd5e97871ebd2fc7b1",
+      "review_sha256": "b3768109e8171634be32d6a6d7aadd49dc09efe0853df08775a10faba36513af",
       "state": "approved"
     },
     "definition-8.3.1-minimal-element": {
       "comments": [],
-      "review_sha256": "43a4e50089cba973d260e3e21b159c4a8545848eefe8e3ee79e238319bfa1e0d",
+      "review_sha256": "298900e53e9ffc2e1905ab615fc7af79262c887532683f43e1d748b9d40afe4c",
       "state": "approved"
     },
     "definition-8.4.1-common-divisor": {
       "comments": [],
-      "review_sha256": "bb0cbb5e8246cbd30123854aa8f21503a957d988fcd82b18c07498d68ee181a4",
+      "review_sha256": "f38ec2403fbec3a34bfda58d2a530be1ba0003fc5c764dd5bd881bfc0c5bf773",
       "state": "approved"
     },
     "definition-8.4.1-greatest-common-divisor": {
       "comments": [],
-      "review_sha256": "0a20dd9afde8cdc05e6a049bda2c7151d9fe2da4e6143474a8ecebb13984b195",
+      "review_sha256": "2e6d044be1ffeacef2b58a9dd803b2c8ac02f476f79636e663f38f519844a9a3",
       "state": "approved"
     },
     "definition-8.4.3-multiple-gcd": {
       "comments": [],
-      "review_sha256": "a2dc219e025de53bce2d84f87996455e521b1aeeb4ff60b4c0feeefea63dddca",
+      "review_sha256": "da78e6b72cc45526666ce3d0e9af282aff9b13c062c9d2adec69744fd86f4a1f",
       "state": "approved"
     },
     "definition-8.4.6-gcd": {
@@ -110,8 +110,8 @@
           "text": "Why are `is-multiple-of-gcd-gcd-ℕ` and `is-lower-bound-gcd-ℕ` part of this codeblock?"
         }
       ],
-      "review_sha256": "3c2ed38872cdc6fbee59587ca2ab7123a8ef4660aa356b16bad79c4eaa0392d3",
-      "state": "pending"
+      "review_sha256": "5d7097bf3513f85ea1fb651eb31e4ff2b3c2afb2659ab4e9ac5c0907e0b72c58",
+      "state": "needs-further-review"
     },
     "definition-8.5.1-prime": {
       "comments": [],
@@ -130,7 +130,7 @@
     },
     "definition-8.6.1-booleanization": {
       "comments": [],
-      "review_sha256": "d21f1403a1cc16cb4815a198c4f04b6d3040fcb7fb6e21636895802d8eaf949c",
+      "review_sha256": "280735fac6627e807009d573fcbaaedd5bb0a63a89e57f18b5fe64fb9273441d",
       "state": "approved"
     },
     "definition-9.1.2-homotopies": {
@@ -141,7 +141,7 @@
         }
       ],
       "review_sha256": "2b715d21c9f0d23f1c29649bb9e0d77003fa18b941b0c723a96d8c3da51d89c4",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "definition-9.1.5-concatenation-homotopy": {
       "comments": [
@@ -151,7 +151,7 @@
         }
       ],
       "review_sha256": "5f23ae684314dae64d78e6dd9819c68abe2f8b83892e31546b6007f3c71d02ef",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "definition-9.1.5-concatenation-homotopy-code": {
       "comments": [
@@ -191,7 +191,7 @@
         }
       ],
       "review_sha256": "67b30b870bc49e07ce2f5d7ec5973225fda1c5287ba099995f81dc76253060f7",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "definition-9.1.7-whiskering": {
       "comments": [
@@ -201,7 +201,7 @@
         }
       ],
       "review_sha256": "670f87e098e9734e3ac2d88baa9b231b9e12086d2ee89bb24fa3e8f3fa2f30e7",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "definition-9.2.1-equivalence-components": {
       "comments": [
@@ -211,7 +211,7 @@
         }
       ],
       "review_sha256": "22425220a38144999abadae884091bdcae2a318f014a8a38a9990b561fc9fe4f",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "definition-9.2.1-equivalence-map-components": {
       "comments": [
@@ -221,7 +221,7 @@
         }
       ],
       "review_sha256": "ac4980b67efbe5f0a12ed9f42740850c6f8d89dc2593f0172450adac727f7e06",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "definition-9.2.1-equivalences": {
       "comments": [],
@@ -246,7 +246,7 @@
         }
       ],
       "review_sha256": "51f5c0e97b3da367f694e81e0b013ea119d7240ca8555179c1fdfc8127ce9f6b",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "definition-9.2.1-sections": {
       "comments": [],
@@ -260,8 +260,8 @@
           "text": "Should we unwind the definiton of dependent identification?"
         }
       ],
-      "review_sha256": "4fc5fcbe5680543e882736aca6853bf89da9181726fdce6ca98936bcddf7c8eb",
-      "state": "pending"
+      "review_sha256": "13db49f0309770d08cb72f93ca6ddeba5b3feda2bc88f11d87e81dce5c69dfea",
+      "state": "needs-further-review"
     },
     "definition-9.3.3-pair-equality": {
       "comments": [
@@ -270,8 +270,13 @@
           "text": "This proof seems to lose the spirit of the book definition with all the auxiliary defns in between?"
         }
       ],
-      "review_sha256": "d8d1810eaf9e771e9280e8f14cb0351f2f686baffd0e37c282644271dfe7c0cc",
-      "state": "pending"
+      "review_sha256": "157c0c37cc1057b512974c5151e5a0ab5ca7406ca3fd5fbe1167c55bd2dd7582",
+      "state": "needs-further-review"
+    },
+    "example-10.1.3-unit-contractible": {
+      "comments": [],
+      "review_sha256": "0c9cab681e5cf66a1a42f3691fbfbc3cf92e3e243c951843168b8a7cfba31caa",
+      "state": "approved"
     },
     "example-8.1.2-unit-empty-decidable": {
       "comments": [],
@@ -291,7 +296,7 @@
         }
       ],
       "review_sha256": "2e0d62c881b4b4a4211244fec8fa43557649d00367ecc964b290b81b73c716b0",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "example-8.1.3-function-decidable": {
       "comments": [],
@@ -336,7 +341,7 @@
         }
       ],
       "review_sha256": "9822e1e98a7b7706f1bd7906b38a1922e80262cb0552b3a9e99da16043986f7b",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "exercise-7-1-divisibility-three-for-two-block-1": {
       "comments": [
@@ -345,7 +350,7 @@
           "text": "This solution was needed for a later section. Please complete this file with the appropriate code review and prose."
         }
       ],
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "exercise-7-9-bound-successor-finite": {
       "comments": [],
@@ -354,7 +359,7 @@
     },
     "lemma-7.4.4-natural-values-finite-successor-adapted": {
       "comments": [],
-      "review_sha256": "c45abf5522cc9dc8f0dc5bee2cb6169c7e19b71e16cbf28884a71c4bf9743994",
+      "review_sha256": "cebc026d1a272bd067fa860625cccaca8a89769a14ced496de122c72929f6aeb",
       "state": "approved"
     },
     "lemma-8.1.6-decidability-logical-equivalence": {
@@ -370,11 +375,11 @@
         }
       ],
       "review_sha256": "04634297cad31d25c722345f766e788ab317e320a83d58b983209d67b26865ac",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "lemma-8.4.5-sum-multiple-gcd": {
       "comments": [],
-      "review_sha256": "d14fc40e8b2da5e7b3482c493704b7227a1a5f37a836d13fca52fc5b79035d87",
+      "review_sha256": "d4b23e62062fb4afe97b2348a274f205bd0fc14c5b38852f29d0302a7663b081",
       "state": "approved"
     },
     "lemma-8.4.7-double-negation-elimination": {
@@ -384,8 +389,8 @@
           "text": "How exactly is Exercise 4.3 intended to be used, and does this codeblock accurately reflect this intention?"
         }
       ],
-      "review_sha256": "5ac0f85fe982e06b6c93c80c232cbdb66adcd5b64c7ab6995993c72bacc383c6",
-      "state": "pending"
+      "review_sha256": "4f3dd5f628c7a584449ae1d469ae10ba200fa67299cb68a35010f6d530ffb2a6",
+      "state": "needs-further-review"
     },
     "lemma-8.4.7-zero-gcd": {
       "comments": [
@@ -394,12 +399,12 @@
           "text": "See previous comments about using \"is-zero\""
         }
       ],
-      "review_sha256": "8cb0d6cdb302fc87f251bcf5b998f48dfcfe26d9a8f263b91a9ed615823db996",
-      "state": "pending"
+      "review_sha256": "9e6edf1fc24e8c0ba90a2bb463d85ddaf8e1ecf6414e6e953017663750212119",
+      "state": "needs-further-review"
     },
     "lemma-9.3.2-reflexivity": {
       "comments": [],
-      "review_sha256": "3c9c3077b4721cc1127dee5abd9f55ca0919c159bf510dd6071639294697b45a",
+      "review_sha256": "b22df745f26eb14cc7e4a6c6c007df3a1e4fb5c180c1a18c77b941882fa135c7",
       "state": "approved"
     },
     "missing-agda-exercise-7-9-euclidean-division-exercise-7-9-b": {
@@ -409,7 +414,7 @@
           "text": "The agda-unimath literature guide marks Exercise 7.9(b) as TODO. The module elementary-number-theory.euclidean-division-natural-numbers provides euclidean-division-ℕ and its quotient, remainder, equation, and remainder bound, but no result proving uniqueness for arbitrary bounded quotient-and-remainder decompositions."
         }
       ],
-      "review_sha256": "679307f2c43b977c7182b16d813a72055529ad51383210ae786031cbf4b80c76",
+      "review_sha256": "204aa02553a81f9fe0242829b0cce7ef5b53100f74ee05a26cd878be11755216",
       "state": "pending"
     },
     "missing-agda-exercise-8-10-maximal-elements-exercise-8-10": {
@@ -419,7 +424,7 @@
           "text": "The agda-unimath literature guide marks Exercise 8.10 TODO. The greatest-common-divisor module defines is-gcd-ℕ and gcd-ℕ, but not the requested construction as a maximal common divisor."
         }
       ],
-      "review_sha256": "81f4eeadabf18aa637f5f37995303661ce0640bb322b0cd8a6878a23c1874598",
+      "review_sha256": "b66fd6f845dd19040476b9adaeebc13c7c14b4ad53c16d106f8fa3dce9a9d06b",
       "state": "pending"
     },
     "missing-agda-exercise-8-11-bezouts-identity-exercise-8-11": {
@@ -429,7 +434,7 @@
           "text": "Closest match: elementary-number-theory/bezouts-lemma-natural-numbers. The relevant exact ranges are preserved as blocked candidates; they require the upstream integer modular-arithmetic and minimal-positive-distance chain."
         }
       ],
-      "review_sha256": "56bdc7a7d99bc17a9c83a18aedb23df03a2c14f73f7a8cf2e69c2de8b9bc794e",
+      "review_sha256": "c408a6c06fb0b12a3df6d35cb0d07a73fc30304c23ed22f3ca22f00ebcb99255",
       "state": "pending"
     },
     "missing-agda-exercise-8-12-prime-factorization-exercise-8-12": {
@@ -439,7 +444,7 @@
           "text": "Closest match: elementary-number-theory/fundamental-theorem-of-arithmetic. Exact result ranges are preserved as blocked candidates; their list, strong-induction, and prime-factorization dependencies are not locally available here."
         }
       ],
-      "review_sha256": "ce51a78cd7e984b989c45192db0dbc357fc7afbd063734f181973fd36a496e6d",
+      "review_sha256": "d757ec7a10faa4f2ad8bb3b75cee0b0ff4bb88608bff74db6361bcafd0867e82",
       "state": "pending"
     },
     "missing-agda-exercise-8-13-primes-congruent-three-mod-four-exercise-8-13": {
@@ -449,7 +454,7 @@
           "text": "The agda-unimath literature guide marks Exercise 8.13 TODO; infinitude-of-primes proves unbounded primes without the required congruence modulo 4."
         }
       ],
-      "review_sha256": "77ae75c2ec7cc004b2f8ca22bb913d85396cc39655d6816c659e340399a9156e",
+      "review_sha256": "933339f26426bfb56a064117e42db0b736cac6692bc3d6ff9a90fb45531d7aa8",
       "state": "pending"
     },
     "missing-agda-exercise-8-14-fields-integers-modulo-prime-exercise-8-14": {
@@ -459,7 +464,7 @@
           "text": "The agda-unimath literature guide marks Exercise 8.14 TODO. Existing modular-arithmetic code supplies finite cyclic rings, but no applicable proof that the prime case is a field."
         }
       ],
-      "review_sha256": "13df994f0ce14ebed398c39aa98fd4d52fd7d5560c7070cc5943ab809ec47252",
+      "review_sha256": "9381183006934d772dfd7a134be4476a989dace62cca44c934498a36c355319b",
       "state": "pending"
     },
     "missing-agda-exercise-8-15-cofibonacci-sequence-exercise-8-15-a": {
@@ -469,7 +474,7 @@
           "text": "Closest match: elementary-number-theory/cofibonacci. Exact/adapted construction ranges are preserved as blocked candidates; they depend on the upstream Pisano-period and Fibonacci-divisibility developments."
         }
       ],
-      "review_sha256": "9424a513b128448ad9af86ff85d463ce387b000dd5571dd3fb65e0ab390ef2f9",
+      "review_sha256": "0abf8d8c0471078207a5605cefcba077d3b4ac5dea65a8acce44c5f107556ce6",
       "state": "pending"
     },
     "missing-agda-exercise-8-15-cofibonacci-sequence-exercise-8-15-b": {
@@ -479,7 +484,7 @@
           "text": "The agda-unimath literature guide supplies cofibonacci and forward-is-left-adjoint-cofibonacci, but explicitly leaves the backward direction TODO."
         }
       ],
-      "review_sha256": "484bb42d6457a35352d7b73dcc1b88f244ec86a8e7484b56d24ecd0c75368b52",
+      "review_sha256": "d13541c9cdfe40826154845a0dc9ecd4ba90388b1dc8e794ad223ba6dc23fd1a",
       "state": "pending"
     },
     "missing-agda-exercise-8-5-characterization-prime-exercise-8-5": {
@@ -489,7 +494,7 @@
           "text": "The agda-unimath literature guide marks Exercise 8.5 TODO and records no applicable source for this alternative prime characterization."
         }
       ],
-      "review_sha256": "dcf191b6b10dbd0a71888ab1e43f18d1f12fa81e0e40b5ce19380fc8baa0d30f",
+      "review_sha256": "bc6d720bb8165960d16cf74b1445ac9a7163b8e4c0216456faf498258fa5b17e",
       "state": "pending"
     },
     "missing-agda-exercise-8-8-decidable-equality-sigma-types-exercise-8-8": {
@@ -499,7 +504,7 @@
           "text": "Closest match: foundation/decidable-equality (dependent-sum equality). Its current proof depends on the equivalence framework introduced after Chapter 8; the exact source ranges are preserved as blocked candidates."
         }
       ],
-      "review_sha256": "459167c471b2014398821ca59a8233786fc175db963761c0d9c73f5af0f9abd5",
+      "review_sha256": "decd5426e7b0901994781da1e4f8de41cee2ae1757c5d9f09ee39d4f1769f9b2",
       "state": "pending"
     },
     "missing-agda-exercise-8-9-finite-dependent-products-exercise-8-9-a": {
@@ -509,7 +514,7 @@
           "text": "Closest match: univalent-combinatorics/decidable-dependent-function-types, is-decidable-Π-Fin. It factors through dependent-function equivalences unavailable in the local Chapter 8 foundation; the adapted source candidate is preserved as blocked."
         }
       ],
-      "review_sha256": "6f4f9fe8599e8857dec19e0dd66a3b9190c7718d98d8374de2bc0ba249b5bdbd",
+      "review_sha256": "4daf19cfca6e861d357ccd268600b3d4fa33d8a7ab1d7e88ba31a9a44799cc36",
       "state": "pending"
     },
     "missing-agda-exercise-8-9-finite-dependent-products-exercise-8-9-b": {
@@ -519,7 +524,7 @@
           "text": "The agda-unimath literature guide supplies is-decidable-Π-Fin for part (a), but marks part (b) TODO; that result decides dependent propositions and does not provide decidable equality of dependent functions."
         }
       ],
-      "review_sha256": "919b6684a64da5f44f3d5fd0080ec3ce1c25da9436978b8ba1874caae5dcaa43",
+      "review_sha256": "62c941dcca34db460893f201e8a87f160650136e9ce659e30aa429cd458416bb",
       "state": "pending"
     },
     "proposition-7.4.5-congruence-mod-successor-adapted": {
@@ -529,8 +534,8 @@
           "text": "The curly braces from agda-unimath are missing, and the clause following `cong-nat-succ-Fin (succ-ℕ k) (inr star) =` seems to be an unfolding of the corresponding clause in agda-unimath. Need to double-check that the definitions truly coincide."
         }
       ],
-      "review_sha256": "fa33714d219915d3b57299833381fd7ac76661172543ded5e119a913e2efcce3",
-      "state": "pending"
+      "review_sha256": "e9f1e8760b39245d4a07223b11e4d637d7f10d4b52053f036fb8f5579afbeabe",
+      "state": "needs-further-review"
     },
     "proposition-7.4.6-bounded-distance-congruence-adapted": {
       "comments": [
@@ -543,7 +548,7 @@
           "text": "Answering previous question on the stray `H`: it actually does exist in agda-unimath, it's just cut off in the preview here."
         }
       ],
-      "review_sha256": "3f19ab6c474ab2fee03e1eccc6e041718b5c281f693c30677e1a75c747a78788",
+      "review_sha256": "63038e307a0fbc0eced41a334002b8c55eda03baa737b4065d195369a2808312",
       "state": "approved"
     },
     "proposition-7.4.6-small-divisor-and-bounded-congruence-adapted": {
@@ -557,7 +562,7 @@
           "text": "Not sure why this is tagged as \"adapted\", the `abstract` line is present in agda-unimath."
         }
       ],
-      "review_sha256": "7a2ae4fb77646129df3704b48b76f5b6d90335e7a914a996ceeb82c54c870724",
+      "review_sha256": "789c36397a276582fc5066f84bc63d5f3a5edaa2a38692f53f325313c754e626",
       "state": "approved"
     },
     "proposition-7.5.4-congruence-support-excerpts": {
@@ -571,12 +576,12 @@
           "text": "The proof of the claim itself in a separate agda block is in the following agda block... why?"
         }
       ],
-      "review_sha256": "688c1fdca524f211a30b5ba692a435bdf443cfbd785dd2ed7ae9dc5517d0cc11",
-      "state": "pending"
+      "review_sha256": "2872ab38a9b4481bde99c4a5226d0cb8c4924ecf885651d41e7bf1a731f29ec7",
+      "state": "needs-further-review"
     },
     "proposition-7.5.4-three-for-two-addition-congruence": {
       "comments": [],
-      "review_sha256": "48605962cf6a46a1b095552ffa512b39ea16b73480477ab8dce56802653474ca",
+      "review_sha256": "59ed4e3c4183d6bed99287549566a080b8e932226f286ea1e463c8e3cc1a27e3",
       "state": "approved"
     },
     "proposition-8.1.7-natural-decidable-equality": {
@@ -596,8 +601,8 @@
           "text": "Why is there a prime symbol (the ' symbol) in front of the name?"
         }
       ],
-      "review_sha256": "6065175b78b6e71597e2e2e18e053cd98b58e483fb45393430bcf3d1cb221662",
-      "state": "pending"
+      "review_sha256": "00e3df6707e71ba16a6c0b8d694587abff70de22329b620da75a4d6577b0ee70",
+      "state": "needs-further-review"
     },
     "proposition-8.2.3-decidable-product": {
       "comments": [
@@ -610,27 +615,27 @@
           "text": "Also, not sure why there are primes (the ' symbol) in front of the names?"
         }
       ],
-      "review_sha256": "767864f791e09b3bbf00e50629cfef80c1fba461495010f5b7cf8fe94bd5fd15",
-      "state": "pending"
+      "review_sha256": "214915624d0bcac3e7fab2aca17ddaec3471f4fd6db14832bb11d5a1feee1085",
+      "state": "needs-further-review"
     },
     "proposition-8.2.4-decidable-family": {
       "comments": [],
-      "review_sha256": "4fa34649d15fa3db78a72b8cceff5d05a854b81aeccd7116391b89026d277b02",
+      "review_sha256": "7062518597438f1856ea13b4ca40b2fd26dbbcaf3d62ecbfd29a914c82b2480c",
       "state": "approved"
     },
     "proposition-8.2.4-dependent-products-natural": {
       "comments": [],
-      "review_sha256": "15a705ad61236fcc424522b099052d1d0477dc4474b5db6f5d01d582a462ed59",
+      "review_sha256": "dd4061f65172bdcb031f503276d01b0ad7e8aad975adc039a6aa8a49dbb0e883",
       "state": "approved"
     },
     "proposition-8.4.2-common-divisor-gcd": {
       "comments": [],
-      "review_sha256": "3e64d0a3f2738575ada19ce0ecdb04a87b90e9d2d9a25e1eb4c89aa051c70464",
+      "review_sha256": "63c863242eb5df67cd4e9feb720d4ab6e67cc70d0a20758e2de24082cfdccff7",
       "state": "approved"
     },
     "proposition-8.4.2-uniqueness-gcd": {
       "comments": [],
-      "review_sha256": "b6bd4d16b2e9d535aa12cee1921858aec26470d7499dcc8fb9451ca17982608a",
+      "review_sha256": "4e65681e11705574b696e8ff58bc7392da15395f9b81ba0cf7cd7b891e636bfb",
       "state": "approved"
     },
     "proposition-8.4.4-common-divisor-bound": {
@@ -640,22 +645,22 @@
           "text": "See comment in Section 7 about using \"is-zero\". This has a somewhat analogous question - do we want to start using \"is-nonzero\"?"
         }
       ],
-      "review_sha256": "fd45feddf8ff9619e35a555c8bdf4d0725fcae18934dc84f570d0eadbc8de78b",
-      "state": "pending"
+      "review_sha256": "ce4f97e0c874d8ffe6eed87c8688ee05bc69a362ff5081c1304353c5a014db03",
+      "state": "needs-further-review"
     },
     "proposition-8.4.4-common-divisor-decidable": {
       "comments": [],
-      "review_sha256": "dc8b993cc9fe73bd7330d8794c8bb50fadd3bfd514a3861f84317c7c8b189354",
+      "review_sha256": "e5dc822a5946ce8e8b9e2ed1d39cc1885cd24bd97d20a3c2aada2db8e2dd60f9",
       "state": "approved"
     },
     "proposition-8.4.4-divisor-successor-bound": {
       "comments": [],
-      "review_sha256": "5f146ae327d0fd437d08ade074e3f482eb623afa2bdc7b433f70ec40bbcf253e",
+      "review_sha256": "6e5c3037a8f9cbd90ecb982f7f6d431733ea174d0a2cc81aec3d1330ee17f364",
       "state": "approved"
     },
     "proposition-8.4.4-multiple-gcd-decidable": {
       "comments": [],
-      "review_sha256": "174705701a398adbd4c148c18c7fb2c0fca836efa51b185cc95d33784c1d9d9a",
+      "review_sha256": "9fed15682a66e6941ad5b8ca2dd819ecb1601093b71fa397c666ba118cc11f1a",
       "state": "approved"
     },
     "proposition-9.1.6-associativity": {
@@ -676,7 +681,7 @@
         }
       ],
       "review_sha256": "cc43137271e6f16c36bf84d08bae3758e88a429cebdb640f948b58b4927df7c0",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "proposition-9.1.6-inverse-laws": {
       "comments": [
@@ -686,7 +691,7 @@
         }
       ],
       "review_sha256": "ec0578088c5c5bed150ec29e1b8e32e48b17f9077413a04d7b91b10ad7a047be",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "proposition-9.1.6-unit-laws": {
       "comments": [
@@ -696,7 +701,7 @@
         }
       ],
       "review_sha256": "e45aab7655bb462bae6c74ea936be68e925b5ce9cd7eba66e6152e075417d417",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "proposition-9.2.7-equivalence-is-invertible": {
       "comments": [
@@ -706,7 +711,7 @@
         }
       ],
       "review_sha256": "74297143928bd809c1d4c5210eb62cc229281d15638a5bde71f7c15093334d41",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "remark-7.5.3-natural-value-congruences": {
       "comments": [
@@ -715,7 +720,7 @@
           "text": "Missing the statement for preserving zero."
         }
       ],
-      "review_sha256": "11dd365e7bb7d01a4056b5c91d6b4035eecdd1fece3e1828e690fe2fce1081db",
+      "review_sha256": "a0b11d3326894db4ae9f09f52a8e51607874bef5dbcc5351d3628e14a032c149",
       "state": "rejected"
     },
     "remark-9.1.1-negation-involution": {
@@ -726,7 +731,7 @@
         }
       ],
       "review_sha256": "d1bd82c4a2ff457d682f22a8fab82ba63647b8837e9d3a2b8f20f875c927c94d",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "remark-9.2.6-invertible-maps": {
       "comments": [
@@ -736,7 +741,7 @@
         }
       ],
       "review_sha256": "eafb7c22d9fcd1da8d9de9b56cc5e77ac61cf3f91bdff59bc8c131004bcba771",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "remark-9.2.6-involutions": {
       "comments": [
@@ -765,7 +770,7 @@
           "text": "This is copied from agda-unimath. Do we want to keep dependent-identification, or inline it into the definition of apd?"
         }
       ],
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "section-5-5-the-uniqueness-of-refl-block-65": {
       "comments": [
@@ -778,7 +783,7 @@
           "text": "The closest reference source found proves that Σ(x : A), a = x is contractible, a notion that has not yet been defined here, so it is not quite a correct source for this proof."
         }
       ],
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "section-7-1-the-curry-howard-interpretation-block-186": {
       "comments": [
@@ -787,7 +792,7 @@
           "text": "agda-unimath uses a dedicated ap-add-ℕ function defined via ap-binary. This code instead follows the textbook proof, subject to the earlier reversed-multiplication caveat."
         }
       ],
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "section-7-1-the-curry-howard-interpretation-block-59": {
       "comments": [
@@ -796,7 +801,7 @@
           "text": "This code is copied from agda-unimath, which defines multiplication in the opposite order from the textbook (k * m rather than m * k). This makes the later proof slightly different from both the textbook and the library proof."
         }
       ],
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "section-7-2-the-congruence-relations-on-natural-numbers-block-86": {
       "comments": [
@@ -805,7 +810,7 @@
           "text": "In agda-unimath, equivalence relations are defined only for relations valued in propositions."
         }
       ],
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "section-7-3-the-standard-finite-types-block-136": {
       "comments": [
@@ -814,7 +819,7 @@
           "text": "This code was manually supplied. Is there a source for it in agda-unimath, and do we want it here at all?"
         }
       ],
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "section-7-3-the-standard-finite-types-block-230": {
       "comments": [
@@ -823,7 +828,7 @@
           "text": "At this point, is-injective should have a proper earlier definition and be imported; it appears to be used multiple times before this."
         }
       ],
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "section-7-3-the-standard-finite-types-block-77": {
       "comments": [
@@ -832,7 +837,7 @@
           "text": "This differs slightly from agda-unimath, where finite types are first defined as sets and then cast to types."
         }
       ],
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "section-7-3-the-standard-finite-types-block-87": {
       "comments": [
@@ -841,7 +846,7 @@
           "text": "Not sure whether this inclusion should be included here; in particular, there is no analogous code for inclusion of the point."
         }
       ],
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "section-9.3-transport-action": {
       "comments": [
@@ -850,8 +855,8 @@
           "text": "Why is this here? Seems to no be used in the next block, which is what corresponds to this definition."
         }
       ],
-      "review_sha256": "83571db2c54510452df14f8ebfe9a66024a8787846c6b8333896c07e8e5d2878",
-      "state": "pending"
+      "review_sha256": "65ad7c83f47c2af9f3ee5d27a56004241ccfcfd5db47769d49ed93a463e76cf2",
+      "state": "needs-further-review"
     },
     "theorem-7.4.7-effectiveness-mod-successor-adapted": {
       "comments": [
@@ -860,12 +865,12 @@
           "text": "Changes to the code need explanation."
         }
       ],
-      "review_sha256": "fc6cc2ae53b24cf6d75237f364e8d3356b0e5e9db2b84a72d6dc4a7cdb2133f8",
-      "state": "pending"
+      "review_sha256": "5581edb4e436fcf8a30ebd8dac3f4f7189fca900a45451330088c2adc566699d",
+      "state": "needs-further-review"
     },
     "theorem-7.4.8-split-surjectivity-mod-successor": {
       "comments": [],
-      "review_sha256": "f4dc267c371dc3dba53f179df8116ee1a379782930e38cee7efa9bf34929f0de",
+      "review_sha256": "731357db56a7a454e14a5520efa866435daa66d95c56d7d2b8503cc96f9eb421",
       "state": "approved"
     },
     "theorem-7.5.5-abelian-group-laws-finite-adapted": {
@@ -875,8 +880,8 @@
           "text": "Differences occur in the last few lines of `left-inverse-law-add-Fin` - needs further review."
         }
       ],
-      "review_sha256": "ec762c0dcfad4723aa17b066315e3bc55f767cdefdcae25d5c0020a132537b3e",
-      "state": "pending"
+      "review_sha256": "89174687828cdf96380761548b6a58448d8d5872effdb534420a4ceb8b94fc59",
+      "state": "needs-further-review"
     },
     "theorem-8.1.9-divisibility-decidable": {
       "comments": [
@@ -886,7 +891,7 @@
         }
       ],
       "review_sha256": "f0858b9f19835cc68535b6dba86a17ff430c2d60f094053b8b9f29444704fd94",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "theorem-8.1.9-divisibility-modulo": {
       "comments": [
@@ -896,7 +901,7 @@
         }
       ],
       "review_sha256": "fb44b5150efe9f4ffda98ea34ebccef5ca3ec33790046fe395cd815330b33496",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "theorem-8.1.9-finite-zero-decidable": {
       "comments": [
@@ -906,7 +911,7 @@
         }
       ],
       "review_sha256": "ec8e59dedf01a2ad5adb24b264068a66fab8e0881af343488eeacbded52741c6",
-      "state": "pending"
+      "state": "needs-further-review"
     },
     "theorem-8.1.9-natural-zero-decidable": {
       "comments": [],
@@ -920,7 +925,7 @@
     },
     "theorem-8.3.2-well-ordering": {
       "comments": [],
-      "review_sha256": "0c773b44d3333d140c5dfb73d24abf06dba97c816b416f4fdebd5dcafb0602a6",
+      "review_sha256": "8b0c8dbbbc8a30c6c8180244cc483d4d2ab109f50baeb338b93565c0ee5e4aa2",
       "state": "approved"
     },
     "theorem-8.4.8-divisor-gcd-common-divisor": {
@@ -930,17 +935,17 @@
           "text": "I'm ready to approve, just wondering if there's a way to make this proof more efficient? e.g. I feel like div-right-factor could be some commutativitiy result of div-left-factor, but I could be wrong."
         }
       ],
-      "review_sha256": "8fc14de5caab7118fd7b909370491c3b6ba089d272caac620dac799cbdc4d92a",
-      "state": "pending"
+      "review_sha256": "302ce6065c0a5b0b6049376f27f117ac172ed8a55c1a998b99682e1b2f0a9c88",
+      "state": "needs-further-review"
     },
     "theorem-8.4.8-divisor-multiple": {
       "comments": [],
-      "review_sha256": "9dd7b4bc16ebdcfaa9a6f0f73b410ebf9c7286409880f8bfc5b0fab6ef55a549",
+      "review_sha256": "36bd381390b5e6510a380397ed4de5ced61897eb736ca8c28ff41c07f7bcc42f",
       "state": "approved"
     },
     "theorem-8.4.8-gcd-is-gcd": {
       "comments": [],
-      "review_sha256": "33636847a2028487ff1618e451221acc0690f06b0ff8b0ff86eb390d06668cf7",
+      "review_sha256": "953bcbfbb5e549d84f095157b981a56ccac744362f8382326e2db58d70ffdffb",
       "state": "approved"
     },
     "theorem-8.4.8-nonzero-and-common-divisor": {
@@ -950,12 +955,12 @@
           "text": "See previous comments about using is-nonzero."
         }
       ],
-      "review_sha256": "90ff3e900143895f8e3e7bfc8ff4dfca213ba1b62e8d64f8d40bc366237422d0",
-      "state": "pending"
+      "review_sha256": "572490eec3e65a2d9c726c23bdbc6bd7a6c26f24dcfc5753a074e1b2720ca82b",
+      "state": "needs-further-review"
     },
     "theorem-8.4.8-small-common-multiple-zero": {
       "comments": [],
-      "review_sha256": "1cecedb41ca2131c6bc38e6985da2f0e984dd5b4acad451759d897bb8f1b36f5",
+      "review_sha256": "9c0698f3bb36ac64b97fab999de93b3666c5918933c0e93e2706c30b3e8e8a63",
       "state": "approved"
     },
     "theorem-8.6.2-boolean-reflection": {
@@ -965,8 +970,8 @@
           "text": "Do we want the inverse defined here, and do we want it placed above the definition of the forward map?"
         }
       ],
-      "review_sha256": "35fe4ce091d2850378b489db214d1f9ecda2d73f64de2f3e827e22e649dfa908",
-      "state": "pending"
+      "review_sha256": "8edb1260ae27ab5b5d816b1e824c7424eff54b56867316bc4a14b94b7a00ef59",
+      "state": "needs-further-review"
     },
     "theorem-9.3.4-equivalence-proof": {
       "comments": [
@@ -975,7 +980,7 @@
           "text": "Where is `ap-pr1-eq-pair-eq-fiber` used? It doesn't seem to be necessary."
         }
       ],
-      "review_sha256": "78615f8268f4acae0f18705c5c418fe58829cdd6214ca1cec5164bea77b5498e",
+      "review_sha256": "d5fc9e993d98ca98f240fbf9536114c5a21b06f77c6a6cb48005a6f2daf4468e",
       "state": "rejected"
     },
     "theorem-9.3.4-inverse-map": {
@@ -985,8 +990,8 @@
           "text": "It seems some of these constructions, e.g, `eq-pair-eq-base`, aren't used in the later blocks that prove this theorem. Maybe they should be removed?"
         }
       ],
-      "review_sha256": "54758cb850e11da29c0c804ef98aac41d89b1be3c09256ad6bc742ddd665eb52",
-      "state": "pending"
+      "review_sha256": "157d3fcf7b600296deafad2c999006a61893a92159944d03618e7e6839e0bc33",
+      "state": "needs-further-review"
     }
   },
   "version": 1

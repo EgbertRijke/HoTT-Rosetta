@@ -129,6 +129,30 @@ answer : Type
             saved = load_agda_review_store(root / "data" / "agda-reviews.json")
             self.assertEqual(saved["blocks"][record.block_id]["state"], "approved")
 
+    def test_needs_further_review_is_a_saved_decision(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data").mkdir()
+            (root / "data" / "agda-reviews.json").write_text(
+                '{\n  "version": 1,\n  "blocks": {}\n}\n'
+            )
+            record = self._record()
+            update_agda_review(
+                root,
+                record.block_id,
+                state="needs-further-review",
+                current_record=record,
+            )
+            store = load_agda_review_store(root / "data" / "agda-reviews.json")
+            self.assertEqual(
+                store["blocks"][record.block_id]["state"],
+                "needs-further-review",
+            )
+            self.assertEqual(
+                _with_stored_review(record, store).state,
+                "needs-further-review",
+            )
+
     def test_browser_pages_show_three_review_columns_and_escape_code(self):
         record = self._record()
         detail = render_record(record)
@@ -140,6 +164,7 @@ answer : Type
         self.assertIn("Show highlighted Agda diff", detail)
         self.assertIn("identical to the recorded source", detail)
         self.assertIn("Approve", detail)
+        self.assertIn("Needs further review", detail)
         self.assertIn("Run Agda check", detail)
         self.assertIn("Edit Agda code", detail)
         self.assertIn("Open scratchpad editor", detail)
@@ -157,6 +182,14 @@ answer : Type
         self.assertIn("agda-search", index)
         self.assertIn("Only items with comments", index)
         self.assertIn("data-has-comments='false'", index)
+        self.assertIn("class='agda-review-table'", index)
+        self.assertIn("class='book-item-column'", index)
+        self.assertIn("class='review-column'", index)
+        self.assertIn("class='agda-check-column'", index)
+        self.assertIn(".book-item-column { width: 18%; }", index)
+        self.assertIn(".review-column { width: 18%; }", index)
+        self.assertIn(".agda-check-column { width: 16%; }", index)
+        self.assertIn("class='badge review-state pending'", index)
         unsafe = AgdaReviewRecord(**{**record.to_dict(), "project_code": "x < y"})
         self.assertIn("x &lt; y", render_record(unsafe))
 
@@ -196,6 +229,13 @@ answer : Type
         commented_index = render_index([commented])
         self.assertIn("data-has-comments='true'", commented_index)
 
+        needs_review = AgdaReviewRecord(
+            **{**record.to_dict(), "state": "needs-further-review"}
+        )
+        needs_review_index = render_index([needs_review])
+        self.assertIn("1 needs further review", needs_review_index)
+        self.assertIn("needs further review", render_record(needs_review))
+
     def test_loading_page_reports_progress_and_polls_until_ready(self):
         page = render_loading()
         self.assertIn("Preparing the review workspace", page)
@@ -203,6 +243,40 @@ answer : Type
         self.assertIn("fetch('/status'", page)
         self.assertIn("location.reload()", page)
         self.assertIn("status.message", page)
+
+    def test_review_index_has_clear_sort_and_status_filter_controls(self):
+        pending = self._record()
+        approved = AgdaReviewRecord(
+            **{
+                **pending.to_dict(),
+                "block_id": "definition-1.1.2-example",
+                "item_id": "definition-1.1.2",
+                "state": "approved",
+            }
+        )
+        index = render_index([pending, approved])
+
+        self.assertEqual(index.count("class='sort-button'"), 5)
+        for key in ("bookItem", "file", "sourceKind", "review", "agdaCheck"):
+            self.assertIn(f"data-sort-key='{key}'", index)
+        self.assertIn("aria-sort='none'", index)
+        self.assertIn("ascending, descending, and default order", index)
+        self.assertIn("sortDirection==='ascending'", index)
+        self.assertIn("sortDirection='descending'", index)
+        self.assertIn("sortDirection='none'", index)
+
+        self.assertIn("data-state-filter='pending'", index)
+        self.assertIn("data-state-filter='approved'", index)
+        self.assertIn("aria-pressed='false'", index)
+        self.assertIn("select it again to show all statuses", index)
+        self.assertIn("statusFilter=statusFilter===", index)
+        self.assertIn("data-review-state='approved'", index)
+
+        self.assertIn("id='reset-table-view'", index)
+        self.assertIn("Reset table view", index)
+        self.assertIn("id='table-view-status'", index)
+        self.assertIn("aria-live='polite'", index)
+        self.assertIn("Showing all 2 items in default order.", index)
 
     def test_successful_agda_check_hides_progress_output(self):
         record = self._record()
@@ -248,6 +322,7 @@ answer : Type
         self.assertNotIn("Run Agda check", detail)
         self.assertNotIn("Edit Rosetta Agda code", detail)
         self.assertNotIn(">Approve<", detail)
+        self.assertNotIn(">Needs further review<", detail)
         self.assertIn(record.block_id, index)
 
         with tempfile.TemporaryDirectory() as directory, patch(
@@ -264,6 +339,10 @@ answer : Type
             )
             with self.assertRaisesRegex(ValueError, "cannot be approved"):
                 update_agda_review(root, record.block_id, state="approved")
+            with self.assertRaisesRegex(ValueError, "needing further review"):
+                update_agda_review(
+                    root, record.block_id, state="needs-further-review"
+                )
 
         with self.assertRaisesRegex(ValueError, "no candidate Agda code"):
             run_block_typecheck(Path("."), record.block_id, [record])
@@ -293,6 +372,30 @@ answer : Type
             **{**approved.to_dict(), "document_sha256": "changed-file-digest"}
         )
         self.assertEqual(_with_stored_review(changed, store).state, "stale")
+
+    def test_reviewed_repository_blocks_are_not_left_pending(self):
+        root = Path(__file__).resolve().parent.parent
+        store = load_agda_review_store(root / "data" / "agda-reviews.json")
+        curated_ids = {
+            record.block_id
+            for record in discover_agda_reviews(root)
+            if record.provenance_kind != "missing"
+        }
+        reviewer_names = {"Daniel C", "Daniel", "Reviewer"}
+        pending_reviewed = []
+        for block_id, saved in store["blocks"].items():
+            authors = {
+                comment.get("author", "")
+                for comment in saved.get("comments", [])
+                if isinstance(comment, dict)
+            }
+            if (
+                block_id in curated_ids
+                and saved.get("state", "pending") == "pending"
+                and authors & reviewer_names
+            ):
+                pending_reviewed.append(block_id)
+        self.assertEqual(pending_reviewed, [])
 
 
 if __name__ == "__main__":

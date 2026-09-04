@@ -94,6 +94,11 @@ Review is optional metadata and cannot affect conversion or ordinary checks.
 The UI may display files, provenance, diffs, typechecks, gaps, comments, and
 decisions. Changed content makes prior review evidence stale.
 
+For Agda blocks, `pending` means that no review decision has been recorded.
+`needs-further-review` means that a reviewer inspected the block but did not
+approve or reject it. An evidence mismatch displays as `stale` regardless of
+the saved decision until the block is reviewed against its current content.
+
 Edits to existing curated blocks are staged in a temporary scratchpad. Only an
 exact passing draft may be promoted; promotion shows the manifest diff, writes
 atomically with a recoverable backup, regenerates the destination, and marks

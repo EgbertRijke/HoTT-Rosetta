@@ -524,10 +524,14 @@ def command_review(
         )
         return 0
     agda_pending = sum(record.state == "pending" for record in agda_records)
+    agda_needs_review = sum(
+        record.state == "needs-further-review" for record in agda_records
+    )
     agda_approved = sum(record.state == "approved" for record in agda_records)
     agda_stale = sum(record.state == "stale" for record in agda_records)
     print(
         f"Agda reviews: {len(agda_records)} total, {agda_pending} pending, "
+        f"{agda_needs_review} need further review, "
         f"{agda_approved} approved, {agda_stale} stale."
     )
     print("Run 'python3 rosetta.py review --web' for side-by-side review.")

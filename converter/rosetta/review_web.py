@@ -20,6 +20,7 @@ from .agda_scratchpad import (
     save_scratchpad,
 )
 from .agda_review import (
+    AGDA_REVIEW_STATES,
     AgdaReviewRecord,
     _with_stored_review,
     discover_agda_reviews,
@@ -42,6 +43,7 @@ a { color: #174ea6; }
 .summary, .controls { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
 .badge { border-radius: 1rem; padding: .25rem .65rem; background: #e8eaed; }
 .approved { background: #ceead6; } .rejected, .stale { background: #f8d7da; }
+.needs-further-review { background: #d2e3fc; }
 .pending { background: #feefc3; }
 .passed { background: #ceead6; } .failed { background: #f8d7da; }
 .not-checked, .not-applicable, .missing { background: #e8eaed; }
@@ -66,9 +68,38 @@ textarea { width: 95%; min-height: 30rem; font-family: ui-monospace, monospace; 
 .diff-context { color: #57606a; }
 button { padding: .55rem .9rem; cursor: pointer; }
 table { width: 100%; border-collapse: collapse; } th, td { padding: .55rem; border-bottom: 1px solid #ddd; text-align: left; }
+.summary-filter { border: 1px solid transparent; font: inherit; }
+.summary-filter[aria-pressed='true'] { outline: 2px solid #174ea6; outline-offset: 2px; }
+.table-tools { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin: 1rem 0 .5rem; }
+.table-view-status { color: #5f6368; margin: .5rem 0 1rem; }
+#reset-table-view[disabled] { cursor: default; opacity: .55; }
+.agda-review-table { table-layout: fixed; }
+.agda-review-table td { overflow-wrap: anywhere; }
+.agda-review-table .book-item-column { width: 18%; }
+.agda-review-table .file-column { width: 36%; }
+.agda-review-table .source-kind-column { width: 12%; }
+.agda-review-table .review-column { width: 18%; }
+.agda-review-table .agda-check-column { width: 16%; }
+.agda-review-table .review-state { white-space: nowrap; }
+.sort-button { border: 0; background: transparent; color: inherit; font: inherit; font-weight: 600; padding: 0; }
+.sort-button:hover, .sort-button:focus-visible { color: #174ea6; text-decoration: underline; }
+.sort-indicator { display: inline-block; min-width: 1.1em; text-align: center; }
 .warning { border-left: .3rem solid #d93025; padding-left: .8rem; }
 @media (max-width: 850px) { .columns { grid-template-columns: 1fr; } .statement { grid-column: auto; } }
 """
+
+
+REVIEW_STATE_LABELS = {
+    "pending": "pending",
+    "needs-further-review": "needs further review",
+    "approved": "approved",
+    "rejected": "rejected",
+    "stale": "stale",
+}
+
+
+def _review_state_label(state: str) -> str:
+    return REVIEW_STATE_LABELS.get(state, state)
 
 
 def _layout(title: str, body: str) -> str:
@@ -83,46 +114,122 @@ def _layout(title: str, body: str) -> str:
 def render_index(
     records: list[AgdaReviewRecord], file_count: int = 0, missing_count: int = 0
 ) -> str:
-    counts = {state: sum(item.state == state for item in records) for state in (
-        "pending", "approved", "rejected", "stale"
-    )}
+    displayed_states = (*AGDA_REVIEW_STATES, "stale")
+    counts = {
+        state: sum(item.state == state for item in records)
+        for state in displayed_states
+    }
     rows = []
-    for record in records:
+    for original_index, record in enumerate(records):
         url = "/agda/" + quote(record.block_id)
         has_comments = "true" if record.comments else "false"
         rows.append(
-            f"<tr class='agda-item' data-has-comments='{has_comments}'>"
+            f"<tr class='agda-item' data-has-comments='{has_comments}' "
+            f"data-original-index='{original_index}' "
+            f"data-book-item='{html.escape(record.item_id)}' "
+            f"data-file='{html.escape(record.destination)}' "
+            f"data-source-kind='{html.escape(record.provenance_kind)}' "
+            f"data-review='{html.escape(_review_state_label(record.state))}' "
+            f"data-review-state='{html.escape(record.state)}' "
+            f"data-agda-check='{html.escape(record.typecheck_status)}'>"
             f"<td><a href='{url}'>{html.escape(record.item_id)}</a></td>"
             f"<td>{html.escape(record.destination)}</td>"
             f"<td>{html.escape(record.provenance_kind)}</td>"
-            f"<td><span class='badge {record.state}'>{html.escape(record.state)}</span></td>"
+            f"<td><span class='badge review-state {record.state}'>"
+            f"{html.escape(_review_state_label(record.state))}</span></td>"
             f"<td><span class='badge {record.typecheck_status}'>{html.escape(record.typecheck_status)}</span></td>"
             "</tr>"
         )
     summary = "".join(
-        f"<span class='badge {state}'>{count} {state}</span>"
+        f"<button type='button' class='badge summary-filter {state}' "
+        f"data-state-filter='{state}' aria-pressed='false' "
+        f"title='Show only {html.escape(_review_state_label(state))} reviews; "
+        f"select again to show all statuses'>"
+        f"{count} {html.escape(_review_state_label(state))}</button>"
         for state, count in counts.items()
+    )
+    sort_headers = "".join(
+        f"<th scope='col' aria-sort='none'><button type='button' "
+        f"class='sort-button' data-sort-key='{key}' "
+        f"title='Sort by {label}; select again to reverse or clear sorting'>"
+        f"{label} <span class='sort-indicator' aria-hidden='true'>↕</span>"
+        f"</button></th>"
+        for key, label in (
+            ("bookItem", "Book item"),
+            ("file", "File"),
+            ("sourceKind", "Source kind"),
+            ("review", "Review"),
+            ("agdaCheck", "Agda check"),
+        )
     )
     body = (
         "<p>Review the book text, Rosetta Agda code, and recorded source side by side.</p>"
         f"<p><a href='/read'>Read {file_count} generated .lagda.md files</a> · "
         f"<a href='/missing-agda'>View {missing_count} mathematical items missing Agda</a></p>"
         f"<div class='summary'>{summary}</div><h2>Agda review items</h2>"
-        "<p><label>Find an item: <input id='agda-search' type='search' "
-        "placeholder='For example: 7.9'></label> &nbsp; "
+        "<p>Select a status total to filter the table; select it again to show all statuses. "
+        "Select a column heading to cycle through ascending, descending, and default order.</p>"
+        "<div class='table-tools'><label>Find an item: "
+        "<input id='agda-search' type='search' placeholder='For example: 7.9'></label>"
         "<label><input id='comments-only' type='checkbox'> "
-        "Only items with comments</label></p>"
-        "<table><thead><tr><th>Book item</th><th>File</th><th>Source kind</th>"
-        "<th>Review</th><th>Agda check</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table>"
+        "Only items with comments</label>"
+        "<button type='button' id='reset-table-view' disabled>Reset table view</button></div>"
+        f"<p id='table-view-status' class='table-view-status' aria-live='polite'>"
+        f"Showing all {len(records)} items in default order.</p>"
+        "<table class='agda-review-table'><colgroup>"
+        "<col class='book-item-column'><col class='file-column'>"
+        "<col class='source-kind-column'><col class='review-column'>"
+        "<col class='agda-check-column'></colgroup>"
+        f"<thead><tr>{sort_headers}</tr></thead><tbody>"
+        + "".join(rows) + "</tbody></table>"
         "<script>const search=document.getElementById('agda-search');"
         "const commentsOnly=document.getElementById('comments-only');"
-        "function filterItems(){const q=search.value.toLowerCase();"
-        "document.querySelectorAll('.agda-item').forEach(function(x){"
-        "const matchesText=x.textContent.toLowerCase().includes(q);"
-        "const matchesComments=!commentsOnly.checked||x.dataset.hasComments==='true';"
-        "x.hidden=!(matchesText&&matchesComments);});}"
-        "search.addEventListener('input',filterItems);"
-        "commentsOnly.addEventListener('change',filterItems);</script>"
+        "const reset=document.getElementById('reset-table-view');"
+        "const viewStatus=document.getElementById('table-view-status');"
+        "const tbody=document.querySelector('.agda-review-table tbody');"
+        "const rows=Array.from(document.querySelectorAll('.agda-item'));"
+        "const sortButtons=Array.from(document.querySelectorAll('.sort-button'));"
+        "const statusButtons=Array.from(document.querySelectorAll('.summary-filter'));"
+        "let statusFilter='';let sortKey='';let sortDirection='none';"
+        "function applyTableView(){const q=search.value.trim().toLowerCase();"
+        "const ordered=rows.slice();"
+        "if(sortDirection==='none'){ordered.sort((a,b)=>Number(a.dataset.originalIndex)-Number(b.dataset.originalIndex));}"
+        "else{ordered.sort((a,b)=>{const result=a.dataset[sortKey].localeCompare("
+        "b.dataset[sortKey],undefined,{numeric:true,sensitivity:'base'});"
+        "return sortDirection==='ascending'?result:-result;});}"
+        "ordered.forEach(row=>tbody.appendChild(row));let visible=0;"
+        "ordered.forEach(row=>{const matchesText=row.textContent.toLowerCase().includes(q);"
+        "const matchesComments=!commentsOnly.checked||row.dataset.hasComments==='true';"
+        "const matchesStatus=!statusFilter||row.dataset.reviewState===statusFilter;"
+        "row.hidden=!(matchesText&&matchesComments&&matchesStatus);if(!row.hidden)visible+=1;});"
+        "statusButtons.forEach(button=>button.setAttribute('aria-pressed',"
+        "String(button.dataset.stateFilter===statusFilter)));"
+        "sortButtons.forEach(button=>{const active=button.dataset.sortKey===sortKey&&sortDirection!=='none';"
+        "button.querySelector('.sort-indicator').textContent=active?"
+        "(sortDirection==='ascending'?'↑':'↓'):'↕';"
+        "button.closest('th').setAttribute('aria-sort',active?sortDirection:'none');});"
+        "const details=[];if(statusFilter){const active=statusButtons.find("
+        "button=>button.dataset.stateFilter===statusFilter);details.push('status: '+active.textContent.trim().replace(/^\\d+\\s+/,''));}"
+        "if(q)details.push('search: “'+search.value.trim()+'”');"
+        "if(commentsOnly.checked)details.push('comments only');"
+        "if(sortDirection!=='none'){const activeSort=sortButtons.find("
+        "button=>button.dataset.sortKey===sortKey);details.push('sorted by '+"
+        "activeSort.textContent.replace(/[↕↑↓]/g,'').trim()+' '+sortDirection);}"
+        "viewStatus.textContent='Showing '+visible+' of '+rows.length+' items'+"
+        "(details.length?' · '+details.join(' · '):' in default order')+'.';"
+        "reset.disabled=!statusFilter&&!q&&!commentsOnly.checked&&sortDirection==='none';}"
+        "search.addEventListener('input',applyTableView);"
+        "commentsOnly.addEventListener('change',applyTableView);"
+        "statusButtons.forEach(button=>button.addEventListener('click',()=>{"
+        "statusFilter=statusFilter===button.dataset.stateFilter?'':button.dataset.stateFilter;"
+        "applyTableView();}));"
+        "sortButtons.forEach(button=>button.addEventListener('click',()=>{const key=button.dataset.sortKey;"
+        "if(sortKey!==key||sortDirection==='none'){sortKey=key;sortDirection='ascending';}"
+        "else if(sortDirection==='ascending'){sortDirection='descending';}"
+        "else{sortKey='';sortDirection='none';}applyTableView();}));"
+        "reset.addEventListener('click',()=>{search.value='';commentsOnly.checked=false;"
+        "statusFilter='';sortKey='';sortDirection='none';applyTableView();});"
+        "applyTableView();</script>"
     )
     return _layout("HoTT Rosetta review", body)
 
@@ -345,7 +452,8 @@ def render_record(
     body = (
         f"<nav class='controls'>{navigation_html}</nav>"
         f"<h2>{html.escape(record.item_id)}</h2>"
-        f"<p><span class='badge {record.state}'>{html.escape(record.state)}</span> "
+        f"<p><span class='badge {record.state}'>"
+        f"{html.escape(_review_state_label(record.state))}</span> "
         f"<span class='badge'>{html.escape(record.provenance_kind)}</span> "
         f"<span class='badge'>{html.escape(record.conversion_status)}</span> "
         f"<span class='badge {record.typecheck_status}'>Agda: {html.escape(record.typecheck_status)}</span></p>"
@@ -394,9 +502,10 @@ def render_record(
         f"<input type='hidden' name='token' value='{html.escape(token)}'>"
         "<h3>Review decision</h3>"
         + (
-            "<p>Missing code cannot be approved or rejected.</p>"
+            "<p>Review decisions are unavailable until candidate Agda code exists.</p>"
             if is_missing else
             "<div class='controls'><button name='state' value='approved'>Approve</button>"
+            "<button name='state' value='needs-further-review'>Needs further review</button>"
             "<button name='state' value='rejected'>Reject</button>"
             "<button name='state' value='pending'>Clear decision</button></div>"
         )

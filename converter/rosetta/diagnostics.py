@@ -127,6 +127,9 @@ def repository_checks(root: Path) -> List[Diagnostic]:
     try:
         agda_reviews = discover_agda_reviews(root)
         pending = sum(record.state == "pending" for record in agda_reviews)
+        needs_review = sum(
+            record.state == "needs-further-review" for record in agda_reviews
+        )
         stale = sum(record.state == "stale" for record in agda_reviews)
         missing = sum(record.provenance_kind == "missing" for record in agda_reviews)
         code_blocks = len(agda_reviews) - missing
@@ -135,7 +138,8 @@ def repository_checks(root: Path) -> List[Diagnostic]:
                 "ok",
                 f"Agda review data is valid ({code_blocks} code blocks, "
                 f"{missing} missing-code items, "
-                f"{pending} pending, {stale} stale; review is optional).",
+                f"{pending} pending, {needs_review} need further review, "
+                f"{stale} stale; review is optional).",
             )
         )
     except (OSError, ValueError, json.JSONDecodeError, RuntimeError) as error:
