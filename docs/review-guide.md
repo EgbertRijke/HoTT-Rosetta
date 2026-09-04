@@ -9,6 +9,12 @@ source and provenance, typecheck state, comments, and a collapsible highlighted
 diff. Reviewers may approve, reject, or comment; changed content makes earlier
 decisions stale. Records are stored in `data/agda-reviews.json`.
 
+Relocating a block or changing generated item boundaries can refresh its
+`review_sha256` and make a prior decision stale even when the Agda text is
+unchanged. Preserve existing reviewer comments and inspect diffs before
+committing review metadata; never replace the file wholesale after
+regeneration.
+
 Use **Open scratchpad editor** to edit an existing block temporarily. Save the
 draft, typecheck the overlaid destination, and preview promotion. Only the exact
 passing draft can be promoted. Confirmation creates a backup, updates the

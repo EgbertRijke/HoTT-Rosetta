@@ -11,6 +11,8 @@ Read `AGENTS.md`, `docs/implementation-handoff.md`, and
 `docs/conversion-contract.md`. Then read only the references needed:
 
 - section work: `references/section-files.md` and `references/latex-to-markdown.md`
+- Agda block placement or manifest relocation:
+  `references/agda-block-placement.md`
 - chapter aggregation: `references/chapter-files.md`
 - requested or required exercise work: `references/exercise-files.md`
 
@@ -31,6 +33,12 @@ adaptations, and use repository-local imports.
 Record commit, file, inclusive lines, SHA-256 digest, stored code, destination,
 item, and honest `exact` or `adapted` provenance in `data/agda-blocks*.json`.
 If no source applies, record a gap and continue.
+
+Place each block according to both the prose and Agda's sequential dependency
+scope. Prefer the matching item's end marker, use `after_text` only for a
+specific intermediate narrative step, and use a labeled section-level
+prerequisite group when dependencies make a closer placement invalid. Never
+move a declaration without typechecking its new section and its consumers.
 
 Make durable prose or notation repairs in converter code or versioned data,
 regenerate every affected file, and add regression tests for recurring rules.

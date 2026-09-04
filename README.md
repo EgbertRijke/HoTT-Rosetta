@@ -53,7 +53,10 @@ record the gap.
 
 See [`docs/conversion-contract.md`](docs/conversion-contract.md) for enforced
 conversion rules and [`docs/implementation-handoff.md`](docs/implementation-handoff.md)
-for the current work plan.
+for the current work plan. Agents relocating Agda should also follow the
+repository-local
+[`Agda block placement`](skills/hott-rosetta-translation/references/agda-block-placement.md)
+reference.
 
 ## Layout
 
