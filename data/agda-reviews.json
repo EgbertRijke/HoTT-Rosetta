@@ -423,6 +423,11 @@
       "review_sha256": "11dd365e7bb7d01a4056b5c91d6b4035eecdd1fece3e1828e690fe2fce1081db",
       "state": "rejected"
     },
+    "section-2-2-identity-function-adapted": {
+      "comments": [],
+      "review_sha256": "c96b8910c05ef822a12fd425677f21b7bfaa28323ddd1eb1be19f8b0caf948c0",
+      "state": "approved"
+    },
     "section-5-4-transport-block-82": {
       "comments": [
         {
