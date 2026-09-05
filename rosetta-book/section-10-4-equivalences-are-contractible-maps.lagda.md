@@ -289,6 +289,20 @@ nat-htpy-id :
   {x y : A} (p : x ＝ y) → H x ∙ p ＝ ap f p ∙ H y
 nat-htpy-id H refl = right-unit
 ```
+
+<!-- rosetta-agda-block: lemma-10.4.5-identity-coherence-helper -->
+
+```agda
+module _
+  {l : Level} {A : Type l} {f : A → A} (H : f ~ id)
+  where
+
+  coh-htpy-id : H ·r f ~ f ·l H
+  coh-htpy-id x = is-injective-concat' (H x) (nat-htpy-id H (H x))
+
+  inv-coh-htpy-id : f ·l H ~ H ·r f
+  inv-coh-htpy-id = inv-htpy coh-htpy-id
+```
 <!-- rosetta-item-end: definition-10.4.4 -->
 
 ## Lemma 10.4.5
@@ -364,7 +378,67 @@ Now we observe that this is just a naturality square the homotopy `G· f:fgf~ f`
 <!-- rosetta-agda-block: lemma-10.4.5-invertible-coherently-invertible -->
 
 ```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B} (H : is-invertible f)
+  where
 
+  is-retraction-map-inv-is-coherently-invertible-is-invertible :
+    pr1 H ∘ f ~ id
+  is-retraction-map-inv-is-coherently-invertible-is-invertible =
+    pr2 (pr2 H)
+
+  abstract
+    is-section-map-inv-is-coherently-invertible-is-invertible :
+      f ∘ pr1 H ~ id
+    is-section-map-inv-is-coherently-invertible-is-invertible =
+      ( ( inv-htpy (pr1 (pr2 H))) ·r
+        ( f ∘ pr1 H)) ∙h
+      ( ( ( f) ·l
+          ( pr2 (pr2 H)) ·r
+          ( pr1 H)) ∙h
+        ( pr1 (pr2 H)))
+
+  abstract
+    inv-coh-is-coherently-invertible-is-invertible :
+      f ·l is-retraction-map-inv-is-coherently-invertible-is-invertible ~
+      is-section-map-inv-is-coherently-invertible-is-invertible ·r f
+    inv-coh-is-coherently-invertible-is-invertible =
+      left-transpose-htpy-concat
+        ( ( pr1 (pr2 H)) ·r
+          ( f ∘ pr1 H ∘ f))
+        ( f ·l pr2 (pr2 H))
+        ( ( ( f) ·l
+            ( pr2 (pr2 H)) ·r
+            ( pr1 H ∘ f)) ∙h
+          ( pr1 (pr2 H) ·r f))
+        ( ( ( nat-htpy (pr1 (pr2 H) ·r f)) ·r
+            ( pr2 (pr2 H))) ∙h
+          ( right-whisker-concat-htpy
+            ( ( inv-preserves-comp-left-whisker-comp
+                ( f)
+                ( pr1 H ∘ f)
+                ( pr2 (pr2 H))) ∙h
+              ( left-whisker-comp²
+                ( f)
+                ( inv-coh-htpy-id (pr2 (pr2 H)))))
+            ( pr1 (pr2 H) ·r f)))
+
+  abstract
+    coh-is-coherently-invertible-is-invertible :
+      coherence-is-coherently-invertible
+        ( f)
+        ( pr1 H)
+        ( is-section-map-inv-is-coherently-invertible-is-invertible)
+        ( is-retraction-map-inv-is-coherently-invertible-is-invertible)
+    coh-is-coherently-invertible-is-invertible =
+      inv-htpy inv-coh-is-coherently-invertible-is-invertible
+
+  is-coherently-invertible-is-invertible : is-coherently-invertible f
+  is-coherently-invertible-is-invertible =
+    ( pr1 H ,
+      is-section-map-inv-is-coherently-invertible-is-invertible ,
+      is-retraction-map-inv-is-coherently-invertible-is-invertible ,
+      coh-is-coherently-invertible-is-invertible)
 ```
 <!-- rosetta-item-end: lemma-10.4.5 -->
 

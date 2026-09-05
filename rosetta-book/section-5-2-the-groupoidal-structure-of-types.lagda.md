@@ -250,6 +250,22 @@ module _
   right-inv : {x y : A} (p : x ＝ y) → p ∙ inv p ＝ refl
   right-inv refl = refl
 ```
+
+<!-- rosetta-agda-block: lemma-10.4.5-concatenation-injective-helper -->
+
+```agda
+module _
+  {l1 : Level} {A : Type l1}
+  where
+
+  is-injective-concat :
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} → p ∙ q ＝ p ∙ r → q ＝ r
+  is-injective-concat refl s = s
+
+  is-injective-concat' :
+    {x y z : A} (r : y ＝ z) {p q : x ＝ y} → p ∙ r ＝ q ∙ r → p ＝ q
+  is-injective-concat' refl s = inv right-unit ∙ s ∙ right-unit
+```
 <!-- rosetta-item-end: definition-5.2.5 -->
 
 ## Remark 5.2.6

@@ -69,6 +69,17 @@ module _
   ap-comp : {x y : A} (p : x ＝ y) → ap (g ∘ f) p ＝ (ap g ∘ ap f) p
   ap-comp refl = refl
 ```
+
+<!-- rosetta-agda-block: lemma-10.4.5-identification-whisker-helper -->
+
+```agda
+module _
+  {l : Level} {A : Type l}
+  where
+
+  right-whisker-concat : {x y z : A} {p q : x ＝ y} → p ＝ q → (r : y ＝ z) → p ∙ r ＝ q ∙ r
+  right-whisker-concat α q = ap (_∙ q) α
+```
 <!-- rosetta-item-end: definition-5.3.1 -->
 
 ## Definition 5.3.2
