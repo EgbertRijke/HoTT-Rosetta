@@ -47,6 +47,12 @@ the exercise and its reason in `docs/agda-training-exercises.md`. In
 `docs/invisible-math.md`, record the exact upstream results, their natural
 mathematical homes, their order, and their later uses.
 
+Count these exercises by chapter. At 15, keep the cautious version and create
+a separate proposal branch. There, place pinned agda-unimath blocks at the best
+mathematical locations, record each choice, regenerate, and typecheck every
+affected section and later user. Do not merge or push the proposal without
+instruction. Do not record an unpushed branch name in tracked files.
+
 Make durable prose or notation repairs in converter code or versioned data,
 regenerate every affected file, and add regression tests for recurring rules.
 

@@ -82,6 +82,19 @@ formalization. Its invisible mathematics may have a natural home in an earlier
 file. Preserve the book's prose. When the classification is unclear, report it
 before changing the manifest.
 
+Count these training exercises by chapter. Do not count the book's exercises.
+When a chapter reaches 15:
+
+- keep the cautious version unchanged;
+- create a separate proposal branch;
+- add the pinned agda-unimath blocks at their best mathematical locations;
+- record every placement and dependency choice;
+- regenerate and typecheck all affected sections and later users;
+- report the alternative for review.
+
+Do not merge or push the proposal branch without instruction. Do not write an
+unpushed branch name into tracked documents.
+
 ## Agda narrative placement
 
 Agda blocks must appear where their declarations are both narratively relevant

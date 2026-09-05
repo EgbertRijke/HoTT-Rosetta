@@ -23,6 +23,10 @@ For each exercise, record:
 The exercise belongs where the absent result first blocks formalization. The
 invisible-math entry names the result's natural mathematical home.
 
+Count entries by chapter. At 15, keep this version and make a separate proposal
+branch with the missing pinned blocks placed where they fit best. Validate and
+report that alternative. Do not merge or push it without instruction.
+
 ## Exercises
 
 ### `definition-10.2.1-singleton-induction`

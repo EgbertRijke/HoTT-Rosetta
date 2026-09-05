@@ -21,6 +21,11 @@ auxiliary result. Leave the blocked later formalization empty and record it as
 an exercise. Record the auxiliary result's most natural earlier item, exact
 source, role, order, and later uses as invisible mathematics.
 
+If a chapter reaches 15 such exercises, preserve this cautious version. In a
+separate proposal branch, place the pinned blocks where they fit best
+mathematically. Regenerate and typecheck every affected section and later user.
+Leave the proposal unmerged and unpushed unless instructed otherwise.
+
 After changing a section, regenerate it, inspect the active output, run
 `python3 rosetta.py typecheck-candidate N M` when it contains Agda, and run the
 repository validation required by `AGENTS.md`.

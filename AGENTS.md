@@ -31,6 +31,9 @@ not current instructions.
   empty. Record the exercise in `docs/agda-training-exercises.md`. In
   `docs/invisible-math.md`, record the needed agda-unimath results and their
   natural mathematical home.
+- If one chapter reaches 15 such exercises, create a separate proposal branch.
+  There, place pinned agda-unimath code at the best mathematical locations and
+  validate the result. Do not merge or push the proposal without instruction.
 - Generated modules must use repository-local imports, never imports from
   `external/agda-unimath`.
 - Preserve unrelated and in-progress work. Agents may create focused commits

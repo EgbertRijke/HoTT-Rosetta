@@ -177,6 +177,10 @@ begin the deferred exercise-Agda pass in book order.
   Leave the blocked later formalization empty. Record the exercise in
   `docs/agda-training-exercises.md`. Record each upstream requirement and its
   natural mathematical home in `docs/invisible-math.md`.
+- Count these exercises by chapter. At 15, preserve the cautious version and
+  build a source-backed placement alternative on a separate proposal branch.
+  Validate it, but do not merge or push it without instruction. Never record
+  an unpushed branch name in tracked files.
 
 Avoid snapshot counts in handoff documentation. Obtain current block, gap,
 review, and generated-file counts from `python3 rosetta.py check` and the
