@@ -101,6 +101,13 @@ helper blocks are withheld for renewed placement review. All other Section
 10.4 blocks remain. The proposed natural homes and pinned sources are recorded
 in `docs/invisible-math.md`.
 
+Its public solution is commit `5e5a5cd` on
+`proposal/agda-exercise-solutions`. That solution places path cancellation in
+Definition 5.2.5, path whiskering in Definition 5.3.1, four homotopy laws in
+Proposition 9.1.6 and Definition 9.1.7, and identity coherence in Definition
+10.4.4. Sections 5.2, 5.3, 9.1, and 10.4 typecheck there. Chapters 5 and 9 also
+typecheck as aggregates. Do not merge the proposal automatically.
+
 Exercise prose remains part of conversion, but missing exercise Agda is the
 final formalization phase. Do not search for or add exercise Agda yet unless a
 later section imports or otherwise directly requires it. When an exercise is a

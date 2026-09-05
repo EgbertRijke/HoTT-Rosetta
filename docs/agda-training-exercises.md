@@ -60,4 +60,4 @@ These steps bind agents only. Humans may edit either branch freely.
 - **Invisible mathematics:** “Lemma 10.4.5: coherent inverse” in
   `docs/invisible-math.md`.
 - **Status:** Empty on `main`.
-- **Proposal solution:** Not yet made.
+- **Proposal solution:** `proposal/agda-exercise-solutions`, commit `5e5a5cd`.
