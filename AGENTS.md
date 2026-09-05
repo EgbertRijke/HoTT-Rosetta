@@ -26,10 +26,11 @@ not current instructions.
 - Never invent Agda. Copy exact or analogous pinned agda-unimath code, make
   only necessary local adaptations, and record commit/file/line/hash
   provenance. If no applicable source exists, report the gap.
-- Put each result in its natural mathematical section. If an auxiliary result
-  has no natural place in that file, leave its Agda block empty. Record the
-  choice in `docs/agda-training-exercises.md` and its needed agda-unimath
-  results in `docs/invisible-math.md`.
+- Do not enlarge an earlier complete file solely to support a later one. If a
+  later Agda block needs an absent auxiliary result, leave that later block
+  empty. Record the exercise in `docs/agda-training-exercises.md`. In
+  `docs/invisible-math.md`, record the needed agda-unimath results and their
+  natural mathematical home.
 - Generated modules must use repository-local imports, never imports from
   `external/agda-unimath`.
 - Preserve unrelated and in-progress work. Agents may create focused commits

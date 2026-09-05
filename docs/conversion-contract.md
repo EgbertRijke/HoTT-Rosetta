@@ -63,23 +63,24 @@ Agda blocks are curated independently of mechanical LaTeX conversion.
 
 ## Auxiliary results
 
-Put a result in the section where its mathematics is introduced. Import it
-later when needed.
+Keep an earlier file unchanged when it already tells a complete mathematical
+story and typechecks. Do not enlarge it solely to support a later file.
 
-If a definition or lemma exists only to bridge the formal decomposition and
-does not belong to the file's mathematics:
+If a later Agda block needs an absent auxiliary definition or lemma:
 
-- leave its Agda block empty;
+- leave the later block empty;
 - list it in `docs/agda-training-exercises.md`;
-- state why it does not belong in the file;
+- state why the auxiliary result is needed there;
 - list its exact agda-unimath requirements in `docs/invisible-math.md`;
+- name the earlier item where each requirement would most naturally belong;
 - note every later result that needs it;
 - treat the resulting unresolved names as expected until the exercise is
   filled.
 
-Do not withhold a result stated by the book. Do not move a result away from its
-natural earlier section merely to create an exercise. When the classification
-is unclear, report it before changing the manifest.
+The exercise belongs where the missing mathematics first blocks the intended
+formalization. Its invisible mathematics may have a natural home in an earlier
+file. Preserve the book's prose. When the classification is unclear, report it
+before changing the manifest.
 
 ## Agda narrative placement
 

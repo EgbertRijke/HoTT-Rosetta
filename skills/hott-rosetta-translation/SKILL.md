@@ -41,11 +41,11 @@ specific intermediate narrative step, and use a labeled section-level
 prerequisite group when dependencies make a closer placement invalid. Never
 move a declaration without typechecking its new section and its consumers.
 
-Put each result at its natural mathematical home. If an auxiliary result only
-bridges the formal decomposition and does not belong to the file, leave its
-Agda block empty. Record the exercise and its reason in
-`docs/agda-training-exercises.md`. Record the exact upstream results, their
-order, and their later uses in `docs/invisible-math.md`.
+Do not enlarge an earlier complete file solely to support a later block. If the
+later block needs an absent auxiliary result, leave that block empty. Record
+the exercise and its reason in `docs/agda-training-exercises.md`. In
+`docs/invisible-math.md`, record the exact upstream results, their natural
+mathematical homes, their order, and their later uses.
 
 Make durable prose or notation repairs in converter code or versioned data,
 regenerate every affected file, and add regression tests for recurring rules.

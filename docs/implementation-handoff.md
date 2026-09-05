@@ -90,9 +90,11 @@ through Chapters 3--22 in source order. File existence is not evidence that a
 section is complete: inspect every numbered definition, lemma, proposition,
 theorem, construction, and proof for applicable formalization.
 
-Section 10.2 currently fails at `ev-point`. The definition belongs in Section
-2.2's evaluation discussion, not in Section 10.2 and not as a training
-exercise. Its pinned source is recorded in `docs/invisible-math.md`.
+Section 10.2 currently fails at `ev-point`. Its Definition 10.2.1 block is now
+a recorded training exercise. Do not enlarge the already complete Section 2.2
+solely to fix it. The needed result's natural home, Remark 2.2.2, and pinned
+source are recorded in `docs/invisible-math.md`. The current block has not yet
+been emptied.
 
 Exercise prose remains part of conversion, but missing exercise Agda is the
 final formalization phase. Do not search for or add exercise Agda yet unless a
@@ -171,10 +173,10 @@ begin the deferred exercise-Agda pass in book order.
 - Historical handwritten/local blocks may remain, but do not add new ones.
 - A missing applicable source is a reportable gap, not permission to write a
   replacement.
-- Put results in their natural mathematical sections. Leave a purely auxiliary
-  block empty when it does not belong to the file. Record the exercise in
-  `docs/agda-training-exercises.md` and the required upstream mathematics in
-  `docs/invisible-math.md`.
+- Do not enlarge an earlier complete section solely to support later Agda.
+  Leave the blocked later formalization empty. Record the exercise in
+  `docs/agda-training-exercises.md`. Record each upstream requirement and its
+  natural mathematical home in `docs/invisible-math.md`.
 
 Avoid snapshot counts in handoff documentation. Obtain current block, gap,
 review, and generated-file counts from `python3 rosetta.py check` and the

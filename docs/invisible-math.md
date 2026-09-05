@@ -7,6 +7,7 @@ For each exercise, record:
 - the same stable name used in `docs/agda-training-exercises.md`;
 - each needed definition or lemma;
 - its mathematical role;
+- the book item where it most naturally belongs;
 - its dependency order;
 - its pinned agda-unimath commit, file, and lines;
 - any necessary change of notation;
@@ -18,11 +19,18 @@ Record all non-obvious decomposition choices. Keep the explanation short.
 
 ### Section 10.2: evaluation at a point
 
-Section 10.2 needs
-`ev-point a : ((x : A) → P x) → P a` in Definition 10.2.1 and Theorem 10.2.3.
-The pinned source is commit `c85d7fb`,
-`src/foundation-core/function-types.lagda.md`, lines 48--50.
+- **Exercise:** `definition-10.2.1-singleton-induction`.
+- **Needed result:**
+  `ev-point a : ((x : A) → P x) → P a`.
+- **Role:** It defines the evaluation map whose section expresses singleton
+  induction.
+- **Natural home:** Remark 2.2.2, which presents function evaluation.
+- **Order:** Define `ev-point` before `is-singleton`.
+- **Source:** Commit `c85d7fb`,
+  `src/foundation-core/function-types.lagda.md`, lines 48--50.
+- **Notation:** Replace `UU` by `Type`.
+- **Uses:** Definition 10.2.1 and Theorem 10.2.3.
 
-This is not a training exercise. Evaluation at a point belongs to Section 2.2,
-where function evaluation is introduced. Section 10.2 should import it from
-there. Until then, its typecheck fails at `ev-point`.
+Section 2.2 already typechecks and tells a complete story. Do not add
+`ev-point` there solely to make Section 10.2 compile. Section 10.2 is the
+training exercise because the need arises there.
