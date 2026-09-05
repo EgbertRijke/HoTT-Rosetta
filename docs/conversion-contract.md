@@ -90,10 +90,12 @@ When a chapter reaches 15:
 - add the pinned agda-unimath blocks at their best mathematical locations;
 - record every placement and dependency choice;
 - regenerate and typecheck all affected sections and later users;
-- report the alternative for review.
+- commit only the proposal changes;
+- push the new branch to the fork for review;
+- record the public branch in the handoff.
 
-Do not merge or push the proposal branch without instruction. Do not write an
-unpushed branch name into tracked documents.
+Never merge the proposal automatically. Push only its named branch; never push
+all local branches. Record its name only after the remote branch exists.
 
 ## Agda narrative placement
 

@@ -179,8 +179,9 @@ begin the deferred exercise-Agda pass in book order.
   natural mathematical home in `docs/invisible-math.md`.
 - Count these exercises by chapter. At 15, preserve the cautious version and
   build a source-backed placement alternative on a separate proposal branch.
-  Validate it, but do not merge or push it without instruction. Never record
-  an unpushed branch name in tracked files.
+  Validate and commit it. Push the named branch to the fork for review, then
+  record the public branch here. Never merge it automatically or push all local
+  branches.
 
 Avoid snapshot counts in handoff documentation. Obtain current block, gap,
 review, and generated-file counts from `python3 rosetta.py check` and the

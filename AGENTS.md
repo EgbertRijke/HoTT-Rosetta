@@ -33,7 +33,8 @@ not current instructions.
   natural mathematical home.
 - If one chapter reaches 15 such exercises, create a separate proposal branch.
   There, place pinned agda-unimath code at the best mathematical locations and
-  validate the result. Do not merge or push the proposal without instruction.
+  validate the result. Commit focused changes and push the new branch to the
+  fork for review. Never merge it automatically.
 - Generated modules must use repository-local imports, never imports from
   `external/agda-unimath`.
 - Preserve unrelated and in-progress work. Agents may create focused commits

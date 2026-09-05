@@ -25,7 +25,8 @@ invisible-math entry names the result's natural mathematical home.
 
 Count entries by chapter. At 15, keep this version and make a separate proposal
 branch with the missing pinned blocks placed where they fit best. Validate and
-report that alternative. Do not merge or push it without instruction.
+commit that alternative. Push the new branch to the fork for shared review and
+record it in the handoff. Never merge it automatically.
 
 ## Exercises
 
