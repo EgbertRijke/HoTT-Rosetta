@@ -47,12 +47,19 @@ the exercise and its reason in `docs/agda-training-exercises.md`. In
 `docs/invisible-math.md`, record the exact upstream results, their natural
 mathematical homes, their order, and their later uses.
 
-Count these exercises by chapter. At 15, keep the cautious version and create
-a separate proposal branch. There, place pinned agda-unimath blocks at the best
-mathematical locations, record each choice, regenerate, and typecheck every
-affected section and later user. Commit only those changes. Push the new branch
-to the fork and record it in the handoff. Never merge it automatically. Push
-only the named branch, not all local branches.
+Use `proposal/agda-exercise-solutions` for every exercise. Create and publish it
+from current `main` when the first exercise appears. First publish the empty
+block and both mathematical records on `main`. Fetch and inspect both remote
+branches. Bring current `main` into the proposal without rewriting its history.
+Add the pinned blocks where they fit best, record each choice, and make one
+focused solution commit. Regenerate and typecheck every affected section and
+later user. Push only the proposal branch. On `main`, record the proposal
+branch and solution commit in the exercise index, commit and push that record,
+and keep the handoff current. Never merge the proposal automatically or
+force-push it.
+
+This workflow is mandatory for agents. Humans may edit either branch without
+following it. Inspect and preserve their work.
 
 Make durable prose or notation repairs in converter code or versioned data,
 regenerate every affected file, and add regression tests for recurring rules.

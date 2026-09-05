@@ -31,10 +31,13 @@ not current instructions.
   empty. Record the exercise in `docs/agda-training-exercises.md`. In
   `docs/invisible-math.md`, record the needed agda-unimath results and their
   natural mathematical home.
-- If one chapter reaches 15 such exercises, create a separate proposal branch.
-  There, place pinned agda-unimath code at the best mathematical locations and
-  validate the result. Commit focused changes and push the new branch to the
-  fork for review. Never merge it automatically.
+- Use one shared branch, `proposal/agda-exercise-solutions`, for every training
+  exercise. Create and publish it from current `main` when the first exercise
+  appears. Before each solution, bring in the latest `main`. Add one focused
+  solution commit, validate it, push it, and record its commit in the exercise
+  index. Never merge the proposal automatically or rewrite its public history.
+- These branch steps bind agents only. Humans may edit either branch freely.
+  Agents must inspect and preserve human changes.
 - Generated modules must use repository-local imports, never imports from
   `external/agda-unimath`.
 - Preserve unrelated and in-progress work. Agents may create focused commits

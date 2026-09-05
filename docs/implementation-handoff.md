@@ -177,11 +177,13 @@ begin the deferred exercise-Agda pass in book order.
   Leave the blocked later formalization empty. Record the exercise in
   `docs/agda-training-exercises.md`. Record each upstream requirement and its
   natural mathematical home in `docs/invisible-math.md`.
-- Count these exercises by chapter. At 15, preserve the cautious version and
-  build a source-backed placement alternative on a separate proposal branch.
-  Validate and commit it. Push the named branch to the fork for review, then
-  record the public branch here. Never merge it automatically or push all local
-  branches.
+- Every exercise receives a solution on
+  `proposal/agda-exercise-solutions`. Create and publish it from current `main`
+  when the first exercise appears. Agents must publish the cautious `main`
+  version first, bring current `main` into the proposal, make one focused
+  solution commit, validate and push it, then record the commit in the exercise
+  index on `main`. Never merge or force-push the proposal. Humans may edit
+  either branch without this workflow; agents must preserve their work.
 
 Avoid snapshot counts in handoff documentation. Obtain current block, gap,
 review, and generated-file counts from `python3 rosetta.py check` and the

@@ -21,11 +21,14 @@ auxiliary result. Leave the blocked later formalization empty and record it as
 an exercise. Record the auxiliary result's most natural earlier item, exact
 source, role, order, and later uses as invisible mathematics.
 
-If a chapter reaches 15 such exercises, preserve this cautious version. In a
-separate proposal branch, place the pinned blocks where they fit best
-mathematically. Regenerate and typecheck every affected section and later user.
-Commit only the proposal, push its named branch to the fork, and record the
-public branch in the handoff. Never merge it automatically.
+Every exercise also receives a solution on
+`proposal/agda-exercise-solutions`. Create and publish it from current `main`
+when the first exercise appears. Agents must first publish the cautious version
+on `main`, then bring current `main` into the proposal branch. Place the pinned
+blocks where they fit best mathematically. Make one focused solution commit,
+regenerate, typecheck every affected section and later user, push the proposal,
+and record the solution commit on `main`. Never merge or force-push the
+proposal. Humans may edit either branch without this workflow.
 
 After changing a section, regenerate it, inspect the active output, run
 `python3 rosetta.py typecheck-candidate N M` when it contains Agda, and run the

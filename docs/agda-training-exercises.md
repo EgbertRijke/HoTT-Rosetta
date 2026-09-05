@@ -19,14 +19,19 @@ For each exercise, record:
 - why the earlier file should remain unchanged;
 - every later result that needs it;
 - the matching entry in `docs/invisible-math.md`.
+- the proposal branch, solution commit, and review state.
 
 The exercise belongs where the absent result first blocks formalization. The
 invisible-math entry names the result's natural mathematical home.
 
-Count entries by chapter. At 15, keep this version and make a separate proposal
-branch with the missing pinned blocks placed where they fit best. Validate and
-commit that alternative. Push the new branch to the fork for shared review and
-record it in the handoff. Never merge it automatically.
+Every exercise has a solution on `proposal/agda-exercise-solutions`. Create and
+publish this branch from current `main` when the first exercise appears. Agents
+must make one focused solution commit, validate and push it, then record its
+commit here on `main`. Before each solution, they must bring current `main`
+into the proposal without rewriting public history. The proposal is never
+merged automatically.
+
+These steps bind agents only. Humans may edit either branch freely.
 
 ## Exercises
 
@@ -41,3 +46,4 @@ record it in the handoff. Never merge it automatically.
 - **Invisible mathematics:** “Section 10.2: evaluation at a point” in
   `docs/invisible-math.md`.
 - **Status:** Recorded; the current Agda block has not yet been emptied.
+- **Proposal solution:** Not yet made.

@@ -82,20 +82,31 @@ formalization. Its invisible mathematics may have a natural home in an earlier
 file. Preserve the book's prose. When the classification is unclear, report it
 before changing the manifest.
 
-Count these training exercises by chapter. Do not count the book's exercises.
-When a chapter reaches 15:
+Every training exercise has a solution on the shared branch
+`proposal/agda-exercise-solutions`. There is no chapter threshold.
+Create and publish this branch from current `main` when the first exercise is
+recorded. Keep all later solutions on the same branch.
 
-- keep the cautious version unchanged;
-- create a separate proposal branch;
-- add the pinned agda-unimath blocks at their best mathematical locations;
-- record every placement and dependency choice;
-- regenerate and typecheck all affected sections and later users;
-- commit only the proposal changes;
-- push the new branch to the fork for review;
-- record the public branch in the handoff.
+For each exercise, an agent must:
 
-Never merge the proposal automatically. Push only its named branch; never push
-all local branches. Record its name only after the remote branch exists.
+1. Commit and push the empty block and both mathematical records on `main`.
+2. Fetch both remote branches and inspect their history.
+3. Bring the latest `main` into the proposal branch without rewriting public
+   history.
+4. Add the pinned agda-unimath blocks at their best mathematical locations.
+5. Record every placement and dependency choice.
+6. Make one focused solution commit.
+7. Regenerate and typecheck every affected section and later user.
+8. Push only the named proposal branch.
+9. On `main`, record the proposal branch and solution commit in
+   `docs/agda-training-exercises.md`; commit and push that record.
+10. Keep the handoff current.
+
+Never merge the proposal automatically. Never force-push it. Before changing
+it, preserve all collaborator work.
+
+These steps are mandatory for agents. Humans may edit either branch without
+following them. This is allowed, though the same care is encouraged.
 
 ## Agda narrative placement
 
