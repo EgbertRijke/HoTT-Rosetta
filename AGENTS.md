@@ -6,6 +6,8 @@ Before changing the repository, read:
 2. `docs/conversion-contract.md`
 3. `skills/hott-rosetta-translation/SKILL.md`
 4. The task references selected by that skill
+5. `docs/agda-training-exercises.md`
+6. `docs/invisible-math.md`
 
 `docs/initial-prompt.txt` and `docs/audit-baseline.md` are historical evidence,
 not current instructions.
@@ -24,6 +26,10 @@ not current instructions.
 - Never invent Agda. Copy exact or analogous pinned agda-unimath code, make
   only necessary local adaptations, and record commit/file/line/hash
   provenance. If no applicable source exists, report the gap.
+- Put each result in its natural mathematical section. If an auxiliary result
+  has no natural place in that file, leave its Agda block empty. Record the
+  choice in `docs/agda-training-exercises.md` and its needed agda-unimath
+  results in `docs/invisible-math.md`.
 - Generated modules must use repository-local imports, never imports from
   `external/agda-unimath`.
 - Preserve unrelated and in-progress work. Agents may create focused commits

@@ -61,6 +61,26 @@ Agda blocks are curated independently of mechanical LaTeX conversion.
   upstream copies or used as precedent for new handwritten blocks.
 - Typecheck every changed section containing Agda and affected aggregates.
 
+## Auxiliary results
+
+Put a result in the section where its mathematics is introduced. Import it
+later when needed.
+
+If a definition or lemma exists only to bridge the formal decomposition and
+does not belong to the file's mathematics:
+
+- leave its Agda block empty;
+- list it in `docs/agda-training-exercises.md`;
+- state why it does not belong in the file;
+- list its exact agda-unimath requirements in `docs/invisible-math.md`;
+- note every later result that needs it;
+- treat the resulting unresolved names as expected until the exercise is
+  filled.
+
+Do not withhold a result stated by the book. Do not move a result away from its
+natural earlier section merely to create an exercise. When the classification
+is unclear, report it before changing the manifest.
+
 ## Agda narrative placement
 
 Agda blocks must appear where their declarations are both narratively relevant

@@ -7,8 +7,9 @@ description: Convert HoTT book LaTeX, curate provenance-backed Agda, and maintai
 
 ## Start
 
-Read `AGENTS.md`, `docs/implementation-handoff.md`, and
-`docs/conversion-contract.md`. Then read only the references needed:
+Read `AGENTS.md`, `docs/implementation-handoff.md`,
+`docs/conversion-contract.md`, `docs/agda-training-exercises.md`, and
+`docs/invisible-math.md`. Then read only the references needed:
 
 - section work: `references/section-files.md` and `references/latex-to-markdown.md`
 - Agda block placement or manifest relocation:
@@ -39,6 +40,12 @@ scope. Prefer the matching item's end marker, use `after_text` only for a
 specific intermediate narrative step, and use a labeled section-level
 prerequisite group when dependencies make a closer placement invalid. Never
 move a declaration without typechecking its new section and its consumers.
+
+Put each result at its natural mathematical home. If an auxiliary result only
+bridges the formal decomposition and does not belong to the file, leave its
+Agda block empty. Record the exercise and its reason in
+`docs/agda-training-exercises.md`. Record the exact upstream results, their
+order, and their later uses in `docs/invisible-math.md`.
 
 Make durable prose or notation repairs in converter code or versioned data,
 regenerate every affected file, and add regression tests for recurring rules.

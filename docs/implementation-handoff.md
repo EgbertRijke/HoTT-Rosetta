@@ -2,12 +2,10 @@
 
 Updated 2026-09-04.
 
-## Current review branch
+## Current branch
 
-The narrative-placement work is on `fix/agda-narrative-placement`, tracking
-`fork/fix/agda-narrative-placement`. It has been pushed to the
-`daniel-carranza/HoTT-Rosetta` fork but must not be merged until the project
-collaborators reach consensus. Key commits leading into this handoff are:
+Work continues on `main`. The narrative-placement branch was merged and
+removed from the fork. Key commits leading into this handoff are:
 
 - `d33e710 fix(converter): place Agda blocks by narrative scope`
 - `47b17f3 docs(review): record Agda placement feedback`
@@ -64,12 +62,11 @@ the Agda declarations look familiar. All stale Agda review records outside
 those four files were reconciled before `f184957`; Section 9.3 is not part of
 the remaining manual-review set.
 
-Before proposing a merge, complete the four-file narrative review, then repeat
-the required checks and affected typechecks for Sections 8.1, 8.5, 9.1, 9.2,
-9.3, and 10.4. In particular, decide whether the Section 8.5 prerequisite group
-is the desired editorial presentation. Do not move those helpers solely for
-visual proximity: first establish that every definition is in Agda scope at
-its new location.
+Complete the four-file narrative review, then repeat the required checks and
+affected typechecks for Sections 8.1, 8.5, 9.1, 9.2, 9.3, and 10.4. In
+particular, decide whether the Section 8.5 prerequisite group is the desired
+editorial presentation. Do not move those helpers solely for visual proximity:
+first establish that every definition is in Agda scope at its new location.
 
 ### Review workflow state
 
@@ -92,6 +89,10 @@ Complete the remaining Agda for every **section file** in the book, working
 through Chapters 3--22 in source order. File existence is not evidence that a
 section is complete: inspect every numbered definition, lemma, proposition,
 theorem, construction, and proof for applicable formalization.
+
+Section 10.2 currently fails at `ev-point`. The definition belongs in Section
+2.2's evaluation discussion, not in Section 10.2 and not as a training
+exercise. Its pinned source is recorded in `docs/invisible-math.md`.
 
 Exercise prose remains part of conversion, but missing exercise Agda is the
 final formalization phase. Do not search for or add exercise Agda yet unless a
@@ -170,6 +171,10 @@ begin the deferred exercise-Agda pass in book order.
 - Historical handwritten/local blocks may remain, but do not add new ones.
 - A missing applicable source is a reportable gap, not permission to write a
   replacement.
+- Put results in their natural mathematical sections. Leave a purely auxiliary
+  block empty when it does not belong to the file. Record the exercise in
+  `docs/agda-training-exercises.md` and the required upstream mathematics in
+  `docs/invisible-math.md`.
 
 Avoid snapshot counts in handoff documentation. Obtain current block, gap,
 review, and generated-file counts from `python3 rosetta.py check` and the
