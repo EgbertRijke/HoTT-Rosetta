@@ -11,14 +11,14 @@ collaborators reach consensus. Key commits leading into this handoff are:
 
 - `d33e710 fix(converter): place Agda blocks by narrative scope`
 - `47b17f3 docs(review): record Agda placement feedback`
+- `f184957 feat(review): improve Agda review triage and table controls`
 
 The first commit adds stable `rosetta-item-end` markers, curated narrative
 anchors, optional headings for prerequisite groups, manifest relocations, and
 regenerated products. The second preserves the collaborator's Agda review
-comments separately. At the start of this documentation handoff,
-`data/agda-reviews.json` also had an unstaged one-line `review_sha256` refresh
-for `definition-8.5.1-prime`; inspect and preserve that review metadata rather
-than overwriting it.
+comments separately. The third preserves applicable review evidence after the
+converter change, adds the `needs-further-review` decision, migrates reviewed
+but inconclusive records, and adds sortable and filterable review tables.
 
 The branch passed the full unit suite, `python3 rosetta.py check`, and
 `git diff --check`. Candidate typechecks passed for the affected sections 8.1,
@@ -26,7 +26,7 @@ The branch passed the full unit suite, `python3 rosetta.py check`, and
 into agreement with existing notation conversion rules; those small notation
 changes were generated consequences rather than hand edits.
 
-### What changed and what remains to review
+### What changed
 
 - The renderer now closes a numbered item's scope after its adjacent proof or
   construction, not merely at the closing theorem div emitted by Pandoc.
@@ -45,12 +45,46 @@ changes were generated consequences rather than hand edits.
   defining `eq-pair`; the equivalence proof remains after the rest of the proof
   narrative.
 
-Before proposing a merge, collaborators should review the generated Sections
-8.1, 8.5, 9.1, 9.2, and 9.3 for mathematical narrative, then repeat the
-required checks and affected typechecks. In particular, decide whether the
-Section 8.5 prerequisite group is the desired editorial presentation. Do not
-move those helpers solely for visual proximity: first establish that every
-definition is in Agda scope at its new location.
+Most generated-file differences outside the central placement work were either
+new item-end markers, movement of an unchanged Agda fence ahead of transition
+prose, or existing notation normalization. Review hashes were refreshed only
+where inspection established that the reviewable Agda remained unchanged.
+
+### Remaining collaborator review
+
+The collaborator explicitly reserved these generated files for manual review:
+
+- Section 8.1
+- Section 8.5
+- Section 9.1
+- Section 9.2
+
+Do not refresh or transfer stale review evidence for those files merely because
+the Agda declarations look familiar. All stale Agda review records outside
+those four files were reconciled before `f184957`; Section 9.3 is not part of
+the remaining manual-review set.
+
+Before proposing a merge, complete the four-file narrative review, then repeat
+the required checks and affected typechecks for Sections 8.1, 8.5, 9.1, 9.2,
+9.3, and 10.4. In particular, decide whether the Section 8.5 prerequisite group
+is the desired editorial presentation. Do not move those helpers solely for
+visual proximity: first establish that every definition is in Agda scope at
+its new location.
+
+### Review workflow state
+
+Agda review decisions now distinguish `pending` (no recorded decision) from
+`needs-further-review` (inspected but not ready for approval or rejection).
+Content mismatches still display as `stale` over the saved decision. Existing
+pending code-block records with comments by `Daniel C`, `Daniel`, or
+`Reviewer` were migrated to the new decision; missing-code records and records
+with only `codex` comments were not.
+
+On the review home page, status totals are filter buttons and all five table
+columns are sortable. A repeated header click cycles ascending, descending,
+and default order. The active status button, directional arrows, live result
+summary, and **Reset table view** control make the current view explicit.
+These controls are client-side presentation only and do not change review data.
 
 ## Current goal
 
