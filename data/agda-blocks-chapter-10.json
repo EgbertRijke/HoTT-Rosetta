@@ -282,6 +282,8 @@
       "source_end_line": 524,
       "source_sha256": "a8c6528c080a072d52cae77ee6f1be2d0603442b07394fef1c73111638c0f117",
       "order": 0,
+      "conversion_status": "exercise",
+      "conversion_note": "Redo Lemma 10.4.5 with its auxiliary mathematics placed at natural Rosetta locations.",
       "imports": [],
       "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B} (H : is-invertible f)\n  where\n\n  is-retraction-map-inv-is-coherently-invertible-is-invertible :\n    pr1 H ∘ f ~ id\n  is-retraction-map-inv-is-coherently-invertible-is-invertible =\n    pr2 (pr2 H)\n\n  abstract\n    is-section-map-inv-is-coherently-invertible-is-invertible :\n      f ∘ pr1 H ~ id\n    is-section-map-inv-is-coherently-invertible-is-invertible =\n      ( ( inv-htpy (pr1 (pr2 H))) ·r\n        ( f ∘ pr1 H)) ∙h\n      ( ( ( f) ·l\n          ( pr2 (pr2 H)) ·r\n          ( pr1 H)) ∙h\n        ( pr1 (pr2 H)))\n\n  abstract\n    inv-coh-is-coherently-invertible-is-invertible :\n      f ·l is-retraction-map-inv-is-coherently-invertible-is-invertible ~\n      is-section-map-inv-is-coherently-invertible-is-invertible ·r f\n    inv-coh-is-coherently-invertible-is-invertible =\n      left-transpose-htpy-concat\n        ( ( pr1 (pr2 H)) ·r\n          ( f ∘ pr1 H ∘ f))\n        ( f ·l pr2 (pr2 H))\n        ( ( ( f) ·l\n            ( pr2 (pr2 H)) ·r\n            ( pr1 H ∘ f)) ∙h\n          ( pr1 (pr2 H) ·r f))\n        ( ( ( nat-htpy (pr1 (pr2 H) ·r f)) ·r\n            ( pr2 (pr2 H))) ∙h\n          ( right-whisker-concat-htpy\n            ( ( inv-preserves-comp-left-whisker-comp\n                ( f)\n                ( pr1 H ∘ f)\n                ( pr2 (pr2 H))) ∙h\n              ( left-whisker-comp²\n                ( f)\n                ( inv-coh-htpy-id (pr2 (pr2 H)))))\n            ( pr1 (pr2 H) ·r f)))\n\n  abstract\n    coh-is-coherently-invertible-is-invertible :\n      coherence-is-coherently-invertible\n        ( f)\n        ( pr1 H)\n        ( is-section-map-inv-is-coherently-invertible-is-invertible)\n        ( is-retraction-map-inv-is-coherently-invertible-is-invertible)\n    coh-is-coherently-invertible-is-invertible =\n      inv-htpy inv-coh-is-coherently-invertible-is-invertible\n\n  is-coherently-invertible-is-invertible : is-coherently-invertible f\n  is-coherently-invertible-is-invertible =\n    ( pr1 H ,\n      is-section-map-inv-is-coherently-invertible-is-invertible ,\n      is-retraction-map-inv-is-coherently-invertible-is-invertible ,\n      coh-is-coherently-invertible-is-invertible)",
       "source_note": "Copied from the pinned source with only the requested local substitutions."
@@ -326,6 +328,8 @@
       "source_end_line": 163,
       "source_sha256": "34c8f42f0fdb97375ac1111974ebd61729bea83a5d977aa7388c871c3f2e1006",
       "order": -4,
+      "conversion_status": "blocked",
+      "conversion_note": "Reconsider this auxiliary result under the Lemma 10.4.5 training exercise.",
       "imports": [],
       "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} {f g h : (x : A) → B x}\n  (H : f ~ g) (K : g ~ h) (L : f ~ h) (M : H ∙h K ~ L)\n  where\n\n  left-transpose-htpy-concat : K ~ inv-htpy H ∙h L\n  left-transpose-htpy-concat x =\n    left-transpose-eq-concat (H x) (K x) (L x) (M x)\n\n  inv-htpy-left-transpose-htpy-concat : inv-htpy H ∙h L ~ K\n  inv-htpy-left-transpose-htpy-concat = inv-htpy left-transpose-htpy-concat",
       "source_note": "Copied from the pinned source with only the requested local substitutions."
@@ -341,6 +345,8 @@
       "source_end_line": 85,
       "source_sha256": "8c3212232c7e0f50dd20615fb4abb0223119fef5c48a336d322082aa0a1d65fc",
       "order": -3,
+      "conversion_status": "blocked",
+      "conversion_note": "Reconsider this auxiliary result under the Lemma 10.4.5 training exercise.",
       "imports": [],
       "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}\n  where\n\n  right-whisker-concat-htpy :\n    {f g h : (x : A) → B x} {H I : f ~ g} → H ~ I → (J : g ~ h) → H ∙h J ~ I ∙h J\n  right-whisker-concat-htpy K J x = right-whisker-concat (K x) (J x)",
       "source_note": "Copied from the pinned source with only the requested local substitutions."
@@ -356,6 +362,8 @@
       "source_end_line": 285,
       "source_sha256": "9d4cbfd0f377b8fc883e9bf0cdc89e5939b2c3b862e973d2d4dcfe86f7605d92",
       "order": -2,
+      "conversion_status": "blocked",
+      "conversion_note": "Reconsider this auxiliary result under the Lemma 10.4.5 training exercise.",
       "imports": [],
       "code": "module _\n  {l1 l2 l3 l4 : Level}\n  {A : Type l1} {B : A → Type l2} {C : A → Type l3} {D : A → Type l4}\n  where\n\n  inv-preserves-comp-left-whisker-comp :\n    ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}\n    ( H : f ~ g) →\n    (k ∘ h) ·l H ~ k ·l (h ·l H)\n  inv-preserves-comp-left-whisker-comp k h H x = ap-comp k h (H x)\n\n  preserves-comp-left-whisker-comp :\n    ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}\n    ( H : f ~ g) →\n    k ·l (h ·l H) ~ (k ∘ h) ·l H\n  preserves-comp-left-whisker-comp k h H =\n    inv-htpy (inv-preserves-comp-left-whisker-comp k h H)",
       "source_note": "Copied from the pinned source with only the requested local substitutions."
@@ -371,6 +379,8 @@
       "source_end_line": 318,
       "source_sha256": "2074ca8b78ecf7c167f2b213d1a30c2a5c955c58326a81809ad1ca9034cf8fb5",
       "order": -1,
+      "conversion_status": "blocked",
+      "conversion_note": "Reconsider this auxiliary result under the Lemma 10.4.5 training exercise.",
       "imports": [],
       "code": "module _\n  {l : Level} {A : Type l} {f : A → A} (H : f ~ id)\n  where\n\n  coh-htpy-id : H ·r f ~ f ·l H\n  coh-htpy-id x = is-injective-concat' (H x) (nat-htpy-id H (H x))\n\n  inv-coh-htpy-id : f ·l H ~ H ·r f\n  inv-coh-htpy-id = inv-htpy coh-htpy-id",
       "source_note": "Copied from the pinned source with only the requested local substitutions."
@@ -386,6 +396,8 @@
       "source_end_line": 69,
       "source_sha256": "dc7e264f94e636fbf67c3aea58ae4964f913d9b4674ef5b1b5e851de36bb4efb",
       "order": -1,
+      "conversion_status": "blocked",
+      "conversion_note": "Reconsider this auxiliary result under the Lemma 10.4.5 training exercise.",
       "imports": [],
       "code": "module _\n  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}\n  {f g : (x : A) → B x}\n  where\n\n  left-whisker-comp² :\n    (h : {x : A} → B x → C x) {H H' : f ~ g} (α : H ~ H') → h ·l H ~ h ·l H'\n  left-whisker-comp² h α = ap h ·l α",
       "source_note": "Copied from the pinned source with only the requested local substitutions."
@@ -401,6 +413,8 @@
       "source_end_line": 83,
       "source_sha256": "f02c06e9e5790e2a6136df1fbc814977c6ba95fd950616ae2d330752c4690283",
       "order": -5,
+      "conversion_status": "blocked",
+      "conversion_note": "Reconsider this auxiliary result under the Lemma 10.4.5 training exercise.",
       "imports": [],
       "code": "module _\n  {l : Level} {A : Type l}\n  where\n\n  right-whisker-concat : {x y z : A} {p q : x ＝ y} → p ＝ q → (r : y ＝ z) → p ∙ r ＝ q ∙ r\n  right-whisker-concat α q = ap (_∙ q) α",
       "source_note": "Copied from the pinned source with only the requested local substitutions."
@@ -416,6 +430,8 @@
       "source_end_line": 517,
       "source_sha256": "b21a2bc6e93caef2c80d9abc7b339818f5eb18b24c327502f86ca2e4a47c711c",
       "order": -5,
+      "conversion_status": "blocked",
+      "conversion_note": "Reconsider this auxiliary result under the Lemma 10.4.5 training exercise.",
       "imports": [],
       "code": "module _\n  {l1 : Level} {A : Type l1}\n  where\n\n  is-injective-concat :\n    {x y z : A} (p : x ＝ y) {q r : y ＝ z} → p ∙ q ＝ p ∙ r → q ＝ r\n  is-injective-concat refl s = s\n\n  is-injective-concat' :\n    {x y z : A} (r : y ＝ z) {p q : x ＝ y} → p ∙ r ＝ q ∙ r → p ＝ q\n  is-injective-concat' refl s = inv right-unit ∙ s ∙ right-unit",
       "source_note": "Copied from the pinned source with only the requested local substitutions."

@@ -77,10 +77,13 @@ def candidate_section(
     rendered = render_section(section.path, section.number, subsection)
     destination_blocks = [
         block for block in (blocks or [])
-        if block.destination == module + ".lagda.md" and block.conversion_status == "ready"
+        if block.destination == module + ".lagda.md"
+        and block.conversion_status in {"ready", "exercise"}
     ]
     imports = []
     for block in destination_blocks:
+        if block.conversion_status != "ready":
+            continue
         for imported_module in block.imports:
             if imported_module not in imports:
                 imports.append(imported_module)
@@ -113,10 +116,13 @@ def candidate_exercise(
     module = filename.removesuffix(".lagda.md")
     selected = [
         block for block in (blocks or [])
-        if block.destination == filename and block.conversion_status == "ready"
+        if block.destination == filename
+        and block.conversion_status in {"ready", "exercise"}
     ]
     imports = []
     for block in selected:
+        if block.conversion_status != "ready":
+            continue
         for imported in block.imports:
             if imported not in imports:
                 imports.append(imported)

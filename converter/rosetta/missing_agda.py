@@ -103,7 +103,7 @@ def discover_missing_agda(root: Path) -> List[MissingAgdaItem]:
     curated = {
         (block.destination, block.item_id)
         for block in load_manifest(root / "data" / "agda-blocks.json")
-        if block.conversion_status == "ready"
+        if block.conversion_status in {"ready", "exercise"}
     }
     for chapter in inventory(root / "book"):
         for subsection in range(1, len(chapter.subsections) + 1):

@@ -421,9 +421,12 @@ def render_record(
     if next_id:
         navigation.append(f"<a href='/agda/{quote(next_id)}'>Next →</a>")
     navigation_html = " &nbsp; ".join(navigation)
-    is_missing = record.provenance_kind == "missing"
+    is_training = record.conversion_status == "exercise"
+    is_missing = record.provenance_kind == "missing" or is_training
     source_note = (
-        "No Agda code or applicable upstream source has been recorded yet."
+        "This block is an Agda training exercise. Its source records the invisible mathematics."
+        if is_training
+        else "No Agda code or applicable upstream source has been recorded yet."
         if is_missing
         else
         "This is an exact copy of the recorded source."
@@ -461,6 +464,11 @@ def render_record(
             f"<p class='warning'><strong>Not inserted by conversion:</strong> "
             f"{html.escape(record.conversion_note)}</p>"
             if record.conversion_status == "blocked" else ""
+        )
+        + (
+            f"<p class='warning'><strong>Training exercise:</strong> "
+            f"{html.escape(record.conversion_note)}</p>"
+            if is_training else ""
         )
         +
         f"<p><a href='/read/{quote(record.destination)}'>Read the generated file</a></p>"
@@ -519,7 +527,7 @@ def render_record(
 
 
 def render_agda_editor(record: AgdaReviewRecord, token: str, scratchpad=None) -> str:
-    if record.provenance_kind == "missing":
+    if record.provenance_kind == "missing" or record.conversion_status == "exercise":
         raise ValueError("There is no candidate Agda block to edit")
     draft_code = scratchpad.code if scratchpad else record.project_code
     draft_note = scratchpad.adaptation_note if scratchpad else ""

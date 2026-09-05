@@ -63,7 +63,8 @@ class AgdaReviewTests(unittest.TestCase):
             if comment.author == "Daniel C"
         ]
         self.assertGreaterEqual(len(daniel_comments), 11)
-        self.assertEqual(sum(record.conversion_status == "blocked" for record in records), 28)
+        self.assertEqual(sum(record.conversion_status == "blocked" for record in records), 35)
+        self.assertEqual(sum(record.conversion_status == "exercise" for record in records), 1)
         self.assertTrue(all(record.statement for record in records))
         self.assertTrue(all(record.document_sha256 for record in records))
 

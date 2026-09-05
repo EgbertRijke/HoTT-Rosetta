@@ -56,7 +56,10 @@ class AgdaManifestTests(unittest.TestCase):
         for block in selected:
             document = (directory / block.destination).read_text()
             marker = f"<!-- rosetta-agda-block: {block.block_id} -->"
-            self.assertEqual(marker in document, block.conversion_status == "ready")
+            self.assertEqual(
+                marker in document,
+                block.conversion_status in {"ready", "exercise"},
+            )
 
     def test_chapter_seven_ready_blocks_are_generated(self):
         from rosetta.layout import rosetta_directory
@@ -71,7 +74,10 @@ class AgdaManifestTests(unittest.TestCase):
         for block in selected:
             document = (directory / block.destination).read_text()
             marker = f"<!-- rosetta-agda-block: {block.block_id} -->"
-            self.assertEqual(marker in document, block.conversion_status == "ready")
+            self.assertEqual(
+                marker in document,
+                block.conversion_status in {"ready", "exercise"},
+            )
 
     def test_duplicate_ids_are_rejected(self):
         block = {
@@ -192,6 +198,23 @@ class AgdaManifestTests(unittest.TestCase):
         document = "<!-- rosetta-item: section-8.5 -->\n\nText.\n\n## Definition\n"
         result = inject_agda_blocks(document, "example.lagda.md", [block])
         self.assertIn("### Agda prerequisites\n\n<!-- rosetta-agda-block:", result)
+
+    def test_training_exercise_inserts_an_empty_block(self):
+        block = AgdaBlock(
+            block_id="training-exercise", provenance_kind="adapted",
+            item_id="lemma-10.4.5", destination="example.lagda.md",
+            source_file="example", source_commit="abc", source_start_line=1,
+            source_end_line=1, source_sha256="abc", code="solution = answer",
+            order=1, imports=["unused"], conversion_status="exercise",
+            conversion_note="Reserved as a training exercise.",
+        )
+        document = (
+            "<!-- rosetta-item: lemma-10.4.5 -->\n\nText.\n\n"
+            "<!-- rosetta-item-end: lemma-10.4.5 -->\n"
+        )
+        result = inject_agda_blocks(document, "example.lagda.md", [block])
+        self.assertIn("```agda\n\n```", result)
+        self.assertNotIn("solution = answer", result)
 
     def test_block_insertion_uses_unnumbered_heading_anchor(self):
         block = AgdaBlock(

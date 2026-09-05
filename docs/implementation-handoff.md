@@ -96,6 +96,11 @@ solely to fix it. The needed result's natural home, Remark 2.2.2, and pinned
 source are recorded in `docs/invisible-math.md`. The current block has not yet
 been emptied.
 
+Lemma 10.4.5 is now an Agda training exercise on `main`. Its seven former
+helper blocks are withheld for renewed placement review. All other Section
+10.4 blocks remain. The proposed natural homes and pinned sources are recorded
+in `docs/invisible-math.md`.
+
 Exercise prose remains part of conversion, but missing exercise Agda is the
 final formalization phase. Do not search for or add exercise Agda yet unless a
 later section imports or otherwise directly requires it. When an exercise is a

@@ -47,3 +47,17 @@ These steps bind agents only. Humans may edit either branch freely.
   `docs/invisible-math.md`.
 - **Status:** Recorded; the current Agda block has not yet been emptied.
 - **Proposal solution:** Not yet made.
+
+### `lemma-10.4.5-coherent-inverse`
+
+- **Place:** Section 10.4, Lemma 10.4.5.
+- **Task:** Turn an invertible map into a coherently invertible map.
+- **Absent results:** Cancellation and whiskering laws for paths and
+  homotopies.
+- **Reason:** The former proof placed seven general lemmas beside Lemma 10.4.5.
+  Their mathematics belongs with earlier path and homotopy operations.
+- **Later use:** Theorem 10.4.6.
+- **Invisible mathematics:** “Lemma 10.4.5: coherent inverse” in
+  `docs/invisible-math.md`.
+- **Status:** Empty on `main`.
+- **Proposal solution:** Not yet made.

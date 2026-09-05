@@ -42,5 +42,9 @@ Missing-code pages accept comments but cannot receive a review decision, be
 edited, or be typechecked. Current policy forbids adding handwritten
 replacement blocks.
 
+Training exercises show an empty Agda block and their recorded invisible
+mathematics. Their solutions live on `proposal/agda-exercise-solutions`, not on
+`main`.
+
 The file reader displays active generated files read-only. Durable changes
 belong in converter code or curated data followed by regeneration.
