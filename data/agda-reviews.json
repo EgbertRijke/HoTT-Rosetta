@@ -352,10 +352,20 @@
       ],
       "state": "needs-further-review"
     },
+    "exercise-7-9-bound-natural-remainder": {
+      "comments": [],
+      "review_sha256": "c0c1c6ee3b1e2fade39ad6f221a54fc3a74b32be40dfb1b124c1cdce9c4ce699",
+      "state": "approved"
+    },
     "exercise-7-9-bound-successor-finite": {
       "comments": [],
       "review_sha256": "bcfbfc1d042d74e1d036af8e38095a866b1bc52f5f69eda968d4afa43eed129e",
-      "state": "pending"
+      "state": "approved"
+    },
+    "exercise-7-9-euclidean-division-existence": {
+      "comments": [],
+      "review_sha256": "58f820d860e564be2f15ff0bdda2fd156e10492980927d4ac8cedf4a8cfd594f",
+      "state": "approved"
     },
     "lemma-7.4.4-natural-values-finite-successor-adapted": {
       "comments": [],
