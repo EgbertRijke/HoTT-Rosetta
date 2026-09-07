@@ -157,3 +157,10 @@ exposes the converse absent from the upstream structure-identity-principle
 module. Exercise 10.6 and Section 11.6 extend the existing singleton-induction
 exercise's later uses; the fundamental theorem extends the coherence
 exercise's later uses. No new auxiliary contraction proof is invented.
+
+Published proposal `6bd180b` implements these placements. Its regression
+test verifies that the involution follows the inverse laws inside Definition
+5.2.5 and that the equivalences remain at Exercise 9.1, not in the later
+example. The unused right-concatenation and transport parts of Exercise 9.1
+remain explicit gaps on that branch. Candidate Sections 5.2 and 11.6,
+Exercises 9.1 and 10.6, and aggregate Chapters 5--11 pass ordinary Agda checks.

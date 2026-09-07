@@ -53,8 +53,10 @@ Work continues on `main`.
   connections between all six theorem conditions, including the converse.
   Exercise 10.6 supplies the required contractible-base equivalence.
   Its Example 11.6.3 is a newly recorded empty training site: the inversion
-  equivalence needs `inv-inv` in complete Section 5.2. Its proposal solution
-  and actual Section 11.6 Agda validation are the immediate next action.
+  equivalence needs `inv-inv` in complete Section 5.2. Proposal solution
+  `6bd180b` places this auxiliary after the inverse laws and the two required
+  groupoid equivalences at Exercise 9.1. It passes all of Section 11.6 and
+  aggregate Chapters 5--11, including the six-condition theorem.
   Sections 12.1--13.5 still have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
@@ -62,35 +64,34 @@ Work continues on `main`.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
-The latest validation passed the full unit suite (149 tests on `main`, 151 on
+The latest validation passed the full unit suite (151 tests on `main`, 154 on
 the proposal), `python3 rosetta.py check`, and `git diff --check`. Proposal
+`6bd180b` passes candidate Sections 5.2 and 11.6, Exercises 9.1 and 10.6,
+and aggregate Chapters 5--11. Earlier proposal
 `3bbc564` passes candidate Section 11.5 and aggregate Chapters 9--11; the
 earlier `63e5e49` checks Sections 10.3 and 11.1--11.4. The earlier `511f171`
 also checked Section 2.2 and Chapters 2--10.
-On `main`, Sections 10.2, 10.4, and 11.1--11.5 and Chapters 10--11 remain
-deferred, never recorded as passed. The prose of Sections 11.2--11.5 was
-compared item by item with the book and has no unresolved references or raw
+On `main`, Sections 10.2, 10.4, and 11.1--11.6, Exercise 10.6, and Chapters
+10--11 remain deferred, never recorded as passed. The prose of Sections
+11.2--11.6 was compared item by item with the book and has no unresolved references or raw
 TeX commands. No review evidence or completion status was inferred from this.
 
 ## Next work
 
-The five assigned Chapter 10 steps are done. Keep Definition 10.2.1, Lemma
-10.4.5, and Theorem 11.4.2 empty on `main`; do not merge the proposal to make
-`main` pass. The audit also records that Definition 10.4.4's final cancellation
+The five assigned Chapter 10 steps and the Chapter 11 section formalizations
+are done, with the recorded training holes retained. Keep Definition 10.2.1,
+Lemma 10.4.5, Theorem 11.4.2, and Example 11.6.3 empty on `main`; do not merge
+the proposal to make `main` pass. The audit also records that Definition 10.4.4's final cancellation
 result is provided only on the proposal as part of the existing coherence exercise.
 
-Publish the recorded Example 11.6.3 solution on the shared proposal and
-validate all of Section 11.6 there, then formalize Chapters 12 and 13 in
-order. Chapter 13 contains Axiom 13.1.3: keep any
-assumption explicit and never describe it as a proof.
-
-Section 11.6 has a definition, a six-condition equivalence theorem, and a
-fiber identity example. The pinned `foundation/structure-identity-principle`
-module provides a forward construction, not by itself all six implications.
-Audit the converse and identity-system conditions as well as the example.
-Its named dependencies include interchange of dependent sums and
-contractibility of a dependent sum; investigate their natural homes before
-adding code.
+Formalize Chapters 12 and 13 in order, starting with Section 12.1 in
+`book/hierarchy.tex`. Its four numbered items include all four equivalent
+conditions for being a proposition: do not omit the embedding into the unit
+type. Search the pinned proposition, embedding, empty-type, and unit-type
+modules, and audit the required contractible-identity result in Exercise 10.1.
+Avoid importing function extensionality from upstream ahead of its narrative
+home. Chapter 13 contains Axiom 13.1.3: keep that assumption explicit and
+never describe it as a proof.
 
 For each section, inventory every numbered mathematical item, search pinned
 agda-unimath for exact code before analogues, record full provenance,
