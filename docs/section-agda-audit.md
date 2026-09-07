@@ -646,4 +646,10 @@ Chapters 12--14 are deferred, not passed. Removing Agda recovers the
 rendered source exactly modulo whitespace: 100% prose comparison,
 7/7 headings, 10/10 text fences, no unresolved references or raw TeX.
 The three existing diagram drafts and their review markers are unchanged.
-Actual proposal validation is pending.
+Published proposal merge `7ba38d00a91229d5311cba0c2a400b3160ebf93f`
+passes actual Agda for Section 14.1, Exercise 12.6, and aggregate Chapters
+12--14, all 176 unit tests, repository checks (598 verified blocks), and
+whitespace checks. No proof correction or new training solution was
+needed. The merge's gap-list insertion conflict was resolved by retaining
+both the proposal's existing Exercise 9.1 remainder and the new Exercise
+12.6 remainder; neither record was discarded.

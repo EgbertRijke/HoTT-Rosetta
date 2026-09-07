@@ -638,5 +638,9 @@ their inclusive source hashes are in the Chapter 14 manifest.
   prose; no classical or univalence axiom is introduced.
 
 Main's candidate Section 14.1, Exercise 12.6, and aggregate Chapters
-12--14 defer through the existing training dependencies. Actual proposal
-validation must precede any claim of an Agda pass.
+12--14 defer through the existing training dependencies. Published
+proposal merge `7ba38d00a91229d5311cba0c2a400b3160ebf93f` passes all
+of those actual Agda checks, 176 unit tests, repository checks (598 verified
+blocks), and whitespace checks. The proofs needed no corrections or new
+training solutions. No earlier complete file or existing exercise proof
+was enlarged.
