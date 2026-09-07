@@ -330,7 +330,11 @@ laws belong after `tot` at Definition 11.1.1. The existing earlier
 mathematical accounts pass on the proposal but remain deferred on main
 through their recorded dependencies. Keep those earlier main files unchanged.
 The exercise index and invisible-math record specify all source ranges,
-local adaptations, dependency order, and later users. Proposal validation
-is pending; Section 12.3 is deferred on `main`, never recorded complete or
-passed. All 154 main unit tests, repository checks, and whitespace checks
-pass. No exercise Agda or optional review evidence is changed.
+local adaptations, dependency order, and later users. Published proposal
+`b96fdf3` implements these placements, and passes candidate Sections
+11.1--11.6 and 12.1--12.3 and aggregate Chapters 10--12. All 158 proposal
+unit tests, repository checks, and whitespace checks pass. The generated
+prose of the two changed earlier sections is unchanged; their comparison
+checks remain 100%. Section 12.3 is deferred on `main`, never recorded
+complete or passed. All 154 main unit tests, repository checks, and
+whitespace checks pass. No exercise Agda or optional review evidence is changed.
