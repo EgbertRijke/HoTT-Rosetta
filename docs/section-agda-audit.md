@@ -469,5 +469,11 @@ TeX commands. Regression tests check the complete prose, declaration scope,
 the intervening display, full inverse data, and the remaining exercise gap.
 Main passes all 162 unit tests, repository checks (542 verified blocks),
 Exercise 9.5's candidate and aggregate Chapter 9, and whitespace checks.
-Section 13.2 and aggregate Chapter 13 are deferred, not passed. Actual
-proposal validation is pending. No review state or complete-file record is changed.
+Section 13.2 and aggregate Chapter 13 are deferred, not passed. Published
+proposal `161b3c1b0b270cbcd06a4a60513271df4690f969` passes actual Agda
+for Section 13.2, Exercise 9.5, and aggregate Chapters 9 and 13, all 167
+unit tests, repository checks (554 verified blocks), and whitespace checks.
+Its only correction adds a direct import for the existing equivalence
+composition in Exercise 9.4; the exact scratchpad passed and all proof
+bodies remain unchanged. That focused correction is also on main, without
+the proposal's training solutions. No review state or complete-file record is changed.

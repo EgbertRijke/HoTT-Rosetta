@@ -424,4 +424,9 @@ the eight new records in `data/agda-blocks-chapter-13.json` carry hashes.
 
 No new absent auxiliary at an earlier complete site is found. The section
 still has the existing transitive training dependencies; its ordinary
-main check is deferred, and actual proposal validation is pending.
+main check is deferred. Published proposal
+`161b3c1b0b270cbcd06a4a60513271df4690f969` passes Section 13.2, Exercise
+9.5, and aggregate Chapters 9 and 13. The candidate check exposed one
+missing direct import: equivalence composition already lives in Exercise
+9.4. That import was validated through a passing scratchpad, with every
+proof body unchanged, and the focused correction was carried to main.
