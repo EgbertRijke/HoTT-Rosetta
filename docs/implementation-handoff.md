@@ -16,6 +16,25 @@ completion.
 
 Work continues on `main`.
 
+Section 14.2 now has eighteen provenance-backed blocks accounting for its
+formation rules, both constructors, and all five numbered items. Its four
+explicitly labeled HIT assumptions are proposition-level only. The full
+dependent induction predicate includes its computation homotopy; the
+universal property and functorial identity/composition laws are derived.
+The equality-based Section 14.1 interface is unchanged: functoriality uses
+an explicit function-extensionality transfer. Remark 14.2.3's displayed
+transport identity equivalence is the ninth empty main training site,
+needing Exercise 9.1's existing proposal-only transport equivalence.
+No earlier Agda or exercise Agda is enlarged. The proof-tree parser now
+preserves nested conclusions and external sentence punctuation; all three
+Section 14.2 rules survive. Agda's separate Tarski-code representation gap
+and the two visible minipage diagnostics remain recorded.
+Main passes 176 unit tests, repository checks (604 blocks: 176 exact,
+370 adapted, 58 historical/local), and whitespace checks. Changed
+Sections 1.1--1.4, 2.1--2.2, and 3.1--3.2 and aggregate Chapters 1--3
+pass Agda with unchanged code. Section 14.2 and Chapter 14 defer.
+Proposal restoration and actual Agda validation are the immediate next step.
+
 The previous handoff misidentified `book/univalence.tex` as Chapter 14.
 Recomputed active inputs and the filename registry agree: Chapter 14 is
 propositional truncations, Chapter 15 images, Chapter 16 finite types, and
@@ -200,24 +219,28 @@ status was inferred from this.
 The five assigned Chapter 10 steps and the Chapter 11 section formalizations
 are done, with the recorded training holes retained. Keep Definition 10.2.1,
 Lemma 10.4.5, Theorems 11.4.2, 12.2.3, 12.3.4, and 12.4.7, Example 11.6.3,
-and Lemma 13.5.3's case-evaluation-identification equivalence empty
+Lemma 13.5.3's case-evaluation-identification equivalence, and Remark
+14.2.3's transport identity equivalence empty
 on `main`; do not merge the proposal to make `main` pass. The audit also
 records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Continue Section 14.2, `book/propositional-truncation.tex`, lines 103--255.
-Inventory its formation and universe rules, both constructors, all five
-numbered items (Lemma 14.2.1, Definition 14.2.2, Remark 14.2.3, Theorem
-14.2.4, Proposition 14.2.5), induction rules, computation rules, and proof
-trees. Section 14.1 and its needed Exercise 12.6 prerequisite are validated.
-Pinned `foundation/propositional-truncations` derives its definitions from
-the postulates in `foundation/truncations`; inspect both before choosing
-the book's proposition-level specialization. Label those assumptions and
-any judgmental-versus-propositional computation difference. Do not
-postulate general truncations ahead of their book scope merely because
-upstream packages them together. Section 14.1 itself assumes no truncation
-exists. Preserve its exact identity-based unique-extension interface.
+First publish the cautious Section 14.2 version on main, bring latest main
+into the shared proposal, restore its retained Remark 14.2.3 block using
+the existing Exercise 9.1 auxiliary, and validate the entire section and
+affected aggregates with actual Agda. Record the published solution here
+and in the exercise index; main must retain its empty block.
+
+Then continue Section 14.3, “Logic in type theory”,
+`book/propositional-truncation.tex`, lines 256--341. Inventory both
+definitions, both universal-property propositions and full proofs, and
+every row of the logical-connective table. Inspect the exact prerequisite
+Exercise 13.8 (the coproduct universal property) and Section 13.3's
+Sigma universal property before choosing pinned disjunction/existential
+code. Add exercise Agda only if the section needs it, at its exact home.
+Keep Section 14.2's proposition-level HIT assumptions and Section 14.1's
+identity-based unique-extension interface unchanged.
 
 For later Section 17.1, `book/univalence.tex`, lines 11--109, inspect
 the Chapter 17 introduction at lines 1--10. Inventory all six numbered

@@ -16,7 +16,7 @@ Such steps can be represented by **inference rules**, which are written in the f
 ```text
 H_1$ $H_2$ \dots $H_n
 ─────────────────────
-         $C$
+          C
 ```
 
 Inference rules contain above the horizontal line a finite list `H_1`, `H_2`, …, `H_n` of *judgments* for the **premises**, and below the horizontal line a single judgment `C` for the **conclusion**.
@@ -31,7 +31,7 @@ A straightforward example of an inference rule that we will encounter in Chapter
 ```text
 Γ⊢ a:A   Γ⊢ f:A→ B
 ──────────────────
-   $Γ⊢ f(a):B$
+    Γ⊢ f(a):B
 ```
 
 This rule asserts that in any context `Γ` we may use an element `a:A` and a function `f:A→ B` to obtain an element `f(a):B`.

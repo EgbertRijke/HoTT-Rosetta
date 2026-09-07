@@ -35,9 +35,9 @@ They are introduced as follows:
 *Proof tree (automatic faithful draft).*
 
 ```text
-      Γ⊢ a:A
-──────────────────
-$Γ, x:A⊢ a=x type$
+     Γ⊢ a:A
+────────────────
+Γ, x:A⊢ a=x type
 ```
 
 This rule asserts that given an element `a:A` in context `Γ`, we may form the type `a=x` in context `Γ, x:A`.

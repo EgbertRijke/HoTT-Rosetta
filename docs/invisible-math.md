@@ -644,3 +644,75 @@ of those actual Agda checks, 176 unit tests, repository checks (598 verified
 blocks), and whitespace checks. The proofs needed no corrections or new
 training solutions. No earlier complete file or existing exercise proof
 was enlarged.
+
+### Section 14.2: higher-inductive truncations
+
+All new blocks use pinned commit
+`c85d7fb834778f96a66576318cdc4ef3d4b80a26`; inclusive-range hashes,
+including secondary sources for adaptations, are in the Chapter 14 manifest.
+
+- **Training exercise:** `remark-14.2.3-transport-identifications`.
+  `foundation/transport-along-identifications`, 42--70, supplies
+  `is-equiv-tr` at its exact Exercise 9.1 home. It is already published on
+  the shared proposal as part of `31222b8`; no new earlier auxiliary is
+  needed. Specialize `foundation-core/equivalences`, 691--698, to this
+  transport and reverse the equivalence as displayed in the book. Expand
+  the inverse-bundle projections from that same file, 270--300, to local
+  `map-section-is-equiv` and `is-equiv-map-section-is-equiv`. Theorem
+  11.4.2 supplies the embedding theorem. Keep this later block empty on
+  main, with its complete retained code; restore it only on the proposal.
+- **Assumption presentation:** The book explicitly adds higher-inductive
+  formation, point, path, and induction rules. Specialize the formation
+  and point postulates in `foundation/truncations`, 51--52 and 62--63,
+  to propositions only. Do not copy its general truncation or
+  universal-property postulate. Use the analogous pinned HIT path and
+  induction-witness postulate pattern from
+  `synthetic-homotopy-theory/circle`, 66--67 and 75--76, with the exact
+  truncation path signature (`foundation/propositional-truncations`,
+  62--65) and exact induction predicate
+  (`foundation/induction-principle-propositional-truncation`, 28--43).
+  These are explicitly labeled assumptions at the book's rules, not
+  proofs, and introduce no circle import or later mathematical axiom.
+- **Lemma and bundle:** Proposition 12.1.3's existing
+  `is-prop-all-elements-equal` (`foundation-core/propositions`, 98--101)
+  proves Lemma 14.2.1 from the assumed path constructor. The pinned
+  truncated-type bundle (`foundation/truncations`, 58--60) specializes to
+  `Prop` with that derived proof. Agda's universe closure realizes the
+  Russell-style formation statement; its representation does not separately
+  encode the book's Tarski truncation code and decoding equation. Keep this
+  distinction in the gap inventory and preserve both source rules in prose.
+- **Induction data:** Copy the full path clause and Sigma-valued induction
+  predicate from the induction-principle module, 28--43. The two projections
+  of the explicitly assumed witness give `ind-trunc-Prop'` and its
+  pointwise computation homotopy. The former's signature agrees with
+  `foundation/propositional-truncations`, 98--108, after expanding
+  `dependent-identification` to transport equality. Its body projects
+  the HIT assumption instead of using upstream's assumed universal property.
+  Thus Theorem 14.2.4 is not assumed before it is proved. No judgmental
+  rewrite rule or computation stronger than the book's homotopy is added.
+- **Path clause:** The induction-principle module, 51--69, supplies both
+  directions of Remark 14.2.3. Its forward proof builds an inhabited
+  contraction with center `tr B (alpha p p) x`, rather than using the
+  book's transport-embedding proof. The latter's displayed equivalence is
+  retained separately at the training site. The proposition-valued
+  eliminator and computation are copied from the truncation module,
+  131--146, using the HIT eliminator.
+- **Universal property:** The same module, 152--177, supplies recursion,
+  its computation, and the full proof of Theorem 14.2.4 via Section 14.1's
+  extension criterion. Lines 183--205 supply unique extensions and their
+  map. Keep the local equality-based universal-property interface unchanged.
+- **Functoriality:** `foundation/functoriality-propositional-truncation`,
+  36--50, 75--87, 93--97, and 103--114, supplies the map, computation,
+  uniqueness, identity law, and full whiskered composition law. At the
+  unique-map definition, transfer the equality-based extension contraction
+  to the source's homotopy-based fiber using the explicit funext transfer
+  in `foundation/universal-property-propositional-truncation`, 117--126.
+  Every later proof is unchanged apart from `UU` and the function wrapper.
+
+The renderer's bounded-depth proof-tree argument regex previously silently
+dropped the nested universe-decoding conclusion. Balanced argument parsing
+now preserves it and rejects malformed rules; the book's `brckcheck` macro
+is rendered from `hott.tex:578`, with a visible check mark. External sentence
+punctuation no longer leaves raw math delimiters in proof-tree drafts.
+The two unsupported minipage layout markers remain visible, with all their
+mathematical content retained. Regenerate and check all affected documents.

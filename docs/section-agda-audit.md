@@ -653,3 +653,49 @@ whitespace checks. No proof correction or new training solution was
 needed. The merge's gap-list insertion conflict was resolved by retaining
 both the proposal's existing Exercise 9.1 remainder and the new Exercise
 12.6 remainder; neither record was discarded.
+
+## Section 14.2: propositional truncations as higher-inductive types
+
+Eighteen provenance-backed blocks account for the introduction and all
+five numbered items in `book/propositional-truncation.tex`, lines 103--255.
+
+| Item or assertion | Curated mathematical content |
+| --- | --- |
+| Formation and universe rules | The proposition-level specialization of pinned truncation formation and its notation alias, explicitly labeled as assumed. All three book proof trees are preserved. Agda's Russell-style universes do not separately represent the checked Tarski code and decoding judgment; that gap is recorded, not claimed proved. |
+| Point and path constructors | Two explicitly labeled assumptions. The point specializes pinned truncations; the path uses the pinned analogous HIT postulate pattern and exact propositional-truncation path signature. No general truncation axiom or unrelated circle import is introduced. |
+| Lemma 14.2.1 | Derive the proposition proof from the path constructor using Proposition 12.1.3; bundle the type and its proof. |
+| Definition 14.2.2 | The complete pinned path-clause and induction predicates, including the Sigma of dependent function and point computation homotopy. Explicitly assume that HIT induction witness, then expose both projections as the eliminator and computation rule. No judgmental rewrite or universal-property axiom is substituted. |
+| Remark 14.2.3 | Both implications of the path-clause/proposition criterion, the transport embedding and reverse identity equivalence, and the proposition-valued eliminator with its computation. The pinned forward criterion uses an inhabited contraction rather than the book's embedding proof; the book's displayed equivalence is retained separately as the new training site. |
+| Theorem 14.2.4 | Constant-family recursion and its computation, then derive the universal property from the proposition-valued eliminator using Section 14.1's extension criterion. Retain the equality-based unique-extension witness and its map projection. |
+| Proposition 14.2.5 | Transfer equality-based unique extensions to homotopy-based extensions by the explicitly recorded total equivalence of function extensionality. Project the unique map and its computation, prove uniqueness by contraction and action on paths, and retain the full identity and composition laws. |
+
+All four assumptions have visible “Assumed” headings and precede the
+derived universal-property theorem. Their source ranges, hashes, analogous
+HIT patterns, and necessary local adaptations are recorded in the manifest
+and invisible-mathematics index. No earlier complete file is enlarged and
+no exercise Agda is added. In particular, the absent general transport
+equivalence belongs at Exercise 9.1; the proposal already supplies it there.
+The later Remark 14.2.3 block stays empty on main as the ninth training site.
+
+The renderer's former bounded-depth regex silently lost a nested universe
+conclusion. Balanced argument scanning now preserves arbitrary nesting,
+escaped braces, and external sentence punctuation, and rejects malformed
+rule arguments rather than emitting an empty conclusion. The truncation
+code macro is normalized explicitly. Regeneration also removes stray math
+delimiters from earlier proof trees, without changing any earlier Agda.
+The two visible unsupported-minipage diagnostics remain; their mathematical
+contents are preserved. No source prose typo is silently corrected.
+
+Removing Agda and the four assumption headings recovers the rendered source
+exactly modulo whitespace. Raw comparison is 99.07%, with 10/14 distinct
+headings and all 18 text fences, no unresolved references or raw TeX.
+Regression tests check all items, assumptions and declaration placement,
+full prose, complete induction/computation data, both criterion directions,
+the explicit function-extensionality transfer, and both functorial laws.
+
+Main passes all 176 unit tests, repository checks (604 verified blocks),
+and whitespace checks. Changed Sections 1.1--1.4, 2.1--2.2, and 3.1--3.2
+and aggregate Chapters 1--3 pass Agda; their Agda fences are unchanged.
+Section 14.2 and aggregate Chapter 14 correctly defer. Actual proposal
+restoration and validation are pending; no completion or review record
+is inferred from the current files or deferred checks.

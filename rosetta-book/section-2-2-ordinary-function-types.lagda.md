@@ -20,7 +20,7 @@ In this case, we can first weaken `B` by `A` and then apply the `Π`-formation r
 ─────────────────────────────────────── W
                  Γ,x:A⊢ B \textrm{type}
 ───────────────────────────────────────── Π
-       $Γ⊢ Π(x:A) B \textrm{type}$
+        Γ⊢ Π(x:A) B \textrm{type}
 ```
 
 A term `f:Π(x:A) B` is a function that takes an argument `x:A` and returns `f(x):B`.
@@ -45,7 +45,7 @@ Formally, we make such definitions by adding one more line to the above derivati
 ───────────────────────────────────────── Π
                 Γ⊢ Π(x:A) B \textrm{type}
 ───────────────────────────────────────────
-     $Γ⊢ A→ B ≔ Π(x:A) B \textrm{type}$
+      Γ⊢ A→ B ≔ Π(x:A) B \textrm{type}
 ```
 
 ## Remark 2.2.1
@@ -73,11 +73,11 @@ If we wish to make a definition `c≔ a`, then we can extend the derivation tree
 *Proof tree (automatic faithful draft).*
 
 ```text
-      D
-  ──────
-  Γ⊢ a:A
-──────────
-$Γ⊢c≔ a:A$
+     D
+ ──────
+ Γ⊢ a:A
+────────
+Γ⊢c≔ a:A
 ```
 
 The effect of such a definition is that we have extended our type theory with a new constant `c`, for which the following inference rules are valid
@@ -105,7 +105,7 @@ H_1$ $H_2$ \dots $H_n
 ```text
 H_1$ $H_2$ \dots $H_n
 ─────────────────────
-      $Γ⊢c≐ a:A$
+       Γ⊢c≐ a:A
 ```
 
 In our example of the definition of the ordinary function type `A→ B`, we therefore have by definition the following valid inference rules
@@ -133,7 +133,7 @@ In our example of the definition of the ordinary function type `A→ B`, we ther
 ```text
 Γ⊢ A \textrm{type}   Γ⊢ B \textrm{type}
 ───────────────────────────────────────
-   $Γ⊢ A→ B≐ Π(x:A) B \textrm{type}$
+    Γ⊢ A→ B≐ Π(x:A) B \textrm{type}
 ```
 
 There are of course many such definitions throughout the development of dependent type theory, the univalent foundations of mathematics, and synthetic homotopy theory.
@@ -232,13 +232,13 @@ For any type `A` in context `Γ`, we define the **identity function** `id[A]:A�
 *Proof tree (automatic faithful draft).*
 
 ```text
-  Γ⊢ A \textrm{type}
-  ──────────────────
-         Γ,x:A⊢ x:A
-  ──────────────────
-     Γ⊢ λ x. x:A→ A
-──────────────────────
-$Γ⊢ id[A]≔λ x. x:A→ A$
+ Γ⊢ A \textrm{type}
+ ──────────────────
+        Γ,x:A⊢ x:A
+ ──────────────────
+    Γ⊢ λ x. x:A→ A
+────────────────────
+Γ⊢ id[A]≔λ x. x:A→ A
 ```
 
 <!-- rosetta-agda-block: section-2-2-identity-function-adapted -->
@@ -272,9 +272,9 @@ The identity function therefore satisfies the following inference rules:
 *Proof tree (automatic faithful draft).*
 
 ```text
-  Γ⊢ A \textrm{type}
-──────────────────────
-$Γ⊢ id[A]≐λ x. x:A→ A$
+ Γ⊢ A \textrm{type}
+────────────────────
+Γ⊢ id[A]≐λ x. x:A→ A
 ```
 
 Next, we define the composition of functions.
@@ -355,7 +355,7 @@ The derivation we use to construct `comp` is as follows:
 ─────────────────────────────────────────────────────────
                Γ⊢λ g. λ f. λ x. g(f(x)):C^B→ (B^A→ C^A)
 ─────────────────────────────────────────────────────────
-     $Γ⊢comp≔ λ g. λ f. λ x. g(f(x)):C^B→ (B^A→ C^A)$
+      Γ⊢comp≔ λ g. λ f. λ x. g(f(x)):C^B→ (B^A→ C^A)
 ```
 
 Note, however, that we haven’t derived the rules (a) and (b) yet.
@@ -372,8 +372,8 @@ The formal derivation of this fact is as follows:
         Γ⊢ A → B type
 ─────────────────────
      Γ,f:A→ B⊢ f:A→ B
-──────────────────────
-$Γ,f:A→ B,x:A⊢ f(x):B$
+─────────────────────
+ Γ,f:A→ B,x:A⊢ f(x):B
 ```
 
 This completes the construction of `comp`.
@@ -406,7 +406,7 @@ Composition of functions is associative, i.e., we can derive
 ```text
 Γ⊢ f:A→ B   Γ⊢ g:B→ C   Γ⊢ h:C→ D
 ─────────────────────────────────
-  $Γ ⊢ (h∘ g)∘ f≐ h∘(g∘ f):A→ D$
+   Γ ⊢ (h∘ g)∘ f≐ h∘(g∘ f):A→ D
 ```
 
 ### Proof
@@ -437,7 +437,7 @@ This idea is made formal in the following derivation:
 ─────────────────────────────────────────────────────
             Γ,x:A⊢ ((h∘ g)∘ f)(x)≐ (h∘ (g ∘ f))(x):D
 ─────────────────────────────────────────────────────
-            $Γ⊢ (h∘ g)∘ f≐ h∘(g∘ f):A→ D$
+             Γ⊢ (h∘ g)∘ f≐ h∘(g∘ f):A→ D
 ``` ◻
 
 <!-- rosetta-item-end: lemma-2.2.6 -->
@@ -465,9 +465,9 @@ and
 *Proof tree (automatic faithful draft).*
 
 ```text
-     Γ⊢ f:A→ B
-────────────────────
-$Γ⊢ f∘id[A]≐ f:A→ B$
+    Γ⊢ f:A→ B
+──────────────────
+Γ⊢ f∘id[A]≐ f:A→ B
 ```
 
 ### Proof
@@ -487,7 +487,7 @@ $Γ⊢ f∘id[A]≐ f:A→ B$
 ──────────────────────────────   ───────────────────
 Γ⊢λ x. id(f(x))≐λ x. f(x):A→ B   Γ⊢λ x. f(x)≐ f:A→ B
 ────────────────────────────────────────────────────
-                 $Γ⊢id∘ f≐ f:A→ B$
+                  Γ⊢id∘ f≐ f:A→ B
 ```
 
 The derivation of the equality `id(f(x))≐ f(x)` in context `Γ,x:A` is as follows:
@@ -503,7 +503,7 @@ The derivation of the equality `id(f(x))≐ f(x)` in context `Γ,x:A` is as foll
 ─────────────   ────────────────────────────
  Γ,x:A⊢ f(x):B         Γ,x:A,y:B⊢id(y)≐ y:B
 ────────────────────────────────────────────
-          $Γ,x:A⊢id(f(x))≐ f(x):B$
+           Γ,x:A⊢id(f(x))≐ f(x):B
 ```
 
 We leave the right unit law as Exercise 2.2. ◻

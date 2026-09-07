@@ -9,6 +9,15 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 class RenderTests(unittest.TestCase):
+    def test_truncation_universe_rules_preserve_nested_conclusions(self):
+        result = render_section(ROOT / "book" / "propositional-truncation.tex", 14, 2)
+        self.assertIn("Γ⊢ ‖A‖ type", result)
+        self.assertIn("X:𝒰⊢ ‖X‖̌:𝒰", result)
+        self.assertIn("X:𝒰⊢ T(‖X‖̌)≐‖T(X)‖ type", result)
+        self.assertEqual(result.count("rosetta-proof-tree:"), 3)
+        self.assertNotIn(r"\brckcheck", result)
+        self.assertNotIn("$Γ", result)
+
     def test_strong_induction_keeps_asterisk_reference_and_both_case_displays(self):
         result = render_section(ROOT / "book" / "funext.tex", 13, 5)
         self.assertIn("mentioned in (\\*).", result)
