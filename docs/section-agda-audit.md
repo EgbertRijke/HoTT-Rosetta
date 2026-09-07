@@ -223,6 +223,8 @@ The `multline` display wrapper is now normalized by the converter, with a
 regression test preserving each line. Full Chapters 3--22 regeneration changes
 only this section and the new Exercise 10.6. The prose comparison preserves
 all five headings and fourteen displays, without unresolved references or
-raw TeX commands. Agda validation on the proposal is pending; `main` remains
-deferred through the existing Chapter 10 exercises and this new example.
-No Section 11.6 completion or optional review decision is recorded.
+raw TeX commands. Published proposal `6bd180b` passes candidate Sections 5.2
+and 11.6, Exercises 9.1 and 10.6, and aggregate Chapters 5--11, with all 154
+unit tests and repository checks passing. Main's 151 tests pass, but its Agda
+checks remain deferred through the existing Chapter 10 exercises and this new
+example. No Section 11.6 completion or optional review decision is recorded.

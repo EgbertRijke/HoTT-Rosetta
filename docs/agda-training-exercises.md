@@ -83,8 +83,14 @@ but does not introduce another training exercise.
 - **Invisible mathematics:** “Example 11.6.3: identities in fibers” in
   `docs/invisible-math.md`.
 - **Status:** Empty on `main`; Section 11.6 and Chapter 11 are deferred.
-- **Proposal solution:** Pending publication on
-  `proposal/agda-exercise-solutions` after this empty site is published.
+- **Proposal solution:** `proposal/agda-exercise-solutions`, commit `6bd180b`.
+  It places `inv-inv` after the inverse laws at Definition 5.2.5, copies
+  the required inverse maps and equivalences at Exercise 9.1, and restores
+  the retained example without changing its proof.
+- **Validation:** Candidate Sections 5.2 and 11.6, Exercises 9.1 and 10.6,
+  and aggregate Chapters 5--11 pass ordinary Agda checks on the proposal.
+  All 154 proposal unit tests, repository checks, and whitespace checks pass.
+  Section 11.6's six-condition theorem is included in these checks.
 
 Section 11.6's theorem and Exercise 10.6 also depend on singleton induction;
 the theorem's fundamental-theorem applications additionally depend on coherent
