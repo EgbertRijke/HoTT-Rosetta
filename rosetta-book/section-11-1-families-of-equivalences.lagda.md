@@ -355,9 +355,9 @@ where `C` is a type family over `A`, and `D` is a type family over `B`.
 In this situation we also say that `g` is a **family of maps over `f`**.
 Then we define
 ```text
-tot([f]{g}:Σ(x:A) C(x)→Σ(y:B) D(y)
+tot_f(g):Σ(x:A) C(x)→Σ(y:B) D(y)
 ```
-by `tot([f]{g}(x,z)≔ (f(x),g(x,z))`.
+by `tot_f(g)(x,z)≔ (f(x),g(x,z))`.
 
 <!-- rosetta-agda-block: definition-11.1.5-total-map-over-base -->
 
@@ -381,7 +381,7 @@ Then the following are equivalent:
 
 1.  The family of maps `g` over `f` is a family of equivalences.
 
-2.  The map `tot([f]{g}` is an equivalence.
+2.  The map `tot_f(g)` is an equivalence.
 
 ### Proof
 
@@ -398,7 +398,7 @@ Then the following are equivalent:
                   [Σ(x:A) D(f(x))]
 
 Arrows:
-- Σ(x:A) C(x) --{tot([f]{g}}--> Σ(y:B) D(y)
+- Σ(x:A) C(x) --{tot_f(g)}--> Σ(y:B) D(y)
 - Σ(x:A) C(x) --tot(g)--> Σ(x:A) D(f(x))
 - Σ(x:A) D(f(x)) --{λ (x,z). (f(x),z)}--> Σ(y:B) D(y)
 ```
@@ -407,7 +407,7 @@ By the assumption that `f` is an equivalence, it follows that the map
 Σ(x:A) D(f(x))→ Σ(y:B) D(y)
 ```
 is an equivalence.
-Therefore it follows that `tot([f]{g}` is an equivalence if and only if `tot(g)` is an equivalence.
+Therefore it follows that `tot_f(g)` is an equivalence if and only if `tot(g)` is an equivalence.
 Now the claim follows, since `tot(g)` is an equivalence if and only if `g` if a family of equivalences. ◻
 
 <!-- rosetta-agda-block: theorem-11.1.6-total-map-triangle -->
@@ -420,7 +420,7 @@ module _
 
   triangle-map-Σ :
     (f : A → B) (g : (x : A) → C x → D (f x)) →
-    map-Σ f g ~ map-Σ-map-base f D ∘ tot g
+    map-Σ D f g ~ map-Σ-map-base f D ∘ tot g
   triangle-map-Σ f g t = refl
 ```
 

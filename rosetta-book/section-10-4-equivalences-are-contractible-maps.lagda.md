@@ -317,12 +317,12 @@ Thus we obtain a map `has-inverse(f)→is-coh-invertible(f)`.
 *Linear diagram (automatic draft).*
 
 ```text
-[fg(y)]---->[[2.5em] fgfg(y)]---->[[2.5em] fg(y)]----> [y]
+[fg(y)]---->[fgfg(y)]---->[fg(y)]----> [y]
 
 Arrows:
-- fg(y) --{G(fg(y))}^{-1}--> [2.5em] fgfg(y)
-- [2.5em] fgfg(y) --ap_{f}(H(g(y)))--> [2.5em] fg(y)
-- [2.5em] fg(y) --G(y)--> y
+- fg(y) --{G(fg(y))}^{-1}--> fgfg(y)
+- fgfg(y) --ap_{f}(H(g(y)))--> fg(y)
+- fg(y) --G(y)--> y
 ```
 In order to construct a homotopy `f· H ~ G'· f`, it suffices to show that the square
 <!-- rosetta-diagram: d894f03c5f8d; review: pending -->

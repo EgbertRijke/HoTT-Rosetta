@@ -9,6 +9,12 @@ from rosetta.math_text import (
 
 
 class MathTextTests(unittest.TestCase):
+    def test_total_map_keeps_its_optional_base_map(self):
+        self.assertEqual(
+            normalize_math(r"\tot{g}, \tot[f]{g}, \tot[f]{\tot{g}}"),
+            "tot(g), tot_f(g), tot_f(tot(g))",
+        )
+
     def test_singleton_induction_aliases_from_book(self):
         self.assertEqual(
             normalize_math(r"\singind_a, \singcomp_a, \indsing_a, \compsing_a, \omega"),

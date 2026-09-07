@@ -175,10 +175,10 @@
       "source_start_line": 75,
       "source_end_line": 86,
       "source_sha256": "7ae8b43a4149db66e942793f3220da905249e0abf3b3af71ed2662d88a74fba6",
-      "code": "module _\n  {l1 l2 l3 l4 : Level} {A : Type l1} {B : Type l2} {C : A → Type l3}\n  (D : B → Type l4)\n  where\n\n  triangle-map-Σ :\n    (f : A → B) (g : (x : A) → C x → D (f x)) →\n    map-Σ f g ~ map-Σ-map-base f D ∘ tot g\n  triangle-map-Σ f g t = refl",
+      "code": "module _\n  {l1 l2 l3 l4 : Level} {A : Type l1} {B : Type l2} {C : A → Type l3}\n  (D : B → Type l4)\n  where\n\n  triangle-map-Σ :\n    (f : A → B) (g : (x : A) → C x → D (f x)) →\n    map-Σ D f g ~ map-Σ-map-base f D ∘ tot g\n  triangle-map-Σ f g t = refl",
       "order": 0,
       "imports": [],
-      "source_note": "Replace UU by repository-local Type. Restore the source anonymous module around triangle-map-Σ after splitting off map-Σ at Definition 11.1.5; omit that already available definition."
+      "source_note": "Replace UU by repository-local Type. Restore the source anonymous module around triangle-map-Σ after splitting off map-Σ at Definition 11.1.5; omit that already available definition. Pass D explicitly to map-Σ, since that definition is now outside this restored anonymous module."
     },
     {
       "block_id": "theorem-11.1.6-equivalence-iff-fiberwise-over-base",

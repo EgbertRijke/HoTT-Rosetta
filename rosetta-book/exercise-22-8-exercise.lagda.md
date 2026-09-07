@@ -14,15 +14,15 @@ Construct the **Mac Lane pentagon** for the circle, i.e. show that the pentagon
 *3-by-5 diagram (automatic draft).*
 
 ```text
-                                       [[-6em] ((x·_{S^1} y)·_{S^1} z)·_{S^1} w]                                            [(x·_{S^1} y)·_{S^1} (z·_{S^1} w)]                   [[-6em]]
+                                       [((x·_{S^1} y)·_{S^1} z)·_{S^1} w]                                            [(x·_{S^1} y)·_{S^1} (z·_{S^1} w)]
 
-[(x·_{S^1} (y·_{S^1} z))·_{S^1} w]                                                                                                                                 [x·_{S^1} (y·_{S^1} (z ·_{S^1} w))]
+[(x·_{S^1} (y·_{S^1} z))·_{S^1} w]                                                                                                                          [x·_{S^1} (y·_{S^1} (z ·_{S^1} w))]
 
-                                                                                     [x·_{S^1} ((y·_{S^1} z)·_{S^1} w)]
+                                                                              [x·_{S^1} ((y·_{S^1} z)·_{S^1} w)]
 
 Arrows:
-- [-6em] ((x·_{S^1} y)·_{S^1} z)·_{S^1} w --unlabeled--> (x·_{S^1} y)·_{S^1} (z·_{S^1} w)
-- [-6em] ((x·_{S^1} y)·_{S^1} z)·_{S^1} w --unlabeled--> (x·_{S^1} (y·_{S^1} z))·_{S^1} w
+- ((x·_{S^1} y)·_{S^1} z)·_{S^1} w --unlabeled--> (x·_{S^1} y)·_{S^1} (z·_{S^1} w)
+- ((x·_{S^1} y)·_{S^1} z)·_{S^1} w --unlabeled--> (x·_{S^1} (y·_{S^1} z))·_{S^1} w
 - (x·_{S^1} y)·_{S^1} (z·_{S^1} w) --unlabeled--> x·_{S^1} (y·_{S^1} (z ·_{S^1} w))
 - (x·_{S^1} (y·_{S^1} z))·_{S^1} w --unlabeled--> x·_{S^1} ((y·_{S^1} z)·_{S^1} w)
 - x·_{S^1} ((y·_{S^1} z)·_{S^1} w) --unlabeled--> x·_{S^1} (y·_{S^1} (z ·_{S^1} w))

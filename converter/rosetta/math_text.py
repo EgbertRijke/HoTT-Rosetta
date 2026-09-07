@@ -436,9 +436,10 @@ def _replace_unary_wrapper(
 
 
 def _replace_optional_unary_wrapper(
-    value: str, macro: str, name: str, default_exponent: str = ""
+    value: str, macro: str, name: str, default_exponent: str = "",
+    script_marker: str = "^",
 ) -> str:
-    """Render an optional exponent followed by one braced argument."""
+    """Render an optional super/subscript followed by one braced argument."""
 
     while True:
         position = _last_command_position(value, macro)
@@ -455,8 +456,8 @@ def _replace_optional_unary_wrapper(
         argument = _braced_argument(value, cursor)
         if argument is None:
             return value[:position] + name + value[position + len(macro) :]
-        superscript = f"^{exponent}" if exponent else ""
-        replacement = f"{name}{superscript}({argument[0]})"
+        script = f"{script_marker}{exponent}" if exponent else ""
+        replacement = f"{name}{script}({argument[0]})"
         value = value[:position] + replacement + value[argument[1] :]
 
 
@@ -518,7 +519,7 @@ def normalize_math(source: str) -> str:
     value = _replace_subscript_function(value, r"\apd", "apd")
     value = _replace_subscript_function(value, r"\ap", "ap")
     value = _replace_unary_wrapper(value, r"\pairr", "(", ")")
-    value = _replace_unary_wrapper(value, r"\tot", "tot(", ")")
+    value = _replace_optional_unary_wrapper(value, r"\tot", "tot", script_marker="_")
     value = _replace_unary_wrapper(value, r"\fibf", "fib_", "")
     value = _replace_unary_wrapper(value, r"\brck", "‖", "‖")
     value = _replace_unary_wrapper(value, r"\Brck", "‖", "‖")
