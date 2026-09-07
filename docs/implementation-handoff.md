@@ -31,10 +31,14 @@ Work continues on `main`.
   from Exercises 9.4, 10.2, and 10.3. Section 9.2's formerly blocked Corollary
   9.2.8 is restored from a passing scratchpad, and retract data is defined at
   Definition 9.2.1. These changed files pass candidate checks on `main`.
-- Section 11.1 passes Agda on the published shared proposal at `dc1ffed`.
-  It is deferred on `main` through Lemma 10.4.5. Sections 11.2--13.5 still have
-  no curated section blocks. No Chapter 11 section is recorded complete on
-  `main`.
+- Sections 11.2 and 11.3 now have curated code. Proposal `a48a60e` passes
+  Section 11.2 and Chapter 11; `c41af9d` passes Section 11.3 and Chapter 11.
+  They are deferred on `main` through both Chapter 10 training exercises.
+- Theorem 11.4.2 is a new empty training site on `main`: its fiber-orientation
+  equivalence belongs at Definition 10.3.1, in complete Section 10.3. The
+  exercise and invisible-math records describe the pending proposal solution.
+  Sections 11.5--13.5 still have no curated section blocks. No Chapter 11
+  section is recorded complete on `main`.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
@@ -56,8 +60,9 @@ The five assigned Chapter 10 steps are done. Keep Definition 10.2.1 and Lemma
 audit also records that Definition 10.4.4's final cancellation result is
 provided only on the proposal as part of the existing coherence exercise.
 
-Formalize the remaining sections of Chapters 11, 12, and 13 in order,
-starting with Section 11.2. Chapter 13 contains Axiom 13.1.3: keep any
+First publish and validate the recorded Theorem 11.4.2 proposal solution.
+Then formalize the remaining sections of Chapters 11, 12, and 13 in order,
+starting with Section 11.5. Chapter 13 contains Axiom 13.1.3: keep any
 assumption explicit and never describe it as a proof.
 
 For each section, inventory every numbered mathematical item, search pinned

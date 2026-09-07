@@ -114,5 +114,23 @@ same total-space successor map as the book.
 The introductory definitions and canonical map are reused from complete
 Section 6.3 without changing it. Only the `is-torsorial` abbreviation is
 expanded in the excerpt. Section 11.3 is deferred on `main` through both
-Chapter 10 training exercises and is not recorded complete. Actual proposal
-validation is pending.
+Chapter 10 training exercises and is not recorded complete. Published proposal
+`c41af9d` passes its candidate and aggregate Chapter 11, all 148 unit tests,
+and repository checks. The prose comparison preserves all three headings and
+eleven displays, with no unresolved references or raw TeX commands.
+
+## Section 11.4 (2026-09-06)
+
+Both numbered items and the complete proof are preserved.
+
+| Item | Formalization |
+| --- | --- |
+| Definition 11.4.1 | `is-emb`, the type `_↪_`, its projections, and the induced equivalence on identity types. |
+| Theorem 11.4.2 | Empty training block on `main`: specialize the pinned contractible-fiber embedding criterion using Theorem 10.4.6; it needs the missing equivalence between ordinary and reverse fibers. The packaged `is-emb-equiv` and `emb-equiv` are retained downstream. |
+
+The auxiliary belongs at Definition 10.3.1, but complete Section 10.3 must
+remain unchanged on `main`. The exercise index and invisible-math record
+describe the proposal placement. No direct coherent-inverse proof or new
+unproven assumption is substituted. Section 11.4 and Chapter 11 are deferred
+on `main`, and no Chapter 11 section is marked complete. Proposal publication
+and actual typechecking of this new exercise are pending.

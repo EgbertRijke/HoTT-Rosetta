@@ -560,6 +560,79 @@
         "section-11-2-the-fundamental-theorem"
       ],
       "source_note": "Expand is-torsorial (Eq-ℕ m) to is-contr (Σ ℕ (Eq-ℕ m)), retaining its upstream name. Reuse the existing Eq-ℕ, reflexivity, and canonical map from Section 6.3. The successor map, contraction, and fundamental-theorem application are otherwise unchanged."
+    },
+    {
+      "source_file": "src/foundation-core/embeddings.lagda.md",
+      "source_start_line": 39,
+      "source_end_line": 49,
+      "source_sha256": "851c6be86935d88aaecf84a52e22ba8739c1f0258b7866c675798cbfd966ab6d",
+      "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : Type l2}\n  where\n\n  is-emb : (A → B) → Type (l1 ⊔ l2)\n  is-emb f = (x y : A) → is-equiv (ap f {x} {y})\n\n  equiv-ap-is-emb :\n    {f : A → B} (e : is-emb f) {x y : A} → (x ＝ y) ≃ (f x ＝ f y)\n  pr1 (equiv-ap-is-emb {f} e) = ap f\n  pr2 (equiv-ap-is-emb {f} e {x} {y}) = e x y",
+      "block_id": "definition-11.4.1-embedding-predicate",
+      "item_id": "definition-11.4.1",
+      "provenance_kind": "adapted",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "destination": "section-11-4-embeddings.lagda.md",
+      "order": 0,
+      "imports": [
+        "universe-levels",
+        "section-4-6-dependent-pair-types",
+        "section-5-1-the-inductive-definition-of-identity-types",
+        "section-5-3-the-action-on-identifications-of-functions",
+        "section-9-2-bi-invertible-maps",
+        "section-10-1-contractible-types",
+        "section-10-3-contractible-maps",
+        "section-10-4-equivalences-are-contractible-maps",
+        "exercise-10-3-contractible-equivalences",
+        "section-11-2-the-fundamental-theorem"
+      ],
+      "source_note": "Replace UU by repository-local Type."
+    },
+    {
+      "source_file": "src/foundation-core/embeddings.lagda.md",
+      "source_start_line": 59,
+      "source_end_line": 76,
+      "source_sha256": "0cd1df00f8356f5ede142df6e50accc10ce7b2a75377dff0efd4cdc374297344",
+      "code": "infix 5 _↪_\n_↪_ :\n  {l1 l2 : Level} → Type l1 → Type l2 → Type (l1 ⊔ l2)\nA ↪ B = Σ (A → B) is-emb\n\nmodule _\n  {l1 l2 : Level} {A : Type l1} {B : Type l2}\n  where\n\n  map-emb : A ↪ B → A → B\n  map-emb = pr1\n\n  is-emb-map-emb : (f : A ↪ B) → is-emb (map-emb f)\n  is-emb-map-emb = pr2\n\n  equiv-ap-emb :\n    (e : A ↪ B) {x y : A} → (x ＝ y) ≃ (map-emb e x ＝ map-emb e y)\n  equiv-ap-emb e = equiv-ap-is-emb (is-emb-map-emb e)",
+      "block_id": "definition-11.4.1-embeddings",
+      "item_id": "definition-11.4.1",
+      "provenance_kind": "adapted",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "destination": "section-11-4-embeddings.lagda.md",
+      "order": 1,
+      "imports": [],
+      "source_note": "Replace UU by repository-local Type."
+    },
+    {
+      "source_file": "src/foundation/embeddings.lagda.md",
+      "source_start_line": 431,
+      "source_end_line": 448,
+      "source_sha256": "6acef9cfdf81b75f1c5da7cf6596688b266b58760ed5f7129df765ed1f8908bb",
+      "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}\n  where\n\n  is-emb-is-contr-fibers-values' :\n    ((a : A) → is-contr (fiber' f (f a))) → is-emb f\n  is-emb-is-contr-fibers-values' c a =\n    fundamental-theorem-id (c a) (λ x → ap f {a} {x})\n\n  is-emb-is-equiv : is-equiv f → is-emb f\n  is-emb-is-equiv H =\n    is-emb-is-contr-fibers-values'\n      ( λ a →\n        is-contr-equiv'\n          ( fiber f (f a))\n          ( equiv-fiber f (f a))\n          ( is-contr-map-is-equiv H (f a)))",
+      "block_id": "theorem-11.4.2-equivalences-are-embeddings",
+      "item_id": "theorem-11.4.2",
+      "provenance_kind": "adapted",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "destination": "section-11-4-embeddings.lagda.md",
+      "order": 0,
+      "imports": [],
+      "source_note": "Replace UU by Type and make the enclosing f implicit. Retain the fundamental-theorem implication from contractible reverse fibers. Specialize the ordinary-fiber implication to H : is-equiv f by substituting is-contr-map-is-equiv H (f a) for c a, and name that specialization is-emb-is-equiv. The rest of the fiber-equivalence proof is unchanged. This is the contractible-fiber route in the book, not the upstream core module's alternative coherent-inverse proof.",
+      "conversion_status": "exercise",
+      "conversion_note": "Training exercise: equiv-fiber belongs with Definition 10.3.1 in the earlier complete Section 10.3. See docs/agda-training-exercises.md and docs/invisible-math.md; the shared proposal supplies the auxiliary and restores this block."
+    },
+    {
+      "source_file": "src/foundation/equivalences.lagda.md",
+      "source_start_line": 58,
+      "source_end_line": 67,
+      "source_sha256": "7a616ebe074e3f6638c5f7ef1a9044e218c144f23a82867269808092231aef9d",
+      "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : Type l2}\n  where\n\n  is-emb-equiv : (e : A ≃ B) → is-emb (map-equiv e)\n  is-emb-equiv e = is-emb-is-equiv (is-equiv-map-equiv e)\n\n  emb-equiv : (A ≃ B) → (A ↪ B)\n  pr1 (emb-equiv e) = map-equiv e\n  pr2 (emb-equiv e) = is-emb-equiv e",
+      "block_id": "theorem-11.4.2-embedding-of-equivalence",
+      "item_id": "theorem-11.4.2",
+      "provenance_kind": "adapted",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "destination": "section-11-4-embeddings.lagda.md",
+      "order": 1,
+      "imports": [],
+      "source_note": "Replace UU by repository-local Type."
     }
   ]
 }

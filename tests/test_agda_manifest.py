@@ -193,6 +193,24 @@ class AgdaManifestTests(unittest.TestCase):
         self.assertLess(start, declarations[0])
         self.assertLess(declarations[-1], end)
 
+    def test_embedding_blocks_stay_in_their_numbered_items(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        selected = [
+            block for block in load_manifest(root / "data" / "agda-blocks.json")
+            if block.destination.startswith("section-11-4-")
+        ]
+        self.assertEqual(len(selected), 4)
+        for block in selected:
+            with self.subTest(block=block.block_id):
+                document = (rosetta_directory(root) / block.destination).read_text()
+                start = document.index(f"<!-- rosetta-item: {block.item_id}")
+                end = document.index(f"<!-- rosetta-item-end: {block.item_id} -->")
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(start, position)
+                self.assertLess(position, end)
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
