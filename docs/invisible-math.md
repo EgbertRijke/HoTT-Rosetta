@@ -217,3 +217,45 @@ pass ordinary Agda checks, as do all 156 proposal tests and repository
 checks. Main keeps its complete Section 10.3 unchanged and the new theorem
 site empty. Both implications and the later projection results are included
 in the proposal's passing candidate check.
+
+### Theorem 12.3.4: propositional identity relations
+
+- **Exercise:** `theorem-12.3.4-propositional-identity-relation`.
+- **Source commit:** `c85d7fb834778f96a66576318cdc4ef3d4b80a26` for all
+  ranges below; each curated block records its inclusive-range SHA-256.
+- **Total-map laws:** `tot-htpy`, `tot-id`, and `preserves-comp-tot`, from
+  `src/foundation-core/functoriality-dependent-pair-types.lagda.md`, lines
+  110--113, 119--122, and 128--133. Their natural home is Definition 11.1.1,
+  immediately after `tot`. The homotopy law uses the already available
+  `eq-pair-eq-fiber` from Theorem 9.3.4; import that local section.
+- **Retract fundamental theorem:** `fundamental-theorem-id-retraction`,
+  `src/foundation/fundamental-theorem-of-identity-types.lagda.md`, lines
+  105--126. Its natural home is Theorem 11.2.2 after the existing variants.
+  The three laws above assemble the retraction on total spaces. Exercise
+  10.2 transfers contractibility from the total identity space, after which
+  the existing total-map criterion proves the fiberwise equivalence.
+- **Notation:** Replace `UU` by `Type`, `id' (Σ A B)` by
+  `id {A = Σ A B}`, and `is-torsorial-Id` by the local `is-contr-Id`.
+  The first identity-map replacement only makes the same type argument
+  implicit; the pinned definitions are `foundation-core/function-types`,
+  lines 24--28. Do not introduce a new identity-map API in Section 2.2.
+- **Retained later proof:** `src/foundation-core/sets.lagda.md`, lines
+  115--137. Expand `is-torsorial R` to `is-contr (Σ A R)` and use the local
+  `map-section-is-equiv` and `is-equiv-map-section-is-equiv` names. The
+  binary criterion is at lines 141--154. The arbitrary-map conclusion is
+  an explicitly typed specialization of the existing fundamental theorem
+  to the copied total-space contraction, not a new proof.
+- **Order and uses:** The total-map laws precede the retract variant; both
+  precede Theorem 12.3.4, which precedes Hedberg's Theorem 12.3.5. Recheck
+  Sections 11.1--11.6 and 12.1--12.3 and aggregate Chapters 10--12 on the
+  proposal. Keep the earlier main files unchanged.
+
+The natural-number example does not require moving the later relation
+criterion ahead of its narrative home. Copy `is-prop-Eq-ℕ` from
+`elementary-number-theory/equality-natural-numbers`, lines 61--67, then
+specialize the already copied `is-prop-is-equiv` to Theorem 11.3.1's
+`is-equiv-Eq-eq-ℕ`. This is exactly the book's equality-code proof route.
+The axiom-K characterization keeps the source's explicit hypothesis and
+both implications; it adds no postulate or global K assumption. The source's
+converse uses path induction with K rather than the book's cancellation
+presentation. All original proof prose remains intact.

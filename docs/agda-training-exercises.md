@@ -132,3 +132,31 @@ The fundamental-theorem applications also extend the later uses of the two
 Chapter 10 training exercises. Only part (a) of Exercise 10.7 is added early,
 at its exact book home, for the projection corollary. Parts (b) and (c) remain
 explicit Agda gaps; their proofs are not required by this section.
+
+### `theorem-12.3.4-propositional-identity-relation`
+
+- **Place:** Section 12.3, Theorem 12.3.4.
+- **Task:** Prove that a proposition-valued reflexive relation mapping into
+  identity characterizes identity, including equivalence of every family of
+  maps from identity into the relation, and conclude that the type is a set.
+- **Absent results:** `fundamental-theorem-id-retraction`, and its total-map
+  laws `tot-htpy`, `tot-id`, and `preserves-comp-tot`.
+- **Reason:** These general results belong in the previously audited
+  mathematical accounts of Sections 11.2 and 11.1, which pass on the shared
+  proposal. Preserve those accounts on `main`, where their existing training
+  dependencies still cause deferred checks; do not confuse that status with
+  a successful main typecheck or a completeness record.
+- **Later use:** The based and binary relation criteria, the arbitrary-map
+  conclusion of Theorem 12.3.4, and Hedberg's Theorem 12.3.5.
+- **Invisible mathematics:** “Theorem 12.3.4: propositional identity
+  relations” in `docs/invisible-math.md`.
+- **Status:** The based proof block is empty on `main`; Section 12.3 and
+  Chapter 12 are deferred, not passed.
+- **Proposal solution:** Pending. Add the three total-map laws at Definition
+  11.1.1, then the retract fundamental theorem at Theorem 11.2.2, and restore
+  the retained based proof on `proposal/agda-exercise-solutions`.
+
+No exercise Agda is added for Section 12.3. It reuses the required
+contractibility-of-retracts result already curated at Exercise 10.2. Its
+fundamental-theorem uses also extend the two existing Chapter 10 training
+dependencies; its proposition imports include the other recorded sites.

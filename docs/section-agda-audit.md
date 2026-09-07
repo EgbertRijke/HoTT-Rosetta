@@ -305,3 +305,32 @@ the outer alphabetical part labels; this pre-existing exercise presentation
 issue is not a claim of complete exercise prose fidelity. Section 12.2 itself
 has no such custom list. All 153 main unit tests, repository checks, and
 whitespace checks pass. No optional review evidence was refreshed.
+
+## Section 12.3 (2026-09-06)
+
+All five numbered items and the three full proof bodies in
+`book/hierarchy.tex`, lines 191--287, are preserved. The generated section
+has nine heading occurrences (seven distinct headings) and ten displays.
+The prose comparison is 100%, with no unresolved references or raw TeX
+commands. All three proof bodies were compared individually, not inferred
+from the comparison's set-valued heading count.
+
+| Item | Formalization |
+| --- | --- |
+| Definition 12.3.1 | `is-set` is the exact identity-propositionality predicate, with only `UU` renamed to `Type`. The general universe of truncated types belongs in Definition 12.4.1. |
+| Example 12.3.2 | The verbatim induction proving `is-prop-Eq-ℕ`, followed by the explicitly typed specialization of `is-prop-is-equiv` to Theorem 11.3.1's equality-code equivalence. This follows the book's proof without using the later relation criterion. |
+| Proposition 12.3.3 | The type-specific `instance-axiom-K` and both implication functions. The source's converse uses path induction with the explicit K hypothesis instead of the book's concatenation-cancellation presentation. No global K witness, postulate, or compiler-option change is introduced. |
+| Theorem 12.3.4 | The pinned based and binary relation proofs, including total-space contraction and `is-set-prop-in-id`. The separate `is-equiv-id-in-prop` specializes the existing fundamental theorem to that contraction for an arbitrary family `(f : (x y : A) → x ＝ y → R x y)`. Equivalence of the chosen reverse map alone would not cover the statement. |
+| Theorem 12.3.5 | The unit/empty relation chosen by the equality decision, its propositionality and reflexivity, its map back to identity, and the application of Theorem 12.3.4. All three hypotheses of the relation criterion are supplied explicitly, matching the book's Hedberg proof. |
+
+The based proof at Theorem 12.3.4 is a new empty training site on `main`.
+Its general retract fundamental theorem belongs at Theorem 11.2.2, after
+the existing variants; its total-map homotopy, identity, and composition
+laws belong after `tot` at Definition 11.1.1. The existing earlier
+mathematical accounts pass on the proposal but remain deferred on main
+through their recorded dependencies. Keep those earlier main files unchanged.
+The exercise index and invisible-math record specify all source ranges,
+local adaptations, dependency order, and later users. Proposal validation
+is pending; Section 12.3 is deferred on `main`, never recorded complete or
+passed. All 154 main unit tests, repository checks, and whitespace checks
+pass. No exercise Agda or optional review evidence is changed.
