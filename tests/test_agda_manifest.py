@@ -299,6 +299,28 @@ class AgdaManifestTests(unittest.TestCase):
         else:
             self.assertIn("  equiv-fiber-ap-eq-fiber :", document)
 
+    def test_proposed_fiber_identity_auxiliaries_have_natural_homes(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        blocks = {block.block_id: block for block in load_manifest(root / "data" / "agda-blocks.json")}
+        involution = blocks["definition-5.2.5-inversion-involution"]
+        self.assertEqual(involution.item_id, "definition-5.2.5")
+        document = (rosetta_directory(root) / involution.destination).read_text()
+        marker = document.index("<!-- rosetta-agda-block: definition-5.2.5-inversion-involution -->")
+        self.assertLess(document.index("  right-inv :"), marker)
+        self.assertLess(marker, document.index("<!-- rosetta-item-end: definition-5.2.5 -->"))
+        for identifier in (
+            "exercise-9-1-inverse-concatenation",
+            "exercise-9-1-concatenation-inverse-laws",
+            "exercise-9-1-inversion-and-concatenation-equivalences",
+        ):
+            self.assertEqual(blocks[identifier].item_id, "exercise-9-1")
+        example = blocks["example-11.6.3-identities-in-fibers"]
+        self.assertEqual(example.conversion_status, "ready")
+        self.assertNotIn("  inv-inv :", example.code)
+        self.assertNotIn("    is-equiv-inv :", example.code)
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

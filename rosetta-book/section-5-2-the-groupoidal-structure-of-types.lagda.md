@@ -266,6 +266,17 @@ module _
     {x y z : A} (r : y ＝ z) {p q : x ＝ y} → p ∙ r ＝ q ∙ r → p ＝ q
   is-injective-concat' refl s = inv right-unit ∙ s ∙ right-unit
 ```
+
+<!-- rosetta-agda-block: definition-5.2.5-inversion-involution -->
+
+```agda
+module _
+  {l : Level} {A : Type l}
+  where
+
+  inv-inv : {x y : A} (p : x ＝ y) → inv (inv p) ＝ p
+  inv-inv refl = refl
+```
 <!-- rosetta-item-end: definition-5.2.5 -->
 
 ## Remark 5.2.6

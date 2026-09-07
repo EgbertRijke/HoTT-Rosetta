@@ -2,6 +2,13 @@
   "format_version": 1,
   "items": [
     {
+      "item_id": "exercise-9-1-remaining-operations",
+      "kind": "Exercise",
+      "number": "9.1(right concatenation, transport)",
+      "destination": "exercise-9-1-groupoid-operations-equivalences.lagda.md",
+      "statement": "Only inversion and left concatenation, needed by Example 11.6.3, are curated. The right-concatenation and transport equivalences with their explicit inverses remain lower-priority exercise work."
+    },
+    {
       "item_id": "example-9.2.9",
       "kind": "Example",
       "number": "9.2.9",
