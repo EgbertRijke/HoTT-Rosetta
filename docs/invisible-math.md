@@ -509,6 +509,8 @@ ranges and hashes in the Chapter 13 manifest.
   `center` and `eq-is-contr'`; Section 10.4 supplies contractible fibers
   of equivalences. No later subuniverse theory is imported.
 
-The entire section and aggregate Chapter 13 defer on main. Actual Agda
-validation on the shared proposal is pending; no new training solution
-or earlier complete-file enlargement is required by this curation.
+The entire section and aggregate Chapter 13 defer on main. Published
+proposal merge `b42184ff92633edf5d9dd24eebc5a0b79babd86b` passes actual
+Agda for Section 13.4 and aggregate Chapter 13, all 169 tests, repository
+checks, and whitespace checks. No code correction, new training solution,
+or earlier complete-file enlargement was needed.
