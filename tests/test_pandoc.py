@@ -10,6 +10,14 @@ from rosetta.pandoc import (
 
 
 class PandocBoundaryTests(unittest.TestCase):
+    def test_asterisk_tag_and_prose_symbol_survive(self):
+        self.assertEqual(
+            prepare_latex(r"$f\tag{\textasteriskcentered}$; (\textasteriskcentered{})."),
+            r"$f\tag{*}$; (*).",
+        )
+        self.assertEqual(prepare_latex(r"\textasteriskcenteredextra"),
+                         r"\textasteriskcenteredextra")
+
     def test_define_macro_is_preserved_as_bold_text(self):
         self.assertEqual(
             prepare_latex(r"the \define{addition operation}"),

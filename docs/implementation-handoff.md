@@ -110,19 +110,28 @@ Work continues on `main`.
   Its transport substitution is an expansion of a pinned wrapper around
   Section 9.3's existing `tr-ap`, not a new missing auxiliary. Published
   proposal merge `b42184f` passes actual Agda for the section and aggregate
-  Chapter 13 without corrections or new solutions. Section 13.5 has no
-  curated section blocks.
+  Chapter 13 without corrections or new solutions. Section 13.5 now has
+  twelve curated blocks for its three items, intervening bounded family,
+  both successor-lemma laws, and the full delayed theorem proof with both
+  computation rules. The lemma's additional identity-type equivalence is
+  a new empty training site needing Exercise 9.1's existing proposal
+  inverse-concatenation equivalence. The required Exercise 12.4(c) forward
+  implication is curated at its exact home; its other parts remain gaps.
+  Actual Section 13.5 proposal validation is pending.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
-The latest main validation passed all 164 unit tests,
-`python3 rosetta.py check`, and `git diff --check`, with 558 manifest blocks
-(175 exact, 325 adapted, 58 historical/local). The preceding Exercise 9.5
+The latest main validation passed all 169 unit tests,
+`python3 rosetta.py check`, and `git diff --check`, with 571 manifest blocks
+(176 exact, 337 adapted, 58 historical/local). Section 8.2 and aggregate
+Chapter 8 pass after the cases-display repair. Section 13.5, Exercise
+12.4, and aggregate Chapters 12--13 defer through recorded training sites.
+The preceding Exercise 9.5
 candidate and aggregate Chapter 9 checks passed; neither changed in the
-Section 13.4 work. Sections 13.1--13.4 and Chapter 13
+Section 13.5 work. Sections 13.1--13.5 and Chapter 13
 are deferred until their existing training dependencies are supplied.
 Proposal `b42184f` passes all 169 unit tests, repository and whitespace
 checks, candidate Section 13.4, and aggregate Chapter 13.
@@ -158,35 +167,34 @@ status was inferred from this.
 
 The five assigned Chapter 10 steps and the Chapter 11 section formalizations
 are done, with the recorded training holes retained. Keep Definition 10.2.1,
-Lemma 10.4.5, Theorems 11.4.2, 12.2.3, 12.3.4, and 12.4.7, and Example 11.6.3 empty
+Lemma 10.4.5, Theorems 11.4.2, 12.2.3, 12.3.4, and 12.4.7, Example 11.6.3,
+and Lemma 13.5.3's case-evaluation-identification equivalence empty
 on `main`; do not merge the proposal to make `main` pass. The audit also
 records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Continue Section 13.5, the strong induction principle of natural numbers
-in `book/funext.tex`, lines 462--636. Account for Theorem 13.5.1, both
-Lemmas 13.5.2--13.5.3, and the delayed full theorem proof after the lemmas.
-Preserve both strong-induction computation rules and both successor-lemma
-laws, not just a function with the strong-induction type.
-Pinned `elementary-number-theory/strong-induction-natural-numbers` supplies
-the bounded-family construction, base and successor lemmas, induction,
-and the full computation proof through line 244. Inspect its order
-dependencies before changing earlier files. `is-set-ℕ` already lives at
-Example 12.3.2 and transport of inequalities at Exercise 6.3. The source
-uses `is-prop-leq-ℕ`, `neg-succ-leq-ℕ`, `cases-leq-succ-ℕ`, and
-`cases-leq-succ-reflexive-leq-ℕ` from
-`elementary-number-theory/inequality-natural-numbers`. Those names are
-absent locally, but Exercise 7.3 already contains the analogous
-`decide-leq-succ-ℕ`; inspect actual mathematics, signatures, and natural
-homes before declaring gaps or copying duplicate auxiliaries. The book
-also explicitly asserts that the case-splitting map is an equivalence
-between propositions; the pinned induction proof's direct case analysis
-alone does not account for that additional assertion.
-Fix and regression-test the prose renderer's dropped `(*)` reference:
-the display preserves the asterisk but the following prose currently says
-`mentioned in ()`. Handle the remaining literal cases environments under
-the normal fidelity rules, without silently dropping their cases.
+Complete the new Section 13.5 training exercise on the shared proposal.
+Bring in latest main, restore the retained
+`lemma-13.5.3-case-evaluation-identifications` block using the already
+available Exercise 9.1 `equiv-inv-concat`, commit the focused solution,
+and validate Section 13.5, Exercise 12.4, and aggregate Chapters 12--13.
+Also validate the changed Section 8.2 prose and aggregate Chapter 8.
+No earlier auxiliary needs to be added. Publish and record the solution
+before continuing Section 14.1.
+
+Section 13.5's curation preserves both computation rules and the full
+delayed theorem proof. Keep its code-order anchors, the complete case-map
+equivalence and proposition assertions, and the existing explicit-index
+case splitter from Exercise 7.3. The source's successor contradiction is
+the existing order contradiction at reflexivity; the separate reflexive
+case law is an instance of the already stated `f(p)=x`. No earlier
+complete section or existing exercise code is enlarged. The new required
+Exercise 12.4(c) supplies only the forward implication; keep its remaining
+parts and custom-list presentation gaps explicit. The renderer now
+preserves the asterisk reference and both cases displays. Section 8.2's
+Collatz display was regenerated by the same tested rule, without Agda
+changes or reserved review updates.
 
 Section 13.4 is curated and validated. It preserves all three conditions
 and the full converse using the fibers at `id` and `f`. Keep the existing local

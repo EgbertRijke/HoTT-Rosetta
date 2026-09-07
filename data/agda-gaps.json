@@ -2,6 +2,13 @@
   "format_version": 1,
   "items": [
     {
+      "item_id": "exercise-12-4-remaining-parts",
+      "kind": "Exercise",
+      "number": "12.4(a,b;c-converse;d)",
+      "destination": "exercise-12-4-coproduct-truncation.lagda.md",
+      "statement": "Only the implication in part (c) from mutually exclusive propositions to a propositional coproduct is curated, because Lemma 13.5.3 requires it. The converse of part (c), parts (a), (b), and (d), and the conclusion about the integers remain lower-priority exercise Agda. The custom-list prose still lacks outer alphabetical labels; the solution heading explicitly identifies part (c)."
+    },
+    {
       "item_id": "theorem-13.2.1-judgmental-sigma-eta",
       "kind": "Theorem",
       "number": "13.2.1",
