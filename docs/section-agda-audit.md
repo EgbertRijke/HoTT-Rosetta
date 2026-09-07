@@ -55,7 +55,7 @@ recorded in `data/agda-blocks-chapter-11.json`.
 | Theorem 11.1.3 | `is-fiberwise-equiv`, both implications between it and `is-equiv (tot f)`, and `equiv-tot`. |
 | Lemma 11.1.4 | `map-Σ-map-base`, its fiber equivalence, and the implications for contractible maps and equivalences. |
 | Definition 11.1.5 | `map-Σ`, changing the base and fiber coordinates. |
-| Theorem 11.1.6 | `triangle-map-Σ`, both equivalence implications, and `equiv-Σ`. The triangle's anonymous module is restored after splitting it from Definition 11.1.5. |
+| Theorem 11.1.6 | `triangle-map-Σ`, both equivalence implications, and `equiv-Σ`. The triangle's anonymous module is restored after splitting it from Definition 11.1.5; `map-Σ` therefore receives `D` explicitly. |
 
 Only section dependencies were added to Exercises 9.4, 10.2, and 10.3:
 triangle laws and 3-for-2, preservation of contractibility by retracts, and
@@ -69,4 +69,34 @@ No complete earlier file was enlarged and no review evidence was refreshed.
 
 Section 9.2 and the three changed exercise candidates pass on `main`.
 Section 11.1 remains deferred through Lemma 10.4.5 and is not in the
-completion list. Validation on the shared proposal is the next check.
+completion list. Published proposal `dc1ffed` passes candidate Sections 10.2,
+10.4, and 11.1 and aggregate Chapters 9--11. Its full unit suite and repository
+checks pass. The prose preserves the optional base parameter in `tot_f(g)`;
+diagram spacing options are excluded from mathematical node labels. Both
+conversion repairs have regression tests and were regenerated throughout the
+active output.
+
+## Section 11.2 (2026-09-06)
+
+Both numbered items, the canonical-family specialization, and the full proof
+in `book/fundamental.tex` are preserved. Seven curated blocks formalize:
+
+| Item | Formalization |
+| --- | --- |
+| Definition 11.2.1 | Evaluation at the distinguished pair, the universe-level predicate, and the universe-polymorphic identity-system predicate. |
+| Theorem 11.2.2, (i) iff (ii) | `fundamental-theorem-id` and its converse for arbitrary families of maps. The upstream result is stronger: neither direction needs the stipulated equation at the base point. |
+| Theorem 11.2.2, (ii) iff (iii) | `is-identity-system-is-contr` specializes the pinned singleton-induction package to the dependent sum and curries its section with the existing `ev-pair`; the computation witness is unchanged. The converse is copied from `identity-systems`, with its module restored. |
+| Theorem 11.2.2, canonical family | `fundamental-theorem-id-J` and its converse specialize to path induction. |
+
+The exact upstream identity-system construction uses `is-prop-is-contr`, a
+later proposition result. The analogous singleton-induction package instead
+uses the book's proof route and already available local results; no missing
+auxiliary proof is inserted or hidden. `is-torsorial B` is expanded to
+`is-contr (Σ A B)`, and upstream `is-torsorial-Id` is the local `is-contr-Id`.
+The three conditions are connected by implication functions, not asserted as
+an equivalence of proof types.
+
+The prose comparison has all four headings and nine displays, with no
+unresolved references or raw TeX commands. Section 11.2 is deferred on `main`
+through both recorded Chapter 10 training exercises and is not recorded
+complete. Actual proposal validation is pending.

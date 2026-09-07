@@ -38,3 +38,6 @@ mathematics, proposal solution, and review state.
   `docs/invisible-math.md`.
 - **Status:** Empty on `main`.
 - **Proposal solution:** `proposal/agda-exercise-solutions`, commit `5e5a5cd`.
+- **Later validation:** Proposal `dc1ffed` includes current Section 11.1 and
+  passes its candidate check and aggregate Chapters 9--11. The new section's
+  dependency on this exercise is intentional; it remains deferred on `main`.
