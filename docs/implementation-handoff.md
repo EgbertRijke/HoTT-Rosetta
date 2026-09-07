@@ -73,8 +73,11 @@ Work continues on `main`.
   including both axiom-K implications and the arbitrary-map assertion in
   Theorem 12.3.4. That theorem's based proof is a new empty training site:
   its retract fundamental theorem and total-map laws belong in the earlier
-  Chapter 11 accounts. The shared-proposal solution is pending. No exercise
-  Agda is added. Sections 12.4--13.5 have no curated section blocks.
+  Chapter 11 accounts. Proposal `b96fdf3` adds the total-map laws at
+  Definition 11.1.1 and the retract variant at Theorem 11.2.2, and restores
+  the later proof. Every Chapter 11 section, Sections 12.1--12.3, and
+  aggregate Chapters 10--12 pass there. No exercise Agda is added.
+  Sections 12.4--13.5 have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
@@ -84,9 +87,11 @@ Work continues on `main`.
 The latest main validation passed all 154 unit tests,
 `python3 rosetta.py check`, and `git diff --check`. Section 12.3 and
 aggregate Chapters 10--12 are deferred. Exercise 10.7's unchanged candidate
-passed in the preceding validation. Proposal `7b6b28c` passes all
-156 unit tests, Section 12.2, Exercise 10.7, aggregate Chapters 10--12, and
-the repository and whitespace checks. Earlier proposal
+passed in the preceding validation. Proposal `b96fdf3` passes all 158
+unit tests, candidate Sections 11.1--11.6 and 12.1--12.3, aggregate Chapters
+10--12, and the repository and whitespace checks. Earlier proposal
+`7b6b28c` passes Section 12.2, Exercise 10.7, and aggregate Chapters 10--12.
+Earlier proposal
 `0c3d8b1` passes candidate Section 12.1, Exercise 10.1, and aggregate Chapters
 10--12. Proposal `6bd180b` passes candidate Sections 5.2 and 11.6, Exercises
 9.1 and 10.6, and aggregate Chapters 5--11. Earlier proposal
@@ -103,19 +108,23 @@ status was inferred from this.
 
 The five assigned Chapter 10 steps and the Chapter 11 section formalizations
 are done, with the recorded training holes retained. Keep Definition 10.2.1,
-Lemma 10.4.5, Theorems 11.4.2, 12.2.3, and 12.3.4, and Example 11.6.3 empty on `main`;
-do not merge the proposal to make `main` pass. The audit also records that Definition
+Lemma 10.4.5, Theorems 11.4.2, 12.2.3, and 12.3.4, and Example 11.6.3 empty
+on `main`; do not merge the proposal to make `main` pass. The audit also
+records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Publish and validate the recorded Theorem 12.3.4 solution on the shared
-proposal. Add `tot-htpy`, `tot-id`, and `preserves-comp-tot` at Definition
-11.1.1; add `fundamental-theorem-id-retraction` at Theorem 11.2.2; restore
-the retained later proof. The exact ranges and local adaptations are in
-the exercise index and invisible-math record. Recheck every Chapter 11
-section, Sections 12.1--12.3, and aggregate Chapters 10--12. Then continue
-Sections 12.4--13.5 in order, starting with general truncation levels in
-`book/hierarchy.tex`.
+Continue Sections 12.4--13.5 in order, starting with general truncation
+levels in `book/hierarchy.tex`. Section 12.4 has seven numbered items.
+Account for the indexing type and natural-number inclusion, proper types,
+the universe of truncated types, and truncated maps in addition to the
+recursive predicate. Inspect the universe-independence remark explicitly;
+do not infer its coverage merely from a universe-polymorphic signature.
+The final theorem needs both directions between successor-truncated maps
+and truncated action on identities. Pinned `foundation-core/truncated-maps`
+lines 112--133 gives that proof using the existing Example 11.6.3 fiber
+identity equivalence; investigate its existing training dependency without
+moving its auxiliaries into earlier complete main files.
 Add exercise Agda only as needed by sections, accounting for any remaining
 exercise assertions. Exercise 10.7's existing custom-list rendering loses
 the outer alphabetical labels; the audit records this presentation issue

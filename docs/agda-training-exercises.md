@@ -152,9 +152,14 @@ explicit Agda gaps; their proofs are not required by this section.
   relations” in `docs/invisible-math.md`.
 - **Status:** The based proof block is empty on `main`; Section 12.3 and
   Chapter 12 are deferred, not passed.
-- **Proposal solution:** Pending. Add the three total-map laws at Definition
-  11.1.1, then the retract fundamental theorem at Theorem 11.2.2, and restore
-  the retained based proof on `proposal/agda-exercise-solutions`.
+- **Proposal solution:** `proposal/agda-exercise-solutions`, commit `b96fdf3`.
+  It adds the three total-map laws at Definition 11.1.1, then the retract
+  fundamental theorem at Theorem 11.2.2, and restores the retained based
+  proof without changing it.
+- **Validation:** Candidate Sections 11.1--11.6 and 12.1--12.3 and aggregate
+  Chapters 10--12 pass ordinary Agda checks on that proposal. All 158
+  proposal unit tests, repository checks, and whitespace checks pass.
+  Main's 154 tests pass, but Section 12.3 remains deferred, not passed.
 
 No exercise Agda is added for Section 12.3. It reuses the required
 contractibility-of-retracts result already curated at Exercise 10.2. Its

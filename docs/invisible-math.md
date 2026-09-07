@@ -259,3 +259,12 @@ The axiom-K characterization keeps the source's explicit hypothesis and
 both implications; it adds no postulate or global K assumption. The source's
 converse uses path induction with K rather than the book's cancellation
 presentation. All original proof prose remains intact.
+
+Published proposal `b96fdf3` implements these placements and restores the
+retained based proof without changing its code. Its regression tests check
+all four auxiliary placements, declaration order, absence of Chapter 12
+imports in the earlier modules, and the arbitrary-map conclusion in the
+later theorem. Candidate Sections 11.1--11.6 and 12.1--12.3 and aggregate
+Chapters 10--12 pass ordinary Agda checks, as do all 158 proposal unit tests
+and repository checks. Main retains the empty site and its earlier files
+unchanged; no completeness or review state is inferred from deferred checks.
