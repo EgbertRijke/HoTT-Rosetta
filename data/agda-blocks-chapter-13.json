@@ -343,11 +343,12 @@
         "section-11-1-families-of-equivalences",
         "section-11-2-the-fundamental-theorem",
         "section-13-1-equivalent-forms-of-function-extensionality",
+        "exercise-9-4-three-for-two-equivalences",
         "exercise-9-5-sigma-swap",
         "exercise-10-3-contractible-equivalences",
         "exercise-10-6-dependent-pair-contractible-base"
       ],
-      "source_note": "Replace UU by Type. Keep the explicit-function types only; implicit-function variants are outside this item."
+      "source_note": "Replace UU by Type. Keep the explicit-function types only; implicit-function variants are outside this item. Import equivalence composition directly from the existing Exercise 9.4; local section imports are not public re-exports."
     },
     {
       "block_id": "theorem-13.2.1-dependent-choice-equivalence",
