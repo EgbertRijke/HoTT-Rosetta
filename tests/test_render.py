@@ -1,14 +1,52 @@
 import unittest
 from pathlib import Path
 
-from rosetta.latex import inventory
-from rosetta.render import _structure_theorem_divs, render_section
+from rosetta.latex import exercise_bodies, inventory, section_introduction, subsection_body
+from rosetta.render import _structure_theorem_divs, render_fragment, render_section
 
 
 ROOT = Path(__file__).resolve().parent.parent
 
 
 class RenderTests(unittest.TestCase):
+    def test_active_citation_keys_survive_in_all_document_kinds(self):
+        import re
+
+        kinds = set()
+        citation_count = 0
+        for chapter in inventory(ROOT / "book"):
+            fragments = [("chapter", section_introduction(chapter.path))]
+            fragments.extend(
+                ("section", subsection_body(chapter.path, number)[1])
+                for number in range(1, len(chapter.subsections) + 1)
+            )
+            fragments.extend(("exercise", body) for body in exercise_bodies(chapter.path))
+            for kind, source in fragments:
+                keys = re.findall(r"\\cite\s*\{([^{}]+)\}", source)
+                if not keys:
+                    continue
+                kinds.add(kind)
+                rendered = render_fragment(chapter.path, source)
+                for group in keys:
+                    expected = "citation: " + ", ".join(
+                        f"`{key.strip()}`" for key in group.split(",")
+                    )
+                    self.assertIn(expected, rendered)
+                    citation_count += 1
+        self.assertEqual(kinds, {"chapter", "section", "exercise"})
+        self.assertGreaterEqual(citation_count, 14)
+
+    def test_mapping_truncations_keeps_citation_delimiters_and_diagram_ids(self):
+        result = render_section(ROOT / "book" / "propositional-truncation.tex", 14, 4)
+        self.assertIn("citation: `Kraus`", result)
+        self.assertIn("h:‖A‖→Σ(b:B) ‖Σ(x:A) f(x)=b‖", result)
+        self.assertNotIn(r"\|", result)
+        for marker in ("e3422d10b67e", "44459fe1a1c2", "7e7385271393"):
+            self.assertIn(f"rosetta-diagram: {marker};", result)
+        finite = render_section(ROOT / "book" / "finite-types.tex", 16, 3)
+        self.assertIn("`‖Π(x:A) B(x)‖`", finite)
+        self.assertNotIn(r"\|", finite)
+
     def test_propositional_logic_table_preserves_all_eight_interpretations(self):
         result = render_section(ROOT / "book" / "propositional-truncation.tex", 14, 3)
         rows = [line for line in result.splitlines() if line.startswith("| `")]

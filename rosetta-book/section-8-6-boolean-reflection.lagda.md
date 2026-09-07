@@ -108,8 +108,8 @@ To see that `is-prime-thirty-seven` is indeed an element of type `is-prime(37)` 
 This is not doable by hand.
 Computer proof assistants, however, are capable of performing this task.
 In a proof assistant, we may therefore use boolean reflection to offload the task of evaluating the decision algorithm of a decidable type to the computer.
-This technique has been essential in the formalization of the Feit-Thompson theorem in Coq .
-The book *Mathematical Components* contains more information about using boolean reflection effectively in formalized mathematics.
+This technique has been essential in the formalization of the Feit-Thompson theorem in Coq \[citation: `Gonthier`\].
+The book *Mathematical Components* \[citation: `mathematical-components`\] contains more information about using boolean reflection effectively in formalized mathematics.
 
 Do not, however, "solve" your homework problems with boolean reflection.
 If your teaching assistant cannot evaluate your solution, they will conclude that you haven’t demonstrated your clear understanding of the problem.

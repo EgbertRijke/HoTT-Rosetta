@@ -513,6 +513,10 @@ def normalize_math(source: str) -> str:
     """Render confirmed project notation as readable Unicode/plain text."""
 
     value = _replace_simple_commands(source.strip().replace("~", " "))
+    # TeX's double-bar control symbol can directly precede a letter; unlike
+    # control words it must not use _replace_simple_commands' word boundary.
+    # Match the book's brck/trunc double-bar notation (hott.tex:765,771).
+    value = value.replace(r"\|", "‖")
     value = re.sub(r"\\begin\{(?:equation|align|multline)\*?\}", "", value)
     value = re.sub(r"\\end\{(?:equation|align|multline)\*?\}", "", value)
     value = re.sub(r"\\text\{([^{}]*)\}", r"\1", value)

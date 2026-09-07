@@ -15,7 +15,7 @@ open import exercise-3-6-division-by-two
 ```
 
 The set of natural numbers is the most important object in mathematics.
-We quote Bishop, from his Constructivist Manifesto, the first chapter in Foundations of Constructive Analysis , where he gives a colorful illustration of its importance to mathematics.
+We quote Bishop, from his Constructivist Manifesto, the first chapter in Foundations of Constructive Analysis \[citation: `Bishop1967`\], where he gives a colorful illustration of its importance to mathematics.
 
 > “The primary concern of mathematics is number, and this means the positive integers. We feel about number the way Kant felt about space. The positive integers and their arithmetic are presupposed by the very nature of our intelligence and, we are tempted to believe, by the very nature of intelligence in general. The development of the theory of the positive integers from the primitive concept of the unit, the concept of adjoining a unit, and the process of mathematical induction carries complete conviction. In the words of Kronecker, the positive integers were created by God. Kronecker would have expressed it even better if he had said that the positive integers were created by God for the benefit of man (and other finite beings). Mathematics belongs to man, not to God. We are not interested in properties of the positive integers that have no descriptive meaning for finite man. When a man proves a positive integer to exist, he should show how to find it. If God has mathematics of his own that needs to be done, let him do it himself.”
 

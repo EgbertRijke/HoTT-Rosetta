@@ -133,7 +133,7 @@ in `B`. ◻
 
 <!-- rosetta-item-end: lemma-14.4.5 -->
 
-We now show, in a theorem due to Kraus , that any weakly constant map `f:A→ B` into a set `B` extends uniquely to a map `‖A‖→ B`.
+We now show, in a theorem due to Kraus \[citation: `Kraus`\], that any weakly constant map `f:A→ B` into a set `B` extends uniquely to a map `‖A‖→ B`.
 We therefore conclude that, in order to define a map `‖A‖→ B` into a set `B` it suffices to define a map `f:A→ B` and show that it is weakly constant.
 
 ## Theorem 14.4.6
@@ -197,7 +197,7 @@ Arrows:
 - Σ(b:B) ‖Σ(x:A) f(x)=b‖ --pr 1--> B
 ```
 Indeed, the map `g` is given by `x↦(f(x),η(x,refl))`.
-Since the codomain of `g` is a proposition, we obtain via the universal property of the propositional truncation of `A` a unique map `h:‖A‖→Σ(b:B) \|Σ(x:A) f(x)=b\|` equipped with a homotopy `g~ h∘η`.
+Since the codomain of `g` is a proposition, we obtain via the universal property of the propositional truncation of `A` a unique map `h:‖A‖→Σ(b:B) ‖Σ(x:A) f(x)=b‖` equipped with a homotopy `g~ h∘η`.
 Now we obtain the map `pr 1∘ h:‖A‖→ B` equipped with the concatenated homotopy
 ```text
 (pr 1∘ h)∘η ≐ pr 1∘ (h∘η) ~ pr 1∘ g ~ f.

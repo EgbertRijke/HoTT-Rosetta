@@ -72,6 +72,17 @@ def prepare_latex(source: str) -> str:
     """
 
     source = _split_align_intertext(source)
+    # GFM has no citation extension, and its writer drops LaTeX citation keys.
+    # Keep the book's simple citation groups as visible, explicitly unresolved
+    # references. Do not invent bibliography numbering or execute BibTeX.
+    source = re.sub(
+        r"\\cite\s*\{([A-Za-z0-9_.:+/-]+(?:\s*,\s*[A-Za-z0-9_.:+/-]+)*)\}",
+        lambda match: "[citation: " + ", ".join(
+            r"\texttt{" + key.strip().replace("_", r"\_") + "}"
+            for key in match.group(1).split(",")
+        ) + "]",
+        source,
+    )
     # Pandoc drops this text symbol in prose, although it keeps it in math.
     # Use the same literal asterisk for equation tags and their text references.
     source = re.sub(r"\\textasteriskcentered(?![A-Za-z@])(?:\{\})?", "*", source)

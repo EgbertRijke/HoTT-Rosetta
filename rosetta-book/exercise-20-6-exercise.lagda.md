@@ -7,7 +7,7 @@ module exercise-20-6-exercise where
 
 ## Problem statement
 
-(Awodey, Gambino, Sojakova ) For any type family `B` over `A`, the **polynomial endofunctor** `P_{A,B}` acts on types by
+(Awodey, Gambino, Sojakova \[citation: `AwodeyGambinoSojakova`\]) For any type family `B` over `A`, the **polynomial endofunctor** `P_{A,B}` acts on types by
 ```text
 P_{A,B}(X) ≔ Σ(x:A) X^{B(x)},
 ```

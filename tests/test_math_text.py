@@ -9,6 +9,14 @@ from rosetta.math_text import (
 
 
 class MathTextTests(unittest.TestCase):
+    def test_double_bar_control_symbol_matches_macro_truncations(self):
+        self.assertEqual(normalize_math(r"\|A\|, \left\|A\right\|, \big\|A\big\|"),
+                         "‖A‖, ‖A‖, ‖A‖")
+        self.assertEqual(
+            normalize_math(r"\brck{A}\to\sm{b:B}\left\|\sm{x:A}f(x)=b\right\|"),
+            "‖A‖→Σ(b:B) ‖Σ(x:A) f(x)=b‖",
+        )
+
     def test_logical_connectives_remain_distinct_from_their_interpretations(self):
         self.assertEqual(normalize_math(r"\bot, \emptyt, P\Leftrightarrow Q, P\leftrightarrow Q"),
                          "⊥, empty, P⇔ Q, P↔ Q")
