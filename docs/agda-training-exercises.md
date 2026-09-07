@@ -69,3 +69,23 @@ The later coproduct identity formalization in Section 11.5 is validated on
 proposal `3bbc564`, including aggregate Chapters 9--11. It imports the
 fundamental theorem and therefore depends on the two Chapter 10 exercises,
 but does not introduce another training exercise.
+
+### `example-11.6.3-identities-in-fibers`
+
+- **Place:** Section 11.6, Example 11.6.3.
+- **Task:** Prove `(s ＝ t) ≃ fiber (ap f) (pr2 s ∙ inv (pr2 t))`.
+- **Absent result:** `inv-inv`, used by the required inversion equivalence
+  in Exercise 9.1. That exercise also supplies the concatenation equivalence.
+- **Reason:** The involution law naturally belongs at Definition 5.2.5 in
+  complete Section 5.2; do not enlarge it on `main` for this later example.
+- **Later use:** The fiberwise equivalence and commuting-triangle proof
+  in Example 11.6.3.
+- **Invisible mathematics:** “Example 11.6.3: identities in fibers” in
+  `docs/invisible-math.md`.
+- **Status:** Empty on `main`; Section 11.6 and Chapter 11 are deferred.
+- **Proposal solution:** Pending publication on
+  `proposal/agda-exercise-solutions` after this empty site is published.
+
+Section 11.6's theorem and Exercise 10.6 also depend on singleton induction;
+the theorem's fundamental-theorem applications additionally depend on coherent
+inversion. These extend the later uses of the two existing Chapter 10 exercises.

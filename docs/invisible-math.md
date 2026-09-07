@@ -118,3 +118,42 @@ Chapter 11 dependency to Section 10.3. The stored Theorem 11.4.2 block is
 restored without changing its specialized proof. A regression test checks
 this placement and the transition prose boundary. Section 10.3, Sections
 11.1--11.4, and Chapters 10--11 pass ordinary Agda checks there.
+
+### Example 11.6.3: identities in fibers
+
+- **Exercise:** `example-11.6.3-identities-in-fibers`.
+- **Source commit:** `c85d7fb834778f96a66576318cdc4ef3d4b80a26` for every
+  range below; full hashes are recorded with the curated blocks.
+- **Needed involution:** `inv-inv`,
+  `src/foundation-core/identity-types.lagda.md`, lines 322--327.
+  Its natural home is Definition 5.2.5, immediately after the inverse laws.
+  Section 5.2 is complete, so add this only on the proposal.
+- **Needed equivalences:** `is-equiv-inv` and `is-equiv-concat`, with their
+  explicit inverses, from `src/foundation/identity-types.lagda.md`, lines
+  80--119. Their natural home is Exercise 9.1, which asks for these exact
+  equivalences. Only the section-required inversion and left-concatenation
+  parts are in scope; right concatenation and transport remain gaps.
+- **Inverse data for concatenation:** `inv-concat` and its two homotopies,
+  `src/foundation-core/identity-types.lagda.md`, lines 212--217 and 367--377.
+  Place these with Exercise 9.1's explicitly requested inverse data, before
+  its equivalence proof. They use only the existing groupoid operations.
+- **Order and uses:** `inv-inv` in Section 5.2 precedes the Exercise 9.1
+  inversion equivalence. Both Exercise 9.1 equivalences are needed by the
+  fiberwise map in Example 11.6.3; its total map and commuting triangle then
+  give the claimed equivalence of identity types with fibers of `ap f`.
+- **Retained example:** `src/foundation/equality-fibers-of-maps.lagda.md`,
+  lines 47--97. Preserve its map, triangle, and equivalence proof, replacing
+  `UU` by repository-local `Type`. This proof uses Theorem 9.3.4 and the
+  total-map criterion of Theorem 11.1.3, rather than the book's direct
+  structure-identity-principle contraction argument; the claim is the same.
+
+Theorem 11.6.2 does not require adding a generic `is-contr-Σ` theorem to
+complete Section 10.1. Its prose explicitly constructs a total-space
+equivalence. The pinned interchange equivalence belongs in that proof, and
+the contractible-base unit equivalence belongs in Exercise 10.6, which asks
+for precisely that result. Compose them and specialize the already copied
+contractibility transfers from Exercise 10.3 in both directions. This also
+exposes the converse absent from the upstream structure-identity-principle
+module. Exercise 10.6 and Section 11.6 extend the existing singleton-induction
+exercise's later uses; the fundamental theorem extends the coherence
+exercise's later uses. No new auxiliary contraction proof is invented.

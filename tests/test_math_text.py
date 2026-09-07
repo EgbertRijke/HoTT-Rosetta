@@ -45,6 +45,16 @@ class MathTextTests(unittest.TestCase):
             "Π(x:A) f(x) =_A g(x)",
         )
 
+    def test_multline_display_preserves_every_line(self):
+        for environment in ("multline", "multline*"):
+            source = (
+                "``` math\n\\begin{" + environment + "}\n"
+                "A \\\\\n\\simeq B\n\\end{" + environment + "}\n```"
+            )
+            self.assertEqual(
+                normalize_markdown_math(source), "```text\nA\n≃ B\n```"
+            )
+
     def test_html_table_math_is_normalized(self):
         self.assertEqual(
             normalize_markdown_math('<span class="math inline">$A\\to B$</span>'),

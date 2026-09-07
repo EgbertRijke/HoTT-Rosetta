@@ -49,7 +49,13 @@ Work continues on `main`.
   and the empty-type equivalence criterion to Example 9.2.9. The latter's
   still-missing displayed laws are explicit gaps; neither earlier file was
   complete. Both changed candidates pass on `main`.
-  Sections 11.6--13.5 still have no curated section blocks.
+  Section 11.6 now has a dependent-identity-system predicate and explicit
+  connections between all six theorem conditions, including the converse.
+  Exercise 10.6 supplies the required contractible-base equivalence.
+  Its Example 11.6.3 is a newly recorded empty training site: the inversion
+  equivalence needs `inv-inv` in complete Section 5.2. Its proposal solution
+  and actual Section 11.6 Agda validation are the immediate next action.
+  Sections 12.1--13.5 still have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
@@ -73,8 +79,9 @@ The five assigned Chapter 10 steps are done. Keep Definition 10.2.1, Lemma
 `main` pass. The audit also records that Definition 10.4.4's final cancellation
 result is provided only on the proposal as part of the existing coherence exercise.
 
-Formalize the remaining sections of Chapters 11, 12, and 13 in order,
-starting with Section 11.6. Chapter 13 contains Axiom 13.1.3: keep any
+Publish the recorded Example 11.6.3 solution on the shared proposal and
+validate all of Section 11.6 there, then formalize Chapters 12 and 13 in
+order. Chapter 13 contains Axiom 13.1.3: keep any
 assumption explicit and never describe it as a proof.
 
 Section 11.6 has a definition, a six-condition equivalence theorem, and a

@@ -487,8 +487,8 @@ def normalize_math(source: str) -> str:
     """Render confirmed project notation as readable Unicode/plain text."""
 
     value = _replace_simple_commands(source.strip().replace("~", " "))
-    value = re.sub(r"\\begin\{(?:equation|align)\*?\}", "", value)
-    value = re.sub(r"\\end\{(?:equation|align)\*?\}", "", value)
+    value = re.sub(r"\\begin\{(?:equation|align|multline)\*?\}", "", value)
+    value = re.sub(r"\\end\{(?:equation|align|multline)\*?\}", "", value)
     value = re.sub(r"\\text\{([^{}]*)\}", r"\1", value)
     value = re.sub(r"\\mathrm\{([^{}]*)\}", r"\1", value)
     value = _replace_unary_wrapper(value, r"\mathsf", "")
