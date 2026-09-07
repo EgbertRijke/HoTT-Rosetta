@@ -674,6 +674,7 @@ class AgdaManifestTests(unittest.TestCase):
         self.assertIn("( equiv-right-swap-Σ) ∘e", document)
         self.assertIn("( equiv-Σ-equiv-base", document)
         self.assertIn("( left-unit-law-Σ-is-contr", document)
+        self.assertIn("open import exercise-9-4-three-for-two-equivalences", document)
         self.assertIn("Agda record-Σ presentation (judgmental η)", document)
         self.assertIn("However, it is *not* the case", document)
         self.assertIn("Therefore we obtain the required homotopy by function extensionality", document)

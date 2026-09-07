@@ -15,6 +15,7 @@ open import section-10-4-equivalences-are-contractible-maps
 open import section-11-1-families-of-equivalences
 open import section-11-2-the-fundamental-theorem
 open import section-13-1-equivalent-forms-of-function-extensionality
+open import exercise-9-4-three-for-two-equivalences
 open import exercise-9-5-sigma-swap
 open import exercise-10-3-contractible-equivalences
 open import exercise-10-6-dependent-pair-contractible-base
