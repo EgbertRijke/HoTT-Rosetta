@@ -13,6 +13,16 @@ from rosetta.agda_manifest import (
 
 
 class AgdaManifestTests(unittest.TestCase):
+    def test_proposed_evaluation_has_its_natural_home(self):
+        from rosetta.file_registry import registered_filename
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        document = (rosetta_directory(root) / registered_filename(root, "section", 2, 2)).read_text()
+        self.assertLess(document.index("rosetta-item: remark-2.2.2"), document.index("ev-point :"))
+        self.assertLess(document.index("ev-point :"), document.index("rosetta-item-end: remark-2.2.2"))
+        self.assertLess(document.index("rosetta-item-end: remark-2.2.2"), document.index("Now we can use these rules"))
+
     def test_repository_manifest_is_valid(self):
         root = Path(__file__).resolve().parent.parent
         blocks = load_manifest(root / "data" / "agda-blocks.json")

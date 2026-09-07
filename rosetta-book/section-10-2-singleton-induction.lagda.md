@@ -42,7 +42,20 @@ for any type family `B` over `A`.
 <!-- rosetta-agda-block: definition-10.2.1-singleton-induction -->
 
 ```agda
+is-singleton :
+  (l1 : Level) {l2 : Level} (A : Type l2) → A → Type (lsuc l1 ⊔ l2)
+is-singleton l A a = (B : A → Type l) → section (ev-point a {B})
 
+ind-is-singleton :
+  {l1 l2 : Level} {A : Type l1} (a : A) →
+  ({l : Level} → is-singleton l A a) → (B : A → Type l2) →
+  B a → (x : A) → B x
+ind-is-singleton a is-sing-A B = pr1 (is-sing-A B)
+
+compute-ind-is-singleton :
+  {l1 l2 : Level} {A : Type l1} (a : A) (H : {l : Level} → is-singleton l A a) →
+  (B : A → Type l2) → (ev-point a {B} ∘ ind-is-singleton a H B) ~ id
+compute-ind-is-singleton a H B = pr2 (H B)
 ```
 <!-- rosetta-item-end: definition-10.2.1 -->
 

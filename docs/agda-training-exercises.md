@@ -18,7 +18,12 @@ mathematics, proposal solution, and review state.
   `docs/invisible-math.md`.
 - **Status:** Empty on `main`; routine Section 10.2 and Chapter 10 checks are
   deferred, not passed.
-- **Proposal solution:** Pending on `proposal/agda-exercise-solutions`.
+- **Proposal solution:** Implemented on `proposal/agda-exercise-solutions` by
+  placing `ev-point` at Remark 2.2.2 and restoring this definition. The solution
+  commit is recorded on `main` after validation and publication.
+- **Validation:** Candidate Sections 2.2, 10.2, and 10.4 and aggregate Chapters
+  2--10 pass ordinary Agda checks on this proposal; the full unit suite,
+  `rosetta.py check`, and `git diff --check` pass.
 
 ### `lemma-10.4.5-coherent-inverse`
 

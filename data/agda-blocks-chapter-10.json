@@ -86,8 +86,8 @@
     },
     {
       "block_id": "definition-10.2.1-singleton-induction",
-      "conversion_status": "exercise",
-      "conversion_note": "Training exercise: ev-point is absent from the complete Section 2.2. See docs/agda-training-exercises.md and docs/invisible-math.md; the solution belongs on proposal/agda-exercise-solutions.",
+      "conversion_status": "ready",
+      "conversion_note": "Proposal solution: ev-point is supplied at Remark 2.2.2; retain the pinned singleton definition and computation rule unchanged.",
       "provenance_kind": "adapted",
       "item_id": "definition-10.2.1",
       "destination": "section-10-2-singleton-induction.lagda.md",
