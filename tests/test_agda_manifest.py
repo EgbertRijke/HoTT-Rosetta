@@ -398,6 +398,76 @@ class AgdaManifestTests(unittest.TestCase):
         self.assertNotIn("open import foundation", document)
         self.assertNotIn("section-13-", document)
 
+    def test_general_truncation_blocks_cover_items_and_delay_lift_transfer(self):
+        import re
+        from rosetta.layout import rosetta_directory
+        from rosetta.render import render_section
+
+        root = Path(__file__).resolve().parent.parent
+        blocks = load_manifest(root / "data" / "agda-blocks.json")
+        selected = [b for b in blocks if b.destination.startswith("section-12-4-")]
+        self.assertEqual(len(selected), 17)
+        self.assertEqual(
+            {b.item_id for b in selected},
+            {"section-12.4", "definition-12.4.1", "remark-12.4.2",
+             "proposition-12.4.3", "corollary-12.4.4", "proposition-12.4.5",
+             "corollary-12.4.6", "theorem-12.4.7"},
+        )
+        document = (rosetta_directory(root) / selected[0].destination).read_text()
+        for block in selected:
+            with self.subTest(block=block.block_id):
+                start = document.index(f"<!-- rosetta-item: {block.item_id}")
+                end = (document.index("## Definition 12.4.1")
+                       if block.item_id == "section-12.4" else
+                       document.index(f"<!-- rosetta-item-end: {block.item_id} -->"))
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(start, position)
+                self.assertLess(position, end)
+        names = ("truncation-level-ℕ", "is-trunc", "is-proper-succ-trunc",
+                 "Truncated-Type", "  is-trunc-map", "compute-raise",
+                 "  is-trunc-succ-is-trunc", "  is-trunc-Id",
+                 "  is-trunc-retract-of", "  is-trunc-is-equiv",
+                 "  is-trunc-equiv'", "  is-trunc-raise",
+                 "  is-trunc-is-trunc-raise", "  is-trunc-is-emb")
+        positions = [document.index(name + " :") for name in names]
+        self.assertEqual(positions, sorted(positions))
+        self.assertIn("Σ (is-trunc (succ-𝕋 k) A) (λ _ → is-empty (is-trunc k A))", document)
+        self.assertIn("Agda universe representation: equivalent lifted types", document)
+        self.assertIn("Remark 12.4.2 revisited", document)
+        theorem = next(b for b in selected if b.item_id == "theorem-12.4.7")
+        self.assertIn("is-trunc-map-succ-is-trunc-map-ap :", theorem.code)
+        self.assertIn("is-trunc-map-ap-is-trunc-map-succ :", theorem.code)
+        self.assertIn("equiv-fiber-ap-eq-fiber", theorem.code)
+        self.assertIn("is-equiv-eq-fiber-fiber-ap", theorem.code)
+        if theorem.conversion_status == "exercise":
+            self.assertNotIn("is-trunc-map-succ-is-trunc-map-ap :", document)
+        else:
+            self.assertIn("is-trunc-map-ap-is-trunc-map-succ :", document)
+        self.assertNotIn("postulate", document)
+        self.assertNotIn("open import foundation", document)
+        self.assertNotIn("section-13-", document)
+
+        prose = document
+        for block in selected:
+            if block.display_heading:
+                prose = prose.replace("### " + block.display_heading, "")
+        prose = re.sub(r"^```agda\n.*?^```\s*", "", prose, flags=re.M | re.S)
+        prose = re.sub(r"<!-- rosetta-agda-block:.*?-->", "", prose)
+        expected = render_section(root / "book" / "hierarchy.tex", 12, 4)
+        normalize = lambda value: re.sub(r"\s+", " ", value).strip()
+        self.assertEqual(normalize(prose), normalize(expected))
+
+    def test_identity_retract_exercise_does_not_import_its_truncation_consumer(self):
+        root = Path(__file__).resolve().parent.parent
+        blocks = load_manifest(root / "data" / "agda-blocks.json")
+        selected = [b for b in blocks if b.destination.startswith("exercise-12-8-")]
+        self.assertEqual(len(selected), 2)
+        self.assertIn("retraction-ap :", selected[0].code)
+        self.assertIn("retract-eq :", selected[1].code)
+        for block in selected:
+            self.assertFalse(any(i.startswith("section-12-") for i in block.imports))
+            self.assertNotIn("is-trunc", block.code)
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

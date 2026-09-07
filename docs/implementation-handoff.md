@@ -1,6 +1,6 @@
 # Implementation handoff
 
-Updated 2026-09-06.
+Updated 2026-09-07.
 
 ## Objective
 
@@ -77,16 +77,26 @@ Work continues on `main`.
   Definition 11.1.1 and the retract variant at Theorem 11.2.2, and restores
   the later proof. Every Chapter 11 section, Sections 12.1--12.3, and
   aggregate Chapters 10--12 pass there. No exercise Agda is added.
-  Sections 12.4--13.5 have no curated section blocks.
+  Section 12.4 now has seventeen curated blocks accounting for its
+  introduction and seven items. Remark 12.4.2 has an explicit representation
+  gap: lifted-type invariance is formalized, but Agda's disjoint universes
+  do not literally express the book's overlapping-universe assertion.
+  Exercise 12.8(a) is added because the pinned equivalence-invariance proof
+  needs identity retracts; its part-(b) proof is a labeled prerequisite at
+  Proposition 12.4.5 to avoid an import cycle. Theorem 12.4.7 is a new empty
+  training site needing the specialized fiber equivalence at Example 11.6.3
+  and transport equivalence at Example 9.2.3. Its shared-proposal solution
+  is pending. Sections 13.1--13.5 still have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
-The latest main validation passed all 154 unit tests,
+The latest main validation passed all 156 unit tests,
 `python3 rosetta.py check`, and `git diff --check`. Section 12.3 and
-aggregate Chapters 10--12 are deferred. Exercise 10.7's unchanged candidate
+aggregate Chapters 10--12 are deferred. Section 12.4 is also deferred;
+its needed Exercise 12.8(a) candidate passes. Exercise 10.7's unchanged candidate
 passed in the preceding validation. Proposal `b96fdf3` passes all 158
 unit tests, candidate Sections 11.1--11.6 and 12.1--12.3, aggregate Chapters
 10--12, and the repository and whitespace checks. Earlier proposal
@@ -108,13 +118,15 @@ status was inferred from this.
 
 The five assigned Chapter 10 steps and the Chapter 11 section formalizations
 are done, with the recorded training holes retained. Keep Definition 10.2.1,
-Lemma 10.4.5, Theorems 11.4.2, 12.2.3, and 12.3.4, and Example 11.6.3 empty
+Lemma 10.4.5, Theorems 11.4.2, 12.2.3, 12.3.4, and 12.4.7, and Example 11.6.3 empty
 on `main`; do not merge the proposal to make `main` pass. The audit also
 records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Continue Sections 12.4--13.5 in order, starting with general truncation
+First publish and validate the new Theorem 12.4.7 proposal solution,
+following its exact index and invisible-math records. Then continue
+Sections 13.1--13.5 in order. The Section 12.4 work covered general truncation
 levels in `book/hierarchy.tex`. Section 12.4 has seven numbered items.
 Account for the indexing type and natural-number inclusion, proper types,
 the universe of truncated types, and truncated maps in addition to the
@@ -123,8 +135,8 @@ do not infer its coverage merely from a universe-polymorphic signature.
 The final theorem needs both directions between successor-truncated maps
 and truncated action on identities. Pinned `foundation-core/truncated-maps`
 lines 112--133 gives that proof using the existing Example 11.6.3 fiber
-identity equivalence; investigate its existing training dependency without
-moving its auxiliaries into earlier complete main files.
+identity equivalence and the absent specialization now recorded for the
+proposal. Keep the earlier main files unchanged.
 Add exercise Agda only as needed by sections, accounting for any remaining
 exercise assertions. Exercise 10.7's existing custom-list rendering loses
 the outer alphabetical labels; the audit records this presentation issue

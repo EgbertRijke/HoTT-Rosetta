@@ -268,3 +268,57 @@ later theorem. Candidate Sections 11.1--11.6 and 12.1--12.3 and aggregate
 Chapters 10--12 pass ordinary Agda checks, as do all 158 proposal unit tests
 and repository checks. Main retains the empty site and its earlier files
 unchanged; no completeness or review state is inferred from deferred checks.
+
+### Theorem 12.4.7: truncated action on identities
+
+- **Exercise:** `theorem-12.4.7-truncated-action-on-identities`.
+- **Pinned commit:** `c85d7fb834778f96a66576318cdc4ef3d4b80a26` throughout.
+- **Transport equivalence:** `src/foundation/transport-along-identifications.lagda.md`,
+  lines 42--57, gives `is-equiv-tr` and both inverse-transport homotopies.
+  Its natural earliest equivalence-level home is Example 9.2.3, after
+  `is-equiv-id`; Section 5.4 has transport but not equivalence vocabulary.
+  Replace `UU` by `Type` and expand `inv-tr B p` to `tr B (inv p)` using
+  `src/foundation-core/transport-along-identifications.lagda.md`, lines
+  42--43. Import local Section 5.4; do not enlarge complete Section 5.4.
+- **Specialized fiber equivalence:**
+  `src/foundation/equality-fibers-of-maps.lagda.md`, lines 113--130,
+  gives `eq-fiber-fiber-ap` and `is-equiv-eq-fiber-fiber-ap`. Put them
+  after the existing general fiber identity equivalence at Example 11.6.3.
+  Replace only `UU` by `Type`. The extra transport along `right-unit`
+  changes the fiber target from `q ∙ refl` to `q`; it must not be erased
+  as a judgmental equality. The equivalence proof uses Exercise 9.4's
+  existing composition theorem and the new transport equivalence.
+- **Retained later theorem:**
+  `src/foundation-core/truncated-maps.lagda.md`, lines 112--133.
+  Both implications are retained together in the empty main block.
+  The first uses Example 11.6.3's existing general equivalence, and the
+  converse uses the specialized one above. Replace only `UU` by `Type`.
+- **Order and validation:** Transport equivalence precedes the fiber
+  specialization, which precedes the truncation theorem. Check changed
+  Sections 9.2, 11.6, and 12.4 and aggregate Chapters 9--12 on the proposal.
+  Main's earlier modules remain unchanged; preserve reserved manual reviews.
+
+Proposition 12.4.5 uses the pinned retract induction in
+`foundation-core/truncated-types`, lines 117--126, followed by its
+equivalence transfers at lines 132--161. The needed identity retraction
+belongs at the previously empty Exercise 12.8(a): copy
+`foundation-core/retractions`, lines 77--110, then
+`foundation-core/retracts-of-types`, lines 129--136. Expand the latter's
+two retract projections to `pr1 R` and `pr2 R`; their definitions are in
+the same file, lines 66--70. This avoids enlarging Definition 9.2.1.
+The truncation-of-retracts theorem also proves Exercise 12.8(b), but must
+remain beside Proposition 12.4.5 as a labeled upstream prerequisite to
+avoid the cycle through the exercise module and this section's `is-trunc`.
+The book's original equivalence-on-identities induction stays in the prose.
+
+Remark 12.4.2 requires a separate universe interpretation: pinned
+`foundation-core/raising-universe-levels`, lines 26--28, says Agda universes
+do not overlap. Its `raise` (33--34) and `compute-raise` proof (45--67)
+provide equivalent lifted types. After Proposition 12.4.5, specialize both
+copied equivalence-transfer directions to `compute-raise l A`. Those
+typed applications prove lifted truncation invariance without function
+extensionality or a universe axiom. They do not prove the book's literal
+same-type-in-two-universes assertion; its representation gap is explicit.
+The proper-successor-type predicate is a typed specialization of
+`foundation/complements`, lines 25--27, to the constant family of
+`is-trunc k A` over `is-trunc (succ-𝕋 k) A`, not a new proof.
