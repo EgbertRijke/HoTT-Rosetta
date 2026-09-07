@@ -85,7 +85,7 @@ When we go through these proofs, the familiar truth table emerges:
 
 <!-- unsupported LaTeX environment: center -->
 
-| `1-5 A` | `B` | `A + B` | `A × B` | `A → B` |
+| 1-5 AA | BB | A+BA+B | A×BA\times B | A→BA\to B |
 | --- | --- | --- | --- | --- |
 | `inl(a)` | `inl(b)` | `inl(inl(a))` | `inl(a,b)` | `inl(λ x. b)` |
 | `inl(a)` | `inr(g)` | `inl(inl(a))` | `inr(g∘ pr 2)` | `inr(λ h. g(h(a)))` |

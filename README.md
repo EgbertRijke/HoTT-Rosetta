@@ -23,12 +23,12 @@ provenance but is never imported by generated modules.
 ## Commands
 
 ```text
-python3 rosetta.py convert                 # regenerate Chapters 3--22
+python3 rosetta.py convert
 python3 rosetta.py convert --from 1 --to 22
-python3 rosetta.py candidate 8 4           # regenerate one section
+python3 rosetta.py candidate 8 4
 python3 rosetta.py typecheck-candidate 8 4
 python3 rosetta.py typecheck-all
-python3 rosetta.py review --web            # optional local review UI
+python3 rosetta.py review --web
 ```
 
 Required validation:

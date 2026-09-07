@@ -24,6 +24,8 @@ In other words, in the situation where
 we say that `B` is a family of types over `A` in context `Γ`.
 Alternatively, we say that `B(x)` is a type **indexed** by `x:A`, in context `Γ`.
 
+<!-- rosetta-item-end: definition-1.2.1 -->
+
 We think of a type family `B` over `A` in context `Γ` as a type `B(x)` varying along `x:A`.
 A basic example of a type family occurs when we introduce *identity types* in Chapter 5.
 They are introduced as follows:
@@ -52,6 +54,8 @@ A **section** of the family `B` over `A` in context `Γ` is an element of type `
 ```
 we say that `b` is a section of the family `B` over `A` in context `Γ`.
 Alternatively, we say that `b(x)` is an element of type `B(x)` **indexed** by `x:A` in context `Γ`.
+
+<!-- rosetta-item-end: definition-1.2.2 -->
 
 Note that in the above situations `A`, `B`, and `b` also depend on the variables declared in the context `Γ`, even though we have not explicitly mentioned them.
 It is indeed common practice to not mention every variable in the context `Γ` in such situations.

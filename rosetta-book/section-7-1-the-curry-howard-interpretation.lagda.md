@@ -229,15 +229,15 @@ We summarize the full Curry-Howard interpretation in the following table.
 | Propositions | Types |
 | Proofs | Elements |
 | Predicates | Type families |
-| `⊤` | `unit` |
-| `⊥` | `empty` |
-| `P ∨ Q` | `A + B` |
-| `P ∧ Q` | `A × B` |
-| `P ⇒ Q` | `A → B` |
-| `¬P` | `A→ empty` |
-| `∃_xP(x)` | `Σ(x:A) B(x)` |
-| `∀_xP(x)` | `Π(x:A) B(x)` |
-| `x = y` | `x = y` |
+| ⊤\top | `unit` |
+| ⊥\bot | `empty` |
+| P∨QP\lor Q | A+BA+B |
+| P∧QP\land Q | A×BA\times B |
+| P⇒QP\Rightarrow Q | A→BA\to B |
+| ¬P\neg P | `A→ empty` |
+| ∃xP(x)\exists_{x}P(x) | `Σ(x:A) B(x)` |
+| ∀xP(x)\forall_{x}P(x) | `Π(x:A) B(x)` |
+| x=yx=y | x=yx=y |
 
 ## Remark 7.1.6
 

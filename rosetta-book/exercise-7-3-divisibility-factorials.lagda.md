@@ -4,7 +4,6 @@
 module exercise-7-3-divisibility-factorials where
 
 open import universe-levels
-open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import exercise-3-1-multiplication-and-exponentiation
 open import exercise-3-3-triangular-numbers-and-factorials
@@ -34,6 +33,13 @@ for every `n:ℕ`.
 ## Solution
 
 <!-- rosetta-item: exercise-7-3 -->
+
+<!-- rosetta-agda-block: exercise-7-3-identity-function-adapted -->
+
+```agda
+id : {l : Level} {A : Type l} → A → A
+id a = a
+```
 
 <!-- rosetta-agda-block: exercise-7-3-decide-below-successor -->
 

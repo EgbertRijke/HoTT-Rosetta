@@ -295,6 +295,8 @@ We will usually write `B(a)` for the fiber of `B` at `a`.
 When `b` is a section of the family `B` over `A` in context `Γ`, we call the element `b[a/x]` the **value** of `b` at `a`.
 Again, we will usually write `b(a)` for the value of `b` at `a`.
 
+<!-- rosetta-item-end: definition-1.3.1 -->
+
 ### Weakening
 
 <!-- rosetta-item: subheading-1.3-weakening -->

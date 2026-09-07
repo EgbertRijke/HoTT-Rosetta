@@ -92,11 +92,12 @@ ap-add-Fin k p q = ap-binary (add-Fin k) p q
 ```agda
 scalar-invariant-cong-ℕ :
   (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (z *ℕ x) (z *ℕ y)
-pr1 (scalar-invariant-cong-ℕ k x y z (d , p)) = z *ℕ d
-pr2 (scalar-invariant-cong-ℕ k x y z (d , p)) =
-  ( associative-mul-ℕ z d k) ∙
-    ( ( ap (z *ℕ_) p) ∙
-      ( left-distributive-mul-dist-ℕ x y z))
+scalar-invariant-cong-ℕ k x y z =
+  ind-Σ (λ d p →
+    pair (z *ℕ d)
+      ((associative-mul-ℕ z d k) ∙
+        ((ap (z *ℕ_) p) ∙
+          (left-distributive-mul-dist-ℕ x y z))))
 
 scalar-invariant-cong-ℕ' :
   (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (x *ℕ z) (y *ℕ z)
@@ -105,7 +106,6 @@ scalar-invariant-cong-ℕ' k x y z H =
     ( commutative-mul-ℕ x z)
     ( scalar-invariant-cong-ℕ k x y z H)
     ( commutative-mul-ℕ z y)
-
 congruence-mul-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
   cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (x *ℕ y) (x' *ℕ y')

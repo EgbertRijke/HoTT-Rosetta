@@ -69,6 +69,8 @@ There are four kinds of **judgments** in Martin-Löf’s dependent type theory:
 Γ⊢ a≐ b:A.
 ```
 
+<!-- rosetta-item-end: definition-1.1.1 -->
+
 We see that any judgment is of the form `Γ⊢J`, consisting of a *context* `Γ` and a *judgment thesis* `J` asserting either that `A` is a type, that `A` and `B` are equal types, that `a` is an element of type `A`, or that `a` and `b` are equal elements of type `A`.
 The role of a context is to declare what **hypothetical elements** are assumed, along with their types.
 Hypothetical elements are commonly called **variables**.
@@ -87,6 +89,8 @@ x_1:A_1, …, x_{k-1}:A_{k-1}(x_1,…,x_{k-2})⊢ A_k(x_1,…,x_{k-1}) \type,
 ```
 using the inference rules of type theory.
 We may use variable names other than `x_1,…,x_n`, as long as no variable is declared more than once.
+
+<!-- rosetta-item-end: definition-1.1.2 -->
 
 The condition in Definition 1.1.2 that each of the hypothetical elements is assigned a type, is checked recursively.
 In other words, to check that a list of variable declarations as in **[unresolved reference: eq:context]** is a context, one starts on the left and works their way to the right, verifying that each hypothetical elements `x_k` is assigned a type.

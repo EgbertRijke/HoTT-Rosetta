@@ -350,7 +350,38 @@
           "text": "This solution was needed for a later section. Please complete this file with the appropriate code review and prose."
         }
       ],
-      "state": "needs-further-review"
+      "review_sha256": "a5060825aa9b1d85438ff5e849d6f95e0bd18571b941bdf80b9c05b29e61c1be",
+      "state": "approved"
+    },
+    "exercise-7-2-antisymmetric-relation-adapted": {
+      "comments": [],
+      "review_sha256": "867b7d11cb3451f41568744c5a7e63882267d14a8dc158c668c46131e6272174",
+      "state": "approved"
+    },
+    "exercise-7-2-divisibility-partial-order": {
+      "comments": [],
+      "review_sha256": "5c446f3e8bf54730a5cba0b4e7f8aea3c1e3d7254edf1fd01b2fee9ba962b3f8",
+      "state": "approved"
+    },
+    "exercise-7-2-left-unit-multiplication-helper": {
+      "comments": [],
+      "review_sha256": "90fc604ac2c41ec3150a74365c952a318f762c658d429015c156c9b7b049b64c",
+      "state": "approved"
+    },
+    "exercise-7-3-decide-below-successor": {
+      "comments": [],
+      "review_sha256": "b305e2795bc59ac142505561756fea6f9b17388860dcca47ab4f7269ba5ebeb1",
+      "state": "approved"
+    },
+    "exercise-7-3-divisibility-factorial": {
+      "comments": [],
+      "review_sha256": "95e47fb099efdd7001dc12ddf8ae8171b54eb6c0cd5eff69e80ebac7d6db2245",
+      "state": "approved"
+    },
+    "exercise-7-3-identity-function-adapted": {
+      "comments": [],
+      "review_sha256": "f0cc5e95ccdc5186efe490a73c99221e1e20b44b2ff4c07902c76689288d2466",
+      "state": "rejected"
     },
     "exercise-7-4-natural-value-one-finite": {
       "comments": [],
@@ -873,6 +904,11 @@
       "review_sha256": "b921b54137a998ca4003cc2c02f70b96e67bd4423a6e7552641de74612934d68",
       "state": "rejected"
     },
+    "section-2-2-dependent-composition-adapted": {
+      "comments": [],
+      "review_sha256": "42ea01ad8d25e3758d94cccc9d387989606bbf5cedef0928aebc9e19f2f201d2",
+      "state": "approved"
+    },
     "section-2-2-identity-function-adapted": {
       "comments": [],
       "review_sha256": "c96b8910c05ef822a12fd425677f21b7bfaa28323ddd1eb1be19f8b0caf948c0",
@@ -900,6 +936,16 @@
       ],
       "state": "needs-further-review"
     },
+    "section-7-1-the-curry-howard-interpretation-block-106": {
+      "comments": [],
+      "review_sha256": "640bb50f37728fc428441ff1c51dd8b2b84f2bf5f2208df1a3442a58ab0904db",
+      "state": "approved"
+    },
+    "section-7-1-the-curry-howard-interpretation-block-119": {
+      "comments": [],
+      "review_sha256": "1628648dd07be5ecaed45a2a3b83526e5f1beacbef120bb05b2097d509945ede",
+      "state": "approved"
+    },
     "section-7-1-the-curry-howard-interpretation-block-186": {
       "comments": [
         {
@@ -916,7 +962,53 @@
           "text": "This code is copied from agda-unimath, which defines multiplication in the opposite order from the textbook (k * m rather than m * k). This makes the later proof slightly different from both the textbook and the library proof."
         }
       ],
-      "state": "needs-further-review"
+      "review_sha256": "4aeec2cceec7f26f77e4d14e038b05c1686c364f533a17adbec41735e66d53ad",
+      "state": "approved"
+    },
+    "section-7-2-the-congruence-relations-on-natural-numbers-block-129": {
+      "comments": [],
+      "review_sha256": "d88a42afe54339f77f2baa724002ef7aa15fd70fe47300aa7cbb40564ab16f71",
+      "state": "approved"
+    },
+    "section-7-2-the-congruence-relations-on-natural-numbers-block-145": {
+      "comments": [],
+      "review_sha256": "1e3d29a32154bd09ecb9509d4d84288e54fbc11cd19fbee8171b67c62907cb20",
+      "state": "approved"
+    },
+    "section-7-2-the-congruence-relations-on-natural-numbers-block-163": {
+      "comments": [],
+      "review_sha256": "11e3c84e9963355ca7ac84000d90106e4817017f9e33cb6624159c342807113f",
+      "state": "approved"
+    },
+    "section-7-2-the-congruence-relations-on-natural-numbers-block-173": {
+      "comments": [],
+      "review_sha256": "d7207c42769dfb52aea4a53f25bddf658dd4ead1bd65692ce3e1568092a3b661",
+      "state": "approved"
+    },
+    "section-7-2-the-congruence-relations-on-natural-numbers-block-203": {
+      "comments": [],
+      "review_sha256": "5612374d4a24a1ec75e2af5679c7063d3c399cb3129c1a66fdb38d1b8227e749",
+      "state": "approved"
+    },
+    "section-7-2-the-congruence-relations-on-natural-numbers-block-31": {
+      "comments": [],
+      "review_sha256": "0c6fba4858c26ff18b97fa48107c6fc78533724522b78be57da8870d521acaa9",
+      "state": "approved"
+    },
+    "section-7-2-the-congruence-relations-on-natural-numbers-block-43": {
+      "comments": [],
+      "review_sha256": "171ebafa36c65bcda199351862993fda4a2f4753c8acbabf8b73f12ebb0c09dd",
+      "state": "approved"
+    },
+    "section-7-2-the-congruence-relations-on-natural-numbers-block-58": {
+      "comments": [],
+      "review_sha256": "63113ec79c22c3f44e8802f87e769a6339956eeaea48d3354092981b11401ad1",
+      "state": "approved"
+    },
+    "section-7-2-the-congruence-relations-on-natural-numbers-block-73": {
+      "comments": [],
+      "review_sha256": "0e5026526645bddfbdfdd332dcb989afe65c064160ca9eaeaf9afb006df2dd2a",
+      "state": "approved"
     },
     "section-7-2-the-congruence-relations-on-natural-numbers-block-86": {
       "comments": [
@@ -925,7 +1017,8 @@
           "text": "In agda-unimath, equivalence relations are defined only for relations valued in propositions."
         }
       ],
-      "state": "needs-further-review"
+      "review_sha256": "5397c42e67053540574a822ba7b1814155e1e5036f31b1e96d0ed8ec1d506857",
+      "state": "approved"
     },
     "section-7-3-the-standard-finite-types-block-136": {
       "comments": [
@@ -934,7 +1027,18 @@
           "text": "This code was manually supplied. Is there a source for it in agda-unimath, and do we want it here at all?"
         }
       ],
-      "state": "needs-further-review"
+      "review_sha256": "6d713834cdf55c9a4a6599fc1c71ec9d5a0d4e511c6a31f6141812e44d86490f",
+      "state": "approved"
+    },
+    "section-7-3-the-standard-finite-types-block-166": {
+      "comments": [],
+      "review_sha256": "30246bd54bebfe242bbe0631334d38515e45074152bf7025312d932f922f592e",
+      "state": "approved"
+    },
+    "section-7-3-the-standard-finite-types-block-189": {
+      "comments": [],
+      "review_sha256": "863496ce0609f3b51eabea6895c76a3d7bc234ca41302dda533e61865e4407ee",
+      "state": "approved"
     },
     "section-7-3-the-standard-finite-types-block-230": {
       "comments": [
@@ -943,7 +1047,13 @@
           "text": "At this point, is-injective should have a proper earlier definition and be imported; it appears to be used multiple times before this."
         }
       ],
-      "state": "needs-further-review"
+      "review_sha256": "5d743c8893a2da50c9fbccfd906458686f110c728321700669b8617b56619058",
+      "state": "approved"
+    },
+    "section-7-3-the-standard-finite-types-block-56": {
+      "comments": [],
+      "review_sha256": "a42771fecc49c33b39c6a275195beca6239328df22434d61138b12e73efdfafb",
+      "state": "approved"
     },
     "section-7-3-the-standard-finite-types-block-77": {
       "comments": [
@@ -952,7 +1062,8 @@
           "text": "This differs slightly from agda-unimath, where finite types are first defined as sets and then cast to types."
         }
       ],
-      "state": "needs-further-review"
+      "review_sha256": "bb1b69218e55cb7b915edf677d6d87a3385513d23a3a6c29d0ebd9dc0498c1b3",
+      "state": "approved"
     },
     "section-7-3-the-standard-finite-types-block-87": {
       "comments": [
@@ -961,7 +1072,8 @@
           "text": "Not sure whether this inclusion should be included here; in particular, there is no analogous code for inclusion of the point."
         }
       ],
-      "state": "needs-further-review"
+      "review_sha256": "23d63fab6fc6e974559587fa77dc69da293555e1633a6da8832de2ced7b09dbc",
+      "state": "approved"
     },
     "section-9.3-transport-action": {
       "comments": [
