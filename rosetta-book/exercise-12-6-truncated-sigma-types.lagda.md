@@ -3,6 +3,11 @@
 ```agda
 module exercise-12-6-truncated-sigma-types where
 
+open import universe-levels
+open import section-4-6-dependent-pair-types
+open import section-12-1-propositions
+open import section-12-2-subtypes
+open import section-12-4-general-truncation-levels
 ```
 
 ## Problem statement
@@ -31,4 +36,25 @@ Show that the following are equivalent:
 
 <!-- rosetta-item: exercise-12-6 -->
 
-No formalization has been curated yet.
+### Part (a): proposition-level forward implication needed by Section 14.1
+
+<!-- rosetta-agda-block: exercise-12-6-propositional-sigma -->
+
+```agda
+abstract
+  is-prop-Σ :
+    {l1 l2 : Level} {A : Type l1} {B : A → Type l2} →
+    is-prop A → ((x : A) → is-prop (B x)) → is-prop (Σ A B)
+  is-prop-Σ H K =
+    is-trunc-is-emb neg-two-𝕋 pr1 (is-emb-pr1-is-subtype K) H
+```
+
+<!-- rosetta-agda-block: exercise-12-6-propositional-product -->
+
+```agda
+abstract
+  is-prop-product :
+    {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+    is-prop A → is-prop B → is-prop (A × B)
+  is-prop-product H K = is-prop-Σ H (λ x → K)
+```
