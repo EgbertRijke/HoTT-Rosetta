@@ -80,3 +80,32 @@ Required mathematics, in dependency order:
 All sources use commit `c85d7fb`. Replace `UU` by `Type`. The first result is
 needed by the seventh. The second is needed by the fourth. Results 3--7 are
 needed by the proof of Lemma 10.4.5.
+
+### Theorem 11.4.2: reversing fiber paths
+
+- **Exercise:** `theorem-11.4.2-equivalences-are-embeddings`.
+- **Needed result:** `equiv-fiber : fiber f y ≃ fiber' f y`, including its
+  two maps, their section and retraction homotopies, and the equivalence proof.
+- **Role:** Convert contractibility of the ordinary fiber at `f a` into
+  contractibility of `Σ A (λ x → f a ＝ f x)`, then apply Theorem 11.2.2 to
+  `ap f`. The underlying maps preserve the first coordinate and invert the
+  path. Their inverse laws are copied path-induction proofs.
+- **Natural home:** Definition 10.3.1, immediately after the existing ordinary
+  and reverse fiber definitions. Section 10.3 is already complete, so this
+  addition belongs only on the shared proposal.
+- **Source:** Commit `c85d7fb834778f96a66576318cdc4ef3d4b80a26`,
+  `src/foundation-core/fibers-of-maps.lagda.md`, lines 215--244.
+- **Notation:** Replace `UU` by `Type`; all other declarations are unchanged.
+- **Order:** Section 5.2 supplies path inversion, Section 9.2 supplies
+  equivalence construction, and Definition 10.3.1 supplies the two fiber
+  types. Add the auxiliary there before any Section 11.4 consumer.
+- **Uses:** Theorem 11.4.2's `is-emb-is-equiv`, then `is-emb-equiv` and
+  `emb-equiv`. Recheck Section 10.3, Sections 11.1--11.4, and Chapters 10--11.
+
+The retained theorem excerpt comes from `src/foundation/embeddings.lagda.md`,
+lines 431--448 at the same commit. Its contractible-ordinary-fiber argument
+is specialized using `is-contr-map-is-equiv H (f a)`, already proved in
+Theorem 10.4.6. This keeps the book's fundamental-theorem proof route; the
+alternative coherent-inverse proof in `foundation-core/equivalences` is not
+used. The auxiliary fiber equivalence is proved directly by path inversion
+rather than by a separate appeal to Exercise 9.1 and `equiv-tot`.

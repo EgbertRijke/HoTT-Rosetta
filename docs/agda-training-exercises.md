@@ -13,7 +13,8 @@ mathematics, proposal solution, and review state.
 - **Absent result:** Evaluation at a point, `ev-point`.
 - **Reason:** Section 2.2 already gives a complete account of ordinary
   functions and typechecks. It should not grow solely to support Section 10.2.
-- **Later use:** Example 10.2.2 and Theorem 10.2.3.
+- **Later use:** Example 10.2.2, Theorem 10.2.3, and the identity-system
+  implication in Theorem 11.2.2; through it, Sections 11.3 and 11.4.
 - **Invisible mathematics:** “Section 10.2: evaluation at a point” in
   `docs/invisible-math.md`.
 - **Status:** Empty on `main`; routine Section 10.2 and Chapter 10 checks are
@@ -41,3 +42,19 @@ mathematics, proposal solution, and review state.
 - **Later validation:** Proposal `dc1ffed` includes current Section 11.1 and
   passes its candidate check and aggregate Chapters 9--11. The new section's
   dependency on this exercise is intentional; it remains deferred on `main`.
+
+### `theorem-11.4.2-equivalences-are-embeddings`
+
+- **Place:** Section 11.4, Theorem 11.4.2.
+- **Task:** Prove that every equivalence is an embedding by the fundamental
+  theorem and contractibility of its fibers.
+- **Absent result:** `equiv-fiber`, the equivalence between `fiber f y` and
+  `fiber' f y`, with its forward and inverse maps and homotopies.
+- **Reason:** Section 10.3 is complete and typechecks. Do not enlarge its
+  fiber definition solely to support this later theorem on `main`.
+- **Later use:** Theorem 11.4.2 and its packaged map `emb-equiv`.
+- **Invisible mathematics:** “Theorem 11.4.2: reversing fiber paths” in
+  `docs/invisible-math.md`.
+- **Status:** Empty on `main`; Section 11.4 and Chapter 11 are deferred.
+- **Proposal solution:** Pending publication on
+  `proposal/agda-exercise-solutions` after this empty site is published.
