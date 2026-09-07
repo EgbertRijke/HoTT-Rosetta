@@ -31,7 +31,13 @@ and aggregate Chapters 3, 6--8, 16, 18--20, and 22. Chapters 11 and 14 remain
 deferred through existing training sites; they are not passes. Section
 14.4's passing candidate still contains only its module declaration and
 does not establish formalization completeness. Its six-item Agda work
-remains next. Proposal validation of this prose-only change is pending.
+remains next. Published proposal merge
+`d57b496af51c6ef85798aa27e09eef3effdca178` passes actual Agda for all ten
+changed section candidates and aggregate Chapters 3, 6--8, 11, 14, 16,
+18--20, and 22, all 190 unit tests, repository checks (634 verified blocks),
+and whitespace checks. All thirteen repaired documents exactly match their
+generated proposal candidates. No proof correction or new training solution
+was needed, and main retains all nine empty sites.
 
 Section 14.3 now has seventeen provenance-backed blocks for all four
 numbered items and the complete eight-row connective table. Both
@@ -301,6 +307,13 @@ not redo that work. Further pinned-source inspection found:
   image-proposition proof at 61--91, extension and computation at 97--126,
   both inverse homotopies at 128--152, and equivalence at 154--161. Preserve
   the book's separate uniqueness argument before the image construction.
+- Pinned `foundation/propositional-truncations`, lines 208--212, makes
+  `apply-universal-property-trunc-Prop t P f` merely an argument-reordered
+  call to the local `map-universal-property-trunc-Prop P f t`. Expand it
+  without adding another earlier wrapper. Likewise, the weak-constancy
+  proposition at `foundation/weakly-constant-maps`, lines 88--99, specializes
+  iterated product closure to two products; use the existing nested
+  `is-prop-Π` rather than importing telescope machinery.
 
 Inspect pinned `elementary-number-theory/well-ordering-principle-natural-numbers`
 and `elementary-number-theory/well-ordering-principle-standard-finite-types`
