@@ -19,10 +19,12 @@ Work continues on `main`.
 - Routine checks report `deferred` without running Agda when a file contains or
   imports a manifest block marked `exercise`. `--force` runs the unchanged Agda
   command. Deferred never means passed.
-- Sections 10.1 and 10.3 pass candidate checks.
-- Definition 10.2.1 is now marked `exercise` on `main`; Section 10.2 is
-  deferred because `ev-point` is absent. Publishing and validating its shared
-  proposal solution is the immediate next step.
+- Sections 10.1 and 10.3 have item-by-item coverage audits and passing candidate
+  checks; both are recorded complete. See `docs/section-agda-audit.md`.
+- Definition 10.2.1 is marked `exercise` on `main`. Its solution is published
+  as `511f171` on the shared proposal, with `ev-point` at Remark 2.2.2.
+- Remark 10.1.2 needs no separate declaration. Example 10.2.2 now has an
+  upstream-analogous unit singleton witness, checked on the proposal.
 - Section 10.4 is deferred on `main` at Lemma 10.4.5. Its solution is commit
   `5e5a5cd` on `proposal/agda-exercise-solutions` and passes Agda there.
 - Chapters 11--13 currently have no curated section blocks or recorded complete
@@ -31,24 +33,18 @@ Work continues on `main`.
   these remain reserved for manual review.
 
 The latest validation passed the full unit suite, `python3 rosetta.py check`,
-and `git diff --check`.
+and `git diff --check`. Proposal `511f171` passes candidate Sections 2.2, 10.2,
+and 10.4 and aggregate Chapters 2--10. On `main`, Sections 10.2 and 10.4 and
+Chapter 10 remain deferred, never recorded as passed.
 
 ## Next work
 
-Finish Chapter 10 before Chapter 11:
+The five assigned Chapter 10 steps are done. Keep Definition 10.2.1 and Lemma
+10.4.5 empty on `main`; do not merge the proposal to make `main` pass. The
+audit also records that Definition 10.4.4's final cancellation result is
+provided only on the proposal as part of the existing coherence exercise.
 
-1. Audit Remark 10.1.2 and decide whether it needs Agda.
-2. Complete the Definition 10.2.1 exercise workflow. Mark its manifest block
-   `exercise` on `main`; update and publish the exercise records; bring current
-   `main` into the shared proposal; place `ev-point` at its natural home in
-   Remark 2.2.2 there; check Sections 2.2 and 10.2 and affected aggregates;
-   push the proposal; then record its solution commit on `main`.
-3. Decide whether Example 10.2.2 needs Agda.
-4. Audit Section 10.3 before recording completion.
-5. Leave Lemma 10.4.5 empty on `main`; do not merge its proposal merely to make
-   `main` pass.
-
-Then formalize Chapters 11, 12, and 13 in order, one section at a time. Chapter
+Formalize Chapters 11, 12, and 13 in order, starting with Section 11.1. Chapter
 13 contains Axiom 13.1.3: keep any assumption explicit and never describe it as
 a proof.
 
