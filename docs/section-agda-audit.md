@@ -477,3 +477,34 @@ Its only correction adds a direct import for the existing equivalence
 composition in Exercise 9.4; the exact scratchpad passed and all proof
 bodies remain unchanged. That focused correction is also on main, without
 the proposal's training solutions. No review state or complete-file record is changed.
+
+## Section 13.3 (2026-09-07)
+
+The three numbered items, both complete proofs, and both introductory
+ordinary-family universal properties in `book/funext.tex`, lines 282--377,
+are accounted for by five provenance-backed blocks.
+
+| Item | Formalization |
+| --- | --- |
+| Theorem 13.3.1 | The pinned `is-equiv-ev-pair`, with `ind-Σ` as both inverse maps, the reflexivity computation, and the explicit `eq-htpy (ind-Σ ...)` inverse homotopy, followed by its forward equivalence bundle. Reuse `ev-pair` from Remark 4.6.3. The source's separate assertion that the inverse is an equivalence is not required by this theorem and is omitted; all inverse data needed for the stated equivalence is retained. |
+| Introductory ordinary Σ property | Explicit typed specializations of that proof and bundle to a constant codomain family. They follow the general proof within its item, with a visible heading explaining the connection to the introduction. |
+| Corollary 13.3.2 | The equivalence proof and bundle for the forward currying map `(A × B → X) → (A → B → X)`, specializing both families to constants. It is not merely the oppositely oriented uncurrying equivalence. |
+| Theorem 13.3.3 | Evaluation at reflexivity, its computation homotopy, the two nested function-extensionality applications around path induction, and the equivalence and bundle. No unrelated later univalence results from the source module are imported. |
+| Introductory ordinary identity property | Explicit proof and bundle specializations to a family independent of the path argument, after the dependent proof and under a visible heading. |
+
+The book's redundant extra function-extensionality wording in the first
+proof and its free `p` in the displayed type of `f` in the second proof
+remain as written; the Agda statements have the fully bound dependent
+types. No source prose was silently corrected. Removing code and the two
+explicit specialization headings recovers the rendered book text exactly,
+modulo whitespace. Raw comparison is 98.72%, with 7/9 distinct headings,
+all ten text fences, no unresolved references, and no raw TeX commands.
+Regression tests check the complete prose, placement and declaration order,
+both inverse maps, and the explicit induction/function-extensionality proofs.
+
+No earlier complete file, exercise Agda, training site, review decision,
+or complete-file record is changed. Section 13.3 is deferred on main through
+the existing Section 13.1 imports; actual proposal validation is pending.
+Main passes all 163 unit tests, repository checks (547 verified blocks),
+and whitespace checks. Its Section 13.3 and Chapter 13 results remain
+deferred, not passed.

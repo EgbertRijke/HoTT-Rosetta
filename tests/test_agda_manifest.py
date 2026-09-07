@@ -600,6 +600,62 @@ class AgdaManifestTests(unittest.TestCase):
         self.assertTrue(any(g["item_id"] == "exercise-9-5-a" for g in gaps))
         self.assertTrue(any(g["item_id"] == "theorem-13.2.1-judgmental-sigma-eta" for g in gaps))
 
+    def test_universal_properties_keep_induction_proofs_and_ordinary_specializations(self):
+        import re
+        from rosetta.file_registry import registered_filename
+        from rosetta.layout import rosetta_directory
+        from rosetta.render import render_section
+
+        root = Path(__file__).resolve().parent.parent
+        destination = registered_filename(root, "section", 13, 3)
+        selected = [b for b in load_manifest(root / "data" / "agda-blocks.json")
+                    if b.destination == destination]
+        self.assertEqual(len(selected), 5)
+        self.assertEqual({b.item_id for b in selected},
+                         {"theorem-13.3.1", "corollary-13.3.2", "theorem-13.3.3"})
+        document = (rosetta_directory(root) / destination).read_text()
+        for block in selected:
+            with self.subTest(block=block.block_id):
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(document.index(f"<!-- rosetta-item: {block.item_id}"), position)
+                self.assertLess(position, document.index(f"<!-- rosetta-item-end: {block.item_id} -->"))
+        sigma = next(b for b in selected if b.block_id ==
+                     "theorem-13.3.1-dependent-universal-property-sigma")
+        self.assertIn("pr1 (pr1 is-equiv-ev-pair) = ind-Σ", sigma.code)
+        self.assertIn("pr2 (pr1 is-equiv-ev-pair) = refl-htpy", sigma.code)
+        self.assertIn("pr1 (pr2 is-equiv-ev-pair) = ind-Σ", sigma.code)
+        self.assertIn("eq-htpy (ind-Σ (λ x y → refl))", sigma.code)
+        identity = next(b for b in selected if b.block_id ==
+                        "theorem-13.3.3-dependent-universal-property-identity")
+        self.assertEqual(identity.code.count("eq-htpy"), 2)
+        self.assertIn("is-retraction-ev-refl = refl-htpy", identity.code)
+        self.assertIn("( λ x' p' → ind-Id a _ (f a refl) x' p' ＝ f x' p')", identity.code)
+        self.assertIn("is-equiv-is-invertible (ind-Id a B)", identity.code)
+        for name in ("is-equiv-ev-pair-nondependent", "equiv-ev-pair-nondependent",
+                     "is-equiv-ev-product", "equiv-ev-product",
+                     "is-equiv-ev-refl-nondependent", "equiv-ev-refl-nondependent"):
+            self.assertRegex(document, r"(?m)^\s*" + re.escape(name) + r" :")
+        self.assertLess(document.index("  equiv-ev-pair :"),
+                        document.index("  equiv-ev-pair-nondependent :"))
+        self.assertLess(document.index("  equiv-ev-refl :"),
+                        document.index("  equiv-ev-refl-nondependent :"))
+        self.assertIn("(A × B → X) ≃ (A → B → X)", document)
+        self.assertIn("open import section-4-6-dependent-pair-types", document)
+        self.assertNotRegex(document, r"(?m)^\s*ev-pair :")
+        self.assertNotIn("is-equiv-ind-Σ", document)
+        self.assertNotIn("postulate", document)
+        self.assertNotIn("univalence", document)
+        self.assertNotIn("open import foundation", document)
+        prose = document
+        for block in selected:
+            if block.display_heading:
+                prose = prose.replace("### " + block.display_heading, "")
+        prose = re.sub(r"^```agda\n.*?^```\s*", "", prose, flags=re.M | re.S)
+        prose = re.sub(r"<!-- rosetta-agda-block:.*?-->", "", prose)
+        expected = render_section(root / "book" / "funext.tex", 13, 3)
+        normalize = lambda value: re.sub(r"\s+", " ", value).strip()
+        self.assertEqual(normalize(prose), normalize(expected))
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

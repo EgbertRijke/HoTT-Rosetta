@@ -100,17 +100,22 @@ Work continues on `main`.
   Proposal `161b3c1` passes its actual Agda check and Chapters 9 and 13.
   Its direct-import correction for existing Exercise 9.4 composition is
   also on main, without any training solution.
-  Sections 13.3--13.5 have no curated section blocks.
+  Section 13.3 now has five provenance-backed blocks for the three numbered
+  universal properties and both introductory ordinary-family specializations.
+  It preserves the explicit Σ-induction and twice-extensional path-induction
+  proofs, with no new auxiliary or exercise Agda. Its actual proposal
+  validation is pending. Sections 13.4--13.5 have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
-The latest main validation passed all 162 unit tests,
-`python3 rosetta.py check`, and `git diff --check`, with 542 manifest blocks
-(175 exact, 309 adapted, 58 historical/local), Exercise 9.5's candidate,
-and aggregate Chapter 9. Sections 13.1--13.2 and Chapter 13
+The latest main validation passed all 163 unit tests,
+`python3 rosetta.py check`, and `git diff --check`, with 547 manifest blocks
+(175 exact, 314 adapted, 58 historical/local). The preceding Exercise 9.5
+candidate and aggregate Chapter 9 checks passed; neither changed in the
+Section 13.3 work. Sections 13.1--13.3 and Chapter 13
 are deferred until their existing training dependencies are supplied.
 Proposal `161b3c1` passes all 167 unit tests, repository and whitespace
 checks, Section 13.2, Exercise 9.5, and aggregate Chapters 9 and 13.
@@ -148,7 +153,9 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Continue Sections 13.3--13.5 in order. Section 13.3 is `book/funext.tex`,
+First validate the newly curated Section 13.3 and Chapter 13 on the shared
+proposal after bringing in current main. No new training solution is needed.
+Then continue Sections 13.4--13.5 in order. Section 13.3 is `book/funext.tex`,
 lines 282--377: Theorem 13.3.1 (dependent universal property of Σ),
 Corollary 13.3.2 (currying for ordinary products), and Theorem 13.3.3
 (dependent universal property of identity types). Preserve both introductory
