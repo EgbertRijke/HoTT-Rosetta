@@ -293,8 +293,10 @@ its absent `equiv-fiber`, so the new training site is recorded even though
 proposal `63e5e49` already supplies that auxiliary for Theorem 11.4.2.
 The shared-proposal solution must reuse the existing placement and restore
 only this retained theorem block. Its fundamental-theorem applications also
-depend on the two existing Chapter 10 exercises. Section 12.2 is deferred
-on `main`, not complete or passed; proposal validation is pending.
+depend on the two existing Chapter 10 exercises. Published proposal `7b6b28c`
+implements exactly that solution and passes Section 12.2, Exercise 10.7, and
+aggregate Chapters 10--12. All 156 proposal tests and repository checks pass.
+Section 12.2 remains deferred on `main`, not complete or passed.
 
 Exercise 10.7(a) passes its ordinary candidate check on `main`. Parts (b)
 and (c) remain explicit Agda gaps. All problem text is retained, but the

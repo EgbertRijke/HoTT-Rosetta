@@ -120,9 +120,13 @@ its existing training sites empty and Section 12.1 deferred.
 - **Invisible mathematics:** “Theorem 12.2.3: embeddings and propositional
   fibers” in `docs/invisible-math.md`.
 - **Status:** Empty on `main`; Section 12.2 and Chapter 12 are deferred.
-- **Proposal solution:** Pending. Reuse the complete auxiliary already placed
-  at Definition 10.3.1 by `63e5e49`; restore this retained theorem block in a
-  focused solution commit after bringing in latest `main`.
+- **Proposal solution:** `proposal/agda-exercise-solutions`, commit `7b6b28c`.
+  It reuses the complete auxiliary already placed at Definition 10.3.1 by
+  `63e5e49` and restores the retained theorem without changing its proof.
+- **Validation:** Section 12.2, Exercise 10.7, and aggregate Chapters 10--12
+  pass ordinary Agda checks on that proposal. All 156 proposal unit tests,
+  repository checks, and whitespace checks pass. Main's 153 tests pass,
+  but its Section 12.2 and Chapter 12 checks remain deferred, not passed.
 
 The fundamental-theorem applications also extend the later uses of the two
 Chapter 10 training exercises. Only part (a) of Exercise 10.7 is added early,

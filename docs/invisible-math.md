@@ -209,3 +209,11 @@ Parts (b) and (c) are not section prerequisites and remain Agda gaps.
 The unbundled forward implication simply applies the copied subtype-inclusion
 embedding proof to `(λ x → (B x , H x))`; it does not invent a new proof.
 No function-extensionality assumption or later truncation result is imported.
+
+Published proposal `7b6b28c` restores the retained theorem with no new
+auxiliary or proof changes. It reuses Definition 10.3.1's existing fiber
+equivalence. Section 12.2, Exercise 10.7, and aggregate Chapters 10--12
+pass ordinary Agda checks, as do all 156 proposal tests and repository
+checks. Main keeps its complete Section 10.3 unchanged and the new theorem
+site empty. Both implications and the later projection results are included
+in the proposal's passing candidate check.
