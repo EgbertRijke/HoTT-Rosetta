@@ -26,10 +26,18 @@ Record all non-obvious decomposition choices. Keep the explanation short.
   induction.
 - **Natural home:** Remark 2.2.2, which presents function evaluation.
 - **Order:** Define `ev-point` before `is-singleton`.
-- **Source:** Commit `c85d7fb`,
+- **Source:** Commit `c85d7fb834778f96a66576318cdc4ef3d4b80a26`,
   `src/foundation-core/function-types.lagda.md`, lines 48--50.
 - **Notation:** Replace `UU` by `Type`.
-- **Uses:** Definition 10.2.1 and Theorem 10.2.3.
+- **Uses:** Definition 10.2.1, Example 10.2.2, and Theorem 10.2.3.
+
+On the proposal, restore the retained Definition 10.2.1 block after adding
+evaluation at Remark 2.2.2. Its source is
+`src/foundation/singleton-induction.lagda.md`, lines 39--52, at the same
+commit. The example uses the analogous singleton witness at lines 103--108:
+replace the total path space and its eliminator by `unit`, `star`, and the
+already available `ind-unit`. The computation witness remains `refl-htpy`.
+No new dependency from Section 2.2 to singleton induction is introduced.
 
 Section 2.2 already typechecks and tells a complete story. Do not add
 `ev-point` there solely to make Section 10.2 compile. Section 10.2 is the

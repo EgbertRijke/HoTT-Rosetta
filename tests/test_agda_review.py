@@ -1,7 +1,10 @@
 import tempfile
 import unittest
+from collections import Counter
 from pathlib import Path
 from unittest.mock import patch
+
+from rosetta.agda_manifest import load_manifest
 
 from rosetta.agda_review import (
     AgdaReviewRecord,
@@ -49,10 +52,19 @@ class AgdaReviewTests(unittest.TestCase):
         records = discover_agda_reviews(root)
         curated = [record for record in records if record.provenance_kind != "missing"]
         missing = [record for record in records if record.provenance_kind == "missing"]
-        self.assertEqual(len(curated), 406)
-        self.assertEqual(sum(record.exact_match for record in curated), 170)
-        self.assertEqual(sum(record.provenance_kind == "adapted" for record in curated), 178)
-        self.assertEqual(sum(record.provenance_kind == "handwritten" for record in curated), 58)
+        blocks = load_manifest(root / "data" / "agda-blocks.json")
+        self.assertCountEqual(
+            [record.block_id for record in curated],
+            [block.block_id for block in blocks],
+        )
+        self.assertEqual(
+            sum(record.exact_match for record in curated),
+            sum(block.provenance_kind == "exact" for block in blocks),
+        )
+        self.assertEqual(
+            Counter(record.provenance_kind for record in curated),
+            Counter(block.provenance_kind for block in blocks),
+        )
         self.assertTrue(missing)
         self.assertTrue(all(not record.project_code for record in missing))
         self.assertTrue(all(record.typecheck_status == "not-applicable" for record in missing))
@@ -63,14 +75,9 @@ class AgdaReviewTests(unittest.TestCase):
             if comment.author == "Daniel C"
         ]
         self.assertGreaterEqual(len(daniel_comments), 11)
-        self.assertGreaterEqual(
-            sum(record.conversion_status == "blocked" for record in records), 28
-        )
-        self.assertTrue(
-            all(
-                record.conversion_status in {"ready", "blocked", "exercise"}
-                for record in curated
-            )
+        self.assertEqual(
+            Counter(record.conversion_status for record in curated),
+            Counter(block.conversion_status for block in blocks),
         )
         self.assertTrue(all(record.statement for record in records))
         self.assertTrue(all(record.document_sha256 for record in records))
@@ -308,6 +315,18 @@ answer : Type
             }
         )
         self.assertIn("proof does not have the required type", render_record(failed))
+
+        deferred = AgdaReviewRecord(
+            **{
+                **record.to_dict(),
+                "typecheck_status": "deferred",
+                "typecheck_message": "Agda was not run. Exercise 10.4.5 is unfinished.",
+            }
+        )
+        deferred_detail = render_record(deferred)
+        self.assertIn("Agda was not run", deferred_detail)
+        self.assertIn("--force", deferred_detail)
+        self.assertNotIn(">Run Agda check<", deferred_detail)
 
     def test_missing_code_uses_the_same_review_page_for_comments(self):
         record = AgdaReviewRecord(
