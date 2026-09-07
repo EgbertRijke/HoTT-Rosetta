@@ -2,6 +2,18 @@
 
 ```agda
 module section-11-3-equality-on-the-natural-numbers where
+
+open import universe-levels
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
+open import section-4-2-the-unit-type
+open import section-4-3-the-empty-type
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-3-the-action-on-identifications-of-functions
+open import section-6-3-observational-equality-of-the-natural-numbers
+open import section-9-2-bi-invertible-maps
+open import section-10-1-contractible-types
+open import section-11-2-the-fundamental-theorem
 ```
 
 <!-- rosetta-item: section-11.3 -->
@@ -84,4 +96,28 @@ Therefore we can define
 ```
  ◻
 
+<!-- rosetta-agda-block: theorem-11.3.1-equality-natural-numbers -->
+
+```agda
+map-total-Eq-ℕ :
+  (m : ℕ) → Σ ℕ (Eq-ℕ m) → Σ ℕ (Eq-ℕ (succ-ℕ m))
+pr1 (map-total-Eq-ℕ m (n , e)) = succ-ℕ n
+pr2 (map-total-Eq-ℕ m (n , e)) = e
+
+is-torsorial-Eq-ℕ :
+  (m : ℕ) → is-contr (Σ ℕ (Eq-ℕ m))
+pr1 (pr1 (is-torsorial-Eq-ℕ m)) = m
+pr2 (pr1 (is-torsorial-Eq-ℕ m)) = refl-Eq-ℕ m
+pr2 (is-torsorial-Eq-ℕ zero-ℕ) (zero-ℕ , _) = refl
+pr2 (is-torsorial-Eq-ℕ (succ-ℕ m)) (succ-ℕ n , e) =
+  ap (map-total-Eq-ℕ m) (pr2 (is-torsorial-Eq-ℕ m) (pair n e))
+
+is-equiv-Eq-eq-ℕ :
+  {m n : ℕ} → is-equiv (Eq-eq-ℕ {m} {n})
+is-equiv-Eq-eq-ℕ {m} {n} =
+  fundamental-theorem-id
+    ( is-torsorial-Eq-ℕ m)
+    ( λ y → Eq-eq-ℕ {m} {y})
+    ( n)
+```
 <!-- rosetta-item-end: theorem-11.3.1 -->
