@@ -2,6 +2,20 @@
 
 ```agda
 module section-13-4-composing-with-equivalences where
+
+open import universe-levels
+open import section-2-2-ordinary-function-types
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
+open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
+open import section-9-1-homotopies
+open import section-9-2-bi-invertible-maps
+open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
+open import section-10-1-contractible-types
+open import section-10-4-equivalences-are-contractible-maps
+open import section-13-1-equivalent-forms-of-function-extensionality
 ```
 
 <!-- rosetta-item: section-13.4 -->
@@ -109,4 +123,189 @@ However we claim that there also is an identification `p:(f∘ h)∘ f=f`, showi
 From the contractibility of the fiber we obtain an identification `(id[B],refl)=(f∘ h,p)`.
 In particular we obtain that `id[B]=f∘ h`, showing that `h` is a section of `f`. ◻
 
+<!-- rosetta-agda-block: theorem-13.4.1-dependent-precomposition -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : B → Type l3)
+  where
+
+  precomp-Π : ((b : B) → C b) → ((a : A) → C (f a))
+  precomp-Π h a = h (f a)
+```
+
+<!-- rosetta-agda-block: theorem-13.4.1-ordinary-precomposition -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : Type l3)
+  where
+
+  precomp : (B → C) → (A → C)
+  precomp = _∘ f
+```
+
+<!-- rosetta-agda-block: theorem-13.4.1-dependent-precomposition-condition -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B)
+  where
+
+  dependent-universal-property-equiv : Typeω
+  dependent-universal-property-equiv =
+    {l : Level} (C : B → Type l) → is-equiv (precomp-Π f C)
+```
+
+<!-- rosetta-agda-block: theorem-13.4.1-ordinary-precomposition-condition -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B)
+  where
+
+  universal-property-equiv : Typeω
+  universal-property-equiv = {l : Level} (X : Type l) → is-equiv (precomp f X)
+```
+
+<!-- rosetta-agda-block: theorem-13.4.1-dependent-precomposition-coherent-proof -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B)
+  where
+
+  abstract
+    is-equiv-precomp-Π-is-coherently-invertible :
+      is-coherently-invertible f → dependent-universal-property-equiv f
+    is-equiv-precomp-Π-is-coherently-invertible
+      ( g , is-section-g , is-retraction-g , coh) C =
+      is-equiv-is-invertible
+        ( λ s y → tr C (is-section-g y) (s (g y)))
+        ( λ s →
+          eq-htpy
+            ( λ x →
+              ( ap (λ t → tr C t (s (g (f x)))) (coh x)) ∙
+              ( tr-ap f (λ _ → id) (is-retraction-g x) (s (g (f x)))) ∙
+              ( apd s (is-retraction-g x))))
+        ( λ s → eq-htpy (λ y → apd s (is-section-g y)))
+```
+
+<!-- rosetta-agda-block: theorem-13.4.1-dependent-precomposition-from-equivalence -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B} (H : is-equiv f)
+  where
+
+  abstract
+    is-equiv-precomp-Π-is-equiv :
+      dependent-universal-property-equiv f
+    is-equiv-precomp-Π-is-equiv =
+      is-equiv-precomp-Π-is-coherently-invertible f
+        ( is-coherently-invertible-is-invertible
+          ( is-invertible-is-equiv H))
+```
+
+<!-- rosetta-agda-block: theorem-13.4.1-dependent-precomposition-equivalence -->
+
+```agda
+equiv-precomp-Π :
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (e : A ≃ B) →
+  (C : B → Type l3) → ((b : B) → C b) ≃ ((a : A) → C (map-equiv e a))
+pr1 (equiv-precomp-Π e C) = precomp-Π (map-equiv e) C
+pr2 (equiv-precomp-Π e C) = is-equiv-precomp-Π-is-equiv (is-equiv-map-equiv e) C
+```
+
+<!-- rosetta-agda-block: theorem-13.4.1-ordinary-from-dependent -->
+
+```agda
+abstract
+  is-equiv-precomp-is-equiv-precomp-Π :
+    {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) →
+    dependent-universal-property-equiv f →
+    universal-property-equiv f
+  is-equiv-precomp-is-equiv-precomp-Π f H C = H (λ _ → C)
+```
+
+<!-- rosetta-agda-block: theorem-13.4.1-ordinary-from-equivalence -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B)
+  where
+
+  abstract
+    is-equiv-precomp-is-equiv :
+      is-equiv f → universal-property-equiv f
+    is-equiv-precomp-is-equiv H =
+      is-equiv-precomp-is-equiv-precomp-Π f
+        ( is-equiv-precomp-Π-is-equiv H)
+
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (e : A ≃ B)
+  where
+
+  abstract
+    is-equiv-precomp-equiv :
+      universal-property-equiv (map-equiv e)
+    is-equiv-precomp-equiv =
+      is-equiv-precomp-is-equiv (map-equiv e) (is-equiv-map-equiv e)
+
+  equiv-precomp : {l3 : Level} (C : Type l3) → (B → C) ≃ (A → C)
+  pr1 (equiv-precomp C) = precomp (map-equiv e) C
+  pr2 (equiv-precomp C) = is-equiv-precomp-equiv C
+```
+
+<!-- rosetta-agda-block: theorem-13.4.1-equivalence-from-ordinary -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B)
+  (H : universal-property-equiv f)
+  where
+
+  map-inv-is-equiv-precomp : B → A
+  map-inv-is-equiv-precomp =
+    pr1 (center (is-contr-map-is-equiv (H A) id))
+
+  is-section-map-inv-is-equiv-precomp :
+    is-section f map-inv-is-equiv-precomp
+  is-section-map-inv-is-equiv-precomp =
+    htpy-eq
+      ( ap
+        ( pr1)
+        ( eq-is-contr'
+          ( is-contr-map-is-equiv (H B) f)
+          ( ( f ∘ (pr1 (center (is-contr-map-is-equiv (H A) id)))) ,
+            ( ap
+              ( λ g → f ∘ g)
+              ( pr2 (center (is-contr-map-is-equiv (H A) id)))))
+          ( id , refl)))
+
+  is-retraction-map-inv-is-equiv-precomp :
+    is-retraction f map-inv-is-equiv-precomp
+  is-retraction-map-inv-is-equiv-precomp =
+    htpy-eq (pr2 (center (is-contr-map-is-equiv (H A) id)))
+
+  abstract
+    is-equiv-is-equiv-precomp : is-equiv f
+    is-equiv-is-equiv-precomp =
+      is-equiv-is-invertible
+        ( map-inv-is-equiv-precomp)
+        ( is-section-map-inv-is-equiv-precomp)
+        ( is-retraction-map-inv-is-equiv-precomp)
+```
+
+<!-- rosetta-agda-block: theorem-13.4.1-equivalence-from-dependent -->
+
+```agda
+abstract
+  is-equiv-is-equiv-precomp-Π :
+    {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) →
+    dependent-universal-property-equiv f →
+    is-equiv f
+  is-equiv-is-equiv-precomp-Π f H =
+    is-equiv-is-equiv-precomp f (is-equiv-precomp-is-equiv-precomp-Π f H)
+```
 <!-- rosetta-item-end: theorem-13.4.1 -->

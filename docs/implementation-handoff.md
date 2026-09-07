@@ -105,18 +105,23 @@ Work continues on `main`.
   It preserves the explicit Σ-induction and twice-extensional path-induction
   proofs, with no new auxiliary or exercise Agda. Published proposal merge
   `6c408d4` passes its actual candidate and aggregate Chapter 13 checks.
-  Sections 13.4--13.5 have no curated section blocks.
+  Section 13.4 now has eleven provenance-backed blocks for all three
+  conditions and implications, including the full two-fiber converse.
+  Its transport substitution is an expansion of a pinned wrapper around
+  Section 9.3's existing `tr-ap`, not a new missing auxiliary. Its actual
+  Agda validation on the shared proposal is pending. Section 13.5 has no
+  curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
-The latest main validation passed all 163 unit tests,
-`python3 rosetta.py check`, and `git diff --check`, with 547 manifest blocks
-(175 exact, 314 adapted, 58 historical/local). The preceding Exercise 9.5
+The latest main validation passed all 164 unit tests,
+`python3 rosetta.py check`, and `git diff --check`, with 558 manifest blocks
+(175 exact, 325 adapted, 58 historical/local). The preceding Exercise 9.5
 candidate and aggregate Chapter 9 checks passed; neither changed in the
-Section 13.3 work. Sections 13.1--13.3 and Chapter 13
+Section 13.4 work. Sections 13.1--13.4 and Chapter 13
 are deferred until their existing training dependencies are supplied.
 Proposal `6c408d4` passes all 168 unit tests, repository and whitespace
 checks, candidate Section 13.3, and aggregate Chapter 13.
@@ -156,23 +161,17 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Continue Sections 13.4--13.5 in order. Section 13.4 is `book/funext.tex`,
-lines 378--461: Theorem 13.4.1 has three equivalent conditions (equivalence
-of the map, dependent precomposition, and ordinary precomposition). Account
-for all implications and the full converse proof using fibers at `id` and
-`f`, not just preservation of equivalences under precomposition.
-Pinned `foundation/dependent-universal-property-equivalences` gives the
-coherent-inverse/transport proof. Its wrapper uses path-split maps; inspect
-the existing local coherent-inverse conversion before importing any new
-general machinery. Its `substitution-law-tr` is absent locally; inspect
-that result's source, dependencies, and natural mathematical home under the
-training-exercise policy before editing earlier complete sections.
-`foundation/universal-property-equivalences` supplies the constant-family
-implication. Its converse delegates to the structured-type proof in
-`foundation/precomposition-functions-into-subuniverses`, lines 47--84,
-which explicitly constructs the inverse and both homotopies using those
-two contractible fibers. Specialize only necessary structure and record
-all adaptations; preserve the book's complete proof.
+Validate the newly curated Section 13.4 and aggregate Chapter 13 on the
+shared proposal with latest main, then record and publish the result before
+continuing Section 13.5. Section 13.4 preserves all three conditions and
+the full converse using the fibers at `id` and `f`. Keep the existing local
+coherent-inverse conversion, not upstream path-split machinery. The
+missing name `substitution-law-tr` is only a wrapper around the existing
+Section 9.3 `tr-ap`: the pinned definition is expanded in the new proof,
+with secondary provenance recorded. No earlier complete file was enlarged
+and no new training exercise is needed. The converse specializes the full
+structured-type proof to ordinary types while retaining its inverse and
+both homotopies. The book's entire prose is unchanged.
 
 Section 13.3's three numbered results, both proofs, and introductory
 ordinary specializations are curated and validated. Keep the explicit

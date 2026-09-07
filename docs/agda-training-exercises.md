@@ -233,3 +233,12 @@ inside the new induction proofs. Published proposal merge
 `6c408d4247f512bc7ce8cfbafbd4b11edce697b8` passes candidate Section 13.3,
 aggregate Chapter 13, all 168 unit tests, and repository and whitespace
 checks. No new solution code was needed, and main retains all seven holes.
+
+Section 13.4 introduces no new training site. The apparent missing
+`substitution-law-tr` is definitionally the specialization of the already
+curated Section 9.3 `tr-ap`; the new proof expands that pinned wrapper
+without adding any earlier mathematics. The coherent-inverse conversion
+uses the existing Lemma 10.4.5 solution, and Section 13.1 retains its
+transitive training dependencies. Main's Section 13.4 and Chapter 13
+therefore defer. Actual proposal validation is pending; all seven main
+holes remain unchanged, and no exercise Agda was added.

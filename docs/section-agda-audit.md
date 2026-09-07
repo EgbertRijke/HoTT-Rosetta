@@ -512,3 +512,43 @@ correction was needed on that branch.
 Main passes all 163 unit tests, repository checks (547 verified blocks),
 and whitespace checks. Its Section 13.3 and Chapter 13 results remain
 deferred, not passed.
+
+## Section 13.4 (2026-09-07)
+
+Theorem 13.4.1, its three conditions, and its complete proof in
+`book/funext.tex`, lines 378--461, are accounted for by eleven
+provenance-backed blocks. All code follows the theorem's full prose proof,
+in dependency order, without additional headings.
+
+| Assertion | Formalization |
+| --- | --- |
+| Conditions (ii) and (iii) | The dependent and ordinary precomposition maps and universe-polymorphic predicates, preserving every family and every codomain. Their first book occurrence is this theorem; no earlier function-type account is enlarged. |
+| (i) implies (ii) | Convert the given equivalence to a coherent inverse using the existing Lemma 10.4.5. Copy the transport inverse and both homotopies from the pinned dependent universal property. The section homotopy explicitly uses coherence, transport substitution, and dependent action on paths; the retraction uses dependent action on paths. |
+| (ii) implies (iii) | The pinned constant-family specialization, consuming the dependent universal property hypothesis. |
+| (iii) implies (i) | Specialize the pinned structured-type proof to ordinary types, retaining the constructed inverse and both homotopies. The fiber of precomposition into A at id supplies the inverse and its retraction law. The fiber of precomposition into B at f supplies the section law, comparing `(f ∘ h, p)` with `(id, refl)`. |
+| Consequences | Both dependent and ordinary equivalence bundles, the composite (i) implies (iii), and the composite (ii) implies (i). Together these explicitly connect all three conditions. |
+
+The missing name `substitution-law-tr` is not missing mathematics: its pinned
+definition in `foundation-core/transport-along-identifications`, lines
+87--91, is precisely `tr-ap f (λ _ → id) p x'`. Section 9.3 already contains
+that general `tr-ap`. The new proof expands only this wrapper, with the
+secondary source range and hash recorded in its manifest note. Section 5.4
+is unchanged. The coherent-inverse wrapper uses the existing local route
+through invertibility, not new path-split machinery. The converse removes
+only the unnecessary structured-type parameters and names; its full proof
+body remains. Its equality in the fiber has the opposite orientation to
+the book's display and directly yields `f ∘ h ~ id`; the book prose is
+preserved without a silent correction.
+
+Removing Agda and block markers recovers the rendered book text exactly
+modulo whitespace. Raw comparison is 100%, with all three headings and
+thirteen text fences, no unresolved references, and no raw TeX commands.
+The regression test checks full prose, placement, universe quantification,
+all implications, both inverse homotopies, and the two contractible fibers.
+No earlier complete file, exercise Agda, training site, review state, or
+complete-file record is changed.
+
+Main passes all 164 unit tests, repository checks (558 verified blocks),
+and whitespace checks. Section 13.4 and aggregate Chapter 13 correctly
+defer through existing training dependencies. Actual Agda validation on
+the shared proposal is pending; the deferred results are not passes.

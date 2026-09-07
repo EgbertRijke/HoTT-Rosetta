@@ -466,3 +466,49 @@ deferral on main. Published proposal merge
 aggregate Chapter 13 with these exact five blocks. All 168 tests and
 repository checks pass. No additional mathematical auxiliary or exercise
 solution was needed; no earlier complete file was enlarged.
+
+### Section 13.4: precomposition characterizes equivalences
+
+No new auxiliary mathematics is absent. All eleven new blocks cite pinned
+commit `c85d7fb834778f96a66576318cdc4ef3d4b80a26`, with inclusive source
+ranges and hashes in the Chapter 13 manifest.
+
+- The dependent and ordinary precomposition maps first occur in Theorem
+  13.4.1. Copy `foundation-core/precomposition-dependent-functions`, lines
+  35--40, and `foundation-core/precomposition-functions`, lines 33--38,
+  there; do not enlarge the earlier complete function-type account.
+- `foundation/dependent-universal-property-equivalences`, lines 48--54,
+  62--79, 85--95, and 116--120, supplies the dependent condition, full
+  coherent-inverse/transport proof, implication from equivalence, and
+  bundle. Replace `UU`/`UUω` by `Type`/`Typeω`. The existing local
+  `is-coherently-invertible-is-invertible (is-invertible-is-equiv H)`
+  applies Lemma 10.4.5 to the explicit hypothesis; no path-split machinery
+  is needed. That lemma remains an existing training dependency on main.
+- The apparent transport gap is only an absent wrapper name.
+  `foundation-core/transport-along-identifications`, lines 87--91,
+  defines `substitution-law-tr B f p {x'} = tr-ap f (λ _ → id) p x'`.
+  Its SHA256 is
+  `7797856fc5326bea4d72b58fc0a7c4ba6e56480bc1d099ad80db52b2c59a0b6c`.
+  The general result already lives in Section 9.3's transport-action
+  block, from the same source's lines 51--56. Instantiate it in the new
+  proof at `x' = s (g (f x))`. The substitution identity's natural
+  subject is transport as in Section 5.4, but it is already supplied by
+  this existing theorem: neither Section 5.4 nor Section 9.3 is enlarged,
+  and no artificial training exercise is created.
+- `foundation/universal-property-equivalences`, lines 36--41, 51--56,
+  62--85, and 110--116, supplies the ordinary condition, constant-family
+  implication, ordinary bundle, and dependent converse by composition.
+- The full ordinary converse is
+  `foundation/precomposition-functions-into-subuniverses`, lines 49--84.
+  Remove only the structured-type predicate and parameters, use ordinary
+  A and B and `H : universal-property-equiv f`, and strip the declaration
+  suffix. This is the specialization in
+  `foundation/universal-property-equivalences`, lines 91--104 (secondary
+  hash recorded in the manifest). Keep the inverse and both homotopies,
+  using the two fibers at id and f. Existing Section 10.1 supplies
+  `center` and `eq-is-contr'`; Section 10.4 supplies contractible fibers
+  of equivalences. No later subuniverse theory is imported.
+
+The entire section and aggregate Chapter 13 defer on main. Actual Agda
+validation on the shared proposal is pending; no new training solution
+or earlier complete-file enlargement is required by this curation.
