@@ -10,6 +10,7 @@ open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import section-5-4-transport
 ```
 
 ## Problem statement
@@ -97,4 +98,38 @@ module _
     {x y : A} (p : x ＝ y) (z : A) → (x ＝ z) ≃ (y ＝ z)
   pr1 (equiv-inv-concat p z) = inv-concat p z
   pr2 (equiv-inv-concat p z) = is-equiv-inv-concat p z
+```
+
+<!-- rosetta-agda-block: exercise-9-1-transport-equivalences -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x y : A}
+  where
+
+  is-retraction-inv-tr : (p : x ＝ y) → is-retraction (tr B p) (tr B (inv p))
+  is-retraction-inv-tr refl b = refl
+
+  is-section-inv-tr : (p : x ＝ y) → is-section (tr B p) (tr B (inv p))
+  is-section-inv-tr refl b = refl
+
+  is-equiv-tr : (p : x ＝ y) → is-equiv (tr B p)
+  is-equiv-tr p =
+    is-equiv-is-invertible
+      ( tr B (inv p))
+      ( is-section-inv-tr p)
+      ( is-retraction-inv-tr p)
+
+  is-equiv-inv-tr : (p : x ＝ y) → is-equiv (tr B (inv p))
+  is-equiv-inv-tr p =
+    is-equiv-is-invertible
+      ( tr B p)
+      ( is-retraction-inv-tr p)
+      ( is-section-inv-tr p)
+
+  equiv-tr : x ＝ y → B x ≃ B y
+  equiv-tr p = (tr B p , is-equiv-tr p)
+
+  equiv-inv-tr : x ＝ y → B y ≃ B x
+  equiv-inv-tr p = (tr B (inv p) , is-equiv-inv-tr p)
 ```

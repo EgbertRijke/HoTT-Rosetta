@@ -274,7 +274,8 @@ unchanged; no completeness or review state is inferred from deferred checks.
 - **Exercise:** `theorem-12.4.7-truncated-action-on-identities`.
 - **Pinned commit:** `c85d7fb834778f96a66576318cdc4ef3d4b80a26` throughout.
 - **Transport equivalence:** `src/foundation/transport-along-identifications.lagda.md`,
-  lines 42--57, gives `is-equiv-tr` and both inverse-transport homotopies.
+  lines 42--70, gives `is-equiv-tr`, both inverse-transport homotopies,
+  the inverse equivalence, and the two equivalence bundles.
   Exercise 9.1 explicitly requests this equivalence and its inverse;
   use that exact home, refining the initially suggested Example 9.2.3.
   Replace `UU` by `Type` and expand `inv-tr B p` to `tr B (inv p)` using

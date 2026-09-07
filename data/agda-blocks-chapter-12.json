@@ -854,8 +854,8 @@
       "order": 0,
       "imports": [],
       "source_note": "Replace UU by Type. Retain both directions and the two distinct fiber-equivalence applications.",
-      "conversion_status": "exercise",
-      "conversion_note": "The converse needs eq-fiber-fiber-ap and is-equiv-eq-fiber-fiber-ap, whose natural home is Example 11.6.3, plus the transport equivalence explicitly requested by Exercise 9.1. Preserve those earlier main accounts; see docs/agda-training-exercises.md and docs/invisible-math.md. The first direction also imports the existing Example 11.6.3 training exercise."
+      "conversion_status": "ready",
+      "conversion_note": "Restored unchanged on the shared proposal. The fiber specialization is placed at Example 11.6.3 and transport equivalence at its exact Exercise 9.1 home; earlier complete main files remain unchanged."
     },
     {
       "block_id": "exercise-12-8-retraction-on-identities",
@@ -896,6 +896,40 @@
       "order": 1,
       "imports": [],
       "source_note": "Replace UU by Type and definitionally expand inclusion-retract R to pr1 R and retraction-retract R to pr2 R (same source, lines 66--70). This packages part (a) without enlarging Definition 9.2.1. Part (b)'s proof is placed at Proposition 12.4.5 as the required upstream prerequisite, avoiding an import cycle."
+    },
+    {
+      "block_id": "exercise-9-1-transport-equivalences",
+      "provenance_kind": "adapted",
+      "item_id": "exercise-9-1",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_file": "src/foundation/transport-along-identifications.lagda.md",
+      "source_start_line": 42,
+      "source_end_line": 70,
+      "source_sha256": "7979b6d2ef788a5ae8f1f0f9ed1600d51f91f875d2d81f06d8ecad3b876c46c0",
+      "code": "module _\n  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x y : A}\n  where\n\n  is-retraction-inv-tr : (p : x ＝ y) → is-retraction (tr B p) (tr B (inv p))\n  is-retraction-inv-tr refl b = refl\n\n  is-section-inv-tr : (p : x ＝ y) → is-section (tr B p) (tr B (inv p))\n  is-section-inv-tr refl b = refl\n\n  is-equiv-tr : (p : x ＝ y) → is-equiv (tr B p)\n  is-equiv-tr p =\n    is-equiv-is-invertible\n      ( tr B (inv p))\n      ( is-section-inv-tr p)\n      ( is-retraction-inv-tr p)\n\n  is-equiv-inv-tr : (p : x ＝ y) → is-equiv (tr B (inv p))\n  is-equiv-inv-tr p =\n    is-equiv-is-invertible\n      ( tr B p)\n      ( is-retraction-inv-tr p)\n      ( is-section-inv-tr p)\n\n  equiv-tr : x ＝ y → B x ≃ B y\n  equiv-tr p = (tr B p , is-equiv-tr p)\n\n  equiv-inv-tr : x ＝ y → B y ≃ B x\n  equiv-inv-tr p = (tr B (inv p) , is-equiv-inv-tr p)",
+      "destination": "exercise-9-1-groupoid-operations-equivalences.lagda.md",
+      "order": 3,
+      "imports": [
+        "section-5-4-transport"
+      ],
+      "source_note": "Replace UU by Type and definitionally expand inv-tr B p to tr B (inv p), using foundation-core/transport-along-identifications lines 42--43 at the same commit. Copy both inverse homotopies, the transport and inverse-transport equivalence proofs, and their bundles. Exercise 9.1 explicitly asks for this result; it is added now because Theorem 12.4.7 needs the fiber specialization. Keep Section 5.4 and the reserved Section 9.2 unchanged."
+    },
+    {
+      "block_id": "example-11.6.3-fiber-of-action-specialization",
+      "provenance_kind": "adapted",
+      "item_id": "example-11.6.3",
+      "destination": "section-11-6-the-structure-identity-principle.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_file": "src/foundation/equality-fibers-of-maps.lagda.md",
+      "source_start_line": 113,
+      "source_end_line": 130,
+      "source_sha256": "5f1dfc53020a32bf53d3eb36b2cfcd267abee05418218b81b579e355b0e53bec",
+      "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (x y : A)\n  where\n\n  eq-fiber-fiber-ap :\n    (q : f x ＝ f y) → (x , q) ＝ (y , refl) → fiber (ap f {x} {y}) q\n  eq-fiber-fiber-ap q =\n    tr (fiber (ap f)) right-unit ∘ fiber-ap-eq-fiber f (x , q) (y , refl)\n\n  abstract\n    is-equiv-eq-fiber-fiber-ap :\n      (q : f x ＝ f y) → is-equiv (eq-fiber-fiber-ap q)\n    is-equiv-eq-fiber-fiber-ap q =\n      is-equiv-comp\n        ( tr (fiber (ap f)) right-unit)\n        ( fiber-ap-eq-fiber f (x , q) (y , refl))\n        ( is-equiv-fiber-ap-eq-fiber f (x , q) (y , refl))\n        ( is-equiv-tr (fiber (ap f)) right-unit)",
+      "order": 1,
+      "imports": [
+        "exercise-9-1-groupoid-operations-equivalences"
+      ],
+      "source_note": "Replace only UU by Type. Natural home: immediately after the general fiber identity equivalence at Example 11.6.3. Transport along right-unit changes q ∙ refl into q; preserve its is-equiv-tr proof rather than treating right-unit as judgmental. The needed transport equivalence is copied at its exact Exercise 9.1 home. Proposed for the later Theorem 12.4.7 training site."
     }
   ]
 }

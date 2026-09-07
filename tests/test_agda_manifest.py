@@ -264,7 +264,7 @@ class AgdaManifestTests(unittest.TestCase):
             block for block in load_manifest(root / "data" / "agda-blocks.json")
             if block.destination.startswith("section-11-6-")
         ]
-        self.assertEqual(len(selected), 10)
+        self.assertEqual(len(selected), 11)
         for block in selected:
             with self.subTest(block=block.block_id):
                 document = (rosetta_directory(root) / block.destination).read_text()
@@ -551,6 +551,32 @@ class AgdaManifestTests(unittest.TestCase):
         for block in selected:
             self.assertFalse(any(i.startswith("section-12-") for i in block.imports))
             self.assertNotIn("is-trunc", block.code)
+
+    def test_proposed_truncated_map_auxiliaries_precede_their_later_consumer(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        blocks = {b.block_id: b for b in load_manifest(root / "data" / "agda-blocks.json")}
+        transport = blocks["exercise-9-1-transport-equivalences"]
+        self.assertEqual(transport.item_id, "exercise-9-1")
+        self.assertIn("is-equiv-tr :", transport.code)
+        self.assertIn("is-section-inv-tr :", transport.code)
+        self.assertIn("is-retraction-inv-tr :", transport.code)
+        self.assertIn("( tr B (inv p))", transport.code)
+        self.assertFalse(any(i.startswith("section-12-") for i in transport.imports))
+        fiber = blocks["example-11.6.3-fiber-of-action-specialization"]
+        self.assertEqual(fiber.item_id, "example-11.6.3")
+        self.assertIn("is-equiv-tr (fiber (ap f)) right-unit", fiber.code)
+        document = (rosetta_directory(root) / fiber.destination).read_text()
+        self.assertLess(document.index("  equiv-fiber-ap-eq-fiber :"),
+                        document.index("  eq-fiber-fiber-ap :"))
+        self.assertLess(document.index("  eq-fiber-fiber-ap :"),
+                        document.index("<!-- rosetta-item-end: example-11.6.3 -->"))
+        self.assertNotIn("section-12-", document)
+        theorem = blocks["theorem-12.4.7-truncated-action-on-identities"]
+        self.assertEqual(theorem.conversion_status, "ready")
+        self.assertNotIn("is-equiv-tr :", theorem.code)
+        self.assertNotIn("eq-fiber-fiber-ap :", theorem.code)
 
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:

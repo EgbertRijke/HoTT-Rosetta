@@ -453,4 +453,27 @@ module _
   pr1 (equiv-fiber-ap-eq-fiber s t) = fiber-ap-eq-fiber s t
   pr2 (equiv-fiber-ap-eq-fiber s t) = is-equiv-fiber-ap-eq-fiber s t
 ```
+
+<!-- rosetta-agda-block: example-11.6.3-fiber-of-action-specialization -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (x y : A)
+  where
+
+  eq-fiber-fiber-ap :
+    (q : f x ＝ f y) → (x , q) ＝ (y , refl) → fiber (ap f {x} {y}) q
+  eq-fiber-fiber-ap q =
+    tr (fiber (ap f)) right-unit ∘ fiber-ap-eq-fiber f (x , q) (y , refl)
+
+  abstract
+    is-equiv-eq-fiber-fiber-ap :
+      (q : f x ＝ f y) → is-equiv (eq-fiber-fiber-ap q)
+    is-equiv-eq-fiber-fiber-ap q =
+      is-equiv-comp
+        ( tr (fiber (ap f)) right-unit)
+        ( fiber-ap-eq-fiber f (x , q) (y , refl))
+        ( is-equiv-fiber-ap-eq-fiber f (x , q) (y , refl))
+        ( is-equiv-tr (fiber (ap f)) right-unit)
+```
 <!-- rosetta-item-end: example-11.6.3 -->
