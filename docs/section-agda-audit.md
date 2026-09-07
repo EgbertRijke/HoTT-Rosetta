@@ -75,3 +75,28 @@ checks pass. The prose preserves the optional base parameter in `tot_f(g)`;
 diagram spacing options are excluded from mathematical node labels. Both
 conversion repairs have regression tests and were regenerated throughout the
 active output.
+
+## Section 11.2 (2026-09-06)
+
+Both numbered items, the canonical-family specialization, and the full proof
+in `book/fundamental.tex` are preserved. Seven curated blocks formalize:
+
+| Item | Formalization |
+| --- | --- |
+| Definition 11.2.1 | Evaluation at the distinguished pair, the universe-level predicate, and the universe-polymorphic identity-system predicate. |
+| Theorem 11.2.2, (i) iff (ii) | `fundamental-theorem-id` and its converse for arbitrary families of maps. The upstream result is stronger: neither direction needs the stipulated equation at the base point. |
+| Theorem 11.2.2, (ii) iff (iii) | `is-identity-system-is-contr` specializes the pinned singleton-induction package to the dependent sum and curries its section with the existing `ev-pair`; the computation witness is unchanged. The converse is copied from `identity-systems`, with its module restored. |
+| Theorem 11.2.2, canonical family | `fundamental-theorem-id-J` and its converse specialize to path induction. |
+
+The exact upstream identity-system construction uses `is-prop-is-contr`, a
+later proposition result. The analogous singleton-induction package instead
+uses the book's proof route and already available local results; no missing
+auxiliary proof is inserted or hidden. `is-torsorial B` is expanded to
+`is-contr (Σ A B)`, and upstream `is-torsorial-Id` is the local `is-contr-Id`.
+The three conditions are connected by implication functions, not asserted as
+an equivalence of proof types.
+
+The prose comparison has all four headings and nine displays, with no
+unresolved references or raw TeX commands. Section 11.2 is deferred on `main`
+through both recorded Chapter 10 training exercises and is not recorded
+complete. Actual proposal validation is pending.
