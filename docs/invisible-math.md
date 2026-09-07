@@ -386,3 +386,42 @@ Published proposal merge `dc97e2f5941b950b2cfd3283794adee1278891b2`
 validates this section against the existing auxiliaries without adding
 any new one. Section 13.1 and aggregate Chapter 13 pass actual Agda;
 main retains its conservative training-dependency deferral.
+
+### Section 13.2: dependent choice and projection sections
+
+All ranges below are at `c85d7fb834778f96a66576318cdc4ef3d4b80a26`;
+the eight new records in `data/agda-blocks-chapter-13.json` carry hashes.
+
+- `foundation-core/type-theoretic-principle-of-choice`, lines 40--49
+  and 73--115, supplies the explicit-function types, maps, both inverse
+  homotopies, and both bundles at Theorem 13.2.1. Lines 177--191 give
+  Corollary 13.2.2. The intervening products-of-fibers/sections equivalence
+  is the typed specialization to `C b a = (f a ＝ b)`; local `fiber` and
+  `section` expand to its two sides. No new general proof is added.
+- Both pinned and local Section 4.6 Σ types are records with judgmental η.
+  The book explicitly uses inductive Σ without that rule. Retain the
+  book's full function-extensionality proof, label the shorter pinned
+  record proof, and retain the representation gap in `data/agda-gaps.json`.
+  Do not change the earlier Σ representation to make the proofs look alike.
+- `foundation/type-arithmetic-dependent-pair-types`, lines 377--408,
+  supplies the exact right-swap content of Exercise 9.5(b). This is its
+  natural, explicitly cited mathematical home, and the exercise was
+  previously uncurated. Its earlier placement introduces no import cycle.
+  Part (a) is not needed and remains unfilled.
+- `foundation/sections`, lines 135--148, supplies the three composed
+  equivalences at Corollary 13.2.3. Rename `is-torsorial-Id'` to the local
+  `is-contr-Id'`; use the existing Section 11.1 base-change equivalence,
+  Exercise 10.3 contractibility transfer, and Exercise 10.6 contractible-base
+  law. The reverse total-homotopy contraction is already in this pinned
+  proof; the alternative Exercise 13.1 is not needed.
+- `foundation/equality-dependent-function-types`, lines 38--48,
+  supplies Theorem 13.2.4's contraction. Expand `is-torsorial` to its local
+  dependent-sum contractibility. The final typed application uses the
+  existing Theorem 11.2.2 identity-system conversions, from
+  `foundation/singleton-induction`, lines 77--82, and
+  `foundation/identity-systems`, lines 109--114, to expose the exact
+  identity-system hypothesis and conclusion.
+
+No new absent auxiliary at an earlier complete site is found. The section
+still has the existing transitive training dependencies; its ordinary
+main check is deferred, and actual proposal validation is pending.

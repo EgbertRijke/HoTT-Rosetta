@@ -93,16 +93,22 @@ Work continues on `main`.
   results hypothesis-parametric and introducing the pinned coherent-inverse
   postulates only at Axiom 13.1.3. Published proposal merge `dc97e2f` passes
   its actual Agda check and aggregate Chapter 13 with no new auxiliary;
-  main correctly defers it. Sections 13.2--13.5 have no curated section blocks.
+  main correctly defers it. Section 13.2 now has seven curated blocks for
+  all four numbered items and the intervening products-of-fibers equivalence.
+  Its needed Exercise 9.5(b) passes on main; part (a) remains a gap.
+  The choice proof's record-Σ η difference from the book is explicit.
+  Section 13.2's actual proposal validation is pending.
+  Sections 13.3--13.5 have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
-The latest main validation passed all 160 unit tests,
-`python3 rosetta.py check`, and `git diff --check`, with 534 manifest blocks
-(175 exact, 301 adapted, 58 historical/local). Section 13.1 and Chapter 13
+The latest main validation passed all 162 unit tests,
+`python3 rosetta.py check`, and `git diff --check`, with 542 manifest blocks
+(175 exact, 309 adapted, 58 historical/local), Exercise 9.5's candidate,
+and aggregate Chapter 9. Sections 13.1--13.2 and Chapter 13
 are deferred until their existing training dependencies are supplied.
 Proposal `dc97e2f` passes all 165 unit tests, repository and whitespace
 checks, candidate Sections 2.2 and 13.1, and aggregate Chapters 1--6 and
@@ -138,7 +144,10 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Continue Sections 13.2--13.5 in order. Section 13.2 is
+First validate newly curated Section 13.2 and its affected aggregates on
+the shared proposal, after bringing in current main. No new auxiliary or
+training solution is needed. Then continue Sections 13.3--13.5 in order.
+Section 13.2 accounts for
 `book/funext.tex`, lines 153--281: Theorem 13.2.1 (distributivity of Π
 over Σ), Corollary 13.2.2 (ordinary-function specialization), Corollary
 13.2.3 (sections of a projection), and Theorem 13.2.4 (identity systems
@@ -146,10 +155,12 @@ on Π-types). Account also for the intervening displayed equivalence
 between products of fibers and sections. Pinned sources include
 `foundation-core/type-theoretic-principle-of-choice`, `foundation/sections`,
 and `foundation/equality-dependent-function-types`. The pinned choice
-proof uses record Σ-eta; the book and local inductive Σ do not have that
-judgmental rule. Preserve the book's explicit function-extensionality
-step and inspect exact/analogous source-backed adaptations. Check all
-auxiliary placements before changing earlier complete files.
+proof uses record Σ-eta, as does the existing local Section 4.6 record;
+the book's inductive Σ does not have that judgmental rule. The full book
+proof and a labeled pinned proof are retained, with the representation
+gap explicitly recorded; the earlier Σ type is unchanged. The right-swap
+prerequisite is placed at its exact Exercise 9.5(b) home, and no earlier
+complete section is enlarged.
 
 Section 13.1's seven items and complete proofs are accounted for and
 validated. Its pre-axiom results use explicit hypotheses, not the global

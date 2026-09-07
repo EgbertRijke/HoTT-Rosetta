@@ -2,6 +2,20 @@
   "format_version": 1,
   "items": [
     {
+      "item_id": "theorem-13.2.1-judgmental-sigma-eta",
+      "kind": "Theorem",
+      "number": "13.2.1",
+      "destination": "section-13-2-identity-systems-on-pi-types.lagda.md",
+      "statement": "The choice equivalence is curated, but the pinned proof and existing local Section 4.6 use record Sigma with judgmental eta. The book explicitly lacks this rule and invokes function extensionality for the second inverse homotopy. Its full proof is preserved as prose; the shorter Agda refl proof does not represent that nonjudgmental-eta step. Keep this representation difference explicit rather than changing the earlier Sigma definition or claiming literal proof fidelity."
+    },
+    {
+      "item_id": "exercise-9-5-a",
+      "kind": "Exercise",
+      "number": "9.5(a)",
+      "destination": "exercise-9-5-sigma-swap.lagda.md",
+      "statement": "Part (b)'s right-swap equivalence is curated because Corollary 13.2.3 needs it. Part (a)'s left-swap equivalence remains lower-priority exercise Agda. The existing custom-list rendering also lacks the outer alphabetical labels; the solution heading explicitly identifies part (b), and the exercise is not recorded complete."
+    },
+    {
       "item_id": "remark-12.4.2-overlapping-universes",
       "kind": "Remark",
       "number": "12.4.2",

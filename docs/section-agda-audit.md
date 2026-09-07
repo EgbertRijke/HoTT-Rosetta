@@ -439,3 +439,35 @@ The Section 2.2 merge was regenerated from the combined manifest and
 preserves every proposal Agda block and its order byte-for-byte. Both
 branches' regression tests were retained. No new training site, exercise
 Agda, complete-file record, or review decision is added.
+
+## Section 13.2 (2026-09-07)
+
+The four numbered items, three complete proofs, and intervening
+products-of-fibers equivalence in `book/funext.tex`, lines 153--281, are
+preserved. Seven section blocks and the one needed Exercise 9.5(b) block
+carry full pinned provenance.
+
+| Item | Formalization |
+| --- | --- |
+| Theorem 13.2.1 | Both choice types, both maps, both inverse homotopies, and both equivalence bundles. The Agda record-Σ representation has judgmental η, so the pinned second homotopy is `refl`; this does not formalize the book's explicit assertion that its inductive Σ lacks this rule. The full book proof using function extensionality is retained. A visible heading and gap record mark the representation difference; the existing Section 4.6 record is unchanged. |
+| Corollary 13.2.2 | The ordinary-function map, its equivalence proof, and equivalence bundle, specialized from choice. |
+| Intervening display | `equiv-Π-fiber-section` is a typed specialization of choice to the family `f a ＝ b`. Its block follows that display, outside Corollary 13.2.2 and before Corollary 13.2.3, with an exact `after_text` anchor checked by regression. |
+| Corollary 13.2.3 | The pinned three-equivalence calculation using choice on the base, the Exercise 9.5(b) right swap, and the existing Exercise 10.6 contractible-base law. The total reverse-homotopy space is contracted using inverse choice, products of contractible types, and `is-contr-Id'`. The alternative citation to Exercise 13.1 remains prose; that exercise is not needed or filled. |
+| Theorem 13.2.4 | The pinned total-space contractibility proof, then a typed application of the existing identity-system/contractibility conversions at `f` and its pointwise reflexivity data. The declaration explicitly takes identity systems as hypotheses and returns the dependent-product identity system; it is not merely the intermediate contraction. |
+
+Exercise 9.5 was previously uncurated, not an earlier complete file.
+Only its exact part (b) is needed and added, with a labeled solution heading.
+Part (a) and the existing loss of alphabetical problem labels in custom-list
+rendering remain explicit gaps. No new training site or earlier complete
+section enlargement is needed. Main still defers Section 13.2 through the
+existing training dependencies.
+
+Removing the two visible Agda headings and all code reproduces the rendered
+book prose exactly modulo whitespace. Raw comparison is 99.21%, with 6/8
+distinct headings, all 21 text fences, no unresolved references, and no raw
+TeX commands. Regression tests check the complete prose, declaration scope,
+the intervening display, full inverse data, and the remaining exercise gap.
+Main passes all 162 unit tests, repository checks (542 verified blocks),
+Exercise 9.5's candidate and aggregate Chapter 9, and whitespace checks.
+Section 13.2 and aggregate Chapter 13 are deferred, not passed. Actual
+proposal validation is pending. No review state or complete-file record is changed.

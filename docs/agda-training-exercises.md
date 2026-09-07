@@ -210,3 +210,11 @@ extensionality is assumed only at Axiom 13.1.3. Published proposal merge
 and 13.1, aggregate Chapters 1--6 and 13--14, all 165 unit tests, and
 repository and whitespace checks. No new solution code was necessary;
 main's deferred result is not a pass.
+
+Section 13.2 likewise introduces no new training site. Its only new early
+exercise code is the directly cited Exercise 9.5(b), in a previously
+uncurated exercise. That candidate and aggregate Chapter 9 pass on main;
+part (a) remains lower priority. The projection-section and dependent-product
+identity-system proofs reuse the existing Chapter 10--12 training
+dependencies, so main's Section 13.2 and Chapter 13 remain deferred.
+Actual proposal validation is pending.
