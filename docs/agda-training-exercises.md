@@ -18,12 +18,11 @@ mathematics, proposal solution, and review state.
   `docs/invisible-math.md`.
 - **Status:** Empty on `main`; routine Section 10.2 and Chapter 10 checks are
   deferred, not passed.
-- **Proposal solution:** Implemented on `proposal/agda-exercise-solutions` by
-  placing `ev-point` at Remark 2.2.2 and restoring this definition. The solution
-  commit is recorded on `main` after validation and publication.
+- **Proposal solution:** `proposal/agda-exercise-solutions`, commit `511f171`.
+  It places `ev-point` at Remark 2.2.2 and restores Definition 10.2.1.
 - **Validation:** Candidate Sections 2.2, 10.2, and 10.4 and aggregate Chapters
-  2--10 pass ordinary Agda checks on this proposal; the full unit suite,
-  `rosetta.py check`, and `git diff --check` pass.
+  2--10 pass ordinary Agda checks at that proposal commit. This also checks
+  Example 10.2.2. The full unit suite and repository checks pass.
 
 ### `lemma-10.4.5-coherent-inverse`
 
@@ -33,7 +32,8 @@ mathematics, proposal solution, and review state.
   homotopies.
 - **Reason:** The former proof placed seven general lemmas beside Lemma 10.4.5.
   Their mathematics belongs with earlier path and homotopy operations.
-- **Later use:** Theorem 10.4.6.
+- **Later use:** Theorem 10.4.6; through it, Theorem 11.1.3, Lemma 11.1.4,
+  and Theorem 11.1.6.
 - **Invisible mathematics:** “Lemma 10.4.5: coherent inverse” in
   `docs/invisible-math.md`.
 - **Status:** Empty on `main`.

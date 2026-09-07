@@ -2,6 +2,20 @@
 
 ```agda
 module section-11-1-families-of-equivalences where
+
+open import universe-levels
+open import section-2-2-ordinary-function-types
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
+open import section-5-3-the-action-on-identifications-of-functions
+open import section-9-1-homotopies
+open import section-9-2-bi-invertible-maps
+open import section-10-1-contractible-types
+open import section-10-3-contractible-maps
+open import section-10-4-equivalences-are-contractible-maps
+open import exercise-9-4-three-for-two-equivalences
+open import exercise-10-3-contractible-equivalences
 ```
 
 <!-- rosetta-item: section-11.1 -->
@@ -20,6 +34,17 @@ tot(f):Σ(x:A) B(x)→Σ(x:A) C(x)
 ```
 by `λ (x,y). (x,f(x,y))`.
 
+<!-- rosetta-agda-block: definition-11.1.1-total-map -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  (f : (x : A) → B x → C x)
+  where
+
+  tot : Σ A B → Σ A C
+  tot (x , y) = (x , f x y)
+```
 <!-- rosetta-item-end: definition-11.1.1 -->
 
 ## Lemma 11.1.2
@@ -57,6 +82,57 @@ H((x,f(x,y)),((x,y),refl)) ≔ refl.
 ```
  ◻
 
+<!-- rosetta-agda-block: lemma-11.1.2-fibers-total-map -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  (f : (x : A) → B x → C x)
+  where
+
+  map-compute-fiber-tot :
+    (t : Σ A C) → fiber (tot f) t → fiber (f (pr1 t)) (pr2 t)
+  map-compute-fiber-tot .(tot f (x , y)) ((x , y) , refl) = (y , refl)
+
+  map-inv-compute-fiber-tot :
+    (t : Σ A C) → fiber (f (pr1 t)) (pr2 t) → fiber (tot f) t
+  map-inv-compute-fiber-tot (a , .(f a y)) (y , refl) = ((a , y) , refl)
+
+  is-section-map-inv-compute-fiber-tot :
+    (t : Σ A C) → (map-compute-fiber-tot t ∘ map-inv-compute-fiber-tot t) ~ id
+  is-section-map-inv-compute-fiber-tot (x , .(f x y)) (y , refl) = refl
+
+  is-retraction-map-inv-compute-fiber-tot :
+    (t : Σ A C) → (map-inv-compute-fiber-tot t ∘ map-compute-fiber-tot t) ~ id
+  is-retraction-map-inv-compute-fiber-tot ._ ((x , y) , refl) = refl
+
+  abstract
+    is-equiv-map-compute-fiber-tot :
+      (t : Σ A C) → is-equiv (map-compute-fiber-tot t)
+    is-equiv-map-compute-fiber-tot t =
+      is-equiv-is-invertible
+        ( map-inv-compute-fiber-tot t)
+        ( is-section-map-inv-compute-fiber-tot t)
+        ( is-retraction-map-inv-compute-fiber-tot t)
+
+  compute-fiber-tot : (t : Σ A C) → fiber (tot f) t ≃ fiber (f (pr1 t)) (pr2 t)
+  pr1 (compute-fiber-tot t) = map-compute-fiber-tot t
+  pr2 (compute-fiber-tot t) = is-equiv-map-compute-fiber-tot t
+
+  abstract
+    is-equiv-map-inv-compute-fiber-tot :
+      (t : Σ A C) → is-equiv (map-inv-compute-fiber-tot t)
+    is-equiv-map-inv-compute-fiber-tot t =
+      is-equiv-is-invertible
+        ( map-compute-fiber-tot t)
+        ( is-retraction-map-inv-compute-fiber-tot t)
+        ( is-section-map-inv-compute-fiber-tot t)
+
+  inv-compute-fiber-tot :
+    (t : Σ A C) → fiber (f (pr1 t)) (pr2 t) ≃ fiber (tot f) t
+  pr1 (inv-compute-fiber-tot t) = map-inv-compute-fiber-tot t
+  pr2 (inv-compute-fiber-tot t) = is-equiv-map-inv-compute-fiber-tot t
+```
 <!-- rosetta-item-end: lemma-11.1.2 -->
 
 ## Theorem 11.1.3
@@ -79,6 +155,60 @@ In this case we say that `f` is a **family of equivalences**.
 Thus, we will show that `fib(f(x), c)` is contractible if and only if `fib(tot(f), x,c)` is contractible, for each `x:A` and `c:C(x)`.
 However, by Lemma 11.1.2 these types are equivalent, so the result follows by Exercise 10.3. ◻
 
+<!-- rosetta-agda-block: theorem-11.1.3-fiberwise-equivalences -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  where
+
+  is-fiberwise-equiv : (f : (x : A) → B x → C x) → Type (l1 ⊔ l2 ⊔ l3)
+  is-fiberwise-equiv f = (x : A) → is-equiv (f x)
+```
+
+<!-- rosetta-agda-block: theorem-11.1.3-total-equivalence-iff-fiberwise -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {f : (x : A) → B x → C x}
+  where
+
+  abstract
+    is-equiv-tot-is-fiberwise-equiv : is-fiberwise-equiv f → is-equiv (tot f)
+    is-equiv-tot-is-fiberwise-equiv H =
+      is-equiv-is-contr-map
+        ( λ t →
+          is-contr-is-equiv
+            ( fiber (f (pr1 t)) (pr2 t))
+            ( map-compute-fiber-tot f t)
+            ( is-equiv-map-compute-fiber-tot f t)
+            ( is-contr-map-is-equiv (H (pr1 t)) (pr2 t)))
+
+  abstract
+    is-fiberwise-equiv-is-equiv-tot : is-equiv (tot f) → is-fiberwise-equiv f
+    is-fiberwise-equiv-is-equiv-tot is-equiv-tot-f x =
+      is-equiv-is-contr-map
+        ( λ z →
+          is-contr-is-equiv'
+            ( fiber (tot f) (x , z))
+            ( map-compute-fiber-tot f (x , z))
+            ( is-equiv-map-compute-fiber-tot f (x , z))
+            ( is-contr-map-is-equiv is-equiv-tot-f (x , z)))
+```
+
+<!-- rosetta-agda-block: theorem-11.1.3-equivalence-total-spaces -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  where
+
+  equiv-tot : ((x : A) → B x ≃ C x) → (Σ A B) ≃ (Σ A C)
+  pr1 (equiv-tot e) = tot (λ x → map-equiv (e x))
+  pr2 (equiv-tot e) =
+    is-equiv-tot-is-fiberwise-equiv (λ x → is-equiv-map-equiv (e x))
+```
 <!-- rosetta-item-end: theorem-11.1.3 -->
 
 Now consider the situation where we have a map `f:A→ B`, and a family `C` over `B`.
@@ -120,6 +250,95 @@ H(t) : ψ(t)∘φ(t)~id H((f(x),z),((x,z),refl)) ≔ refl.
 ```
 Now the claim follows, since we see that `φ` is a contractible map if and only if `f` is a contractible map. ◻
 
+<!-- rosetta-agda-block: lemma-11.1.4-map-on-base -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : B → Type l3)
+  where
+
+  map-Σ-map-base : Σ A (λ x → C (f x)) → Σ B C
+  map-Σ-map-base (x , y) = (f x , y)
+```
+
+<!-- rosetta-agda-block: lemma-11.1.4-fibers-map-on-base -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : B → Type l3)
+  where
+
+  fiber-map-Σ-map-base-fiber :
+    (t : Σ B C) → fiber f (pr1 t) → fiber (map-Σ-map-base f C) t
+  fiber-map-Σ-map-base-fiber (.(f x) , z) (x , refl) = ((x , z) , refl)
+
+  fiber-fiber-map-Σ-map-base :
+    (t : Σ B C) → fiber (map-Σ-map-base f C) t → fiber f (pr1 t)
+  fiber-fiber-map-Σ-map-base ._ ((x , z) , refl) = (x , refl)
+
+  is-section-fiber-fiber-map-Σ-map-base :
+    (t : Σ B C) →
+    fiber-map-Σ-map-base-fiber t ∘ fiber-fiber-map-Σ-map-base t ~ id
+  is-section-fiber-fiber-map-Σ-map-base .(f x , z) ((x , z) , refl) = refl
+
+  is-retraction-fiber-fiber-map-Σ-map-base :
+    (t : Σ B C) →
+    (fiber-fiber-map-Σ-map-base t ∘ fiber-map-Σ-map-base-fiber t) ~ id
+  is-retraction-fiber-fiber-map-Σ-map-base (.(f x) , z) (x , refl) = refl
+
+  abstract
+    is-equiv-fiber-map-Σ-map-base-fiber :
+      (t : Σ B C) → is-equiv (fiber-map-Σ-map-base-fiber t)
+    is-equiv-fiber-map-Σ-map-base-fiber t =
+      is-equiv-is-invertible
+        ( fiber-fiber-map-Σ-map-base t)
+        ( is-section-fiber-fiber-map-Σ-map-base t)
+        ( is-retraction-fiber-fiber-map-Σ-map-base t)
+
+  compute-fiber-map-Σ-map-base :
+    (t : Σ B C) → fiber f (pr1 t) ≃ fiber (map-Σ-map-base f C) t
+  pr1 (compute-fiber-map-Σ-map-base t) =
+    fiber-map-Σ-map-base-fiber t
+  pr2 (compute-fiber-map-Σ-map-base t) =
+    is-equiv-fiber-map-Σ-map-base-fiber t
+```
+
+<!-- rosetta-agda-block: lemma-11.1.4-contractible-map-on-base -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : B → Type l3)
+  where
+
+  abstract
+    is-contr-map-map-Σ-map-base :
+      is-contr-map f → is-contr-map (map-Σ-map-base f C)
+    is-contr-map-map-Σ-map-base is-contr-f (y , z) =
+      is-contr-equiv'
+        ( fiber f y)
+        ( compute-fiber-map-Σ-map-base f C (y , z))
+        ( is-contr-f y)
+```
+
+<!-- rosetta-agda-block: lemma-11.1.4-equivalence-map-on-base -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : B → Type l3)
+  where
+
+  abstract
+    is-equiv-map-Σ-map-base : is-equiv f → is-equiv (map-Σ-map-base f C)
+    is-equiv-map-Σ-map-base is-equiv-f =
+      is-equiv-is-contr-map
+        ( is-contr-map-map-Σ-map-base f C (is-contr-map-is-equiv is-equiv-f))
+
+equiv-Σ-equiv-base :
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (C : B → Type l3) (e : A ≃ B) →
+  Σ A (C ∘ map-equiv e) ≃ Σ B C
+equiv-Σ-equiv-base C (f , is-equiv-f) =
+  ( map-Σ-map-base f C , is-equiv-map-Σ-map-base f C is-equiv-f)
+```
 <!-- rosetta-item-end: lemma-11.1.4 -->
 
 Now we use Lemma 11.1.4 to obtain a generalization of Theorem 11.1.3.
@@ -140,6 +359,17 @@ tot([f]{g}:Σ(x:A) C(x)→Σ(y:B) D(y)
 ```
 by `tot([f]{g}(x,z)≔ (f(x),g(x,z))`.
 
+<!-- rosetta-agda-block: definition-11.1.5-total-map-over-base -->
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : Type l1} {B : Type l2} {C : A → Type l3}
+  (D : B → Type l4)
+  where
+
+  map-Σ : (f : A → B) (g : (x : A) → C x → D (f x)) → Σ A C → Σ B D
+  map-Σ f g (x , y) = (f x , g x y)
+```
 <!-- rosetta-item-end: definition-11.1.5 -->
 
 ## Theorem 11.1.6
@@ -180,4 +410,62 @@ is an equivalence.
 Therefore it follows that `tot([f]{g}` is an equivalence if and only if `tot(g)` is an equivalence.
 Now the claim follows, since `tot(g)` is an equivalence if and only if `g` if a family of equivalences. ◻
 
+<!-- rosetta-agda-block: theorem-11.1.6-total-map-triangle -->
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : Type l1} {B : Type l2} {C : A → Type l3}
+  (D : B → Type l4)
+  where
+
+  triangle-map-Σ :
+    (f : A → B) (g : (x : A) → C x → D (f x)) →
+    map-Σ f g ~ map-Σ-map-base f D ∘ tot g
+  triangle-map-Σ f g t = refl
+```
+
+<!-- rosetta-agda-block: theorem-11.1.6-equivalence-iff-fiberwise-over-base -->
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : Type l1} {B : Type l2} {C : A → Type l3}
+  (D : B → Type l4)
+  where
+
+  abstract
+    is-equiv-map-Σ :
+      {f : A → B} {g : (x : A) → C x → D (f x)} →
+      is-equiv f → is-fiberwise-equiv g → is-equiv (map-Σ D f g)
+    is-equiv-map-Σ {f} {g} is-equiv-f is-fiberwise-equiv-g =
+      is-equiv-left-map-triangle
+        ( map-Σ D f g)
+        ( map-Σ-map-base f D)
+        ( tot g)
+        ( triangle-map-Σ D f g)
+        ( is-equiv-tot-is-fiberwise-equiv is-fiberwise-equiv-g)
+        ( is-equiv-map-Σ-map-base f D is-equiv-f)
+
+  equiv-Σ :
+    (e : A ≃ B) (g : (x : A) → C x ≃ D (map-equiv e x)) → Σ A C ≃ Σ B D
+  pr1 (equiv-Σ e g) =
+    map-Σ D (map-equiv e) (λ x → map-equiv (g x))
+  pr2 (equiv-Σ e g) =
+    is-equiv-map-Σ
+      ( is-equiv-map-equiv e)
+      ( λ x → is-equiv-map-equiv (g x))
+
+  abstract
+    is-fiberwise-equiv-is-equiv-map-Σ :
+      (f : A → B) (g : (x : A) → C x → D (f x)) →
+      is-equiv f → is-equiv (map-Σ D f g) → is-fiberwise-equiv g
+    is-fiberwise-equiv-is-equiv-map-Σ f g H K =
+      is-fiberwise-equiv-is-equiv-tot
+        ( is-equiv-top-map-triangle
+          ( map-Σ D f g)
+          ( map-Σ-map-base f D)
+          ( tot g)
+          ( triangle-map-Σ D f g)
+          ( is-equiv-map-Σ-map-base f D H)
+          ( K))
+```
 <!-- rosetta-item-end: theorem-11.1.6 -->
