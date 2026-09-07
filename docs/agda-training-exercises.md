@@ -217,4 +217,9 @@ uncurated exercise. That candidate and aggregate Chapter 9 pass on main;
 part (a) remains lower priority. The projection-section and dependent-product
 identity-system proofs reuse the existing Chapter 10--12 training
 dependencies, so main's Section 13.2 and Chapter 13 remain deferred.
-Actual proposal validation is pending.
+Published proposal `161b3c1b0b270cbcd06a4a60513271df4690f969` passes
+Section 13.2, Exercise 9.5, aggregate Chapters 9 and 13, all 167 unit
+tests, repository checks, and whitespace checks. The only correction was
+a direct import of existing Exercise 9.4 equivalence composition, checked
+in a passing scratchpad and carried to main as a focused commit without
+any training solution. Main's earlier holes remain unchanged.
