@@ -281,7 +281,7 @@
       "order": 1,
       "imports": [],
       "source_note": "Replace UU by Type. Retain both fundamental-theorem implications. Empty on main because equiv-fiber belongs in complete Section 10.3; its complete auxiliary is already published at Definition 10.3.1 on proposal/agda-exercise-solutions (63e5e49). Reuse that auxiliary when restoring this training site; do not enlarge main's earlier complete file.",
-      "conversion_status": "exercise",
+      "conversion_status": "ready",
       "conversion_note": "Training exercise theorem-12.2.3-embeddings-propositional-fibers: equiv-fiber belongs at Definition 10.3.1 in complete Section 10.3. Keep this later block empty on main; reuse proposal 63e5e49's auxiliary and restore both implications on proposal/agda-exercise-solutions. See docs/agda-training-exercises.md and docs/invisible-math.md."
     },
     {
