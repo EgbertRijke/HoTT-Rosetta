@@ -323,3 +323,12 @@ numbered training site was created.
   pass on that published proposal. Main passes 176 tests and repository
   checks but retains all nine training sites; Section 14.2 and Chapter
   14 are deferred, not passed. Earlier regenerated Agda is unchanged.
+
+Section 14.3 and its required Exercise 13.8 introduce no new training
+site. The coproduct universal property is added at that previously
+uncurated exercise's exact home because Proposition 14.3.2 explicitly
+uses it. The section also reuses the existing Sigma and truncation
+universal properties. These files transitively import the earlier
+training dependencies, so main's Section 14.3, Exercise 13.8, and
+aggregate Chapters 13--14 defer, not pass. Actual validation on the
+shared proposal is pending; all nine main holes remain unchanged.

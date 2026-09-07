@@ -946,6 +946,97 @@ class AgdaManifestTests(unittest.TestCase):
         normalize = lambda value: re.sub(r"\s+", " ", value).strip()
         self.assertEqual(normalize(prose), normalize(render_section(sources[13].path, 14, 1)))
 
+    def test_propositional_logic_preserves_both_composite_proofs_and_table(self):
+        import re
+        from rosetta.file_registry import registered_filename
+        from rosetta.layout import rosetta_directory
+        from rosetta.render import render_section
+
+        root = Path(__file__).resolve().parent.parent
+        destination = registered_filename(root, "section", 14, 3)
+        selected = [b for b in load_manifest(root / "data" / "agda-blocks.json")
+                    if b.destination == destination]
+        self.assertEqual(len(selected), 17)
+        self.assertEqual({b.item_id for b in selected}, {
+            "section-14.3", "definition-14.3.1", "proposition-14.3.2",
+            "definition-14.3.3", "proposition-14.3.4"})
+        self.assertTrue(all(b.conversion_status == "ready" for b in selected))
+        document = (rosetta_directory(root) / destination).read_text()
+        code = "\n".join(b.code for b in selected)
+        for b in selected:
+            position = document.index("<!-- rosetta-agda-block: " + b.block_id + " -->")
+            if b.after_text:
+                self.assertLess(document.index(b.after_text), position)
+            else:
+                self.assertLess(document.index("<!-- rosetta-item: " + b.item_id), position)
+                self.assertLess(position, document.index("<!-- rosetta-item-end: " + b.item_id + " -->"))
+        for name in ("disjunction-Prop", "type-disjunction-Prop", "is-prop-disjunction-Prop",
+                     "inl-disjunction", "inr-disjunction", "ev-disjunction", "elim-disjunction'",
+                     "universal-property-disjunction-Prop", "up-disjunction", "is-equiv-ev-disjunction",
+                     "equiv-ev-disjunction", "exists-Prop", "exists", "is-prop-exists", "intro-exists",
+                     "universal-property-exists", "ev-intro-exists", "elim-exists",
+                     "is-equiv-ev-intro-exists", "equiv-ev-intro-exists", "up-exists",
+                     "hom-Prop", "conjunction-Prop", "iff-Prop", "Π-Prop"):
+            self.assertRegex(code, r"(?m)^\s*" + re.escape(name) + " :")
+        self.assertIn("inl-disjunction = unit-trunc-Prop ∘ inl", code)
+        self.assertIn("inr-disjunction = unit-trunc-Prop ∘ inr", code)
+        self.assertIn("intro-exists a b = unit-trunc-Prop (a , b)", code)
+        self.assertIn("up-disjunction R = ev-disjunction , elim-disjunction' R", code)
+        self.assertIn("up-exists Q = (ev-intro-exists , elim-exists Q)", code)
+        for identity, first, second in (
+            ("proposition-14.3.2-composite-equivalence",
+             "( is-propositional-truncation-trunc-Prop (A + B) R)",
+             "( universal-property-coproduct (type-Prop R))"),
+            ("proposition-14.3.4-composite-equivalence",
+             "( is-propositional-truncation-trunc-Prop (Σ A B) Q)",
+             "( is-equiv-ev-pair {C = λ _ → type-Prop Q})"),
+        ):
+            proof = next(b.code for b in selected if b.block_id == identity)
+            self.assertIn("is-equiv-comp", proof)
+            self.assertIn(first, proof)
+            self.assertIn(second, proof)
+        table_order = ["implication", "conjunction", "bi-implication", "universal-quantification"]
+        positions = [document.index("<!-- rosetta-agda-block: section-14.3-table-" + name)
+                     for name in table_order]
+        self.assertEqual(positions, sorted(positions))
+        self.assertLess(document.index("| `∀_{(x:A)}P(x)`"), positions[0])
+        self.assertIn("is-prop-product (is-prop-type-Prop P) (is-prop-type-Prop Q)", code)
+        self.assertIn("is-prop-Π (λ x → is-prop-type-Prop (P x))", code)
+        self.assertIn("open import " + registered_filename(root, "exercise", 13, 8).removesuffix(".lagda.md"), document)
+        for forbidden in ("postulate", "open import foundation", "{-# REWRITE", "{-# OPTIONS"):
+            self.assertNotIn(forbidden, code)
+        prose = re.sub(r"^```agda\n.*?^```\s*", "", document, flags=re.M | re.S)
+        prose = re.sub(r"<!-- rosetta-agda-block:.*?-->", "", prose)
+        prose = prose.replace("### Proposition-valued interpretations in the table", "")
+        normalize = lambda value: re.sub(r"\s+", " ", value).strip()
+        self.assertEqual(normalize(prose), normalize(render_section(root / "book" / "propositional-truncation.tex", 14, 3)))
+        self.assertEqual(document.count("rosetta-diagram:"), 2)
+
+    def test_required_coproduct_universal_property_stays_at_exercise_13_8(self):
+        import re
+        from rosetta.file_registry import registered_filename
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        selected = [b for b in load_manifest(root / "data" / "agda-blocks.json")
+                    if b.block_id == "exercise-13-8-universal-property-coproduct"]
+        self.assertEqual(len(selected), 1)
+        block = selected[0]
+        self.assertEqual(block.destination, registered_filename(root, "exercise", 13, 8))
+        self.assertFalse(any(name.startswith("section-14-") for name in block.imports))
+        document = (rosetta_directory(root) / block.destination).read_text()
+        self.assertLess(document.index("## Solution"), document.index("ev-inl-inr :"))
+        self.assertIn("( λ p → ind-coproduct P (pr1 p) (pr2 p))", block.code)
+        self.assertIn("( ind-Σ (λ f g → refl))", block.code)
+        self.assertIn("( λ s → eq-htpy (ind-coproduct _ refl-htpy refl-htpy))", block.code)
+        self.assertIn("dependent-universal-property-coproduct (λ _ → X)", block.code)
+        self.assertIn("equiv-dependent-universal-property-coproduct (λ _ → X)", block.code)
+        source = root / "external" / "agda-unimath" / block.source_file
+        copied = "\n".join(source.read_text().splitlines()[32:67]).replace("UU", "Type")
+        self.assertEqual(block.code, copied)
+        self.assertNotIn("No formalization has been curated yet.", document)
+        self.assertNotIn("postulate", block.code)
+
     def test_higher_inductive_truncations_preserve_assumptions_and_all_items(self):
         import re
         from rosetta.file_registry import registered_filename
