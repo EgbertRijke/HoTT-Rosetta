@@ -318,7 +318,7 @@ module _
 
     compute-eq-coproduct-inl-inl : (inl x ＝ inl y) ≃ (x ＝ y)
     compute-eq-coproduct-inl-inl =
-      compute-Eq-coproduct-inl-inl ∘e extensionality-coproduct (inl x) (inl y)
+      compute-Eq-coproduct-inl-inl {B = B} x y ∘e extensionality-coproduct (inl x) (inl y)
 
   module _
     (x : A) (y : B)
@@ -326,7 +326,7 @@ module _
 
     compute-eq-coproduct-inl-inr : (inl x ＝ inr y) ≃ empty
     compute-eq-coproduct-inl-inr =
-      compute-Eq-coproduct-inl-inr ∘e extensionality-coproduct (inl x) (inr y)
+      compute-Eq-coproduct-inl-inr x y ∘e extensionality-coproduct (inl x) (inr y)
 
   module _
     (x : B) (y : A)
@@ -334,7 +334,7 @@ module _
 
     compute-eq-coproduct-inr-inl : (inr x ＝ inl y) ≃ empty
     compute-eq-coproduct-inr-inl =
-      compute-Eq-coproduct-inr-inl ∘e extensionality-coproduct (inr x) (inl y)
+      compute-Eq-coproduct-inr-inl x y ∘e extensionality-coproduct (inr x) (inl y)
 
   module _
     (x y : B)
@@ -342,5 +342,5 @@ module _
 
     compute-eq-coproduct-inr-inr : (inr x ＝ inr y) ≃ (x ＝ y)
     compute-eq-coproduct-inr-inr =
-      compute-Eq-coproduct-inr-inr ∘e extensionality-coproduct (inr x) (inr y)
+      compute-Eq-coproduct-inr-inr {A = A} x y ∘e extensionality-coproduct (inr x) (inr y)
 ```
