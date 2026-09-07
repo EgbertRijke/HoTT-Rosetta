@@ -174,10 +174,11 @@ dependencies; its proposition imports include the other recorded sites.
 - **Absent results:** `eq-fiber-fiber-ap` and `is-equiv-eq-fiber-fiber-ap`,
   together with `is-equiv-tr` and its inverse-transport homotopies.
 - **Reason:** The specialized fiber equivalence belongs immediately after
-  the general one at Example 11.6.3. Transport equivalence first has the
-  required equivalence vocabulary at Example 9.2.3, after identity
-  equivalence. Preserve these earlier main accounts; Section 11.6 passes
-  only on the proposal, and Section 9.2 still has unrelated item gaps.
+  the general one at Example 11.6.3. Exercise 9.1 explicitly asks for
+  transport equivalence with its inverse, so it is the exact home for
+  this needed result, refining the initially suggested Example 9.2.3.
+  Preserve the earlier main accounts; Section 11.6 passes only on the
+  proposal. No Section 9.2 edit or review refresh is needed.
 - **Later use:** The converse implication in Theorem 12.4.7. Its first
   implication also depends on the existing Example 11.6.3 exercise.
 - **Invisible mathematics:** “Theorem 12.4.7: truncated action on

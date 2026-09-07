@@ -275,8 +275,8 @@ unchanged; no completeness or review state is inferred from deferred checks.
 - **Pinned commit:** `c85d7fb834778f96a66576318cdc4ef3d4b80a26` throughout.
 - **Transport equivalence:** `src/foundation/transport-along-identifications.lagda.md`,
   lines 42--57, gives `is-equiv-tr` and both inverse-transport homotopies.
-  Its natural earliest equivalence-level home is Example 9.2.3, after
-  `is-equiv-id`; Section 5.4 has transport but not equivalence vocabulary.
+  Exercise 9.1 explicitly requests this equivalence and its inverse;
+  use that exact home, refining the initially suggested Example 9.2.3.
   Replace `UU` by `Type` and expand `inv-tr B p` to `tr B (inv p)` using
   `src/foundation-core/transport-along-identifications.lagda.md`, lines
   42--43. Import local Section 5.4; do not enlarge complete Section 5.4.
@@ -295,7 +295,7 @@ unchanged; no completeness or review state is inferred from deferred checks.
   converse uses the specialized one above. Replace only `UU` by `Type`.
 - **Order and validation:** Transport equivalence precedes the fiber
   specialization, which precedes the truncation theorem. Check changed
-  Sections 9.2, 11.6, and 12.4 and aggregate Chapters 9--12 on the proposal.
+  Sections 11.6 and 12.4, Exercise 9.1, and aggregate Chapters 9--12 on the proposal.
   Main's earlier modules remain unchanged; preserve reserved manual reviews.
 
 Proposition 12.4.5 uses the pinned retract induction in

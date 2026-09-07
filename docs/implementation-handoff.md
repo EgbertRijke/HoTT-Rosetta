@@ -85,7 +85,7 @@ Work continues on `main`.
   needs identity retracts; its part-(b) proof is a labeled prerequisite at
   Proposition 12.4.5 to avoid an import cycle. Theorem 12.4.7 is a new empty
   training site needing the specialized fiber equivalence at Example 11.6.3
-  and transport equivalence at Example 9.2.3. Its shared-proposal solution
+  and transport equivalence at its exact Exercise 9.1 home. Its shared-proposal solution
   is pending. Sections 13.1--13.5 still have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
