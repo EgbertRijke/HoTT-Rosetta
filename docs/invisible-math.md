@@ -331,3 +331,53 @@ proposal unit tests and repository checks pass. Its Exercise 9.1 gap now
 names only right concatenation; the needed transport assertion is supplied.
 Main keeps its earlier files and all seven training sites unchanged and
 empty. No Section 9.2 code or reserved manual-review data is changed.
+
+### Section 13.1: assumptions and pre-axiom equivalence proofs
+
+No new absent auxiliary or training site is introduced. All source ranges
+below are at `c85d7fb834778f96a66576318cdc4ef3d4b80a26`, with hashes in
+`data/agda-blocks-chapter-13.json`.
+
+- `foundation/function-extensionality-axiom`, lines 63--71, defines
+  `htpy-eq`. Expand `ev a` using `foundation/evaluation-functions`, lines
+  31--36, instead of enlarging complete Section 2.2. Its instance and
+  based predicates (85--90 and 104--110) belong at Proposition 13.1.1;
+  its fixed-universe predicate (116--119) belongs at Theorem 13.1.2.
+- The hypothesis-parametric fundamental theorem (56--75 of
+  `foundation/fundamental-theorem-of-identity-types`) specializes to the
+  function space and homotopy family for (i) iff (ii). The local
+  identity-system proof from the singleton-induction package (77--82 of
+  `foundation/singleton-induction`) gives (ii) to (iii), and
+  `foundation/identity-systems`, lines 109--114, gives its converse.
+  These typed applications reuse the Section 11.2 declarations; they do
+  not copy `homotopy-induction`'s globally assumed contraction.
+- `foundation/homotopy-induction`, lines 41--48 and 62--66, supplies
+  evaluation and the induction predicate. Its later implication from
+  based extensionality calls the global `is-torsorial-htpy` despite
+  taking a hypothesis. That is not suitable before the book's axiom.
+- `foundation/weak-function-extensionality`, lines 43--54 and 79--106,
+  supplies the predicates and both implications with explicit hypotheses.
+  Rename `map-inv-is-equiv` to `map-section-is-equiv` and
+  `is-torsorial-Id` to `is-contr-Id`. Keep the entire retract, including
+  its `eq-pair-eq-fiber refl` identity homotopy, in the later theorem's
+  own proof rather than moving the choice equivalence ahead of Section 13.2.
+- At Axiom 13.1.3 only, copy `foundation/function-extensionality`, lines
+  76--96: the inverse map, two inverse homotopies, and coherence are
+  postulates. Their derived `funext` is not a proof of the axiom. The
+  pinned inverse presentation and the book's equivalence formulation are
+  related by the already available invertibility/coherence results in
+  Chapters 9--10. The bundles and computations (98--122) follow here;
+  rename the local retraction-of-section theorem, but retain the proof.
+- `foundation/dependent-products-contractible-types`, lines 33--39,
+  and `foundation/dependent-products-truncated-types`, lines 45--53,
+  supply Theorem 13.1.5's base and induction. The ordinary function
+  corollary is at lines 97--102 of the latter. The required proposition
+  specializations are at lines 33--39 and 88--92 of
+  `foundation/dependent-products-propositions`, and `is-prop-neg` is at
+  lines 38--39 of `foundation/negation`.
+
+No `postulate` or global `funext` declaration occurs before Axiom 13.1.3.
+The regression test checks this boundary, the four implication functions,
+the actual use of both weak-extensionality hypotheses, and the later
+induction order. Remark 13.1.4's rule is represented by the contextual
+postulates, not by a new redundant assumption.

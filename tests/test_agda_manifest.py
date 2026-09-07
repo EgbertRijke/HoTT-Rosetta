@@ -468,6 +468,65 @@ class AgdaManifestTests(unittest.TestCase):
             self.assertFalse(any(i.startswith("section-12-") for i in block.imports))
             self.assertNotIn("is-trunc", block.code)
 
+    def test_function_extensionality_proofs_precede_the_explicit_assumption(self):
+        import re
+        from rosetta.file_registry import registered_filename
+        from rosetta.layout import rosetta_directory
+        from rosetta.render import render_section
+
+        root = Path(__file__).resolve().parent.parent
+        destination = registered_filename(root, "section", 13, 1)
+        blocks = load_manifest(root / "data" / "agda-blocks.json")
+        selected = [b for b in blocks if b.destination == destination]
+        self.assertEqual(len(selected), 20)
+        self.assertEqual(
+            {b.item_id for b in selected},
+            {"proposition-13.1.1", "theorem-13.1.2", "axiom-13.1.3",
+             "theorem-13.1.5", "corollary-13.1.6", "remark-13.1.7"},
+        )
+        document = (rosetta_directory(root) / destination).read_text()
+        for block in selected:
+            with self.subTest(block=block.block_id):
+                start = document.index(f"<!-- rosetta-item: {block.item_id}")
+                end = document.index(f"<!-- rosetta-item-end: {block.item_id} -->")
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(start, position)
+                self.assertLess(position, end)
+        before_axiom = document[:document.index("## Axiom 13.1.3")]
+        self.assertNotIn("postulate", before_axiom)
+        self.assertNotRegex(before_axiom, r"(?m)^\s*funext\s*:")
+        self.assertNotRegex(before_axiom, r"(?m)^\s*eq-htpy\s*:")
+        self.assertIn("fundamental-theorem-id H (λ g → htpy-eq", before_axiom)
+        self.assertIn("fundamental-theorem-id' (λ g → htpy-eq", before_axiom)
+        self.assertIn("is-identity-system-is-contr f refl-htpy", before_axiom)
+        self.assertIn("is-torsorial-is-identity-system f refl-htpy", before_axiom)
+        self.assertIn("weak-funext-funext funext A B", before_axiom)
+        self.assertIn("funext-weak-funext weak-funext", before_axiom)
+        self.assertIn("( weak-funext A", before_axiom)
+        self.assertNotIn("( is-torsorial-htpy f)", before_axiom)
+        axiom = next(b for b in selected if b.block_id ==
+                     "axiom-13.1.3-assumed-coherent-function-extensionality")
+        self.assertEqual(document.count("  postulate"), 1)
+        for name in ("eq-htpy", "is-section-eq-htpy", "is-retraction-eq-htpy'", "coh-eq-htpy'"):
+            self.assertIn("    " + name + " :", axiom.code)
+        names = ("funext", "  equiv-funext", "  is-contr-Π", "  is-trunc-Π",
+                 "  is-prop-Π", "  is-trunc-function-type", "  is-prop-function-type", "is-prop-neg")
+        positions = [re.search(r"(?m)^" + re.escape(name) + " :", document).start()
+                     for name in names]
+        self.assertEqual(positions, sorted(positions))
+        self.assertNotIn("open import foundation", document)
+        self.assertNotIn("open import section-14-", document)
+        self.assertIn("Γ⊢funext:is-equiv(htpy-eq_{f,g})", document)
+        prose = document
+        for block in selected:
+            if block.display_heading:
+                prose = prose.replace("### " + block.display_heading, "")
+        prose = re.sub(r"^```agda\n.*?^```\s*", "", prose, flags=re.M | re.S)
+        prose = re.sub(r"<!-- rosetta-agda-block:.*?-->", "", prose)
+        expected = render_section(root / "book" / "funext.tex", 13, 1)
+        normalize = lambda value: re.sub(r"\s+", " ", value).strip()
+        self.assertEqual(normalize(prose), normalize(expected))
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

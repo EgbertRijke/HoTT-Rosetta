@@ -33,9 +33,9 @@ The formation rule is therefore as follows:
 *Proof tree (automatic faithful draft).*
 
 ```text
-  Γ⊢ A \type
-──────────────
-$Γ⊢ ‖A‖ \type$
+  Γ⊢ A type
+─────────────
+$Γ⊢ ‖A‖ type$
 ```
 
 Furthermore, we will assume that all universes are closed under propositional truncations.

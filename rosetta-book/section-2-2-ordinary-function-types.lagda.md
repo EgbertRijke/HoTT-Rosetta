@@ -139,6 +139,8 @@ In our example of the definition of the ordinary function type `A→ B`, we ther
 There are of course many such definitions throughout the development of dependent type theory, the univalent foundations of mathematics, and synthetic homotopy theory.
 They are all included in the index at the end of this book.
 
+<!-- rosetta-item-end: remark-2.2.1 -->
+
 ## Remark 2.2.2
 
 <!-- rosetta-item: remark-2.2.2 -->
@@ -208,6 +210,8 @@ We give a brief summary of these rules, omitting the congruence rules.
 Γ⊢λ x. f(x)≐ f:A→ B
 ```
 
+<!-- rosetta-item-end: remark-2.2.2 -->
+
 Now we can use these rules to construct some familiar functions, such as the identity function `id:A→ A` on an arbitrary type `A`, and the composition `g∘ f:A→ C` of any two functions `f:A→ B` and `g:B→ C`.
 
 ## Definition 2.2.3
@@ -229,6 +233,14 @@ For any type `A` in context `Γ`, we define the **identity function** `id[A]:A�
 ──────────────────────
 $Γ⊢ id[A]≔λ x. x:A→ A$
 ```
+
+<!-- rosetta-agda-block: section-2-2-identity-function-adapted -->
+
+```agda
+id : {l : Level} {A : Type l} → A → A
+id a = a
+```
+<!-- rosetta-item-end: definition-2.2.3 -->
 
 The identity function therefore satisfies the following inference rules:
 
@@ -262,13 +274,6 @@ Next, we define the composition of functions.
 We will introduce the composition operation itself as a function `comp` that takes two arguments: the first argument is a function `g:B→ C`, and the second argument is a function `f:A→ B`.
 The output is a function `comp(g,f):A→ C`, for which we often write `g∘ f`.
 
-<!-- rosetta-agda-block: section-2-2-identity-function-adapted -->
-
-```agda
-id : {l : Level} {A : Type l} → A → A
-id a = a
-```
-
 ## Remark 2.2.4
 
 <!-- rosetta-item: remark-2.2.4 -->
@@ -296,6 +301,8 @@ With the idea of iterating function types, we see that type of the composition o
 ```
 It is the type of functions, taking a function `g:B→ C`, to the type of functions `(A→ B)→ (A→ C)`.
 Thus, `comp(g)` is again a function, mapping a function `f:A→ B` to a function of type `A→ C`.
+
+<!-- rosetta-item-end: remark-2.2.4 -->
 
 ## Definition 2.2.5
 
@@ -325,23 +332,23 @@ The derivation we use to construct `comp` is as follows:
 *Proof tree (automatic faithful draft).*
 
 ```text
-                                    Γ⊢ B \type   Γ⊢ C \type
-                                ─────────────────────── (b)
-    Γ⊢ A \type   Γ⊢ B \type             Γ,g:C^B,y:B⊢ g(y):C
-─────────────────────── (a)     ───────────────────────────
-        Γ,f:B^A,x:A⊢ f(x):B       Γ,g:C^B,f:B^A,y:B⊢ g(y):C
-───────────────────────────   ─────────────────────────────
-  Γ,g:C^B,f:B^A,x:A⊢ f(x):B   Γ,g:C^B,f:B^A,x:A,y:B⊢ g(y):C
-───────────────────────────────────────────────────────────
-                             Γ,g:C^B,f:B^A,x:A⊢ g(f(x)) : C
-───────────────────────────────────────────────────────────
-                            Γ,g:C^B,f:B^A⊢ λ x. g(f(x)):C^A
-───────────────────────────────────────────────────────────
-                       Γ,g:B→ C⊢ λ f. λ x. g(f(x)):B^A→ C^A
-───────────────────────────────────────────────────────────
-                 Γ⊢λ g. λ f. λ x. g(f(x)):C^B→ (B^A→ C^A)
-───────────────────────────────────────────────────────────
-      $Γ⊢comp≔ λ g. λ f. λ x. g(f(x)):C^B→ (B^A→ C^A)$
+                                    Γ⊢ B type   Γ⊢ C type
+                                ───────────────────── (b)
+     Γ⊢ A type   Γ⊢ B type            Γ,g:C^B,y:B⊢ g(y):C
+ ───────────────────── (a)      ─────────────────────────
+       Γ,f:B^A,x:A⊢ f(x):B      Γ,g:C^B,f:B^A,y:B⊢ g(y):C
+─────────────────────────   ─────────────────────────────
+Γ,g:C^B,f:B^A,x:A⊢ f(x):B   Γ,g:C^B,f:B^A,x:A,y:B⊢ g(y):C
+─────────────────────────────────────────────────────────
+                           Γ,g:C^B,f:B^A,x:A⊢ g(f(x)) : C
+─────────────────────────────────────────────────────────
+                          Γ,g:C^B,f:B^A⊢ λ x. g(f(x)):C^A
+─────────────────────────────────────────────────────────
+                     Γ,g:B→ C⊢ λ f. λ x. g(f(x)):B^A→ C^A
+─────────────────────────────────────────────────────────
+               Γ⊢λ g. λ f. λ x. g(f(x)):C^B→ (B^A→ C^A)
+─────────────────────────────────────────────────────────
+     $Γ⊢comp≔ λ g. λ f. λ x. g(f(x)):C^B→ (B^A→ C^A)$
 ```
 
 Note, however, that we haven’t derived the rules (a) and (b) yet.
@@ -353,19 +360,16 @@ The formal derivation of this fact is as follows:
 *Proof tree (automatic faithful draft).*
 
 ```text
-Γ⊢ A \type   Γ⊢ B \type
-───────────────────────
-         Γ⊢ A → B \type
-───────────────────────
-       Γ,f:A→ B⊢ f:A→ B
-───────────────────────
- $Γ,f:A→ B,x:A⊢ f(x):B$
+Γ⊢ A type   Γ⊢ B type
+─────────────────────
+        Γ⊢ A → B type
+─────────────────────
+     Γ,f:A→ B⊢ f:A→ B
+──────────────────────
+$Γ,f:A→ B,x:A⊢ f(x):B$
 ```
 
 This completes the construction of `comp`.
-
-In the remainder of this section we will see how to use the given rules for function types to derive the laws of a category for functions.
-These are the laws that assert that function composition is associative and that the identity function satisfies the unit laws.
 
 <!-- rosetta-agda-block: section-2-2-dependent-composition-adapted -->
 
@@ -377,6 +381,10 @@ _∘_ :
   ({a : A} → (b : B a) → C a b) → (f : (a : A) → B a) → (a : A) → C a (f a)
 (g ∘ f) a = g (f a)
 ```
+<!-- rosetta-item-end: definition-2.2.5 -->
+
+In the remainder of this section we will see how to use the given rules for function types to derive the laws of a category for functions.
+These are the laws that assert that function composition is associative and that the identity function satisfies the unit laws.
 
 ## Lemma 2.2.6
 
@@ -424,6 +432,8 @@ This idea is made formal in the following derivation:
 ─────────────────────────────────────────────────────
             $Γ⊢ (h∘ g)∘ f≐ h∘(g∘ f):A→ D$
 ``` ◻
+
+<!-- rosetta-item-end: lemma-2.2.6 -->
 
 ## Lemma 2.2.7
 
@@ -480,13 +490,15 @@ The derivation of the equality `id(f(x))≐ f(x)` in context `Γ,x:A` is as foll
 *Proof tree (automatic faithful draft).*
 
 ```text
-                                   Γ⊢ B \type
-                             ────────────────
-   Γ⊢ f:A→ B    Γ⊢ A \type   Γ,y:B⊢id(y)≐ y:B
-─────────────   ─────────────────────────────
- Γ,x:A⊢ f(x):B          Γ,x:A,y:B⊢id(y)≐ y:B
-─────────────────────────────────────────────
-           $Γ,x:A⊢id(f(x))≐ f(x):B$
+                                  Γ⊢ B type
+                            ────────────────
+   Γ⊢ f:A→ B    Γ⊢ A type   Γ,y:B⊢id(y)≐ y:B
+─────────────   ────────────────────────────
+ Γ,x:A⊢ f(x):B         Γ,x:A,y:B⊢id(y)≐ y:B
+────────────────────────────────────────────
+          $Γ,x:A⊢id(f(x))≐ f(x):B$
 ```
 
 We leave the right unit law as Exercise 2.2. ◻
+
+<!-- rosetta-item-end: lemma-2.2.7 -->

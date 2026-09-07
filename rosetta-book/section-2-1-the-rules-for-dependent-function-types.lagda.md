@@ -46,9 +46,9 @@ The idea of `Π`-types is that `Π(x:A) B(x)` is a type of **dependent functions
 *Proof tree (automatic faithful draft).*
 
 ```text
- Γ,x:A⊢ B(x) \type
-──────────────────── $Π$
-Γ⊢ Π(x:A) B(x) \type
+  Γ,x:A⊢ B(x) type
+─────────────────── $Π$
+Γ⊢ Π(x:A) B(x) type
 ```
 
 This rule simply states that in order to form the type `Π(x:A) B(x)` in context `Γ`, we must have a type family `B` over `A` in context `Γ`.
@@ -61,9 +61,9 @@ This is postulated in the **congruence rule** for `Π`-types:
 *Proof tree (automatic faithful draft).*
 
 ```text
-Γ⊢ A≐ A' \type   Γ,x:A⊢ B(x)≐ B'(x) \textrm{type}
-───────────────────────────────────────────────── $Π$-eq
-        Γ⊢ Π(x:A) B(x)≐Π(x:A') B'(x) \type
+Γ⊢ A≐ A' type   Γ,x:A⊢ B(x)≐ B'(x) \textrm{type}
+──────────────────────────────────────────────── $Π$-eq
+       Γ⊢ Π(x:A) B(x)≐Π(x:A') B'(x) type
 ```
 
 ### The `Π`-introduction rule

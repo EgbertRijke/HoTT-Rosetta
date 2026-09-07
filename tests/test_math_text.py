@@ -9,6 +9,23 @@ from rosetta.math_text import (
 
 
 class MathTextTests(unittest.TestCase):
+    def test_labelled_arrows_preserve_the_retraction_pair_labels(self):
+        self.assertEqual(
+            normalize_math(r"X \stackrel{i}{\longrightarrow} Y \stackrel{r}{\longrightarrow} X"),
+            "X ⟶[i] Y ⟶[r] X",
+        )
+        self.assertEqual(
+            normalize_math(r"\stackrel {\ap{f}{p}} {\longrightarrow}"),
+            "⟶[ap_{f}(p)]",
+        )
+        self.assertEqual(normalize_math(r"\stackrel{i}"), r"\stackrel{i}")
+        self.assertEqual(normalize_math(r"\stackrelation"), r"\stackrelation")
+
+    def test_type_judgments_use_the_explicit_book_macro(self):
+        self.assertEqual(normalize_math(r"\Gamma,x:A\vdash B(x)~\type"),
+                         "Γ,x:A⊢ B(x) type")
+        self.assertEqual(normalize_math(r"\typewriter"), r"\typewriter")
+
     def test_total_map_keeps_its_optional_base_map(self):
         self.assertEqual(
             normalize_math(r"\tot{g}, \tot[f]{g}, \tot[f]{\tot{g}}"),

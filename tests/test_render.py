@@ -36,6 +36,17 @@ class RenderTests(unittest.TestCase):
         self.assertIn("rosetta-proof-tree:", result)
         self.assertIn("Proof tree (automatic faithful draft)", result)
 
+    def test_function_extensionality_keeps_labelled_maps_and_the_axiom_rule(self):
+        result = render_section(ROOT / "book" / "funext.tex", 13, 1)
+        self.assertIn("⟶[i] (Π(x:A) Σ(b:B(x)) f(x)=b)", result)
+        self.assertIn("⟶[r] (Σ(g:Π(x:A) B(x)) f~ g)", result)
+        self.assertIn("Γ,x:A⊢ B(x) type", result)
+        self.assertIn("Γ⊢funext:is-equiv(htpy-eq_{f,g})", result)
+        self.assertIn("<!-- rosetta-proof-tree: 828a985f9fa9; review: pending -->", result)
+        self.assertNotIn(r"\stackrel", result)
+        self.assertNotIn(r"\longrightarrow", result)
+        self.assertNotIn(r"\type", result)
+
     def test_construction_environment_gets_heading(self):
         result = _structure_theorem_divs(
             '<div class="constr">\nBody.\n</div>\n', []

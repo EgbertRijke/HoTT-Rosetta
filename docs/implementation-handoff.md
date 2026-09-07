@@ -88,16 +88,22 @@ Work continues on `main`.
   and transport equivalence at its exact Exercise 9.1 home. Published
   proposal `31222b8` supplies both auxiliaries and restores both theorem
   implications unchanged. It passes Sections 11.6 and 12.4, Exercises
-  9.1 and 12.8, and aggregate Chapters 9--12. Sections 13.1--13.5 still
-  have no curated section blocks.
+  9.1 and 12.8, and aggregate Chapters 9--12. Section 13.1 now has twenty
+  curated blocks for its seven items, keeping both initial equivalence
+  results hypothesis-parametric and introducing the pinned coherent-inverse
+  postulates only at Axiom 13.1.3. Its actual proposal validation is pending;
+  main correctly defers it. Sections 13.2--13.5 have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
-The latest main validation passed all 156 unit tests,
-`python3 rosetta.py check`, and `git diff --check`. Section 12.3 and
+The latest main validation passed all 160 unit tests,
+`python3 rosetta.py check`, and `git diff --check`, with 534 manifest blocks
+(175 exact, 301 adapted, 58 historical/local). Section 13.1 and Chapter 13
+are deferred until their existing training dependencies are supplied;
+their actual proposal validation is pending. Section 12.3 and
 aggregate Chapters 10--12 are deferred. Section 12.4 is also deferred;
 its needed Exercise 12.8(a) candidate passes. Proposal `31222b8` passes
 all 161 tests, Sections 11.6 and 12.4, Exercises 9.1 and 12.8, and
@@ -129,7 +135,10 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Continue Sections 13.1--13.5 in order, starting with `book/funext.tex`,
+First validate the newly curated Section 13.1 on the shared proposal after
+bringing in current main. No new training exercise or auxiliary placement
+is needed. Then continue Sections 13.2--13.5 in order. The Section 13.1
+work accounts for `book/funext.tex`,
 lines 28--152. Section 13.1 has seven numbered items: the three-form
 criterion, equivalence with weak function extensionality, the explicit
 axiom, its inference-rule remark, dependent-product truncatedness, the
