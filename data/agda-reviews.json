@@ -352,6 +352,16 @@
       ],
       "state": "needs-further-review"
     },
+    "exercise-7-8-action-addition-finite": {
+      "comments": [],
+      "review_sha256": "16cd7cef7ea7f52bcae5e168f48b518c11a04dbbf4b67194cba48e20a651633d",
+      "state": "approved"
+    },
+    "exercise-7-8-multiplication-finite": {
+      "comments": [],
+      "review_sha256": "7d0a554e9f7f15de116dcfef8fb0a73188600565ffc7ea40309e5501a3383a55",
+      "state": "approved"
+    },
     "exercise-7-9-bound-natural-remainder": {
       "comments": [],
       "review_sha256": "c0c1c6ee3b1e2fade39ad6f221a54fc3a74b32be40dfb1b124c1cdce9c4ce699",
