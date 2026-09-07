@@ -174,3 +174,55 @@ the four final composites and an explicit opposite summand in each of the
 same-summand cases. The exact corrected draft passed the proposal scratchpad
 check, was compared against the unchanged target block on `main`, and was
 promoted with an atomic backup. No manual review evidence was refreshed.
+
+## Section 11.6 (2026-09-06)
+
+All three numbered items and the theorem's proof are preserved from
+`book/fundamental.tex`, lines 427--515. Definition 11.6.1 specializes the
+identity-system predicate to `λ y → D a y c`, with distinguished point `b`
+and witness `d`. This is the same alias construction as the pinned homotopy
+induction predicate, not a new induction proof.
+
+Theorem 11.6.2 is not represented solely by the upstream forward structure
+identity principle. The following explicitly typed specializations are curated
+in addition to that construction and its packaged extensionality map:
+
+| Conditions | Declarations and mathematical content |
+| --- | --- |
+| (i) ↔ (ii) | `dependent-equiv-from-contr` / `dependent-contr-from-equiv` instantiate both fundamental-theorem implications at `B a` and `λ y → D a y c`. The canonical family exists by path induction from `d`, so the universal assertion in (i) implies the hypothesis of the converse. |
+| (ii) ↔ (iii) | `dependent-identity-system-from-contr` / `dependent-contr-from-identity-system` instantiate both identity-system implications of Theorem 11.2.2. |
+| (iv) ↔ (v) | `structure-equiv-from-contr` / `structure-contr-from-equiv` instantiate the same fundamental theorem at `Σ A B` and its stated structure relation; `(c,d)` supplies the canonical family. |
+| (v) ↔ (vi) | `structure-identity-system-from-contr` / `structure-contr-from-identity-system` instantiate the identity-system implications at `(a,b)` and `(c,d)`. |
+| (ii) ↔ (v) | `interchange-Σ-Σ`, followed by Exercise 10.6's `left-unit-law-Σ-is-contr`, gives `equiv-total-Eq-structure`. The base identity-system hypothesis is used explicitly by `equiv-total-dependent-identity-system`. `is-torsorial-Eq-structure` and its prime converse transfer contractibility in the two directions. |
+
+These are implication functions, not a claim that the six proof types have
+been proved equivalent as types. The generic proofs are reused from their
+pinned-source formalizations in Theorem 11.2.2 and Exercise 10.3. The only
+earlier exercise added on `main` is Exercise 10.6, whose full inclusion-map
+equivalence is needed by the book's displayed total-space calculation.
+No generic dependent-sum contraction theorem is added to complete Section
+10.1 solely to satisfy the upstream forward construction.
+
+Example 11.6.3 is a new empty training site on `main`. The retained exact
+proof route from `foundation/equality-fibers-of-maps` uses dependent-pair
+identities, a fiberwise equivalence, and a commuting triangle to establish
+the book's first displayed equivalence. Its inversion equivalence requires
+`inv-inv` in complete Section 5.2, so its solution belongs on the shared
+proposal. Required placements and source ranges are in the exercise index
+and invisible-math record. The source proof differs from the book's direct
+structure-identity-principle argument; the book's proof prose remains intact.
+
+Two source discrepancies are made explicit rather than silently repaired:
+the later formulas write `\ct{p}{q}^{-1}` where the first formula correctly
+has `\ct{p}{q^{-1}}`; and the center of `Σ(y:A) x=y` is printed with
+`refl_{f(x)}` rather than `refl_x`. The Agda statement uses the correctly
+typed `p ∙ inv q`. The renderer's existing unannotated `refl` convention
+does not expose that subscript discrepancy in the generated prose.
+
+The `multline` display wrapper is now normalized by the converter, with a
+regression test preserving each line. Full Chapters 3--22 regeneration changes
+only this section and the new Exercise 10.6. The prose comparison preserves
+all five headings and fourteen displays, without unresolved references or
+raw TeX commands. Agda validation on the proposal is pending; `main` remains
+deferred through the existing Chapter 10 exercises and this new example.
+No Section 11.6 completion or optional review decision is recorded.

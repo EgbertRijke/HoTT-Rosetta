@@ -228,6 +228,49 @@ class AgdaManifestTests(unittest.TestCase):
                 self.assertLess(position, end)
         self.assertFalse(document.endswith("\n\n"))
 
+    def test_structure_identity_conditions_stay_in_their_numbered_items(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        selected = [
+            block for block in load_manifest(root / "data" / "agda-blocks.json")
+            if block.destination.startswith("section-11-6-")
+        ]
+        self.assertEqual(len(selected), 10)
+        for block in selected:
+            with self.subTest(block=block.block_id):
+                document = (rosetta_directory(root) / block.destination).read_text()
+                start = document.index(f"<!-- rosetta-item: {block.item_id}")
+                end = document.index(f"<!-- rosetta-item-end: {block.item_id} -->")
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(start, position)
+                self.assertLess(position, end)
+        declarations = [
+            document.index(name + " :") for name in (
+                "is-dependent-identity-system",
+                "  interchange-Σ-Σ",
+                "  equiv-total-Eq-structure",
+                "  is-torsorial-Eq-structure",
+                "  is-torsorial-Eq-structure'",
+                "  dependent-equiv-from-contr",
+                "  dependent-contr-from-equiv",
+                "  structure-equiv-from-contr",
+                "  structure-contr-from-equiv",
+                "  dependent-contr-from-identity-system",
+                "  structure-contr-from-identity-system",
+                "  dependent-identity-system-from-contr",
+                "  structure-identity-system-from-contr",
+                "    structure-identity-principle",
+            )
+        ]
+        self.assertEqual(declarations, sorted(declarations))
+        example = selected[-1]
+        self.assertEqual(example.item_id, "example-11.6.3")
+        if example.conversion_status == "exercise":
+            self.assertNotIn("  equiv-fiber-ap-eq-fiber :", document)
+        else:
+            self.assertIn("  equiv-fiber-ap-eq-fiber :", document)
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
