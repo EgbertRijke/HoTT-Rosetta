@@ -82,7 +82,7 @@
       "order": 0,
       "imports": [],
       "code": "module _\n  {l : Level} {A : Type l}\n  where\n\n  abstract\n    is-contr-Id : (a : A) → is-contr (Σ A (λ x → a ＝ x))\n    pr1 (pr1 (is-contr-Id a)) = a\n    pr2 (pr1 (is-contr-Id a)) = refl\n    pr2 (is-contr-Id a) (.a , refl) = refl",
-      "source_note": "Copied from the pinned torsorial identity-family proof, expanding is-torsorial to its defining contractibility of the dependent sum and replacing Type with Type."
+      "source_note": "Copied from the pinned torsorial identity-family proof, expanding is-torsorial to its defining contractibility of the dependent sum and replacing UU with Type."
     },
     {
       "block_id": "definition-10.2.1-singleton-induction",
@@ -344,7 +344,7 @@
       "order": 0,
       "imports": [],
       "code": "module _\n  {l : Level} {A : Type l}\n  where\n\n  abstract\n    is-contr-Id' : (a : A) → is-contr (Σ A (λ x → x ＝ a))\n    pr1 (pr1 (is-contr-Id' a)) = a\n    pr2 (pr1 (is-contr-Id' a)) = refl\n    pr2 (is-contr-Id' a) (.a , refl) = refl",
-      "source_note": "Copied from the pinned reverse torsorial identity-family proof, expanding is-torsorial to its defining contractibility of the dependent sum, omitting the already imported forward variant, and replacing Type with Type."
+      "source_note": "Copied from the pinned reverse torsorial identity-family proof, expanding is-torsorial to its defining contractibility of the dependent sum, omitting the already imported forward variant, and replacing UU with Type."
     },
     {
       "block_id": "lemma-10.4.5-transpose-homotopy-helper",

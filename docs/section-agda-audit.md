@@ -55,7 +55,7 @@ recorded in `data/agda-blocks-chapter-11.json`.
 | Theorem 11.1.3 | `is-fiberwise-equiv`, both implications between it and `is-equiv (tot f)`, and `equiv-tot`. |
 | Lemma 11.1.4 | `map-Σ-map-base`, its fiber equivalence, and the implications for contractible maps and equivalences. |
 | Definition 11.1.5 | `map-Σ`, changing the base and fiber coordinates. |
-| Theorem 11.1.6 | `triangle-map-Σ`, both equivalence implications, and `equiv-Σ`. The triangle's anonymous module is restored after splitting it from Definition 11.1.5. |
+| Theorem 11.1.6 | `triangle-map-Σ`, both equivalence implications, and `equiv-Σ`. The triangle's anonymous module is restored after splitting it from Definition 11.1.5; `map-Σ` therefore receives `D` explicitly. |
 
 Only section dependencies were added to Exercises 9.4, 10.2, and 10.3:
 triangle laws and 3-for-2, preservation of contractibility by retracts, and
@@ -69,4 +69,9 @@ No complete earlier file was enlarged and no review evidence was refreshed.
 
 Section 9.2 and the three changed exercise candidates pass on `main`.
 Section 11.1 remains deferred through Lemma 10.4.5 and is not in the
-completion list. Validation on the shared proposal is the next check.
+completion list. Published proposal `dc1ffed` passes candidate Sections 10.2,
+10.4, and 11.1 and aggregate Chapters 9--11. Its full unit suite and repository
+checks pass. The prose preserves the optional base parameter in `tot_f(g)`;
+diagram spacing options are excluded from mathematical node labels. Both
+conversion repairs have regression tests and were regenerated throughout the
+active output.

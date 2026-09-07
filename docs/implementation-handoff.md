@@ -31,16 +31,23 @@ Work continues on `main`.
   from Exercises 9.4, 10.2, and 10.3. Section 9.2's formerly blocked Corollary
   9.2.8 is restored from a passing scratchpad, and retract data is defined at
   Definition 9.2.1. These changed files pass candidate checks on `main`.
-- Section 11.1 is deferred on `main` through Lemma 10.4.5; validation on the
-  shared proposal is next. Sections 11.2--13.5 still have no curated section
-  blocks. No Chapter 11 section is recorded complete on `main`.
+- Section 11.1 passes Agda on the published shared proposal at `dc1ffed`.
+  It is deferred on `main` through Lemma 10.4.5. Sections 11.2--13.5 still have
+  no curated section blocks. No Chapter 11 section is recorded complete on
+  `main`.
+- Total-map base parameters and TikZ spacing options now render correctly;
+  affected documents were regenerated. Blocked scratchpad drafts are now
+  included in their candidate checks, so omitted code cannot yield a false pass.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
-The latest validation passed the full unit suite, `python3 rosetta.py check`,
-and `git diff --check`. Proposal `511f171` passes candidate Sections 2.2, 10.2,
-and 10.4 and aggregate Chapters 2--10. On `main`, Sections 10.2 and 10.4 and
-Chapter 10 remain deferred, never recorded as passed.
+The latest validation passed the full unit suite (145 tests on `main`, 146 on
+the proposal), `python3 rosetta.py check`, and `git diff --check`. Proposal
+`dc1ffed` passes candidate Sections 10.2, 10.4, and 11.1 and aggregate Chapters
+9--11. The earlier `511f171` also checked Section 2.2 and Chapters 2--10.
+On `main`, Sections 10.2, 10.4, and 11.1 and Chapters 10--11 remain deferred,
+never recorded as passed. The changed later prose sections and affected
+aggregates were checked, without treating their empty Agda as completeness.
 
 ## Next work
 
@@ -49,11 +56,9 @@ The five assigned Chapter 10 steps are done. Keep Definition 10.2.1 and Lemma
 audit also records that Definition 10.4.4's final cancellation result is
 provided only on the proposal as part of the existing coherence exercise.
 
-Bring current `main` into the shared proposal and check Section 11.1 and the
-affected aggregates there. Then formalize Chapters 11, 12, and 13 in order,
-starting with Section 11.2. Chapter
-13 contains Axiom 13.1.3: keep any assumption explicit and never describe it as
-a proof.
+Formalize the remaining sections of Chapters 11, 12, and 13 in order,
+starting with Section 11.2. Chapter 13 contains Axiom 13.1.3: keep any
+assumption explicit and never describe it as a proof.
 
 For each section, inventory every numbered mathematical item, search pinned
 agda-unimath for exact code before analogues, record full provenance,
