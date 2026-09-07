@@ -16,6 +16,23 @@ completion.
 
 Work continues on `main`.
 
+Section 14.4's preparatory prose audit exposed two recurring conversion
+losses. The converter now preserves the active book's simple citation groups
+as visible unresolved `[citation: key]` references, without inventing
+bibliography numbers. It also normalizes TeX's double-bar control symbol,
+including the bare, `left`/`right`, and `big` forms. All thirteen affected
+active documents are regenerated: two chapter introductions, ten sections,
+and Exercise 20.6. Every Agda fence and all three Section 14.4 diagram IDs
+are unchanged. Five new regressions cover the notation, citation groups,
+all active citation-bearing fragment kinds, and the actual Sections 14.4
+and 16.3 passages. Main passes 185 unit tests, repository checks (the same
+622 verified blocks), whitespace checks, all ten changed section candidates,
+and aggregate Chapters 3, 6--8, 16, 18--20, and 22. Chapters 11 and 14 remain
+deferred through existing training sites; they are not passes. Section
+14.4's passing candidate still contains only its module declaration and
+does not establish formalization completeness. Its six-item Agda work
+remains next. Proposal validation of this prose-only change is pending.
+
 Section 14.3 now has seventeen provenance-backed blocks for all four
 numbered items and the complete eight-row connective table. Both
 universal-property proofs retain the full composition of two equivalences,
@@ -257,6 +274,33 @@ the natural-number minimal-element argument and its finite-type corollary,
 both constant/weakly-constant identity characterizations, and the full
 Kraus theorem including uniqueness, image proposition, extension, and both
 inverse laws. Preserve the explicit map using action on the path constructor.
+
+The citation and escaped-delimiter prose losses are already repaired; do
+not redo that work. Further pinned-source inspection found:
+
+- `well-ordering-principle-standard-finite-types`, lines 200--226, supplies
+  the finite epsilon operator by reduction to the natural-number operator,
+  using the existing `nat-Fin`, `mod-succ-ℕ`, and `is-section-nat-Fin`.
+  It does not require copying a new finite well-ordering theorem or enlarging
+  Chapter 7. Unbundle its decidable-subtype argument into a proposition family
+  and pointwise decidability if needed.
+- The book's constant-map predicate is upstream
+  `foundation/null-homotopic-maps`, lines 53--55, not the differently defined
+  predicate in `coherently-constant-maps`. The implication to weak constancy
+  is at lines 353--359. Still account for both identity characterizations;
+  the contraction and null-homotopy have opposite path orientations.
+- Local Definition 12.3.1 supplies `is-set` but no bundled `Set`. The Kraus
+  proof can use a type and its set witness, expanding `Id-Prop` explicitly,
+  without adding an earlier set-packaging auxiliary.
+- Pinned `foundation-core/subtypes`, lines 150--157, implements
+  `eq-type-subtype` by the inverse of the subtype identity equivalence.
+  Local Corollary 12.2.4 already supplies `equiv-ap-inclusion-subtype`.
+  Expand this wrapper using the existing inverse-map operation rather than
+  introducing a new earlier result merely because the wrapper name differs.
+- The complete Kraus source has precomposition at lines 41--53, the nested
+  image-proposition proof at 61--91, extension and computation at 97--126,
+  both inverse homotopies at 128--152, and equivalence at 154--161. Preserve
+  the book's separate uniqueness argument before the image construction.
 
 Inspect pinned `elementary-number-theory/well-ordering-principle-natural-numbers`
 and `elementary-number-theory/well-ordering-principle-standard-finite-types`

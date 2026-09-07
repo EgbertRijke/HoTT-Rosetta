@@ -14,7 +14,7 @@ open import section-6-3-observational-equality-of-the-natural-numbers
 <!-- rosetta-item: section-6.4 -->
 
 Using the observational equality of `ℕ`, we can prove Peano’s seventh and eighth axioms.
-In his *Arithmetices Principia* , the natural numbers are based at `1`, but today it is customary to have the natural numbers based at `0`.
+In his *Arithmetices Principia* \[citation: `Peano`\], the natural numbers are based at `1`, but today it is customary to have the natural numbers based at `0`.
 Adapting for this, the seventh and eighth axioms assert that
 
 1.  For any two natural numbers `m` and `n`, we have

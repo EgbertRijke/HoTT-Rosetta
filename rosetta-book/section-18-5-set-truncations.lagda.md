@@ -240,6 +240,6 @@ That is, we can define for every type `A` a map `η:A→‖A‖_k` such that the
 _∘η : (‖A‖_k→ X)→ (A→ X)
 ```
 is an equivalence for every `k`-truncated type `X`.
-To learn more about general `k`-truncations, we refer to Chapter 7 of .
+To learn more about general `k`-truncations, we refer to Chapter 7 of \[citation: `hottbook`\].
 
 <!-- rosetta-item-end: remark-18.5.8 -->
