@@ -165,3 +165,29 @@ No exercise Agda is added for Section 12.3. It reuses the required
 contractibility-of-retracts result already curated at Exercise 10.2. Its
 fundamental-theorem uses also extend the two existing Chapter 10 training
 dependencies; its proposition imports include the other recorded sites.
+
+### `theorem-12.4.7-truncated-action-on-identities`
+
+- **Place:** Section 12.4, Theorem 12.4.7.
+- **Task:** Prove both directions between successor-truncated fibers of a
+  map and truncated fibers of its action on identities.
+- **Absent results:** `eq-fiber-fiber-ap` and `is-equiv-eq-fiber-fiber-ap`,
+  together with `is-equiv-tr` and its inverse-transport homotopies.
+- **Reason:** The specialized fiber equivalence belongs immediately after
+  the general one at Example 11.6.3. Transport equivalence first has the
+  required equivalence vocabulary at Example 9.2.3, after identity
+  equivalence. Preserve these earlier main accounts; Section 11.6 passes
+  only on the proposal, and Section 9.2 still has unrelated item gaps.
+- **Later use:** The converse implication in Theorem 12.4.7. Its first
+  implication also depends on the existing Example 11.6.3 exercise.
+- **Invisible mathematics:** “Theorem 12.4.7: truncated action on
+  identities” in `docs/invisible-math.md`.
+- **Status:** Empty on `main`; candidate Section 12.4 and Chapter 12 defer.
+- **Proposal solution:** Pending publication on the shared
+  `proposal/agda-exercise-solutions` branch.
+
+Exercise 12.8(a) is added early because the pinned equivalence-invariance
+proof needs its identity-retract result. Part (b)'s truncation-of-retracts
+proof appears as a visibly labeled prerequisite at Proposition 12.4.5:
+placing it in the exercise module would make the section and exercise
+import one another. No earlier complete main file is enlarged for it.

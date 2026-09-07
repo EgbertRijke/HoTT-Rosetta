@@ -9,6 +9,13 @@
       "statement": "Only inversion and left concatenation, needed by Example 11.6.3, are curated. The right-concatenation and transport equivalences with their explicit inverses remain lower-priority exercise work."
     },
     {
+      "item_id": "remark-12.4.2-overlapping-universes",
+      "kind": "Remark",
+      "number": "12.4.2",
+      "destination": "section-12-4-general-truncation-levels.lagda.md",
+      "statement": "The book's same type inhabiting overlapping universes is not represented by the pinned library's disjoint Agda universe levels. The lift equivalence and both directions of truncation transfer for A and raise l A are curated, with transfer delayed until Proposition 12.4.5. This is an explicit lifted-type analogue, not a literal proof of the overlapping-universe assertion or its judgmental base equalities; see docs/section-agda-audit.md."
+    },
+    {
       "item_id": "exercise-10-7-b-c",
       "kind": "Exercise",
       "number": "10.7(b,c)",

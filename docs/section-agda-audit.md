@@ -338,3 +338,42 @@ prose of the two changed earlier sections is unchanged; their comparison
 checks remain 100%. Section 12.3 is deferred on `main`, never recorded
 complete or passed. All 154 main unit tests, repository checks, and
 whitespace checks pass. No exercise Agda or optional review evidence is changed.
+
+## Section 12.4 (2026-09-07)
+
+The seven numbered items and four proof bodies in `book/hierarchy.tex`,
+lines 288--421, retain their complete prose. The introductory indexing
+type and natural-number inclusion are curated before Definition 12.4.1.
+The introduction's announced future identification with integers at least
+-2 is not presented by the book as a theorem proved here.
+
+| Item | Formalization and limits |
+| --- | --- |
+| Introduction | The inductive `𝕋`, common aliases, and pinned `truncation-level-ℕ`. Its two defining computations agree judgmentally with the book's inclusion after unfolding the shifted maps. |
+| Definition 12.4.1 | Recursive `is-trunc`, the proper-successor predicate as a specialization of complements, the universe `Truncated-Type` and its projections, and `is-trunc-map` with its map bundle. |
+| Remark 12.4.2 | The pinned lift and its equivalence, followed by both lifted truncation implications after Proposition 12.4.5. **Representation gap:** Agda's disjoint universes do not literally express the book's same type in two overlapping universes. Neither polymorphism nor the lifted analogue proves those judgmental base equalities. The original claim stays in the prose and the gap inventory. |
+| Proposition 12.4.3 | The pinned base contraction and recursive successor proof. |
+| Corollary 12.4.4 | Identity truncatedness as the preceding successor theorem. |
+| Proposition 12.4.5 | Both map-level and bundled equivalence transfers. Upstream uses a broader retract induction, included as a labeled prerequisite; the book's equivalence-on-identities induction is retained, not claimed to be the copied proof. |
+| Corollary 12.4.6 | Transfer along the equivalence on identities supplied by the embedding hypothesis. |
+| Theorem 12.4.7 | Both pinned implications using the general and specialized fiber identity equivalences. Their single block is a new empty training site on main; the retained converse requires an absent specialization and transport equivalence at earlier mathematical homes. |
+
+Exercise 12.8(a)'s identity-retract proof is needed by the section, so it
+is added now and imports no Chapter 12 section. The proof of part (b)
+appears at Proposition 12.4.5 to avoid a section/exercise import cycle;
+there is no outstanding mathematical part-(b) proof to invent. The
+exercise's pre-existing custom-list presentation drops its alphabetical
+labels, as in Exercise 10.7, and remains an explicit presentation issue.
+Corollary 12.4.4 also retains the existing tight inline QED spacing.
+No complete-file or optional-review status is inferred from these blocks.
+
+Main passes all 156 unit tests, repository checks, and whitespace checks;
+Exercise 12.8(a) passes its ordinary Agda candidate check. Section 12.4
+and Chapter 12 are deferred, never passed. The shared proposal solution
+is pending. The raw prose comparison is 98.26%, with 9/13 distinct
+headings matching: its four unmatched headings are precisely the new,
+explicit Agda headings. After removing only those headings and curated
+Agda, a regression test confirms equality with the rendered book text,
+including all item markers and thirteen displays, modulo whitespace.
+The book itself has twelve heading occurrences, nine distinct. There are
+no unresolved references or raw TeX commands. No review data is changed.
