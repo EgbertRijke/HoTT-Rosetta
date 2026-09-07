@@ -36,15 +36,15 @@ Construct the five identifications `α_1,…,α_5` in the pentagon
 *3-by-5 diagram (automatic draft).*
 
 ```text
-                        [[-2em] ((p ∙ q) ∙ r) ∙ s]                             [(p ∙ q) ∙ (r ∙ s)]           [[-2em]]
+                        [((p ∙ q) ∙ r) ∙ s]                             [(p ∙ q) ∙ (r ∙ s)]
 
-[(p ∙ (q ∙ r)) ∙ s]                                                                                    [p ∙ (q ∙ (r ∙ s))]
+[(p ∙ (q ∙ r)) ∙ s]                                                                             [p ∙ (q ∙ (r ∙ s))]
 
-                                                       [p ∙ ((q ∙ r) ∙ s)]
+                                                [p ∙ ((q ∙ r) ∙ s)]
 
 Arrows:
-- [-2em] ((p ∙ q) ∙ r) ∙ s --α_4--> (p ∙ q) ∙ (r ∙ s)
-- [-2em] ((p ∙ q) ∙ r) ∙ s --α_1--> (p ∙ (q ∙ r)) ∙ s
+- ((p ∙ q) ∙ r) ∙ s --α_4--> (p ∙ q) ∙ (r ∙ s)
+- ((p ∙ q) ∙ r) ∙ s --α_1--> (p ∙ (q ∙ r)) ∙ s
 - (p ∙ q) ∙ (r ∙ s) --α_5--> p ∙ (q ∙ (r ∙ s))
 - (p ∙ (q ∙ r)) ∙ s --α_2--> p ∙ ((q ∙ r) ∙ s)
 - p ∙ ((q ∙ r) ∙ s) --α_3--> p ∙ (q ∙ (r ∙ s))

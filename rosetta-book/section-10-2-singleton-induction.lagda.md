@@ -127,11 +127,11 @@ Then we have the identifications
 *Linear diagram (automatic draft).*
 
 ```text
-[tr_B(C(a),b)]---->[[4em] tr_B(refl,b)]----> [b]
+[tr_B(C(a),b)]---->[tr_B(refl,b)]----> [b]
 
 Arrows:
-- tr_B(C(a),b) --ap_{λ ω. tr_B(ω,b)}(p)--> [4em] tr_B(refl,b)
-- [4em] tr_B(refl,b) --refl--> b
+- tr_B(C(a),b) --ap_{λ ω. tr_B(ω,b)}(p)--> tr_B(refl,b)
+- tr_B(refl,b) --refl--> b
 ```
 This shows that the computation rule is satisfied, which completes the proof that `A` satisfies singleton induction.
 

@@ -11,6 +11,10 @@ TIKZCD_RE = re.compile(
 )
 ARROW_START_RE = re.compile(r"\\arrow\[")
 QUOTED_RE = re.compile(r'"([^\"]*)"')
+SPACING_OPTION_RE = re.compile(
+    r"^\s*\[\s*[+-]?(?:\d+(?:\.\d*)?|\.\d+)\s*"
+    r"(?:em|ex|pt|pc|in|bp|cm|mm|dd|cc|sp)\s*\]"
+)
 
 
 @dataclass(frozen=True)
@@ -184,8 +188,12 @@ def render_tikzcd(source: str, normalize: Callable[[str], str]) -> DiagramDraft:
     nodes: List[List[str]] = []
     arrows: List[Arrow] = []
     for row_number, raw_row in enumerate(raw_rows):
+        if row_number:
+            raw_row = SPACING_OPTION_RE.sub("", raw_row, count=1)
         row: List[str] = []
         for column, raw_cell in enumerate(_split_top_level(raw_row, "&")):
+            if column:
+                raw_cell = SPACING_OPTION_RE.sub("", raw_cell, count=1)
             node, cell_arrows = _parse_cell(raw_cell, row_number, column)
             row.append(normalize(node) if node else "")
             arrows.extend(cell_arrows)

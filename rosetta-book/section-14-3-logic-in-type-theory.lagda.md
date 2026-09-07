@@ -50,11 +50,11 @@ Now consider the following composition of maps, for an arbitrary proposition `R`
 *Linear diagram (automatic draft).*
 
 ```text
-[(P∨ Q→ R)]---->[(P+Q→ R)]---->[[3.6em] (P→ R)× (Q→ R)]
+[(P∨ Q→ R)]---->[(P+Q→ R)]---->[(P→ R)× (Q→ R)]
 
 Arrows:
 - (P∨ Q→ R) --_∘η--> (P+Q→ R)
-- (P+Q→ R) --{h ↦ (h∘ inl,h∘ inr)}--> [3.6em] (P→ R)× (Q→ R)
+- (P+Q→ R) --{h ↦ (h∘ inl,h∘ inr)}--> (P→ R)× (Q→ R)
 ```
 The first map is an equivalence by the universal property of the propositional truncation, and the second map is an equivalence by the universal property of coproducts (Exercise 13.8). ◻
 
