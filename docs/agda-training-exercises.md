@@ -34,7 +34,7 @@ mathematics, proposal solution, and review state.
 - **Reason:** The former proof placed seven general lemmas beside Lemma 10.4.5.
   Their mathematics belongs with earlier path and homotopy operations.
 - **Later use:** Theorem 10.4.6; through it, Theorem 11.1.3, Lemma 11.1.4,
-  and Theorem 11.1.6.
+  Theorem 11.1.6, and Sections 11.2--11.4.
 - **Invisible mathematics:** “Lemma 10.4.5: coherent inverse” in
   `docs/invisible-math.md`.
 - **Status:** Empty on `main`.
@@ -56,5 +56,11 @@ mathematics, proposal solution, and review state.
 - **Invisible mathematics:** “Theorem 11.4.2: reversing fiber paths” in
   `docs/invisible-math.md`.
 - **Status:** Empty on `main`; Section 11.4 and Chapter 11 are deferred.
-- **Proposal solution:** Pending publication on
-  `proposal/agda-exercise-solutions` after this empty site is published.
+- **Proposal solution:** `proposal/agda-exercise-solutions`, commit `63e5e49`.
+  It places the complete fiber-orientation equivalence at Definition 10.3.1
+  and restores the retained Theorem 11.4.2 block.
+- **Validation:** Candidate Sections 10.3 and 11.1--11.4 and aggregate
+  Chapters 10--11 pass ordinary Agda checks on that proposal. Its 150-test
+  suite, repository check, and whitespace check pass. This also validates the
+  new consumers of the two earlier Chapter 10 exercises. Main keeps all
+  three training sites empty and affected checks deferred.

@@ -36,7 +36,8 @@ Work continues on `main`.
   They are deferred on `main` through both Chapter 10 training exercises.
 - Theorem 11.4.2 is a new empty training site on `main`: its fiber-orientation
   equivalence belongs at Definition 10.3.1, in complete Section 10.3. The
-  exercise and invisible-math records describe the pending proposal solution.
+  solution is published as `63e5e49` on the shared proposal, with the complete
+  fiber equivalence at that earlier definition. Main's Section 10.3 is unchanged.
   Sections 11.5--13.5 still have no curated section blocks. No Chapter 11
   section is recorded complete on `main`.
 - Total-map base parameters and TikZ spacing options now render correctly;
@@ -45,25 +46,30 @@ Work continues on `main`.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
-The latest validation passed the full unit suite (145 tests on `main`, 146 on
+The latest validation passed the full unit suite (148 tests on `main`, 150 on
 the proposal), `python3 rosetta.py check`, and `git diff --check`. Proposal
-`dc1ffed` passes candidate Sections 10.2, 10.4, and 11.1 and aggregate Chapters
-9--11. The earlier `511f171` also checked Section 2.2 and Chapters 2--10.
-On `main`, Sections 10.2, 10.4, and 11.1 and Chapters 10--11 remain deferred,
-never recorded as passed. The changed later prose sections and affected
-aggregates were checked, without treating their empty Agda as completeness.
+`63e5e49` passes candidate Sections 10.3 and 11.1--11.4 and aggregate Chapters
+10--11. The earlier `511f171` also checked Section 2.2 and Chapters 2--10.
+On `main`, Sections 10.2, 10.4, and 11.1--11.4 and Chapters 10--11 remain
+deferred, never recorded as passed. The prose of Sections 11.2--11.4 was
+compared item by item with the book and has no unresolved references or raw
+TeX commands. No review evidence or completion status was inferred from this.
 
 ## Next work
 
-The five assigned Chapter 10 steps are done. Keep Definition 10.2.1 and Lemma
-10.4.5 empty on `main`; do not merge the proposal to make `main` pass. The
-audit also records that Definition 10.4.4's final cancellation result is
-provided only on the proposal as part of the existing coherence exercise.
+The five assigned Chapter 10 steps are done. Keep Definition 10.2.1, Lemma
+10.4.5, and Theorem 11.4.2 empty on `main`; do not merge the proposal to make
+`main` pass. The audit also records that Definition 10.4.4's final cancellation
+result is provided only on the proposal as part of the existing coherence exercise.
 
-First publish and validate the recorded Theorem 11.4.2 proposal solution.
-Then formalize the remaining sections of Chapters 11, 12, and 13 in order,
+Formalize the remaining sections of Chapters 11, 12, and 13 in order,
 starting with Section 11.5. Chapter 13 contains Axiom 13.1.3: keep any
 assumption explicit and never describe it as a proof.
+
+Section 11.5 announces its first theorem before its auxiliary definitions
+and proves it after Proposition 11.5.4. Preserve Agda dependency order at
+that later proof; do not place a proof using those definitions at the opening
+theorem statement.
 
 For each section, inventory every numbered mathematical item, search pinned
 agda-unimath for exact code before analogues, record full provenance,
