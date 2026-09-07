@@ -604,3 +604,46 @@ tests, repository checks (583 verified blocks), and whitespace checks
 pass there. No proof correction or earlier auxiliary addition was needed.
 Main retains all eight training holes; no review or complete-file record
 is changed.
+
+## Section 14.1: universal property of propositional truncations
+
+The active input order, recomputed from `book/hott-intro.tex`, assigns
+`book/propositional-truncation.tex` to Chapter 14 and `book/univalence.tex`
+to Chapter 17. The preceding handoff confused those numbers. Its univalence
+research is retained for Section 17.1; the generated registry and source
+order are unchanged. The Chapter 14 introduction was inspected in full.
+
+All five numbered items and the complete proof in Section 14.1 are
+accounted for by thirteen provenance-backed blocks:
+
+| Item | Curated mathematical content |
+| --- | --- |
+| Definition 14.1.1 | Precomposition between maps into propositions and the universe-polymorphic equivalence predicate on an arbitrary map. No truncation constructor or existence assumption. |
+| Remark 14.1.2 | The exact displayed equality-based fiber of extensions, both contractibility/equivalence implications, the extension map, and its equality computation from the two center projections. |
+| Remark 14.1.3 | The extension predicate and both implications. The preliminary converse-map criterion and proposition-valued function types reuse Proposition 12.1.4 and Corollary 13.1.6; no duplicate earlier mathematics is added. |
+| Proposition 14.1.4 | The complete nested-Sigma proof that equivalences between propositions form a proposition, the equivalence constructed from both extension maps, and both remaining transfer implications. Thus all three assertions and every two-imply-third case, including uniqueness, are represented. |
+| Remark 14.1.5 | Double negations are propositions; precomposition by double-negation introduction is an equivalence into doubly negated types, with the existing Exercise 4.3 Kleisli extension as inverse data. The limitation to doubly negated targets and the metatheoretic warning about existence remain prose, not unproved general Agda claims. |
+
+The source's unique-extension formulation uses pointwise homotopies. The
+book instead displays an equality of functions. The curation keeps that
+exact equality-based Sigma and specializes the already local
+contractible-map equivalence criterion directly. The center projections
+are unchanged. This deliberate formulation adaptation is recorded in
+the manifest and invisible-mathematics record; it requires neither a new
+inverse proof nor an unmentioned function-extensionality transfer.
+
+Only the needed proposition-level forward implication of Exercise 12.6(a)
+and its constant-family specialization are added early. They use the
+pinned subtype-embedding proof, applied to the existing Corollaries
+12.2.4 and 12.4.6. Its general-truncation case, converse, part (b), and
+outer alphabetical presentation labels remain explicit exercise gaps.
+No earlier complete section, existing exercise proof, training site,
+review evidence, or completion record is changed.
+
+Main passes 171 unit tests, repository checks (586 verified blocks), and
+whitespace checks. Candidate Section 14.1, Exercise 12.6, and aggregate
+Chapters 12--14 are deferred, not passed. Removing Agda recovers the
+rendered source exactly modulo whitespace: 100% prose comparison,
+7/7 headings, 10/10 text fences, no unresolved references or raw TeX.
+The three existing diagram drafts and their review markers are unchanged.
+Actual proposal validation is pending.

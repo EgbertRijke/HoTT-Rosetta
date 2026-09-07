@@ -581,3 +581,62 @@ Agda for Sections 8.2 and 13.5, Exercise 12.4, and aggregate Chapters 8
 and 12--13. All 174 tests, repository checks, and whitespace checks pass.
 No proof correction, earlier complete-section enlargement, or existing
 exercise code change was needed. Main retains the new empty site.
+
+### Section 14.1: specifying propositional truncations without assuming existence
+
+The active book's Chapter 14 is propositional truncations; univalence is
+Chapter 17. The preceding handoff's different numbering was an error,
+not a reason to renumber the registry or import later axioms here.
+There is no new absent auxiliary at an earlier complete site. All fifteen
+new records use pinned commit `c85d7fb834778f96a66576318cdc4ef3d4b80a26`;
+their inclusive source hashes are in the Chapter 14 manifest.
+
+- `foundation/universal-property-propositional-truncation`, lines 54--65,
+  defines the precomposition map and universe-polymorphic predicate at
+  Definition 14.1.1. Replace `UU`/`UUω` by `Type`/`Typeω` and expand
+  `type-hom-Prop` to its underlying function type. No existence postulate
+  or type constructor is copied into this specification.
+- Lines 71--79 and 128--146 give the universal-property predicate and its
+  two center projections at Remark 14.1.2. The book uses equality of
+  functions in the displayed fiber, whereas the source uses homotopy.
+  Keep the book's equality, rename the second projection `eq-`, and
+  specialize existing `is-contr-map-is-equiv` and `is-equiv-is-contr-map`
+  directly to precomposition. Their source ranges are
+  `foundation-core/contractible-maps`, 127--134 and 52--89. The center
+  projections are unchanged; no new inverse proof or hidden funext
+  transfer is needed.
+- Lines 88--95 and 165--175 give the extension predicate and its full
+  implication at Remark 14.1.3. The copied extension map supplies the
+  converse by a typed application. The remark's two preliminary facts
+  already live at Proposition 12.1.4 and Corollary 13.1.6; reuse them.
+- The equivalence between two truncations specializes the existing
+  `equiv-iff-is-prop` (`foundation-core/logical-equivalences`, 126--130)
+  to the two extension maps. The remaining two transfer implications are
+  the complete proofs from the truncation-property source, 195--215,
+  replacing only `UU`, the function-type wrapper, and the local inverse
+  name `map-section-is-equiv`.
+- The book's assertion that the equivalence type is a proposition uses
+  `foundation/equivalences-propositions`, 27--42, including its full
+  nested-Sigma proof. This does not need the more general proof that
+  `is-equiv f` is a proposition, so Exercise 13.4 is not filled early.
+- The required Sigma/product proposition results have their exact natural
+  home at Exercise 12.6(a), the previously empty truncation-of-Sigma
+  exercise. Specialize `foundation-core/subtypes`, 277--295, to
+  `neg-two-𝕋` and `(λ x → (B x , K x))`. Expand its two wrappers to
+  `is-trunc-is-emb neg-two-𝕋 pr1 (is-emb-pr1-is-subtype K) H`, reusing
+  Corollaries 12.2.4 and 12.4.6. The constant-family specialization is
+  `foundation-core/propositions`, 218--222. The alternative source
+  `is-prop-Σ` proof at 175--185 of that module needs an absent generic
+  total-space contraction; the subtype proof applies existing mathematics
+  without inventing it or enlarging an earlier complete section.
+- Remark 14.1.5 copies `foundation/double-negation`, 72--74, then applies
+  the existing converse-map criterion (logical-equivalences, 117--124)
+  to precomposition by Exercise 4.3's `double-negation-introduction` and
+  its existing `double-negation-kleisli-map`. Both function types are
+  propositions. No earlier exercise code is changed. The book's warning
+  that this is not a general propositional truncation remains in the
+  prose; no classical or univalence axiom is introduced.
+
+Main's candidate Section 14.1, Exercise 12.6, and aggregate Chapters
+12--14 defer through the existing training dependencies. Actual proposal
+validation must precede any claim of an Agda pass.

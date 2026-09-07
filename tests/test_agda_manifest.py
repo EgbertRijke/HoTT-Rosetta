@@ -891,6 +891,75 @@ class AgdaManifestTests(unittest.TestCase):
         normalize = lambda value: re.sub(r"\s+", " ", value).strip()
         self.assertEqual(normalize(prose), normalize(render_section(root / "book" / "funext.tex", 13, 5)))
 
+    def test_propositional_truncation_specification_preserves_all_five_items(self):
+        import re
+        from rosetta.file_registry import registered_filename
+        from rosetta.layout import rosetta_directory
+        from rosetta.latex import inventory
+        from rosetta.render import render_section
+
+        root = Path(__file__).resolve().parent.parent
+        sources = inventory(root / "book")
+        self.assertEqual(sources[13].path.name, "propositional-truncation.tex")
+        self.assertEqual(sources[16].path.name, "univalence.tex")
+        destination = registered_filename(root, "section", 14, 1)
+        selected = [b for b in load_manifest(root / "data" / "agda-blocks.json")
+                    if b.destination == destination]
+        self.assertEqual(len(selected), 13)
+        self.assertEqual({b.item_id for b in selected}, {
+            "definition-14.1.1", "remark-14.1.2", "remark-14.1.3",
+            "proposition-14.1.4", "remark-14.1.5"})
+        document = (rosetta_directory(root) / destination).read_text()
+        code = "\n".join(b.code for b in selected)
+        for b in selected:
+            position = document.index("<!-- rosetta-agda-block: " + b.block_id + " -->")
+            self.assertLess(document.index("<!-- rosetta-item: " + b.item_id), position)
+            self.assertLess(position, document.index("<!-- rosetta-item-end: " + b.item_id + " -->"))
+        for name in ("precomp-Prop", "is-propositional-truncation",
+                     "universal-property-propositional-truncation",
+                     "universal-property-is-propositional-truncation",
+                     "is-propositional-truncation-universal-property",
+                     "map-is-propositional-truncation", "eq-is-propositional-truncation",
+                     "extension-property-propositional-truncation",
+                     "is-propositional-truncation-extension-property",
+                     "extension-property-is-propositional-truncation",
+                     "is-prop-equiv-is-prop", "equiv-is-propositional-truncation",
+                     "is-ptruncation-is-ptruncation-is-equiv",
+                     "is-ptruncation-is-equiv-is-ptruncation",
+                     "is-prop-double-negation", "is-equiv-precomp-double-negation",
+                     "equiv-precomp-double-negation"):
+            self.assertRegex(code, r"(?m)^\s*" + re.escape(name) + " :")
+        self.assertIn("(λ h → h ∘ f ＝ g)", code)
+        self.assertNotIn("h ∘ f ~ g", code)
+        self.assertIn("is-contr-map-is-equiv (H Q)", code)
+        self.assertIn("is-equiv-is-contr-map (H Q)", code)
+        self.assertIn("( map-is-propositional-truncation P f H P' f')", code)
+        self.assertIn("( map-is-propositional-truncation P' f' K P f)", code)
+        self.assertIn("( double-negation-kleisli-map)", code)
+        for forbidden in ("postulate", "univalence", "unit-trunc-Prop",
+                          "is-property-is-equiv", "is-prop-Σ :",
+                          "double-negation-kleisli-map :"):
+            self.assertNotIn(forbidden, code)
+        self.assertNotIn("open import foundation", document)
+        prose = re.sub(r"^```agda\n.*?^```\s*", "", document, flags=re.M | re.S)
+        prose = re.sub(r"<!-- rosetta-agda-block:.*?-->", "", prose)
+        normalize = lambda value: re.sub(r"\s+", " ", value).strip()
+        self.assertEqual(normalize(prose), normalize(render_section(sources[13].path, 14, 1)))
+
+    def test_needed_propositional_sums_stay_at_exercise_12_6(self):
+        from rosetta.file_registry import registered_filename
+
+        root = Path(__file__).resolve().parent.parent
+        selected = [b for b in load_manifest(root / "data" / "agda-blocks.json")
+                    if b.destination == registered_filename(root, "exercise", 12, 6)]
+        self.assertEqual(len(selected), 2)
+        self.assertTrue(all(b.item_id == "exercise-12-6" for b in selected))
+        sigma, product = sorted(selected, key=lambda b: b.order)
+        self.assertIn("Part (a)", sigma.display_heading)
+        self.assertIn("is-trunc-is-emb neg-two-𝕋 pr1 (is-emb-pr1-is-subtype K) H", sigma.code)
+        self.assertIn("is-prop-product H K = is-prop-Σ H (λ x → K)", product.code)
+        self.assertFalse(any(module.startswith("section-14-") for b in selected for module in b.imports))
+
     def test_needed_coproduct_proposition_result_stays_at_exercise_12_4_c(self):
         from rosetta.file_registry import registered_filename
 

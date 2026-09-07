@@ -16,6 +16,29 @@ completion.
 
 Work continues on `main`.
 
+The previous handoff misidentified `book/univalence.tex` as Chapter 14.
+Recomputed active inputs and the filename registry agree: Chapter 14 is
+propositional truncations, Chapter 15 images, Chapter 16 finite types, and
+Chapter 17 univalence. Follow that source order. No univalence code or
+training site was added under the incorrect Chapter 14 numbering.
+
+Section 14.1 now has thirteen provenance-backed blocks accounting for its
+five numbered items. Its unique-extension formulation uses the book's
+equality of functions, not a silently substituted homotopy. Both
+equivalence/contractibility implications, both extension-property
+implications, all three uniqueness/transfer implications, and the
+double-negation precomposition equivalence are curated. The latter reuses
+Exercise 4.3 unchanged and does not assert general truncation existence.
+Exercise 12.6(a)'s needed proposition-level forward implication and product
+specialization are curated at that exact home; all other parts remain gaps.
+There is no new training site or earlier complete-section enlargement.
+Main passes 171 unit tests, repository and whitespace checks, with 586
+manifest blocks (176 exact, 352 adapted, 58 historical/local). Section
+14.1's prose comparison is 100%, all 7 headings and 10 text fences match,
+and there are no unresolved references or raw TeX commands. Its candidate,
+Exercise 12.6, and aggregate Chapters 12--14 defer through existing sites.
+Actual proposal validation is the next step before accepting this curation.
+
 - Routine checks report `deferred` without running Agda when a file contains or
   imports a manifest block marked `exercise`. `--force` runs the unchanged Agda
   command. Deferred never means passed.
@@ -126,7 +149,7 @@ Work continues on `main`.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
-The latest main validation passed all 169 unit tests,
+The preceding Section 13.5 main validation passed all 169 unit tests,
 `python3 rosetta.py check`, and `git diff --check`, with 571 manifest blocks
 (176 exact, 337 adapted, 58 historical/local). Section 8.2 and aggregate
 Chapter 8 pass after the cases-display repair. Section 13.5, Exercise
@@ -179,11 +202,23 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Continue Section 14.1, `book/univalence.tex`, lines 11--109, and inspect
-the Chapter 14 introduction at lines 1--10. Inventory all six numbered
-items and all six parts of Example 14.1.4, not just the axiom.
-Theorem 14.1.1's three equivalence conditions must remain hypothesis-
-parametric before Axiom 14.1.2. Use the explicit fundamental-theorem and
+First validate Section 14.1 and Exercise 12.6 on the shared proposal, then
+continue Section 14.2, `book/propositional-truncation.tex`, beginning at
+line 104. Inventory its formation and universe rules, both constructors,
+all numbered items, induction rules, computation rules, and proof trees.
+Pinned `foundation/propositional-truncations` derives its definitions from
+the postulates in `foundation/truncations`; inspect both before choosing
+the book's proposition-level specialization. Label those assumptions and
+any judgmental-versus-propositional computation difference. Do not
+postulate general truncations ahead of their book scope merely because
+upstream packages them together. Section 14.1 itself assumes no truncation
+exists. Preserve its exact identity-based unique-extension interface.
+
+For later Section 17.1, `book/univalence.tex`, lines 11--109, inspect
+the Chapter 17 introduction at lines 1--10. Inventory all six numbered
+items and all six parts of Example 17.1.4, not just the axiom.
+Theorem 17.1.1's three equivalence conditions must remain hypothesis-
+parametric before Axiom 17.1.2. Use the explicit fundamental-theorem and
 identity-system conversions, not the globally assumed convenience proofs.
 Pinned `foundation-core/univalence` supplies the canonical map and the
 two contractibility implications; `foundation/equivalence-induction`
@@ -202,7 +237,7 @@ equivalence types, which is distinct from Section 13.4's ordinary-function
 precomposition. Trace the dependencies and natural homes. Account for the
 intervening type-former invariance statements and all smallness examples,
 including finite types and the explicit later Russell reference.
-Corollary 14.1.6's literal inclusion of overlapping universes is not
+Corollary 17.1.6's literal inclusion of overlapping universes is not
 represented by Agda's disjoint universes. Inspect the pinned raising-
 universe embedding analogue and retain any representation gap explicitly,
 as in Remark 12.4.2; do not claim a literal inclusion from a lifted proof.
