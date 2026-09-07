@@ -229,4 +229,7 @@ property proofs use the explicit function-extensionality assumption from
 Section 13.1, whose whole-file imports transitively retain the existing
 Chapter 10--12 training dependencies. Main's Section 13.3 and Chapter 13
 therefore defer; this is not evidence of an additional missing auxiliary
-inside the new induction proofs. Actual proposal validation is pending.
+inside the new induction proofs. Published proposal merge
+`6c408d4247f512bc7ce8cfbafbd4b11edce697b8` passes candidate Section 13.3,
+aggregate Chapter 13, all 168 unit tests, and repository and whitespace
+checks. No new solution code was needed, and main retains all seven holes.
