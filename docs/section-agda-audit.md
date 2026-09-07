@@ -165,4 +165,12 @@ occur there. Trailing newlines are normalized after block insertion so an
 anchor at the document end does not add a blank line. The prose comparison
 has all seven headings and eight displays without unresolved references or
 raw TeX commands. Section 11.5 remains deferred on `main` through the Chapter
-10 exercises; proposal validation is pending.
+10 exercises. Published proposal `3bbc564` passes the Section 11.5 candidate
+and aggregate Chapters 9--11. Its 151-test suite and repository checks pass;
+Section 9.2 and Exercise 9.4 also pass candidate checks on `main`.
+
+Splitting the upstream modules requires explicit `x` and `y` arguments in
+the four final composites and an explicit opposite summand in each of the
+same-summand cases. The exact corrected draft passed the proposal scratchpad
+check, was compared against the unchanged target block on `main`, and was
+promoted with an atomic backup. No manual review evidence was refreshed.

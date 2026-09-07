@@ -38,20 +38,31 @@ Work continues on `main`.
   equivalence belongs at Definition 10.3.1, in complete Section 10.3. The
   solution is published as `63e5e49` on the shared proposal, with the complete
   fiber equivalence at that earlier definition. Main's Section 10.3 is unchanged.
-  Sections 11.5--13.5 still have no curated section blocks. No Chapter 11
-  section is recorded complete on `main`.
+  No Chapter 11 section is recorded complete on `main`.
+- Section 11.5 now has all four coproduct identity equivalences, code
+  computations, reflexivity, and total-space contraction. Its theorem code
+  follows the delayed proof after Proposition 11.5.4. Proposal `3bbc564`
+  passes its candidate and aggregate Chapters 9--11; it remains deferred
+  on `main`. The indexed upstream relation realizes the book's four cases
+  by equivalences, not judgmental reduction; see the section audit.
+- Section 11.5's dependencies add equivalence composition to Exercise 9.4
+  and the empty-type equivalence criterion to Example 9.2.9. The latter's
+  still-missing displayed laws are explicit gaps; neither earlier file was
+  complete. Both changed candidates pass on `main`.
+  Sections 11.6--13.5 still have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
-The latest validation passed the full unit suite (148 tests on `main`, 150 on
+The latest validation passed the full unit suite (149 tests on `main`, 151 on
 the proposal), `python3 rosetta.py check`, and `git diff --check`. Proposal
-`63e5e49` passes candidate Sections 10.3 and 11.1--11.4 and aggregate Chapters
-10--11. The earlier `511f171` also checked Section 2.2 and Chapters 2--10.
-On `main`, Sections 10.2, 10.4, and 11.1--11.4 and Chapters 10--11 remain
-deferred, never recorded as passed. The prose of Sections 11.2--11.4 was
+`3bbc564` passes candidate Section 11.5 and aggregate Chapters 9--11; the
+earlier `63e5e49` checks Sections 10.3 and 11.1--11.4. The earlier `511f171`
+also checked Section 2.2 and Chapters 2--10.
+On `main`, Sections 10.2, 10.4, and 11.1--11.5 and Chapters 10--11 remain
+deferred, never recorded as passed. The prose of Sections 11.2--11.5 was
 compared item by item with the book and has no unresolved references or raw
 TeX commands. No review evidence or completion status was inferred from this.
 
@@ -63,13 +74,16 @@ The five assigned Chapter 10 steps are done. Keep Definition 10.2.1, Lemma
 result is provided only on the proposal as part of the existing coherence exercise.
 
 Formalize the remaining sections of Chapters 11, 12, and 13 in order,
-starting with Section 11.5. Chapter 13 contains Axiom 13.1.3: keep any
+starting with Section 11.6. Chapter 13 contains Axiom 13.1.3: keep any
 assumption explicit and never describe it as a proof.
 
-Section 11.5 announces its first theorem before its auxiliary definitions
-and proves it after Proposition 11.5.4. Preserve Agda dependency order at
-that later proof; do not place a proof using those definitions at the opening
-theorem statement.
+Section 11.6 has a definition, a six-condition equivalence theorem, and a
+fiber identity example. The pinned `foundation/structure-identity-principle`
+module provides a forward construction, not by itself all six implications.
+Audit the converse and identity-system conditions as well as the example.
+Its named dependencies include interchange of dependent sums and
+contractibility of a dependent sum; investigate their natural homes before
+adding code.
 
 For each section, inventory every numbered mathematical item, search pinned
 agda-unimath for exact code before analogues, record full provenance,
