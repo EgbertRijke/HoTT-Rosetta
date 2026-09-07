@@ -10,6 +10,7 @@ removed from the fork. Key commits leading into this handoff are:
 - `d33e710 fix(converter): place Agda blocks by narrative scope`
 - `47b17f3 docs(review): record Agda placement feedback`
 - `f184957 feat(review): improve Agda review triage and table controls`
+- `492d0b4 feat(agda): defer checks blocked by exercises`
 
 The first commit adds stable `rosetta-item-end` markers, curated narrative
 anchors, optional headings for prerequisite groups, manifest relocations, and
@@ -17,12 +18,13 @@ regenerated products. The second preserves the collaborator's Agda review
 comments separately. The third preserves applicable review evidence after the
 converter change, adds the `needs-further-review` decision, migrates reviewed
 but inconclusive records, and adds sortable and filterable review tables.
+The fourth makes routine checks abstain from files containing or importing a
+recorded exercise. It does not alter Agda options or interpret Agda errors.
 
 The branch passed the full unit suite, `python3 rosetta.py check`, and
-`git diff --check`. Candidate typechecks passed for the affected sections 8.1,
-8.5, 9.1, 9.2, 9.3, and 10.4. Regeneration also brought two exercise products
-into agreement with existing notation conversion rules; those small notation
-changes were generated consequences rather than hand edits.
+`git diff --check`. Current candidate checks pass for Sections 10.1 and 10.3.
+Section 10.2 fails at the known `ev-point` exercise. Section 10.4 is deferred
+on `main`; Agda is not run there. Its completed proposal passes Agda.
 
 ### What changed
 
@@ -122,6 +124,44 @@ pass ordinary Agda checks on `proposal/agda-exercise-solutions`.
 
 Chapters 1--2 are optional compatibility material. Do not let work there delay
 section completion in Chapters 3--22.
+
+## Next agent task: Chapters 10--13
+
+Finish the Chapter 10 audit before adding Chapter 11 material:
+
+1. Section 10.1 currently passes Agda. Decide whether Remark 10.1.2 needs a
+   block before recording section completion.
+2. Definition 10.2.1 is documented as an exercise but its manifest block is
+   still `ready`. Complete the exercise workflow: publish the empty block on
+   `main`, bring that `main` into `proposal/agda-exercise-solutions`, place
+   `ev-point` at its natural home in Remark 2.2.2 on the proposal, and check
+   Sections 2.2 and 10.2 plus their affected aggregates. Then record the
+   proposal commit on `main`. Also decide whether Example 10.2.2 needs Agda.
+3. Section 10.3 currently passes Agda and has no detected missing numbered
+   item. Audit it before recording completion.
+4. Section 10.4 remains intentionally empty at Lemma 10.4.5 on `main`. Its
+   solution is already on the shared proposal branch. Do not merge it merely
+   to make `main` pass.
+
+Then supply section Agda for Chapters 11, 12, and 13, in that order. At this
+handoff, those chapters have no curated section blocks and no section is
+recorded complete. Recompute the inventory rather than treating this statement
+as permanent evidence.
+
+Chapter 13 contains Axiom 13.1.3. Keep any formal assumption explicit and
+describe it as an axiom, never as an Agda proof. Do not hide it through a
+checker exception or altered Agda option.
+
+Work one section at a time. Inventory every numbered mathematical item, search
+the pinned agda-unimath checkout for exact material before analogues, record
+full provenance, regenerate, and typecheck. If an upstream auxiliary result
+belongs naturally in an earlier complete file, make the blocked later block an
+exercise on `main` and supply its complete proposal on the shared branch. Do
+this for every such exercise; there is no threshold.
+
+After the sections of a chapter are complete, regenerate and typecheck its
+aggregate. A `deferred` result is an abstention, not a passing Agda check. The
+corresponding proposal and every affected later file must pass Agda normally.
 
 ## Section-completion workflow
 
@@ -231,6 +271,7 @@ summaries, or comments that merely report a passing typecheck.
 
 - `converter/rosetta/render.py`: LaTeX-to-Markdown structure and item markers.
 - `converter/rosetta/generate.py`: document generation and candidate checks.
+- `converter/rosetta/agda_typecheck.py`: cached checks and exercise deferral.
 - `converter/rosetta/agda_manifest.py`: curated block loading and insertion.
 - `converter/rosetta/agda_review.py`: review records and discovery.
 - `converter/rosetta/agda_scratchpad.py`: temporary edits and promotion gate.
