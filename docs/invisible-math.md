@@ -430,3 +430,36 @@ main check is deferred. Published proposal
 missing direct import: equivalence composition already lives in Exercise
 9.4. That import was validated through a passing scratchpad, with every
 proof body unchanged, and the focused correction was carried to main.
+
+### Section 13.3: universal properties by induction
+
+No new absent auxiliary is needed. All five new records use pinned commit
+`c85d7fb834778f96a66576318cdc4ef3d4b80a26`, with hashes in the Chapter 13
+manifest.
+
+- `foundation/universal-property-dependent-pair-types`, lines 32--49,
+  supplies the full forward evaluation equivalence at Theorem 13.3.1.
+  Replace `UU` by `Type`; omit only the separate `is-equiv-ind-Σ`
+  declaration. The two inverse maps, reflexivity computation, and explicit
+  function-extensionality/Σ-induction homotopy remain intact. Local
+  `ev-pair` already belongs at Remark 4.6.3, and `ind-Σ` at Definition
+  4.6.1; neither earlier account is enlarged.
+- The introductory ordinary Σ universal property and Corollary 13.3.2
+  are typed specializations of that same proof and bundle. First make
+  only the result family constant; then also make the input family
+  constant for the product corollary. The direction remains evaluation
+  on pairs, as in the book.
+- `foundation/universal-property-identity-types`, lines 52--79, supplies
+  Theorem 13.3.3: `ev-refl`, both inverse homotopies, equivalence proof,
+  and bundle. Replace only `UU` by `Type`. Keep both nested `eq-htpy`
+  applications and the exact path-induction body. The local `ind-Id`,
+  `is-section`, and `is-retraction` already have the required signatures.
+  No postulate or later univalence argument is brought into this section.
+- The ordinary type-theoretic Yoneda statement from the introduction
+  specializes the result family to be independent of its path argument.
+  Both introductory specializations follow the general proofs they use,
+  with visible headings recording this dependency-order choice.
+
+The imports of Section 13.1 retain conservative transitive training
+deferral on main. Actual proposal validation is pending; no additional
+mathematical auxiliary or exercise solution is proposed.

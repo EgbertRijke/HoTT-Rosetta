@@ -223,3 +223,10 @@ tests, repository checks, and whitespace checks. The only correction was
 a direct import of existing Exercise 9.4 equivalence composition, checked
 in a passing scratchpad and carried to main as a focused commit without
 any training solution. Main's earlier holes remain unchanged.
+
+Section 13.3 needs no new training site or exercise Agda. Its two universal
+property proofs use the explicit function-extensionality assumption from
+Section 13.1, whose whole-file imports transitively retain the existing
+Chapter 10--12 training dependencies. Main's Section 13.3 and Chapter 13
+therefore defer; this is not evidence of an additional missing auxiliary
+inside the new induction proofs. Actual proposal validation is pending.
