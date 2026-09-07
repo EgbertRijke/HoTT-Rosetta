@@ -2,6 +2,33 @@
   "format_version": 1,
   "blocks": [
     {
+      "block_id": "example-10.2.2-unit-singleton-induction",
+      "provenance_kind": "adapted",
+      "item_id": "example-10.2.2",
+      "destination": "section-10-2-singleton-induction.lagda.md",
+      "source_file": "src/foundation/singleton-induction.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_start_line": 103,
+      "source_end_line": 108,
+      "source_sha256": "1885b88208f42eabb1c0952366fb1f3de743056c05c751750c8a0cd6e3bb679d",
+      "order": 0,
+      "imports": [
+        "universe-levels",
+        "section-2-2-ordinary-function-types",
+        "section-4-2-the-unit-type",
+        "section-4-6-dependent-pair-types",
+        "section-5-1-the-inductive-definition-of-identity-types",
+        "section-5-2-the-groupoidal-structure-of-types",
+        "section-5-3-the-action-on-identifications-of-functions",
+        "section-5-4-transport",
+        "section-9-1-homotopies",
+        "section-9-2-bi-invertible-maps",
+        "section-10-1-contractible-types"
+      ],
+      "code": "abstract\n  is-singleton-unit :\n    {l : Level} → is-singleton l unit star\n  pr1 (is-singleton-unit B) = ind-unit\n  pr2 (is-singleton-unit B) = refl-htpy",
+      "source_note": "Adapt the pinned total-path singleton witness to the unit type: replace the total path space and its base point by unit and star, replace ind-Σ ∘ ind-Id a _ by the existing ind-unit (foundation/unit-type.lagda.md:47-48 at the same commit), and remove the now unused A and a parameters and universe. Rename the witness is-singleton-unit. The section computation proof is unchanged refl-htpy. This uses Definition 10.2.1, which is a training exercise on main."
+    },
+    {
       "block_id": "definition-10.1.1-contractible-types",
       "provenance_kind": "adapted",
       "item_id": "definition-10.1.1",
@@ -59,6 +86,8 @@
     },
     {
       "block_id": "definition-10.2.1-singleton-induction",
+      "conversion_status": "exercise",
+      "conversion_note": "Training exercise: ev-point is absent from the complete Section 2.2. See docs/agda-training-exercises.md and docs/invisible-math.md; the solution belongs on proposal/agda-exercise-solutions.",
       "provenance_kind": "adapted",
       "item_id": "definition-10.2.1",
       "destination": "section-10-2-singleton-induction.lagda.md",

@@ -13,11 +13,12 @@ mathematics, proposal solution, and review state.
 - **Absent result:** Evaluation at a point, `ev-point`.
 - **Reason:** Section 2.2 already gives a complete account of ordinary
   functions and typechecks. It should not grow solely to support Section 10.2.
-- **Later use:** Theorem 10.2.3.
+- **Later use:** Example 10.2.2 and Theorem 10.2.3.
 - **Invisible mathematics:** “Section 10.2: evaluation at a point” in
   `docs/invisible-math.md`.
-- **Status:** Recorded; the current Agda block has not yet been emptied.
-- **Proposal solution:** Not yet made.
+- **Status:** Empty on `main`; routine Section 10.2 and Chapter 10 checks are
+  deferred, not passed.
+- **Proposal solution:** Pending on `proposal/agda-exercise-solutions`.
 
 ### `lemma-10.4.5-coherent-inverse`
 

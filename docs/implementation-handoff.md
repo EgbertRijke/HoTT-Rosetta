@@ -20,8 +20,9 @@ Work continues on `main`.
   imports a manifest block marked `exercise`. `--force` runs the unchanged Agda
   command. Deferred never means passed.
 - Sections 10.1 and 10.3 pass candidate checks.
-- Section 10.2 fails because `ev-point` is absent. Definition 10.2.1 is recorded
-  as a training exercise, but its manifest block is still `ready`.
+- Definition 10.2.1 is now marked `exercise` on `main`; Section 10.2 is
+  deferred because `ev-point` is absent. Publishing and validating its shared
+  proposal solution is the immediate next step.
 - Section 10.4 is deferred on `main` at Lemma 10.4.5. Its solution is commit
   `5e5a5cd` on `proposal/agda-exercise-solutions` and passes Agda there.
 - Chapters 11--13 currently have no curated section blocks or recorded complete

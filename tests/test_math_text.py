@@ -9,6 +9,12 @@ from rosetta.math_text import (
 
 
 class MathTextTests(unittest.TestCase):
+    def test_singleton_induction_aliases_from_book(self):
+        self.assertEqual(
+            normalize_math(r"\singind_a, \singcomp_a, \indsing_a, \compsing_a, \omega"),
+            "ind-sing_a, comp-sing_a, ind-sing_a, comp-sing_a, ω",
+        )
+
     def test_foundational_commands(self):
         self.assertEqual(
             normalize_math(r"\addN(m,\succN(n)) \jdeq \succN(\addN(m,n))"),
