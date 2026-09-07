@@ -494,7 +494,7 @@
       "source_start_line": 77,
       "source_end_line": 82,
       "source_sha256": "76098dde0430d20d9d98aac4d98adb1126aa29d16f00c1d35b35787f60975e25",
-      "code": "is-identity-system-is-contr :\n  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (a : A) (b : B a) →\n  is-contr (Σ A B) → is-identity-system B a b\npr1 (is-identity-system-is-contr a b H P) =\n  ev-pair (ind-singleton (a , b) H (λ t → P (pr1 t) (pr2 t)))\npr2 (is-identity-system-is-contr a b H P) =\n  compute-ind-singleton (a , b) H (λ t → P (pr1 t) (pr2 t))",
+      "code": "is-identity-system-is-contr :\n  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (a : A) (b : B a) →\n  is-contr (Σ A B) → is-identity-system B a b\npr1 (is-identity-system-is-contr a b H P) p =\n  ev-pair (ind-singleton (a , b) H (λ t → P (pr1 t) (pr2 t)) p)\npr2 (is-identity-system-is-contr a b H P) =\n  compute-ind-singleton (a , b) H (λ t → P (pr1 t) (pr2 t))",
       "block_id": "theorem-11.2.2-identity-system-from-contractibility",
       "provenance_kind": "adapted",
       "item_id": "theorem-11.2.2",
@@ -502,7 +502,7 @@
       "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
       "order": 1,
       "imports": [],
-      "source_note": "Specialize the upstream singleton-induction package to the total space Σ A B at (a , b), with family λ t → P (pr1 t) (pr2 t). Curry its section by the existing ev-pair; its computation witness is unchanged. Rename the specialized package to is-identity-system-is-contr and quantify over all levels through is-identity-system. This is the singleton-induction route in the book's proof; it does not require the later is-prop-is-contr used by foundation/identity-systems."
+      "source_note": "Specialize the upstream singleton-induction package to the total space Σ A B at (a , b), with family λ t → P (pr1 t) (pr2 t). Supply the induction datum p and curry its section by the existing ev-pair; its computation witness is unchanged. Rename the specialized package to is-identity-system-is-contr and quantify over all levels through is-identity-system. This is the singleton-induction route in the book's proof; it does not require the later is-prop-is-contr used by foundation/identity-systems."
     },
     {
       "source_file": "src/foundation/identity-systems.lagda.md",

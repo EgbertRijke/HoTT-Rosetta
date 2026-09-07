@@ -185,8 +185,8 @@ module _
 is-identity-system-is-contr :
   {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (a : A) (b : B a) →
   is-contr (Σ A B) → is-identity-system B a b
-pr1 (is-identity-system-is-contr a b H P) =
-  ev-pair (ind-singleton (a , b) H (λ t → P (pr1 t) (pr2 t)))
+pr1 (is-identity-system-is-contr a b H P) p =
+  ev-pair (ind-singleton (a , b) H (λ t → P (pr1 t) (pr2 t)) p)
 pr2 (is-identity-system-is-contr a b H P) =
   compute-ind-singleton (a , b) H (λ t → P (pr1 t) (pr2 t))
 ```
