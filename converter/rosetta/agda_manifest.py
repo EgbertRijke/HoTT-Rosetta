@@ -171,4 +171,4 @@ def inject_agda_blocks(document: str, destination: str, blocks: List[AgdaBlock])
         code = "" if block.conversion_status == "exercise" else block.code.rstrip()
         fenced = f"{heading}\n\n{marker}\n\n```agda\n{code}\n```\n"
         result = result[:insertion].rstrip() + fenced + result[insertion:]
-    return result
+    return result.rstrip("\n") + "\n"

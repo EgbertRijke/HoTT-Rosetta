@@ -2,6 +2,13 @@
   "format_version": 1,
   "items": [
     {
+      "item_id": "example-9.2.9",
+      "kind": "Example",
+      "number": "9.2.9",
+      "destination": "section-9-2-bi-invertible-maps.lagda.md",
+      "statement": "The general equivalence criterion for maps into empty types is curated for Section 11.5. The displayed product/coproduct unit, absorption, commutativity, associativity, and distributivity equivalences themselves still need formalization; that auxiliary alone does not complete this example."
+    },
+    {
       "item_id": "exercise-9-4-remaining-parts",
       "kind": "Exercise",
       "number": "9.4(a,b;c-consequence)",

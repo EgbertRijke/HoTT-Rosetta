@@ -546,6 +546,24 @@ G(inr(x,z)) ≔ refl H(x,inr(z)) ≔ refl.
 ```
 We encourage the reader to write out the definitions of at least a few of these equivalences.
 
+<!-- rosetta-agda-block: example-9.2.9-equivalences-of-empty-types -->
+
+```agda
+abstract
+  is-equiv-is-empty :
+    {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) →
+    is-empty B → is-equiv f
+  is-equiv-is-empty f H =
+    is-equiv-is-invertible
+      ( ex-falso ∘ H)
+      ( λ y → ex-falso (H y))
+      ( λ x → ex-falso (H (f x)))
+
+abstract
+  is-equiv-is-empty' :
+    {l : Level} {A : Type l} (f : is-empty A) → is-equiv f
+  is-equiv-is-empty' f = is-equiv-is-empty f id
+```
 <!-- rosetta-item-end: example-9.2.9 -->
 
 ## Example 9.2.10
