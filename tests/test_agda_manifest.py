@@ -174,6 +174,25 @@ class AgdaManifestTests(unittest.TestCase):
                 self.assertLess(start, position)
                 self.assertLess(position, end)
 
+    def test_natural_number_equality_proof_stays_in_its_theorem(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        block = next(
+            block for block in load_manifest(root / "data" / "agda-blocks.json")
+            if block.block_id == "theorem-11.3.1-equality-natural-numbers"
+        )
+        document = (rosetta_directory(root) / block.destination).read_text()
+        start = document.index("<!-- rosetta-item: theorem-11.3.1;")
+        end = document.index("<!-- rosetta-item-end: theorem-11.3.1 -->")
+        declarations = [
+            document.index(name + " :") for name in
+            ("map-total-Eq-ℕ", "is-torsorial-Eq-ℕ", "is-equiv-Eq-eq-ℕ")
+        ]
+        self.assertEqual(declarations, sorted(declarations))
+        self.assertLess(start, declarations[0])
+        self.assertLess(declarations[-1], end)
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

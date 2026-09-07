@@ -533,6 +533,33 @@
       "order": 3,
       "imports": [],
       "source_note": "Replace UU by Type, expand is-torsorial B to is-contr (Σ A B), and use the existing local is-contr-Id for upstream is-torsorial-Id."
+    },
+    {
+      "block_id": "theorem-11.3.1-equality-natural-numbers",
+      "provenance_kind": "adapted",
+      "item_id": "theorem-11.3.1",
+      "destination": "section-11-3-equality-on-the-natural-numbers.lagda.md",
+      "source_file": "src/elementary-number-theory/equality-natural-numbers.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_start_line": 165,
+      "source_end_line": 184,
+      "source_sha256": "51bd61073082976233692e9a22242f03e32a2187f843c696a55e06ba1a91cb96",
+      "code": "map-total-Eq-ℕ :\n  (m : ℕ) → Σ ℕ (Eq-ℕ m) → Σ ℕ (Eq-ℕ (succ-ℕ m))\npr1 (map-total-Eq-ℕ m (n , e)) = succ-ℕ n\npr2 (map-total-Eq-ℕ m (n , e)) = e\n\nis-torsorial-Eq-ℕ :\n  (m : ℕ) → is-contr (Σ ℕ (Eq-ℕ m))\npr1 (pr1 (is-torsorial-Eq-ℕ m)) = m\npr2 (pr1 (is-torsorial-Eq-ℕ m)) = refl-Eq-ℕ m\npr2 (is-torsorial-Eq-ℕ zero-ℕ) (zero-ℕ , _) = refl\npr2 (is-torsorial-Eq-ℕ (succ-ℕ m)) (succ-ℕ n , e) =\n  ap (map-total-Eq-ℕ m) (pr2 (is-torsorial-Eq-ℕ m) (pair n e))\n\nis-equiv-Eq-eq-ℕ :\n  {m n : ℕ} → is-equiv (Eq-eq-ℕ {m} {n})\nis-equiv-Eq-eq-ℕ {m} {n} =\n  fundamental-theorem-id\n    ( is-torsorial-Eq-ℕ m)\n    ( λ y → Eq-eq-ℕ {m} {y})\n    ( n)",
+      "order": 0,
+      "imports": [
+        "universe-levels",
+        "section-3-1-the-formal-specification-of-the-type-of-natural-numbers",
+        "section-4-2-the-unit-type",
+        "section-4-3-the-empty-type",
+        "section-4-6-dependent-pair-types",
+        "section-5-1-the-inductive-definition-of-identity-types",
+        "section-5-3-the-action-on-identifications-of-functions",
+        "section-6-3-observational-equality-of-the-natural-numbers",
+        "section-9-2-bi-invertible-maps",
+        "section-10-1-contractible-types",
+        "section-11-2-the-fundamental-theorem"
+      ],
+      "source_note": "Expand is-torsorial (Eq-ℕ m) to is-contr (Σ ℕ (Eq-ℕ m)), retaining its upstream name. Reuse the existing Eq-ℕ, reflexivity, and canonical map from Section 6.3. The successor map, contraction, and fundamental-theorem application are otherwise unchanged."
     }
   ]
 }

@@ -99,4 +99,20 @@ an equivalence of proof types.
 The prose comparison has all four headings and nine displays, with no
 unresolved references or raw TeX commands. Section 11.2 is deferred on `main`
 through both recorded Chapter 10 training exercises and is not recorded
-complete. Actual proposal validation is pending.
+complete. Published proposal `a48a60e` passes the Section 11.2 candidate and
+aggregate Chapter 11. Its unit suite (147 tests) and repository checks pass.
+
+## Section 11.3 (2026-09-06)
+
+Theorem 11.3.1 and its full induction proof are preserved. The pinned natural
+number equality module supplies `map-total-Eq-ℕ`, the center and contraction
+of `Σ ℕ (Eq-ℕ m)`, and `is-equiv-Eq-eq-ℕ` by Theorem 11.2.2. The mixed
+zero/successor cases are impossible because their equality code is empty;
+Agda's coverage checker handles them. The successor case uses `ap` of the
+same total-space successor map as the book.
+
+The introductory definitions and canonical map are reused from complete
+Section 6.3 without changing it. Only the `is-torsorial` abbreviation is
+expanded in the excerpt. Section 11.3 is deferred on `main` through both
+Chapter 10 training exercises and is not recorded complete. Actual proposal
+validation is pending.
