@@ -637,6 +637,78 @@ class AgdaManifestTests(unittest.TestCase):
         normalize = lambda value: re.sub(r"\s+", " ", value).strip()
         self.assertEqual(normalize(prose), normalize(expected))
 
+    def test_dependent_choice_accounts_for_the_intervening_equivalence_and_identity_system(self):
+        import re
+        from rosetta.file_registry import registered_filename
+        from rosetta.layout import rosetta_directory
+        from rosetta.render import render_section
+
+        root = Path(__file__).resolve().parent.parent
+        destination = registered_filename(root, "section", 13, 2)
+        selected = [b for b in load_manifest(root / "data" / "agda-blocks.json")
+                    if b.destination == destination]
+        self.assertEqual(len(selected), 7)
+        self.assertEqual({b.item_id for b in selected},
+                         {"theorem-13.2.1", "corollary-13.2.2", "corollary-13.2.3",
+                          "theorem-13.2.4", "section-13.2"})
+        document = (rosetta_directory(root) / destination).read_text()
+        for block in selected:
+            if block.item_id == "section-13.2":
+                self.assertIn("Π(b:B) fib(f, b)", block.after_text)
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(document.index("<!-- rosetta-item-end: corollary-13.2.2 -->"), position)
+                self.assertLess(position, document.index("## Corollary 13.2.3"))
+                continue
+            with self.subTest(block=block.block_id):
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(document.index(f"<!-- rosetta-item: {block.item_id}"), position)
+                self.assertLess(position, document.index(f"<!-- rosetta-item-end: {block.item_id} -->"))
+        for name in ("map-distributive-Π-Σ", "map-inv-distributive-Π-Σ",
+                     "is-section-map-inv-distributive-Π-Σ", "is-retraction-map-inv-distributive-Π-Σ",
+                     "distributive-Π-Σ", "inv-distributive-Π-Σ", "equiv-mapping-into-Σ",
+                     "equiv-Π-fiber-section", "equiv-Π-section-pr1", "is-torsorial-Eq-Π",
+                     "is-identity-system-Π"):
+            self.assertRegex(document, r"(?m)^\s*" + re.escape(name) + r" :")
+        self.assertIn("is-identity-system-is-contr f e", document)
+        self.assertIn("is-torsorial-is-identity-system (f x) (e x) (H x)", document)
+        self.assertIn("( equiv-right-swap-Σ) ∘e", document)
+        self.assertIn("( equiv-Σ-equiv-base", document)
+        self.assertIn("( left-unit-law-Σ-is-contr", document)
+        self.assertIn("Agda record-Σ presentation (judgmental η)", document)
+        self.assertIn("However, it is *not* the case", document)
+        self.assertIn("Therefore we obtain the required homotopy by function extensionality", document)
+        self.assertNotIn("postulate", document)
+        self.assertNotIn("open import foundation", document)
+        prose = document
+        for block in selected:
+            if block.display_heading:
+                prose = prose.replace("### " + block.display_heading, "")
+        prose = re.sub(r"^```agda\n.*?^```\s*", "", prose, flags=re.M | re.S)
+        prose = re.sub(r"<!-- rosetta-agda-block:.*?-->", "", prose)
+        expected = render_section(root / "book" / "funext.tex", 13, 2)
+        normalize = lambda value: re.sub(r"\s+", " ", value).strip()
+        self.assertEqual(normalize(prose), normalize(expected))
+
+    def test_only_the_needed_sigma_swap_exercise_part_is_curated(self):
+        from rosetta.file_registry import registered_filename
+
+        root = Path(__file__).resolve().parent.parent
+        destination = registered_filename(root, "exercise", 9, 5)
+        selected = [b for b in load_manifest(root / "data" / "agda-blocks.json")
+                    if b.destination == destination]
+        self.assertEqual(len(selected), 1)
+        block = selected[0]
+        self.assertEqual(block.display_heading, "Part (b): swapping dependent families")
+        for name in ("map-right-swap-Σ", "map-inv-right-swap-Σ",
+                     "is-section-map-inv-right-swap-Σ", "is-retraction-map-inv-right-swap-Σ",
+                     "is-equiv-map-right-swap-Σ", "equiv-right-swap-Σ"):
+            self.assertIn(name + " :", block.code)
+        self.assertNotIn("left-swap", block.code)
+        self.assertFalse(any(i.startswith("section-13-") for i in block.imports))
+        gaps = json.loads((root / "data" / "agda-gaps.json").read_text())["items"]
+        self.assertTrue(any(g["item_id"] == "exercise-9-5-a" for g in gaps))
+        self.assertTrue(any(g["item_id"] == "theorem-13.2.1-judgmental-sigma-eta" for g in gaps))
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
