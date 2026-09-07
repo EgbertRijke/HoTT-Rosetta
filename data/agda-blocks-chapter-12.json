@@ -855,7 +855,7 @@
       "imports": [],
       "source_note": "Replace UU by Type. Retain both directions and the two distinct fiber-equivalence applications.",
       "conversion_status": "exercise",
-      "conversion_note": "The converse needs eq-fiber-fiber-ap and is-equiv-eq-fiber-fiber-ap, whose natural home is Example 11.6.3, plus the transport equivalence at Example 9.2.3. Preserve those earlier main accounts; see docs/agda-training-exercises.md and docs/invisible-math.md. The first direction also imports the existing Example 11.6.3 training exercise."
+      "conversion_note": "The converse needs eq-fiber-fiber-ap and is-equiv-eq-fiber-fiber-ap, whose natural home is Example 11.6.3, plus the transport equivalence explicitly requested by Exercise 9.1. Preserve those earlier main accounts; see docs/agda-training-exercises.md and docs/invisible-math.md. The first direction also imports the existing Example 11.6.3 training exercise."
     },
     {
       "block_id": "exercise-12-8-retraction-on-identities",
