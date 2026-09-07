@@ -355,6 +355,51 @@ class AgdaManifestTests(unittest.TestCase):
         self.assertEqual(exercise.item_id, "exercise-10-1")
         self.assertFalse(any(imported.startswith("section-12-") for imported in exercise.imports))
 
+    def test_subtype_blocks_cover_both_criteria_and_keep_projection_fibers_earlier(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        blocks = load_manifest(root / "data" / "agda-blocks.json")
+        selected = [block for block in blocks if block.destination.startswith("section-12-2-")]
+        self.assertEqual(len(selected), 8)
+        self.assertEqual(
+            {block.item_id for block in selected},
+            {"definition-12.2.1", "lemma-12.2.2", "theorem-12.2.3", "corollary-12.2.4"},
+        )
+        document = (rosetta_directory(root) / selected[0].destination).read_text()
+        for block in selected:
+            with self.subTest(block=block.block_id):
+                start = document.index(f"<!-- rosetta-item: {block.item_id}")
+                end = document.index(f"<!-- rosetta-item-end: {block.item_id} -->")
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(start, position)
+                self.assertLess(position, end)
+        names = (
+            "  is-subtype", "subtype", "    is-prop-equiv", "    is-prop-equiv'",
+            "  is-prop-map", "    is-prop-map-inclusion-subtype",
+            "    is-emb-inclusion-subtype", "  equiv-ap-inclusion-subtype",
+            "    is-subtype-is-emb-pr1", "  is-emb-pr1-is-subtype",
+        )
+        positions = [document.index(name + " :") for name in names]
+        self.assertEqual(positions, sorted(positions))
+        theorem = next(block for block in selected if block.block_id ==
+                       "theorem-12.2.3-embeddings-propositional-fibers")
+        for name in ("is-emb-is-prop-map", "is-prop-map-is-emb"):
+            self.assertIn(name + " :", theorem.code)
+            if theorem.conversion_status == "exercise":
+                self.assertNotIn(name + " :", document)
+            else:
+                self.assertIn(name + " :", document)
+        self.assertNotIn("postulate", document)
+        self.assertNotIn("open import foundation", document)
+        self.assertNotIn("section-13-", document)
+        exercise = next(block for block in blocks if block.block_id ==
+                        "exercise-10-7-projection-fiber-equivalence")
+        self.assertEqual(exercise.item_id, "exercise-10-7")
+        self.assertIn("equiv-fiber-pr1 :", exercise.code)
+        self.assertFalse(any(imported.startswith("section-12-") for imported in exercise.imports))
+        self.assertNotIn("equiv-fiber-pr1 :", document)
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

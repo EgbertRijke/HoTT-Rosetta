@@ -61,25 +61,33 @@ Work continues on `main`.
   including the unit-embedding condition and its converse. Exercise 10.1's
   required contractible-identity proof passes on `main`. Section 12.1 is
   deferred through Theorem 11.4.2. Proposal `0c3d8b1` passes its candidate,
-  Exercise 10.1, and aggregate Chapters 10--12. Sections 12.2--13.5 have no
-  curated section blocks.
+  Exercise 10.1, and aggregate Chapters 10--12.
+  Section 12.2 now has curated code for all four numbered items, including
+  both directions of the embedding and projection criteria. Theorem 12.2.3
+  is a new empty training site because it directly needs `equiv-fiber` in
+  complete Section 10.3. Its shared-proposal solution is pending; reuse the
+  auxiliary already published as `63e5e49`. Exercise 10.7(a)'s projection-fiber
+  equivalence passes on `main`; parts (b) and (c) remain explicit gaps.
+  Sections 12.3--13.5 have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
-The latest validation passed the full unit suite (152 tests on `main`, 155 on
-the proposal), `python3 rosetta.py check`, and `git diff --check`. Proposal
+The latest main validation passed all 153 unit tests, Exercise 10.7's
+candidate, `python3 rosetta.py check`, and `git diff --check`. Section 12.2
+and aggregate Chapters 10--12 are deferred. The last proposal validation
+passed 155 tests before Section 12.2 was added. Proposal
 `0c3d8b1` passes candidate Section 12.1, Exercise 10.1, and aggregate Chapters
 10--12. Proposal `6bd180b` passes candidate Sections 5.2 and 11.6, Exercises
 9.1 and 10.6, and aggregate Chapters 5--11. Earlier proposal
 `3bbc564` passes candidate Section 11.5 and aggregate Chapters 9--11; the
 earlier `63e5e49` checks Sections 10.3 and 11.1--11.4. The earlier `511f171`
 also checked Section 2.2 and Chapters 2--10.
-On `main`, Sections 10.2, 10.4, 11.1--11.6, and 12.1, Exercise 10.6, and
+On `main`, Sections 10.2, 10.4, 11.1--11.6, and 12.1--12.2, Exercise 10.6, and
 Chapters 10--12 remain deferred, never recorded as passed. The prose of
-Sections 11.2--11.6 and 12.1 was compared item by item with the book and has
+Sections 11.2--11.6 and 12.1--12.2 was compared item by item with the book and has
 no unresolved references or raw TeX commands. No review evidence or completion
 status was inferred from this.
 
@@ -87,21 +95,19 @@ status was inferred from this.
 
 The five assigned Chapter 10 steps and the Chapter 11 section formalizations
 are done, with the recorded training holes retained. Keep Definition 10.2.1,
-Lemma 10.4.5, Theorem 11.4.2, and Example 11.6.3 empty on `main`; do not merge
+Lemma 10.4.5, Theorems 11.4.2 and 12.2.3, and Example 11.6.3 empty on `main`; do not merge
 the proposal to make `main` pass. The audit also records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Continue Sections 12.2--13.5 in order, starting with subtypes in
-`book/hierarchy.tex`. Section 12.2 needs both directions between embeddings
-and proposition-valued fibers and both directions of its projection
-corollary. The pinned `foundation-core/propositional-maps` module has the
-fundamental-theorem proof, using the fiber-orientation equivalence already
-proposed at Definition 10.3.1. Investigate this existing exercise dependency
-without adding it to complete Section 10.3 on `main`. The projection-fiber
-equivalence is asked for in Exercise 10.7; its exact pinned source is
-`foundation-core/fibers-of-maps`, lines 250--290. Add exercise Agda only as
-needed by the section, accounting for any remaining exercise assertions.
+Publish and validate the recorded Theorem 12.2.3 solution on the shared
+proposal, reusing its existing fiber-orientation equivalence at Definition
+10.3.1; do not add it to complete Section 10.3 on `main`. Then continue
+Sections 12.3--13.5 in order, starting with sets in `book/hierarchy.tex`.
+Add exercise Agda only as needed by sections, accounting for any remaining
+exercise assertions. Exercise 10.7's existing custom-list rendering loses
+the outer alphabetical labels; the audit records this presentation issue
+without claiming the exercise complete.
 Avoid importing function extensionality from upstream ahead of its narrative
 home. Chapter 13 contains Axiom 13.1.3: keep that assumption explicit and
 never describe it as a proof.

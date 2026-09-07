@@ -2,6 +2,19 @@
 
 ```agda
 module section-12-2-subtypes where
+
+open import universe-levels
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-3-the-action-on-identifications-of-functions
+open import section-9-2-bi-invertible-maps
+open import section-10-1-contractible-types
+open import section-10-3-contractible-maps
+open import section-11-2-the-fundamental-theorem
+open import section-11-4-embeddings
+open import section-12-1-propositions
+open import exercise-10-3-contractible-equivalences
+open import exercise-10-7-fibers-of-projections
 ```
 
 <!-- rosetta-item: section-12.2 -->
@@ -32,6 +45,43 @@ This observation suggests that in type theory we should define a subtype of a ty
 A type family `B` over `A` is said to be a **subtype** of `A` if for each `x:A` the type `B(x)` is a proposition.
 When `B` is a subtype of `A`, we also say that `B(x)` is a **property** of `x:A`.
 
+<!-- rosetta-agda-block: definition-12.2.1-subtypes -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} (B : A → Type l2)
+  where
+
+  is-subtype : Type (l1 ⊔ l2)
+  is-subtype = (x : A) → is-prop (B x)
+
+  is-property : Type (l1 ⊔ l2)
+  is-property = is-subtype
+
+subtype : {l1 : Level} (l : Level) (A : Type l1) → Type (l1 ⊔ lsuc l)
+subtype l A = A → Prop l
+
+module _
+  {l1 l2 : Level} {A : Type l1} (P : subtype l2 A)
+  where
+
+  is-in-subtype : A → Type l2
+  is-in-subtype x = type-Prop (P x)
+
+  is-prop-is-in-subtype : (x : A) → is-prop (is-in-subtype x)
+  is-prop-is-in-subtype x = is-prop-type-Prop (P x)
+
+  type-subtype : Type (l1 ⊔ l2)
+  type-subtype = Σ A is-in-subtype
+
+  inclusion-subtype : type-subtype → A
+  inclusion-subtype = pr1
+
+  ap-inclusion-subtype :
+    (x y : type-subtype) →
+    x ＝ y → (inclusion-subtype x ＝ inclusion-subtype y)
+  ap-inclusion-subtype x y p = ap inclusion-subtype p
+```
 <!-- rosetta-item-end: definition-12.2.1 -->
 
 One reason why subtypes are important and useful, is that for any
@@ -83,6 +133,36 @@ ap{e} : (x=y)→ (e(x)=e(y))
 is an equivalence for any `x,y:A`.
 If `B` is a proposition, then in particular the type `e(x)=e(y)` is contractible for any `x,y:A`, so the claim follows from Theorem 10.4.6. ◻
 
+<!-- rosetta-agda-block: lemma-12.2.2-propositions-under-equivalence -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  where
+
+  abstract
+    is-prop-is-equiv : {f : A → B} → is-equiv f → is-prop B → is-prop A
+    is-prop-is-equiv {f} E H =
+      is-prop-is-proof-irrelevant
+        ( λ a → is-contr-is-equiv B f E (is-proof-irrelevant-is-prop H (f a)))
+
+  abstract
+    is-prop-equiv : A ≃ B → is-prop B → is-prop A
+    is-prop-equiv (f , is-equiv-f) = is-prop-is-equiv is-equiv-f
+
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  where
+
+  abstract
+    is-prop-is-equiv' : {f : A → B} → is-equiv f → is-prop A → is-prop B
+    is-prop-is-equiv' E H =
+      is-prop-is-equiv (is-equiv-map-section-is-equiv E) H
+
+  abstract
+    is-prop-equiv' : A ≃ B → is-prop A → is-prop B
+    is-prop-equiv' (f , is-equiv-f) = is-prop-is-equiv' is-equiv-f
+```
 <!-- rosetta-item-end: lemma-12.2.2 -->
 
 ## Theorem 12.2.3
@@ -118,6 +198,22 @@ fib(f, b)→is-contr(fib(f, b))
 ```
 for any `b:B`, which is by Proposition 12.1.3 equivalent to the condition that each `fib(f, b)` is a proposition. ◻
 
+<!-- rosetta-agda-block: theorem-12.2.3-propositional-map-predicate -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  where
+
+  is-prop-map : (A → B) → Type (l1 ⊔ l2)
+  is-prop-map f = (b : B) → is-prop (fiber f b)
+```
+
+<!-- rosetta-agda-block: theorem-12.2.3-embeddings-propositional-fibers -->
+
+```agda
+
+```
 <!-- rosetta-item-end: theorem-12.2.3 -->
 
 ## Corollary 12.2.4
@@ -141,4 +237,68 @@ fib(pr 1, x)≃ B(x).
 ```
  ◻
 
+<!-- rosetta-agda-block: corollary-12.2.4-propositional-inclusion-fibers -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} (B : subtype l2 A)
+  where
+
+  abstract
+    is-prop-map-inclusion-subtype : is-prop-map (inclusion-subtype B)
+    is-prop-map-inclusion-subtype =
+      ( λ x →
+        is-prop-equiv
+          ( equiv-fiber-pr1 (is-in-subtype B) x)
+          ( is-prop-is-in-subtype B x))
+```
+
+<!-- rosetta-agda-block: corollary-12.2.4-subtype-embedding -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} (B : subtype l2 A)
+  where
+
+  abstract
+    is-emb-inclusion-subtype : is-emb (inclusion-subtype B)
+    is-emb-inclusion-subtype =
+      is-emb-is-prop-map
+        ( is-prop-map-inclusion-subtype B)
+
+  emb-subtype : type-subtype B ↪ A
+  pr1 emb-subtype = inclusion-subtype B
+  pr2 emb-subtype = is-emb-inclusion-subtype
+
+  equiv-ap-inclusion-subtype :
+    {s t : type-subtype B} →
+    (s ＝ t) ≃ (inclusion-subtype B s ＝ inclusion-subtype B t)
+  pr1 (equiv-ap-inclusion-subtype {s} {t}) = ap-inclusion-subtype B s t
+  pr2 (equiv-ap-inclusion-subtype {s} {t}) = is-emb-inclusion-subtype s t
+```
+
+<!-- rosetta-agda-block: corollary-12.2.4-subtype-from-embedding -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  where
+
+  abstract
+    is-subtype-is-emb-pr1 : is-emb (pr1 {B = B}) → is-subtype B
+    is-subtype-is-emb-pr1 H x =
+      is-prop-equiv' (equiv-fiber-pr1 B x) (is-prop-map-is-emb H x)
+```
+
+<!-- rosetta-agda-block: corollary-12.2.4-embedding-from-subtype -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  where
+
+  is-emb-pr1-is-subtype : is-subtype B → is-emb (pr1 {B = B})
+  is-emb-pr1-is-subtype H =
+    is-emb-inclusion-subtype (λ x → (B x , H x))
+```
 <!-- rosetta-item-end: corollary-12.2.4 -->

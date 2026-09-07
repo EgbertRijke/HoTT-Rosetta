@@ -264,3 +264,42 @@ checks passing. Main's 152 tests and repository checks also pass, but no
 completion or optional review state is inferred from its deferred Agda check.
 All generated imports are repository-local; no later truncation theory or
 function-extensionality assumption is imported ahead of its narrative home.
+
+## Section 12.2 (2026-09-06)
+
+All four numbered items, three proof bodies, and the introductory and
+transition prose in `book/hierarchy.tex`, lines 97--191, are preserved.
+The generated section has eight heading occurrences (six distinct headings)
+and eleven displays. The prose comparison is 100%, with no unresolved
+references or raw TeX commands; the three proof bodies were also inspected
+individually, since the comparison counts distinct headings only.
+
+| Item | Formalization |
+| --- | --- |
+| Definition 12.2.1 | `is-subtype`, `is-property`, the proposition-valued family `subtype`, its total space, membership predicate, inclusion, and action on identities. |
+| Lemma 12.2.2 | Both `is-prop-equiv` and `is-prop-equiv'`, together with their map-level versions. The pinned `foundation-core/propositions` proof transfers inhabited contractibility. This proves the book's assertion by a different route from its direct `ap` argument; that full book proof is retained. |
+| Theorem 12.2.3 | `is-prop-map` states the fiber condition. The retained `foundation-core/propositional-maps` proof gives both `is-emb-is-prop-map` and `is-prop-map-is-emb` using the fundamental theorem, the fiber-orientation equivalence, and inhabited contractibility. This proof block is a new empty training site on `main`. |
+| Corollary 12.2.4 | Proposition-valued inclusion fibers, the subtype-inclusion embedding, its bundled embedding and identity equivalence, and both unbundled implications `is-subtype-is-emb-pr1` / `is-emb-pr1-is-subtype`. Exercise 10.7(a) supplies the projection-fiber equivalence at its exact book home. |
+
+The final forward implication is an explicitly typed application of the
+copied bundled-inclusion proof to `(λ x → (B x , H x))`; inclusion reduces
+to `pr1`. No new proof is invented. The identity equivalence at the
+corollary also supplies the introductory claim that equality in a subtype
+is equivalent to equality of the underlying terms. The unused upstream
+`injection-subtype` packaging is omitted; no injection API is imported.
+
+Main's complete Section 10.3 is unchanged. The theorem directly requires
+its absent `equiv-fiber`, so the new training site is recorded even though
+proposal `63e5e49` already supplies that auxiliary for Theorem 11.4.2.
+The shared-proposal solution must reuse the existing placement and restore
+only this retained theorem block. Its fundamental-theorem applications also
+depend on the two existing Chapter 10 exercises. Section 12.2 is deferred
+on `main`, not complete or passed; proposal validation is pending.
+
+Exercise 10.7(a) passes its ordinary candidate check on `main`. Parts (b)
+and (c) remain explicit Agda gaps. All problem text is retained, but the
+existing converter renders its custom `subexenum` as a visible div without
+the outer alphabetical part labels; this pre-existing exercise presentation
+issue is not a claim of complete exercise prose fidelity. Section 12.2 itself
+has no such custom list. All 153 main unit tests, repository checks, and
+whitespace checks pass. No optional review evidence was refreshed.
