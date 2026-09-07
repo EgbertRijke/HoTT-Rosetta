@@ -85,8 +85,11 @@ Work continues on `main`.
   needs identity retracts; its part-(b) proof is a labeled prerequisite at
   Proposition 12.4.5 to avoid an import cycle. Theorem 12.4.7 is a new empty
   training site needing the specialized fiber equivalence at Example 11.6.3
-  and transport equivalence at its exact Exercise 9.1 home. Its shared-proposal solution
-  is pending. Sections 13.1--13.5 still have no curated section blocks.
+  and transport equivalence at its exact Exercise 9.1 home. Published
+  proposal `31222b8` supplies both auxiliaries and restores both theorem
+  implications unchanged. It passes Sections 11.6 and 12.4, Exercises
+  9.1 and 12.8, and aggregate Chapters 9--12. Sections 13.1--13.5 still
+  have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
@@ -96,7 +99,9 @@ Work continues on `main`.
 The latest main validation passed all 156 unit tests,
 `python3 rosetta.py check`, and `git diff --check`. Section 12.3 and
 aggregate Chapters 10--12 are deferred. Section 12.4 is also deferred;
-its needed Exercise 12.8(a) candidate passes. Exercise 10.7's unchanged candidate
+its needed Exercise 12.8(a) candidate passes. Proposal `31222b8` passes
+all 161 tests, Sections 11.6 and 12.4, Exercises 9.1 and 12.8, and
+aggregate Chapters 9--12. Exercise 10.7's unchanged candidate
 passed in the preceding validation. Proposal `b96fdf3` passes all 158
 unit tests, candidate Sections 11.1--11.6 and 12.1--12.3, aggregate Chapters
 10--12, and the repository and whitespace checks. Earlier proposal
@@ -108,7 +113,7 @@ Earlier proposal
 `3bbc564` passes candidate Section 11.5 and aggregate Chapters 9--11; the
 earlier `63e5e49` checks Sections 10.3 and 11.1--11.4. The earlier `511f171`
 also checked Section 2.2 and Chapters 2--10.
-On `main`, Sections 10.2, 10.4, 11.1--11.6, and 12.1--12.3, Exercise 10.6, and
+On `main`, Sections 10.2, 10.4, 11.1--11.6, and 12.1--12.4, Exercise 10.6, and
 Chapters 10--12 remain deferred, never recorded as passed. The prose of
 Sections 11.2--11.6 and 12.1--12.3 was compared item by item with the book and has
 no unresolved references or raw TeX commands. No review evidence or completion
@@ -124,19 +129,28 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-First publish and validate the new Theorem 12.4.7 proposal solution,
-following its exact index and invisible-math records. Then continue
-Sections 13.1--13.5 in order. The Section 12.4 work covered general truncation
-levels in `book/hierarchy.tex`. Section 12.4 has seven numbered items.
-Account for the indexing type and natural-number inclusion, proper types,
-the universe of truncated types, and truncated maps in addition to the
-recursive predicate. Inspect the universe-independence remark explicitly;
-do not infer its coverage merely from a universe-polymorphic signature.
-The final theorem needs both directions between successor-truncated maps
-and truncated action on identities. Pinned `foundation-core/truncated-maps`
-lines 112--133 gives that proof using the existing Example 11.6.3 fiber
-identity equivalence and the absent specialization now recorded for the
-proposal. Keep the earlier main files unchanged.
+Continue Sections 13.1--13.5 in order, starting with `book/funext.tex`,
+lines 28--152. Section 13.1 has seven numbered items: the three-form
+criterion, equivalence with weak function extensionality, the explicit
+axiom, its inference-rule remark, dependent-product truncatedness, the
+ordinary-function corollary, and propositionality of negation.
+Before Axiom 13.1.3, prove implications with the extensionality hypotheses
+as parameters; do not accidentally use a globally assumed witness in
+Proposition 13.1.1 or Theorem 13.1.2. Pinned
+`foundation/function-extensionality-axiom` defines the predicates and
+`htpy-eq` but does not postulate the axiom there. The actual postulates are
+in `foundation/function-extensionality`; its coherent-inverse presentation
+needs an explicit comparison with the book's stated equivalence axiom.
+`foundation/weak-function-extensionality` gives both hypothesis-parametric
+implications. Search exact sources for the remaining assertions and keep
+their dependencies at the correct narrative homes.
+
+Section 12.4's audit records the explicit overlapping-universe
+representation gap and the checked lifted analogue; do not erase that gap
+or infer completeness from polymorphism. Its prose is unchanged after
+removing the four explicit Agda headings and code, but raw comparison
+counts those headings (98.26%, 9/13). Preserve the regression test rather
+than calling the raw comparison 100%. The earlier main files stay unchanged.
 Add exercise Agda only as needed by sections, accounting for any remaining
 exercise assertions. Exercise 10.7's existing custom-list rendering loses
 the outer alphabetical labels; the audit records this presentation issue

@@ -184,8 +184,14 @@ dependencies; its proposition imports include the other recorded sites.
 - **Invisible mathematics:** “Theorem 12.4.7: truncated action on
   identities” in `docs/invisible-math.md`.
 - **Status:** Empty on `main`; candidate Section 12.4 and Chapter 12 defer.
-- **Proposal solution:** Pending publication on the shared
-  `proposal/agda-exercise-solutions` branch.
+- **Proposal solution:** `proposal/agda-exercise-solutions`, commit `31222b8`.
+  It places transport and inverse-transport equivalences at Exercise 9.1,
+  the fiber specialization at Example 11.6.3, and restores the retained
+  later theorem without changing any existing proof code.
+- **Validation:** Candidate Sections 11.6 and 12.4, Exercises 9.1 and
+  12.8, and aggregate Chapters 9--12 pass ordinary Agda checks. All 161
+  proposal unit tests and repository checks pass. Main's 156 tests pass;
+  its Section 12.4 and Chapter 12 remain deferred, not passed.
 
 Exercise 12.8(a) is added early because the pinned equivalence-invariance
 proof needs its identity-retract result. Part (b)'s truncation-of-retracts

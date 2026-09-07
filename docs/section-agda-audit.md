@@ -369,11 +369,19 @@ No complete-file or optional-review status is inferred from these blocks.
 
 Main passes all 156 unit tests, repository checks, and whitespace checks;
 Exercise 12.8(a) passes its ordinary Agda candidate check. Section 12.4
-and Chapter 12 are deferred, never passed. The shared proposal solution
-is pending. The raw prose comparison is 98.26%, with 9/13 distinct
+and Chapter 12 are deferred, never passed. Published shared-proposal
+solution `31222b8` passes candidate Sections 11.6 and 12.4, Exercises
+9.1 and 12.8, and aggregate Chapters 9--12; all 161 proposal unit tests
+and repository checks pass. It supplies the transport equivalence at
+Exercise 9.1 and the fiber specialization at Example 11.6.3, restoring
+both later theorem implications without changing their code. The literal
+overlapping-universe gap remains explicit on both branches.
+
+The raw prose comparison is 98.26%, with 9/13 distinct
 headings matching: its four unmatched headings are precisely the new,
 explicit Agda headings. After removing only those headings and curated
 Agda, a regression test confirms equality with the rendered book text,
 including all item markers and thirteen displays, modulo whitespace.
 The book itself has twelve heading occurrences, nine distinct. There are
 no unresolved references or raw TeX commands. No review data is changed.
+Section 11.6's unchanged prose still compares at 100%.
