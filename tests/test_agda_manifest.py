@@ -766,6 +766,66 @@ class AgdaManifestTests(unittest.TestCase):
         normalize = lambda value: re.sub(r"\s+", " ", value).strip()
         self.assertEqual(normalize(prose), normalize(expected))
 
+    def test_precomposition_characterization_keeps_all_conditions_and_full_converse(self):
+        import re
+        from rosetta.file_registry import registered_filename
+        from rosetta.layout import rosetta_directory
+        from rosetta.render import render_section
+
+        root = Path(__file__).resolve().parent.parent
+        destination = registered_filename(root, "section", 13, 4)
+        blocks = load_manifest(root / "data" / "agda-blocks.json")
+        selected = [b for b in blocks if b.destination == destination]
+        self.assertEqual(len(selected), 11)
+        self.assertEqual({b.item_id for b in selected}, {"theorem-13.4.1"})
+        self.assertEqual([b.order for b in selected], list(range(11)))
+        self.assertTrue(all(b.conversion_status == "ready" for b in selected))
+        document = (rosetta_directory(root) / destination).read_text()
+        for block in selected:
+            with self.subTest(block=block.block_id):
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(document.index("<!-- rosetta-item: theorem-13.4.1"), position)
+                self.assertLess(position, document.index("<!-- rosetta-item-end: theorem-13.4.1 -->"))
+        code = "\n".join(b.code for b in selected)
+        for name in ("precomp-Π", "precomp", "dependent-universal-property-equiv",
+                     "universal-property-equiv", "is-equiv-precomp-Π-is-equiv",
+                     "is-equiv-precomp-is-equiv-precomp-Π", "is-equiv-precomp-is-equiv",
+                     "is-equiv-is-equiv-precomp", "is-equiv-is-equiv-precomp-Π",
+                     "equiv-precomp-Π", "equiv-precomp"):
+            self.assertRegex(code, r"(?m)^\s*" + re.escape(name) + r" :")
+        self.assertIn("{l : Level} (C : B → Type l) → is-equiv (precomp-Π f C)", code)
+        self.assertIn("{l : Level} (X : Type l) → is-equiv (precomp f X)", code)
+        self.assertIn("is-equiv-precomp-is-equiv-precomp-Π f H C = H (λ _ → C)", code)
+        coherent = next(b for b in selected if b.block_id.endswith("-coherent-proof"))
+        self.assertIn("( λ s y → tr C (is-section-g y) (s (g y)))", coherent.code)
+        self.assertIn("( ap (λ t → tr C t (s (g (f x)))) (coh x))", coherent.code)
+        self.assertIn("tr-ap f (λ _ → id) (is-retraction-g x) (s (g (f x)))", coherent.code)
+        self.assertIn("( apd s (is-retraction-g x))", coherent.code)
+        self.assertIn("eq-htpy (λ y → apd s (is-section-g y))", coherent.code)
+        self.assertIn("is-coherently-invertible-is-invertible\n          ( is-invertible-is-equiv H)", code)
+        converse = next(b for b in selected if b.block_id.endswith("-equivalence-from-ordinary"))
+        for name in ("map-inv-is-equiv-precomp", "is-section-map-inv-is-equiv-precomp",
+                     "is-retraction-map-inv-is-equiv-precomp"):
+            self.assertIn(name + " :", converse.code)
+            self.assertIn("( " + name + ")", converse.code)
+        self.assertIn("pr1 (center (is-contr-map-is-equiv (H A) id))", converse.code)
+        self.assertIn("htpy-eq (pr2 (center (is-contr-map-is-equiv (H A) id)))", converse.code)
+        self.assertIn("eq-is-contr'\n          ( is-contr-map-is-equiv (H B) f)", converse.code)
+        self.assertIn("( λ g → f ∘ g)", converse.code)
+        self.assertIn("( id , refl)", converse.code)
+        self.assertIn("(H : universal-property-equiv f)", converse.code)
+        transport = next(b for b in blocks if b.block_id == "section-9.3-transport-action")
+        self.assertIn("tr-ap f g refl z = refl", transport.code)
+        self.assertIn("open import " + transport.destination.removesuffix(".lagda.md"), document)
+        for forbidden in ("substitution-law-tr", "path-split", "structured-type", "postulate"):
+            self.assertNotIn(forbidden, code)
+        self.assertNotRegex(code, r"(?m)^\s*tr-ap :")
+        self.assertNotIn("open import foundation", document)
+        prose = re.sub(r"^```agda\n.*?^```\s*", "", document, flags=re.M | re.S)
+        prose = re.sub(r"<!-- rosetta-agda-block:.*?-->", "", prose)
+        normalize = lambda value: re.sub(r"\s+", " ", value).strip()
+        self.assertEqual(normalize(prose), normalize(render_section(root / "book" / "funext.tex", 13, 4)))
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
