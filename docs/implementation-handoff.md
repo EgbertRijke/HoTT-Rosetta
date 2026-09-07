@@ -108,8 +108,9 @@ Work continues on `main`.
   Section 13.4 now has eleven provenance-backed blocks for all three
   conditions and implications, including the full two-fiber converse.
   Its transport substitution is an expansion of a pinned wrapper around
-  Section 9.3's existing `tr-ap`, not a new missing auxiliary. Its actual
-  Agda validation on the shared proposal is pending. Section 13.5 has no
+  Section 9.3's existing `tr-ap`, not a new missing auxiliary. Published
+  proposal merge `b42184f` passes actual Agda for the section and aggregate
+  Chapter 13 without corrections or new solutions. Section 13.5 has no
   curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
@@ -123,6 +124,8 @@ The latest main validation passed all 164 unit tests,
 candidate and aggregate Chapter 9 checks passed; neither changed in the
 Section 13.4 work. Sections 13.1--13.4 and Chapter 13
 are deferred until their existing training dependencies are supplied.
+Proposal `b42184f` passes all 169 unit tests, repository and whitespace
+checks, candidate Section 13.4, and aggregate Chapter 13.
 Proposal `6c408d4` passes all 168 unit tests, repository and whitespace
 checks, candidate Section 13.3, and aggregate Chapter 13.
 Proposal `161b3c1` passes all 167 unit tests, repository and whitespace
@@ -161,10 +164,32 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Validate the newly curated Section 13.4 and aggregate Chapter 13 on the
-shared proposal with latest main, then record and publish the result before
-continuing Section 13.5. Section 13.4 preserves all three conditions and
-the full converse using the fibers at `id` and `f`. Keep the existing local
+Continue Section 13.5, the strong induction principle of natural numbers
+in `book/funext.tex`, lines 462--636. Account for Theorem 13.5.1, both
+Lemmas 13.5.2--13.5.3, and the delayed full theorem proof after the lemmas.
+Preserve both strong-induction computation rules and both successor-lemma
+laws, not just a function with the strong-induction type.
+Pinned `elementary-number-theory/strong-induction-natural-numbers` supplies
+the bounded-family construction, base and successor lemmas, induction,
+and the full computation proof through line 244. Inspect its order
+dependencies before changing earlier files. `is-set-ℕ` already lives at
+Example 12.3.2 and transport of inequalities at Exercise 6.3. The source
+uses `is-prop-leq-ℕ`, `neg-succ-leq-ℕ`, `cases-leq-succ-ℕ`, and
+`cases-leq-succ-reflexive-leq-ℕ` from
+`elementary-number-theory/inequality-natural-numbers`. Those names are
+absent locally, but Exercise 7.3 already contains the analogous
+`decide-leq-succ-ℕ`; inspect actual mathematics, signatures, and natural
+homes before declaring gaps or copying duplicate auxiliaries. The book
+also explicitly asserts that the case-splitting map is an equivalence
+between propositions; the pinned induction proof's direct case analysis
+alone does not account for that additional assertion.
+Fix and regression-test the prose renderer's dropped `(*)` reference:
+the display preserves the asterisk but the following prose currently says
+`mentioned in ()`. Handle the remaining literal cases environments under
+the normal fidelity rules, without silently dropping their cases.
+
+Section 13.4 is curated and validated. It preserves all three conditions
+and the full converse using the fibers at `id` and `f`. Keep the existing local
 coherent-inverse conversion, not upstream path-split machinery. The
 missing name `substitution-law-tr` is only a wrapper around the existing
 Section 9.3 `tr-ap`: the pinned definition is expanded in the new proof,

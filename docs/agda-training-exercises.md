@@ -240,5 +240,9 @@ curated Section 9.3 `tr-ap`; the new proof expands that pinned wrapper
 without adding any earlier mathematics. The coherent-inverse conversion
 uses the existing Lemma 10.4.5 solution, and Section 13.1 retains its
 transitive training dependencies. Main's Section 13.4 and Chapter 13
-therefore defer. Actual proposal validation is pending; all seven main
-holes remain unchanged, and no exercise Agda was added.
+therefore defer. Published proposal merge
+`b42184ff92633edf5d9dd24eebc5a0b79babd86b` passes actual Agda for the
+Section 13.4 candidate and aggregate Chapter 13, all 169 unit tests,
+repository checks, and whitespace checks. No correction or new solution
+was needed; all seven main holes remain unchanged, and no exercise Agda
+was added.

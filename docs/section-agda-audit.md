@@ -550,5 +550,9 @@ complete-file record is changed.
 
 Main passes all 164 unit tests, repository checks (558 verified blocks),
 and whitespace checks. Section 13.4 and aggregate Chapter 13 correctly
-defer through existing training dependencies. Actual Agda validation on
-the shared proposal is pending; the deferred results are not passes.
+defer through existing training dependencies. Published proposal merge
+`b42184ff92633edf5d9dd24eebc5a0b79babd86b` passes actual Agda for the
+Section 13.4 candidate and aggregate Chapter 13, all 169 unit tests,
+repository checks (570 verified blocks), and whitespace checks. No code
+correction or new solution was needed. Main's deferred results are not
+passes, and all seven training holes remain unchanged.
