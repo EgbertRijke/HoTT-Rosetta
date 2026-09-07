@@ -400,6 +400,54 @@ class AgdaManifestTests(unittest.TestCase):
         self.assertFalse(any(imported.startswith("section-12-") for imported in exercise.imports))
         self.assertNotIn("equiv-fiber-pr1 :", document)
 
+    def test_set_blocks_cover_all_items_and_the_arbitrary_map_assertion(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        blocks = load_manifest(root / "data" / "agda-blocks.json")
+        selected = [block for block in blocks if block.destination.startswith("section-12-3-")]
+        self.assertEqual(len(selected), 10)
+        self.assertEqual(
+            {block.item_id for block in selected},
+            {"definition-12.3.1", "example-12.3.2", "proposition-12.3.3",
+             "theorem-12.3.4", "theorem-12.3.5"},
+        )
+        document = (rosetta_directory(root) / selected[0].destination).read_text()
+        for block in selected:
+            with self.subTest(block=block.block_id):
+                start = document.index(f"<!-- rosetta-item: {block.item_id}")
+                end = document.index(f"<!-- rosetta-item-end: {block.item_id} -->")
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(start, position)
+                self.assertLess(position, end)
+        names = (
+            "is-set", "  is-prop-Eq-ℕ", "  is-set-ℕ", "instance-axiom-K",
+            "    is-set-axiom-K'", "    is-set-axiom-K", "    axiom-K-is-set",
+            "    is-equiv-prop-in-id", "    is-set-prop-in-id", "    is-equiv-id-in-prop",
+            "  Eq-has-decidable-equality'", "  refl-Eq-has-decidable-equality",
+            "  eq-Eq-has-decidable-equality", "    is-set-has-decidable-equality",
+        )
+        positions = [document.index(name + " :") for name in names]
+        self.assertEqual(positions, sorted(positions))
+        example = next(block for block in selected if block.block_id ==
+                       "example-12.3.2-natural-numbers-are-a-set")
+        self.assertIn("is-prop-is-equiv (is-equiv-Eq-eq-ℕ", example.code)
+        self.assertNotIn("is-set-prop-in-id", example.code)
+        arbitrary = next(block for block in selected if block.block_id ==
+                         "theorem-12.3.4-arbitrary-identity-maps")
+        self.assertIn("(f : (x y : A) → x ＝ y → R x y)", arbitrary.code)
+        self.assertIn("is-equiv (f x y)", arbitrary.code)
+        self.assertIn("( f x)", arbitrary.code)
+        based = next(block for block in selected if block.block_id ==
+                     "theorem-12.3.4-propositional-identity-relation")
+        if based.conversion_status == "exercise":
+            self.assertNotIn("is-equiv-prop-in-based-id :", document)
+        else:
+            self.assertIn("is-equiv-prop-in-based-id :", document)
+        self.assertNotIn("postulate", document)
+        self.assertNotIn("open import foundation", document)
+        self.assertNotIn("section-13-", document)
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

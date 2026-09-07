@@ -69,16 +69,22 @@ Work continues on `main`.
   from `63e5e49` and passes the section, Exercise 10.7, and aggregate Chapters
   10--12. Exercise 10.7(a)'s projection-fiber equivalence also passes on
   `main`; parts (b) and (c) remain explicit gaps.
-  Sections 12.3--13.5 have no curated section blocks.
+  Section 12.3 now has source-backed code for all five numbered items,
+  including both axiom-K implications and the arbitrary-map assertion in
+  Theorem 12.3.4. That theorem's based proof is a new empty training site:
+  its retract fundamental theorem and total-map laws belong in the earlier
+  Chapter 11 accounts. The shared-proposal solution is pending. No exercise
+  Agda is added. Sections 12.4--13.5 have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
-The latest main validation passed all 153 unit tests, Exercise 10.7's
-candidate, `python3 rosetta.py check`, and `git diff --check`. Section 12.2
-and aggregate Chapters 10--12 are deferred. Proposal `7b6b28c` passes all
+The latest main validation passed all 154 unit tests,
+`python3 rosetta.py check`, and `git diff --check`. Section 12.3 and
+aggregate Chapters 10--12 are deferred. Exercise 10.7's unchanged candidate
+passed in the preceding validation. Proposal `7b6b28c` passes all
 156 unit tests, Section 12.2, Exercise 10.7, aggregate Chapters 10--12, and
 the repository and whitespace checks. Earlier proposal
 `0c3d8b1` passes candidate Section 12.1, Exercise 10.1, and aggregate Chapters
@@ -87,9 +93,9 @@ the repository and whitespace checks. Earlier proposal
 `3bbc564` passes candidate Section 11.5 and aggregate Chapters 9--11; the
 earlier `63e5e49` checks Sections 10.3 and 11.1--11.4. The earlier `511f171`
 also checked Section 2.2 and Chapters 2--10.
-On `main`, Sections 10.2, 10.4, 11.1--11.6, and 12.1--12.2, Exercise 10.6, and
+On `main`, Sections 10.2, 10.4, 11.1--11.6, and 12.1--12.3, Exercise 10.6, and
 Chapters 10--12 remain deferred, never recorded as passed. The prose of
-Sections 11.2--11.6 and 12.1--12.2 was compared item by item with the book and has
+Sections 11.2--11.6 and 12.1--12.3 was compared item by item with the book and has
 no unresolved references or raw TeX commands. No review evidence or completion
 status was inferred from this.
 
@@ -97,21 +103,19 @@ status was inferred from this.
 
 The five assigned Chapter 10 steps and the Chapter 11 section formalizations
 are done, with the recorded training holes retained. Keep Definition 10.2.1,
-Lemma 10.4.5, Theorems 11.4.2 and 12.2.3, and Example 11.6.3 empty on `main`;
+Lemma 10.4.5, Theorems 11.4.2, 12.2.3, and 12.3.4, and Example 11.6.3 empty on `main`;
 do not merge the proposal to make `main` pass. The audit also records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Continue Sections 12.3--13.5 in order, starting with sets in
-`book/hierarchy.tex`. Section 12.3 has five numbered items: the set
-predicate, natural numbers as a set, the axiom-K characterization, the
-proposition-valued reflexive relation criterion, and Hedberg's theorem.
-The relation theorem must cover any map from identities into the relation,
-not merely the chosen map in the reverse direction. Pinned
-`foundation-core/sets` and `foundation/decidable-equality` provide the main
-proofs. Avoid importing the later relation theorem before the natural-number
-example; its book proof instead transfers propositionality along the
-already available equality-code equivalence.
+Publish and validate the recorded Theorem 12.3.4 solution on the shared
+proposal. Add `tot-htpy`, `tot-id`, and `preserves-comp-tot` at Definition
+11.1.1; add `fundamental-theorem-id-retraction` at Theorem 11.2.2; restore
+the retained later proof. The exact ranges and local adaptations are in
+the exercise index and invisible-math record. Recheck every Chapter 11
+section, Sections 12.1--12.3, and aggregate Chapters 10--12. Then continue
+Sections 12.4--13.5 in order, starting with general truncation levels in
+`book/hierarchy.tex`.
 Add exercise Agda only as needed by sections, accounting for any remaining
 exercise assertions. Exercise 10.7's existing custom-list rendering loses
 the outer alphabetical labels; the audit records this presentation issue
