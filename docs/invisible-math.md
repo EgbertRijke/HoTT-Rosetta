@@ -381,3 +381,8 @@ The regression test checks this boundary, the four implication functions,
 the actual use of both weak-extensionality hypotheses, and the later
 induction order. Remark 13.1.4's rule is represented by the contextual
 postulates, not by a new redundant assumption.
+
+Published proposal merge `dc97e2f5941b950b2cfd3283794adee1278891b2`
+validates this section against the existing auxiliaries without adding
+any new one. Section 13.1 and aggregate Chapter 13 pass actual Agda;
+main retains its conservative training-dependency deferral.

@@ -431,5 +431,11 @@ That earlier empty-section check is not evidence for the new mathematics.
 
 Main passes all 160 unit tests, repository checks (534 verified blocks),
 and whitespace checks. The new Section 13.1 and Chapter 13 are deferred on
-main through existing training dependencies. Actual proposal validation is pending. No new
-training site, exercise Agda, complete-file record, or review decision is added.
+main through existing training dependencies. Published proposal merge
+`dc97e2f5941b950b2cfd3283794adee1278891b2` passes actual candidate checks
+for Sections 2.2 and 13.1, aggregate Chapters 1--6 and 13--14, all 165
+unit tests, repository checks (546 verified blocks), and whitespace checks.
+The Section 2.2 merge was regenerated from the combined manifest and
+preserves every proposal Agda block and its order byte-for-byte. Both
+branches' regression tests were retained. No new training site, exercise
+Agda, complete-file record, or review decision is added.

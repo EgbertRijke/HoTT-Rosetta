@@ -205,5 +205,8 @@ also transitively retain the Section 11.4, 11.6, and 12.4 training
 dependencies; this conservative whole-file deferral does not mean every
 imported exercise is directly used in the new proof. The two pre-axiom
 equivalence results take their hypotheses as arguments. Function
-extensionality is assumed only at Axiom 13.1.3. Proposal validation of
-this new section is pending; main's deferred result is not a pass.
+extensionality is assumed only at Axiom 13.1.3. Published proposal merge
+`dc97e2f5941b950b2cfd3283794adee1278891b2` passes candidate Sections 2.2
+and 13.1, aggregate Chapters 1--6 and 13--14, all 165 unit tests, and
+repository and whitespace checks. No new solution code was necessary;
+main's deferred result is not a pass.
