@@ -16,6 +16,20 @@ completion.
 
 Work continues on `main`.
 
+Section 14.3 now has seventeen provenance-backed blocks for all four
+numbered items and the complete eight-row connective table. Both
+universal-property proofs retain the full composition of two equivalences,
+not merely their converse maps. Its needed Exercise 13.8 has the full
+dependent coproduct universal property, inverse homotopies, and ordinary
+specialization at that exact home. No earlier section is enlarged or new
+training site introduced. The renderer now distinguishes `⊥` from `empty`
+and `⇔` from `↔`; Exercise 14.8's symbol is regenerated without Agda
+changes. Section 7.1's existing correct output is unchanged.
+Main passes 180 unit tests, repository checks (622 blocks: 176 exact,
+388 adapted, 58 historical/local), and whitespace checks. Section 7.1
+and Chapter 7 pass Agda. Section 14.3, Exercise 13.8, and Chapters 13--14
+defer through existing sites. Actual proposal validation is next.
+
 Section 14.2 now has eighteen provenance-backed blocks accounting for its
 formation rules, both constructors, and all five numbered items. Its four
 explicitly labeled HIT assumptions are proposition-level only. The full
@@ -231,26 +245,32 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Continue Section 14.3, “Logic in type theory”,
-`book/propositional-truncation.tex`, lines 256--341. Inventory both
-definitions, both universal-property propositions and full proofs, and
-every row of the logical-connective table. Inspect the exact prerequisite
-Exercise 13.8 (the coproduct universal property) and Section 13.3's
-Sigma universal property before choosing pinned disjunction/existential
-code. Add exercise Agda only if the section needs it, at its exact home.
-Keep Section 14.2's proposition-level HIT assumptions and Section 14.1's
-identity-based unique-extension interface unchanged.
+First publish Section 14.3 on main, bring current main into the shared
+proposal, and validate Section 14.3, Exercise 13.8, and affected aggregate
+Chapters 13--14 with actual Agda. Record that validation; main keeps all
+nine earlier training holes. No new solution is currently needed.
 
-Pinned `foundation/disjunction` supplies the disjunction, introduction
-maps, and logical-equivalence eliminator; `foundation/existential-quantification`
-supplies the corresponding existential constructions. Do not stop at
-those two-map witnesses: the book's proofs explicitly assert that both
-arrows in each composite are equivalences. Inspect
-`foundation/universal-property-coproduct-types`, lines 34--68, for the
-full Exercise 13.8 proof and ordinary specialization; reuse the existing
-Section 13.3 Sigma proof and Section 14.2 truncation universal property.
-Preserve the statement and all table rows even where a connective already
-has its natural mathematical home in an earlier section.
+Then continue Section 14.4, “Mapping propositional truncations into sets”,
+`book/propositional-truncation.tex`, lines 342--457. Inventory all six
+numbered items, the introductory proposition-valued factorization strategy,
+the natural-number minimal-element argument and its finite-type corollary,
+both constant/weakly-constant identity characterizations, and the full
+Kraus theorem including uniqueness, image proposition, extension, and both
+inverse laws. Preserve the explicit map using action on the path constructor.
+
+Inspect pinned `elementary-number-theory/well-ordering-principle-natural-numbers`
+and `elementary-number-theory/well-ordering-principle-standard-finite-types`
+for the minimal-element and epsilon-operator constructions. Reuse the
+earlier well-ordering proof unchanged where possible. Inspect
+`foundation/hilberts-epsilon-operators`, `foundation/weakly-constant-maps`,
+and `foundation/universal-property-propositional-truncation-into-sets`.
+The last gives the full image-proposition and two-inverse proof without
+requiring a Chapter 15 images import. Do not copy `foundation/global-choice`'s
+later univalence-based inconsistency proof here: Remark 14.4.2 explicitly
+defers that assertion. Keep Section 14.2's HIT assumptions and Section
+14.1's identity-based unique-extension interface unchanged. Follow the
+training policy for genuinely absent earlier auxiliaries and preserve every
+source representation difference explicitly.
 
 For later Section 17.1, `book/univalence.tex`, lines 11--109, inspect
 the Chapter 17 introduction at lines 1--10. Inventory all six numbered

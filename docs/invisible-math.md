@@ -726,3 +726,65 @@ or earlier auxiliary addition was needed. The main-to-proposal merge
 preserved Section 2.2's existing proposal Agda and both independently
 inserted gap records. Main retains its ninth empty training site and
 reports Section 14.2 and Chapter 14 deferred, not passed.
+
+### Section 14.3: propositional logic and its universal properties
+
+No new absent auxiliary or training site is introduced. All eighteen new
+records use pinned commit `c85d7fb834778f96a66576318cdc4ef3d4b80a26`;
+inclusive primary and secondary source hashes are in the Chapter 14 manifest.
+
+- `foundation/disjunction`, lines 99--110 and 116--132, supplies the
+  underlying-type helper and the actual proposition-valued disjunction.
+  Lines 142--150 give both introductions at the proof's defining display;
+  161--176 and 184--197 give evaluation, the universal-property predicates,
+  the converse via coproduct recursion, and both logical implications.
+- The book additionally proves that each arrow in its composite is an
+  equivalence. Specialize `foundation-core/equivalences`, 424--431,
+  already local at Exercise 9.4, to truncation precomposition followed by
+  coproduct evaluation. Reuse Theorem 14.2.4's proof from
+  `foundation/propositional-truncations`, 169--177. Copy the second
+  prerequisite from `foundation/universal-property-coproduct-types`,
+  33--67, at its exact Exercise 13.8 home. Preserve its induction inverse,
+  both inverse homotopies, dependent equivalence and ordinary specialization;
+  this exercise was previously uncurated. No earlier section is enlarged.
+- `foundation/existential-quantification`, 98--109 and 115--130, supplies
+  the underlying-family helper and proposition-family existential type.
+  Lines 136--141 give introduction at the epsilon sentence. Lines
+  153--168, 181--192, and 212--218 give the predicates, evaluation,
+  Sigma-induction converse, and both logical implications.
+- For the existential composite-equivalence proof, specialize the same
+  local Exercise 9.4 theorem to truncation precomposition followed by
+  evaluation on pairs. Its second equivalence is the existing Theorem
+  13.3.1, from `foundation/universal-property-dependent-pair-types`, 32--49,
+  specialized to a constant codomain family. Both composite maps are
+  definitionally the copied evaluation functions. These typed applications
+  preserve the book's proof, rather than substituting the source's
+  proposition-converse criterion for the two-arrow equivalence argument.
+- The table reuses `unit-Prop` and `empty-Prop` from Example 12.1.2 and
+  the new disjunction and existential bundles. Its remaining interpretations
+  are the pinned implication bundle (`foundation/dependent-products-propositions`,
+  109--124), conjunction (`foundation/conjunction`, 74--90), bi-implication
+  (`foundation/logical-equivalences`, 65--85), and universal quantification
+  (`foundation/dependent-products-propositions`, 41--53). Expand only
+  proposition-bundle wrappers using that last file's 94--107 and
+  `foundation-core/propositions`, 224--236. Reuse the existing function,
+  dependent-product, and Exercise 12.6(a) product proposition proofs.
+  These are the logical table's interpretation bundles, not new earlier
+  closure theorems. Reverse insertion at the shared final-row anchor is
+  intentional and tested to preserve logical display order and the table.
+
+Replace `UU`/`UUω` by `Type`/`Typeω`. No postulate, rewrite rule, or
+later univalence assumption is added. Exercise 13.8's source has a free-b
+typo in its displayed right family; its prose stays unchanged and the
+pinned Agda binds the variable correctly. The section's introductory
+contrast with Curry--Howard and its nonclosure discussion remain prose;
+the positive closure results reuse the earlier proposition proofs.
+
+The converter now distinguishes logical falsity `⊥` from the empty type,
+and logical `⇔` from type-theoretic `↔`, as the two columns in the source
+table do. Regeneration changes the corresponding Exercise 14.8 symbol,
+without adding exercise Agda. Section 7.1 was also regenerated and checked;
+its existing output already used the correct symbol and is unchanged.
+The section's visible unsupported-center marker and both diagram drafts
+are retained. Main reports Section 14.3, Exercise 13.8, and Chapters
+13--14 deferred through existing sites; proposal validation is pending.

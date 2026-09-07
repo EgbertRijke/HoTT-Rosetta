@@ -705,3 +705,49 @@ repository checks (616 verified blocks), and whitespace checks. The
 main-to-proposal merge preserved all existing Section 2.2 Agda and both
 independently inserted gap records. Main keeps all nine training sites
 empty; no completion or review record is changed.
+
+## Section 14.3: logic in type theory
+
+Seventeen section blocks and one needed exercise block account for the
+four numbered items, both complete proofs, and all eight connective-table
+interpretations in `book/propositional-truncation.tex`, lines 256--341.
+
+| Item | Curated mathematical content |
+| --- | --- |
+| Definition 14.3.1 | The pinned truncation of an underlying coproduct, its proposition proof, and the actual proposition-valued disjunction and notation. |
+| Proposition 14.3.2 | Both introduction maps at their defining display, evaluation, the arbitrary-target universal-property predicates, the coproduct-recursion converse and logical equivalence, and the full composite-equivalence proof with both arrow witnesses. |
+| Definition 14.3.3 | The pinned truncation of an underlying dependent sum, its proposition proof, and the actual proposition-family existential quantification and notation. |
+| Proposition 14.3.4 | Dependent introduction at its epsilon sentence, arbitrary-target predicates, evaluation, the Sigma-induction converse and logical equivalence, and the full composite-equivalence proof with both arrow witnesses. |
+| Table | Unit and empty propositions reuse Example 12.1.2; disjunction and existence reuse the section's definitions. Implication, conjunction, bi-implication, and universal quantification receive their pinned proposition bundles after the complete table, using the existing closure proofs. |
+| Required Exercise 13.8 | The entire dependent coproduct universal property, explicit induction inverse and both homotopies, forward equivalence bundle, and ordinary specialization, at its exact cited exercise home. |
+
+The two composite proofs are typed applications of Exercise 9.4's existing
+composition theorem. Their first arrow uses Theorem 14.2.4; their second
+uses Exercise 13.8 or Theorem 13.3.1, respectively. No earlier complete
+section is enlarged, no training solution is copied into main, and no
+postulate or later axiom is introduced. The underlying-type helpers are
+followed by the book's exact proposition specializations; they are not a
+substitution of untruncated disjunction or Sigma for the logical operators.
+The motivating nonclosure discussion and the exercise's free-b typo are
+preserved as written; no new unproved Agda assertion replaces that prose.
+
+The table's two columns now retain the source distinction between `⊥`
+and `empty`, and between `⇔` and `↔`. The same notation repair regenerates
+Exercise 14.8 without adding Agda. Section 7.1's existing correct table
+is unchanged after regeneration. Both diagram drafts and the visible
+unsupported-center diagnostic remain. The four table blocks share a
+final-row anchor, with tested reverse insertion order; no code splits the
+Markdown table or intrudes into the preceding proposition.
+
+Removing Agda and the one table heading recovers the rendered section
+exactly modulo whitespace. Raw comparison is 99.49%, with 6/7 distinct
+headings and all eight text fences, no unresolved references or raw TeX.
+Regression tests check every numbered item, both explicit composite
+equivalence arguments, the introduction anchors, all table rows, table
+block order, full prose, and the complete exercise inverse data.
+
+Main passes all 180 unit tests, repository checks (622 verified blocks),
+and whitespace checks. Section 7.1 and Chapter 7 pass Agda. Section
+14.3, Exercise 13.8, and aggregate Chapters 13--14 correctly defer through
+the existing training sites. Actual proposal validation is pending.
+No review or complete-file record is changed.

@@ -9,6 +9,20 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 class RenderTests(unittest.TestCase):
+    def test_propositional_logic_table_preserves_all_eight_interpretations(self):
+        result = render_section(ROOT / "book" / "propositional-truncation.tex", 14, 3)
+        rows = [line for line in result.splitlines() if line.startswith("| `")]
+        import re
+        self.assertEqual([re.findall(r"`([^`]+)`", row) for row in rows], [
+            ["⊤", "unit"], ["⊥", "empty"], ["P⇒ Q", "P→ Q"],
+            ["P∧ Q", "P× Q"], ["P∨ Q", "‖P+Q‖"], ["P⇔ Q", "P↔ Q"],
+            ["∃_{(x:A)}P(x)", "‖Σ(x:A) P(x)‖"],
+            ["∀_{(x:A)}P(x)", "Π(x:A) P(x)"],
+        ])
+        self.assertIn("Exercise 13.8", result)
+        self.assertIn("Theorem 13.3.1", result)
+        self.assertEqual(result.count("rosetta-diagram:"), 2)
+
     def test_truncation_universe_rules_preserve_nested_conclusions(self):
         result = render_section(ROOT / "book" / "propositional-truncation.tex", 14, 2)
         self.assertIn("Γ⊢ ‖A‖ type", result)

@@ -9,6 +9,11 @@ from rosetta.math_text import (
 
 
 class MathTextTests(unittest.TestCase):
+    def test_logical_connectives_remain_distinct_from_their_interpretations(self):
+        self.assertEqual(normalize_math(r"\bot, \emptyt, P\Leftrightarrow Q, P\leftrightarrow Q"),
+                         "⊥, empty, P⇔ Q, P↔ Q")
+        self.assertEqual(normalize_math(r"\bottomrule"), r"\bottomrule")
+
     def test_cases_keep_grouping_values_conditions_and_surrounding_equations(self):
         self.assertEqual(
             normalize_math(r"h(x)=\begin{cases}H(m,q) & \text{if }x=\inl(q)\\"
