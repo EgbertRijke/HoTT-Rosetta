@@ -29,7 +29,9 @@ Record all non-obvious decomposition choices. Keep the explanation short.
 - **Source:** Commit `c85d7fb834778f96a66576318cdc4ef3d4b80a26`,
   `src/foundation-core/function-types.lagda.md`, lines 48--50.
 - **Notation:** Replace `UU` by `Type`.
-- **Uses:** Definition 10.2.1, Example 10.2.2, and Theorem 10.2.3.
+- **Uses:** Definition 10.2.1, Example 10.2.2, Theorem 10.2.3, and the
+  identity-system implication of Theorem 11.2.2; through it, Sections 11.3
+  and 11.4.
 
 On the proposal, restore the retained Definition 10.2.1 block after adding
 evaluation at Remark 2.2.2. Its source is
@@ -50,7 +52,7 @@ training exercise because the need arises there.
 - **Main source:** Commit `c85d7fb`,
   `src/foundation-core/coherently-invertible-maps.lagda.md`, lines 464--524.
 - **Later use:** Theorem 10.4.6; its contractible-fiber result is used by
-  Theorem 11.1.3 and Lemma 11.1.4, and then by Theorem 11.1.6.
+  Theorem 11.1.3 and Lemma 11.1.4, then Theorem 11.1.6 and Sections 11.2--11.4.
 
 Required mathematics, in dependency order:
 
@@ -109,3 +111,11 @@ Theorem 10.4.6. This keeps the book's fundamental-theorem proof route; the
 alternative coherent-inverse proof in `foundation-core/equivalences` is not
 used. The auxiliary fiber equivalence is proved directly by path inversion
 rather than by a separate appeal to Exercise 9.1 and `equiv-tot`.
+
+Published proposal `63e5e49` places the whole 215--244 excerpt in
+`definition-10.3.1-fiber-orientation-equivalence`, after the existing fiber
+types and before the item's closing marker. It adds no imports and no
+Chapter 11 dependency to Section 10.3. The stored Theorem 11.4.2 block is
+restored without changing its specialized proof. A regression test checks
+this placement and the transition prose boundary. Section 10.3, Sections
+11.1--11.4, and Chapters 10--11 pass ordinary Agda checks there.

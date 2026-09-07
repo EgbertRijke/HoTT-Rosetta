@@ -126,11 +126,14 @@ Both numbered items and the complete proof are preserved.
 | Item | Formalization |
 | --- | --- |
 | Definition 11.4.1 | `is-emb`, the type `_↪_`, its projections, and the induced equivalence on identity types. |
-| Theorem 11.4.2 | Empty training block on `main`: specialize the pinned contractible-fiber embedding criterion using Theorem 10.4.6; it needs the missing equivalence between ordinary and reverse fibers. The packaged `is-emb-equiv` and `emb-equiv` are retained downstream. |
+| Theorem 11.4.2 | Empty training block on `main`, solved on proposal `63e5e49`: specialize the pinned contractible-fiber embedding criterion using Theorem 10.4.6 and the fiber-orientation equivalence placed at Definition 10.3.1. The packaged `is-emb-equiv` and `emb-equiv` are retained downstream. |
 
 The auxiliary belongs at Definition 10.3.1, but complete Section 10.3 must
 remain unchanged on `main`. The exercise index and invisible-math record
 describe the proposal placement. No direct coherent-inverse proof or new
 unproven assumption is substituted. Section 11.4 and Chapter 11 are deferred
-on `main`, and no Chapter 11 section is marked complete. Proposal publication
-and actual typechecking of this new exercise are pending.
+on `main`, and no Chapter 11 section is marked complete. Proposal `63e5e49`
+passes Sections 10.3 and 11.1--11.4 and aggregate Chapters 10--11, all 150
+unit tests, and repository checks. The Section 11.4 prose comparison preserves
+all four headings and six displays, with no unresolved references or raw TeX
+commands. Main's 148 tests pass; its affected Agda checks remain deferred.
