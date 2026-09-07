@@ -1,42 +1,8 @@
 # Agda training exercises
 
-These are later Agda blocks left empty because they need auxiliary mathematics
-absent from otherwise complete earlier files.
-
-An exercise site contains an empty fence:
-
-````text
-```agda
-```
-````
-
-For each exercise, record:
-
-- a stable name;
-- the file and mathematical location;
-- the result to prove;
-- the absent auxiliary result;
-- why the earlier file should remain unchanged;
-- every later result that needs it;
-- the matching entry in `docs/invisible-math.md`.
-- the proposal branch, solution commit, and review state.
-
-The exercise belongs where the absent result first blocks formalization. The
-invisible-math entry names the result's natural mathematical home.
-
-Every exercise has a solution on `proposal/agda-exercise-solutions`. Create and
-publish this branch from current `main` when the first exercise appears. Agents
-must make one focused solution commit, validate and push it, then record its
-commit here on `main`. Before each solution, they must bring current `main`
-into the proposal without rewriting public history. The proposal is never
-merged automatically.
-
-Routine checks report a file containing or importing one of these exercises as
-`deferred`; Agda is not run. This is not a proof result. `--force` runs the
-unchanged Agda check. The proposal solution and all affected later files must
-pass Agda normally.
-
-These steps bind agents only. Humans may edit either branch freely.
+This is the exercise index. The policy and mandatory agent workflow are in
+`docs/conversion-contract.md`. Each entry links the empty site to its required
+mathematics, proposal solution, and review state.
 
 ## Exercises
 
