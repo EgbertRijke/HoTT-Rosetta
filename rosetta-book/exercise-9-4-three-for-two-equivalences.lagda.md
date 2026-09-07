@@ -336,3 +336,25 @@ module _
           ( g , is-retraction-rg))
         ( retraction-top-map-triangle f g h H retraction-f))
 ```
+
+<!-- rosetta-agda-block: exercise-9-4-composition-equivalences -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  where
+
+  opaque
+    is-equiv-comp :
+      (g : B → X) (h : A → B) → is-equiv h → is-equiv g → is-equiv (g ∘ h)
+    pr1 (is-equiv-comp g h (sh , rh) (sg , rg)) = section-comp g h sh sg
+    pr2 (is-equiv-comp g h (sh , rh) (sg , rg)) = retraction-comp g h rg rh
+
+  comp-equiv : B ≃ X → A ≃ B → A ≃ X
+  pr1 (comp-equiv g h) = map-equiv g ∘ map-equiv h
+  pr2 (comp-equiv g h) = is-equiv-comp (pr1 g) (pr1 h) (pr2 h) (pr2 g)
+
+  infixr 15 _∘e_
+  _∘e_ : B ≃ X → A ≃ B → A ≃ X
+  _∘e_ = comp-equiv
+```

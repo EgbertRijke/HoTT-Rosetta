@@ -229,6 +229,33 @@ class AgdaManifestTests(unittest.TestCase):
         self.assertLess(position, end)
         self.assertLess(end, document.index("In other words, the fiber"))
 
+    def test_coproduct_identity_proof_follows_its_delayed_proof(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        selected = [
+            block for block in load_manifest(root / "data" / "agda-blocks.json")
+            if block.destination.startswith("section-11-5-")
+        ]
+        self.assertEqual(len(selected), 8)
+        for block in selected:
+            document = (rosetta_directory(root) / block.destination).read_text()
+            position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+            if block.item_id == "theorem-11.5.1":
+                proof = document.index("<!-- rosetta-item: subheading-11.5-proof-2 -->")
+                contraction = document.index("  is-torsorial-Eq-coproduct :")
+                self.assertLess(contraction, proof)
+                self.assertLess(proof, position)
+                self.assertLess(document.index(block.after_text), position)
+                for case in ("inl-inl", "inl-inr", "inr-inl", "inr-inr"):
+                    self.assertGreater(document.index(f"    compute-eq-coproduct-{case} :"), position)
+            else:
+                start = document.index(f"<!-- rosetta-item: {block.item_id}")
+                end = document.index(f"<!-- rosetta-item-end: {block.item_id} -->")
+                self.assertLess(start, position)
+                self.assertLess(position, end)
+        self.assertFalse(document.endswith("\n\n"))
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

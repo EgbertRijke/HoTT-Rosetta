@@ -137,3 +137,32 @@ passes Sections 10.3 and 11.1--11.4 and aggregate Chapters 10--11, all 150
 unit tests, and repository checks. The Section 11.4 prose comparison preserves
 all four headings and six displays, with no unresolved references or raw TeX
 commands. Main's 148 tests pass; its affected Agda checks remain deferred.
+
+## Section 11.5 (2026-09-06)
+
+All four numbered items and both proofs are preserved. The source is the
+pinned `foundation/equality-coproduct-types` module.
+
+| Item | Formalization |
+| --- | --- |
+| Theorem 11.5.1 | `extensionality-coproduct` and all four `compute-eq-coproduct-*` equivalences, placed at the theorem's delayed proof after Proposition 11.5.4, not at its opening announcement. |
+| Definition 11.5.2 | Upstream's indexed `Eq-coproduct` and four case equivalences. This represents the book's case table up to equivalence, not by judgmental reduction; both mixed cases are proved equivalent to `empty`. |
+| Lemma 11.5.3 | Reflexivity, the canonical map by path induction, and its inverse map. |
+| Proposition 11.5.4 | The centers and contractions for both summands. The copied proof contracts the indexed code directly by path induction; the prose retains the book's equivalent calculation with sums and total path spaces. |
+
+Only two dependencies were added earlier. Exercise 9.4 receives equivalence
+composition from its existing section/retraction composition laws. Example
+9.2.9 receives the general empty-type equivalence criterion underlying the
+absorption laws and mixed coproduct cases. Neither earlier file was complete:
+Exercise 9.4 has recorded remaining parts, and Example 9.2.9 had none of its
+displayed equivalences formalized. An explicit gap keeps those laws visible
+despite the new auxiliary; no earlier complete section was enlarged.
+
+The final theorem block keeps `theorem-11.5.1` as its mathematical identity
+and uses an exact `after_text` anchor in its later proof. A regression test
+checks that all dependencies precede it and that the four case conclusions
+occur there. Trailing newlines are normalized after block insertion so an
+anchor at the document end does not add a blank line. The prose comparison
+has all seven headings and eight displays without unresolved references or
+raw TeX commands. Section 11.5 remains deferred on `main` through the Chapter
+10 exercises; proposal validation is pending.
