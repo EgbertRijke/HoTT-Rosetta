@@ -352,14 +352,104 @@
       ],
       "state": "needs-further-review"
     },
+    "exercise-7-4-natural-value-one-finite": {
+      "comments": [],
+      "review_sha256": "15cbbbce0d0ce9224efb9a3a85d90faf00dd3cf390edd5ad6dfeacf92bda6fed",
+      "state": "approved"
+    },
+    "exercise-7-4-one-finite": {
+      "comments": [],
+      "review_sha256": "1e17b6971919b86a7ee165603064d3c05386af2e3c3725b8451f86e3128ee953",
+      "state": "approved"
+    },
+    "exercise-7-4-successor-adds-one": {
+      "comments": [],
+      "review_sha256": "6ee6097e1e1b414b88ae484d5e614a9dac20ad96fcbc04556b241c831d67d9f8",
+      "state": "approved"
+    },
+    "exercise-7-5-injective-inclusion": {
+      "comments": [],
+      "review_sha256": "73818396dd570ddc8a83dacfac8840450a3032ba78f24906ef5880c71e217635",
+      "state": "approved"
+    },
+    "exercise-7-5-injective-successor": {
+      "comments": [],
+      "review_sha256": "82b8bbe3bcc37df92f6bc5a2bf8310fe7fb313e5950b6aff78f81459f3cb2eb6",
+      "state": "approved"
+    },
+    "exercise-7-5-observational-equality": {
+      "comments": [],
+      "review_sha256": "1350e913e10b48808229be6135b7134199c69e5ea89c5da84fb85c949bd3d271",
+      "state": "approved"
+    },
+    "exercise-7-5-successor-nonzero": {
+      "comments": [],
+      "review_sha256": "471bff602e11f9a075d81cfd7bba25f64c204cd212a1713e10a59d8ce9d866f7",
+      "state": "approved"
+    },
+    "exercise-7-5-zero-predicates": {
+      "comments": [],
+      "review_sha256": "ea48ba2b18f72cfd7dccd8f6d6ea811bdd88cc4bccc113a54d693f33524f1061",
+      "state": "approved"
+    },
+    "exercise-7-6-negative-finite-elements": {
+      "comments": [],
+      "review_sha256": "f3e6adb1a7ee4076ca6ddc28e11ce58cf209754a30eba2df68a25fd8171b43f4",
+      "state": "approved"
+    },
+    "exercise-7-6-predecessor": {
+      "comments": [],
+      "review_sha256": "55a6c8b0e29fd0f7d2d79e9deb96f2a118f7040eda5baa8b9e37712c569a7563",
+      "state": "approved"
+    },
+    "exercise-7-6-predecessor-inverse": {
+      "comments": [],
+      "review_sha256": "9bf9b60172b529cfcfd632793c5e89c1dc67eee2c2a38a4ebf9ca45f29bc9580",
+      "state": "approved"
+    },
+    "exercise-7-6-skip-negative-two": {
+      "comments": [],
+      "review_sha256": "eede5d5927341aa7919af1dfa6d8befe41aa7f3b5cf193100d883573738ad0f9",
+      "state": "approved"
+    },
+    "exercise-7-7-equality-classical-finite": {
+      "comments": [],
+      "review_sha256": "d93d5a53991bb941114984697f357138df9d2d8a866f92cf583ee5c7d3e0ea84",
+      "state": "approved"
+    },
+    "exercise-7-7-inverse-classical-standard-finite": {
+      "comments": [],
+      "review_sha256": "7920feead84469f07ddea9a0670e121328861f9f80b2428cca25cdac269d9c4b",
+      "state": "approved"
+    },
+    "exercise-7-7-maps-classical-standard-finite": {
+      "comments": [],
+      "review_sha256": "61b4d65b33031a7a4bb3d05a00917682808969f78a3671b3a479cb0d4daa4a11",
+      "state": "approved"
+    },
+    "exercise-7-7-natural-value-classical-finite": {
+      "comments": [],
+      "review_sha256": "da604346a3bcc5c394ba45627b52d357d57128677fabd4a4f2acb45476a2507e",
+      "state": "approved"
+    },
     "exercise-7-8-action-addition-finite": {
       "comments": [],
       "review_sha256": "16cd7cef7ea7f52bcae5e168f48b518c11a04dbbf4b67194cba48e20a651633d",
       "state": "approved"
     },
+    "exercise-7-8-congruence-multiplication-natural": {
+      "comments": [],
+      "review_sha256": "1984eafb357452f2129f976bd834028bd98c62d46e1b6961dce634bc1e6d9335",
+      "state": "approved"
+    },
     "exercise-7-8-multiplication-finite": {
       "comments": [],
       "review_sha256": "7d0a554e9f7f15de116dcfef8fb0a73188600565ffc7ea40309e5501a3383a55",
+      "state": "approved"
+    },
+    "exercise-7-8-ring-laws-finite": {
+      "comments": [],
+      "review_sha256": "1dcb4720001e1d7bb61a11a5951110e2ef92bce221eb55d54d80fa78e7e0646c",
       "state": "approved"
     },
     "exercise-7-9-bound-natural-remainder": {
