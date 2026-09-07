@@ -258,7 +258,9 @@ its remaining terminal-map characterization is still lower-priority work.
 This section introduces no new training exercise. Its subterminal proof
 depends on the existing Theorem 11.4.2 exercise, and transitively on the two
 Chapter 10 exercises. Main's Exercise 10.1 candidate passes; Section 12.1 is
-deferred, not passed. Actual Section 12.1 and aggregate validation on the
-shared proposal is pending. No completion or optional review state is inferred.
+deferred, not passed. Published proposal `0c3d8b1` passes Section 12.1,
+Exercise 10.1, and aggregate Chapters 10--12, with all 155 tests and repository
+checks passing. Main's 152 tests and repository checks also pass, but no
+completion or optional review state is inferred from its deferred Agda check.
 All generated imports are repository-local; no later truncation theory or
 function-extensionality assumption is imported ahead of its narrative home.

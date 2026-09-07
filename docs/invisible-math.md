@@ -177,3 +177,5 @@ section. The required `is-prop-is-contr` is copied from
 `foundation-core/contractible-types` lines 197--200 to the previously empty
 Exercise 10.1, its exact book home. All ranges use the same pinned commit.
 These choices add no new training exercise or function-extensionality axiom.
+Proposal `0c3d8b1` validates Section 12.1, Exercise 10.1, and aggregate
+Chapters 10--12 with these placements and the existing training solutions.
