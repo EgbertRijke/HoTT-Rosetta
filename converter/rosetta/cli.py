@@ -35,7 +35,11 @@ from .review import discover_diagram_reviews, update_diagram_review
 from .agda_review import discover_agda_reviews
 from .review_web import serve_review
 from .missing_agda import load_agda_coverage
-from .agda_typecheck import prepare_candidate_dependencies
+from .agda_typecheck import (
+    deferred_exercises,
+    deferred_message,
+    prepare_candidate_dependencies,
+)
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -356,7 +360,13 @@ def command_convert(first: int, last: int) -> int:
     return 0
 
 
-def command_typecheck_candidate(section: int, subsection: int) -> int:
+def _report_deferred(label: str, pending) -> None:
+    print(f"{label} deferred; Agda was not run.")
+    print(deferred_message(pending))
+    print("Use --force to run the unchanged Agda check anyway.")
+
+
+def command_typecheck_candidate(section: int, subsection: int, force: bool = False) -> int:
     sections = inventory(ROOT / "book")
     if section < 1 or section > len(sections):
         print(f"Chapter must be between 1 and {len(sections)}.", file=sys.stderr)
@@ -367,6 +377,10 @@ def command_typecheck_candidate(section: int, subsection: int) -> int:
             sections[section - 1], subsection, blocks
         )
         document, _ = prepare_candidate_dependencies(ROOT, document, blocks)
+        pending = deferred_exercises(blocks, filename, document)
+        if pending and not force:
+            _report_deferred("Candidate typecheck", pending)
+            return 0
         returncode, output, staged = typecheck_candidate(
             ROOT, filename, document
         )
@@ -382,7 +396,9 @@ def command_typecheck_candidate(section: int, subsection: int) -> int:
     return 0
 
 
-def command_typecheck_exercise_candidate(section: int, exercise: int) -> int:
+def command_typecheck_exercise_candidate(
+    section: int, exercise: int, force: bool = False
+) -> int:
     sections = inventory(ROOT / "book")
     if section < 1 or section > len(sections):
         print(f"Chapter must be between 1 and {len(sections)}.", file=sys.stderr)
@@ -393,6 +409,10 @@ def command_typecheck_exercise_candidate(section: int, exercise: int) -> int:
             ROOT, sections[section - 1], exercise, blocks
         )
         document, _ = prepare_candidate_dependencies(ROOT, document, blocks)
+        pending = deferred_exercises(blocks, filename, document)
+        if pending and not force:
+            _report_deferred("Exercise candidate typecheck", pending)
+            return 0
         returncode, output, staged = typecheck_candidate(ROOT, filename, document)
     except (IndexError, OSError, ValueError, RuntimeError) as error:
         print(str(error), file=sys.stderr)
@@ -406,7 +426,7 @@ def command_typecheck_exercise_candidate(section: int, exercise: int) -> int:
     return 0
 
 
-def command_typecheck_all(first: int, last: int) -> int:
+def command_typecheck_all(first: int, last: int, force: bool = False) -> int:
     """Typecheck aggregate generated chapters from the configured product."""
 
     sections = inventory(ROOT / "book")
@@ -418,12 +438,20 @@ def command_typecheck_all(first: int, last: int) -> int:
         print("Agda is not installed or not on PATH.", file=sys.stderr)
         return 2
     directory = rosetta_directory(ROOT)
+    blocks = load_manifest(ROOT / "data" / "agda-blocks.json")
+    passed = 0
+    deferred = 0
     for section in sections[first - 1:last]:
         filename = registered_filename(ROOT, "chapter", section.number)
         path = directory / filename
         if not path.is_file():
             print(f"Generated chapter is missing: {path.relative_to(ROOT)}", file=sys.stderr)
             return 1
+        pending = deferred_exercises(blocks, filename, path.read_text())
+        if pending and not force:
+            _report_deferred(f"Chapter {section.number}", pending)
+            deferred += 1
+            continue
         print(f"Typechecking Chapter {section.number}: {filename}", flush=True)
         process = subprocess.run(
             [
@@ -439,7 +467,11 @@ def command_typecheck_all(first: int, last: int) -> int:
         )
         if process.returncode:
             return process.returncode
-    print(f"Aggregate Chapters {first}--{last} typecheck.")
+        passed += 1
+    if deferred:
+        print(f"Agda accepted {passed} chapter(s); {deferred} chapter(s) remain deferred.")
+    else:
+        print(f"Aggregate Chapters {first}--{last} typecheck.")
     return 0
 
 
@@ -616,17 +648,29 @@ def build_parser() -> argparse.ArgumentParser:
     )
     candidate_check.add_argument("section", type=int)
     candidate_check.add_argument("subsection", type=int)
+    candidate_check.add_argument(
+        "--force", action="store_true",
+        help="run Agda even when the candidate has an unfinished exercise",
+    )
     exercise_check = subcommands.add_parser(
         "typecheck-exercise-candidate",
         help="typecheck one generated exercise under a temporary module name",
     )
     exercise_check.add_argument("section", type=int)
     exercise_check.add_argument("exercise", type=int)
+    exercise_check.add_argument(
+        "--force", action="store_true",
+        help="run Agda even when the candidate has an unfinished exercise",
+    )
     typecheck_all = subcommands.add_parser(
         "typecheck-all", help="typecheck aggregate generated chapter modules",
     )
     typecheck_all.add_argument("--from", dest="first", type=int, default=1)
     typecheck_all.add_argument("--to", dest="last", type=int, default=22)
+    typecheck_all.add_argument(
+        "--force", action="store_true",
+        help="run Agda even for chapters with unfinished exercises",
+    )
     source_audit = subcommands.add_parser(
         "agda-source-audit",
         help="find existing section blocks copied verbatim from agda-unimath",
@@ -671,13 +715,15 @@ def main(argv=None) -> int:
     if arguments.command == "convert":
         return command_convert(arguments.first, arguments.last)
     if arguments.command == "typecheck-candidate":
-        return command_typecheck_candidate(arguments.section, arguments.subsection)
+        return command_typecheck_candidate(
+            arguments.section, arguments.subsection, arguments.force
+        )
     if arguments.command == "typecheck-exercise-candidate":
         return command_typecheck_exercise_candidate(
-            arguments.section, arguments.exercise
+            arguments.section, arguments.exercise, arguments.force
         )
     if arguments.command == "typecheck-all":
-        return command_typecheck_all(arguments.first, arguments.last)
+        return command_typecheck_all(arguments.first, arguments.last, arguments.force)
     if arguments.command == "agda-source-audit":
         return command_agda_source_audit(
             arguments.first, arguments.last, arguments.json

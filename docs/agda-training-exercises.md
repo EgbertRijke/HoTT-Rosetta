@@ -31,6 +31,11 @@ commit here on `main`. Before each solution, they must bring current `main`
 into the proposal without rewriting public history. The proposal is never
 merged automatically.
 
+Routine checks report a file containing or importing one of these exercises as
+`deferred`; Agda is not run. This is not a proof result. `--force` runs the
+unchanged Agda check. The proposal solution and all affected later files must
+pass Agda normally.
+
 These steps bind agents only. Humans may edit either branch freely.
 
 ## Exercises

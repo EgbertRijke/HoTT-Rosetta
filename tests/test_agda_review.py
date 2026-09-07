@@ -302,6 +302,18 @@ answer : Type
         )
         self.assertIn("proof does not have the required type", render_record(failed))
 
+        deferred = AgdaReviewRecord(
+            **{
+                **record.to_dict(),
+                "typecheck_status": "deferred",
+                "typecheck_message": "Agda was not run. Exercise 10.4.5 is unfinished.",
+            }
+        )
+        deferred_detail = render_record(deferred)
+        self.assertIn("Agda was not run", deferred_detail)
+        self.assertIn("--force", deferred_detail)
+        self.assertNotIn(">Run Agda check<", deferred_detail)
+
     def test_missing_code_uses_the_same_review_page_for_comments(self):
         record = AgdaReviewRecord(
             **{

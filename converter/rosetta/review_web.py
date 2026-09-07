@@ -46,6 +46,7 @@ a { color: #174ea6; }
 .needs-further-review { background: #d2e3fc; }
 .pending { background: #feefc3; }
 .passed { background: #ceead6; } .failed { background: #f8d7da; }
+.deferred { background: #feefc3; }
 .not-checked, .not-applicable, .missing { background: #e8eaed; }
 .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .statement { grid-column: 1 / -1; }
@@ -448,6 +449,10 @@ def render_record(
         check_message = (
             "<p class='passed-message'>Agda accepted the complete candidate file.</p>"
         )
+    elif record.typecheck_status == "deferred":
+        check_message = (
+            f"<p class='warning'>{html.escape(record.typecheck_message)}</p>"
+        )
     elif record.typecheck_message:
         check_message = f"<pre>{html.escape(record.typecheck_message)}</pre>"
     else:
@@ -479,9 +484,15 @@ def render_record(
             if is_missing else
             f"<section class='panel'><h3>Agda check</h3>"
             f"<p>This checks the complete candidate file containing this block.</p>{check_message}"
-            f"<form method='post' action='/agda/{quote(record.block_id)}/typecheck'>"
-            f"<input type='hidden' name='token' value='{html.escape(token)}'>"
-            "<button type='submit'>Run Agda check</button></form></section>"
+            + (
+                "<p>To see Agda's raw result, run the corresponding candidate "
+                "check with <code>--force</code>.</p>"
+                if record.typecheck_status == "deferred" else
+                f"<form method='post' action='/agda/{quote(record.block_id)}/typecheck'>"
+                f"<input type='hidden' name='token' value='{html.escape(token)}'>"
+                "<button type='submit'>Run Agda check</button></form>"
+            )
+            + "</section>"
         )
         +
         "<div class='columns'>"

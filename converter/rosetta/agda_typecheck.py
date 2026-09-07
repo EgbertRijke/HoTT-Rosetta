@@ -26,6 +26,41 @@ def load_typechecks(root: Path) -> dict:
     return value
 
 
+def deferred_exercises(blocks, destination: str, document: str = "") -> list:
+    """Return unfinished exercises contained in or imported by a candidate."""
+
+    by_destination = {}
+    for block in blocks:
+        by_destination.setdefault(block.destination, []).append(block)
+    pending = {}
+    visiting = set()
+
+    def visit(current: str):
+        if current in visiting:
+            return
+        visiting.add(current)
+        for block in by_destination.get(current, []):
+            if block.conversion_status == "exercise":
+                pending[block.block_id] = block
+            if block.conversion_status == "ready":
+                for module in block.imports:
+                    visit(module + ".lagda.md")
+
+    visit(destination)
+    for module in re.findall(r"^open import ([A-Za-z0-9-]+)", document, re.MULTILINE):
+        visit(module + ".lagda.md")
+    return sorted(pending.values(), key=lambda block: (block.destination, block.item_id))
+
+
+def deferred_message(blocks) -> str:
+    items = ", ".join(dict.fromkeys(block.item_id for block in blocks))
+    return (
+        "Agda was not run. This file contains or depends on unfinished "
+        f"training mathematics: {items}. The proposal branch must pass Agda "
+        "before these exercises are accepted."
+    )
+
+
 def candidate_for_destination(
     root: Path, destination: str, blocks=None
 ) -> tuple[str, str]:
@@ -87,23 +122,40 @@ def typecheck_fingerprint(root: Path, destination: str, blocks=None) -> str:
                 for block in dependency_blocks
                 for item in (block.block_id, block.code, block.conversion_status)
             )
+    value.extend(block.block_id for block in deferred_exercises(blocks, destination))
     return hashlib.sha256("\0".join(value).encode()).hexdigest()
 
 
 def typecheck_result(root: Path, destination: str) -> dict:
     blocks = load_manifest(root / "data" / "agda-blocks.json")
     digest = typecheck_fingerprint(root, destination, blocks)
+    pending = deferred_exercises(blocks, destination)
+    if pending:
+        return {
+            "status": "deferred",
+            "message": deferred_message(pending),
+            "sha256": digest,
+            "candidate": "",
+        }
     saved = load_typechecks(root)["destinations"].get(destination, {})
     if saved.get("sha256") != digest:
         return {"status": "not-checked", "message": "", "sha256": digest}
     return saved
 
 
-def run_typecheck(root: Path, destination: str) -> dict:
+def run_typecheck(root: Path, destination: str, force: bool = False) -> dict:
     filename, document = candidate_for_destination(root, destination)
     blocks = load_manifest(root / "data" / "agda-blocks.json")
     document, _ = prepare_candidate_dependencies(root, document, blocks)
     digest = typecheck_fingerprint(root, destination, blocks)
+    pending = deferred_exercises(blocks, destination, document)
+    if pending and not force:
+        return {
+            "status": "deferred",
+            "message": deferred_message(pending),
+            "sha256": digest,
+            "candidate": "",
+        }
     returncode, output, staged = typecheck_candidate(root, filename, document)
     result = {
         "status": "passed" if returncode == 0 else "failed",

@@ -108,6 +108,20 @@ it, preserve all collaborator work.
 These steps are mandatory for agents. Humans may edit either branch without
 following them. This is allowed, though the same care is encouraged.
 
+## Deferred Agda checks
+
+An active file that contains or imports a block marked `exercise` is
+intentionally incomplete. Routine candidate and aggregate checks must not run
+Agda on it. Report `deferred` and list the exercises instead.
+
+`deferred` means only that Agda was not run. It is neither `passed` nor
+`failed`. The checker must not add definitions, change Agda options, inspect
+compiler errors, suppress errors, or infer mathematical correctness.
+
+The project commands accept `--force` to run the existing Agda invocation and
+show its ordinary result. Every proposed solution and affected later file must
+pass Agda on `proposal/agda-exercise-solutions` before acceptance.
+
 ## Agda narrative placement
 
 Agda blocks must appear where their declarations are both narratively relevant

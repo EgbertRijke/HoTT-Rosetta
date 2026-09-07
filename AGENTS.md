@@ -38,6 +38,10 @@ not current instructions.
   index. Never merge the proposal automatically or rewrite its public history.
 - These branch steps bind agents only. Humans may edit either branch freely.
   Agents must inspect and preserve human changes.
+- Routine checks do not run Agda on a file that contains or imports a recorded
+  training exercise. They report `deferred`, never `passed`. Use `--force` only
+  to see Agda's unchanged result. The proposal branch must pass ordinary Agda
+  checks for every exercise and affected later file.
 - Generated modules must use repository-local imports, never imports from
   `external/agda-unimath`.
 - Preserve unrelated and in-progress work. Agents may create focused commits
@@ -54,4 +58,5 @@ git diff --check
 ```
 
 Also run `python3 rosetta.py typecheck-candidate N M` for every changed section
-containing Agda. Typecheck exercises only when their Agda changes.
+containing Agda. A deferred result is not a successful typecheck. Typecheck
+exercises only when their Agda changes.

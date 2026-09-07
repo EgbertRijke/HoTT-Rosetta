@@ -61,6 +61,12 @@ force-push it.
 This workflow is mandatory for agents. Humans may edit either branch without
 following it. Inspect and preserve their work.
 
+Routine typechecks abstain from files that contain or import a block marked
+`exercise`. Report `deferred`, never `passed`; Agda was not run. Do not change
+Agda options, add hidden mathematics, or reinterpret compiler errors. Use the
+project command's `--force` only to request Agda's ordinary result. On the
+proposal branch, every solution and affected later file must pass Agda.
+
 Make durable prose or notation repairs in converter code or versioned data,
 regenerate every affected file, and add regression tests for recurring rules.
 
@@ -74,6 +80,8 @@ Typecheck every changed section containing Agda:
 ```text
 python3 rosetta.py typecheck-candidate N M
 ```
+
+A deferred result does not satisfy a required completed-file typecheck.
 
 Before handoff run:
 

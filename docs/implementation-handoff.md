@@ -1,6 +1,6 @@
 # Implementation handoff
 
-Updated 2026-09-04.
+Updated 2026-09-06.
 
 ## Current branch
 
@@ -113,6 +113,12 @@ final formalization phase. Do not search for or add exercise Agda yet unless a
 later section imports or otherwise directly requires it. When an exercise is a
 section dependency, add only the dependency needed to unblock section work,
 with the same provenance and validation requirements as section code.
+
+Routine checks now abstain from files that contain or import a manifest block
+marked `exercise`. They report `deferred`, list the blocking items, and do not
+invoke Agda. This does not establish correctness. `--force` runs the unchanged
+Agda command for diagnosis. Complete solutions and affected later files must
+pass ordinary Agda checks on `proposal/agda-exercise-solutions`.
 
 Chapters 1--2 are optional compatibility material. Do not let work there delay
 section completion in Chapters 3--22.
@@ -245,6 +251,9 @@ python3 rosetta.py check
 python3 rosetta.py review --web
 ```
 
+Add `--force` to a typecheck command only when Agda's raw result is wanted for
+an intentionally incomplete file.
+
 ## Required validation
 
 Before handing work back, run:
@@ -257,7 +266,9 @@ git diff --check
 
 Also typecheck every changed section containing Agda. Typecheck an exercise
 candidate only when its Agda changes. Typecheck affected aggregate chapters
-when shared dependencies or completed section sets change.
+when shared dependencies or completed section sets change. A `deferred` result
+is not a successful Agda check; rely on the proposal branch for the completed
+formalization.
 
 Preserve all unrelated and in-progress work. Commits are allowed and should be
 focused: inspect the worktree first, stage only the intended files or hunks,
