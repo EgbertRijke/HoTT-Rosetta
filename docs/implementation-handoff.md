@@ -65,9 +65,10 @@ Work continues on `main`.
   Section 12.2 now has curated code for all four numbered items, including
   both directions of the embedding and projection criteria. Theorem 12.2.3
   is a new empty training site because it directly needs `equiv-fiber` in
-  complete Section 10.3. Its shared-proposal solution is pending; reuse the
-  auxiliary already published as `63e5e49`. Exercise 10.7(a)'s projection-fiber
-  equivalence passes on `main`; parts (b) and (c) remain explicit gaps.
+  complete Section 10.3. Published proposal `7b6b28c` reuses the auxiliary
+  from `63e5e49` and passes the section, Exercise 10.7, and aggregate Chapters
+  10--12. Exercise 10.7(a)'s projection-fiber equivalence also passes on
+  `main`; parts (b) and (c) remain explicit gaps.
   Sections 12.3--13.5 have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
@@ -77,8 +78,9 @@ Work continues on `main`.
 
 The latest main validation passed all 153 unit tests, Exercise 10.7's
 candidate, `python3 rosetta.py check`, and `git diff --check`. Section 12.2
-and aggregate Chapters 10--12 are deferred. The last proposal validation
-passed 155 tests before Section 12.2 was added. Proposal
+and aggregate Chapters 10--12 are deferred. Proposal `7b6b28c` passes all
+156 unit tests, Section 12.2, Exercise 10.7, aggregate Chapters 10--12, and
+the repository and whitespace checks. Earlier proposal
 `0c3d8b1` passes candidate Section 12.1, Exercise 10.1, and aggregate Chapters
 10--12. Proposal `6bd180b` passes candidate Sections 5.2 and 11.6, Exercises
 9.1 and 10.6, and aggregate Chapters 5--11. Earlier proposal
@@ -95,15 +97,21 @@ status was inferred from this.
 
 The five assigned Chapter 10 steps and the Chapter 11 section formalizations
 are done, with the recorded training holes retained. Keep Definition 10.2.1,
-Lemma 10.4.5, Theorems 11.4.2 and 12.2.3, and Example 11.6.3 empty on `main`; do not merge
-the proposal to make `main` pass. The audit also records that Definition
+Lemma 10.4.5, Theorems 11.4.2 and 12.2.3, and Example 11.6.3 empty on `main`;
+do not merge the proposal to make `main` pass. The audit also records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Publish and validate the recorded Theorem 12.2.3 solution on the shared
-proposal, reusing its existing fiber-orientation equivalence at Definition
-10.3.1; do not add it to complete Section 10.3 on `main`. Then continue
-Sections 12.3--13.5 in order, starting with sets in `book/hierarchy.tex`.
+Continue Sections 12.3--13.5 in order, starting with sets in
+`book/hierarchy.tex`. Section 12.3 has five numbered items: the set
+predicate, natural numbers as a set, the axiom-K characterization, the
+proposition-valued reflexive relation criterion, and Hedberg's theorem.
+The relation theorem must cover any map from identities into the relation,
+not merely the chosen map in the reverse direction. Pinned
+`foundation-core/sets` and `foundation/decidable-equality` provide the main
+proofs. Avoid importing the later relation theorem before the natural-number
+example; its book proof instead transfers propositionality along the
+already available equality-code equivalence.
 Add exercise Agda only as needed by sections, accounting for any remaining
 exercise assertions. Exercise 10.7's existing custom-list rendering loses
 the outer alphabetical labels; the audit records this presentation issue
