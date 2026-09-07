@@ -716,3 +716,13 @@ is rendered from `hott.tex:578`, with a visible check mark. External sentence
 punctuation no longer leaves raw math delimiters in proof-tree drafts.
 The two unsupported minipage layout markers remain visible, with all their
 mathematical content retained. Regenerate and check all affected documents.
+
+Published proposal solution `d9fe7afc68edc25d011dcddba86f3ed6de739934`
+restores only the retained transport specialization. Section 14.2,
+changed Sections 1.1--1.4, 2.1--2.2, and 3.1--3.2, and aggregate Chapters
+1--3 and 14 pass actual Agda there. All 181 unit tests, repository checks
+(616 verified blocks), and whitespace checks pass. No proof correction
+or earlier auxiliary addition was needed. The main-to-proposal merge
+preserved Section 2.2's existing proposal Agda and both independently
+inserted gap records. Main retains its ninth empty training site and
+reports Section 14.2 and Chapter 14 deferred, not passed.

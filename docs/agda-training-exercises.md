@@ -313,5 +313,13 @@ numbered training site was created.
 - **Invisible mathematics:** “Section 14.2: higher-inductive truncations”
   in `docs/invisible-math.md`.
 - **Status:** Empty on main; candidate Section 14.2 and Chapter 14 defer.
-- **Proposal solution:** Pending on `proposal/agda-exercise-solutions`;
-  reuse Exercise 9.1's existing result and restore the retained block.
+- **Proposal solution:** `proposal/agda-exercise-solutions`, commit
+  `d9fe7afc68edc25d011dcddba86f3ed6de739934`. It restores the retained
+  block using Exercise 9.1's existing result, without proof corrections
+  or earlier-file additions.
+- **Validation:** Candidate Section 14.2, changed Sections 1.1--1.4,
+  2.1--2.2, and 3.1--3.2, aggregate Chapters 1--3 and 14, all 181 unit
+  tests, repository checks (616 verified blocks), and whitespace checks
+  pass on that published proposal. Main passes 176 tests and repository
+  checks but retains all nine training sites; Section 14.2 and Chapter
+  14 are deferred, not passed. Earlier regenerated Agda is unchanged.

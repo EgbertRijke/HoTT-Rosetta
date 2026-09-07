@@ -33,7 +33,12 @@ Main passes 176 unit tests, repository checks (604 blocks: 176 exact,
 370 adapted, 58 historical/local), and whitespace checks. Changed
 Sections 1.1--1.4, 2.1--2.2, and 3.1--3.2 and aggregate Chapters 1--3
 pass Agda with unchanged code. Section 14.2 and Chapter 14 defer.
-Proposal restoration and actual Agda validation are the immediate next step.
+Published proposal solution `d9fe7afc68edc25d011dcddba86f3ed6de739934`
+restores the retained transport block without proof corrections or earlier
+auxiliary additions. It passes actual Agda for Section 14.2, all eight
+earlier changed sections, and aggregate Chapters 1--3 and 14, all 181
+unit tests, repository checks (616 verified blocks), and whitespace checks.
+Main retains all nine empty sites; its deferred results are not passes.
 
 The previous handoff misidentified `book/univalence.tex` as Chapter 14.
 Recomputed active inputs and the filename registry agree: Chapter 14 is
@@ -226,13 +231,7 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-First publish the cautious Section 14.2 version on main, bring latest main
-into the shared proposal, restore its retained Remark 14.2.3 block using
-the existing Exercise 9.1 auxiliary, and validate the entire section and
-affected aggregates with actual Agda. Record the published solution here
-and in the exercise index; main must retain its empty block.
-
-Then continue Section 14.3, “Logic in type theory”,
+Continue Section 14.3, “Logic in type theory”,
 `book/propositional-truncation.tex`, lines 256--341. Inventory both
 definitions, both universal-property propositions and full proofs, and
 every row of the logical-connective table. Inspect the exact prerequisite
@@ -241,6 +240,17 @@ Sigma universal property before choosing pinned disjunction/existential
 code. Add exercise Agda only if the section needs it, at its exact home.
 Keep Section 14.2's proposition-level HIT assumptions and Section 14.1's
 identity-based unique-extension interface unchanged.
+
+Pinned `foundation/disjunction` supplies the disjunction, introduction
+maps, and logical-equivalence eliminator; `foundation/existential-quantification`
+supplies the corresponding existential constructions. Do not stop at
+those two-map witnesses: the book's proofs explicitly assert that both
+arrows in each composite are equivalences. Inspect
+`foundation/universal-property-coproduct-types`, lines 34--68, for the
+full Exercise 13.8 proof and ordinary specialization; reuse the existing
+Section 13.3 Sigma proof and Section 14.2 truncation universal property.
+Preserve the statement and all table rows even where a connective already
+has its natural mathematical home in an earlier section.
 
 For later Section 17.1, `book/univalence.tex`, lines 11--109, inspect
 the Chapter 17 introduction at lines 1--10. Inventory all six numbered
