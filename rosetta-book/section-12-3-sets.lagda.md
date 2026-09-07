@@ -176,7 +176,29 @@ Now it also follows that `A` is a set, since its identity types are equivalent t
 <!-- rosetta-agda-block: theorem-12.3.4-propositional-identity-relation -->
 
 ```agda
+module _
+  {l1 l2 : Level} {A : Type l1} (x : A) (R : A → Type l2)
+  (p : (y : A) → is-prop (R y)) (ρ : R x)
+  (i : (y : A) → R y → x ＝ y)
+  where
 
+  abstract
+    is-equiv-prop-in-based-id : (y : A) → is-equiv (i y)
+    is-equiv-prop-in-based-id =
+      fundamental-theorem-id-retraction x i
+        ( λ y → (ind-Id x (λ z p → R z) ρ y) , (λ r → eq-is-prop (p y)))
+
+  abstract
+    is-torsorial-prop-in-based-id : is-contr (Σ A R)
+    is-torsorial-prop-in-based-id =
+      fundamental-theorem-id'
+        ( λ y → map-section-is-equiv (is-equiv-prop-in-based-id y))
+        ( λ y → is-equiv-map-section-is-equiv (is-equiv-prop-in-based-id y))
+
+  abstract
+    is-prop-based-Id-prop-in-based-id : (y : A) → is-prop (x ＝ y)
+    is-prop-based-Id-prop-in-based-id y =
+      is-prop-is-equiv' (is-equiv-prop-in-based-id y) (p y)
 ```
 
 <!-- rosetta-agda-block: theorem-12.3.4-binary-relation-criterion -->

@@ -145,7 +145,7 @@ class AgdaManifestTests(unittest.TestCase):
                 "corollary-9.2.8-inverse-equivalence",
             }
         ]
-        self.assertEqual(len(selected), 14)
+        self.assertEqual(len(selected), 17)
         for block in selected:
             with self.subTest(block=block.block_id):
                 document = (rosetta_directory(root) / block.destination).read_text()
@@ -164,7 +164,7 @@ class AgdaManifestTests(unittest.TestCase):
             block for block in blocks
             if block.destination.startswith("section-11-2-")
         ]
-        self.assertEqual(len(selected), 7)
+        self.assertEqual(len(selected), 8)
         for block in selected:
             with self.subTest(block=block.block_id):
                 document = (rosetta_directory(root) / block.destination).read_text()
@@ -447,6 +447,40 @@ class AgdaManifestTests(unittest.TestCase):
         self.assertNotIn("postulate", document)
         self.assertNotIn("open import foundation", document)
         self.assertNotIn("section-13-", document)
+
+    def test_proposed_relation_auxiliaries_stay_at_their_chapter_eleven_homes(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        blocks = load_manifest(root / "data" / "agda-blocks.json")
+        names = (
+            "definition-11.1.1-total-map-homotopies",
+            "definition-11.1.1-total-map-identity",
+            "definition-11.1.1-total-map-composition",
+            "theorem-11.2.2-retract-fundamental-theorem",
+        )
+        selected = [next(block for block in blocks if block.block_id == name) for name in names]
+        for block in selected:
+            with self.subTest(block=block.block_id):
+                document = (rosetta_directory(root) / block.destination).read_text()
+                start = document.index(f"<!-- rosetta-item: {block.item_id}")
+                end = document.index(f"<!-- rosetta-item-end: {block.item_id} -->")
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(start, position)
+                self.assertLess(position, end)
+                self.assertNotIn("section-12-", document)
+        total = (rosetta_directory(root) / selected[0].destination).read_text()
+        positions = [total.index(name + " :") for name in
+                     ("  tot", "tot-htpy", "tot-id", "preserves-comp-tot")]
+        self.assertEqual(positions, sorted(positions))
+        self.assertIn("id {A = Σ A B}", selected[1].code)
+        theorem = (rosetta_directory(root) / selected[-1].destination).read_text()
+        self.assertLess(theorem.index("fundamental-theorem-id-J' :"),
+                        theorem.index("fundamental-theorem-id-retraction :"))
+        later = next(block for block in blocks if block.block_id ==
+                     "theorem-12.3.4-propositional-identity-relation")
+        self.assertEqual(later.conversion_status, "ready")
+        self.assertNotIn("fundamental-theorem-id-retraction :", later.code)
 
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
