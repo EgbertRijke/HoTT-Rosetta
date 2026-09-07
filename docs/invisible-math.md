@@ -575,5 +575,9 @@ records carry inclusive-range hashes.
   after its delayed proof. Keep both nested function-extensionality
   applications in the successor computation.
 
-The extra identity-type-equivalence site is pending proposal validation.
-No earlier complete section or existing exercise code was enlarged.
+Published proposal solution `e8105dd4b8247547602a1d1b5a4e68542faa4acd`
+restores only the retained identity-type equivalence and passes actual
+Agda for Sections 8.2 and 13.5, Exercise 12.4, and aggregate Chapters 8
+and 12--13. All 174 tests, repository checks, and whitespace checks pass.
+No proof correction, earlier complete-section enlargement, or existing
+exercise code change was needed. Main retains the new empty site.
