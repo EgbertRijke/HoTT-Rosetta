@@ -18,7 +18,7 @@ Give a derivation for the following **element conversion rule**:
 ```text
 Γ⊢ A≐ A' \textrm{type}   Γ⊢ a:A
 ───────────────────────────────
-           $Γ⊢ a:A'$
+            Γ⊢ a:A'
 ```
 
 Give a derivation for the following **congruence rule** for element conversion:
@@ -30,7 +30,7 @@ Give a derivation for the following **congruence rule** for element conversion:
 ```text
 Γ⊢ A≐ A' \textrm{type}   Γ⊢ a≐ b:A
 ──────────────────────────────────
-           $Γ⊢ a≐ b:A'$
+            Γ⊢ a≐ b:A'
 ```
 
 </div>

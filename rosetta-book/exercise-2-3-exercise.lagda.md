@@ -16,9 +16,9 @@ Construct the **constant map**
 *Proof tree (automatic faithful draft).*
 
 ```text
-  Γ⊢ A \textrm{type}
-─────────────────────
-$Γ,y:B⊢ const_y:A→ B$
+ Γ⊢ A \textrm{type}
+───────────────────
+Γ,y:B⊢ const_y:A→ B
 ```
 
 Show that
@@ -28,9 +28,9 @@ Show that
 *Proof tree (automatic faithful draft).*
 
 ```text
-            Γ⊢ f:A→ B
-──────────────────────────────────
-$Γ,z:C⊢ const_z∘ f≐const_z : A→ C$
+           Γ⊢ f:A→ B
+────────────────────────────────
+Γ,z:C⊢ const_z∘ f≐const_z : A→ C
 ```
 
 Show that
@@ -40,9 +40,9 @@ Show that
 *Proof tree (automatic faithful draft).*
 
 ```text
-    Γ⊢ A \textrm{type}   Γ⊢ g:B→ C
-─────────────────────────────────────
-$Γ,y:B⊢ g∘const_y≐ const_{g(y)}:A→ C$
+   Γ⊢ A \textrm{type}   Γ⊢ g:B→ C
+───────────────────────────────────
+Γ,y:B⊢ g∘const_y≐ const_{g(y)}:A→ C
 ```
 
 </div>

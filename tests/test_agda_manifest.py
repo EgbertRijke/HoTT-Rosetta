@@ -836,6 +836,81 @@ class AgdaManifestTests(unittest.TestCase):
         normalize = lambda value: re.sub(r"\s+", " ", value).strip()
         self.assertEqual(normalize(prose), normalize(render_section(sources[13].path, 14, 1)))
 
+    def test_higher_inductive_truncations_preserve_assumptions_and_all_items(self):
+        import re
+        from rosetta.file_registry import registered_filename
+        from rosetta.layout import rosetta_directory
+        from rosetta.render import render_section
+
+        root = Path(__file__).resolve().parent.parent
+        destination = registered_filename(root, "section", 14, 2)
+        selected = [b for b in load_manifest(root / "data" / "agda-blocks.json")
+                    if b.destination == destination]
+        self.assertEqual(len(selected), 18)
+        self.assertEqual({b.item_id for b in selected}, {
+            "section-14.2", "lemma-14.2.1", "definition-14.2.2",
+            "remark-14.2.3", "theorem-14.2.4", "proposition-14.2.5"})
+        document = (rosetta_directory(root) / destination).read_text()
+        code = "\n".join(b.code for b in selected)
+        assumptions = [b for b in selected if "postulate" in b.code]
+        self.assertEqual(len(assumptions), 4)
+        self.assertTrue(all(b.display_heading.startswith("Assumed") for b in assumptions))
+        for b in assumptions:
+            self.assertLess(document.index("<!-- rosetta-agda-block: " + b.block_id),
+                            document.index("<!-- rosetta-item: theorem-14.2.4"))
+        for b in selected:
+            marker = "<!-- rosetta-agda-block: " + b.block_id + " -->"
+            position = document.index(marker)
+            if b.after_text:
+                self.assertLess(document.index(b.after_text), position)
+            else:
+                self.assertLess(document.index("<!-- rosetta-item: " + b.item_id), position)
+                self.assertLess(position, document.index("<!-- rosetta-item-end: " + b.item_id + " -->"))
+        for name in ("type-trunc-Prop", "unit-trunc-Prop", "all-elements-equal-type-trunc-Prop",
+                     "is-prop-type-trunc-Prop", "trunc-Prop",
+                     "case-paths-induction-principle-propositional-truncation",
+                     "induction-principle-propositional-truncation", "induction-trunc-Prop",
+                     "ind-trunc-Prop'", "compute-ind-trunc-Prop'",
+                     "is-prop-case-paths-induction-principle-propositional-truncation",
+                     "case-paths-induction-principle-propositional-truncation-is-prop",
+                     "ind-trunc-Prop", "compute-ind-trunc-Prop", "rec-trunc-Prop",
+                     "is-propositional-truncation-trunc-Prop", "universal-property-trunc-Prop",
+                     "map-trunc-Prop", "htpy-uniqueness-map-trunc-Prop",
+                     "id-map-trunc-Prop", "preserves-comp-map-trunc-Prop"):
+            self.assertRegex(code, r"(?m)^\s*" + re.escape(name) + " :")
+        self.assertIn("is-prop-all-elements-equal all-elements-equal-type-trunc-Prop", code)
+        self.assertIn("ind-trunc-Prop' P f H = pr1 (induction-trunc-Prop P f H)", code)
+        self.assertIn("compute-ind-trunc-Prop' P f H = pr2 (induction-trunc-Prop P f H)", code)
+        self.assertIn("Σ ((p : type-Prop P) → B p) (λ h → (x : A) → h (f x) ＝ g x)", code)
+        self.assertIn("is-prop-is-proof-irrelevant (λ x → pair (tr B (α p p) x) (β p p x))", code)
+        self.assertIn("( λ Q → ind-trunc-Prop (λ x → Q))", code)
+        self.assertIn("( equiv-tot (λ _ → equiv-funext))", code)
+        self.assertIn("htpy-eq (ap pr1 (contraction (unique-map-trunc-Prop f) (pair h H)))", code)
+        self.assertIn("htpy-uniqueness-map-trunc-Prop id id refl-htpy", code)
+        self.assertIn("( ( (map-trunc-Prop g) ·l (htpy-map-trunc-Prop f)) ∙h", code)
+        self.assertIn("( ( htpy-map-trunc-Prop g) ·r f))", code)
+        for forbidden in ("type-trunc :", "is-truncation-trunc", "function-dependent-universal-property-trunc",
+                          "univalence", "{-# REWRITE", "{-# OPTIONS"):
+            self.assertNotIn(forbidden, code)
+        site = next(b for b in selected if b.block_id == "remark-14.2.3-transport-identifications")
+        self.assertIn("is-equiv-tr P (all-elements-equal-type-trunc-Prop x y)", site.code)
+        marker = "<!-- rosetta-agda-block: " + site.block_id + " -->"
+        if site.conversion_status == "exercise":
+            self.assertRegex(document, re.escape(marker) + r"\s*```agda\s*```")
+            self.assertNotIn("equiv-identifications-tr-trunc-Prop :", document)
+        else:
+            self.assertIn("equiv-identifications-tr-trunc-Prop :", document)
+        self.assertNotIn("open import foundation", document)
+        prose = re.sub(r"^```agda\n.*?^```\s*", "", document, flags=re.M | re.S)
+        prose = re.sub(r"<!-- rosetta-agda-block:.*?-->", "", prose)
+        for b in selected:
+            if b.display_heading:
+                prose = prose.replace("### " + b.display_heading, "")
+        normalize = lambda value: re.sub(r"\s+", " ", value).strip()
+        self.assertEqual(normalize(prose), normalize(render_section(root / "book" / "propositional-truncation.tex", 14, 2)))
+        self.assertEqual(document.count("rosetta-proof-tree:"), 3)
+        self.assertIn("T(‖X‖̌)≐‖T(X)‖ type", document)
+
     def test_needed_propositional_sums_stay_at_exercise_12_6(self):
         from rosetta.file_registry import registered_filename
 

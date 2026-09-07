@@ -47,7 +47,7 @@ The idea of `Π`-types is that `Π(x:A) B(x)` is a type of **dependent functions
 
 ```text
   Γ,x:A⊢ B(x) type
-─────────────────── $Π$
+─────────────────── Π
 Γ⊢ Π(x:A) B(x) type
 ```
 
@@ -80,7 +80,7 @@ Hence the introduction rule of dependent functions postulates that, in order to 
 
 ```text
    Γ,x:A ⊢ b(x) : B(x)
-────────────────────────── $λ$
+────────────────────────── λ
 Γ⊢ λ x. b(x) : Π(x:A) B(x)
 ```
 
@@ -113,7 +113,7 @@ The `Π`-elimination rule is therefore also called the **evaluation rule**:
 
 ```text
  Γ⊢ f:Π(x:A) B(x)
-────────────────── $ev$
+────────────────── ev
 Γ,x:A⊢ f(x) : B(x)
 ```
 
@@ -144,7 +144,7 @@ This rule is called the **`β`-rule**
 
 ```text
        Γ,x:A ⊢ b(x) : B(x)
-────────────────────────────────── $β$
+────────────────────────────────── β
 Γ,x:A ⊢ (λ y.b(y))(x)≐ b(x) : B(x)
 ```
 
@@ -157,7 +157,7 @@ This rule is known as the **`η`-rule**
 
 ```text
         Γ⊢ f:Π(x:A) B(x)
-─────────────────────────────── $η$
+─────────────────────────────── η
 Γ ⊢ λ x. f(x) ≐ f : Π(x:A) B(x)
 ```
 

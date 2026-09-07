@@ -19,7 +19,7 @@ Given a derivation with hypotheses `H_1,…,H_n` and conclusion `C`, we can form
 ```text
 H_1   ⋯   H_n
 ─────────────
-     $C$
+      C
 ```
 
 Such a rule is called **derivable**, because we have a derivation for it.
@@ -54,7 +54,7 @@ Indeed, we have the following derivation using substitution, weakening, and the 
       Γ⊢ A type         Γ⊢ A type   Γ, x:A, \Delta⊢ J
 ───────────── \delta   ───────────────────────────── W
     Γ, x':A⊢ x':A             Γ, x':A, x:A, \Delta⊢ J
-────────────────────────────────────────────────────── $S$
+────────────────────────────────────────────────────── S
             Γ, x':A, \Delta[x'/x]⊢ J[x'/x]
 ```
 
@@ -74,7 +74,7 @@ More formally, the interchange rule is the following inference rule
 ```text
 Γ⊢ B \textrm{type}   Γ, x:A, y:B, \Delta⊢ J
 ───────────────────────────────────────────
-          $Γ, y:B, x:A, \Delta⊢ J$
+           Γ, y:B, x:A, \Delta⊢ J
 ```
 
 Just as the rule for changing variables, we claim that the interchange rule is a derivable rule.

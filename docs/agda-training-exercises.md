@@ -295,3 +295,23 @@ its eight empty sites and reports these candidates and aggregates deferred.
 The handoff's former univalence-as-Chapter-14 assignment was incorrect:
 active source order places univalence in Chapter 17, so no such wrongly
 numbered training site was created.
+
+### `remark-14.2.3-transport-identifications`
+
+- **Place:** Section 14.2, Remark 14.2.3, the transport embedding and its
+  displayed reverse equivalence on identity types.
+- **Task:** Show that transport along the truncation's path constructor
+  is an embedding and identify its transported identity types.
+- **Absent result:** `is-equiv-tr`, from Exercise 9.1's transport equivalence.
+- **Reason:** This general result belongs at the exercise that explicitly
+  requests it. Proposal `31222b8` already supplies it there; preserve the
+  earlier main accounts and do not duplicate it in the later remark.
+- **Later use:** The displayed identity equivalence in Remark 14.2.3. Its
+  separate pinned contraction proof of the path-clause criterion does not
+  call this display; both implications and all later section results still
+  belong to the same deferred candidate.
+- **Invisible mathematics:** “Section 14.2: higher-inductive truncations”
+  in `docs/invisible-math.md`.
+- **Status:** Empty on main; candidate Section 14.2 and Chapter 14 defer.
+- **Proposal solution:** Pending on `proposal/agda-exercise-solutions`;
+  reuse Exercise 9.1's existing result and restore the retained block.

@@ -79,16 +79,16 @@ The formal derivation for the construction of `add-S` is as follows:
 
 ```text
 
-               ───────   ────────────
-               ⊢ℕ type   ⊢ succ-ℕ:ℕ→ℕ
-     ───────   ──────────────────────
-      ⊢ℕ type        n:ℕ⊢ succ-ℕ:ℕ→ℕ
-     ────────────────────────────────
-                m:ℕ,n:ℕ ⊢ succ-ℕ:ℕ→ℕ
-     ────────────────────────────────
-        m:ℕ ⊢ λ n. succ-ℕ:ℕ→ (ℕ → ℕ)
-─────────────────────────────────────────
-$m:ℕ ⊢ add-S(m) ≔ λ n. succ-ℕ:ℕ→ (ℕ → ℕ)$
+              ───────   ────────────
+              ⊢ℕ type   ⊢ succ-ℕ:ℕ→ℕ
+    ───────   ──────────────────────
+     ⊢ℕ type        n:ℕ⊢ succ-ℕ:ℕ→ℕ
+    ────────────────────────────────
+               m:ℕ,n:ℕ ⊢ succ-ℕ:ℕ→ℕ
+    ────────────────────────────────
+       m:ℕ ⊢ λ n. succ-ℕ:ℕ→ (ℕ → ℕ)
+───────────────────────────────────────
+m:ℕ ⊢ add-S(m) ≔ λ n. succ-ℕ:ℕ→ (ℕ → ℕ)
 ```
 
 We combine this derivation with the induction principle of `ℕ` to complete the construction of addition:
@@ -104,7 +104,7 @@ m:ℕ⊢ add-0(m) ≔ m:ℕ   m:ℕ⊢ add-S(m):ℕ→ (ℕ → ℕ)
 ──────────────────────────────────────────────
            m:ℕ⊢ind-ℕ(add-0(m),add-S(m)):ℕ→ ℕ
 ──────────────────────────────────────────────
- $m:ℕ⊢add-ℕ(m)≔ind-ℕ(add-0(m),add-S(m)):ℕ→ ℕ$
+  m:ℕ⊢add-ℕ(m)≔ind-ℕ(add-0(m),add-S(m)):ℕ→ ℕ
 ```
 
 The asserted judgmental equalities then hold by the computation rules for `ℕ`. ◻

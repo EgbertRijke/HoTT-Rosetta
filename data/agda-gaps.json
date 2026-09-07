@@ -2,6 +2,13 @@
   "format_version": 1,
   "items": [
     {
+      "item_id": "section-14.2-tarski-truncation-codes",
+      "kind": "Section",
+      "number": "14.2",
+      "destination": "section-14-2-propositional-truncations-as-higher-inductive-types.lagda.md",
+      "statement": "Proposition-level formation is represented in Agda's Russell-style universes. The book's separate checked Tarski truncation code and decoding equation are preserved in the repaired proof-tree prose but are not separately represented by that Agda type operator. Do not claim a literal Tarski code/decoding implementation or enlarge the earlier universe account solely to add one. The two minipage layout diagnostics remain visible; their full mathematical contents are retained."
+    },
+    {
       "item_id": "exercise-12-6-remaining-parts",
       "kind": "Exercise",
       "number": "12.6(a-general-and-converse;b)",

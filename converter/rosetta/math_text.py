@@ -548,6 +548,8 @@ def normalize_math(source: str) -> str:
     value = _replace_unary_wrapper(value, r"\pairr", "(", ")")
     value = _replace_optional_unary_wrapper(value, r"\tot", "tot", script_marker="_")
     value = _replace_unary_wrapper(value, r"\fibf", "fib_", "")
+    # hott.tex:578: brckcheck is the truncation code followed by a check mark.
+    value = _replace_unary_wrapper(value, r"\brckcheck", "‖", "‖̌")
     value = _replace_unary_wrapper(value, r"\brck", "‖", "‖")
     value = _replace_unary_wrapper(value, r"\Brck", "‖", "‖")
     value = _replace_unary_wrapper(value, r"\sphere", "S^")
