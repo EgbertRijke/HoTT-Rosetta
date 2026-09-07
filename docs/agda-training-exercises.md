@@ -330,5 +330,9 @@ uncurated exercise's exact home because Proposition 14.3.2 explicitly
 uses it. The section also reuses the existing Sigma and truncation
 universal properties. These files transitively import the earlier
 training dependencies, so main's Section 14.3, Exercise 13.8, and
-aggregate Chapters 13--14 defer, not pass. Actual validation on the
-shared proposal is pending; all nine main holes remain unchanged.
+aggregate Chapters 13--14 defer, not pass. Published proposal merge
+`b792e7b63caf4041d01ec3cfca503a923a7716b3` passes actual Agda for Section
+14.3, Exercise 13.8, Section 7.1, and aggregate Chapters 7 and 13--14,
+all 185 unit tests, repository checks (634 verified blocks), and whitespace
+checks. No proof correction or new solution was needed; all nine main
+holes remain unchanged.

@@ -749,5 +749,9 @@ block order, full prose, and the complete exercise inverse data.
 Main passes all 180 unit tests, repository checks (622 verified blocks),
 and whitespace checks. Section 7.1 and Chapter 7 pass Agda. Section
 14.3, Exercise 13.8, and aggregate Chapters 13--14 correctly defer through
-the existing training sites. Actual proposal validation is pending.
-No review or complete-file record is changed.
+the existing training sites. Published proposal merge
+`b792e7b63caf4041d01ec3cfca503a923a7716b3` passes actual Agda for Section
+14.3, Exercise 13.8, Section 7.1, and aggregate Chapters 7 and 13--14,
+all 185 unit tests, repository checks (634 verified blocks), and whitespace
+checks. It needed no proof correction or new training solution. Main's
+deferred checks are not passes. No review or complete-file record is changed.

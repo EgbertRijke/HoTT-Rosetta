@@ -28,7 +28,12 @@ changes. Section 7.1's existing correct output is unchanged.
 Main passes 180 unit tests, repository checks (622 blocks: 176 exact,
 388 adapted, 58 historical/local), and whitespace checks. Section 7.1
 and Chapter 7 pass Agda. Section 14.3, Exercise 13.8, and Chapters 13--14
-defer through existing sites. Actual proposal validation is next.
+defer through existing sites. Published proposal merge
+`b792e7b63caf4041d01ec3cfca503a923a7716b3` passes actual Agda for Section
+14.3, Exercise 13.8, Section 7.1, and aggregate Chapters 7 and 13--14,
+all 185 unit tests, repository checks (634 verified blocks), and whitespace
+checks. No proof correction or new training solution was needed; main
+retains all nine empty sites and its deferred results are not passes.
 
 Section 14.2 now has eighteen provenance-backed blocks accounting for its
 formation rules, both constructors, and all five numbered items. Its four
@@ -245,12 +250,7 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-First publish Section 14.3 on main, bring current main into the shared
-proposal, and validate Section 14.3, Exercise 13.8, and affected aggregate
-Chapters 13--14 with actual Agda. Record that validation; main keeps all
-nine earlier training holes. No new solution is currently needed.
-
-Then continue Section 14.4, “Mapping propositional truncations into sets”,
+Continue Section 14.4, “Mapping propositional truncations into sets”,
 `book/propositional-truncation.tex`, lines 342--457. Inventory all six
 numbered items, the introductory proposition-valued factorization strategy,
 the natural-number minimal-element argument and its finite-type corollary,
@@ -260,8 +260,10 @@ inverse laws. Preserve the explicit map using action on the path constructor.
 
 Inspect pinned `elementary-number-theory/well-ordering-principle-natural-numbers`
 and `elementary-number-theory/well-ordering-principle-standard-finite-types`
-for the minimal-element and epsilon-operator constructions. Reuse the
-earlier well-ordering proof unchanged where possible. Inspect
+for the minimal-element and epsilon-operator constructions. The existing
+lower-bound and minimal-element definitions and well-ordering proof live
+at Definition 8.3.1 and Theorem 8.3.2; reuse them unchanged. The inequality
+proposition proof already lives at Lemma 13.5.3. Inspect
 `foundation/hilberts-epsilon-operators`, `foundation/weakly-constant-maps`,
 and `foundation/universal-property-propositional-truncation-into-sets`.
 The last gives the full image-proposition and two-inverse proof without

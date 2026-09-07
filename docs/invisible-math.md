@@ -787,4 +787,9 @@ without adding exercise Agda. Section 7.1 was also regenerated and checked;
 its existing output already used the correct symbol and is unchanged.
 The section's visible unsupported-center marker and both diagram drafts
 are retained. Main reports Section 14.3, Exercise 13.8, and Chapters
-13--14 deferred through existing sites; proposal validation is pending.
+13--14 deferred through existing sites. Published proposal merge
+`b792e7b63caf4041d01ec3cfca503a923a7716b3` passes actual Agda for Section
+14.3, Exercise 13.8, Section 7.1, and aggregate Chapters 7 and 13--14,
+all 185 unit tests, repository checks (634 verified blocks), and whitespace
+checks. No proof correction or new training solution was necessary.
+Main keeps its earlier files and all nine training sites unchanged.
