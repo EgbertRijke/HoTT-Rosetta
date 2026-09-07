@@ -101,3 +101,6 @@ Section 12.1's subterminal characterization uses Theorem 11.4.2's
 its two Chapter 10 dependencies. No new training site is introduced: the
 required contractible-identity theorem is added at the previously empty
 Exercise 10.1, which the book explicitly cites.
+Published proposal `0c3d8b1` passes Section 12.1, Exercise 10.1, and aggregate
+Chapters 10--12, with 155 unit tests and repository checks passing. Main keeps
+its existing training sites empty and Section 12.1 deferred.
