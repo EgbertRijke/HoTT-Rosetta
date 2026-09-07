@@ -826,6 +826,87 @@ class AgdaManifestTests(unittest.TestCase):
         normalize = lambda value: re.sub(r"\s+", " ", value).strip()
         self.assertEqual(normalize(prose), normalize(render_section(root / "book" / "funext.tex", 13, 4)))
 
+    def test_strong_induction_preserves_lemmas_delayed_proof_and_computation_rules(self):
+        import re
+        from rosetta.file_registry import registered_filename
+        from rosetta.layout import rosetta_directory
+        from rosetta.render import render_section
+
+        root = Path(__file__).resolve().parent.parent
+        destination = registered_filename(root, "section", 13, 5)
+        selected = [b for b in load_manifest(root / "data" / "agda-blocks.json")
+                    if b.destination == destination]
+        self.assertEqual(len(selected), 12)
+        self.assertEqual({b.item_id for b in selected},
+                         {"section-13.5", "theorem-13.5.1", "lemma-13.5.2", "lemma-13.5.3"})
+        document = (rosetta_directory(root) / destination).read_text()
+        code = "\n".join(b.code for b in selected)
+        for name in ("□-≤-ℕ", "zero-strong-ind-ℕ", "eq-zero-strong-ind-ℕ",
+                     "is-prop-leq-ℕ", "is-prop-leq-succ-cases", "equiv-leq-succ-cases",
+                     "eq-cases-leq-succ", "cases-succ-strong-ind-ℕ", "succ-strong-ind-ℕ",
+                     "htpy-succ-strong-ind-ℕ", "eq-succ-strong-ind-ℕ",
+                     "induction-strong-ind-ℕ", "ε-□-≤-ℕ", "strong-ind-ℕ",
+                     "compute-zero-strong-ind-ℕ", "compute-succ-strong-ind-ℕ",
+                     "total-strong-ind-ℕ"):
+            self.assertRegex(code, r"(?m)^\s*" + re.escape(name) + r" :")
+        self.assertIn("zero-strong-ind-ℕ P p0 zero-ℕ t = p0", code)
+        self.assertIn("(decide-leq-succ-ℕ m k p)", code)
+        self.assertIn("contradiction-leq-ℕ k k (refl-leq-ℕ k)", code)
+        self.assertIn("( is-set-ℕ m (succ-ℕ n))", code)
+        self.assertIn("( preserves-leq-succ-ℕ m n)", code)
+        self.assertIn("( leq-eq-ℕ m (succ-ℕ n))", code)
+        self.assertIn("compute-zero-strong-ind-ℕ P p0 pS = refl", code)
+        self.assertIn("strong-ind-ℕ P p0 pS (succ-ℕ n) ＝ pS n (λ m p → strong-ind-ℕ P p0 pS m)", code)
+        self.assertIn("( eq-htpy (eq-htpy ∘ eq-compute-succ-strong-ind-ℕ P p0 pS n))", code)
+        self.assertIn("( eq-cases-leq-succ (succ-ℕ n) n (refl-leq-ℕ n) (inr refl))", code)
+        self.assertIn("pr1 (pr2 (total-strong-ind-ℕ P p0 pS)) = compute-zero-strong-ind-ℕ P p0 pS", code)
+        self.assertIn("pr2 (pr2 (total-strong-ind-ℕ P p0 pS)) = compute-succ-strong-ind-ℕ P p0 pS", code)
+        for forbidden in ("postulate", "cases-leq-succ-reflexive-leq-ℕ", "neg-succ-leq-ℕ :",
+                          "decide-leq-succ-ℕ :", "cases-leq-succ-ℕ :"):
+            self.assertNotIn(forbidden, code)
+        self.assertNotIn("open import foundation", document)
+        sequence = ["P̃(n)≔", "□-≤-ℕ :", "zero-strong-ind-ℕ :", "is-prop-leq-ℕ :",
+                    "equiv-leq-succ-cases :", "succ-strong-ind-ℕ :",
+                    "We are now ready to finish the proof of Theorem 13.5.1.",
+                    "induction-strong-ind-ℕ :", "ε-□-≤-ℕ :", "strong-ind-ℕ :"]
+        positions = []
+        for entry in sequence:
+            positions.append(re.search(r"(?m)^\s*" + re.escape(entry), document).start() if entry.endswith(" :")
+                             else document.index(entry))
+        self.assertEqual(positions, sorted(positions))
+        final = next(b for b in selected if b.block_id.endswith("-and-computations"))
+        self.assertLess(document.index(final.after_text), document.index("\nstrong-ind-ℕ :"))
+        site = next(b for b in selected if b.block_id.endswith("-case-evaluation-identifications"))
+        self.assertIn("equiv-inv-concat", site.code)
+        self.assertIn("( eq-cases-leq-succ m n p x)", site.code)
+        marker = f"<!-- rosetta-agda-block: {site.block_id} -->"
+        if site.conversion_status == "exercise":
+            self.assertRegex(document, re.escape(marker) + r"\s*```agda\s*```")
+            self.assertNotIn("equiv-identifications-succ-strong-ind-ℕ :", document)
+        else:
+            self.assertIn("equiv-identifications-succ-strong-ind-ℕ :", document)
+            self.assertIn("open import exercise-9-1-groupoid-operations-equivalences", document)
+        prose = re.sub(r"^```agda\n.*?^```\s*", "", document, flags=re.M | re.S)
+        prose = re.sub(r"<!-- rosetta-agda-block:.*?-->", "", prose)
+        normalize = lambda value: re.sub(r"\s+", " ", value).strip()
+        self.assertEqual(normalize(prose), normalize(render_section(root / "book" / "funext.tex", 13, 5)))
+
+    def test_needed_coproduct_proposition_result_stays_at_exercise_12_4_c(self):
+        from rosetta.file_registry import registered_filename
+
+        root = Path(__file__).resolve().parent.parent
+        destination = registered_filename(root, "exercise", 12, 4)
+        selected = [b for b in load_manifest(root / "data" / "agda-blocks.json")
+                    if b.destination == destination]
+        self.assertEqual(len(selected), 1)
+        block = selected[0]
+        self.assertIn("Part (c)", block.display_heading)
+        self.assertIn("all-elements-equal-coproduct", block.code)
+        self.assertIn("is-prop-coproduct :", block.code)
+        self.assertNotIn("section-13-", " ".join(block.imports))
+        gaps = json.loads((root / "data" / "agda-gaps.json").read_text())["items"]
+        self.assertTrue(any(g["item_id"] == "exercise-12-4-remaining-parts" for g in gaps))
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

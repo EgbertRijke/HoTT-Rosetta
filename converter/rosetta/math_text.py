@@ -591,6 +591,14 @@ def normalize_math(source: str) -> str:
     value = value.replace(r"\{", "{").replace(r"\}", "}")
     value = value.replace("{}", "")
     value = value.replace(r"\qquad", "    ").replace(r"\quad", "  ")
+    # A cases environment groups alternative values and their conditions.
+    # Keep explicit boundaries, including when it occurs inside an align row.
+    value = re.sub(
+        r"\\begin\{cases\}((?:(?!\\(?:begin|end)\{cases\}).)*)\\end\{cases\}",
+        lambda match: "cases {\n" + match.group(1).strip() + "\n}",
+        value,
+        flags=re.DOTALL,
+    )
     value = re.sub(r"[ \t]+", " ", value)
     value = re.sub(r" *& *", " ", value)
     value = re.sub(r"\\\\\*?\s*", "\n", value)

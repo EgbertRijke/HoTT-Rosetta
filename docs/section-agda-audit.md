@@ -556,3 +556,45 @@ Section 13.4 candidate and aggregate Chapter 13, all 169 unit tests,
 repository checks (570 verified blocks), and whitespace checks. No code
 correction or new solution was needed. Main's deferred results are not
 passes, and all seven training holes remain unchanged.
+
+## Section 13.5 (2026-09-07)
+
+Twelve section blocks and one needed exercise block account for the three
+numbered items, intervening construction, and full delayed proof in
+`book/funext.tex`, lines 462--636. One section block is a new empty training
+site on main, with its intended typed specialization retained in the manifest.
+
+| Item or assertion | Formalization |
+| --- | --- |
+| Intervening bounded family | The pinned `□-≤-ℕ`, at the displayed definition of P-tilde after the theorem statement and before the lemmas. |
+| Lemma 13.5.2 | The bounded base value and its reflexivity computation, with the required judgmental defining equation. |
+| Lemma 13.5.3, case splitter | Reuse Exercise 7.3's existing map. Copy the proposition proof for inequalities at this first explicit assertion; specialize the disjoint-coproduct proposition theorem at its required Exercise 12.4(c) home. Use the existing proposition-equivalence constructor with explicit forward and reverse maps, and expose `f(p)=x` for every case x. |
+| Lemma 13.5.3, successor and laws | The full pinned case evaluator, successor construction, both case-helper proofs and both computation laws. Use existing inequality contradiction and transport, with no new earlier helper. |
+| Lemma 13.5.3, identity-type equivalence | The displayed equivalence is the typed inverse-concatenation equivalence along the action of the case evaluator on `f(p)=x`. It needs the existing proposal-only Exercise 9.1 auxiliary, so its later block is empty on main and recorded as a training exercise. |
+| Theorem 13.5.1, delayed proof | Bounded induction at its displayed computation, diagonal evaluation at its definition, then the complete strong induction function, base and successor computation proofs, inductive helpers, and function-and-laws bundle after the full delayed proof. Both function-extensionality applications remain explicit. |
+
+The source's implicit-index case splitter is replaced by the already
+available explicit-index `decide-leq-succ-ℕ`. Its separate reflexive-case
+computation is replaced by the corresponding instance of the book's
+already stated proposition equality `f(p)=x`. The source's successor
+contradiction is the existing order contradiction at reflexivity. These
+typed specializations and their sources are recorded in the manifest and
+invisible-math index; no new general Agda proof is invented.
+
+The prose renderer now preserves `\textasteriskcentered` before Pandoc
+can drop it, so the displayed `(*)` tag and prose reference agree.
+Matched `cases` environments render with explicit `cases { ... }`
+boundaries and every value and condition retained. This recurring repair
+also regenerates Section 8.2's Collatz display, without changing its Agda
+or reserved manual-review data. Regression tests cover both forms of
+case display, malformed-input preservation, symbol boundaries, and the
+complete Section 13.5 prose and code placement. Removing code recovers
+the rendered source exactly modulo whitespace: raw comparison is 100%,
+all five distinct headings and 28 text fences, with no raw TeX commands
+or unresolved references.
+
+Main passes all 169 unit tests, repository checks (571 verified blocks),
+and whitespace checks. Section 8.2 and aggregate Chapter 8 pass Agda.
+Section 13.5, Exercise 12.4, and aggregate Chapters 12--13 correctly
+defer. Actual proposal validation is pending; existing main training
+holes remain, and no review or complete-file record is changed.

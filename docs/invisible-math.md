@@ -514,3 +514,66 @@ proposal merge `b42184ff92633edf5d9dd24eebc5a0b79babd86b` passes actual
 Agda for Section 13.4 and aggregate Chapter 13, all 169 tests, repository
 checks, and whitespace checks. No code correction, new training solution,
 or earlier complete-file enlargement was needed.
+
+### Section 13.5: strong induction
+
+All ranges below use pinned commit
+`c85d7fb834778f96a66576318cdc4ef3d4b80a26`; the thirteen new manifest
+records carry inclusive-range hashes.
+
+- **Training exercise:** `lemma-13.5.3-case-evaluation-identifications`.
+  The identity-type equivalence in the book's successor-lemma proof is a
+  typed specialization of `equiv-inv-concat` from
+  `foundation/identity-types`, lines 115--119, to
+  `ap (cases-succ-strong-ind-ℕ P pS n H m) (eq-cases-leq-succ m n p x)`.
+  Its natural home is Exercise 9.1, where proposal `6bd180b` already
+  supplies the inverse-concatenation map, both homotopies, and equivalence.
+  Keep the later specialization empty on main; restore it on the shared
+  proposal without changing that earlier auxiliary. The direct computation
+  proofs do not call this additional displayed equivalence.
+- `elementary-number-theory/strong-induction-natural-numbers`, lines
+  43--44, supplies the bounded family at its intervening definition. Lines
+  59--66 supply Lemma 13.5.2, including its judgmental base equation.
+  Lines 72--82 and 84--121 supply the successor construction and both
+  full computation laws. Replace `UU` by `Type`.
+- Reuse Exercise 7.3's existing `decide-leq-succ-ℕ`, from
+  `elementary-number-theory/inequality-natural-numbers`, lines 252--259,
+  instead of importing the source's analogous implicit-index case splitter.
+  Every adapted call supplies its two indices explicitly. No earlier
+  exercise code changes. Replace `neg-succ-leq-ℕ k` by the typed existing
+  `contradiction-leq-ℕ k k (refl-leq-ℕ k)`, whose source is the same
+  inequality module, lines 302--307. Inequality transport and preservation
+  by successor are already in Exercise 6.3.
+- The book explicitly asserts that both sides of the case splitter are
+  propositions. Copy `is-prop-leq-ℕ` verbatim from that inequality module,
+  lines 71--77, at Lemma 13.5.3. Exercise 6.3 introduces order before
+  propositions are defined; it is not enlarged with a later proposition
+  import. The codomain proposition specializes
+  `foundation/coproduct-types`, lines 225--248, using the very same
+  inequality-transport contradiction in the pinned successor proof and
+  `is-set-ℕ` already at Example 12.3.2.
+- Copy the required general coproduct-proposition result at Exercise
+  12.4(c), its exact book home, from that 225--248 range. Only the direction
+  needed by the section is added. The converse and other exercise parts
+  remain gaps. This introduces no Chapter 13 dependency in the exercise.
+- The case-splitting equivalence specializes the existing
+  `equiv-iff-is-prop` (`foundation-core/logical-equivalences`, 127--130).
+  Its forward map is the existing case splitter; its reverse is the
+  coproduct recursor applied to the existing inequality-by-successor and
+  equality-to-inequality maps. This exposes the full book assertion.
+- `eq-cases-leq-succ` specializes the existing `eq-is-prop'`
+  (`foundation-core/propositions`, 103--105) to the case proposition:
+  it is precisely the book's `f(p)=x`. The reflexive-successor instance
+  replaces the source's separate `cases-leq-succ-reflexive-leq-ℕ` in the
+  final computation proof. This reuses mathematics already required and
+  stated in this section; no new earlier computation lemma is introduced.
+- The delayed theorem proof uses the strong-induction source's lines
+  127--140 for bounded induction, 49--51 for diagonal evaluation, and
+  146--244 for the strong induction function, both full computations,
+  inductive case helpers, and the function-and-laws bundle. Place the
+  first two at their precise prose steps, and the full theorem block
+  after its delayed proof. Keep both nested function-extensionality
+  applications in the successor computation.
+
+The extra identity-type-equivalence site is pending proposal validation.
+No earlier complete section or existing exercise code was enlarged.

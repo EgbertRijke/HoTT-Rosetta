@@ -9,6 +9,19 @@ from rosetta.math_text import (
 
 
 class MathTextTests(unittest.TestCase):
+    def test_cases_keep_grouping_values_conditions_and_surrounding_equations(self):
+        self.assertEqual(
+            normalize_math(r"h(x)=\begin{cases}H(m,q) & \text{if }x=\inl(q)\\"
+                           r"p_S(n,H) & \text{if }x=\inr(\refl{}).\end{cases}"),
+            "h(x)=cases {\nH(m,q) if x=inl(q)\np_S(n,H) if x=inr(refl).\n}",
+        )
+        self.assertEqual(
+            normalize_math(r"a &=\begin{cases}b & \text{if }P\\c & \text{if }Q\end{cases}\\"
+                           r"&=d"),
+            "a =cases {\nb if P\nc if Q\n}\n=d",
+        )
+        self.assertEqual(normalize_math(r"\begin{cases}a & P"), r"\begin{cases}a P")
+
     def test_labelled_arrows_preserve_the_retraction_pair_labels(self):
         self.assertEqual(
             normalize_math(r"X \stackrel{i}{\longrightarrow} Y \stackrel{r}{\longrightarrow} X"),

@@ -246,3 +246,32 @@ Section 13.4 candidate and aggregate Chapter 13, all 169 unit tests,
 repository checks, and whitespace checks. No correction or new solution
 was needed; all seven main holes remain unchanged, and no exercise Agda
 was added.
+
+### `lemma-13.5.3-case-evaluation-identifications`
+
+- **Place:** Section 13.5, Lemma 13.5.3, the displayed equivalence between
+  identifications of the bounded successor and identifications of a case value.
+- **Task:** Apply inverse-concatenation equivalence to the equality obtained
+  by applying the case evaluator to `f(p)=x`.
+- **Absent result:** `equiv-inv-concat`, with its inverse and both homotopies.
+- **Reason:** This general groupoid equivalence has its exact mathematical
+  home at Exercise 9.1. It is already supplied on the shared proposal by
+  `6bd180b`, but absent on main. Preserve the earlier main accounts instead
+  of duplicating the auxiliary inside the successor lemma.
+- **Later use:** The intermediate identity-type equivalence explicitly
+  asserted in Lemma 13.5.3. The copied direct case proofs of its two
+  computation laws and the later strong-induction computation do not call
+  this block; all still belong to the same deferred section on main.
+- **Invisible mathematics:** “Section 13.5: strong induction” in
+  `docs/invisible-math.md`.
+- **Status:** Empty on main; candidate Section 13.5 and Chapter 13 defer.
+- **Proposal solution:** Pending. Reuse the existing Exercise 9.1 auxiliary
+  and restore the retained typed specialization; do not enlarge earlier files.
+
+The section also needs the forward implication of Exercise 12.4(c), copied
+at that previously uncurated exercise's exact home. Its other parts and
+the converse remain explicit gaps. This is a direct section prerequisite,
+not a new training site; it transitively imports the existing proposition
+training dependencies. The order proposition and case-type proposition
+belong to the explicit assertions in Lemma 13.5.3. No earlier complete
+section or existing exercise proof is enlarged for them.

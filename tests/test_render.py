@@ -9,6 +9,17 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 class RenderTests(unittest.TestCase):
+    def test_strong_induction_keeps_asterisk_reference_and_both_case_displays(self):
+        result = render_section(ROOT / "book" / "funext.tex", 13, 5)
+        self.assertIn("mentioned in (\\*).", result)
+        self.assertIn("f : (m≤ n+1)→ (m≤ n)+(m=n+1)(*)", result)
+        self.assertEqual(result.count("cases {"), 2)
+        for branch in ("H(m,q) if x≐inl(q)", "p_S(n,H) if x≐inr(refl).",
+                       "s̃(n,m,p) if m≤ n", "p_S(n,s̃(n)) if m=n+1."):
+            self.assertIn(branch, result)
+        self.assertNotIn(r"\begin{cases}", result)
+        self.assertNotIn(r"\end{cases}", result)
+
     def test_theorem_div_gets_expected_heading(self):
         class Item:
             kind = "Definition"

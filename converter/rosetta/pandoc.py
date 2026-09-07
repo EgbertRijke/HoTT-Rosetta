@@ -72,6 +72,9 @@ def prepare_latex(source: str) -> str:
     """
 
     source = _split_align_intertext(source)
+    # Pandoc drops this text symbol in prose, although it keeps it in math.
+    # Use the same literal asterisk for equation tags and their text references.
+    source = re.sub(r"\\textasteriskcentered(?![A-Za-z@])(?:\{\})?", "*", source)
     # ``samepage`` controls page breaking only; it has no Markdown meaning.
     source = re.sub(r"\\(?:begin|end)\{samepage\}%?", "", source)
     source = re.sub(r"\\define\{([^{}]*)\}", r"\\textbf{\1}", source)
