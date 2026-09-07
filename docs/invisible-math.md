@@ -30,8 +30,7 @@ Record all non-obvious decomposition choices. Keep the explanation short.
   `src/foundation-core/function-types.lagda.md`, lines 48--50.
 - **Notation:** Replace `UU` by `Type`.
 - **Uses:** Definition 10.2.1, Example 10.2.2, Theorem 10.2.3, and the
-  identity-system implication of Theorem 11.2.2; through it, Sections 11.3
-  and 11.4.
+  identity-system implication of Theorem 11.2.2; through it, Sections 11.3--11.5.
 
 On the proposal, restore the retained Definition 10.2.1 block after adding
 evaluation at Remark 2.2.2. Its source is
@@ -52,7 +51,7 @@ training exercise because the need arises there.
 - **Main source:** Commit `c85d7fb`,
   `src/foundation-core/coherently-invertible-maps.lagda.md`, lines 464--524.
 - **Later use:** Theorem 10.4.6; its contractible-fiber result is used by
-  Theorem 11.1.3 and Lemma 11.1.4, then Theorem 11.1.6 and Sections 11.2--11.4.
+  Theorem 11.1.3 and Lemma 11.1.4, then Theorem 11.1.6 and Sections 11.2--11.5.
 
 Required mathematics, in dependency order:
 

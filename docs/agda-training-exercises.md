@@ -14,7 +14,7 @@ mathematics, proposal solution, and review state.
 - **Reason:** Section 2.2 already gives a complete account of ordinary
   functions and typechecks. It should not grow solely to support Section 10.2.
 - **Later use:** Example 10.2.2, Theorem 10.2.3, and the identity-system
-  implication in Theorem 11.2.2; through it, Sections 11.3 and 11.4.
+  implication in Theorem 11.2.2; through it, Sections 11.3--11.5.
 - **Invisible mathematics:** “Section 10.2: evaluation at a point” in
   `docs/invisible-math.md`.
 - **Status:** Empty on `main`; routine Section 10.2 and Chapter 10 checks are
@@ -34,7 +34,7 @@ mathematics, proposal solution, and review state.
 - **Reason:** The former proof placed seven general lemmas beside Lemma 10.4.5.
   Their mathematics belongs with earlier path and homotopy operations.
 - **Later use:** Theorem 10.4.6; through it, Theorem 11.1.3, Lemma 11.1.4,
-  Theorem 11.1.6, and Sections 11.2--11.4.
+  Theorem 11.1.6, and Sections 11.2--11.5.
 - **Invisible mathematics:** “Lemma 10.4.5: coherent inverse” in
   `docs/invisible-math.md`.
 - **Status:** Empty on `main`.
@@ -64,3 +64,8 @@ mathematics, proposal solution, and review state.
   suite, repository check, and whitespace check pass. This also validates the
   new consumers of the two earlier Chapter 10 exercises. Main keeps all
   three training sites empty and affected checks deferred.
+
+The later coproduct identity formalization in Section 11.5 is validated on
+proposal `3bbc564`, including aggregate Chapters 9--11. It imports the
+fundamental theorem and therefore depends on the two Chapter 10 exercises,
+but does not introduce another training exercise.
