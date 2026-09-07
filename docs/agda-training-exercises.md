@@ -198,3 +198,12 @@ proof needs its identity-retract result. Part (b)'s truncation-of-retracts
 proof appears as a visibly labeled prerequisite at Proposition 12.4.5:
 placing it in the exercise module would make the section and exercise
 import one another. No earlier complete main file is enlarged for it.
+
+Section 13.1 introduces no new training site. Its fundamental-theorem
+proofs use the existing Chapter 10 exercises. Its Chapter 12 file imports
+also transitively retain the Section 11.4, 11.6, and 12.4 training
+dependencies; this conservative whole-file deferral does not mean every
+imported exercise is directly used in the new proof. The two pre-axiom
+equivalence results take their hypotheses as arguments. Function
+extensionality is assumed only at Axiom 13.1.3. Proposal validation of
+this new section is pending; main's deferred result is not a pass.

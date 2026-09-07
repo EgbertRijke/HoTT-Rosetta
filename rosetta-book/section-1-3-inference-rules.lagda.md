@@ -38,9 +38,9 @@ The following rules follow from the presuppositions about contexts, types, and t
 *Proof tree (automatic faithful draft).*
 
 ```text
-Γ,x:A⊢ B(x) \type
-─────────────────
-    Γ⊢ A \type
+Γ,x:A⊢ B(x) type
+────────────────
+   Γ⊢ A type
 ```
 
 <!-- rosetta-proof-tree: 14d89d899617; review: pending -->
@@ -49,8 +49,8 @@ The following rules follow from the presuppositions about contexts, types, and t
 
 ```text
   Γ⊢ a:A
-──────────
-Γ⊢ A \type
+─────────
+Γ⊢ A type
 ```
 
 <!-- unsupported LaTeX environment: minipage -->
@@ -60,9 +60,9 @@ The following rules follow from the presuppositions about contexts, types, and t
 *Proof tree (automatic faithful draft).*
 
 ```text
-Γ⊢ A≐ B \type
-─────────────
-  Γ⊢ A \type
+Γ⊢ A≐ B type
+────────────
+ Γ⊢ A type
 ```
 
 <!-- rosetta-proof-tree: a2f70fbb9434; review: pending -->
@@ -82,9 +82,9 @@ The following rules follow from the presuppositions about contexts, types, and t
 *Proof tree (automatic faithful draft).*
 
 ```text
-Γ⊢ A≐ B \type
-─────────────
-  Γ⊢ B \type
+Γ⊢ A≐ B type
+────────────
+ Γ⊢ B type
 ```
 
 <!-- rosetta-proof-tree: 6e53d4ce35f8; review: pending -->
@@ -197,9 +197,9 @@ The first variable conversion rule states that
 *Proof tree (automatic faithful draft).*
 
 ```text
-Γ⊢ A≐ A' \textrm{type}   Γ, x:A, \Delta⊢ B(x) \type
-───────────────────────────────────────────────────
-           $Γ, x:A', \Delta⊢ B(x) \type$
+Γ⊢ A≐ A' \textrm{type}   Γ, x:A, \Delta⊢ B(x) type
+──────────────────────────────────────────────────
+           $Γ, x:A', \Delta⊢ B(x) type$
 ```
 
 In this conversion rule, the context `Γ, x:A, \Delta` is just any extension of the context `Γ, x:A`, i.e., it is a context of the form
@@ -267,9 +267,9 @@ Furthermore, we add two more ‘congruence rules’ for substitution, postulatin
 *Proof tree (automatic faithful draft).*
 
 ```text
- Γ⊢ a≐ a':A   Γ, x:A, \Delta⊢ B \type
-─────────────────────────────────────
-Γ, \Delta[a/x]⊢ B[a/x]≐ B[a'/x] \type
+Γ⊢ a≐ a':A   Γ, x:A, \Delta⊢ B type
+────────────────────────────────────
+Γ, \Delta[a/x]⊢ B[a/x]≐ B[a'/x] type
 ```
 
 <!-- rosetta-proof-tree: dbddef295494; review: pending -->
@@ -294,6 +294,8 @@ We will usually write `B(a)` for the fiber of `B` at `a`.
 
 When `b` is a section of the family `B` over `A` in context `Γ`, we call the element `b[a/x]` the **value** of `b` at `a`.
 Again, we will usually write `b(a)` for the value of `b` at `a`.
+
+<!-- rosetta-item-end: definition-1.3.1 -->
 
 ### Weakening
 
@@ -324,7 +326,7 @@ Then we can weaken `B` by `A` as follows
 ```text
 Γ⊢ A \textrm{type}   Γ⊢ B \textrm{type}
 ─────────────────────────────────────── W
-            Γ, x:A⊢ B \type
+             Γ, x:A⊢ B type
 ```
 
 in order to form the type `B` in context `Γ, x:A`.

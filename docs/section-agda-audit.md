@@ -385,3 +385,51 @@ including all item markers and thirteen displays, modulo whitespace.
 The book itself has twelve heading occurrences, nine distinct. There are
 no unresolved references or raw TeX commands. No review data is changed.
 Section 11.6's unchanged prose still compares at 100%.
+
+## Section 13.1 (2026-09-07)
+
+All seven numbered items and three full proof bodies in `book/funext.tex`,
+lines 28--152, are preserved. Twenty provenance-backed blocks account for
+the mathematics; the inference-rule remark needs no second declaration.
+
+| Item | Formalization |
+| --- | --- |
+| Proposition 13.1.1 | `htpy-eq` with its reflexivity computation, instance and based extensionality predicates, evaluation at the reflexivity homotopy, and the homotopy-induction predicate. Four explicitly typed applications of the existing fundamental-theorem and identity-system proofs give (i) iff (ii) iff (iii). These are implications, not an equivalence between the types of proofs. |
+| Theorem 13.1.2 | Fixed-universe extensionality and weak-extensionality predicates and both pinned implication proofs. The weak-to-strong proof retains the two maps of the section-retraction pair and its identity homotopy. Both implications use their hypotheses, before any global axiom is in scope. The two-level version specializes to the book's single universe. |
+| Axiom 13.1.3 | The pinned coherent-inverse presentation: `eq-htpy`, its section and retraction homotopies, and their coherence are explicitly postulated. `funext` and the two equivalence bundles are consequences of those assumptions, not a proof of function extensionality. Proposition 9.2.7 and Lemma 10.4.5 relate this chosen coherent-inverse presentation to the book's equivalence formulation. |
+| Remark 13.1.4 | The full contextual inference rule is retained as a faithful proof-tree draft. Its mathematical content is the preceding context-polymorphic assumption, so no separate Agda declaration or extra axiom is added. |
+| Theorem 13.1.5 | The contractible-dependent-product base case, induction on truncation level using `funext` and Section 12.4's equivalence invariance, and the needed proposition-valued specialization. |
+| Corollary 13.1.6 | Both the general truncation result and the proposition specialization for constant families. |
+| Remark 13.1.7 | `is-prop-neg`, by functions into the empty proposition. This proof uses function extensionality; the prose observation about needing the axiom is not presented as a formal independence theorem. |
+
+The pinned `homotopy-induction` implication from based extensionality uses
+the global `is-torsorial-htpy`, ignoring its explicit hypothesis. Importing
+that proof would assume the conclusion before Axiom 13.1.3. Instead, the
+four typed specializations use the already curated hypothesis-parametric
+Theorem 11.2.2. No new general proof or earlier auxiliary is invented.
+The `ev a` in `htpy-eq` is definitionally expanded to `(λ h → h a)` using
+the pinned evaluation definition; complete Section 2.2 is not enlarged.
+The book's incomplete binder `f,g:Π(x:A)` in the prose of Theorem 13.1.5
+is retained as written; the Agda statement includes the codomain `B x`.
+
+The raw comparison is 99.57%, with 9/10 distinct headings: the only added
+heading labels the assumed coherent-inverse presentation. Removing that
+heading and curated Agda gives exactly the rendered book text, modulo
+whitespace, as a regression test checks. The book has eleven heading
+occurrences and thirteen text fences, including its inference rule.
+The labelled retraction arrows now render as `⟶[i]` and `⟶[r]`, and
+the rule's type judgment renders `type`, using `book/hott.tex` line 212.
+No unresolved references or raw TeX commands remain in this section.
+
+Those converter rules regenerated thirteen affected sections: 1.1--1.4,
+2.1--2.2, 3.1--3.2, 5.1, 6.1--6.2, 13.1, and 14.2. Regeneration also
+refreshes the existing item-end boundaries, notably in Section 2.2;
+all pre-existing Agda code and its order remain byte-identical. All
+thirteen candidate checks and aggregate Chapters 1--6 and 13--14 passed
+after the prose repair, before new Section 13.1 Agda was inserted.
+That earlier empty-section check is not evidence for the new mathematics.
+
+Main passes all 160 unit tests, repository checks (534 verified blocks),
+and whitespace checks. The new Section 13.1 and Chapter 13 are deferred on
+main through existing training dependencies. Actual proposal validation is pending. No new
+training site, exercise Agda, complete-file record, or review decision is added.

@@ -257,10 +257,12 @@ SIMPLE_COMMANDS = {
     r"\defeq": "≔",
     r"\coloneqq": "≔",
     r"\vdash": "⊢",
+    r"\type": "type",
     r"\mapsto": "↦",
     r"\longmapsto": "⟼",
     r"\leftrightarrow": "↔",
     r"\rightarrow": "→",
+    r"\longrightarrow": "⟶",
     r"\to": "→",
     r"\times": "×",
     r"\cdots": "⋯",
@@ -347,6 +349,30 @@ def _replace_binary_macro(value: str, macro: str, separator: str) -> str:
             return value[:position] + separator.strip() + value[position + len(macro) :]
         replacement = first[0] + separator + second[0]
         value = value[:position] + replacement + value[second[1] :]
+
+
+def _replace_annotated_relation(value: str) -> str:
+    """Preserve both parts of TeX stackrel as ``relation[label]``."""
+
+    macro = r"\stackrel"
+    while True:
+        position = _last_command_position(value, macro)
+        if position < 0:
+            return value
+        cursor = position + len(macro)
+        while cursor < len(value) and value[cursor].isspace():
+            cursor += 1
+        label = _braced_argument(value, cursor)
+        if label is None:
+            return value
+        cursor = label[1]
+        while cursor < len(value) and value[cursor].isspace():
+            cursor += 1
+        relation = _braced_argument(value, cursor)
+        if relation is None:
+            return value
+        replacement = f"{relation[0]}[{label[0]}]"
+        value = value[:position] + replacement + value[relation[1]:]
 
 
 def _replace_binary_function(value: str, macro: str, name: str) -> str:
@@ -511,6 +537,7 @@ def normalize_math(source: str) -> str:
     value = re.sub(r"\\frac\{([^{}]+)\}\{([^{}]+)\}", r"\1/\2", value)
     value = _replace_binary_macro(value, r"\ct", " ∙ ")
     value = _replace_binary_macro(value, r"\eqv", " ≃ ")
+    value = _replace_annotated_relation(value)
     value = _replace_truncation(value)
     value = _replace_stirling(value)
     value = _replace_binary_function(value, r"\fib", "fib")

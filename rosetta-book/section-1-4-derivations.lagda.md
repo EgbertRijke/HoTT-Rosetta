@@ -51,11 +51,11 @@ Indeed, we have the following derivation using substitution, weakening, and the 
 *Proof tree (automatic faithful draft).*
 
 ```text
-       Γ⊢ A \type        Γ⊢ A \type   Γ, x:A, \Delta⊢ J
-───────────── \delta   ────────────────────────────── W
-     Γ, x':A⊢ x':A             Γ, x':A, x:A, \Delta⊢ J
-─────────────────────────────────────────────────────── $S$
-             Γ, x':A, \Delta[x'/x]⊢ J[x'/x]
+      Γ⊢ A type         Γ⊢ A type   Γ, x:A, \Delta⊢ J
+───────────── \delta   ───────────────────────────── W
+    Γ, x':A⊢ x':A             Γ, x':A, x:A, \Delta⊢ J
+────────────────────────────────────────────────────── $S$
+            Γ, x':A, \Delta[x'/x]⊢ J[x'/x]
 ```
 
 In this derivation it is the application of the weakening rule where we have to check that `x'` does not occur in the context `Γ, x:A, \Delta`.
