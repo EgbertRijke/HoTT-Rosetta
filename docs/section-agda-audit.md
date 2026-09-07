@@ -39,3 +39,34 @@ Sections 10.1 and 10.3 pass candidate Agda checks and have complete required
 coverage. Sections 10.2 and 10.4 and Chapter 10 are intentionally deferred on
 `main`. Proposal `511f171` passes Sections 2.2, 10.2, and 10.4 and aggregate
 Chapters 2--10. No optional reviewer decisions were transferred or refreshed.
+
+## Section 11.1 (2026-09-06)
+
+All six items and their proofs in `book/fundamental.tex` have curated code.
+The main source is `foundation-core/functoriality-dependent-pair-types`, with
+the separate fiberwise-equivalence predicate from
+`foundation-core/families-of-equivalences`. Full commit, ranges, and hashes are
+recorded in `data/agda-blocks-chapter-11.json`.
+
+| Item | Formalization |
+| --- | --- |
+| Definition 11.1.1 | `tot`, preserving the base coordinate. |
+| Lemma 11.1.2 | `compute-fiber-tot`, its forward and inverse maps, and both homotopies by pair/path induction. |
+| Theorem 11.1.3 | `is-fiberwise-equiv`, both implications between it and `is-equiv (tot f)`, and `equiv-tot`. |
+| Lemma 11.1.4 | `map-Σ-map-base`, its fiber equivalence, and the implications for contractible maps and equivalences. |
+| Definition 11.1.5 | `map-Σ`, changing the base and fiber coordinates. |
+| Theorem 11.1.6 | `triangle-map-Σ`, both equivalence implications, and `equiv-Σ`. The triangle's anonymous module is restored after splitting it from Definition 11.1.5. |
+
+Only section dependencies were added to Exercises 9.4, 10.2, and 10.3:
+triangle laws and 3-for-2, preservation of contractibility by retracts, and
+3-for-2 for contractible types and equivalences. Unused parts of Exercises
+9.4 and 10.3 remain explicit gaps. Section 9.2 was not a complete
+formalization: Corollary 9.2.8 was blocked. Its existing source excerpt was
+completed via a passing scratchpad by restoring its module and using the
+section inverse proved in Proposition 9.2.7. The retract-data type belongs
+with Definition 9.2.1, which already introduces that notion in the book.
+No complete earlier file was enlarged and no review evidence was refreshed.
+
+Section 9.2 and the three changed exercise candidates pass on `main`.
+Section 11.1 remains deferred through Lemma 10.4.5 and is not in the
+completion list. Validation on the shared proposal is the next check.

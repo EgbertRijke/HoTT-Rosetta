@@ -27,8 +27,13 @@ Work continues on `main`.
   upstream-analogous unit singleton witness, checked on the proposal.
 - Section 10.4 is deferred on `main` at Lemma 10.4.5. Its solution is commit
   `5e5a5cd` on `proposal/agda-exercise-solutions` and passes Agda there.
-- Chapters 11--13 currently have no curated section blocks or recorded complete
-  sections. Verify this before work begins.
+- All six items in Section 11.1 have curated code, with the needed results
+  from Exercises 9.4, 10.2, and 10.3. Section 9.2's formerly blocked Corollary
+  9.2.8 is restored from a passing scratchpad, and retract data is defined at
+  Definition 9.2.1. These changed files pass candidate checks on `main`.
+- Section 11.1 is deferred on `main` through Lemma 10.4.5; validation on the
+  shared proposal is next. Sections 11.2--13.5 still have no curated section
+  blocks. No Chapter 11 section is recorded complete on `main`.
 - Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
   these remain reserved for manual review.
 
@@ -44,7 +49,9 @@ The five assigned Chapter 10 steps are done. Keep Definition 10.2.1 and Lemma
 audit also records that Definition 10.4.4's final cancellation result is
 provided only on the proposal as part of the existing coherence exercise.
 
-Formalize Chapters 11, 12, and 13 in order, starting with Section 11.1. Chapter
+Bring current `main` into the shared proposal and check Section 11.1 and the
+affected aggregates there. Then formalize Chapters 11, 12, and 13 in order,
+starting with Section 11.2. Chapter
 13 contains Axiom 13.1.3: keep any assumption explicit and never describe it as
 a proof.
 

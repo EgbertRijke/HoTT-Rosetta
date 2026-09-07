@@ -122,6 +122,29 @@ class AgdaManifestTests(unittest.TestCase):
             [],
         )
 
+    def test_family_equivalence_blocks_stay_in_their_numbered_items(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        blocks = load_manifest(root / "data" / "agda-blocks.json")
+        selected = [
+            block for block in blocks
+            if block.destination.startswith("section-11-1-")
+            or block.block_id in {
+                "definition-9.2.1-retract-data",
+                "corollary-9.2.8-inverse-equivalence",
+            }
+        ]
+        self.assertEqual(len(selected), 14)
+        for block in selected:
+            with self.subTest(block=block.block_id):
+                document = (rosetta_directory(root) / block.destination).read_text()
+                start = document.index(f"<!-- rosetta-item: {block.item_id}")
+                end = document.index(f"<!-- rosetta-item-end: {block.item_id} -->")
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(start, position)
+                self.assertLess(position, end)
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

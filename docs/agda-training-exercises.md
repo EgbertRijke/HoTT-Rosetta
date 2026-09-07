@@ -32,7 +32,8 @@ mathematics, proposal solution, and review state.
   homotopies.
 - **Reason:** The former proof placed seven general lemmas beside Lemma 10.4.5.
   Their mathematics belongs with earlier path and homotopy operations.
-- **Later use:** Theorem 10.4.6.
+- **Later use:** Theorem 10.4.6; through it, Theorem 11.1.3, Lemma 11.1.4,
+  and Theorem 11.1.6.
 - **Invisible mathematics:** “Lemma 10.4.5: coherent inverse” in
   `docs/invisible-math.md`.
 - **Status:** Empty on `main`.

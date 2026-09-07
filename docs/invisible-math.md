@@ -49,7 +49,8 @@ training exercise because the need arises there.
 - **Goal:** Construct a coherent inverse from a two-sided inverse.
 - **Main source:** Commit `c85d7fb`,
   `src/foundation-core/coherently-invertible-maps.lagda.md`, lines 464--524.
-- **Later use:** Theorem 10.4.6.
+- **Later use:** Theorem 10.4.6; its contractible-fiber result is used by
+  Theorem 11.1.3 and Lemma 11.1.4, and then by Theorem 11.1.6.
 
 Required mathematics, in dependency order:
 

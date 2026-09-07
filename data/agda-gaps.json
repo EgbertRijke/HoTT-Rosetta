@@ -2,6 +2,20 @@
   "format_version": 1,
   "items": [
     {
+      "item_id": "exercise-9-4-remaining-parts",
+      "kind": "Exercise",
+      "number": "9.4(a,b;c-consequence)",
+      "destination": "exercise-9-4-three-for-two-equivalences.lagda.md",
+      "statement": "The triangle laws needed by Theorem 11.1.6 and the three equivalence implications are curated. Package the standalone assertions in parts (a) and (b), and prove the final consequence that any section or retraction of an equivalence is an equivalence. These remaining exercise results are deferred until section Agda is complete."
+    },
+    {
+      "item_id": "exercise-10-3-a",
+      "kind": "Exercise",
+      "number": "10.3(a)",
+      "destination": "exercise-10-3-contractible-equivalences.lagda.md",
+      "statement": "Show that the terminal map A → unit is an equivalence exactly when A is contractible. Only part (b), needed by Section 11.1, is currently curated."
+    },
+    {
       "item_id": "exercise-7-9-b",
       "kind": "Exercise",
       "number": "7.9(b)",
