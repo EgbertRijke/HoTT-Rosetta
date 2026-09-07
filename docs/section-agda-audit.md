@@ -504,7 +504,11 @@ both inverse maps, and the explicit induction/function-extensionality proofs.
 
 No earlier complete file, exercise Agda, training site, review decision,
 or complete-file record is changed. Section 13.3 is deferred on main through
-the existing Section 13.1 imports; actual proposal validation is pending.
+the existing Section 13.1 imports. Published proposal merge
+`6c408d4247f512bc7ce8cfbafbd4b11edce697b8` passes actual Agda for Section
+13.3 and aggregate Chapter 13, all 168 unit tests, repository checks
+(559 verified blocks), and whitespace checks. No new solution code or
+correction was needed on that branch.
 Main passes all 163 unit tests, repository checks (547 verified blocks),
 and whitespace checks. Its Section 13.3 and Chapter 13 results remain
 deferred, not passed.

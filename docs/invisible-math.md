@@ -461,5 +461,8 @@ manifest.
   with visible headings recording this dependency-order choice.
 
 The imports of Section 13.1 retain conservative transitive training
-deferral on main. Actual proposal validation is pending; no additional
-mathematical auxiliary or exercise solution is proposed.
+deferral on main. Published proposal merge
+`6c408d4247f512bc7ce8cfbafbd4b11edce697b8` passes Section 13.3 and
+aggregate Chapter 13 with these exact five blocks. All 168 tests and
+repository checks pass. No additional mathematical auxiliary or exercise
+solution was needed; no earlier complete file was enlarged.

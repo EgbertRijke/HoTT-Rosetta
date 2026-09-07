@@ -103,8 +103,9 @@ Work continues on `main`.
   Section 13.3 now has five provenance-backed blocks for the three numbered
   universal properties and both introductory ordinary-family specializations.
   It preserves the explicit Σ-induction and twice-extensional path-induction
-  proofs, with no new auxiliary or exercise Agda. Its actual proposal
-  validation is pending. Sections 13.4--13.5 have no curated section blocks.
+  proofs, with no new auxiliary or exercise Agda. Published proposal merge
+  `6c408d4` passes its actual candidate and aggregate Chapter 13 checks.
+  Sections 13.4--13.5 have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
@@ -117,6 +118,8 @@ The latest main validation passed all 163 unit tests,
 candidate and aggregate Chapter 9 checks passed; neither changed in the
 Section 13.3 work. Sections 13.1--13.3 and Chapter 13
 are deferred until their existing training dependencies are supplied.
+Proposal `6c408d4` passes all 168 unit tests, repository and whitespace
+checks, candidate Section 13.3, and aggregate Chapter 13.
 Proposal `161b3c1` passes all 167 unit tests, repository and whitespace
 checks, Section 13.2, Exercise 9.5, and aggregate Chapters 9 and 13.
 Proposal `dc97e2f` passes all 165 unit tests, repository and whitespace
@@ -153,19 +156,30 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-First validate the newly curated Section 13.3 and Chapter 13 on the shared
-proposal after bringing in current main. No new training solution is needed.
-Then continue Sections 13.4--13.5 in order. Section 13.3 is `book/funext.tex`,
-lines 282--377: Theorem 13.3.1 (dependent universal property of Σ),
-Corollary 13.3.2 (currying for ordinary products), and Theorem 13.3.3
-(dependent universal property of identity types). Preserve both introductory
-ordinary-family specializations as well as the numbered statements and
-complete proofs. Pinned `foundation/universal-property-dependent-pair-types`
-has the explicit `eq-htpy`/Σ-induction proof; `foundation/universal-property-identity-types`
-has the two nested function-extensionality applications and path induction.
-Copy only the relevant ranges, not that latter module's unrelated later
-univalence arguments. Local `ev-pair` already exists at Remark 4.6.3;
-inspect all imports and auxiliary homes before adding code.
+Continue Sections 13.4--13.5 in order. Section 13.4 is `book/funext.tex`,
+lines 378--461: Theorem 13.4.1 has three equivalent conditions (equivalence
+of the map, dependent precomposition, and ordinary precomposition). Account
+for all implications and the full converse proof using fibers at `id` and
+`f`, not just preservation of equivalences under precomposition.
+Pinned `foundation/dependent-universal-property-equivalences` gives the
+coherent-inverse/transport proof. Its wrapper uses path-split maps; inspect
+the existing local coherent-inverse conversion before importing any new
+general machinery. Its `substitution-law-tr` is absent locally; inspect
+that result's source, dependencies, and natural mathematical home under the
+training-exercise policy before editing earlier complete sections.
+`foundation/universal-property-equivalences` supplies the constant-family
+implication. Its converse delegates to the structured-type proof in
+`foundation/precomposition-functions-into-subuniverses`, lines 47--84,
+which explicitly constructs the inverse and both homotopies using those
+two contractible fibers. Specialize only necessary structure and record
+all adaptations; preserve the book's complete proof.
+
+Section 13.3's three numbered results, both proofs, and introductory
+ordinary specializations are curated and validated. Keep the explicit
+induction proofs, their scope-order headings, and the original prose's
+redundant function-extensionality wording and free-`p` typo as documented
+in the audit. No source prose correction, new exercise, or earlier complete
+file enlargement was needed.
 
 Section 13.2's four numbered items and intervening equivalence are curated
 and validated, but its record-Σ η representation difference remains
