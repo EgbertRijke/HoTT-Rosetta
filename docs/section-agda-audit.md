@@ -696,6 +696,12 @@ the explicit function-extensionality transfer, and both functorial laws.
 Main passes all 176 unit tests, repository checks (604 verified blocks),
 and whitespace checks. Changed Sections 1.1--1.4, 2.1--2.2, and 3.1--3.2
 and aggregate Chapters 1--3 pass Agda; their Agda fences are unchanged.
-Section 14.2 and aggregate Chapter 14 correctly defer. Actual proposal
-restoration and validation are pending; no completion or review record
-is inferred from the current files or deferred checks.
+Section 14.2 and aggregate Chapter 14 correctly defer. Published proposal
+solution `d9fe7afc68edc25d011dcddba86f3ed6de739934` restores the retained
+transport block without proof corrections or earlier auxiliary additions.
+It passes actual Agda for Section 14.2, all eight earlier changed
+sections, and aggregate Chapters 1--3 and 14, all 181 unit tests,
+repository checks (616 verified blocks), and whitespace checks. The
+main-to-proposal merge preserved all existing Section 2.2 Agda and both
+independently inserted gap records. Main keeps all nine training sites
+empty; no completion or review record is changed.
