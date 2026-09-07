@@ -179,3 +179,33 @@ Exercise 10.1, its exact book home. All ranges use the same pinned commit.
 These choices add no new training exercise or function-extensionality axiom.
 Proposal `0c3d8b1` validates Section 12.1, Exercise 10.1, and aggregate
 Chapters 10--12 with these placements and the existing training solutions.
+
+### Theorem 12.2.3: embeddings and propositional fibers
+
+- **Exercise:** `theorem-12.2.3-embeddings-propositional-fibers`.
+- **Needed result:** `equiv-fiber : fiber f y ≃ fiber' f y`, with the
+  forward and inverse maps, section, retraction, and equivalence proof.
+- **Source:** Commit `c85d7fb834778f96a66576318cdc4ef3d4b80a26`,
+  `src/foundation-core/fibers-of-maps.lagda.md`, lines 215--244.
+- **Natural home:** Definition 10.3.1, after the ordinary and reverse fiber
+  definitions. Main's complete Section 10.3 stays unchanged. Proposal
+  `63e5e49` already provides this entire auxiliary for Theorem 11.4.2;
+  reuse it without adding a duplicate or moving it beside the later theorem.
+- **Role and order:** The fundamental theorem applies to the reverse fiber
+  over `f x`. Transfer contractibility between it and the ordinary fiber;
+  Proposition 12.1.3 converts inhabited contractibility into propositionality.
+  In the converse direction, eliminate the fiber path by path induction.
+- **Retained theorem:** `src/foundation-core/propositional-maps.lagda.md`,
+  lines 81--105 at the same commit. Replace only `UU` by local `Type`.
+- **Uses:** Both directions of Theorem 12.2.3, the embedding criterion for
+  projections in Corollary 12.2.4, and its packaged equivalence on identities.
+  Recheck Section 12.2 and aggregate Chapters 10--12 on the proposal.
+
+Corollary 12.2.4 also needs `equiv-fiber-pr1` and its inverse data, from
+`src/foundation-core/fibers-of-maps.lagda.md`, lines 250--290 at the same
+commit. Exercise 10.7(a) asks for precisely this result and was previously
+empty; add it there on both branches, without a Chapter 12 dependency.
+Parts (b) and (c) are not section prerequisites and remain Agda gaps.
+The unbundled forward implication simply applies the copied subtype-inclusion
+embedding proof to `(λ x → (B x , H x))`; it does not invent a new proof.
+No function-extensionality assumption or later truncation result is imported.

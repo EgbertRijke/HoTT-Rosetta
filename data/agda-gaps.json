@@ -2,6 +2,13 @@
   "format_version": 1,
   "items": [
     {
+      "item_id": "exercise-10-7-b-c",
+      "kind": "Exercise",
+      "number": "10.7(b,c)",
+      "destination": "exercise-10-7-fibers-of-projections.lagda.md",
+      "statement": "Part (a)'s projection-fiber equivalence is curated because Corollary 12.2.4 needs it. The remaining projection-equivalence and section-graph-equivalence characterizations by contractibility of every family fiber, including both directions in parts (b) and (c), remain lower-priority exercise Agda."
+    },
+    {
       "item_id": "example-9.2.9",
       "kind": "Example",
       "number": "9.2.9",

@@ -104,3 +104,27 @@ Exercise 10.1, which the book explicitly cites.
 Published proposal `0c3d8b1` passes Section 12.1, Exercise 10.1, and aggregate
 Chapters 10--12, with 155 unit tests and repository checks passing. Main keeps
 its existing training sites empty and Section 12.1 deferred.
+
+### `theorem-12.2.3-embeddings-propositional-fibers`
+
+- **Place:** Section 12.2, Theorem 12.2.3.
+- **Task:** Prove both directions between embeddings and proposition-valued
+  fibers using the fundamental theorem of identity types.
+- **Absent result:** `equiv-fiber`, with its two maps and inverse homotopies.
+- **Reason:** This theorem directly needs the same auxiliary as Theorem
+  11.4.2. Its natural home, Section 10.3, remains complete and unchanged on
+  `main`; record this later empty site even though the auxiliary is already
+  available on the shared proposal.
+- **Later use:** Both implications of Theorem 12.2.3, both implications of
+  Corollary 12.2.4, and the subtype identity equivalence.
+- **Invisible mathematics:** “Theorem 12.2.3: embeddings and propositional
+  fibers” in `docs/invisible-math.md`.
+- **Status:** Empty on `main`; Section 12.2 and Chapter 12 are deferred.
+- **Proposal solution:** Pending. Reuse the complete auxiliary already placed
+  at Definition 10.3.1 by `63e5e49`; restore this retained theorem block in a
+  focused solution commit after bringing in latest `main`.
+
+The fundamental-theorem applications also extend the later uses of the two
+Chapter 10 training exercises. Only part (a) of Exercise 10.7 is added early,
+at its exact book home, for the projection corollary. Parts (b) and (c) remain
+explicit Agda gaps; their proofs are not required by this section.

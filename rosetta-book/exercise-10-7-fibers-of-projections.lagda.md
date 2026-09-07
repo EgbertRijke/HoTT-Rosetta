@@ -3,6 +3,12 @@
 ```agda
 module exercise-10-7-fibers-of-projections where
 
+open import universe-levels
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-4-transport
+open import section-9-2-bi-invertible-maps
+open import section-10-3-contractible-maps
 ```
 
 ## Problem statement
@@ -43,4 +49,48 @@ Show that the following are equivalent:
 
 <!-- rosetta-item: exercise-10-7 -->
 
-No formalization has been curated yet.
+<!-- rosetta-agda-block: exercise-10-7-projection-fiber-equivalence -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) (a : A)
+  where
+
+  map-fiber-pr1 : fiber (pr1 {B = B}) a → B a
+  map-fiber-pr1 ((x , y) , p) = tr B p y
+
+  map-inv-fiber-pr1 : B a → fiber (pr1 {B = B}) a
+  map-inv-fiber-pr1 b = (a , b) , refl
+
+  is-section-map-inv-fiber-pr1 :
+    is-section map-fiber-pr1 map-inv-fiber-pr1
+  is-section-map-inv-fiber-pr1 b = refl
+
+  is-retraction-map-inv-fiber-pr1 :
+    is-retraction map-fiber-pr1 map-inv-fiber-pr1
+  is-retraction-map-inv-fiber-pr1 ((.a , y) , refl) = refl
+
+  abstract
+    is-equiv-map-fiber-pr1 : is-equiv map-fiber-pr1
+    is-equiv-map-fiber-pr1 =
+      is-equiv-is-invertible
+        map-inv-fiber-pr1
+        is-section-map-inv-fiber-pr1
+        is-retraction-map-inv-fiber-pr1
+
+  equiv-fiber-pr1 : fiber (pr1 {B = B}) a ≃ B a
+  pr1 equiv-fiber-pr1 = map-fiber-pr1
+  pr2 equiv-fiber-pr1 = is-equiv-map-fiber-pr1
+
+  abstract
+    is-equiv-map-inv-fiber-pr1 : is-equiv map-inv-fiber-pr1
+    is-equiv-map-inv-fiber-pr1 =
+      is-equiv-is-invertible
+        map-fiber-pr1
+        is-retraction-map-inv-fiber-pr1
+        is-section-map-inv-fiber-pr1
+
+  inv-equiv-fiber-pr1 : B a ≃ fiber (pr1 {B = B}) a
+  pr1 inv-equiv-fiber-pr1 = map-inv-fiber-pr1
+  pr2 inv-equiv-fiber-pr1 = is-equiv-map-inv-fiber-pr1
+```
