@@ -323,3 +323,11 @@ same-type-in-two-universes assertion; its representation gap is explicit.
 The proper-successor-type predicate is a typed specialization of
 `foundation/complements`, lines 25--27, to the constant family of
 `is-trunc k A` over `is-trunc (succ-𝕋 k) A`, not a new proof.
+
+Published proposal `31222b8` implements the two auxiliary placements and
+restores Theorem 12.4.7 unchanged. It passes candidate Sections 11.6 and
+12.4, Exercises 9.1 and 12.8, and aggregate Chapters 9--12. All 161
+proposal unit tests and repository checks pass. Its Exercise 9.1 gap now
+names only right concatenation; the needed transport assertion is supplied.
+Main keeps its earlier files and all seven training sites unchanged and
+empty. No Section 9.2 code or reserved manual-review data is changed.
