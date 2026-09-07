@@ -342,5 +342,8 @@ minimum construction reuses the existing well-ordering and natural-number
 order results; its set-valued extension reuses the existing subtype,
 function-extensionality, and truncation interfaces. The section and aggregate
 Chapter 14 therefore import all nine existing training sites and defer on
-main. The exact new draft passes against the proposal's existing solutions;
-published validation of the curated section and aggregate is pending.
+main. Published proposal merge
+`4524b3ac744d3be90ee758b827a31c22ce4c6b7b` passes actual Agda for the
+curated Section 14.4 and aggregate Chapter 14, all 192 unit tests,
+repository checks (656 verified blocks), and whitespace checks. No proof
+correction or new solution was needed; all nine main holes are unchanged.

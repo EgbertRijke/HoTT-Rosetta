@@ -802,5 +802,10 @@ Main passes 187 unit tests, repository checks (644 verified blocks), and
 whitespace checks. Section 14.4 and aggregate Chapter 14 defer through the
 nine existing training sites, not pass. The exact 22-block draft passed
 Agda against the shared proposal's solved prerequisites before curation.
-Published proposal validation of the curated section and aggregate is
-pending. No new training site or completion/review decision is added.
+Published proposal merge `4524b3ac744d3be90ee758b827a31c22ce4c6b7b` passes
+actual Agda for the curated Section 14.4 and aggregate Chapter 14, all
+192 unit tests, repository checks (656 verified blocks), and whitespace
+checks. No proof correction or new solution was needed. The merge retains
+the existing evaluation-placement test alongside the new section tests;
+only their shared insertion location conflicted. No new training site or
+completion/review decision is added, and main retains all nine empty sites.
