@@ -37,7 +37,11 @@ manifest blocks (176 exact, 352 adapted, 58 historical/local). Section
 14.1's prose comparison is 100%, all 7 headings and 10 text fences match,
 and there are no unresolved references or raw TeX commands. Its candidate,
 Exercise 12.6, and aggregate Chapters 12--14 defer through existing sites.
-Actual proposal validation is the next step before accepting this curation.
+Published proposal merge `7ba38d00a91229d5311cba0c2a400b3160ebf93f`
+passes actual Agda for Section 14.1, Exercise 12.6, and aggregate Chapters
+12--14, all 176 unit tests, repository checks (598 verified blocks), and
+whitespace checks. No proof corrections or new training solutions were
+needed. Main's eight training sites stay empty and its checks stay deferred.
 
 - Routine checks report `deferred` without running Agda when a file contains or
   imports a manifest block marked `exercise`. `--force` runs the unchanged Agda
@@ -202,10 +206,11 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-First validate Section 14.1 and Exercise 12.6 on the shared proposal, then
-continue Section 14.2, `book/propositional-truncation.tex`, beginning at
-line 104. Inventory its formation and universe rules, both constructors,
-all numbered items, induction rules, computation rules, and proof trees.
+Continue Section 14.2, `book/propositional-truncation.tex`, lines 103--255.
+Inventory its formation and universe rules, both constructors, all five
+numbered items (Lemma 14.2.1, Definition 14.2.2, Remark 14.2.3, Theorem
+14.2.4, Proposition 14.2.5), induction rules, computation rules, and proof
+trees. Section 14.1 and its needed Exercise 12.6 prerequisite are validated.
 Pinned `foundation/propositional-truncations` derives its definitions from
 the postulates in `foundation/truncations`; inspect both before choosing
 the book's proposition-level specialization. Label those assumptions and

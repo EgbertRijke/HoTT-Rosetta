@@ -282,3 +282,16 @@ not a new training site; it transitively imports the existing proposition
 training dependencies. The order proposition and case-type proposition
 belong to the explicit assertions in Lemma 13.5.3. No earlier complete
 section or existing exercise proof is enlarged for them.
+
+Section 14.1's propositional-truncation specification and its needed
+Exercise 12.6(a) proposition-level prerequisite extend the later uses of
+the existing Chapter 10--12 training dependencies. There is no new training
+site. Published proposal merge
+`7ba38d00a91229d5311cba0c2a400b3160ebf93f` passes actual Agda for the
+Section 14.1 candidate, Exercise 12.6, and aggregate Chapters 12--14,
+all 176 unit tests, repository checks (598 verified blocks), and whitespace
+checks. It needs no proof correction or new auxiliary solution. Main keeps
+its eight empty sites and reports these candidates and aggregates deferred.
+The handoff's former univalence-as-Chapter-14 assignment was incorrect:
+active source order places univalence in Chapter 17, so no such wrongly
+numbered training site was created.
