@@ -23,14 +23,20 @@ the full Kraus theorem. The explicit precomposition map uses action on
 the assumed path constructor. Uniqueness precedes the image-proposition
 construction, and the extension retains its computation and both inverse
 homotopies. Existing minimum, finite-type, and subtype-identity results
-are reused; no earlier section, exercise Agda, or training site is added.
+are reused; no earlier section is enlarged and no exercise Agda or new
+training site is added.
 Main passes 187 tests, repository checks (644 blocks: 176 exact, 410
 adapted, 58 historical/local), and whitespace checks. Source comparison
 is 100%, all 8 headings and 15 text fences match, and all three diagram
 IDs remain unchanged. Section 14.4 and Chapter 14 defer through all nine
-existing sites. The exact draft passes Agda against the shared proposal's
-solved prerequisites; published validation of the curated section and
-aggregate is pending. See `docs/section-agda-audit.md` for the item audit.
+existing sites. Published proposal merge
+`4524b3ac744d3be90ee758b827a31c22ce4c6b7b` passes actual Agda for Section
+14.4 and aggregate Chapter 14, all 192 unit tests, repository checks
+(656 verified blocks), and whitespace checks. No proof correction or new
+training solution was needed. The test insertion conflict preserves both
+the proposal's evaluation-placement regression and the two new section
+regressions. Main retains all nine empty sites and its deferred results
+are not passes. See `docs/section-agda-audit.md` for the item audit.
 
 Section 14.4's preparatory prose audit exposed two recurring conversion
 losses. The converter now preserves the active book's simple citation groups
