@@ -164,3 +164,16 @@ test verifies that the involution follows the inverse laws inside Definition
 example. The unused right-concatenation and transport parts of Exercise 9.1
 remain explicit gaps on that branch. Candidate Sections 5.2 and 11.6,
 Exercises 9.1 and 10.6, and aggregate Chapters 5--11 pass ordinary Agda checks.
+
+Section 12.1 uses the existing Theorem 11.4.2 solution in the proof that an
+inhabited-contractible type embeds into the unit type. The pinned
+`foundation/subterminal-types`, lines 48--86, provides the book's exact proof
+route. Its point-assumption lemma, `foundation-core/embeddings` lines
+126--132, belongs in the proof of Proposition 12.1.3, where the book states
+that observation explicitly. Expand `terminal-map A` to `(λ (_ : A) → star)`
+using `foundation/unit-type` lines 54--59 and `foundation-core/constant-maps`
+lines 29--30; this avoids introducing a general API in an earlier complete
+section. The required `is-prop-is-contr` is copied from
+`foundation-core/contractible-types` lines 197--200 to the previously empty
+Exercise 10.1, its exact book home. All ranges use the same pinned commit.
+These choices add no new training exercise or function-extensionality axiom.

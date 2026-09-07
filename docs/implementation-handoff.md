@@ -57,7 +57,11 @@ Work continues on `main`.
   `6bd180b` places this auxiliary after the inverse laws and the two required
   groupoid equivalences at Exercise 9.1. It passes all of Section 11.6 and
   aggregate Chapters 5--11, including the six-condition theorem.
-  Sections 12.1--13.5 still have no curated section blocks.
+  Section 12.1 now has source-backed code for all four numbered items,
+  including the unit-embedding condition and its converse. Exercise 10.1's
+  required contractible-identity proof passes on `main`. Section 12.1 is
+  deferred through Theorem 11.4.2; its actual proposal validation is the
+  immediate next action. Sections 12.2--13.5 have no curated section blocks.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
@@ -84,11 +88,10 @@ Lemma 10.4.5, Theorem 11.4.2, and Example 11.6.3 empty on `main`; do not merge
 the proposal to make `main` pass. The audit also records that Definition 10.4.4's final cancellation
 result is provided only on the proposal as part of the existing coherence exercise.
 
-Formalize Chapters 12 and 13 in order, starting with Section 12.1 in
-`book/hierarchy.tex`. Its four numbered items include all four equivalent
-conditions for being a proposition: do not omit the embedding into the unit
-type. Search the pinned proposition, embedding, empty-type, and unit-type
-modules, and audit the required contractible-identity result in Exercise 10.1.
+Validate Section 12.1 and affected aggregates on the shared proposal, then
+continue Sections 12.2--13.5 in order. Section 12.1's fourth condition uses
+the exact proof in pinned `foundation/subterminal-types`, not the later
+truncation-theory wrapper in `foundation/propositions`.
 Avoid importing function extensionality from upstream ahead of its narrative
 home. Chapter 13 contains Axiom 13.1.3: keep that assumption explicit and
 never describe it as a proof.
