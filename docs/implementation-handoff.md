@@ -6,7 +6,7 @@ Updated 2026-09-07.
 
 Complete section prose and section Agda for Chapters 3--22 before the remaining
 exercise Agda. Chapters 1--2 are optional. The next working range is Chapters
-10--13.
+14--17.
 
 `docs/conversion-contract.md` is the policy authority. Do not duplicate it
 here. Recompute inventories; file presence and review state do not prove
@@ -117,7 +117,9 @@ Work continues on `main`.
   a new empty training site needing Exercise 9.1's existing proposal
   inverse-concatenation equivalence. The required Exercise 12.4(c) forward
   implication is curated at its exact home; its other parts remain gaps.
-  Actual Section 13.5 proposal validation is pending.
+  Published proposal solution `e8105dd` restores that retained equivalence
+  without proof corrections or earlier-file additions, and passes the
+  entire section, Exercise 12.4, and aggregate Chapters 8 and 12--13.
 - Total-map base parameters and TikZ spacing options now render correctly;
   affected documents were regenerated. Blocked scratchpad drafts are now
   included in their candidate checks, so omitted code cannot yield a false pass.
@@ -133,6 +135,9 @@ The preceding Exercise 9.5
 candidate and aggregate Chapter 9 checks passed; neither changed in the
 Section 13.5 work. Sections 13.1--13.5 and Chapter 13
 are deferred until their existing training dependencies are supplied.
+Proposal `e8105dd` passes all 174 unit tests, repository and whitespace
+checks, candidate Sections 8.2 and 13.5, Exercise 12.4, and aggregate
+Chapters 8 and 12--13.
 Proposal `b42184f` passes all 169 unit tests, repository and whitespace
 checks, candidate Section 13.4, and aggregate Chapter 13.
 Proposal `6c408d4` passes all 168 unit tests, repository and whitespace
@@ -174,14 +179,37 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Complete the new Section 13.5 training exercise on the shared proposal.
-Bring in latest main, restore the retained
-`lemma-13.5.3-case-evaluation-identifications` block using the already
-available Exercise 9.1 `equiv-inv-concat`, commit the focused solution,
-and validate Section 13.5, Exercise 12.4, and aggregate Chapters 12--13.
-Also validate the changed Section 8.2 prose and aggregate Chapter 8.
-No earlier auxiliary needs to be added. Publish and record the solution
-before continuing Section 14.1.
+Continue Section 14.1, `book/univalence.tex`, lines 11--109, and inspect
+the Chapter 14 introduction at lines 1--10. Inventory all six numbered
+items and all six parts of Example 14.1.4, not just the axiom.
+Theorem 14.1.1's three equivalence conditions must remain hypothesis-
+parametric before Axiom 14.1.2. Use the explicit fundamental-theorem and
+identity-system conversions, not the globally assumed convenience proofs.
+Pinned `foundation-core/univalence` supplies the canonical map and the
+two contractibility implications; `foundation/equivalence-induction`
+supplies the induction predicate and its two contractibility implications.
+The canonical map uses `equiv-tr id`: inspect the existing Exercise 9.1
+transport equivalence and apply the training policy before changing any
+earlier main account. Introduce the pinned univalence postulates from
+`foundation/univalence` only at the book's axiom and label the assumption.
+Never call those postulates a proof.
+
+For the smallness material, start with `foundation-core/small-types`
+(not the later replacement theorem in `foundation/small-types`) and
+`foundation/small-maps`. The core small-type definition has the book's
+orientation `Σ X, A ≃ X`; its property proof uses precomposition between
+equivalence types, which is distinct from Section 13.4's ordinary-function
+precomposition. Trace the dependencies and natural homes. Account for the
+intervening type-former invariance statements and all smallness examples,
+including finite types and the explicit later Russell reference.
+Corollary 14.1.6's literal inclusion of overlapping universes is not
+represented by Agda's disjoint universes. Inspect the pinned raising-
+universe embedding analogue and retain any representation gap explicitly,
+as in Remark 12.4.2; do not claim a literal inclusion from a lifted proof.
+
+Section 13.5's training exercise is solved and published as `e8105dd`.
+It reuses Exercise 9.1's existing inverse-concatenation equivalence and
+needs no earlier auxiliary addition. Main keeps the later block empty.
 
 Section 13.5's curation preserves both computation rules and the full
 delayed theorem proof. Keep its code-order anchors, the complete case-map

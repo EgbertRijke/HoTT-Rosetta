@@ -265,8 +265,15 @@ was added.
 - **Invisible mathematics:** “Section 13.5: strong induction” in
   `docs/invisible-math.md`.
 - **Status:** Empty on main; candidate Section 13.5 and Chapter 13 defer.
-- **Proposal solution:** Pending. Reuse the existing Exercise 9.1 auxiliary
-  and restore the retained typed specialization; do not enlarge earlier files.
+- **Proposal solution:** `proposal/agda-exercise-solutions`, commit
+  `e8105dd4b8247547602a1d1b5a4e68542faa4acd`. It restores the retained
+  specialization using the existing Exercise 9.1 auxiliary, with no
+  earlier-file changes or proof corrections.
+- **Validation:** Candidate Sections 8.2 and 13.5, Exercise 12.4, aggregate
+  Chapters 8 and 12--13, all 174 unit tests, repository checks (583 verified
+  blocks), and whitespace checks pass on that published proposal. Main
+  passes 169 tests and repository checks but keeps this eighth training
+  site empty; its Section 13.5 and Chapter 13 remain deferred, not passed.
 
 The section also needs the forward implication of Exercise 12.4(c), copied
 at that previously uncurated exercise's exact home. Its other parts and
