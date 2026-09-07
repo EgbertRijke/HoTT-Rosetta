@@ -211,6 +211,24 @@ class AgdaManifestTests(unittest.TestCase):
                 self.assertLess(start, position)
                 self.assertLess(position, end)
 
+    def test_proposed_fiber_orientation_has_its_natural_home(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        block = next(
+            block for block in load_manifest(root / "data" / "agda-blocks.json")
+            if block.block_id == "definition-10.3.1-fiber-orientation-equivalence"
+        )
+        document = (rosetta_directory(root) / block.destination).read_text()
+        start = document.index("<!-- rosetta-item: definition-10.3.1 -->")
+        end = document.index("<!-- rosetta-item-end: definition-10.3.1 -->")
+        original = document.index("fiber' :")
+        position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+        self.assertLess(start, original)
+        self.assertLess(original, position)
+        self.assertLess(position, end)
+        self.assertLess(end, document.index("In other words, the fiber"))
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

@@ -109,3 +109,10 @@ Theorem 10.4.6. This keeps the book's fundamental-theorem proof route; the
 alternative coherent-inverse proof in `foundation-core/equivalences` is not
 used. The auxiliary fiber equivalence is proved directly by path inversion
 rather than by a separate appeal to Exercise 9.1 and `equiv-tot`.
+
+The proposal places the whole 215--244 excerpt in
+`definition-10.3.1-fiber-orientation-equivalence`, after the existing fiber
+types and before the item's closing marker. It adds no imports and no
+Chapter 11 dependency to Section 10.3. The stored Theorem 11.4.2 block is
+restored without changing its specialized proof. A regression test checks
+this placement and the transition prose boundary.

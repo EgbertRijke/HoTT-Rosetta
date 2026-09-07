@@ -616,8 +616,8 @@
       "order": 0,
       "imports": [],
       "source_note": "Replace UU by Type and make the enclosing f implicit. Retain the fundamental-theorem implication from contractible reverse fibers. Specialize the ordinary-fiber implication to H : is-equiv f by substituting is-contr-map-is-equiv H (f a) for c a, and name that specialization is-emb-is-equiv. The rest of the fiber-equivalence proof is unchanged. This is the contractible-fiber route in the book, not the upstream core module's alternative coherent-inverse proof.",
-      "conversion_status": "exercise",
-      "conversion_note": "Training exercise: equiv-fiber belongs with Definition 10.3.1 in the earlier complete Section 10.3. See docs/agda-training-exercises.md and docs/invisible-math.md; the shared proposal supplies the auxiliary and restores this block."
+      "conversion_status": "ready",
+      "conversion_note": "Proposed solution: equiv-fiber is supplied at Definition 10.3.1. Main retains this theorem as an empty training exercise."
     },
     {
       "source_file": "src/foundation/equivalences.lagda.md",
@@ -633,6 +633,21 @@
       "order": 1,
       "imports": [],
       "source_note": "Replace UU by repository-local Type."
+    },
+    {
+      "source_file": "src/foundation-core/fibers-of-maps.lagda.md",
+      "source_start_line": 215,
+      "source_end_line": 244,
+      "source_sha256": "c39b15a959ea76594fb9c1b4f5762756f037a558887b27c661da10f900906f65",
+      "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (y : B)\n  where\n\n  map-equiv-fiber : fiber f y → fiber' f y\n  pr1 (map-equiv-fiber (x , _)) = x\n  pr2 (map-equiv-fiber (x , p)) = inv p\n\n  map-inv-equiv-fiber : fiber' f y → fiber f y\n  pr1 (map-inv-equiv-fiber (x , _)) = x\n  pr2 (map-inv-equiv-fiber (x , p)) = inv p\n\n  is-section-map-inv-equiv-fiber :\n    is-section map-equiv-fiber map-inv-equiv-fiber\n  is-section-map-inv-equiv-fiber (x , refl) = refl\n\n  is-retraction-map-inv-equiv-fiber :\n    is-retraction map-equiv-fiber map-inv-equiv-fiber\n  is-retraction-map-inv-equiv-fiber (x , refl) = refl\n\n  is-equiv-map-equiv-fiber : is-equiv map-equiv-fiber\n  is-equiv-map-equiv-fiber =\n    is-equiv-is-invertible\n      map-inv-equiv-fiber\n      is-section-map-inv-equiv-fiber\n      is-retraction-map-inv-equiv-fiber\n\n  equiv-fiber : fiber f y ≃ fiber' f y\n  pr1 equiv-fiber = map-equiv-fiber\n  pr2 equiv-fiber = is-equiv-map-equiv-fiber",
+      "block_id": "definition-10.3.1-fiber-orientation-equivalence",
+      "provenance_kind": "adapted",
+      "item_id": "definition-10.3.1",
+      "destination": "section-10-3-contractible-maps.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "order": 1,
+      "imports": [],
+      "source_note": "Replace UU by repository-local Type. Proposal-only auxiliary for theorem-11.4.2-equivalences-are-embeddings; place both maps, homotopies, and equivalence at the existing ordinary/reverse fiber definitions."
     }
   ]
 }
