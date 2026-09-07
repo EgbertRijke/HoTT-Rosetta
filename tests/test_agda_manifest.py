@@ -321,6 +321,40 @@ class AgdaManifestTests(unittest.TestCase):
         self.assertNotIn("  inv-inv :", example.code)
         self.assertNotIn("    is-equiv-inv :", example.code)
 
+    def test_proposition_blocks_cover_the_four_conditions_in_order(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        blocks = load_manifest(root / "data" / "agda-blocks.json")
+        selected = [block for block in blocks if block.destination.startswith("section-12-1-")]
+        self.assertEqual(len(selected), 10)
+        self.assertEqual(
+            {block.item_id for block in selected},
+            {"definition-12.1.1", "example-12.1.2", "proposition-12.1.3", "proposition-12.1.4"},
+        )
+        for block in selected:
+            with self.subTest(block=block.block_id):
+                document = (rosetta_directory(root) / block.destination).read_text()
+                start = document.index(f"<!-- rosetta-item: {block.item_id}")
+                end = document.index(f"<!-- rosetta-item-end: {block.item_id} -->")
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(start, position)
+                self.assertLess(position, end)
+        declarations = [document.index(name + " :") for name in (
+            "is-prop", "Prop", "  is-prop-unit", "  is-prop-empty",
+            "  all-elements-equal", "  is-proof-irrelevant",
+            "  is-subterminal", "    is-emb-is-emb",
+            "    is-subterminal-is-proof-irrelevant", "    is-prop-is-subterminal",
+            "    is-equiv-has-converse-is-prop", "  equiv-iff'", "iff-equiv",
+        )]
+        self.assertEqual(declarations, sorted(declarations))
+        self.assertNotIn("postulate", document)
+        self.assertNotIn("open import foundation", document)
+        self.assertNotIn("section-13-", document)
+        exercise = next(block for block in blocks if block.block_id == "exercise-10-1-contractible-identities")
+        self.assertEqual(exercise.item_id, "exercise-10-1")
+        self.assertFalse(any(imported.startswith("section-12-") for imported in exercise.imports))
+
     def test_adapted_block_verifies_source_without_claiming_exact_copy(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

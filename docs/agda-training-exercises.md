@@ -95,3 +95,9 @@ but does not introduce another training exercise.
 Section 11.6's theorem and Exercise 10.6 also depend on singleton induction;
 the theorem's fundamental-theorem applications additionally depend on coherent
 inversion. These extend the later uses of the two existing Chapter 10 exercises.
+
+Section 12.1's subterminal characterization uses Theorem 11.4.2's
+`is-emb-is-equiv`. It therefore extends the later uses of that exercise and
+its two Chapter 10 dependencies. No new training site is introduced: the
+required contractible-identity theorem is added at the previously empty
+Exercise 10.1, which the book explicitly cites.

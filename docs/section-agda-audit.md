@@ -228,3 +228,37 @@ and 11.6, Exercises 9.1 and 10.6, and aggregate Chapters 5--11, with all 154
 unit tests and repository checks passing. Main's 151 tests pass, but its Agda
 checks remain deferred through the existing Chapter 10 exercises and this new
 example. No Section 11.6 completion or optional review decision is recorded.
+
+## Section 12.1 (2026-09-06)
+
+All four numbered items, both proofs, and the transition prose in
+`book/hierarchy.tex` are preserved. The generated prose has seven heading
+occurrences (six distinct headings) and nine displays. The comparison is
+100%, with no unresolved references or raw TeX commands; the duplicate
+“Proof” heading is checked by inspecting both proof bodies, not by the
+comparison's set-valued heading count alone.
+
+| Item | Formalization |
+| --- | --- |
+| Definition 12.1.1 | `is-prop`, `Prop`, and their projections from `foundation-core/propositions`. The predicate is exactly contractibility of every identity type. |
+| Example 12.1.2 | The generic `is-prop-is-contr` comes from the explicitly cited Exercise 10.1; its type expands the proposition predicate. The unit and empty proposition witnesses and packaged propositions are copied verbatim. |
+| Proposition 12.1.3, (i)--(iii) | `all-elements-equal`, `is-proof-irrelevant`, and the implication functions from the pinned proposition module. In particular, `eq-is-prop'` gives (i) → (ii), and `is-proof-irrelevant-all-elements-equal` gives (ii) → (iii). |
+| Proposition 12.1.3, (iii) → (iv) → (i) | The exact book proof route is in `foundation/subterminal-types`: assume a point with `is-emb-is-emb`, apply equivalence of contractible types and Theorem 11.4.2, then transfer contractibility along `ap` of the unit map for the converse. The copied `is-subterminal` predicate names condition (iv). |
+| Proposition 12.1.4 | `is-equiv-has-converse-is-prop`, the two proposition-homotopies, and the packaged `equiv-iff*` maps from `foundation-core/logical-equivalences`; `iff-equiv` gives the reverse logical implication using the local inverse map. For a fixed map, its converse under `is-equiv` is already `map-section-is-equiv` from Section 9.2. |
+
+The terminal map is expanded to `(λ (_ : A) → star)`, by the pinned
+definitions of `terminal-map` and `const`. No general constant-map API is
+added to the earlier complete function or unit sections. The point-assumption
+lemma belongs in Proposition 12.1.3 because that proof explicitly states it.
+Only Exercise 10.1 is added early: it was empty and is required here, and its
+contractible-identity proof has no Chapter 12 dependency. Exercise 10.3's
+already curated equivalence of contractible types suffices for the proof;
+its remaining terminal-map characterization is still lower-priority work.
+
+This section introduces no new training exercise. Its subterminal proof
+depends on the existing Theorem 11.4.2 exercise, and transitively on the two
+Chapter 10 exercises. Main's Exercise 10.1 candidate passes; Section 12.1 is
+deferred, not passed. Actual Section 12.1 and aggregate validation on the
+shared proposal is pending. No completion or optional review state is inferred.
+All generated imports are repository-local; no later truncation theory or
+function-extensionality assumption is imported ahead of its narrative home.
