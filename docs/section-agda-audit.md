@@ -755,3 +755,52 @@ the existing training sites. Published proposal merge
 all 185 unit tests, repository checks (634 verified blocks), and whitespace
 checks. It needed no proof correction or new training solution. Main's
 deferred checks are not passes. No review or complete-file record is changed.
+
+## Section 14.4: mapping propositional truncations into sets
+
+Twenty-two provenance-backed blocks account for the introduction and all
+six numbered items in `book/propositional-truncation.tex`, lines 342--457.
+
+| Item or assertion | Curated mathematical content |
+| --- | --- |
+| Introductory strategy | Specialize the pinned projection-after-proposition-elimination construction to an arbitrary family over X whose total space is a proposition. |
+| Example 14.4.1 | The lower-bound proposition, the identity equivalence for minimal elements, the antisymmetry proof that their type is a proposition, extension of the existing well-ordering map, projection to the desired natural-number choice map, and the complete finite-type corollary via the pinned reduction to natural numbers. |
+| Remark 14.4.2 | Hilbert's epsilon-operator predicate on a type. No global-choice assumption is introduced; the univalence-based negative assertion stays explicitly deferred to Corollary 17.5.3. |
+| Definition 14.4.3 | The pointwise weak-constancy predicate and its map bundle. |
+| Remark 14.4.4 | The book's constant-map predicate, constant implies weakly constant, both contractible/constant-identity implications, and both proposition/weakly-constant-identity implications. |
+| Lemma 14.4.5 | The explicit action of g on the assumed truncation path constructor, then the full commuting-triangle result with its endpoint homotopies; B remains arbitrary. |
+| Theorem 14.4.6 | The exact precomposition map using action on the path constructor, uniqueness by propositional identity induction before existence, the image-proposition proof with both nested eliminations and the three-path composite, the factorization and extension, its computation homotopy, the proposition of weak-constancy witnesses, both inverse homotopies, and the equivalence proof. |
+
+The finite construction reuses the existing Chapter 7 maps and their section
+law, and the natural-number construction reuses Definition 8.3.1 and Theorem
+8.3.2. No earlier complete file or exercise Agda is enlarged. The book's
+constant-map predicate is upstream `is-null-homotopic-map`, not upstream's
+different coherently-constant predicate. The identity/contractibility maps
+are typed specializations of the existing total-space map to inversion of
+homotopies, reversing the two conventions for contraction paths.
+
+The pinned Set bundle and Id-Prop wrappers are expanded into a type, its
+set witness, and explicit identity propositions. The subtype-equality
+wrapper is expanded using the inverse of Corollary 12.2.4's existing
+identity equivalence. Argument-reordered truncation elimination and twofold
+product closure are likewise expanded into existing operations. These are
+wrapper changes, not absent earlier mathematics. Their exact secondary
+sources and hashes are in the manifest. The image argument belongs at this
+theorem and does not import Chapter 15. Section 14.1's equality-based
+interface and Section 14.2's four labeled HIT assumptions are unchanged.
+
+Removing Agda recovers the complete rendered source exactly modulo
+whitespace. Comparison reports 100% prose similarity, all 8 headings and
+15 text fences, no unresolved cross-references, and no raw TeX commands.
+The three diagram IDs and the repaired Kraus citation remain intact.
+Regression tests cover every item, all implications, the explicit finite
+reduction, the path-constructor map, both inverse proofs, source provenance,
+absence of copied earlier auxiliaries, every insertion boundary, and the
+proof order, especially uniqueness before the image construction.
+
+Main passes 187 unit tests, repository checks (644 verified blocks), and
+whitespace checks. Section 14.4 and aggregate Chapter 14 defer through the
+nine existing training sites, not pass. The exact 22-block draft passed
+Agda against the shared proposal's solved prerequisites before curation.
+Published proposal validation of the curated section and aggregate is
+pending. No new training site or completion/review decision is added.

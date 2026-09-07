@@ -336,3 +336,11 @@ aggregate Chapters 13--14 defer, not pass. Published proposal merge
 all 185 unit tests, repository checks (634 verified blocks), and whitespace
 checks. No proof correction or new solution was needed; all nine main
 holes remain unchanged.
+
+Section 14.4 introduces no new training site or exercise Agda. Its
+minimum construction reuses the existing well-ordering and natural-number
+order results; its set-valued extension reuses the existing subtype,
+function-extensionality, and truncation interfaces. The section and aggregate
+Chapter 14 therefore import all nine existing training sites and defer on
+main. The exact new draft passes against the proposal's existing solutions;
+published validation of the curated section and aggregate is pending.

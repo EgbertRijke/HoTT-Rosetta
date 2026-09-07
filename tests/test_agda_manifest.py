@@ -23,6 +23,112 @@ class AgdaManifestTests(unittest.TestCase):
         self.assertLess(document.index("ev-point :"), document.index("rosetta-item-end: remark-2.2.2"))
         self.assertLess(document.index("rosetta-item-end: remark-2.2.2"), document.index("Now we can use these rules"))
 
+    def test_truncation_into_sets_covers_every_item_and_both_inverse_laws(self):
+        import re
+        from rosetta.file_registry import registered_filename
+
+        root = Path(__file__).resolve().parent.parent
+        destination = registered_filename(root, "section", 14, 4)
+        blocks = [b for b in load_manifest(root / "data" / "agda-blocks.json")
+                  if b.destination == destination]
+        self.assertEqual(len(blocks), 22)
+        self.assertEqual({b.item_id for b in blocks}, {
+            "section-14.4", "example-14.4.1", "remark-14.4.2", "definition-14.4.3",
+            "remark-14.4.4", "lemma-14.4.5", "theorem-14.4.6"})
+        code = "\n".join(b.code for b in blocks)
+        for name in (
+            "map-trunc-Prop-via-propositional-subtype", "is-prop-is-lower-bound-ℕ",
+            "equiv-identifications-minimal-element-ℕ", "is-prop-minimal-element-ℕ",
+            "minimal-element-inhabited-decidable-subtype-ℕ",
+            "ε-operator-decidable-subtype-ℕ", "ε-operator-decidable-subtype-Fin",
+            "ε-operator-Hilbert", "is-weakly-constant-map", "weakly-constant-map",
+            "is-constant-map", "is-weakly-constant-map-is-constant-map",
+            "is-constant-id-is-contr", "is-contr-is-constant-id",
+            "is-weakly-constant-id-is-prop", "is-prop-is-weakly-constant-id",
+            "is-weakly-constant-map-precomp-unit-trunc-Prop",
+            "is-weakly-constant-map-factors-through-trunc-Prop",
+            "precomp-universal-property-set-quotient-trunc-Prop",
+            "unique-extension-into-set-trunc-Prop",
+            "all-elements-equal-image-is-weakly-constant-map",
+            "is-prop-image-is-weakly-constant-map", "image-weakly-constant-map-Prop",
+            "map-universal-property-set-quotient-trunc-Prop",
+            "htpy-universal-property-set-quotient-trunc-Prop",
+            "is-prop-is-weakly-constant-map-Set",
+            "is-section-map-universal-property-set-quotient-trunc-Prop",
+            "is-retraction-map-universal-property-set-quotient-trunc-Prop",
+            "universal-property-set-quotient-trunc-Prop",
+        ):
+            self.assertRegex(code, r"(?m)^\s*" + re.escape(name) + r" :")
+        self.assertIn("Σ B (λ y → (x : A) → f x ＝ y)", code)
+        self.assertEqual(code.count("= tot (λ a → inv-htpy)"), 2)
+        self.assertIn("antisymmetric-leq-ℕ x y (l y q) (k x p)", code)
+        self.assertIn("well-ordering-principle-ℕ (λ n → type-Prop (P n)) d", code)
+        self.assertIn("ε-operator-total-Q = ε-operator-decidable-subtype-ℕ Q is-decidable-Q", code)
+        self.assertIn("inv (is-section-nat-Fin k x)", code)
+        self.assertIn("all-elements-equal-type-trunc-Prop\n      ( unit-trunc-Prop x) (unit-trunc-Prop y)", code)
+        self.assertIn("H x ∙ is-weakly-constant-map-precomp-unit-trunc-Prop g x y ∙ inv (H y)", code)
+        self.assertIn("( inv-htpy H ∙h K)", code)
+        self.assertIn("λ v → inv (pr2 u) ∙ H (pr1 u) (pr1 v) ∙ pr2 v", code)
+        self.assertIn("λ a → (f a , unit-trunc-Prop (a , refl))", code)
+        self.assertIn("is-equiv-is-invertible\n"
+                      "      ( map-universal-property-set-quotient-trunc-Prop' B is-set-B)\n"
+                      "      ( is-section-map-universal-property-set-quotient-trunc-Prop B is-set-B)\n"
+                      "      ( is-retraction-map-universal-property-set-quotient-trunc-Prop B is-set-B)", code)
+        for forbidden in ("postulate", "no-global-choice", "univalence", "TERMINATING", "allow-unsolved-metas"):
+            self.assertNotIn(forbidden, code)
+        for existing in ("is-lower-bound-ℕ", "minimal-element-ℕ", "is-prop-leq-ℕ",
+                         "eq-type-subtype", "Set", "is-set", "map-Σ"):
+            self.assertNotRegex(code, r"(?m)^\s*" + re.escape(existing) + r" :")
+        for block in blocks:
+            self.assertEqual(block.conversion_status, "ready")
+            self.assertEqual(block.source_commit, "c85d7fb834778f96a66576318cdc4ef3d4b80a26")
+            self.assertEqual(verify_block_source(block, root / "external" / "agda-unimath"), [])
+            self.assertFalse(any("section-15-" in name or "external/" in name for name in block.imports))
+
+    def test_truncation_into_sets_preserves_prose_and_proof_order(self):
+        import re
+        from rosetta.file_registry import registered_filename
+        from rosetta.layout import rosetta_directory
+        from rosetta.render import render_section
+
+        root = Path(__file__).resolve().parent.parent
+        destination = registered_filename(root, "section", 14, 4)
+        blocks = [b for b in load_manifest(root / "data" / "agda-blocks.json")
+                  if b.destination == destination]
+        document = (rosetta_directory(root) / destination).read_text()
+        for block in blocks:
+            position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+            self.assertLess(document.index("<!-- rosetta-item: " + block.item_id), position)
+            end = (document.index("## Example 14.4.1") if block.item_id == "section-14.4" else
+                   document.index(f"<!-- rosetta-item-end: {block.item_id} -->"))
+            self.assertLess(position, end)
+            if block.after_text:
+                self.assertLess(document.index(block.after_text), position)
+        names = ["map-trunc-Prop-via-propositional-subtype", "is-prop-is-lower-bound-ℕ",
+                 "equiv-identifications-minimal-element-ℕ", "is-prop-minimal-element-ℕ",
+                 "ε-operator-decidable-subtype-ℕ", "ε-operator-decidable-subtype-Fin",
+                 "ε-operator-Hilbert", "is-weakly-constant-map", "is-constant-map",
+                 "is-constant-id-is-contr", "is-weakly-constant-id-is-prop",
+                 "is-weakly-constant-map-precomp-unit-trunc-Prop",
+                 "is-weakly-constant-map-factors-through-trunc-Prop",
+                 "precomp-universal-property-set-quotient-trunc-Prop",
+                 "unique-extension-into-set-trunc-Prop",
+                 "all-elements-equal-image-is-weakly-constant-map",
+                 "map-universal-property-set-quotient-trunc-Prop",
+                 "htpy-universal-property-set-quotient-trunc-Prop",
+                 "is-prop-is-weakly-constant-map-Set",
+                 "is-section-map-universal-property-set-quotient-trunc-Prop",
+                 "is-retraction-map-universal-property-set-quotient-trunc-Prop",
+                 "universal-property-set-quotient-trunc-Prop"]
+        positions = [re.search(r"(?m)^\s*" + re.escape(name) + r" :", document).start() for name in names]
+        self.assertEqual(positions, sorted(positions))
+        self.assertEqual(document.count("rosetta-diagram:"), 3)
+        self.assertIn("Corollary 17.5.3", document)
+        prose = re.sub(r"^```agda\n.*?^```\s*", "", document, flags=re.M | re.S)
+        prose = re.sub(r"<!-- rosetta-agda-block:.*?-->", "", prose)
+        normalize = lambda value: re.sub(r"\s+", " ", value).strip()
+        self.assertEqual(normalize(prose), normalize(render_section(root / "book" / "propositional-truncation.tex", 14, 4)))
+
     def test_repository_manifest_is_valid(self):
         root = Path(__file__).resolve().parent.parent
         blocks = load_manifest(root / "data" / "agda-blocks.json")

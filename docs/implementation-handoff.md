@@ -16,6 +16,22 @@ completion.
 
 Work continues on `main`.
 
+Section 14.4 now has twenty-two provenance-backed blocks accounting for
+the introduction and all six numbered items, including the finite-choice
+corollary, both constant/weakly-constant identity characterizations, and
+the full Kraus theorem. The explicit precomposition map uses action on
+the assumed path constructor. Uniqueness precedes the image-proposition
+construction, and the extension retains its computation and both inverse
+homotopies. Existing minimum, finite-type, and subtype-identity results
+are reused; no earlier section, exercise Agda, or training site is added.
+Main passes 187 tests, repository checks (644 blocks: 176 exact, 410
+adapted, 58 historical/local), and whitespace checks. Source comparison
+is 100%, all 8 headings and 15 text fences match, and all three diagram
+IDs remain unchanged. Section 14.4 and Chapter 14 defer through all nine
+existing sites. The exact draft passes Agda against the shared proposal's
+solved prerequisites; published validation of the curated section and
+aggregate is pending. See `docs/section-agda-audit.md` for the item audit.
+
 Section 14.4's preparatory prose audit exposed two recurring conversion
 losses. The converter now preserves the active book's simple citation groups
 as visible unresolved `[citation: key]` references, without inventing
@@ -29,9 +45,9 @@ and 16.3 passages. Main passes 185 unit tests, repository checks (the same
 622 verified blocks), whitespace checks, all ten changed section candidates,
 and aggregate Chapters 3, 6--8, 16, 18--20, and 22. Chapters 11 and 14 remain
 deferred through existing training sites; they are not passes. Section
-14.4's passing candidate still contains only its module declaration and
-does not establish formalization completeness. Its six-item Agda work
-remains next. Published proposal merge
+14.4's candidate at that prose-only stage contained only its module
+declaration and did not establish formalization completeness. The new
+curation is described above. Published prose-validation proposal merge
 `d57b496af51c6ef85798aa27e09eef3effdca178` passes actual Agda for all ten
 changed section candidates and aggregate Chapters 3, 6--8, 11, 14, 16,
 18--20, and 22, all 190 unit tests, repository checks (634 verified blocks),
@@ -273,63 +289,26 @@ records that Definition
 10.4.4's final cancellation result is provided only on the proposal as part
 of the existing coherence exercise.
 
-Continue Section 14.4, “Mapping propositional truncations into sets”,
-`book/propositional-truncation.tex`, lines 342--457. Inventory all six
-numbered items, the introductory proposition-valued factorization strategy,
-the natural-number minimal-element argument and its finite-type corollary,
-both constant/weakly-constant identity characterizations, and the full
-Kraus theorem including uniqueness, image proposition, extension, and both
-inverse laws. Preserve the explicit map using action on the path constructor.
+Continue Chapter 15, “Image factorizations”, in source order. Read the
+chapter introduction in `book/images.tex`, lines 1--11, then curate Section
+15.1, “The image of a map”, lines 12--204. Inventory all eight numbered
+items: morphisms over a base and their composition; the image universal
+property; the proposition of maps into an embedding; both implications of
+the converse-map criterion; all three components of the image construction;
+the image inclusion's embedding proof; the full fiberwise commuting-square
+universal-property proof; and all three implications in the uniqueness
+theorem, including contractibility of equivalences over the base.
 
-The citation and escaped-delimiter prose losses are already repaired; do
-not redo that work. Further pinned-source inspection found:
-
-- `well-ordering-principle-standard-finite-types`, lines 200--226, supplies
-  the finite epsilon operator by reduction to the natural-number operator,
-  using the existing `nat-Fin`, `mod-succ-ℕ`, and `is-section-nat-Fin`.
-  It does not require copying a new finite well-ordering theorem or enlarging
-  Chapter 7. Unbundle its decidable-subtype argument into a proposition family
-  and pointwise decidability if needed.
-- The book's constant-map predicate is upstream
-  `foundation/null-homotopic-maps`, lines 53--55, not the differently defined
-  predicate in `coherently-constant-maps`. The implication to weak constancy
-  is at lines 353--359. Still account for both identity characterizations;
-  the contraction and null-homotopy have opposite path orientations.
-- Local Definition 12.3.1 supplies `is-set` but no bundled `Set`. The Kraus
-  proof can use a type and its set witness, expanding `Id-Prop` explicitly,
-  without adding an earlier set-packaging auxiliary.
-- Pinned `foundation-core/subtypes`, lines 150--157, implements
-  `eq-type-subtype` by the inverse of the subtype identity equivalence.
-  Local Corollary 12.2.4 already supplies `equiv-ap-inclusion-subtype`.
-  Expand this wrapper using the existing inverse-map operation rather than
-  introducing a new earlier result merely because the wrapper name differs.
-- The complete Kraus source has precomposition at lines 41--53, the nested
-  image-proposition proof at 61--91, extension and computation at 97--126,
-  both inverse homotopies at 128--152, and equivalence at 154--161. Preserve
-  the book's separate uniqueness argument before the image construction.
-- Pinned `foundation/propositional-truncations`, lines 208--212, makes
-  `apply-universal-property-trunc-Prop t P f` merely an argument-reordered
-  call to the local `map-universal-property-trunc-Prop P f t`. Expand it
-  without adding another earlier wrapper. Likewise, the weak-constancy
-  proposition at `foundation/weakly-constant-maps`, lines 88--99, specializes
-  iterated product closure to two products; use the existing nested
-  `is-prop-Π` rather than importing telescope machinery.
-
-Inspect pinned `elementary-number-theory/well-ordering-principle-natural-numbers`
-and `elementary-number-theory/well-ordering-principle-standard-finite-types`
-for the minimal-element and epsilon-operator constructions. The existing
-lower-bound and minimal-element definitions and well-ordering proof live
-at Definition 8.3.1 and Theorem 8.3.2; reuse them unchanged. The inequality
-proposition proof already lives at Lemma 13.5.3. Inspect
-`foundation/hilberts-epsilon-operators`, `foundation/weakly-constant-maps`,
-and `foundation/universal-property-propositional-truncation-into-sets`.
-The last gives the full image-proposition and two-inverse proof without
-requiring a Chapter 15 images import. Do not copy `foundation/global-choice`'s
-later univalence-based inconsistency proof here: Remark 14.4.2 explicitly
-defers that assertion. Keep Section 14.2's HIT assumptions and Section
-14.1's identity-based unique-extension interface unchanged. Follow the
-training policy for genuinely absent earlier auxiliaries and preserve every
-source representation difference explicitly.
+The source's `ex:triangle_fib` resolves to Exercise 13.15, not a Chapter 11
+exercise. Inspect that exact problem and existing local declarations;
+curate only the parts required by this section. Inspect pinned
+`foundation/morphisms-slice`, `foundation/equivalences-slice`,
+`foundation/universal-property-image`, `foundation/images`, and
+`foundation/uniqueness-image`. Preserve the book's triangle orientation,
+fiberwise maps, and full three-condition theorem. Do not substitute merely
+a chosen comparison map for its contractible equivalence-space assertion.
+Reuse the now-curated truncation interfaces unchanged and apply the
+training workflow if genuinely absent earlier auxiliaries are needed.
 
 For later Section 17.1, `book/univalence.tex`, lines 11--109, inspect
 the Chapter 17 introduction at lines 1--10. Inventory all six numbered
