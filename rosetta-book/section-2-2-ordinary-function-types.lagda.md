@@ -210,6 +210,13 @@ We give a brief summary of these rules, omitting the congruence rules.
 Γ⊢λ x. f(x)≐ f:A→ B
 ```
 
+<!-- rosetta-agda-block: remark-2.2.2-evaluation-at-a-point -->
+
+```agda
+ev-point :
+  {l1 l2 : Level} {A : Type l1} (a : A) {P : A → Type l2} → ((x : A) → P x) → P a
+ev-point a f = f a
+```
 <!-- rosetta-item-end: remark-2.2.2 -->
 
 Now we can use these rules to construct some familiar functions, such as the identity function `id:A→ A` on an arbitrary type `A`, and the composition `g∘ f:A→ C` of any two functions `f:A→ B` and `g:B→ C`.

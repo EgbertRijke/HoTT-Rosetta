@@ -16,6 +16,7 @@ open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import exercise-10-3-contractible-equivalences
+open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 ```
 
 <!-- rosetta-item: section-11.1 -->
@@ -44,6 +45,35 @@ module _
 
   tot : Σ A B → Σ A C
   tot (x , y) = (x , f x y)
+```
+
+<!-- rosetta-agda-block: definition-11.1.1-total-map-homotopies -->
+
+```agda
+tot-htpy :
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {f g : (x : A) → B x → C x} → (H : (x : A) → f x ~ g x) → tot f ~ tot g
+tot-htpy H (x , y) = eq-pair-eq-fiber (H x y)
+```
+
+<!-- rosetta-agda-block: definition-11.1.1-total-map-identity -->
+
+```agda
+tot-id :
+  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) →
+  tot (λ x → id) ~ id {A = Σ A B}
+tot-id B p = refl
+```
+
+<!-- rosetta-agda-block: definition-11.1.1-total-map-composition -->
+
+```agda
+preserves-comp-tot :
+  {l1 l2 l3 l4 : Level}
+  {A : Type l1} {B : A → Type l2} {B' : A → Type l3} {B'' : A → Type l4}
+  (f : (x : A) → B x → B' x) (g : (x : A) → B' x → B'' x) →
+  tot (λ x → g x ∘ f x) ~ tot g ∘ tot f
+preserves-comp-tot f g p = refl
 ```
 <!-- rosetta-item-end: definition-11.1.1 -->
 
