@@ -46,9 +46,9 @@ The idea of `Π`-types is that `Π(x:A) B(x)` is a type of **dependent functions
 *Proof tree (automatic faithful draft).*
 
 ```text
- Γ,x:A⊢ B(x) \type
-──────────────────── $Π$
-Γ⊢ Π(x:A) B(x) \type
+  Γ,x:A⊢ B(x) type
+─────────────────── Π
+Γ⊢ Π(x:A) B(x) type
 ```
 
 This rule simply states that in order to form the type `Π(x:A) B(x)` in context `Γ`, we must have a type family `B` over `A` in context `Γ`.
@@ -61,9 +61,9 @@ This is postulated in the **congruence rule** for `Π`-types:
 *Proof tree (automatic faithful draft).*
 
 ```text
-Γ⊢ A≐ A' \type   Γ,x:A⊢ B(x)≐ B'(x) \textrm{type}
-───────────────────────────────────────────────── $Π$-eq
-        Γ⊢ Π(x:A) B(x)≐Π(x:A') B'(x) \type
+Γ⊢ A≐ A' type   Γ,x:A⊢ B(x)≐ B'(x) \textrm{type}
+──────────────────────────────────────────────── $Π$-eq
+       Γ⊢ Π(x:A) B(x)≐Π(x:A') B'(x) type
 ```
 
 ### The `Π`-introduction rule
@@ -80,7 +80,7 @@ Hence the introduction rule of dependent functions postulates that, in order to 
 
 ```text
    Γ,x:A ⊢ b(x) : B(x)
-────────────────────────── $λ$
+────────────────────────── λ
 Γ⊢ λ x. b(x) : Π(x:A) B(x)
 ```
 
@@ -113,7 +113,7 @@ The `Π`-elimination rule is therefore also called the **evaluation rule**:
 
 ```text
  Γ⊢ f:Π(x:A) B(x)
-────────────────── $ev$
+────────────────── ev
 Γ,x:A⊢ f(x) : B(x)
 ```
 
@@ -144,7 +144,7 @@ This rule is called the **`β`-rule**
 
 ```text
        Γ,x:A ⊢ b(x) : B(x)
-────────────────────────────────── $β$
+────────────────────────────────── β
 Γ,x:A ⊢ (λ y.b(y))(x)≐ b(x) : B(x)
 ```
 
@@ -157,7 +157,7 @@ This rule is known as the **`η`-rule**
 
 ```text
         Γ⊢ f:Π(x:A) B(x)
-─────────────────────────────── $η$
+─────────────────────────────── η
 Γ ⊢ λ x. f(x) ≐ f : Π(x:A) B(x)
 ```
 

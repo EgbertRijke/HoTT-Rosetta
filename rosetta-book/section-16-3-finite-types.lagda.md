@@ -134,7 +134,7 @@ Then there is a **finite choice** map
 
 <!-- rosetta-item: subheading-16.3-proof-3 -->
 
-*Proof.* Note that the type `\|Π(x:A) B(x)\|` is a proposition.
+*Proof.* Note that the type `‖Π(x:A) B(x)‖` is a proposition.
 Therefore we may assume that the type `A` comes equipped with a counting `e:Fin{k}≃ A`.
 By this equivalence, it suffices to show that for every type family `B` over `Fin{k}`, there is a map
 ```text

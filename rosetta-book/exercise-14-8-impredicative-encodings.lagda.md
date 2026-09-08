@@ -11,7 +11,7 @@ Consider a universe `𝒰`, let `P_1` and `P_2` be propositions in `𝒰`, and f
 Construct the following equivalences:
 ```text
 ⊤ ≃ Π(Q:Prop_𝒰) Q→ Q,
-empty ≃ Π(Q:Prop_𝒰) Q,
+⊥ ≃ Π(Q:Prop_𝒰) Q,
 ‖A‖ ≃ Π(Q:Prop_𝒰) (A→ Q)→ Q,
 P_1∨ P_2 ≃ Π(Q:Prop_𝒰) (P_1→ Q) → ((P_2→ Q)→ Q),
 P_1∧ P_2 ≃ Π(Q:Prop_𝒰) (P_1→ (P_2→ Q))→ Q,

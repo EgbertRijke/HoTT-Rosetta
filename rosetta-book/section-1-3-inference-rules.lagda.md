@@ -38,9 +38,9 @@ The following rules follow from the presuppositions about contexts, types, and t
 *Proof tree (automatic faithful draft).*
 
 ```text
-Γ,x:A⊢ B(x) \type
-─────────────────
-    Γ⊢ A \type
+Γ,x:A⊢ B(x) type
+────────────────
+   Γ⊢ A type
 ```
 
 <!-- rosetta-proof-tree: 14d89d899617; review: pending -->
@@ -49,8 +49,8 @@ The following rules follow from the presuppositions about contexts, types, and t
 
 ```text
   Γ⊢ a:A
-──────────
-Γ⊢ A \type
+─────────
+Γ⊢ A type
 ```
 
 <!-- unsupported LaTeX environment: minipage -->
@@ -60,9 +60,9 @@ The following rules follow from the presuppositions about contexts, types, and t
 *Proof tree (automatic faithful draft).*
 
 ```text
-Γ⊢ A≐ B \type
-─────────────
-  Γ⊢ A \type
+Γ⊢ A≐ B type
+────────────
+ Γ⊢ A type
 ```
 
 <!-- rosetta-proof-tree: a2f70fbb9434; review: pending -->
@@ -82,9 +82,9 @@ The following rules follow from the presuppositions about contexts, types, and t
 *Proof tree (automatic faithful draft).*
 
 ```text
-Γ⊢ A≐ B \type
-─────────────
-  Γ⊢ B \type
+Γ⊢ A≐ B type
+────────────
+ Γ⊢ B type
 ```
 
 <!-- rosetta-proof-tree: 6e53d4ce35f8; review: pending -->
@@ -182,7 +182,7 @@ The rules postulating that judgmental equality on types and on elements is an eq
 ```text
 Γ⊢ a≐ b : A   Γ⊢ b≐ c: A
 ────────────────────────
-      $Γ⊢ a≐ c: A$
+       Γ⊢ a≐ c: A
 ```
 
 ### Variable conversion rules
@@ -197,9 +197,9 @@ The first variable conversion rule states that
 *Proof tree (automatic faithful draft).*
 
 ```text
-Γ⊢ A≐ A' \textrm{type}   Γ, x:A, \Delta⊢ B(x) \type
-───────────────────────────────────────────────────
-           $Γ, x:A', \Delta⊢ B(x) \type$
+Γ⊢ A≐ A' \textrm{type}   Γ, x:A, \Delta⊢ B(x) type
+──────────────────────────────────────────────────
+            Γ, x:A', \Delta⊢ B(x) type
 ```
 
 In this conversion rule, the context `Γ, x:A, \Delta` is just any extension of the context `Γ, x:A`, i.e., it is a context of the form
@@ -217,7 +217,7 @@ To avoid having to state essentially the same rule four times, we state all four
 ```text
 Γ⊢ A≐ A' \textrm{type}   Γ, x:A, \Delta⊢ J
 ──────────────────────────────────────────
-           $Γ, x:A', \Delta⊢ J$
+            Γ, x:A', \Delta⊢ J
 ```
 
 An analogous *element conversion rule*, stated in Exercise 1.1, converting the type of an element to a judgmentally equal type, is derivable using the rules from the rules presented in this section.
@@ -256,7 +256,7 @@ The **substitution rule** are therefore stated using a generic judgment `J`:
 
 ```text
 Γ⊢ a:A   Γ, x:A, \Delta⊢ J
-────────────────────────── $S$
+────────────────────────── S
   Γ, \Delta[a/x]⊢ J[a/x]
 ```
 
@@ -267,9 +267,9 @@ Furthermore, we add two more ‘congruence rules’ for substitution, postulatin
 *Proof tree (automatic faithful draft).*
 
 ```text
- Γ⊢ a≐ a':A   Γ, x:A, \Delta⊢ B \type
-─────────────────────────────────────
-Γ, \Delta[a/x]⊢ B[a/x]≐ B[a'/x] \type
+Γ⊢ a≐ a':A   Γ, x:A, \Delta⊢ B type
+────────────────────────────────────
+Γ, \Delta[a/x]⊢ B[a/x]≐ B[a'/x] type
 ```
 
 <!-- rosetta-proof-tree: dbddef295494; review: pending -->
@@ -277,9 +277,9 @@ Furthermore, we add two more ‘congruence rules’ for substitution, postulatin
 *Proof tree (automatic faithful draft).*
 
 ```text
-    Γ⊢ a≐ a':A   Γ, x:A, \Delta⊢ b:B
-────────────────────────────────────────
-$Γ, \Delta[a/x]⊢ b[a/x]≐ b[a'/x]:B[a/x]$
+   Γ⊢ a≐ a':A   Γ, x:A, \Delta⊢ b:B
+──────────────────────────────────────
+Γ, \Delta[a/x]⊢ b[a/x]≐ b[a'/x]:B[a/x]
 ```
 
 To see that these rules make sense, we observe that both `B[a/x]` and `B[a'/x]` are types in context `\Delta[a/x]`, provided that `a≐ a'`.
@@ -310,7 +310,7 @@ The **weakening rule** asserts that weakening by a type `A` in context preserves
 
 ```text
 Γ⊢ A \textrm{type}   Γ, \Delta⊢ J
-───────────────────────────────── $W$
+───────────────────────────────── W
         Γ, x:A, \Delta ⊢ J
 ```
 
@@ -326,7 +326,7 @@ Then we can weaken `B` by `A` as follows
 ```text
 Γ⊢ A \textrm{type}   Γ⊢ B \textrm{type}
 ─────────────────────────────────────── W
-            Γ, x:A⊢ B \type
+             Γ, x:A⊢ B type
 ```
 
 in order to form the type `B` in context `Γ, x:A`.
@@ -345,7 +345,7 @@ The rule for the **generic element** now asserts that any hypothetical element `
 
 ```text
 Γ⊢ A \textrm{type}
-────────────────── $\delta$
+────────────────── \delta
    Γ, x:A⊢ x:A
 ```
 

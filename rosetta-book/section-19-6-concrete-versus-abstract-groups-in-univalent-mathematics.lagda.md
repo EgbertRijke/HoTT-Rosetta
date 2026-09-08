@@ -8,7 +8,7 @@ module section-19-6-concrete-versus-abstract-groups-in-univalent-mathematics whe
 
 In univalent mathematics there is another exciting perspective on group theory.
 We won’t be able to go in full details here, but we can sketch some of key ideas.
-To learn more about this beautiful univalent perspective on group theory, I recommend the forthcoming *Symmetry* book .
+To learn more about this beautiful univalent perspective on group theory, I recommend the forthcoming *Symmetry* book \[citation: `symmetrybook`\].
 
 We saw in Example 19.4.3 that for every pointed connected `1`-type `X` we obtain a group with underlying type `Ω(X)`.
 All groups can be constructed in this way.

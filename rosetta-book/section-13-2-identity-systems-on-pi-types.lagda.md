@@ -2,6 +2,23 @@
 
 ```agda
 module section-13-2-identity-systems-on-pi-types where
+
+open import universe-levels
+open import section-2-2-ordinary-function-types
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-9-1-homotopies
+open import section-9-2-bi-invertible-maps
+open import section-10-1-contractible-types
+open import section-10-3-contractible-maps
+open import section-10-4-equivalences-are-contractible-maps
+open import section-11-1-families-of-equivalences
+open import section-11-2-the-fundamental-theorem
+open import section-13-1-equivalent-forms-of-function-extensionality
+open import exercise-9-4-three-for-two-equivalences
+open import exercise-9-5-sigma-swap
+open import exercise-10-3-contractible-equivalences
+open import exercise-10-6-dependent-pair-contractible-base
 ```
 
 <!-- rosetta-item: section-13.2 -->
@@ -81,6 +98,70 @@ Therefore we obtain the required homotopy by function extensionality:
 ```
  ◻
 
+<!-- rosetta-agda-block: theorem-13.2.1-dependent-choice-types -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2}
+  (C : (x : A) → B x → Type l3)
+  where
+
+  Π-total-fam : Type (l1 ⊔ l2 ⊔ l3)
+  Π-total-fam = (x : A) → Σ (B x) (C x)
+
+  universally-structured-Π : Type (l1 ⊔ l2 ⊔ l3)
+  universally-structured-Π = Σ ((x : A) → B x) (λ f → (x : A) → C x (f x))
+```
+
+### Agda record-Σ presentation (judgmental η)
+
+<!-- rosetta-agda-block: theorem-13.2.1-dependent-choice-equivalence -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : (x : A) → B x → Type l3}
+  where
+
+  map-distributive-Π-Σ : Π-total-fam C → universally-structured-Π C
+  pr1 (map-distributive-Π-Σ φ) x = pr1 (φ x)
+  pr2 (map-distributive-Π-Σ φ) x = pr2 (φ x)
+
+  map-inv-distributive-Π-Σ : universally-structured-Π C → Π-total-fam C
+  pr1 (map-inv-distributive-Π-Σ ψ x) = (pr1 ψ) x
+  pr2 (map-inv-distributive-Π-Σ ψ x) = (pr2 ψ) x
+
+  is-section-map-inv-distributive-Π-Σ :
+    map-distributive-Π-Σ ∘ map-inv-distributive-Π-Σ ~ id
+  is-section-map-inv-distributive-Π-Σ (ψ , ψ') = refl
+
+  is-retraction-map-inv-distributive-Π-Σ :
+    map-inv-distributive-Π-Σ ∘ map-distributive-Π-Σ ~ id
+  is-retraction-map-inv-distributive-Π-Σ φ = refl
+
+  abstract
+    is-equiv-map-distributive-Π-Σ : is-equiv (map-distributive-Π-Σ)
+    is-equiv-map-distributive-Π-Σ =
+      is-equiv-is-invertible
+        ( map-inv-distributive-Π-Σ)
+        ( is-section-map-inv-distributive-Π-Σ)
+        ( is-retraction-map-inv-distributive-Π-Σ)
+
+  distributive-Π-Σ : Π-total-fam C ≃ universally-structured-Π C
+  pr1 distributive-Π-Σ = map-distributive-Π-Σ
+  pr2 distributive-Π-Σ = is-equiv-map-distributive-Π-Σ
+
+  abstract
+    is-equiv-map-inv-distributive-Π-Σ : is-equiv (map-inv-distributive-Π-Σ)
+    is-equiv-map-inv-distributive-Π-Σ =
+      is-equiv-is-invertible
+        ( map-distributive-Π-Σ)
+        ( is-retraction-map-inv-distributive-Π-Σ)
+        ( is-section-map-inv-distributive-Π-Σ)
+
+  inv-distributive-Π-Σ : universally-structured-Π C ≃ Π-total-fam C
+  pr1 inv-distributive-Π-Σ = map-inv-distributive-Π-Σ
+  pr2 inv-distributive-Π-Σ = is-equiv-map-inv-distributive-Π-Σ
+```
 <!-- rosetta-item-end: theorem-13.2.1 -->
 
 The fact that `Π`-types distribute over `Σ`-types has many useful consequences.
@@ -95,12 +176,46 @@ For any two types `A` and `B`, and any type family `C` over `B`, we have an equi
 (A→Σ(y:B) C(y))≃(Σ(f:A→ B) Π(x:A) C(f(x))).
 ```
 
+<!-- rosetta-agda-block: corollary-13.2.2-ordinary-choice-equivalence -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : B → Type l3}
+  where
+
+  mapping-into-Σ : (A → Σ B C) → Σ (A → B) (λ f → (x : A) → C (f x))
+  mapping-into-Σ = map-distributive-Π-Σ {B = λ _ → B}
+
+  abstract
+    is-equiv-mapping-into-Σ : is-equiv mapping-into-Σ
+    is-equiv-mapping-into-Σ = is-equiv-map-distributive-Π-Σ
+
+  equiv-mapping-into-Σ :
+    (A → Σ B C) ≃ Σ (A → B) (λ f → (x : A) → C (f x))
+  pr1 equiv-mapping-into-Σ = mapping-into-Σ
+  pr2 equiv-mapping-into-Σ = is-equiv-mapping-into-Σ
+```
 <!-- rosetta-item-end: corollary-13.2.2 -->
 
 Another direct consequence of the distributivity of `Π`-types over `Σ`-types is the fact that
 ```text
 Π(b:B) fib(f, b)≃Σ(g:B→ A) f∘ g~ id.
 ```
+
+### Products of fibers and sections
+
+<!-- rosetta-agda-block: section-13.2-products-of-fibers-and-sections -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B)
+  where
+
+  equiv-Π-fiber-section : ((b : B) → fiber f b) ≃ section f
+  equiv-Π-fiber-section =
+    distributive-Π-Σ {C = λ b a → f a ＝ b}
+```
+
 In the following corollary we use the distributivity of `Π`-types over `Σ`-types to show that dependent functions are sections of projection maps.
 
 ## Corollary 13.2.3
@@ -140,6 +255,24 @@ This gives an equivalence
 ```
 and the right-hand side is a product of contractible types. ◻
 
+<!-- rosetta-agda-block: corollary-13.2.3-sections-of-a-projection -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  where
+
+  equiv-Π-section-pr1 : section (pr1 {B = B}) ≃ ((x : A) → B x)
+  equiv-Π-section-pr1 =
+    ( left-unit-law-Σ-is-contr
+      ( is-contr-equiv
+        ( Π-total-fam (λ x y → y ＝ x))
+        ( inv-distributive-Π-Σ)
+        ( is-contr-Π is-contr-Id'))
+      ( id , refl-htpy)) ∘e
+    ( equiv-right-swap-Σ) ∘e
+    ( equiv-Σ-equiv-base ( λ s → pr1 s ~ id) ( distributive-Π-Σ))
+```
 <!-- rosetta-item-end: corollary-13.2.3 -->
 
 In the final application of distributivity of `Π`-types over `Σ`-types we obtain a general way of constructing identity systems of `Π`-types.
@@ -172,4 +305,37 @@ By Theorem 13.2.1 it follows that this type is equivalent to the type
 This is a product of contractible types because each `E(f(x))` is an identity system at `f(x):B(x)`.
 This product is therefore contractible by the weak function extensionality principle. ◻
 
+<!-- rosetta-agda-block: theorem-13.2.4-contractible-total-dependent-products -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : (x : A) → B x → Type l3}
+  (is-torsorial-C : (x : A) → is-contr (Σ (B x) (C x)))
+  where
+
+  is-torsorial-Eq-Π : is-contr (Σ ((x : A) → B x) (λ g → (x : A) → C x (g x)))
+  is-torsorial-Eq-Π =
+    is-contr-equiv'
+      ( (x : A) → Σ (B x) (C x))
+      ( distributive-Π-Σ)
+      ( is-contr-Π is-torsorial-C)
+```
+
+<!-- rosetta-agda-block: theorem-13.2.4-dependent-product-identity-system -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2}
+  (f : (x : A) → B x) (E : (x : A) → B x → Type l3)
+  (e : (x : A) → E x (f x))
+  where
+
+  is-identity-system-Π :
+    ((x : A) → is-identity-system (E x) (f x) (e x)) →
+    is-identity-system (λ g → (x : A) → E x (g x)) f e
+  is-identity-system-Π H =
+    is-identity-system-is-contr f e
+      ( is-torsorial-Eq-Π
+        ( λ x → is-torsorial-is-identity-system (f x) (e x) (H x)))
+```
 <!-- rosetta-item-end: theorem-13.2.4 -->

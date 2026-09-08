@@ -32,8 +32,8 @@ The type `ℕ` is formed by the **`ℕ`-formation** rule
 
 ```text
 
-───────── $ℕ$-form
-⊢ ℕ \type
+──────── $ℕ$-form
+⊢ ℕ type
 ```
 
 In other words, `ℕ` is postulated to be a type in the empty context.
@@ -108,7 +108,7 @@ The type theoretical induction principle of `ℕ` is therefore formulated using 
 *Proof tree (automatic faithful draft).*
 
 ```text
-              Γ, n:ℕ⊢ P(n) \type
+              Γ, n:ℕ⊢ P(n) type
 
                   Γ\ ⊢ p_0:P(0)
 
@@ -131,9 +131,9 @@ We might alternatively present the induction principle of `ℕ` as the following
 *Proof tree (automatic faithful draft).*
 
 ```text
-                      Γ,n:ℕ⊢ P(n) \type
-─────────────────────────────────────────────────────────────
-$Γ⊢ ind-ℕ : P(0)→ ((Π(n:ℕ) P(n)→ P(succ-ℕ(n)))→ Π(n:ℕ) P(n))$
+                      Γ,n:ℕ⊢ P(n) type
+───────────────────────────────────────────────────────────
+Γ⊢ ind-ℕ : P(0)→ ((Π(n:ℕ) P(n)→ P(succ-ℕ(n)))→ Π(n:ℕ) P(n))
 ```
 
 In other words, for any type family `P` over `ℕ` there is a *function* `ind-ℕ` that takes two arguments, one for the base case and one for the inductive step, and returns a section of `P`.
@@ -146,7 +146,7 @@ First, we let `Γ'` be the context
 ```
 By weakening we obtain that
 ```text
-Γ', n:ℕ⊢ P(n) \type
+Γ', n:ℕ⊢ P(n) type
 Γ'⊢ p_0 : P(0)
 Γ'⊢ p_S : Π(n:ℕ) P(n)→ P(succ-ℕ(n)).
 ```
@@ -195,7 +195,7 @@ The computation rule for the base case is
 *Proof tree (automatic faithful draft).*
 
 ```text
-              Γ, n:ℕ⊢ P(n) \type
+              Γ, n:ℕ⊢ P(n) type
 
                   Γ\ ⊢ p_0:P(0)
 
@@ -211,9 +211,9 @@ The computation rule for the inductive step has the same premises as the computa
 *Proof tree (automatic faithful draft).*
 
 ```text
-                                     ⋯
-───────────────────────────────────────────────────────────────────────────
-$Γ, n:ℕ ⊢ ind-ℕ(p_0,p_S,succ-ℕ(n))≐ p_S(n,ind-ℕ(p_0,p_S,n)) : P(succ-ℕ(n))$
+                                    ⋯
+─────────────────────────────────────────────────────────────────────────
+Γ, n:ℕ ⊢ ind-ℕ(p_0,p_S,succ-ℕ(n))≐ p_S(n,ind-ℕ(p_0,p_S,n)) : P(succ-ℕ(n))
 ```
 
 This completes the formal specification of the type `ℕ` of natural numbers.

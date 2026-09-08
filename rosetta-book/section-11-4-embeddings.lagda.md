@@ -2,6 +2,17 @@
 
 ```agda
 module section-11-4-embeddings where
+
+open import universe-levels
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-3-the-action-on-identifications-of-functions
+open import section-9-2-bi-invertible-maps
+open import section-10-1-contractible-types
+open import section-10-3-contractible-maps
+open import section-10-4-equivalences-are-contractible-maps
+open import exercise-10-3-contractible-equivalences
+open import section-11-2-the-fundamental-theorem
 ```
 
 <!-- rosetta-item: section-11.4 -->
@@ -23,6 +34,44 @@ We write `is-emb(f)` for the type of witnesses that `f` is an embedding, and we 
 A↪ B≔ Σ(f:A→ B) is-emb(f).
 ```
 
+<!-- rosetta-agda-block: definition-11.4.1-embedding-predicate -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  where
+
+  is-emb : (A → B) → Type (l1 ⊔ l2)
+  is-emb f = (x y : A) → is-equiv (ap f {x} {y})
+
+  equiv-ap-is-emb :
+    {f : A → B} (e : is-emb f) {x y : A} → (x ＝ y) ≃ (f x ＝ f y)
+  pr1 (equiv-ap-is-emb {f} e) = ap f
+  pr2 (equiv-ap-is-emb {f} e {x} {y}) = e x y
+```
+
+<!-- rosetta-agda-block: definition-11.4.1-embeddings -->
+
+```agda
+infix 5 _↪_
+_↪_ :
+  {l1 l2 : Level} → Type l1 → Type l2 → Type (l1 ⊔ l2)
+A ↪ B = Σ (A → B) is-emb
+
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  where
+
+  map-emb : A ↪ B → A → B
+  map-emb = pr1
+
+  is-emb-map-emb : (f : A ↪ B) → is-emb (map-emb f)
+  is-emb-map-emb = pr2
+
+  equiv-ap-emb :
+    (e : A ↪ B) {x y : A} → (x ＝ y) ≃ (map-emb e x ＝ map-emb e y)
+  equiv-ap-emb e = equiv-ap-is-emb (is-emb-map-emb e)
+```
 <!-- rosetta-item-end: definition-11.4.1 -->
 
 Another way of phrasing the following statement is that equivalent types have equivalent identity types.
@@ -62,4 +111,24 @@ inv : (e(x)=e(y))→ (e(y)= e(x))
 is an equivalence by Exercise 9.1.
 The fiber `fib(e, e(x))` is contractible by Theorem 10.4.6, so it follows by Exercise 10.3 that the type `Σ(y:A) e(x)=e(y)` is indeed contractible. ◻
 
+<!-- rosetta-agda-block: theorem-11.4.2-equivalences-are-embeddings -->
+
+```agda
+
+```
+
+<!-- rosetta-agda-block: theorem-11.4.2-embedding-of-equivalence -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  where
+
+  is-emb-equiv : (e : A ≃ B) → is-emb (map-equiv e)
+  is-emb-equiv e = is-emb-is-equiv (is-equiv-map-equiv e)
+
+  emb-equiv : (A ≃ B) → (A ↪ B)
+  pr1 (emb-equiv e) = map-equiv e
+  pr2 (emb-equiv e) = is-emb-equiv e
+```
 <!-- rosetta-item-end: theorem-11.4.2 -->

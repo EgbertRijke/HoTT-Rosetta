@@ -2,6 +2,76 @@
   "format_version": 1,
   "items": [
     {
+      "item_id": "section-14.2-tarski-truncation-codes",
+      "kind": "Section",
+      "number": "14.2",
+      "destination": "section-14-2-propositional-truncations-as-higher-inductive-types.lagda.md",
+      "statement": "Proposition-level formation is represented in Agda's Russell-style universes. The book's separate checked Tarski truncation code and decoding equation are preserved in the repaired proof-tree prose but are not separately represented by that Agda type operator. Do not claim a literal Tarski code/decoding implementation or enlarge the earlier universe account solely to add one. The two minipage layout diagnostics remain visible; their full mathematical contents are retained."
+    },
+    {
+      "item_id": "exercise-12-6-remaining-parts",
+      "kind": "Exercise",
+      "number": "12.6(a-general-and-converse;b)",
+      "destination": "exercise-12-6-truncated-sigma-types.lagda.md",
+      "statement": "Only the proposition-level forward implication of part (a), and its constant-family product specialization, are curated because Proposition 14.1.4 requires them. The arbitrary-truncation statement, converse, and part (b) remain lower-priority exercise Agda. The custom-list rendering lacks outer alphabetical labels; the solution heading explicitly identifies the supplied part."
+    },
+    {
+      "item_id": "exercise-12-4-remaining-parts",
+      "kind": "Exercise",
+      "number": "12.4(a,b;c-converse;d)",
+      "destination": "exercise-12-4-coproduct-truncation.lagda.md",
+      "statement": "Only the implication in part (c) from mutually exclusive propositions to a propositional coproduct is curated, because Lemma 13.5.3 requires it. The converse of part (c), parts (a), (b), and (d), and the conclusion about the integers remain lower-priority exercise Agda. The custom-list prose still lacks outer alphabetical labels; the solution heading explicitly identifies part (c)."
+    },
+    {
+      "item_id": "theorem-13.2.1-judgmental-sigma-eta",
+      "kind": "Theorem",
+      "number": "13.2.1",
+      "destination": "section-13-2-identity-systems-on-pi-types.lagda.md",
+      "statement": "The choice equivalence is curated, but the pinned proof and existing local Section 4.6 use record Sigma with judgmental eta. The book explicitly lacks this rule and invokes function extensionality for the second inverse homotopy. Its full proof is preserved as prose; the shorter Agda refl proof does not represent that nonjudgmental-eta step. Keep this representation difference explicit rather than changing the earlier Sigma definition or claiming literal proof fidelity."
+    },
+    {
+      "item_id": "exercise-9-5-a",
+      "kind": "Exercise",
+      "number": "9.5(a)",
+      "destination": "exercise-9-5-sigma-swap.lagda.md",
+      "statement": "Part (b)'s right-swap equivalence is curated because Corollary 13.2.3 needs it. Part (a)'s left-swap equivalence remains lower-priority exercise Agda. The existing custom-list rendering also lacks the outer alphabetical labels; the solution heading explicitly identifies part (b), and the exercise is not recorded complete."
+    },
+    {
+      "item_id": "remark-12.4.2-overlapping-universes",
+      "kind": "Remark",
+      "number": "12.4.2",
+      "destination": "section-12-4-general-truncation-levels.lagda.md",
+      "statement": "The book's same type inhabiting overlapping universes is not represented by the pinned library's disjoint Agda universe levels. The lift equivalence and both directions of truncation transfer for A and raise l A are curated, with transfer delayed until Proposition 12.4.5. This is an explicit lifted-type analogue, not a literal proof of the overlapping-universe assertion or its judgmental base equalities; see docs/section-agda-audit.md."
+    },
+    {
+      "item_id": "exercise-10-7-b-c",
+      "kind": "Exercise",
+      "number": "10.7(b,c)",
+      "destination": "exercise-10-7-fibers-of-projections.lagda.md",
+      "statement": "Part (a)'s projection-fiber equivalence is curated because Corollary 12.2.4 needs it. The remaining projection-equivalence and section-graph-equivalence characterizations by contractibility of every family fiber, including both directions in parts (b) and (c), remain lower-priority exercise Agda."
+    },
+    {
+      "item_id": "example-9.2.9",
+      "kind": "Example",
+      "number": "9.2.9",
+      "destination": "section-9-2-bi-invertible-maps.lagda.md",
+      "statement": "The general equivalence criterion for maps into empty types is curated for Section 11.5. The displayed product/coproduct unit, absorption, commutativity, associativity, and distributivity equivalences themselves still need formalization; that auxiliary alone does not complete this example."
+    },
+    {
+      "item_id": "exercise-9-4-remaining-parts",
+      "kind": "Exercise",
+      "number": "9.4(a,b;c-consequence)",
+      "destination": "exercise-9-4-three-for-two-equivalences.lagda.md",
+      "statement": "The triangle laws needed by Theorem 11.1.6 and the three equivalence implications are curated. Package the standalone assertions in parts (a) and (b), and prove the final consequence that any section or retraction of an equivalence is an equivalence. These remaining exercise results are deferred until section Agda is complete."
+    },
+    {
+      "item_id": "exercise-10-3-a",
+      "kind": "Exercise",
+      "number": "10.3(a)",
+      "destination": "exercise-10-3-contractible-equivalences.lagda.md",
+      "statement": "Show that the terminal map A → unit is an equivalence exactly when A is contractible. Only part (b), needed by Section 11.1, is currently curated."
+    },
+    {
       "item_id": "exercise-7-9-b",
       "kind": "Exercise",
       "number": "7.9(b)",

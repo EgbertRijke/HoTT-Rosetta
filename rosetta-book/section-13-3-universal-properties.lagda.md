@@ -2,6 +2,13 @@
 
 ```agda
 module section-13-3-universal-properties where
+
+open import universe-levels
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-9-1-homotopies
+open import section-9-2-bi-invertible-maps
+open import section-13-1-equivalent-forms-of-function-extensionality
 ```
 
 <!-- rosetta-item: section-13.3 -->
@@ -59,6 +66,40 @@ We apply function extensionality again, so it suffices to show that
 ```
 We obtain this homotopy by another application of `Σ`-induction. ◻
 
+<!-- rosetta-agda-block: theorem-13.3.1-dependent-universal-property-sigma -->
+
+```agda
+module _
+  { l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : Σ A B → Type l3}
+  where
+
+  abstract
+    is-equiv-ev-pair : is-equiv (ev-pair {C = C})
+    pr1 (pr1 is-equiv-ev-pair) = ind-Σ
+    pr2 (pr1 is-equiv-ev-pair) = refl-htpy
+    pr1 (pr2 is-equiv-ev-pair) = ind-Σ
+    pr2 (pr2 is-equiv-ev-pair) f = eq-htpy (ind-Σ (λ x y → refl))
+
+  equiv-ev-pair : ((x : Σ A B) → C x) ≃ ((a : A) (b : B a) → C (a , b))
+  pr1 equiv-ev-pair = ev-pair
+  pr2 equiv-ev-pair = is-equiv-ev-pair
+```
+
+### Ordinary Σ universal property from the introduction
+
+<!-- rosetta-agda-block: theorem-13.3.1-ordinary-sigma-specialization -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {X : Type l3}
+  where
+
+  is-equiv-ev-pair-nondependent : is-equiv (ev-pair {B = B} {C = λ _ → X})
+  is-equiv-ev-pair-nondependent = is-equiv-ev-pair {C = λ _ → X}
+
+  equiv-ev-pair-nondependent : (Σ A B → X) ≃ ((a : A) → B a → X)
+  equiv-ev-pair-nondependent = equiv-ev-pair {C = λ _ → X}
+```
 <!-- rosetta-item-end: theorem-13.3.1 -->
 
 ## Corollary 13.3.2
@@ -72,6 +113,19 @@ ev-pair: (A× B → X)→ (A→ (B→ X))
 ```
 given by `f↦λ a. λ b. f(a,b)` is an equivalence.
 
+<!-- rosetta-agda-block: corollary-13.3.2-product-currying -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  where
+
+  is-equiv-ev-product : is-equiv (ev-pair {A = A} {B = λ _ → B} {C = λ _ → X})
+  is-equiv-ev-product = is-equiv-ev-pair {C = λ _ → X}
+
+  equiv-ev-product : (A × B → X) ≃ (A → B → X)
+  equiv-ev-product = equiv-ev-pair {C = λ _ → X}
+```
 <!-- rosetta-item-end: corollary-13.3.2 -->
 
 ### The universal property of identity types
@@ -116,4 +170,52 @@ Therefore it suffices to show that
 ```
 This follows by path induction on `p`, since `path-ind_a(f(a,refl),a,refl)≐ f(a,refl)` by the computation rule of path induction. ◻
 
+<!-- rosetta-agda-block: theorem-13.3.3-dependent-universal-property-identity -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} (a : A) {B : (x : A) → a ＝ x → Type l2}
+  where
+
+  ev-refl : ((x : A) (p : a ＝ x) → B x p) → B a refl
+  ev-refl f = f a refl
+
+  is-retraction-ev-refl : is-retraction (ind-Id a B) ev-refl
+  is-retraction-ev-refl = refl-htpy
+
+  abstract
+    is-section-ev-refl : is-section (ind-Id a B) ev-refl
+    is-section-ev-refl f =
+      eq-htpy
+        ( λ x →
+          eq-htpy
+            ( ind-Id a
+              ( λ x' p' → ind-Id a _ (f a refl) x' p' ＝ f x' p')
+              ( refl)
+              ( x)))
+
+  is-equiv-ev-refl : is-equiv ev-refl
+  is-equiv-ev-refl =
+    is-equiv-is-invertible (ind-Id a B) is-retraction-ev-refl is-section-ev-refl
+
+  equiv-ev-refl : ((x : A) (p : a ＝ x) → B x p) ≃ B a refl
+  equiv-ev-refl = (ev-refl , is-equiv-ev-refl)
+```
+
+### Ordinary identity universal property from the introduction
+
+<!-- rosetta-agda-block: theorem-13.3.3-ordinary-identity-specialization -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} (a : A) {B : A → Type l2}
+  where
+
+  is-equiv-ev-refl-nondependent :
+    is-equiv (ev-refl a {B = λ x _ → B x})
+  is-equiv-ev-refl-nondependent = is-equiv-ev-refl a {B = λ x _ → B x}
+
+  equiv-ev-refl-nondependent : ((x : A) → a ＝ x → B x) ≃ B a
+  equiv-ev-refl-nondependent = equiv-ev-refl a {B = λ x _ → B x}
+```
 <!-- rosetta-item-end: theorem-13.3.3 -->

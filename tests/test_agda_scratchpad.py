@@ -77,6 +77,28 @@ class AgdaScratchpadTests(unittest.TestCase):
             self.assertEqual(promotion_scratchpad(root, "example-block"), checked)
             self.assertEqual(manifest.read_text(), original)
 
+    def test_blocked_draft_is_included_in_the_checked_candidate(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root, manifest = self._root(directory)
+            value = json.loads(manifest.read_text())
+            value["blocks"][0].update(conversion_status="blocked", conversion_note="Missing scope.")
+            manifest.write_text(json.dumps(value))
+            original = manifest.read_text()
+            save_scratchpad(root, "example-block", "invalid draft")
+            with patch(
+                "rosetta.agda_scratchpad.candidate_for_destination",
+                return_value=("section-1-1-example.lagda.md", "invalid draft"),
+            ) as candidate, patch(
+                "rosetta.agda_scratchpad.typecheck_candidate",
+                return_value=(1, "Invalid code", root / "candidate.lagda.md"),
+            ):
+                checked = run_scratchpad_typecheck(root, "example-block")
+            self.assertEqual(candidate.call_args.kwargs["blocks"][0].conversion_status, "ready")
+            self.assertEqual(checked.status, "failed")
+            self.assertEqual(manifest.read_text(), original)
+            with self.assertRaisesRegex(ValueError, "must pass Agda"):
+                promotion_scratchpad(root, "example-block")
+
     def test_failed_or_stale_draft_cannot_be_promoted(self):
         with tempfile.TemporaryDirectory() as directory:
             root, manifest = self._root(directory)

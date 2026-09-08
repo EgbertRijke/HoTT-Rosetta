@@ -19,7 +19,7 @@ Consider a type `A` in context `Γ`.
 A **family** of types over `A` in context `Γ` is a type `B(x)` in context `Γ,x:A`.
 In other words, in the situation where
 ```text
-Γ, x:A⊢ B(x) \type,
+Γ, x:A⊢ B(x) type,
 ```
 we say that `B` is a family of types over `A` in context `Γ`.
 Alternatively, we say that `B(x)` is a type **indexed** by `x:A`, in context `Γ`.
@@ -35,9 +35,9 @@ They are introduced as follows:
 *Proof tree (automatic faithful draft).*
 
 ```text
-       Γ⊢ a:A
-───────────────────
-$Γ, x:A⊢ a=x \type$
+     Γ⊢ a:A
+────────────────
+Γ, x:A⊢ a=x type
 ```
 
 This rule asserts that given an element `a:A` in context `Γ`, we may form the type `a=x` in context `Γ, x:A`.

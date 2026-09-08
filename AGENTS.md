@@ -6,6 +6,8 @@ Before changing the repository, read:
 2. `docs/conversion-contract.md`
 3. `skills/hott-rosetta-translation/SKILL.md`
 4. The task references selected by that skill
+5. `docs/agda-training-exercises.md`
+6. `docs/invisible-math.md`
 
 `docs/initial-prompt.txt` and `docs/audit-baseline.md` are historical evidence,
 not current instructions.
@@ -24,6 +26,22 @@ not current instructions.
 - Never invent Agda. Copy exact or analogous pinned agda-unimath code, make
   only necessary local adaptations, and record commit/file/line/hash
   provenance. If no applicable source exists, report the gap.
+- Do not enlarge an earlier complete file solely to support a later one. If a
+  later Agda block needs an absent auxiliary result, leave that later block
+  empty. Record the exercise in `docs/agda-training-exercises.md`. In
+  `docs/invisible-math.md`, record the needed agda-unimath results and their
+  natural mathematical home.
+- Use one shared branch, `proposal/agda-exercise-solutions`, for every training
+  exercise. Create and publish it from current `main` when the first exercise
+  appears. Before each solution, bring in the latest `main`. Add one focused
+  solution commit, validate it, push it, and record its commit in the exercise
+  index. Never merge the proposal automatically or rewrite its public history.
+- These branch steps bind agents only. Humans may edit either branch freely.
+  Agents must inspect and preserve human changes.
+- Routine checks do not run Agda on a file that contains or imports a recorded
+  training exercise. They report `deferred`, never `passed`. Use `--force` only
+  to see Agda's unchanged result. The proposal branch must pass ordinary Agda
+  checks for every exercise and affected later file.
 - Generated modules must use repository-local imports, never imports from
   `external/agda-unimath`.
 - Preserve unrelated and in-progress work. Agents may create focused commits
@@ -40,4 +58,5 @@ git diff --check
 ```
 
 Also run `python3 rosetta.py typecheck-candidate N M` for every changed section
-containing Agda. Typecheck exercises only when their Agda changes.
+containing Agda. A deferred result is not a successful typecheck. Typecheck
+exercises only when their Agda changes.

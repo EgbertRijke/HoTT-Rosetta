@@ -242,16 +242,16 @@ Let `f` be a map, and consider two commuting triangles
 *2-by-6 diagram (automatic draft).*
 
 ```text
- [A]                 [B]      [[2em] A]                [B']
+ [A]                 [B]       [A]                 [B']
 
-           [X]                               [X]
+           [X]                           [X]
 
 Arrows:
 - A --f--> X
 - A --q--> B
 - B --i--> X
-- [2em] A --f--> X
-- [2em] A --{q'}--> B'
+- A --f--> X
+- A --{q'}--> B'
 - B' --{i'}--> X
 ```
 with `I:f~ i∘ q` and `I':f~ i'∘ q'`, in which `i` and `i'` are assumed to be embeddings.

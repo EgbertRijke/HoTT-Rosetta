@@ -25,7 +25,7 @@ open import exercise-11-11-fiber-triangles
 For many types it is useful to have a characterization of their identity types.
 For example, we have used a characterization of the identity types of the fibers of a map in order to conclude that any equivalence is a contractible map.
 The fundamental theorem of identity types is our main tool to carry out such characterizations, and with the fundamental theorem it becomes a routine task to characterize an identity type whenever that is of interest.
-We note that the fundamental theorem also appears as Theorem 5.8.4 in .
+We note that the fundamental theorem also appears as Theorem 5.8.4 in \[citation: `hottbook`\].
 
 In our first application of the fundamental theorem of identity types we show that any equivalence is an embedding.
 Embeddings are maps that induce equivalences on identity types, i.e., they are the homotopical analogue of injective maps.

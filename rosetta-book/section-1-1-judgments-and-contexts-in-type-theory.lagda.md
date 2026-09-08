@@ -16,7 +16,7 @@ Such steps can be represented by **inference rules**, which are written in the f
 ```text
 H_1$ $H_2$ \dots $H_n
 ─────────────────────
-         $C$
+          C
 ```
 
 Inference rules contain above the horizontal line a finite list `H_1`, `H_2`, …, `H_n` of *judgments* for the **premises**, and below the horizontal line a single judgment `C` for the **conclusion**.
@@ -31,7 +31,7 @@ A straightforward example of an inference rule that we will encounter in Chapter
 ```text
 Γ⊢ a:A   Γ⊢ f:A→ B
 ──────────────────
-   $Γ⊢ f(a):B$
+    Γ⊢ f(a):B
 ```
 
 This rule asserts that in any context `Γ` we may use an element `a:A` and a function `f:A→ B` to obtain an element `f(a):B`.
@@ -51,12 +51,12 @@ There are four kinds of **judgments** in Martin-Löf’s dependent type theory:
 
 1.  *`A` is a (well-formed) **type** in context `Γ`.* We express this judgment as
 ```text
-Γ⊢ A \type.
+Γ⊢ A type.
 ```
 
 2.  *`A` and `B` are **judgmentally equal types** in context `Γ`.* We express this judgment as
 ```text
-Γ⊢ A ≐ B \type.
+Γ⊢ A ≐ B type.
 ```
 
 3.  *`a` is an **element** of type `A` in context `Γ`.* We express this judgment as
@@ -85,7 +85,7 @@ x_1:A_1, x_2:A_2(x_1), …, x_n:A_n(x_1,…,x_{n-1})
 ```
 satisfying the condition that for each `1≤ k≤ n` we can derive the judgment
 ```text
-x_1:A_1, …, x_{k-1}:A_{k-1}(x_1,…,x_{k-2})⊢ A_k(x_1,…,x_{k-1}) \type,
+x_1:A_1, …, x_{k-1}:A_{k-1}(x_1,…,x_{k-2})⊢ A_k(x_1,…,x_{k-1}) type,
 ```
 using the inference rules of type theory.
 We may use variable names other than `x_1,…,x_n`, as long as no variable is declared more than once.

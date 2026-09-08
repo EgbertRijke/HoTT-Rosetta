@@ -46,6 +46,7 @@ a { color: #174ea6; }
 .needs-further-review { background: #d2e3fc; }
 .pending { background: #feefc3; }
 .passed { background: #ceead6; } .failed { background: #f8d7da; }
+.deferred { background: #feefc3; }
 .not-checked, .not-applicable, .missing { background: #e8eaed; }
 .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .statement { grid-column: 1 / -1; }
@@ -421,9 +422,12 @@ def render_record(
     if next_id:
         navigation.append(f"<a href='/agda/{quote(next_id)}'>Next →</a>")
     navigation_html = " &nbsp; ".join(navigation)
-    is_missing = record.provenance_kind == "missing"
+    is_training = record.conversion_status == "exercise"
+    is_missing = record.provenance_kind == "missing" or is_training
     source_note = (
-        "No Agda code or applicable upstream source has been recorded yet."
+        "This block is an Agda training exercise. Its source records the invisible mathematics."
+        if is_training
+        else "No Agda code or applicable upstream source has been recorded yet."
         if is_missing
         else
         "This is an exact copy of the recorded source."
@@ -445,6 +449,10 @@ def render_record(
         check_message = (
             "<p class='passed-message'>Agda accepted the complete candidate file.</p>"
         )
+    elif record.typecheck_status == "deferred":
+        check_message = (
+            f"<p class='warning'>{html.escape(record.typecheck_message)}</p>"
+        )
     elif record.typecheck_message:
         check_message = f"<pre>{html.escape(record.typecheck_message)}</pre>"
     else:
@@ -462,6 +470,11 @@ def render_record(
             f"{html.escape(record.conversion_note)}</p>"
             if record.conversion_status == "blocked" else ""
         )
+        + (
+            f"<p class='warning'><strong>Training exercise:</strong> "
+            f"{html.escape(record.conversion_note)}</p>"
+            if is_training else ""
+        )
         +
         f"<p><a href='/read/{quote(record.destination)}'>Read the generated file</a></p>"
         + (
@@ -471,9 +484,15 @@ def render_record(
             if is_missing else
             f"<section class='panel'><h3>Agda check</h3>"
             f"<p>This checks the complete candidate file containing this block.</p>{check_message}"
-            f"<form method='post' action='/agda/{quote(record.block_id)}/typecheck'>"
-            f"<input type='hidden' name='token' value='{html.escape(token)}'>"
-            "<button type='submit'>Run Agda check</button></form></section>"
+            + (
+                "<p>To see Agda's raw result, run the corresponding candidate "
+                "check with <code>--force</code>.</p>"
+                if record.typecheck_status == "deferred" else
+                f"<form method='post' action='/agda/{quote(record.block_id)}/typecheck'>"
+                f"<input type='hidden' name='token' value='{html.escape(token)}'>"
+                "<button type='submit'>Run Agda check</button></form>"
+            )
+            + "</section>"
         )
         +
         "<div class='columns'>"
@@ -519,7 +538,7 @@ def render_record(
 
 
 def render_agda_editor(record: AgdaReviewRecord, token: str, scratchpad=None) -> str:
-    if record.provenance_kind == "missing":
+    if record.provenance_kind == "missing" or record.conversion_status == "exercise":
         raise ValueError("There is no candidate Agda block to edit")
     draft_code = scratchpad.code if scratchpad else record.project_code
     draft_note = scratchpad.adaptation_note if scratchpad else ""

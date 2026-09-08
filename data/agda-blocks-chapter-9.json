@@ -568,10 +568,10 @@
       "source_sha256": "e28ea44b778ea4479fc963ed5608d747e303da1e2c71e8c76740e62f866e3394",
       "order": 0,
       "imports": [],
-      "code": "  is-equiv-map-section-is-equiv : is-equiv map-section-is-equiv\n  is-equiv-map-section-is-equiv =\n    is-equiv-is-invertible f\n      ( is-retraction-map-section-is-equiv)\n      ( is-section-map-section-is-equiv)",
-      "source_note": "Copied from the pinned source with only the requested local substitutions.",
-      "conversion_status": "blocked",
-      "conversion_note": "The upstream excerpt depends on the surrounding coherently-invertible module; it is retained as a sourced candidate but not inserted until that dependency is localized."
+      "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B} (H : is-equiv f)\n  where\n\n  is-equiv-map-section-is-equiv : is-equiv (map-section-is-equiv H)\n  is-equiv-map-section-is-equiv =\n    is-equiv-is-invertible f\n      ( is-retraction-map-section-is-equiv H)\n      ( is-section-map-section-is-equiv H)",
+      "source_note": "Restore the anonymous module parameters from the same pinned file, lines 237--239. Use the section inverse already proved in Proposition 9.2.7: replace map-inv-is-equiv by map-section-is-equiv H and its two inverse laws by the existing section laws with explicit H. This avoids the later coherent inverse dependency and follows the book proof of Corollary 9.2.8.",
+      "conversion_status": "ready",
+      "conversion_note": "The checked scratchpad restores the surrounding module and uses the existing section inverse."
     },
     {
       "block_id": "definition-9.2.1-invertible-implies-equivalence",

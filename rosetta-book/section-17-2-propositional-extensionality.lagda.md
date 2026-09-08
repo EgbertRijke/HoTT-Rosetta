@@ -34,11 +34,11 @@ Therefore we see that the asserted map is the composite of the equivalences
 *Linear diagram (automatic draft).*
 
 ```text
-[(A=B)]---->[(pr 1(A)=pr 1(B))]---->[[2em] (pr 1(A)≃ pr 1(B))]
+[(A=B)]---->[(pr 1(A)=pr 1(B))]---->[(pr 1(A)≃ pr 1(B))]
 
 Arrows:
 - (A=B) --ap{pr 1}--> (pr 1(A)=pr 1(B))
-- (pr 1(A)=pr 1(B)) --equiv-eq--> [2em] (pr 1(A)≃ pr 1(B))
+- (pr 1(A)=pr 1(B)) --equiv-eq--> (pr 1(A)≃ pr 1(B))
 ```
  ◻
 

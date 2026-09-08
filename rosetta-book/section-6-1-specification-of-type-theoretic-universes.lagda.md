@@ -87,7 +87,7 @@ Ty(ℕ̌) ≐ ℕ.
 Consider a universe `𝒰` and a type `A` in context `Γ`.
 We say that `A` is a type in `𝒰`, or that `𝒰` **contains** `A`, if `𝒰` comes equipped with an element `Ǎ:𝒰` in context `Γ`, for which the judgment
 ```text
-Γ⊢Ty(Ǎ)≐ A \type
+Γ⊢Ty(Ǎ)≐ A type
 ```
 holds.
 If `A` is a type in `𝒰`, we usually write simply `A` for `Ǎ` and also `A` for `Ty(Ǎ)`.

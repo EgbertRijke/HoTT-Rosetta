@@ -62,6 +62,7 @@ SIMPLE_COMMANDS = {
     r"\inneg": "in-neg",
     r"\inpos": "in-pos",
     r"\Omega": "Ω",
+    r"\omega": "ω",
     r"\W": "W",
     r"\Q": "ℚ",
     r"\addsuccN": "add-S",
@@ -144,6 +145,8 @@ SIMPLE_COMMANDS = {
     r"\indSigma": "ind-Σ",
     r"\indunit": "ind-unit",
     r"\indsing": "ind-sing",
+    r"\singind": "ind-sing",
+    r"\singcomp": "comp-sing",
     r"\equiveq": "equiv-eq",
     r"\invfunc": "inv",
     r"\invhtpy": "inv-htpy",
@@ -164,8 +167,8 @@ SIMPLE_COMMANDS = {
     r"\demb": "↪ᵈ",
     r"\Aut": "Aut",
     r"\B": "B",
-    r"\bot": "empty",
-    r"\Leftrightarrow": "↔",
+    r"\bot": "⊥",
+    r"\Leftrightarrow": "⇔",
     r"\reflEqN": "refl-Eq-ℕ",
     r"\isdecidable": "is-decidable",
     r"\hookrightarrow": "↪",
@@ -254,10 +257,12 @@ SIMPLE_COMMANDS = {
     r"\defeq": "≔",
     r"\coloneqq": "≔",
     r"\vdash": "⊢",
+    r"\type": "type",
     r"\mapsto": "↦",
     r"\longmapsto": "⟼",
     r"\leftrightarrow": "↔",
     r"\rightarrow": "→",
+    r"\longrightarrow": "⟶",
     r"\to": "→",
     r"\times": "×",
     r"\cdots": "⋯",
@@ -344,6 +349,30 @@ def _replace_binary_macro(value: str, macro: str, separator: str) -> str:
             return value[:position] + separator.strip() + value[position + len(macro) :]
         replacement = first[0] + separator + second[0]
         value = value[:position] + replacement + value[second[1] :]
+
+
+def _replace_annotated_relation(value: str) -> str:
+    """Preserve both parts of TeX stackrel as ``relation[label]``."""
+
+    macro = r"\stackrel"
+    while True:
+        position = _last_command_position(value, macro)
+        if position < 0:
+            return value
+        cursor = position + len(macro)
+        while cursor < len(value) and value[cursor].isspace():
+            cursor += 1
+        label = _braced_argument(value, cursor)
+        if label is None:
+            return value
+        cursor = label[1]
+        while cursor < len(value) and value[cursor].isspace():
+            cursor += 1
+        relation = _braced_argument(value, cursor)
+        if relation is None:
+            return value
+        replacement = f"{relation[0]}[{label[0]}]"
+        value = value[:position] + replacement + value[relation[1]:]
 
 
 def _replace_binary_function(value: str, macro: str, name: str) -> str:
@@ -433,9 +462,10 @@ def _replace_unary_wrapper(
 
 
 def _replace_optional_unary_wrapper(
-    value: str, macro: str, name: str, default_exponent: str = ""
+    value: str, macro: str, name: str, default_exponent: str = "",
+    script_marker: str = "^",
 ) -> str:
-    """Render an optional exponent followed by one braced argument."""
+    """Render an optional super/subscript followed by one braced argument."""
 
     while True:
         position = _last_command_position(value, macro)
@@ -452,8 +482,8 @@ def _replace_optional_unary_wrapper(
         argument = _braced_argument(value, cursor)
         if argument is None:
             return value[:position] + name + value[position + len(macro) :]
-        superscript = f"^{exponent}" if exponent else ""
-        replacement = f"{name}{superscript}({argument[0]})"
+        script = f"{script_marker}{exponent}" if exponent else ""
+        replacement = f"{name}{script}({argument[0]})"
         value = value[:position] + replacement + value[argument[1] :]
 
 
@@ -483,8 +513,12 @@ def normalize_math(source: str) -> str:
     """Render confirmed project notation as readable Unicode/plain text."""
 
     value = _replace_simple_commands(source.strip().replace("~", " "))
-    value = re.sub(r"\\begin\{(?:equation|align)\*?\}", "", value)
-    value = re.sub(r"\\end\{(?:equation|align)\*?\}", "", value)
+    # TeX's double-bar control symbol can directly precede a letter; unlike
+    # control words it must not use _replace_simple_commands' word boundary.
+    # Match the book's brck/trunc double-bar notation (hott.tex:765,771).
+    value = value.replace(r"\|", "‖")
+    value = re.sub(r"\\begin\{(?:equation|align|multline)\*?\}", "", value)
+    value = re.sub(r"\\end\{(?:equation|align|multline)\*?\}", "", value)
     value = re.sub(r"\\text\{([^{}]*)\}", r"\1", value)
     value = re.sub(r"\\mathrm\{([^{}]*)\}", r"\1", value)
     value = _replace_unary_wrapper(value, r"\mathsf", "")
@@ -507,6 +541,7 @@ def normalize_math(source: str) -> str:
     value = re.sub(r"\\frac\{([^{}]+)\}\{([^{}]+)\}", r"\1/\2", value)
     value = _replace_binary_macro(value, r"\ct", " ∙ ")
     value = _replace_binary_macro(value, r"\eqv", " ≃ ")
+    value = _replace_annotated_relation(value)
     value = _replace_truncation(value)
     value = _replace_stirling(value)
     value = _replace_binary_function(value, r"\fib", "fib")
@@ -515,8 +550,10 @@ def normalize_math(source: str) -> str:
     value = _replace_subscript_function(value, r"\apd", "apd")
     value = _replace_subscript_function(value, r"\ap", "ap")
     value = _replace_unary_wrapper(value, r"\pairr", "(", ")")
-    value = _replace_unary_wrapper(value, r"\tot", "tot(", ")")
+    value = _replace_optional_unary_wrapper(value, r"\tot", "tot", script_marker="_")
     value = _replace_unary_wrapper(value, r"\fibf", "fib_", "")
+    # hott.tex:578: brckcheck is the truncation code followed by a check mark.
+    value = _replace_unary_wrapper(value, r"\brckcheck", "‖", "‖̌")
     value = _replace_unary_wrapper(value, r"\brck", "‖", "‖")
     value = _replace_unary_wrapper(value, r"\Brck", "‖", "‖")
     value = _replace_unary_wrapper(value, r"\sphere", "S^")
@@ -560,6 +597,14 @@ def normalize_math(source: str) -> str:
     value = value.replace(r"\{", "{").replace(r"\}", "}")
     value = value.replace("{}", "")
     value = value.replace(r"\qquad", "    ").replace(r"\quad", "  ")
+    # A cases environment groups alternative values and their conditions.
+    # Keep explicit boundaries, including when it occurs inside an align row.
+    value = re.sub(
+        r"\\begin\{cases\}((?:(?!\\(?:begin|end)\{cases\}).)*)\\end\{cases\}",
+        lambda match: "cases {\n" + match.group(1).strip() + "\n}",
+        value,
+        flags=re.DOTALL,
+    )
     value = re.sub(r"[ \t]+", " ", value)
     value = re.sub(r" *& *", " ", value)
     value = re.sub(r"\\\\\*?\s*", "\n", value)

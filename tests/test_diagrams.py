@@ -5,6 +5,25 @@ from rosetta.math_text import normalize_math, normalize_markdown_math
 
 
 class DiagramTests(unittest.TestCase):
+    def test_spacing_options_are_not_mathematical_nodes(self):
+        source = r"""\begin{tikzcd}
+A \arrow[r,"f"] &[4em] B \arrow[r,"g"] &[2.5em] C \\
+[1ex] &[-2em] D &[-2em]
+\end{tikzcd}"""
+        draft = render_tikzcd(source, normalize_math)
+        self.assertIn("A --f--> B", draft.art)
+        self.assertIn("B --g--> C", draft.art)
+        self.assertIn("[D]", draft.art)
+        for option in ("4em", "2.5em", "-2em", "1ex"):
+            self.assertNotIn(option, draft.art)
+
+    def test_bracketed_mathematics_is_preserved(self):
+        source = r"""\begin{tikzcd}
+A \arrow[r,"f"] & {[0,1]}
+\end{tikzcd}"""
+        draft = render_tikzcd(source, normalize_math)
+        self.assertIn("A --f--> [0,1]", draft.art)
+
     def test_square_matrix_and_arrows_are_preserved(self):
         source = r"""\begin{tikzcd}
 A \arrow[r,"f"] \arrow[d,swap,"g"] & B \arrow[d,"h"] \\
