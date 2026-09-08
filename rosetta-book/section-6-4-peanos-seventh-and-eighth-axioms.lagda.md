@@ -9,6 +9,7 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-6-3-observational-equality-of-the-natural-numbers
+open import universe-levels
 ```
 
 <!-- rosetta-item: section-6.4 -->
@@ -73,8 +74,11 @@ ap-succ-ℕ = ap succ-ℕ
 <!-- rosetta-agda-block: section-6-4-peanos-seventh-and-eighth-axioms-block-63 -->
 
 ```agda
+is-injective : {l1 l2 : Level} {A : Type l1} {B : Type l2} → (A → B) → Type (l1 ⊔ l2)
+is-injective {l1} {l2} {A} {B} f = {x y : A} → f x ＝ f y → x ＝ y
+
 is-injective-succ-ℕ :
-  {m n : ℕ} → succ-ℕ m ＝ succ-ℕ n → m ＝ n
+  is-injective succ-ℕ
 is-injective-succ-ℕ {m} {n} p = eq-Eq-ℕ m n (Eq-eq-ℕ p)
 
 peano-7-ℕ :
