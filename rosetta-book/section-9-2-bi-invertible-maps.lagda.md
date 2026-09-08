@@ -235,6 +235,19 @@ module _
     (g : B → A) (H : f ∘ g ~ id) (K : g ∘ f ~ id) → is-equiv f
   is-equiv-is-invertible g H K = is-equiv-is-invertible' (g , H , K)
 ```
+
+<!-- rosetta-agda-block: definition-9.2.1-retract-data -->
+
+```agda
+retract : {l1 l2 : Level} → Type l1 → Type l2 → Type (l1 ⊔ l2)
+retract B A = Σ (A → B) (retraction)
+
+infix 6 _retract-of_
+
+_retract-of_ :
+  {l1 l2 : Level} → Type l1 → Type l2 → Type (l1 ⊔ l2)
+A retract-of B = retract B A
+```
 <!-- rosetta-item-end: definition-9.2.1 -->
 
 ## Remark 9.2.2
@@ -486,6 +499,19 @@ By Proposition 9.2.7 it follows that the section of `f` is also a retraction.
 Therefore it follows that the section is itself an invertible map, with inverse `f`.
 Hence it is an equivalence. ◻
 
+<!-- rosetta-agda-block: corollary-9.2.8-inverse-equivalence -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B} (H : is-equiv f)
+  where
+
+  is-equiv-map-section-is-equiv : is-equiv (map-section-is-equiv H)
+  is-equiv-map-section-is-equiv =
+    is-equiv-is-invertible f
+      ( is-retraction-map-section-is-equiv H)
+      ( is-section-map-section-is-equiv H)
+```
 <!-- rosetta-item-end: corollary-9.2.8 -->
 
 ## Example 9.2.9
@@ -520,6 +546,24 @@ G(inr(x,z)) ≔ refl H(x,inr(z)) ≔ refl.
 ```
 We encourage the reader to write out the definitions of at least a few of these equivalences.
 
+<!-- rosetta-agda-block: example-9.2.9-equivalences-of-empty-types -->
+
+```agda
+abstract
+  is-equiv-is-empty :
+    {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) →
+    is-empty B → is-equiv f
+  is-equiv-is-empty f H =
+    is-equiv-is-invertible
+      ( ex-falso ∘ H)
+      ( λ y → ex-falso (H y))
+      ( λ x → ex-falso (H (f x)))
+
+abstract
+  is-equiv-is-empty' :
+    {l : Level} {A : Type l} (f : is-empty A) → is-equiv f
+  is-equiv-is-empty' f = is-equiv-is-empty f id
+```
 <!-- rosetta-item-end: example-9.2.9 -->
 
 ## Example 9.2.10

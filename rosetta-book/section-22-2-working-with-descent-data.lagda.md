@@ -135,7 +135,7 @@ This equivalence fits in a commuting triangle
 Arrows:
 - Π(t:S^1) A(t) --unlabeled--> Σ(x:X) e(x)=x
 - Π(t:S^1) A(t) --dgen_{S^1}--> Σ(x:A(base)) tr_A(loop,x)=x
-- Σ(x:X) e(x)=x --{tot([α]{ᾱ}}--> Σ(x:A(base)) tr_A(loop,x)=x
+- Σ(x:X) e(x)=x --{tot_α(ᾱ)}--> Σ(x:A(base)) tr_A(loop,x)=x
 ```
 where the map on the left is given by `s↦(α^{-1}(s(base)),ᾱ^{-1}(apd_{s}(loop)))`.
 The bottom map and the map on the right are equivalences, so it follows by the 3-for-2 property of equivalences that the map on the left is an equivalence. ◻

@@ -61,6 +61,67 @@ Agda blocks are curated independently of mechanical LaTeX conversion.
   upstream copies or used as precedent for new handwritten blocks.
 - Typecheck every changed section containing Agda and affected aggregates.
 
+## Auxiliary results
+
+Keep an earlier file unchanged when it already tells a complete mathematical
+story and typechecks. Do not enlarge it solely to support a later file.
+
+If a later Agda block needs an absent auxiliary definition or lemma:
+
+- leave the later block empty;
+- list it in `docs/agda-training-exercises.md`;
+- state why the auxiliary result is needed there;
+- list its exact agda-unimath requirements in `docs/invisible-math.md`;
+- name the earlier item where each requirement would most naturally belong;
+- note every later result that needs it;
+- treat the resulting unresolved names as expected until the exercise is
+  filled.
+
+The exercise belongs where the missing mathematics first blocks the intended
+formalization. Its invisible mathematics may have a natural home in an earlier
+file. Preserve the book's prose. When the classification is unclear, report it
+before changing the manifest.
+
+Every training exercise has a solution on the shared branch
+`proposal/agda-exercise-solutions`. There is no chapter threshold.
+Create and publish this branch from current `main` when the first exercise is
+recorded. Keep all later solutions on the same branch.
+
+For each exercise, an agent must:
+
+1. Commit and push the empty block and both mathematical records on `main`.
+2. Fetch both remote branches and inspect their history.
+3. Bring the latest `main` into the proposal branch without rewriting public
+   history.
+4. Add the pinned agda-unimath blocks at their best mathematical locations.
+5. Record every placement and dependency choice.
+6. Make one focused solution commit.
+7. Regenerate and typecheck every affected section and later user.
+8. Push only the named proposal branch.
+9. On `main`, record the proposal branch and solution commit in
+   `docs/agda-training-exercises.md`; commit and push that record.
+10. Keep the handoff current.
+
+Never merge the proposal automatically. Never force-push it. Before changing
+it, preserve all collaborator work.
+
+These steps are mandatory for agents. Humans may edit either branch without
+following them. This is allowed, though the same care is encouraged.
+
+## Deferred Agda checks
+
+An active file that contains or imports a block marked `exercise` is
+intentionally incomplete. Routine candidate and aggregate checks must not run
+Agda on it. Report `deferred` and list the exercises instead.
+
+`deferred` means only that Agda was not run. It is neither `passed` nor
+`failed`. The checker must not add definitions, change Agda options, inspect
+compiler errors, suppress errors, or infer mathematical correctness.
+
+The project commands accept `--force` to run the existing Agda invocation and
+show its ordinary result. Every proposed solution and affected later file must
+pass Agda on `proposal/agda-exercise-solutions` before acceptance.
+
 ## Agda narrative placement
 
 Agda blocks must appear where their declarations are both narratively relevant

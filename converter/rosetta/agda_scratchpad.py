@@ -95,7 +95,16 @@ def run_scratchpad_typecheck(root: Path, block_id: str) -> AgdaScratchpad:
     matches = [block for block in blocks if block.block_id == block_id]
     if len(matches) != 1:
         raise ValueError(f"Agda block not found: {block_id}")
-    replacement = replace(matches[0], code=draft.code)
+    block = matches[0]
+    # A blocked source excerpt is omitted by the renderer. Check the supplied
+    # draft as active code, or a passing result would say nothing about it.
+    replacement = replace(
+        block,
+        code=draft.code,
+        conversion_status=(
+            "ready" if block.conversion_status == "blocked" else block.conversion_status
+        ),
+    )
     overlaid = [replacement if block.block_id == block_id else block for block in blocks]
     filename, document = candidate_for_destination(
         root, replacement.destination, blocks=overlaid

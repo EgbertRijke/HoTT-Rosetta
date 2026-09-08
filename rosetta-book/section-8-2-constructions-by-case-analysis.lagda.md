@@ -21,10 +21,10 @@ A common way to construct functions and to prove properties about them is by cas
 For example, a famous function of Collatz is specified by case analysis on whether `n` is even or odd:
 ```text
 collatz(n) =
-\begin{cases}
+cases {
 n/2 if $n$ is even
 3n+1 if $n$ is odd.
-\end{cases}
+}
 ```
 The Collatz function is of course uniquely determined by this specification, but it is important to note that there is a bit of work to be done in order to define the Collatz function according to the rules of dependent type theory.
 First we note that, since the Collatz function is specified by case analysis on whether `n` is even or odd, we will have to use a dependent function witnessing the fact that every number is either even or odd.

@@ -8,8 +8,7 @@ from typing import List
 
 COMMAND_RE = re.compile(
     r"\\(AxiomC|UnaryInfC|BinaryInfC|TrinaryInfC|RightLabel|noLine)"
-    r"(?:\{((?:[^{}]|\{[^{}]*\})*)\})?",
-    re.DOTALL,
+    r"(?![A-Za-z@])",
 )
 
 
@@ -37,10 +36,43 @@ def _text(value: str) -> str:
     # Import lazily to avoid coupling the notation table to the renderer.
     from .math_text import normalize_math
 
-    value = value.strip()
+    # The book sometimes puts sentence punctuation outside the math delimiters.
+    value = value.strip().removesuffix(".").rstrip()
     if value.startswith("$") and value.endswith("$"):
         value = value[1:-1]
     return normalize_math(value.rstrip(".").strip())
+
+
+def _commands(body: str):
+    """Read full braced arguments; a depth-limited regex can lose conclusions."""
+
+    cursor = 0
+    while match := COMMAND_RE.search(body, cursor):
+        command = match.group(1)
+        cursor = match.end()
+        if command == "noLine":
+            yield command, ""
+            continue
+        while cursor < len(body) and body[cursor].isspace():
+            cursor += 1
+        if cursor >= len(body) or body[cursor] != "{":
+            raise ValueError(f"{command} needs a braced argument")
+        start = cursor + 1
+        depth = 1
+        cursor = start
+        while cursor < len(body) and depth:
+            if body[cursor] == "\\":
+                # Escaped braces are literal symbols, not argument delimiters.
+                cursor += 2
+                continue
+            if body[cursor] == "{":
+                depth += 1
+            elif body[cursor] == "}":
+                depth -= 1
+            cursor += 1
+        if depth:
+            raise ValueError(f"Unclosed {command} argument")
+        yield command, body[start : cursor - 1]
 
 
 def _combine(premises: List[_Tree], conclusion: str, label: str, line: bool) -> _Tree:
@@ -79,8 +111,7 @@ def render_proof_tree(body: str) -> ProofTreeDraft:
     label = ""
     draw_line = True
     arities = {"UnaryInfC": 1, "BinaryInfC": 2, "TrinaryInfC": 3}
-    for match in COMMAND_RE.finditer(body):
-        command, argument = match.group(1), match.group(2) or ""
+    for command, argument in _commands(body):
         if command == "AxiomC":
             stack.append(_Tree([_text(argument)]))
         elif command == "RightLabel":

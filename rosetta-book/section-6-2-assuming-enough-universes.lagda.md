@@ -29,7 +29,7 @@ Therefore we will assume that there are sufficiently many universes:
 
 We assume that there are **enough universes**, i.e., that for every finite list of types in context
 ```text
-Γ_1⊢ A_1 \type ⋯ Γ_n⊢ A_n \type,
+Γ_1⊢ A_1 type ⋯ Γ_n⊢ A_n type,
 ```
 there is a universe `𝒰` that contains each `A_i` in the sense that `𝒰` comes equipped with
 ```text
@@ -37,7 +37,7 @@ there is a universe `𝒰` that contains each `A_i` in the sense that `𝒰` com
 ```
 for which the judgment
 ```text
-Γ_i⊢ Ty(Ǎ_i)≐ A_i \type
+Γ_i⊢ Ty(Ǎ_i)≐ A_i type
 ```
 holds.
 
@@ -62,8 +62,8 @@ In other words, the base universe is a universe that is closed under all the way
 
 The **successor universe** of a universe `𝒰` is the universe `𝒰^+` obtained using Postulate 6.2.1 with the finite list
 ```text
-⊢ 𝒰 \type
-X:𝒰 ⊢ T(X) \type.
+⊢ 𝒰 type
+X:𝒰 ⊢ T(X) type.
 ```
 
 <!-- rosetta-item-end: definition-6.2.3 -->
@@ -74,8 +74,8 @@ X:𝒰 ⊢ T(X) \type.
 
 The successor universe `𝒰^+` of `𝒰` therefore contains the type `𝒰` as well as every type in `𝒰`, in the following sense
 ```text
-⊢ 𝒰̌:𝒰^+  ⊢ T^+(𝒰̌)≐𝒰 \type
-X:𝒰 ⊢ Ť(X) :𝒰^+ X:𝒰 ⊢ T^+(Ť(X))≐ T(X) \type.
+⊢ 𝒰̌:𝒰^+  ⊢ T^+(𝒰̌)≐𝒰 type
+X:𝒰 ⊢ Ť(X) :𝒰^+ X:𝒰 ⊢ T^+(Ť(X))≐ T(X) type.
 ```
 In particular, we obtain a function `i:𝒰→𝒰^+` that includes the types in `𝒰` into `𝒰^+`, given by
 ```text
@@ -97,8 +97,8 @@ However, such towers of universes need not be exhaustive in the sense that it mi
 
 The **join** of two universes `𝒰` and `𝒱` is the universe `𝒰⊔𝒱` that we obtain using Postulate 6.2.1 with the two types
 ```text
-X:𝒰 ⊢ T_{𝒰}(X) \type
-Y:𝒱 ⊢ T_{𝒱}(Y) \type.
+X:𝒰 ⊢ T_{𝒰}(X) type
+Y:𝒱 ⊢ T_{𝒱}(Y) type.
 ```
 
 <!-- rosetta-item-end: definition-6.2.5 -->

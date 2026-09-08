@@ -34,28 +34,15 @@ ev-pt:(Π(x:A) B(x))→ B(a)
 defined by `ev-pt(f)≔ f(a)` has a section.
 In other words, if `A` satisfies singleton induction we have a function and a homotopy
 ```text
-\singind_{a} : B(a)→ Π(x:A) B(x)
-\singcomp_{a} : ev-pt∘ \singind_{a} ~ id
+ind-sing_{a} : B(a)→ Π(x:A) B(x)
+comp-sing_{a} : ev-pt∘ ind-sing_{a} ~ id
 ```
 for any type family `B` over `A`.
 
 <!-- rosetta-agda-block: definition-10.2.1-singleton-induction -->
 
 ```agda
-is-singleton :
-  (l1 : Level) {l2 : Level} (A : Type l2) → A → Type (lsuc l1 ⊔ l2)
-is-singleton l A a = (B : A → Type l) → section (ev-point a {B})
 
-ind-is-singleton :
-  {l1 l2 : Level} {A : Type l1} (a : A) →
-  ({l : Level} → is-singleton l A a) → (B : A → Type l2) →
-  B a → (x : A) → B x
-ind-is-singleton a is-sing-A B = pr1 (is-sing-A B)
-
-compute-ind-is-singleton :
-  {l1 l2 : Level} {A : Type l1} (a : A) (H : {l : Level} → is-singleton l A a) →
-  (B : A → Type l2) → (ev-point a {B} ∘ ind-is-singleton a H B) ~ id
-compute-ind-is-singleton a H B = pr2 (H B)
 ```
 <!-- rosetta-item-end: definition-10.2.1 -->
 
@@ -75,6 +62,15 @@ Therefore, we obtain the homotopy
 ```
 and we conclude that the unit type satisfies singleton induction.
 
+<!-- rosetta-agda-block: example-10.2.2-unit-singleton-induction -->
+
+```agda
+abstract
+  is-singleton-unit :
+    {l : Level} → is-singleton l unit star
+  pr1 (is-singleton-unit B) = ind-unit
+  pr2 (is-singleton-unit B) = refl-htpy
+```
 <!-- rosetta-item-end: example-10.2.2 -->
 
 ## Theorem 10.2.3
@@ -118,11 +114,11 @@ Then we have the identifications
 *Linear diagram (automatic draft).*
 
 ```text
-[tr_B(C(a),b)]---->[[4em] tr_B(refl,b)]----> [b]
+[tr_B(C(a),b)]---->[tr_B(refl,b)]----> [b]
 
 Arrows:
-- tr_B(C(a),b) --ap_{λ \omega. tr_B(\omega,b)}(p)--> [4em] tr_B(refl,b)
-- [4em] tr_B(refl,b) --refl--> b
+- tr_B(C(a),b) --ap_{λ ω. tr_B(ω,b)}(p)--> tr_B(refl,b)
+- tr_B(refl,b) --refl--> b
 ```
 This shows that the computation rule is satisfied, which completes the proof that `A` satisfies singleton induction.
 

@@ -159,6 +159,6 @@ for all `k,l:ℤ`, such a function is obtained at once from Corollary 22.2.4. �
 <!-- rosetta-item-end: theorem-22.4.4 -->
 
 In order to prove that the fundamental group of the circle is `ℤ`, we first had to use the univalence axiom to construct the universal cover of the circle.
-This proof was originally discovered by Mike Shulman in 2011, and later published in .
+This proof was originally discovered by Mike Shulman in 2011, and later published in \[citation: `LicataShulman`\].
 Its importance of this proof to the field of homotopy type theory is hard to overestimate.
 The proof led to the discovery of the *encode-decode method*, which we presented in this book as the fundamental theorem of identity types, and it was the start of the field that is now sometimes called *synthetic homotopy theory*, where the induction principle for identity types and the univalence axiom are used along with methods from algebraic topology in order to compute algebraic invariants of types.

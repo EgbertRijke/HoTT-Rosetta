@@ -68,10 +68,10 @@ class AgdaBlock:
             isinstance(module, str) and module for module in block.imports
         ):
             raise ValueError(f"Invalid imports for {block.block_id}")
-        if block.conversion_status not in {"ready", "blocked"}:
+        if block.conversion_status not in {"ready", "blocked", "exercise"}:
             raise ValueError(f"Invalid conversion status for {block.block_id}")
-        if block.conversion_status == "blocked" and not block.conversion_note.strip():
-            raise ValueError(f"Blocked block needs a conversion note: {block.block_id}")
+        if block.conversion_status != "ready" and not block.conversion_note.strip():
+            raise ValueError(f"Non-ready block needs a conversion note: {block.block_id}")
         return block
 
 
@@ -139,7 +139,8 @@ def inject_agda_blocks(document: str, destination: str, blocks: List[AgdaBlock])
     selected = sorted(
         (
             block for block in blocks
-            if block.destination == destination and block.conversion_status == "ready"
+            if block.destination == destination
+            and block.conversion_status in {"ready", "exercise"}
         ),
         key=lambda block: (block.item_id, block.order, block.block_id),
     )
@@ -167,6 +168,7 @@ def inject_agda_blocks(document: str, destination: str, blocks: List[AgdaBlock])
         if marker in result:
             raise ValueError(f"Agda block already inserted: {block.block_id}")
         heading = f"\n\n### {block.display_heading}" if block.display_heading else ""
-        fenced = f"{heading}\n\n{marker}\n\n```agda\n{block.code.rstrip()}\n```\n"
+        code = "" if block.conversion_status == "exercise" else block.code.rstrip()
+        fenced = f"{heading}\n\n{marker}\n\n```agda\n{code}\n```\n"
         result = result[:insertion].rstrip() + fenced + result[insertion:]
-    return result
+    return result.rstrip("\n") + "\n"

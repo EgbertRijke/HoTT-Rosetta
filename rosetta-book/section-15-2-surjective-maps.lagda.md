@@ -237,16 +237,16 @@ Every map factors uniquely as a surjective map followed by an embedding.
 *2-by-6 diagram (automatic draft).*
 
 ```text
- [A]                 [B]      [[3em] A]                [B']
+ [A]                 [B]       [A]                 [B']
 
-           [X]                               [X]
+           [X]                           [X]
 
 Arrows:
 - A --q--> B
 - A --f--> X
 - B --i--> X
-- [3em] A --{q'}--> B'
-- [3em] A --f--> X
+- A --{q'}--> B'
+- A --f--> X
 - B' --{i'}--> X
 ```
 of `f` where `m` and `m'` are embeddings, and `q` and `q'` are surjective.

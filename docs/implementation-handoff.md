@@ -1,193 +1,440 @@
 # Implementation handoff
 
-Updated 2026-09-04.
+Updated 2026-09-07.
 
-## Current review branch
+## Objective
 
-The narrative-placement work is on `fix/agda-narrative-placement`, tracking
-`fork/fix/agda-narrative-placement`. It has been pushed to the
-`daniel-carranza/HoTT-Rosetta` fork but must not be merged until the project
-collaborators reach consensus. Key commits leading into this handoff are:
+Complete section prose and section Agda for Chapters 3--22 before the remaining
+exercise Agda. Chapters 1--2 are optional. The next working range is Chapters
+14--17.
 
-- `d33e710 fix(converter): place Agda blocks by narrative scope`
-- `47b17f3 docs(review): record Agda placement feedback`
+`docs/conversion-contract.md` is the policy authority. Do not duplicate it
+here. Recompute inventories; file presence and review state do not prove
+completion.
 
-The first commit adds stable `rosetta-item-end` markers, curated narrative
-anchors, optional headings for prerequisite groups, manifest relocations, and
-regenerated products. The second preserves the collaborator's Agda review
-comments separately. At the start of this documentation handoff,
-`data/agda-reviews.json` also had an unstaged one-line `review_sha256` refresh
-for `definition-8.5.1-prime`; inspect and preserve that review metadata rather
-than overwriting it.
+## Current state
 
-The branch passed the full unit suite, `python3 rosetta.py check`, and
-`git diff --check`. Candidate typechecks passed for the affected sections 8.1,
-8.5, 9.1, 9.2, 9.3, and 10.4. Regeneration also brought two exercise products
-into agreement with existing notation conversion rules; those small notation
-changes were generated consequences rather than hand edits.
+Work continues on `main`.
 
-### What changed and what remains to review
+Section 14.4 now has twenty-two provenance-backed blocks accounting for
+the introduction and all six numbered items, including the finite-choice
+corollary, both constant/weakly-constant identity characterizations, and
+the full Kraus theorem. The explicit precomposition map uses action on
+the assumed path constructor. Uniqueness precedes the image-proposition
+construction, and the extension retains its computation and both inverse
+homotopies. Existing minimum, finite-type, and subtype-identity results
+are reused; no earlier section is enlarged and no exercise Agda or new
+training site is added.
+Main passes 187 tests, repository checks (644 blocks: 176 exact, 410
+adapted, 58 historical/local), and whitespace checks. Source comparison
+is 100%, all 8 headings and 15 text fences match, and all three diagram
+IDs remain unchanged. Section 14.4 and Chapter 14 defer through all nine
+existing sites. Published proposal merge
+`4524b3ac744d3be90ee758b827a31c22ce4c6b7b` passes actual Agda for Section
+14.4 and aggregate Chapter 14, all 192 unit tests, repository checks
+(656 verified blocks), and whitespace checks. No proof correction or new
+training solution was needed. The test insertion conflict preserves both
+the proposal's evaluation-placement regression and the two new section
+regressions. Main retains all nine empty sites and its deferred results
+are not passes. See `docs/section-agda-audit.md` for the item audit.
 
-- The renderer now closes a numbered item's scope after its adjacent proof or
-  construction, not merely at the closing theorem div emitted by Pandoc.
-  Consequently, ordinary block insertion no longer captures transition prose.
-- Section 8.5's general-purpose helpers are visibly grouped as **Agda
-  prerequisites for Section 8.5**. Logical-equivalence projections and
-  decidability of equality with one moved to their earlier narrative homes in
-  Section 8.1. Other helpers stayed at section scope because moving them into
-  earlier modules caused dependency-order or name-resolution failures.
-- Section 9.2's combined invertibility material was split into the forward
-  prerequisite at Definition 9.2.1 and the converse at Proposition 9.2.7. The
-  involution material moved beside the homotopy/involution examples it
-  formalizes. Anonymous module wrappers were restored where separated upstream
-  excerpts otherwise lost their required scope.
-- In Theorem 9.3.4, the inverse-map code now follows the prose that finishes
-  defining `eq-pair`; the equivalence proof remains after the rest of the proof
-  narrative.
+Section 14.4's preparatory prose audit exposed two recurring conversion
+losses. The converter now preserves the active book's simple citation groups
+as visible unresolved `[citation: key]` references, without inventing
+bibliography numbers. It also normalizes TeX's double-bar control symbol,
+including the bare, `left`/`right`, and `big` forms. All thirteen affected
+active documents are regenerated: two chapter introductions, ten sections,
+and Exercise 20.6. Every Agda fence and all three Section 14.4 diagram IDs
+are unchanged. Five new regressions cover the notation, citation groups,
+all active citation-bearing fragment kinds, and the actual Sections 14.4
+and 16.3 passages. Main passes 185 unit tests, repository checks (the same
+622 verified blocks), whitespace checks, all ten changed section candidates,
+and aggregate Chapters 3, 6--8, 16, 18--20, and 22. Chapters 11 and 14 remain
+deferred through existing training sites; they are not passes. Section
+14.4's candidate at that prose-only stage contained only its module
+declaration and did not establish formalization completeness. The new
+curation is described above. Published prose-validation proposal merge
+`d57b496af51c6ef85798aa27e09eef3effdca178` passes actual Agda for all ten
+changed section candidates and aggregate Chapters 3, 6--8, 11, 14, 16,
+18--20, and 22, all 190 unit tests, repository checks (634 verified blocks),
+and whitespace checks. All thirteen repaired documents exactly match their
+generated proposal candidates. No proof correction or new training solution
+was needed, and main retains all nine empty sites.
 
-Before proposing a merge, collaborators should review the generated Sections
-8.1, 8.5, 9.1, 9.2, and 9.3 for mathematical narrative, then repeat the
-required checks and affected typechecks. In particular, decide whether the
-Section 8.5 prerequisite group is the desired editorial presentation. Do not
-move those helpers solely for visual proximity: first establish that every
-definition is in Agda scope at its new location.
+Section 14.3 now has seventeen provenance-backed blocks for all four
+numbered items and the complete eight-row connective table. Both
+universal-property proofs retain the full composition of two equivalences,
+not merely their converse maps. Its needed Exercise 13.8 has the full
+dependent coproduct universal property, inverse homotopies, and ordinary
+specialization at that exact home. No earlier section is enlarged or new
+training site introduced. The renderer now distinguishes `⊥` from `empty`
+and `⇔` from `↔`; Exercise 14.8's symbol is regenerated without Agda
+changes. Section 7.1's existing correct output is unchanged.
+Main passes 180 unit tests, repository checks (622 blocks: 176 exact,
+388 adapted, 58 historical/local), and whitespace checks. Section 7.1
+and Chapter 7 pass Agda. Section 14.3, Exercise 13.8, and Chapters 13--14
+defer through existing sites. Published proposal merge
+`b792e7b63caf4041d01ec3cfca503a923a7716b3` passes actual Agda for Section
+14.3, Exercise 13.8, Section 7.1, and aggregate Chapters 7 and 13--14,
+all 185 unit tests, repository checks (634 verified blocks), and whitespace
+checks. No proof correction or new training solution was needed; main
+retains all nine empty sites and its deferred results are not passes.
 
-## Current goal
+Section 14.2 now has eighteen provenance-backed blocks accounting for its
+formation rules, both constructors, and all five numbered items. Its four
+explicitly labeled HIT assumptions are proposition-level only. The full
+dependent induction predicate includes its computation homotopy; the
+universal property and functorial identity/composition laws are derived.
+The equality-based Section 14.1 interface is unchanged: functoriality uses
+an explicit function-extensionality transfer. Remark 14.2.3's displayed
+transport identity equivalence is the ninth empty main training site,
+needing Exercise 9.1's existing proposal-only transport equivalence.
+No earlier Agda or exercise Agda is enlarged. The proof-tree parser now
+preserves nested conclusions and external sentence punctuation; all three
+Section 14.2 rules survive. Agda's separate Tarski-code representation gap
+and the two visible minipage diagnostics remain recorded.
+Main passes 176 unit tests, repository checks (604 blocks: 176 exact,
+370 adapted, 58 historical/local), and whitespace checks. Changed
+Sections 1.1--1.4, 2.1--2.2, and 3.1--3.2 and aggregate Chapters 1--3
+pass Agda with unchanged code. Section 14.2 and Chapter 14 defer.
+Published proposal solution `d9fe7afc68edc25d011dcddba86f3ed6de739934`
+restores the retained transport block without proof corrections or earlier
+auxiliary additions. It passes actual Agda for Section 14.2, all eight
+earlier changed sections, and aggregate Chapters 1--3 and 14, all 181
+unit tests, repository checks (616 verified blocks), and whitespace checks.
+Main retains all nine empty sites; its deferred results are not passes.
 
-Complete the remaining Agda for every **section file** in the book, working
-through Chapters 3--22 in source order. File existence is not evidence that a
-section is complete: inspect every numbered definition, lemma, proposition,
-theorem, construction, and proof for applicable formalization.
+The previous handoff misidentified `book/univalence.tex` as Chapter 14.
+Recomputed active inputs and the filename registry agree: Chapter 14 is
+propositional truncations, Chapter 15 images, Chapter 16 finite types, and
+Chapter 17 univalence. Follow that source order. No univalence code or
+training site was added under the incorrect Chapter 14 numbering.
 
-Exercise prose remains part of conversion, but missing exercise Agda is the
-final formalization phase. Do not search for or add exercise Agda yet unless a
-later section imports or otherwise directly requires it. When an exercise is a
-section dependency, add only the dependency needed to unblock section work,
-with the same provenance and validation requirements as section code.
+Section 14.1 now has thirteen provenance-backed blocks accounting for its
+five numbered items. Its unique-extension formulation uses the book's
+equality of functions, not a silently substituted homotopy. Both
+equivalence/contractibility implications, both extension-property
+implications, all three uniqueness/transfer implications, and the
+double-negation precomposition equivalence are curated. The latter reuses
+Exercise 4.3 unchanged and does not assert general truncation existence.
+Exercise 12.6(a)'s needed proposition-level forward implication and product
+specialization are curated at that exact home; all other parts remain gaps.
+There is no new training site or earlier complete-section enlargement.
+Main passes 171 unit tests, repository and whitespace checks, with 586
+manifest blocks (176 exact, 352 adapted, 58 historical/local). Section
+14.1's prose comparison is 100%, all 7 headings and 10 text fences match,
+and there are no unresolved references or raw TeX commands. Its candidate,
+Exercise 12.6, and aggregate Chapters 12--14 defer through existing sites.
+Published proposal merge `7ba38d00a91229d5311cba0c2a400b3160ebf93f`
+passes actual Agda for Section 14.1, Exercise 12.6, and aggregate Chapters
+12--14, all 176 unit tests, repository checks (598 verified blocks), and
+whitespace checks. No proof corrections or new training solutions were
+needed. Main's eight training sites stay empty and its checks stay deferred.
 
-Chapters 1--2 are optional compatibility material. Do not let work there delay
-section completion in Chapters 3--22.
+- Routine checks report `deferred` without running Agda when a file contains or
+  imports a manifest block marked `exercise`. `--force` runs the unchanged Agda
+  command. Deferred never means passed.
+- Sections 10.1 and 10.3 have item-by-item coverage audits and passing candidate
+  checks; both are recorded complete. See `docs/section-agda-audit.md`.
+- Definition 10.2.1 is marked `exercise` on `main`. Its solution is published
+  as `511f171` on the shared proposal, with `ev-point` at Remark 2.2.2.
+- Remark 10.1.2 needs no separate declaration. Example 10.2.2 now has an
+  upstream-analogous unit singleton witness, checked on the proposal.
+- Section 10.4 is deferred on `main` at Lemma 10.4.5. Its solution is commit
+  `5e5a5cd` on `proposal/agda-exercise-solutions` and passes Agda there.
+- All six items in Section 11.1 have curated code, with the needed results
+  from Exercises 9.4, 10.2, and 10.3. Section 9.2's formerly blocked Corollary
+  9.2.8 is restored from a passing scratchpad, and retract data is defined at
+  Definition 9.2.1. These changed files pass candidate checks on `main`.
+- Sections 11.2 and 11.3 now have curated code. Proposal `a48a60e` passes
+  Section 11.2 and Chapter 11; `c41af9d` passes Section 11.3 and Chapter 11.
+  They are deferred on `main` through both Chapter 10 training exercises.
+- Theorem 11.4.2 is a new empty training site on `main`: its fiber-orientation
+  equivalence belongs at Definition 10.3.1, in complete Section 10.3. The
+  solution is published as `63e5e49` on the shared proposal, with the complete
+  fiber equivalence at that earlier definition. Main's Section 10.3 is unchanged.
+  No Chapter 11 section is recorded complete on `main`.
+- Section 11.5 now has all four coproduct identity equivalences, code
+  computations, reflexivity, and total-space contraction. Its theorem code
+  follows the delayed proof after Proposition 11.5.4. Proposal `3bbc564`
+  passes its candidate and aggregate Chapters 9--11; it remains deferred
+  on `main`. The indexed upstream relation realizes the book's four cases
+  by equivalences, not judgmental reduction; see the section audit.
+- Section 11.5's dependencies add equivalence composition to Exercise 9.4
+  and the empty-type equivalence criterion to Example 9.2.9. The latter's
+  still-missing displayed laws are explicit gaps; neither earlier file was
+  complete. Both changed candidates pass on `main`.
+  Section 11.6 now has a dependent-identity-system predicate and explicit
+  connections between all six theorem conditions, including the converse.
+  Exercise 10.6 supplies the required contractible-base equivalence.
+  Its Example 11.6.3 is a newly recorded empty training site: the inversion
+  equivalence needs `inv-inv` in complete Section 5.2. Proposal solution
+  `6bd180b` places this auxiliary after the inverse laws and the two required
+  groupoid equivalences at Exercise 9.1. It passes all of Section 11.6 and
+  aggregate Chapters 5--11, including the six-condition theorem.
+  Section 12.1 now has source-backed code for all four numbered items,
+  including the unit-embedding condition and its converse. Exercise 10.1's
+  required contractible-identity proof passes on `main`. Section 12.1 is
+  deferred through Theorem 11.4.2. Proposal `0c3d8b1` passes its candidate,
+  Exercise 10.1, and aggregate Chapters 10--12.
+  Section 12.2 now has curated code for all four numbered items, including
+  both directions of the embedding and projection criteria. Theorem 12.2.3
+  is a new empty training site because it directly needs `equiv-fiber` in
+  complete Section 10.3. Published proposal `7b6b28c` reuses the auxiliary
+  from `63e5e49` and passes the section, Exercise 10.7, and aggregate Chapters
+  10--12. Exercise 10.7(a)'s projection-fiber equivalence also passes on
+  `main`; parts (b) and (c) remain explicit gaps.
+  Section 12.3 now has source-backed code for all five numbered items,
+  including both axiom-K implications and the arbitrary-map assertion in
+  Theorem 12.3.4. That theorem's based proof is a new empty training site:
+  its retract fundamental theorem and total-map laws belong in the earlier
+  Chapter 11 accounts. Proposal `b96fdf3` adds the total-map laws at
+  Definition 11.1.1 and the retract variant at Theorem 11.2.2, and restores
+  the later proof. Every Chapter 11 section, Sections 12.1--12.3, and
+  aggregate Chapters 10--12 pass there. No exercise Agda is added.
+  Section 12.4 now has seventeen curated blocks accounting for its
+  introduction and seven items. Remark 12.4.2 has an explicit representation
+  gap: lifted-type invariance is formalized, but Agda's disjoint universes
+  do not literally express the book's overlapping-universe assertion.
+  Exercise 12.8(a) is added because the pinned equivalence-invariance proof
+  needs identity retracts; its part-(b) proof is a labeled prerequisite at
+  Proposition 12.4.5 to avoid an import cycle. Theorem 12.4.7 is a new empty
+  training site needing the specialized fiber equivalence at Example 11.6.3
+  and transport equivalence at its exact Exercise 9.1 home. Published
+  proposal `31222b8` supplies both auxiliaries and restores both theorem
+  implications unchanged. It passes Sections 11.6 and 12.4, Exercises
+  9.1 and 12.8, and aggregate Chapters 9--12. Section 13.1 now has twenty
+  curated blocks for its seven items, keeping both initial equivalence
+  results hypothesis-parametric and introducing the pinned coherent-inverse
+  postulates only at Axiom 13.1.3. Published proposal merge `dc97e2f` passes
+  its actual Agda check and aggregate Chapter 13 with no new auxiliary;
+  main correctly defers it. Section 13.2 now has seven curated blocks for
+  all four numbered items and the intervening products-of-fibers equivalence.
+  Its needed Exercise 9.5(b) passes on main; part (a) remains a gap.
+  The choice proof's record-Σ η difference from the book is explicit.
+  Proposal `161b3c1` passes its actual Agda check and Chapters 9 and 13.
+  Its direct-import correction for existing Exercise 9.4 composition is
+  also on main, without any training solution.
+  Section 13.3 now has five provenance-backed blocks for the three numbered
+  universal properties and both introductory ordinary-family specializations.
+  It preserves the explicit Σ-induction and twice-extensional path-induction
+  proofs, with no new auxiliary or exercise Agda. Published proposal merge
+  `6c408d4` passes its actual candidate and aggregate Chapter 13 checks.
+  Section 13.4 now has eleven provenance-backed blocks for all three
+  conditions and implications, including the full two-fiber converse.
+  Its transport substitution is an expansion of a pinned wrapper around
+  Section 9.3's existing `tr-ap`, not a new missing auxiliary. Published
+  proposal merge `b42184f` passes actual Agda for the section and aggregate
+  Chapter 13 without corrections or new solutions. Section 13.5 now has
+  twelve curated blocks for its three items, intervening bounded family,
+  both successor-lemma laws, and the full delayed theorem proof with both
+  computation rules. The lemma's additional identity-type equivalence is
+  a new empty training site needing Exercise 9.1's existing proposal
+  inverse-concatenation equivalence. The required Exercise 12.4(c) forward
+  implication is curated at its exact home; its other parts remain gaps.
+  Published proposal solution `e8105dd` restores that retained equivalence
+  without proof corrections or earlier-file additions, and passes the
+  entire section, Exercise 12.4, and aggregate Chapters 8 and 12--13.
+- Total-map base parameters and TikZ spacing options now render correctly;
+  affected documents were regenerated. Blocked scratchpad drafts are now
+  included in their candidate checks, so omitted code cannot yield a false pass.
+- Do not transfer stale review evidence for Sections 8.1, 8.5, 9.1, or 9.2;
+  these remain reserved for manual review.
 
-## Section-completion workflow
+The preceding Section 13.5 main validation passed all 169 unit tests,
+`python3 rosetta.py check`, and `git diff --check`, with 571 manifest blocks
+(176 exact, 337 adapted, 58 historical/local). Section 8.2 and aggregate
+Chapter 8 pass after the cases-display repair. Section 13.5, Exercise
+12.4, and aggregate Chapters 12--13 defer through recorded training sites.
+The preceding Exercise 9.5
+candidate and aggregate Chapter 9 checks passed; neither changed in the
+Section 13.5 work. Sections 13.1--13.5 and Chapter 13
+are deferred until their existing training dependencies are supplied.
+Proposal `e8105dd` passes all 174 unit tests, repository and whitespace
+checks, candidate Sections 8.2 and 13.5, Exercise 12.4, and aggregate
+Chapters 8 and 12--13.
+Proposal `b42184f` passes all 169 unit tests, repository and whitespace
+checks, candidate Section 13.4, and aggregate Chapter 13.
+Proposal `6c408d4` passes all 168 unit tests, repository and whitespace
+checks, candidate Section 13.3, and aggregate Chapter 13.
+Proposal `161b3c1` passes all 167 unit tests, repository and whitespace
+checks, Section 13.2, Exercise 9.5, and aggregate Chapters 9 and 13.
+Proposal `dc97e2f` passes all 165 unit tests, repository and whitespace
+checks, candidate Sections 2.2 and 13.1, and aggregate Chapters 1--6 and
+13--14. Section 12.3 and
+aggregate Chapters 10--12 are deferred. Section 12.4 is also deferred;
+its needed Exercise 12.8(a) candidate passes. Proposal `31222b8` passes
+all 161 tests, Sections 11.6 and 12.4, Exercises 9.1 and 12.8, and
+aggregate Chapters 9--12. Exercise 10.7's unchanged candidate
+passed in the preceding validation. Proposal `b96fdf3` passes all 158
+unit tests, candidate Sections 11.1--11.6 and 12.1--12.3, aggregate Chapters
+10--12, and the repository and whitespace checks. Earlier proposal
+`7b6b28c` passes Section 12.2, Exercise 10.7, and aggregate Chapters 10--12.
+Earlier proposal
+`0c3d8b1` passes candidate Section 12.1, Exercise 10.1, and aggregate Chapters
+10--12. Proposal `6bd180b` passes candidate Sections 5.2 and 11.6, Exercises
+9.1 and 10.6, and aggregate Chapters 5--11. Earlier proposal
+`3bbc564` passes candidate Section 11.5 and aggregate Chapters 9--11; the
+earlier `63e5e49` checks Sections 10.3 and 11.1--11.4. The earlier `511f171`
+also checked Section 2.2 and Chapters 2--10.
+On `main`, Sections 10.2, 10.4, 11.1--11.6, and 12.1--12.4, Exercise 10.6, and
+Chapters 10--12 remain deferred, never recorded as passed. The prose of
+Sections 11.2--11.6 and 12.1--12.3 was compared item by item with the book and has
+no unresolved references or raw TeX commands. No review evidence or completion
+status was inferred from this.
 
-For each incomplete section:
+## Next work
 
-1. Compare the LaTeX source, active generated section, numbered-item inventory,
-   current Agda manifest entries, explicit gaps, and downstream imports. Do not
-   infer completeness from filenames or review state.
-2. List the section items that still lack substantive Agda or whose existing
-   block is incomplete, misplaced, incorrectly sourced, or not typechecking.
-   For placement work, follow
-   `skills/hott-rosetta-translation/references/agda-block-placement.md`.
-3. Search the pinned `external/agda-unimath` checkout for exact material first,
-   then for the closest analogous implementation. Follow the search and
-   dependency procedure in `skills/hott-rosetta-translation/SKILL.md` and its
-   section references.
-4. Copy the closest applicable code. Make only locally necessary adaptations
-   for established names, universes, imports, and dependency structure.
-5. Record exact commit/file/inclusive-line/hash provenance and classify the
-   block honestly as exact or adapted. Never create a new block by hand.
-6. Add repository-local imports only. If a section requires exercise code,
-   formalize that dependency before continuing and document why it was needed.
-7. Regenerate the section and run
-   `python3 rosetta.py typecheck-candidate N M`.
-8. Recheck later section consumers whenever a shared name, dependency, or
-   imported block changes. After completing a chapter's sections, typecheck its
-   aggregate chapter candidate.
-9. If no applicable agda-unimath source exists, record a clear gap and continue
-   with other section items. Do not substitute invented Agda.
+The five assigned Chapter 10 steps and the Chapter 11 section formalizations
+are done, with the recorded training holes retained. Keep Definition 10.2.1,
+Lemma 10.4.5, Theorems 11.4.2, 12.2.3, 12.3.4, and 12.4.7, Example 11.6.3,
+Lemma 13.5.3's case-evaluation-identification equivalence, and Remark
+14.2.3's transport identity equivalence empty
+on `main`; do not merge the proposal to make `main` pass. The audit also
+records that Definition
+10.4.4's final cancellation result is provided only on the proposal as part
+of the existing coherence exercise.
 
-Once every required section has been audited and its applicable Agda supplied,
-begin the deferred exercise-Agda pass in book order.
+Continue Chapter 15, “Image factorizations”, in source order. Read the
+chapter introduction in `book/images.tex`, lines 1--11, then curate Section
+15.1, “The image of a map”, lines 12--204. Inventory all eight numbered
+items: morphisms over a base and their composition; the image universal
+property; the proposition of maps into an embedding; both implications of
+the converse-map criterion; all three components of the image construction;
+the image inclusion's embedding proof; the full fiberwise commuting-square
+universal-property proof; and all three implications in the uniqueness
+theorem, including contractibility of equivalences over the base.
 
-## Priority order
+The source's `ex:triangle_fib` resolves to Exercise 13.15, not a Chapter 11
+exercise. Inspect that exact problem and existing local declarations;
+curate only the parts required by this section. Inspect pinned
+`foundation/morphisms-slice`, `foundation/equivalences-slice`,
+`foundation/universal-property-image`, `foundation/images`, and
+`foundation/uniqueness-image`. Preserve the book's triangle orientation,
+fiberwise maps, and full three-condition theorem. Do not substitute merely
+a chosen comparison map for its contractible equivalence-space assertion.
+Reuse the now-curated truncation interfaces unchanged and apply the
+training workflow if genuinely absent earlier auxiliaries are needed.
 
-1. Faithful section prose, mathematics, numbering, and Markdown.
-2. Remaining provenance-backed Agda for all section definitions and results.
-3. Section dependency closure, including only exercises required downstream.
-4. Aggregate chapter correctness and converter-wide regressions.
-5. Remaining exercise Agda after section work is complete.
-6. Optional review-interface and diagram presentation improvements.
+For later Section 17.1, `book/univalence.tex`, lines 11--109, inspect
+the Chapter 17 introduction at lines 1--10. Inventory all six numbered
+items and all six parts of Example 17.1.4, not just the axiom.
+Theorem 17.1.1's three equivalence conditions must remain hypothesis-
+parametric before Axiom 17.1.2. Use the explicit fundamental-theorem and
+identity-system conversions, not the globally assumed convenience proofs.
+Pinned `foundation-core/univalence` supplies the canonical map and the
+two contractibility implications; `foundation/equivalence-induction`
+supplies the induction predicate and its two contractibility implications.
+The canonical map uses `equiv-tr id`: inspect the existing Exercise 9.1
+transport equivalence and apply the training policy before changing any
+earlier main account. Introduce the pinned univalence postulates from
+`foundation/univalence` only at the book's axiom and label the assumption.
+Never call those postulates a proof.
 
-## Active document model
+For the smallness material, start with `foundation-core/small-types`
+(not the later replacement theorem in `foundation/small-types`) and
+`foundation/small-maps`. The core small-type definition has the book's
+orientation `Σ X, A ≃ X`; its property proof uses precomposition between
+equivalence types, which is distinct from Section 13.4's ordinary-function
+precomposition. Trace the dependencies and natural homes. Account for the
+intervening type-former invariance statements and all smallness examples,
+including finite types and the explicit later Russell reference.
+Corollary 17.1.6's literal inclusion of overlapping universes is not
+represented by Agda's disjoint universes. Inspect the pinned raising-
+universe embedding analogue and retain any representation gap explicitly,
+as in Remark 12.4.2; do not claim a literal inclusion from a lifted proof.
 
-- `data/project-layout.json` defines the only active Rosetta directory,
-  currently `rosetta-book/`.
-- `data/rosetta-files.json` records stable chapter, section, exercise, and
-  support filenames.
-- `archive/legacy-rosetta/` is a historical backup only. Active scripts,
-  tests, review tools, Agda invocations, and agent workflows must never read,
-  write, compare against, or import it.
-- Generated files are products. Durable corrections belong in converter code
-  or versioned data, followed by regeneration.
-- Review state is optional metadata and never controls conversion, ordinary
-  checks, or the definition of section completion.
+Section 13.5's training exercise is solved and published as `e8105dd`.
+It reuses Exercise 9.1's existing inverse-concatenation equivalence and
+needs no earlier auxiliary addition. Main keeps the later block empty.
 
-## Agda and provenance rules
+Section 13.5's curation preserves both computation rules and the full
+delayed theorem proof. Keep its code-order anchors, the complete case-map
+equivalence and proposition assertions, and the existing explicit-index
+case splitter from Exercise 7.3. The source's successor contradiction is
+the existing order contradiction at reflexivity; the separate reflexive
+case law is an instance of the already stated `f(p)=x`. No earlier
+complete section or existing exercise code is enlarged. The new required
+Exercise 12.4(c) supplies only the forward implication; keep its remaining
+parts and custom-list presentation gaps explicit. The renderer now
+preserves the asterisk reference and both cases displays. Section 8.2's
+Collatz display was regenerated by the same tested rule, without Agda
+changes or reserved review updates.
 
-- Never invent Agda. Search pinned agda-unimath for exact and analogous code.
-- Preserve upstream names and structure wherever local compatibility permits.
-- Exact blocks must be byte-for-byte identical to their pinned source range.
-- Adapted blocks require a concise, concrete adaptation note.
-- Record the upstream commit, file, inclusive lines, SHA-256 hash, stored code,
-  destination, item, and provenance category in `data/agda-blocks*.json`.
-- Generated documents must be self-contained and use repository-local imports,
-  never imports from `external/agda-unimath`.
-- Historical handwritten/local blocks may remain, but do not add new ones.
-- A missing applicable source is a reportable gap, not permission to write a
-  replacement.
+Section 13.4 is curated and validated. It preserves all three conditions
+and the full converse using the fibers at `id` and `f`. Keep the existing local
+coherent-inverse conversion, not upstream path-split machinery. The
+missing name `substitution-law-tr` is only a wrapper around the existing
+Section 9.3 `tr-ap`: the pinned definition is expanded in the new proof,
+with secondary provenance recorded. No earlier complete file was enlarged
+and no new training exercise is needed. The converse specializes the full
+structured-type proof to ordinary types while retaining its inverse and
+both homotopies. The book's entire prose is unchanged.
 
-Avoid snapshot counts in handoff documentation. Obtain current block, gap,
-review, and generated-file counts from `python3 rosetta.py check` and the
-versioned manifests so the instructions do not become stale as work proceeds.
+Section 13.3's three numbered results, both proofs, and introductory
+ordinary specializations are curated and validated. Keep the explicit
+induction proofs, their scope-order headings, and the original prose's
+redundant function-extensionality wording and free-`p` typo as documented
+in the audit. No source prose correction, new exercise, or earlier complete
+file enlargement was needed.
 
-## Review program
+Section 13.2's four numbered items and intervening equivalence are curated
+and validated, but its record-Σ η representation difference remains
+explicit in the audit and gap inventory. The book's full proof and the
+labeled shorter pinned proof are both retained; the earlier Σ type is
+unchanged. Its right-swap prerequisite is at Exercise 9.5(b); part (a)
+remains lower-priority exercise work. No earlier complete section was enlarged.
 
-The review program is optional. It displays active generated Markdown,
-candidate and recorded-source Agda, provenance, typecheck state, comments,
-missing-code items, and a collapsible highlighted Agda diff.
+Section 13.1's seven items and complete proofs are accounted for and
+validated. Its pre-axiom results use explicit hypotheses, not the global
+`is-torsorial-htpy` used by the pinned homotopy-induction convenience
+proof. Keep that boundary and the explicit coherent-inverse assumption
+label; the audit records the comparison with the book's axiom.
 
-Edits to existing curated blocks use a separate scratchpad page. Scratchpad
-drafts are temporary, typechecked against the overlaid destination, and may be
-promoted only when the exact current draft passes. Promotion shows the manifest
-diff before confirmation and regenerates the destination. Missing-code entries
-remain comment-only because current policy forbids new handwritten blocks.
+Section 12.4's audit records the explicit overlapping-universe
+representation gap and the checked lifted analogue; do not erase that gap
+or infer completeness from polymorphism. Its prose is unchanged after
+removing the four explicit Agda headings and code, but raw comparison
+counts those headings (98.26%, 9/13). Preserve the regression test rather
+than calling the raw comparison 100%. The earlier main files stay unchanged.
+Add exercise Agda only as needed by sections, accounting for any remaining
+exercise assertions. Exercise 10.7's existing custom-list rendering loses
+the outer alphabetical labels; the audit records this presentation issue
+without claiming the exercise complete.
+Avoid importing function extensionality from upstream ahead of its narrative
+home. Chapter 13 contains Axiom 13.1.3: keep that assumption explicit and
+never describe it as a proof.
 
-The web server initializes review data in the background and shows a loading
-page until the index is ready. Review UI behavior must remain independent of
-ordinary conversion and checks.
+For each section, inventory every numbered mathematical item, search pinned
+agda-unimath for exact code before analogues, record full provenance,
+regenerate, and typecheck. If an auxiliary result belongs in an earlier
+complete file, follow the exercise and shared-proposal workflow in the contract.
+There is no exercise threshold.
 
-Add a concise `codex` review comment only when it helps resolve a mathematical,
-source, or dependency question. Do not add routine search logs, obvious code
-summaries, or comments that merely report a passing typecheck.
+## Essential files
 
-## Implementation map
-
-- `converter/rosetta/render.py`: LaTeX-to-Markdown structure and item markers.
-- `converter/rosetta/generate.py`: document generation and candidate checks.
-- `converter/rosetta/agda_manifest.py`: curated block loading and insertion.
-- `converter/rosetta/agda_review.py`: review records and discovery.
-- `converter/rosetta/agda_scratchpad.py`: temporary edits and promotion gate.
-- `converter/rosetta/review_web.py`: optional browser interface.
-- `converter/rosetta/layout.py`, `converter/rosetta/file_registry.py`: active
-  location and stable names.
+- `data/project-layout.json`: active output path.
+- `data/rosetta-files.json`: stable generated filenames.
 - `data/agda-blocks*.json`: curated Agda and provenance.
-- `data/agda-gaps.json`: explicit gaps that cannot be inferred automatically.
-- `data/agda-coverage.json`: audited coverage evidence; verify rather than
-  assuming entries remain complete after dependency or source changes.
+- `data/agda-gaps.json`: explicit gaps.
+- `data/agda-coverage.json`: audited section-completion evidence.
+- `docs/agda-training-exercises.md`: exercise index and proposal commits.
+- `docs/invisible-math.md`: required mathematics and natural homes.
 
-Everyday commands:
+Never use `archive/legacy-rosetta/` for active work.
+
+## Validation
+
+For every changed section containing Agda:
 
 ```text
-python3 rosetta.py candidate N M
 python3 rosetta.py typecheck-candidate N M
-python3 rosetta.py check
-python3 rosetta.py review --web
 ```
 
-## Required validation
+Typecheck changed exercise Agda and affected aggregate chapters. A deferred
+result does not satisfy a completed-file check; the proposal must pass Agda.
 
-Before handing work back, run:
+Before handoff:
 
 ```text
 python3 -m unittest discover
@@ -195,12 +442,5 @@ python3 rosetta.py check
 git diff --check
 ```
 
-Also typecheck every changed section containing Agda. Typecheck an exercise
-candidate only when its Agda changes. Typecheck affected aggregate chapters
-when shared dependencies or completed section sets change.
-
-Preserve all unrelated and in-progress work. Commits are allowed and should be
-focused: inspect the worktree first, stage only the intended files or hunks,
-validate, and use a clear message. Do not reset, clean, overwrite, amend or
-rewrite existing history, pull, or push unless the task specifically calls for
-that operation.
+Preserve unrelated work. Use focused commits. Do not reset, clean, overwrite,
+pull, push, amend, or rewrite history unless the task requires it.

@@ -78,9 +78,9 @@ The identity type is formed by the formation rule:
 *Proof tree (automatic faithful draft).*
 
 ```text
-       Γ⊢ a:A
-───────────────────
-Γ,x:A⊢ a=_A x \type
+      Γ⊢ a:A
+──────────────────
+Γ,x:A⊢ a=_A x type
 ```
 
 The constructor of the identity type is then given by the introduction rule:
@@ -102,7 +102,7 @@ The induction principle is now given by the elimination rule:
 *Proof tree (automatic faithful draft).*
 
 ```text
-      Γ⊢ a:A   Γ,x:A,p:a=_A x⊢ P(x,p) \type
+       Γ⊢ a:A   Γ,x:A,p:a=_A x⊢ P(x,p) type
 ─────────────────────────────────────────────────
 Γ⊢ path-ind_a:P(a,refl)→Π(x:A) Π(p:a=_A x) P(x,p)
 ```
@@ -114,7 +114,7 @@ And finally the computation rule is:
 *Proof tree (automatic faithful draft).*
 
 ```text
-       Γ⊢ a:A   Γ,x:A,p:a=_A x⊢ P(x,p) \type
+        Γ⊢ a:A   Γ,x:A,p:a=_A x⊢ P(x,p) type
 ───────────────────────────────────────────────────
 Γ,u:P(a,refl) ⊢ path-ind_a(u,a,refl)≐ u : P(a,refl)
 ```
@@ -133,9 +133,9 @@ This is certainly possible: since we can form the identity type in *any* context
 *Proof tree (automatic faithful draft).*
 
 ```text
-       Γ,x:A⊢ x:A
-───────────────────────
-Γ,x:A,y:A⊢ x=_A y \type
+      Γ,x:A⊢ x:A
+──────────────────────
+Γ,x:A,y:A⊢ x=_A y type
 ```
 
 In this way we obtain the ‘binary’ identity type.

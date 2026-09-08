@@ -28,6 +28,8 @@
     "section-6-4-peanos-seventh-and-eighth-axioms.lagda.md",
     "section-7-1-the-curry-howard-interpretation.lagda.md",
     "section-7-2-the-congruence-relations-on-natural-numbers.lagda.md",
-    "section-7-3-the-standard-finite-types.lagda.md"
+    "section-7-3-the-standard-finite-types.lagda.md",
+    "section-10-1-contractible-types.lagda.md",
+    "section-10-3-contractible-maps.lagda.md"
   ]
 }

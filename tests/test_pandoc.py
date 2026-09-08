@@ -10,6 +10,27 @@ from rosetta.pandoc import (
 
 
 class PandocBoundaryTests(unittest.TestCase):
+    def test_citation_groups_preserve_keys_without_numbering_them(self):
+        self.assertEqual(
+            prepare_latex(r"Kraus \cite{Kraus}; see \cite {A, B_2}."),
+            r"Kraus [citation: \texttt{Kraus}]; see [citation: \texttt{A}, \texttt{B\_2}].",
+        )
+        self.assertEqual(prepare_latex(r"\citeextra{A}"), r"\citeextra{A}")
+
+    @unittest.skipUnless(shutil.which("pandoc"), "Pandoc is not installed")
+    def test_citation_keys_survive_pandoc_including_groups(self):
+        result = latex_to_gfm(r"Kraus \cite{Kraus}; see \cite{A, B_2}.")
+        self.assertIn("citation: `Kraus`", result)
+        self.assertIn("citation: `A`, `B_2`", result)
+
+    def test_asterisk_tag_and_prose_symbol_survive(self):
+        self.assertEqual(
+            prepare_latex(r"$f\tag{\textasteriskcentered}$; (\textasteriskcentered{})."),
+            r"$f\tag{*}$; (*).",
+        )
+        self.assertEqual(prepare_latex(r"\textasteriskcenteredextra"),
+                         r"\textasteriskcenteredextra")
+
     def test_define_macro_is_preserved_as_bold_text(self):
         self.assertEqual(
             prepare_latex(r"the \define{addition operation}"),

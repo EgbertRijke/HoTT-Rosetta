@@ -317,12 +317,12 @@ Thus we obtain a map `has-inverse(f)→is-coh-invertible(f)`.
 *Linear diagram (automatic draft).*
 
 ```text
-[fg(y)]---->[[2.5em] fgfg(y)]---->[[2.5em] fg(y)]----> [y]
+[fg(y)]---->[fgfg(y)]---->[fg(y)]----> [y]
 
 Arrows:
-- fg(y) --{G(fg(y))}^{-1}--> [2.5em] fgfg(y)
-- [2.5em] fgfg(y) --ap_{f}(H(g(y)))--> [2.5em] fg(y)
-- [2.5em] fg(y) --G(y)--> y
+- fg(y) --{G(fg(y))}^{-1}--> fgfg(y)
+- fgfg(y) --ap_{f}(H(g(y)))--> fg(y)
+- fg(y) --G(y)--> y
 ```
 In order to construct a homotopy `f· H ~ G'· f`, it suffices to show that the square
 <!-- rosetta-diagram: d894f03c5f8d; review: pending -->
@@ -361,174 +361,10 @@ Arrows:
 commutes.
 Now we observe that this is just a naturality square the homotopy `G· f:fgf~ f`, which commutes by Definition 10.4.3. ◻
 
-<!-- rosetta-agda-block: lemma-10.4.5-concatenation-injective-helper -->
-
-```agda
-module _
-  {l1 : Level} {A : Type l1}
-  where
-
-  is-injective-concat :
-    {x y z : A} (p : x ＝ y) {q r : y ＝ z} → p ∙ q ＝ p ∙ r → q ＝ r
-  is-injective-concat refl s = s
-
-  is-injective-concat' :
-    {x y z : A} (r : y ＝ z) {p q : x ＝ y} → p ∙ r ＝ q ∙ r → p ＝ q
-  is-injective-concat' refl s = inv right-unit ∙ s ∙ right-unit
-```
-
-<!-- rosetta-agda-block: lemma-10.4.5-identification-whisker-helper -->
-
-```agda
-module _
-  {l : Level} {A : Type l}
-  where
-
-  right-whisker-concat : {x y z : A} {p q : x ＝ y} → p ＝ q → (r : y ＝ z) → p ∙ r ＝ q ∙ r
-  right-whisker-concat α q = ap (_∙ q) α
-```
-
-<!-- rosetta-agda-block: lemma-10.4.5-transpose-homotopy-helper -->
-
-```agda
-module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} {f g h : (x : A) → B x}
-  (H : f ~ g) (K : g ~ h) (L : f ~ h) (M : H ∙h K ~ L)
-  where
-
-  left-transpose-htpy-concat : K ~ inv-htpy H ∙h L
-  left-transpose-htpy-concat x =
-    left-transpose-eq-concat (H x) (K x) (L x) (M x)
-
-  inv-htpy-left-transpose-htpy-concat : inv-htpy H ∙h L ~ K
-  inv-htpy-left-transpose-htpy-concat = inv-htpy left-transpose-htpy-concat
-```
-
-<!-- rosetta-agda-block: lemma-10.4.5-whisker-concatenation-helper -->
-
-```agda
-module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
-  where
-
-  right-whisker-concat-htpy :
-    {f g h : (x : A) → B x} {H I : f ~ g} → H ~ I → (J : g ~ h) → H ∙h J ~ I ∙h J
-  right-whisker-concat-htpy K J x = right-whisker-concat (K x) (J x)
-```
-
-<!-- rosetta-agda-block: lemma-10.4.5-composition-whisker-helper -->
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  {A : Type l1} {B : A → Type l2} {C : A → Type l3} {D : A → Type l4}
-  where
-
-  inv-preserves-comp-left-whisker-comp :
-    ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
-    ( H : f ~ g) →
-    (k ∘ h) ·l H ~ k ·l (h ·l H)
-  inv-preserves-comp-left-whisker-comp k h H x = ap-comp k h (H x)
-
-  preserves-comp-left-whisker-comp :
-    ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
-    ( H : f ~ g) →
-    k ·l (h ·l H) ~ (k ∘ h) ·l H
-  preserves-comp-left-whisker-comp k h H =
-    inv-htpy (inv-preserves-comp-left-whisker-comp k h H)
-```
-
-<!-- rosetta-agda-block: lemma-10.4.5-higher-whisker-helper -->
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
-  {f g : (x : A) → B x}
-  where
-
-  left-whisker-comp² :
-    (h : {x : A} → B x → C x) {H H' : f ~ g} (α : H ~ H') → h ·l H ~ h ·l H'
-  left-whisker-comp² h α = ap h ·l α
-```
-
-<!-- rosetta-agda-block: lemma-10.4.5-identity-coherence-helper -->
-
-```agda
-module _
-  {l : Level} {A : Type l} {f : A → A} (H : f ~ id)
-  where
-
-  coh-htpy-id : H ·r f ~ f ·l H
-  coh-htpy-id x = is-injective-concat' (H x) (nat-htpy-id H (H x))
-
-  inv-coh-htpy-id : f ·l H ~ H ·r f
-  inv-coh-htpy-id = inv-htpy coh-htpy-id
-```
-
 <!-- rosetta-agda-block: lemma-10.4.5-invertible-coherently-invertible -->
 
 ```agda
-module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B} (H : is-invertible f)
-  where
 
-  is-retraction-map-inv-is-coherently-invertible-is-invertible :
-    pr1 H ∘ f ~ id
-  is-retraction-map-inv-is-coherently-invertible-is-invertible =
-    pr2 (pr2 H)
-
-  abstract
-    is-section-map-inv-is-coherently-invertible-is-invertible :
-      f ∘ pr1 H ~ id
-    is-section-map-inv-is-coherently-invertible-is-invertible =
-      ( ( inv-htpy (pr1 (pr2 H))) ·r
-        ( f ∘ pr1 H)) ∙h
-      ( ( ( f) ·l
-          ( pr2 (pr2 H)) ·r
-          ( pr1 H)) ∙h
-        ( pr1 (pr2 H)))
-
-  abstract
-    inv-coh-is-coherently-invertible-is-invertible :
-      f ·l is-retraction-map-inv-is-coherently-invertible-is-invertible ~
-      is-section-map-inv-is-coherently-invertible-is-invertible ·r f
-    inv-coh-is-coherently-invertible-is-invertible =
-      left-transpose-htpy-concat
-        ( ( pr1 (pr2 H)) ·r
-          ( f ∘ pr1 H ∘ f))
-        ( f ·l pr2 (pr2 H))
-        ( ( ( f) ·l
-            ( pr2 (pr2 H)) ·r
-            ( pr1 H ∘ f)) ∙h
-          ( pr1 (pr2 H) ·r f))
-        ( ( ( nat-htpy (pr1 (pr2 H) ·r f)) ·r
-            ( pr2 (pr2 H))) ∙h
-          ( right-whisker-concat-htpy
-            ( ( inv-preserves-comp-left-whisker-comp
-                ( f)
-                ( pr1 H ∘ f)
-                ( pr2 (pr2 H))) ∙h
-              ( left-whisker-comp²
-                ( f)
-                ( inv-coh-htpy-id (pr2 (pr2 H)))))
-            ( pr1 (pr2 H) ·r f)))
-
-  abstract
-    coh-is-coherently-invertible-is-invertible :
-      coherence-is-coherently-invertible
-        ( f)
-        ( pr1 H)
-        ( is-section-map-inv-is-coherently-invertible-is-invertible)
-        ( is-retraction-map-inv-is-coherently-invertible-is-invertible)
-    coh-is-coherently-invertible-is-invertible =
-      inv-htpy inv-coh-is-coherently-invertible-is-invertible
-
-  is-coherently-invertible-is-invertible : is-coherently-invertible f
-  is-coherently-invertible-is-invertible =
-    ( pr1 H ,
-      is-section-map-inv-is-coherently-invertible-is-invertible ,
-      is-retraction-map-inv-is-coherently-invertible-is-invertible ,
-      coh-is-coherently-invertible-is-invertible)
 ```
 <!-- rosetta-item-end: lemma-10.4.5 -->
 

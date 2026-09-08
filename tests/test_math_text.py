@@ -9,6 +9,61 @@ from rosetta.math_text import (
 
 
 class MathTextTests(unittest.TestCase):
+    def test_double_bar_control_symbol_matches_macro_truncations(self):
+        self.assertEqual(normalize_math(r"\|A\|, \left\|A\right\|, \big\|A\big\|"),
+                         "‖A‖, ‖A‖, ‖A‖")
+        self.assertEqual(
+            normalize_math(r"\brck{A}\to\sm{b:B}\left\|\sm{x:A}f(x)=b\right\|"),
+            "‖A‖→Σ(b:B) ‖Σ(x:A) f(x)=b‖",
+        )
+
+    def test_logical_connectives_remain_distinct_from_their_interpretations(self):
+        self.assertEqual(normalize_math(r"\bot, \emptyt, P\Leftrightarrow Q, P\leftrightarrow Q"),
+                         "⊥, empty, P⇔ Q, P↔ Q")
+        self.assertEqual(normalize_math(r"\bottomrule"), r"\bottomrule")
+
+    def test_cases_keep_grouping_values_conditions_and_surrounding_equations(self):
+        self.assertEqual(
+            normalize_math(r"h(x)=\begin{cases}H(m,q) & \text{if }x=\inl(q)\\"
+                           r"p_S(n,H) & \text{if }x=\inr(\refl{}).\end{cases}"),
+            "h(x)=cases {\nH(m,q) if x=inl(q)\np_S(n,H) if x=inr(refl).\n}",
+        )
+        self.assertEqual(
+            normalize_math(r"a &=\begin{cases}b & \text{if }P\\c & \text{if }Q\end{cases}\\"
+                           r"&=d"),
+            "a =cases {\nb if P\nc if Q\n}\n=d",
+        )
+        self.assertEqual(normalize_math(r"\begin{cases}a & P"), r"\begin{cases}a P")
+
+    def test_labelled_arrows_preserve_the_retraction_pair_labels(self):
+        self.assertEqual(
+            normalize_math(r"X \stackrel{i}{\longrightarrow} Y \stackrel{r}{\longrightarrow} X"),
+            "X ⟶[i] Y ⟶[r] X",
+        )
+        self.assertEqual(
+            normalize_math(r"\stackrel {\ap{f}{p}} {\longrightarrow}"),
+            "⟶[ap_{f}(p)]",
+        )
+        self.assertEqual(normalize_math(r"\stackrel{i}"), r"\stackrel{i}")
+        self.assertEqual(normalize_math(r"\stackrelation"), r"\stackrelation")
+
+    def test_type_judgments_use_the_explicit_book_macro(self):
+        self.assertEqual(normalize_math(r"\Gamma,x:A\vdash B(x)~\type"),
+                         "Γ,x:A⊢ B(x) type")
+        self.assertEqual(normalize_math(r"\typewriter"), r"\typewriter")
+
+    def test_total_map_keeps_its_optional_base_map(self):
+        self.assertEqual(
+            normalize_math(r"\tot{g}, \tot[f]{g}, \tot[f]{\tot{g}}"),
+            "tot(g), tot_f(g), tot_f(tot(g))",
+        )
+
+    def test_singleton_induction_aliases_from_book(self):
+        self.assertEqual(
+            normalize_math(r"\singind_a, \singcomp_a, \indsing_a, \compsing_a, \omega"),
+            "ind-sing_a, comp-sing_a, ind-sing_a, comp-sing_a, ω",
+        )
+
     def test_foundational_commands(self):
         self.assertEqual(
             normalize_math(r"\addN(m,\succN(n)) \jdeq \succN(\addN(m,n))"),
@@ -32,6 +87,16 @@ class MathTextTests(unittest.TestCase):
             normalize_math(r"\prd{x:A}\id[A]{f(x)}{g(x)}"),
             "Π(x:A) f(x) =_A g(x)",
         )
+
+    def test_multline_display_preserves_every_line(self):
+        for environment in ("multline", "multline*"):
+            source = (
+                "``` math\n\\begin{" + environment + "}\n"
+                "A \\\\\n\\simeq B\n\\end{" + environment + "}\n```"
+            )
+            self.assertEqual(
+                normalize_markdown_math(source), "```text\nA\n≃ B\n```"
+            )
 
     def test_html_table_math_is_normalized(self):
         self.assertEqual(
