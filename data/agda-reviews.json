@@ -343,6 +343,186 @@
       "review_sha256": "9822e1e98a7b7706f1bd7906b38a1922e80262cb0552b3a9e99da16043986f7b",
       "state": "needs-further-review"
     },
+    "exercise-6-1-injectivity-addition-multiplication-block-1": {
+      "comments": [],
+      "review_sha256": "37c47666c3e6d2d892fbe5d2f2e1a2872a99a2397901da2d54b13d5ef8541dc4",
+      "state": "approved"
+    },
+    "exercise-6-1-injectivity-addition-multiplication-block-2": {
+      "comments": [],
+      "review_sha256": "0408736f212afd16ecabd98def3b1e0d650350a39380e8177defc4f7169daf0c",
+      "state": "approved"
+    },
+    "exercise-6-1-injectivity-addition-multiplication-block-3": {
+      "comments": [],
+      "review_sha256": "fd53d47ead37f8e4e3bc9714b6daa3dd26142de22b1d41b51bfe1b0d55e7e9e6",
+      "state": "approved"
+    },
+    "exercise-6-1-injectivity-addition-multiplication-block-4": {
+      "comments": [],
+      "review_sha256": "9239704d3e90d92cec7eb197f4d7112d26947f1686de909bba51a35882359f18",
+      "state": "approved"
+    },
+    "exercise-6-1-injectivity-addition-multiplication-block-5": {
+      "comments": [],
+      "review_sha256": "deefa805415af945fb4126227d1e69eed403401952892dd44f7565f1dcd8e4d2",
+      "state": "approved"
+    },
+    "exercise-6-1-injectivity-addition-multiplication-block-6": {
+      "comments": [],
+      "review_sha256": "cf834058735e9a88c2d3e000c6b85a393368135926bc66a6a6ea48e1e6422397",
+      "state": "approved"
+    },
+    "exercise-6-1-injectivity-addition-multiplication-block-7": {
+      "comments": [],
+      "review_sha256": "897c2b46bfe84b3220fcdc298d971e04f9e68644b366f34687b0f5d841a28c9b",
+      "state": "approved"
+    },
+    "exercise-6-2-observational-equality-booleans-block-1": {
+      "comments": [],
+      "review_sha256": "e5b6e52b3eb6689d0b015429d056f4c952f3ca93d15b0d21e47b102b879177c5",
+      "state": "approved"
+    },
+    "exercise-6-2-observational-equality-booleans-block-2": {
+      "comments": [],
+      "review_sha256": "d4ae864f5e99b5818ec680e40aab86dc44cdf4c192d283129da9baebdbeb60ef",
+      "state": "approved"
+    },
+    "exercise-6-2-observational-equality-booleans-block-3": {
+      "comments": [],
+      "review_sha256": "4d09285e065e3d28265098e97a2353b0e889e19df70933b2ea2692fe59a20da0",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-1": {
+      "comments": [],
+      "review_sha256": "b5f7582c46f7a89b7cf0b2633a5c2143f8429b5f3aee13d38dfdbf687fc9ba40",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-10": {
+      "comments": [],
+      "review_sha256": "67c9d4d7cae5c3f5a6776c3428b0e1d21879c5e3104c8ad69bd5e577354be586",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-11": {
+      "comments": [],
+      "review_sha256": "be6269177adcdee237ee79641e546fac055c6fe444a3cf0c67c4780410872036",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-12": {
+      "comments": [],
+      "review_sha256": "1f097de0bc78e1d73f32a187930b4936749076c43c1593780dc0d72d8a2ea5de",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-13": {
+      "comments": [],
+      "review_sha256": "9bd858ab0663d17500d8363a22968d3645d5be7b296e4921e97b78386f2653f0",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-14": {
+      "comments": [],
+      "review_sha256": "ddc41217396a6a52306a9cca585b202cff26931e9b1c37ed05e0367a2d35dc31",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-15": {
+      "comments": [],
+      "review_sha256": "90ff9368f12cdb38fe3c1eb3bce9cd7bab114e781ae256ec894f2e721072e596",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-16": {
+      "comments": [],
+      "review_sha256": "fc38132fbbdef9504c33f97c55faf235e7d2d1da57ff4309a8ed29f821375c7e",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-17": {
+      "comments": [],
+      "review_sha256": "e6a142a0b15748cce37aac97ac014c318f47bcbfd23a9c16c8c1b7a93126ae64",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-2": {
+      "comments": [],
+      "review_sha256": "0b6163dc10fbda53c9acdf87d1197c0f8cb501fb4d92d4839ea7915af6dc5a33",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-3": {
+      "comments": [],
+      "review_sha256": "ac8d4c6348c09ce5be53b455beccd2f8efecdb1128fead6a41ca262935c514d1",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-4": {
+      "comments": [],
+      "review_sha256": "f7542505948a17af320c4e8534d32f578a16a4fdee2439ed5ab593cd47e2578c",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-5": {
+      "comments": [],
+      "review_sha256": "cc8c134e48a92570e922559a17eb2ca032bd521d6db7c8e7a33384efccc1296a",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-6": {
+      "comments": [],
+      "review_sha256": "f17386f844210cf8f7c5f25ffbb501ecfb2b1abdd52d93938a28d36a6e854f8d",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-7": {
+      "comments": [],
+      "review_sha256": "46d379a4bab7d6086a6e740fb3138b2569108d7d593c7735cbabd46b2114fc16",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-8": {
+      "comments": [],
+      "review_sha256": "79a23a8766bc0a8474132d8378aff14b1b23456299ebf9864e9bb18a03b15f32",
+      "state": "approved"
+    },
+    "exercise-6-3-order-natural-numbers-block-9": {
+      "comments": [],
+      "review_sha256": "d743fcd7b814d54b513ee501187958d2964e0ce396a75738c4b32871bddaa276",
+      "state": "approved"
+    },
+    "exercise-6-4-strict-order-natural-numbers-block-1": {
+      "comments": [],
+      "review_sha256": "4b8138dec3969fb9d8da68b53e1176f11e4fed83cd316938f917d68c846a8664",
+      "state": "approved"
+    },
+    "exercise-6-4-strict-order-natural-numbers-block-2": {
+      "comments": [],
+      "review_sha256": "39703f16bc06efb656a6e1774d371f508bded30fefd8aa82b8b6091db8f32116",
+      "state": "approved"
+    },
+    "exercise-6-4-strict-order-natural-numbers-block-3": {
+      "comments": [],
+      "review_sha256": "e3f8b59fe39bf747a644a3055023555256b2db2649cb80e2143b2fcf5e9edf5d",
+      "state": "approved"
+    },
+    "exercise-6-4-strict-order-natural-numbers-block-4": {
+      "comments": [],
+      "review_sha256": "fe2b9dca23b747ede1be347446e527cbe3fa82caa8f2f109b08d952835c3b0f6",
+      "state": "approved"
+    },
+    "exercise-6-4-strict-order-natural-numbers-block-5": {
+      "comments": [],
+      "review_sha256": "e156882371a816ea97a441136fa41759ddc257c646fa5eeed317329ddff9beb5",
+      "state": "approved"
+    },
+    "exercise-6-4-strict-order-natural-numbers-block-6": {
+      "comments": [],
+      "review_sha256": "28307afb1e88c2b804410d0beea09f49ab597c6ee87af2b8b82e6a428eee0ffe",
+      "state": "approved"
+    },
+    "exercise-6-4-strict-order-natural-numbers-block-7": {
+      "comments": [],
+      "review_sha256": "4b54572214ae0ac11779f8d1d5d465d05ee0c18dfcd43bf094b331d55ade58f5",
+      "state": "approved"
+    },
+    "exercise-6-4-strict-order-natural-numbers-block-8": {
+      "comments": [],
+      "review_sha256": "dd3b690ff1fce16b3915c95755dd1316dc2e06ed47560d3b784f3a6a7e882e20",
+      "state": "approved"
+    },
+    "exercise-6-5-distance-natural-numbers-block-1": {
+      "comments": [],
+      "review_sha256": "596eaad33cef7fded0416e1f4807ae3492c0f4643b85c35c0061c4992c6af265",
+      "state": "approved"
+    },
     "exercise-7-1-divisibility-three-for-two-block-1": {
       "comments": [
         {
@@ -906,12 +1086,122 @@
     },
     "section-2-2-dependent-composition-adapted": {
       "comments": [],
-      "review_sha256": "42ea01ad8d25e3758d94cccc9d387989606bbf5cedef0928aebc9e19f2f201d2",
+      "review_sha256": "43b3a4555abc845fe7d726e19d1a5e77174b244a5dec06e41fad95491e24fd7f",
       "state": "approved"
     },
     "section-2-2-identity-function-adapted": {
       "comments": [],
-      "review_sha256": "c96b8910c05ef822a12fd425677f21b7bfaa28323ddd1eb1be19f8b0caf948c0",
+      "review_sha256": "6e08dfa333def625bee03d23974b0536de46a7ef8e265827969cb501a866be39",
+      "state": "approved"
+    },
+    "section-3-3-pattern-matching-block-74": {
+      "comments": [],
+      "review_sha256": "ed62c9133eb8561436e6ce7893949e1220dea357d21d683c52825ae657749115",
+      "state": "approved"
+    },
+    "section-4-2-the-unit-type-block-35": {
+      "comments": [],
+      "review_sha256": "c286b9b0a934cdb3b52dcea0b5cbfc7816a09041484a0683e2c0ccda3234efdb",
+      "state": "approved"
+    },
+    "section-4-2-the-unit-type-block-61": {
+      "comments": [],
+      "review_sha256": "d702fb8815b23f701fd1df71ba7802d3542ef51ae41ce9a2128a2860b978c5d8",
+      "state": "approved"
+    },
+    "section-4-3-the-empty-type-block-146": {
+      "comments": [],
+      "review_sha256": "8a51e322f505ab7c0020ca2095c87badc240c3113ed0f17a329a2ce11d558fc9",
+      "state": "approved"
+    },
+    "section-4-3-the-empty-type-block-23": {
+      "comments": [],
+      "review_sha256": "68afaf195fc9dbe5b22981ed1a3bb010fbbaad6cf5192725fd1fbff8eb060c07",
+      "state": "approved"
+    },
+    "section-4-3-the-empty-type-block-38": {
+      "comments": [],
+      "review_sha256": "6ce5ee010d207f5411e413ca38e44e27e4de2508cb19890785419bc8956620c6",
+      "state": "approved"
+    },
+    "section-4-3-the-empty-type-block-56": {
+      "comments": [],
+      "review_sha256": "659a895639fc289086a33d0d1583380a8272652f61d295fa33ad870f7004fbac",
+      "state": "approved"
+    },
+    "section-4-3-the-empty-type-block-70": {
+      "comments": [],
+      "review_sha256": "b54fdf3e7458391e2613be2ebd9267e5dcb8793b9778470aa222dfa7e40b16de",
+      "state": "approved"
+    },
+    "section-4-3-the-empty-type-block-91": {
+      "comments": [],
+      "review_sha256": "652ca75034502aa3b7dcb6c976d556a6d5a92f564abbb4040ce7f1e54642e32e",
+      "state": "approved"
+    },
+    "section-4-4-coproducts-block-137": {
+      "comments": [],
+      "review_sha256": "93681e3bb2d195a7a8596017f9590422b9b985d4d25cae6364692b35c6ae6076",
+      "state": "approved"
+    },
+    "section-4-4-coproducts-block-43": {
+      "comments": [],
+      "review_sha256": "d75ff74ceaa04d82c538f9b9e57339f63366d299203a2081f6cc254805055d5d",
+      "state": "approved"
+    },
+    "section-4-4-coproducts-block-93": {
+      "comments": [],
+      "review_sha256": "3ed78f3eb7d57cbe4482a920075093f21b752983eb2d4aa694f6d67d23554ddd",
+      "state": "approved"
+    },
+    "section-4-6-dependent-pair-types-block-135": {
+      "comments": [],
+      "review_sha256": "486767b3a6345934cb6b7bb969d79baef5c16474faacd130e10e0913353c022b",
+      "state": "approved"
+    },
+    "section-4-6-dependent-pair-types-block-161": {
+      "comments": [],
+      "review_sha256": "2fb8d06bb46c6bdace8c0aeae09d2945d7b688c57139bf8477ecc47a4e92ff0e",
+      "state": "approved"
+    },
+    "section-4-6-dependent-pair-types-block-193": {
+      "comments": [],
+      "review_sha256": "39c7dd4a49b03a427ebae7a5a26e997cd59b073dc192e5bd5d4b380440ea126f",
+      "state": "approved"
+    },
+    "section-4-6-dependent-pair-types-block-53": {
+      "comments": [],
+      "review_sha256": "8fa3f8b7c07da31ac0aab41b6a297c436cb93c0d0c354656374a4f70688bb44b",
+      "state": "approved"
+    },
+    "section-5-1-the-inductive-definition-of-identity-types-block-20": {
+      "comments": [],
+      "review_sha256": "3e63563c064daa5defd1a787bc3b17d4f626a57a8f4a94543a3f0f09230fc478",
+      "state": "approved"
+    },
+    "section-5-1-the-inductive-definition-of-identity-types-block-44": {
+      "comments": [],
+      "review_sha256": "73d6782786ff9c0ecd4b0032f35d7d90f2cf6158b786b8bc4a0f3fbd215e438a",
+      "state": "approved"
+    },
+    "section-5-2-the-groupoidal-structure-of-types-block-258": {
+      "comments": [],
+      "review_sha256": "1c948c329f12e16625a2b28dbfca60ba5e2238764eb7728db9a37e75b8159b3a",
+      "state": "approved"
+    },
+    "section-5-3-the-action-on-identifications-of-functions-block-115": {
+      "comments": [],
+      "review_sha256": "afcc187ee846ff723f7b0a37c671dc7f0fae35753fdb61d5024932d9d7ef2562",
+      "state": "approved"
+    },
+    "section-5-3-the-action-on-identifications-of-functions-block-59": {
+      "comments": [],
+      "review_sha256": "1e8e2196caad9743330cc0366f60ab7bafa7139e5e41d374bc3f5c32042175aa",
+      "state": "approved"
+    },
+    "section-5-4-transport-block-33": {
+      "comments": [],
+      "review_sha256": "5dbb71277881af36e20dfe8dbd2bafe2e4081a8c8d170ce5892b5c027e045aa4",
       "state": "approved"
     },
     "section-5-4-transport-block-82": {
@@ -921,7 +1211,8 @@
           "text": "This is copied from agda-unimath. Do we want to keep dependent-identification, or inline it into the definition of apd?"
         }
       ],
-      "state": "needs-further-review"
+      "review_sha256": "921340505d4153c67c663a4aa339863b2848ae5f956eaa94d8bbd0985fc98b00",
+      "state": "approved"
     },
     "section-5-5-the-uniqueness-of-refl-block-65": {
       "comments": [
@@ -934,7 +1225,23 @@
           "text": "The closest reference source found proves that Σ(x : A), a = x is contractible, a notion that has not yet been defined here, so it is not quite a correct source for this proof."
         }
       ],
-      "state": "needs-further-review"
+      "review_sha256": "57205a7f01208ed25fded2d3de9f7afb93dc314d6f0daed1be07e82c0d7140f7",
+      "state": "approved"
+    },
+    "section-6-4-peanos-seventh-and-eighth-axioms-block-46": {
+      "comments": [],
+      "review_sha256": "5e87a94f7be4a044ed525c40410df4d1ff8681ae47fc65689507580f367873dc",
+      "state": "approved"
+    },
+    "section-6-4-peanos-seventh-and-eighth-axioms-block-63": {
+      "comments": [],
+      "review_sha256": "30a87ba628c0c52b6113f03f826e807b79fde7f4bd866daef9b67feb806171df",
+      "state": "approved"
+    },
+    "section-6-4-peanos-seventh-and-eighth-axioms-block-97": {
+      "comments": [],
+      "review_sha256": "cf254d040ba9871b8be34677b7eae06159b5c1375982366c27918da28338a748",
+      "state": "approved"
     },
     "section-7-1-the-curry-howard-interpretation-block-106": {
       "comments": [],
