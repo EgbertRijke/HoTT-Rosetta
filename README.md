@@ -14,7 +14,7 @@ The file `BENCHMARK.md` contains a list of where those exercises can be found.
 ## Layout
 
 - `latex-book/`: LaTeX source
-- `rosetta-book/`: maintained literate Agda
+- `rosetta-book/`: literate Agda files
 
 The prose comes from the [arXiv book](https://arxiv.org/abs/2212.11082), and
 formalizations are sourced from
@@ -49,18 +49,6 @@ To work with this repository:
     is-contr A = Σ A (λ a → (x : A) → a ＝ x)
     ```
     ````
-
-## Development and contributions
-
-Edit the Rosetta files directly. Existing Markdown and Agda edits are permanent;
-generation is used only to create missing files. Accepted content changes are
-shared between this repository and the development fork.
-
-Backend tools, review software, and development documentation live in
-[daniel-carranza/HoTT-Rosetta](https://github.com/daniel-carranza/HoTT-Rosetta).
-The public content consists of `rosetta-book/`, `latex-book/`, `README.md`, and
-`BENCHMARK.md`. Needed auxiliary results are added where they naturally belong,
-including earlier sections. They are not kept in separate proposal versions.
 
 ## Contributors
 
