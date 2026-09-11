@@ -8,18 +8,13 @@ The formalizations are in [agda](https://agda.readthedocs.io/en/latest/getting-s
 
 The main contents of this repository are literate agda files, with agda codeblocks embedded in a markdown file containing natural language text converted from the LaTeX. These codeblocks can be typechecked by agda. This repository compiles independently of any particular agda library. These files are intended to be both human-readable, providing an introduction to homotopy theory both in natural language and in agda, and machine readable, providing training data for autoformalization agents targeting homotopy type theory.
 
-## Setup
-
-For an existing clone, run `git submodule update --init --recursive`.
-The project requires Python, Pandoc, and Agda; the converter itself uses only
-Python's standard library. The pinned agda-unimath submodule supplies source
-provenance but is never imported by generated modules.
+This repository also contains an introductory HoTT (auto)formalization benchmark in the form of unsolved exercises.
+The file `BENCHMARK.md` contains a list of where those exercises can be found.
 
 ## Layout
 
-- `book/`: LaTeX source
+- `latex-book/`: LaTeX source
 - `rosetta-book/`: generated literate Agda
-- `external/agda-unimath/`: agda-unimath library as a git submodule 
 
 The prose comes from the [arXiv book](https://arxiv.org/abs/2212.11082), and
 formalizations are sourced from
