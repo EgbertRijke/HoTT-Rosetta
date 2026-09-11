@@ -35,6 +35,21 @@ formalizations are sourced from
   section-1-1-judgements-and-contexts-in-type-theory.lagda.md
   ```
 
+## Compiling the repository
+
+To work with this repository:
+ 1. Make a local copy
+ 2. Download and install agda, along with an agda language server in an editor of your choice (e.g. emacs, VSCode)
+ 3. Open any of the "literate agda" `.lagda.md` files and use `Ctrl+c` `Ctrl+l` to load and typecheck.
+ 4. New code can be added inside an agda codeblock:
+
+    ````text
+    ```agda
+    is-contr : {l : Level} → Type l → Type l
+    is-contr A = Σ A (λ a → (x : A) → a ＝ x)
+    ```
+    ````
+
 ## Contributors
 
 This repository has been developed by 
