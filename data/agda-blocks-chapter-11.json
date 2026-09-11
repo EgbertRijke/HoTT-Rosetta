@@ -616,8 +616,8 @@
       "order": 0,
       "imports": [],
       "source_note": "Replace UU by Type and make the enclosing f implicit. Retain the fundamental-theorem implication from contractible reverse fibers. Specialize the ordinary-fiber implication to H : is-equiv f by substituting is-contr-map-is-equiv H (f a) for c a, and name that specialization is-emb-is-equiv. The rest of the fiber-equivalence proof is unchanged. This is the contractible-fiber route in the book, not the upstream core module's alternative coherent-inverse proof.",
-      "conversion_status": "exercise",
-      "conversion_note": "Training exercise: equiv-fiber belongs with Definition 10.3.1 in the earlier complete Section 10.3. See docs/agda-training-exercises.md and docs/invisible-math.md; the shared proposal supplies the auxiliary and restores this block."
+      "conversion_status": "ready",
+      "conversion_note": "Proposed solution: equiv-fiber is supplied at Definition 10.3.1. Main retains this theorem as an empty training exercise."
     },
     {
       "source_file": "src/foundation/equivalences.lagda.md",
@@ -633,6 +633,21 @@
       "order": 1,
       "imports": [],
       "source_note": "Replace UU by repository-local Type."
+    },
+    {
+      "source_file": "src/foundation-core/fibers-of-maps.lagda.md",
+      "source_start_line": 215,
+      "source_end_line": 244,
+      "source_sha256": "c39b15a959ea76594fb9c1b4f5762756f037a558887b27c661da10f900906f65",
+      "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (y : B)\n  where\n\n  map-equiv-fiber : fiber f y → fiber' f y\n  pr1 (map-equiv-fiber (x , _)) = x\n  pr2 (map-equiv-fiber (x , p)) = inv p\n\n  map-inv-equiv-fiber : fiber' f y → fiber f y\n  pr1 (map-inv-equiv-fiber (x , _)) = x\n  pr2 (map-inv-equiv-fiber (x , p)) = inv p\n\n  is-section-map-inv-equiv-fiber :\n    is-section map-equiv-fiber map-inv-equiv-fiber\n  is-section-map-inv-equiv-fiber (x , refl) = refl\n\n  is-retraction-map-inv-equiv-fiber :\n    is-retraction map-equiv-fiber map-inv-equiv-fiber\n  is-retraction-map-inv-equiv-fiber (x , refl) = refl\n\n  is-equiv-map-equiv-fiber : is-equiv map-equiv-fiber\n  is-equiv-map-equiv-fiber =\n    is-equiv-is-invertible\n      map-inv-equiv-fiber\n      is-section-map-inv-equiv-fiber\n      is-retraction-map-inv-equiv-fiber\n\n  equiv-fiber : fiber f y ≃ fiber' f y\n  pr1 equiv-fiber = map-equiv-fiber\n  pr2 equiv-fiber = is-equiv-map-equiv-fiber",
+      "block_id": "definition-10.3.1-fiber-orientation-equivalence",
+      "provenance_kind": "adapted",
+      "item_id": "definition-10.3.1",
+      "destination": "section-10-3-contractible-maps.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "order": 1,
+      "imports": [],
+      "source_note": "Replace UU by repository-local Type. Proposal-only auxiliary for theorem-11.4.2-equivalences-are-embeddings; place both maps, homotopies, and equivalence at the existing ordinary/reverse fiber definitions."
     },
     {
       "source_file": "src/foundation/equality-coproduct-types.lagda.md",
@@ -992,8 +1007,76 @@
         "exercise-9-1-groupoid-operations-equivalences"
       ],
       "source_note": "Replace UU by Type. Preserve the full forward map, fiberwise map, commuting triangle, and equivalence proof from the pinned source. This formalizes the correctly typed first displayed formula, p ∙ inv q; source-prose discrepancies and the proof route are recorded in docs/section-agda-audit.md.",
-      "conversion_status": "exercise",
-      "conversion_note": "Training exercise example-11.6.3-identities-in-fibers: the required Exercise 9.1 inversion equivalence needs inv-inv at Definition 5.2.5 in already-complete Section 5.2. Keep this site empty on main; see docs/agda-training-exercises.md and docs/invisible-math.md."
+      "conversion_status": "ready",
+      "conversion_note": "Proposed solution: inv-inv is placed at Definition 5.2.5 and the required inversion and concatenation equivalences at Exercise 9.1. Main keeps this example empty."
+    },
+    {
+      "block_id": "definition-5.2.5-inversion-involution",
+      "provenance_kind": "adapted",
+      "item_id": "definition-5.2.5",
+      "destination": "section-5-2-the-groupoidal-structure-of-types.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_file": "src/foundation-core/identity-types.lagda.md",
+      "source_start_line": 322,
+      "source_end_line": 327,
+      "source_sha256": "6334768afdc36f77c340eaa32269893ef6fa25a2be0ef5f641d49142765d0647",
+      "code": "module _\n  {l : Level} {A : Type l}\n  where\n\n  inv-inv : {x y : A} (p : x ＝ y) → inv (inv p) ＝ p\n  inv-inv refl = refl",
+      "order": 260,
+      "imports": [],
+      "source_note": "Replace UU by Type. Proposal-only auxiliary for Example 11.6.3: the involution of path inversion belongs after the inverse laws in Definition 5.2.5. Main's complete Section 5.2 remains unchanged."
+    },
+    {
+      "block_id": "exercise-9-1-inverse-concatenation",
+      "provenance_kind": "adapted",
+      "item_id": "exercise-9-1",
+      "destination": "exercise-9-1-groupoid-operations-equivalences.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_file": "src/foundation-core/identity-types.lagda.md",
+      "source_start_line": 212,
+      "source_end_line": 217,
+      "source_sha256": "5265cbdeb9d1e14ec916e2461621f0352a212eb313f11ee97b02342fd0ba6dd6",
+      "code": "module _\n  {l : Level} {A : Type l}\n  where\n\n  inv-concat : {x y : A} (p : x ＝ y) (z : A) → x ＝ z → y ＝ z\n  inv-concat p = concat (inv p)",
+      "order": 0,
+      "imports": [
+        "universe-levels",
+        "section-2-2-ordinary-function-types",
+        "section-4-6-dependent-pair-types",
+        "section-5-1-the-inductive-definition-of-identity-types",
+        "section-5-2-the-groupoidal-structure-of-types",
+        "section-9-1-homotopies",
+        "section-9-2-bi-invertible-maps"
+      ],
+      "source_note": "Replace UU by Type. Exercise 9.1 explicitly asks for inverse maps to its groupoid operations. This left-concatenation inverse is needed by Example 11.6.3."
+    },
+    {
+      "block_id": "exercise-9-1-concatenation-inverse-laws",
+      "provenance_kind": "adapted",
+      "item_id": "exercise-9-1",
+      "destination": "exercise-9-1-groupoid-operations-equivalences.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_file": "src/foundation-core/identity-types.lagda.md",
+      "source_start_line": 367,
+      "source_end_line": 377,
+      "source_sha256": "555b50894f51af65e58f6808725e1f39221b4ecf8e3936e9bc156d1d9586b10c",
+      "code": "module _\n  {l : Level} {A : Type l}\n  where\n\n  is-retraction-inv-concat :\n    {x y z : A} (p : x ＝ y) (q : y ＝ z) → inv p ∙ (p ∙ q) ＝ q\n  is-retraction-inv-concat refl q = refl\n\n  is-section-inv-concat :\n    {x y z : A} (p : x ＝ y) (r : x ＝ z) → p ∙ (inv p ∙ r) ＝ r\n  is-section-inv-concat refl r = refl",
+      "order": 1,
+      "imports": [],
+      "source_note": "Replace UU by Type. Copy the two path-induction homotopies for the explicitly requested inverse to left concatenation, before its equivalence proof. Needed by Example 11.6.3."
+    },
+    {
+      "block_id": "exercise-9-1-inversion-and-concatenation-equivalences",
+      "provenance_kind": "adapted",
+      "item_id": "exercise-9-1",
+      "destination": "exercise-9-1-groupoid-operations-equivalences.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_file": "src/foundation/identity-types.lagda.md",
+      "source_start_line": 80,
+      "source_end_line": 119,
+      "source_sha256": "ecf4f0725fd51c1508506c171de43f0272367354691c3e80364e84db0be0ccb9",
+      "code": "module _\n  {l : Level} {A : Type l}\n  where\n\n  abstract\n    is-equiv-inv : (x y : A) → is-equiv (λ (p : x ＝ y) → inv p)\n    is-equiv-inv x y = is-equiv-is-invertible inv inv-inv inv-inv\n\n  equiv-inv : (x y : A) → (x ＝ y) ≃ (y ＝ x)\n  pr1 (equiv-inv x y) = inv\n  pr2 (equiv-inv x y) = is-equiv-inv x y\n\n  abstract\n    is-equiv-concat :\n      {x y : A} (p : x ＝ y) (z : A) → is-equiv (concat p z)\n    is-equiv-concat p z =\n      is-equiv-is-invertible\n        ( inv-concat p z)\n        ( is-section-inv-concat p)\n        ( is-retraction-inv-concat p)\n\n  abstract\n    is-equiv-inv-concat :\n      {x y : A} (p : x ＝ y) (z : A) → is-equiv (inv-concat p z)\n    is-equiv-inv-concat p z =\n      is-equiv-is-invertible\n        ( concat p z)\n        ( is-retraction-inv-concat p)\n        ( is-section-inv-concat p)\n\n  equiv-concat :\n    {x y : A} (p : x ＝ y) (z : A) → (y ＝ z) ≃ (x ＝ z)\n  pr1 (equiv-concat p z) = concat p z\n  pr2 (equiv-concat p z) = is-equiv-concat p z\n\n  equiv-inv-concat :\n    {x y : A} (p : x ＝ y) (z : A) → (x ＝ z) ≃ (y ＝ z)\n  pr1 (equiv-inv-concat p z) = inv-concat p z\n  pr2 (equiv-inv-concat p z) = is-equiv-inv-concat p z",
+      "order": 2,
+      "imports": [],
+      "source_note": "Replace UU by Type. Copy only the inversion and left-concatenation equivalences and their packaged inverses needed by Example 11.6.3. The inv-inv auxiliary is at Definition 5.2.5 on this proposal. The remaining right-concatenation and transport parts are explicit gaps."
     }
   ]
 }

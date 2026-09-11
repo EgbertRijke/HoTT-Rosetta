@@ -18,6 +18,8 @@ open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-4-composing-with-equivalences
 open import section-14-1-the-universal-property-of-propositional-truncations
 open import exercise-10-3-contractible-equivalences
+open import section-11-4-embeddings
+open import exercise-9-1-groupoid-operations-equivalences
 ```
 
 <!-- rosetta-item: section-14.2 -->
@@ -296,7 +298,21 @@ abstract
 <!-- rosetta-agda-block: remark-14.2.3-transport-identifications -->
 
 ```agda
+is-emb-tr-trunc-Prop :
+  {l1 l2 : Level} {A : Type l1} (P : ║ A ║₋₁ → Type l2)
+  (x y : ║ A ║₋₁) → is-emb (tr P (all-elements-equal-type-trunc-Prop x y))
+is-emb-tr-trunc-Prop P x y =
+  is-emb-is-equiv (is-equiv-tr P (all-elements-equal-type-trunc-Prop x y))
 
+equiv-identifications-tr-trunc-Prop :
+  {l1 l2 : Level} {A : Type l1} (P : ║ A ║₋₁ → Type l2)
+  (x y : ║ A ║₋₁) (u v : P x) →
+  (tr P (all-elements-equal-type-trunc-Prop x y) u ＝
+    tr P (all-elements-equal-type-trunc-Prop x y) v) ≃ (u ＝ v)
+pr1 (equiv-identifications-tr-trunc-Prop P x y u v) =
+  map-section-is-equiv (is-emb-tr-trunc-Prop P x y u v)
+pr2 (equiv-identifications-tr-trunc-Prop P x y u v) =
+  is-equiv-map-section-is-equiv (is-emb-tr-trunc-Prop P x y u v)
 ```
 
 <!-- rosetta-agda-block: remark-14.2.3-propositional-induction -->

@@ -212,7 +212,31 @@ module _
 <!-- rosetta-agda-block: theorem-12.2.3-embeddings-propositional-fibers -->
 
 ```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}
+  where
 
+  abstract
+    is-emb-is-prop-map : is-prop-map f → is-emb f
+    is-emb-is-prop-map is-prop-map-f x =
+      fundamental-theorem-id
+        ( is-contr-equiv'
+          ( fiber f (f x))
+          ( equiv-fiber f (f x))
+          ( is-proof-irrelevant-is-prop (is-prop-map-f (f x)) (x , refl)))
+        ( λ _ → ap f)
+
+  abstract
+    is-prop-map-is-emb : is-emb f → is-prop-map f
+    is-prop-map-is-emb is-emb-f y =
+      is-prop-is-proof-irrelevant α
+      where
+      α : (t : fiber f y) → is-contr (fiber f y)
+      α (x , refl) =
+        is-contr-equiv
+          ( fiber' f (f x))
+          ( equiv-fiber f (f x))
+          ( fundamental-theorem-id' (λ _ → ap f) (is-emb-f x))
 ```
 <!-- rosetta-item-end: theorem-12.2.3 -->
 

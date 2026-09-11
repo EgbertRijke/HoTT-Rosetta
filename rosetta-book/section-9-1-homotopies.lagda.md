@@ -15,6 +15,7 @@ open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-4-transport
+open import exercise-5-2-inverse-concatenation-maps
 ```
 
 <!-- rosetta-item: section-9.1 -->
@@ -306,6 +307,34 @@ module _
   inv-htpy-right-inv-htpy : refl-htpy ~ H ∙h inv-htpy H
   inv-htpy-right-inv-htpy = inv-htpy right-inv-htpy
 ```
+
+<!-- rosetta-agda-block: lemma-10.4.5-transpose-homotopy-helper -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} {f g h : (x : A) → B x}
+  (H : f ~ g) (K : g ~ h) (L : f ~ h) (M : H ∙h K ~ L)
+  where
+
+  left-transpose-htpy-concat : K ~ inv-htpy H ∙h L
+  left-transpose-htpy-concat x =
+    left-transpose-eq-concat (H x) (K x) (L x) (M x)
+
+  inv-htpy-left-transpose-htpy-concat : inv-htpy H ∙h L ~ K
+  inv-htpy-left-transpose-htpy-concat = inv-htpy left-transpose-htpy-concat
+```
+
+<!-- rosetta-agda-block: lemma-10.4.5-whisker-concatenation-helper -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  where
+
+  right-whisker-concat-htpy :
+    {f g h : (x : A) → B x} {H I : f ~ g} → H ~ I → (J : g ~ h) → H ∙h J ~ I ∙h J
+  right-whisker-concat-htpy K J x = right-whisker-concat (K x) (J x)
+```
 <!-- rosetta-item-end: proposition-9.1.6 -->
 
 Apart from the groupoid operations and their laws, we will occasionally need *whiskering* operations.
@@ -378,5 +407,40 @@ module _
 
   infixl 16 _·r_
   _·r_ = right-whisker-comp
+```
+
+<!-- rosetta-agda-block: lemma-10.4.5-composition-whisker-helper -->
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : Type l1} {B : A → Type l2} {C : A → Type l3} {D : A → Type l4}
+  where
+
+  inv-preserves-comp-left-whisker-comp :
+    ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
+    ( H : f ~ g) →
+    (k ∘ h) ·l H ~ k ·l (h ·l H)
+  inv-preserves-comp-left-whisker-comp k h H x = ap-comp k h (H x)
+
+  preserves-comp-left-whisker-comp :
+    ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
+    ( H : f ~ g) →
+    k ·l (h ·l H) ~ (k ∘ h) ·l H
+  preserves-comp-left-whisker-comp k h H =
+    inv-htpy (inv-preserves-comp-left-whisker-comp k h H)
+```
+
+<!-- rosetta-agda-block: lemma-10.4.5-higher-whisker-helper -->
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {f g : (x : A) → B x}
+  where
+
+  left-whisker-comp² :
+    (h : {x : A} → B x → C x) {H H' : f ~ g} (α : H ~ H') → h ·l H ~ h ·l H'
+  left-whisker-comp² h α = ap h ·l α
 ```
 <!-- rosetta-item-end: definition-9.1.7 -->

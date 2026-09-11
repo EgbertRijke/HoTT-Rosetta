@@ -427,6 +427,27 @@ We conclude by Proposition 12.4.5 that the fiber `fib(ap{f}, p)` is `k`-truncate
 <!-- rosetta-agda-block: theorem-12.4.7-truncated-action-on-identities -->
 
 ```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : Type l1} {B : Type l2} (f : A → B)
+  where
 
+  abstract
+    is-trunc-map-succ-is-trunc-map-ap :
+      ((x y : A) → is-trunc-map k (ap f {x} {y})) → is-trunc-map (succ-𝕋 k) f
+    is-trunc-map-succ-is-trunc-map-ap is-trunc-map-ap-f b (x , p) (x' , p') =
+      is-trunc-equiv k
+        ( fiber (ap f) (p ∙ inv p'))
+        ( equiv-fiber-ap-eq-fiber f (x , p) (x' , p'))
+        ( is-trunc-map-ap-f x x' (p ∙ inv p'))
+
+  abstract
+    is-trunc-map-ap-is-trunc-map-succ :
+      is-trunc-map (succ-𝕋 k) f → (x y : A) → is-trunc-map k (ap f {x} {y})
+    is-trunc-map-ap-is-trunc-map-succ is-trunc-map-f x y p =
+      is-trunc-is-equiv' k
+        ( (x , p) ＝ (y , refl))
+        ( eq-fiber-fiber-ap f x y p)
+        ( is-equiv-eq-fiber-fiber-ap f x y p)
+        ( is-trunc-map-f (f y) (x , p) (y , refl))
 ```
 <!-- rosetta-item-end: theorem-12.4.7 -->

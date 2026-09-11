@@ -281,7 +281,7 @@
       "order": 1,
       "imports": [],
       "source_note": "Replace UU by Type. Retain both fundamental-theorem implications. Empty on main because equiv-fiber belongs in complete Section 10.3; its complete auxiliary is already published at Definition 10.3.1 on proposal/agda-exercise-solutions (63e5e49). Reuse that auxiliary when restoring this training site; do not enlarge main's earlier complete file.",
-      "conversion_status": "exercise",
+      "conversion_status": "ready",
       "conversion_note": "Training exercise theorem-12.2.3-embeddings-propositional-fibers: equiv-fiber belongs at Definition 10.3.1 in complete Section 10.3. Keep this later block empty on main; reuse proposal 63e5e49's auxiliary and restore both implications on proposal/agda-exercise-solutions. See docs/agda-training-exercises.md and docs/invisible-math.md."
     },
     {
@@ -450,7 +450,7 @@
       "order": 0,
       "imports": [],
       "source_note": "Replace UU by Type, expand is-torsorial R to is-contr (Σ A R), and rename map-inv-is-equiv / is-equiv-map-inv-is-equiv to the corresponding local map-section names from Section 9.2. Retain the source's retract proof and total-space contraction. Empty on main because the retract form of the fundamental theorem and total-map laws belong in previously audited Sections 11.2 and 11.1; provide them on the shared proposal.",
-      "conversion_status": "exercise",
+      "conversion_status": "ready",
       "conversion_note": "Training exercise theorem-12.3.4-propositional-identity-relation: add tot-htpy, tot-id, and preserves-comp-tot at Definition 11.1.1, then fundamental-theorem-id-retraction at Theorem 11.2.2 on proposal/agda-exercise-solutions. Keep this site empty on main; see docs/agda-training-exercises.md and docs/invisible-math.md."
     },
     {
@@ -512,6 +512,72 @@
       "order": 1,
       "imports": [],
       "source_note": "Replace UU by Type. Apply the preceding relation criterion with all three hypotheses, as in the book; no extensionality axiom is imported."
+    },
+    {
+      "block_id": "definition-11.1.1-total-map-homotopies",
+      "provenance_kind": "adapted",
+      "item_id": "definition-11.1.1",
+      "destination": "section-11-1-families-of-equivalences.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_file": "src/foundation-core/functoriality-dependent-pair-types.lagda.md",
+      "source_start_line": 110,
+      "source_end_line": 113,
+      "source_sha256": "f5fa1a8a1ca7c7c2966207feac4577ccacd74a1a3c4259a568715b36891b5bc6",
+      "code": "tot-htpy :\n  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}\n  {f g : (x : A) → B x → C x} → (H : (x : A) → f x ~ g x) → tot f ~ tot g\ntot-htpy H (x , y) = eq-pair-eq-fiber (H x y)",
+      "order": 1,
+      "imports": [
+        "section-9-3-characterizing-the-identity-types-of-dependent-pair-types"
+      ],
+      "source_note": "Replace UU by Type. Natural home: after tot at Definition 11.1.1. Reuse eq-pair-eq-fiber from the local Theorem 9.3.4. This auxiliary is proposed for the Theorem 12.3.4 training exercise; preserve main's earlier file."
+    },
+    {
+      "block_id": "definition-11.1.1-total-map-identity",
+      "provenance_kind": "adapted",
+      "item_id": "definition-11.1.1",
+      "destination": "section-11-1-families-of-equivalences.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_file": "src/foundation-core/functoriality-dependent-pair-types.lagda.md",
+      "source_start_line": 119,
+      "source_end_line": 122,
+      "source_sha256": "ffac0f6248cd616be8ac9ca75be312ffbe38c12caebf2c6425a2a513bcb7a048",
+      "code": "tot-id :\n  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) →\n  tot (λ x → id) ~ id {A = Σ A B}\ntot-id B p = refl",
+      "order": 2,
+      "imports": [],
+      "source_note": "Replace UU by Type and id' (Σ A B) by id {A = Σ A B}, using the same identity map with its type argument implicit (foundation-core/function-types lines 24--28 at the same commit). Natural home: the total-map definition. No earlier function API is enlarged."
+    },
+    {
+      "block_id": "definition-11.1.1-total-map-composition",
+      "provenance_kind": "adapted",
+      "item_id": "definition-11.1.1",
+      "destination": "section-11-1-families-of-equivalences.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_file": "src/foundation-core/functoriality-dependent-pair-types.lagda.md",
+      "source_start_line": 128,
+      "source_end_line": 133,
+      "source_sha256": "34ff69a9be381ef569aed88184f8191ab8f7e5eb2656b7cfb8b241c640d59c18",
+      "code": "preserves-comp-tot :\n  {l1 l2 l3 l4 : Level}\n  {A : Type l1} {B : A → Type l2} {B' : A → Type l3} {B'' : A → Type l4}\n  (f : (x : A) → B x → B' x) (g : (x : A) → B' x → B'' x) →\n  tot (λ x → g x ∘ f x) ~ tot g ∘ tot f\npreserves-comp-tot f g p = refl",
+      "order": 3,
+      "imports": [],
+      "source_note": "Replace UU by Type. Natural home: after tot at Definition 11.1.1. Preserve the pinned reflexivity proof; needed to assemble the total-space retraction for Theorem 12.3.4."
+    },
+    {
+      "block_id": "theorem-11.2.2-retract-fundamental-theorem",
+      "provenance_kind": "adapted",
+      "item_id": "theorem-11.2.2",
+      "destination": "section-11-2-the-fundamental-theorem.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_file": "src/foundation/fundamental-theorem-of-identity-types.lagda.md",
+      "source_start_line": 105,
+      "source_end_line": 126,
+      "source_sha256": "32ab456f40ca7ad8f072c41ec8e63dd37e3bb1671338638b8485e88292f3739e",
+      "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (a : A)\n  where\n\n  abstract\n    fundamental-theorem-id-retraction :\n      (i : (x : A) → B x → a ＝ x) →\n      ((x : A) → retraction (i x)) →\n      is-fiberwise-equiv i\n    fundamental-theorem-id-retraction i R =\n      is-fiberwise-equiv-is-equiv-tot\n        ( is-equiv-is-contr (tot i)\n          ( is-contr-retract-of\n            ( Σ _ (λ y → a ＝ y))\n            ( ( tot i) ,\n              ( tot (λ x → pr1 (R x))) ,\n              ( ( inv-htpy (preserves-comp-tot i (pr1 ∘ R))) ∙h\n                ( tot-htpy (pr2 ∘ R)) ∙h\n                ( tot-id B)))\n            ( is-contr-Id a))\n          ( is-contr-Id a))",
+      "order": 5,
+      "imports": [
+        "section-2-2-ordinary-function-types",
+        "section-9-1-homotopies",
+        "exercise-10-2-contractible-retracts"
+      ],
+      "source_note": "Replace UU by Type and is-torsorial-Id by repository-local is-contr-Id. Preserve the retraction on total spaces and its contractibility proof. Natural home: after the existing fundamental-theorem variants at Theorem 11.2.2; proposed for the later Theorem 12.3.4 training exercise. Import only the local function, homotopy, and contractible-retract declarations."
     },
     {
       "block_id": "section-12.4-truncation-levels",
@@ -788,8 +854,8 @@
       "order": 0,
       "imports": [],
       "source_note": "Replace UU by Type. Retain both directions and the two distinct fiber-equivalence applications.",
-      "conversion_status": "exercise",
-      "conversion_note": "The converse needs eq-fiber-fiber-ap and is-equiv-eq-fiber-fiber-ap, whose natural home is Example 11.6.3, plus the transport equivalence explicitly requested by Exercise 9.1. Preserve those earlier main accounts; see docs/agda-training-exercises.md and docs/invisible-math.md. The first direction also imports the existing Example 11.6.3 training exercise."
+      "conversion_status": "ready",
+      "conversion_note": "Restored unchanged on the shared proposal. The fiber specialization is placed at Example 11.6.3 and transport equivalence at its exact Exercise 9.1 home; earlier complete main files remain unchanged."
     },
     {
       "block_id": "exercise-12-8-retraction-on-identities",
@@ -830,6 +896,40 @@
       "order": 1,
       "imports": [],
       "source_note": "Replace UU by Type and definitionally expand inclusion-retract R to pr1 R and retraction-retract R to pr2 R (same source, lines 66--70). This packages part (a) without enlarging Definition 9.2.1. Part (b)'s proof is placed at Proposition 12.4.5 as the required upstream prerequisite, avoiding an import cycle."
+    },
+    {
+      "block_id": "exercise-9-1-transport-equivalences",
+      "provenance_kind": "adapted",
+      "item_id": "exercise-9-1",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_file": "src/foundation/transport-along-identifications.lagda.md",
+      "source_start_line": 42,
+      "source_end_line": 70,
+      "source_sha256": "7979b6d2ef788a5ae8f1f0f9ed1600d51f91f875d2d81f06d8ecad3b876c46c0",
+      "code": "module _\n  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x y : A}\n  where\n\n  is-retraction-inv-tr : (p : x ＝ y) → is-retraction (tr B p) (tr B (inv p))\n  is-retraction-inv-tr refl b = refl\n\n  is-section-inv-tr : (p : x ＝ y) → is-section (tr B p) (tr B (inv p))\n  is-section-inv-tr refl b = refl\n\n  is-equiv-tr : (p : x ＝ y) → is-equiv (tr B p)\n  is-equiv-tr p =\n    is-equiv-is-invertible\n      ( tr B (inv p))\n      ( is-section-inv-tr p)\n      ( is-retraction-inv-tr p)\n\n  is-equiv-inv-tr : (p : x ＝ y) → is-equiv (tr B (inv p))\n  is-equiv-inv-tr p =\n    is-equiv-is-invertible\n      ( tr B p)\n      ( is-retraction-inv-tr p)\n      ( is-section-inv-tr p)\n\n  equiv-tr : x ＝ y → B x ≃ B y\n  equiv-tr p = (tr B p , is-equiv-tr p)\n\n  equiv-inv-tr : x ＝ y → B y ≃ B x\n  equiv-inv-tr p = (tr B (inv p) , is-equiv-inv-tr p)",
+      "destination": "exercise-9-1-groupoid-operations-equivalences.lagda.md",
+      "order": 3,
+      "imports": [
+        "section-5-4-transport"
+      ],
+      "source_note": "Replace UU by Type and definitionally expand inv-tr B p to tr B (inv p), using foundation-core/transport-along-identifications lines 42--43 at the same commit. Copy both inverse homotopies, the transport and inverse-transport equivalence proofs, and their bundles. Exercise 9.1 explicitly asks for this result; it is added now because Theorem 12.4.7 needs the fiber specialization. Keep Section 5.4 and the reserved Section 9.2 unchanged."
+    },
+    {
+      "block_id": "example-11.6.3-fiber-of-action-specialization",
+      "provenance_kind": "adapted",
+      "item_id": "example-11.6.3",
+      "destination": "section-11-6-the-structure-identity-principle.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_file": "src/foundation/equality-fibers-of-maps.lagda.md",
+      "source_start_line": 113,
+      "source_end_line": 130,
+      "source_sha256": "5f1dfc53020a32bf53d3eb36b2cfcd267abee05418218b81b579e355b0e53bec",
+      "code": "module _\n  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (x y : A)\n  where\n\n  eq-fiber-fiber-ap :\n    (q : f x ＝ f y) → (x , q) ＝ (y , refl) → fiber (ap f {x} {y}) q\n  eq-fiber-fiber-ap q =\n    tr (fiber (ap f)) right-unit ∘ fiber-ap-eq-fiber f (x , q) (y , refl)\n\n  abstract\n    is-equiv-eq-fiber-fiber-ap :\n      (q : f x ＝ f y) → is-equiv (eq-fiber-fiber-ap q)\n    is-equiv-eq-fiber-fiber-ap q =\n      is-equiv-comp\n        ( tr (fiber (ap f)) right-unit)\n        ( fiber-ap-eq-fiber f (x , q) (y , refl))\n        ( is-equiv-fiber-ap-eq-fiber f (x , q) (y , refl))\n        ( is-equiv-tr (fiber (ap f)) right-unit)",
+      "order": 1,
+      "imports": [
+        "exercise-9-1-groupoid-operations-equivalences"
+      ],
+      "source_note": "Replace only UU by Type. Natural home: immediately after the general fiber identity equivalence at Example 11.6.3. Transport along right-unit changes q ∙ refl into q; preserve its is-equiv-tr proof rather than treating right-unit as judgmental. The needed transport equivalence is copied at its exact Exercise 9.1 home. Proposed for the later Theorem 12.4.7 training site."
     }
   ]
 }

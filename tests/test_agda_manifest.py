@@ -13,6 +13,16 @@ from rosetta.agda_manifest import (
 
 
 class AgdaManifestTests(unittest.TestCase):
+    def test_proposed_evaluation_has_its_natural_home(self):
+        from rosetta.file_registry import registered_filename
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        document = (rosetta_directory(root) / registered_filename(root, "section", 2, 2)).read_text()
+        self.assertLess(document.index("rosetta-item: remark-2.2.2"), document.index("ev-point :"))
+        self.assertLess(document.index("ev-point :"), document.index("rosetta-item-end: remark-2.2.2"))
+        self.assertLess(document.index("rosetta-item-end: remark-2.2.2"), document.index("Now we can use these rules"))
+
     def test_truncation_into_sets_covers_every_item_and_both_inverse_laws(self):
         import re
         from rosetta.file_registry import registered_filename
@@ -241,7 +251,7 @@ class AgdaManifestTests(unittest.TestCase):
                 "corollary-9.2.8-inverse-equivalence",
             }
         ]
-        self.assertEqual(len(selected), 14)
+        self.assertEqual(len(selected), 17)
         for block in selected:
             with self.subTest(block=block.block_id):
                 document = (rosetta_directory(root) / block.destination).read_text()
@@ -260,7 +270,7 @@ class AgdaManifestTests(unittest.TestCase):
             block for block in blocks
             if block.destination.startswith("section-11-2-")
         ]
-        self.assertEqual(len(selected), 7)
+        self.assertEqual(len(selected), 8)
         for block in selected:
             with self.subTest(block=block.block_id):
                 document = (rosetta_directory(root) / block.destination).read_text()
@@ -307,6 +317,24 @@ class AgdaManifestTests(unittest.TestCase):
                 self.assertLess(start, position)
                 self.assertLess(position, end)
 
+    def test_proposed_fiber_orientation_has_its_natural_home(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        block = next(
+            block for block in load_manifest(root / "data" / "agda-blocks.json")
+            if block.block_id == "definition-10.3.1-fiber-orientation-equivalence"
+        )
+        document = (rosetta_directory(root) / block.destination).read_text()
+        start = document.index("<!-- rosetta-item: definition-10.3.1 -->")
+        end = document.index("<!-- rosetta-item-end: definition-10.3.1 -->")
+        original = document.index("fiber' :")
+        position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+        self.assertLess(start, original)
+        self.assertLess(original, position)
+        self.assertLess(position, end)
+        self.assertLess(end, document.index("In other words, the fiber"))
+
     def test_coproduct_identity_proof_follows_its_delayed_proof(self):
         from rosetta.layout import rosetta_directory
 
@@ -342,7 +370,7 @@ class AgdaManifestTests(unittest.TestCase):
             block for block in load_manifest(root / "data" / "agda-blocks.json")
             if block.destination.startswith("section-11-6-")
         ]
-        self.assertEqual(len(selected), 10)
+        self.assertEqual(len(selected), 11)
         for block in selected:
             with self.subTest(block=block.block_id):
                 document = (rosetta_directory(root) / block.destination).read_text()
@@ -376,6 +404,28 @@ class AgdaManifestTests(unittest.TestCase):
             self.assertNotIn("  equiv-fiber-ap-eq-fiber :", document)
         else:
             self.assertIn("  equiv-fiber-ap-eq-fiber :", document)
+
+    def test_proposed_fiber_identity_auxiliaries_have_natural_homes(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        blocks = {block.block_id: block for block in load_manifest(root / "data" / "agda-blocks.json")}
+        involution = blocks["definition-5.2.5-inversion-involution"]
+        self.assertEqual(involution.item_id, "definition-5.2.5")
+        document = (rosetta_directory(root) / involution.destination).read_text()
+        marker = document.index("<!-- rosetta-agda-block: definition-5.2.5-inversion-involution -->")
+        self.assertLess(document.index("  right-inv :"), marker)
+        self.assertLess(marker, document.index("<!-- rosetta-item-end: definition-5.2.5 -->"))
+        for identifier in (
+            "exercise-9-1-inverse-concatenation",
+            "exercise-9-1-concatenation-inverse-laws",
+            "exercise-9-1-inversion-and-concatenation-equivalences",
+        ):
+            self.assertEqual(blocks[identifier].item_id, "exercise-9-1")
+        example = blocks["example-11.6.3-identities-in-fibers"]
+        self.assertEqual(example.conversion_status, "ready")
+        self.assertNotIn("  inv-inv :", example.code)
+        self.assertNotIn("    is-equiv-inv :", example.code)
 
     def test_proposition_blocks_cover_the_four_conditions_in_order(self):
         from rosetta.layout import rosetta_directory
@@ -504,6 +554,40 @@ class AgdaManifestTests(unittest.TestCase):
         self.assertNotIn("open import foundation", document)
         self.assertNotIn("section-13-", document)
 
+    def test_proposed_relation_auxiliaries_stay_at_their_chapter_eleven_homes(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        blocks = load_manifest(root / "data" / "agda-blocks.json")
+        names = (
+            "definition-11.1.1-total-map-homotopies",
+            "definition-11.1.1-total-map-identity",
+            "definition-11.1.1-total-map-composition",
+            "theorem-11.2.2-retract-fundamental-theorem",
+        )
+        selected = [next(block for block in blocks if block.block_id == name) for name in names]
+        for block in selected:
+            with self.subTest(block=block.block_id):
+                document = (rosetta_directory(root) / block.destination).read_text()
+                start = document.index(f"<!-- rosetta-item: {block.item_id}")
+                end = document.index(f"<!-- rosetta-item-end: {block.item_id} -->")
+                position = document.index(f"<!-- rosetta-agda-block: {block.block_id} -->")
+                self.assertLess(start, position)
+                self.assertLess(position, end)
+                self.assertNotIn("section-12-", document)
+        total = (rosetta_directory(root) / selected[0].destination).read_text()
+        positions = [total.index(name + " :") for name in
+                     ("  tot", "tot-htpy", "tot-id", "preserves-comp-tot")]
+        self.assertEqual(positions, sorted(positions))
+        self.assertIn("id {A = Σ A B}", selected[1].code)
+        theorem = (rosetta_directory(root) / selected[-1].destination).read_text()
+        self.assertLess(theorem.index("fundamental-theorem-id-J' :"),
+                        theorem.index("fundamental-theorem-id-retraction :"))
+        later = next(block for block in blocks if block.block_id ==
+                     "theorem-12.3.4-propositional-identity-relation")
+        self.assertEqual(later.conversion_status, "ready")
+        self.assertNotIn("fundamental-theorem-id-retraction :", later.code)
+
     def test_general_truncation_blocks_cover_items_and_delay_lift_transfer(self):
         import re
         from rosetta.layout import rosetta_directory
@@ -573,6 +657,32 @@ class AgdaManifestTests(unittest.TestCase):
         for block in selected:
             self.assertFalse(any(i.startswith("section-12-") for i in block.imports))
             self.assertNotIn("is-trunc", block.code)
+
+    def test_proposed_truncated_map_auxiliaries_precede_their_later_consumer(self):
+        from rosetta.layout import rosetta_directory
+
+        root = Path(__file__).resolve().parent.parent
+        blocks = {b.block_id: b for b in load_manifest(root / "data" / "agda-blocks.json")}
+        transport = blocks["exercise-9-1-transport-equivalences"]
+        self.assertEqual(transport.item_id, "exercise-9-1")
+        self.assertIn("is-equiv-tr :", transport.code)
+        self.assertIn("is-section-inv-tr :", transport.code)
+        self.assertIn("is-retraction-inv-tr :", transport.code)
+        self.assertIn("( tr B (inv p))", transport.code)
+        self.assertFalse(any(i.startswith("section-12-") for i in transport.imports))
+        fiber = blocks["example-11.6.3-fiber-of-action-specialization"]
+        self.assertEqual(fiber.item_id, "example-11.6.3")
+        self.assertIn("is-equiv-tr (fiber (ap f)) right-unit", fiber.code)
+        document = (rosetta_directory(root) / fiber.destination).read_text()
+        self.assertLess(document.index("  equiv-fiber-ap-eq-fiber :"),
+                        document.index("  eq-fiber-fiber-ap :"))
+        self.assertLess(document.index("  eq-fiber-fiber-ap :"),
+                        document.index("<!-- rosetta-item-end: example-11.6.3 -->"))
+        self.assertNotIn("section-12-", document)
+        theorem = blocks["theorem-12.4.7-truncated-action-on-identities"]
+        self.assertEqual(theorem.conversion_status, "ready")
+        self.assertNotIn("is-equiv-tr :", theorem.code)
+        self.assertNotIn("eq-fiber-fiber-ap :", theorem.code)
 
     def test_function_extensionality_proofs_precede_the_explicit_assumption(self):
         import re

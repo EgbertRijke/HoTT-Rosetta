@@ -11,6 +11,9 @@ open import section-10-1-contractible-types
 open import section-10-2-singleton-induction
 open import section-11-1-families-of-equivalences
 open import exercise-10-3-contractible-equivalences
+open import section-2-2-ordinary-function-types
+open import section-9-1-homotopies
+open import exercise-10-2-contractible-retracts
 ```
 
 <!-- rosetta-item: section-11.2 -->
@@ -235,5 +238,31 @@ module _
         ( tot (ind-Id a (λ x p → B x) b))
         ( is-equiv-tot-is-fiberwise-equiv H)
         ( is-contr-Id a)
+```
+
+<!-- rosetta-agda-block: theorem-11.2.2-retract-fundamental-theorem -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (a : A)
+  where
+
+  abstract
+    fundamental-theorem-id-retraction :
+      (i : (x : A) → B x → a ＝ x) →
+      ((x : A) → retraction (i x)) →
+      is-fiberwise-equiv i
+    fundamental-theorem-id-retraction i R =
+      is-fiberwise-equiv-is-equiv-tot
+        ( is-equiv-is-contr (tot i)
+          ( is-contr-retract-of
+            ( Σ _ (λ y → a ＝ y))
+            ( ( tot i) ,
+              ( tot (λ x → pr1 (R x))) ,
+              ( ( inv-htpy (preserves-comp-tot i (pr1 ∘ R))) ∙h
+                ( tot-htpy (pr2 ∘ R)) ∙h
+                ( tot-id B)))
+            ( is-contr-Id a))
+          ( is-contr-Id a))
 ```
 <!-- rosetta-item-end: theorem-11.2.2 -->

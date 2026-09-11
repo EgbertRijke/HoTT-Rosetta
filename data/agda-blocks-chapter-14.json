@@ -425,8 +425,8 @@
         "exercise-9-1-groupoid-operations-equivalences"
       ],
       "source_note": "Specialize the pinned equivalence on identities to transport along the path constructor and reverse it as in the book. Expand the inverse-equivalence projections using src/foundation-core/equivalences.lagda.md, lines 270--300, SHA256 d848d065428f22bec0a93d5283ac6ed24493e7239c6a568bb1ec2078d43c5d28 and local map-section-is-equiv / is-equiv-map-section-is-equiv names. The required is-equiv-tr is from src/foundation/transport-along-identifications.lagda.md, lines 42--70, SHA256 7979b6d2ef788a5ae8f1f0f9ed1600d51f91f875d2d81f06d8ecad3b876c46c0; it belongs at Exercise 9.1 and already exists only on the proposal. The forward embedding proof reuses Theorem 11.4.2. Keep this later block empty on main.",
-      "conversion_status": "exercise",
-      "conversion_note": "Training exercise: requires Exercise 9.1's proposal-only transport equivalence. See docs/agda-training-exercises.md and docs/invisible-math.md. Restore on proposal/agda-exercise-solutions; do not enlarge earlier main accounts."
+      "conversion_status": "ready",
+      "conversion_note": "Proposal solution: restore the retained transport-embedding and reverse identity-equivalence specialization using Exercise 9.1's existing is-equiv-tr from proposal 31222b8. No earlier auxiliary or proof body is changed; main retains the empty training site."
     },
     {
       "block_id": "remark-14.2.3-propositional-induction",

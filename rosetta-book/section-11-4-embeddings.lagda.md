@@ -114,7 +114,23 @@ The fiber `fib(e, e(x))` is contractible by Theorem 10.4.6, so it follows by Exe
 <!-- rosetta-agda-block: theorem-11.4.2-equivalences-are-embeddings -->
 
 ```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}
+  where
 
+  is-emb-is-contr-fibers-values' :
+    ((a : A) → is-contr (fiber' f (f a))) → is-emb f
+  is-emb-is-contr-fibers-values' c a =
+    fundamental-theorem-id (c a) (λ x → ap f {a} {x})
+
+  is-emb-is-equiv : is-equiv f → is-emb f
+  is-emb-is-equiv H =
+    is-emb-is-contr-fibers-values'
+      ( λ a →
+        is-contr-equiv'
+          ( fiber f (f a))
+          ( equiv-fiber f (f a))
+          ( is-contr-map-is-equiv H (f a)))
 ```
 
 <!-- rosetta-agda-block: theorem-11.4.2-embedding-of-equivalence -->

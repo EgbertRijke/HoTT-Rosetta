@@ -16,7 +16,7 @@ Construct the **constant map**
 *Proof tree (automatic faithful draft).*
 
 ```text
- Γ⊢ A \textrm{type}
+ Γ⊢ A type
 ───────────────────
 Γ,y:B⊢ const_y:A→ B
 ```
@@ -40,7 +40,7 @@ Show that
 *Proof tree (automatic faithful draft).*
 
 ```text
-   Γ⊢ A \textrm{type}   Γ⊢ g:B→ C
+   Γ⊢ A type   Γ⊢ g:B→ C
 ───────────────────────────────────
 Γ,y:B⊢ g∘const_y≐ const_{g(y)}:A→ C
 ```
