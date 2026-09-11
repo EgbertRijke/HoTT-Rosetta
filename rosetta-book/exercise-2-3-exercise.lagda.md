@@ -45,5 +45,7 @@ Show that
 
 <!-- rosetta-item: exercise-2-3 -->
 
-This is intended as a pen-and-paper exercise. 
-No formalization is expected.
+```agda
+const : {l1 l2 : Level} (A : UU l1) {B : UU l2} → B → A → B
+const A b x = b
+```
