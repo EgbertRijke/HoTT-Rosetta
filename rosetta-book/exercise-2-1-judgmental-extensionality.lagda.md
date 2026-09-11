@@ -12,8 +12,6 @@ Use the `η`-rule to show that if `f` and `g` take equal values, then they must 
 
 <!-- rosetta-proof-tree: c74e5a088f5b; review: pending -->
 
-*Proof tree (automatic faithful draft).*
-
 ```text
      Γ⊢ f:Π(x:A) B(x)
 
@@ -28,4 +26,5 @@ Use the `η`-rule to show that if `f` and `g` take equal values, then they must 
 
 <!-- rosetta-item: exercise-2-1 -->
 
-No formalization has been curated yet.
+This is intended as a pen-and-paper exercise. 
+No formalization is expected.
