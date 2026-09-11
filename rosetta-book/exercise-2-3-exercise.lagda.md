@@ -3,6 +3,7 @@
 ```agda
 module exercise-2-3-exercise where
 
+open import universe-levels
 ```
 
 ## Problem statement
