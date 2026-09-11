@@ -75,11 +75,10 @@ In other words, for each map `g:A→ Q` into a proposition `Q` there is a unique
 We also say that every map `g:A→ Q` into a proposition `Q` *extends* uniquely along `f`, as indicated in the diagram
 <!-- rosetta-diagram: cbd3f685da87; review: pending -->
 
-*Triangle-shaped diagram (automatic draft).*
 
 ```text
- [A]
-  |
+      [A]
+     
  [P] ----> [Q]
 
 Arrows:
@@ -240,8 +239,6 @@ Finally we show that (iii) implies that (i) holds if and only if (ii) holds.
 Suppose we have an equivalence `P≃ P'`, let `Q` be an arbitrary proposition, and consider the triangle
 <!-- rosetta-diagram: 82048488c0ff; review: pending -->
 
-*Triangle-shaped diagram (automatic draft).*
-
 ```text
              [(A→ Q)]
 
@@ -335,11 +332,9 @@ It is therefore natural to wonder whether the map `A→¬¬ A` satisfies the uni
 Recall that we have shown in Exercise 4.3 that any map `A→¬¬ Q` extends to a map `¬¬ A→¬¬ Q`, as indicated in the diagram
 <!-- rosetta-diagram: bc6d1f4223fe; review: pending -->
 
-*Triangle-shaped diagram (automatic draft).*
-
 ```text
- [A]
-  |
+       [A]
+  
 [¬¬ A]---->[¬¬ Q]
 
 Arrows:
