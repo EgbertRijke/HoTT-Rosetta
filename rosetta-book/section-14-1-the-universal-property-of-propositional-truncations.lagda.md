@@ -78,7 +78,7 @@ We also say that every map `g:A→ Q` into a proposition `Q` *extends* uniquely 
 
 ```text
       [A]
-     
+
  [P] ----> [Q]
 
 Arrows:
@@ -334,7 +334,7 @@ Recall that we have shown in Exercise 4.3 that any map `A→¬¬ Q` extends to a
 
 ```text
        [A]
-  
+
 [¬¬ A]---->[¬¬ Q]
 
 Arrows:

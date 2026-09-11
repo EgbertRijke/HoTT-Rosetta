@@ -35,5 +35,5 @@ Give a derivation for the following **congruence rule** for element conversion:
 
 <!-- rosetta-item: exercise-1-1 -->
 
-This is intended as a pen-and-paper exercise. 
+This is intended as a pen-and-paper exercise.
 No formalization is expected.

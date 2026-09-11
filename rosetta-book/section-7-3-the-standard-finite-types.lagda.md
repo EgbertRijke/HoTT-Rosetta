@@ -109,8 +109,8 @@ f_{k+1}(⋆) ≔ p_k.
 
 ```agda
 ind-Fin : 
-  {i : Level} {P : (k : ℕ) → Fin k → Type i} → 
-  ({k : ℕ} (x : Fin k) → P k x → P (succ-ℕ k) (inl-Fin k x)) → 
+  {i : Level} {P : (k : ℕ) → Fin k → Type i} →
+  ({k : ℕ} (x : Fin k) → P k x → P (succ-ℕ k) (inl-Fin k x)) →
   ({k : ℕ} → P (succ-ℕ k) (inr star)) → ({k : ℕ} (x : Fin k) → P k x)
 ind-Fin g p {succ-ℕ k} (inl x) = g {k} x (ind-Fin g p {k} x)
 ind-Fin g p {succ-ℕ k} (inr star) = p {k}

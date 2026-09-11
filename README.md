@@ -1,74 +1,69 @@
 # HoTT Rosetta
 
-HoTT Rosetta generates self-contained literate Agda Markdown from the LaTeX
-source of *Introduction to Homotopy Type Theory*. Durable inputs are
-`book/`, `converter/`, and `data/`; the tracked product is `rosetta-book/`.
+The HoTT Rosetta pairs natural language and formalized mathematics in homotopy type theory, an extension of Martin-Löf's intensional dependent type theory with Voevodsky's univalence axiom with some higher inductive types.
 
-The required range is Chapters 3--22. Current work prioritizes completing Agda
-for every section; exercise Agda is deferred unless a section depends on it.
-File presence and optional review state do not imply completion.
+This repository will ultimately cover the contents of [Egbert Rijke](https://egbertrijke.github.io/)'s book [Introduction to Homotopy Type Theory](https://www.cambridge.org/us/universitypress/subjects/mathematics/logic-categories-and-sets/introduction-homotopy-type-theory) published in November 2025 by Cambridge University Press. The source natural language text comes from the [arXiv version](https://arxiv.org/abs/2212.11082), whose LaTeX source files are included here for convenience.
 
-## Setup
+The formalizations are in [agda](https://agda.readthedocs.io/en/latest/getting-started/what-is-agda.html). The code is copied from or derived from the [agda-unimath library](https://unimath.github.io/agda-unimath/).
 
-```sh
-git clone --recurse-submodules https://github.com/daniel-carranza/HoTT-Rosetta.git
-cd HoTT-Rosetta
-```
+The main contents of this repository are literate agda files, with agda codeblocks embedded in a markdown file containing natural language text converted from the LaTeX. These codeblocks can be typechecked by agda. This repository compiles independently of any particular agda library. These files are intended to be both human-readable, providing an introduction to homotopy theory both in natural language and in agda, and machine readable, providing training data for autoformalization agents targeting homotopy type theory.
 
-For an existing clone, run `git submodule update --init --recursive`.
-The project requires Python, Pandoc, and Agda; the converter itself uses only
-Python's standard library. The pinned agda-unimath submodule supplies source
-provenance but is never imported by generated modules.
-
-## Commands
-
-```text
-python3 rosetta.py convert
-python3 rosetta.py convert --from 1 --to 22
-python3 rosetta.py candidate 8 4
-python3 rosetta.py typecheck-candidate 8 4
-python3 rosetta.py typecheck-all
-python3 rosetta.py review --web
-```
-
-Required validation:
-
-```text
-python3 -m unittest discover
-python3 rosetta.py check
-git diff --check
-```
-
-The active output directory is configured in `data/project-layout.json`.
-Read chapter or section files in that directory. See
-[`docs/review-guide.md`](docs/review-guide.md) for the optional review UI.
-
-## Contributing
-
-Put durable corrections in converter code or versioned data, then regenerate.
-Never invent Agda: copy exact or analogous code from the pinned agda-unimath
-checkout, record commit/file/line/hash provenance, classify adaptations
-honestly, and use repository-local imports. If no applicable source exists,
-record the gap.
-
-See [`docs/conversion-contract.md`](docs/conversion-contract.md) for enforced
-conversion rules and [`docs/implementation-handoff.md`](docs/implementation-handoff.md)
-for the current work plan. Agents relocating Agda should also follow the
-repository-local
-[`Agda block placement`](skills/hott-rosetta-translation/references/agda-block-placement.md)
-reference.
+This repository also contains an introductory HoTT (auto)formalization benchmark in the form of unsolved exercises.
+The file `BENCHMARK.md` contains a list of where those exercises can be found.
 
 ## Layout
 
-- `book/`: LaTeX source
-- `rosetta-book/`: generated literate Agda
-- `converter/`: conversion, checks, and review UI
-- `data/`: configuration, provenance, gaps, coverage, and reviews
-- `tests/`: unit tests
-- `skills/`: agent workflow
-- `external/agda-unimath/`: pinned provenance source
-- `archive/legacy-rosetta/`: inactive historical backup
+- `latex-book/`: LaTeX source
+- `rosetta-book/`: literate Agda files
 
 The prose comes from the [arXiv book](https://arxiv.org/abs/2212.11082), and
 formalizations are sourced from
 [agda-unimath](https://unimath.github.io/agda-unimath/).
+
+## Organization of the files
+
+- For every chapter, there is a file, which imports all the sections and exercises of that chapter. This file also contains the introduction to that chapter. The file names for these chapter files take the following form:
+
+  ```text
+  chapter-1-dependent-type-theory.lagda.md
+  ```
+
+- Each section and each exercise gets its own file:
+
+  ```text
+  exercise-1-1-exercise.lagda.md
+  section-1-1-judgements-and-contexts-in-type-theory.lagda.md
+  ```
+
+## Compiling the repository
+
+To work with this repository:
+ 1. Make a local copy
+ 2. Download and install agda, along with an agda language server in an editor of your choice (e.g. emacs, VSCode)
+ 3. Open any of the "literate agda" `.lagda.md` files and use `Ctrl+c` `Ctrl+l` to load and typecheck.
+ 4. New code can be added inside an agda codeblock:
+
+    ````text
+    ```agda
+    is-contr : {l : Level} → Type l → Type l
+    is-contr A = Σ A (λ a → (x : A) → a ＝ x)
+    ```
+    ````
+
+## Contributors
+
+This repository has been developed by
+
+* [Yuriy Brun](http://www.cs.umass.edu/~brun/)
+* [Daniel Carranza](https://daniel-carranza.github.io/)
+* [Arnav Dandu](https://dandu.dev)
+* [Kevin Fisher](https://github.com/kfish610)
+* [Kiran Gopinathan](https://kirancodes.me)
+* [Audra Aurora Izzani](https://github.com/aizzani2)
+* [Eyad Loutfi](https://github.com/eloutf)
+* [Trey Plante](https://github.com/trey3p)
+* [Emily Riehl](https://emilyriehl.github.io/)
+* [Egbert Rijke](https://egbertrijke.github.io/)
+* [Talia Ringer](https://dependenttyp.es)
+
+as part of ASTRAL: Automated Synthetic Theorem-Proving by Reasonining with Language Models, a team funded by DARPA's [expMath program](https://www.darpa.mil/research/programs/expmath-exponential-mathematics).

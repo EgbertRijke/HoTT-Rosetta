@@ -1,3 +1,0 @@
-[submodule "external/agda-unimath"]
-	path = external/agda-unimath
-	url = https://github.com/UniMath/agda-unimath.git

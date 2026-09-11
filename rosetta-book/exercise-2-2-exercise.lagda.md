@@ -13,5 +13,5 @@ Give a derivation for the right unit law of Lemma 2.2.7.
 
 <!-- rosetta-item: exercise-2-2 -->
 
-This is intended as a pen-and-paper exercise. 
+This is intended as a pen-and-paper exercise.
 No formalization is expected.

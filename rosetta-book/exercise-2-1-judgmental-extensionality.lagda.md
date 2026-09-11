@@ -26,5 +26,5 @@ Use the `η`-rule to show that if `f` and `g` take equal values, then they must 
 
 <!-- rosetta-item: exercise-2-1 -->
 
-This is intended as a pen-and-paper exercise. 
+This is intended as a pen-and-paper exercise.
 No formalization is expected.
