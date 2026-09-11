@@ -12,7 +12,6 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
-open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-4-strict-order-natural-numbers
 ```
 
@@ -110,11 +109,11 @@ f_{k+1}(⋆) ≔ p_k.
 
 ```agda
 ind-Fin : 
-  {i : Level} (P : (k : ℕ) → Fin k → Type i) → 
-  ( {k : ℕ} (x : Fin k) → P k x → P (succ-ℕ k) (inl-Fin k x)) → 
-  ( {k : ℕ} → P (succ-ℕ k) (inr star)) → ({k : ℕ} (x : Fin k) → P k x)
-ind-Fin P g p {succ-ℕ k} (inl x) = g {k} x (ind-Fin P g p {k} x)
-ind-Fin P g p {succ-ℕ k} (inr star) = p {k}
+  {i : Level} {P : (k : ℕ) → Fin k → Type i} →
+  ({k : ℕ} (x : Fin k) → P k x → P (succ-ℕ k) (inl-Fin k x)) →
+  ({k : ℕ} → P (succ-ℕ k) (inr star)) → ({k : ℕ} (x : Fin k) → P k x)
+ind-Fin g p {succ-ℕ k} (inl x) = g {k} x (ind-Fin g p {k} x)
+ind-Fin g p {succ-ℕ k} (inr star) = p {k}
 ```
 <!-- rosetta-item-end: remark-7.3.3 -->
 
@@ -197,6 +196,9 @@ where `f:(nat-Fin_{k+1}(i(x))=nat-Fin_{k+1}(⋆))→empty` and `g:(nat-Fin_{k+1}
 <!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-230 -->
 
 ```agda
+is-injective : {l1 l2 : Level} {A : Type l1} {B : Type l2} → (A → B) → Type (l1 ⊔ l2)
+is-injective {l1} {l2} {A} {B} f = {x y : A} → f x ＝ f y → x ＝ y
+
 is-injective-nat-Fin : (k : ℕ) → is-injective (nat-Fin k)
 is-injective-nat-Fin (succ-ℕ k) {inl x} {inl y} p =
   ap inl (is-injective-nat-Fin k p)

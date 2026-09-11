@@ -19,6 +19,7 @@ open import section-12-1-propositions
 open import section-12-3-sets
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-12-4-coproduct-truncation
+open import exercise-9-1-groupoid-operations-equivalences
 ```
 
 <!-- rosetta-item: section-13.5 -->
@@ -282,7 +283,18 @@ eq-succ-strong-ind-ℕ P pS k H p =
 <!-- rosetta-agda-block: lemma-13.5.3-case-evaluation-identifications -->
 
 ```agda
-
+equiv-identifications-succ-strong-ind-ℕ :
+  {l : Level} (P : ℕ → Type l)
+  (pS : (n : ℕ) → □-≤-ℕ P n → P (succ-ℕ n))
+  (n : ℕ) (H : □-≤-ℕ P n) (m : ℕ) (p : m ≤-ℕ succ-ℕ n)
+  (x : (m ≤-ℕ n) + (m ＝ succ-ℕ n)) (y : P m) →
+  (succ-strong-ind-ℕ P pS n H m p ＝ y) ≃
+  (cases-succ-strong-ind-ℕ P pS n H m x ＝ y)
+equiv-identifications-succ-strong-ind-ℕ P pS n H m p x y =
+  equiv-inv-concat
+    ( ap (cases-succ-strong-ind-ℕ P pS n H m)
+      ( eq-cases-leq-succ m n p x))
+    ( y)
 ```
 <!-- rosetta-item-end: lemma-13.5.3 -->
 

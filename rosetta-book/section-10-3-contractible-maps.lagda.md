@@ -58,6 +58,41 @@ module _
     (y : fiber' f b) → b ＝ f (inclusion-fiber' y)
   compute-value-inclusion-fiber' = pr2
 ```
+
+<!-- rosetta-agda-block: definition-10.3.1-fiber-orientation-equivalence -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (y : B)
+  where
+
+  map-equiv-fiber : fiber f y → fiber' f y
+  pr1 (map-equiv-fiber (x , _)) = x
+  pr2 (map-equiv-fiber (x , p)) = inv p
+
+  map-inv-equiv-fiber : fiber' f y → fiber f y
+  pr1 (map-inv-equiv-fiber (x , _)) = x
+  pr2 (map-inv-equiv-fiber (x , p)) = inv p
+
+  is-section-map-inv-equiv-fiber :
+    is-section map-equiv-fiber map-inv-equiv-fiber
+  is-section-map-inv-equiv-fiber (x , refl) = refl
+
+  is-retraction-map-inv-equiv-fiber :
+    is-retraction map-equiv-fiber map-inv-equiv-fiber
+  is-retraction-map-inv-equiv-fiber (x , refl) = refl
+
+  is-equiv-map-equiv-fiber : is-equiv map-equiv-fiber
+  is-equiv-map-equiv-fiber =
+    is-equiv-is-invertible
+      map-inv-equiv-fiber
+      is-section-map-inv-equiv-fiber
+      is-retraction-map-inv-equiv-fiber
+
+  equiv-fiber : fiber f y ≃ fiber' f y
+  pr1 equiv-fiber = map-equiv-fiber
+  pr2 equiv-fiber = is-equiv-map-equiv-fiber
+```
 <!-- rosetta-item-end: definition-10.3.1 -->
 
 In other words, the fiber of `f` at `b` is the type of `a:A` that get mapped by `f` to `b`.

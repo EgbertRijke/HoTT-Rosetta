@@ -3,6 +3,7 @@
 ```agda
 module exercise-2-4-exercise where
 
+open import universe-levels
 ```
 
 ## Problem statement
@@ -12,8 +13,6 @@ module exercise-2-4-exercise where
 Define the **swap function**
 
 <!-- rosetta-proof-tree: d7366097dc2c; review: pending -->
-
-*Proof tree (automatic faithful draft).*
 
 ```text
   Γ⊢ A type   Γ⊢ B type   Γ,x:A,y:B⊢ C(x,y) type
@@ -31,8 +30,6 @@ Show that
 
 <!-- rosetta-proof-tree: e2ad895faccd; review: pending -->
 
-*Proof tree (automatic faithful draft).*
-
 ```text
      Γ⊢ A type   Γ⊢ B type   Γ,x:A,y:B⊢ C(x,y) type
 ────────────────────────────────────────────────────────
@@ -45,4 +42,8 @@ Show that
 
 <!-- rosetta-item: exercise-2-4 -->
 
-No formalization has been curated yet.
+```agda
+swap-Π : {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : A → B → Type l3} →
+  ((x : A) (y : B) → C x y) → ((y : B) (x : A) → C x y)
+swap-Π f y x = f x y
+```

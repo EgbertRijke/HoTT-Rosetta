@@ -3,6 +3,7 @@
 ```agda
 module exercise-2-3-exercise where
 
+open import universe-levels
 ```
 
 ## Problem statement
@@ -13,10 +14,8 @@ Construct the **constant map**
 
 <!-- rosetta-proof-tree: 6295d3bacb13; review: pending -->
 
-*Proof tree (automatic faithful draft).*
-
 ```text
- Γ⊢ A \textrm{type}
+ Γ⊢ A type
 ───────────────────
 Γ,y:B⊢ const_y:A→ B
 ```
@@ -24,8 +23,6 @@ Construct the **constant map**
 Show that
 
 <!-- rosetta-proof-tree: b070ceed5cb4; review: pending -->
-
-*Proof tree (automatic faithful draft).*
 
 ```text
            Γ⊢ f:A→ B
@@ -37,10 +34,8 @@ Show that
 
 <!-- rosetta-proof-tree: 981ff7e743d1; review: pending -->
 
-*Proof tree (automatic faithful draft).*
-
 ```text
-   Γ⊢ A \textrm{type}   Γ⊢ g:B→ C
+   Γ⊢ A type   Γ⊢ g:B→ C
 ───────────────────────────────────
 Γ,y:B⊢ g∘const_y≐ const_{g(y)}:A→ C
 ```
@@ -51,4 +46,7 @@ Show that
 
 <!-- rosetta-item: exercise-2-3 -->
 
-No formalization has been curated yet.
+```agda
+const : {l1 l2 : Level} (A : Type l1) {B : Type l2} → B → A → B
+const A b x = b
+```
