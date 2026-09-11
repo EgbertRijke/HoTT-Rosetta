@@ -47,6 +47,6 @@ Show that
 <!-- rosetta-item: exercise-2-3 -->
 
 ```agda
-const : {l1 l2 : Level} (A : UU l1) {B : UU l2} → B → A → B
+const : {l1 l2 : Level} (A : Type l1) {B : Type l2} → B → A → B
 const A b x = b
 ```
