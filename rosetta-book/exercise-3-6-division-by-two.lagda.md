@@ -19,7 +19,7 @@ Define division by two rounded down as a function `ℕ→ℕ` in two ways: first
 <!-- rosetta-agda-block: exercise-3-6-division-by-two-block-1 -->
 
 ```agda
-division-by-two : ℕ → ℕ 
+division-by-two : ℕ → ℕ
 division-by-two zero-ℕ = 0
 division-by-two (succ-ℕ zero-ℕ) = 0
 division-by-two (succ-ℕ (succ-ℕ n)) = succ-ℕ (division-by-two n)
@@ -29,7 +29,7 @@ div-two-zero-ℕ = const ℕ zero-ℕ
 
 div-two-succ-ℕ : (ℕ → ℕ) → (ℕ → ℕ)
 div-two-succ-ℕ f =
-  shift-two (f 1) (succ-ℕ (f zero-ℕ)) (const ℕ ℕ zero-ℕ)
+  shift-two (f 1) (succ-ℕ (f zero-ℕ)) (const ℕ zero-ℕ)
 
 div-two-function : ℕ → ℕ → ℕ
 div-two-function = ind-ℕ div-two-zero-ℕ (λ n → div-two-succ-ℕ)

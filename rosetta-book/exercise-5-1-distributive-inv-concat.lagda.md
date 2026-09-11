@@ -11,9 +11,11 @@ open import section-5-2-the-groupoidal-structure-of-types
 ## Problem statement
 
 Show that the operation inverting identifications distributes over the concatenation operation, i.e., construct an identification
+
 ```text
 distributive-inv-concat(p,q):(p ∙ q)^{-1} = q^{-1} ∙ p^{-1}.
 ```
+
 for any `p:x = y` and `q:y = z`.
 
 ## Solution
