@@ -882,7 +882,7 @@
       "imports": [
         "exercise-9-1-groupoid-operations-equivalences"
       ],
-      "conversion_status": "exercise",
+      "conversion_status": "ready",
       "conversion_note": "Training exercise: the displayed equivalence of identification types directly needs equiv-inv-concat, with its inverse and homotopies, at Exercise 9.1. That auxiliary is already on the shared proposal but absent on main. Keep this later block empty and preserve the earlier main accounts; see docs/agda-training-exercises.md and docs/invisible-math.md.",
       "source_note": "Typed specialization of the pinned equiv-inv-concat to the path obtained by applying the case evaluator to the preceding eq-cases-leq-succ. The local successor definition unfolds to the left endpoint. This exposes the extra identity-type equivalence in the book's proof, in the same orientation, rather than relying only on the pinned successor computations. No general proof is invented."
     },

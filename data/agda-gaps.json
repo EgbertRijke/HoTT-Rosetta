@@ -2,6 +2,13 @@
   "format_version": 1,
   "items": [
     {
+      "item_id": "exercise-9-1-remaining-operations",
+      "kind": "Exercise",
+      "number": "9.1(right concatenation)",
+      "destination": "exercise-9-1-groupoid-operations-equivalences.lagda.md",
+      "statement": "Inversion and left concatenation are curated for Example 11.6.3; transport and its explicit inverse are added for Theorem 12.4.7. Right-concatenation equivalence with its explicit inverse remains lower-priority exercise work."
+    },
+    {
       "item_id": "section-14.2-tarski-truncation-codes",
       "kind": "Section",
       "number": "14.2",

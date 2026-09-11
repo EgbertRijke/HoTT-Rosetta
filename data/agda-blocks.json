@@ -11,6 +11,21 @@
   ],
   "blocks": [
     {
+      "block_id": "remark-2.2.2-evaluation-at-a-point",
+      "provenance_kind": "adapted",
+      "item_id": "remark-2.2.2",
+      "destination": "section-2-2-ordinary-function-types.lagda.md",
+      "source_file": "src/foundation-core/function-types.lagda.md",
+      "source_commit": "c85d7fb834778f96a66576318cdc4ef3d4b80a26",
+      "source_start_line": 48,
+      "source_end_line": 50,
+      "source_sha256": "5c02b3de1dcfb5ebce350ddd9f160d1fe6182ea2b53f984ceaf0235a4789f3dc",
+      "order": 0,
+      "imports": ["universe-levels"],
+      "code": "ev-point :\n  {l1 l2 : Level} {A : Type l1} (a : A) {P : A → Type l2} → ((x : A) → P x) → P a\nev-point a f = f a",
+      "source_note": "Replace UU by the repository-local Type. On the exercise proposal, place dependent evaluation with the evaluation rules in Remark 2.2.2, before Definition 10.2.1 and its consumers. This earlier complete section is intentionally unchanged on main."
+    },
+    {
       "block_id": "section-2-2-identity-function-adapted",
       "provenance_kind": "adapted",
       "item_id": "definition-2.2.3",

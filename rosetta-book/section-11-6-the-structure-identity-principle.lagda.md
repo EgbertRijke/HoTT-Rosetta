@@ -17,6 +17,10 @@ open import section-11-2-the-fundamental-theorem
 open import exercise-9-4-three-for-two-equivalences
 open import exercise-10-3-contractible-equivalences
 open import exercise-10-6-dependent-pair-contractible-base
+open import section-5-4-transport
+open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
+open import section-10-3-contractible-maps
+open import exercise-9-1-groupoid-operations-equivalences
 ```
 
 <!-- rosetta-item: section-11.6 -->
@@ -397,6 +401,79 @@ Of course, this type is equivalent to `Σ(q:f(x)=b) p=q`, which is again contrac
 <!-- rosetta-agda-block: example-11.6.3-identities-in-fibers -->
 
 ```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) {b : B}
+  where
 
+  fiber-ap-eq-fiber-fiberwise :
+    (s t : fiber f b) (p : pr1 s ＝ pr1 t) →
+    tr (λ (a : A) → f a ＝ b) p (pr2 s) ＝ pr2 t →
+    ap f p ＝ pr2 s ∙ inv (pr2 t)
+  fiber-ap-eq-fiber-fiberwise (.x' , p) (x' , refl) refl =
+    inv ∘ concat right-unit refl
+
+  abstract
+    is-fiberwise-equiv-fiber-ap-eq-fiber-fiberwise :
+      (s t : fiber f b) → is-fiberwise-equiv (fiber-ap-eq-fiber-fiberwise s t)
+    is-fiberwise-equiv-fiber-ap-eq-fiber-fiberwise (x , y) (.x , refl) refl =
+      is-equiv-comp
+        ( inv)
+        ( concat right-unit refl)
+        ( is-equiv-concat right-unit refl)
+        ( is-equiv-inv (y ∙ refl) refl)
+
+  fiber-ap-eq-fiber :
+    (s t : fiber f b) → s ＝ t →
+    fiber (ap f {x = pr1 s} {y = pr1 t}) (pr2 s ∙ inv (pr2 t))
+  pr1 (fiber-ap-eq-fiber s .s refl) = refl
+  pr2 (fiber-ap-eq-fiber s .s refl) = inv (right-inv (pr2 s))
+
+  triangle-fiber-ap-eq-fiber :
+    (s t : fiber f b) →
+    fiber-ap-eq-fiber s t ~
+    tot (fiber-ap-eq-fiber-fiberwise s t) ∘ pair-eq-Σ {s = s} {t}
+  triangle-fiber-ap-eq-fiber (x , refl) .(x , refl) refl = refl
+
+  abstract
+    is-equiv-fiber-ap-eq-fiber :
+      (s t : fiber f b) → is-equiv (fiber-ap-eq-fiber s t)
+    is-equiv-fiber-ap-eq-fiber s t =
+      is-equiv-left-map-triangle
+        ( fiber-ap-eq-fiber s t)
+        ( tot (fiber-ap-eq-fiber-fiberwise s t))
+        ( pair-eq-Σ {s = s} {t})
+        ( triangle-fiber-ap-eq-fiber s t)
+        ( is-equiv-pair-eq-Σ s t)
+        ( is-equiv-tot-is-fiberwise-equiv
+          ( is-fiberwise-equiv-fiber-ap-eq-fiber-fiberwise s t))
+
+  equiv-fiber-ap-eq-fiber :
+    (s t : fiber f b) →
+    (s ＝ t) ≃ fiber (ap f {x = pr1 s} {y = pr1 t}) (pr2 s ∙ inv (pr2 t))
+  pr1 (equiv-fiber-ap-eq-fiber s t) = fiber-ap-eq-fiber s t
+  pr2 (equiv-fiber-ap-eq-fiber s t) = is-equiv-fiber-ap-eq-fiber s t
+```
+
+<!-- rosetta-agda-block: example-11.6.3-fiber-of-action-specialization -->
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (x y : A)
+  where
+
+  eq-fiber-fiber-ap :
+    (q : f x ＝ f y) → (x , q) ＝ (y , refl) → fiber (ap f {x} {y}) q
+  eq-fiber-fiber-ap q =
+    tr (fiber (ap f)) right-unit ∘ fiber-ap-eq-fiber f (x , q) (y , refl)
+
+  abstract
+    is-equiv-eq-fiber-fiber-ap :
+      (q : f x ＝ f y) → is-equiv (eq-fiber-fiber-ap q)
+    is-equiv-eq-fiber-fiber-ap q =
+      is-equiv-comp
+        ( tr (fiber (ap f)) right-unit)
+        ( fiber-ap-eq-fiber f (x , q) (y , refl))
+        ( is-equiv-fiber-ap-eq-fiber f (x , q) (y , refl))
+        ( is-equiv-tr (fiber (ap f)) right-unit)
 ```
 <!-- rosetta-item-end: example-11.6.3 -->
