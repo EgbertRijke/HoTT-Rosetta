@@ -12,9 +12,8 @@ open import section-5-3-the-action-on-identifications-of-functions
 ## Problem statement
 
 Consider four consecutive identifications
-<!-- rosetta-diagram: 59cb81762f07; review: pending -->
 
-*Linear diagram (automatic draft).*
+<!-- rosetta-diagram: 59cb81762f07; review: pending -->
 
 ```text
  [a] ----> [b] ----> [c] ----> [d] ----> [e]
@@ -25,15 +24,15 @@ Arrows:
 - c --r--> d
 - d --s--> e
 ```
+
 in a type `A`.
 In this exercise we will show that the **Mac Lane pentagon** for identifications commutes.
 
 <div class="subexenum">
 
 Construct the five identifications `α_1,…,α_5` in the pentagon
-<!-- rosetta-diagram: 9ea155e46c09; review: pending -->
 
-*3-by-5 diagram (automatic draft).*
+<!-- rosetta-diagram: 9ea155e46c09; review: pending -->
 
 ```text
                         [((p ∙ q) ∙ r) ∙ s]                             [(p ∙ q) ∙ (r ∙ s)]
@@ -49,9 +48,11 @@ Arrows:
 - (p ∙ (q ∙ r)) ∙ s --α_2--> p ∙ ((q ∙ r) ∙ s)
 - p ∙ ((q ∙ r) ∙ s) --α_3--> p ∙ (q ∙ (r ∙ s))
 ```
+
 where `α_1`, `α_2`, and `α_3` run counter-clockwise, and `α_4` and `α_5` run clockwise.
 
 Show that
+
 ```text
 (α_1 ∙ α_2) ∙ α_3 = α_4 ∙ α_5.
 ```
