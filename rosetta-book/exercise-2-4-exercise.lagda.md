@@ -3,6 +3,7 @@
 ```agda
 module exercise-2-4-exercise where
 
+open import universe-levels
 ```
 
 ## Problem statement
@@ -42,7 +43,7 @@ Show that
 <!-- rosetta-item: exercise-2-4 -->
 
 ```agda
-{l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : A → B → UU l3}
+{l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : A → B → Type l3}
 
 swap-Π : ((x : A) (y : B) → C x y) → ((y : B) (x : A) → C x y)
 swap-Π f y x = f x y
