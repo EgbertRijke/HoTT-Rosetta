@@ -25,7 +25,7 @@ division-by-two (succ-ℕ zero-ℕ) = 0
 division-by-two (succ-ℕ (succ-ℕ n)) = succ-ℕ (division-by-two n)
 
 div-two-zero-ℕ : ℕ → ℕ
-div-two-zero-ℕ = const ℕ ℕ zero-ℕ
+div-two-zero-ℕ = const ℕ zero-ℕ
 
 div-two-succ-ℕ : (ℕ → ℕ) → (ℕ → ℕ)
 div-two-succ-ℕ f =
