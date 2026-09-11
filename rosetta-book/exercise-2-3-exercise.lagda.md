@@ -13,8 +13,6 @@ Construct the **constant map**
 
 <!-- rosetta-proof-tree: 6295d3bacb13; review: pending -->
 
-*Proof tree (automatic faithful draft).*
-
 ```text
  Γ⊢ A type
 ───────────────────
@@ -25,8 +23,6 @@ Show that
 
 <!-- rosetta-proof-tree: b070ceed5cb4; review: pending -->
 
-*Proof tree (automatic faithful draft).*
-
 ```text
            Γ⊢ f:A→ B
 ────────────────────────────────
@@ -36,8 +32,6 @@ Show that
 Show that
 
 <!-- rosetta-proof-tree: 981ff7e743d1; review: pending -->
-
-*Proof tree (automatic faithful draft).*
 
 ```text
    Γ⊢ A type   Γ⊢ g:B→ C
@@ -51,4 +45,5 @@ Show that
 
 <!-- rosetta-item: exercise-2-3 -->
 
-No formalization has been curated yet.
+This is intended as a pen-and-paper exercise. 
+No formalization is expected.
