@@ -16,19 +16,15 @@ open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 ```
 
-<!-- rosetta-item: section-10.1 -->
-
 ## Definition 10.1.1
 
-<!-- rosetta-item: definition-10.1.1 -->
-
 We say that a type `A` is **contractible** if it comes equipped with an element of type
-```text
-is-contr(A) ≔ Σ(c:A) Π(x:A) c=x.
-```
-Given a pair `(c,C):is-contr(A)`, we call `c:A` the **center of contraction** of `A`, and we call `C:Π(x:A) c=x` the **contraction** of `A`.
 
-<!-- rosetta-agda-block: definition-10.1.1-contractible-types -->
+```text
+  is-contr(A) ≔ Σ(c : A) Π(x : A) c = x.
+```
+
+Given a pair `(c,C) : is-contr(A)`, we call `c : A` the **center of contraction** of `A`, and we call `C : Π(x : A) c = x` the **contraction** of `A`.
 
 ```agda
 is-contr :
@@ -59,31 +55,24 @@ abstract
     (contraction is-contr-A (center is-contr-A)) ＝ refl
   coh-contraction (pair c C) = left-inv (C c)
 ```
-<!-- rosetta-item-end: definition-10.1.1 -->
 
 ## Remark 10.1.2
 
-<!-- rosetta-item: remark-10.1.2 -->
-
 Suppose `A` is a contractible type with center of contraction `c` and contraction `C`.
 Then the type of `C` is (judgmentally) equal to the type
-```text
-const_c~id[A].
-```
-In other words, the contraction `C` is a *homotopy* from the constant function to the identity function.
 
-<!-- rosetta-item-end: remark-10.1.2 -->
+```text
+  const_c ~ id.
+```
+
+In other words, the contraction `C` is a *homotopy* from the constant function to the identity function.
 
 ## Example 10.1.3
 
-<!-- rosetta-item: example-10.1.3 -->
-
 The unit type is easily seen to be contractible.
-For the center of contraction we take `⋆:unit`.
-Then we define a contraction `Π(x:unit) ⋆=x` by the induction principle of `unit`.
+For the center of contraction we take `⋆ : unit`.
+Then we define a contraction `Π(x : unit) ⋆ = x` by the induction principle of `unit`.
 Applying the induction principle, it suffices to construct an identification of type `⋆ = ⋆`, for which we just take `refl`.
-
-<!-- rosetta-agda-block: example-10.1.3-unit-contractible -->
 
 ```agda
 abstract
@@ -91,29 +80,26 @@ abstract
   pr1 is-contr-unit = star
   pr2 is-contr-unit _ = refl
 ```
-<!-- rosetta-item-end: example-10.1.3 -->
 
 ## Theorem 10.1.4
 
-<!-- rosetta-item: theorem-10.1.4; latex-label: thm:total_path -->
-
 For any `a:A`, the type
+
 ```text
-Σ(x:A) a=x
+  Σ(x : A) a = x
 ```
+
 is contractible.
 
 ### Proof
 
-<!-- rosetta-item: subheading-10.1-proof -->
+For the center of contraction we take
 
-*Proof.* For the center of contraction we take
 ```text
-(a,refl):Σ(x:A) a=x.
+  (a,refl) : Σ(x : A) a = x.
 ```
-The contraction is constructed in Proposition 5.5.1. ◻
 
-<!-- rosetta-agda-block: theorem-10.1.4-total-path -->
+The contraction is constructed in Proposition 5.5.1. ◻
 
 ```agda
 module _
@@ -126,4 +112,3 @@ module _
     pr2 (pr1 (is-contr-Id a)) = refl
     pr2 (is-contr-Id a) (.a , refl) = refl
 ```
-<!-- rosetta-item-end: theorem-10.1.4 -->

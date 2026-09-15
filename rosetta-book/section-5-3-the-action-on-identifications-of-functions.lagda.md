@@ -72,7 +72,7 @@ module _
 
 <!-- rosetta-agda-block: lemma-10.4.5-identification-whisker-helper -->
 
-```agda
+```text
 module _
   {l : Level} {A : Type l}
   where

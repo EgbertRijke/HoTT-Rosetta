@@ -334,6 +334,30 @@ is-invertible :
 is-invertible {A = A} {B} f = Σ (B → A) (is-inverse f)
 
 module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B} (g : is-invertible f)
+  where
+
+  map-inv-is-invertible : B → A
+  map-inv-is-invertible = pr1 g
+
+  is-inverse-map-inv-is-invertible : is-inverse f map-inv-is-invertible
+  is-inverse-map-inv-is-invertible = pr2 g
+
+  is-section-map-inv-is-invertible : f ∘ map-inv-is-invertible ~ id
+  is-section-map-inv-is-invertible = pr1 is-inverse-map-inv-is-invertible
+
+  is-retraction-map-inv-is-invertible : map-inv-is-invertible ∘ f ~ id
+  is-retraction-map-inv-is-invertible = pr2 is-inverse-map-inv-is-invertible
+
+  section-is-invertible : section f
+  pr1 section-is-invertible = map-inv-is-invertible
+  pr2 section-is-invertible = is-section-map-inv-is-invertible
+
+  retraction-is-invertible : retraction f
+  pr1 retraction-is-invertible = map-inv-is-invertible
+  pr2 retraction-is-invertible = is-retraction-map-inv-is-invertible
+
+module _
   {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}
   where
 

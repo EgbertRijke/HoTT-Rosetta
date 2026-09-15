@@ -291,3 +291,54 @@ The iterated identity types give types in homotopy type theory a very intricate 
 One important way of studying this structure is via the homotopy groups of types, a subject that we will gradually be working towards.
 
 <!-- rosetta-item-end: remark-5.2.6 -->
+
+## Supplementary definitions
+
+### Left whiskering of identifications
+
+Left whiskering of identifications with respect to concatenation is an operation
+
+```text
+  (p : x ＝ y) {q r : y ＝ z} → q ＝ r → p ∙ q ＝ p ∙ r
+```
+
+on any type.
+
+```agda
+module _
+  {l : Level} {A : Type l}
+  where
+
+  left-whisker-concat : 
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} (s : q ＝ r) → p ∙ q ＝ p ∙ r
+  left-whisker-concat p refl = refl
+
+  left-unwhisker-concat :
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} → p ∙ q ＝ p ∙ r → q ＝ r
+  left-unwhisker-concat = is-injective-concat
+```
+
+### Right whiskering of identifications
+
+Right whiskering of identifications with respect to concatenation is an
+operation
+
+```text
+  {p q : x ＝ y} → p ＝ q → (r : y ＝ z) → p ∙ r ＝ q ∙ r
+```
+
+on any type.
+
+```agda
+module _
+  {l : Level} {A : Type l}
+  where
+
+  right-whisker-concat : 
+    {x y z : A} {p q : x ＝ y} (r : y ＝ z) → p ＝ q → p ∙ r ＝ q ∙ r
+  right-whisker-concat α refl = refl
+
+  right-unwhisker-concat :
+    {x y z : A} {p q : x ＝ y} (r : y ＝ z) → p ∙ r ＝ q ∙ r → p ＝ q
+  right-unwhisker-concat r = is-injective-concat' r
+```

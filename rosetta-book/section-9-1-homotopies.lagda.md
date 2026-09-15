@@ -343,3 +343,140 @@ module _
 
   _·r_ = right-whisker-comp
 ```
+
+## Supplementary definitions
+
+### Transposition of homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} {f g h : (x : A) → B x}
+  (H : f ~ g) (K : g ~ h) (L : f ~ h) (M : H ∙h K ~ L)
+  where
+
+  left-transpose-htpy-concat : K ~ inv-htpy H ∙h L
+  left-transpose-htpy-concat x =
+    left-transpose-eq-concat (H x) (K x) (L x) (M x)
+
+  inv-htpy-left-transpose-htpy-concat : inv-htpy H ∙h L ~ K
+  inv-htpy-left-transpose-htpy-concat = inv-htpy left-transpose-htpy-concat
+
+  right-transpose-htpy-concat : H ~ L ∙h inv-htpy K
+  right-transpose-htpy-concat x =
+    right-transpose-eq-concat (H x) (K x) (L x) (M x)
+
+  inv-htpy-right-transpose-htpy-concat : L ∙h inv-htpy K ~ H
+  inv-htpy-right-transpose-htpy-concat = inv-htpy right-transpose-htpy-concat
+```
+
+### Left whiskering of homotopies with respect to concatenation
+
+Left whiskering of homotopies with respect to concatenation is an operation
+
+```text
+  (H : f ~ g) {I J : g ~ h} → I ~ J → H ∙h I ~ H ∙h J.
+```
+
+We implement the left whiskering operation of homotopies with respect to
+concatenation as an instance of a general left whiskering operation.
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  where
+
+  left-whisker-concat-htpy :
+    {f g h : (x : A) → B x} (H : f ~ g) {K L : g ~ h} → K ~ L → H ∙h K ~ H ∙h L
+  left-whisker-concat-htpy H K x = left-whisker-concat (H x) (K x)
+
+  left-unwhisker-concat-htpy :
+    {f g h : (x : A) → B x} (H : f ~ g) {I J : g ~ h} → H ∙h I ~ H ∙h J → I ~ J
+  left-unwhisker-concat-htpy H K x = left-unwhisker-concat (H x) (K x)
+```
+
+### Right whiskering of homotopies with respect to concatenation
+
+Right whiskering of homotopies with respect to concatenation is an operation
+
+```text
+  {H I : f ~ g} → H ~ I → (J : g ~ h) → H ∙h J ~ I ∙h J.
+```
+
+We implement the right whiskering operation of homotopies with respect to
+concatenation as an instance of a general right whiskering operation.
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  where
+
+  right-whisker-concat-htpy :
+    {f g h : (x : A) → B x} {H I : f ~ g} → H ~ I → (J : g ~ h) → H ∙h J ~ I ∙h J
+  right-whisker-concat-htpy J K x = right-whisker-concat (K x) (J x)
+
+  right-unwhisker-concat-htpy :
+    {f g h : (x : A) → B x} {H I : f ~ g} (J : g ~ h) → H ∙h J ~ I ∙h J → H ~ I
+  right-unwhisker-concat-htpy H K x = right-unwhisker-concat (H x) (K x)
+```
+
+### Whiskering preserves function composition
+
+In other words, whiskering is an action of functions on homotopies.
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A : Type l1} {B : A → Type l2} {C : A → Type l3} {D : A → Type l4}
+  where
+
+  inv-preserves-comp-left-whisker-comp :
+    ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
+    ( H : f ~ g) →
+    (k ∘ h) ·l H ~ k ·l (h ·l H)
+  inv-preserves-comp-left-whisker-comp k h H x = ap-comp k h (H x)
+
+  preserves-comp-left-whisker-comp :
+    ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
+    ( H : f ~ g) →
+    k ·l (h ·l H) ~ (k ∘ h) ·l H
+  preserves-comp-left-whisker-comp k h H =
+    inv-htpy (inv-preserves-comp-left-whisker-comp k h H)
+
+module _
+  { l1 l2 l3 l4 : Level}
+  { A : Type l1} {B : A → Type l2} {C : (x : A) → B x → Type l3}
+  { D : (x : A) (y : B x) (z : C x y) → Type l4}
+  { f g : {x : A} {y : B x} (z : C x y) → D x y z}
+  ( h : {x : A} (y : B x) → C x y) (k : (x : A) → B x)
+  ( H : {x : A} {y : B x} → f {x} {y} ~ g {x} {y})
+  where
+
+  preserves-comp-right-whisker-comp : (H ·r h) ·r k ~ H ·r (h ∘ k)
+  preserves-comp-right-whisker-comp = refl-htpy
+```
+
+### Left whiskering higher homotopies
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {f g : (x : A) → B x}
+  where
+
+  left-whisker-comp² :
+    (h : {x : A} → B x → C x) {H H' : f ~ g} (α : H ~ H') → h ·l H ~ h ·l H'
+  left-whisker-comp² h α = ap h ·l α
+```
+
+### Right whiskering higher homotopies
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : (x : A) → B x → Type l3}
+  {f g : {x : A} (y : B x) → C x y} {H H' : {x : A} → f {x} ~ g {x}}
+  where
+
+  right-whisker-comp² :
+    (α : {x : A} → H {x} ~ H' {x}) (h : (x : A) → B x) → H ·r h ~ H' ·r h
+  right-whisker-comp² α h = α ·r h
+```

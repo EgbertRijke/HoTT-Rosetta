@@ -17,39 +17,39 @@ open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 ```
 
-<!-- rosetta-item: section-10.4 -->
-
 In Theorem 10.4.6 we will show the converse to Theorem 10.3.5, i.e., we will show that any equivalence is a contractible map.
 We will do this in two steps.
 
 First we introduce a new notion of *coherently invertible map*, for which we can easily show that such maps have contractible fibers.
 Then we show that any equivalence is a coherently invertible map.
 
-Recall that an invertible map is a map `f:A→ B` equipped with `g:B→ A` and homotopies
+Recall that an invertible map is a map `f : A → B` equipped with `g : B → A` and homotopies
+
 ```text
-G : f∘ g ~ id and H:g∘ f~ id.
+  G : f ∘ g ~ id    and    H : g ∘ f ~ id.
 ```
+
 Then we observe that both `G · f` and `f · H` are homotopies of the same type
+
 ```text
-f∘ g∘ f ~ f.
+  f ∘ g ∘ f ~ f.
 ```
-A coherently invertible map is an invertible map for which there is a further homotopy `G · f~ f· H`.
+
+A coherently invertible map is an invertible map for which there is a further homotopy `G · f ~ f · H`.
 
 ## Definition 10.4.1
 
-<!-- rosetta-item: definition-10.4.1 -->
-
-Consider a map `f:A→ B`.
+Consider a map `f : A → B`.
 We say that `f` is **coherently invertible** if it comes equipped with
-```text
-g : B → A
-G : f ∘ g ~ id
-H : g ∘ f ~ id
-K : G · f ~ f · H.
-```
-We will write `is-coh-invertible(f)` for the type of quadruples `(g,G,H,K)`.
 
-<!-- rosetta-agda-block: definition-10.4.1-coherently-invertible -->
+```text
+  g : B → A
+  G : f ∘ g ~ id
+  H : g ∘ f ~ id
+  K : G · f ~ f · H.
+```
+
+We will write `is-coh-invertible(f)` for the type of quadruples `(g, G, H, K)`.
 
 ```agda
 module _
@@ -112,53 +112,56 @@ module _
   pr2 retraction-is-coherently-invertible =
     is-retraction-map-inv-is-coherently-invertible
 ```
-<!-- rosetta-item-end: definition-10.4.1 -->
 
 Although we will encounter the notion of coherently invertible map on some further occasions, the following proposition is our main motivation for considering it.
 
 ## Proposition 10.4.2
 
-<!-- rosetta-item: proposition-10.4.2; latex-label: lem:contr-inv -->
-
 Any coherently invertible map has contractible fibers.
 
 ### Proof
 
-<!-- rosetta-item: subheading-10.4-proof -->
+Consider a map `f : A → B` equipped with
 
-*Proof.* Consider a map `f:A→ B` equipped with
 ```text
-g : B → A
-G : f ∘ g ~ id
-H : g ∘ f ~ id
-K : G · f ~ f · H,
+  g : B → A
+  G : f ∘ g ~ id
+  H : g ∘ f ~ id
+  K : G · f ~ f · H,
 ```
-and let `y:B`.
-Our goal is to show that `fib(f, y)` is contractible.
+
+and let `y : B`.
+Our goal is to show that `fib(f,y)` is contractible.
 For the center of contraction we take `(g(y),G(y))`.
 In order to construct a contraction, it suffices to construct a dependent function of type
-```text
-Π(x:A) Π(p:f(x)=y) Eq-fib_f((g(y),G(y)),(x,p)).
-```
-By path induction on `p:f(x)=y` it suffices to construct a dependent function of type
-```text
-Π(x:A) Eq-fib_f((g(f(x)),G(f(x))),(x,refl)).
-```
-By definition of `Eq-fib_f`, we have to construct for each `x:A` an identification `α:g(f(x))=x` equipped with a further identification
-```text
-G(f(x))=ap_{f}(α) ∙ refl.
-```
-Such a dependent function is constructed as `λ x. (H(x),K'(x))`, where the homotopy `H:g∘ f~ id` is given by assumption, and the homotopy
-```text
-K' : Π(x:A) G(f(x))=ap_{f}(H(x)) ∙ refl
-```
-is defined as
-```text
-K'≔ K ∙ right-unit-htpy(f· H)^{-1}.
-```
- ◻
 
-<!-- rosetta-agda-block: proposition-10.4.2-coherently-invertible-contractible -->
+```text
+  Π(x : A) Π(p : f(x) = y) Eq-fib_f((g(y),G(y)),(x,p)).
+```
+
+By path induction on `p:f(x)=y` it suffices to construct a dependent function of type
+
+```text
+  Π(x : A) Eq-fib_f((g(f(x)),G(f(x))),(x,refl)).
+```
+
+By definition of `Eq-fib_f`, we have to construct for each `x : A` an identification `α : g(f(x)) = x` equipped with a further identification
+
+```text
+  G(f(x)) = ap_{f}(α) ∙ refl.
+```
+
+Such a dependent function is constructed as `λ x. (H(x),K'(x))`, where the homotopy `H : g ∘ f ~ id` is given by assumption, and the homotopy
+
+```text
+  K' : Π(x : A) G(f(x)) = ap_{f}(H(x)) ∙ refl
+```
+
+is defined as
+
+```text
+  K' ≔ K ∙ right-unit-htpy(f · H)⁻¹. ◻
+```
 
 ```agda
 module _
@@ -189,58 +192,55 @@ module _
   pr2 (is-contr-map-is-coherently-invertible H y) =
     contraction-fiber-is-coherently-invertible H y
 ```
-<!-- rosetta-item-end: proposition-10.4.2 -->
 
-Our next goal is to show that for any map `f:A→ B` equipped with
+Our next goal is to show that for any map `f : A → B` equipped with
+
 ```text
-g:B→ A, G:f∘ g ~ id, and H:g∘ f~ id,
+  g : B → A,    G : f ∘ g ~ id,    and    H : g ∘ f ~ id,
 ```
-we can improve the homotopy `G` to a new homotopy `G':f∘ g~ id` for which there is a further homotopy
+
+we can improve the homotopy `G` to a new homotopy `G' : f ∘ g ~ id` for which there is a further homotopy
+
 ```text
-f· H~ G'· f.
+  f · H ~ G' · f.
 ```
-Note that this situation is analogous to the situation in the proof of Theorem 10.2.3, where we improved the contraction `C` so that it satisfied `C(c)=refl`.
-The extra coherence `f· H~ G'· f` is then used in the proof that the fibers of an equivalence are contractible.
+
+Note that this situation is analogous to the situation in the proof of Theorem 10.2.3, where we improved the contraction `C` so that it satisfied `C(c) = refl`.
+The extra coherence `f · H ~ G' · f` is then used in the proof that the fibers of an equivalence are contractible.
 
 ## Definition 10.4.3
 
-<!-- rosetta-item: definition-10.4.3; latex-label: defn:htpy_nat -->
-
-Let `f,g:A→ B` be functions, and consider `H:f~ g` and `p:x=y` in `A`.
+Let `f, g : A → B` be functions, and consider `H : f ~ g` and `p : x = y` in `A`.
 We define the identification
+
 ```text
-nat-htpy(H,p) ≔ ap_{f}(p) ∙ H(y)=H(x) ∙ ap_{g}(p)
+  nat-htpy(H,p) : ap_{f}(p) ∙ H(y) = H(x) ∙ ap_{g}(p)
 ```
+
 witnessing that the square
-<!-- rosetta-diagram: a2f4fce2f636; review: pending -->
-
-*Square-shaped diagram (automatic draft).*
 
 ```text
-[f(x)]---->[g(x)]
-  |          |
-[f(y)]---->[g(y)]
-
-Arrows:
-- f(x) --H(x)--> g(x)
-- f(x) --ap_{f}(p)--> f(y)
-- g(x) --ap_{g}(p)--> g(y)
-- f(y) --H(y)--> g(y)
+              H(x)
+        f(x) ====== g(x)
+          ∥           ∥
+  ap_f(p) ∥           ∥ ap_g(p)
+          ∥           ∥
+        f(y) ====== g(y)
+              H(y)
 ```
+
 commutes.
 This square is also called the **naturality square** of the homotopy `H` at `p`.
 
 ### Construction
 
-<!-- rosetta-item: subheading-10.4-construction -->
-
 By path induction on `p` it suffices to construct an identification
-```text
-ap_{f}(refl) ∙ H(x)=H(x) ∙ ap_{g}(refl)
-```
-since `ap_{f}(refl)≐ refl` and `ap_{g}(refl)≐refl`, and since `refl ∙ H(x)≐ H(x)`, we see that the path `right-unit(H(x))^{-1}` is of the asserted type.
 
-<!-- rosetta-agda-block: definition-10.4.3-naturality -->
+```text
+  ap_{f}(refl) ∙ H(x) = H(x) ∙ ap_{g}(refl)
+```
+
+since `ap_{f}(refl) ≐ refl` and `ap_{g}(refl) ≐ refl`, and since `refl ∙ H(x) ≐ H(x)`, we see that the path `right-unit(H(x))⁻¹` is of the asserted type.
 
 ```agda
 nat-htpy :
@@ -249,39 +249,28 @@ nat-htpy :
   H x ∙ ap g p ＝ ap f p ∙ H y
 nat-htpy H refl = right-unit
 ```
-<!-- rosetta-item-end: definition-10.4.3 -->
 
 ## Definition 10.4.4
 
-<!-- rosetta-item: definition-10.4.4; latex-label: defn:retraction_swap -->
-
-Consider `f:A→ A` and `H: f~ id[A]`.
-We construct an identification `H(f(x))=ap_{f}(H(x))`, for any `x:A`.
+Consider `f : A → A` and `H : f ~ id`.
+We construct an identification `H(f(x)) = ap_{f}(H(x))`, for any `x : A`.
 
 ### Construction
 
-<!-- rosetta-item: subheading-10.4-construction-2 -->
-
 By the naturality of homotopies with respect to identifications the square
-<!-- rosetta-diagram: e9ca675c5778; review: pending -->
-
-*Square-shaped diagram (automatic draft).*
 
 ```text
-[ff(x)]---->[f(x)]
-   |          |
- [f(x)]----> [x]
-
-Arrows:
-- ff(x) --ap_{f}(H(x))--> f(x)
-- ff(x) --H(f(x))--> f(x)
-- f(x) --H(x)--> x
-- f(x) --H(x)--> x
+                   H(f(x))
+            ff(x) ========= f(x)
+             ∥                ∥
+  ap_f(H(x)) ∥                ∥ H(x)
+             ∥                ∥
+            f(x) ============ x
+                     H(x)
 ```
-commutes.
-This gives the desired identification `H(f(x))=ap_{f}(H(x))`.
 
-<!-- rosetta-agda-block: definition-10.4.4-retraction-swap -->
+commutes.
+This gives the desired identification `H(f(x)) = ap_{f}(H(x))`.
 
 ```agda
 nat-htpy-id :
@@ -289,8 +278,6 @@ nat-htpy-id :
   {x y : A} (p : x ＝ y) → H x ∙ p ＝ ap f p ∙ H y
 nat-htpy-id H refl = right-unit
 ```
-
-<!-- rosetta-agda-block: lemma-10.4.5-identity-coherence-helper -->
 
 ```agda
 module _
@@ -303,79 +290,62 @@ module _
   inv-coh-htpy-id : f ·l H ~ H ·r f
   inv-coh-htpy-id = inv-htpy coh-htpy-id
 ```
-<!-- rosetta-item-end: definition-10.4.4 -->
 
 ## Lemma 10.4.5
 
-<!-- rosetta-item: lemma-10.4.5; latex-label: lem:coherently-invertible -->
+Let `f : A → B` be a map equipped with an inverse, i.e., consider
 
-Let `f:A→ B` be a map equipped with an inverse, i.e., consider
 ```text
-g : B → A
-G : f ∘ g ~ id
-H : g ∘ f ~ id.
+  g : B → A
+  G : f ∘ g ~ id
+  H : g ∘ f ~ id.
 ```
-Then there is a homotopy `G':f∘ g~ id` equipped with a further homotopy
+
+Then there is a homotopy `G' : f ∘ g ~ id` equipped with a further homotopy
+
 ```text
-K : f· H ~ G'· f.
+  K : f · H ~ G' · f.
 ```
-Thus we obtain a map `has-inverse(f)→is-coh-invertible(f)`.
+
+Thus we obtain a map `has-inverse(f) → is-coh-invertible(f)`.
 
 ### Proof
 
-<!-- rosetta-item: subheading-10.4-proof-2 -->
-
-*Proof.* For each `y:B`, we construct the identification `G'(y)` as the concatenation
-<!-- rosetta-diagram: b0f70c6cf179; review: pending -->
-
-*Linear diagram (automatic draft).*
+For each `y : B`, we construct the identification `G'(y)` as the concatenation
 
 ```text
-[fg(y)]---->[fgfg(y)]---->[fg(y)]----> [y]
-
-Arrows:
-- fg(y) --{G(fg(y))}^{-1}--> fgfg(y)
-- fgfg(y) --ap_{f}(H(g(y)))--> fg(y)
-- fg(y) --G(y)--> y
+         G(fg(y))⁻¹           ap_f(H(g(y)))         G(y)
+  fg(y) ============ fgfg(y) =============== fg(y) ====== y.
 ```
-In order to construct a homotopy `f· H ~ G'· f`, it suffices to show that the square
-<!-- rosetta-diagram: d894f03c5f8d; review: pending -->
 
-*Square-shaped diagram (automatic draft).*
+In order to construct a homotopy `f · H ~ G' · f`, it suffices to show that the square
 
 ```text
-[fgfgf(x)]---->[fgf(x)]
-    |             |
- [fgf(x)] ----> [f(x)]
-
-Arrows:
-- fgfgf(x) --{G(fgf(x))}--> fgf(x)
-- fgfgf(x) --ap_{f}(H(gf(x)))--> fgf(x)
-- fgf(x) --ap_{f}(H(x))--> f(x)
-- fgf(x) --G(f(x))--> f(x)
+                       G(fgf(x))
+             fgfgf(x) =========== fgf(x)
+                 ∥                  ∥ 
+  ap_f(H(gf(x))) ∥                  ∥ ap_f(H(x))
+                 ∥                  ∥
+              fgf(x) ============= f(x)
+                        G(f(x))
 ```
-commutes for every `x:A`.
-Recall from Definition 10.4.4 that we have `H(gf(x))=ap_{gf}(H(x))`.
+
+commutes for every `x : A`.
+Recall from Definition 10.4.4 that we have `H(gf(x)) = ap_{gf}(H(x))`.
 Using this identification, we see that it suffices to show that the square
-<!-- rosetta-diagram: d5e947466295; review: pending -->
-
-*Square-shaped diagram (automatic draft).*
 
 ```text
-[fgfgf(x)]---->[fgf(x)]
-    |             |
- [fgf(x)] ----> [f(x)]
-
-Arrows:
-- fgfgf(x) --(G· f)(gf(x))--> fgf(x)
-- fgfgf(x) --ap_{fgf}(H(x))--> fgf(x)
-- fgf(x) --ap_{f}(H(x))--> f(x)
-- fgf(x) --(G· f)(x)--> f(x)
+                       (G · f)(gf(x))
+             fgfgf(x) ================ fgf(x)
+                 ∥                        ∥
+  ap_{fgf}(H(x)) ∥                        ∥ ap_f(H(x))
+                 ∥                        ∥
+              fgf(x) =================== f(x)
+                         (G · f)(x)
 ```
-commutes.
-Now we observe that this is just a naturality square the homotopy `G· f:fgf~ f`, which commutes by Definition 10.4.3. ◻
 
-<!-- rosetta-agda-block: lemma-10.4.5-invertible-coherently-invertible -->
+commutes.
+Now we observe that this is just a naturality square the homotopy `G · f : fgf ~ f`, which commutes by Definition 10.4.3. ◻
 
 ```agda
 module _
@@ -383,20 +353,20 @@ module _
   where
 
   is-retraction-map-inv-is-coherently-invertible-is-invertible :
-    pr1 H ∘ f ~ id
+    map-inv-is-invertible H ∘ f ~ id
   is-retraction-map-inv-is-coherently-invertible-is-invertible =
-    pr2 (pr2 H)
+    is-retraction-map-inv-is-invertible H
 
   abstract
     is-section-map-inv-is-coherently-invertible-is-invertible :
-      f ∘ pr1 H ~ id
+      f ∘ map-inv-is-invertible H ~ id
     is-section-map-inv-is-coherently-invertible-is-invertible =
-      ( ( inv-htpy (pr1 (pr2 H))) ·r
-        ( f ∘ pr1 H)) ∙h
+      ( ( inv-htpy (is-section-map-inv-is-invertible H)) ·r
+        ( f ∘ map-inv-is-invertible H)) ∙h
       ( ( ( f) ·l
-          ( pr2 (pr2 H)) ·r
-          ( pr1 H)) ∙h
-        ( pr1 (pr2 H)))
+          ( is-retraction-map-inv-is-invertible H) ·r
+          ( map-inv-is-invertible H)) ∙h
+        ( is-section-map-inv-is-invertible H))
 
   abstract
     inv-coh-is-coherently-invertible-is-invertible :
@@ -404,30 +374,30 @@ module _
       is-section-map-inv-is-coherently-invertible-is-invertible ·r f
     inv-coh-is-coherently-invertible-is-invertible =
       left-transpose-htpy-concat
-        ( ( pr1 (pr2 H)) ·r
-          ( f ∘ pr1 H ∘ f))
-        ( f ·l pr2 (pr2 H))
+        ( ( is-section-map-inv-is-invertible H) ·r
+          ( f ∘ map-inv-is-invertible H ∘ f))
+        ( f ·l is-retraction-map-inv-is-invertible H)
         ( ( ( f) ·l
-            ( pr2 (pr2 H)) ·r
-            ( pr1 H ∘ f)) ∙h
-          ( pr1 (pr2 H) ·r f))
-        ( ( ( nat-htpy (pr1 (pr2 H) ·r f)) ·r
-            ( pr2 (pr2 H))) ∙h
+            ( is-retraction-map-inv-is-invertible H) ·r
+            ( map-inv-is-invertible H ∘ f)) ∙h
+          ( is-section-map-inv-is-invertible H ·r f))
+        ( ( ( nat-htpy (is-section-map-inv-is-invertible H ·r f)) ·r
+            ( is-retraction-map-inv-is-invertible H)) ∙h
           ( right-whisker-concat-htpy
             ( ( inv-preserves-comp-left-whisker-comp
                 ( f)
-                ( pr1 H ∘ f)
-                ( pr2 (pr2 H))) ∙h
+                ( map-inv-is-invertible H ∘ f)
+                ( is-retraction-map-inv-is-invertible H)) ∙h
               ( left-whisker-comp²
                 ( f)
-                ( inv-coh-htpy-id (pr2 (pr2 H)))))
-            ( pr1 (pr2 H) ·r f)))
+                ( inv-coh-htpy-id (is-retraction-map-inv-is-invertible H))))
+            ( is-section-map-inv-is-invertible H ·r f)))
 
   abstract
     coh-is-coherently-invertible-is-invertible :
       coherence-is-coherently-invertible
         ( f)
-        ( pr1 H)
+        ( map-inv-is-invertible H)
         ( is-section-map-inv-is-coherently-invertible-is-invertible)
         ( is-retraction-map-inv-is-coherently-invertible-is-invertible)
     coh-is-coherently-invertible-is-invertible =
@@ -435,29 +405,22 @@ module _
 
   is-coherently-invertible-is-invertible : is-coherently-invertible f
   is-coherently-invertible-is-invertible =
-    ( pr1 H ,
+    ( map-inv-is-invertible H ,
       is-section-map-inv-is-coherently-invertible-is-invertible ,
       is-retraction-map-inv-is-coherently-invertible-is-invertible ,
       coh-is-coherently-invertible-is-invertible)
 ```
-<!-- rosetta-item-end: lemma-10.4.5 -->
 
 Now we put the pieces together to conclude that any equivalence has contractible fibers.
 
 ## Theorem 10.4.6
 
-<!-- rosetta-item: theorem-10.4.6; latex-label: thm:contr_equiv -->
-
 Any equivalence is a contractible map.
 
 ### Proof
 
-<!-- rosetta-item: subheading-10.4-proof-3 -->
-
-*Proof.* We have seen in Proposition 10.4.2 that any coherently invertible map is a contractible map.
-Moreover, any equivalence has the structure of an invertible map by Proposition 9.2.7, and any invertible map is coherently invertible by Lemma 10.4.5. ◻
-
-<!-- rosetta-agda-block: theorem-10.4.6-equivalence-contractible-map -->
+We have seen in Proposition 10.4.2 that any coherently invertible map is a contractible map.
+Moreover, any equivalence has the structure of an invertible map by Proposition 9.2.7, and any invertible map is coherently invertible by Lemma 10.4.5. ◻
 
 ```agda
 module _
@@ -469,32 +432,27 @@ module _
     is-contr-map-is-equiv =
       is-contr-map-is-coherently-invertible ∘ (is-coherently-invertible-is-invertible ∘ is-invertible-is-equiv)
 ```
-<!-- rosetta-item-end: theorem-10.4.6 -->
 
-The following corollary is very similar to Theorem 10.1.4, which asserts that the type `Σ(x:A) a=x` is contractible.
-However, we haven’t yet established that the equivalence `(a=x)≃ (x=a)` induces an equivalence on total spaces.
+The following corollary is very similar to Theorem 10.1.4, which asserts that the type `Σ(x : A) a = x` is contractible.
+However, we haven’t yet established that the equivalence `(a = x) ≃ (x = a)` induces an equivalence on total spaces.
 However, using the fact that equivalences are contractible maps we can give a direct proof.
 
 ## Corollary 10.4.7
 
-<!-- rosetta-item: corollary-10.4.7; latex-label: cor:contr_path -->
-
-Let `A` be a type, and let `a:A`.
+Let `A` be a type, and let `a : A`.
 Then the type
+
 ```text
-Σ(x:A) x=a
+  Σ(x : A) x = a
 ```
+
 is contractible.
 
 ### Proof
 
-<!-- rosetta-item: subheading-10.4-proof-4 -->
-
-*Proof.* By Example 9.2.3, the identity function is an equivalence.
+By Example 9.2.3, the identity function is an equivalence.
 Therefore, the fibers of the identity function are contractible by Theorem 10.4.6.
-Note that `Σ(x:A) x=a` is exactly the fiber of `id[A]` at `a:A`. ◻
-
-<!-- rosetta-agda-block: corollary-10.4.7-reverse-total-path -->
+Note that `Σ(x : A) x = a` is exactly the fiber of `id` at `a : A`. ◻
 
 ```agda
 module _
@@ -507,4 +465,3 @@ module _
     pr2 (pr1 (is-contr-Id' a)) = refl
     pr2 (is-contr-Id' a) (.a , refl) = refl
 ```
-<!-- rosetta-item-end: corollary-10.4.7 -->
