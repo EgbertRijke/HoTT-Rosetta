@@ -10,20 +10,22 @@ open import exercise-3-5-fibonacci-sequence
 
 ## Problem statement
 
-Define division by two rounded down as a function `ℕ→ℕ` in two ways: first by pattern matching, and then directly by the induction principle of `ℕ`.
+Define division by two rounded down as a function `ℕ → ℕ` in two ways: first by pattern matching, and then directly by the induction principle of `ℕ`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-3-6 -->
-
-<!-- rosetta-agda-block: exercise-3-6-division-by-two-block-1 -->
+We first define division by two by pattern matching:
 
 ```agda
 division-by-two : ℕ → ℕ
 division-by-two zero-ℕ = 0
 division-by-two (succ-ℕ zero-ℕ) = 0
 division-by-two (succ-ℕ (succ-ℕ n)) = succ-ℕ (division-by-two n)
+```
 
+Next, we define division by two using the induction principle:
+
+```agda
 div-two-zero-ℕ : ℕ → ℕ
 div-two-zero-ℕ = const ℕ zero-ℕ
 

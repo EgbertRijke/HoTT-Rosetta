@@ -1,4 +1,4 @@
-# Exercise 3.4
+# Exercise 3.4 Binomial coefficients
 
 ```agda
 module exercise-3-4-binomial-coefficients where
@@ -9,13 +9,9 @@ open import section-3-2-addition-on-the-natural-numbers
 
 ## Problem statement
 
-Define the **binomial coefficient** `binom(n, k)` for any `n,k:ℕ`, making sure that `binom(n, k)≐ 0` when `n<k`.
+Define the **binomial coefficient**  `(n choose k)` for any `n k : ℕ`, making sure that `(n choose k) ≐ 0` when `n < k`.
 
-## Solution
-
-<!-- rosetta-item: exercise-3-4 -->
-
-<!-- rosetta-agda-block: exercise-3-4-binomial-coefficients-block-1 -->
+## Solution 
 
 ```agda
 binomial-coefficient-ℕ : ℕ → ℕ → ℕ
@@ -25,3 +21,7 @@ binomial-coefficient-ℕ (succ-ℕ n) zero-ℕ = 1
 binomial-coefficient-ℕ (succ-ℕ n) (succ-ℕ k) =
   (binomial-coefficient-ℕ n k) +ℕ (binomial-coefficient-ℕ n (succ-ℕ k))
 ```
+
+## Agda-unimath sources
+
+- The definition of the binomial coefficient is implemented in `elementary-number-theory.binomial-coefficients`.
