@@ -7,26 +7,23 @@ module exercise-14-9-interval where
 
 ## Problem statement
 
-In this exercise we introduce the **interval** as a higher inductive type `\I`, equipped with two point constructors and one path constructor
+In this exercise we introduce the **interval** as a higher inductive type `𝕀`, equipped with two point constructors and one path constructor
 ```text
-source,target : \I
+source,target : 𝕀
 path : source=target.
 ```
-The induction principle of `\I` asserts that for any type family `P` over `\I`, if we have
+The induction principle of `𝕀` asserts that for any type family `P` over `𝕀`, if we have
 ```text
 u : P(source)
 v : P(target)
 p : tr_P(path,u)=v,
 ```
-then there is a section `f:Π(x:\I) P(x)` equipped with identifications
+then there is a section `f:Π(x:𝕀) P(x)` equipped with identifications
 ```text
 α : f(source) = u
 β : f(target) = v
 ```
 and an identification `γ` witnessing that the square
-<!-- rosetta-diagram: e110adfc08e3; review: pending -->
-
-*Square-shaped diagram (automatic draft).*
 
 ```text
 [tr_P(path,f(source))]---->[tr_P(path,u)]
@@ -40,9 +37,9 @@ Arrows:
 - f(target) --β--> v
 ```
 commutes.
-Note that the constructors of `\I` induce a map
+Note that the constructors of `𝕀` induce a map
 ```text
-ε: (Π(x:\I) P(x))→ (Σ(u:P(source)) Σ(v:P(target)) tr_P(path,u)=v).
+ε: (Π(x:𝕀) P(x))→ (Σ(u:P(source)) Σ(v:P(target)) tr_P(path,u)=v).
 ```
 given by `f↦ (f(source),f(target),apd_{f}(path))`.
 
@@ -54,9 +51,9 @@ Characterize the identity types of the codomain of the map `ε` in the following
 ```
 for any `(u,v,q)` and `(u',v',q')` in the codomain of `ε`.
 
-Prove the dependent universal property of `\I`, i.e., show that the map `ε` is an equivalence.
+Prove the dependent universal property of `𝕀`, i.e., show that the map `ε` is an equivalence.
 
-Show that `\I` is contractible.
+Show that `𝕀` is contractible.
 
 </div>
 
