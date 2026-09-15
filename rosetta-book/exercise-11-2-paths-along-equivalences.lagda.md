@@ -15,12 +15,10 @@ p↦ p̃:(e(x)=y)≃(x=e^{-1}(y))
 for every `x:A` and `y:B`, such that the triangle
 <!-- rosetta-diagram: 7bba382ff5fc; review: pending -->
 
-*Triangle-shaped diagram (automatic draft).*
-
 ```text
 [e(x)]---->[e(e^{-1}(y))]
-                 |
-                [y]
+
+        [y]
 
 Arrows:
 - e(x) --ap_{e}(p̃)--> e(e^{-1}(y))
