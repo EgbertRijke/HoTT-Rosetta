@@ -8,43 +8,37 @@ open import universe-levels
 
 ## Problem statement
 
-<div class="subexenum">
+### Exercise 2.3(a)
 
 Construct the **constant map**
 
-<!-- rosetta-proof-tree: 6295d3bacb13; review: pending -->
-
 ```text
- Γ⊢ A type
-───────────────────
-Γ,y:B⊢ const_y:A→ B
+           Γ ⊢ A type
+  ----------------------------
+   Γ, y : B ⊢ const_y : A → B
 ```
+
+### Exercise 2.3(b)
 
 Show that
 
-<!-- rosetta-proof-tree: b070ceed5cb4; review: pending -->
-
 ```text
-           Γ⊢ f:A→ B
-────────────────────────────────
-Γ,z:C⊢ const_z∘ f≐const_z : A→ C
+                 Γ ⊢ f : A → B
+  ------------------------------------------
+   Γ, z : C ⊢ const_z ∘ f ≐ const_z : A → C
 ```
+
+### Exercise 2.3(c)
 
 Show that
 
-<!-- rosetta-proof-tree: 981ff7e743d1; review: pending -->
-
 ```text
-   Γ⊢ A type   Γ⊢ g:B→ C
-───────────────────────────────────
-Γ,y:B⊢ g∘const_y≐ const_{g(y)}:A→ C
+           Γ ⊢ A type   Γ ⊢ g : B → C
+  -----------------------------------------------
+   Γ, y : B ⊢ g ∘ const_y ≐ const_{g(y)} : A → C
 ```
-
-</div>
 
 ## Solution
-
-<!-- rosetta-item: exercise-2-3 -->
 
 ```agda
 const : {l1 l2 : Level} (A : Type l1) {B : Type l2} → B → A → B
