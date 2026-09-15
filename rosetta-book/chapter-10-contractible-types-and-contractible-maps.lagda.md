@@ -28,7 +28,7 @@ To specify such an identification, we have to give its end point `x : A` as well
 This suggests that the total space
 
 ```text
-Σ(x : A) a = x
+  Σ(x : A) a = x
 ```
 
 of all paths with starting point `a : A` is contractible.
