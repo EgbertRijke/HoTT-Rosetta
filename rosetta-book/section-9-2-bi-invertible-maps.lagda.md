@@ -1319,7 +1319,7 @@ module _
   {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3}
   where
 
-  map-left-distributive-product-coproduct : A × (B + C) → (A × B) + (A × C)
+  map-left-distributive-product-coproduct : A × (B + C) → A × B + A × C
   map-left-distributive-product-coproduct =
     map-left-distributive-Σ-coproduct
 
@@ -1345,7 +1345,7 @@ module _
   is-equiv-map-left-distributive-product-coproduct =
     is-equiv-map-left-distributive-Σ-coproduct
 
-  left-distributive-product-coproduct : (A × (B + C)) ≃ ((A × B) + (A × C))
+  left-distributive-product-coproduct : A × (B + C) ≃ A × B + A × C
   left-distributive-product-coproduct =
     left-distributive-Σ-coproduct
 ```
@@ -1413,7 +1413,7 @@ module _
   {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3}
   where
 
-  map-right-distributive-product-coproduct : (A + B) × C → (A × C) + (B × C)
+  map-right-distributive-product-coproduct : (A + B) × C → A × C + B × C
   map-right-distributive-product-coproduct =
     map-right-distributive-Σ-coproduct (λ _ → C)
 
@@ -1439,11 +1439,11 @@ module _
   is-equiv-map-right-distributive-product-coproduct =
     is-equiv-map-right-distributive-Σ-coproduct (λ _ → C)
 
-  right-distributive-product-coproduct : ((A + B) × C) ≃ ((A × C) + (B × C))
+  right-distributive-product-coproduct : (A + B) × C ≃ A × C + B × C
   right-distributive-product-coproduct =
     right-distributive-Σ-coproduct (λ _ → C)
 
-  inv-right-distributive-product-coproduct : ((A × C) + (B × C)) ≃ ((A + B) × C)
+  inv-right-distributive-product-coproduct : A × C + B × C ≃ (A + B) × C
   inv-right-distributive-product-coproduct =
     inv-right-distributive-Σ-coproduct (λ _ → C)
 ```

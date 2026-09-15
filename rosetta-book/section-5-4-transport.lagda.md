@@ -5,6 +5,8 @@ module section-5-4-transport where
 
 open import universe-levels
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
+open import section-5-3-the-action-on-identifications-of-functions
 ```
 
 <!-- rosetta-item: section-5.4 -->
@@ -40,6 +42,9 @@ module _
 
   tr : x ＝ y → B x → B y
   tr refl b = b
+
+  inv-tr : y ＝ x → B x → B y
+  inv-tr p = tr (inv p)
 ```
 <!-- rosetta-item-end: definition-5.4.1 -->
 
@@ -49,6 +54,29 @@ As an application of the transport function we construct the *dependent* action 
 Note that for such a dependent function `f`, and an identification `p:x =_A y`, it does not make sense to directly compare `f(x)` and `f(y)`, since the type of `f(x)` is `B(x)` whereas the type of `f(y)` is `B(y)`, which might not be exactly the same type.
 However, we can first *transport* `f(x)` along `p`, so that we obtain the element `tr_B(p,f(x))` which is of type `B(y)`.
 Now we can ask whether it is the case that `tr_B(p,f(x))=f(y)`.
+
+```agda
+dependent-identification :
+  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x x' : A} (p : x ＝ x') →
+  B x → B x' → Type l2
+dependent-identification B p u v = (tr B p u ＝ v)
+
+refl-dependent-identification :
+  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x : A} {y : B x} →
+  dependent-identification B refl y y
+refl-dependent-identification B = refl
+
+dependent-identification' :
+  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x x' : A} (p : x ＝ x') →
+  B x → B x' → Type l2
+dependent-identification' B p u v = (u ＝ inv-tr B p v)
+
+refl-dependent-identification' :
+  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x : A} {y : B x} →
+  dependent-identification' B refl y y
+refl-dependent-identification' B = refl
+```
+
 The dependent action on paths of `f` establishes this identification.
 
 ## Definition 5.4.2
@@ -74,14 +102,23 @@ Since transporting along `refl` is the identity function on `B(x)`, we simply ta
 <!-- rosetta-agda-block: section-5-4-transport-block-82 -->
 
 ```agda
-dependent-identification :
-  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x x' : A} (p : x ＝ x') →
-  B x → B x' → Type l2
-dependent-identification B p u v = (tr B p u ＝ v)
-
 apd :
   {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (f : (x : A) → B x) {x y : A}
   (p : x ＝ y) → dependent-identification B p (f x) (f y)
 apd f refl = refl
 ```
 <!-- rosetta-item-end: definition-5.4.2 -->
+
+## Supplemental definitions
+
+We will occasionally need to know how to trasport along an identification of the form ap_f(p).
+Such a computation is most naturally defined here.
+
+```agda
+tr-ap :
+  {l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {C : Type l3} {D : C → Type l4}
+  (f : A → C) (g : (x : A) → B x → D (f x))
+  {x y : A} (p : x ＝ y) (z : B x) →
+  tr D (ap f p) (g x z) ＝ g y (tr B p z)
+tr-ap f g refl z = refl
+```
