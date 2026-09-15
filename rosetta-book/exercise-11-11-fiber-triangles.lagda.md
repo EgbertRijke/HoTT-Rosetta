@@ -10,8 +10,6 @@ module exercise-11-11-fiber-triangles where
 Consider a triangle
 <!-- rosetta-diagram: 962a48c2124b; review: pending -->
 
-*Triangle-shaped diagram (automatic draft).*
-
 ```text
  [A]                 [B]
 
