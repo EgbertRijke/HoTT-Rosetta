@@ -8,9 +8,6 @@ module exercise-12-11-truncated-maps-triangles where
 ## Problem statement
 
 Consider a commuting triangle
-<!-- rosetta-diagram: 962a48c2124b; review: pending -->
-
-*Triangle-shaped diagram (automatic draft).*
 
 ```text
  [A]                 [B]
