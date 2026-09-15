@@ -10,8 +10,6 @@ module exercise-11-4-embedding-triangles where
 Consider a commuting triangle
 <!-- rosetta-diagram: 962a48c2124b; review: pending -->
 
-*Triangle-shaped diagram (automatic draft).*
-
 ```text
  [A]                 [B]
 
