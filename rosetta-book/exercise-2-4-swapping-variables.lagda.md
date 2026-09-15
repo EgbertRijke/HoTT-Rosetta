@@ -1,7 +1,7 @@
 # Exercise 2.4
 
 ```agda
-module exercise-2-4-exercise where
+module exercise-2-4-swapping-variables where
 
 open import universe-levels
 ```

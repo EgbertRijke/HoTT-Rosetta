@@ -1,4 +1,4 @@
-# Exercise 4.2
+# Exercise 4.2 Boolean operations
 
 ```agda
 module exercise-4-2-boolean-operations where
@@ -8,47 +8,66 @@ open import universe-levels
 
 ## Problem statement
 
-The type of **booleans** is defined to be an inductive type `bool` that comes equipped with
+The type of **booleans** is an inductive type `bool` that comes equipped with
+
 ```text
-false : bool and true : bool.
+    false : bool
 ```
-The induction principle of the booleans asserts that for any family of types `P(x)` indexed by `x:bool`, there is a term
+
+and
+
 ```text
-ind-bool : P(false)→ (P(true)→ Π(x:bool) P(x))
+    true : bool
 ```
+
+The induction principle of the booleans asserts that for any family of types `P(x)` indexed by `x : bool`, there is a term
+
+```text
+    ind-bool : P(false) → (P(true) → Π(x : bool) P(x))
+```
+
 for which the computation rules
+
 ```text
-ind-bool(p_0,p_1,false) ≐ p_0
-ind-bool(p_0,p_1,true) ≐ p_1
+    ind-bool(p₀, p₁, false) ≐ p₀
+     ind-bool(p₀, p₁, true) ≐ p₁
 ```
+
 hold.
-
-<div class="subexenum">
-
-Construct the **boolean negation** function `neg-bool:bool→bool`.
-
-Construct the **boolean conjunction** operation `_∧_ : bool→(bool→bool)`.
-
-Construct the **boolean disjunction** operation `_∨_ : bool→(bool→bool)`.
-
-</div>
-
-## Solution
-
-<!-- rosetta-item: exercise-4-2 -->
-
-<!-- rosetta-agda-block: exercise-4-2-booleans-adapted -->
 
 ```agda
 data bool : Type lzero where
   true false : bool
 
-ind-bool : {l : Level} {P : bool → Type l} → P true → P false → (b : bool) → P b
-ind-bool pt pf true = pt
-ind-bool pt pf false = pf
+{-# BUILTIN BOOL bool #-}
+{-# BUILTIN TRUE true #-}
+{-# BUILTIN FALSE false #-}
+
+ind-bool : {l : Level} (P : bool → Type l) → P true → P false → (b : bool) → P b
+ind-bool P pt pf true = pt
+ind-bool P pt pf false = pf
+
+rec-bool : {l : Level} {P : Type l} → P → P → bool → P
+rec-bool {l} {P} p1 p0 = ind-bool (λ _ → P) p1 p0
 ```
 
-<!-- rosetta-agda-block: exercise-4-2-boolean-negation -->
+### Exercise 4.2(a)
+
+Construct the **boolean negation function** `neg-bool : bool → bool`.
+
+### Exercise 4.2(b)
+
+Construct the **boolean conjunction** operation `and-bool : bool → (bool → bool)`.
+
+### Exercise 4.2(c)
+
+Construct the **boolean disjunction** operation `or-bool : bool → (bool → bool)`.
+
+## Solutions
+
+### Exercise 4.2(a)
+
+We can now define the boolean negation function.
 
 ```agda
 neg-bool : bool → bool
@@ -56,7 +75,7 @@ neg-bool true = false
 neg-bool false = true
 ```
 
-<!-- rosetta-agda-block: exercise-4-2-boolean-conjunction-adapted -->
+## Exercise 4.2(b)
 
 ```agda
 and-bool : bool → bool → bool
@@ -64,10 +83,15 @@ and-bool true q = q
 and-bool false q = false
 ```
 
-<!-- rosetta-agda-block: exercise-4-2-boolean-disjunction-adapted -->
+## Exercise 4.2(c)
 
 ```agda
 or-bool : bool → bool → bool
 or-bool true q = true
 or-bool false q = q
 ```
+
+## Agda-unimath sources
+
+- The definitions of the type of booleans is implemented in `foundation-core.booleans`.
+- The definitions of boolean negation, conjunction, and disjunction are implemented in `foundation.boolean-operations`.

@@ -1,7 +1,7 @@
 # Exercise 2.2
 
 ```agda
-module exercise-2-2-exercise where
+module exercise-2-2-right-unit-law where
 ```
 
 ## Problem statement

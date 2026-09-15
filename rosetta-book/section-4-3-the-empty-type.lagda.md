@@ -6,23 +6,18 @@ module section-4-3-the-empty-type where
 open import universe-levels
 ```
 
-<!-- rosetta-item: section-4.3 -->
-
 The empty type is a degenerate example of an inductive type.
 It does *not* come equipped with any constructors, and therefore there are also no computation rules.
 The induction principle merely asserts that any type family has a section.
 In other words: if we assume the empty type has a term, then we can prove anything.
 
-## Definition 4.3.1
+### Definition 4.3.1
 
-<!-- rosetta-item: definition-4.3.1 -->
+We define the **empty type** to be a type `∅` satisfying the induction principle that for any family of types `P(x)` indexed by `x : ∅`, there is a term
 
-We define the **empty type** to be a type `empty` satisfying the induction principle that for any family of types `P(x)` indexed by `x:empty`, there is a term
 ```text
-ind : Π(x:empty) P(x).
+  ind_∅ : Π{x : ∅} P(x).
 ```
-
-<!-- rosetta-agda-block: section-4-3-the-empty-type-block-23 -->
 
 ```agda
 data empty : Type lzero where
@@ -31,41 +26,31 @@ ind-empty : {l : Level} {P : empty → Type l} → ((x : empty) → P x)
 ind-empty ()
 ```
 
-<!-- rosetta-agda-block: section-4-3-the-empty-type-block-38 -->
+It is again a special case of the induction principle that we have a function
+
+```text
+  ex-falso ≔ ind_∅ : ∅ → A
+```
+
+for any type `A`.
 
 ```agda
 ex-falso : {l : Level} {A : Type l} → empty → A
 ex-falso = ind-empty
 ```
-<!-- rosetta-item-end: definition-4.3.1 -->
 
-It is again a special case of the induction principle that we have a function
-```text
-ex-falso≔ind:empty→ A
-```
-for any type `A`.
-Indeed, to obtain this function one first weakens `A` to obtain the constant family over `empty` with value `A`, and then the induction principle gives the desired function.
+Indeed, to obtain this function one first weakens `A` to obtain the constant family over `∅` with value `A`, and then the induction principle gives the desired function.
 The function `ex-falso` can be used to draw any conclusion after deriving a contradiction, because *ex falso quodlibet*.
 
 We can also use the empty type to define the negation operation on types.
 
-## Definition 4.3.2
-
-<!-- rosetta-item: definition-4.3.2 -->
+### Definition 4.3.2
 
 For any type `A` we define **negation** of `A` by
-```text
-¬ A ≔ A→empty.
-```
-
-We also say that a type `A` **is empty** if it comes equipped with an element of type `¬ A`.
-Therefore, we also define
 
 ```text
-is-empty(A) ≔ A→empty.
+  ¬ A ≔ A → ∅.
 ```
-
-<!-- rosetta-agda-block: section-4-3-the-empty-type-block-56 -->
 
 ```agda
 infix 25 ¬_
@@ -74,19 +59,21 @@ infix 25 ¬_
 ¬ A = A → empty
 ```
 
-<!-- rosetta-agda-block: section-4-3-the-empty-type-block-70 -->
+We also say that a type `A` **is empty** if it comes equipped with an element of type `¬ A`.
+Therefore, we also define
+
+```text
+  is-empty(A) ≔ A → ∅.
+```
 
 ```agda
 is-empty : {l : Level} → Type l → Type l
 is-empty A = A → empty
 ```
-<!-- rosetta-item-end: definition-4.3.2 -->
 
-## Remark 4.3.3
+### Remark 4.3.3
 
-<!-- rosetta-item: remark-4.3.3 -->
-
-Since `¬ A` is the type of functions from `A` to `empty`, a proof of `¬ A` is given by assuming that `A` holds, and then constructing an element of the empty type.
+Since `¬ A` is the type of functions from `A` to `∅`, a proof of `¬ A` is given by assuming that `A` holds, and then constructing an element of the empty type.
 In other words, we prove `¬ A` by assuming `A` and deriving a contradiction.
 This proof technique is called **proof of negation**.
 
@@ -95,15 +82,10 @@ Even though a proof of negation involves deriving a contradiction, in logic a **
 In other words, a proof by contradiction uses the logical step `¬¬ P ⇒ P`, which is also called **double negation elimination**.
 
 In type theory, however, note that the type `¬¬ A` is the type of functions
+  
 ```text
-(A→empty)→empty.
+  (A → ∅) → ∅.
 ```
-This type is quite different from the type `A` itself, and with the given rules of type theory it is not possible to construct a function `¬¬ A → A` unless more is known about the type `A`.
-In other words, before one can prove by contradiction that there is an element in `A`, one has to construct a function `¬¬ A→ A`, and it depends on the specific type `A` whether this is possible at all.
-In Exercise 4.3 we will see a situation where we can indeed construct a function `¬¬ A→ A`.
-In practice, however, we will rarely use double negation elimination.
-
-<!-- rosetta-agda-block: section-4-3-the-empty-type-block-91 -->
 
 ```agda
 infix 25 ¬¬_
@@ -111,55 +93,56 @@ infix 25 ¬¬_
 ¬¬_ : {l : Level} → Type l → Type l
 ¬¬ P = ¬ ¬ P
 ```
-<!-- rosetta-item-end: remark-4.3.3 -->
+
+This type is quite different from the type `A` itself, and with the given rules of type theory it is not possible to construct a function `¬¬ A → A` unless more is known about the type `A`.
+In other words, before one can prove by contradiction that there is an element in `A`, one has to construct a function `¬¬ A → A`, and it depends on the specific type `A` whether this is possible at all.
+In \cref{ex:dne-is-decidable} we will see a situation where we can indeed construct a function `¬¬ A → A`.
+In practice, however, we will rarely use double negation elimination.
+
+### Proposition 4.3.4
 
 In the following proposition we illustrate how to work with the type theoretic definition of negation.
 
-## Proposition 4.3.4
-
-<!-- rosetta-item: proposition-4.3.4; latex-label: prp:contravariant-neg -->
-
 For any two types `P` and `Q`, there is a function
+  
 ```text
-(P→ Q)→ (¬ Q → ¬ P).
+  (P → Q) → (¬ Q → ¬ P).
 ```
 
-### Proof
+#### Proof
 
-<!-- rosetta-item: subheading-4.3-proof -->
-
-*Proof.* The desired function is defined by `λ`-abstraction, so we begin by assuming that we have a function `f:P→ Q`.
-Then we have to construct a function `¬ Q→¬ P`, which is again constructed by `λ`-abstraction.
-We assume that we have `q̃:¬ Q`.
-By our definition of `¬ Q` we see that `q̃` is a function `Q→empty`.
-Now we have to construct a term of type `¬ P`, which is the type of functions `P→empty`.
-We apply `λ`-abstraction once more, so we assume `p:P`.
+The desired function is defined by `λ`-abstraction, so we begin by assuming that we have a function `f : P → Q`.
+Then we have to construct a function `¬ Q → ¬ P`, which is again constructed by `λ`-abstraction.
+We assume that we have `q̃ : ¬ Q`.
+By our definition of `¬ Q` we see that `q̃` is a function `Q → ∅`.
+Now we have to construct a term of type `¬ P`, which is the type of functions `P → ∅`.
+We apply `λ`-abstraction once more, so we assume `p : P`.
 Now we have
+
 ```text
-f : P → Q
-q̃ : Q→ empty
-p : P,
+  f : P → Q
+  q̃ : Q → ∅
+  p : P,
 ```
+
 and our goal is to construct a term of the empty type.
 
-Since we have `f:P→ Q` and `p:P`, we obtain `f(p):Q`.
-Moreover, we have `q̃:Q→empty`, so we obtain `q̃(f(p)):empty`.
+Since we have `f : P → Q` and `p : P`, we obtain `f(p) : Q`.
+Moreover, we have `q̃ : Q → ∅`, so we obtain `q̃(f(p)) : ∅`.
 This completes the proof.
 The function we have constructed is
+  
 ```text
-λ f. λ q̃. λ p. q̃(f(p)):(P→ Q)→(¬ Q→¬ P).
+  λ f. λ q̃. λ p. q̃(f(p)) : (P → Q) → (¬ Q → ¬ P). □
 ```
- ◻
 
-<!-- rosetta-agda-block: section-4-3-the-empty-type-block-146 -->
+We leave it to the reader to construct the corresponding natural deduction tree, that formally constructs a function
+
+```text
+  (P → Q) → (¬ Q → ¬ P).
+```
 
 ```agda
 map-neg : {l1 l2 : Level} {P : Type l1} {Q : Type l2} → (P → Q) → (¬ Q → ¬ P)
 map-neg f nq p = nq (f p)
-```
-<!-- rosetta-item-end: proposition-4.3.4 -->
-
-We leave it to the reader to construct the corresponding natural deduction tree, that formally constructs a function
-```text
-(P→ Q)→(¬ Q→ ¬ P).
 ```

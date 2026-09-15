@@ -1,7 +1,7 @@
 # Exercise 2.3
 
 ```agda
-module exercise-2-3-exercise where
+module exercise-2-3-constant-maps where
 
 open import universe-levels
 ```

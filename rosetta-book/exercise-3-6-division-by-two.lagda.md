@@ -3,7 +3,7 @@
 ```agda
 module exercise-3-6-division-by-two where
 
-open import exercise-2-3-exercise
+open import exercise-2-3-constant-maps
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import exercise-3-5-fibonacci-sequence
 ```

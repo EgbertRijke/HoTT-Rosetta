@@ -1,43 +1,43 @@
-# Section 4.4 Coproducts
+# Coproducts
 
 ```agda
 module section-4-4-coproducts where
 
 open import universe-levels
+
 open import section-4-3-the-empty-type
 ```
 
-<!-- rosetta-item: section-4.4 -->
-
 ## Definition 4.4.1
 
-<!-- rosetta-item: definition-4.4.1 -->
+Let `A` and `B` be types. We define the **coproduct** to be a type that comes equipped with
 
-Let `A` and `B` be types.
-We define the **coproduct** `A+B` to be a type that comes equipped with
 ```text
-inl : A → A+B
-inr : B → A+B,
+  inl : A → A + B
+  inr : B → A + B,
 ```
-satisfying the induction principle that for any family of types `P(x)` indexed by `x:A+B`, there is a term
+
+satisfying the induction principle that for any family of types `P(x)` indexed by `x : A + B`, there is a term
+
 ```text
-ind-coproduct : (Π(x:A) P(inl(x)))→((Π(y:B) P(inr(y)))→Π(z:A+B) P(z))
+  ind-coprod : (Π(x : A) P(inl(x))) → ((Π(y : B) P(inr(y))) → Π(z : A + B) P(z))
 ```
+
 for which the computation rules
-```text
-ind-coproduct(f,g,inl(x)) ≐ f(x)
-ind-coproduct(f,g,inr(y)) ≐ g(y)
-```
-hold.
-Alternatively, a definition of a dependent function `h:Π(x:A+B) P(x)` by induction using `f:Π(x:A) P(inl(x))` and `g:Π(y:B) P(inr(y))` can be presented by pattern matching as
-```text
-h(inl(x)) ≔ f(x)
-h(inr(y)) ≔ g(y).
-```
-Sometimes we write `[f,g]` for the function `ind-coproduct(f,g)`.
-The coproduct of two types is sometimes also called the **disjoint sum**.
 
-<!-- rosetta-agda-block: section-4-4-coproducts-block-43 -->
+```text
+  ind-coprod(f,g,inl(x)) ≐ f(x)
+  ind-coprod(f,g,inr(y)) ≐ g(y)
+```
+
+hold. Alternatively, a definition of a dependent function `h : Π(x : A + B) P(x)` by induction using `f : Π(x : A) P(inl(x))` and `g : Π(y : B) P(inr(y))` can be presented by pattern matching as
+
+```text
+  h(inl(x)) ≔ f(x)
+  h(inr(y)) ≔ g(y).
+```
+
+Sometimes we write `[f,g]` for the function `ind-coprod(f,g)`. The coproduct of two types is sometimes also called the **disjoint sum**.
 
 ```agda
 infixr 10 _+_
@@ -59,36 +59,35 @@ rec-coproduct :
   (A → C) → (B → C) → (A + B) → C
 rec-coproduct {C = C} = ind-coproduct (λ _ → C)
 ```
-<!-- rosetta-item-end: definition-4.4.1 -->
 
 By the induction principle of coproducts we obtain a function
-```text
-ind-coproduct:(A→ X) → ((B→ X) → (A+B→ X))
-```
-for any type `X`.
-Note that this special case of the induction principle of coproducts is very similar to the elimination rule of disjunction in first order logic: if `P`, `P'`, and `Q` are propositions, then we have
-```text
-(P→ Q)→ ((P'→ Q)→ (P∨ P'→ Q)).
-```
-Indeed, we can think of *propositions as types* and of terms as their constructive proofs.
-Under this interpretation of type theory the coproduct is indeed the disjunction.
 
-## Remark 4.4.2
+```text
+  ind-coprod : (A → X) → ((B → X) → (A + B → X))
+```
 
-<!-- rosetta-item: remark-4.4.2; latex-label: rmk:functor-coprod -->
+for any type `X`. Note that this special case of the induction principle of coproducts is very similar to the elimination rule of disjunction in first order logic: if `P`, `P'`, and `Q` are propositions, then we have
+
+```text
+  (P → Q) → ((P' → Q)→ (P ∨ P' → Q)).
+```
+
+Indeed, we can think of *propositions as types* and of terms as their constructive proofs. Under this interpretation of type theory the coproduct is indeed the disjunction.
+
+### Remark 4.4.2
 
 A simple application of the induction principle for coproducts gives us a map
+
 ```text
-f+g:A+B→ A'+B'
-```
-for every `f:A→ A'` and `g:B→ B'`.
-Indeed, the map `f+g` is defined by
-```text
-(f+g)(inl(x)) ≔ inl(f(x))
-(f+g)(inr(y)) ≔ inr(g(y)).
+  f + g : A + B → A' + B'
 ```
 
-<!-- rosetta-agda-block: section-4-4-coproducts-block-93 -->
+for every `f : A → A'` and `g : B → B'`. Indeed, the map `f + g` is defined by
+
+```text
+    (f + g)(inl(x)) ≔ inl(f(x))
+    (f + g)(inr(y)) ≔ inr(g(y)).
+```
 
 ```agda
 map-coproduct :
@@ -98,51 +97,41 @@ map-coproduct :
 map-coproduct f g (inl x) = inl (f x)
 map-coproduct f g (inr y) = inr (g y)
 ```
-<!-- rosetta-item-end: remark-4.4.2 -->
 
-## Proposition 4.4.3
+### Proposition 4.4.3
 
-<!-- rosetta-item: proposition-4.4.3 -->
+  Consider two types `A` and `B`, and suppose that `B` is empty. Then there is a function
 
-Consider two types `A` and `B`, and suppose that `B` is empty.
-Then there is a function
 ```text
-(A+B)→ A.
+    (A + B) → A.
 ```
 
-<!-- rosetta-item-end: proposition-4.4.3 -->
+### Remark 4.4.4
 
-## Remark 4.4.4
+  In other words, there is a function
 
-<!-- rosetta-item: remark-4.4.4 -->
-
-In other words, there is a function
 ```text
-is-empty(B) → ((A+B)→ A),
+    is-empty(B) → ((A + B) → A),
 ```
-for any two types `A` and `B`.
-Similarly, there is a function
+
+for any two types `A` and `B`. Similarly, there is a function
+
 ```text
-is-empty(A)→ ((A+B)→ B),
+    is-empty(A) → ((A + B) → B),
 ```
+
 for any two types `A` and `B`.
 
-### Proof
+### Proof of Proposition 4.4.3
 
-<!-- rosetta-item: subheading-4.4-proof -->
+  We will construct the function `(A + B) → A` with the induction principle of the coproduct `A + B`. Therefore, we must construct two functions:
 
-*Proof.* We will construct the function `(A+B)→ A` with the induction principle of the coproduct `A+B`.
-Therefore, we must construct two functions:
 ```text
-f : A→ A
-g : B→ A.
+    f : A → A
+    g : B → A.
 ```
-The function `f` is simply defined to be the identity function `id:A→ A`.
-Recall that we have assumed that `B` is empty, so we have a function `b̃:B→empty`.
-Furthermore, we always have the function `ex-falso:empty→ A`.
-Therefore, we can define `g≔ ex-falso∘ b̃` to complete the proof. ◻
 
-<!-- rosetta-agda-block: section-4-4-coproducts-block-137 -->
+The function `f` is simply defined to be the identity function `\idfunc : A → A`. Recall that we have assumed that `B` is empty, so we have a function `b̃ : B → ∅`. Furthermore, we always have the function `\exfalso : ∅ → A`. Therefore, we can define `g≔ \exfalso\circ b̃` to complete the proof.
 
 ```agda
 map-left-unit-law-coproduct :
@@ -157,4 +146,3 @@ map-right-unit-law-coproduct :
 map-right-unit-law-coproduct H (inl x) = x
 map-right-unit-law-coproduct H (inr x) = ex-falso (H x)
 ```
-<!-- rosetta-item-end: remark-4.4.4 -->
