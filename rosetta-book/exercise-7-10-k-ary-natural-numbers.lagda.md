@@ -32,32 +32,39 @@ open import section-2-2-ordinary-function-types
 ## Problem statement
 
 The type `ℕ_k` of **`k`-ary natural numbers** is an inductive type with the following constructors:
+
 ```text
-\constantbasedN{k} : Fin{k}→\basedN{k}
-\unaryopbasedN{k} : Fin{k}→ (\basedN{k}→\basedN{k}).
+constant-based-ℕ{k} : Fin{k} → based-ℕ{k}
+unary-op-based-ℕ{k} : Fin{k} → (based-ℕ{k} → based-ℕ{k}).
 ```
-A `k`-ary natural number can be converted back into an ordinary natural number via the function `\convertbasedN{k}:\basedN{k}→ℕ`, which is defined recursively by
+
+A `k`-ary natural number can be converted back into an ordinary natural number via the function `convert-based-ℕ{k}:\basedN{k}→ℕ`, which is defined recursively by
+
 ```text
-\convertbasedN{k}(\constantbasedN{k}(x)) ≔ nat-Fin(x)
-\convertbasedN{k}(\unaryopbasedN{k}(x,n)) ≔ k(\convertbasedN{k}(n)+1)+nat-Fin(x).
+convert-based-ℕ{k}(constant-based-ℕ {k}(x)) ≔ nat-Fin(x)
+convert-based-ℕ{k}(unary-op-based-ℕ{k}(x,n)) ≔ k(convert-based-ℕ{k}(n)+1)+nat-Fin(x).
 ```
 
 <div class="subexenum">
 
-Show that the type `\basedN{0}` is empty.
+Show that the type `based-ℕ{0}` is empty.
 
-Show that the function `\convertbasedN{k}:\basedN{k}→ℕ` is injective.
+Show that the function `convert-based-ℕ{k}:based-ℕ{k}→ℕ` is injective.
 
-Show that the function `\convertbasedN{k+1}:\basedN{k+1}→ℕ` has an inverse, i.e. construct a function
+Show that the function `convert-based-ℕ{k+1}:based-ℕ{k+1}→ℕ` has an inverse, i.e. construct a function
+
 ```text
-g_{k} : ℕ→\basedN{k+1}
+g_{k} : ℕ→based-ℕ{k+1}
 ```
+
 equipped with identifications
+
 ```text
-\convertbasedN{k+1}(g_k(n)) = n
-g_{k}(\convertbasedN{k+1}(x)) = x
+convert-based-ℕ{k+1}(g_k(n)) = n
+g_{k}(convert-based-ℕ{k+1}(x)) = x
 ```
-for each `n:ℕ` and each `x:\basedN{k+1}`.
+
+for each `n:ℕ` and each `x: based-ℕ {k+1}`.
 
 </div>
 
