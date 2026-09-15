@@ -12,9 +12,6 @@ For any two maps `f:A→ X` and `g:B→ X`, define the type of **morphisms from 
 hom-slice_X(f,g)≔ Σ(h:A→ B) f~ g∘ h.
 ```
 In other words, the type `hom-slice_X(f,g)` is the type of maps `h:A→ B` equipped with a homotopy witnessing that the triangle
-<!-- rosetta-diagram: adc9008040dd; review: pending -->
-
-*Triangle-shaped diagram (automatic draft).*
 
 ```text
  [A]                 [B]
@@ -38,9 +35,6 @@ Show that the map
 given by `h↦ h_{f(a)}(a,refl)` is an equivalence.
 
 Construct three equivalences `α`, `β`, and `γ` as shown in the following diagram, and show that this triangle commutes:
-<!-- rosetta-diagram: 996e8242ed9a; review: pending -->
-
-*Triangle-shaped diagram (automatic draft).*
 
 ```text
                                    [hom-slice_X(f,g)]
