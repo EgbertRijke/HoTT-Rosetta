@@ -4,6 +4,7 @@
 module exercise-4-3-double-negation-logic where
 
 open import universe-levels
+open import section-2-1-the-rules-for-dependent-function-types
 open import section-2-2-ordinary-function-types
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
@@ -154,6 +155,25 @@ is-irrefutable-is-decidable H = H (inr (H ∘ inl))
 
 ### Exercise 4.4(d)
 
+```agda
+double-negation-elim-is-decidable :
+  {l : Level} {P : Type l} → P + ¬ P → (¬¬ P → P)
+double-negation-elim-is-decidable (inl x) p = x
+double-negation-elim-is-decidable (inr x) p = ex-falso (p x)
+```
+
+Statemets 2 and 3 are missing.
+
 ### Exercise 4.4(e)
 
+```agda
+double-negation-elim-neg :
+  {l : Level} (A : Type l) → ¬¬¬ A → ¬ A
+double-negation-elim-neg A f p = f (ev p)
+```
+
+Statements 2 and 3 are missing.
+
 ### Exercise 4.4(f)
+
+Statements 1, 2, and 3 are missing.

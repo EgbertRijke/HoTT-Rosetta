@@ -1,6 +1,5 @@
 Currently unsolved (auto)formalization exercises can be found in the following files:
 
-- rosetta-book/exercise-4-1-exercise.lagda.md
 - rosetta-book/exercise-8-5-characterization-prime.lagda.md
 - rosetta-book/exercise-8-8-decidable-equality-sigma-types.lagda.md
 - rosetta-book/exercise-8-9-finite-dependent-products.lagda.md
@@ -70,7 +69,7 @@ Currently unsolved (auto)formalization exercises can be found in the following f
 
 The following files contain partial solutions but not full solutions:
 
-- rosetta-book/exercise-4-3-negation.lagda.md
+- rosetta-book/exercise-4-3-double-negation-logic.lagda.md
 - rosetta-book/exercise-8-7-decidable-equality-coproducts.lagda.md
 - rosetta-book/exercise-9-5-sigma-swap.lagda.md
 - rosetta-book/exercise-10-7-fibers-of-projections.lagda.md

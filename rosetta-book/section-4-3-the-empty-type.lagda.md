@@ -88,10 +88,13 @@ In type theory, however, note that the type `¬¬ A` is the type of functions
 ```
 
 ```agda
-infix 25 ¬¬_
+infix 25 ¬¬_ ¬¬¬_
 
 ¬¬_ : {l : Level} → Type l → Type l
 ¬¬ P = ¬ ¬ P
+
+¬¬¬_ : {l : Level} → Type l → Type l
+¬¬¬ P = ¬ ¬ ¬ P
 ```
 
 This type is quite different from the type `A` itself, and with the given rules of type theory it is not possible to construct a function `¬¬ A → A` unless more is known about the type `A`.
