@@ -14,9 +14,6 @@ Characterize the identity types of the following types:
 The type `Σ(h:A→ B) h(a)=b` of **pointed maps**, where `a:A` and `b:B` are given.
 
 The type `Σ(h:A→ B) f~ g∘ h` of commuting triangles
-<!-- rosetta-diagram: 62b037b9ddb2; review: pending -->
-
-*Triangle-shaped diagram (automatic draft).*
 
 ```text
  [A]                 [B]
@@ -31,9 +28,6 @@ Arrows:
 where `f:A→ X` and `g:B→ X` are given.
 
 The type `Σ(h:X→ Y) h∘ f~ g` of commuting triangles
-<!-- rosetta-diagram: 78beea117d39; review: pending -->
-
-*Triangle-shaped diagram (automatic draft).*
 
 ```text
            [A]
@@ -48,9 +42,6 @@ Arrows:
 where `f:A→ X` and `g:A→ Y` are given.
 
 The type `Σ(i:A→ X) Σ(j:B→ Y) j∘ f~ g∘ i` of commuting squares
-<!-- rosetta-diagram: 806455b47280; review: pending -->
-
-*Square-shaped diagram (automatic draft).*
 
 ```text
  [A] ----> [X]

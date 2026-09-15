@@ -29,9 +29,9 @@ Show that the following are equivalent:
 1.  Each `f_i` is `k`-truncated.
 
 2.  For every map `α:X→ I`, the map
-```text
-λ h. λ x. f_{α(x)}(h(x)):(Π(x:X) A_{α(x)})→(Π(x:X) B_{α(x)})
-```
+    ```text
+    λ h. λ x. f_{α(x)}(h(x)):(Π(x:X) A_{α(x)})→(Π(x:X) B_{α(x)})
+    ```
     is `k`-truncated.
 
 Show that for any map `f:A→ B` the following are equivalent:
@@ -39,9 +39,9 @@ Show that for any map `f:A→ B` the following are equivalent:
 1.  The map `f` is `k`-truncated.
 
 2.  For every type `X`, the postcomposition function
-```text
-f∘_ : (X→ A)→ (X→ B)
-```
+    ```text
+    f∘_ : (X→ A)→ (X→ B)
+    ```
     is `k`-truncated.
 
 In particular, `f` is an equivalence if and only if `f∘_` is an equivalence, and `f` is an embedding if and only if `f∘_` is an embedding.

@@ -10,8 +10,6 @@ module exercise-11-11-fiber-triangles where
 Consider a triangle
 <!-- rosetta-diagram: 962a48c2124b; review: pending -->
 
-*Triangle-shaped diagram (automatic draft).*
-
 ```text
  [A]                 [B]
 
@@ -32,8 +30,6 @@ fib-triangle(h,H):Π(x:X) fib(f, x)→fib(g, x),
 ```
 for which the square
 <!-- rosetta-diagram: 40f9e5a7bf45; review: pending -->
-
-*Square-shaped diagram (automatic draft).*
 
 ```text
 [Σ(x:X) fib(f, x)]---->[Σ(x:X) fib(g, x)]

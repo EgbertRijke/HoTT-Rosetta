@@ -18,17 +18,11 @@ open import section-9-2-bi-invertible-maps
 <div class="subexenum">
 
 Consider a section-retraction pair
-<!-- rosetta-diagram: af030234c6b2; review: pending -->
-
-*Linear diagram (automatic draft).*
 
 ```text
- [A] ----> [B] ----> [A]
-
-Arrows:
-- A --i--> B
-- B --r--> A
+ [A] --i--> [B] --r--> [A]
 ```
+
 with `H:r∘ i~ id`.
 Show that `x = y` is a retract of `i(x) = i(y)`.
 

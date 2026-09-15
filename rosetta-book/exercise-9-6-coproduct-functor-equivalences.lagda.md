@@ -19,14 +19,8 @@ Show that `id[A]+id[B]~ id[A+B]`.
 Show that for any two pairs of composable functions
 <!-- rosetta-diagram: 4ee2185c74da; review: pending -->
 
-*Linear diagram (automatic draft).*
-
 ```text
- [A] ----> [A']---->[A'']
-
-Arrows:
-- A --f--> A'
-- A' --{f'}--> A''
+ [A] --f--> [A']--{f'}-->[A'']
 ```
 there is a homotopy `(f'∘ f)+(g'∘ g) ~ (f'+g')∘ (f+g)`.
 

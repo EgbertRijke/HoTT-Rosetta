@@ -8,16 +8,9 @@ module exercise-13-18-retracts-as-limits where
 ## Problem statement
 
 (Shulman) Consider a section-retraction pair
-<!-- rosetta-diagram: dff8c57ba552; review: pending -->
-
-*Linear diagram (automatic draft).*
 
 ```text
- [A] ----> [X] ----> [A]
-
-Arrows:
-- A --i--> X
-- X --r--> A
+ [A] --i--> [X] --r--> [A]
 ```
 with `H:r∘ i~ id` and define `f≔ i∘ r`.
 Construct an equivalence
