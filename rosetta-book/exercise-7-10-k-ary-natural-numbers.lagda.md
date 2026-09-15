@@ -38,7 +38,7 @@ constant-based-ℕ{k} : Fin{k} → based-ℕ{k}
 unary-op-based-ℕ{k} : Fin{k} → (based-ℕ{k} → based-ℕ{k}).
 ```
 
-A `k`-ary natural number can be converted back into an ordinary natural number via the function `convert-based-ℕ{k}:\basedN{k}→ℕ`, which is defined recursively by
+A `k`-ary natural number can be converted back into an ordinary natural number via the function `convert-based-ℕ{k}:based-ℕ{k}→ℕ`, which is defined recursively by
 
 ```text
 convert-based-ℕ{k}(constant-based-ℕ {k}(x)) ≔ nat-Fin(x)
