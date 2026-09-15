@@ -134,15 +134,29 @@ for any two types `A` and `B`.
 The function `f` is simply defined to be the identity function `\idfunc : A → A`. Recall that we have assumed that `B` is empty, so we have a function `b̃ : B → ∅`. Furthermore, we always have the function `\exfalso : ∅ → A`. Therefore, we can define `g≔ \exfalso\circ b̃` to complete the proof.
 
 ```agda
+module _
+  {l1 l2 : Level} (A : Type l1) (B : Type l2) (H : is-empty A)
+  where
+
+  map-left-unit-law-coproduct-is-empty : A + B → B
+  map-left-unit-law-coproduct-is-empty (inl a) = ex-falso (H a)
+  map-left-unit-law-coproduct-is-empty (inr b) = b
+
 map-left-unit-law-coproduct :
   {l1 l2 : Level} {A : Type l1} {B : Type l2} →
   is-empty A → A + B → B
-map-left-unit-law-coproduct H (inl x) = ex-falso (H x)
-map-left-unit-law-coproduct H (inr y) = y
+map-left-unit-law-coproduct = map-left-unit-law-coproduct-is-empty _ _
+
+module _
+  {l1 l2 : Level} (A : Type l1) (B : Type l2) (H : is-empty B)
+  where
+
+  map-right-unit-law-coproduct-is-empty : A + B → A
+  map-right-unit-law-coproduct-is-empty (inl a) = a
+  map-right-unit-law-coproduct-is-empty (inr b) = ex-falso (H b)
 
 map-right-unit-law-coproduct :
   {l1 l2 : Level} {A : Type l1} {B : Type l2} →
   is-empty B → A + B → A
-map-right-unit-law-coproduct H (inl x) = x
-map-right-unit-law-coproduct H (inr x) = ex-falso (H x)
+map-right-unit-law-coproduct = map-right-unit-law-coproduct-is-empty _ _
 ```
