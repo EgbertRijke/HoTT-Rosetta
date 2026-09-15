@@ -21,9 +21,11 @@ In this section we will define equivalences of types.
 However, we have to be a bit careful in how we define the condition for a map to be an equivalence.
 It turns out to be important that being an equivalence is a *property* of maps, and not a *structure* on maps.
 In other words, we want to define the type
+
 ```text
-is-equiv(f)
+  is-equiv(f)
 ```
+
 in such a way that we will be able to prove that the type `is-equiv(f)` is a *proposition*.
 Propositions will be defined in Chapter 12, and in Chapter 13 we will be able to prove that `is-equiv(f)` is indeed a proposition.
 

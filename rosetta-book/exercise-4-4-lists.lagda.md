@@ -14,12 +14,11 @@ open import exercise-3-1-multiplication-and-exponentiation
 For any type `A`, we can define the type `list(A)` of **lists** of elements of `A` as the inductive type with constructors
 
 ```text
-    nil : list(A)
-    const : A → (list(A) → list(A))
+  nil : list(A)
+  const : A → (list(A) → list(A))
 ```
 
 ```agda
-
 data list {l : Level} (A : Type l) : Type l where
   nil : list A
   cons : A → list A → list A

@@ -18,46 +18,51 @@ open import section-5-4-transport
 open import exercise-5-2-inverse-concatenation-maps
 ```
 
-<!-- rosetta-item: section-9.1 -->
-
 In type theory we are very limited in constructing identifications of functions.
 The following example illustrates a case where type theory provides no rules to construct an identification between two maps, even though they are pointwise equal.
 
 ## Remark 9.1.1
 
-<!-- rosetta-item: remark-9.1.1; latex-label: rmk:negnegbool -->
-
 Consider the negation function `neg-bool : bool→bool` on the booleans, which was defined in Exercise 4.2.
 Type theory does not provide any means to show that
+
 ```text
-neg-bool∘neg-bool=id.
+  neg-bool ∘ neg-bool = id.
 ```
+
 The best we can do is to construct an identification
+
 ```text
-neg-neg-bool(b) : neg-bool(neg-bool(b))=b
+  neg-neg-bool(b) : neg-bool(neg-bool(b)) = b
 ```
-for any `b:bool`.
+
+for any `b : bool`.
 Indeed, `neg-neg-bool` is defined using the induction principle of `bool`, by
+
 ```text
-neg-neg-bool(true) ≔ refl
-neg-neg-bool(false) ≔ refl.
+   neg-neg-bool(true) ≔ refl,
+  neg-neg-bool(false) ≔ refl.
 ```
-Therefore we see that, while we cannot identify `neg-bool∘neg-bool` with `id`, we can define a *pointwise identification* between the values of `neg-bool∘neg-bool` and `id`.
 
-<!-- rosetta-item-end: remark-9.1.1 -->
+Therefore we see that, while we cannot identify `neg-bool ∘ neg-bool` with `id`, we can define a *pointwise identification* between the values of `neg-bool ∘ neg-bool` and `id`.
 
-The observations in Remark 9.1.1 are an instance of a general phenomenon in type theory: it is often much easier to construct a *pointwise identification* between the values of two maps, than it is to construct an identification between those two maps.
+```agda
+is-involution-neg-bool : (b : bool) → neg-bool (neg-bool b) ＝ b
+is-involution-neg-bool true = refl
+is-involution-neg-bool false = refl
+```
+
+The observations in Remark 9.1.1 are an instance of a general phenomenon in type theory: It is often much easier to construct a *pointwise identification* between the values of two maps, than it is to construct an identification between those two maps.
 In fact, the prevalent notion of sameness of maps is the notion of pointwise identification.
 Since they are so important, we will give them a name and call them *homotopies*.
 
 ## Definition 9.1.2
 
-<!-- rosetta-item: definition-9.1.2 -->
-
-Let `f,g:Π(x:A) B(x)` be two dependent functions.
+Let `f, g : Π(x : A) B(x)` be two dependent functions.
 The type of **homotopies** from `f` to `g` is defined as the type of pointwise identifications, i.e., we define
+
 ```text
-f~ g ≔ Π(x:A) f(x)=g(x).
+  f ~ g ≔ Π(x : A) f(x) = g(x).
 ```
 
 <!-- rosetta-agda-block: definition-9.1.2-homotopies -->
@@ -71,83 +76,80 @@ module _
   _~_ : (f g : (x : A) → B x) → Type (l1 ⊔ l2)
   f ~ g = (x : A) → f x ＝ g x
 ```
-<!-- rosetta-item-end: definition-9.1.2 -->
 
 ## Example 9.1.3
 
-<!-- rosetta-item: example-9.1.3 -->
-
 By Remark 9.1.1 we have a homotopy
+
 ```text
-neg-neg-bool : neg-bool∘neg-bool~id.
+  neg-neg-bool : neg-bool ∘ neg-bool ~ id.
 ```
-
-<!-- rosetta-agda-block: remark-9.1.1-negation-involution -->
-
-```agda
-neg-neg-bool : (neg-bool ∘ neg-bool) ~ id
-neg-neg-bool true = refl
-neg-neg-bool false = refl
-```
-
-<!-- rosetta-agda-block: remark-9.2.6-involutions -->
-
-```agda
-module _
-  {l : Level} {A : Type l}
-  where
-
-  is-involution : (A → A) → Type l
-  is-involution f = (f ∘ f) ~ id
-```
-<!-- rosetta-item-end: example-9.1.3 -->
 
 ## Remark 9.1.4
 
-<!-- rosetta-item: remark-9.1.4; latex-label: rmk:commuting-diagrams -->
-
 We will use homotopies, for example, to express the commutativity of diagrams.
 For example, we say that a triangle
-<!-- rosetta-diagram: 962a48c2124b; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
 ```text
- [A]                 [B]
-
-           [X]
-
-Arrows:
-- A --h--> B
-- A --f--> X
-- B --g--> X
+      h
+  A ----> B
+   \     /
+  f \   / g
+     ∨ ∨
+      X
 ```
-**commutes** if it comes equipped with a homotopy `H:f~ g∘ h`.
+
+**commutes** if it comes equipped with a homotopy `H : f ~ g ∘ h`.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : Type l1} {A : Type l2} {B : Type l3}
+  where
+
+  coherence-triangle-maps :
+    (left : A → X) (right : B → X) (top : A → B) → Type (l1 ⊔ l2)
+  coherence-triangle-maps left right top = left ~ right ∘ top
+
+  coherence-triangle-maps' :
+    (left : A → X) (right : B → X) (top : A → B) → Type (l1 ⊔ l2)
+  coherence-triangle-maps' left right top = right ∘ top ~ left
+```
+
 Similarly, we say that a square
-<!-- rosetta-diagram: f5ddaf96d5be; review: pending -->
-
-*Square-shaped diagram (automatic draft).*
 
 ```text
- [A] ----> [A']
-  |         |
- [B] ----> [B']
-
-Arrows:
-- A --g--> A'
-- A --f--> B
-- A' --{f'}--> B'
-- B --h--> B'
+         g
+    A ------> A'
+    |         |
+  f |         | f'
+    ∨         ∨
+    B ------> B'
+         h
 ```
-commutes if it comes equipped with a homotopy `h ∘ f~ f'∘ g`.
 
-<!-- rosetta-item-end: remark-9.1.4 -->
+commutes if it comes equipped with a homotopy `h ∘ f ~ f' ∘ g`.
 
-Note that the type of homotopies `f~ g` is defined for dependent functions, and moreover the type of homotopies is itself a dependent function type.
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : Type l1} {B : Type l2} {C : Type l3} {X : Type l4}
+  (top : C → B) (left : C → A) (right : B → X) (bottom : A → X)
+  where
+
+  coherence-square-maps : Type (l3 ⊔ l4)
+  coherence-square-maps = bottom ∘ left ~ right ∘ top
+
+  coherence-square-maps' : Type (l3 ⊔ l4)
+  coherence-square-maps' = right ∘ top ~ bottom ∘ left
+```
+
+Note that the type of homotopies `f ~ g` is defined for dependent functions, and moreover the type of homotopies is itself a dependent function type.
 The definition of homotopies is therefore set up in such a way that we may also consider homotopies *between* homotopies, and even further homotopies between those higher homotopies.
-More concretely, if `H,K:f~ g` are two homotopies, then the type of homotopies `H~ K` between them is just the type
+More concretely, if `H, K : f ~ g` are two homotopies, then the type of homotopies `H ~ K` between them is just the type
+
 ```text
-Π(x:A) H(x)=K(x).
+  Π(x : A) H(x) = K(x).
 ```
 
 Since homotopies are pointwise identifications, we can use the groupoidal structure of identity types to also define the groupoidal structure of homotopies.
@@ -155,23 +157,23 @@ In this case, however, we state the groupoid laws as *homotopies* and *homotopie
 
 ## Definition 9.1.5
 
-<!-- rosetta-item: definition-9.1.5; latex-label: defn:htpy_groupoid -->
-
 For any type family `B` over `A` we define the operations on homotopies
-```text
-refl-htpy : Π(f:Π(x:A) B(x)) f~ f
-inv-htpy : Π(f,g:Π(x:A) B(x)) (f~ g)→(g~ f)
-concat-htpy : Π(f,g,h:Π(x:A) B(x)) (f~ g)→ ((g~ h)→ (f~ h))
-```
-pointwise by
-```text
-refl-htpy(f) ≔ λ x. refl
-inv-htpy(H) ≔ λ x. H(x)^{-1}
-concat-htpy(H,K) ≔ λ x. H(x) ∙ K(x).
-```
-We will often write `H^{-1}` for `inv-htpy(H)`, and `H ∙ K` for `concat-htpy(H,K)`.
 
-<!-- rosetta-agda-block: definition-9.1.5-reflexive-homotopy -->
+```text
+    refl-htpy : Π(f : Π(x : A) B(x)) f ~ f,
+     inv-htpy : Π(f, g : Π(x : A) B(x)) (f ~ g) → (g ~ f),
+  concat-htpy : Π(f, g, h : Π(x : A) B(x)) (f ~ g) → ((g ~ h) → (f ~ h)),
+```
+
+pointwise by
+
+```text
+      refl-htpy(f) ≔ λ x. refl,
+       inv-htpy(H) ≔ λ x. H(x)⁻¹,
+  concat-htpy(H,K) ≔ λ x. H(x) ∙ K(x).
+```
+
+We will often write `H⁻¹` for `inv-htpy(H)`, and `H ∙ K` for `concat-htpy(H,K)`.
 
 ```agda
 module _
@@ -183,23 +185,12 @@ module _
 
   refl-htpy' : (f : (x : A) → B x) → f ~ f
   refl-htpy' f = refl-htpy
-```
 
-<!-- rosetta-agda-block: definition-9.1.5-inverse-homotopy-code -->
-
-```agda
   inv-htpy : {f g : (x : A) → B x} → f ~ g → g ~ f
   inv-htpy H x = inv (H x)
-```
-
-<!-- rosetta-agda-block: definition-9.1.5-concatenation-homotopy-code -->
-
-```agda
-module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
-  where
 
   infixl 15 _∙h_
+
   _∙h_ : {f g h : (x : A) → B x} → f ~ g → g ~ h → f ~ h
   (H ∙h K) x = (H x) ∙ (K x)
 
@@ -213,45 +204,46 @@ module _
     g ~ h → f ~ g → f ~ h
   concat-htpy' f K H = H ∙h K
 ```
-<!-- rosetta-item-end: definition-9.1.5 -->
 
 ## Proposition 9.1.6
 
-<!-- rosetta-item: proposition-9.1.6 -->
-
 Homotopies satisfy the groupoid laws:
 
-1.  Concatenation of homotopies is associative up to homotopy, i.e., there is a homotopy
-```text
-assoc-htpy(H,K,L) : (H ∙ K) ∙ L~H ∙ (K ∙ L)
-```
-    for any homotopies `H:f~ g`, `K:g~ h` and `L:h~ i`.
+1. Concatenation of homotopies is associative up to homotopy, i.e., there is a homotopy
 
-2.  Homotopies satisfy the left and right unit laws up to homotopy, i.e., there are homotopies
-```text
-left-unit-htpy(H) : refl-htpy_f ∙ H~ H
-right-unit-htpy(H) : H ∙ refl-htpy_g~ H
-```
-    for any homotopy `H`.
+   ```text
+     assoc-htpy(H,K,L) : (H ∙ K) ∙ L~H ∙ (K ∙ L)
+   ```
 
-3.  Homotopies satisfy the left and right inverse laws up to homotopy, i.e., there are homotopies
-```text
-left-inv-htpy(H) : H^{-1} ∙ H ~ refl-htpy_g
-right-inv-htpy(H) : H ∙ H^{-1} ~ refl-htpy_f
-```
-    for any homotopy `H`.
+   for any homotopies `H : f ~ g`, `K : g ~ h` and `L : h ~ i`.
+
+2. Homotopies satisfy the left and right unit laws up to homotopy, i.e., there are homotopies
+
+   ```text
+      left-unit-htpy(H) : refl-htpy(f) ∙ H ~ H
+     right-unit-htpy(H) : H ∙ refl-htpy(g) ~ H
+   ```
+
+   for any homotopy `H`.
+
+3. Homotopies satisfy the left and right inverse laws up to homotopy, i.e., there are homotopies
+
+   ```text
+      left-inv-htpy(H) : H⁻¹ ∙ H ~ refl-htpy(g)
+     right-inv-htpy(H) : H ∙ H⁻¹ ~ refl-htpy(f)
+   ```
+
+   for any homotopy `H`.
 
 ### Proof
 
-<!-- rosetta-item: subheading-9.1-proof -->
+The homotopy `assoc-htpy(H,K,L)` is defined pointwise by
 
-*Proof.* The homotopy `assoc-htpy(H,K,L)` is defined pointwise by
 ```text
-assoc-htpy(H,K,L,x) ≔ assoc(H(x),K(x),L(x)).
+  assoc-htpy(H,K,L,x) ≔ assoc(H(x),K(x),L(x)).
 ```
-The other homotopies are similarly defined pointwise. ◻
 
-<!-- rosetta-agda-block: proposition-9.1.6-associativity -->
+The other homotopies are similarly defined pointwise. ◻
 
 ```agda
 module _
@@ -264,11 +256,7 @@ module _
 
   inv-htpy-assoc-htpy : H ∙h (K ∙h L) ~ (H ∙h K) ∙h L
   inv-htpy-assoc-htpy = inv-htpy assoc-htpy
-```
 
-<!-- rosetta-agda-block: proposition-9.1.6-unit-laws -->
-
-```agda
 module _
   {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
   {f g : (x : A) → B x} {H : f ~ g}
@@ -285,15 +273,6 @@ module _
 
   inv-htpy-right-unit-htpy : H ~ H ∙h refl-htpy
   inv-htpy-right-unit-htpy = inv-htpy right-unit-htpy
-```
-
-<!-- rosetta-agda-block: proposition-9.1.6-inverse-laws -->
-
-```agda
-module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
-  {f g : (x : A) → B x} (H : f ~ g)
-  where
 
   left-inv-htpy : inv-htpy H ∙h H ~ refl-htpy
   left-inv-htpy = left-inv ∘ H
@@ -308,75 +287,33 @@ module _
   inv-htpy-right-inv-htpy = inv-htpy right-inv-htpy
 ```
 
-<!-- rosetta-agda-block: lemma-10.4.5-transpose-homotopy-helper -->
-
-```agda
-module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} {f g h : (x : A) → B x}
-  (H : f ~ g) (K : g ~ h) (L : f ~ h) (M : H ∙h K ~ L)
-  where
-
-  left-transpose-htpy-concat : K ~ inv-htpy H ∙h L
-  left-transpose-htpy-concat x =
-    left-transpose-eq-concat (H x) (K x) (L x) (M x)
-
-  inv-htpy-left-transpose-htpy-concat : inv-htpy H ∙h L ~ K
-  inv-htpy-left-transpose-htpy-concat = inv-htpy left-transpose-htpy-concat
-```
-
-<!-- rosetta-agda-block: lemma-10.4.5-whisker-concatenation-helper -->
-
-```agda
-module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
-  where
-
-  right-whisker-concat-htpy :
-    {f g h : (x : A) → B x} {H I : f ~ g} → H ~ I → (J : g ~ h) → H ∙h J ~ I ∙h J
-  right-whisker-concat-htpy K J x = right-whisker-concat (K x) (J x)
-```
-<!-- rosetta-item-end: proposition-9.1.6 -->
-
 Apart from the groupoid operations and their laws, we will occasionally need *whiskering* operations.
 Whiskering operations are operations that allow us to compose homotopies with functions.
-There are two situations where we want this:
-<!-- rosetta-diagram: ffc214eead5e; review: pending -->
-
-*Linear diagram (automatic draft).*
+There are two situations where we want to do this:
 
 ```text
- [A] ----> [B] ----> [C]       [A] ----> [B] ----> [C]
-
-Arrows:
-- A --unlabeled--> B
-- A --unlabeled--> B
-- A --⇓--> custom target
-- B --unlabeled--> C
-- A --unlabeled--> B
-- B --unlabeled--> C
-- B --unlabeled--> C
-- B --⇓--> custom target
+     ---->                                   ---->
+ [A]   ⇓   [B] ----> [C]       [A] ----> [B]   ⇓   [C]
+     ---->                                   ---->
 ```
 
 ## Definition 9.1.7
 
-<!-- rosetta-item: definition-9.1.7 -->
-
 We define the following **whiskering** operations on homotopies:
 
-1.  Suppose `H:f~ g` for two functions `f,g:A→ B`, and let `h:B→ C`.
-We define
-```text
-h· H≔ λ x. ap_{h}(H(x)):h∘ f~ h∘ g.
-```
+1. Suppose `H : f ~ g` for two functions `f, g : A → B`, and let `h : B → C`.
+   We define
 
-2.  Suppose `f:A→ B` and `H:g~ h` for two functions `g,h:B→ C`.
-We define
-```text
-H· f≔λ x. H(f(x)):g∘ f~ h∘ f.
-```
+   ```text
+     h · H ≔ λ x. ap_{h}(H(x)) : h ∘ f ~ h ∘ g.
+   ```
 
-<!-- rosetta-agda-block: definition-9.1.7-whiskering -->
+2. Suppose `f : A → B` and `H : g ~ h` for two functions `g, h : B → C`.
+   We define
+
+   ```text
+     H · f ≔ λ x. H(f(x)) : g ∘ f ~ h ∘ f.
+   ```
 
 ```agda
 module _
@@ -389,12 +326,9 @@ module _
   left-whisker-comp h H x = ap h (H x)
 
   infixr 17 _·l_
+
   _·l_ = left-whisker-comp
-```
 
-### Right whiskering of homotopies
-
-```agda
 module _
   {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : (x : A) → B x → Type l3}
   where
@@ -406,41 +340,6 @@ module _
   right-whisker-comp H f x = H (f x)
 
   infixl 16 _·r_
+
   _·r_ = right-whisker-comp
 ```
-
-<!-- rosetta-agda-block: lemma-10.4.5-composition-whisker-helper -->
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level}
-  {A : Type l1} {B : A → Type l2} {C : A → Type l3} {D : A → Type l4}
-  where
-
-  inv-preserves-comp-left-whisker-comp :
-    ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
-    ( H : f ~ g) →
-    (k ∘ h) ·l H ~ k ·l (h ·l H)
-  inv-preserves-comp-left-whisker-comp k h H x = ap-comp k h (H x)
-
-  preserves-comp-left-whisker-comp :
-    ( k : {x : A} → C x → D x) (h : {x : A} → B x → C x) {f g : (x : A) → B x}
-    ( H : f ~ g) →
-    k ·l (h ·l H) ~ (k ∘ h) ·l H
-  preserves-comp-left-whisker-comp k h H =
-    inv-htpy (inv-preserves-comp-left-whisker-comp k h H)
-```
-
-<!-- rosetta-agda-block: lemma-10.4.5-higher-whisker-helper -->
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
-  {f g : (x : A) → B x}
-  where
-
-  left-whisker-comp² :
-    (h : {x : A} → B x → C x) {H H' : f ~ g} (α : H ~ H') → h ·l H ~ h ·l H'
-  left-whisker-comp² h α = ap h ·l α
-```
-<!-- rosetta-item-end: definition-9.1.7 -->
