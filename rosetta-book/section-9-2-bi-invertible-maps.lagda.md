@@ -636,23 +636,280 @@ module _
 
 ### The equivalence `A + B ≃ B + A`
 
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  where
+
+  map-commutative-coproduct : A + B → B + A
+  map-commutative-coproduct (inl a) = inr a
+  map-commutative-coproduct (inr b) = inl b
+
+  map-inv-commutative-coproduct : B + A → A + B
+  map-inv-commutative-coproduct (inl b) = inr b
+  map-inv-commutative-coproduct (inr a) = inl a
+
+  is-section-map-inv-commutative-coproduct :
+    ( map-commutative-coproduct ∘ map-inv-commutative-coproduct) ~ id
+  is-section-map-inv-commutative-coproduct (inl b) = refl
+  is-section-map-inv-commutative-coproduct (inr a) = refl
+
+  is-retraction-map-inv-commutative-coproduct :
+    ( map-inv-commutative-coproduct ∘ map-commutative-coproduct) ~ id
+  is-retraction-map-inv-commutative-coproduct (inl a) = refl
+  is-retraction-map-inv-commutative-coproduct (inr b) = refl
+
+  is-equiv-map-commutative-coproduct : is-equiv map-commutative-coproduct
+  is-equiv-map-commutative-coproduct =
+    is-equiv-is-invertible
+      map-inv-commutative-coproduct
+      is-section-map-inv-commutative-coproduct
+      is-retraction-map-inv-commutative-coproduct
+
+  commutative-coproduct : (A + B) ≃ (B + A)
+  pr1 commutative-coproduct = map-commutative-coproduct
+  pr2 commutative-coproduct = is-equiv-map-commutative-coproduct
+```
+
 ### The equivalence `(A + B) + C ≃ A + (B + C)`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3}
+  where
+
+  map-associative-coproduct : (A + B) + C → A + (B + C)
+  map-associative-coproduct (inl (inl x)) = inl x
+  map-associative-coproduct (inl (inr x)) = inr (inl x)
+  map-associative-coproduct (inr x) = inr (inr x)
+
+  map-inv-associative-coproduct : A + (B + C) → (A + B) + C
+  map-inv-associative-coproduct (inl x) = inl (inl x)
+  map-inv-associative-coproduct (inr (inl x)) = inl (inr x)
+  map-inv-associative-coproduct (inr (inr x)) = inr x
+
+  is-section-map-inv-associative-coproduct :
+    (map-associative-coproduct ∘ map-inv-associative-coproduct) ~ id
+  is-section-map-inv-associative-coproduct (inl x) = refl
+  is-section-map-inv-associative-coproduct (inr (inl x)) = refl
+  is-section-map-inv-associative-coproduct (inr (inr x)) = refl
+
+  is-retraction-map-inv-associative-coproduct :
+    (map-inv-associative-coproduct ∘ map-associative-coproduct) ~ id
+  is-retraction-map-inv-associative-coproduct (inl (inl x)) = refl
+  is-retraction-map-inv-associative-coproduct (inl (inr x)) = refl
+  is-retraction-map-inv-associative-coproduct (inr x) = refl
+
+  is-equiv-map-associative-coproduct : is-equiv map-associative-coproduct
+  is-equiv-map-associative-coproduct =
+    is-equiv-is-invertible
+      map-inv-associative-coproduct
+      is-section-map-inv-associative-coproduct
+      is-retraction-map-inv-associative-coproduct
+
+  is-equiv-map-inv-associative-coproduct :
+    is-equiv map-inv-associative-coproduct
+  is-equiv-map-inv-associative-coproduct =
+    is-equiv-is-invertible
+      map-associative-coproduct
+      is-retraction-map-inv-associative-coproduct
+      is-section-map-inv-associative-coproduct
+
+  associative-coproduct : ((A + B) + C) ≃ (A + (B + C))
+  pr1 associative-coproduct = map-associative-coproduct
+  pr2 associative-coproduct = is-equiv-map-associative-coproduct
+
+  inv-associative-coproduct : (A + (B + C)) ≃ ((A + B) + C)
+  pr1 inv-associative-coproduct = map-inv-associative-coproduct
+  pr2 inv-associative-coproduct = is-equiv-map-inv-associative-coproduct
+```
 
 ### The equivalence `∅ × B ≃ ∅`
 
+```agda
+module _
+  {l : Level} (X : Type l)
+  where
+
+  inv-pr1-product-empty : empty → empty × X
+  inv-pr1-product-empty ()
+
+  is-section-inv-pr1-product-empty : (pr1 ∘ inv-pr1-product-empty) ~ id
+  is-section-inv-pr1-product-empty ()
+
+  is-retraction-inv-pr1-product-empty : (inv-pr1-product-empty ∘ pr1) ~ id
+  is-retraction-inv-pr1-product-empty (pair () x)
+
+  is-equiv-pr1-product-empty : is-equiv (pr1 {A = empty} {B = λ t → X})
+  is-equiv-pr1-product-empty =
+    is-equiv-is-invertible
+      inv-pr1-product-empty
+      is-section-inv-pr1-product-empty
+      is-retraction-inv-pr1-product-empty
+
+  left-zero-law-product : (empty × X) ≃ empty
+  pr1 left-zero-law-product = pr1
+  pr2 left-zero-law-product = is-equiv-pr1-product-empty
+
+module _
+  {l1 l2 : Level} (A : Type l1) (B : Type l2) (is-empty-A : is-empty A)
+  where
+  inv-pr1-product-is-empty : A → A × B
+  inv-pr1-product-is-empty a = ex-falso (is-empty-A a)
+
+  is-section-inv-pr1-product-is-empty : (pr1 ∘ inv-pr1-product-is-empty) ~ id
+  is-section-inv-pr1-product-is-empty a = ex-falso (is-empty-A a)
+
+  is-retraction-inv-pr1-product-is-empty : (inv-pr1-product-is-empty ∘ pr1) ~ id
+  is-retraction-inv-pr1-product-is-empty (pair a b) = ex-falso (is-empty-A a)
+
+  is-equiv-pr1-product-is-empty : is-equiv (pr1 {A = A} {B = λ a → B})
+  is-equiv-pr1-product-is-empty =
+    is-equiv-is-invertible
+      inv-pr1-product-is-empty
+      is-section-inv-pr1-product-is-empty
+      is-retraction-inv-pr1-product-is-empty
+
+  left-zero-law-product-is-empty : (A × B) ≃ A
+  pr1 left-zero-law-product-is-empty = pr1
+  pr2 left-zero-law-product-is-empty = is-equiv-pr1-product-is-empty
+```
+
 ### The equivalence `A × ∅ ≃ ∅`
+
+```agda
+module _
+  {l : Level} (X : Type l)
+  where
+
+  inv-pr2-product-empty : empty → (X × empty)
+  inv-pr2-product-empty ()
+
+  is-section-inv-pr2-product-empty : (pr2 ∘ inv-pr2-product-empty) ~ id
+  is-section-inv-pr2-product-empty ()
+
+  is-retraction-inv-pr2-product-empty : (inv-pr2-product-empty ∘ pr2) ~ id
+  is-retraction-inv-pr2-product-empty (pair x ())
+
+  is-equiv-pr2-product-empty : is-equiv (pr2 {A = X} {B = λ x → empty})
+  is-equiv-pr2-product-empty =
+    is-equiv-is-invertible
+      inv-pr2-product-empty
+      is-section-inv-pr2-product-empty
+      is-retraction-inv-pr2-product-empty
+
+  right-zero-law-product : (X × empty) ≃ empty
+  pr1 right-zero-law-product = pr2
+  pr2 right-zero-law-product = is-equiv-pr2-product-empty
+
+module _
+  {l1 l2 : Level} (A : Type l1) (B : Type l2) (is-empty-B : is-empty B)
+  where
+  inv-pr2-product-is-empty : B → A × B
+  inv-pr2-product-is-empty b = ex-falso (is-empty-B b)
+
+  is-section-inv-pr2-product-is-empty : (pr2 ∘ inv-pr2-product-is-empty) ~ id
+  is-section-inv-pr2-product-is-empty b = ex-falso (is-empty-B b)
+
+  is-retraction-inv-pr2-product-is-empty : (inv-pr2-product-is-empty ∘ pr2) ~ id
+  is-retraction-inv-pr2-product-is-empty (pair a b) = ex-falso (is-empty-B b)
+
+  is-equiv-pr2-product-is-empty : is-equiv (pr2 {A = A} {B = λ a → B})
+  is-equiv-pr2-product-is-empty =
+    is-equiv-is-invertible
+      inv-pr2-product-is-empty
+      is-section-inv-pr2-product-is-empty
+      is-retraction-inv-pr2-product-is-empty
+
+  right-zero-law-product-is-empty : (A × B) ≃ B
+  pr1 right-zero-law-product-is-empty = pr2
+  pr2 right-zero-law-product-is-empty = is-equiv-pr2-product-is-empty
+```
 
 ### The equivalence `1 × B ≃ B`
 
+This equivalence is formalized below as an instance of the more general unit law for `Σ`-types
+
 ### The equivalence `A × 1 ≃ A`
+
+```agda
+module _
+  {l : Level} {A : Type l}
+  where
+
+  map-right-unit-law-product : A × unit → A
+  map-right-unit-law-product = pr1
+
+  map-inv-right-unit-law-product : A → A × unit
+  pr1 (map-inv-right-unit-law-product a) = a
+  pr2 (map-inv-right-unit-law-product a) = star
+
+  is-section-map-inv-right-unit-law-product :
+    is-section map-right-unit-law-product map-inv-right-unit-law-product
+  is-section-map-inv-right-unit-law-product = refl-htpy
+
+  is-retraction-map-inv-right-unit-law-product :
+    is-retraction map-right-unit-law-product map-inv-right-unit-law-product
+  is-retraction-map-inv-right-unit-law-product = refl-htpy
+
+  is-equiv-map-right-unit-law-product : is-equiv map-right-unit-law-product
+  is-equiv-map-right-unit-law-product =
+    is-equiv-is-invertible
+      map-inv-right-unit-law-product
+      is-section-map-inv-right-unit-law-product
+      is-retraction-map-inv-right-unit-law-product
+
+  right-unit-law-product : (A × unit) ≃ A
+  pr1 right-unit-law-product = map-right-unit-law-product
+  pr2 right-unit-law-product = is-equiv-map-right-unit-law-product
+```
 
 ### The equivalence `A × B ≃ B × A`
 
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  where
+
+  map-commutative-product : A × B → B × A
+  pr1 (map-commutative-product (pair a b)) = b
+  pr2 (map-commutative-product (pair a b)) = a
+
+  map-inv-commutative-product : B × A → A × B
+  pr1 (map-inv-commutative-product (pair b a)) = a
+  pr2 (map-inv-commutative-product (pair b a)) = b
+
+  is-section-map-inv-commutative-product :
+    (map-commutative-product ∘ map-inv-commutative-product) ~ id
+  is-section-map-inv-commutative-product (pair b a) = refl
+
+  is-retraction-map-inv-commutative-product :
+    (map-inv-commutative-product ∘ map-commutative-product) ~ id
+  is-retraction-map-inv-commutative-product (pair a b) = refl
+
+  is-equiv-map-commutative-product : is-equiv map-commutative-product
+  is-equiv-map-commutative-product =
+    is-equiv-is-invertible
+      map-inv-commutative-product
+      is-section-map-inv-commutative-product
+      is-retraction-map-inv-commutative-product
+
+  commutative-product : (A × B) ≃ (B × A)
+  pr1 commutative-product = map-commutative-product
+  pr2 commutative-product = is-equiv-map-commutative-product
+```
+
 ### The equivalence `(A × B) × C ≃ A × (B × C)`
+
+We formalize this as an instance of associativity of `Σ`-types
 
 ### The equivalence `A × (B + C) ≃ (A × B) + (A × C)`
 
+We formalize this below as an instance of left distributivity of `Σ` over coproducts.
+
 ### The equivalence `(A + B) × C ≃ (A × C) + (B × C)`
+
+We formalize this below as an instance of right distributivity of `Σ` over coproducts.
 
 ## Example 9.2.10
 
@@ -661,13 +918,196 @@ The absorption laws and unit laws, for instance, are as follows:
 
 ```text
   Σ(x : ∅) B(x) ≃ ∅
-  Σ(x : 1) B(x) ≃ B(⋆)
      Σ(x : A) ∅ ≃ ∅
+  Σ(x : 1) B(x) ≃ B(⋆)
      Σ(x : A) 1 ≃ A.
 ```
 
 Note that the right absorption law and the right unit law are exactly the same as the right absorption and unit laws for cartesian products.
 The left absorption and unit laws are, however, formulated with a type family `B` over `∅` and over `1`, and therefore they are slightly more general.
+
+### The equivalence `Σ(x : ∅) B(x) ≃ ∅`
+
+The proof uses the fact that any map into an empty type is an equivalence.
+
+```agda
+abstract
+  is-equiv-is-empty :
+    {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) →
+    is-empty B → is-equiv f
+  is-equiv-is-empty f H =
+    is-equiv-is-invertible
+      ( ex-falso ∘ H)
+      ( λ y → ex-falso (H y))
+      ( λ x → ex-falso (H (f x)))
+
+abstract
+  is-equiv-is-empty' :
+    {l : Level} {A : Type l} (f : is-empty A) → is-equiv f
+  is-equiv-is-empty' f = is-equiv-is-empty f id
+
+equiv-is-empty' : {l : Level} {A : Type l} → is-empty A → A ≃ empty
+equiv-is-empty' f = (f , is-equiv-is-empty' f)
+
+module _
+  {l : Level} (A : empty → Type l)
+  where
+
+  map-left-absorption-Σ : Σ empty A → empty
+  map-left-absorption-Σ = pr1
+
+  is-equiv-map-left-absorption-Σ : is-equiv map-left-absorption-Σ
+  is-equiv-map-left-absorption-Σ =
+    is-equiv-is-empty' map-left-absorption-Σ
+
+  left-absorption-Σ : Σ empty A ≃ empty
+  pr1 left-absorption-Σ = map-left-absorption-Σ
+  pr2 left-absorption-Σ = is-equiv-map-left-absorption-Σ
+
+module _
+  {l : Level} (A : Type l)
+  where
+
+  map-left-absorption-product : empty × A → empty
+  map-left-absorption-product = map-left-absorption-Σ (λ x → A)
+
+  is-equiv-map-left-absorption-product : is-equiv map-left-absorption-product
+  is-equiv-map-left-absorption-product =
+    is-equiv-map-left-absorption-Σ (λ x → A)
+
+  left-absorption-product : (empty × A) ≃ empty
+  left-absorption-product = left-absorption-Σ (λ x → A)
+
+is-empty-left-factor-is-empty-product :
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} → is-empty (A × B) → B → is-empty A
+is-empty-left-factor-is-empty-product f b a = f (pair a b)
+```
+
+### The equivalence `Σ(x : A) ∅ ≃ ∅`
+
+```agda
+module _
+  {l : Level} (A : Type l)
+  where
+
+  map-right-absorption-Σ : Σ A (λ x → empty) → empty
+  map-right-absorption-Σ (pair x ())
+
+  is-equiv-map-right-absorption-Σ : is-equiv map-right-absorption-Σ
+  is-equiv-map-right-absorption-Σ = is-equiv-is-empty' map-right-absorption-Σ
+
+  right-absorption-Σ : Σ A (λ x → empty) ≃ empty
+  right-absorption-Σ =
+    pair map-right-absorption-Σ is-equiv-map-right-absorption-Σ
+
+module _
+  {l : Level} {A : Type l}
+  where
+
+  map-right-absorption-product : A × empty → empty
+  map-right-absorption-product = map-right-absorption-Σ A
+
+  is-equiv-map-right-absorption-product : is-equiv map-right-absorption-product
+  is-equiv-map-right-absorption-product = is-equiv-map-right-absorption-Σ A
+
+  right-absorption-product : (A × empty) ≃ empty
+  right-absorption-product = right-absorption-Σ A
+
+is-empty-right-factor-is-empty-product :
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} → is-empty (A × B) → A → is-empty B
+is-empty-right-factor-is-empty-product f a b = f (pair a b)
+```
+
+### The equivalence `Σ(x : 1) B(x) ≃ B(⋆)`
+
+```agda
+module _
+  {l : Level} (A : unit → Type l)
+  where
+
+  map-left-unit-law-Σ : Σ unit A → A star
+  map-left-unit-law-Σ (_ , a) = a
+
+  map-inv-left-unit-law-Σ : A star → Σ unit A
+  pr1 (map-inv-left-unit-law-Σ a) = star
+  pr2 (map-inv-left-unit-law-Σ a) = a
+
+  is-section-map-inv-left-unit-law-Σ :
+    ( map-left-unit-law-Σ ∘ map-inv-left-unit-law-Σ) ~ id
+  is-section-map-inv-left-unit-law-Σ = refl-htpy
+
+  is-retraction-map-inv-left-unit-law-Σ :
+    ( map-inv-left-unit-law-Σ ∘ map-left-unit-law-Σ) ~ id
+  is-retraction-map-inv-left-unit-law-Σ = refl-htpy
+
+  is-equiv-map-left-unit-law-Σ : is-equiv map-left-unit-law-Σ
+  is-equiv-map-left-unit-law-Σ =
+    is-equiv-is-invertible
+      map-inv-left-unit-law-Σ
+      is-section-map-inv-left-unit-law-Σ
+      is-retraction-map-inv-left-unit-law-Σ
+
+  left-unit-law-Σ : Σ unit A ≃ A star
+  pr1 left-unit-law-Σ = map-left-unit-law-Σ
+  pr2 left-unit-law-Σ = is-equiv-map-left-unit-law-Σ
+
+  is-equiv-map-inv-left-unit-law-Σ : is-equiv map-inv-left-unit-law-Σ
+  is-equiv-map-inv-left-unit-law-Σ =
+    is-equiv-is-invertible
+      map-left-unit-law-Σ
+      is-retraction-map-inv-left-unit-law-Σ
+      is-section-map-inv-left-unit-law-Σ
+
+  inv-left-unit-law-Σ : A star ≃ Σ unit A
+  pr1 inv-left-unit-law-Σ = map-inv-left-unit-law-Σ
+  pr2 inv-left-unit-law-Σ = is-equiv-map-inv-left-unit-law-Σ
+
+module _
+  {l : Level} {A : Type l}
+  where
+
+  map-left-unit-law-product : unit × A → A
+  map-left-unit-law-product = pr2
+
+  map-inv-left-unit-law-product : A → unit × A
+  map-inv-left-unit-law-product = map-inv-left-unit-law-Σ (λ _ → A)
+
+  is-section-map-inv-left-unit-law-product :
+    is-section map-left-unit-law-product map-inv-left-unit-law-product
+  is-section-map-inv-left-unit-law-product =
+    is-section-map-inv-left-unit-law-Σ (λ _ → A)
+
+  is-retraction-map-inv-left-unit-law-product :
+    is-retraction map-left-unit-law-product map-inv-left-unit-law-product
+  is-retraction-map-inv-left-unit-law-product = refl-htpy
+
+  is-equiv-map-left-unit-law-product : is-equiv map-left-unit-law-product
+  is-equiv-map-left-unit-law-product =
+    is-equiv-is-invertible
+      map-inv-left-unit-law-product
+      is-section-map-inv-left-unit-law-product
+      is-retraction-map-inv-left-unit-law-product
+
+  left-unit-law-product : (unit × A) ≃ A
+  pr1 left-unit-law-product = map-left-unit-law-product
+  pr2 left-unit-law-product = is-equiv-map-left-unit-law-product
+
+  is-equiv-map-inv-left-unit-law-product :
+    is-equiv map-inv-left-unit-law-product
+  is-equiv-map-inv-left-unit-law-product =
+    is-equiv-is-invertible
+      map-left-unit-law-product
+      is-retraction-map-inv-left-unit-law-product
+      is-section-map-inv-left-unit-law-product
+
+  inv-left-unit-law-product : A ≃ (unit × A)
+  pr1 inv-left-unit-law-product = map-inv-left-unit-law-product
+  pr2 inv-left-unit-law-product = is-equiv-map-inv-left-unit-law-product
+```
+
+### The equivalence `Σ(x : A) 1 ≃ A`
+
+In agda-unimath, this equivalence only exists in a more general form, in which the fibers of the type family over `A` are arbitrary contractible types.
 
 Commutativity cannot be generalized to `Σ`-types.
 Associativity, on the other hand, can be expressed in two ways:
@@ -679,12 +1119,333 @@ Associativity, on the other hand, can be expressed in two ways:
 
 In the first of these equivalences associativity is stated using a type family `C` over `Σ(x : A) B(x)` while in the second it is stated using a family of types `C(x,y)` indexed by `x : A` and `y : B(x)`.
 
+### The equivalence `Σ(w : Σ(x : A) B(x)) C(w) ≃ Σ(x : A) Σ(y : B) C(x,y)`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : Σ A B → Type l3}
+  where
+
+  map-associative-Σ : Σ (Σ A B) C → Σ A (λ x → Σ (B x) (λ y → C (x , y)))
+  pr1 (map-associative-Σ ((x , y) , z)) = x
+  pr1 (pr2 (map-associative-Σ ((x , y) , z))) = y
+  pr2 (pr2 (map-associative-Σ ((x , y) , z))) = z
+
+  map-inv-associative-Σ : Σ A (λ x → Σ (B x) (λ y → C (x , y))) → Σ (Σ A B) C
+  pr1 (pr1 (map-inv-associative-Σ (x , y , z))) = x
+  pr2 (pr1 (map-inv-associative-Σ (x , y , z))) = y
+  pr2 (map-inv-associative-Σ (x , y , z)) = z
+
+  is-retraction-map-inv-associative-Σ :
+    map-inv-associative-Σ ∘ map-associative-Σ ~ id
+  is-retraction-map-inv-associative-Σ ((x , y) , z) = refl
+
+  is-section-map-inv-associative-Σ :
+    map-associative-Σ ∘ map-inv-associative-Σ ~ id
+  is-section-map-inv-associative-Σ (x , (y , z)) = refl
+
+  is-equiv-map-associative-Σ : is-equiv map-associative-Σ
+  is-equiv-map-associative-Σ =
+    is-equiv-is-invertible
+      map-inv-associative-Σ
+      is-section-map-inv-associative-Σ
+      is-retraction-map-inv-associative-Σ
+
+  associative-Σ : Σ (Σ A B) C ≃ Σ A (λ x → Σ (B x) (λ y → C (x , y)))
+  pr1 associative-Σ = map-associative-Σ
+  pr2 associative-Σ = is-equiv-map-associative-Σ
+
+  is-equiv-map-inv-associative-Σ : is-equiv map-inv-associative-Σ
+  is-equiv-map-inv-associative-Σ =
+    is-equiv-is-invertible
+      map-associative-Σ
+      is-retraction-map-inv-associative-Σ
+      is-section-map-inv-associative-Σ
+
+  inv-associative-Σ : Σ A (λ x → Σ (B x) (λ y → C (x , y))) ≃ Σ (Σ A B) C
+  pr1 inv-associative-Σ = map-inv-associative-Σ
+  pr2 inv-associative-Σ = is-equiv-map-inv-associative-Σ
+
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3}
+  where
+
+  map-associative-product : (A × B) × C → A × (B × C)
+  map-associative-product = map-associative-Σ
+
+  map-inv-associative-product : A × (B × C) → (A × B) × C
+  map-inv-associative-product = map-inv-associative-Σ
+
+  is-section-map-inv-associative-product :
+    (map-associative-product ∘ map-inv-associative-product) ~ id
+  is-section-map-inv-associative-product =
+    is-section-map-inv-associative-Σ
+
+  is-retraction-map-inv-associative-product :
+    (map-inv-associative-product ∘ map-associative-product) ~ id
+  is-retraction-map-inv-associative-product =
+    is-retraction-map-inv-associative-Σ
+
+  is-equiv-map-associative-product : is-equiv map-associative-product
+  is-equiv-map-associative-product =
+    is-equiv-map-associative-Σ
+
+  associative-product : ((A × B) × C) ≃ (A × (B × C))
+  associative-product = associative-Σ
+
+  inv-associative-product : (A × (B × C)) ≃ ((A × B) × C)
+  inv-associative-product = inv-associative-Σ
+```
+
+### The equivalence `Σ(w : Σ(x : A) B(x)) C(pr1(w),pr2(w)) ≃ Σ(x : A) Σ(y : B(x)) C(x,y)`
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : Type l1) (B : A → Type l2) (C : (x : A) → B x → Type l3)
+  where
+
+  map-associative-Σ' :
+    Σ (Σ A B) (λ w → C (pr1 w) (pr2 w)) → Σ A (λ x → Σ (B x) (C x))
+  pr1 (map-associative-Σ' ((x , y) , z)) = x
+  pr1 (pr2 (map-associative-Σ' ((x , y) , z))) = y
+  pr2 (pr2 (map-associative-Σ' ((x , y) , z))) = z
+
+  map-inv-associative-Σ' :
+    Σ A (λ x → Σ (B x) (C x)) → Σ (Σ A B) (λ w → C (pr1 w) (pr2 w))
+  pr1 (pr1 (map-inv-associative-Σ' (x , y , z))) = x
+  pr2 (pr1 (map-inv-associative-Σ' (x , y , z))) = y
+  pr2 (map-inv-associative-Σ' (x , y , z)) = z
+
+  is-section-map-inv-associative-Σ' :
+    map-associative-Σ' ∘ map-inv-associative-Σ' ~ id
+  is-section-map-inv-associative-Σ' (x , (y , z)) = refl
+
+  is-retraction-map-inv-associative-Σ' :
+    map-inv-associative-Σ' ∘ map-associative-Σ' ~ id
+  is-retraction-map-inv-associative-Σ' ((x , y) , z) = refl
+
+  is-equiv-map-associative-Σ' : is-equiv map-associative-Σ'
+  is-equiv-map-associative-Σ' =
+    is-equiv-is-invertible
+      map-inv-associative-Σ'
+      is-section-map-inv-associative-Σ'
+      is-retraction-map-inv-associative-Σ'
+
+  associative-Σ' :
+    Σ (Σ A B) (λ w → C (pr1 w) (pr2 w)) ≃ Σ A (λ x → Σ (B x) (C x))
+  pr1 associative-Σ' = map-associative-Σ'
+  pr2 associative-Σ' = is-equiv-map-associative-Σ'
+
+  inv-associative-Σ' :
+    Σ A (λ x → Σ (B x) (C x)) ≃ Σ (Σ A B) (λ w → C (pr1 w) (pr2 w))
+  pr1 inv-associative-Σ' = map-inv-associative-Σ'
+  pr2 inv-associative-Σ' =
+    is-equiv-is-invertible
+      map-associative-Σ'
+      is-retraction-map-inv-associative-Σ'
+      is-section-map-inv-associative-Σ'
+```
+
 Finally, we note that `Σ` also distributes over coproducts.
 In other words, there are the following two equivalences:
 
 ```text
   Σ(x : A) B(x) + C(x) ≃ (Σ(x : A) B(x)) + (Σ(x : A) C(x))
   Σ(w : A + B) C(w) ≃ (Σ(x : A) C(inl(x))) + (Σ(y : B) C(inr(y))).
+```
+
+### The equivalence `Σ(x : A) B(x) + C(x) ≃ (Σ(x : A) B(x)) + (Σ(x : A) C(x))`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  where
+
+  map-left-distributive-Σ-coproduct :
+    Σ A (λ x → B x + C x) → (Σ A B) + (Σ A C)
+  map-left-distributive-Σ-coproduct (x , inl y) = inl (x , y)
+  map-left-distributive-Σ-coproduct (x , inr z) = inr (x , z)
+
+  map-inv-left-distributive-Σ-coproduct :
+    (Σ A B) + (Σ A C) → Σ A (λ x → B x + C x)
+  pr1 (map-inv-left-distributive-Σ-coproduct (inl (x , y))) = x
+  pr2 (map-inv-left-distributive-Σ-coproduct (inl (x , y))) = inl y
+  pr1 (map-inv-left-distributive-Σ-coproduct (inr (x , z))) = x
+  pr2 (map-inv-left-distributive-Σ-coproduct (inr (x , z))) = inr z
+
+  is-section-map-inv-left-distributive-Σ-coproduct :
+    ( map-left-distributive-Σ-coproduct ∘
+      map-inv-left-distributive-Σ-coproduct) ~
+    ( id)
+  is-section-map-inv-left-distributive-Σ-coproduct (inl (x , y)) = refl
+  is-section-map-inv-left-distributive-Σ-coproduct (inr (x , z)) = refl
+
+  is-retraction-map-inv-left-distributive-Σ-coproduct :
+    ( map-inv-left-distributive-Σ-coproduct ∘
+      map-left-distributive-Σ-coproduct) ~
+    ( id)
+  is-retraction-map-inv-left-distributive-Σ-coproduct (x , inl y) = refl
+  is-retraction-map-inv-left-distributive-Σ-coproduct (x , inr z) = refl
+
+  is-equiv-map-left-distributive-Σ-coproduct :
+    is-equiv map-left-distributive-Σ-coproduct
+  is-equiv-map-left-distributive-Σ-coproduct =
+    is-equiv-is-invertible
+      map-inv-left-distributive-Σ-coproduct
+      is-section-map-inv-left-distributive-Σ-coproduct
+      is-retraction-map-inv-left-distributive-Σ-coproduct
+
+  left-distributive-Σ-coproduct :
+    Σ A (λ x → B x + C x) ≃ ((Σ A B) + (Σ A C))
+  left-distributive-Σ-coproduct =
+    ( map-left-distributive-Σ-coproduct ,
+      is-equiv-map-left-distributive-Σ-coproduct)
+
+  is-equiv-map-inv-left-distributive-Σ-coproduct :
+    is-equiv map-inv-left-distributive-Σ-coproduct
+  is-equiv-map-inv-left-distributive-Σ-coproduct =
+    is-equiv-is-invertible
+      map-left-distributive-Σ-coproduct
+      is-retraction-map-inv-left-distributive-Σ-coproduct
+      is-section-map-inv-left-distributive-Σ-coproduct
+
+  inv-left-distributive-Σ-coproduct :
+    ((Σ A B) + (Σ A C)) ≃ Σ A (λ x → B x + C x)
+  inv-left-distributive-Σ-coproduct =
+    ( map-inv-left-distributive-Σ-coproduct ,
+      is-equiv-map-inv-left-distributive-Σ-coproduct)
+
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3}
+  where
+
+  map-left-distributive-product-coproduct : A × (B + C) → (A × B) + (A × C)
+  map-left-distributive-product-coproduct =
+    map-left-distributive-Σ-coproduct
+
+  map-inv-left-distributive-product-coproduct :
+    (A × B) + (A × C) → A × (B + C)
+  map-inv-left-distributive-product-coproduct =
+    map-inv-left-distributive-Σ-coproduct
+
+  is-section-map-inv-left-distributive-product-coproduct :
+    map-left-distributive-product-coproduct ∘
+    map-inv-left-distributive-product-coproduct ~ id
+  is-section-map-inv-left-distributive-product-coproduct =
+    is-section-map-inv-left-distributive-Σ-coproduct
+
+  is-retraction-map-inv-left-distributive-product-coproduct :
+    map-inv-left-distributive-product-coproduct ∘
+    map-left-distributive-product-coproduct ~ id
+  is-retraction-map-inv-left-distributive-product-coproduct =
+    is-retraction-map-inv-left-distributive-Σ-coproduct
+
+  is-equiv-map-left-distributive-product-coproduct :
+    is-equiv map-left-distributive-product-coproduct
+  is-equiv-map-left-distributive-product-coproduct =
+    is-equiv-map-left-distributive-Σ-coproduct
+
+  left-distributive-product-coproduct : (A × (B + C)) ≃ ((A × B) + (A × C))
+  left-distributive-product-coproduct =
+    left-distributive-Σ-coproduct
+```
+
+### The equivalence `Σ(w : A + B) C(w) ≃ (Σ(x : A) C(inl(x))) + (Σ(y : B) C(inr(y)))`
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (C : A + B → Type l3)
+  where
+
+  map-right-distributive-Σ-coproduct :
+    Σ (A + B) C → (Σ A (λ x → C (inl x))) + (Σ B (λ y → C (inr y)))
+  map-right-distributive-Σ-coproduct (inl x , z) = inl (x , z)
+  map-right-distributive-Σ-coproduct (inr y , z) = inr (y , z)
+
+  map-inv-right-distributive-Σ-coproduct :
+    (Σ A (λ x → C (inl x))) + (Σ B (λ y → C (inr y))) → Σ (A + B) C
+  map-inv-right-distributive-Σ-coproduct (inl (x , z)) = (inl x , z)
+  map-inv-right-distributive-Σ-coproduct (inr (y , z)) = (inr y , z)
+
+  is-section-map-inv-right-distributive-Σ-coproduct :
+    ( map-right-distributive-Σ-coproduct ∘
+      map-inv-right-distributive-Σ-coproduct) ~
+    ( id)
+  is-section-map-inv-right-distributive-Σ-coproduct (inl (x , z)) = refl
+  is-section-map-inv-right-distributive-Σ-coproduct (inr (y , z)) = refl
+
+  is-retraction-map-inv-right-distributive-Σ-coproduct :
+    ( map-inv-right-distributive-Σ-coproduct ∘
+      map-right-distributive-Σ-coproduct) ~
+    ( id)
+  is-retraction-map-inv-right-distributive-Σ-coproduct (inl x , z) = refl
+  is-retraction-map-inv-right-distributive-Σ-coproduct (inr y , z) = refl
+
+  is-equiv-map-right-distributive-Σ-coproduct :
+    is-equiv map-right-distributive-Σ-coproduct
+  is-equiv-map-right-distributive-Σ-coproduct =
+    is-equiv-is-invertible
+      map-inv-right-distributive-Σ-coproduct
+      is-section-map-inv-right-distributive-Σ-coproduct
+      is-retraction-map-inv-right-distributive-Σ-coproduct
+
+  right-distributive-Σ-coproduct :
+    Σ (A + B) C ≃ ((Σ A (λ x → C (inl x))) + (Σ B (λ y → C (inr y))))
+  right-distributive-Σ-coproduct =
+    ( map-right-distributive-Σ-coproduct ,
+      is-equiv-map-right-distributive-Σ-coproduct)
+
+  is-equiv-map-inv-right-distributive-Σ-coproduct :
+    is-equiv map-inv-right-distributive-Σ-coproduct
+  is-equiv-map-inv-right-distributive-Σ-coproduct =
+    is-equiv-is-invertible
+      map-right-distributive-Σ-coproduct
+      is-retraction-map-inv-right-distributive-Σ-coproduct
+      is-section-map-inv-right-distributive-Σ-coproduct
+
+  inv-right-distributive-Σ-coproduct :
+    ((Σ A (λ x → C (inl x))) + (Σ B (λ y → C (inr y)))) ≃ Σ (A + B) C
+  inv-right-distributive-Σ-coproduct =
+    ( map-inv-right-distributive-Σ-coproduct ,
+      is-equiv-map-inv-right-distributive-Σ-coproduct)
+
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3}
+  where
+
+  map-right-distributive-product-coproduct : (A + B) × C → (A × C) + (B × C)
+  map-right-distributive-product-coproduct =
+    map-right-distributive-Σ-coproduct (λ _ → C)
+
+  map-inv-right-distributive-product-coproduct :
+    (A × C) + (B × C) → (A + B) × C
+  map-inv-right-distributive-product-coproduct =
+    map-inv-right-distributive-Σ-coproduct (λ _ → C)
+
+  is-section-map-inv-right-distributive-product-coproduct :
+    map-right-distributive-product-coproduct ∘
+    map-inv-right-distributive-product-coproduct ~ id
+  is-section-map-inv-right-distributive-product-coproduct =
+    is-section-map-inv-right-distributive-Σ-coproduct (λ _ → C)
+
+  is-retraction-map-inv-right-distributive-product-coproduct :
+    map-inv-right-distributive-product-coproduct ∘
+    map-right-distributive-product-coproduct ~ id
+  is-retraction-map-inv-right-distributive-product-coproduct =
+    is-retraction-map-inv-right-distributive-Σ-coproduct (λ _ → C)
+
+  is-equiv-map-right-distributive-product-coproduct :
+    is-equiv map-right-distributive-product-coproduct
+  is-equiv-map-right-distributive-product-coproduct =
+    is-equiv-map-right-distributive-Σ-coproduct (λ _ → C)
+
+  right-distributive-product-coproduct : ((A + B) × C) ≃ ((A × C) + (B × C))
+  right-distributive-product-coproduct =
+    right-distributive-Σ-coproduct (λ _ → C)
+
+  inv-right-distributive-product-coproduct : ((A × C) + (B × C)) ≃ ((A + B) × C)
+  inv-right-distributive-product-coproduct =
+    inv-right-distributive-Σ-coproduct (λ _ → C)
 ```
 
 ## Remark 9.2.11
