@@ -1,4 +1,4 @@
-# Exercise 5.8
+# Exercise 5.8 The ring laws on the integers
 
 ```agda
 module exercise-5-8-ring-laws-integers where
@@ -7,10 +7,10 @@ open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-4-coproducts
 open import section-4-5-the-type-of-integers
+open import exercise-4-1-arithmetic-operations-integers
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
-open import path-algebra
 open import exercise-5-6-successor-predecessor-integers
 open import exercise-5-7-group-laws-integers
 ```
@@ -19,58 +19,51 @@ open import exercise-5-7-group-laws-integers
 
 In this exercise we will show that `ℤ` satisfies the axioms of a **ring**, using the multiplication operation defined in Exercise 4.1.
 
-<div class="subexenum">
+### Exercise 5.8(a)
 
 Show that multiplication on `ℤ` satisfies the following laws for `0` and `1`:
+
 ```text
-0· x = 0 1· x = x
-x· 0 = 0 x· 1 = x.
+  0· x = 0
+  x· 0 = 0
+  1· x = x
+  x· 1 = x.
 ```
+
+### Exercise 5.8(b)
 
 Show that multiplication on `ℤ` satisfies the predecessor and successor laws:
+
 ```text
-pred(x)· y = x· y-y succ-ℤ(x)· y = x· y + y
-x· pred(y) = x· y-x y· succ-ℤ(y) = x· y + x.
+    pred(x) · y = x · y - y 
+    x · pred(y) = x · y - x
+  succ-ℤ(x) · y = x · y + y
+  y · succ-ℤ(y) = x · y + x.
 ```
+
+### Exercise 5.8(c)
 
 Show that multiplication on `ℤ` distributes over addition, both from the left and from the right:
+
 ```text
-x·(y+z) = x· y+ x· z
-(x+y)· z = x· z + y· z.
+  x · (y + z) = x · y + x · z
+  (x + y) · z = x · z + y · z.
 ```
+
+### Exercise 5.8(d)
 
 Show that multiplication on `Z` is associative and commutative:
+
 ```text
-(x· y)· z = x· (y· z)
-x· y = y· x.
+  (x · y) · z = x · (y · z)
+  x · y = y · x.
 ```
 
-</div>
+## Solutions
 
-## Solution
-
-<!-- rosetta-item: exercise-5-8 -->
-
-<!-- rosetta-agda-block: exercise-5-8-ring-laws-integers-block-1 -->
+### Exercise 5.8(a)
 
 ```agda
-mul-ℤ : ℤ → ℤ → ℤ
-mul-ℤ (inl zero-ℕ) l = neg-ℤ l
-mul-ℤ (inl (succ-ℕ x)) l = (neg-ℤ l) +ℤ (mul-ℤ (inl x) l)
-mul-ℤ (inr (inl _)) l = zero-ℤ
-mul-ℤ (inr (inr zero-ℕ)) l = l
-mul-ℤ (inr (inr (succ-ℕ x))) l = l +ℤ (mul-ℤ (inr (inr x)) l)
-
-infixl 40 _*ℤ_
-_*ℤ_ = mul-ℤ
-
-mul-ℤ' : ℤ → ℤ → ℤ
-mul-ℤ' x y = mul-ℤ y x
-
-ap-mul-ℤ :
-  {x y x' y' : ℤ} → x ＝ x' → y ＝ y' → x *ℤ y ＝ x' *ℤ y'
-ap-mul-ℤ p q = ap-binary mul-ℤ p q
-
 abstract
   left-zero-law-mul-ℤ : (k : ℤ) → zero-ℤ *ℤ k ＝ zero-ℤ
   left-zero-law-mul-ℤ k = refl
@@ -96,7 +89,13 @@ abstract
   right-unit-law-mul-ℤ (inr (inr zero-ℕ)) = refl
   right-unit-law-mul-ℤ (inr (inr (succ-ℕ n))) =
     ap (one-ℤ +ℤ_) (right-unit-law-mul-ℤ (inr (inr n)))
+```
 
+### Exercise 5.8(b)
+
+We first prove negative unit laws for multiplication: `(-1) · x ＝ -x` and `x · (-1) ＝ -x`, and then we prove the identities of the exercise.
+
+```agda
 abstract
   left-neg-unit-law-mul-ℤ : (k : ℤ) → neg-one-ℤ *ℤ k ＝ neg-ℤ k
   left-neg-unit-law-mul-ℤ k = refl
@@ -234,7 +233,13 @@ abstract
   right-predecessor-law-mul-ℤ' k l =
     right-predecessor-law-mul-ℤ k l ∙
     commutative-add-ℤ (neg-ℤ k) (k *ℤ l)
+```
 
+### Exercise 5.8(c)
+
+We will prove the left distributive law as a consequence of the right distributive law and commutativity.
+
+```agda
 abstract
   right-distributive-mul-add-ℤ :
     (k l m : ℤ) → (k +ℤ l) *ℤ m ＝ (k *ℤ m) +ℤ (l *ℤ m)
@@ -256,7 +261,13 @@ abstract
     ( left-successor-law-mul-ℤ ((in-pos-ℤ n) +ℤ l) m) ∙
     ( ( ap (m +ℤ_) (right-distributive-mul-add-ℤ (inr (inr n)) l m)) ∙
       ( inv (associative-add-ℤ m ((in-pos-ℤ n) *ℤ m) (l *ℤ m))))
+```
 
+### Exercise 5.8(d)
+
+We first prove that `(-x) · y ＝ -(x · y)`, and then we prove the identities of the exercise.
+
+```agda
 abstract
   left-negative-law-mul-ℤ :
     (k l : ℤ) → (neg-ℤ k) *ℤ l ＝ neg-ℤ (k *ℤ l)
@@ -312,4 +323,14 @@ abstract
     ( commutative-mul-ℤ m (k +ℤ l)) ∙
     ( right-distributive-mul-add-ℤ k l m) ∙
     ( ap-add-ℤ (commutative-mul-ℤ k m) (commutative-mul-ℤ l m))
+```
+
+## Supplementary definitions
+
+### The binary action on identifications of multiplication
+
+```agda
+ap-mul-ℤ :
+  {x y x' y' : ℤ} → x ＝ x' → y ＝ y' → x *ℤ y ＝ x' *ℤ y'
+ap-mul-ℤ p q = ap-binary mul-ℤ p q
 ```

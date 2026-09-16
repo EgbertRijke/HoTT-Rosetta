@@ -7,6 +7,7 @@ open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-4-coproducts
 open import section-4-5-the-type-of-integers
+open import exercise-4-1-arithmetic-operations-integers
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
@@ -15,93 +16,52 @@ open import exercise-5-6-successor-predecessor-integers
 
 ## Problem statement
 
-In this exercise we will show that the laws for abelian groups hold for addition on the integers, using the group operations on `ℤ` defined in Exercise 4.1.
+In this exercise we will show that the laws for abelian groups hold for addition
+on the integers, using the group operations on `ℤ` defined in Exercise 4.1(b).
 
-<div class="subexenum">
+### Exercise 5.7(a)
 
 Show that addition satisfies the left and right unit laws, i.e., show that
+
 ```text
-0+x = x
-x+0 = x.
+  0 + x = x
+  x + 0 = x.
 ```
+
+### Exercise 5.7(b)
 
 Show that the following successor and predecessor laws hold for addition on `ℤ`.
+
 ```text
-pred(x)+y = pred(x+y) succ-ℤ(x)+y = succ-ℤ(x+y)
-x+pred(y) = pred(x+y) x+succ-ℤ(y) = succ-ℤ(x+y).
+  pred-ℤ(x) + y = pred-ℤ(x + y)
+  succ-ℤ(x) + y = succ-ℤ(x + y)
+  x + pred-ℤ(y) = pred-ℤ(x + y)
+  x + succ-ℤ(y) = succ-ℤ(x + y).
 ```
 
-Use part (b) to show that addition on the integers is associative and commutative, show that
+### Exercise 5.7(c)
+
+Use part (b) to show that addition on the integers is associative and commutative:
+
 ```text
-(x+y)+z = x + (y+z)
-x+y = y+x.
+  (x + y) + z = x + (y + z)
+  x + y = y + x.
 ```
+
+### Exercise 5.7(d)
 
 Show that addition satisfies the left and right inverse laws:
+
 ```text
-(-x)+x =0
-x+(-x) =0.
+  (-x) + x = 0
+  x + (-x) = 0.
 ```
 
-</div>
+## Solutions
 
-## Solution
-
-<!-- rosetta-item: exercise-5-7 -->
-
-<!-- rosetta-agda-block: exercise-5-7-group-laws-integers-block-1 -->
+### Exercise 5.7(a)
 
 ```agda
-neg-ℤ : ℤ → ℤ
-neg-ℤ (inl x) = inr (inr x)
-neg-ℤ (inr (inl star)) = inr (inl star)
-neg-ℤ (inr (inr x)) = inl x
-
-abstract
-  neg-neg-ℤ : (k : ℤ) → neg-ℤ (neg-ℤ k) ＝ k
-  neg-neg-ℤ (inl n) = refl
-  neg-neg-ℤ (inr (inl star)) = refl
-  neg-neg-ℤ (inr (inr n)) = refl
-
-abstract
-  neg-pred-ℤ : (k : ℤ) → neg-ℤ (pred-ℤ k) ＝ succ-ℤ (neg-ℤ k)
-  neg-pred-ℤ (inl x) = refl
-  neg-pred-ℤ (inr (inl star)) = refl
-  neg-pred-ℤ (inr (inr zero-ℕ)) = refl
-  neg-pred-ℤ (inr (inr (succ-ℕ x))) = refl
-
-abstract
-  neg-succ-ℤ : (x : ℤ) → neg-ℤ (succ-ℤ x) ＝ pred-ℤ (neg-ℤ x)
-  neg-succ-ℤ (inl zero-ℕ) = refl
-  neg-succ-ℤ (inl (succ-ℕ x)) = refl
-  neg-succ-ℤ (inr (inl star)) = refl
-  neg-succ-ℤ (inr (inr x)) = refl
-
-abstract
-  pred-neg-ℤ :
-    (k : ℤ) → pred-ℤ (neg-ℤ k) ＝ neg-ℤ (succ-ℤ k)
-  pred-neg-ℤ (inl zero-ℕ) = refl
-  pred-neg-ℤ (inl (succ-ℕ x)) = refl
-  pred-neg-ℤ (inr (inl star)) = refl
-  pred-neg-ℤ (inr (inr x)) = refl
-
-add-ℤ : ℤ → ℤ → ℤ
-add-ℤ (inl zero-ℕ) l = pred-ℤ l
-add-ℤ (inl (succ-ℕ x)) l = pred-ℤ (add-ℤ (inl x) l)
-add-ℤ (inr (inl star)) l = l
-add-ℤ (inr (inr zero-ℕ)) l = succ-ℤ l
-add-ℤ (inr (inr (succ-ℕ x))) l = succ-ℤ (add-ℤ (inr (inr x)) l)
-
-add-ℤ' : ℤ → ℤ → ℤ
-add-ℤ' x y = add-ℤ y x
-
-infixl 35 _+ℤ_
-_+ℤ_ = add-ℤ
-
-ap-add-ℤ :
-  {x y x' y' : ℤ} → x ＝ x' → y ＝ y' → x +ℤ y ＝ x' +ℤ y'
-ap-add-ℤ p q = ap-binary add-ℤ p q
-
 abstract
   left-unit-law-add-ℤ : (k : ℤ) → zero-ℤ +ℤ k ＝ k
   left-unit-law-add-ℤ k = refl
@@ -114,7 +74,11 @@ abstract
   right-unit-law-add-ℤ (inr (inr zero-ℕ)) = refl
   right-unit-law-add-ℤ (inr (inr (succ-ℕ x))) =
     ap succ-ℤ (right-unit-law-add-ℤ (inr (inr x)))
+```
 
+### Exercise 5.7(b)
+
+```agda
 abstract
   left-predecessor-law-add-ℤ :
     (x y : ℤ) → pred-ℤ x +ℤ y ＝ pred-ℤ (x +ℤ y)
@@ -185,7 +149,11 @@ abstract
   right-successor-law-add-ℤ (inr (inr zero-ℕ)) y = refl
   right-successor-law-add-ℤ (inr (inr (succ-ℕ x))) y =
     ap succ-ℤ (right-successor-law-add-ℤ (inr (inr x)) y)
+```
 
+### Exercise 5.7(c)
+
+```agda
 abstract
   associative-add-ℤ :
     (x y z : ℤ) → ((x +ℤ y) +ℤ z) ＝ (x +ℤ (y +ℤ z))
@@ -266,7 +234,11 @@ abstract
         by ap succ-ℤ (commutative-add-ℤ (inr (inr x)) y)
       ＝ y +ℤ (succ-ℤ (inr (inr x)))
         by inv (right-successor-law-add-ℤ y (inr (inr x)))
+```
 
+### Exercise 5.7(d)
+
+```agda
 abstract
   left-inverse-law-add-ℤ :
     (x : ℤ) → neg-ℤ x +ℤ x ＝ zero-ℤ
@@ -298,6 +270,48 @@ abstract
         by commutative-add-ℤ x (neg-ℤ x)
       ＝ zero-ℤ
         by left-inverse-law-add-ℤ x
+```
+
+## Supplemental definitions
+
+### The binary action on identifications of addition on the integers
+
+```agda
+ap-add-ℤ :
+  {x y x' y' : ℤ} → x ＝ x' → y ＝ y' → x +ℤ y ＝ x' +ℤ y'
+ap-add-ℤ p q = ap-binary add-ℤ p q
+```
+
+### Supplementary laws
+
+```agda
+abstract
+  neg-neg-ℤ : (k : ℤ) → neg-ℤ (neg-ℤ k) ＝ k
+  neg-neg-ℤ (inl n) = refl
+  neg-neg-ℤ (inr (inl star)) = refl
+  neg-neg-ℤ (inr (inr n)) = refl
+
+abstract
+  neg-pred-ℤ : (k : ℤ) → neg-ℤ (pred-ℤ k) ＝ succ-ℤ (neg-ℤ k)
+  neg-pred-ℤ (inl x) = refl
+  neg-pred-ℤ (inr (inl star)) = refl
+  neg-pred-ℤ (inr (inr zero-ℕ)) = refl
+  neg-pred-ℤ (inr (inr (succ-ℕ x))) = refl
+
+abstract
+  neg-succ-ℤ : (x : ℤ) → neg-ℤ (succ-ℤ x) ＝ pred-ℤ (neg-ℤ x)
+  neg-succ-ℤ (inl zero-ℕ) = refl
+  neg-succ-ℤ (inl (succ-ℕ x)) = refl
+  neg-succ-ℤ (inr (inl star)) = refl
+  neg-succ-ℤ (inr (inr x)) = refl
+
+abstract
+  pred-neg-ℤ :
+    (k : ℤ) → pred-ℤ (neg-ℤ k) ＝ neg-ℤ (succ-ℤ k)
+  pred-neg-ℤ (inl zero-ℕ) = refl
+  pred-neg-ℤ (inl (succ-ℕ x)) = refl
+  pred-neg-ℤ (inr (inl star)) = refl
+  pred-neg-ℤ (inr (inr x)) = refl
 
 abstract
   right-negative-law-add-ℤ :

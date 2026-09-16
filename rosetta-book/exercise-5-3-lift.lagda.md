@@ -1,10 +1,11 @@
-# Exercise 5.3
+# Exercise 5.3 Lifting identifications
 
 ```agda
 module exercise-5-3-lift where
 
 open import universe-levels
-open import universe-levels using () renaming (Type to UU ; Typeω to UUω)
+open import universe-levels renaming (UU to Type)
+
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-4-transport
@@ -12,22 +13,24 @@ open import section-5-4-transport
 
 ## Problem statement
 
-Let `B` be a type family over `A`, and consider an identification `p:a = x` in `A`.
-Construct for any `b:B(a)` an identification
+Let `B` be a type family over `A`, and consider an identification `p : a = x` in
+`A`.
+Construct for any `b : B(a)` an identification
+
 ```text
-lift_B(p,b) : (a,b) = (x,tr_B(p,b)).
+  lift_B(p,b) : (a, b) = (x, tr_B(p, b)).
 ```
-In other words, an identification `p:x=y` in the *base type* `A` *lifts* to an identification in `Σ(x:A) B(x)` for every element in `B(x)`, analogous to the path lifting property for fibrations in homotopy theory.
+
+In other words, an identification `p : x = y` in the *base type* `A` *lifts* to
+an identification in `Σ(x : A) B(x)` for every element in `B(x)`, analogous to
+the path lifting property for fibrations in homotopy theory.
+
 
 ## Solution
 
-<!-- rosetta-item: exercise-5-3 -->
-
-<!-- rosetta-agda-block: exercise-5-3-lift-block-1 -->
-
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
   where
 
   lift-eq-Σ :

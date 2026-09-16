@@ -3,7 +3,7 @@
 ```agda
 module exercise-5-1-distributive-inv-concat where
 
-open import universe-levels renaming (Type to UU ; Typeω to UUω)
+open import universe-levels renaming (UU to Type)
 
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
@@ -20,12 +20,11 @@ concatenation operation, i.e., construct an identification
 
 for any `p : x = y` and `q : y = z`.
 
-
 ## Solution
 
 ```agda
 module _
-  {l : Level} {A : UU l}
+  {l : Level} {A : Type l}
   where
 
   distributive-inv-concat :

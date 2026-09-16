@@ -1,4 +1,4 @@
-# Exercise 5.5
+# Exercise 5.5 Semiring laws for natural numbers
 
 ```agda
 module exercise-5-5-semiring-laws-natural-numbers where
@@ -14,39 +14,41 @@ open import section-5-6-the-laws-of-addition-on-natural-numbers
 
 ## Problem statement
 
-In this exercise we show that the operations of addition and multiplication on the natural numbers satisfy the laws of a commutative **semi-ring**.
+In this exercise we show that the operations of addition and multiplication on
+the natural numbers satisfy the laws of a commutative **semiring**.
 
-<div class="subexenum">
+1. Show that multiplication satisfies the following laws:
 
-Show that multiplication satisfies the following laws:
-```text
-m· 0 = 0 m· 1 = m m· succ-ℕ(n) = m+m· n
-0· m = 0 1· m = m succ-ℕ(m)· n = m· n+n.
-```
+   ```text
+     m · 0 = 0
+     m · 1 = m
+     m · succ-ℕ(n) = m + m · n
+     0 · m = 0
+     1 · m = m
+     succ-ℕ(m) · n = m · n + n.
+   ```
 
-Show that multiplication on `ℕ` is commutative:
-```text
-m· n=n· m.
-```
+2. Show that multiplication on `ℕ` is commutative:
 
-Show that multiplication on `ℕ` distributes over addition from the left and from the right, i.e., show that we have identifications
-```text
-m· (n+k) = m· n + m· k
-(m+n)· k = m· k + n· k.
-```
+   ```text
+     m · n = n · m.
+   ```
 
-Show that multiplication on `ℕ` is associative:
-```text
-(m· n)· k = m· (n· k).
-```
+3. Show that multiplication on `ℕ` distributes over addition from the left and
+   from the right, i.e., show that we have identifications
 
-</div>
+   ```text
+     m · (n + k) = m · n + m · k
+     (m + n) · k = m · k + n · k.
+   ```
+
+4. Show that multiplication on `ℕ` is associative:
+
+   ```text
+     (m · n) · k = m · (n · k).
+   ```
 
 ## Solution
-
-<!-- rosetta-item: exercise-5-5 -->
-
-<!-- rosetta-agda-block: exercise-5-5-semiring-laws-natural-numbers-block-1 -->
 
 ```agda
 abstract

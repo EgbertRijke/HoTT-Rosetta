@@ -4,7 +4,7 @@
 module exercise-5-6-successor-predecessor-integers where
 
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
-open import section-4-2-the-unit-type
+open import exercise-4-1-arithmetic-operations-integers
 open import section-4-4-coproducts
 open import section-4-5-the-type-of-integers
 open import section-5-1-the-inductive-definition-of-identity-types
@@ -13,24 +13,17 @@ open import section-5-1-the-inductive-definition-of-identity-types
 ## Problem statement
 
 Show that
+
 ```text
-succ-ℤ(pred(k))=k and pred(succ-ℤ(k))=k
+  succ-ℤ(pred-ℤ(k)) = k
+  pred-ℤ(succ-ℤ(k)) = k
 ```
-for any `k:ℤ`, where `pred` is the predecessor function on the integers, defined in Exercise 4.1.
+
+for any `k : ℤ`, where `pred-ℤ` is the predecessor function on the integers defined in Exercise 4.1(a).
 
 ## Solution
 
-<!-- rosetta-item: exercise-5-6 -->
-
-<!-- rosetta-agda-block: exercise-5-6-successor-predecessor-integers-block-1 -->
-
 ```agda
-pred-ℤ : ℤ → ℤ
-pred-ℤ (inl x) = inl (succ-ℕ x)
-pred-ℤ (inr (inl star)) = inl zero-ℕ
-pred-ℤ (inr (inr zero-ℕ)) = inr (inl star)
-pred-ℤ (inr (inr (succ-ℕ x))) = inr (inr x)
-
 abstract
   is-retraction-pred-ℤ : (k : ℤ) → pred-ℤ (succ-ℤ k) ＝ k
   is-retraction-pred-ℤ (inl zero-ℕ) = refl
