@@ -122,3 +122,23 @@ tr-ap :
   tr D (ap f p) (g x z) ＝ g y (tr B p z)
 tr-ap f g refl z = refl
 ```
+
+## Supplement
+
+### Transposing transport along the inverse of an identification
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  where
+
+  eq-transpose-tr :
+    {x y : A} (p : x ＝ y) {u : B x} {v : B y} →
+    v ＝ tr B p u → tr B (inv p) v ＝ u
+  eq-transpose-tr refl q = q
+
+  eq-transpose-tr' :
+    {x y : A} (p : x ＝ y) {u : B x} {v : B y} →
+    tr B p u ＝ v → u ＝ tr B (inv p) v
+  eq-transpose-tr' refl q = q
+```

@@ -9,8 +9,10 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import section-10-1-contractible-types
 open import section-10-2-singleton-induction
 ```
@@ -89,4 +91,34 @@ module _
   inv-left-unit-law-Σ-is-contr : B a ≃ Σ A B
   pr1 inv-left-unit-law-Σ-is-contr = map-inv-left-unit-law-Σ-is-contr
   pr2 inv-left-unit-law-Σ-is-contr = is-equiv-map-inv-left-unit-law-Σ-is-contr
+```
+
+## Supplement
+
+### Contractibility of `Σ`-types
+
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  where
+
+  abstract
+    is-contr-Σ' :
+      is-contr A → ((x : A) → is-contr (B x)) → is-contr (Σ A B)
+    pr1 (pr1 (is-contr-Σ' (a , H) is-contr-B)) = a
+    pr2 (pr1 (is-contr-Σ' (a , H) is-contr-B)) = center (is-contr-B a)
+    pr2 (is-contr-Σ' (a , H) is-contr-B) (x , y) =
+      eq-pair-Σ
+        ( inv (inv (H x)))
+        ( eq-transpose-tr (inv (H x)) (eq-is-contr (is-contr-B a)))
+
+  abstract
+    is-contr-Σ :
+      is-contr A → (a : A) → is-contr (B a) → is-contr (Σ A B)
+    pr1 (pr1 (is-contr-Σ H a K)) = a
+    pr2 (pr1 (is-contr-Σ H a K)) = center K
+    pr2 (is-contr-Σ H a K) (x , y) =
+      eq-pair-Σ
+        ( inv (eq-is-contr H))
+        ( eq-transpose-tr (eq-is-contr H) (eq-is-contr K))
 ```

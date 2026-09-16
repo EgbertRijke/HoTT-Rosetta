@@ -23,118 +23,113 @@ open import section-10-3-contractible-maps
 open import exercise-9-1-groupoid-operations-equivalences
 ```
 
-<!-- rosetta-item: section-11.6 -->
-
 We often encounter a type consisting of certain objects equipped with further structure.
-For example, the fiber of a map `f:A→ B` at `b:B` is the type of elements `a:A` equipped with an identification `p:f(a)=b`.
+For example, the fiber of a map `f : A → B` at `b : B` is the type of elements `a : A` equipped with an identification `p : f(a) = b`.
 Such *structure* types occur all over mathematics, and it is important to have an efficient characterization of their identity types.
 A general structure type is just a `Σ`-type, and we’re asking for a characterization of its identity type.
 
-Recall from Theorem 9.3.4 that the identity type of the type `Σ(x:A) B(x)` at a pair `(a,b)` can be characterized as
-```text
-((a,b)=(x,y))≃ Σ(p:a=x) tr_B(p,b)=y.
-```
-However, this characterization of the identity type of `Σ(x:A) B(x)` is not as clear and useful as we like it to be, because it uses the transport function, which is completely generic.
-Our plan is to use identity systems on `A` and on `B(a)` to arrive at a more useful characterization of the identity type of `Σ(x:A) B(x)`.
+Recall from Theorem 9.3.4 that the identity type of the type `Σ(x : A) B(x)` at a pair `(a,b)` can be characterized as
 
-In order to abstract away this characterization of the identity type of `Σ(x:A) B(x)`, let `C:A→𝒰` be the family of types given by `C(x)≔ (a=x)`, and let
 ```text
-D:Π(x:A) B(x)→(C(x)→𝒰)
+  ((a,b) = (x,y)) ≃ Σ(p : a = x) tr_B(p,b) = y.
 ```
-be the family of types given by `D(x,y,p)≔ tr_B(p,b)=y`.
-Then `C` is an identity system on `A` at `a`, and the type family `y↦ D(a,y,refl)` is an identity system on `B(a)` at `b`.
+
+However, this characterization of the identity type of `Σ(x : A) B(x)` is not as clear and useful as we like it to be, because it uses the transport function, which is completely generic.
+Our plan is to use identity systems on `A` and on `B(a)` to arrive at a more useful characterization of the identity type of `Σ(x : A) B(x)`.
+
+In order to abstract away this characterization of the identity type of `Σ(x : A) B(x)`, let `C : A → 𝒰` be the family of types given by `C(x) ≔ (a = x)`, and let
+
+```text
+  D : Π(x : A) B(x) → (C(x) → 𝒰)
+```
+
+be the family of types given by `D(x,y,p) ≔ tr_B(p,b) = y`.
+Then `C` is an identity system on `A` at `a`, and the type family `y ↦ D(a,y,refl)` is an identity system on `B(a)` at `b`.
 This suggests the following definition of dependent identity systems.
 
 ## Definition 11.6.1
 
-<!-- rosetta-item: definition-11.6.1 -->
-
-Consider a type `A` equipped with an identity system `C` based at `a:A`, and let `c:C(a)`.
+Consider a type `A` equipped with an identity system `C` based at `a : A`, and let `c : C(a)`.
 Furthermore, consider a type family `B` over `A`.
-A **dependent identity system** over `C` at `b:B(a)` consists of a type family
+A **dependent identity system** over `C` at `b : B(a)` consists of a type family
+
 ```text
-D : Π(x:A) B(x) → (C(x)→ 𝒰)
+  D : Π(x : A) B(x) → (C(x) → 𝒰)
 ```
-equipped with an element `d:D(a,b,c)` such that `y↦ D(a,y,c)` is an identity system at `b`.
 
-<!-- rosetta-agda-block: definition-11.6.1-dependent-identity-system -->
+equipped with an element `d : D(a,b,c)` such that `y ↦ D(a,y,c)` is an identity system at `b`.
 
-```agda
-is-dependent-identity-system :
-  {l1 l2 l3 l4 : Level} {A : Type l1}
-  {B : A → Type l2} {C : A → Type l3}
-  (D : (x : A) → B x → C x → Type l4)
-  (a : A) (b : B a) (c : C a) (d : D a b c) → Typeω
-is-dependent-identity-system D a b c d =
-  is-identity-system (λ y → D a y c) b d
-```
-<!-- rosetta-item-end: definition-11.6.1 -->
+###
+
+Note: It seems agda-unimath doesn't have a definition of dependent identity system.
 
 ## Theorem 11.6.2
 
-<!-- rosetta-item: theorem-11.6.2; latex-label: thm:structure-identity-principle -->
-
-Consider a type family `B` over `A`, elements `a:A` and `b:B(a)`, and an identity system `C` of `A` with `c:C(a)`.
+Consider a type family `B` over `A`, elements `a : A` and `b : B(a)`, and an identity system `C` of `A` with `c : C(a)`.
 Furthermore, consider a type family
+
 ```text
-D : Π(x:A) B(x) → (C(x)→ 𝒰)
+  D : Π(x : A) B(x) → (C(x) → 𝒰)
 ```
-equipped with an element `d:D(a,b,c)`.
+
+equipped with an element `d : D(a,b,c)`.
 Then the following are equivalent:
 
-1.  Any family of maps
-```text
-(b=y)→ D(a,y,c)
-```
-    indexed by `y:B(a)` is a family of equivalences.
+1. Any family of maps
 
-2.  The total space
-```text
-Σ(y:B(a)) D(a,y,c)
-```
-    is contractible.
+   ```text
+     (b = y) → D(a,y,c)
+   ```
+   
+   indexed by `y : B(a)` is a family of equivalences.
 
-3.  `D` is a dependent identity system over `C` at `b:B(a)`.
+2. The total space
 
-4.  Any family of maps
-```text
-((a,b)=(x,y))→ Σ(z:C(x)) D(x,y,z))
-```
-    indexed by `(x,y):Σ(x:A) B(x)` is a family of equivalences.
+   ```text
+     Σ(y : B(a)) D(a,y,c)
+   ```
 
-5.  The total space
-```text
-Σ((x,y):Σ(x:A) B(x)) Σ(z:C(x)) D(x,y,z)
-```
-    is contractible.
+   is contractible.
 
-6.  The type family
-```text
-(x,y)↦ Σ(z:C(x)) D(x,y,z)
-```
-    is an identity system at `(a,b):Σ(x:A) B(x)`.
+3. `D` is a dependent identity system over `C` at `b : B(a)`.
+
+4. Any family of maps
+
+   ```text
+     ((a,b) = (x,y)) → Σ(z : C(x)) D(x,y,z)
+   ```
+
+   indexed by `(x,y) : Σ(x : A) B(x)` is a family of equivalences.
+
+5. The total space
+
+   ```text
+     Σ((x,y) : Σ(x : A) B(x)) Σ(z : C(x)) D(x,y,z)
+   ```
+
+   is contractible.
+
+6. The type family
+
+   ```text
+     (x,y) ↦ Σ(z : C(x)) D(x,y,z)
+   ```
+   
+   is an identity system at `(a,b) : Σ(x : A) B(x)`.
 
 ### Proof
 
-<!-- rosetta-item: subheading-11.6-proof -->
-
-*Proof.* The first three statements as well as the last three statements are equivalent by Theorem 11.2.2.
+The first three statements as well as the last three statements are equivalent by Theorem 11.2.2.
 Therefore it suffices to show that (ii) and (v) are equivalent.
 Note that there is an equivalence
-```text
-Σ((x,y):Σ(x:A) B(x)) Σ(z:C(x)) D(x,y,z)
-≃
-Σ((x,z):Σ(x:A) C(x)) Σ(y:B(x)) D(x,y,z).
-```
-This equivalence, its inverse, and the homotopies witnessing that the inverse is indeed an inverse are all straightforward to construct using pattern matching.
-Furthermore, notice that the type `Σ(x:A) C(x)` is contractible with center of contraction `(a,c)` since `C` is assumed to be an identity system at `a:A`.
-Therefore it follows that
-```text
-Σ((x,y):Σ(x:A) B(x)) Σ(z:C(x)) D(x,y,z)≃Σ(y:B(a)) D(a,y,c).
-```
- ◻
 
-<!-- rosetta-agda-block: theorem-11.6.2-interchange -->
+```text
+  Σ((x,y) : Σ(x : A) B(x)) Σ(z : C(x)) D(x,y,z)
+  ≃
+  Σ((x,z) : Σ(x : A) C(x)) Σ(y : B(x)) D(x,y,z).
+```
+
+This equivalence, its inverse, and the homotopies witnessing that the inverse is indeed an inverse are all straightforward to construct using pattern matching.
 
 ```agda
 module _
@@ -193,145 +188,30 @@ module _
   pr2 inv-interchange-Σ-Σ = is-equiv-map-inv-interchange-Σ-Σ
 ```
 
-<!-- rosetta-agda-block: theorem-11.6.2-total-space-equivalence -->
+Furthermore, notice that the type `Σ(x : A) C(x)` is contractible with center of contraction `(a,c)` since `C` is assumed to be an identity system at `a : A`.
+Therefore it follows that
+
+```text
+  Σ((x,y) : Σ(x : A) B(x)) Σ(z : C(x)) D(x,y,z) ≃ Σ(y : B(a)) D(a,y,c). ◻
+```
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
-  (D : (x : A) → B x → C x → Type l4)
+  { l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  { D : (x : A) → B x → C x → Type l4}
   where
 
-  equiv-total-Eq-structure :
-    (H : is-contr (Σ A C)) (t : Σ A C) →
-    Σ (Σ A B) (λ z → Σ (C (pr1 z)) (D (pr1 z) (pr2 z))) ≃
-    Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t))
-  equiv-total-Eq-structure H t =
-    left-unit-law-Σ-is-contr H t ∘e interchange-Σ-Σ D
+  abstract
+    is-torsorial-Eq-structure :
+      (is-torsorial-AC : is-torsorial C) (t : Σ A C) →
+      is-torsorial (λ y → D (pr1 t) y (pr2 t)) →
+      is-torsorial (λ t → Σ (C (pr1 t)) (D (pr1 t) (pr2 t)))
+    is-torsorial-Eq-structure is-torsorial-AC t is-torsorial-BD =
+      is-contr-equiv
+        ( Σ (Σ A C) (λ t → Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t))))
+        ( interchange-Σ-Σ D)
+        ( is-contr-Σ is-torsorial-AC t is-torsorial-BD)
 
-  equiv-total-dependent-identity-system :
-    (a : A) (c : C a) → is-identity-system C a c →
-    Σ (Σ A B) (λ z → Σ (C (pr1 z)) (D (pr1 z) (pr2 z))) ≃
-    Σ (B a) (λ y → D a y c)
-  equiv-total-dependent-identity-system a c H =
-    equiv-total-Eq-structure (is-torsorial-is-identity-system a c H) (a , c)
-```
-
-<!-- rosetta-agda-block: theorem-11.6.2-total-contractibility -->
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
-  (D : (x : A) → B x → C x → Type l4)
-  where
-
-  is-torsorial-Eq-structure :
-    (H : is-contr (Σ A C)) (t : Σ A C) →
-    is-contr (Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t))) →
-    is-contr (Σ (Σ A B) (λ z → Σ (C (pr1 z)) (D (pr1 z) (pr2 z))))
-  is-torsorial-Eq-structure H t K =
-    is-contr-equiv
-      (Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t)))
-      (equiv-total-Eq-structure D H t)
-      K
-```
-
-<!-- rosetta-agda-block: theorem-11.6.2-fiber-contractibility-converse -->
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
-  (D : (x : A) → B x → C x → Type l4)
-  where
-
-  is-torsorial-Eq-structure' :
-    (H : is-contr (Σ A C)) (t : Σ A C) →
-    is-contr (Σ (Σ A B) (λ z → Σ (C (pr1 z)) (D (pr1 z) (pr2 z)))) →
-    is-contr (Σ (B (pr1 t)) (λ y → D (pr1 t) y (pr2 t)))
-  is-torsorial-Eq-structure' H t =
-    is-contr-equiv'
-      (Σ (Σ A B) (λ z → Σ (C (pr1 z)) (D (pr1 z) (pr2 z))))
-      (equiv-total-Eq-structure D H t)
-```
-
-<!-- rosetta-agda-block: theorem-11.6.2-family-equivalence-conditions -->
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
-  (D : (x : A) → B x → C x → Type l4)
-  (a : A) (b : B a) (c : C a) (d : D a b c)
-  where
-
-  dependent-equiv-from-contr :
-    is-contr (Σ (B a) (λ y → D a y c)) →
-    (g : (y : B a) → b ＝ y → D a y c) → is-fiberwise-equiv g
-  dependent-equiv-from-contr = fundamental-theorem-id
-
-  dependent-contr-from-equiv :
-    (g : (y : B a) → b ＝ y → D a y c) → is-fiberwise-equiv g →
-    is-contr (Σ (B a) (λ y → D a y c))
-  dependent-contr-from-equiv = fundamental-theorem-id'
-
-  structure-equiv-from-contr :
-    is-contr (Σ (Σ A B) (λ z → Σ (C (pr1 z)) (D (pr1 z) (pr2 z)))) →
-    (h : (z : Σ A B) → (a , b) ＝ z → Σ (C (pr1 z)) (D (pr1 z) (pr2 z))) →
-    is-fiberwise-equiv h
-  structure-equiv-from-contr = fundamental-theorem-id
-
-  structure-contr-from-equiv :
-    (h : (z : Σ A B) → (a , b) ＝ z → Σ (C (pr1 z)) (D (pr1 z) (pr2 z))) →
-    is-fiberwise-equiv h →
-    is-contr (Σ (Σ A B) (λ z → Σ (C (pr1 z)) (D (pr1 z) (pr2 z))))
-  structure-contr-from-equiv = fundamental-theorem-id'
-```
-
-<!-- rosetta-agda-block: theorem-11.6.2-contractibility-from-identity-systems -->
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
-  (D : (x : A) → B x → C x → Type l4)
-  (a : A) (b : B a) (c : C a) (d : D a b c)
-  where
-
-  dependent-contr-from-identity-system :
-    is-dependent-identity-system D a b c d →
-    is-contr (Σ (B a) (λ y → D a y c))
-  dependent-contr-from-identity-system =
-    is-torsorial-is-identity-system b d
-
-  structure-contr-from-identity-system :
-    is-identity-system (λ z → Σ (C (pr1 z)) (D (pr1 z) (pr2 z))) (a , b) (c , d) →
-    is-contr (Σ (Σ A B) (λ z → Σ (C (pr1 z)) (D (pr1 z) (pr2 z))))
-  structure-contr-from-identity-system =
-    is-torsorial-is-identity-system (a , b) (c , d)
-```
-
-<!-- rosetta-agda-block: theorem-11.6.2-identity-systems-from-contractibility -->
-
-```agda
-module _
-  {l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
-  (D : (x : A) → B x → C x → Type l4)
-  (a : A) (b : B a) (c : C a) (d : D a b c)
-  where
-
-  dependent-identity-system-from-contr :
-    is-contr (Σ (B a) (λ y → D a y c)) →
-    is-dependent-identity-system D a b c d
-  dependent-identity-system-from-contr =
-    is-identity-system-is-contr b d
-
-  structure-identity-system-from-contr :
-    is-contr (Σ (Σ A B) (λ z → Σ (C (pr1 z)) (D (pr1 z) (pr2 z)))) →
-    is-identity-system (λ z → Σ (C (pr1 z)) (D (pr1 z) (pr2 z))) (a , b) (c , d)
-  structure-identity-system-from-contr =
-    is-identity-system-is-contr (a , b) (c , d)
-```
-
-<!-- rosetta-agda-block: theorem-11.6.2-structure-extensionality -->
-
-```agda
 module _
   {l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {Eq-A : A → Type l3}
   (Eq-B : {x : A} → B x → Eq-A x → Type l4)
@@ -347,7 +227,7 @@ module _
       (z : Σ A B) → is-equiv (h z)
     structure-identity-principle {f} {g} h H K =
       fundamental-theorem-id
-        ( is-torsorial-Eq-structure (λ x y z → Eq-B {x} y z)
+        ( is-torsorial-Eq-structure
           ( fundamental-theorem-id' f H)
           ( pair a refl-A)
           ( fundamental-theorem-id' g K))
@@ -372,33 +252,35 @@ module _
       ( λ y → is-equiv-map-equiv (g y))
       ( z)
 ```
-<!-- rosetta-item-end: theorem-11.6.2 -->
+
+### Note: It seems that agda-unimath doesn't explicitly develop the equivalence between all 6 statements. Instead, the equivalences that are actually used are formalized and the equivalences that are not used not.
 
 ## Example 11.6.3
 
-<!-- rosetta-item: example-11.6.3 -->
-
 By the structure identity principle of Theorem 11.6.2 in combination with the fundamental theorem of identity types (Theorem 11.2.2), it becomes completely routine to characterize identity types of structures: We only have to show that the types
-```text
-Σ(x:A) C(x) and Σ(y:B(a)) D(a,y,c)
-```
-are contractible.
-To illustrate this use of the structure identity principle, we give an alternative characterization of the fiber of a map `f:A → B` at `b:B`.
-We claim that
-```text
-((x,p)=(y,q)) ≃ fib(ap{f}, p ∙ q^{-1})
-≐ Σ(α:x=y) ap_{f}(α)=p ∙ q^{-1}.
-```
-To see this, we apply Theorem 11.6.2.
-Note that `Σ(y:A) x=y` is contractible by Theorem 10.1.4 with center of contraction `(x,refl)`.
-Therefore it suffices to show that the type
-```text
-Σ(q:f(x)=b) refl=p ∙ q^{-1}
-```
-is contractible.
-Of course, this type is equivalent to `Σ(q:f(x)=b) p=q`, which is again contractible by Theorem 10.1.4.
 
-<!-- rosetta-agda-block: example-11.6.3-identities-in-fibers -->
+```text
+  Σ(x : A) C(x)    and    Σ(y : B(a)) D(a,y,c)
+```
+
+are contractible.
+To illustrate this use of the structure identity principle, we give an alternative characterization of the fiber of a map `f : A → B` at `b : B`.
+We claim that
+
+```text
+  ((x,p) = (y,q)) ≃ fib(ap{f}, p ∙ q⁻¹) ≐ Σ(α : x = y) ap_{f}(α) = p ∙ q⁻¹.
+```
+
+To see this, we apply Theorem 11.6.2.
+Note that `Σ(y : A) x = y` is contractible by Theorem 10.1.4 with center of contraction `(x,refl)`.
+Therefore it suffices to show that the type
+
+```text
+  Σ(q : f(x) = b) refl = p ∙ q⁻¹
+```
+
+is contractible.
+Of course, this type is equivalent to `Σ(q : f(x) = b) p = q`, which is again contractible by Theorem 10.1.4.
 
 ```agda
 module _
@@ -452,11 +334,21 @@ module _
     (s ＝ t) ≃ fiber (ap f {x = pr1 s} {y = pr1 t}) (pr2 s ∙ inv (pr2 t))
   pr1 (equiv-fiber-ap-eq-fiber s t) = fiber-ap-eq-fiber s t
   pr2 (equiv-fiber-ap-eq-fiber s t) = is-equiv-fiber-ap-eq-fiber s t
-```
 
-<!-- rosetta-agda-block: example-11.6.3-fiber-of-action-specialization -->
+  map-inv-fiber-ap-eq-fiber :
+    (s t : fiber f b) →
+    fiber (ap f {x = pr1 s} {y = pr1 t}) (pr2 s ∙ inv (pr2 t)) →
+    s ＝ t
+  map-inv-fiber-ap-eq-fiber (x , refl) (.x , p) (refl , u) =
+    eq-pair-eq-fiber (ap inv u ∙ inv-inv p)
 
-```agda
+  ap-pr1-map-inv-fiber-ap-eq-fiber :
+    (s t : fiber f b) →
+    (v : fiber (ap f {x = pr1 s} {y = pr1 t}) (pr2 s ∙ inv (pr2 t))) →
+    ap pr1 (map-inv-fiber-ap-eq-fiber s t v) ＝ pr1 v
+  ap-pr1-map-inv-fiber-ap-eq-fiber (x , refl) (.x , p) (refl , u) =
+    ap-pr1-eq-pair-eq-fiber (ap inv u ∙ inv-inv p)
+
 module _
   {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (x y : A)
   where
@@ -476,4 +368,3 @@ module _
         ( is-equiv-fiber-ap-eq-fiber f (x , q) (y , refl))
         ( is-equiv-tr (fiber (ap f)) right-unit)
 ```
-<!-- rosetta-item-end: example-11.6.3 -->
