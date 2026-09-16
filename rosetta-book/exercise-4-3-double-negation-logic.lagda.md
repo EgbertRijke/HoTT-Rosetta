@@ -177,3 +177,14 @@ Statements 2 and 3 are missing.
 ### Exercise 4.4(f)
 
 Statements 1, 2, and 3 are missing.
+
+## Supplementary definitions
+
+### The inverse of a logical equivalence
+
+```agda
+inv-iff :
+  {l1 l2 : Level} {A : Type l1} {B : Type l2} → (A ↔ B) → (B ↔ A)
+pr1 (inv-iff (f , g)) = g
+pr2 (inv-iff (f , g)) = f
+```

@@ -11,7 +11,7 @@ open import exercise-3-1-multiplication-and-exponentiation
 open import exercise-3-3-triangular-numbers-and-factorials
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
-open import exercise-4-3-negation
+open import exercise-4-3-double-negation-logic
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types

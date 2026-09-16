@@ -18,7 +18,6 @@ open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-4-transport
 open import section-5-6-the-laws-of-addition-on-natural-numbers
 open import exercise-5-5-semiring-laws-natural-numbers
-open import path-algebra
 open import exercise-6-1-injectivity-addition-multiplication
 open import exercise-6-3-order-natural-numbers
 open import exercise-6-4-strict-order-natural-numbers

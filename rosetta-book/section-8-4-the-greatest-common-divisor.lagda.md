@@ -27,7 +27,7 @@ open import exercise-7-9-euclidean-division
 open import section-8-1-decidability-and-decidable-equality
 open import section-8-2-constructions-by-case-analysis
 open import section-8-3-the-well-ordering-principle-of-natural-numbers
-open import exercise-4-3-negation
+open import exercise-4-3-double-negation-logic
 open import section-5-2-the-groupoidal-structure-of-types
 open import exercise-7-10-k-ary-natural-numbers
 ```
@@ -333,15 +333,6 @@ The fact that equality on `ℕ` is decidable implies via Exercise 4.3 that `¬¬
 
 For the converse direction, recall that the inequality `gcd(a,b)≤ a+b` holds by minimality, since `M(a,b,a+b)` holds by Lemma 8.4.5.
 If `a+b=0`, it therefore follows that `gcd(a,b)≤ 0`, which implies that `gcd(a,b)=0`. ◻
-
-<!-- rosetta-agda-block: lemma-8.4.7-double-negation-elimination -->
-
-```agda
-double-negation-elim-is-decidable :
-  {l : Level} {P : Type l} → is-decidable P → (¬¬ P → P)
-double-negation-elim-is-decidable (inl x) p = x
-double-negation-elim-is-decidable (inr x) p = ex-falso (p x)
-```
 
 <!-- rosetta-agda-block: lemma-8.4.7-zero-gcd -->
 
