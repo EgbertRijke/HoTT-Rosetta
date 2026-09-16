@@ -12,17 +12,13 @@ open import section-10-1-contractible-types
 
 ## Problem statement
 
-Show that if `A` is contractible, then for any `x,y:A` the identity type `x=y` is also contractible.
+Show that if `A` is contractible, then for any `x, y : A` the identity type `x = y` is also contractible.
 
 ## Solution
 
-<!-- rosetta-item: exercise-10-1 -->
-
-<!-- rosetta-agda-block: exercise-10-1-contractible-identities -->
-
 ```agda
 is-prop-is-contr :
-  {l : Level} {A : Type l} → is-contr A → (x y : A) → is-contr (x ＝ y)
+  {l : Level} {A : UU l} → is-contr A → (x y : A) → is-contr (x ＝ y)
 pr1 (is-prop-is-contr H x y) = eq-is-contr H
 pr2 (is-prop-is-contr H x .x) refl = left-inv (pr2 H x)
 ```

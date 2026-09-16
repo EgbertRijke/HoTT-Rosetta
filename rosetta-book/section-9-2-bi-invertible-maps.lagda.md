@@ -8,7 +8,9 @@ open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
+open import exercise-4-1-arithmetic-operations-integers
 open import exercise-4-2-boolean-operations
+open import exercise-4-3-double-negation-logic
 open import section-4-4-coproducts
 open import section-4-5-the-type-of-integers
 open import section-4-6-dependent-pair-types
@@ -1475,3 +1477,13 @@ module _
 ## Remark 9.2.11
 
 We haven’t stated any laws involving function types or dependent function types, because it requires the function extensionality principle to prove them.
+
+## Supplementary definitions
+
+### Equivalences induce logical equivalences
+
+```agda
+iff-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A ≃ B) → (A ↔ B)
+pr1 (iff-equiv e) = map-equiv e
+pr2 (iff-equiv e) = map-section-map-equiv e
+```

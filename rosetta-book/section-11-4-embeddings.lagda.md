@@ -35,10 +35,10 @@ We write `is-emb(f)` for the type of witnesses that `f` is an embedding, and we 
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-emb : (A → B) → Type (l1 ⊔ l2)
+  is-emb : (A → B) → UU (l1 ⊔ l2)
   is-emb f = (x y : A) → is-equiv (ap f {x} {y})
 
   equiv-ap-is-emb :
@@ -49,11 +49,11 @@ module _
 infix 5 _↪_
 
 _↪_ :
-  {l1 l2 : Level} → Type l1 → Type l2 → Type (l1 ⊔ l2)
+  {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 A ↪ B = Σ (A → B) is-emb
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   map-emb : A ↪ B → A → B
@@ -107,7 +107,7 @@ The fiber `fib(e,e(x))` is contractible by Theorem 10.4.6, so it follows by Exer
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
   is-emb-is-contr-fibers-values' :
@@ -125,7 +125,7 @@ module _
           ( is-contr-map-is-equiv H (f a)))
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-emb-equiv : (e : A ≃ B) → is-emb (map-equiv e)
@@ -134,4 +134,18 @@ module _
   emb-equiv : (A ≃ B) → (A ↪ B)
   pr1 (emb-equiv e) = map-equiv e
   pr2 (emb-equiv e) = is-emb-equiv e
+```
+
+## Supplementary definitions
+
+### An equivalent definition of embeddings
+
+```agda
+module _
+  {l : Level} {A : UU l} {l2 : Level} {B : UU l2} {f : A → B}
+  where
+
+  abstract
+    is-emb-is-emb : (A → is-emb f) → is-emb f
+    is-emb-is-emb H x y = H x x y
 ```
