@@ -40,7 +40,7 @@ Use Exercise 10.2 to show that if `A` is a retract of a `k`-type `B`, then `A` i
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (i : A → B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (i : A → B)
   (r : B → A) (H : r ∘ i ~ id)
   where
 
@@ -53,7 +53,7 @@ module _
   is-retraction-is-injective-has-retraction {x} refl = left-inv (H x)
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (i : A → B) (R : retraction i)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (i : A → B) (R : retraction i)
   where
 
   is-injective-retraction :
@@ -79,7 +79,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (R : A retract-of B) (x y : A)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (R : A retract-of B) (x y : A)
   where
 
   retract-eq :

@@ -52,7 +52,7 @@ if each `f(x)` has a section, then `f` is a family of equivalences.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (a : A)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A)
   where
 
   abstract
