@@ -10,6 +10,7 @@ open import section-5-3-the-action-on-identifications-of-functions
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
+open import section-10-4-equivalences-are-contractible-maps
 open import section-11-2-the-fundamental-theorem
 open import section-11-4-embeddings
 open import section-12-1-propositions
@@ -17,61 +18,59 @@ open import exercise-10-3-contractible-equivalences
 open import exercise-10-7-fibers-of-projections
 ```
 
-<!-- rosetta-item: section-12.2 -->
-
 In set theory, a set `y` is said to be a subset of a set `x`, if any element of `y` is an element of `x`, i.e., if the condition
+
 ```text
-∀_z (z∈ y)→ (z∈ x)
+  ∀ z. (z ∈ y) → (z ∈ x)
 ```
+
 holds.
 We have already noted that type theory is different from set theory in that terms in type theory come equipped with a *unique* type.
-Moreover, in set theory the proposition `x∈ y` is well-formed for any two sets `x` and `y`, whereas in type theory we can only judge that `a:A` by applying the rules of inference of type theory in such a manner that we arrive at the conclusion that `a:A`.
+Moreover, in set theory the proposition `x ∈ y` is well-formed for any two sets `x` and `y`, whereas in type theory we can only judge that `a : A` by applying the rules of inference of type theory in such a manner that we arrive at the conclusion that `a : A`.
 Because of these differences we must find a different way to talk about subtypes.
 
 Note that in set theory there is a correspondence between the subsets of a set `x`, and the *predicates* on `x`.
-A predicate on `x` is just a proposition `P(z)` that varies over the elements `z∈ x`.
-Indeed, if `y` is a subset of `x`, then the corresponding predicate is the proposition `z∈ y`.
+A predicate on `x` is just a proposition `P(z)` that varies over the elements `z ∈ x`.
+Indeed, if `y` is a subset of `x`, then the corresponding predicate is the proposition `z ∈ y`.
 Conversely, if `P` is a predicate on `x`, then we obtain the subset
+
 ```text
-{z∈ x| P(z)}
+  {z ∈ x | P(z)}
 ```
+
 of `x`.
 This observation suggests that in type theory we should define a subtype of a type `A` to be a family of propositions over `A`.
 
 ## Definition 12.2.1
 
-<!-- rosetta-item: definition-12.2.1 -->
-
-A type family `B` over `A` is said to be a **subtype** of `A` if for each `x:A` the type `B(x)` is a proposition.
-When `B` is a subtype of `A`, we also say that `B(x)` is a **property** of `x:A`.
-
-<!-- rosetta-agda-block: definition-12.2.1-subtypes -->
+A type family `B` over `A` is said to be a **subtype** of `A` if for each `x : A` the type `B(x)` is a proposition.
+When `B` is a subtype of `A`, we also say that `B(x)` is a **property** of `x : A`.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (B : A → Type l2)
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
   where
 
-  is-subtype : Type (l1 ⊔ l2)
+  is-subtype : UU (l1 ⊔ l2)
   is-subtype = (x : A) → is-prop (B x)
 
-  is-property : Type (l1 ⊔ l2)
+  is-property : UU (l1 ⊔ l2)
   is-property = is-subtype
 
-subtype : {l1 : Level} (l : Level) (A : Type l1) → Type (l1 ⊔ lsuc l)
+subtype : {l1 : Level} (l : Level) (A : UU l1) → UU (l1 ⊔ lsuc l)
 subtype l A = A → Prop l
 
 module _
-  {l1 l2 : Level} {A : Type l1} (P : subtype l2 A)
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
   where
 
-  is-in-subtype : A → Type l2
+  is-in-subtype : A → UU l2
   is-in-subtype x = type-Prop (P x)
 
   is-prop-is-in-subtype : (x : A) → is-prop (is-in-subtype x)
   is-prop-is-in-subtype x = is-prop-type-Prop (P x)
 
-  type-subtype : Type (l1 ⊔ l2)
+  type-subtype : UU (l1 ⊔ l2)
   type-subtype = Σ A is-in-subtype
 
   inclusion-subtype : type-subtype → A
@@ -81,63 +80,81 @@ module _
     (x y : type-subtype) →
     x ＝ y → (inclusion-subtype x ＝ inclusion-subtype y)
   ap-inclusion-subtype x y p = ap inclusion-subtype p
+
+  is-in-subtype-inclusion-subtype :
+    (x : type-subtype) → is-in-subtype (inclusion-subtype x)
+  is-in-subtype-inclusion-subtype = pr2
+
+  eq-is-in-subtype :
+    {x : A} {p q : is-in-subtype x} → p ＝ q
+  eq-is-in-subtype {x} = eq-is-prop (is-prop-is-in-subtype x)
+
+  is-closed-under-eq-subtype :
+    {x y : A} → is-in-subtype x → (x ＝ y) → is-in-subtype y
+  is-closed-under-eq-subtype p refl = p
+
+  is-closed-under-eq-subtype' :
+    {x y : A} → is-in-subtype y → (x ＝ y) → is-in-subtype x
+  is-closed-under-eq-subtype' p refl = p
 ```
-<!-- rosetta-item-end: definition-12.2.1 -->
 
 One reason why subtypes are important and useful, is that for any
+
 ```text
-(x,p),(y,q):Σ(x:A) P(x)
+  (x,p), (y,q) : Σ(x : A) P(x)
 ```
-in a subtype of `A`, we have `(x,p)=(y,q)` if and only if `x=y`.
+
+in a subtype of `A`, we have `(x,p) = (y,q)` if and only if `x = y`.
 In other words, two terms of a subtype of `A` are equal if and only if they are equal as terms of `A`.
 This fact is properly expressed using embeddings: we claim that the projection map
+
 ```text
-pr 1 : (Σ(x:A) P(x))→ A
+  pr1 : (Σ(x:A) P(x))→ A
 ```
+
 is an embedding, for any subtype `P` of `A`.
 This claim can be strengthened slightly.
 We will prove the following two closely related facts:
 
-1.  A map `f:A→ B` is an embedding if and only if its fibers are propositions.
+1. A map `f : A → B` is an embedding if and only if its fibers are propositions.
 
-2.  A family of types `B` over `A` is a subtype of `A` if and only if the projection map
-```text
-(Σ(x:A) B(x))→ A
-```
-    is an embedding.
+2. A family of types `B` over `A` is a subtype of `A` if and only if the projection map
+
+   ```text
+     (Σ(x : A) B(x)) → A
+   ```
+
+   is an embedding.
 
 The first fact is analogous to the fact that a map is an equivalence if and only if its fibers are contractible, which we saw in Theorems 10.4.6 and 10.3.5.
 To prove the above claims, we will need that propositions are closed under equivalences.
 
 ## Lemma 12.2.2
 
-<!-- rosetta-item: lemma-12.2.2; latex-label: lem:prop_equiv -->
-
-Let `A` and `B` be types, and let `e:A ≃ B`.
+Let `A` and `B` be types, and let `e : A ≃ B`.
 Then we have
+
 ```text
-is-prop(A)↔is-prop(B).
+  is-prop(A) ↔ is-prop(B).
 ```
 
 ### Proof
 
-<!-- rosetta-item: subheading-12.2-proof -->
-
-*Proof.* We will show that `is-prop(B)` implies `is-prop(A)`.
-This suffices, because the converse follows from the fact that `e^{-1}:B→ A` is also an equivalence.
+We will show that `is-prop(B)` implies `is-prop(A)`.
+This suffices, because the converse follows from the fact that `e⁻¹ : B → A` is also an equivalence.
 
 Since `e` is assumed to be an equivalence, it follows by Theorem 11.4.2 that
-```text
-ap{e} : (x=y)→ (e(x)=e(y))
-```
-is an equivalence for any `x,y:A`.
-If `B` is a proposition, then in particular the type `e(x)=e(y)` is contractible for any `x,y:A`, so the claim follows from Theorem 10.4.6. ◻
 
-<!-- rosetta-agda-block: lemma-12.2.2-propositions-under-equivalence -->
+```text
+  ap_{e} : (x = y) → (e(x) = e(y))
+```
+
+is an equivalence for any `x, y : A`.
+If `B` is a proposition, then in particular the type `e(x) = e(y)` is contractible for any `x, y : A`, so the claim follows from Theorem 10.4.6. ◻
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   abstract
@@ -151,69 +168,81 @@ module _
     is-prop-equiv (f , is-equiv-f) = is-prop-is-equiv is-equiv-f
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   abstract
     is-prop-is-equiv' : {f : A → B} → is-equiv f → is-prop A → is-prop B
     is-prop-is-equiv' E H =
-      is-prop-is-equiv (is-equiv-map-section-is-equiv E) H
+      is-prop-is-equiv (is-equiv-map-inv-is-equiv E) H
 
   abstract
     is-prop-equiv' : A ≃ B → is-prop A → is-prop B
     is-prop-equiv' (f , is-equiv-f) = is-prop-is-equiv' is-equiv-f
 ```
-<!-- rosetta-item-end: lemma-12.2.2 -->
 
 ## Theorem 12.2.3
 
-<!-- rosetta-item: theorem-12.2.3; latex-label: thm:embedding -->
-
-Consider a map `f:A→ B`.
+Consider a map `f : A → B`.
 The following are equivalent:
 
-1.  The map `f` is an embedding.
+1. The map `f` is an embedding.
 
-2.  The fiber `fib(f, b)` is a proposition for each `b:B`.
+2. The fiber `fib(f, b)` is a proposition for each `b : B`.
 
 ### Proof
 
-<!-- rosetta-item: subheading-12.2-proof-2 -->
+By the fundamental theorem of identity types, it follows that `f` is an embedding if and only if
 
-*Proof.* By the fundamental theorem of identity types, it follows that `f` is an embedding if and only if
 ```text
-Σ(x:A) f(x)=f(y)
+  Σ(x : A) f(x) = f(y)
 ```
-is contractible for each `y:A`.
-In other words, `f` is an embedding if and only if `fib(f, f(y))` is contractible for each `y:A`.
+
+is contractible for each `y : A`.
+In other words, `f` is an embedding if and only if `fib(f,f(y))` is contractible for each `y : A`.
 Note that we obtain equivalences
-```text
-fib(f, f(y))≃ fib(f, b)
-```
-for any `b:B` and `p:f(y)=b`, by transporting along `p`.
-Therefore it follows by Lemma 12.2.2 that `fib(f, f(y))` is contractible for each `y:A` if and only if `fib(f, b)` is contractible for each `y:A`, and each `b:B` such that `p:f(y)=b`.
-The latter condition holds if and only if we have
-```text
-fib(f, b)→is-contr(fib(f, b))
-```
-for any `b:B`, which is by Proposition 12.1.3 equivalent to the condition that each `fib(f, b)` is a proposition. ◻
 
-<!-- rosetta-agda-block: theorem-12.2.3-propositional-map-predicate -->
+```text
+  fib(f,f(y)) ≃ fib(f,b)
+```
+
+for any `b : B` and `p : f(y) = b`, by transporting along `p`.
+Therefore it follows by Lemma 12.2.2 that `fib(f,f(y))` is contractible for each `y : A` if and only if `fib(f,b)` is contractible for each `y : A`, and each `b : B` such that `p : f(y) = b`.
+The latter condition holds if and only if we have
+
+```text
+  fib(f,b) → is-contr(fib(f,b))
+```
+
+for any `b : B`, which is by Proposition 12.1.3 equivalent to the condition that each `fib(f,b)` is a proposition. ◻
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-prop-map : (A → B) → Type (l1 ⊔ l2)
+  is-prop-map : (A → B) → UU (l1 ⊔ l2)
   is-prop-map f = (b : B) → is-prop (fiber f b)
-```
 
-<!-- rosetta-agda-block: theorem-12.2.3-embeddings-propositional-fibers -->
-
-```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}
+  {l1 l2 : Level}
+  where
+
+  prop-map : (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+  prop-map A B = Σ (A → B) is-prop-map
+
+  module _
+    {A : UU l1} {B : UU l2} (f : prop-map A B)
+    where
+
+    map-prop-map : A → B
+    map-prop-map = pr1 f
+
+    is-prop-map-prop-map : is-prop-map map-prop-map
+    is-prop-map-prop-map = pr2 f
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
   abstract
@@ -237,35 +266,57 @@ module _
           ( fiber' f (f x))
           ( equiv-fiber f (f x))
           ( fundamental-theorem-id' (λ _ → ap f) (is-emb-f x))
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  emb-prop-map : prop-map A B → A ↪ B
+  pr1 (emb-prop-map (f , p)) = f
+  pr2 (emb-prop-map (f , p)) = is-emb-is-prop-map p
+
+  prop-map-emb : A ↪ B → prop-map A B
+  pr1 (prop-map-emb (f , p)) = f
+  pr2 (prop-map-emb (f , p)) = is-prop-map-is-emb p
+
+  is-prop-map-emb : (f : A ↪ B) → is-prop-map (map-emb f)
+  is-prop-map-emb f = is-prop-map-is-emb (is-emb-map-emb f)
+
+  is-prop-map-emb' : (f : A ↪ B) → (b : B) → is-prop (fiber' (map-emb f) b)
+  is-prop-map-emb' f y =
+    is-prop-equiv' (equiv-fiber (map-emb f) y) (is-prop-map-emb f y)
+
+  fiber-emb-Prop : A ↪ B → B → Prop (l1 ⊔ l2)
+  pr1 (fiber-emb-Prop f y) = fiber (map-emb f) y
+  pr2 (fiber-emb-Prop f y) = is-prop-map-emb f y
+
+  fiber-emb-Prop' : A ↪ B → B → Prop (l1 ⊔ l2)
+  pr1 (fiber-emb-Prop' f y) = fiber' (map-emb f) y
+  pr2 (fiber-emb-Prop' f y) = is-prop-map-emb' f y
 ```
-<!-- rosetta-item-end: theorem-12.2.3 -->
 
 ## Corollary 12.2.4
-
-<!-- rosetta-item: corollary-12.2.4; latex-label: cor:pr1-embedding -->
 
 Consider a family `B` of types over `A`.
 The following are equivalent:
 
-1.  The map `pr 1 : (Σ(x:A) B(x))→ A` is an embedding.
+1.  The map `pr1 : (Σ(x : A) B(x)) → A` is an embedding.
 
-2.  The type `B(x)` is a proposition for each `x:A`.
+2.  The type `B(x)` is a proposition for each `x : A`.
 
 ### Proof
 
-<!-- rosetta-item: subheading-12.2-proof-3 -->
+This corollary follows at once from Exercise 10.7, where we showed that
 
-*Proof.* This corollary follows at once from Exercise 10.7, where we showed that
 ```text
-fib(pr 1, x)≃ B(x).
+  fib(pr1,x) ≃ B(x). ◻
 ```
- ◻
 
-<!-- rosetta-agda-block: corollary-12.2.4-propositional-inclusion-fibers -->
+Note: the following formalization proves only the direction `2. ⇒ 1.`.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (B : subtype l2 A)
+  {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
   where
 
   abstract
@@ -275,13 +326,13 @@ module _
         is-prop-equiv
           ( equiv-fiber-pr1 (is-in-subtype B) x)
           ( is-prop-is-in-subtype B x))
-```
 
-<!-- rosetta-agda-block: corollary-12.2.4-subtype-embedding -->
+  prop-map-subtype : prop-map (type-subtype B) A
+  pr1 prop-map-subtype = inclusion-subtype B
+  pr2 prop-map-subtype = is-prop-map-inclusion-subtype
 
-```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (B : subtype l2 A)
+  {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
   where
 
   abstract
@@ -301,11 +352,9 @@ module _
   pr2 (equiv-ap-inclusion-subtype {s} {t}) = is-emb-inclusion-subtype s t
 ```
 
-<!-- rosetta-agda-block: corollary-12.2.4-subtype-from-embedding -->
-
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   abstract
@@ -314,15 +363,12 @@ module _
       is-prop-equiv' (equiv-fiber-pr1 B x) (is-prop-map-is-emb H x)
 ```
 
-<!-- rosetta-agda-block: corollary-12.2.4-embedding-from-subtype -->
-
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   is-emb-pr1-is-subtype : is-subtype B → is-emb (pr1 {B = B})
   is-emb-pr1-is-subtype H =
     is-emb-inclusion-subtype (λ x → (B x , H x))
 ```
-<!-- rosetta-item-end: corollary-12.2.4 -->

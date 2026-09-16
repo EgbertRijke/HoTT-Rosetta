@@ -14,46 +14,51 @@ open import section-10-3-contractible-maps
 ## Problem statement
 
 Let `B` be a family of types over `A`, and consider the projection map
+
 ```text
-pr 1 : (Σ(x:A) B(x))→ A.
+  pr1 : (Σ(x : A) B(x)) → A.
 ```
 
-<div class="subexenum">
+### Exercise 10.7(a)
 
-Show that for any `a:A`, the map
+Show that for any `a : A`, the map
+
 ```text
-λ ((x,y),p). tr_B(p,y) : fib(pr 1, a) → B(a),
+  λ ((x,y),p). tr_B(p,y) : fib(pr1,a) → B(a),
 ```
+
 is an equivalence.
 
+### Exercise 10.7(b)
+
 Show that the following are equivalent:
 
-1.  The projection map `pr 1` is an equivalence.
+1. The projection map `pr1` is an equivalence.
 
-2.  The type `B(x)` is contractible for each `x:A`.
+2. The type `B(x)` is contractible for each `x : A`.
 
-Consider a dependent function `b:Π(x:A) B(x)`.
+### Exercise 10.7(c)
+
+Consider a dependent function `b : Π(x : A) B(x)`.
 Show that the following are equivalent:
 
-1.  The map
-```text
-λ x. (x,b(x)) : A → Σ(x:A) B(x)
-```
-    is an equivalence.
+1. The map
 
-2.  The type `B(x)` is contractible for each `x:A`.
+   ```text
+     λ x. (x,b(x)) : A → Σ(x : A) B(x)
+   ```
 
-</div>
+   is an equivalence.
 
-## Solution
+2. The type `B(x)` is contractible for each `x : A`.
 
-<!-- rosetta-item: exercise-10-7 -->
+## Solutions
 
-<!-- rosetta-agda-block: exercise-10-7-projection-fiber-equivalence -->
+### Exercise 10.7(a)
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) (a : A)
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A)
   where
 
   map-fiber-pr1 : fiber (pr1 {B = B}) a → B a
@@ -93,4 +98,16 @@ module _
   inv-equiv-fiber-pr1 : B a ≃ fiber (pr1 {B = B}) a
   pr1 inv-equiv-fiber-pr1 = map-inv-fiber-pr1
   pr2 inv-equiv-fiber-pr1 = is-equiv-map-inv-fiber-pr1
+```
+
+### Exercise 10.7(b)
+
+```agda
+
+```
+
+### Exercise 10.7(c)
+
+```agda
+
 ```

@@ -369,6 +369,36 @@ module _
   is-equiv-is-invertible :
     (g : B → A) (H : f ∘ g ~ id) (K : g ∘ f ~ id) → is-equiv f
   is-equiv-is-invertible g H K = is-equiv-is-invertible' (g , H , K)
+
+invertible-map : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+invertible-map A B = Σ (A → B) (is-invertible)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  map-invertible-map : invertible-map A B → A → B
+  map-invertible-map = pr1
+
+  is-invertible-map-invertible-map :
+    (f : invertible-map A B) → is-invertible (map-invertible-map f)
+  is-invertible-map-invertible-map = pr2
+
+  map-inv-invertible-map : invertible-map A B → B → A
+  map-inv-invertible-map =
+    map-inv-is-invertible ∘ is-invertible-map-invertible-map
+
+  is-retraction-map-inv-invertible-map :
+    (f : invertible-map A B) →
+    map-inv-invertible-map f ∘ map-invertible-map f ~ id
+  is-retraction-map-inv-invertible-map =
+    is-retraction-map-inv-is-invertible ∘ is-invertible-map-invertible-map
+
+  is-section-map-inv-invertible-map :
+    (f : invertible-map A B) →
+    map-invertible-map f ∘ map-inv-invertible-map f ~ id
+  is-section-map-inv-invertible-map =
+    is-section-map-inv-is-invertible ∘ is-invertible-map-invertible-map
 ```
 
 However, we did *not* define equivalences to be functions that have inverses.
@@ -1486,4 +1516,34 @@ We haven’t stated any laws involving function types or dependent function type
 iff-equiv : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A ≃ B) → (A ↔ B)
 pr1 (iff-equiv e) = map-equiv e
 pr2 (iff-equiv e) = map-section-map-equiv e
+```
+
+### The inverse of an invertible map
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-inverse-inv-is-inverse :
+    {f : A → B} {g : B → A} → is-inverse f g → is-inverse g f
+  pr1 (is-inverse-inv-is-inverse {f} {g} H) =
+    is-retraction-map-inv-is-invertible (g , H)
+  pr2 (is-inverse-inv-is-inverse {f} {g} H) =
+    is-section-map-inv-is-invertible (g , H)
+
+  is-invertible-map-inv-is-invertible :
+    {f : A → B} (g : is-invertible f) → is-invertible (map-inv-is-invertible g)
+  pr1 (is-invertible-map-inv-is-invertible {f} g) = f
+  pr2 (is-invertible-map-inv-is-invertible {f} g) =
+    is-inverse-inv-is-inverse {f} (is-inverse-map-inv-is-invertible g)
+
+  is-invertible-map-inv-invertible-map :
+    (f : invertible-map A B) → is-invertible (map-inv-invertible-map f)
+  is-invertible-map-inv-invertible-map f =
+    is-invertible-map-inv-is-invertible (is-invertible-map-invertible-map f)
+
+  inv-invertible-map : invertible-map A B → invertible-map B A
+  pr1 (inv-invertible-map f) = map-inv-invertible-map f
+  pr2 (inv-invertible-map f) = is-invertible-map-inv-invertible-map f
 ```

@@ -111,6 +111,71 @@ module _
     map-inv-is-coherently-invertible
   pr2 retraction-is-coherently-invertible =
     is-retraction-map-inv-is-coherently-invertible
+
+coherently-invertible-map : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+coherently-invertible-map A B = Σ (A → B) (is-coherently-invertible)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : coherently-invertible-map A B)
+  where
+
+  map-coherently-invertible-map : A → B
+  map-coherently-invertible-map = pr1 e
+
+  is-coherently-invertible-map-coherently-invertible-map :
+    is-coherently-invertible map-coherently-invertible-map
+  is-coherently-invertible-map-coherently-invertible-map = pr2 e
+
+  map-inv-coherently-invertible-map : B → A
+  map-inv-coherently-invertible-map =
+    map-inv-is-coherently-invertible
+      ( is-coherently-invertible-map-coherently-invertible-map)
+
+  is-section-map-inv-coherently-invertible-map :
+    map-coherently-invertible-map ∘ map-inv-coherently-invertible-map ~ id
+  is-section-map-inv-coherently-invertible-map =
+    is-section-map-inv-is-coherently-invertible
+      ( is-coherently-invertible-map-coherently-invertible-map)
+
+  is-retraction-map-inv-coherently-invertible-map :
+    map-inv-coherently-invertible-map ∘ map-coherently-invertible-map ~ id
+  is-retraction-map-inv-coherently-invertible-map =
+    is-retraction-map-inv-is-coherently-invertible
+      ( is-coherently-invertible-map-coherently-invertible-map)
+
+  coh-coherently-invertible-map :
+    coherence-is-coherently-invertible
+      ( map-coherently-invertible-map)
+      ( map-inv-coherently-invertible-map)
+      ( is-section-map-inv-coherently-invertible-map)
+      ( is-retraction-map-inv-coherently-invertible-map)
+  coh-coherently-invertible-map =
+    coh-is-coherently-invertible
+      ( is-coherently-invertible-map-coherently-invertible-map)
+
+  section-coherently-invertible-map :
+    section map-coherently-invertible-map
+  section-coherently-invertible-map =
+    section-is-coherently-invertible
+      ( is-coherently-invertible-map-coherently-invertible-map)
+
+  retraction-coherently-invertible-map :
+    retraction map-coherently-invertible-map
+  retraction-coherently-invertible-map =
+    retraction-is-coherently-invertible
+      ( is-coherently-invertible-map-coherently-invertible-map)
+
+  is-invertible-coherently-invertible-map :
+    is-invertible map-coherently-invertible-map
+  is-invertible-coherently-invertible-map =
+    is-invertible-is-coherently-invertible
+      ( is-coherently-invertible-map-coherently-invertible-map)
+
+  invertible-map-coherently-invertible-map : invertible-map A B
+  pr1 invertible-map-coherently-invertible-map =
+    map-coherently-invertible-map
+  pr2 invertible-map-coherently-invertible-map =
+    is-invertible-coherently-invertible-map
 ```
 
 Although we will encounter the notion of coherently invertible map on some further occasions, the following proposition is our main motivation for considering it.
@@ -464,4 +529,309 @@ module _
     pr1 (pr1 (is-contr-Id' a)) = a
     pr2 (pr1 (is-contr-Id' a)) = refl
     pr2 (is-contr-Id' a) (.a , refl) = refl
+```
+
+## Supplementary definitions
+
+### The predicate of being a transpose coherently invertible map
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  coherence-is-transpose-coherently-invertible :
+    (f : A → B) (g : B → A) (G : f ∘ g ~ id) (H : g ∘ f ~ id) → UU (l1 ⊔ l2)
+  coherence-is-transpose-coherently-invertible f g G H = H ·r g ~ g ·l G
+
+  is-transpose-coherently-invertible : (A → B) → UU (l1 ⊔ l2)
+  is-transpose-coherently-invertible f =
+    Σ ( B → A)
+      ( λ g →
+        Σ ( f ∘ g ~ id)
+          ( λ G →
+            Σ ( g ∘ f ~ id)
+              ( λ H → coherence-is-transpose-coherently-invertible f g G H)))
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  (H : is-transpose-coherently-invertible f)
+  where
+
+  map-inv-is-transpose-coherently-invertible : B → A
+  map-inv-is-transpose-coherently-invertible = pr1 H
+
+  is-section-map-inv-is-transpose-coherently-invertible :
+    f ∘ map-inv-is-transpose-coherently-invertible ~ id
+  is-section-map-inv-is-transpose-coherently-invertible = pr1 (pr2 H)
+
+  is-retraction-map-inv-is-transpose-coherently-invertible :
+    map-inv-is-transpose-coherently-invertible ∘ f ~ id
+  is-retraction-map-inv-is-transpose-coherently-invertible = pr1 (pr2 (pr2 H))
+
+  coh-is-transpose-coherently-invertible :
+    coherence-is-transpose-coherently-invertible f
+      ( map-inv-is-transpose-coherently-invertible)
+      ( is-section-map-inv-is-transpose-coherently-invertible)
+      ( is-retraction-map-inv-is-transpose-coherently-invertible)
+  coh-is-transpose-coherently-invertible = pr2 (pr2 (pr2 H))
+
+  is-invertible-is-transpose-coherently-invertible : is-invertible f
+  pr1 is-invertible-is-transpose-coherently-invertible =
+    map-inv-is-transpose-coherently-invertible
+  pr1 (pr2 is-invertible-is-transpose-coherently-invertible) =
+    is-section-map-inv-is-transpose-coherently-invertible
+  pr2 (pr2 is-invertible-is-transpose-coherently-invertible) =
+    is-retraction-map-inv-is-transpose-coherently-invertible
+
+  section-is-transpose-coherently-invertible : section f
+  pr1 section-is-transpose-coherently-invertible =
+    map-inv-is-transpose-coherently-invertible
+  pr2 section-is-transpose-coherently-invertible =
+    is-section-map-inv-is-transpose-coherently-invertible
+
+  retraction-is-transpose-coherently-invertible : retraction f
+  pr1 retraction-is-transpose-coherently-invertible =
+    map-inv-is-transpose-coherently-invertible
+  pr2 retraction-is-transpose-coherently-invertible =
+    is-retraction-map-inv-is-transpose-coherently-invertible
+
+transpose-coherently-invertible-map :
+  {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
+transpose-coherently-invertible-map A B =
+  Σ (A → B) (is-transpose-coherently-invertible)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (e : transpose-coherently-invertible-map A B)
+  where
+
+  map-transpose-coherently-invertible-map : A → B
+  map-transpose-coherently-invertible-map = pr1 e
+
+  is-transpose-coherently-invertible-map-transpose-coherently-invertible-map :
+    is-transpose-coherently-invertible map-transpose-coherently-invertible-map
+  is-transpose-coherently-invertible-map-transpose-coherently-invertible-map =
+    pr2 e
+
+  map-inv-transpose-coherently-invertible-map : B → A
+  map-inv-transpose-coherently-invertible-map =
+    map-inv-is-transpose-coherently-invertible
+      ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map)
+
+  is-section-map-inv-transpose-coherently-invertible-map :
+    ( map-transpose-coherently-invertible-map ∘
+      map-inv-transpose-coherently-invertible-map) ~
+    ( id)
+  is-section-map-inv-transpose-coherently-invertible-map =
+    is-section-map-inv-is-transpose-coherently-invertible
+      ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map)
+
+  is-retraction-map-inv-transpose-coherently-invertible-map :
+    ( map-inv-transpose-coherently-invertible-map ∘
+      map-transpose-coherently-invertible-map) ~
+    ( id)
+  is-retraction-map-inv-transpose-coherently-invertible-map =
+    is-retraction-map-inv-is-transpose-coherently-invertible
+      ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map)
+
+  coh-transpose-coherently-invertible-map :
+    coherence-is-transpose-coherently-invertible
+      ( map-transpose-coherently-invertible-map)
+      ( map-inv-transpose-coherently-invertible-map)
+      ( is-section-map-inv-transpose-coherently-invertible-map)
+      ( is-retraction-map-inv-transpose-coherently-invertible-map)
+  coh-transpose-coherently-invertible-map =
+    coh-is-transpose-coherently-invertible
+      ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map)
+
+  section-transpose-coherently-invertible-map :
+    section map-transpose-coherently-invertible-map
+  section-transpose-coherently-invertible-map =
+    section-is-transpose-coherently-invertible
+      ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map)
+
+  retraction-transpose-coherently-invertible-map :
+    retraction map-transpose-coherently-invertible-map
+  retraction-transpose-coherently-invertible-map =
+    retraction-is-transpose-coherently-invertible
+      ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map)
+
+  is-invertible-transpose-coherently-invertible-map :
+    is-invertible map-transpose-coherently-invertible-map
+  is-invertible-transpose-coherently-invertible-map =
+    is-invertible-is-transpose-coherently-invertible
+      ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map)
+
+  invertible-map-transpose-coherently-invertible-map : invertible-map A B
+  pr1 invertible-map-transpose-coherently-invertible-map =
+    map-transpose-coherently-invertible-map
+  pr2 invertible-map-transpose-coherently-invertible-map =
+    is-invertible-transpose-coherently-invertible-map
+```
+
+### The inverse of a coherently invertible map is transpose coherently invertible and vice versa
+
+The inverse of a coherently invertible map is transpose coherently invertible.
+Conversely, the inverse of a transpose coherently invertible map is coherently
+invertible. Since these are defined by simply moving data around, they are
+strict inverses to one another.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-transpose-coherently-invertible-map-inv-is-coherently-invertible :
+    {f : A → B} (H : is-coherently-invertible f) →
+    is-transpose-coherently-invertible (map-inv-is-coherently-invertible H)
+  is-transpose-coherently-invertible-map-inv-is-coherently-invertible {f} H =
+    ( f ,
+      is-retraction-map-inv-is-coherently-invertible H ,
+      is-section-map-inv-is-coherently-invertible H ,
+      coh-is-coherently-invertible H)
+
+  is-coherently-invertible-map-inv-is-transpose-coherently-invertible :
+    {f : A → B} (H : is-transpose-coherently-invertible f) →
+    is-coherently-invertible (map-inv-is-transpose-coherently-invertible H)
+  is-coherently-invertible-map-inv-is-transpose-coherently-invertible {f} H =
+    ( f ,
+      is-retraction-map-inv-is-transpose-coherently-invertible H ,
+      is-section-map-inv-is-transpose-coherently-invertible H ,
+      coh-is-transpose-coherently-invertible H)
+
+  transpose-coherently-invertible-map-inv-coherently-invertible-map :
+    coherently-invertible-map A B → transpose-coherently-invertible-map B A
+  transpose-coherently-invertible-map-inv-coherently-invertible-map e =
+    ( map-inv-coherently-invertible-map e ,
+      is-transpose-coherently-invertible-map-inv-is-coherently-invertible
+        ( is-coherently-invertible-map-coherently-invertible-map e))
+
+  coherently-invertible-map-inv-transpose-coherently-invertible-map :
+    transpose-coherently-invertible-map A B → coherently-invertible-map B A
+  coherently-invertible-map-inv-transpose-coherently-invertible-map e =
+    ( map-inv-transpose-coherently-invertible-map e ,
+      is-coherently-invertible-map-inv-is-transpose-coherently-invertible
+        ( is-transpose-coherently-invertible-map-transpose-coherently-invertible-map
+          ( e)))
+```
+
+### Invertible maps are transpose coherently invertible
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-invertible f)
+  where
+
+  is-transpose-coherently-invertible-is-invertible :
+    is-transpose-coherently-invertible f
+  is-transpose-coherently-invertible-is-invertible =
+    is-transpose-coherently-invertible-map-inv-is-coherently-invertible
+      ( is-coherently-invertible-is-invertible
+        ( is-invertible-map-inv-is-invertible H))
+```
+
+### Coherently invertible maps are equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-equiv-is-coherently-invertible :
+    is-coherently-invertible f → is-equiv f
+  is-equiv-is-coherently-invertible H =
+    is-equiv-is-invertible' (is-invertible-is-coherently-invertible H)
+
+  is-equiv-is-transpose-coherently-invertible :
+    is-transpose-coherently-invertible f → is-equiv f
+  is-equiv-is-transpose-coherently-invertible H =
+    is-equiv-is-invertible'
+      ( is-invertible-is-transpose-coherently-invertible H)
+```
+
+The following maps are not simple constructions and should not be computed with.
+Therefore, we mark them as `abstract`.
+
+```agda
+  abstract
+    is-coherently-invertible-is-equiv :
+      is-equiv f → is-coherently-invertible f
+    is-coherently-invertible-is-equiv =
+      is-coherently-invertible-is-invertible ∘ is-invertible-is-equiv
+
+  abstract
+    is-transpose-coherently-invertible-is-equiv :
+      is-equiv f → is-transpose-coherently-invertible f
+    is-transpose-coherently-invertible-is-equiv =
+      is-transpose-coherently-invertible-is-invertible ∘ is-invertible-is-equiv
+```
+
+### Structure obtained from being coherently invertible
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-equiv f)
+  where
+
+  map-inv-is-equiv : B → A
+  map-inv-is-equiv = pr1 (is-invertible-is-equiv H)
+
+  is-section-map-inv-is-equiv : is-section f map-inv-is-equiv
+  is-section-map-inv-is-equiv =
+    is-section-map-inv-is-coherently-invertible-is-invertible
+      ( is-invertible-is-equiv H)
+
+  is-retraction-map-inv-is-equiv : is-retraction f map-inv-is-equiv
+  is-retraction-map-inv-is-equiv =
+    is-retraction-map-inv-is-coherently-invertible-is-invertible
+      ( is-invertible-is-equiv H)
+
+  coherence-map-inv-is-equiv :
+    coherence-is-coherently-invertible f
+      ( map-inv-is-equiv)
+      ( is-section-map-inv-is-equiv)
+      ( is-retraction-map-inv-is-equiv)
+  coherence-map-inv-is-equiv =
+    coh-is-coherently-invertible-is-invertible (is-invertible-is-equiv H)
+
+  is-equiv-map-inv-is-equiv : is-equiv map-inv-is-equiv
+  is-equiv-map-inv-is-equiv =
+    is-equiv-is-invertible f
+      ( is-retraction-map-inv-is-equiv)
+      ( is-section-map-inv-is-equiv)
+```
+
+### The inverse of an equivalence is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
+  where
+
+  map-inv-equiv : B → A
+  map-inv-equiv = map-inv-is-equiv (is-equiv-map-equiv e)
+
+  is-section-map-inv-equiv : is-section (map-equiv e) map-inv-equiv
+  is-section-map-inv-equiv = is-section-map-inv-is-equiv (is-equiv-map-equiv e)
+
+  is-retraction-map-inv-equiv : is-retraction (map-equiv e) map-inv-equiv
+  is-retraction-map-inv-equiv =
+    is-retraction-map-inv-is-equiv (is-equiv-map-equiv e)
+
+  coherence-map-inv-equiv :
+    coherence-is-coherently-invertible
+      ( map-equiv e)
+      ( map-inv-equiv)
+      ( is-section-map-inv-equiv)
+      ( is-retraction-map-inv-equiv)
+  coherence-map-inv-equiv =
+    coherence-map-inv-is-equiv (is-equiv-map-equiv e)
+
+  is-equiv-map-inv-equiv : is-equiv map-inv-equiv
+  is-equiv-map-inv-equiv = is-equiv-map-inv-is-equiv (is-equiv-map-equiv e)
+
+  inv-equiv : B ≃ A
+  pr1 inv-equiv = map-inv-equiv
+  pr2 inv-equiv = is-equiv-map-inv-equiv
 ```
