@@ -3,6 +3,17 @@
 ```agda
 module exercise-11-8-total-map-retractions where
 
+open import universe-levels
+
+open import section-2-2-ordinary-function-types
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-9-1-homotopies
+open import section-9-2-bi-invertible-maps
+open import exercise-10-2-contractible-retracts
+open import exercise-10-3-contractible-equivalences
+open import section-10-1-contractible-types
+open import section-11-1-families-of-equivalences
 ```
 
 ## Problem statement
@@ -39,6 +50,27 @@ if each `f(x)` has a section, then `f` is a family of equivalences.
 
 ## Solution
 
-<!-- rosetta-item: exercise-11-8 -->
+```agda
+module _
+  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (a : A)
+  where
 
-No formalization has been curated yet.
+  abstract
+    fundamental-theorem-id-retraction :
+      (i : (x : A) → B x → a ＝ x) →
+      ((x : A) → retraction (i x)) →
+      is-fiberwise-equiv i
+    fundamental-theorem-id-retraction i R =
+      is-fiberwise-equiv-is-equiv-tot
+        ( is-equiv-is-contr (tot i)
+          ( is-contr-retract-of
+            ( Σ _ (λ y → a ＝ y))
+            ( ( tot i) ,
+              ( tot (λ x → pr1 (R x))) ,
+              ( ( inv-htpy (preserves-comp-tot i (pr1 ∘ R))) ∙h
+                ( tot-htpy (pr2 ∘ R)) ∙h
+                ( tot-id B)))
+            ( is-contr-Id a))
+          ( is-contr-Id a))
+```
+

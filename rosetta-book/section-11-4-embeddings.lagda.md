@@ -15,26 +15,23 @@ open import exercise-10-3-contractible-equivalences
 open import section-11-2-the-fundamental-theorem
 ```
 
-<!-- rosetta-item: section-11.4 -->
-
 In our second application of the fundamental theorem we show that equivalences are embeddings.
 The notion of embedding is the homotopical analogue of the set theoretic notion of injective map.
 
 ## Definition 11.4.1
 
-<!-- rosetta-item: definition-11.4.1 -->
+An **embedding** is a map `f : A → B` that satisfies the property that
 
-An **embedding** is a map `f:A→ B` that satisfies the property that
 ```text
-ap{f}:(x = y)→(f(x) = f(y))
+  ap{f} : (x = y) → (f(x) = f(y))
 ```
-is an equivalence, for every `x,y:A`.
+
+is an equivalence, for every `x, y : A`.
 We write `is-emb(f)` for the type of witnesses that `f` is an embedding, and we define
-```text
-A↪ B≔ Σ(f:A→ B) is-emb(f).
-```
 
-<!-- rosetta-agda-block: definition-11.4.1-embedding-predicate -->
+```text
+  A ↪ B ≔ Σ(f : A → B) is-emb(f).
+```
 
 ```agda
 module _
@@ -48,12 +45,9 @@ module _
     {f : A → B} (e : is-emb f) {x y : A} → (x ＝ y) ≃ (f x ＝ f y)
   pr1 (equiv-ap-is-emb {f} e) = ap f
   pr2 (equiv-ap-is-emb {f} e {x} {y}) = e x y
-```
 
-<!-- rosetta-agda-block: definition-11.4.1-embeddings -->
-
-```agda
 infix 5 _↪_
+
 _↪_ :
   {l1 l2 : Level} → Type l1 → Type l2 → Type (l1 ⊔ l2)
 A ↪ B = Σ (A → B) is-emb
@@ -72,46 +66,44 @@ module _
     (e : A ↪ B) {x y : A} → (x ＝ y) ≃ (map-emb e x ＝ map-emb e y)
   equiv-ap-emb e = equiv-ap-is-emb (is-emb-map-emb e)
 ```
-<!-- rosetta-item-end: definition-11.4.1 -->
 
 Another way of phrasing the following statement is that equivalent types have equivalent identity types.
 
 ## Theorem 11.4.2
 
-<!-- rosetta-item: theorem-11.4.2; latex-label: cor:emb_equiv -->
-
 Any equivalence is an embedding.
 
 ### Proof
 
-<!-- rosetta-item: subheading-11.4-proof -->
-
-*Proof.* Let `e:A ≃ B` be an equivalence, and let `x:A`.
+Let `e : A ≃ B` be an equivalence, and let `x : A`.
 Our goal is to show that
+
 ```text
-ap{e} : (x = y)→ (e(x) = e(y))
+  ap{e} : (x = y) → (e(x) = e(y))
 ```
-is an equivalence for every `y:A`.
+
+is an equivalence for every `y : A`.
 By Theorem 11.2.2 it suffices to show that
+
 ```text
-Σ(y:A) e(x)=e(y)
+  Σ(y : A) e(x) = e(y)
 ```
+
 is contractible.
 Now observe that there is an equivalence
 
 ```text
-Σ(y:A) e(x)=e(y) ≃ Σ(y:A) e(y)=e(x)
-≐ fib(e, e(x))
+  Σ(y : A) e(x) = e(y) ≃ Σ(y : A) e(y) = e(x) ≐ fib(e,e(x))
 ```
 
-by Theorem 11.1.3, since for each `y:A` the map
+by Theorem 11.1.3, since for each `y : A` the map
+
 ```text
-inv : (e(x)=e(y))→ (e(y)= e(x))
+  inv : (e(x) = e(y)) → (e(y) = e(x))
 ```
-is an equivalence by Exercise 9.1.
-The fiber `fib(e, e(x))` is contractible by Theorem 10.4.6, so it follows by Exercise 10.3 that the type `Σ(y:A) e(x)=e(y)` is indeed contractible. ◻
 
-<!-- rosetta-agda-block: theorem-11.4.2-equivalences-are-embeddings -->
+is an equivalence by Exercise 9.1.
+The fiber `fib(e,e(x))` is contractible by Theorem 10.4.6, so it follows by Exercise 10.3 that the type `Σ(y : A) e(x) = e(y)` is indeed contractible. ◻
 
 ```agda
 module _
@@ -131,11 +123,7 @@ module _
           ( fiber f (f a))
           ( equiv-fiber f (f a))
           ( is-contr-map-is-equiv H (f a)))
-```
 
-<!-- rosetta-agda-block: theorem-11.4.2-embedding-of-equivalence -->
-
-```agda
 module _
   {l1 l2 : Level} {A : Type l1} {B : Type l2}
   where
@@ -147,4 +135,3 @@ module _
   pr1 (emb-equiv e) = map-equiv e
   pr2 (emb-equiv e) = is-emb-equiv e
 ```
-<!-- rosetta-item-end: theorem-11.4.2 -->

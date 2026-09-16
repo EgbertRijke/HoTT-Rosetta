@@ -25,7 +25,6 @@ Currently unsolved (auto)formalization exercises can be found in the following f
 - rosetta-book/exercise-11-5-composite-embeddings-equivalences.lagda.md
 - rosetta-book/exercise-11-6-embeddings-from-coproducts.lagda.md
 - rosetta-book/exercise-11-7-coproduct-functor-reflection.lagda.md
-- rosetta-book/exercise-11-8-total-map-retractions.lagda.md
 - rosetta-book/exercise-11-9-embedding-from-path-sections.lagda.md
 - rosetta-book/exercise-11-10-path-split-maps.lagda.md
 - rosetta-book/exercise-11-11-fiber-triangles.lagda.md
