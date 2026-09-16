@@ -36,7 +36,7 @@ While the Curry-Howard interpretation of the existential quantifier is neverthel
 <!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-56 -->
 
 ```agda
-classical-Fin : ℕ → Type lzero
+classical-Fin : ℕ → UU lzero
 classical-Fin k = Σ ℕ (λ x → le-ℕ x k)
 ```
 <!-- rosetta-item-end: remark-7.3.1 -->
@@ -62,7 +62,7 @@ We will write `i` for the inclusion `inl:Fin{k}→Fin{k+1}` and we will write `�
 <!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-77 -->
 
 ```agda
-Fin : ℕ → Type lzero
+Fin : ℕ → UU lzero
 Fin zero-ℕ = empty
 Fin (succ-ℕ n) = Fin n + unit
 ```
@@ -109,7 +109,7 @@ f_{k+1}(⋆) ≔ p_k.
 
 ```agda
 ind-Fin : 
-  {i : Level} {P : (k : ℕ) → Fin k → Type i} →
+  {i : Level} {P : (k : ℕ) → Fin k → UU i} →
   ({k : ℕ} (x : Fin k) → P k x → P (succ-ℕ k) (inl-Fin k x)) →
   ({k : ℕ} → P (succ-ℕ k) (inr star)) → ({k : ℕ} (x : Fin k) → P k x)
 ind-Fin g p {succ-ℕ k} (inl x) = g {k} x (ind-Fin g p {k} x)
@@ -196,7 +196,7 @@ where `f:(nat-Fin_{k+1}(i(x))=nat-Fin_{k+1}(⋆))→empty` and `g:(nat-Fin_{k+1}
 <!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-230 -->
 
 ```agda
-is-injective : {l1 l2 : Level} {A : Type l1} {B : Type l2} → (A → B) → Type (l1 ⊔ l2)
+is-injective : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-injective {l1} {l2} {A} {B} f = {x y : A} → f x ＝ f y → x ＝ y
 
 is-injective-nat-Fin : (k : ℕ) → is-injective (nat-Fin k)

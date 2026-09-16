@@ -3,7 +3,7 @@
 ```agda
 module exercise-4-2-boolean-operations where
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
 ```
 
 ## Problem statement

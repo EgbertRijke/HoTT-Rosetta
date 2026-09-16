@@ -3,7 +3,7 @@
 ```agda
 module exercise-6-5-distance-natural-numbers where
 
-open import universe-levels renaming (Type to UU ; Typeω to UUω)
+open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers

@@ -58,13 +58,13 @@ Let `f : A → B` be a function.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  is-section : (B → A) → Type l2
+  is-section : (B → A) → UU l2
   is-section g = f ∘ g ~ id
 
-  section : Type (l1 ⊔ l2)
+  section : UU (l1 ⊔ l2)
   section = Σ (B → A) is-section
 
   map-section : section → B → A
@@ -74,13 +74,13 @@ module _
   is-section-map-section = pr2
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-retraction : (f : A → B) (g : B → A) → Type l1
+  is-retraction : (f : A → B) (g : B → A) → UU l1
   is-retraction f g = g ∘ f ~ id
 
-  retraction : (f : A → B) → Type (l1 ⊔ l2)
+  retraction : (f : A → B) → UU (l1 ⊔ l2)
   retraction f = Σ (B → A) (is-retraction f)
 
   map-retraction : (f : A → B) → retraction f → B → A
@@ -90,32 +90,32 @@ module _
     (f : A → B) (r : retraction f) → map-retraction f r ∘ f ~ id
   is-retraction-map-retraction f = pr2
 
-retract : {l1 l2 : Level} → Type l1 → Type l2 → Type (l1 ⊔ l2)
+retract : {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 retract B A = Σ (A → B) (retraction)
 
 infix 6 _retract-of_
 
 _retract-of_ :
-  {l1 l2 : Level} → Type l1 → Type l2 → Type (l1 ⊔ l2)
+  {l1 l2 : Level} → UU l1 → UU l2 → UU (l1 ⊔ l2)
 A retract-of B = retract B A
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-equiv : (A → B) → Type (l1 ⊔ l2)
+  is-equiv : (A → B) → UU (l1 ⊔ l2)
   is-equiv f = section f × retraction f
 
 module _
-  {l1 l2 : Level} (A : Type l1) (B : Type l2)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
-  equiv : Type (l1 ⊔ l2)
+  equiv : UU (l1 ⊔ l2)
   equiv = Σ (A → B) is-equiv
 
 infix 6 _≃_
 
-_≃_ : {l1 l2 : Level} (A : Type l1) (B : Type l2) → Type (l1 ⊔ l2)
+_≃_ : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 A ≃ B = equiv A B
 ```
 
@@ -133,7 +133,7 @@ Explicitly, if `f` is an equivalence, then there are
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B} (H : is-equiv f)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-equiv f)
   where
 
   section-is-equiv : section f
@@ -157,7 +157,7 @@ module _
     is-retraction-map-retraction f retraction-is-equiv
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (e : A ≃ B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
   where
 
   map-equiv : A → B
@@ -195,7 +195,7 @@ For any type `A`, the identity function `id : A → A` is an equivalence, since 
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   is-equiv-id : is-equiv (id {l} {A})
@@ -215,11 +215,11 @@ Since we have seen in Remark 9.1.1 that the negation function `neg-bool:bool→b
 
 ```agda
 is-involution :
-  {l : Level} {A : Type l} (f : A → A) → Type l
+  {l : Level} {A : UU l} (f : A → A) → UU l
 is-involution f = f ∘ f ~ id
 
 is-equiv-is-involution :
-  {l : Level} {A : Type l} {f : A → A} → is-involution f → is-equiv f
+  {l : Level} {A : UU l} {f : A → A} → is-involution f → is-equiv f
 pr1 (pr1 (is-equiv-is-involution {f = f} H)) = f
 pr2 (pr1 (is-equiv-is-involution {f = f} H)) = H
 pr1 (pr2 (is-equiv-is-involution {f = f} H)) = f
@@ -315,10 +315,10 @@ We write
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-inverse : (A → B) → (B → A) → Type (l1 ⊔ l2)
+  is-inverse : (A → B) → (B → A) → UU (l1 ⊔ l2)
   is-inverse f g = ((f ∘ g) ~ id) × ((g ∘ f) ~ id)
 
   is-section-is-inverse :
@@ -330,11 +330,11 @@ module _
   is-retraction-is-inverse = pr2
 
 is-invertible :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} → (A → B) → Type (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-invertible {A = A} {B} f = Σ (B → A) (is-inverse f)
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B} (g : is-invertible f)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (g : is-invertible f)
   where
 
   map-inv-is-invertible : B → A
@@ -358,7 +358,7 @@ module _
   pr2 retraction-is-invertible = is-retraction-map-inv-is-invertible
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
   is-equiv-is-invertible' : is-invertible f → is-equiv f
@@ -418,7 +418,7 @@ For `x : A` we have the identification
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
   is-retraction-map-section-is-equiv :
@@ -449,7 +449,7 @@ Hence it is an equivalence. ◻
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B} (H : is-equiv f)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-equiv f)
   where
 
   is-equiv-map-section-is-equiv : is-equiv (map-section-is-equiv H)
@@ -511,7 +511,7 @@ We encourage the reader to write out the definitions of at least a few of these 
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Type l1) (B : Type l2) (H : is-empty A)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) (H : is-empty A)
   where
 
   map-inv-left-unit-law-coproduct-is-empty : B → A + B
@@ -556,7 +556,7 @@ module _
   pr2 inv-left-unit-law-coproduct-is-empty = is-equiv-inr-is-empty
 
 module _
-  {l : Level} (B : Type l)
+  {l : Level} (B : UU l)
   where
 
   map-inv-left-unit-law-coproduct : B → empty + B
@@ -587,7 +587,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Type l1) (B : Type l2) (H : is-empty B)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) (H : is-empty B)
   where
 
   map-inv-right-unit-law-coproduct-is-empty : A → A + B
@@ -630,7 +630,7 @@ module _
   pr2 inv-right-unit-law-coproduct-is-empty = is-equiv-inl-is-empty
 
 module _
-  {l : Level} (A : Type l)
+  {l : Level} (A : UU l)
   where
 
   map-inv-right-unit-law-coproduct : A → A + empty
@@ -662,7 +662,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   map-commutative-coproduct : A + B → B + A
@@ -699,7 +699,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
   map-associative-coproduct : (A + B) + C → A + (B + C)
@@ -752,7 +752,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (X : Type l)
+  {l : Level} (X : UU l)
   where
 
   inv-pr1-product-empty : empty → empty × X
@@ -776,7 +776,7 @@ module _
   pr2 left-zero-law-product = is-equiv-pr1-product-empty
 
 module _
-  {l1 l2 : Level} (A : Type l1) (B : Type l2) (is-empty-A : is-empty A)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) (is-empty-A : is-empty A)
   where
   inv-pr1-product-is-empty : A → A × B
   inv-pr1-product-is-empty a = ex-falso (is-empty-A a)
@@ -803,7 +803,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (X : Type l)
+  {l : Level} (X : UU l)
   where
 
   inv-pr2-product-empty : empty → (X × empty)
@@ -827,7 +827,7 @@ module _
   pr2 right-zero-law-product = is-equiv-pr2-product-empty
 
 module _
-  {l1 l2 : Level} (A : Type l1) (B : Type l2) (is-empty-B : is-empty B)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) (is-empty-B : is-empty B)
   where
   inv-pr2-product-is-empty : B → A × B
   inv-pr2-product-is-empty b = ex-falso (is-empty-B b)
@@ -858,7 +858,7 @@ This equivalence is formalized below as an instance of the more general unit law
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   map-right-unit-law-product : A × unit → A
@@ -892,7 +892,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   map-commutative-product : A × B → B × A
@@ -957,7 +957,7 @@ The proof uses the fact that any map into an empty type is an equivalence.
 ```agda
 abstract
   is-equiv-is-empty :
-    {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-empty B → is-equiv f
   is-equiv-is-empty f H =
     is-equiv-is-invertible
@@ -967,14 +967,14 @@ abstract
 
 abstract
   is-equiv-is-empty' :
-    {l : Level} {A : Type l} (f : is-empty A) → is-equiv f
+    {l : Level} {A : UU l} (f : is-empty A) → is-equiv f
   is-equiv-is-empty' f = is-equiv-is-empty f id
 
-equiv-is-empty' : {l : Level} {A : Type l} → is-empty A → A ≃ empty
+equiv-is-empty' : {l : Level} {A : UU l} → is-empty A → A ≃ empty
 equiv-is-empty' f = (f , is-equiv-is-empty' f)
 
 module _
-  {l : Level} (A : empty → Type l)
+  {l : Level} (A : empty → UU l)
   where
 
   map-left-absorption-Σ : Σ empty A → empty
@@ -989,7 +989,7 @@ module _
   pr2 left-absorption-Σ = is-equiv-map-left-absorption-Σ
 
 module _
-  {l : Level} (A : Type l)
+  {l : Level} (A : UU l)
   where
 
   map-left-absorption-product : empty × A → empty
@@ -1003,7 +1003,7 @@ module _
   left-absorption-product = left-absorption-Σ (λ x → A)
 
 is-empty-left-factor-is-empty-product :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} → is-empty (A × B) → B → is-empty A
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty (A × B) → B → is-empty A
 is-empty-left-factor-is-empty-product f b a = f (pair a b)
 ```
 
@@ -1011,7 +1011,7 @@ is-empty-left-factor-is-empty-product f b a = f (pair a b)
 
 ```agda
 module _
-  {l : Level} (A : Type l)
+  {l : Level} (A : UU l)
   where
 
   map-right-absorption-Σ : Σ A (λ x → empty) → empty
@@ -1025,7 +1025,7 @@ module _
     pair map-right-absorption-Σ is-equiv-map-right-absorption-Σ
 
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   map-right-absorption-product : A × empty → empty
@@ -1038,7 +1038,7 @@ module _
   right-absorption-product = right-absorption-Σ A
 
 is-empty-right-factor-is-empty-product :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} → is-empty (A × B) → A → is-empty B
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty (A × B) → A → is-empty B
 is-empty-right-factor-is-empty-product f a b = f (pair a b)
 ```
 
@@ -1046,7 +1046,7 @@ is-empty-right-factor-is-empty-product f a b = f (pair a b)
 
 ```agda
 module _
-  {l : Level} (A : unit → Type l)
+  {l : Level} (A : unit → UU l)
   where
 
   map-left-unit-law-Σ : Σ unit A → A star
@@ -1087,7 +1087,7 @@ module _
   pr2 inv-left-unit-law-Σ = is-equiv-map-inv-left-unit-law-Σ
 
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   map-left-unit-law-product : unit × A → A
@@ -1147,7 +1147,7 @@ In the first of these equivalences associativity is stated using a type family `
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : Σ A B → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3}
   where
 
   map-associative-Σ : Σ (Σ A B) C → Σ A (λ x → Σ (B x) (λ y → C (x , y)))
@@ -1191,7 +1191,7 @@ module _
   pr2 inv-associative-Σ = is-equiv-map-inv-associative-Σ
 
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
   map-associative-product : (A × B) × C → A × (B × C)
@@ -1225,7 +1225,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : Type l1) (B : A → Type l2) (C : (x : A) → B x → Type l3)
+  {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (C : (x : A) → B x → UU l3)
   where
 
   map-associative-Σ' :
@@ -1282,7 +1282,7 @@ In other words, there are the following two equivalences:
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
   map-left-distributive-Σ-coproduct :
@@ -1340,7 +1340,7 @@ module _
       is-equiv-map-inv-left-distributive-Σ-coproduct)
 
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
   map-left-distributive-product-coproduct : A × (B + C) → A × B + A × C
@@ -1378,7 +1378,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (C : A + B → Type l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A + B → UU l3)
   where
 
   map-right-distributive-Σ-coproduct :
@@ -1434,7 +1434,7 @@ module _
       is-equiv-map-inv-right-distributive-Σ-coproduct)
 
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
   where
 
   map-right-distributive-product-coproduct : (A + B) × C → A × C + B × C

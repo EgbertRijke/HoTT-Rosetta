@@ -61,14 +61,14 @@ is-gcd_{a,b}(d) ≔ Π(x:ℕ) (x| a)× (x| b)↔ (x| d).
 <!-- rosetta-agda-block: definition-8.4.1-common-divisor -->
 
 ```agda
-is-common-divisor-ℕ : (a b x : ℕ) → Type lzero
+is-common-divisor-ℕ : (a b x : ℕ) → UU lzero
 is-common-divisor-ℕ a b x = (div-ℕ x a) × (div-ℕ x b)
 ```
 
 <!-- rosetta-agda-block: definition-8.4.1-greatest-common-divisor -->
 
 ```agda
-is-gcd-ℕ : (a b d : ℕ) → Type lzero
+is-gcd-ℕ : (a b d : ℕ) → UU lzero
 is-gcd-ℕ a b d = (x : ℕ) → (is-common-divisor-ℕ a b x) ↔ (div-ℕ x d)
 ```
 <!-- rosetta-item-end: definition-8.4.1 -->
@@ -149,7 +149,7 @@ M(a,b,n) ≔ (a+b≠ 0) → (n≠ 0)× (Π(x:ℕ) (x| a)× (x| b) → (x| n)).
 <!-- rosetta-agda-block: definition-8.4.3-multiple-gcd -->
 
 ```agda
-is-multiple-of-gcd-ℕ : (a b n : ℕ) → Type lzero
+is-multiple-of-gcd-ℕ : (a b n : ℕ) → UU lzero
 is-multiple-of-gcd-ℕ a b n =
   is-nonzero-ℕ (a +ℕ b) →
   (is-nonzero-ℕ n) × ((x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x n)

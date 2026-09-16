@@ -35,24 +35,24 @@ has a section.
 
 ```agda
 ev-refl-identity-system :
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {a : A} (b : B a)
-  {P : (x : A) (y : B x) → Type l3} →
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {a : A} (b : B a)
+  {P : (x : A) (y : B x) → UU l3} →
   ((x : A) (y : B x) → P x y) → P a b
 ev-refl-identity-system {a = a} b f = f a b
 
 module _
-  {l1 l2 : Level} (l : Level) {A : Type l1} (B : A → Type l2) (a : A) (b : B a)
+  {l1 l2 : Level} (l : Level) {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
   where
 
-  is-identity-system-Level : Type (l1 ⊔ l2 ⊔ lsuc l)
+  is-identity-system-Level : UU (l1 ⊔ l2 ⊔ lsuc l)
   is-identity-system-Level =
-    (P : (x : A) (y : B x) → Type l) → section (ev-refl-identity-system b {P})
+    (P : (x : A) (y : B x) → UU l) → section (ev-refl-identity-system b {P})
 
 module _
-  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) (a : A) (b : B a)
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) (a : A) (b : B a)
   where
 
-  is-identity-system : Typeω
+  is-identity-system : UUω
   is-identity-system = {l : Level} → is-identity-system-Level l B a b
 ```
 
@@ -155,11 +155,11 @@ Note: In agda-unimath we say that `B` is *torsorial* if `Σ A B` is contractible
 
 ```agda
 is-torsorial :
-  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) → Type (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → UU (l1 ⊔ l2)
 is-torsorial B = is-contr (Σ _ B)
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} {a : A}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {a : A}
   where
 
   abstract
@@ -180,7 +180,7 @@ module _
         ( is-contr-Id a)
 
 is-identity-system-is-contr :
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (a : A) (b : B a) →
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a) →
   is-torsorial B → is-identity-system B a b
 pr1 (is-identity-system-is-contr a b H P) p =
   ev-pair (ind-singleton (a , b) H (λ t → P (pr1 t) (pr2 t)) p)
@@ -188,7 +188,7 @@ pr2 (is-identity-system-is-contr a b H P) =
   compute-ind-singleton (a , b) H (λ t → P (pr1 t) (pr2 t))
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (a : A) (b : B a)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
   where
 
   abstract
@@ -206,7 +206,7 @@ module _
       fundamental-theorem-id (is-torsorial-is-identity-system H)
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (a : A) (b : B a)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
   where
 
   abstract

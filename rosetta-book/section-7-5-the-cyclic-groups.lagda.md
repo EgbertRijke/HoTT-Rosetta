@@ -40,7 +40,7 @@ We define the type `ℤ/k` for each `k:ℕ` by
 <!-- rosetta-agda-block: definition-7.5.1-integers-modulo-adapted -->
 
 ```agda
-ℤ-Mod : ℕ → Type lzero
+ℤ-Mod : ℕ → UU lzero
 ℤ-Mod zero-ℕ = ℤ
 ℤ-Mod (succ-ℕ k) = Fin (succ-ℕ k)
 ```

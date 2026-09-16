@@ -75,7 +75,7 @@ for each `n:ℕ` and each `x: based-ℕ {k+1}`.
 <!-- rosetta-agda-block: exercise-7-10-based-natural-numbers -->
 
 ```agda
-data based-ℕ : ℕ → Type lzero where
+data based-ℕ : ℕ → UU lzero where
   constant-based-ℕ : (k : ℕ) → Fin k → based-ℕ k
   unary-op-based-ℕ : (k : ℕ) → Fin k → based-ℕ k → based-ℕ k
 ```

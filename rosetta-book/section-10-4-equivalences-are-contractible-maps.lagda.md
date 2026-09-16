@@ -53,14 +53,14 @@ We will write `is-coh-invertible(f)` for the type of quadruples `(g, G, H, K)`.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   coherence-is-coherently-invertible :
-    (f : A → B) (g : B → A) (G : f ∘ g ~ id) (H : g ∘ f ~ id) → Type (l1 ⊔ l2)
+    (f : A → B) (g : B → A) (G : f ∘ g ~ id) (H : g ∘ f ~ id) → UU (l1 ⊔ l2)
   coherence-is-coherently-invertible f g G H = G ·r f ~ f ·l H
 
-  is-coherently-invertible : (A → B) → Type (l1 ⊔ l2)
+  is-coherently-invertible : (A → B) → UU (l1 ⊔ l2)
   is-coherently-invertible f =
     Σ ( B → A)
       ( λ g →
@@ -70,7 +70,7 @@ module _
               ( λ H → coherence-is-coherently-invertible f g G H)))
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   (H : is-coherently-invertible f)
   where
 
@@ -165,7 +165,7 @@ is defined as
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
   abstract
@@ -244,7 +244,7 @@ since `ap_{f}(refl) ≐ refl` and `ap_{g}(refl) ≐ refl`, and since `refl ∙ H
 
 ```agda
 nat-htpy :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f g : A → B} (H : f ~ g)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
   {x y : A} (p : x ＝ y) →
   H x ∙ ap g p ＝ ap f p ∙ H y
 nat-htpy H refl = right-unit
@@ -274,14 +274,14 @@ This gives the desired identification `H(f(x)) = ap_{f}(H(x))`.
 
 ```agda
 nat-htpy-id :
-  {l : Level} {A : Type l} {f : A → A} (H : f ~ id)
+  {l : Level} {A : UU l} {f : A → A} (H : f ~ id)
   {x y : A} (p : x ＝ y) → H x ∙ p ＝ ap f p ∙ H y
 nat-htpy-id H refl = right-unit
 ```
 
 ```agda
 module _
-  {l : Level} {A : Type l} {f : A → A} (H : f ~ id)
+  {l : Level} {A : UU l} {f : A → A} (H : f ~ id)
   where
 
   coh-htpy-id : H ·r f ~ f ·l H
@@ -349,7 +349,7 @@ Now we observe that this is just a naturality square the homotopy `G · f : fgf 
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B} (H : is-invertible f)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-invertible f)
   where
 
   is-retraction-map-inv-is-coherently-invertible-is-invertible :
@@ -424,7 +424,7 @@ Moreover, any equivalence has the structure of an invertible map by Proposition 
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
   where
 
   abstract
@@ -456,7 +456,7 @@ Note that `Σ(x : A) x = a` is exactly the fiber of `id` at `a : A`. ◻
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   abstract

@@ -78,10 +78,10 @@ by defining
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  Eq-Σ : (s t : Σ A B) → Type (l1 ⊔ l2)
+  Eq-Σ : (s t : Σ A B) → UU (l1 ⊔ l2)
   Eq-Σ s t =
     Σ (pr1 s ＝ pr1 t) (λ α → dependent-identification B α (pr2 s) (pr2 t))
 ```
@@ -107,7 +107,7 @@ Here we take `λ x. λ y. (refl,refl)`.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   refl-Eq-Σ : (s : Σ A B) → Eq-Σ s s
@@ -127,7 +127,7 @@ by path induction, taking `pair-eq(refl) ≔ reflexive-Eq-Σ(s)`.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   eq-base-eq-pair : {s t : Σ A B} → s ＝ t → pr1 s ＝ pr1 t
@@ -180,7 +180,7 @@ This completes the definition of the function `eq-pair`.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   eq-pair-eq-base :

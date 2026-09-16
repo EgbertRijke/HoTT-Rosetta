@@ -3,7 +3,8 @@
 ```agda
 module section-5-2-the-groupoidal-structure-of-types where
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
+
 open import section-5-1-the-inductive-definition-of-identity-types
 ```
 

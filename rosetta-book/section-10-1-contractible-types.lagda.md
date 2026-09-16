@@ -28,30 +28,30 @@ Given a pair `(c,C) : is-contr(A)`, we call `c : A` the **center of contraction*
 
 ```agda
 is-contr :
-  {l : Level} → Type l → Type l
+  {l : Level} → UU l → UU l
 is-contr A = Σ A (λ a → (x : A) → a ＝ x)
 
 abstract
   center :
-    {l : Level} {A : Type l} → is-contr A → A
+    {l : Level} {A : UU l} → is-contr A → A
   center (pair c is-contr-A) = c
 
 eq-is-contr' :
-  {l : Level} {A : Type l} → is-contr A → (x y : A) → x ＝ y
+  {l : Level} {A : UU l} → is-contr A → (x y : A) → x ＝ y
 eq-is-contr' (pair c C) x y = (inv (C x)) ∙ (C y)
 
 eq-is-contr :
-  {l : Level} {A : Type l} → is-contr A → {x y : A} → x ＝ y
+  {l : Level} {A : UU l} → is-contr A → {x y : A} → x ＝ y
 eq-is-contr C {x} {y} = eq-is-contr' C x y
 
 abstract
   contraction :
-    {l : Level} {A : Type l} (is-contr-A : is-contr A) →
+    {l : Level} {A : UU l} (is-contr-A : is-contr A) →
     (x : A) → (center is-contr-A) ＝ x
   contraction C x = eq-is-contr C
 
   coh-contraction :
-    {l : Level} {A : Type l} (is-contr-A : is-contr A) →
+    {l : Level} {A : UU l} (is-contr-A : is-contr A) →
     (contraction is-contr-A (center is-contr-A)) ＝ refl
   coh-contraction (pair c C) = left-inv (C c)
 ```
@@ -103,7 +103,7 @@ The contraction is constructed in Proposition 5.5.1. ◻
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   abstract

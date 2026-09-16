@@ -41,7 +41,7 @@ hold, then so does the third.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (B : Type l2)
+  {l1 l2 : Level} {A : UU l1} (B : UU l2)
   where
 
   abstract
@@ -57,7 +57,7 @@ module _
       is-contr-is-equiv e H
 
 module _
-  {l1 l2 : Level} (A : Type l1) {B : Type l2}
+  {l1 l2 : Level} (A : UU l1) {B : UU l2}
   where
 
   abstract
@@ -74,7 +74,7 @@ module _
     is-contr-equiv' (e , H) = is-contr-is-equiv' e H
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   abstract

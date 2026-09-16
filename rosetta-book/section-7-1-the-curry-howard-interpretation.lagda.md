@@ -51,7 +51,7 @@ d| n≔ Σ(k:ℕ) d· k=n.
 <!-- rosetta-agda-block: section-7-1-the-curry-howard-interpretation-block-59 -->
 
 ```agda
-div-ℕ : ℕ → ℕ → Type lzero
+div-ℕ : ℕ → ℕ → UU lzero
 div-ℕ m n = Σ ℕ (λ k → k *ℕ m ＝ n)
 ```
 <!-- rosetta-item-end: definition-7.1.2 -->

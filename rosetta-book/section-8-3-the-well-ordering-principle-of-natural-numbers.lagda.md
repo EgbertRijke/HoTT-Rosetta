@@ -40,7 +40,7 @@ is-upper-bound_P(n)≔ Π(x:ℕ) P(x)→ (x≤ n).
 
 ```agda
 is-lower-bound-ℕ :
-  {l : Level} (P : ℕ → Type l) (n : ℕ) → Type l
+  {l : Level} (P : ℕ → UU l) (n : ℕ) → UU l
 is-lower-bound-ℕ P n = (m : ℕ) → P m → leq-ℕ n m
 ```
 
@@ -48,7 +48,7 @@ is-lower-bound-ℕ P n = (m : ℕ) → P m → leq-ℕ n m
 
 ```agda
 minimal-element-ℕ :
-  {l : Level} (P : ℕ → Type l) → Type l
+  {l : Level} (P : ℕ → UU l) → UU l
 minimal-element-ℕ P = Σ ℕ (λ n → (P n) × (is-lower-bound-ℕ P n))
 ```
 <!-- rosetta-item-end: definition-8.3.1 -->
@@ -103,7 +103,7 @@ Of course, by the assumption that `Q(0)` doesn’t hold, the minimal element of 
 
 ```agda
 is-minimal-element-succ-ℕ :
-  {l : Level} (P : ℕ → Type l) (d : is-decidable-family P)
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P)
   (m : ℕ) (pm : P (succ-ℕ m))
   (is-lower-bound-m : is-lower-bound-ℕ (λ x → P (succ-ℕ x)) m) →
   ¬ (P zero-ℕ) → is-lower-bound-ℕ P (succ-ℕ m)
@@ -117,7 +117,7 @@ is-minimal-element-succ-ℕ
   is-lower-bound-m n psuccn
 
 well-ordering-principle-succ-ℕ :
-  {l : Level} (P : ℕ → Type l) (d : is-decidable-family P)
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P)
   (n : ℕ) (p : P (succ-ℕ n)) →
   is-decidable (P zero-ℕ) →
   minimal-element-ℕ (λ m → P (succ-ℕ m)) → minimal-element-ℕ P
@@ -127,7 +127,7 @@ well-ordering-principle-succ-ℕ P d n p (inr neg-p0) (m , pm , is-min-m) =
   ( succ-ℕ m , pm , is-minimal-element-succ-ℕ P d m pm is-min-m neg-p0)
 
 well-ordering-principle-ℕ :
-  {l : Level} (P : ℕ → Type l) (d : is-decidable-family P) →
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) →
   Σ ℕ P → minimal-element-ℕ P
 pr1 (well-ordering-principle-ℕ P d (pair zero-ℕ p)) = zero-ℕ
 pr1 (pr2 (well-ordering-principle-ℕ P d (pair zero-ℕ p))) = p

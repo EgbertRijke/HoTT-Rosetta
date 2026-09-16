@@ -3,7 +3,7 @@
 ```agda
 module section-2-2-ordinary-function-types where
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
 ```
 
 An important special case of `Π`-types arises when both `A` and `B` are types in context `Γ`. In this case, we can first weaken `B` by `A` and then apply the `Π`-formation rule to obtain the type `A → B` of *ordinary* functions from `A` to `B`, as in the following derivation:
@@ -154,12 +154,6 @@ The identity function therefore satisfies the following inference rules:
 ```agda
 id : {l : Level} {A : Type l} → A → A
 id a = a
-
-id' : {l : Level} (A : Type l) → A → A
-id' A = id
-
-idω : {A : Typeω} → A → A
-idω a = a
 ```
 
 Next, we define the composition of functions. We will introduce the composition operation itself as a function `comp` that takes two arguments: the first argument is a function `g : B → C`, and the second argument is a function `f : A → B`. The output is a function `comp(g,f) : A → C`, for which we often write `g ∘ f`.

@@ -3,7 +3,7 @@
 ```agda
 module exercise-5-2-inverse-concatenation-maps where
 
-open import universe-levels renaming (Type to UU ; Typeω to UUω)
+open import universe-levels renaming (UU to Type)
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 ```
@@ -24,7 +24,7 @@ con-inv(p,q,r) : (p ∙ q=r)→ (p=r ∙ q^{-1}).
 
 ```agda
 module _
-  {l : Level} {A : UU l}
+  {l : Level} {A : Type l}
   where
 
   left-transpose-eq-concat :

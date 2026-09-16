@@ -3,7 +3,7 @@
 ```agda
 module section-6-3-observational-equality-of-the-natural-numbers where
 
-open import universe-levels renaming (Type to UU ; Typeω to UUω)
+open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type

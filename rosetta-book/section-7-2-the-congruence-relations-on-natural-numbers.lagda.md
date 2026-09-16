@@ -48,18 +48,18 @@ A **(typal) equivalence relation** on `A` is a reflexive, symmetric, and transit
 <!-- rosetta-agda-block: section-7-2-the-congruence-relations-on-natural-numbers-block-31 -->
 
 ```agda
-Relation : {l1 : Level} (l : Level) (A : Type l1) → Type (l1 ⊔ lsuc l)
-Relation l A = A → A → Type l
+Relation : {l1 : Level} (l : Level) (A : UU l1) → UU (l1 ⊔ lsuc l)
+Relation l A = A → A → UU l
 ```
 
 <!-- rosetta-agda-block: section-7-2-the-congruence-relations-on-natural-numbers-block-43 -->
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (R : Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
 
-  is-reflexive : Type (l1 ⊔ l2)
+  is-reflexive : UU (l1 ⊔ l2)
   is-reflexive = (x : A) → R x x
 ```
 
@@ -67,10 +67,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (R : Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
 
-  is-symmetric : Type (l1 ⊔ l2)
+  is-symmetric : UU (l1 ⊔ l2)
   is-symmetric = (x y : A) → R x y → R y x
 ```
 
@@ -78,10 +78,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (R : Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
 
-  is-transitive : Type (l1 ⊔ l2)
+  is-transitive : UU (l1 ⊔ l2)
   is-transitive = (x y z : A) → R y z → R x y → R x z
 ```
 
@@ -89,14 +89,14 @@ module _
 
 ```agda
 is-equivalence-relation :
-  {l1 l2 : Level} {A : Type l1} (R : Relation l2 A) → Type (l1 ⊔ l2)
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A) → UU (l1 ⊔ l2)
 is-equivalence-relation R =
   is-reflexive R ×
   is-symmetric R ×
   is-transitive R
 
 equivalence-relation :
-  (l : Level) {l1 : Level} (A : Type l1) → Type (lsuc l ⊔ l1)
+  (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
 equivalence-relation l A = Σ (Relation l A) is-equivalence-relation
 ```
 <!-- rosetta-item-end: definition-7.2.1 -->
@@ -127,7 +127,7 @@ x≡ y mod k ≔ k|dist-ℕ(x,y).
 
 ```agda
 cong-ℕ :
-  ℕ → ℕ → ℕ → Type lzero
+  ℕ → ℕ → ℕ → UU lzero
 cong-ℕ k x y = div-ℕ k (dist-ℕ x y)
 ```
 <!-- rosetta-item-end: definition-7.2.2 -->

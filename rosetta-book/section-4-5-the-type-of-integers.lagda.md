@@ -3,7 +3,7 @@
 ```agda
 module section-4-5-the-type-of-integers where
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
 
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type

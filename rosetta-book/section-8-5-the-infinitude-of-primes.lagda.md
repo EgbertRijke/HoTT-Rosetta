@@ -103,7 +103,7 @@ abstract
 <!-- rosetta-agda-block: definition-8.5.1-negated-equality -->
 
 ```agda
-nonequal : {l : Level} {A : Type l} → A → A → Type l
+nonequal : {l : Level} {A : UU l} → A → A → UU l
 nonequal x y = ¬ (x ＝ y)
 
 infix 6 _≠_
@@ -124,7 +124,7 @@ abstract
 
 ```agda
 is-empty-left-factor-is-empty-product :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} → is-empty (A × B) → B → is-empty A
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty (A × B) → B → is-empty A
 is-empty-left-factor-is-empty-product f b a = f (pair a b)
 ```
 
@@ -148,7 +148,7 @@ is-prime(n)≔ Π(x:ℕ) is-proper-divisor(n,x)↔ (x=1).
 <!-- rosetta-agda-block: definition-8.5.1-proper-divisor -->
 
 ```agda
-is-proper-divisor-ℕ : ℕ → ℕ → Type lzero
+is-proper-divisor-ℕ : ℕ → ℕ → UU lzero
 is-proper-divisor-ℕ n d = (d ≠ n) × (div-ℕ d n)
 
 is-decidable-is-proper-divisor-ℕ :
@@ -171,7 +171,7 @@ le-is-proper-divisor-ℕ x y H K =
 <!-- rosetta-agda-block: definition-8.5.1-prime -->
 
 ```agda
-is-prime-ℕ : ℕ → Type lzero
+is-prime-ℕ : ℕ → UU lzero
 is-prime-ℕ n = (x : ℕ) → (is-proper-divisor-ℕ n x ↔ is-one-ℕ x)
 ```
 <!-- rosetta-item-end: definition-8.5.1 -->
@@ -235,11 +235,11 @@ pr2 (pr2 (is-proper-divisor-one-is-proper-divisor-ℕ {n} {x} H)) =
 <!-- rosetta-agda-block: proposition-8.5.2-prime-easy -->
 
 ```agda
-is-one-is-proper-divisor-ℕ : ℕ → Type lzero
+is-one-is-proper-divisor-ℕ : ℕ → UU lzero
 is-one-is-proper-divisor-ℕ n =
   (x : ℕ) → is-proper-divisor-ℕ n x → is-one-ℕ x
 
-is-prime-easy-ℕ : ℕ → Type lzero
+is-prime-easy-ℕ : ℕ → UU lzero
 is-prime-easy-ℕ n = (is-not-one-ℕ n) × (is-one-is-proper-divisor-ℕ n)
 ```
 
@@ -317,11 +317,11 @@ R(n,m)≔ (n<m)× Π(x:ℕ) (x≤ n)→ ((x| m)→ (x=1)).
 <!-- rosetta-agda-block: definition-8.5.3-sieve -->
 
 ```agda
-is-one-is-divisor-below-ℕ : ℕ → ℕ → Type lzero
+is-one-is-divisor-below-ℕ : ℕ → ℕ → UU lzero
 is-one-is-divisor-below-ℕ n a =
   (x : ℕ) → leq-ℕ x n → div-ℕ x a → is-one-ℕ x
 
-in-sieve-of-eratosthenes-ℕ : ℕ → ℕ → Type lzero
+in-sieve-of-eratosthenes-ℕ : ℕ → ℕ → UU lzero
 in-sieve-of-eratosthenes-ℕ n a =
   (le-ℕ n a) × (is-one-is-divisor-below-ℕ n a)
 
@@ -534,7 +534,7 @@ is-prime-two-ℕ =
 <!-- rosetta-agda-block: theorem-8.5.6-infinitude-type -->
 
 ```agda
-Infinitude-Of-Primes-ℕ : Type lzero
+Infinitude-Of-Primes-ℕ : UU lzero
 Infinitude-Of-Primes-ℕ = (n : ℕ) → Σ ℕ (λ p → is-prime-ℕ p × le-ℕ n p)
 ```
 

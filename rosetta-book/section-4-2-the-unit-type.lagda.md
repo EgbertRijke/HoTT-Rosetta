@@ -5,7 +5,7 @@ module section-4-2-the-unit-type where
 
 open import exercise-2-3-constant-maps
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
 ```
 
 A straightforward example of an inductive type is the *unit type*, which has just one constructor. 

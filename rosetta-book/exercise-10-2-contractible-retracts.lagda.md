@@ -30,7 +30,7 @@ is-contr(B)→is-contr(A).
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (B : Type l2)
+  {l1 l2 : Level} {A : UU l1} (B : UU l2)
   where
 
   abstract

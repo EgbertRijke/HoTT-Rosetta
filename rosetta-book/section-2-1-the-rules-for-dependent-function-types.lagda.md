@@ -3,7 +3,7 @@
 ```agda
 module section-2-1-the-rules-for-dependent-function-types where
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
 ```
 
 Consider a section `b` of a family `B` over `A` in context `Γ`, i.e., consider

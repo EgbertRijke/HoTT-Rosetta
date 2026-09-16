@@ -56,10 +56,10 @@ is-split-surjective(f):=Π(b:B) Σ(a:A) f(a)=b.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-split-surjective : (A → B) → Type (l1 ⊔ l2)
+  is-split-surjective : (A → B) → UU (l1 ⊔ l2)
   is-split-surjective f = (b : B) → Σ A (λ x → f x ＝ b)
 ```
 <!-- rosetta-item-end: definition-7.4.1 -->

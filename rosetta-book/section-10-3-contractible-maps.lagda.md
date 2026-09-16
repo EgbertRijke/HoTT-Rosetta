@@ -27,17 +27,17 @@ The **fiber** of `f` at `b` is defined to be the type
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (b : B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (b : B)
   where
 
-  fiber : Type (l1 ⊔ l2)
+  fiber : UU (l1 ⊔ l2)
   fiber = Σ A (λ x → f x ＝ b)
 
-  fiber' : Type (l1 ⊔ l2)
+  fiber' : UU (l1 ⊔ l2)
   fiber' = Σ A (λ x → b ＝ f x)
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) {b : B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {b : B}
   where
 
   inclusion-fiber : fiber f b → A
@@ -54,7 +54,7 @@ module _
   compute-value-inclusion-fiber' = pr2
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (y : B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (y : B)
   where
 
   map-equiv-fiber : fiber f y → fiber' f y
@@ -122,10 +122,10 @@ The relation `Eq-fib_f : fib(f,y) → fib(f,y) → 𝒰` is a reflexive relation
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (b : B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (b : B)
   where
 
-  Eq-fiber : fiber f b → fiber f b → Type (l1 ⊔ l2)
+  Eq-fiber : fiber f b → fiber f b → UU (l1 ⊔ l2)
   Eq-fiber s t = Σ (pr1 s ＝ pr1 t) (λ α → ap f α ∙ pr2 t ＝ pr2 s)
 
   refl-Eq-fiber : (s : fiber f b) → Eq-fiber s s
@@ -201,10 +201,10 @@ We say that a function `f : A → B` is **contractible** if it comes equipped wi
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  is-contr-map : (A → B) → Type (l1 ⊔ l2)
+  is-contr-map : (A → B) → UU (l1 ⊔ l2)
   is-contr-map f = (y : B) → is-contr (fiber f y)
 ```
 
@@ -233,7 +233,7 @@ The base path `ap_{pr1}(q)` of this identification is an identification of type 
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B} (H : is-contr-map f)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-contr-map f)
   where
 
   map-inv-is-contr-map : B → A

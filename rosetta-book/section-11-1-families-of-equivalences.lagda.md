@@ -37,7 +37,7 @@ by `λ (x,y). (x,f(x,y))`.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   (f : (x : A) → B x → C x)
   where
 
@@ -45,18 +45,18 @@ module _
   tot (x , y) = (x , f x y)
 
 tot-htpy :
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   {f g : (x : A) → B x → C x} → (H : (x : A) → f x ~ g x) → tot f ~ tot g
 tot-htpy H (x , y) = eq-pair-eq-fiber (H x y)
 
 tot-id :
-  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) →
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
   tot (λ x → id) ~ id {A = Σ A B}
 tot-id B p = refl
 
 preserves-comp-tot :
   {l1 l2 l3 l4 : Level}
-  {A : Type l1} {B : A → Type l2} {B' : A → Type l3} {B'' : A → Type l4}
+  {A : UU l1} {B : A → UU l2} {B' : A → UU l3} {B'' : A → UU l4}
   (f : (x : A) → B x → B' x) (g : (x : A) → B' x → B'' x) →
   tot (λ x → g x ∘ f x) ~ tot g ∘ tot f
 preserves-comp-tot f g p = refl
@@ -101,7 +101,7 @@ Each of these definitions is given by pattern matching, as follows:
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   (f : (x : A) → B x → C x)
   where
 
@@ -167,14 +167,14 @@ However, by Lemma 11.1.2 these types are equivalent, so the result follows by Ex
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
-  is-fiberwise-equiv : (f : (x : A) → B x → C x) → Type (l1 ⊔ l2 ⊔ l3)
+  is-fiberwise-equiv : (f : (x : A) → B x → C x) → UU (l1 ⊔ l2 ⊔ l3)
   is-fiberwise-equiv f = (x : A) → is-equiv (f x)
 
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   {f : (x : A) → B x → C x}
   where
 
@@ -201,7 +201,7 @@ module _
             ( is-contr-map-is-equiv is-equiv-tot-f (x , z)))
 
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
   equiv-tot : ((x : A) → B x ≃ C x) → (Σ A B) ≃ (Σ A C)
@@ -262,14 +262,14 @@ Now the claim follows, since we see that `φ` is a contractible map if and only 
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : B → Type l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3)
   where
 
   map-Σ-map-base : Σ A (λ x → C (f x)) → Σ B C
   map-Σ-map-base (x , y) = (f x , y)
 
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : B → Type l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3)
   where
 
   fiber-map-Σ-map-base-fiber :
@@ -307,7 +307,7 @@ module _
     is-equiv-fiber-map-Σ-map-base-fiber t
 
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : B → Type l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3)
   where
 
   abstract
@@ -320,7 +320,7 @@ module _
         ( is-contr-f y)
 
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : B → Type l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3)
   where
 
   abstract
@@ -330,7 +330,7 @@ module _
         ( is-contr-map-map-Σ-map-base f C (is-contr-map-is-equiv is-equiv-f))
 
 equiv-Σ-equiv-base :
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (C : B → Type l3) (e : A ≃ B) →
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : B → UU l3) (e : A ≃ B) →
   Σ A (C ∘ map-equiv e) ≃ Σ B C
 equiv-Σ-equiv-base C (f , is-equiv-f) =
   ( map-Σ-map-base f C , is-equiv-map-Σ-map-base f C is-equiv-f)
@@ -358,8 +358,8 @@ by `tot_f(g)(x,z) ≔ (f(x),g(x,z))`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : Type l1} {B : Type l2} {C : A → Type l3}
-  (D : B → Type l4)
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
+  (D : B → UU l4)
   where
 
   map-Σ : (f : A → B) (g : (x : A) → C x → D (f x)) → Σ A C → Σ B D
@@ -401,8 +401,8 @@ Now the claim follows, since `tot(g)` is an equivalence if and only if `g` if a 
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : Type l1} {B : Type l2} {C : A → Type l3}
-  (D : B → Type l4)
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
+  (D : B → UU l4)
   where
 
   triangle-map-Σ :
@@ -411,8 +411,8 @@ module _
   triangle-map-Σ f g t = refl
 
 module _
-  {l1 l2 l3 l4 : Level} {A : Type l1} {B : Type l2} {C : A → Type l3}
-  (D : B → Type l4)
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : A → UU l3}
+  (D : B → UU l4)
   where
 
   abstract

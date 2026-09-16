@@ -3,7 +3,7 @@
 ```agda
 module exercise-2-3-constant-maps where
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
 ```
 
 ## Problem statement

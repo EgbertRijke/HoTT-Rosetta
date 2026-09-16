@@ -3,7 +3,7 @@
 ```agda
 module section-3-1-the-formal-specification-of-the-type-of-natural-numbers where
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
 ```
 
 The type `ℕ` of **natural numbers** is the archetypal example of an inductive type. 

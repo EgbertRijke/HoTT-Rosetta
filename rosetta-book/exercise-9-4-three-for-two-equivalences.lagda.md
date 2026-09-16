@@ -93,7 +93,7 @@ Conclude that any section and any retraction of an equivalence is again an equiv
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (g : B → X) (h : A → B) (t : section h) (s : section g)
   where
 
@@ -115,7 +115,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H' : g ∘ h ~ f) (s : section f)
   where
 
@@ -138,7 +138,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h) (s : section f)
   where
 
@@ -160,7 +160,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h) (t : section h)
   where
 
@@ -182,7 +182,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (g : B → X) (h : A → B) (r : retraction g) (s : retraction h)
   where
 
@@ -203,7 +203,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : g ∘ h ~ f)
   (r : retraction f)
   where
@@ -223,7 +223,7 @@ module _
     is-retraction-map-retraction-top-map-triangle'
 
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
   (r : retraction f)
   where
@@ -237,7 +237,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
   (r : retraction g) (s : retraction h)
   where
@@ -262,7 +262,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (T : f ~ g ∘ h)
   where
 
@@ -282,7 +282,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
   where
 
@@ -306,7 +306,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
   where
 
@@ -347,7 +347,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   where
 
   opaque

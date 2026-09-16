@@ -3,7 +3,7 @@
 ```agda
 module exercise-4-3-double-negation-logic where
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
 open import section-2-1-the-rules-for-dependent-function-types
 open import section-2-2-ordinary-function-types
 open import section-4-3-the-empty-type

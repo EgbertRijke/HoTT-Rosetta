@@ -35,7 +35,7 @@ is an equivalence.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (C : is-contr A) (a : A)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (C : is-contr A) (a : A)
   where
 
   map-inv-left-unit-law-Σ-is-contr : B a → Σ A B
@@ -99,7 +99,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   abstract

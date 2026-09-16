@@ -3,7 +3,7 @@
 ```agda
 module exercise-2-4-swapping-variables where
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
 ```
 
 ## Problem statement

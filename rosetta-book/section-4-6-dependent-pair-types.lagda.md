@@ -3,7 +3,7 @@
 ```agda
 module section-4-6-dependent-pair-types where
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
 ```
 
 Given a type family `B` over `A`, we may consider pairs `(a,b)` of

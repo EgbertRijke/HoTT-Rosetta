@@ -44,7 +44,7 @@ A family `P` over a type `A` is said to be **decidable** if `P(x)` is decidable 
 <!-- rosetta-agda-block: definition-8.1.1-decidable -->
 
 ```agda
-is-decidable : {l : Level} (A : Type l) → Type l
+is-decidable : {l : Level} (A : UU l) → UU l
 is-decidable A = A + (¬ A)
 ```
 <!-- rosetta-item-end: definition-8.1.1 -->
@@ -98,7 +98,7 @@ Since `A→ B` is decidable whenever both `A` and `B` are decidable, it also fol
 
 ```agda
 is-decidable-coproduct :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → is-decidable B → is-decidable (A + B)
 is-decidable-coproduct (inl a) y = inl (inl a)
 is-decidable-coproduct (inr na) (inl b) = inl (inr b)
@@ -109,7 +109,7 @@ is-decidable-coproduct (inr na) (inr nb) = inr (rec-coproduct na nb)
 
 ```agda
 is-decidable-product :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → is-decidable B → is-decidable (A × B)
 is-decidable-product (inl a) (inl b) = inl (a , b)
 is-decidable-product (inl a) (inr g) = inr (g ∘ pr2)
@@ -121,7 +121,7 @@ is-decidable-product (inr f) (inr g) = inr (f ∘ pr1)
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (a : A)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A)
   where
 
   ev : ((x : A) → B x) → B a
@@ -132,7 +132,7 @@ module _
 
 ```agda
 is-decidable-function-type :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → is-decidable B → is-decidable (A → B)
 is-decidable-function-type (inl a) (inl b) = inl (λ _ → b)
 is-decidable-function-type (inl a) (inr nb) = inr (map-neg (ev a) nb)
@@ -143,7 +143,7 @@ is-decidable-function-type (inr f) _ = inl (ex-falso ∘ f)
 
 ```agda
 is-decidable-neg :
-  {l : Level} {A : Type l} → is-decidable A → is-decidable (¬ A)
+  {l : Level} {A : UU l} → is-decidable A → is-decidable (¬ A)
 is-decidable-neg d = is-decidable-function-type d is-decidable-empty
 ```
 <!-- rosetta-item-end: example-8.1.3 -->
@@ -213,7 +213,7 @@ has-decidable-eq(A)≔ Π(x,y:A) is-decidable(x=y).
 <!-- rosetta-agda-block: definition-8.1.5-decidable-equality -->
 
 ```agda
-has-decidable-equality : {l : Level} → Type l → Type l
+has-decidable-equality : {l : Level} → UU l → UU l
 has-decidable-equality A = (x y : A) → is-decidable (x ＝ y)
 ```
 <!-- rosetta-item-end: definition-8.1.5 -->
@@ -247,7 +247,7 @@ g+f̃ : (B+¬ B) → (A+¬ A).
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-decidable-iff :
@@ -260,7 +260,7 @@ module _
   is-decidable-iff' (f , g) = is-decidable-iff f g
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   iff-is-decidable : A ↔ B → is-decidable A ↔ is-decidable B

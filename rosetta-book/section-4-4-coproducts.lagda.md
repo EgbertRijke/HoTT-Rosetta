@@ -3,7 +3,7 @@
 ```agda
 module section-4-4-coproducts where
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
 
 open import section-4-3-the-empty-type
 ```

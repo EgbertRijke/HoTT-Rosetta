@@ -28,10 +28,10 @@ Show that the divisibility relation satisfies the axioms of a poset, i.e., that 
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (R : Relation l2 A)
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
 
-  is-antisymmetric : Type (l1 ⊔ l2)
+  is-antisymmetric : UU (l1 ⊔ l2)
   is-antisymmetric = (x y : A) → R x y → R y x → x ＝ y
 ```
 

@@ -155,7 +155,7 @@ d(H)\with [H(a)/inr(g)] ≔ inr(λ h. g(h(a))).
 
 ```agda
 is-decidable-product' :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → (A → is-decidable B) → is-decidable (A × B)
 is-decidable-product' (inl a) d =
   rec-coproduct (λ b → inl (a , b)) (λ nb → inr (nb ∘ pr2)) (d a)
@@ -166,7 +166,7 @@ is-decidable-product' (inr na) d = inr (na ∘ pr1)
 
 ```agda
 is-decidable-function-type' :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable A → (A → is-decidable B) → is-decidable (A → B)
 is-decidable-function-type' (inl a) d =
   rec-coproduct (λ b → inl (λ _ → b)) (λ nb → inr (map-neg (ev a) nb)) (d a)
@@ -229,7 +229,7 @@ f(x+1) ≔ g(x).
 <!-- rosetta-agda-block: proposition-8.2.4-decidable-family -->
 
 ```agda
-is-decidable-family : {l1 l2 : Level} {A : Type l1} (P : A → Type l2) → Type (l1 ⊔ l2)
+is-decidable-family : {l1 l2 : Level} {A : UU l1} (P : A → UU l2) → UU (l1 ⊔ l2)
 is-decidable-family {A = A} P = (x : A) → is-decidable (P x)
 ```
 
@@ -237,7 +237,7 @@ is-decidable-family {A = A} P = (x : A) → is-decidable (P x)
 
 ```agda
 is-decidable-Π-ℕ :
-  {l : Level} (P : ℕ → Type l) (d : is-decidable-family P) (m : ℕ) →
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) (m : ℕ) →
   is-decidable ((x : ℕ) → (leq-ℕ m x) → P x) → is-decidable ((x : ℕ) → P x)
 is-decidable-Π-ℕ P d zero-ℕ (inr nH) = inr (λ f → nH (λ x y → f x))
 is-decidable-Π-ℕ P d zero-ℕ (inl H) = inl (λ x → H x (leq-zero-ℕ x))
@@ -277,7 +277,7 @@ With this observation we apply Proposition 8.2.4. ◻
 
 ```agda
 is-upper-bound-ℕ :
-  {l : Level} (P : ℕ → Type l) (n : ℕ) → Type l
+  {l : Level} (P : ℕ → UU l) (n : ℕ) → UU l
 is-upper-bound-ℕ P n =
   (m : ℕ) → P m → leq-ℕ m n
 ```
@@ -286,7 +286,7 @@ is-upper-bound-ℕ P n =
 
 ```agda
 is-decidable-bounded-Π-ℕ :
-  {l1 l2 : Level} (P : ℕ → Type l1) (Q : ℕ → Type l2) (dP : is-decidable-family P) →
+  {l1 l2 : Level} (P : ℕ → UU l1) (Q : ℕ → UU l2) (dP : is-decidable-family P) →
   (dQ : is-decidable-family Q) (m : ℕ) (H : is-upper-bound-ℕ P m) →
   is-decidable ((x : ℕ) → P x → Q x)
 is-decidable-bounded-Π-ℕ P Q dP dQ m H =

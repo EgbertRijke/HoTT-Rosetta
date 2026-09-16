@@ -33,7 +33,7 @@ Give their inverses explicitly.
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   inv-concat : {x y : A} (p : x ＝ y) (z : A) → x ＝ z → y ＝ z
@@ -44,7 +44,7 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   is-retraction-inv-concat :
@@ -60,7 +60,7 @@ module _
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   abstract
@@ -104,7 +104,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x y : A}
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A}
   where
 
   is-retraction-inv-tr : (p : x ＝ y) → is-retraction (tr B p) (tr B (inv p))

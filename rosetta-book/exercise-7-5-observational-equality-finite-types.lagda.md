@@ -54,7 +54,7 @@ Show that function `succ-Fin_k:Fin{k}→Fin{k}` is injective, for each `k:ℕ`.
 <!-- rosetta-agda-block: exercise-7-5-observational-equality -->
 
 ```agda
-Eq-Fin : (k : ℕ) → Fin k → Fin k → Type lzero
+Eq-Fin : (k : ℕ) → Fin k → Fin k → UU lzero
 Eq-Fin (succ-ℕ k) (inl x) (inl y) = Eq-Fin k x y
 Eq-Fin (succ-ℕ k) (inl x) (inr y) = empty
 Eq-Fin (succ-ℕ k) (inr x) (inl y) = empty
@@ -75,13 +75,13 @@ eq-Eq-Fin (succ-ℕ k) {inr star} {inr star} star = refl
 <!-- rosetta-agda-block: exercise-7-5-zero-predicates -->
 
 ```agda
-is-zero-Fin : (k : ℕ) → Fin k → Type lzero
+is-zero-Fin : (k : ℕ) → Fin k → UU lzero
 is-zero-Fin (succ-ℕ k) x = x ＝ zero-Fin k
 
-is-zero-Fin' : (k : ℕ) → Fin k → Type lzero
+is-zero-Fin' : (k : ℕ) → Fin k → UU lzero
 is-zero-Fin' (succ-ℕ k) x = zero-Fin k ＝ x
 
-is-nonzero-Fin : (k : ℕ) → Fin k → Type lzero
+is-nonzero-Fin : (k : ℕ) → Fin k → UU lzero
 is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
 ```
 

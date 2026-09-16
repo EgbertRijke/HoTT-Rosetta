@@ -133,8 +133,8 @@ This equivalence, its inverse, and the homotopies witnessing that the inverse is
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
-  ( D : (x : A) → B x → C x → Type l4)
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  ( D : (x : A) → B x → C x → UU l4)
   where
 
   map-interchange-Σ-Σ :
@@ -197,8 +197,8 @@ Therefore it follows that
 
 ```agda
 module _
-  { l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
-  { D : (x : A) → B x → C x → Type l4}
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  { D : (x : A) → B x → C x → UU l4}
   where
 
   abstract
@@ -213,8 +213,8 @@ module _
         ( is-contr-Σ is-torsorial-AC t is-torsorial-BD)
 
 module _
-  {l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {Eq-A : A → Type l3}
-  (Eq-B : {x : A} → B x → Eq-A x → Type l4)
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {Eq-A : A → UU l3}
+  (Eq-B : {x : A} → B x → Eq-A x → UU l4)
   {a : A} {b : B a} (refl-A : Eq-A a) (refl-B : Eq-B b refl-A)
   where
 
@@ -284,7 +284,7 @@ Of course, this type is equivalent to `Σ(q : f(x) = b) p = q`, which is again c
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) {b : B}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {b : B}
   where
 
   fiber-ap-eq-fiber-fiberwise :
@@ -350,7 +350,7 @@ module _
     ap-pr1-eq-pair-eq-fiber (ap inv u ∙ inv-inv p)
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (x y : A)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x y : A)
   where
 
   eq-fiber-fiber-ap :

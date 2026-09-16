@@ -54,7 +54,7 @@ for each `x:Fin{k}`.
 neg-one-Fin : (k : ℕ) → Fin (succ-ℕ k)
 neg-one-Fin k = inr star
 
-is-neg-one-Fin : (k : ℕ) → Fin k → Type lzero
+is-neg-one-Fin : (k : ℕ) → Fin k → UU lzero
 is-neg-one-Fin (succ-ℕ k) x = x ＝ neg-one-Fin k
 
 neg-two-Fin : (k : ℕ) → Fin (succ-ℕ k)

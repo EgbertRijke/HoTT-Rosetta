@@ -69,11 +69,11 @@ The type of **homotopies** from `f` to `g` is defined as the type of pointwise i
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   infix 6 _~_
-  _~_ : (f g : (x : A) → B x) → Type (l1 ⊔ l2)
+  _~_ : (f g : (x : A) → B x) → UU (l1 ⊔ l2)
   f ~ g = (x : A) → f x ＝ g x
 ```
 
@@ -105,15 +105,15 @@ For example, we say that a triangle
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {X : Type l1} {A : Type l2} {B : Type l3}
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
   where
 
   coherence-triangle-maps :
-    (left : A → X) (right : B → X) (top : A → B) → Type (l1 ⊔ l2)
+    (left : A → X) (right : B → X) (top : A → B) → UU (l1 ⊔ l2)
   coherence-triangle-maps left right top = left ~ right ∘ top
 
   coherence-triangle-maps' :
-    (left : A → X) (right : B → X) (top : A → B) → Type (l1 ⊔ l2)
+    (left : A → X) (right : B → X) (top : A → B) → UU (l1 ⊔ l2)
   coherence-triangle-maps' left right top = right ∘ top ~ left
 ```
 
@@ -133,14 +133,14 @@ commutes if it comes equipped with a homotopy `h ∘ f ~ f' ∘ g`.
 
 ```agda
 module _
-  {l1 l2 l3 l4 : Level} {A : Type l1} {B : Type l2} {C : Type l3} {X : Type l4}
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4}
   (top : C → B) (left : C → A) (right : B → X) (bottom : A → X)
   where
 
-  coherence-square-maps : Type (l3 ⊔ l4)
+  coherence-square-maps : UU (l3 ⊔ l4)
   coherence-square-maps = bottom ∘ left ~ right ∘ top
 
-  coherence-square-maps' : Type (l3 ⊔ l4)
+  coherence-square-maps' : UU (l3 ⊔ l4)
   coherence-square-maps' = right ∘ top ~ bottom ∘ left
 ```
 
@@ -177,7 +177,7 @@ We will often write `H⁻¹` for `inv-htpy(H)`, and `H ∙ K` for `concat-htpy(H
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   refl-htpy : {f : (x : A) → B x} → f ~ f
@@ -247,7 +247,7 @@ The other homotopies are similarly defined pointwise. ◻
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} {f g h k : (x : A) → B x}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h k : (x : A) → B x}
   (H : f ~ g) (K : g ~ h) (L : h ~ k)
   where
 
@@ -258,7 +258,7 @@ module _
   inv-htpy-assoc-htpy = inv-htpy assoc-htpy
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   {f g : (x : A) → B x} {H : f ~ g}
   where
 
@@ -317,7 +317,7 @@ We define the following **whiskering** operations on homotopies:
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
   left-whisker-comp :
@@ -330,7 +330,7 @@ module _
   _·l_ = left-whisker-comp
 
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : (x : A) → B x → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
   where
 
   right-whisker-comp :
@@ -350,7 +350,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} {f g h : (x : A) → B x}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
   (H : f ~ g) (K : g ~ h) (L : f ~ h) (M : H ∙h K ~ L)
   where
 
@@ -382,7 +382,7 @@ concatenation as an instance of a general left whiskering operation.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   left-whisker-concat-htpy :
@@ -407,7 +407,7 @@ concatenation as an instance of a general right whiskering operation.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   right-whisker-concat-htpy :
@@ -426,7 +426,7 @@ In other words, whiskering is an action of functions on homotopies.
 ```agda
 module _
   {l1 l2 l3 l4 : Level}
-  {A : Type l1} {B : A → Type l2} {C : A → Type l3} {D : A → Type l4}
+  {A : UU l1} {B : A → UU l2} {C : A → UU l3} {D : A → UU l4}
   where
 
   inv-preserves-comp-left-whisker-comp :
@@ -444,8 +444,8 @@ module _
 
 module _
   { l1 l2 l3 l4 : Level}
-  { A : Type l1} {B : A → Type l2} {C : (x : A) → B x → Type l3}
-  { D : (x : A) (y : B x) (z : C x y) → Type l4}
+  { A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
+  { D : (x : A) (y : B x) (z : C x y) → UU l4}
   { f g : {x : A} {y : B x} (z : C x y) → D x y z}
   ( h : {x : A} (y : B x) → C x y) (k : (x : A) → B x)
   ( H : {x : A} {y : B x} → f {x} {y} ~ g {x} {y})
@@ -459,7 +459,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   {f g : (x : A) → B x}
   where
 
@@ -472,7 +472,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : (x : A) → B x → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
   {f g : {x : A} (y : B x) → C x y} {H H' : {x : A} → f {x} ~ g {x}}
   where
 

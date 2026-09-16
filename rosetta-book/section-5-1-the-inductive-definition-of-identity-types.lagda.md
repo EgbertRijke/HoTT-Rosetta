@@ -3,7 +3,7 @@
 ```agda
 module section-5-1-the-inductive-definition-of-identity-types where
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
 ```
 
 ## Definition 5.1.1

@@ -42,13 +42,13 @@ for any type family `B` over `A`.
 
 ```agda
 is-singleton :
-  (l1 : Level) {l2 : Level} (A : Type l2) → A → Type (lsuc l1 ⊔ l2)
-is-singleton l A a = (B : A → Type l) → section (ev {B = B} a)
+  (l1 : Level) {l2 : Level} (A : UU l2) → A → UU (lsuc l1 ⊔ l2)
+is-singleton l A a = (B : A → UU l) → section (ev {B = B} a)
 
 module _
-  {l1 l2 : Level} {A : Type l1} (a : A)
+  {l1 l2 : Level} {A : UU l1} (a : A)
   (H : {l : Level} → is-singleton l A a)
-  (B : A → Type l2)
+  (B : A → UU l2)
   where
 
   ind-is-singleton :
@@ -145,21 +145,21 @@ Therefore `ind-sing_{a}(refl)` is a contraction. ◻
 
 ```agda
 ind-singleton :
-  {l1 l2 : Level} {A : Type l1} (a : A) (is-contr-A : is-contr A)
-  (B : A → Type l2) → B a → (x : A) → B x
+  {l1 l2 : Level} {A : UU l1} (a : A) (is-contr-A : is-contr A)
+  (B : A → UU l2) → B a → (x : A) → B x
 ind-singleton a is-contr-A B b x =
   tr B (inv (contraction is-contr-A a) ∙ contraction is-contr-A x) b
 
 compute-ind-singleton :
-  {l1 l2 : Level} {A : Type l1}
-  (a : A) (is-contr-A : is-contr A) (B : A → Type l2) →
+  {l1 l2 : Level} {A : UU l1}
+  (a : A) (is-contr-A : is-contr A) (B : A → UU l2) →
   (ev {B = B} a ∘ ind-singleton a is-contr-A B) ~ id
 compute-ind-singleton a is-contr-A B b =
   ap (λ p → tr B p b) (left-inv (contraction is-contr-A a))
 
 abstract
   is-singleton-is-contr :
-    {l1 l2 : Level} {A : Type l1} (a : A) → is-contr A → is-singleton l2 A a
+    {l1 l2 : Level} {A : UU l1} (a : A) → is-contr A → is-singleton l2 A a
   pr1 (is-singleton-is-contr a is-contr-A B) =
     ind-singleton a is-contr-A B
   pr2 (is-singleton-is-contr a is-contr-A B) =
@@ -167,14 +167,14 @@ abstract
 
 abstract
   is-contr-ind-singleton :
-    {l1 : Level} (A : Type l1) (a : A) →
-    ({l2 : Level} (B : A → Type l2) → B a → (x : A) → B x) → is-contr A
+    {l1 : Level} (A : UU l1) (a : A) →
+    ({l2 : Level} (B : A → UU l2) → B a → (x : A) → B x) → is-contr A
   pr1 (is-contr-ind-singleton A a S) = a
   pr2 (is-contr-ind-singleton A a S) = S (λ x → a ＝ x) refl
 
 abstract
   is-contr-is-singleton :
-    {l1 : Level} (A : Type l1) (a : A) →
+    {l1 : Level} (A : UU l1) (a : A) →
     ({l2 : Level} → is-singleton l2 A a) → is-contr A
   is-contr-is-singleton A a S = is-contr-ind-singleton A a (pr1 ∘ S)
 ```
