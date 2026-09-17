@@ -3,7 +3,7 @@
 ```agda
 module exercise-6-6-absolute-value-integers where
 
-open import universe-levels renaming (Type to UU ; Typeω to UUω)
+open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers
@@ -11,11 +11,11 @@ open import exercise-3-1-multiplication-and-exponentiation
 open import section-4-2-the-unit-type
 open import section-4-4-coproducts
 open import section-4-5-the-type-of-integers
+open import exercise-4-1-arithmetic-operations-integers
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-6-the-laws-of-addition-on-natural-numbers
-open import path-algebra
 open import exercise-5-5-semiring-laws-natural-numbers
 open import exercise-5-6-successor-predecessor-integers
 open import exercise-5-7-group-laws-integers

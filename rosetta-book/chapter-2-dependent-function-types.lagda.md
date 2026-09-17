@@ -6,9 +6,9 @@ module chapter-2-dependent-function-types where
 open import section-2-1-the-rules-for-dependent-function-types
 open import section-2-2-ordinary-function-types
 open import exercise-2-1-judgmental-extensionality
-open import exercise-2-2-exercise
-open import exercise-2-3-exercise
-open import exercise-2-4-exercise
+open import exercise-2-2-right-unit-law
+open import exercise-2-3-constant-maps
+open import exercise-2-4-swapping-variables
 ```
 
 A fundamental concept of dependent type theory is that of a dependent function.

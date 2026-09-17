@@ -61,7 +61,7 @@ nat-classical-Fin k = pr1
 <!-- rosetta-agda-block: exercise-7-7-equality-classical-finite -->
 
 ```agda
-Eq-classical-Fin : (k : ℕ) (x y : classical-Fin k) → Type lzero
+Eq-classical-Fin : (k : ℕ) (x y : classical-Fin k) → UU lzero
 Eq-classical-Fin k x y = nat-classical-Fin k x ＝ nat-classical-Fin k y
 
 eq-succ-classical-Fin :

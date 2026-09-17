@@ -28,7 +28,7 @@ For any family `P` of decidable types indexed by `Fin{k}`, construct a function
 <!-- rosetta-agda-block: exercise-8-3-decidable-family -->
 
 ```agda
-is-decidable-family : {l1 l2 : Level} {A : Type l1} (P : A → Type l2) → Type (l1 ⊔ l2)
+is-decidable-family : {l1 l2 : Level} {A : UU l1} (P : A → UU l2) → UU (l1 ⊔ l2)
 is-decidable-family {A = A} P = (x : A) → is-decidable (P x)
 ```
 
@@ -36,7 +36,7 @@ is-decidable-family {A = A} P = (x : A) → is-decidable (P x)
 
 ```agda
 exists-not-not-for-all-Fin :
-  {l : Level} (k : ℕ) {P : Fin k → Type l} → (is-decidable-family P) →
+  {l : Level} (k : ℕ) {P : Fin k → UU l} → (is-decidable-family P) →
   ¬ ((x : Fin k) → P x) → Σ (Fin k) (λ x → ¬ (P x))
 exists-not-not-for-all-Fin {l} zero-ℕ d H = ex-falso (H ind-empty)
 exists-not-not-for-all-Fin {l} (succ-ℕ k) {P} d H with d (inr star)

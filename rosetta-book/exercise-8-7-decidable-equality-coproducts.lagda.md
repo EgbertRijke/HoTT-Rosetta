@@ -43,14 +43,14 @@ Conclude that `ℤ` has decidable equality.
 <!-- rosetta-agda-block: exercise-8-7-injective-map -->
 
 ```agda
-is-injective : {l1 l2 : Level} {A : Type l1} {B : Type l2} → (A → B) → Type (l1 ⊔ l2)
+is-injective : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-injective {l1} {l2} {A} {B} f = {x y : A} → f x ＝ f y → x ＝ y
 ```
 
 <!-- rosetta-agda-block: exercise-8-7-negated-equality -->
 
 ```agda
-nonequal : {l : Level} {A : Type l} → A → A → Type l
+nonequal : {l : Level} {A : UU l} → A → A → UU l
 nonequal x y = ¬ (x ＝ y)
 
 infix 6 _≠_
@@ -61,7 +61,7 @@ _≠_ = nonequal
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-injective-inl : is-injective {B = A + B} inl
@@ -81,10 +81,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  data Eq-coproduct : A + B → A + B → Type (l1 ⊔ l2)
+  data Eq-coproduct : A + B → A + B → UU (l1 ⊔ l2)
     where
     Eq-eq-coproduct-inl : {x y : A} → x ＝ y → Eq-coproduct (inl x) (inl y)
     Eq-eq-coproduct-inr : {x y : B} → x ＝ y → Eq-coproduct (inr x) (inr y)
@@ -94,7 +94,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   refl-Eq-coproduct : (x : A + B) → Eq-coproduct x x
@@ -113,7 +113,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   has-decidable-equality-coproduct :

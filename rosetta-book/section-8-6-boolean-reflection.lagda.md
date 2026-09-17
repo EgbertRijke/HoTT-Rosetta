@@ -43,7 +43,7 @@ booleanization(inr(f)) ≔ false.
 <!-- rosetta-agda-block: definition-8.6.1-booleanization -->
 
 ```agda
-booleanization : {l : Level} {A : Type l} → is-decidable A → bool
+booleanization : {l : Level} {A : UU l} → is-decidable A → bool
 booleanization (inl a) = true
 booleanization (inr f) = false
 ```
@@ -75,12 +75,12 @@ boolean-reflection(inr(f),p) ≔ ex-falso(γ(p)).
 
 ```agda
 inv-boolean-reflection :
-  {l : Level} {A : Type l} (d : is-decidable A) → A → booleanization d ＝ true
+  {l : Level} {A : UU l} (d : is-decidable A) → A → booleanization d ＝ true
 inv-boolean-reflection (inl a) x = refl
 inv-boolean-reflection (inr f) x = ex-falso (f x)
 
 boolean-reflection :
-  {l : Level} {A : Type l} (d : is-decidable A) → booleanization d ＝ true → A
+  {l : Level} {A : UU l} (d : is-decidable A) → booleanization d ＝ true → A
 boolean-reflection (inl a) p = a
 boolean-reflection (inr f) p = ex-falso (Eq-eq-bool p)
 ```

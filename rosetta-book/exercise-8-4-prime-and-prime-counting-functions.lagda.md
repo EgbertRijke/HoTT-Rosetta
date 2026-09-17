@@ -31,7 +31,7 @@ Define the **prime-counting function** `π:ℕ→ℕ`, which counts for each `n:
 
 ```agda
 module _
-  {l : Level} {X : Type l}
+  {l : Level} {X : UU l}
   where
 
   iterate : ℕ → (X → X) → (X → X)

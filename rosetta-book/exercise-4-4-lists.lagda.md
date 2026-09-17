@@ -3,7 +3,7 @@
 ```agda
 module exercise-4-4-lists where
 
-open import universe-levels
+open import universe-levels renaming (UU to Type)
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers 
 open import section-3-2-addition-on-the-natural-numbers
 open import exercise-3-1-multiplication-and-exponentiation

@@ -26,7 +26,7 @@ for any type `P`.
 
 ```agda
 module _
-  {l : Level} {P : Type l}
+  {l : Level} {P : UU l}
   where
 
   map-idempotent-is-decidable : is-decidable P → is-decidable (is-decidable P)

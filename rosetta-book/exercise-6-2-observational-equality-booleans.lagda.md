@@ -3,7 +3,7 @@
 ```agda
 module exercise-6-2-observational-equality-booleans where
 
-open import universe-levels renaming (Type to UU ; Typeω to UUω)
+open import universe-levels
 open import exercise-4-2-boolean-operations
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type

@@ -57,16 +57,16 @@ The relation `Eq-coproduct_{A,B}` is also called the **observational equality of
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
-  data Eq-coproduct : A + B → A + B → Type (l1 ⊔ l2)
+  data Eq-coproduct : A + B → A + B → UU (l1 ⊔ l2)
     where
     Eq-eq-coproduct-inl : {x y : A} → x ＝ y → Eq-coproduct (inl x) (inl y)
     Eq-eq-coproduct-inr : {x y : B} → x ＝ y → Eq-coproduct (inr x) (inr y)
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   module _
@@ -98,7 +98,7 @@ module _
     pr2 compute-Eq-coproduct-inl-inl = is-equiv-map-compute-Eq-coproduct-inl-inl
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   module _
@@ -118,7 +118,7 @@ module _
     pr2 compute-Eq-coproduct-inl-inr = is-equiv-map-compute-Eq-coproduct-inl-inr
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   module _
@@ -138,7 +138,7 @@ module _
     pr2 compute-Eq-coproduct-inr-inl = is-equiv-map-compute-Eq-coproduct-inr-inl
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   module _
@@ -189,7 +189,7 @@ The reflexivity term `ρ` is constructed by induction on `t : A + B`, using
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   refl-Eq-coproduct : (x : A + B) → Eq-coproduct x x
@@ -241,7 +241,7 @@ The last type in this computation is contractible by Theorem 10.1.4, so we concl
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-torsorial-Eq-coproduct :
@@ -264,7 +264,7 @@ The proof is now concluded with an application of Theorem 11.2.2, using Proposit
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-equiv-Eq-eq-coproduct : (x y : A + B) → is-equiv (Eq-eq-coproduct x y)
@@ -276,7 +276,7 @@ module _
   pr2 (extensionality-coproduct x y) = is-equiv-Eq-eq-coproduct x y
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   module _

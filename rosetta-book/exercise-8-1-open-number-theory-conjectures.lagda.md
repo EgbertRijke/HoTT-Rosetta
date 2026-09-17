@@ -43,14 +43,14 @@ If you have a solution to any of these open problems, you should certainly forma
 <!-- rosetta-agda-block: exercise-8-1-even -->
 
 ```agda
-is-even-ℕ : ℕ → Type lzero
+is-even-ℕ : ℕ → UU lzero
 is-even-ℕ n = div-ℕ 2 n
 ```
 
 <!-- rosetta-agda-block: exercise-8-1-goldbach -->
 
 ```agda
-Goldbach-conjecture : Type lzero
+Goldbach-conjecture : UU lzero
 Goldbach-conjecture =
   ( n : ℕ) → (le-ℕ 2 n) → (is-even-ℕ n) →
     Σ ℕ (λ p → (is-prime-ℕ p) × (Σ ℕ (λ q → (is-prime-ℕ q) × (p +ℕ q ＝ n))))
@@ -59,10 +59,10 @@ Goldbach-conjecture =
 <!-- rosetta-agda-block: exercise-8-1-twin-prime -->
 
 ```agda
-is-twin-prime-ℕ : ℕ → Type lzero
+is-twin-prime-ℕ : ℕ → UU lzero
 is-twin-prime-ℕ n = (is-prime-ℕ n) × (is-prime-ℕ (succ-ℕ (succ-ℕ n)))
 
-twin-prime-conjecture : Type lzero
+twin-prime-conjecture : UU lzero
 twin-prime-conjecture =
   (n : ℕ) → Σ ℕ (λ p → (is-twin-prime-ℕ p) × (leq-ℕ n p))
 ```
@@ -74,7 +74,7 @@ iterate-collatz : ℕ → ℕ → ℕ
 iterate-collatz zero-ℕ n = n
 iterate-collatz (succ-ℕ k) n = collatz (iterate-collatz k n)
 
-Collatz-conjecture : Type lzero
+Collatz-conjecture : UU lzero
 Collatz-conjecture =
   (n : ℕ) → is-nonzero-ℕ n → Σ ℕ (λ k → is-one-ℕ (iterate-collatz k n))
 ```

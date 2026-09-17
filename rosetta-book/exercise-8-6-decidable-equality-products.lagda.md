@@ -32,27 +32,14 @@ Conclude that if both `A` and `B` have decidable equality, then so does `A× B`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-8-6 -->
-
-<!-- rosetta-agda-block: exercise-8-6-transport-action -->
-
-```agda
-tr-ap :
-  {l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {C : Type l3} {D : C → Type l4}
-  (f : A → C) (g : (x : A) → B x → D (f x))
-  {x y : A} (p : x ＝ y) (z : B x) →
-  tr D (ap f p) (g x z) ＝ g y (tr B p z)
-tr-ap f g refl z = refl
-```
-
 <!-- rosetta-agda-block: exercise-8-6-sigma-equality -->
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  Eq-Σ : (s t : Σ A B) → Type (l1 ⊔ l2)
+  Eq-Σ : (s t : Σ A B) → UU (l1 ⊔ l2)
   Eq-Σ s t =
     Σ (pr1 s ＝ pr1 t) (λ α → dependent-identification B α (pr2 s) (pr2 t))
 ```
@@ -100,7 +87,7 @@ module _
 
 ```agda
 has-decidable-equality-product' :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   (f : B → has-decidable-equality A) (g : A → has-decidable-equality B) →
   has-decidable-equality (A × B)
 has-decidable-equality-product' f g (x , y) (x' , y') with
@@ -111,7 +98,7 @@ has-decidable-equality-product' f g (x , y) (x' , y') with
 ... | inr np | inr nq = inr (λ r → np (ap pr1 r))
 
 has-decidable-equality-product :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   has-decidable-equality A → has-decidable-equality B →
   has-decidable-equality (A × B)
 has-decidable-equality-product d e =
@@ -122,14 +109,14 @@ has-decidable-equality-product d e =
 
 ```agda
 has-decidable-equality-left-factor :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   has-decidable-equality (A × B) → B → has-decidable-equality A
 has-decidable-equality-left-factor d b x y with d (x , b) (y , b)
 ... | inl p = inl (ap pr1 p)
 ... | inr np = inr (λ q → np (ap (λ z → z , b) q))
 
 has-decidable-equality-right-factor :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   has-decidable-equality (A × B) → A → has-decidable-equality B
 has-decidable-equality-right-factor d a x y with d (a , x) (a , y)
 ... | inl p = inl (ap pr2 p)

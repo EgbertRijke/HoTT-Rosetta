@@ -9,9 +9,9 @@ open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-5-the-type-of-integers
 open import section-4-6-dependent-pair-types
-open import exercise-4-1-exercise
+open import exercise-4-1-arithmetic-operations-integers
 open import exercise-4-2-boolean-operations
-open import exercise-4-3-negation
+open import exercise-4-3-double-negation-logic
 open import exercise-4-4-lists
 ```
 
