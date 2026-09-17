@@ -28,7 +28,7 @@ open import exercise-13-17-contractible-products-over-decidable-sets
 open import exercise-13-18-retracts-as-limits
 ```
 
-The function extensionality axiom asserts that for any two dependent functions `f,g:Π(x:A) B(x)`, the type of identifications `f=g` is equivalent to the type of homotopies `f~ g` from `f` to `g`.
+The function extensionality axiom asserts that for any two dependent functions `f, g : Π(x : A) B(x)`, the type of identifications `f = g` is equivalent to the type of homotopies `f ~ g` from `f` to `g`.
 In other words, two (dependent) functions can only be distinguished by their values.
 The function extensionality axiom therefore provides a characterization of the identity type of (dependent) function types.
 By the fundamental theorem of identity types it follows immediately that the function extensionality axiom has at least three equivalent forms.
@@ -39,10 +39,12 @@ A simple consequence of the weak function extensionality axiom is that any depen
 The function extensionality axiom is used to derive many important properties in type theory.
 One class of such properties are (dependent) universal properties.
 Universal properties give a characterization of the type of functions into, or out of a type.
-For example, the universal property of the coproduct `A+B` characterizes the type of maps `(A+B)→ X` as the type of pairs of maps `(f,g)` consisting of `f:A→ X` and `g:B→ X`, i.e., the universal property of the coproduct `A+B` is an equivalence
+For example, the universal property of the coproduct `A + B` characterizes the type of maps `(A + B) → X` as the type of pairs of maps `(f,g)` consisting of `f : A → X` and `g : B → X`, i.e., the universal property of the coproduct `A + B` is an equivalence
+
 ```text
-((A+B)→ X)≃ (A→ X)× (B→ X).
+  ((A + B) → X) ≃ (A → X) × (B → X).
 ```
+
 Note that there are function types on both sides of this equivalence.
 Therefore we will need function extensionality in order to construct the homotopies witnessing that the inverse map is both a left and a right inverse.
 In fact, we leave this particular universal property as Exercise 13.8.
@@ -50,10 +52,12 @@ The universal properties that we do show in the main text, are the universal pro
 
 We end this section with two further applications of the function extensionality axiom.
 In the first, Theorem 13.4.1, we show that precomposition by an equivalence is again an equivalence.
-More precisely we show that `f:A→ B` is an equivalence if and only if for every type family `P` over `B`, the precomposition map
+More precisely we show that `f : A → B` is an equivalence if and only if for every type family `P` over `B`, the precomposition map
+
 ```text
-_∘ f :(Π(y:B) P(y))→ (Π(x:A) P(f(x)))
+  - ∘ f : (Π(y : B) P(y)) → (Π(x : A) P(f(x)))
 ```
+
 is an equivalence.
 To prove this fact we will make use of coherently invertible maps, which were introduced in Section 10.4.
 In the second application, Theorem 13.5.1, we prove the strong induction principle of the natural numbers.
@@ -61,10 +65,12 @@ Function extensionality is needed in order to derive the computation rule for th
 
 Many important consequences of the function extensionality axiom are left as exercises.
 For example, in Exercise 13.3 you are asked to show that both `is-contr(A)` and `is-trunc_{k}(A)` are propositions, and in Exercise 13.4 you are asked to show that `is-equiv(f)` is a proposition.
-The universal properties of `empty`, `unit`, and `A+B` are left as Exercises 13.6, 13.7 and 13.8.
+The universal properties of `empty`, `unit`, and `A + B` are left as Exercises 13.6, 13.7 and 13.8.
 A few more advanced properties, such as the fact that post-composition
+
 ```text
-g∘_ : (A→ X)→ (A→ Y)
+  g ∘ - : (A → X) → (A → Y)
 ```
-by a `k`-truncated map `g:X→ Y` is itself a `k`-truncated map, appear in the later exercises.
+
+by a `k`-truncated map `g : X → Y` is itself a `k`-truncated map, appear in the later exercises.
 We encourage you to read through all of them, and get at least a basic idea of why they are true.
