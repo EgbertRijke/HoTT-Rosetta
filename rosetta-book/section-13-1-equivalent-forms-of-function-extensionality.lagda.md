@@ -398,3 +398,39 @@ Note that it requires function extensionality even just to prove that `¬ P` is 
 is-prop-neg : {l : Level} {A : UU l} → is-prop (¬ A)
 is-prop-neg = is-prop-function-type is-prop-empty
 ```
+
+## Supplemental definitions
+
+### Dependent function types taking implicit arguments are equivalent to dependent function types taking explicit arguments
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  implicit-explicit-Π : ((x : A) → B x) → {x : A} → B x
+  implicit-explicit-Π f {x} = f x
+
+  explicit-implicit-Π : ({x : A} → B x) → (x : A) → B x
+  explicit-implicit-Π f x = f {x}
+
+  is-equiv-implicit-explicit-Π : is-equiv implicit-explicit-Π
+  pr1 (pr1 is-equiv-implicit-explicit-Π) = explicit-implicit-Π
+  pr2 (pr1 is-equiv-implicit-explicit-Π) = refl-htpy
+  pr1 (pr2 is-equiv-implicit-explicit-Π) = explicit-implicit-Π
+  pr2 (pr2 is-equiv-implicit-explicit-Π) = refl-htpy
+
+  is-equiv-explicit-implicit-Π : is-equiv explicit-implicit-Π
+  pr1 (pr1 is-equiv-explicit-implicit-Π) = implicit-explicit-Π
+  pr2 (pr1 is-equiv-explicit-implicit-Π) = refl-htpy
+  pr1 (pr2 is-equiv-explicit-implicit-Π) = implicit-explicit-Π
+  pr2 (pr2 is-equiv-explicit-implicit-Π) = refl-htpy
+
+  equiv-implicit-explicit-Π : ((x : A) → B x) ≃ ({x : A} → B x)
+  pr1 equiv-implicit-explicit-Π = implicit-explicit-Π
+  pr2 equiv-implicit-explicit-Π = is-equiv-implicit-explicit-Π
+
+  equiv-explicit-implicit-Π : ({x : A} → B x) ≃ ((x : A) → B x)
+  pr1 equiv-explicit-implicit-Π = explicit-implicit-Π
+  pr2 equiv-explicit-implicit-Π = is-equiv-explicit-implicit-Π
+```
