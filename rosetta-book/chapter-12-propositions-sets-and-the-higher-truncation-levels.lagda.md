@@ -33,11 +33,11 @@ Note that the propositions of first order logic have a virtue that could be rath
 Therefore we say that propositions in type theory are those types that have at most one element.
 
 This condition can be expressed with the identity type: any two elements must be equal.
-Examples of such types include the empty type `empty` and the unit type `unit`.
+Examples of such types include the empty type `∅` and the unit type `𝟙`.
 We call such types propositions.
 Propositions are useful, because if we know that a certain type is a proposition, then we know that any of its inhabitants are equal.
 Many important conditions, such as the condition that a map is an equivalence, will turn out to be propositions.
-This fact implies that two equivalences `A≃ B` are equal if and only if their underlying maps `A→ B` are equal.
+This fact implies that two equivalences `A ≃ B` are equal if and only if their underlying maps `A → B` are equal.
 However, the claim that being an equivalence is a proposition requires function extensionality, the topic of the next section.
 
 In this section we use the idea of propositions in a different way.
@@ -47,7 +47,7 @@ We will see in Example 12.3.2 that the type of natural numbers is a set.
 
 Next, one might ask about the types of which the identity types are *sets*.
 Such types are called *`1`-types*.
-There is an entire hierarchy of special types that arises this way, where a type is said to be a `(k+1)`-type if its identity types are `k`-types.
+There is an entire hierarchy of special types that arises this way, where a type is said to be a `(k + 1)`-type if its identity types are `k`-types.
 Since the identity types of the `1`-types are sets, we see that sets are in fact `0`-types.
 Most of mathematics takes place at this level, the level of sets.
 The types in higher levels, as well as types that do not belong to any finite level in this hierarchy, are studied extensively in synthetic homotopy theory.
