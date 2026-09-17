@@ -8,6 +8,7 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import exercise-9-4-three-for-two-equivalences
 open import section-13-1-equivalent-forms-of-function-extensionality
 ```
 
@@ -43,7 +44,7 @@ given by `f ↦ λ x. λ y. f(x,y)`, is an equivalence.
 
 ### Proof
 
-*Proof.* The map in the converse direction is obtained by the induction principle of `Σ`-types.
+The map in the converse direction is obtained by the induction principle of `Σ`-types.
 It is simply the map
 
 ```text
@@ -93,20 +94,6 @@ module _
   pr2 equiv-ind-Σ = is-equiv-ind-Σ
 ```
 
-### Ordinary Σ universal property from the introduction
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {X : UU l3}
-  where
-
-  is-equiv-ev-pair-nondependent : is-equiv (ev-pair {B = B} {C = λ _ → X})
-  is-equiv-ev-pair-nondependent = is-equiv-ev-pair {C = λ _ → X}
-
-  equiv-ev-pair-nondependent : (Σ A B → X) ≃ ((a : A) → B a → X)
-  equiv-ev-pair-nondependent = equiv-ev-pair {C = λ _ → X}
-```
-
 ## Corollary 13.3.2
 
 Let `A`, `B`, and `X` be types.
@@ -118,17 +105,7 @@ Then the map
 
 given by `f ↦ λ a. λ b. f(a,b)` is an equivalence.
 
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  where
-
-  is-equiv-ev-product : is-equiv (ev-pair {A = A} {B = λ _ → B} {C = λ _ → X})
-  is-equiv-ev-product = is-equiv-ev-pair {C = λ _ → X}
-
-  equiv-ev-product : (A × B → X) ≃ (A → B → X)
-  equiv-ev-product = equiv-ev-pair {C = λ _ → X}
-```
+Note: Agda-unimath does not have dedicated code for this lemma, since the code for the universal property of `Σ`-types applies verbatim.
 
 ### The universal property of identity types
 
@@ -202,19 +179,4 @@ module _
 
   equiv-ev-refl : ((x : A) (p : a ＝ x) → B x p) ≃ B a refl
   equiv-ev-refl = (ev-refl , is-equiv-ev-refl)
-```
-
-### Ordinary identity universal property from the introduction
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (a : A) {B : A → UU l2}
-  where
-
-  is-equiv-ev-refl-nondependent :
-    is-equiv (ev-refl a {B = λ x _ → B x})
-  is-equiv-ev-refl-nondependent = is-equiv-ev-refl a {B = λ x _ → B x}
-
-  equiv-ev-refl-nondependent : ((x : A) → a ＝ x → B x) ≃ B a
-  equiv-ev-refl-nondependent = equiv-ev-refl a {B = λ x _ → B x}
 ```

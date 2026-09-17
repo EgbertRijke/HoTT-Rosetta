@@ -336,3 +336,15 @@ The derivation of the equality `id (f(x))≐ f(x)` in context `Γ,x:A` is as fol
 
 We leave the right unit law as Exercise 2.2.
   
+## Supplemental definitions
+
+### The precomposition operation on dependent function
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : B → Type l3)
+  where
+
+  precomp-Π : ((b : B) → C b) → ((a : A) → C (f a))
+  precomp-Π h a = h (f a)
+```

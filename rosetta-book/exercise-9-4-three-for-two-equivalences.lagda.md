@@ -358,3 +358,51 @@ module _
   pr1 retraction-right-factor = map-retraction-right-factor
   pr2 retraction-right-factor = is-retraction-map-retraction-right-factor
 ```
+
+### Any retraction of an equivalence is an equivalence
+
+```agda
+abstract
+  is-equiv-is-retraction :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
+    is-equiv f → (g ∘ f) ~ id → is-equiv g
+  is-equiv-is-retraction {A = A} {f = f} {g = g} is-equiv-f H =
+    is-equiv-right-map-triangle id g f (inv-htpy H) is-equiv-id is-equiv-f
+```
+
+### Any section of an equivalence is an equivalence
+
+```agda
+abstract
+  is-equiv-is-section :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} {g : B → A} →
+    is-equiv f → f ∘ g ~ id → is-equiv g
+  is-equiv-is-section {B = B} {f = f} {g = g} is-equiv-f H =
+    is-equiv-top-map-triangle id f g (inv-htpy H) is-equiv-f is-equiv-id
+```
+
+### If a section of `f` is an equivalence, then `f` is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  abstract
+    is-equiv-is-equiv-section :
+      (s : section f) → is-equiv (map-section f s) → is-equiv f
+    is-equiv-is-equiv-section (g , G) S = is-equiv-is-retraction S G
+```
+
+### If a retraction of `f` is an equivalence, then `f` is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  abstract
+    is-equiv-is-equiv-retraction :
+      (r : retraction f) → is-equiv (map-retraction f r) → is-equiv f
+    is-equiv-is-equiv-retraction (g , G) R = is-equiv-is-section R G
+```

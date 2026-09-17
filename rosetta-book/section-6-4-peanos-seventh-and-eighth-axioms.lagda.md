@@ -3,6 +3,7 @@
 ```agda
 module section-6-4-peanos-seventh-and-eighth-axioms where
 
+open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
@@ -57,13 +58,26 @@ Arrows:
 and we define the function `(succ-ℕ(m)=succ-ℕ(n))→(m=n)` as the composite of the maps going down, then right, and then up. ◻
 
 ```agda
+is-injective : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
+is-injective {l1} {l2} {A} {B} f = {x y : A} → f x ＝ f y → x ＝ y
+
+injection : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+injection A B = Σ (A → B) is-injective
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : injection A B)
+  where
+
+  map-injection : A → B
+  map-injection = pr1 f
+
+  is-injective-map-injection : is-injective map-injection
+  is-injective-map-injection = pr2 f
+
 ap-succ-ℕ : {m n : ℕ} → m ＝ n → succ-ℕ m ＝ succ-ℕ n
 ap-succ-ℕ = ap succ-ℕ
-```
 
-```agda
-is-injective-succ-ℕ :
-  {m n : ℕ} → succ-ℕ m ＝ succ-ℕ n → m ＝ n
+is-injective-succ-ℕ : is-injective succ-ℕ
 is-injective-succ-ℕ {m} {n} p = eq-Eq-ℕ m n (Eq-eq-ℕ p)
 
 peano-7-ℕ :
