@@ -13,8 +13,6 @@ is-weakly-path-constant(f) : Π(x,y:A) Π(p,q:x=y) ap_{f}(p)=ap_{f}(q).
 ```
 In other words, `f` is weakly path-constant if for each `x,y:A` the map `ap{f}:(x=y)→ (f(x)=f(y))` is weakly constant in the sense of Definition 14.4.3.
 
-<div class="subexenum">
-
 Show that every map `‖A‖_0→ B` is weakly path-constant.
 Use this to obtain a map
 ```text
@@ -36,8 +34,6 @@ Arrows:
 - A --η--> ‖A‖_0
 - ‖A‖_0 --unlabeled--> B
 ```
-
-</div>
 
 ## Solution
 

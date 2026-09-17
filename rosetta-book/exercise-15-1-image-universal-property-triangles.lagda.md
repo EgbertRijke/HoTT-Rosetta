@@ -23,8 +23,6 @@ Arrows:
 ```
 where `g` is an embedding.
 
-<div class="subexenum">
-
 Show that if there is a morphism
 
 *Triangle-shaped diagram (automatic draft).*
@@ -42,8 +40,6 @@ Arrows:
 over `X`, then `g` satisfies the universal property of the image of `f`.
 
 Show that if `f` is an embedding, then `g` satisfies the universal property of `f` if and only if `h` is an equivalence.
-
-</div>
 
 ## Solution
 

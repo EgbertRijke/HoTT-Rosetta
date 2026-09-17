@@ -7,8 +7,6 @@ module exercise-21-1-exercise where
 
 ## Problem statement
 
-<div class="subexenum">
-
 Show that for any type `X` and any `x:X`, the map
 ```text
 ind-S^1(x,refl):S^1→ X
@@ -26,8 +24,6 @@ Construct a homotopy
 ```text
 ind-S^1(f(x),ap_{f}(l))~ f∘ ind-S^1(x,l).
 ```
-
-</div>
 
 ## Solution
 

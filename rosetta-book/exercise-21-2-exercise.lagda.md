@@ -7,8 +7,6 @@ module exercise-21-2-exercise where
 
 ## Problem statement
 
-<div class="subexenum">
-
 Show that the circle is connected.
 
 Let `P:S^1→Prop` be a family of propositions over the circle.
@@ -35,8 +33,6 @@ Arrows:
 ```
 commutes.
 In other words, all the embeddings into the circle are of the form `S^1× P→ S^1`.
-
-</div>
 
 ## Solution
 

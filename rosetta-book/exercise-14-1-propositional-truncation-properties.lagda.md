@@ -10,8 +10,6 @@ module exercise-14-1-propositional-truncation-properties where
 Let `A` be a type.
 Show that
 
-<div class="subexenum">
-
 `‖‖A‖‖↔‖A‖`.
 
 `‖is-decidable(A)‖↔is-decidable‖A‖`.
@@ -25,8 +23,6 @@ Show that
 `∃_{(x:A)}‖B(x)‖↔ ‖Σ(x:A) B(x)‖`.
 
 `¬¬(‖A‖→ A)`.
-
-</div>
 
 ## Solution
 

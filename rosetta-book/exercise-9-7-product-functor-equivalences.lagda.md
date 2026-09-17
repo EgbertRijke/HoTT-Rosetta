@@ -7,8 +7,6 @@ module exercise-9-7-product-functor-equivalences where
 
 ## Problem statement
 
-<div class="subexenum">
-
 Construct for any two maps `f:A → A'` and `g:B→ B'`, a map
 ```text
 f× g : A× B → A'× B'
@@ -38,8 +36,6 @@ Show that for any two maps `f:A→ A'` and `g:B→ B'`, the following are equiva
 α : B → is-equiv(f)
 β : A → is-equiv(g).
 ```
-
-</div>
 
 ## Solution
 

@@ -25,8 +25,6 @@ Arrows:
 ```
 commutes.
 
-<div class="subexenum">
-
 Consider a family `P` of types over `X`.
 Show that the map
 ```text
@@ -68,8 +66,6 @@ Conclude that the type `Σ(h:A ≃ B) f~ g∘ h` is equivalent to the type of fa
 ```text
 Π(x:X) fib(f, x)≃fib(g, x).
 ```
-
-</div>
 
 ## Solution
 

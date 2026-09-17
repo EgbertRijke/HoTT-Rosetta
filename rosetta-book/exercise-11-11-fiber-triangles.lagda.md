@@ -21,8 +21,6 @@ Arrows:
 ```
 with a homotopy `H:f~ g∘ h` witnessing that the triangle commutes.
 
-<div class="subexenum">
-
 Construct a family of maps
 ```text
 fib-triangle(h,H):Π(x:X) fib(f, x)→fib(g, x),
@@ -43,8 +41,6 @@ Arrows:
 commutes, where the vertical maps are as constructed in Exercise 10.8.
 
 Show that `h` is an equivalence if and only if `fib-triangle(h,H)` is a family of equivalences.
-
-</div>
 
 ## Solution
 

@@ -9,8 +9,6 @@ module exercise-18-7-exercise where
 
 Consider a map `f:A→ B`.
 
-<div class="subexenum">
-
 Show that the type of maps `‖f‖_0:‖A‖_0→‖B‖_0` equipped with a homotopy witnessing that the square
 
 *Square-shaped diagram (automatic draft).*
@@ -55,8 +53,6 @@ Arrows:
 - im‖f‖_0 --i_{‖f‖_0}--> ‖B‖_0
 ```
 commute, and show that `h` is a set truncation of `im(f)`.
-
-</div>
 
 ## Solution
 

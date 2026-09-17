@@ -18,19 +18,16 @@ open import section-9-2-bi-invertible-maps
 Consider a commuting triangle
 
 ```text
- [A]                 [B]
-
-           [X]
-
-Arrows:
-- A --h--> B
-- A --f--> X
-- B --g--> X
+       h
+  A ------> B
+   \       /
+  f \     / g
+     \   /
+      ∨ ∨
+       X
 ```
 
-with `H:f~ g∘ h`.
-
-<div class="subexenum">
+with `H : f ~ g ∘ h`.
 
 Suppose that the map `h` has a section `s:B → A`.
 Show that the triangle
@@ -76,8 +73,6 @@ f, g, h
 
 are equivalences, then so is the third.
 Conclude that any section and any retraction of an equivalence is again an equivalence.
-
-</div>
 
 ## Solution
 
@@ -239,26 +234,19 @@ module _
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (T : f ~ g ∘ h)
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
   where
 
   abstract
     is-equiv-left-map-triangle : is-equiv h → is-equiv g → is-equiv f
-    pr1 (is-equiv-left-map-triangle H G) =
-      section-left-map-triangle f g h T
-        ( section-is-equiv H)
-        ( section-is-equiv G)
-    pr2 (is-equiv-left-map-triangle H G) =
-      retraction-left-map-triangle f g h T
-        ( retraction-is-equiv G)
-        ( retraction-is-equiv H)
-```
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
-  where
+    pr1 (is-equiv-left-map-triangle K L) =
+      section-left-map-triangle f g h H
+        ( section-is-equiv K)
+        ( section-is-equiv L)
+    pr2 (is-equiv-left-map-triangle K L) =
+      retraction-left-map-triangle f g h H
+        ( retraction-is-equiv L)
+        ( retraction-is-equiv K)
 
   abstract
     is-equiv-right-map-triangle :
@@ -274,13 +262,6 @@ module _
                 ( g ·l is-section-map-section h (sh , is-section-sh))))
             ( retraction-f)
             ( h , is-section-sh)))
-```
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
-  where
 
   section-is-equiv-top-map-triangle :
     is-equiv g → is-equiv f → section h
@@ -313,9 +294,7 @@ module _
           ( section-f)
           ( g , is-retraction-rg))
         ( retraction-top-map-triangle f g h H retraction-f))
-```
 
-```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   where
@@ -331,6 +310,19 @@ module _
   pr2 (comp-equiv g h) = is-equiv-comp (pr1 g) (pr1 h) (pr2 h) (pr2 g)
 
   infixr 15 _∘e_
+
   _∘e_ : B ≃ X → A ≃ B → A ≃ X
   _∘e_ = comp-equiv
+
+  is-equiv-left-factor :
+    (g : B → X) (h : A → B) →
+    is-equiv (g ∘ h) → is-equiv h → is-equiv g
+  is-equiv-left-factor g h is-equiv-gh is-equiv-h =
+      is-equiv-right-map-triangle (g ∘ h) g h refl-htpy is-equiv-gh is-equiv-h
+
+  is-equiv-right-factor :
+    (g : B → X) (h : A → B) →
+    is-equiv g → is-equiv (g ∘ h) → is-equiv h
+  is-equiv-right-factor g h is-equiv-g is-equiv-gh =
+    is-equiv-top-map-triangle (g ∘ h) g h refl-htpy is-equiv-g is-equiv-gh
 ```

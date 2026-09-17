@@ -7,8 +7,6 @@ module exercise-16-9-decidable-embeddings-with-unit where
 
 ## Problem statement
 
-<div class="subexenum">
-
 Consider a set `A` and an arbitrary type `B`.
 Show that any embedding `A↪ B` factors uniquely through the embedding `(unit↪ B)↪ B` given by `e↦ e(⋆)`.
 
@@ -20,8 +18,6 @@ Show that for any type `A` with decidable equality and an arbitrary type `B`, an
 ```text
 ((A+unit)≃(B+unit))≃ (unit↪ᵈ (B+unit))×(A≃ B).
 ```
-
-</div>
 
 ## Solution
 

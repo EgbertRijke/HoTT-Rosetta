@@ -13,8 +13,6 @@ open import section-9-2-bi-invertible-maps
 
 ## Problem statement
 
-<div class="subexenum">
-
 Let `A` and `B` be types, and let `C` be a family over `x:A,y:B`.
 Construct an equivalence
 ```text
@@ -26,8 +24,6 @@ Construct an equivalence
 ```text
 (Σ(u:Σ(x:A) B(x)) C(pr 1(u))) ≃ (Σ(v:Σ(x:A) C(x)) B(pr 1(v))).
 ```
-
-</div>
 
 ## Solution
 

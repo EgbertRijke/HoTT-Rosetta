@@ -16,8 +16,6 @@ In other words, the type of all `Σ`-decompositions of `A` is defined by
 \Sigmadecomposition_𝒰(A) ≔ Σ(X:𝒰) Σ(Y:X→Σ(Z:𝒰) ‖Z‖) A≃Σ(x:X) Y(x).
 ```
 
-<div class="subexenum">
-
 Construct an equivalence
 ```text
 \Sigmadecomposition_𝒰(A)≃ Σ(X:𝒰) A↠ X.
@@ -29,8 +27,6 @@ Construct an equivalence
 ```text
 Eq-Rel_𝒰(A)≃ \Sigmadecomposition_{Set_𝒰}(A).
 ```
-
-</div>
 
 ## Solution
 

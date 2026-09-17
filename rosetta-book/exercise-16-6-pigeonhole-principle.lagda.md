@@ -9,8 +9,6 @@ module exercise-16-6-pigeonhole-principle where
 
 Consider two finite types `X` and `Y` with `m` and `n` elements, respectively, and let `f:X→ Y` be a map.
 
-<div class="subexenum">
-
 Show that
 ```text
 is-inj(f)→ (m≤ n).
@@ -22,8 +20,6 @@ Prove the **pigeonhole principle**, i.e., show that
 ```
 
 Show that there is no embedding `ℕ↪ Fin{k}`, for any `k:ℕ`.
-
-</div>
 
 ## Solution
 

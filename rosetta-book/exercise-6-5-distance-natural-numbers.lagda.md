@@ -36,8 +36,6 @@ dist-ℕ(m+1,0) ≔ m+1 dist-ℕ(m+1,n+1) ≔ dist-ℕ(m,n).
 ```
 In other words, the distance between two natural numbers is the *symmetric difference* between them.
 
-<div class="subexenum">
-
 Show that `dist-ℕ` satisfies the axioms of a metric:
 
 1. `(m=n)↔ (dist-ℕ(m,n)=0)`,
@@ -55,8 +53,6 @@ dist-ℕ(k· m,k· n) =k·dist-ℕ(m,n).
 ```
 
 Show that `x+dist-ℕ(x,y)=y` for any `x≤ y`.
-
-</div>
 
 ## Solution
 

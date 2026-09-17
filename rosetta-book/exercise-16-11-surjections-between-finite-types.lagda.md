@@ -7,8 +7,6 @@ module exercise-16-11-surjections-between-finite-types where
 
 ## Problem statement
 
-<div class="subexenum">
-
 Consider an arbitrary type `A` and a type `B` with decidable equality.
 Construct an equivalence
 ```text
@@ -24,8 +22,6 @@ Construct an equivalence `Fin{\numberofsurjectivemaps{m}{n}}≃(Fin{m}↠Fin{n})
 ```
 Conclude that if `A` and `B` are finite with cardinality `m` and `n`, then the type `A↠ B` is finite with cardinality `\numberofsurjectivemaps{m}{n}`.
 Note: the number `\numberofsurjectivemaps{m}{n}` is `n!Stirling(m, n)`, where `Stirling(m, n)` is the **Stirling number of the second kind** at `(m,n)`.
-
-</div>
 
 ## Solution
 

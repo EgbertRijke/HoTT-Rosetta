@@ -7,8 +7,6 @@ module exercise-16-10-falling-factorials-and-embeddings where
 
 ## Problem statement
 
-<div class="subexenum">
-
 For any two types `A` and `B`, construct an equivalence
 ```text
 ((A+unit)↪ᵈ(B+unit))≃ (unit ↪ᵈ (B+unit))× (A↪ᵈ B).
@@ -20,8 +18,6 @@ Construct an equivalence `Fin{\fallingfactorial{n}{m}}≃(Fin{m}↪Fin{n})`, whe
 \fallingfactorial{n+1}{0} ≔ 1 \fallingfactorial{n+1}{m+1} ≔ (n+1)\fallingfactorial{n}{m}.
 ```
 Conclude that if `A` and `B` are finite with cardinality `m` and `n`, then the type `A↪ B` is finite with cardinality `\fallingfactorial{n}{m}`.
-
-</div>
 
 ## Solution
 

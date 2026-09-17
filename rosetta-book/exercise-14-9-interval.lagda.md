@@ -43,8 +43,6 @@ Note that the constructors of `𝕀` induce a map
 ```
 given by `f↦ (f(source),f(target),apd_{f}(path))`.
 
-<div class="subexenum">
-
 Characterize the identity types of the codomain of the map `ε` in the following way: Construct an equivalence from the type `(u,v,q)=(u',v',q')` to the type
 ```text
 Σ(α:u=u') Σ(β:v=v') q ∙ β=ap_{tr_P(path)}(α) ∙ q',
@@ -54,8 +52,6 @@ for any `(u,v,q)` and `(u',v',q')` in the codomain of `ε`.
 Prove the dependent universal property of `𝕀`, i.e., show that the map `ε` is an equivalence.
 
 Show that `𝕀` is contractible.
-
-</div>
 
 ## Solution
 

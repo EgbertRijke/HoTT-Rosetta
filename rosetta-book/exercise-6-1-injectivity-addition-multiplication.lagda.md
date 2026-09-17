@@ -21,8 +21,6 @@ open import section-6-4-peanos-seventh-and-eighth-axioms
 
 ## Problem statement
 
-<div class="subexenum">
-
 Show that
 ```text
 (m=n) ↔ (m+k=n+k)
@@ -45,8 +43,6 @@ m ≠ m+(n+1)
 m+1 ≠ (m+1)(n+2)
 ```
 for all `m,n:ℕ`.
-
-</div>
 
 ## Solution
 

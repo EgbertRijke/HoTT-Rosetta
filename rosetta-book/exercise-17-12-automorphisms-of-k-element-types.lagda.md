@@ -7,8 +7,6 @@ module exercise-17-12-automorphisms-of-k-element-types where
 
 ## Problem statement
 
-<div class="subexenum">
-
 Show that for `k≠ 2`, the type
 ```text
 Π(X:BS_k) X→ X
@@ -23,8 +21,6 @@ Show that the type
 ```
 is equivalent to `Fin{2}`.
 Conclude that the type `Π(X:BS_2) X≃ X` is also equivalent to `Fin{2}`.
-
-</div>
 
 ## Solution
 

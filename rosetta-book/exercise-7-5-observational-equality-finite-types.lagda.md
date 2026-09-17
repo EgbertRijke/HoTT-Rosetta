@@ -27,8 +27,6 @@ Eq-Fin_{k+1}(i(x),i(y)) ≔ Eq-Fin_k(x,y) Eq-Fin_{k+1}(i(x),⋆) ≔ empty
 Eq-Fin_{k+1}(⋆,i(y)) ≔ empty Eq-Fin_{k+1}(⋆,⋆) ≔ unit.
 ```
 
-<div class="subexenum">
-
 Show that
 ```text
 (x=y)↔ Eq-Fin_k(x,y)
@@ -44,8 +42,6 @@ succ-Fin_{k+1}(i(x))≠ 0
 for any `x:Fin{k}`.
 
 Show that function `succ-Fin_k:Fin{k}→Fin{k}` is injective, for each `k:ℕ`.
-
-</div>
 
 ## Solution
 

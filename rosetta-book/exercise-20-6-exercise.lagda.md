@@ -50,8 +50,6 @@ The type `hom((X,μ_X),(Y,μ_Y))` of homomorphisms of algebras for `P_{A,B}` is 
 hom((X,μ_X),(Y,μ_Y))≔ Σ(h:X→ Y) h∘μ_X~ μ_Y∘ P_{A,B}(h).
 ```
 
-<div class="subexenum">
-
 For any `(x,α),(y,β):P_{A,B}(X)`, construct an equivalence
 ```text
 ((x,α)=(y,β)) ≃ Σ(p:x=y) α~ β∘tr_B(p).
@@ -67,8 +65,6 @@ Show that the W-type `W(A,B)` equipped with the canonical structure `ε` of a `P
 hom((W(A,B),ε),(X,μ))
 ```
 is contractible, for each `P_{A,B}`-algebra `(X,μ)`.
-
-</div>
 
 ## Solution
 

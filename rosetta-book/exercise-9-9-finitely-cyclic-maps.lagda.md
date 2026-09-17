@@ -12,13 +12,9 @@ A map `f:X→ X` is said to be **finitely cyclic** if it comes equipped with an 
 is-finitely-cyclic(f)≔Π(x,y:X) Σ(k:ℕ) f^k(x)=y.
 ```
 
-<div class="subexenum">
-
 Show that any finitely cyclic map is an equivalence.
 
 Show that `succ-Fin:Fin{k}→Fin{k}` is finitely cyclic for any `k:ℕ`.
-
-</div>
 
 ## Solution
 

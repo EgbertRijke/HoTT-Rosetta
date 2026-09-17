@@ -9,8 +9,6 @@ module exercise-8-10-maximal-elements where
 
 Consider a decidable type family `P` over `ℕ` equipped with an upper bound `m`.
 
-<div class="subexenum">
-
 Show that the type `Σ(n:ℕ) P(n)` is decidable.
 
 Construct a function
@@ -19,8 +17,6 @@ Construct a function
 ```
 
 Use the function of part (b) to give a second construction of the greatest common divisor, and verify that it satisfies the specification of Definition 8.4.1.
-
-</div>
 
 ## Solution
 

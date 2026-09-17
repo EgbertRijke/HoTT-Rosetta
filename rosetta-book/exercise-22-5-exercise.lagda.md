@@ -7,8 +7,6 @@ module exercise-22-5-exercise where
 
 ## Problem statement
 
-<div class="subexenum">
-
 Construct a family of equivalences
 ```text
 Π(t:S^1) ((t=t) ≃ ℤ).
@@ -21,8 +19,6 @@ Use Exercise 13.5 to show that
 has-inverse(id[S^1]) ≃ ℤ,
 ```
 and conclude that `{has-inverse}(id[S^1])\not≃{is-equiv(id[S^1])}`.
-
-</div>
 
 ## Solution
 

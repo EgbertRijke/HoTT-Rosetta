@@ -28,8 +28,6 @@ The ordering relation `≤` on `ℕ` is defined recursively by
 (m+1≤0) ≔ empty (m+1≤ n+1) ≔ (m≤ n).
 ```
 
-<div class="subexenum">
-
 Show that `≤` satisfies the axioms of a *poset*, i.e., show that `≤` is
 
 1. reflexive,
@@ -57,8 +55,6 @@ Show that
 holds for any `m,n,k:ℕ`.
 
 Show that `k≤ min(m,n)` holds if and only if both `k≤ m` and `k≤ n` hold, and show that `max(m,n)≤ k` holds if and only if both `m≤ k` and `n≤ k` hold.
-
-</div>
 
 ## Solution
 

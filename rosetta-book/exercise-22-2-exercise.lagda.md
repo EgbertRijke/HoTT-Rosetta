@@ -7,8 +7,6 @@ module exercise-22-2-exercise where
 
 ## Problem statement
 
-<div class="subexenum">
-
 Show that for every `x:X`, we have an equivalence
 ```text
 (Σ(f:S^1→ X) f(base)= x ) ≃ (x=x)
@@ -24,8 +22,6 @@ Show that for every `t:S^1`, we have an equivalence
 ```text
 (Σ(e:S^1 ≃ S^1) e(base)= t ) ≃ bool
 ```
-
-</div>
 
 ## Solution
 

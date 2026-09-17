@@ -18,8 +18,6 @@ Furthermore, we define the **strict rank comparison relation** `{\prec}` on `W(A
 ```
 If `x\prec y` holds, we say that `x` has **strictly lower rank** than `y`.
 
-<div class="subexenum">
-
 Show that the rank comparison relation defines a preordering on `W(A,B)`, i.e., show that `\preceq` is reflexive and transitve.
 Furthermore, prove the following properties, in which `<` is the strict ordering on `W(A,B)` defined in Exercise 20.5:
 
@@ -40,8 +38,6 @@ Furthermore, prove the following properties:
 
 3. `∀_{(y\preceq y')}∀_{(x'\preceq x)}(x\prec y)→ (x'\prec y')`.
 
-</div>
-
 Since `\preceq` defines a preordering on `W(A,B)`, it follows that the preorder `(W(A,B),\preceq)` has a poset reflection, in the sense of Exercise 18.6.
 We will write
 ```text
@@ -49,8 +45,6 @@ We will write
 ```
 for the poset reflection of `(W(A,B),\preceq)` and its quotient map.
 We will call the poset `(R(A,B),\preceq)` the **rank poset** of the W-type `W(A,B)`.
-
-<div class="subexenum">
 
 Show that if each `B(x)` is finite, then the rank poset `(\rank(A,B),\preceq)` is either the empty poset, the poset with one element, or it is isomorphic to the poset `(ℕ,≤)`.
 
@@ -77,8 +71,6 @@ A strictly ordered set `(X,<)` is said to be **extensional** if the logical equi
 ```
 holds for any `x,y:X`.
 Show that the rank `(\rank(A,B),\prec)` of `W(A,B)` is extensional.
-
-</div>
 
 ## Solution
 

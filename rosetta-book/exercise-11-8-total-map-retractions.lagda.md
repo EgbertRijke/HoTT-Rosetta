@@ -18,8 +18,6 @@ open import section-11-1-families-of-equivalences
 
 ## Problem statement
 
-<div class="subexenum">
-
 Let `f,g:Π(x:A) B(x)→ C(x)` be two families of maps.
 Show that
 ```text
@@ -45,8 +43,6 @@ Conclude that for any family of maps
 f : Π(x:A) (a=x) → B(x),
 ```
 if each `f(x)` has a section, then `f` is a family of equivalences.
-
-</div>
 
 ## Solution
 

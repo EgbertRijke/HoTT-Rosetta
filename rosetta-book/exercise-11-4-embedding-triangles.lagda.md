@@ -21,15 +21,11 @@ Arrows:
 ```
 with `H:f~ g∘ h`.
 
-<div class="subexenum">
-
 Suppose that `g` is an embedding.
 Show that `f` is an embedding if and only if `h` is an embedding.
 
 Suppose that `h` is an equivalence.
 Show that `f` is an embedding if and only if `g` is an embedding.
-
-</div>
 
 ## Solution
 

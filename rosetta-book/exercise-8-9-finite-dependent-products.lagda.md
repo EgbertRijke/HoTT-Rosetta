@@ -9,13 +9,9 @@ module exercise-8-9-finite-dependent-products where
 
 Consider a family `B` of types over `Fin{k}`, for some `k:ℕ`.
 
-<div class="subexenum">
-
 Show that if each `B(x)` is decidable, then `Π(x:Fin{k}) B(x)` is again decidable.
 
 Show that if each `B(x)` has decidable equality, then `Π(x:Fin{k}) B(x)` also has decidable equality.
-
-</div>
 
 ## Solution
 

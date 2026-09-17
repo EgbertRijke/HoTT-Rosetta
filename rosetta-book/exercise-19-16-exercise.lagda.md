@@ -12,8 +12,6 @@ Consider a group `G` and a pointed connected `1`-type `B` equipped with a group 
 φ:G≅ Ω(B).
 ```
 
-<div class="subexenum">
-
 Show that the map
 ```text
 ev_⋆:(B→Set_𝒰)→ Σ(X:Set_𝒰) hom(G,Aut(X))
@@ -42,8 +40,6 @@ Show that the type `X/G` of orbits of `X` is a set if and only if the abstract `
 ```
 
 Show that the type of abstract `G`-torsors is equivalent to the type of families `X:B→Set_𝒰` with contractible total space.
-
-</div>
 
 ## Solution
 

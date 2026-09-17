@@ -7,8 +7,6 @@ module exercise-13-12-dependent-products-of-truncated-maps where
 
 ## Problem statement
 
-<div class="subexenum">
-
 Consider a family of `k`-truncated maps `f_i:A_i→ B_i` indexed by `i:I`.
 Show that the map
 ```text
@@ -45,8 +43,6 @@ Show that for any map `f:A→ B` the following are equivalent:
     is `k`-truncated.
 
 In particular, `f` is an equivalence if and only if `f∘_` is an equivalence, and `f` is an embedding if and only if `f∘_` is an embedding.
-
-</div>
 
 ## Solution
 

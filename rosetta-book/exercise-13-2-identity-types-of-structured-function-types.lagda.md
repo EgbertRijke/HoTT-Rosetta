@@ -9,8 +9,6 @@ module exercise-13-2-identity-types-of-structured-function-types where
 
 Characterize the identity types of the following types:
 
-<div class="subexenum">
-
 The type `Σ(h:A→ B) h(a)=b` of **pointed maps**, where `a:A` and `b:B` are given.
 
 The type `Σ(h:A→ B) f~ g∘ h` of commuting triangles
@@ -55,8 +53,6 @@ Arrows:
 - B --j--> Y
 ```
 where `f:A→ B` and `g:X→ Y` are given.
-
-</div>
 
 ## Solution
 

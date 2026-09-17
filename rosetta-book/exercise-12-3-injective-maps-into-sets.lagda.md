@@ -7,8 +7,6 @@ module exercise-12-3-injective-maps-into-sets where
 
 ## Problem statement
 
-<div class="subexenum">
-
 Show that any injective map `f:A→ B` into a set `B` is an embedding, and conclude that `A` is automatically a set in this case.
 
 Show that `n↦ m+n` is an embedding, for each `m:ℕ`.
@@ -23,8 +21,6 @@ Conclude that the divisibility relation
 d| n
 ```
 is a proposition for each `d,n:ℕ` such that `d>0`.
-
-</div>
 
 ## Solution
 

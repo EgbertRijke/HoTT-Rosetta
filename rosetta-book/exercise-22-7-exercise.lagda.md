@@ -7,8 +7,6 @@ module exercise-22-7-exercise where
 
 ## Problem statement
 
-<div class="subexenum">
-
 Show that the multiplicative operation on the circle is associative, i.e. construct an identification
 ```text
 assoc_{S^1}(x,y,z) :
@@ -66,8 +64,6 @@ assoc_{S^1}(base,base,base).
 ```
 Note: the first three laws should be `3`-cells and the last law should be a `4`-cell.
 The laws are automatically satisfied, since the circle is a `1`-type.
-
-</div>
 
 ## Solution
 

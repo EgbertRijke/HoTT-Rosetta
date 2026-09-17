@@ -12,8 +12,6 @@ Recall from Remark 4.4.2 that coproducts have a **functorial action**, i.e., tha
 f+g:(A+B)→ (A'+B').
 ```
 
-<div class="subexenum">
-
 Show that `id[A]+id[B]~ id[A+B]`.
 
 Show that for any two pairs of composable functions
@@ -29,8 +27,6 @@ H+K:(f+g)~ (f'+g').
 ```
 
 Show that if both `f` and `g` are equivalences, then so is `f+g`. (The converse of this statement also holds, see Exercise 11.7.)
-
-</div>
 
 ## Solution
 

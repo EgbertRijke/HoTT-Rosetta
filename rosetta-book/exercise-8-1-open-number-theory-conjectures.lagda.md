@@ -24,15 +24,11 @@ open import section-8-5-the-infinitude-of-primes
 
 ## Problem statement
 
-<div class="subexenum">
-
 State Goldbach’s conjecture in type theory.
 
 State the twin prime conjecture in type theory.
 
 State the Collatz conjecture in type theory.
-
-</div>
 
 If you have a solution to any of these open problems, you should certainly formalize it before you submit it to the Annals of Mathematics.
 

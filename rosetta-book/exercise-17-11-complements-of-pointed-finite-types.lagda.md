@@ -7,8 +7,6 @@ module exercise-17-11-complements-of-pointed-finite-types where
 
 ## Problem statement
 
-<div class="subexenum">
-
 For any type `A`, construct an equivalence
 ```text
 𝒰_A ≃ \sum_{(X:𝒰_{A+unit})}binom(X, unit).
@@ -23,8 +21,6 @@ Conclude that the type of pointed finite types is equivalent to the type of fini
 ```text
 (Σ(X:𝔽) X)≃ 𝔽.
 ```
-
-</div>
 
 ## Solution
 

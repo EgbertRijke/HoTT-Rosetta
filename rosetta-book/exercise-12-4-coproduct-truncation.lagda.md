@@ -13,8 +13,6 @@ open import section-12-1-propositions
 
 ## Problem statement
 
-<div class="subexenum">
-
 Show that for any two contractible types `A` and `B`, the coproduct `A+B` is not contractible.
 
 Show that for any two propositions `P` and `Q`, we have a logical equivalence
@@ -30,8 +28,6 @@ Show that for any two propositions `P` and `Q`, the coproduct `P+Q` is a proposi
 
 Show that for any two `(k+2)`-types `A` and `B`, the coproduct `A+B` is again a `(k+2)`-type.
 Conclude that `ℤ` is a set.
-
-</div>
 
 ## Solution
 

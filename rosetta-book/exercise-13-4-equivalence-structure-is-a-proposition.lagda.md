@@ -9,8 +9,6 @@ module exercise-13-4-equivalence-structure-is-a-proposition where
 
 Let `f:A→ B` be a function.
 
-<div class="subexenum">
-
 Show that if `f` is an equivalence, then the type `Σ(g:B→ A) f∘ g~ id` of sections of `f` is contractible.
 
 Show that if `f` is an equivalence, then the type `Σ(h:B→ A) h∘ f~ id` of retractions of `f` is contractible.
@@ -24,8 +22,6 @@ Show that for any two equivalences `e,e':A≃ B`, the canonical map
 is an equivalence.
 
 Show that the type `A≃ B` is a `k`-type if both `A` and `B` are `k`-types.
-
-</div>
 
 ## Solution
 

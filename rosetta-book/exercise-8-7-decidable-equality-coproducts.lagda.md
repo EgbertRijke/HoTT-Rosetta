@@ -22,8 +22,6 @@ Eq-coproduct(inl(x),inl(x')) ≔ x= x' Eq-coproduct(inl(x),inr(y')) ≔ empty
 Eq-coproduct(inr(y),inl(x')) ≔ empty Eq-coproduct(inr(y),inr(y')) ≔ y = y'.
 ```
 
-<div class="subexenum">
-
 Show that `(x=y)↔Eq-coproduct(x,y)` for every `x,y:A+B`.
 
 Show that the following are equivalent:
@@ -33,8 +31,6 @@ Show that the following are equivalent:
 2. The coproduct `A+B` has decidable equality.
 
 Conclude that `ℤ` has decidable equality.
-
-</div>
 
 ## Solution
 

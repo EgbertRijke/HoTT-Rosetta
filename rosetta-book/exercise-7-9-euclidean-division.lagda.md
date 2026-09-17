@@ -28,8 +28,6 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 
 (Euclidean division) Consider two natural numbers `a` and `b`.
 
-<div class="subexenum">
-
 Construct two natural numbers `q` and `r` such that `(b≠ 0) → (r<b)`, along with an identification
 ```text
 a=qb+r.
@@ -40,8 +38,6 @@ Show that for any four natural numbers `q,q'` and `r,r'` such that the implicati
 a=qb+r and a=q'b+r',
 ```
 we have `q=q'` and `r=r'`.
-
-</div>
 
 ## Solution
 

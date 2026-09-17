@@ -30,8 +30,6 @@ The multiplication operation `x,y↦ xy` on `ℤ/{(k+1)}` is defined by
 xy ≔ [nat-Fin(x)nat-Fin(y)]_{k+1}.
 ```
 
-<div class="subexenum">
-
 Show that `nat-Fin(xy)≡nat-Fin(x)nat-Fin(y)mod{k+1}` for each `x,y:ℤ/{(k+1)}`.
 
 Show that
@@ -46,8 +44,6 @@ Show that multiplication on `ℤ/{(k+1)}` satisfies the laws of a commutative ri
 1x = x x1 = x
 x(y+z) = xy+xz (x+y)z = xz+yz.
 ```
-
-</div>
 
 ## Solution
 

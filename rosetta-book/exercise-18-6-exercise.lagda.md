@@ -17,8 +17,6 @@ Furthermore, define the **poset reflection** `\posetreflection{A}` to be the ima
 a↦ y_a : A→ PreOrd(\op{(A,≤)},{(Prop_𝒰,{→})}).
 ```
 
-<div class="subexenum">
-
 Show that the image of the map `a↦ y_a` satisfies the universal property of the set quotient of the equivalence relation
 ```text
 x,y↦ (x≤ y)∧ (y≤ x).
@@ -38,8 +36,6 @@ Arrows:
 - A --η--> \posetreflection{A}
 - \posetreflection{A} --unlabeled--> P
 ```
-
-</div>
 
 ## Solution
 

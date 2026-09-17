@@ -21,13 +21,9 @@ Arrows:
 ```
 with `H:f~ g∘ h`.
 
-<div class="subexenum">
-
 Show that if `h` has a section, then `sec(g)` is a retract of `sec(f)`.
 
 Show that if `g` has a retraction, then `retr(h)` is a retract of `sec(f)`.
-
-</div>
 
 ## Solution
 

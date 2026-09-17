@@ -9,8 +9,6 @@ module exercise-17-13-binomial-types-and-isolated-points where
 
 Consider a type `A`.
 
-<div class="subexenum">
-
 Recall from Exercise 12.14 that an element `a:A` is isolated if and only if the map `const_a:unit→ A` is a decidable embedding.
 Construct an equivalence
 ```text
@@ -27,8 +25,6 @@ More generally, construct an equivalence
 ```text
 binom(A, B) ≃ Σ(X:𝒰_B) Σ(Y:𝒰) (X+Y≃ A).
 ```
-
-</div>
 
 ## Solution
 

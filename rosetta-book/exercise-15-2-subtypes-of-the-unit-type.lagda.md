@@ -7,8 +7,6 @@ module exercise-15-2-subtypes-of-the-unit-type where
 
 ## Problem statement
 
-<div class="subexenum">
-
 Show that for any proposition `P`, the constant map
 ```text
 const_⋆ : P → unit
@@ -25,8 +23,6 @@ Show that the following are equivalent:
 1. The map `f` is a propositional truncation of `A`.
 
 2. The constant map `P→unit` satisfies the universal property of the image of the constant map `A→unit`.
-
-</div>
 
 ## Solution
 

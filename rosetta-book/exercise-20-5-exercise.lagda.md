@@ -13,8 +13,6 @@ i : Π(y:W(A,B)) (x∈ y) → (x < y)
 j : Π(y,z:W(A,B)) (y∈ z) → ((x<y) → (x<z)).
 ```
 
-<div class="subexenum">
-
 Show that the type-valued relation `<` is transitive and irreflexive.
 
 Suppose that the type `W(A,B)` is inhabited and suppose that there exists an element `a:A` for which `B(a)` is inhabited.
@@ -39,8 +37,6 @@ f(x)=h(x,λ y. λ p. f(y))
 for all `x:W(A,B)`.
 
 Show that there can be no sequence of elements `x:ℕ→W(A,B)` such that `x_{n+1}< x_n` for all `n:ℕ`.
-
-</div>
 
 ## Solution
 

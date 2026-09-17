@@ -9,8 +9,6 @@ module exercise-16-5-finite-dependent-products where
 
 Consider a family `B` of types over `A`.
 
-<div class="subexenum">
-
 Show that if `A` is finite and if each `B(x)` is finite, then the type
 ```text
 Π(x:A) B(x)
@@ -37,8 +35,6 @@ Show that if `Π(x:A) B(x)` is finite and if each `B(x)` is finite, then `A` is 
 Π(x:A) (2≤|B(x)|)→ B(x)
 ```
     is finite.
-
-</div>
 
 ## Solution
 

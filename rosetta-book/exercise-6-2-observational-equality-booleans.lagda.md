@@ -12,8 +12,6 @@ open import section-5-1-the-inductive-definition-of-identity-types
 
 ## Problem statement
 
-<div class="subexenum">
-
 Define observational equality `Eq-bool` by induction on the booleans.
 
 Show that
@@ -24,8 +22,6 @@ for any `x,y:bool`.
 
 Show that `b≠neg-bool(b)` for any `b:bool`.
 Conclude that `false≠true`.
-
-</div>
 
 ## Solution
 

@@ -13,8 +13,6 @@ The **Stirling type of the second kind** is the type
 Stirling(A, B):=Σ(X:𝒰_B) A↠ X.
 ```
 
-<div class="subexenum">
-
 Show that if `B` is a `k`-type, then the type `Stirling(A, B)` is also a `k`-type.
 
 Suppose that `B` has decidable equality.
@@ -25,8 +23,6 @@ Stirling(A+unit, B+unit)≃ (B+unit)×Stirling(A, B+unit)+Stirling(A, B)
 
 Suppose that `A` and `B` are finite types of cardinality `n` and `k`.
 Show that the Stirling type `Stirling(A, B)` of the second kind is a finite type of cardinality `Stirling(n, k)`, where `Stirling(n, k)` is the **Stirling number of the second kind**.
-
-</div>
 
 ## Solution
 

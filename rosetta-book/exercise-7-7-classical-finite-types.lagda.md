@@ -26,8 +26,6 @@ Recall that
 classical-Fin_k:=Σ(x:ℕ) x<k.
 ```
 
-<div class="subexenum">
-
 Show that
 ```text
 (x=y)↔ (pr 1(x)=pr 1(y))
@@ -44,8 +42,6 @@ for each `k:ℕ`, and show that
 α_k(nat-Fin(x)) = x and nat-Fin(α_k(y)) = y
 ```
 for each `x:Fin{k}` and each `y:classical-Fin_k`.
-
-</div>
 
 ## Solution
 

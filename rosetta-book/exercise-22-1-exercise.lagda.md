@@ -7,8 +7,6 @@ module exercise-22-1-exercise where
 
 ## Problem statement
 
-<div class="subexenum">
-
 Show that
 ```text
 Π(x:S^1) ‖base=x‖.
@@ -23,8 +21,6 @@ Use the circle to conclude that
 ```text
 ¬(Π(X:𝒰) ‖X‖→ X).
 ```
-
-</div>
 
 ## Solution
 

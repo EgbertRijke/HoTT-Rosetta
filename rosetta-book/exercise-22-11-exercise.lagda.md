@@ -13,8 +13,6 @@ Consider the type `C` of families `A:S^1→Set` of sets over the circle equipped
 ```
 is connected.
 
-<div class="subexenum">
-
 For any type family `A` over the circle equipped with `a_0:A(base)`, show that the total space `Σ(t:S^1) A(t)` is connected if and only if `tr_A(loop):A(base)→ A(base)` has a single orbit in the sense that the map `k↦ tr_A(loop)^k(a_0):ℤ→ A(base)` is surjective.
 
 Let `(A,a_0)` and `(B,b_0)` be in `C`.
@@ -26,8 +24,6 @@ is a proposition.
 Furthermore, show that this inequality relation gives `C` the structure of a poset.
 
 Show that the poset `C` is isomorphic to the poset of subgroups of `ℤ`.
-
-</div>
 
 ## Solution
 

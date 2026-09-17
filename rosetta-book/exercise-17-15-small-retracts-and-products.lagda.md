@@ -9,8 +9,6 @@ module exercise-17-15-small-retracts-and-products where
 
 Let `𝒰` be a univalent universe.
 
-<div class="subexenum">
-
 Consider a section-retraction pair
 
 *Linear diagram (automatic draft).*
@@ -28,8 +26,6 @@ Hint: Use Exercise 13.18.
 
 Consider two inhabited types `A` and `B`.
 Show that if the product `A× B` is `𝒰`-small, then so are the types `A` and `B`.
-
-</div>
 
 ## Solution
 

@@ -16,8 +16,6 @@ Define the `G`-type `Concrete-Subgroup_𝒰(G) : BG→𝒰` of **concrete subgro
 Concrete-Subgroup_𝒰(G,u)≔ \sum_{(X:BG→Set_𝒰)}\sum_{(x:X(u))}is-conn(X/G).
 ```
 
-<div class="subexenum">
-
 Construct an equivalence
 ```text
 Concrete-Subgroup_𝒰(G,⋆)≃Subgroup_𝒰(G).
@@ -48,8 +46,6 @@ Show that the type of normal subgroups of a group `G` is also equivalent to the 
 ```text
 Σ(BH:Concrete-Group_𝒰) Σ(f:BG→_⋆ BH) is-conn(f)
 ```
-
-</div>
 
 ## Solution
 

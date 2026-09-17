@@ -28,8 +28,6 @@ The strict ordering relation `<` on `ℕ` is defined recursively by
 (m+1<0) ≔ empty (m+1< n+1) ≔ (m< n).
 ```
 
-<div class="subexenum">
-
 Show that the strict ordering relation is
 
 1. antireflexive,
@@ -50,8 +48,6 @@ Show that
 (m<n) ↔ (n \nleq m)
 ```
 for any `m,n :ℕ`.
-
-</div>
 
 ## Solution
 

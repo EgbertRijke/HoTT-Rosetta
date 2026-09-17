@@ -9,8 +9,6 @@ module exercise-14-6-propositional-truncations-of-decidable-types where
 
 Consider a type `A` equipped with an element `d:is-decidable(A)`.
 
-<div class="subexenum">
-
 Define a function `f:A→ Σ(x:A) inl(x)=d` and show that `f` is a propositional truncation of `A`.
 
 Consider the function `π:is-decidable(A)→Fin{2}` defined by
@@ -19,8 +17,6 @@ Consider the function `π:is-decidable(A)→Fin{2}` defined by
 π(inr(x)) := 0.
 ```
 Define a function `g:A→ (π(d)=1)` and show that `g` is a propositional truncation of `A`.
-
-</div>
 
 ## Solution
 

@@ -45,8 +45,6 @@ convert-based-ℕ{k}(constant-based-ℕ {k}(x)) ≔ nat-Fin(x)
 convert-based-ℕ{k}(unary-op-based-ℕ{k}(x,n)) ≔ k(convert-based-ℕ{k}(n)+1)+nat-Fin(x).
 ```
 
-<div class="subexenum">
-
 Show that the type `based-ℕ{0}` is empty.
 
 Show that the function `convert-based-ℕ{k}:based-ℕ{k}→ℕ` is injective.
@@ -65,8 +63,6 @@ g_{k}(convert-based-ℕ{k+1}(x)) = x
 ```
 
 for each `n:ℕ` and each `x: based-ℕ {k+1}`.
-
-</div>
 
 ## Solution
 
