@@ -29,8 +29,6 @@ is an equivalence.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-10-6-contractible-base -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (C : is-contr A) (a : A)

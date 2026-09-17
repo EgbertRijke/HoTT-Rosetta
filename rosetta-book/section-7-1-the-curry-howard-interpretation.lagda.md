@@ -32,8 +32,6 @@ In other words, `d| n` should be the type that consists of natural numbers `k` e
 In general, the type of `x:A` equipped with `y:B(x)` is represented as the type `Σ(x:A) B(x)`.
 The interpretation of the existential quantification (`∃`) into type theory via the Curry-Howard interpretation is therefore using `Σ`-types.
 
-<!-- rosetta-item-end: example-7.1.1 -->
-
 ## Definition 7.1.2
 
 Consider two natural numbers `d` and `n`.
@@ -42,13 +40,10 @@ We say that `d` **divides** `n` if there is a element of type
 d| n≔ Σ(k:ℕ) d· k=n.
 ```
 
-<!-- rosetta-agda-block: section-7-1-the-curry-howard-interpretation-block-59 -->
-
 ```agda
 div-ℕ : ℕ → ℕ → UU lzero
 div-ℕ m n = Σ ℕ (λ k → k *ℕ m ＝ n)
 ```
-<!-- rosetta-item-end: definition-7.1.2 -->
 
 ## Remark 7.1.3
 
@@ -58,8 +53,6 @@ This type-theoretical definition of the divisibility relation using `Σ`-types h
 
 2. The principal way to use a hypothesis `H:d| n` in a proof is to proceed by `Σ`-induction on the variable `H`.
 We then get to assume a natural number `k` and an identification `p:d· k=n`, in order to proceed with the proof.
-
-<!-- rosetta-item-end: remark-7.1.3 -->
 
 ## Example 7.1.4
 
@@ -82,8 +75,6 @@ Such an element `p(x)` is constructed as the pair `(x,q(x))`, where the identifi
 Similarly, the type theoretic proof that every natural number `k` divides `0`, i.e., that `k| 0`, is the pair `(0,p)` consisting of the natural number `0` and the identification `p:k· 0=0` obtained from the right annihilation law of multiplication on `ℕ`.
 This identification was also constructed in Exercise 5.5.
 
-<!-- rosetta-agda-block: section-7-1-the-curry-howard-interpretation-block-106 -->
-
 ```agda
 div-one-ℕ :
   (x : ℕ) → div-ℕ 1 x
@@ -91,15 +82,12 @@ pr1 (div-one-ℕ x) = x
 pr2 (div-one-ℕ x) = right-unit-law-mul-ℕ x
 ```
 
-<!-- rosetta-agda-block: section-7-1-the-curry-howard-interpretation-block-119 -->
-
 ```agda
 div-zero-ℕ :
   (k : ℕ) → div-ℕ k 0
 pr1 (div-zero-ℕ k) = 0
 pr2 (div-zero-ℕ k) = left-zero-law-mul-ℕ k
 ```
-<!-- rosetta-item-end: example-7.1.4 -->
 
 In the following proposition we will see examples of how a hypothesis of type `d| x` can be used.
 
@@ -125,7 +113,6 @@ Our goal is now to construct an identification
 d· (k+l)=x+y.
 ```
 We construct such an identification as a concatenation `α ∙ (β ∙ γ)`, where the types of the identifications `α`, `β`, and `γ` are as follows:
-<!-- rosetta-diagram: d4c30eb2ec3d; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -148,8 +135,6 @@ To conclude the proof that `d| x+y`, note that we have constructed the pair
 ```
  ◻
 
-<!-- rosetta-agda-block: section-7-1-the-curry-howard-interpretation-block-186 -->
-
 ```agda
 div-add-ℕ :
   (d x y : ℕ) → div-ℕ d x → div-ℕ d y → div-ℕ d (x +ℕ y)
@@ -159,7 +144,6 @@ pr2 (div-add-ℕ d x y (pair n p) (pair m q)) =
   (( ap (λ t → t +ℕ (m *ℕ d)) p) ∙
   ( ap (λ t → x +ℕ t) q))
 ```
-<!-- rosetta-item-end: proposition-7.1.5 -->
 
 The full Curry-Howard interpretation of logic into type theory also involves interpretations of disjunction, conjunction, implication, and equality.
 
@@ -234,4 +218,3 @@ To address this dissimilarity between general types and logic, we will introduce
 In Chapter 12 we will define the type `is-prop(A)`, which expresses the property that the type `A` is a proposition.
 Furthermore, we will introduce the *propositional truncation* operation in Chapter 14, which we will use to interpret logic into type theory in such a way that all logical assertions are interpreted as types that satisfy the condition of being a proposition.
 
-<!-- rosetta-item-end: remark-7.1.6 -->

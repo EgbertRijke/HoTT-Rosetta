@@ -18,14 +18,10 @@ hom(G,H)
 ```
 for the type of all (semi)group homomorphisms from `G` to `H`.
 
-<!-- rosetta-item-end: definition-19.2.1 -->
-
 ## Remark 19.2.2
 
 Since it is a property for a function to preserve the multiplication of a semigroup, it follows easily that equality of semigroup homomorphisms is equivalent to the type of homotopies between their underlying functions.
 In particular, it follows that the type of homomorphisms of semigroups is a set.
-
-<!-- rosetta-item-end: remark-19.2.2 -->
 
 ## Remark 19.2.3
 
@@ -36,7 +32,6 @@ id : G → G
 ```
 Let `f:G→ H` and `g:H→ K` be (semi)group homomorphisms.
 Then the composite function `g∘ f:G→ K` is also a (semi)group homomorphism, since we have the identifications
-<!-- rosetta-diagram: c5bcc022bbdb; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -55,8 +50,6 @@ g∘ id = g
 ```
 for any composable (semi)group homomorphisms `f`, `g`, and `h`.
 
-<!-- rosetta-item-end: remark-19.2.3 -->
-
 ## Definition 19.2.4
 
 Let `h:hom(G,H)` be a homomorphism of (semi)groups.
@@ -68,8 +61,6 @@ witnessing that `h^{-1}` satisfies the inverse lawsWe write `G≅ H` for the typ
 ```text
 G≅ H ≔ Σ(h:hom(G,H)) Σ(k:hom(H,G)) (k∘ h = id[G])× (h∘ k=id[H]).
 ```
-
-<!-- rosetta-item-end: definition-19.2.4 -->
 
 If `f` is an isomorphism, then its inverse is unique.
 In other words, being an isomorphism is a property.
@@ -90,7 +81,6 @@ In Remark 19.2.2 we have observed that the type of semigroup homomorphisms betwe
 Therefore it follows that the types `h∘ k=id` and `k∘ h=id` are propositions, so it suffices to check that `k=k'`.
 In Remark 19.2.2 we also observed that the equality type `k=k'` is equivalent to the type of homotopies `k~ k'` between their underlying functions.
 We construct a homotopy `k~ k'` by the usual argument:
-<!-- rosetta-diagram: 6531376d1fa9; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -103,4 +93,3 @@ Arrows:
 ```
  ◻
 
-<!-- rosetta-item-end: lemma-19.2.5 -->

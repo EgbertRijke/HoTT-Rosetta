@@ -20,7 +20,6 @@ The type `Σ(X:𝒰) X ≃ X` is also called the type of **descent data** for th
 
 Consider a type `X` and an equivalence `e:X ≃ X`.
 We will construct a dependent type `D(X,e):S^1→𝒰` equipped with an equivalence `x↦ x_{D}:X ≃ D(X,e,base)` for which the square
-<!-- rosetta-diagram: a78002d01419; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -53,7 +52,6 @@ equiv-eq(ap_{P}(loop))=tr_P(loop)
 ```
 for each dependent type `P:S^1→𝒰`.
 Therefore we see that the triangle
-<!-- rosetta-diagram: c05da5733c3e; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -79,7 +77,6 @@ Now we observe that the type of identifications in `Σ(X:𝒰) X ≃ X` can be c
 ((X,e)=(X',e'))≃ Σ(α:X≃ X') e'∘ α~ α∘ e'.
 ```
 This implies that we obtain an equivalence `x↦ x_{D}:X≃ D(X,e,base)` such that the square
-<!-- rosetta-diagram: 0f20998e3346; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -96,15 +93,12 @@ Arrows:
 ```
 commutes.
 
-<!-- rosetta-item-end: definition-22.1.1 -->
-
 Recall from Example 9.2.5 that the successor function `succ-ℤ :ℤ→ ℤ` is an equivalence.
 Its inverse is the predecessor function defined in Exercise 4.1.
 
 ## Definition 22.1.2
 
 The **universal cover** of the circle is defined via Definition 22.1.1 to be the unique dependent type `E_(S^1)≔D(ℤ,succ-ℤ ):S^1→𝒰`. equipped with an equivalence `x↦ x_E:ℤ→E_(S^1)(base)` and a homotopy witnessing that the square
-<!-- rosetta-diagram: 9bc0bea6637a; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -121,8 +115,6 @@ Arrows:
 ```
 commutes.
 We will occasionally write `y↦ y_ℤ` for the inverse of `x↦ x_{E}`.
-
-<!-- rosetta-item-end: definition-22.1.2 -->
 
 The picture of the universal cover is that of a helix over the circle.
 This picture emerges from the path liftings of `loop` in the total space.
@@ -145,4 +137,3 @@ in the total space `Σ(t:S^1) E(t)`.
 We just take `α≔loop`.
 Then we have `tr_{E}(α,k_{E})= succ-ℤ (k)_{E}` by the commuting square provided in the definition of `E`. ◻
 
-<!-- rosetta-item-end: lemma-22.1.3 -->

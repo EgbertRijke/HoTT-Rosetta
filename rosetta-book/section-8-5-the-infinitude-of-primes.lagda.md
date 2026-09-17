@@ -44,8 +44,6 @@ A prime number is therefore a number of which has exactly one proper divisor.
 
 ### Agda prerequisites for Section 8.5
 
-<!-- rosetta-agda-block: definition-8.5.1-multiplication-bound -->
-
 ```agda
 abstract
   leq-mul-ℕ :
@@ -74,8 +72,6 @@ abstract
   ... | (l , refl) = leq-mul-ℕ' l x
 ```
 
-<!-- rosetta-agda-block: definition-8.5.1-weak-order-split -->
-
 ```agda
 eq-or-le-leq-ℕ :
   (x y : ℕ) → leq-ℕ x y → ((x ＝ y) + (le-ℕ x y))
@@ -84,8 +80,6 @@ eq-or-le-leq-ℕ zero-ℕ (succ-ℕ y) H = inr star
 eq-or-le-leq-ℕ (succ-ℕ x) (succ-ℕ y) H =
   map-coproduct (ap succ-ℕ) section-2-2-ordinary-function-types.id (eq-or-le-leq-ℕ x y H)
 ```
-
-<!-- rosetta-agda-block: definition-8.5.1-divisor-bound -->
 
 ```agda
 abstract
@@ -98,8 +92,6 @@ abstract
   ... | (pair y refl) = leq-div-succ-ℕ-8-5 d y H
 ```
 
-<!-- rosetta-agda-block: definition-8.5.1-negated-equality -->
-
 ```agda
 nonequal : {l : Level} {A : UU l} → A → A → UU l
 nonequal x y = ¬ (x ＝ y)
@@ -108,8 +100,6 @@ infix 6 _≠_
 _≠_ = nonequal
 ```
 
-<!-- rosetta-agda-block: definition-8.5.1-strict-from-weak-unequal -->
-
 ```agda
 abstract
   le-leq-neq-ℕ : {x y : ℕ} → x ≤-ℕ y → x ≠ y → le-ℕ x y
@@ -117,8 +107,6 @@ abstract
     rec-coproduct (ex-falso ∘ x≠y) section-2-2-ordinary-function-types.id
       (eq-or-le-leq-ℕ x y x≤y)
 ```
-
-<!-- rosetta-agda-block: theorem-8.5.6-empty-product-factor -->
 
 ```agda
 is-empty-left-factor-is-empty-product :
@@ -141,8 +129,6 @@ is-proper-divisor(n,d)≔ (d≠ n)× (d| n).
 is-prime(n)≔ Π(x:ℕ) is-proper-divisor(n,x)↔ (x=1).
 ```
 
-<!-- rosetta-agda-block: definition-8.5.1-proper-divisor -->
-
 ```agda
 is-proper-divisor-ℕ : ℕ → ℕ → UU lzero
 is-proper-divisor-ℕ n d = (d ≠ n) × (div-ℕ d n)
@@ -164,13 +150,10 @@ le-is-proper-divisor-ℕ x y H K =
   le-leq-neq-ℕ (leq-div-ℕ x y H (pr2 K)) (pr1 K)
 ```
 
-<!-- rosetta-agda-block: definition-8.5.1-prime -->
-
 ```agda
 is-prime-ℕ : ℕ → UU lzero
 is-prime-ℕ n = (x : ℕ) → (is-proper-divisor-ℕ n x ↔ is-one-ℕ x)
 ```
-<!-- rosetta-item-end: definition-8.5.1 -->
 
 ## Proposition 8.5.2
 
@@ -205,14 +188,10 @@ Since the types `(x≠ n)× (x| n)` and `x=1` are decidable, it follows from Cor
 for any `x:ℕ`.
 This follows from the implication `(x| n)→ (x≤ n)`, which holds because we have assumed that `n≠ 0`. ◻
 
-<!-- rosetta-agda-block: proposition-8.5.2-divisor-of-one -->
-
 ```agda
 is-one-div-one-ℕ : (x : ℕ) → div-ℕ x 1 → is-one-ℕ x
 is-one-div-one-ℕ x H = antisymmetric-div-ℕ x 1 H (div-one-ℕ x)
 ```
-
-<!-- rosetta-agda-block: proposition-8.5.2-proper-divisor-one -->
 
 ```agda
 is-proper-divisor-one-is-proper-divisor-ℕ :
@@ -224,8 +203,6 @@ pr2 (pr2 (is-proper-divisor-one-is-proper-divisor-ℕ {n} {x} H)) =
   right-unit-law-mul-ℕ n
 ```
 
-<!-- rosetta-agda-block: proposition-8.5.2-prime-easy -->
-
 ```agda
 is-one-is-proper-divisor-ℕ : ℕ → UU lzero
 is-one-is-proper-divisor-ℕ n =
@@ -235,15 +212,11 @@ is-prime-easy-ℕ : ℕ → UU lzero
 is-prime-easy-ℕ n = (is-not-one-ℕ n) × (is-one-is-proper-divisor-ℕ n)
 ```
 
-<!-- rosetta-agda-block: proposition-8.5.2-one-not-prime -->
-
 ```agda
 abstract
   is-not-one-is-prime-ℕ : (n : ℕ) → is-prime-ℕ n → is-not-one-ℕ n
   is-not-one-is-prime-ℕ n H p = pr1 (pr2 (H 1) refl) (inv p)
 ```
-
-<!-- rosetta-agda-block: proposition-8.5.2-prime-equivalence -->
 
 ```agda
 abstract
@@ -258,14 +231,10 @@ abstract
   pr2 (pr2 (is-prime-is-prime-easy-ℕ n H .(succ-ℕ zero-ℕ)) refl) = div-one-ℕ n
 ```
 
-<!-- rosetta-agda-block: proposition-8.5.2-two-not-one -->
-
 ```agda
 is-not-one-two-ℕ : is-not-one-ℕ 2
 is-not-one-two-ℕ ()
 ```
-
-<!-- rosetta-agda-block: proposition-8.5.2-prime-decidable -->
 
 ```agda
 is-decidable-is-prime-easy-ℕ : (n : ℕ) → is-decidable (is-prime-easy-ℕ n)
@@ -291,7 +260,6 @@ is-decidable-is-prime-ℕ n =
     ( is-prime-easy-is-prime-ℕ n)
     ( is-decidable-is-prime-easy-ℕ n)
 ```
-<!-- rosetta-item-end: proposition-8.5.2 -->
 
 The proof that there are infinitely many primes proceeds by constructing a prime number larger than `n`, for any `n:ℕ`.
 The number `n!+1` is relatively prime with any number `x≤ n`.
@@ -303,8 +271,6 @@ For any two natural numbers `n` and `m`, we define the type
 ```text
 R(n,m)≔ (n<m)× Π(x:ℕ) (x≤ n)→ ((x| m)→ (x=1)).
 ```
-
-<!-- rosetta-agda-block: definition-8.5.3-sieve -->
 
 ```agda
 is-one-is-divisor-below-ℕ : ℕ → ℕ → UU lzero
@@ -319,7 +285,6 @@ le-in-sieve-of-eratosthenes-ℕ :
   (n a : ℕ) → in-sieve-of-eratosthenes-ℕ n a → le-ℕ n a
 le-in-sieve-of-eratosthenes-ℕ n a = pr1
 ```
-<!-- rosetta-item-end: definition-8.5.3 -->
 
 ## Lemma 8.5.4
 
@@ -332,8 +297,6 @@ The type `R(n,m)` is decidable for each `n,m:ℕ`.
 Π(x:ℕ) (x≤ n)→ ((x| m)→ (x=1))
 ```
 is decidable. ◻
-
-<!-- rosetta-agda-block: lemma-8.5.4-sieve-decidable -->
 
 ```agda
 is-decidable-in-sieve-of-eratosthenes-ℕ :
@@ -352,7 +315,6 @@ is-decidable-in-sieve-of-eratosthenes-ℕ n a =
       ( n)
       ( λ x → section-2-2-ordinary-function-types.id))
 ```
-<!-- rosetta-item-end: lemma-8.5.4 -->
 
 ## Lemma 8.5.5
 
@@ -367,22 +329,16 @@ To see this, note that any divisor of `{n!}+1` is automatically nonzero, and rec
 Therefore it follows that any `x≤ n` that divides `{n!}+1` also divides `n!`, and consequently it divides `1` as well.
 Now we are done, because if `x` divides `1` then `x=1`. ◻
 
-<!-- rosetta-agda-block: lemma-8.5.5-zero-divisor -->
-
 ```agda
 is-zero-is-zero-div-ℕ : (x y : ℕ) → div-ℕ x y → is-zero-ℕ x → is-zero-ℕ y
 is-zero-is-zero-div-ℕ .zero-ℕ y d refl = is-zero-div-zero-ℕ y d
 ```
-
-<!-- rosetta-agda-block: lemma-8.5.5-consecutive-divisor -->
 
 ```agda
 abstract
   is-one-div-ℕ : (x y : ℕ) → div-ℕ x y → div-ℕ x (succ-ℕ y) → is-one-ℕ x
   is-one-div-ℕ x y H K = is-one-div-one-ℕ x (div-right-summand-ℕ x y 1 H K)
 ```
-
-<!-- rosetta-agda-block: lemma-8.5.5-product-nonzero -->
 
 ```agda
 abstract
@@ -391,8 +347,6 @@ abstract
   is-nonzero-mul-ℕ x y H K p =
     K (is-injective-left-mul-ℕ x H (p ∙ (inv (right-zero-law-mul-ℕ x))))
 ```
-
-<!-- rosetta-agda-block: lemma-8.5.5-factorial-nonzero -->
 
 ```agda
 abstract
@@ -407,8 +361,6 @@ abstract
       ( is-nonzero-succ-ℕ x)
 ```
 
-<!-- rosetta-agda-block: lemma-8.5.5-factorial-bound -->
-
 ```agda
 abstract
   leq-factorial-ℕ :
@@ -420,8 +372,6 @@ abstract
       ( succ-ℕ n)
       ( is-nonzero-factorial-ℕ n)
 ```
-
-<!-- rosetta-agda-block: lemma-8.5.5-factorial-sieve -->
 
 ```agda
 in-sieve-of-eratosthenes-succ-factorial-ℕ :
@@ -451,7 +401,6 @@ pr2 (in-sieve-of-eratosthenes-succ-factorial-ℕ (succ-ℕ n)) x l (pair y p) wi
     ( div-factorial-ℕ (succ-ℕ n) x l f)
     ( pair y p)
 ```
-<!-- rosetta-item-end: lemma-8.5.5 -->
 
 We finally show that there are infinitely many primes.
 
@@ -487,8 +436,6 @@ holds.
 Since `¬ R(n,x)` holds, we conclude now that `n≮ x`.
 To finish the proof, it follows that `x≤ n`. ◻
 
-<!-- rosetta-agda-block: theorem-8.5.6-two-prime -->
-
 ```agda
 abstract
   is-one-is-proper-divisor-two-ℕ : is-one-is-proper-divisor-ℕ 2
@@ -509,14 +456,10 @@ is-prime-two-ℕ =
   is-prime-is-prime-easy-ℕ 2 is-prime-easy-two-ℕ
 ```
 
-<!-- rosetta-agda-block: theorem-8.5.6-infinitude-type -->
-
 ```agda
 Infinitude-Of-Primes-ℕ : UU lzero
 Infinitude-Of-Primes-ℕ = (n : ℕ) → Σ ℕ (λ p → is-prime-ℕ p × le-ℕ n p)
 ```
-
-<!-- rosetta-agda-block: theorem-8.5.6-infinitude -->
 
 ```agda
 minimal-element-in-sieve-of-eratosthenes-ℕ :
@@ -606,4 +549,3 @@ infinitude-of-primes-ℕ n with is-decidable-is-zero-ℕ n
       ( is-prime-larger-prime-ℕ n H)
       ( le-larger-prime-ℕ n))
 ```
-<!-- rosetta-item-end: theorem-8.5.6 -->

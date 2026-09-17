@@ -117,8 +117,6 @@ However we claim that there also is an identification `p:(f∘ h)∘ f=f`, showi
 From the contractibility of the fiber we obtain an identification `(id[B],refl)=(f∘ h,p)`.
 In particular we obtain that `id[B]=f∘ h`, showing that `h` is a section of `f`. ◻
 
-<!-- rosetta-agda-block: theorem-13.4.1-dependent-precomposition -->
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3)
@@ -128,8 +126,6 @@ module _
   precomp-Π h a = h (f a)
 ```
 
-<!-- rosetta-agda-block: theorem-13.4.1-ordinary-precomposition -->
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU l3)
@@ -138,8 +134,6 @@ module _
   precomp : (B → C) → (A → C)
   precomp = _∘ f
 ```
-
-<!-- rosetta-agda-block: theorem-13.4.1-dependent-precomposition-condition -->
 
 ```agda
 module _
@@ -151,8 +145,6 @@ module _
     {l : Level} (C : B → UU l) → is-equiv (precomp-Π f C)
 ```
 
-<!-- rosetta-agda-block: theorem-13.4.1-ordinary-precomposition-condition -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
@@ -161,8 +153,6 @@ module _
   universal-property-equiv : UUω
   universal-property-equiv = {l : Level} (X : UU l) → is-equiv (precomp f X)
 ```
-
-<!-- rosetta-agda-block: theorem-13.4.1-dependent-precomposition-coherent-proof -->
 
 ```agda
 module _
@@ -185,8 +175,6 @@ module _
         ( λ s → eq-htpy (λ y → apd s (is-section-g y)))
 ```
 
-<!-- rosetta-agda-block: theorem-13.4.1-dependent-precomposition-from-equivalence -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-equiv f)
@@ -201,8 +189,6 @@ module _
           ( is-invertible-is-equiv H))
 ```
 
-<!-- rosetta-agda-block: theorem-13.4.1-dependent-precomposition-equivalence -->
-
 ```agda
 equiv-precomp-Π :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
@@ -210,8 +196,6 @@ equiv-precomp-Π :
 pr1 (equiv-precomp-Π e C) = precomp-Π (map-equiv e) C
 pr2 (equiv-precomp-Π e C) = is-equiv-precomp-Π-is-equiv (is-equiv-map-equiv e) C
 ```
-
-<!-- rosetta-agda-block: theorem-13.4.1-ordinary-from-dependent -->
 
 ```agda
 abstract
@@ -221,8 +205,6 @@ abstract
     universal-property-equiv f
   is-equiv-precomp-is-equiv-precomp-Π f H C = H (λ _ → C)
 ```
-
-<!-- rosetta-agda-block: theorem-13.4.1-ordinary-from-equivalence -->
 
 ```agda
 module _
@@ -250,8 +232,6 @@ module _
   pr1 (equiv-precomp C) = precomp (map-equiv e) C
   pr2 (equiv-precomp C) = is-equiv-precomp-equiv C
 ```
-
-<!-- rosetta-agda-block: theorem-13.4.1-equivalence-from-ordinary -->
 
 ```agda
 module _
@@ -291,8 +271,6 @@ module _
         ( is-retraction-map-inv-is-equiv-precomp)
 ```
 
-<!-- rosetta-agda-block: theorem-13.4.1-equivalence-from-dependent -->
-
 ```agda
 abstract
   is-equiv-is-equiv-precomp-Π :
@@ -302,4 +280,3 @@ abstract
   is-equiv-is-equiv-precomp-Π f H =
     is-equiv-is-equiv-precomp f (is-equiv-precomp-is-equiv-precomp-Π f H)
 ```
-<!-- rosetta-item-end: theorem-13.4.1 -->

@@ -41,14 +41,10 @@ and we say that `R` is **transitive** if it comes equipped with
 ```
 A **(typal) equivalence relation** on `A` is a reflexive, symmetric, and transitive binary typal relation on `A`.
 
-<!-- rosetta-agda-block: section-7-2-the-congruence-relations-on-natural-numbers-block-31 -->
-
 ```agda
 Relation : {l1 : Level} (l : Level) (A : UU l1) → UU (l1 ⊔ lsuc l)
 Relation l A = A → A → UU l
 ```
-
-<!-- rosetta-agda-block: section-7-2-the-congruence-relations-on-natural-numbers-block-43 -->
 
 ```agda
 module _
@@ -59,8 +55,6 @@ module _
   is-reflexive = (x : A) → R x x
 ```
 
-<!-- rosetta-agda-block: section-7-2-the-congruence-relations-on-natural-numbers-block-58 -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
@@ -70,8 +64,6 @@ module _
   is-symmetric = (x y : A) → R x y → R y x
 ```
 
-<!-- rosetta-agda-block: section-7-2-the-congruence-relations-on-natural-numbers-block-73 -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
@@ -80,8 +72,6 @@ module _
   is-transitive : UU (l1 ⊔ l2)
   is-transitive = (x y z : A) → R y z → R x y → R x z
 ```
-
-<!-- rosetta-agda-block: section-7-2-the-congruence-relations-on-natural-numbers-block-86 -->
 
 ```agda
 is-equivalence-relation :
@@ -95,7 +85,6 @@ equivalence-relation :
   (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
 equivalence-relation l A = Σ (Relation l A) is-equivalence-relation
 ```
-<!-- rosetta-item-end: definition-7.2.1 -->
 
 To define the congruence relation modulo `k` in type theory using the Curry-Howard interpretation, we will define for any three natural numbers `x`, `y`, and `k`, a *type*
 ```text
@@ -117,14 +106,11 @@ We say that `x` is **congruent to `y` modulo `k`** if it comes equipped with an 
 x≡ y mod k ≔ k|dist-ℕ(x,y).
 ```
 
-<!-- rosetta-agda-block: section-7-2-the-congruence-relations-on-natural-numbers-block-129 -->
-
 ```agda
 cong-ℕ :
   ℕ → ℕ → ℕ → UU lzero
 cong-ℕ k x y = div-ℕ k (dist-ℕ x y)
 ```
-<!-- rosetta-item-end: definition-7.2.2 -->
 
 ## Example 7.2.3
 
@@ -134,8 +120,6 @@ Since `dist-ℕ(k,0)=k` it suffices to show that `k| k`.
 That is, we have to construct a natural number `l` equipped with an identification `p:kl=k`.
 Of course, we choose `l≔ 1`, and the equation `k1=k` holds by the right unit law for multiplication on `ℕ`, which was shown in Exercise 5.5.
 
-<!-- rosetta-agda-block: section-7-2-the-congruence-relations-on-natural-numbers-block-145 -->
-
 ```agda
 cong-zero-ℕ :
   (k : ℕ) → cong-ℕ k k zero-ℕ
@@ -143,7 +127,6 @@ pr1 (cong-zero-ℕ k) = 1
 pr2 (cong-zero-ℕ k) =
   (left-unit-law-mul-ℕ k) ∙ (inv (right-unit-law-dist-ℕ k))
 ```
-<!-- rosetta-item-end: example-7.2.3 -->
 
 ## Proposition 7.2.4
 
@@ -170,8 +153,6 @@ z≤ x and x≤ y, z≤ y and y≤ x.
 ```
 Therefore it follows by Exercise 6.5 and Proposition 7.1.5 that `{k|dist-ℕ(x,z)}` if `{k|dist-ℕ(x,y)}` and `{k|dist-ℕ(y,z)}`. ◻
 
-<!-- rosetta-agda-block: section-7-2-the-congruence-relations-on-natural-numbers-block-163 -->
-
 ```agda
 refl-cong-ℕ : (k : ℕ) → is-reflexive (cong-ℕ k)
 pr1 (refl-cong-ℕ k x) = zero-ℕ
@@ -179,15 +160,11 @@ pr2 (refl-cong-ℕ k x) =
   (left-zero-law-mul-ℕ (succ-ℕ k)) ∙ (inv (dist-eq-ℕ x x refl))
 ```
 
-<!-- rosetta-agda-block: section-7-2-the-congruence-relations-on-natural-numbers-block-173 -->
-
 ```agda
 symmetric-cong-ℕ : (k : ℕ) → is-symmetric (cong-ℕ k)
 pr1 (symmetric-cong-ℕ k x y (pair d p)) = d
 pr2 (symmetric-cong-ℕ k x y (pair d p)) = p ∙ (commutative-dist-ℕ x y)
 ```
-
-<!-- rosetta-agda-block: section-7-2-the-congruence-relations-on-natural-numbers-block-203 -->
 
 ```agda
 transitive-cong-ℕ : (k : ℕ) → is-transitive (cong-ℕ k)
@@ -201,4 +178,3 @@ transitive-cong-ℕ k x y z e d | inr (inr α) =
   div-left-summand-ℕ k (dist-ℕ x z) (dist-ℕ x y) d
     ( concatenate-div-eq-ℕ e (inv α))
 ```
-<!-- rosetta-item-end: proposition-7.2.4 -->

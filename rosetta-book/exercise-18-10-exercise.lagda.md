@@ -23,7 +23,6 @@ Use this to obtain a map
 
 Show that if `B` is a `1`-type, then the map `α` is an equivalence.
 In other words, show that every weakly path-constant map `f:A→ B` into a `1`-type `B` has a unique extension
-<!-- rosetta-diagram: cd7a0a437f3c; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 

@@ -29,8 +29,6 @@ Conclude that `false≠true`.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-6-2-observational-equality-booleans-block-1 -->
-
 ```agda
 Eq-bool : bool → bool → UU lzero
 Eq-bool true true = unit
@@ -38,8 +36,6 @@ Eq-bool true false = empty
 Eq-bool false true = empty
 Eq-bool false false = unit
 ```
-
-<!-- rosetta-agda-block: exercise-6-2-observational-equality-booleans-block-2 -->
 
 ```agda
 refl-Eq-bool : (x : bool) → Eq-bool x x
@@ -61,8 +57,6 @@ neq-false-true-bool ()
 neq-true-false-bool : ¬ (true ＝ false)
 neq-true-false-bool ()
 ```
-
-<!-- rosetta-agda-block: exercise-6-2-observational-equality-booleans-block-3 -->
 
 ```agda
 neq-neg-bool : (b : bool) → ¬ (b ＝ neg-bool b)

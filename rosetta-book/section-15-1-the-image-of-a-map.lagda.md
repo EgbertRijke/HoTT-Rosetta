@@ -12,7 +12,6 @@ Recall from Exercise 13.15 that we made the following definition:
 
 Let `f:A→ X` and `g:B→ X` be maps.
 A **morphism from `f` to `g` over `X`** consists of a map `h:A→ B` equipped with a homotopy `H:f~ g∘ h` witnessing that the triangle
-<!-- rosetta-diagram: 962a48c2124b; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -36,12 +35,9 @@ Composition of morphisms over `X` is defined by
 (k,K)∘ (h,H) ≔ (k∘ h,H ∙ (K· h)).
 ```
 
-<!-- rosetta-item-end: definition-15.1.1 -->
-
 ## Definition 15.1.2
 
 Consider a commuting triangle
-<!-- rosetta-diagram: fefef7339e9a; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -62,8 +58,6 @@ _∘(q,H) : hom-slice_X(i,m)→hom-slice_X(f,m)
 ```
 is an equivalence for every embedding `m:B↪ X`.
 
-<!-- rosetta-item-end: definition-15.1.2 -->
-
 ## Lemma 15.1.3
 
 For any `f:A→ X` and any embedding `m:B→ X`, the type `hom-slice_X(f,m)` is a proposition.
@@ -77,12 +71,9 @@ For any `f:A→ X` and any embedding `m:B→ X`, the type `hom-slice_X(f,m)` is 
 Furthermore, recall from Theorem 12.2.3 that a map is an embedding if and only if its fibers are propositions.
 Thus we see that the type `Π(a:A) fib(m, f(a))` is a product of propositions, hence it is a proposition by Theorem 13.1.5. ◻
 
-<!-- rosetta-item-end: lemma-15.1.3 -->
-
 ## Proposition 15.1.4
 
 Consider a commuting triangle
-<!-- rosetta-diagram: fefef7339e9a; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -110,8 +101,6 @@ hom-slice_X(f,m)→hom-slice_X(i,m).
 
 *Proof.* Since `hom-slice_X(f,m)` is a proposition for every embedding `m:B→ X`, the claim follows immediately by the observation made in Remark 14.1.2. ◻
 
-<!-- rosetta-item-end: proposition-15.1.4 -->
-
 ### The existence of the image
 
 The image of a map `f:A→ X` can be defined using the propositional truncation.
@@ -137,7 +126,6 @@ q_f:A→im(f)
     to be the map given by `q_f(x)≔(f(x),η(x,refl))`, and
 
 3. the homotopy `I_f:f~ i_f∘ q_f` witnessing that the triangle
-<!-- rosetta-diagram: 416cb22d0512; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -153,8 +141,6 @@ Arrows:
 ```
     commutes, to be given by `I_f(x)≔refl`.
 
-<!-- rosetta-item-end: definition-15.1.5 -->
-
 ## Proposition 15.1.6
 
 The image inclusion `i_f:im(f)→ X` of any map `f:A→ X` is an embedding.
@@ -162,8 +148,6 @@ The image inclusion `i_f:im(f)→ X` of any map `f:A→ X` is an embedding.
 ### Proof
 
 *Proof.* The claim follows directly by Corollary 12.2.4, because the type `‖fib(f, x)‖` is a proposition for each `x:X`. ◻
-
-<!-- rosetta-item-end: proposition-15.1.6 -->
 
 ## Theorem 15.1.7
 
@@ -173,7 +157,6 @@ The image inclusion `i_f:im(f)→ X` of any map `f:A→ X` satisfies the univers
 
 *Proof.* Consider an embedding `m:B↪ X`.
 Note that we have a commuting square
-<!-- rosetta-diagram: 0efa4ffd679b; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -196,8 +179,6 @@ Therefore it suffices to construct a map
 The fiber `fib(i_f, x)` is equivalent to the propositional truncation `‖fib(f, x)‖` and the type `fib(m, x)` is a proposition by the assumption that `m` is an embedding.
 Therefore we obtain the desired map by the universal property of the propositional truncation. ◻
 
-<!-- rosetta-item-end: theorem-15.1.7 -->
-
 ### The uniqueness of the image
 
 We will now show that the universal property of the image implies that the image is determined uniquely up to equivalence.
@@ -205,7 +186,6 @@ We will now show that the universal property of the image implies that the image
 ## Theorem 15.1.8
 
 Let `f` be a map, and consider two commuting triangles
-<!-- rosetta-diagram: cbfe6369b3e5; review: pending -->
 
 *2-by-6 diagram (automatic draft).*
 
@@ -230,7 +210,6 @@ Then, if any two of the following three properties hold, so does the third:
 2. The embedding `i'` satisfies the universal property of the image inclusion of `f`.
 
 3. The type of equivalences `e:B≃ B'` equipped with a homotopy witnessing that the triangle
-<!-- rosetta-diagram: 61474fb57e1e; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -251,7 +230,6 @@ Arrows:
 *Proof.* First, we show that if (i) and (ii) hold, then (iii) holds.
 Note that the type `hom-slice_X(i,i')` is a proposition, since `i'` is assumed to be an embedding.
 Therefore it suffices to show that the unique map `h:B→ B'` such that the triangle
-<!-- rosetta-diagram: e54cbec4c346; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -286,4 +264,3 @@ Then the fact that (i) holds if and only if (ii) holds follows from the equivale
 ```
  ◻
 
-<!-- rosetta-item-end: theorem-15.1.8 -->

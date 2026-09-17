@@ -46,8 +46,6 @@ for each `x:Fin{k}`.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-7-6-negative-finite-elements -->
-
 ```agda
 neg-one-Fin : (k : ℕ) → Fin (succ-ℕ k)
 neg-one-Fin k = inr star
@@ -60,8 +58,6 @@ neg-two-Fin zero-ℕ = inr star
 neg-two-Fin (succ-ℕ k) = inl (inr star)
 ```
 
-<!-- rosetta-agda-block: exercise-7-6-skip-negative-two -->
-
 ```agda
 skip-neg-two-Fin :
   (k : ℕ) → Fin k → Fin (succ-ℕ k)
@@ -69,15 +65,11 @@ skip-neg-two-Fin (succ-ℕ k) (inl x) = inl (inl x)
 skip-neg-two-Fin (succ-ℕ k) (inr x) = neg-one-Fin (succ-ℕ k)
 ```
 
-<!-- rosetta-agda-block: exercise-7-6-predecessor -->
-
 ```agda
 pred-Fin : (k : ℕ) → Fin k → Fin k
 pred-Fin (succ-ℕ k) (inl x) = skip-neg-two-Fin k (pred-Fin k x)
 pred-Fin (succ-ℕ k) (inr x) = neg-two-Fin k
 ```
-
-<!-- rosetta-agda-block: exercise-7-6-predecessor-inverse -->
 
 ```agda
 pred-zero-Fin :

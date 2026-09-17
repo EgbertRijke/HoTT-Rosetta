@@ -17,7 +17,6 @@ mul_(S^1)(mul_(S^1)(x,y),z)=mul_(S^1)(x,mul_(S^1)(y,z))
 for any `x,y,z:S^1`.
 
 Show that the associator satisfies unit laws, in the sense that the following triangles commute:
-<!-- rosetta-diagram: 127c6cce74a3; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -31,7 +30,6 @@ Arrows:
 - mul_(S^1)(mul_(S^1)(base,x),y) --unlabeled--> mul_(S^1)(x,y)
 - mul_(S^1)(base,mul_(S^1)(x,y)) --unlabeled--> mul_(S^1)(x,y)
 ```
-<!-- rosetta-diagram: 11e00711f3aa; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -45,7 +43,6 @@ Arrows:
 - mul_(S^1)(mul_(S^1)(x,base),y) --unlabeled--> mul_(S^1)(x,y)
 - mul_(S^1)(x,mul_(S^1)(base,y)) --unlabeled--> mul_(S^1)(x,y)
 ```
-<!-- rosetta-diagram: 68667a9f7681; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 

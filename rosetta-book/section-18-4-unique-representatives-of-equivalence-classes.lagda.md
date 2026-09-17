@@ -16,8 +16,6 @@ We say that `C` is a **choice of (unique) representatives** of the equivalence c
 is-choice-of-reps(C) ≔ Π(x:A) is-contr(Σ(y:A) C(y)× R(x,y)).
 ```
 
-<!-- rosetta-item-end: definition-18.4.1 -->
-
 ## Theorem 18.4.2
 
 Consider an equivalence relation `R` on a type `A`, and let `C` be a choice of representatives of the equivalence classes of `R`, with `(h(x),c(x),r(x))` at the center of contraction of `Σ(y:A) C(y)× R(x,y)`.
@@ -62,8 +60,6 @@ which is contractible with center of contraction `(h(x),c(x),r(x))`.
 Therefore it follows that `q(x)≐ (h(x),c(x))=(x,c)`.
 In particular, we see that `q(pr 1(x,c))=(x,c)`, i.e., that `pr 1` is a section of `q`. ◻
 
-<!-- rosetta-item-end: theorem-18.4.2 -->
-
 ## Example 18.4.3
 
 In Proposition 7.2.4 we constructed the congruence relations `x≡ y mod k` on the natural numbers for every natural number `k`, and in Theorems 7.4.7 and 7.4.8 we showed that the map
@@ -97,8 +93,6 @@ nat-Fin([x]_{k+1})=y.
 Since `C(y)` holds, we see that `y=nat-Fin([y]_{k+1})`.
 Therefore it suffices to prove that `[x]_{k+1}=[y]_{k+1}`.
 This follows from Theorem 7.4.7, since we assumed `x≡ ymod k+1`.
-
-<!-- rosetta-item-end: example-18.4.3 -->
 
 ## Example 18.4.4
 
@@ -156,4 +150,3 @@ We define the type of **rational numbers** by
 and we define the quotient map `(x,y)↦ x/y:Q→ ℚ` to be the quotient map `q` in Theorem 18.4.2.
 By Theorem 18.4.2 it also follows that `(x,y)↦ x/y` satisfies the universal property of the set quotient of the equivalence relation `~` on `Q`.
 
-<!-- rosetta-item-end: example-18.4.4 -->

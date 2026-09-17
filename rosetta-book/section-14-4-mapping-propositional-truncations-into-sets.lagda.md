@@ -38,8 +38,6 @@ Here we will see what we might do in such a case.
 One strategy, if we want to define a map `‖A‖→ X`, is to find a type family `P` over `X` such that the type `Σ(x:X) P(x)` is a proposition.
 In that case, we may use the universal property of the propositional truncation to obtain a map `‖A‖→ Σ(x:X) P(x)` from a map `A→ Σ(x:X) P(x)`, and then we simply compose with the projection map.
 
-<!-- rosetta-agda-block: section-14.4-propositional-factorization-strategy -->
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {X : UU l2}
@@ -68,8 +66,6 @@ In other words, we claim that the type
 is a proposition.
 To see this, note that the type `is-lower-bound_P(x)` is a proposition.
 
-<!-- rosetta-agda-block: example-14.4.1-lower-bounds-are-propositions -->
-
 ```agda
 module _
   {l1 : Level} {P : ℕ → UU l1}
@@ -87,8 +83,6 @@ module _
 
 By the assumption that each `P(x)` is a proposition, it now follows that any two natural numbers `x,y:ℕ` that are in `P` and that are both lower bounds of `P` are equal as elements in the type of (\*) if and only if they are equal as natural numbers.
 
-<!-- rosetta-agda-block: example-14.4.1-minimal-element-identities -->
-
 ```agda
 module _
   {l : Level} (P : ℕ → Prop l)
@@ -103,8 +97,6 @@ module _
 ```
 
 Furthermore, since both `x` and `y` are lower bounds of `P`, it follows that `x≤ y` and `y≤ x`, so indeed `x=y` holds.
-
-<!-- rosetta-agda-block: example-14.4.1-minimal-elements-are-propositions -->
 
 ```agda
 module _
@@ -141,8 +133,6 @@ A map
 ```
 was constructed in Theorem 8.3.2 using the decidability of `P`.
 
-<!-- rosetta-agda-block: example-14.4.1-natural-number-choice -->
-
 ```agda
 abstract
   minimal-element-inhabited-decidable-subtype-ℕ :
@@ -168,8 +158,6 @@ As a corollary of this observation, we observe that there is also a map
 ‖Σ(x:Fin{k}) P(x)‖→Σ(x:Fin{k}) P(x)
 ```
 for any decidable subtype `P` over `Fin{k}`.
-
-<!-- rosetta-agda-block: example-14.4.1-finite-type-choice -->
 
 ```agda
 ε-operator-decidable-subtype-Fin :
@@ -199,7 +187,6 @@ for any decidable subtype `P` over `Fin{k}`.
   ε-operator-total-Q : type-trunc-Prop (type-subtype Q) → type-subtype Q
   ε-operator-total-Q = ε-operator-decidable-subtype-ℕ Q is-decidable-Q
 ```
-<!-- rosetta-item-end: example-14.4.1 -->
 
 ## Remark 14.4.2
 
@@ -214,13 +201,10 @@ we constructed in Example 14.4.1 for decidable subtypes of `ℕ` is a rare case 
 We say that the type `A` satisfies the **principle of global choice** if there is such a function `‖A‖→ A`.
 Using the univalence axiom, we will see in Corollary 17.5.3 that not every type satisfies the principle of global choice.
 
-<!-- rosetta-agda-block: remark-14.4.2-global-choice-for-a-type -->
-
 ```agda
 ε-operator-Hilbert : {l : Level} → UU l → UU l
 ε-operator-Hilbert A = type-trunc-Prop A → A
 ```
-<!-- rosetta-item-end: remark-14.4.2 -->
 
 More generally, we may wish to define a map `‖A‖→ B` where the type `B` is a set.
 In this situation it is helpful to think of the propositional truncation of `A` as the quotient of the type `A` by the equivalence relation that relates every two elements of `A` with each other.
@@ -234,15 +218,11 @@ A map `f:A→ B` is said to be **weakly constant** if it comes equipped with an 
 is-weakly-constant(f) ≔ Π(x,y:A) f(x)=f(y).
 ```
 
-<!-- rosetta-agda-block: definition-14.4.3-weakly-constant-maps -->
-
 ```agda
 is-weakly-constant-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-weakly-constant-map {A = A} f = (x y : A) → f x ＝ f y
 ```
-
-<!-- rosetta-agda-block: definition-14.4.3-type-of-weakly-constant-maps -->
 
 ```agda
 weakly-constant-map : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
@@ -259,14 +239,11 @@ module _
     is-weakly-constant-map map-weakly-constant-map
   is-weakly-constant-map-weakly-constant-map = pr2 f
 ```
-<!-- rosetta-item-end: definition-14.4.3 -->
 
 ## Remark 14.4.4
 
 A constant map `A→ B` is a map of the form `const_b`.
 A map `f:A→ B` is therefore constant if comes equipped with an element `b:B` and a homotopy `f~ const_b`.
-
-<!-- rosetta-agda-block: remark-14.4.4-constant-map-predicate -->
 
 ```agda
 is-constant-map :
@@ -275,8 +252,6 @@ is-constant-map {A = A} {B} f = Σ B (λ y → (x : A) → f x ＝ y)
 ```
 
 This is a stronger notion than the notion of weakly constant maps, which doesn’t require there to be an element in `B`.
-
-<!-- rosetta-agda-block: remark-14.4.4-constant-implies-weakly-constant -->
 
 ```agda
 module _
@@ -290,8 +265,6 @@ module _
 
 One of the differences between constant maps and weakly constant maps manifests itself as follows: A type `A` is contractible if and only if the identity map on `A` is constant, while a type `A` is a proposition if and only if the identity map on `A` is weakly constant.
 
-<!-- rosetta-agda-block: remark-14.4.4-contractibility-constant-identity -->
-
 ```agda
 module _
   {l : Level} {A : UU l}
@@ -303,8 +276,6 @@ module _
   is-contr-is-constant-id : is-constant-map (id {A = A}) → is-contr A
   is-contr-is-constant-id = tot (λ a → inv-htpy)
 ```
-
-<!-- rosetta-agda-block: remark-14.4.4-propositions-weakly-constant-identity -->
 
 ```agda
 module _
@@ -319,12 +290,10 @@ module _
     is-weakly-constant-map (id {A = A}) → is-prop A
   is-prop-is-weakly-constant-id = is-prop-all-elements-equal
 ```
-<!-- rosetta-item-end: remark-14.4.4 -->
 
 ## Lemma 14.4.5
 
 Consider a commuting triangle
-<!-- rosetta-diagram: e3422d10b67e; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -351,8 +320,6 @@ ap_{g}(α(x,y)):g(η(x))=g(η(y))
 ```
 in `B`. ◻
 
-<!-- rosetta-agda-block: lemma-14.4.5-precomposition-is-weakly-constant -->
-
 ```agda
 is-weakly-constant-map-precomp-unit-trunc-Prop :
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -363,8 +330,6 @@ is-weakly-constant-map-precomp-unit-trunc-Prop g x y =
     ( all-elements-equal-type-trunc-Prop
       ( unit-trunc-Prop x) (unit-trunc-Prop y))
 ```
-
-<!-- rosetta-agda-block: lemma-14.4.5-factoring-through-truncation -->
 
 ```agda
 module _
@@ -377,7 +342,6 @@ module _
   is-weakly-constant-map-factors-through-trunc-Prop g H x y =
     H x ∙ is-weakly-constant-map-precomp-unit-trunc-Prop g x y ∙ inv (H y)
 ```
-<!-- rosetta-item-end: lemma-14.4.5 -->
 
 We now show, in a theorem due to Kraus \[citation: `Kraus`\], that any weakly constant map `f:A→ B` into a set `B` extends uniquely to a map `‖A‖→ B`.
 We therefore conclude that, in order to define a map `‖A‖→ B` into a set `B` it suffices to define a map `f:A→ B` and show that it is weakly constant.
@@ -390,8 +354,6 @@ Then the map
 (‖A‖→ B)→ Σ(f:A→ B) Π(x,y:A) f(x)=f(y)
 ```
 given by `g↦ (g∘η,λ x. λ y. ap_{g}(α(x,y)))` is an equivalence.
-
-<!-- rosetta-agda-block: theorem-14.4.6-precomposition -->
 
 ```agda
 precomp-universal-property-set-quotient-trunc-Prop :
@@ -411,8 +373,6 @@ Let `g,h:‖A‖→ B` be two maps equipped with homotopies `f~ g∘η` and `f~ 
 In order to construct a homotopy `g~ h`, note that each identity type `g(x)=h(x)` is a proposition by the assumption that `B` is a set.
 We can therefore construct a homotopy `g~ h` by the induction principle of propositional truncations.
 By the induction principle, it suffices to construct a homotopy `g∘ η~ h∘η`, which we obtain from the homotopies `f~ g∘η` and `f~ h∘η`.
-
-<!-- rosetta-agda-block: theorem-14.4.6-uniqueness-before-existence -->
 
 ```agda
 module _
@@ -440,7 +400,6 @@ It suffices to show that `b=b'`.
 Since `B` is assumed to be a set, the identity type `b=b'` is a proposition.
 Therefore we may assume an element `x:A` equipped with `p:f(x)=b` and an element `x':A` equipped with `p':f(x')=b'`.
 Using the assumption that `f` is weakly constant, we obtain the identification
-<!-- rosetta-diagram: 44459fe1a1c2; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -452,8 +411,6 @@ Arrows:
 - f(x) --{H(x,x')}--> f(x')
 - f(x') --{p'}--> b'
 ```
-
-<!-- rosetta-agda-block: theorem-14.4.6-image-is-a-proposition -->
 
 ```agda
 abstract
@@ -492,7 +449,6 @@ pr2 (image-weakly-constant-map-Prop B is-set-B f H) =
 ```
 
 Now we observe that the map `f:A→ B` factors uniquely as follows
-<!-- rosetta-diagram: 7e7385271393; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -514,8 +470,6 @@ Now we obtain the map `pr 1∘ h:‖A‖→ B` equipped with the concatenated ho
 ```
  ◻
 
-<!-- rosetta-agda-block: theorem-14.4.6-extension -->
-
 ```agda
 map-universal-property-set-quotient-trunc-Prop :
   {l1 l2 : Level} {A : UU l1} (B : UU l2) (is-set-B : is-set B)
@@ -532,8 +486,6 @@ map-universal-property-set-quotient-trunc-Prop' :
 map-universal-property-set-quotient-trunc-Prop' B is-set-B (f , H) =
   map-universal-property-set-quotient-trunc-Prop B is-set-B f H
 ```
-
-<!-- rosetta-agda-block: theorem-14.4.6-computation -->
 
 ```agda
 abstract
@@ -553,8 +505,6 @@ abstract
         ( f a , unit-trunc-Prop (a , refl)))
 ```
 
-<!-- rosetta-agda-block: theorem-14.4.6-weak-constancy-is-a-property -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : UU l2) (is-set-B : is-set B)
@@ -570,8 +520,6 @@ module _
   pr1 is-weakly-constant-map-prop-Set = is-weakly-constant-map f
   pr2 is-weakly-constant-map-prop-Set = is-prop-is-weakly-constant-map-Set
 ```
-
-<!-- rosetta-agda-block: theorem-14.4.6-two-inverses-and-equivalence -->
 
 ```agda
 abstract
@@ -613,4 +561,3 @@ abstract
       ( is-section-map-universal-property-set-quotient-trunc-Prop B is-set-B)
       ( is-retraction-map-universal-property-set-quotient-trunc-Prop B is-set-B)
 ```
-<!-- rosetta-item-end: theorem-14.4.6 -->

@@ -30,7 +30,6 @@ Thus, **algebras** for the polynomial endofunctor `P_{A,B}` are pairs `(X,μ)` w
 Note that `W(A,B)` comes equipped with the structure of an algebra for `P_{A,B}` by Proposition 20.2.1.
 
 Given two algebras `X` and `Y` for the polynomial endofunctor `P_{A,B}`, we say that a map `h:X→ Y` is equipped with the **structure of a homomorphism** of algebras if it comes equipped with a homotopy witnessing that the square
-<!-- rosetta-diagram: aff24b08f0d2; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 

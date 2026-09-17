@@ -40,7 +40,6 @@ The direction of interest is the converse, which asserts that the successor func
 Here we use Proposition 6.3.3, which asserts that `(m=n)↔ Eq-ℕ(m,n)` for all `m,n:ℕ`.
 Furthermore, we have `Eq-ℕ(succ-ℕ(m),succ-ℕ(n))≐ Eq-ℕ(m,n)`.
 Therefore, we obtain
-<!-- rosetta-diagram: d1c529ba013b; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -57,14 +56,10 @@ Arrows:
 ```
 and we define the function `(succ-ℕ(m)=succ-ℕ(n))→(m=n)` as the composite of the maps going down, then right, and then up. ◻
 
-<!-- rosetta-agda-block: section-6-4-peanos-seventh-and-eighth-axioms-block-46 -->
-
 ```agda
 ap-succ-ℕ : {m n : ℕ} → m ＝ n → succ-ℕ m ＝ succ-ℕ n
 ap-succ-ℕ = ap succ-ℕ
 ```
-
-<!-- rosetta-agda-block: section-6-4-peanos-seventh-and-eighth-axioms-block-63 -->
 
 ```agda
 is-injective-succ-ℕ :
@@ -77,7 +72,6 @@ peano-7-ℕ :
   ((succ-ℕ m ＝ succ-ℕ n) → m ＝ n)
 peano-7-ℕ m n = ap-succ-ℕ , is-injective-succ-ℕ
 ```
-<!-- rosetta-item-end: theorem-6.4.1 -->
 
 ## Theorem 6.4.2
 
@@ -96,8 +90,6 @@ Since `Eq-ℕ(0,succ-ℕ(n))≐empty` it follows that
 ```
 which is precisely the claim. ◻
 
-<!-- rosetta-agda-block: section-6-4-peanos-seventh-and-eighth-axioms-block-97 -->
-
 ```agda
 is-nonzero-succ-ℕ : (n : ℕ) → succ-ℕ n ＝ zero-ℕ → empty
 is-nonzero-succ-ℕ n ()
@@ -108,4 +100,3 @@ neq-zero-succ-ℕ n p = Eq-eq-ℕ p
 peano-8-ℕ : (n : ℕ) → zero-ℕ ＝ succ-ℕ n → empty
 peano-8-ℕ = neq-zero-succ-ℕ
 ```
-<!-- rosetta-item-end: theorem-6.4.2 -->

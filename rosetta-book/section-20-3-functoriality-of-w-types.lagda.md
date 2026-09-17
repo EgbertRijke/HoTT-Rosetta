@@ -17,8 +17,6 @@ Then we define the map `W(f,e):W(A',B')→W(A,B)` of W-types inductively by
 W(f,e)(tree(x,α))≔tree(f(x),W(f,g)∘ α∘ e_x^{-1}).
 ```
 
-<!-- rosetta-item-end: definition-20.3.1 -->
-
 ## Lemma 20.3.2
 
 For any morphism `W(f,e):W(A',B')→W(A,B)` of W-types and any `tree(x,α):W(A,B)`, there is an equivalence
@@ -55,8 +53,6 @@ By distributivity of `Π` over `Σ`, i.e., by Theorem 13.2.1, this type is equiv
 ```
 completing the proof. ◻
 
-<!-- rosetta-item-end: lemma-20.3.2 -->
-
 ## Theorem 20.3.3
 
 Consider a morphism `W(f,e):W(A,B)→W(A',B')` of W-types.
@@ -77,4 +73,3 @@ fib(W(f,e), α(b))
 ```
 is `k`-truncated by the inductive hypothesis, so the claim follows. ◻
 
-<!-- rosetta-item-end: theorem-20.3.3 -->

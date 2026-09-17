@@ -48,8 +48,6 @@ We say that `f` is **split surjective** if it comes equipped with an element of 
 is-split-surjective(f):=Π(b:B) Σ(a:A) f(a)=b.
 ```
 
-<!-- rosetta-agda-block: definition-7.4.1-split-surjective-adapted -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -58,7 +56,6 @@ module _
   is-split-surjective : (A → B) → UU (l1 ⊔ l2)
   is-split-surjective f = (b : B) → Σ A (λ x → f x ＝ b)
 ```
-<!-- rosetta-item-end: definition-7.4.1 -->
 
 Martin-Löf’s dependent type theory doesn’t have a general way of forming quotients of types.
 However, in the specific case of the congruence relations on `ℕ` we can define the type of natural numbers modulo `k+1` as the standard finite type `Fin{k+1}`.
@@ -98,8 +95,6 @@ succ-Fin_{k+1}(i(x)) ≔ skip-zero-Fin_k(x)
 succ-Fin_{k+1}(⋆) ≔ zero-Fin_k.
 ```
 
-<!-- rosetta-agda-block: definition-7.4.2-finite-zero-and-successor-adapted -->
-
 ```agda
 zero-Fin : (k : ℕ) → Fin (succ-ℕ k)
 zero-Fin zero-ℕ = inr star
@@ -113,7 +108,6 @@ succ-Fin : (k : ℕ) → Fin k → Fin k
 succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
 succ-Fin (succ-ℕ k) (inr star) = zero-Fin k
 ```
-<!-- rosetta-item-end: definition-7.4.2 -->
 
 ## Definition 7.4.3
 
@@ -122,8 +116,6 @@ For any `k:ℕ`, we define the map `[_]_{k+1}:ℕ→Fin{k+1}` recursively on `x`
 [0]_{k+1} ≔ 0
 [x+1]_{k+1} ≔ succ-Fin_{k+1}[x]_{k+1}.
 ```
-
-<!-- rosetta-agda-block: definition-7.4.3-mod-succ-natural-numbers -->
 
 ```agda
 mod-succ-ℕ : (k : ℕ) → ℕ → Fin (succ-ℕ k)
@@ -136,7 +128,6 @@ mod-two-ℕ = mod-succ-ℕ 1
 mod-three-ℕ : ℕ → Fin 3
 mod-three-ℕ = mod-succ-ℕ 2
 ```
-<!-- rosetta-item-end: definition-7.4.3 -->
 
 Our next intermediate goal is to show that `x≡ nat-Fin[x]_{k+1}mod k+1` for any natural number `x`.
 This fact is a consequence of the following simple lemma, that will help us compute with the maps `nat-Fin : Fin{k}→ℕ`.
@@ -200,8 +191,6 @@ nat-Fin(succ-Fin_{k+1}(⋆)) ≐ nat-Fin(0)  by definition of succ-Fin
 ```
  ◻
 
-<!-- rosetta-agda-block: lemma-7.4.4-natural-values-finite-successor-adapted -->
-
 ```agda
 is-zero-nat-zero-Fin : {k : ℕ} → nat-Fin (succ-ℕ k) (zero-Fin k) ＝ zero-ℕ
 is-zero-nat-zero-Fin {zero-ℕ} = refl
@@ -218,7 +207,6 @@ nat-succ-Fin :
   nat-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x)) ＝ succ-ℕ (nat-Fin k x)
 nat-succ-Fin k x = nat-skip-zero-Fin k x
 ```
-<!-- rosetta-item-end: lemma-7.4.4 -->
 
 ## Proposition 7.4.5
 
@@ -246,8 +234,6 @@ nat-Fin[x+1]_{k+1} ≐ nat-Fin(succ-Fin_{k+1}[x]_{k+1})  by definition of [_]_{k
 ≡ x+1  by the inductive hypothesis.
 ```
  ◻
-
-<!-- rosetta-agda-block: proposition-7.4.5-congruence-mod-successor-adapted -->
 
 ```agda
 cong-identification-ℕ :
@@ -279,7 +265,6 @@ cong-nat-mod-succ-ℕ k (succ-ℕ x) =
     (cong-nat-mod-succ-ℕ k x)
     (cong-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
 ```
-<!-- rosetta-item-end: proposition-7.4.5 -->
 
 We need one more fact before we can prove Theorems 7.4.7 and 7.4.8.
 
@@ -313,8 +298,6 @@ d≤ dk'+ d≐ dk = x+1.
 ```
  ◻
 
-<!-- rosetta-agda-block: proposition-7.4.6-small-divisor-and-bounded-congruence-adapted -->
-
 ```agda
 abstract
   is-zero-div-ℕ :
@@ -327,8 +310,6 @@ abstract
         ( concatenate-leq-eq-ℕ d
           ( leq-add-ℕ' d (k *ℕ d)) p))
 ```
-
-<!-- rosetta-agda-block: proposition-7.4.6-bounded-distance-congruence-adapted -->
 
 ```agda
 abstract
@@ -357,7 +338,6 @@ eq-cong-nat-Fin (succ-ℕ k) x y H =
       (strict-upper-bound-nat-Fin (succ-ℕ k) x)
       (strict-upper-bound-nat-Fin (succ-ℕ k) y) H)
 ```
-<!-- rosetta-item-end: proposition-7.4.6 -->
 
 ## Theorem 7.4.7
 
@@ -379,8 +359,6 @@ Since the inequalities `nat-Fin[x]_{k+1}<k+1` and `nat-Fin[y]_{k+1}<k+1` hold by
 nat-Fin[x]_{k+1}=nat-Fin[y]_{k+1}↔ nat-Fin[x]_{k+1}≡nat-Fin[y]_{k+1}mod k+1.
 ```
 The latter condition is by Proposition 7.4.5 equivalent to the condition that `x≡ ymod k+1`. ◻
-
-<!-- rosetta-agda-block: theorem-7.4.7-effectiveness-mod-successor-adapted -->
 
 ```agda
 concatenate-cong-eq-cong-ℕ :
@@ -412,7 +390,6 @@ eq-mod-succ-cong-ℕ k x y H =
           (cong-nat-mod-succ-ℕ k y)) H)
       (cong-nat-mod-succ-ℕ k x))
 ```
-<!-- rosetta-item-end: theorem-7.4.7 -->
 
 ## Theorem 7.4.8
 
@@ -435,8 +412,6 @@ nat-Fin[nat-Fin(x)]_{k+1}≡nat-Fin(x)mod{k+1}.
 ```
 This fact is an instance of Proposition 7.4.5. ◻
 
-<!-- rosetta-agda-block: theorem-7.4.8-split-surjectivity-mod-successor -->
-
 ```agda
 is-section-nat-Fin :
   (k : ℕ) (x : Fin (succ-ℕ k)) → mod-succ-ℕ k (nat-Fin (succ-ℕ k) x) ＝ x
@@ -457,4 +432,3 @@ is-split-surjective-mod-succ-ℕ :
 pr1 (is-split-surjective-mod-succ-ℕ k x) = nat-Fin (succ-ℕ k) x
 pr2 (is-split-surjective-mod-succ-ℕ k x) = is-section-nat-Fin k x
 ```
-<!-- rosetta-item-end: theorem-7.4.8 -->

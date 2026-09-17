@@ -32,8 +32,6 @@ Conclude that if both `A` and `B` have decidable equality, then so does `A× B`.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-8-6-sigma-equality -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
@@ -43,8 +41,6 @@ module _
   Eq-Σ s t =
     Σ (pr1 s ＝ pr1 t) (λ α → dependent-identification B α (pr2 s) (pr2 t))
 ```
-
-<!-- rosetta-agda-block: exercise-8-6-sigma-identity -->
 
 ```agda
   refl-Eq-Σ : (s : Σ A B) → Eq-Σ s s
@@ -83,8 +79,6 @@ module _
   eq-pair-Σ' p = eq-pair-Σ (pr1 p) (pr2 p)
 ```
 
-<!-- rosetta-agda-block: exercise-8-6-product-forward -->
-
 ```agda
 has-decidable-equality-product' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
@@ -104,8 +98,6 @@ has-decidable-equality-product :
 has-decidable-equality-product d e =
   has-decidable-equality-product' (λ _ → d) (λ _ → e)
 ```
-
-<!-- rosetta-agda-block: exercise-8-6-product-backward -->
 
 ```agda
 has-decidable-equality-left-factor :

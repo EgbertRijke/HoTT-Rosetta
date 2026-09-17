@@ -54,20 +54,15 @@ We say that `d` is a **greatest common divisor** of `a` and `b` if it comes equi
 is-gcd_{a,b}(d) ≔ Π(x:ℕ) (x| a)× (x| b)↔ (x| d).
 ```
 
-<!-- rosetta-agda-block: definition-8.4.1-common-divisor -->
-
 ```agda
 is-common-divisor-ℕ : (a b x : ℕ) → UU lzero
 is-common-divisor-ℕ a b x = (div-ℕ x a) × (div-ℕ x b)
 ```
 
-<!-- rosetta-agda-block: definition-8.4.1-greatest-common-divisor -->
-
 ```agda
 is-gcd-ℕ : (a b d : ℕ) → UU lzero
 is-gcd-ℕ a b d = (x : ℕ) → (is-common-divisor-ℕ a b x) ↔ (div-ℕ x d)
 ```
-<!-- rosetta-item-end: definition-8.4.1 -->
 
 The property of being a greatest common divisor uniquely characterizes the greatest common divisor, in the following sense.
 
@@ -81,8 +76,6 @@ Then `d=d'`.
 *Proof.* If both `d` and `d'` are a greatest common divisor of `a` and `b`, then both `d` and `d'` divide both `a` and `b`, and hence it follows that `d| d'` and `d'| d`.
 Since the divisibility relation was shown to be a partial order in Exercise 7.2, it follows by antisymmetry that `d=d'`. ◻
 
-<!-- rosetta-agda-block: proposition-8.4.2-common-divisor-gcd -->
-
 ```agda
 abstract
   refl-is-common-divisor-ℕ :
@@ -90,8 +83,6 @@ abstract
   pr1 (refl-is-common-divisor-ℕ x) = refl-div-ℕ x
   pr2 (refl-is-common-divisor-ℕ x) = refl-div-ℕ x
 ```
-
-<!-- rosetta-agda-block: proposition-8.4.2-uniqueness-gcd -->
 
 ```agda
 abstract
@@ -107,7 +98,6 @@ abstract
       ( pr1 (H' d) (is-common-divisor-is-gcd-ℕ a b d H))
       ( pr1 (H d') (is-common-divisor-is-gcd-ℕ a b d' H'))
 ```
-<!-- rosetta-item-end: proposition-8.4.2 -->
 
 Note that for any two natural numbers `a` and `b`, the type
 ```text
@@ -136,15 +126,12 @@ Given `a,b:ℕ`, we define the type family `M(a,b)` over `ℕ` by
 M(a,b,n) ≔ (a+b≠ 0) → (n≠ 0)× (Π(x:ℕ) (x| a)× (x| b) → (x| n)).
 ```
 
-<!-- rosetta-agda-block: definition-8.4.3-multiple-gcd -->
-
 ```agda
 is-multiple-of-gcd-ℕ : (a b n : ℕ) → UU lzero
 is-multiple-of-gcd-ℕ a b n =
   is-nonzero-ℕ (a +ℕ b) →
   (is-nonzero-ℕ n) × ((x : ℕ) → is-common-divisor-ℕ a b x → div-ℕ x n)
 ```
-<!-- rosetta-item-end: definition-8.4.3 -->
 
 In other words, if `a+b=0` then the type `Σ(n:ℕ) M(a,b,n)` consist of all the natural numbers.
 On the other hand, if `a+b≠ 0` it consists of the nonzero natural numbers `n` with the property that any common divisor of `a` and `b` also divides `n`.
@@ -176,8 +163,6 @@ If `x` is a common divisor of `a` and `b`, then it follows that `x` divides `a+b
 Furthermore, since we have assumed that `a+b≠ 0`, it follows that `x≤ a+b`.
 This provides the upper bound. ◻
 
-<!-- rosetta-agda-block: proposition-8.4.4-common-divisor-decidable -->
-
 ```agda
 abstract
   is-decidable-is-common-divisor-ℕ :
@@ -188,16 +173,12 @@ abstract
       ( is-decidable-div-ℕ x b)
 ```
 
-<!-- rosetta-agda-block: proposition-8.4.4-divisor-successor-bound -->
-
 ```agda
 abstract
   leq-div-succ-ℕ : (d x : ℕ) → div-ℕ d (succ-ℕ x) → leq-ℕ d (succ-ℕ x)
   leq-div-succ-ℕ d x (pair (succ-ℕ k) p) =
     concatenate-leq-eq-ℕ d (leq-mul-ℕ' k d) p
 ```
-
-<!-- rosetta-agda-block: proposition-8.4.4-common-divisor-bound -->
 
 ```agda
 abstract
@@ -218,8 +199,6 @@ abstract
     leq-sum-is-common-divisor-ℕ' a b d (is-successor-is-nonzero-ℕ H)
 ```
 
-<!-- rosetta-agda-block: proposition-8.4.4-multiple-gcd-decidable -->
-
 ```agda
 abstract
   is-decidable-is-multiple-of-gcd-ℕ :
@@ -238,7 +217,6 @@ abstract
             ( a +ℕ b)
             ( λ x → leq-sum-is-common-divisor-ℕ a b x np)))
 ```
-<!-- rosetta-item-end: proposition-8.4.4 -->
 
 We are almost in position to apply the well-ordering principle of `ℕ` to define the greatest common divisor.
 It just remains to show that there is some `n:ℕ` for which `M(a,b,n)` holds.
@@ -253,21 +231,16 @@ There is an element of type `M(a,b,a+b)`.
 *Proof.* To construct an element of type `M(a,b,a+b)`, assume that `a+b≠ 0`.
 Then we have tautologically that `a+b≠ 0`, and any common divisor of `a` and `b` is also a divisor of `a+b`. ◻
 
-<!-- rosetta-agda-block: lemma-8.4.5-sum-multiple-gcd -->
-
 ```agda
 abstract
   sum-is-multiple-of-gcd-ℕ : (a b : ℕ) → is-multiple-of-gcd-ℕ a b (a +ℕ b)
   pr1 (sum-is-multiple-of-gcd-ℕ a b np) = np
   pr2 (sum-is-multiple-of-gcd-ℕ a b np) x H = div-add-ℕ x a b (pr1 H) (pr2 H)
 ```
-<!-- rosetta-item-end: lemma-8.4.5 -->
 
 ## Definition 8.4.6
 
 We define the **greatest common divisor** `gcd:ℕ→ (ℕ→ℕ)` by the well-ordering principle of `ℕ` (Theorem 8.3.2) as the least natural number `n` for which `M(a,b,n)` holds, using the fact that `M(a,b)` is a decidable type family (Proposition 8.4.4) and that `M(a,b,a+b)` always holds (Lemma 8.4.5).
-
-<!-- rosetta-agda-block: definition-8.4.6-gcd -->
 
 ```agda
 abstract
@@ -288,7 +261,6 @@ is-lower-bound-gcd-ℕ :
   (a b : ℕ) → is-lower-bound-ℕ (is-multiple-of-gcd-ℕ a b) (gcd-ℕ a b)
 is-lower-bound-gcd-ℕ a b = pr2 (pr2 (GCD-ℕ a b))
 ```
-<!-- rosetta-item-end: definition-8.4.6 -->
 
 ## Lemma 8.4.7
 
@@ -309,8 +281,6 @@ The fact that equality on `ℕ` is decidable implies via Exercise 4.3 that `¬¬
 
 For the converse direction, recall that the inequality `gcd(a,b)≤ a+b` holds by minimality, since `M(a,b,a+b)` holds by Lemma 8.4.5.
 If `a+b=0`, it therefore follows that `gcd(a,b)≤ 0`, which implies that `gcd(a,b)=0`. ◻
-
-<!-- rosetta-agda-block: lemma-8.4.7-zero-gcd -->
 
 ```agda
 abstract
@@ -336,7 +306,6 @@ abstract
       ( is-decidable-is-zero-ℕ (a +ℕ b))
       ( λ f → pr1 (is-multiple-of-gcd-gcd-ℕ a b f) H)
 ```
-<!-- rosetta-item-end: lemma-8.4.7 -->
 
 ## Theorem 8.4.8
 
@@ -365,8 +334,6 @@ From this equation and Proposition 7.1.5 it follows that any number `x` which di
 This observation implies that `r=0`, because we have `r<gcd(a,b)` by construction and `gcd(a,b)` is minimal.
 Therefore we conclude that `gcd(a,b)` divides `a`. ◻
 
-<!-- rosetta-agda-block: theorem-8.4.8-nonzero-and-common-divisor -->
-
 ```agda
 abstract
   is-nonzero-gcd-ℕ :
@@ -386,16 +353,12 @@ div-gcd-is-common-divisor-ℕ a b x H with
 ... | inr np = pr2 (is-multiple-of-gcd-gcd-ℕ a b np) x H
 ```
 
-<!-- rosetta-agda-block: theorem-8.4.8-divisor-multiple -->
-
 ```agda
 div-mul-ℕ :
   (k x y : ℕ) → div-ℕ x y → div-ℕ x (k *ℕ y)
 div-mul-ℕ k x y H =
   transitive-div-ℕ x y (k *ℕ y) (pair k refl) H
 ```
-
-<!-- rosetta-agda-block: theorem-8.4.8-small-common-multiple-zero -->
 
 ```agda
 abstract
@@ -409,8 +372,6 @@ abstract
       ( contradiction-le-ℕ r (gcd-ℕ a b) l
         ( is-lower-bound-gcd-ℕ a b r (λ np → pair x d)))
 ```
-
-<!-- rosetta-agda-block: theorem-8.4.8-divisor-gcd-common-divisor -->
 
 ```agda
 opaque
@@ -492,11 +453,8 @@ pr2 (is-common-divisor-div-gcd-ℕ a b x d) =
   div-right-factor-div-gcd-ℕ a b x d
 ```
 
-<!-- rosetta-agda-block: theorem-8.4.8-gcd-is-gcd -->
-
 ```agda
 is-gcd-gcd-ℕ : (a b : ℕ) → is-gcd-ℕ a b (gcd-ℕ a b)
 pr1 (is-gcd-gcd-ℕ a b x) = div-gcd-is-common-divisor-ℕ a b x
 pr2 (is-gcd-gcd-ℕ a b x) = is-common-divisor-div-gcd-ℕ a b x
 ```
-<!-- rosetta-item-end: theorem-8.4.8 -->

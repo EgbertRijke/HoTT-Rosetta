@@ -56,15 +56,12 @@ h(n,inr(f)) ≔ 3n+1.
 collatz(n)≔ h(n,d(n)).
 ```
 
-<!-- rosetta-agda-block: definition-8.2.1-collatz -->
-
 ```agda
 collatz : ℕ → ℕ
 collatz n with is-decidable-div-ℕ 2 n
 ... | inl (pair y p) = y
 ... | inr f = succ-ℕ (3 *ℕ n)
 ```
-<!-- rosetta-item-end: definition-8.2.1 -->
 
 ## Remark 8.2.2
 
@@ -100,8 +97,6 @@ collatz(n)\with [d(n)/inr(f)] ≔ 3n+1.
 Notice that in addition to the information in the specification of the Collatz function, the definition by with-abstraction also tells us which decision procedure was used to decide whether `n` is even or not.
 The combination of with-abstraction and pattern matching, which allows us to skip the explicit definition of the function `h`, is what makes with-abstraction so useful.
 
-<!-- rosetta-item-end: remark-8.2.2 -->
-
 Using with-abstraction we can find a slight improvement of the decidability results of `A→ B` and `A× B` in Example 8.1.3, and we will use these improved claims in the construction of the greatest common divisor.
 
 ## Proposition 8.2.3
@@ -117,7 +112,6 @@ Then the types `A× B` and `A→ B` are also decidable.
 *Proof.* We only prove the claim about the decidability of `A→ B`, since the claim about the decidability of `A× B` is proven similarly.
 Since `A` is assumed to be decidable, we proceed by case analysis on `A+¬ A`.
 In the case where we have `f:¬ A`, we have the functions
-<!-- rosetta-diagram: 09ee1d241e31; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -141,8 +135,6 @@ d(H)\with [H(a)/inr(g)] ≔ inr(λ h. g(h(a))).
 ```
  ◻
 
-<!-- rosetta-agda-block: proposition-8.2.3-decidable-product -->
-
 ```agda
 is-decidable-product' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
@@ -152,8 +144,6 @@ is-decidable-product' (inl a) d =
 is-decidable-product' (inr na) d = inr (na ∘ pr1)
 ```
 
-<!-- rosetta-agda-block: proposition-8.2.3-decidable-function -->
-
 ```agda
 is-decidable-function-type' :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
@@ -162,7 +152,6 @@ is-decidable-function-type' (inl a) d =
   rec-coproduct (λ b → inl (λ _ → b)) (λ nb → inr (map-neg (ev a) nb)) (d a)
 is-decidable-function-type' (inr na) d = inl (ex-falso ∘ na)
 ```
-<!-- rosetta-item-end: proposition-8.2.3 -->
 
 For a general family of decidable types `P` over `ℕ`, we cannot prove that the type
 ```text
@@ -212,14 +201,10 @@ f(x+1) ≔ g(x).
 ```
  ◻
 
-<!-- rosetta-agda-block: proposition-8.2.4-decidable-family -->
-
 ```agda
 is-decidable-family : {l1 l2 : Level} {A : UU l1} (P : A → UU l2) → UU (l1 ⊔ l2)
 is-decidable-family {A = A} P = (x : A) → is-decidable (P x)
 ```
-
-<!-- rosetta-agda-block: proposition-8.2.4-dependent-products-natural -->
 
 ```agda
 is-decidable-Π-ℕ :
@@ -239,7 +224,6 @@ is-decidable-Π-ℕ P d (succ-ℕ m) (inl H) with d zero-ℕ
 ... | inl g = inl (ind-ℕ p (λ x y → g x))
 ... | inr ng = inr (λ f → ng (λ x → f (succ-ℕ x)))
 ```
-<!-- rosetta-item-end: proposition-8.2.4 -->
 
 ## Corollary 8.2.5
 
@@ -255,16 +239,12 @@ is decidable.
 *Proof.* Since `m` is assumed to be an upper bound for `P`, it follows `P(n)→ Q(n)` for any `m≤ n`.
 With this observation we apply Proposition 8.2.4. ◻
 
-<!-- rosetta-agda-block: corollary-8.2.5-upper-bound -->
-
 ```agda
 is-upper-bound-ℕ :
   {l : Level} (P : ℕ → UU l) (n : ℕ) → UU l
 is-upper-bound-ℕ P n =
   (m : ℕ) → P m → leq-ℕ m n
 ```
-
-<!-- rosetta-agda-block: corollary-8.2.5-bounded-dependent-products -->
 
 ```agda
 is-decidable-bounded-Π-ℕ :
@@ -278,4 +258,3 @@ is-decidable-bounded-Π-ℕ P Q dP dQ m H =
     ( succ-ℕ m)
     ( inl (λ x l p → ex-falso (contradiction-leq-ℕ x m (H x p) l)))
 ```
-<!-- rosetta-item-end: corollary-8.2.5 -->

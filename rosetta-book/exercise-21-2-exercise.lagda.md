@@ -20,7 +20,6 @@ P(base)→Π(x:S^1) P(x).
 Show that any embedding `m:S^1→S^1` is an equivalence.
 
 Show that for any embedding `m:X→S^1`, there is a proposition `P` and an equivalence `e:X ≃ S^1× P` for which the triangle
-<!-- rosetta-diagram: 949a7d544e5b; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 

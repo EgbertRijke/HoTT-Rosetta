@@ -33,14 +33,11 @@ We define the type `ℤ/k` for each `k:ℕ` by
 ℤ/0≔ ℤ and ℤ/{(k+1)}≔Fin{k+1}.
 ```
 
-<!-- rosetta-agda-block: definition-7.5.1-integers-modulo-adapted -->
-
 ```agda
 ℤ-Mod : ℕ → UU lzero
 ℤ-Mod zero-ℕ = ℤ
 ℤ-Mod (succ-ℕ k) = Fin (succ-ℕ k)
 ```
-<!-- rosetta-item-end: definition-7.5.1 -->
 
 Recall from Exercise 5.7 that `ℤ/0` already comes equipped with the structure of a group, but the group structure on `ℤ/{(k+1)}` remains to be defined.
 
@@ -55,8 +52,6 @@ and we define the **additive inverse** operation on `ℤ/{(k+1)}` by
 -x≔[dist-ℕ(nat-Fin(x),k+1)]_{k+1}.
 ```
 
-<!-- rosetta-agda-block: definition-7.5.2-addition-and-negation-finite -->
-
 ```agda
 add-Fin : (k : ℕ) → Fin k → Fin k → Fin k
 add-Fin (succ-ℕ k) x y =
@@ -66,15 +61,12 @@ add-Fin' : (k : ℕ) → Fin k → Fin k → Fin k
 add-Fin' k x y = add-Fin k y x
 ```
 
-<!-- rosetta-agda-block: definition-7.5.2-negation-finite -->
-
 ```agda
 neg-Fin :
   (k : ℕ) → Fin k → Fin k
 neg-Fin (succ-ℕ k) x =
   mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k))
 ```
-<!-- rosetta-item-end: definition-7.5.2 -->
 
 ## Remark 7.5.3
 
@@ -84,8 +76,6 @@ nat-Fin(0) ≡ 0
 nat-Fin(x+y) ≡ nat-Fin(x)+nat-Fin(y)
 nat-Fin(-x) ≡ dist-ℕ(nat-Fin(x),k+1).
 ```
-
-<!-- rosetta-agda-block: remark-7.5.3-natural-value-congruences -->
 
 ```agda
 cong-add-Fin :
@@ -100,7 +90,6 @@ cong-neg-Fin :
 cong-neg-Fin {succ-ℕ k} x =
   cong-nat-mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k))
 ```
-<!-- rosetta-item-end: remark-7.5.3 -->
 
 Before we show that addition on `ℤ/{k}` satisfies the group laws, we have to show that addition on `ℕ` preserves the congruence relation.
 
@@ -141,8 +130,6 @@ This shows that (i) and (iii) together imply (ii).
 
 The remaining claim, that (ii) and (iii) together imply (i), follows by commutativity of addition from the fact that (i) and (iii) together imply (ii). ◻
 
-<!-- rosetta-agda-block: proposition-7.5.4-congruence-support-excerpts -->
-
 ```agda
 concatenate-eq-cong-eq-ℕ :
   (k : ℕ) {x1 x2 x3 x4 : ℕ} →
@@ -180,8 +167,6 @@ pr2 (reflects-cong-add-ℕ {k} x {y} {z} (pair d p)) =
   p ∙ translation-invariant-dist-ℕ x y z
 ```
 
-<!-- rosetta-agda-block: proposition-7.5.4-three-for-two-addition-congruence -->
-
 ```agda
 congruence-add-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
@@ -215,7 +200,6 @@ cong-left-summand-ℕ k {x} {y} {x'} {y'} H K =
         ( K)
         ( commutative-add-ℕ x' y')))
 ```
-<!-- rosetta-item-end: proposition-7.5.4 -->
 
 ## Theorem 7.5.5
 
@@ -260,8 +244,6 @@ nat-Fin(x)+nat-Fin(0)≡nat-Fin(x)mod k+1.
 This follows immediately from the fact that `nat-Fin(0)=0`.
 The left unit law now follows from the right unit law by commutativity.
 We leave the inverse laws as an exercise. ◻
-
-<!-- rosetta-agda-block: theorem-7.5.5-abelian-group-laws-finite-adapted -->
 
 ```agda
 commutative-add-Fin : (k : ℕ) (x y : Fin k) → add-Fin k x y ＝ add-Fin k y x
@@ -380,4 +362,3 @@ right-inverse-law-add-Fin k x =
   ( commutative-add-Fin (succ-ℕ k) x (neg-Fin (succ-ℕ k) x)) ∙
   ( left-inverse-law-add-Fin k x)
 ```
-<!-- rosetta-item-end: theorem-7.5.5 -->

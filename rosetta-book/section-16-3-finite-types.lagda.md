@@ -22,8 +22,6 @@ We also define the type `BS_k` of **`k`-element types** by
 BS_k≔ Σ(X:𝒰_0) ‖Fin{k}≃ X‖.
 ```
 
-<!-- rosetta-item-end: definition-16.3.1 -->
-
 ## Remark 16.3.2
 
 It follows directly from the definition of finiteness that any type `X` equipped with a counting is finite.
@@ -37,8 +35,6 @@ from a map `(Σ(k:ℕ) Fin{k}≃ Y)→(Σ(k:ℕ) Fin{k}≃ X)`.
 Given an equivalence `e:X≃ Y`, such a map is given as the map induced on total spaces from the family of maps `f↦ e^{-1}∘ f`.
 
 Similarly, it follows that any finite type has decidable equality, and that every finite type is a set.
-
-<!-- rosetta-item-end: remark-16.3.2 -->
 
 In the following proposition we will show that each finite type can be assigned a unique cardinality.
 
@@ -83,8 +79,6 @@ Again by the universal property of the propositional truncation, we obtain this 
 ```
 given by `e↦ η(k',e)`. ◻
 
-<!-- rosetta-item-end: theorem-16.3.3 -->
-
 ## Corollary 16.3.4
 
 There is an equivalence
@@ -100,8 +94,6 @@ There is an equivalence
 ≃ Σ(k:ℕ) Σ(X:𝒰_0) ‖Fin{k}≃ X‖.
 ```
  ◻
-
-<!-- rosetta-item-end: corollary-16.3.4 -->
 
 We now aim to extend Theorem 16.1.7 to obtain some closure properties of finite types.
 Before we do so, we prove the **principle of finite choice**.
@@ -133,8 +125,6 @@ For the inductive step, note that by the dependent universal property of coprodu
 ```
 Recall from Exercise 14.3 that `‖X× Y‖≃ ‖X‖×‖Y‖` for any two types `X` and `Y`.
 This fact together with the inductive hypothesis finishes the proof. ◻
-
-<!-- rosetta-item-end: proposition-16.3.5 -->
 
 ## Theorem 16.3.6
 
@@ -234,4 +224,3 @@ Furthermore, we note that we have the following equivalence computing the fibers
 The type on the left hand side is decidable, so it follows that the type `A` has decidable equality.
 We conclude that each `B(a)` is a decidable subtype of `Σ(x:A) B(x)`. ◻
 
-<!-- rosetta-item-end: theorem-16.3.6 -->

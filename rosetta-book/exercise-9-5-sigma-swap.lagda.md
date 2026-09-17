@@ -33,8 +33,6 @@ Construct an equivalence
 
 ### Part (b): swapping dependent families
 
-<!-- rosetta-agda-block: exercise-9-5-right-swap -->
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}

@@ -5,7 +5,6 @@ module section-18-2-the-universal-property-of-set-quotients where
 ```
 
 The quotient `A/R` is constructed as the image of `R`, so we obtain a commuting triangle
-<!-- rosetta-diagram: d1f85deb09a0; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -30,7 +29,6 @@ R(x,y)→ (q(x)=q(y))
 ```
 for all `x,y:A`.
 We say that `q:A→ B` **is a set quotient** of `R`, or that `q` satisfies the **universal property of the set quotient by `R`**, if for every map `f:A→ X` into a set `X` such that `f(x)=f(y)` whenever `R(x,y)` holds, there is a unique extension
-<!-- rosetta-diagram: 9f23c3a8d7a4; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -44,8 +42,6 @@ Arrows:
 - A --f--> X
 - B --unlabeled--> X
 ```
-
-<!-- rosetta-item-end: definition-18.2.1 -->
 
 ## Remark 18.2.2
 
@@ -65,8 +61,6 @@ q^⋆(h)≔(h∘ q,λ x. λ y. λ r. ap_{h}(H_{x,y}(r))).
 The universal property of the set quotient of `R` asserts that the map `q^⋆` is an equivalence for every set `X`.
 It is important to note that the universal property of set quotients is formulated with respect to sets.
 
-<!-- rosetta-item-end: remark-18.2.2 -->
-
 ## Theorem 18.2.3
 
 Consider a type `A` and a universe `𝒰` containing `A`.
@@ -85,7 +79,6 @@ q(x)=q(y)
 ```
 
 3. The map `R:A→ (A→ Prop_𝒰)` extends along `q` to an embedding
-<!-- rosetta-diagram: 797f891ee8ed; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -100,8 +93,6 @@ Arrows:
 - B --i--> Prop_𝒰^A
 ```
     and the embedding `i` satisfies the universal property of the image inclusion of `R`.
-
-<!-- rosetta-item-end: theorem-18.2.3 -->
 
 In Theorem 18.2.3 we don’t assume that `B` is in the same universe as `A` and `R`, because we want to apply it to `B≔im(R)`.
 As we will see below, this extra generality only affects the proof that (2) implies (3).
@@ -147,7 +138,6 @@ i(b,a):=pr 1(s(b,a)).
 ```
 Note that we have an equivalence `i(b,a)≃ (b=q(a))` for every `b:B` and `a:A`.
 Then the triangle
-<!-- rosetta-diagram: 8e0efc997c73; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -186,7 +176,6 @@ We conclude by Theorem 15.2.5 that the embedding `i` satisfies the universal pro
 
 Now we show that (1) implies (2).
 To see that `q` is surjective if it satisfies the assumptions in (1), consider the image factorization
-<!-- rosetta-diagram: c9146daeb855; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -207,7 +196,6 @@ q_q(x)=q_q(y)
 ```
 for any `x,y:A` satisfying `R(x,y)`, because if `R(x,y)` holds, then `q(x)=q(y)` and hence `i_q(q_q(x))=i_q(q_q(y))` holds and `i_q` is an embedding.
 Since `im(q)` is a set, we may apply the universal property of `q` and we obtain a unique extension of `q_q` along `q`
-<!-- rosetta-diagram: 0eaefd3b448e; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -228,7 +216,6 @@ We conclude that `q` is surjective, because `q` is the composite `i_q∘ q_q` of
 
 Now we have to show that the map `q` is effective, i.e., that `q(x)=q(y)` is equivalent to `R(x,y)` for every `x,y:A`.
 We first apply the universal property of `q` to obtain for each `x:A` an extension of `R(x)` along `q`
-<!-- rosetta-diagram: 2127350a0b33; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -313,8 +300,6 @@ q:A→ A/R
 ```
 is surjective and effective, and it satisfies the universal property of the set quotient.
 
-<!-- rosetta-item-end: corollary-18.2.4 -->
-
 Theorem 18.2.3 can be used to show that the type of equivalence relations is equivalent to the type of sets `X` equipped with a surjective map `A↠ X`.
 This may seem remarkable if you haven’t tried Exercise 17.18 yet, because at first glance one might think that the type of sets `X` equipped with a surjective map `A↠ X` is a `1`-type, while the type of equivalence relations on `A` is a set.
 
@@ -328,7 +313,6 @@ Eq-Rel_𝒰(A)≃Σ(X:Set_𝒰) A↠ X.
 ### Proof
 
 *Proof.* Given an equivalence relation `R:A→(A→Prop_𝒰)` on `A` we first use the replacement axiom, by which the set quotient `A/R` is `𝒰`-small, to obtain a set `Q(R):Set_𝒰`, an equivalence `e:Q(R)≃ A/R`, and a surjective map `f:A→ Q(R)` such that the triangle
-<!-- rosetta-diagram: 8b841b2da315; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -363,7 +347,6 @@ Note that the type of identifications `(Y,g)=(X,f)` is by the univalence axiom e
 Σ(e:Y≃ X) e∘ g~ f.
 ```
 Therefore it suffices to construct a commuting triangle
-<!-- rosetta-diagram: d0898d6829c9; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -379,4 +362,3 @@ Arrows:
 ```
 We obtain such an equivalence by combining Theorem 18.2.3 and Theorem 15.1.8. ◻
 
-<!-- rosetta-item-end: theorem-18.2.5 -->

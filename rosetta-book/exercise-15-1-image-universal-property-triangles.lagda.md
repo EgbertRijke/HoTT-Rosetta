@@ -8,7 +8,6 @@ module exercise-15-1-image-universal-property-triangles where
 ## Problem statement
 
 Consider a commuting triangle
-<!-- rosetta-diagram: 6916af3c5c56; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -27,7 +26,6 @@ where `g` is an embedding.
 <div class="subexenum">
 
 Show that if there is a morphism
-<!-- rosetta-diagram: 2f6da4b17ea3; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 

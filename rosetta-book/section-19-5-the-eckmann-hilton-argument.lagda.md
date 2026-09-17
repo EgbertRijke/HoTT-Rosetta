@@ -22,8 +22,6 @@ ap-binary_f:(x=x')→ ((y=y') → (f(x,y)=f(x',y'))
 ```
 indexed by `x,x':A` and `y,y':B` given by `ap-binary_f(refl,refl)≔refl`.
 
-<!-- rosetta-item-end: definition-19.5.1 -->
-
 ## Lemma 19.5.2
 
 The binary action on paths of `f:A→(B→ C)` satisfies the following laws:
@@ -32,7 +30,6 @@ ap-binary_f(refl,q) = ap_{f(x)}(q)
 ap-binary_f(p,refl) = ap_{f(_,y)}(p)
 ```
 and moreover both triangles in the following diagram commute:
-<!-- rosetta-diagram: 111901edb741; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -53,8 +50,6 @@ Arrows:
 
 *Proof.* The proof is immediate by identification elimination on `p` and `q`, where applicable. ◻
 
-<!-- rosetta-item-end: lemma-19.5.2 -->
-
 ## Example 19.5.3
 
 One particular binary operation to which we can apply the binary action on paths is concatenation of identifications
@@ -66,7 +61,6 @@ This results in the **horizontal concatenation** operation
 ∙[h]{_}{_} : (p=p')→ ((q=q') → (p ∙ q=p' ∙ q')).
 ```
 In other words, for any two identifications `r:p=p'` and `s:q=q'` as in the diagram
-<!-- rosetta-diagram: 65612ce01e63; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -83,7 +77,6 @@ Arrows:
 ```
 we obtain `∙[h]{r}{s}≔ap-binary_{_ ∙ _}(r,s):p ∙ q=p' ∙ q'`.
 The **vertical concatenation** operation, which concatenates `r:p=p'` and `r':p'=p''` as in the diagram
-<!-- rosetta-diagram: b5cd52ee9c57; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -99,8 +92,6 @@ Arrows:
 ```
 is given by ordinary concatenation of identifications.
 
-<!-- rosetta-item-end: example-19.5.3 -->
-
 ## Lemma 19.5.4
 
 Horizontal concatenation satisfies the following left and right unit laws:
@@ -113,14 +104,11 @@ Horizontal concatenation satisfies the following left and right unit laws:
 
 *Proof.* This follows by identification elimination on `r` and `s`, or alternatively via Lemma 19.5.2. ◻
 
-<!-- rosetta-item-end: lemma-19.5.4 -->
-
 In the following lemma we establish the **interchange law** for horizontal and vertical concatenation.
 
 ## Lemma 19.5.5
 
 Consider a diagram of the form
-<!-- rosetta-diagram: 75f5350fa18c; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -153,8 +141,6 @@ Then it suffices to show that
 ```
 Using the unit laws for ordinary concatenation, we see that both sides reduce to `∙[h]{r'}{s'}`. ◻
 
-<!-- rosetta-item-end: lemma-19.5.5 -->
-
 ## Theorem 19.5.6
 
 Consider a pointed type `A`, and let `r,s:Ω^2(A)`.
@@ -178,8 +164,6 @@ Similarly, we observe that `∙[h]{r}{s}=s ∙ r` by the following calculation:
 = s ∙ r.
 ```
 These two calculations combined prove the claim. ◻
-
-<!-- rosetta-item-end: theorem-19.5.6 -->
 
 ## Corollary 19.5.7
 
@@ -205,4 +189,3 @@ The claim now follows, because
 ```
  ◻
 
-<!-- rosetta-item-end: corollary-19.5.7 -->

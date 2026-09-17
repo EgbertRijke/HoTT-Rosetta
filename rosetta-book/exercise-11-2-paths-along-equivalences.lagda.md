@@ -13,7 +13,6 @@ Construct an equivalence
 p↦ p̃:(e(x)=y)≃(x=e^{-1}(y))
 ```
 for every `x:A` and `y:B`, such that the triangle
-<!-- rosetta-diagram: 7bba382ff5fc; review: pending -->
 
 ```text
 [e(x)]---->[e(e^{-1}(y))]

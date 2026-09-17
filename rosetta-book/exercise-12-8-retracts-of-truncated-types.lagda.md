@@ -34,8 +34,6 @@ Use Exercise 10.2 to show that if `A` is a retract of a `k`-type `B`, then `A` i
 
 ### Part (a): identity types of a retract
 
-<!-- rosetta-agda-block: exercise-12-8-retraction-on-identities -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (i : A → B)
@@ -72,8 +70,6 @@ module _
   pr1 retraction-ap = is-injective-retraction
   pr2 retraction-ap = is-retraction-is-injective-retraction
 ```
-
-<!-- rosetta-agda-block: exercise-12-8-identity-retract -->
 
 ```agda
 module _

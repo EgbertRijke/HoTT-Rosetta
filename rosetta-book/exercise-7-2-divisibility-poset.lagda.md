@@ -22,8 +22,6 @@ Show that the divisibility relation satisfies the axioms of a poset, i.e., that 
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-7-2-antisymmetric-relation-adapted -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
@@ -33,8 +31,6 @@ module _
   is-antisymmetric = (x y : A) → R x y → R y x → x ＝ y
 ```
 
-<!-- rosetta-agda-block: exercise-7-2-left-unit-multiplication-helper -->
-
 ```agda
 abstract
   is-one-is-left-unit-mul-ℕ :
@@ -42,8 +38,6 @@ abstract
   is-one-is-left-unit-mul-ℕ x y p =
     is-injective-right-mul-succ-ℕ y (p ∙ inv (left-unit-law-mul-ℕ (succ-ℕ y)))
 ```
-
-<!-- rosetta-agda-block: exercise-7-2-divisibility-partial-order -->
 
 ```agda
 refl-div-ℕ : is-reflexive div-ℕ

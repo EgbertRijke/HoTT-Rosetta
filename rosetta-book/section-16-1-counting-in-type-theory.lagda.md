@@ -18,8 +18,6 @@ count(A)≔Σ(k:ℕ) (Fin{k}≃ A).
 The elements of `count(A)` are called **countings** of `A`.
 When we have `(k,e):count(A)`, we also say that `A` **has `k` elements**.
 
-<!-- rosetta-item-end: definition-16.1.1 -->
-
 Note that the type `count(A)` is often not a proposition.
 For instance, different equivalences of type `Fin{k}≃Fin{k}` induce different elements of type `count(Fin{k})`.
 
@@ -27,8 +25,6 @@ For instance, different equivalences of type `Fin{k}≃Fin{k}` induce different 
 
 It follows immediately from the definition of countings that every standard finite type can be counted in a canonical way: For any `k:ℕ` we have `(k,id) : count(Fin{k})`.
 It also follows immediately from the definition of countings that types equipped with countings are closed under equivalences.
-
-<!-- rosetta-item-end: example-16.1.2 -->
 
 ## Example 16.1.3
 
@@ -38,14 +34,10 @@ Indeed, the inverse of `e` is a map `e^{-1}:A→empty`.
 Conversely, if we have `f:is-empty(A)`, then the map `f:A→empty` is automatically an equivalence.
 This shows that `Fin{k}≃empty`, and a short argument by induction on `k` yields that `k=0`.
 
-<!-- rosetta-item-end: example-16.1.3 -->
-
 ## Example 16.1.4
 
 A type `A` has one element if and only if it is contractible.
 Indeed, the type `Fin{1}` is contractible, so it follows from the 3-for-2 property of contractible types (Exercise 10.2) that there is an equivalence `Fin{1}≃ A` if and only if `A` is contractible.
-
-<!-- rosetta-item-end: example-16.1.4 -->
 
 ## Example 16.1.5
 
@@ -60,14 +52,10 @@ Conversely, if `P` is decidable, then we can construct a counting of `P` by case
 If `P` holds, then it is contractible and hence equivalent to `Fin{1}`.
 If `¬ P` holds, then `P` is equivalent to `Fin{0}`.
 
-<!-- rosetta-item-end: example-16.1.5 -->
-
 ## Remark 16.1.6
 
 We also note that any type `A` equipped with a counting `e:Fin{k}≃ A` has decidable equality.
 This follows from Proposition 8.1.8, where we showed that `Fin{k}` has decidable equality, for any `k:ℕ`.
-
-<!-- rosetta-item-end: remark-16.1.6 -->
 
 ## Theorem 16.1.7
 
@@ -104,7 +92,6 @@ Then we will prove both claims in (2), and we will prove the reverse direction o
 
 For the forward direction of claim (1), suppose we have equivalences `e:Fin{k}≃ A` and `f:Fin{l}≃ B`.
 The equivalences `e` and `f` induce via Exercises 9.6 and 9.8 a composite equivalence
-<!-- rosetta-diagram: 2191f9591493; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -172,8 +159,6 @@ Note that the forward direction of the first claim in (2) implies that countings
 Note that both `A` and `B` are decidable subtypes of the coproduct `A+B`.
 Any counting of `A+B` therefore induces countings of `A` and of `B`. ◻
 
-<!-- rosetta-item-end: theorem-16.1.7 -->
-
 ## Corollary 16.1.8
 
 Consider two types `A` and `B`.
@@ -191,4 +176,3 @@ A → count(B).
 
 *Proof.* The first claim follows from condition (2a) in Theorem 16.1.7, and the second claim follows from condition (2b) in Theorem 16.1.7. ◻
 
-<!-- rosetta-item-end: corollary-16.1.8 -->

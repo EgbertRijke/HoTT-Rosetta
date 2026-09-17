@@ -51,8 +51,6 @@ x(y+z) = xy+xz (x+y)z = xz+yz.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-7-8-multiplication-finite -->
-
 ```agda
 mul-Fin :
   (k : ℕ) → Fin k → Fin k → Fin k
@@ -75,16 +73,12 @@ cong-mul-Fin {succ-ℕ k} x y =
   cong-nat-mod-succ-ℕ k ((nat-Fin (succ-ℕ k) x) *ℕ (nat-Fin (succ-ℕ k) y))
 ```
 
-<!-- rosetta-agda-block: exercise-7-8-action-addition-finite -->
-
 ```agda
 ap-add-Fin :
   (k : ℕ) {x y x' y' : Fin k} →
   x ＝ x' → y ＝ y' → add-Fin k x y ＝ add-Fin k x' y'
 ap-add-Fin k p q = ap-binary (add-Fin k) p q
 ```
-
-<!-- rosetta-agda-block: exercise-7-8-congruence-multiplication-natural -->
 
 ```agda
 scalar-invariant-cong-ℕ :
@@ -111,8 +105,6 @@ congruence-mul-ℕ k {x} {y} {x'} {y'} H K =
     ( scalar-invariant-cong-ℕ' k x x' y' H)
     ( scalar-invariant-cong-ℕ k y y' x K)
 ```
-
-<!-- rosetta-agda-block: exercise-7-8-ring-laws-finite -->
 
 ```agda
 associative-mul-Fin :

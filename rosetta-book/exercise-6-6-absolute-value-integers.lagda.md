@@ -40,8 +40,6 @@ and show that it satisfies the following three properties:
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-6-6-absolute-value-integers-block-1 -->
-
 ```agda
 is-zero-ℤ : ℤ → UU lzero
 is-zero-ℤ x = (x ＝ zero-ℤ)
@@ -55,8 +53,6 @@ abstract
   succ-int-ℕ zero-ℕ = refl
   succ-int-ℕ (succ-ℕ x) = refl
 ```
-
-<!-- rosetta-agda-block: exercise-6-6-absolute-value-integers-block-2 -->
 
 ```agda
 abstract
@@ -78,8 +74,6 @@ abstract
   right-add-one-ℤ : (x : ℤ) → x +ℤ one-ℤ ＝ succ-ℤ x
   right-add-one-ℤ x = inv (is-right-add-one-succ-ℤ x)
 ```
-
-<!-- rosetta-agda-block: exercise-6-6-absolute-value-integers-block-3 -->
 
 ```agda
 abstract
@@ -103,8 +97,6 @@ abstract
   right-add-neg-one-ℤ x = inv (is-right-add-neg-one-pred-ℤ x)
 ```
 
-<!-- rosetta-agda-block: exercise-6-6-absolute-value-integers-block-4 -->
-
 ```agda
 abs-ℤ : ℤ → ℕ
 abs-ℤ (inl x) = succ-ℕ x
@@ -124,8 +116,6 @@ abs-neg-ℤ (inr (inl star)) = refl
 abs-neg-ℤ (inr (inr x)) = refl
 ```
 
-<!-- rosetta-agda-block: exercise-6-6-absolute-value-integers-block-5 -->
-
 ```agda
 eq-abs-ℤ : (x : ℤ) → is-zero-ℕ (abs-ℤ x) → is-zero-ℤ x
 eq-abs-ℤ (inr (inl star)) p = refl
@@ -133,8 +123,6 @@ eq-abs-ℤ (inr (inl star)) p = refl
 abs-eq-ℤ : (x : ℤ) → is-zero-ℤ x → is-zero-ℕ (abs-ℤ x)
 abs-eq-ℤ .zero-ℤ refl = refl
 ```
-
-<!-- rosetta-agda-block: exercise-6-6-absolute-value-integers-block-6 -->
 
 ```agda
 predecessor-law-abs-ℤ :
@@ -159,8 +147,6 @@ successor-law-abs-ℤ (inr (inl star)) =
 successor-law-abs-ℤ (inr (inr x)) =
   refl-leq-ℕ (succ-ℕ x)
 ```
-
-<!-- rosetta-agda-block: exercise-6-6-absolute-value-integers-block-7 -->
 
 ```agda
 subadditive-abs-ℤ :
@@ -202,8 +188,6 @@ subadditive-abs-ℤ x (inr (inr (succ-ℕ y))) =
     ( refl)
 ```
 
-<!-- rosetta-agda-block: exercise-6-6-absolute-value-integers-block-8 -->
-
 ```agda
 abstract
   add-int-ℕ : (x y : ℕ) → (int-ℕ x) +ℤ (int-ℕ y) ＝ int-ℕ (x +ℕ y)
@@ -221,8 +205,6 @@ abstract
         by succ-int-ℕ (x +ℕ y)
 ```
 
-<!-- rosetta-agda-block: exercise-6-6-absolute-value-integers-block-9 -->
-
 ```agda
 explicit-mul-ℤ : ℤ → ℤ → ℤ
 explicit-mul-ℤ (inl x) (inl y) = int-ℕ ((succ-ℕ x) *ℕ (succ-ℕ y))
@@ -238,8 +220,6 @@ explicit-mul-ℤ (inr (inr x)) (inr (inr y)) = int-ℕ ((succ-ℕ x) *ℕ (succ-
 explicit-mul-ℤ' : ℤ → ℤ → ℤ
 explicit-mul-ℤ' x y = explicit-mul-ℤ y x
 ```
-
-<!-- rosetta-agda-block: exercise-6-6-absolute-value-integers-block-10 -->
 
 ```agda
 abstract
@@ -309,8 +289,6 @@ abstract
     ( ( add-int-ℕ (succ-ℕ y) ((succ-ℕ x) *ℕ (succ-ℕ y))) ∙
       ( ap int-ℕ (commutative-add-ℕ (succ-ℕ y) ((succ-ℕ x) *ℕ (succ-ℕ y)))))
 ```
-
-<!-- rosetta-agda-block: exercise-6-6-absolute-value-integers-block-11 -->
 
 ```agda
 abstract

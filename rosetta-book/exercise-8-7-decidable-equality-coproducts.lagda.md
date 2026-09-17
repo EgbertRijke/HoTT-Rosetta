@@ -38,14 +38,10 @@ Conclude that `ℤ` has decidable equality.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-8-7-injective-map -->
-
 ```agda
 is-injective : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-injective {l1} {l2} {A} {B} f = {x y : A} → f x ＝ f y → x ＝ y
 ```
-
-<!-- rosetta-agda-block: exercise-8-7-negated-equality -->
 
 ```agda
 nonequal : {l : Level} {A : UU l} → A → A → UU l
@@ -54,8 +50,6 @@ nonequal x y = ¬ (x ＝ y)
 infix 6 _≠_
 _≠_ = nonequal
 ```
-
-<!-- rosetta-agda-block: exercise-8-7-coproduct-injections -->
 
 ```agda
 module _
@@ -75,8 +69,6 @@ module _
   neq-inr-inl ()
 ```
 
-<!-- rosetta-agda-block: exercise-8-7-observational-equality -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -87,8 +79,6 @@ module _
     Eq-eq-coproduct-inl : {x y : A} → x ＝ y → Eq-coproduct (inl x) (inl y)
     Eq-eq-coproduct-inr : {x y : B} → x ＝ y → Eq-coproduct (inr x) (inr y)
 ```
-
-<!-- rosetta-agda-block: exercise-8-7-observational-identity -->
 
 ```agda
 module _
@@ -106,8 +96,6 @@ module _
   eq-Eq-coproduct .(inl x) .(inl x) (Eq-eq-coproduct-inl {x} {.x} refl) = refl
   eq-Eq-coproduct .(inr x) .(inr x) (Eq-eq-coproduct-inr {x} {.x} refl) = refl
 ```
-
-<!-- rosetta-agda-block: exercise-8-7-decidable-coproduct -->
 
 ```agda
 module _

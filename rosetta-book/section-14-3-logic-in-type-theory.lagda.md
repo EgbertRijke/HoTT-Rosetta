@@ -34,8 +34,6 @@ Given two propositions `P` and `Q`, we define their **disjunction**
 P∨ Q ≔ ‖P+Q‖.
 ```
 
-<!-- rosetta-agda-block: definition-14.3.1-disjunction-underlying-types -->
-
 ```agda
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2)
@@ -50,8 +48,6 @@ module _
   is-prop-disjunction-type : is-prop disjunction-type
   is-prop-disjunction-type = is-prop-type-Prop disjunction-type-Prop
 ```
-
-<!-- rosetta-agda-block: definition-14.3.1-disjunction -->
 
 ```agda
 module _
@@ -72,7 +68,6 @@ module _
   _∨_ : Prop (l1 ⊔ l2)
   _∨_ = disjunction-Prop
 ```
-<!-- rosetta-item-end: definition-14.3.1 -->
 
 ## Proposition 14.3.2
 
@@ -91,8 +86,6 @@ i ≔ η∘inl
 j ≔ η∘inr.
 ```
 
-<!-- rosetta-agda-block: proposition-14.3.2-introductions -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -106,7 +99,6 @@ module _
 ```
 
 Now consider the following composition of maps, for an arbitrary proposition `R`:
-<!-- rosetta-diagram: f50f266e955f; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -118,8 +110,6 @@ Arrows:
 - (P+Q→ R) --{h ↦ (h∘ inl,h∘ inr)}--> (P→ R)× (Q→ R)
 ```
 The first map is an equivalence by the universal property of the propositional truncation, and the second map is an equivalence by the universal property of coproducts (Exercise 13.8). ◻
-
-<!-- rosetta-agda-block: proposition-14.3.2-evaluation-and-specification -->
 
 ```agda
 ev-disjunction :
@@ -140,8 +130,6 @@ universal-property-disjunction-Prop P Q =
   universal-property-disjunction-type (type-Prop P) (type-Prop Q)
 ```
 
-<!-- rosetta-agda-block: proposition-14.3.2-logical-universal-property -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -158,8 +146,6 @@ module _
     universal-property-disjunction-type A B (disjunction-type-Prop A B)
   up-disjunction R = ev-disjunction , elim-disjunction' R
 ```
-
-<!-- rosetta-agda-block: proposition-14.3.2-composite-equivalence -->
 
 ```agda
 module _
@@ -183,7 +169,6 @@ module _
   pr1 (equiv-ev-disjunction R) = ev-disjunction
   pr2 (equiv-ev-disjunction R) = is-equiv-ev-disjunction R
 ```
-<!-- rosetta-item-end: proposition-14.3.2 -->
 
 ## Definition 14.3.3
 
@@ -191,8 +176,6 @@ Given a family `P` of propositions over a type `A`, we define the **existential 
 ```text
 ∃_{(x:A)}P(x)≔ ‖Σ(x:A) P(x)‖.
 ```
-
-<!-- rosetta-agda-block: definition-14.3.3-existence-underlying-families -->
 
 ```agda
 module _
@@ -208,8 +191,6 @@ module _
   is-prop-exists-structure : is-prop exists-structure
   is-prop-exists-structure = is-prop-type-Prop exists-structure-Prop
 ```
-
-<!-- rosetta-agda-block: definition-14.3.3-existential-quantification -->
 
 ```agda
 module _
@@ -229,7 +210,6 @@ module _
   ∃ : Prop (l1 ⊔ l2)
   ∃ = exists-Prop
 ```
-<!-- rosetta-item-end: definition-14.3.3 -->
 
 ## Proposition 14.3.4
 
@@ -247,8 +227,6 @@ Furthermore, the proposition `∃_{(x:A)}P(x)` satisfies the universal property 
 
 *Proof.* The dependent function `ε : Π(a:A) (P(a)→ ∃_{(x:A)}P(x))` is given by `ε(a,p):=η(a,p)`.
 
-<!-- rosetta-agda-block: proposition-14.3.4-introduction -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
@@ -259,7 +237,6 @@ module _
 ```
 
 Now consider the following composition of maps
-<!-- rosetta-diagram: d76076261c30; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -271,8 +248,6 @@ Arrows:
 - ((Σ(x:A) P(x))→ Q) --unlabeled--> (Π(x:A) P(x)→ Q)
 ```
 The first map in this composite is an equivalence by the universal property of the propositional truncation, and the second map is an equivalence by the universal property of `Σ`-types (Theorem 13.3.1). ◻
-
-<!-- rosetta-agda-block: proposition-14.3.4-universal-property-specification -->
 
 ```agda
 module _
@@ -293,8 +268,6 @@ module _
     universal-property-exists-structure A (type-Prop ∘ P) S
 ```
 
-<!-- rosetta-agda-block: proposition-14.3.4-evaluation-and-elimination -->
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
@@ -309,8 +282,6 @@ module _
     ((x : A) → B x → type-Prop Q) → (exists-structure A B → type-Prop Q)
   elim-exists Q f = map-universal-property-trunc-Prop Q (ind-Σ f)
 ```
-
-<!-- rosetta-agda-block: proposition-14.3.4-composite-equivalence -->
 
 ```agda
 module _
@@ -334,8 +305,6 @@ module _
   pr2 (equiv-ev-intro-exists Q) = is-equiv-ev-intro-exists Q
 ```
 
-<!-- rosetta-agda-block: proposition-14.3.4-logical-universal-property -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
@@ -345,11 +314,8 @@ module _
     universal-property-exists-structure A B (exists-structure-Prop A B)
   up-exists Q = (ev-intro-exists , elim-exists Q)
 ```
-<!-- rosetta-item-end: proposition-14.3.4 -->
 
 In the following table we give an overview of the interpretation of the logical connectives using the propositions in type theory.
-
-<!-- unsupported LaTeX environment: center -->
 
 | logical connective      | interpretation in type theory |
 |:------------------------|:------------------------------|
@@ -363,8 +329,6 @@ In the following table we give an overview of the interpretation of the logical 
 | `∀_{(x:A)}P(x)` | `Π(x:A) P(x)`             |
 
 ### Proposition-valued interpretations in the table
-
-<!-- rosetta-agda-block: section-14.3-table-implication -->
 
 ```agda
 type-hom-Prop :
@@ -384,8 +348,6 @@ pr2 (hom-Prop P Q) = is-prop-hom-Prop P Q
 infixr 5 _⇒_
 _⇒_ = hom-Prop
 ```
-
-<!-- rosetta-agda-block: section-14.3-table-conjunction -->
 
 ```agda
 module _
@@ -408,8 +370,6 @@ module _
   _∧_ : Prop (l1 ⊔ l2)
   _∧_ = conjunction-Prop
 ```
-
-<!-- rosetta-agda-block: section-14.3-table-bi-implication -->
 
 ```agda
 module _
@@ -434,8 +394,6 @@ module _
   _⇔_ : Prop (l1 ⊔ l2)
   _⇔_ = iff-Prop
 ```
-
-<!-- rosetta-agda-block: section-14.3-table-universal-quantification -->
 
 ```agda
 module _

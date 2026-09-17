@@ -25,14 +25,10 @@ ind_W(h,tree(x,α))≐ h(x,α,λ y. ind_W(h,α(y))).
 ```
 The elements of W-types are called **(well-founded) trees**.
 
-<!-- rosetta-item-end: definition-20.1.1 -->
-
 ## Remark 20.1.2
 
 Some authors write `sup` for the constructor of a W-type.
 The intuition that `tree(a,α)` is a supremum of the family of elements `α(y)` indexed by `y:B(a)` is, however, somewhat misleading, because `tree(a,α)` does not satisfy the defining properties of a supremum.
-
-<!-- rosetta-item-end: remark-20.1.2 -->
 
 ## Remark 20.1.3
 
@@ -47,8 +43,6 @@ f(tree(x,α))≔ h(x,α,λ y. f(α(y))),
 ```
 which contains all the information to carry out the construction via the induction principle of W-types.
 The advantage of definitions by pattern matching is that they directly display the defining judgmental equality the function being defined.
-
-<!-- rosetta-item-end: remark-20.1.3 -->
 
 ## Remark 20.1.4
 
@@ -88,8 +82,6 @@ is defined by `is-constant_W(w)≔is-empty(B(arity(w)))`.
 
 On the other hand, if each type `B(x)` is inhabited, then there are no such constants and we will see in the following proposition that the W-type `W(A,B)` is empty in this case.
 
-<!-- rosetta-item-end: remark-20.1.4 -->
-
 ## Proposition 20.1.5
 
 Consider a family `B` of types over `A`.
@@ -120,8 +112,6 @@ To show that `¬¬(B(x))` holds, assume that `¬(B(x))` holds.
 In other words, assume a function `h:B(x)→empty`.
 Then we have the constant element `c_x(h):W(A,B)`.
 This is impossible, since `W(A,B)` was assumed to be empty. ◻
-
-<!-- rosetta-item-end: proposition-20.1.5 -->
 
 ## Example 20.1.6
 
@@ -157,8 +147,6 @@ p(tree(true,α)) : tree(true,const_{α(⋆)})=tree(true,α)
 by the fact that `const_{α(⋆)}=α` for any map `α:unit→ N`.
 This completes the construction of the equivalence `ℕ≃ N`.
 
-<!-- rosetta-item-end: example-20.1.6 -->
-
 ## Example 20.1.7
 
 Consider the type family `B` over `bool` given by
@@ -172,8 +160,6 @@ node : T_2
 ```
 We leave the construction of the equivalence `T_2≃W(bool,B)` as Exercise 20.1.
 The reason we call the elements of `T_2` oriented binary rooted trees is that in a tree of the form `[T_1,T_2]` we can see by inspection which branch is on the left and which branch is on the right.
-
-<!-- rosetta-item-end: example-20.1.7 -->
 
 ## Example 20.1.8
 
@@ -199,8 +185,6 @@ bin-tree(bool,ind-bool(T_2,T_1))
 can always be identified.
 In the terminology of Exercise 19.10, the constructor `bin-tree` of `Bin-Tree` is equivalently described as a commutative binary operation on `Bin-Tree`.
 
-<!-- rosetta-item-end: example-20.1.8 -->
-
 ## Example 20.1.9
 
 The W-type `W(ℕ,Fin)` is the type of **oriented finitely branching rooted trees**.
@@ -208,4 +192,3 @@ On the other hand, we define the type of **(unoriented) finitely branching roote
 The qualitive difference between the types of oriented and unoriented finitely branching rooted trees is similar to the qualitative difference between types of oriented and unoriented binary rooted trees.
 In the type of oriented finitely branching rooted trees, we record the ordering of the branches while in the type of unoriented finitely branching rooted trees there are identifications between trees that have the same branches up to permutation.
 
-<!-- rosetta-item-end: example-20.1.9 -->

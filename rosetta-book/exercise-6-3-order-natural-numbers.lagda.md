@@ -62,8 +62,6 @@ Show that `k≤ min(m,n)` holds if and only if both `k≤ m` and `k≤ n` hold, 
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-1 -->
-
 ```agda
 leq-ℕ : ℕ → ℕ → UU lzero
 leq-ℕ zero-ℕ m = unit
@@ -73,8 +71,6 @@ leq-ℕ (succ-ℕ n) (succ-ℕ m) = leq-ℕ n m
 infix 30 _≤-ℕ_
 _≤-ℕ_ = leq-ℕ
 ```
-
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-2 -->
 
 ```agda
 concatenate-eq-leq-eq-ℕ :
@@ -90,8 +86,6 @@ concatenate-eq-leq-ℕ :
 concatenate-eq-leq-ℕ n refl H = H
 ```
 
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-3 -->
-
 ```agda
 refl-leq-ℕ : (n : ℕ) → n ≤-ℕ n
 refl-leq-ℕ zero-ℕ = star
@@ -100,8 +94,6 @@ refl-leq-ℕ (succ-ℕ n) = refl-leq-ℕ n
 leq-eq-ℕ : (m n : ℕ) → m ＝ n → m ≤-ℕ n
 leq-eq-ℕ m .m refl = refl-leq-ℕ m
 ```
-
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-4 -->
 
 ```agda
 abstract
@@ -117,8 +109,6 @@ antisymmetric-leq-ℕ (succ-ℕ m) (succ-ℕ n) p q =
   ap succ-ℕ (antisymmetric-leq-ℕ m n p q)
 ```
 
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-5 -->
-
 ```agda
 linear-leq-ℕ :
   (m n : ℕ) → (m ≤-ℕ n) + (n ≤-ℕ m)
@@ -127,8 +117,6 @@ linear-leq-ℕ zero-ℕ (succ-ℕ n) = inl star
 linear-leq-ℕ (succ-ℕ m) zero-ℕ = inr star
 linear-leq-ℕ (succ-ℕ m) (succ-ℕ n) = linear-leq-ℕ m n
 ```
-
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-6 -->
 
 ```agda
 cases-order-three-elements-ℕ :
@@ -161,8 +149,6 @@ order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) =
   order-three-elements-ℕ x y z
 ```
 
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-7 -->
-
 ```agda
 leq-zero-ℕ :
   (n : ℕ) → zero-ℕ ≤-ℕ n
@@ -186,8 +172,6 @@ abstract
   preserves-leq-succ-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) (succ-leq-ℕ n) p
 ```
 
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-8 -->
-
 ```agda
 abstract
   contradiction-leq-ℕ : (m n : ℕ) → m ≤-ℕ n → ¬ ((succ-ℕ n) ≤-ℕ m)
@@ -196,8 +180,6 @@ abstract
   contradiction-leq-ℕ' : (m n : ℕ) → (succ-ℕ n) ≤-ℕ m → ¬ (m ≤-ℕ n)
   contradiction-leq-ℕ' m n K H = contradiction-leq-ℕ m n H K
 ```
-
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-9 -->
 
 ```agda
 abstract
@@ -224,8 +206,6 @@ abstract
       ( preserves-leq-left-add-ℕ n m m' H)
 ```
 
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-10 -->
-
 ```agda
 abstract
   reflects-leq-left-add-ℕ :
@@ -243,8 +223,6 @@ abstract
         ( commutative-add-ℕ k n))
 ```
 
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-11 -->
-
 ```agda
 abstract
   leq-add-ℕ : (m n : ℕ) → m ≤-ℕ (m +ℕ n)
@@ -261,8 +239,6 @@ abstract
   leq-add-ℕ' m n =
     concatenate-leq-eq-ℕ m (leq-add-ℕ m n) (commutative-add-ℕ m n)
 ```
-
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-12 -->
 
 ```agda
 abstract
@@ -294,8 +270,6 @@ abstract
       ( preserves-leq-left-mul-ℕ n m m' H)
 ```
 
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-13 -->
-
 ```agda
 abstract
   reflects-leq-mul-ℕ :
@@ -319,8 +293,6 @@ abstract
         ( commutative-mul-ℕ (succ-ℕ k) n))
 ```
 
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-14 -->
-
 ```agda
 min-ℕ : ℕ → (ℕ → ℕ)
 min-ℕ 0 n = 0
@@ -330,8 +302,6 @@ min-ℕ (succ-ℕ m) (succ-ℕ n) = succ-ℕ (min-ℕ m n)
 ap-min-ℕ : {x x' y y' : ℕ} → x ＝ x' → y ＝ y' → min-ℕ x y ＝ min-ℕ x' y'
 ap-min-ℕ p q = ap-binary min-ℕ p q
 ```
-
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-15 -->
 
 ```agda
 abstract
@@ -362,8 +332,6 @@ abstract
     leq-right-leq-min-ℕ k m n H
 ```
 
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-16 -->
-
 ```agda
 max-ℕ : ℕ → (ℕ → ℕ)
 max-ℕ 0 n = n
@@ -376,8 +344,6 @@ max-ℕ' x y = max-ℕ y x
 ap-max-ℕ : {x x' y y' : ℕ} → x ＝ x' → y ＝ y' → max-ℕ x y ＝ max-ℕ x' y'
 ap-max-ℕ p q = ap-binary max-ℕ p q
 ```
-
-<!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-17 -->
 
 ```agda
 abstract

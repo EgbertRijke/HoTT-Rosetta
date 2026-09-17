@@ -24,8 +24,6 @@ is-contr(B)→is-contr(A).
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-10-2-contractibility-retracts -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : UU l2)

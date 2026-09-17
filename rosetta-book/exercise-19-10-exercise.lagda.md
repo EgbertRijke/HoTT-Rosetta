@@ -17,7 +17,6 @@ If `A` is a set, show that the map
 ```
 given by `h↦ λ x. λ y. h(Fin{2},(x,y))` is an equivalence.
 In other words, show that every commutative operation `f:A→(A→ A)` extends uniquely along the map `f↦(Fin{2},f)` as in the diagram
-<!-- rosetta-diagram: bfdf777c4de4; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 

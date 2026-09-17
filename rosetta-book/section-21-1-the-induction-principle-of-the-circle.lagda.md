@@ -35,8 +35,6 @@ dgen_{S^1}:(Π(x:S^1) P(x))→(Σ(u:P(base)) tr_P(loop,u) = u)
 ```
 given by `dgen_{S^1}(f)≔(f(base),apd_{f}(loop))`.
 
-<!-- rosetta-item-end: definition-21.1.1 -->
-
 The induction principle of the circle states that in order to construct a section `f:Π(x:S^1) P(x)`, it suffices to provide an element `u:P(base)` and an identification
 ```text
 tr_P(loop,u)=u.
@@ -60,8 +58,6 @@ comp_S^1:dgen_{S^1}∘ ind-S^1~ id
 ```
 for the computation rules.
 
-<!-- rosetta-item-end: definition-21.1.2 -->
-
 ## Remark 21.1.3
 
 The type of identifications `(u,p)=(u',p')` in the type
@@ -69,7 +65,6 @@ The type of identifications `(u,p)=(u',p')` in the type
 Σ(u:P(base)) tr_P(loop,u)=u
 ```
 is equivalent to the type of pairs `(α,β)` consisting of an identification `α:u=u'`, and an identification `β` witnessing that the square
-<!-- rosetta-diagram: 500a745466d2; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -90,7 +85,6 @@ Therefore it follows from the induction principle of the circle that for any `(u
 α : f(base)=u,
 ```
 and an identification `β` witnessing that the square
-<!-- rosetta-diagram: b9d50548abb6; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -107,4 +101,3 @@ Arrows:
 ```
 commutes.
 
-<!-- rosetta-item-end: remark-21.1.3 -->

@@ -29,13 +29,10 @@ The alert reader may now have observed that the interpretation of a subset `{x�
 This points at a slight problem of the Curry-Howard interpretation of the existential quantifier.
 While the Curry-Howard interpretation of the existential quantifier is nevertheless useful and important, we will reinterpret the existential quantifier in type theory in Section 14.3.
 
-<!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-56 -->
-
 ```agda
 classical-Fin : ℕ → UU lzero
 classical-Fin k = Σ ℕ (λ x → le-ℕ x k)
 ```
-<!-- rosetta-item-end: remark-7.3.1 -->
 
 Since subsets are interpreted as `Σ`-types, the ‘classical’ definition of the standard finite types is
 ```text
@@ -53,22 +50,17 @@ Fin{k+1} ≔ Fin{k}+unit.
 ```
 We will write `i` for the inclusion `inl:Fin{k}→Fin{k+1}` and we will write `⋆` for the point `inr(⋆)`.
 
-<!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-77 -->
-
 ```agda
 Fin : ℕ → UU lzero
 Fin zero-ℕ = empty
 Fin (succ-ℕ n) = Fin n + unit
 ```
 
-<!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-87 -->
-
 ```agda
 inl-Fin :
   (k : ℕ) → Fin k → Fin (succ-ℕ k)
 inl-Fin k = inl
 ```
-<!-- rosetta-item-end: definition-7.3.2 -->
 
 In Exercise 7.7 you will be asked to show that the types `classical-Fin_k` and `Fin{k}` are isomorphic.
 
@@ -97,8 +89,6 @@ f_{k+1}(i(x)) ≔ g_k(x,f_k(x))
 f_{k+1}(⋆) ≔ p_k.
 ```
 
-<!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-136 -->
-
 ```agda
 ind-Fin : 
   {i : Level} {P : (k : ℕ) → Fin k → UU i} →
@@ -107,7 +97,6 @@ ind-Fin :
 ind-Fin g p {succ-ℕ k} (inl x) = g {k} x (ind-Fin g p {k} x)
 ind-Fin g p {succ-ℕ k} (inr star) = p {k}
 ```
-<!-- rosetta-item-end: remark-7.3.3 -->
 
 We will often use definitions by pattern matching for two reasons: (i) such definitions are concise, and (ii) they display the judgmental equalities that hold for the defined object.
 Those judgmental equalities are the only thing we know about that object, and proving a claim about it often amounts to finding a way to apply these judgmental equalities.
@@ -123,14 +112,11 @@ nat-Fin_{k+1}(i(x)) ≔ nat-Fin_{k}(x)
 nat-Fin_{k+1}(⋆) ≔ k.
 ```
 
-<!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-166 -->
-
 ```agda
 nat-Fin : (k : ℕ) → Fin k → ℕ
 nat-Fin (succ-ℕ k) (inl x) = nat-Fin k x
 nat-Fin (succ-ℕ k) (inr x) = k
 ```
-<!-- rosetta-item-end: definition-7.3.4 -->
 
 ## Lemma 7.3.5
 
@@ -146,8 +132,6 @@ nat-Fin_{k+1}(⋆)≐ k<k+1.
 ```
  ◻
 
-<!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-189 -->
-
 ```agda
 strict-upper-bound-nat-Fin : (k : ℕ) (x : Fin k) → le-ℕ (nat-Fin k x) k
 strict-upper-bound-nat-Fin (succ-ℕ k) (inl x) =
@@ -160,7 +144,6 @@ strict-upper-bound-nat-Fin (succ-ℕ k) (inl x) =
 strict-upper-bound-nat-Fin (succ-ℕ k) (inr star) =
   succ-le-ℕ k
 ```
-<!-- rosetta-item-end: lemma-7.3.5 -->
 
 ## Proposition 7.3.6
 
@@ -174,8 +157,6 @@ The inclusion function `nat-Fin_k : Fin{k}→ ℕ` is injective, for each `k:ℕ
 α_{k+1}(⋆,i(y),p) ≔ ex-falso(g(p)) α_{k+1}(⋆,⋆,p) ≔ refl,
 ```
 where `f:(nat-Fin_{k+1}(i(x))=nat-Fin_{k+1}(⋆))→empty` and `g:(nat-Fin_{k+1}(⋆)=nat-Fin_{k+1}(i(y)))→empty` are obtained from the fact that `nat-Fin_{k+1}(i(z))≐nat-Fin_k(z)<k` for any `z:Fin{k}`, and the fact that `nat-Fin_{k+1}(⋆)≐ k`. ◻
-
-<!-- rosetta-agda-block: section-7-3-the-standard-finite-types-block-230 -->
 
 ```agda
 is-injective : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
@@ -191,4 +172,3 @@ is-injective-nat-Fin (succ-ℕ k) {inr star} {inl y} p =
 is-injective-nat-Fin (succ-ℕ k) {inr star} {inr star} p =
   refl
 ```
-<!-- rosetta-item-end: proposition-7.3.6 -->

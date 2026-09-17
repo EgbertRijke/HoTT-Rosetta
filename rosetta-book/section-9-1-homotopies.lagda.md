@@ -65,8 +65,6 @@ The type of **homotopies** from `f` to `g` is defined as the type of pointwise i
   f ~ g ≔ Π(x : A) f(x) = g(x).
 ```
 
-<!-- rosetta-agda-block: definition-9.1.2-homotopies -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}

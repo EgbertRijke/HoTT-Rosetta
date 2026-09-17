@@ -42,8 +42,6 @@ The rules for higher inductive types therefore come in four sets, just as the ru
 The formation rule of the propositional truncation postulates that for every type `A` we can form the propositional truncation of `A`.
 The formation rule is therefore as follows:
 
-<!-- rosetta-proof-tree: f37dfce44a83; review: pending -->
-
 *Proof tree (automatic faithful draft).*
 
 ```text
@@ -55,10 +53,6 @@ The formation rule is therefore as follows:
 Furthermore, we will assume that all universes are closed under propositional truncations.
 In other words, for any universe `𝒰` we will assume the rules
 
-<!-- unsupported LaTeX environment: minipage -->
-
-<!-- rosetta-proof-tree: 19605e39c500; review: pending -->
-
 *Proof tree (automatic faithful draft).*
 
 ```text
@@ -66,10 +60,6 @@ In other words, for any universe `𝒰` we will assume the rules
 ───────────
 X:𝒰⊢ ‖X‖̌:𝒰
 ```
-
-<!-- unsupported LaTeX environment: minipage -->
-
-<!-- rosetta-proof-tree: 5c8275c99809; review: pending -->
 
 *Proof tree (automatic faithful draft).*
 
@@ -80,8 +70,6 @@ X:𝒰⊢ T(‖X‖̌)≐‖T(X)‖ type
 ```
 
 ### Assumed proposition-level formation in Agda universes
-
-<!-- rosetta-agda-block: section-14.2-assumed-formation -->
 
 ```agda
 postulate
@@ -102,8 +90,6 @@ In the case of the propositional truncation, there is one point constructor and 
 
 ### Assumed point constructor
 
-<!-- rosetta-agda-block: section-14.2-assumed-point-constructor -->
-
 ```agda
 postulate
   unit-trunc-Prop : {l : Level} {A : UU l} → A → ║ A ║₋₁
@@ -116,8 +102,6 @@ Therefore it follows immediately that `‖A‖` is a proposition.
 
 ### Assumed path constructor
 
-<!-- rosetta-agda-block: section-14.2-assumed-path-constructor -->
-
 ```agda
 postulate
   all-elements-equal-type-trunc-Prop :
@@ -128,22 +112,17 @@ postulate
 
 For any type `A`, the type `‖A‖` is a proposition.`□`
 
-<!-- rosetta-agda-block: lemma-14.2.1-truncation-is-proposition -->
-
 ```agda
 is-prop-type-trunc-Prop : {l : Level} {A : UU l} → is-prop (║ A ║₋₁)
 is-prop-type-trunc-Prop =
   is-prop-all-elements-equal all-elements-equal-type-trunc-Prop
 ```
 
-<!-- rosetta-agda-block: lemma-14.2.1-bundled-truncation -->
-
 ```agda
 trunc-Prop : {l : Level} → UU l → Prop l
 pr1 (trunc-Prop A) = type-trunc-Prop A
 pr2 (trunc-Prop A) = is-prop-type-trunc-Prop
 ```
-<!-- rosetta-item-end: lemma-14.2.1 -->
 
 ### The induction principle and computation rules
 
@@ -190,8 +169,6 @@ h:Π(t:‖A‖) Q(t)
 ```
 equipped with a homotopy `h∘η~ f`.
 
-<!-- rosetta-agda-block: definition-14.2.2-higher-inductive-specification -->
-
 ```agda
 case-paths-induction-principle-propositional-truncation :
   { l : Level} {l1 l2 : Level} {A : UU l1}
@@ -213,8 +190,6 @@ induction-principle-propositional-truncation l {l1} {l2} {A} P α f =
 
 ### Assumed higher-inductive elimination and its computation homotopy
 
-<!-- rosetta-agda-block: definition-14.2.2-assumed-induction -->
-
 ```agda
 postulate
   induction-trunc-Prop :
@@ -222,8 +197,6 @@ postulate
     induction-principle-propositional-truncation l
       (trunc-Prop A) all-elements-equal-type-trunc-Prop unit-trunc-Prop
 ```
-
-<!-- rosetta-agda-block: definition-14.2.2-induction-and-computation -->
 
 ```agda
 ind-trunc-Prop' :
@@ -242,7 +215,6 @@ compute-ind-trunc-Prop' :
   (ind-trunc-Prop' P f H ∘ unit-trunc-Prop) ~ f
 compute-ind-trunc-Prop' P f H = pr2 (induction-trunc-Prop P f H)
 ```
-<!-- rosetta-item-end: definition-14.2.2 -->
 
 ## Remark 14.2.3
 
@@ -256,8 +228,6 @@ for any `u,v:Q(x)`.
 By assumption, there is an identification on the left hand side, so any two elements `u` and `v` in `Q(x)` are equal.
 
 Since the induction principle of the propositional truncation is only applicable to families of propositions over `‖A‖`, it also follows that there are no interesting computation rules to state: any identification in a proposition just holds.
-
-<!-- rosetta-agda-block: remark-14.2.3-path-clause-propositions -->
 
 ```agda
 abstract
@@ -281,8 +251,6 @@ abstract
     eq-is-prop (is-prop-B q)
 ```
 
-<!-- rosetta-agda-block: remark-14.2.3-transport-identifications -->
-
 ```agda
 is-emb-tr-trunc-Prop :
   {l1 l2 : Level} {A : UU l1} (P : ║ A ║₋₁ → UU l2)
@@ -300,8 +268,6 @@ pr1 (equiv-identifications-tr-trunc-Prop P x y u v) =
 pr2 (equiv-identifications-tr-trunc-Prop P x y u v) =
   is-equiv-map-section-is-equiv (is-emb-tr-trunc-Prop P x y u v)
 ```
-
-<!-- rosetta-agda-block: remark-14.2.3-propositional-induction -->
 
 ```agda
 module _
@@ -321,7 +287,6 @@ module _
     compute-ind-trunc-Prop h =
       eq-is-prop (is-prop-Π (λ x → is-prop-type-Prop (P (unit-trunc-Prop x))))
 ```
-<!-- rosetta-item-end: remark-14.2.3 -->
 
 ### The universal property
 
@@ -348,8 +313,6 @@ tr_{λ x. Q}(α(x,y),u)=v.
 for any `u,v:Q` and any `x,y:‖A‖`.
 However, we have such identifications by the assumption that `Q` is a proposition, so the proof is complete. ◻
 
-<!-- rosetta-agda-block: theorem-14.2.4-recursion -->
-
 ```agda
 module _
   {l l1 : Level} {A : UU l1} (P : Prop l)
@@ -365,8 +328,6 @@ module _
     compute-rec-trunc-Prop = compute-ind-trunc-Prop (λ _ → P)
 ```
 
-<!-- rosetta-agda-block: theorem-14.2.4-universal-property -->
-
 ```agda
 abstract
   is-propositional-truncation-trunc-Prop :
@@ -378,8 +339,6 @@ abstract
       ( unit-trunc-Prop)
       ( λ Q → ind-trunc-Prop (λ x → Q))
 ```
-
-<!-- rosetta-agda-block: theorem-14.2.4-unique-extensions -->
 
 ```agda
 abstract
@@ -406,7 +365,6 @@ abstract
       ( P)
       ( f)
 ```
-<!-- rosetta-item-end: theorem-14.2.4 -->
 
 One simple application of the universal property of the propositional truncation is that `‖_‖` acts on functions in a functorial way.
 
@@ -425,7 +383,6 @@ for any two types `A` and `B`, such that
 ### Proof
 
 *Proof.* For any `f:A→ B`, the map `‖f‖:‖A‖→‖B‖` is defined to be the unique extension
-<!-- rosetta-diagram: 5d4d1dc58188; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -442,8 +399,6 @@ Arrows:
 ```
 To see that `‖_‖` preserves identity maps and compositions, simply note that `id[‖A‖]` is an extension of `id[A]`, and that `‖g‖∘‖f‖` is an extension of `g∘ f`.
 Hence the homotopies are obtained by uniqueness. ◻
-
-<!-- rosetta-agda-block: proposition-14.2.5-functorial-map -->
 
 ```agda
 abstract
@@ -467,8 +422,6 @@ abstract
     pr1 (center (unique-map-trunc-Prop f))
 ```
 
-<!-- rosetta-agda-block: proposition-14.2.5-extension-homotopy-and-uniqueness -->
-
 ```agda
 abstract
   htpy-map-trunc-Prop :
@@ -486,8 +439,6 @@ abstract
     htpy-eq (ap pr1 (contraction (unique-map-trunc-Prop f) (pair h H)))
 ```
 
-<!-- rosetta-agda-block: proposition-14.2.5-identity-law -->
-
 ```agda
 abstract
   id-map-trunc-Prop :
@@ -495,8 +446,6 @@ abstract
   id-map-trunc-Prop {l1} {A} =
     htpy-uniqueness-map-trunc-Prop id id refl-htpy
 ```
-
-<!-- rosetta-agda-block: proposition-14.2.5-composition-law -->
 
 ```agda
 abstract
@@ -512,4 +461,3 @@ abstract
       ( ( (map-trunc-Prop g) ·l (htpy-map-trunc-Prop f)) ∙h
         ( ( htpy-map-trunc-Prop g) ·r f))
 ```
-<!-- rosetta-item-end: proposition-14.2.5 -->

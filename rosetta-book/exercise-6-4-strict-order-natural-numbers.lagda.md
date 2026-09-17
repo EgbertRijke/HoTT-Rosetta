@@ -55,8 +55,6 @@ for any `m,n :ℕ`.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-6-4-strict-order-natural-numbers-block-1 -->
-
 ```agda
 le-ℕ : ℕ → ℕ → UU lzero
 le-ℕ m zero-ℕ = empty
@@ -66,8 +64,6 @@ le-ℕ (succ-ℕ n) (succ-ℕ m) = le-ℕ n m
 infix 30 _<-ℕ_
 _<-ℕ_ = le-ℕ
 ```
-
-<!-- rosetta-agda-block: exercise-6-4-strict-order-natural-numbers-block-2 -->
 
 ```agda
 concatenate-eq-le-eq-ℕ :
@@ -82,8 +78,6 @@ concatenate-le-eq-ℕ :
   {x y z : ℕ} → le-ℕ x y → y ＝ z → le-ℕ x z
 concatenate-le-eq-ℕ p refl = p
 ```
-
-<!-- rosetta-agda-block: exercise-6-4-strict-order-natural-numbers-block-3 -->
 
 ```agda
 is-nonzero-le-ℕ : (m n : ℕ) → le-ℕ m n → is-nonzero-ℕ n
@@ -105,8 +99,6 @@ abstract
   contradiction-le-one-ℕ (succ-ℕ n) ()
 ```
 
-<!-- rosetta-agda-block: exercise-6-4-strict-order-natural-numbers-block-4 -->
-
 ```agda
 abstract
   irreflexive-le-ℕ : (n : ℕ) → ¬ (n <-ℕ n)
@@ -126,8 +118,6 @@ abstract
     transitive-le-ℕ n m l p q
 ```
 
-<!-- rosetta-agda-block: exercise-6-4-strict-order-natural-numbers-block-5 -->
-
 ```agda
 abstract
   succ-le-ℕ : (n : ℕ) → le-ℕ n (succ-ℕ n)
@@ -139,8 +129,6 @@ abstract
   preserves-le-succ-ℕ m n H =
     transitive-le-ℕ m n (succ-ℕ n) H (succ-le-ℕ n)
 ```
-
-<!-- rosetta-agda-block: exercise-6-4-strict-order-natural-numbers-block-6 -->
 
 ```agda
 abstract
@@ -157,8 +145,6 @@ abstract
   concatenate-le-leq-ℕ {succ-ℕ x} {succ-ℕ y} {succ-ℕ z} H K =
     concatenate-le-leq-ℕ {x} {y} {z} H K
 ```
-
-<!-- rosetta-agda-block: exercise-6-4-strict-order-natural-numbers-block-7 -->
 
 ```agda
 abstract
@@ -181,8 +167,6 @@ abstract
   le-not-leq-ℕ (succ-ℕ m) zero-ℕ H = ex-falso (H star)
   le-not-leq-ℕ (succ-ℕ m) (succ-ℕ n) H = le-not-leq-ℕ m n H
 ```
-
-<!-- rosetta-agda-block: exercise-6-4-strict-order-natural-numbers-block-8 -->
 
 ```agda
 abstract

@@ -25,8 +25,6 @@ f^{-1}(μ_H(x,y)) = f^{-1}(μ_H(f(f^{-1}(x)),f(f^{-1}(y))))
 ```
  ◻
 
-<!-- rosetta-item-end: lemma-19.3.1 -->
-
 ## Definition 19.3.2
 
 Let `G` and `H` be a semigroups in a univalent universe `𝒰`.
@@ -35,8 +33,6 @@ We define the family of maps
 iso-eq : (G=H)→ (G≅ H)
 ```
 indexed by `H:Semigroup_𝒰` by `iso-eq(refl)≔id[G]`.
-
-<!-- rosetta-item-end: definition-19.3.2 -->
 
 ## Theorem 19.3.3
 
@@ -68,8 +64,6 @@ By condition (v) of Theorem 11.6.2 it therefore suffices to show that the type
 is contractible.
 This follows by function extensionality, since associativity of a binary operation on a set is a proposition. ◻
 
-<!-- rosetta-item-end: theorem-19.3.3 -->
-
 ## Corollary 19.3.4
 
 The type `Semigroup_𝒰` is a `1`-type.
@@ -77,8 +71,6 @@ The type `Semigroup_𝒰` is a `1`-type.
 ### Proof
 
 *Proof.* The identity types of `Semigroup_𝒰` are sets because they are equivalent to the sets of isomorphisms between semigroups. ◻
-
-<!-- rosetta-item-end: corollary-19.3.4 -->
 
 We now turn to the proof that isomorphic groups are equal.
 Analogously to the map `iso-eq` of semigroups, we have a map `iso-eq` of groups.
@@ -93,8 +85,6 @@ iso-eq : (G=H)→ (G≅ H)
 ```
 indexed by `H:Group_𝒰` by `iso-eq(refl)≔id[G]`.
 
-<!-- rosetta-item-end: definition-19.3.5 -->
-
 ## Theorem 19.3.6
 
 For any two groups `G` and `H` in a univalent universe `𝒰`, the map
@@ -107,7 +97,6 @@ is an equivalence.
 
 *Proof.* Let `G` and `H` be groups in `𝒰`, and write `UG` and `UH` for their underlying semigroups, respectively.
 Then we have a commuting triangle
-<!-- rosetta-diagram: 980c674aeb1d; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -125,10 +114,7 @@ Since being a group is a property of semigroups it follows that the projection m
 Thus the top map in this triangle is an equivalence.
 The map on the right is an equivalence by Theorem 19.3.3, so the claim follows by the 3-for-2 property. ◻
 
-<!-- rosetta-item-end: theorem-19.3.6 -->
-
 ## Corollary 19.3.7
 
 The type of groups is a `1`-type.
 
-<!-- rosetta-item-end: corollary-19.3.7 -->

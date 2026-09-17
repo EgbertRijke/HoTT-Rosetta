@@ -58,8 +58,6 @@ We apply function extensionality again, so it suffices to show that
 ```
 We obtain this homotopy by another application of `Σ`-induction. ◻
 
-<!-- rosetta-agda-block: theorem-13.3.1-dependent-universal-property-sigma -->
-
 ```agda
 module _
   { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3}
@@ -79,8 +77,6 @@ module _
 
 ### Ordinary Σ universal property from the introduction
 
-<!-- rosetta-agda-block: theorem-13.3.1-ordinary-sigma-specialization -->
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {X : UU l3}
@@ -92,7 +88,6 @@ module _
   equiv-ev-pair-nondependent : (Σ A B → X) ≃ ((a : A) → B a → X)
   equiv-ev-pair-nondependent = equiv-ev-pair {C = λ _ → X}
 ```
-<!-- rosetta-item-end: theorem-13.3.1 -->
 
 ## Corollary 13.3.2
 
@@ -102,8 +97,6 @@ Then the map
 ev-pair: (A× B → X)→ (A→ (B→ X))
 ```
 given by `f↦λ a. λ b. f(a,b)` is an equivalence.
-
-<!-- rosetta-agda-block: corollary-13.3.2-product-currying -->
 
 ```agda
 module _
@@ -116,7 +109,6 @@ module _
   equiv-ev-product : (A × B → X) ≃ (A → B → X)
   equiv-ev-product = equiv-ev-pair {C = λ _ → X}
 ```
-<!-- rosetta-item-end: corollary-13.3.2 -->
 
 ### The universal property of identity types
 
@@ -154,8 +146,6 @@ Therefore it suffices to show that
 ```
 This follows by path induction on `p`, since `path-ind_a(f(a,refl),a,refl)≐ f(a,refl)` by the computation rule of path induction. ◻
 
-<!-- rosetta-agda-block: theorem-13.3.3-dependent-universal-property-identity -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → a ＝ x → UU l2}
@@ -188,8 +178,6 @@ module _
 
 ### Ordinary identity universal property from the introduction
 
-<!-- rosetta-agda-block: theorem-13.3.3-ordinary-identity-specialization -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (a : A) {B : A → UU l2}
@@ -202,4 +190,3 @@ module _
   equiv-ev-refl-nondependent : ((x : A) → a ＝ x → B x) ≃ B a
   equiv-ev-refl-nondependent = equiv-ev-refl a {B = λ x _ → B x}
 ```
-<!-- rosetta-item-end: theorem-13.3.3 -->

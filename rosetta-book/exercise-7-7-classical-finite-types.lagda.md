@@ -49,14 +49,10 @@ for each `x:Fin{k}` and each `y:classical-Fin_k`.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-7-7-natural-value-classical-finite -->
-
 ```agda
 nat-classical-Fin : (k : ℕ) → classical-Fin k → ℕ
 nat-classical-Fin k = pr1
 ```
-
-<!-- rosetta-agda-block: exercise-7-7-equality-classical-finite -->
 
 ```agda
 Eq-classical-Fin : (k : ℕ) (x y : classical-Fin k) → UU lzero
@@ -85,8 +81,6 @@ Eq-eq-classical-Fin :
 Eq-eq-classical-Fin k x y refl = refl
 ```
 
-<!-- rosetta-agda-block: exercise-7-7-maps-classical-standard-finite -->
-
 ```agda
 standard-classical-Fin : (k : ℕ) → classical-Fin k → Fin k
 standard-classical-Fin (succ-ℕ k) (pair x H) = mod-succ-ℕ k x
@@ -96,8 +90,6 @@ classical-standard-Fin :
 pr1 (classical-standard-Fin k x) = nat-Fin k x
 pr2 (classical-standard-Fin k x) = strict-upper-bound-nat-Fin k x
 ```
-
-<!-- rosetta-agda-block: exercise-7-7-inverse-classical-standard-finite -->
 
 ```agda
 is-section-classical-standard-Fin :

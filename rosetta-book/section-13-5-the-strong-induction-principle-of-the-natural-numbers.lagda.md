@@ -42,14 +42,10 @@ strong-ind-ℕ(p_0,p_S,0) = p_0
 strong-ind-ℕ(p_0,p_S,n+1) = p_S(n,(λ m. λ p. strong-ind-ℕ(p_0,p_S,m))).
 ```
 
-<!-- rosetta-item-end: theorem-13.5.1 -->
-
 In order to construct `strong-ind-ℕ(p_0,p_S)`, we first define the type family `P̃` over `ℕ` by
 ```text
 P̃(n)≔ Π(m:ℕ) (m≤ n)→ P(m).
 ```
-
-<!-- rosetta-agda-block: section-13.5-bounded-family -->
 
 ```agda
 □-≤-ℕ : {l : Level} → (ℕ → UU l) → ℕ → UU l
@@ -87,8 +83,6 @@ for any `p:0≤ 0`.
 
 *Proof.* The fact that we have such a dependent function `p̃_0` follows immediately by induction on `m` and `p:m≤ 0`. ◻
 
-<!-- rosetta-agda-block: lemma-13.5.2-bounded-base -->
-
 ```agda
 zero-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) → P zero-ℕ → □-≤-ℕ P zero-ℕ
@@ -99,7 +93,6 @@ eq-zero-strong-ind-ℕ :
   zero-strong-ind-ℕ P p0 zero-ℕ t ＝ p0
 eq-zero-strong-ind-ℕ P p0 t = refl
 ```
-<!-- rosetta-item-end: lemma-13.5.2 -->
 
 ## Lemma 13.5.3
 
@@ -158,8 +151,6 @@ for any `y:P(m)`.
 This equivalence is obtained from the fact that `f(p)=x` for any `x:(m≤ n)+(m=n+1)`, i.e., the fact that `(m≤ n)+(m=n+1)` is a proposition.
 Now the identifications in (i) and (ii) are obtained as a simple consequence of the computation rule for coproducts. ◻
 
-<!-- rosetta-agda-block: lemma-13.5.3-order-is-a-proposition -->
-
 ```agda
 abstract
   is-prop-leq-ℕ :
@@ -169,8 +160,6 @@ abstract
   is-prop-leq-ℕ (succ-ℕ m) zero-ℕ = is-prop-empty
   is-prop-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-prop-leq-ℕ m n
 ```
-
-<!-- rosetta-agda-block: lemma-13.5.3-case-type-is-a-proposition -->
 
 ```agda
 is-prop-leq-succ-cases :
@@ -183,8 +172,6 @@ is-prop-leq-succ-cases m n =
     ( is-prop-leq-ℕ m n)
     ( is-set-ℕ m (succ-ℕ n))
 ```
-
-<!-- rosetta-agda-block: lemma-13.5.3-case-splitting-equivalence -->
 
 ```agda
 equiv-leq-succ-cases :
@@ -199,8 +186,6 @@ equiv-leq-succ-cases m n =
       ( leq-eq-ℕ m (succ-ℕ n)))
 ```
 
-<!-- rosetta-agda-block: lemma-13.5.3-case-independence -->
-
 ```agda
 eq-cases-leq-succ :
   (m n : ℕ) (p : m ≤-ℕ succ-ℕ n) (x : (m ≤-ℕ n) + (m ＝ succ-ℕ n)) →
@@ -208,8 +193,6 @@ eq-cases-leq-succ :
 eq-cases-leq-succ m n p x =
   eq-is-prop' (is-prop-leq-succ-cases m n) (decide-leq-succ-ℕ m n p) x
 ```
-
-<!-- rosetta-agda-block: lemma-13.5.3-bounded-successor -->
 
 ```agda
 cases-succ-strong-ind-ℕ :
@@ -224,8 +207,6 @@ succ-strong-ind-ℕ :
 succ-strong-ind-ℕ P pS k H m p =
   cases-succ-strong-ind-ℕ P pS k H m (decide-leq-succ-ℕ m k p)
 ```
-
-<!-- rosetta-agda-block: lemma-13.5.3-bounded-successor-laws -->
 
 ```agda
 cases-htpy-succ-strong-ind-ℕ :
@@ -268,8 +249,6 @@ eq-succ-strong-ind-ℕ P pS k H p =
   cases-eq-succ-strong-ind-ℕ P pS k H (decide-leq-succ-ℕ (succ-ℕ k) k p)
 ```
 
-<!-- rosetta-agda-block: lemma-13.5.3-case-evaluation-identifications -->
-
 ```agda
 equiv-identifications-succ-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l)
@@ -284,7 +263,6 @@ equiv-identifications-succ-strong-ind-ℕ P pS n H m p x y =
       ( eq-cases-leq-succ m n p x))
     ( y)
 ```
-<!-- rosetta-item-end: lemma-13.5.3 -->
 
 We are now ready to finish the proof of Theorem 13.5.1.
 
@@ -299,8 +277,6 @@ satisfying the computation rules
 s̃(0) ≐ p̃_0
 s̃(n+1) ≐ p̃_S(n,s̃(n)).
 ```
-
-<!-- rosetta-agda-block: theorem-13.5.1-bounded-induction -->
 
 ```agda
 induction-strong-ind-ℕ :
@@ -324,8 +300,6 @@ Now we define
 strong-ind-ℕ(p_0,p_S,n) ≔ s̃(n,n,refl-≤-ℕ(n)),
 ```
 where `refl-≤-ℕ(n):n≤ n` is the proof of reflexivity of `≤`.
-
-<!-- rosetta-agda-block: theorem-13.5.1-diagonal-evaluation -->
 
 ```agda
 ε-□-≤-ℕ :
@@ -385,8 +359,6 @@ s̃(n+1,m,p)=s̃(m,m,refl-≤-ℕ(m))
 ```
 when `m=n+1`.
 This completes the proof of the computation rules for the strong induction principle of `ℕ`. ◻
-
-<!-- rosetta-agda-block: theorem-13.5.1-strong-induction-and-computations -->
 
 ```agda
 strong-ind-ℕ :

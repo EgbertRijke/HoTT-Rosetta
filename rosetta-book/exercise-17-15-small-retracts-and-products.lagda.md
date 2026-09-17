@@ -12,7 +12,6 @@ Let `𝒰` be a univalent universe.
 <div class="subexenum">
 
 Consider a section-retraction pair
-<!-- rosetta-diagram: dff8c57ba552; review: pending -->
 
 *Linear diagram (automatic draft).*
 

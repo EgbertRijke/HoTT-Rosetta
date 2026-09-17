@@ -36,14 +36,11 @@ booleanization(inl(a)) ≔ true
 booleanization(inr(f)) ≔ false.
 ```
 
-<!-- rosetta-agda-block: definition-8.6.1-booleanization -->
-
 ```agda
 booleanization : {l : Level} {A : UU l} → is-decidable A → bool
 booleanization (inl a) = true
 booleanization (inr f) = false
 ```
-<!-- rosetta-item-end: definition-8.6.1 -->
 
 ## Theorem 8.6.2
 
@@ -63,8 +60,6 @@ boolean-reflection(inr(f),p) ≔ ex-falso(γ(p)).
 ```
  ◻
 
-<!-- rosetta-agda-block: theorem-8.6.2-boolean-reflection -->
-
 ```agda
 inv-boolean-reflection :
   {l : Level} {A : UU l} (d : is-decidable A) → A → booleanization d ＝ true
@@ -76,7 +71,6 @@ boolean-reflection :
 boolean-reflection (inl a) p = a
 boolean-reflection (inr f) p = ex-falso (Eq-eq-bool p)
 ```
-<!-- rosetta-item-end: theorem-8.6.2 -->
 
 ## Remark 8.6.3
 
@@ -104,4 +98,3 @@ The book *Mathematical Components* \[citation: `mathematical-components`\] conta
 Do not, however, "solve" your homework problems with boolean reflection.
 If your teaching assistant cannot evaluate your solution, they will conclude that you haven’t demonstrated your clear understanding of the problem.
 
-<!-- rosetta-item-end: remark-8.6.3 -->

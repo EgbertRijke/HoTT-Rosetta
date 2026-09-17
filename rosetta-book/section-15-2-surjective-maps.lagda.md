@@ -14,16 +14,12 @@ A map `f:A→ B` is said to be **surjective** if there is an element of type
 is-surj(f)≔ Π(b:B) ‖fib(f, b)‖.
 ```
 
-<!-- rosetta-item-end: definition-15.2.1 -->
-
 ## Example 15.2.2
 
 Any equivalence is a surjective map, since its fibers are contractible.
 More generally, any map that has a section is surjective.
 Those are sometimes called **split epimorphisms**.
 Note that having a section is stronger than surjectivity, since in general we don’t have a function `‖fib(f, b)‖→fib(f, b)`.
-
-<!-- rosetta-item-end: example-15.2.2 -->
 
 In Exercise 14.4 we showed the dependent universal property of the propositional truncation: a map `f:A→ B` into a proposition `B` satisfies the universal property of the propositional truncation if and only if for every family of propositions `P` over `B`, the precomposition map
 ```text
@@ -54,7 +50,6 @@ _∘ f : (Π(y:B) P(y))→(Π(x:A) P(f(x)))
 ### Proof
 
 *Proof.* To prove that (i) implies (ii), suppose first that `f` is surjective, and consider the commuting square
-<!-- rosetta-diagram: a2c952277a82; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -78,7 +73,6 @@ The proof that (ii) implies (iii) is by induction on `k`.
 The base case holds by assumption.
 For the inductive step, it suffices by Theorem 12.4.7 to show that `ap{_∘ f}` is `k`-truncated for any `g,h:Π(y:B) P(y)`.
 Notice that we have a commuting square
-<!-- rosetta-diagram: af756fdb03d4; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -108,8 +102,6 @@ This is easy, because we have
 ```
  ◻
 
-<!-- rosetta-item-end: proposition-15.2.3 -->
-
 As a corollary we obtain that any surjective map into a proposition satisfies the universal property of the propositional truncation.
 
 ## Corollary 15.2.4
@@ -120,14 +112,11 @@ For any map `f:A→ P` into a proposition `P`, the following are equivalent:
 
 2. The map `f` is surjective.
 
-<!-- rosetta-item-end: corollary-15.2.4 -->
-
 Using the characterization of surjective maps of Proposition 15.2.3, we can also give a new characterization of the image of a map.
 
 ## Theorem 15.2.5
 
 Consider a commuting triangle
-<!-- rosetta-diagram: 5b022cc117de; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -151,7 +140,6 @@ Then the following are equivalent:
 ### Proof
 
 *Proof.* First assume that `m` satisfies the universal property of the image inclusion of `f`, and consider the composite function
-<!-- rosetta-diagram: a64061e4998b; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -164,7 +152,6 @@ Arrows:
 ```
 Note that `m∘pr 1` is a composition of embeddings, so it is an embedding.
 By the universal property of `m` there is a unique map `h` for which the triangle
-<!-- rosetta-diagram: e8908c0e3dba; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -203,8 +190,6 @@ hom-slice_X(m,m') ≃ Π(b:B) fib(m', m(b)) (By \cref{ex:triangle_fib})
 ```
  ◻
 
-<!-- rosetta-item-end: theorem-15.2.5 -->
-
 ## Corollary 15.2.6
 
 Every map factors uniquely as a surjective map followed by an embedding.
@@ -212,7 +197,6 @@ Every map factors uniquely as a surjective map followed by an embedding.
 ### Proof
 
 *Proof.* Consider a map `f:A→ X`, and two factorizations
-<!-- rosetta-diagram: 5854a016bb76; review: pending -->
 
 *2-by-6 diagram (automatic draft).*
 
@@ -237,4 +221,3 @@ Now it follows by Theorem 15.1.8 that the type of `(e,H):hom-slice_X(i,i')` in w
 ```
 in `hom-slice_X(f,i')`, is contractible. ◻
 
-<!-- rosetta-item-end: corollary-15.2.6 -->

@@ -49,8 +49,6 @@ Show that function `succ-Fin_k:Fin{k}→Fin{k}` is injective, for each `k:ℕ`.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-7-5-observational-equality -->
-
 ```agda
 Eq-Fin : (k : ℕ) → Fin k → Fin k → UU lzero
 Eq-Fin (succ-ℕ k) (inl x) (inl y) = Eq-Fin k x y
@@ -70,8 +68,6 @@ eq-Eq-Fin (succ-ℕ k) {inl x} {inl y} e = ap inl (eq-Eq-Fin k e)
 eq-Eq-Fin (succ-ℕ k) {inr star} {inr star} star = refl
 ```
 
-<!-- rosetta-agda-block: exercise-7-5-zero-predicates -->
-
 ```agda
 is-zero-Fin : (k : ℕ) → Fin k → UU lzero
 is-zero-Fin (succ-ℕ k) x = x ＝ zero-Fin k
@@ -83,14 +79,10 @@ is-nonzero-Fin : (k : ℕ) → Fin k → UU lzero
 is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
 ```
 
-<!-- rosetta-agda-block: exercise-7-5-injective-inclusion -->
-
 ```agda
 is-injective-inl-Fin : (k : ℕ) → is-injective (inl-Fin k)
 is-injective-inl-Fin k refl = refl
 ```
-
-<!-- rosetta-agda-block: exercise-7-5-successor-nonzero -->
 
 ```agda
 neq-zero-skip-zero-Fin :
@@ -106,8 +98,6 @@ neq-zero-succ-Fin {succ-ℕ k} {inl x} p =
   neq-zero-succ-Fin (is-injective-inl-Fin (succ-ℕ k) p)
 neq-zero-succ-Fin {succ-ℕ k} {inr star} ()
 ```
-
-<!-- rosetta-agda-block: exercise-7-5-injective-successor -->
 
 ```agda
 is-injective-skip-zero-Fin : (k : ℕ) → is-injective (skip-zero-Fin k)

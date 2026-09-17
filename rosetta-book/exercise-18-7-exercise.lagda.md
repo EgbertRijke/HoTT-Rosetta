@@ -12,7 +12,6 @@ Consider a map `f:A→ B`.
 <div class="subexenum">
 
 Show that the type of maps `‖f‖_0:‖A‖_0→‖B‖_0` equipped with a homotopy witnessing that the square
-<!-- rosetta-diagram: 4430fe3fab53; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -38,7 +37,6 @@ Show that the following are equivalent
 2. the map `‖f‖_0:‖A‖_0→‖B‖_0` is surjective.
 
 Construct a map `h:im(f)→im‖f‖_0` such that the squares
-<!-- rosetta-diagram: 48b2b46a6132; review: pending -->
 
 *Diagram of two squares pasted horizontally (automatic draft).*
 

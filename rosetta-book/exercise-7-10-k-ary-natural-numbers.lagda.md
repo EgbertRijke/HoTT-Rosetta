@@ -70,15 +70,11 @@ for each `n:ℕ` and each `x: based-ℕ {k+1}`.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-7-10-based-natural-numbers -->
-
 ```agda
 data based-ℕ : ℕ → UU lzero where
   constant-based-ℕ : (k : ℕ) → Fin k → based-ℕ k
   unary-op-based-ℕ : (k : ℕ) → Fin k → based-ℕ k → based-ℕ k
 ```
-
-<!-- rosetta-agda-block: exercise-7-10-convert-based-natural-numbers -->
 
 ```agda
 constant-ℕ : (k : ℕ) → Fin k → ℕ
@@ -94,15 +90,11 @@ convert-based-ℕ k (unary-op-based-ℕ .k x n) =
   unary-op-ℕ k x (convert-based-ℕ k n)
 ```
 
-<!-- rosetta-agda-block: exercise-7-10-empty-zero-based-natural-numbers -->
-
 ```agda
 is-empty-based-zero-ℕ : is-empty (based-ℕ zero-ℕ)
 is-empty-based-zero-ℕ (constant-based-ℕ .zero-ℕ ())
 is-empty-based-zero-ℕ (unary-op-based-ℕ .zero-ℕ () n)
 ```
-
-<!-- rosetta-agda-block: exercise-7-10-bound-by-nonzero-multiple -->
 
 ```agda
 abstract
@@ -122,8 +114,6 @@ abstract
       ( commutative-mul-ℕ x (succ-ℕ k))
 ```
 
-<!-- rosetta-agda-block: exercise-7-10-congruence-unary-operation -->
-
 ```agda
 cong-unary-op-ℕ :
   (k : ℕ) (x : Fin k) (n : ℕ) →
@@ -140,8 +130,6 @@ cong-unary-op-ℕ (succ-ℕ k) x n =
       ( pair (succ-ℕ n) (commutative-mul-ℕ (succ-ℕ n) (succ-ℕ k))))
     ( left-unit-law-add-ℕ (nat-Fin (succ-ℕ k) x))
 ```
-
-<!-- rosetta-agda-block: exercise-7-10-injective-conversion -->
 
 ```agda
 le-constant-unary-op-ℕ :
@@ -212,14 +200,10 @@ is-injective-convert-based-ℕ
           ( is-injective-right-add-ℕ (nat-Fin (succ-ℕ k) x) p))))
 ```
 
-<!-- rosetta-agda-block: exercise-7-10-zero-based-natural-number -->
-
 ```agda
 zero-based-ℕ : (k : ℕ) → based-ℕ (succ-ℕ k)
 zero-based-ℕ k = constant-based-ℕ (succ-ℕ k) (zero-Fin k)
 ```
-
-<!-- rosetta-agda-block: exercise-7-10-successor-based-natural-numbers -->
 
 ```agda
 succ-based-ℕ : (k : ℕ) → based-ℕ k → based-ℕ k
@@ -233,8 +217,6 @@ succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inl x) n) =
 succ-based-ℕ (succ-ℕ k) (unary-op-based-ℕ .(succ-ℕ k) (inr x) n) =
   unary-op-based-ℕ (succ-ℕ k) (zero-Fin k) (succ-based-ℕ (succ-ℕ k) n)
 ```
-
-<!-- rosetta-agda-block: exercise-7-10-inverse-conversion -->
 
 ```agda
 inv-convert-based-ℕ : (k : ℕ) → ℕ → based-ℕ (succ-ℕ k)

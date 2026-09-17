@@ -59,8 +59,6 @@ Eq-ℕ(succ-ℕ(n),m) ≐ E_S(n,Eq-ℕ(n),m)
 ```
 holds, from which the judgmental equalities in the statement of the definition follow.
 
-<!-- rosetta-agda-block: definition-6.3.1-observational-equality-natural-numbers -->
-
 ```agda
 Eq-ℕ : ℕ → ℕ → UU lzero
 Eq-ℕ zero-ℕ zero-ℕ = unit
@@ -68,7 +66,6 @@ Eq-ℕ zero-ℕ (succ-ℕ n) = empty
 Eq-ℕ (succ-ℕ m) zero-ℕ = empty
 Eq-ℕ (succ-ℕ m) (succ-ℕ n) = Eq-ℕ m n
 ```
-<!-- rosetta-item-end: definition-6.3.1 -->
 
 The observational equality of the natural numbers is important because it can be used to prove equalities and negations of equalities.
 Proposition 6.3.3 enables us to do so.
@@ -89,14 +86,11 @@ refl-Eq-ℕ(succ-ℕ(n)) ≔ refl-Eq-ℕ(n).
 ```
  ◻
 
-<!-- rosetta-agda-block: lemma-6.3.2-reflexivity-observational-equality-natural-numbers -->
-
 ```agda
 refl-Eq-ℕ : (n : ℕ) → Eq-ℕ n n
 refl-Eq-ℕ zero-ℕ = star
 refl-Eq-ℕ (succ-ℕ n) = refl-Eq-ℕ n
 ```
-<!-- rosetta-item-end: lemma-6.3.2 -->
 
 ## Proposition 6.3.3
 
@@ -118,7 +112,6 @@ Then we can define a function
 Eq-ℕ(succ-ℕ(m),succ-ℕ(n))→ (succ-ℕ(m)=succ-ℕ(n))
 ```
 as the composite
-<!-- rosetta-diagram: 20ce7e60c23e; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -135,8 +128,6 @@ Arrows:
 ```
 Note that the map on the left is the identity function, because we have the judgmental equality `Eq-ℕ(succ-ℕ(m),succ-ℕ(n))≐Eq-ℕ(m,n)` by definition of `Eq-ℕ`. ◻
 
-<!-- rosetta-agda-block: proposition-6.3.3-characterization-equality-natural-numbers -->
-
 ```agda
 Eq-eq-ℕ : {x y : ℕ} → x ＝ y → Eq-ℕ x y
 Eq-eq-ℕ {x} {.x} refl = refl-Eq-ℕ x
@@ -145,4 +136,3 @@ eq-Eq-ℕ : (x y : ℕ) → Eq-ℕ x y → x ＝ y
 eq-Eq-ℕ zero-ℕ zero-ℕ e = refl
 eq-Eq-ℕ (succ-ℕ x) (succ-ℕ y) e = ap succ-ℕ (eq-Eq-ℕ x y e)
 ```
-<!-- rosetta-item-end: proposition-6.3.3 -->

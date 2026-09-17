@@ -32,22 +32,17 @@ is-lower-bound_P(n)≔ Π(x:ℕ) P(x)→ (n≤ x).
 is-upper-bound_P(n)≔ Π(x:ℕ) P(x)→ (x≤ n).
 ```
 
-<!-- rosetta-agda-block: definition-8.3.1-lower-bound -->
-
 ```agda
 is-lower-bound-ℕ :
   {l : Level} (P : ℕ → UU l) (n : ℕ) → UU l
 is-lower-bound-ℕ P n = (m : ℕ) → P m → leq-ℕ n m
 ```
 
-<!-- rosetta-agda-block: definition-8.3.1-minimal-element -->
-
 ```agda
 minimal-element-ℕ :
   {l : Level} (P : ℕ → UU l) → UU l
 minimal-element-ℕ P = Σ ℕ (λ n → (P n) × (is-lower-bound-ℕ P n))
 ```
-<!-- rosetta-item-end: definition-8.3.1 -->
 
 A minimal element of `P` is therefore a natural number `n` for which `P(n)` holds, and which is also a lower bound for `P`.
 The well-ordering principle of `ℕ` asserts that such an element exists for any decidable family `P`, as soon as `P(n)` holds for some `n`.
@@ -91,8 +86,6 @@ Q'(n)≔ Q(succ-ℕ(n)).
 Since we have `q:Q'(n)`, we obtain a minimal element in `Q'` by the inductive hypothesis.
 Of course, by the assumption that `Q(0)` doesn’t hold, the minimal element of `Q'` is also the minimal element of `Q`. ◻
 
-<!-- rosetta-agda-block: theorem-8.3.2-well-ordering -->
-
 ```agda
 is-minimal-element-succ-ℕ :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-family P)
@@ -131,4 +124,3 @@ well-ordering-principle-ℕ P d (pair (succ-ℕ n) p) =
       ( λ m → d (succ-ℕ m))
       ( pair n p))
 ```
-<!-- rosetta-item-end: theorem-8.3.2 -->

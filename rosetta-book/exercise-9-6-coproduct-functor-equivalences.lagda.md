@@ -17,7 +17,6 @@ f+g:(A+B)→ (A'+B').
 Show that `id[A]+id[B]~ id[A+B]`.
 
 Show that for any two pairs of composable functions
-<!-- rosetta-diagram: 4ee2185c74da; review: pending -->
 
 ```text
  [A] --f--> [A']--{f'}-->[A'']

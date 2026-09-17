@@ -33,8 +33,6 @@ for every `n:ℕ`.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-7-3-decide-below-successor -->
-
 ```agda
 decide-leq-succ-ℕ :
   (m n : ℕ) → m ≤-ℕ (succ-ℕ n) → (m ≤-ℕ n) + (m ＝ succ-ℕ n)
@@ -45,8 +43,6 @@ decide-leq-succ-ℕ (succ-ℕ m) zero-ℕ l =
 decide-leq-succ-ℕ (succ-ℕ m) (succ-ℕ n) l =
   map-coproduct id (ap succ-ℕ) (decide-leq-succ-ℕ m n l)
 ```
-
-<!-- rosetta-agda-block: exercise-7-3-divisibility-factorial -->
 
 ```agda
 abstract

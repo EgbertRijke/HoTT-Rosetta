@@ -8,7 +8,6 @@ module exercise-11-4-embedding-triangles where
 ## Problem statement
 
 Consider a commuting triangle
-<!-- rosetta-diagram: 962a48c2124b; review: pending -->
 
 ```text
  [A]                 [B]

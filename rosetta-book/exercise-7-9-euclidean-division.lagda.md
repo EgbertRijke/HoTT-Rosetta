@@ -45,8 +45,6 @@ we have `q=q'` and `r=r'`.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-7-9-bound-successor-finite -->
-
 ```agda
 leq-nat-succ-Fin :
   (k : ℕ) (x : Fin k) → leq-ℕ (nat-Fin k (succ-Fin k x)) (succ-ℕ (nat-Fin k x))
@@ -62,8 +60,6 @@ leq-nat-succ-Fin (succ-ℕ k) (inr star) =
     ( leq-zero-ℕ (succ-ℕ (nat-Fin (succ-ℕ k) (inr star))))
 ```
 
-<!-- rosetta-agda-block: exercise-7-9-bound-natural-remainder -->
-
 ```agda
 leq-nat-mod-succ-ℕ :
   (k x : ℕ) → leq-ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
@@ -77,8 +73,6 @@ leq-nat-mod-succ-ℕ k (succ-ℕ x) =
     ( leq-nat-mod-succ-ℕ k x)
     ( leq-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
 ```
-
-<!-- rosetta-agda-block: exercise-7-9-euclidean-division-existence -->
 
 ```agda
 opaque

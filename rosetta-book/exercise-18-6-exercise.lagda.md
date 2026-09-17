@@ -25,7 +25,6 @@ x,y↦ (x≤ y)∧ (y≤ x).
 ```
 
 Equip the type `\posetreflection{A}` with the structure of a poset and construct an order preserving map `η : A → \posetreflection{A}` that satisfies the following universal property: For any poset `P`, any order preserving map `f:A→ P` extends uniquely along `η` to an order preserving map `g:\posetreflection{A}→ P`, as indicated in the following diagram:
-<!-- rosetta-diagram: ebd0070c7a14; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 

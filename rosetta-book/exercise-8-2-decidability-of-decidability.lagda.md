@@ -20,8 +20,6 @@ for any type `P`.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-8-2-decidability-idempotent -->
-
 ```agda
 module _
   {l : Level} {P : UU l}

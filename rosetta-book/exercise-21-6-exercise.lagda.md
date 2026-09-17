@@ -17,7 +17,6 @@ left-inv_{S^1} : mul_(S^1)(inv(x),x) = base
 right-inv_{S^1} : mul_(S^1)(x,inv(x)) = base.
 ```
 Moreover, show that the square
-<!-- rosetta-diagram: 813f872a7be8; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 

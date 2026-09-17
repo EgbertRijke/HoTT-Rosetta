@@ -25,8 +25,6 @@ Define the **prime-counting function** `π:ℕ→ℕ`, which counts for each `n:
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-8-4-iterate -->
-
 ```agda
 module _
   {l : Level} {X : UU l}
@@ -37,8 +35,6 @@ module _
   iterate (succ-ℕ k) f x = f (iterate k f x)
 ```
 
-<!-- rosetta-agda-block: exercise-8-4-prime-function -->
-
 ```agda
 prime-ℕ : ℕ → ℕ
 prime-ℕ n = iterate (succ-ℕ n) (λ x → pr1 (infinitude-of-primes-ℕ x)) 0
@@ -47,8 +43,6 @@ is-prime-prime-ℕ : (n : ℕ) → is-prime-ℕ (prime-ℕ n)
 is-prime-prime-ℕ zero-ℕ = pr1 (pr2 (infinitude-of-primes-ℕ 0))
 is-prime-prime-ℕ (succ-ℕ n) = pr1 (pr2 (infinitude-of-primes-ℕ (prime-ℕ n)))
 ```
-
-<!-- rosetta-agda-block: exercise-8-4-prime-counting -->
 
 ```agda
 prime-counting-succ-ℕ :

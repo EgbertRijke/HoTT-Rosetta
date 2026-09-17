@@ -22,8 +22,6 @@ coh-unit_μ : left-unit_μ(pt)=right-unit_μ(pt).
 ```
 An **H-space** is a pointed type equipped with an H-space structure.
 
-<!-- rosetta-item-end: definition-21.3.1 -->
-
 ## Remark 21.3.2
 
 The data of an H-space structure is equivalently described by a family of base point preserving maps
@@ -39,8 +37,6 @@ Note that for any identification `α:x=y` in `A` and two base-point preserving f
 ```
 This function is easily constructed by identification elimination on `α`.
 We will be using this in our construction of the H-space structure on the circle.
-
-<!-- rosetta-item-end: remark-21.3.2 -->
 
 ## Theorem 21.3.3
 
@@ -68,7 +64,6 @@ By the dependent universal property of the circle there is a unique
 μ :Π(x:S^1) Σ(f:S^1→S^1) f(base)=x
 ```
 equipped with an identification `α:μ(base)=(id,refl)` and an identification witnessing that the square
-<!-- rosetta-diagram: 70d5face1c4b; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -95,7 +90,6 @@ to define `H` as the unique homotopy equipped with an identification
 α : H(base)=loop
 ```
 and an identification `β` witnessing that the square
-<!-- rosetta-diagram: 31a91ca91b38; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -127,8 +121,6 @@ Now we apply this function to `refl` to obtain the desired identification
 ```
  ◻
 
-<!-- rosetta-item-end: theorem-21.3.3 -->
-
 ## Remark 21.3.4
 
 For some of the exercises below it may be useful to know that the binary operation `mul_(S^1)` is the unique map `S^1→(S^1→S^1)` equipped with an identification
@@ -136,7 +128,6 @@ For some of the exercises below it may be useful to know that the binary operati
 base-mul_(S^1) :mul_(S^1)(base)=id
 ```
 and an identification `loop-mul_(S^1)` witnessing that the square
-<!-- rosetta-diagram: 6f4f22a0dd3c; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -153,4 +144,3 @@ Arrows:
 ```
 commutes, where the homotopy `H:id~id` is the one constructed in Theorem 21.3.3.
 
-<!-- rosetta-item-end: remark-21.3.4 -->

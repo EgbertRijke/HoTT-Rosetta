@@ -15,7 +15,6 @@ In analogy with Theorem 18.2.3, show that the following are equivalent:
 φ:G → Ω(B)
 ```
     and for every pointed connected `1`-type `C` that comes equipped with a group homomorphism `ψ:G→ Ω(C)` there is a unique pointed map `f:B→_⋆ C` equipped with a homotopy witnessing that the triangle
-<!-- rosetta-diagram: 07703bcac78c; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -37,7 +36,6 @@ Arrows:
 ```
 
 3. There is an embedding `i:B↪ G-Set_𝒰` such that the triangle
-<!-- rosetta-diagram: ff7792342a61; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 

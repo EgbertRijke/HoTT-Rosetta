@@ -38,12 +38,9 @@ For the induction step on the positive integers we use
 ```
 The computation rules follow in a straightforward way from the computation rules of `ℤ`-induction and the fact that `e^{-1}` is an inverse of `e`. ◻
 
-<!-- rosetta-item-end: lemma-22.3.1 -->
-
 ## Example 22.3.2
 
 For any type `A`, we obtain a map `f:ℤ→ A` from any `x:A` and any equivalence `e:A ≃ A`, such that `f(0)=x` and the square
-<!-- rosetta-diagram: 60bbb0d8b9e0; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -70,8 +67,6 @@ This induces the **degree `k` map** on the circle
 deg(k) : S^1→S^1,
 ```
 for any `k:ℤ`, see Exercise 22.2.
-
-<!-- rosetta-item-end: example-22.3.2 -->
 
 In the following proposition we show that the dependent function constructed in Lemma 22.3.1 is unique.
 This is the **dependent universal property of the integers**.
@@ -108,8 +103,6 @@ and the family of equivalences
 ```
 given by `r↦ (H(k) ∙ ap_{e_k}(r)) ∙ H'(k)^{-1}`. ◻
 
-<!-- rosetta-item-end: proposition-22.3.3 -->
-
 The **universal property of the integers** is a simple corollary of the dependent universal property.
 One way of phrasing it is that `ℤ` is the *initial type equipped with a point and an automorphism*.
 
@@ -120,8 +113,6 @@ For any type `X` equipped with a base point `x_0:X` and an automorphism `e:X ≃
 Σ(f:ℤ→ X) (f(0)=x_0)× ((f ∘ succ-ℤ )~(e∘ f))
 ```
 is contractible.
-
-<!-- rosetta-item-end: corollary-22.3.4 -->
 
 Using the fact that equivalences are contractible maps, we can reformulate the dependent universal property of the integers as follows.
 
@@ -141,8 +132,6 @@ given by `(f,H)↦ f(0)` is an equivalence.
 
 *Proof.* Note that the fibers of `ev_0` are equivalent to the types that are shown to be contractible in Proposition 22.3.3. ◻
 
-<!-- rosetta-item-end: theorem-22.3.5 -->
-
 The following corollary will be used to prove that the fundamental cover of the circle is equivalent to the identity type based at `base:S^1`.
 
 ## Corollary 22.3.6
@@ -153,4 +142,3 @@ For any type `X` equipped with an equivalence `e:X≃ X`, the map
 ```
 given by `(f,H)↦ f(0)` is an equivalence.
 
-<!-- rosetta-item-end: corollary-22.3.6 -->

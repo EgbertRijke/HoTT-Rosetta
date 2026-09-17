@@ -17,8 +17,6 @@ open import section-9-2-bi-invertible-maps
 
 Consider a commuting triangle
 
-<!-- rosetta-diagram: cdb284b42255; review: pending -->
-
 ```text
  [A]                 [B]
 
@@ -37,8 +35,6 @@ with `H:f~ g∘ h`.
 Suppose that the map `h` has a section `s:B → A`.
 Show that the triangle
 
-<!-- rosetta-diagram: 5c672de7e457; review: pending -->
-
 _Triangle-shaped diagram (automatic draft)._
 
 ```text
@@ -56,8 +52,6 @@ commutes, and that `f` has a section if and only if `g` has a section.
 
 Suppose that the map `g` has a retraction `r:X→ B`.
 Show that the triangle
-
-<!-- rosetta-diagram: 32d6c414af56; review: pending -->
 
 _Triangle-shaped diagram (automatic draft)._
 
@@ -87,8 +81,6 @@ Conclude that any section and any retraction of an equivalence is again an equiv
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-9-4-section-comp -->
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -108,8 +100,6 @@ module _
   pr1 section-comp = map-section-comp
   pr2 section-comp = is-section-map-section-comp
 ```
-
-<!-- rosetta-agda-block: exercise-9-4-section-right-prime -->
 
 ```agda
 module _
@@ -132,8 +122,6 @@ module _
     is-section-map-section-right-map-triangle'
 ```
 
-<!-- rosetta-agda-block: exercise-9-4-section-right -->
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -153,8 +141,6 @@ module _
   section-right-map-triangle =
     section-right-map-triangle' f g h (inv-htpy H) s
 ```
-
-<!-- rosetta-agda-block: exercise-9-4-section-left -->
 
 ```agda
 module _
@@ -176,8 +162,6 @@ module _
   pr2 (section-left-map-triangle s) = is-section-map-section-left-map-triangle s
 ```
 
-<!-- rosetta-agda-block: exercise-9-4-retraction-comp -->
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -196,8 +180,6 @@ module _
   pr1 retraction-comp = map-retraction-comp
   pr2 retraction-comp = is-retraction-map-retraction-comp
 ```
-
-<!-- rosetta-agda-block: exercise-9-4-retraction-top -->
 
 ```agda
 module _
@@ -231,8 +213,6 @@ module _
     retraction-top-map-triangle' f g h (inv-htpy H) r
 ```
 
-<!-- rosetta-agda-block: exercise-9-4-retraction-left -->
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -256,8 +236,6 @@ module _
     is-retraction-map-retraction-left-map-triangle
 ```
 
-<!-- rosetta-agda-block: exercise-9-4-equiv-left -->
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -275,8 +253,6 @@ module _
         ( retraction-is-equiv G)
         ( retraction-is-equiv H)
 ```
-
-<!-- rosetta-agda-block: exercise-9-4-equiv-right -->
 
 ```agda
 module _
@@ -299,8 +275,6 @@ module _
             ( retraction-f)
             ( h , is-section-sh)))
 ```
-
-<!-- rosetta-agda-block: exercise-9-4-equiv-top -->
 
 ```agda
 module _
@@ -340,8 +314,6 @@ module _
           ( g , is-retraction-rg))
         ( retraction-top-map-triangle f g h H retraction-f))
 ```
-
-<!-- rosetta-agda-block: exercise-9-4-composition-equivalences -->
 
 ```agda
 module _

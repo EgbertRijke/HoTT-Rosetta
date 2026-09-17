@@ -24,7 +24,6 @@ Concrete-Subgroup_𝒰(G,⋆)≃Subgroup_𝒰(G).
 ```
 
 Show that `G` acts on `Concrete-Subgroup_𝒰(G,⋆)` by conjugation, i.e., show that for any `g:G` we have a commuting square
-<!-- rosetta-diagram: 0313d0b22827; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 

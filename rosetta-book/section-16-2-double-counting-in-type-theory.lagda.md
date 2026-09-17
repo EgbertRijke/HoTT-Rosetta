@@ -106,8 +106,6 @@ Since `i:Y→ Y+unit` is injective, it follows that `f(g(y))=y`.
 
  ◻
 
-<!-- rosetta-item-end: proposition-16.2.1 -->
-
 ## Theorem 16.2.2
 
 For any two natural numbers `k` and `l`, there is a map
@@ -127,7 +125,6 @@ e^{-1}(0):empty,
 which is of course absurd.
 Similarly, if `k` is a successor and `l` is zero, we obtain `e(0):empty`, which is again absurd.
 If both `k` and `l` are a successor, then we have by Proposition 16.2.1 the composite
-<!-- rosetta-diagram: 78052f0defcc; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -141,4 +138,3 @@ Arrows:
 ```
  ◻
 
-<!-- rosetta-item-end: theorem-16.2.2 -->

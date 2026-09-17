@@ -14,7 +14,6 @@ The **(twisted) double cover** of the circle is defined as the type family `T≔
 Show that `¬(Π(t:S^1) T(t))`.
 
 Construct an equivalence `e:S^1 ≃ Σ(t:S^1) T(t)` for which the triangle
-<!-- rosetta-diagram: de2022786093; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 

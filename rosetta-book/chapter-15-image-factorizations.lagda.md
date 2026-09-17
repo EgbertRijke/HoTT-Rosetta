@@ -15,7 +15,6 @@ open import exercise-15-5-lawveres-fixed-point-theorem
 
 The image of a map `f:A→ X` can be thought of as the least subtype of `X` that contains all the values of `f`.
 More precisely, the image of `f` is an embedding `i:im(f)↪ X` that fits in a commuting triangle
-<!-- rosetta-diagram: 2862c1d84979; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 

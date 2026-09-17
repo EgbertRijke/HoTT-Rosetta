@@ -37,8 +37,6 @@ Conclude that `ℤ` is a set.
 
 ### Part (c): mutually exclusive propositions have propositional coproduct
 
-<!-- rosetta-agda-block: exercise-12-4-exclusive-propositions -->
-
 ```agda
 module _
   {l1 l2 : Level} {P : UU l1} {Q : UU l2}

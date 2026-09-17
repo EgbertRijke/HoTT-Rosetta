@@ -34,8 +34,6 @@ The type of all `(𝒰,𝒱)`-partitions of `A` is defined by
 Partition_{𝒰,𝒱}(A)≔Σ(P:P_{𝒰}^+(A)→Prop_{𝒱}) is-partition(P)
 ```
 
-<!-- rosetta-item-end: definition-18.3.1 -->
-
 ## Theorem 18.3.2
 
 Consider a type `A`, a universe `𝒰`, and consider a universe `𝒱` containing both `A` and every type in `𝒰`.
@@ -93,7 +91,6 @@ R'(x,y):=Σ(Q:P_{𝒰}^+(A)) (∃_{(u:A)}∀_{(v:A)}Q(v)↔ R(u,v))× Q(x)× Q(y
 is equivalent to `R`.
 Observe that the proposition `R'(x,y)` is equivalent to `R(x,x)× R(x,y)`, which is equivalent to `R(x,y)`.
 This shows that the composite
-<!-- rosetta-diagram: d27d97483dac; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -115,7 +112,6 @@ Now we see that `P(Q)` holds if and only if `Q` is in the contractible type
 ```
 which is the case if and only if `Q=R_P(x)`.
 This shows that the composite
-<!-- rosetta-diagram: d4e1aa380edc; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -128,4 +124,3 @@ Arrows:
 ```
 is homotopic to the identity function. ◻
 
-<!-- rosetta-item-end: theorem-18.3.2 -->

@@ -23,7 +23,6 @@ indexed by `A,B:Σ(X:𝒰) P(X)`, given by `equiv-eq(refl):=id` is an equivalenc
 
 *Proof.* Since `P` is a subuniverse, it follows from Corollary 12.2.4 that the projection map is an embedding.
 Therefore we see that the asserted map is the composite of the equivalences
-<!-- rosetta-diagram: d11fe49a2933; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -36,8 +35,6 @@ Arrows:
 ```
  ◻
 
-<!-- rosetta-item-end: proposition-17.2.1 -->
-
 ## Remark 17.2.2
 
 Often, when `P` is a subuniverse, i.e., a subtype of the a universe `𝒰`, we will also write `A` for the type `pr 1(A)` if `A:Σ(X:𝒰) P(X)`.
@@ -45,8 +42,6 @@ Using this shorthand notation, the equivalence in Proposition 17.2.1 is displaye
 ```text
 (A=B)≃ (A≃ B).
 ```
-
-<!-- rosetta-item-end: remark-17.2.2 -->
 
 Important examples of subuniverses include the subuniverse `Prop_𝒰` of propositions in `𝒰`, the subuniverse `Set_𝒰` of sets in `𝒰`, and the subuniverse `𝒰^{≤ k}` of `k`-truncated types in `𝒰`.
 The subuniverse `𝔽` of finite types in `𝒰_0`, and the subuniverses `BS_k` of `k`-element types are further important subuniverses to which Proposition 17.2.1 applies.
@@ -71,8 +66,6 @@ Proposition 17.2.1 therefore applies, which gives
 ```
 The last equivalence follows from Proposition 12.1.4, using the fact that `(P≃ Q)` is a proposition by Exercise 13.4. ◻
 
-<!-- rosetta-item-end: theorem-17.2.3 -->
-
 ## Corollary 17.2.4
 
 The type
@@ -93,4 +86,3 @@ For the contractions, note that both types are subtypes of the types of proposit
 Therefore it suffices to show that `unit=P` for any proposition `P` equipped with `p:P`, and that `empty=Q` for any proposition `Q` equipped with `q:¬ Q`.
 Both identifications are obtained immediately from propositional extensionality. ◻
 
-<!-- rosetta-item-end: corollary-17.2.4 -->

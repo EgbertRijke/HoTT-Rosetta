@@ -66,7 +66,6 @@ An argument by path induction on `p` yields that
 ```
 for any `f,g:Π(x:X) P(x)` and any `p:x=x'`, `q:g(x)=f(x)` and `r:g(x')=f(x')`.
 Therefore it suffices to construct an identification `α:g(base)=f(base)` equipped with an identification `β` witnessing that the square
-<!-- rosetta-diagram: f0e00b3923b3; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -84,8 +83,6 @@ Arrows:
 commutes.
 Notice that we get exactly such a pair `(α,β)` from the computation rule of the circle, by Remark 21.1.3. ◻
 
-<!-- rosetta-item-end: theorem-21.2.1 -->
-
 As a corollary we obtain the following uniqueness principle for dependent functions defined by the induction principle of the circle.
 
 ## Corollary 21.2.2
@@ -100,7 +97,6 @@ Then the type of functions `f:Π(x:S^1) P(x)` equipped with an identification
 α: f(base)=y
 ```
 and an identification `β` witnessing that the square
-<!-- rosetta-diagram: 4f7ce2692a14; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -117,8 +113,6 @@ Arrows:
 ```
 commutes, is contractible.
 
-<!-- rosetta-item-end: corollary-21.2.2 -->
-
 Now we use the dependent universal property to derive the ordinary universal property of the circle.
 It would be tempting to say that it is a direct corollary, but we need to address the transport that occurs in the dependent universal property.
 
@@ -133,7 +127,6 @@ given by `f↦ (f(base),ap_{f}(loop))` is an equivalence.
 ### Proof
 
 *Proof.* We prove the claim by constructing a commuting triangle
-<!-- rosetta-diagram: f1ff10123b43; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -163,7 +156,6 @@ indexed by `x:X`.
 Since concatenating by a path is an equivalence, it follows by Theorem 11.1.3 that the induced map on total spaces is indeed an equivalence.
 
 To show that the triangle commutes, it suffices to construct for any `f:S^1→ X` an identification witnessing that the triangle
-<!-- rosetta-diagram: a5cdcdc52c26; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -179,7 +171,6 @@ Arrows:
 ```
 commutes.
 This again follows from general considerations: for any `f:A→ B` and any `p:a=a'` in `A`, the triangle
-<!-- rosetta-diagram: e1e24116802a; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -195,8 +186,6 @@ Arrows:
 ```
 commutes by path induction on `p`. ◻
 
-<!-- rosetta-item-end: theorem-21.2.3 -->
-
 ## Corollary 21.2.4
 
 For any loop `l:x=x` in a type `X`, the type of maps `f:S^1→ X` equipped with an identification
@@ -204,7 +193,6 @@ For any loop `l:x=x` in a type `X`, the type of maps `f:S^1→ X` equipped with 
 α : f(base)=x
 ```
 and an identification `β` witnessing that the square
-<!-- rosetta-diagram: 5ae274f72d1a; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -221,4 +209,3 @@ Arrows:
 ```
 commutes, is contractible.
 
-<!-- rosetta-item-end: corollary-21.2.4 -->

@@ -23,14 +23,10 @@ For any family `P` of decidable types indexed by `Fin{k}`, construct a function
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-8-3-decidable-family -->
-
 ```agda
 is-decidable-family : {l1 l2 : Level} {A : UU l1} (P : A → UU l2) → UU (l1 ⊔ l2)
 is-decidable-family {A = A} P = (x : A) → is-decidable (P x)
 ```
-
-<!-- rosetta-agda-block: exercise-8-3-finite-markov -->
 
 ```agda
 exists-not-not-for-all-Fin :

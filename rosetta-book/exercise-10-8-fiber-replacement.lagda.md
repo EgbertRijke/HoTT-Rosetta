@@ -8,7 +8,6 @@ module exercise-10-8-fiber-replacement where
 ## Problem statement
 
 Construct for any map `f:A→ B` an equivalence `e:A ≃ Σ(y:B) fib(f, y)` and a homotopy `H:f~ pr 1∘ e` witnessing that the triangle
-<!-- rosetta-diagram: 2e82e7bed468; review: pending -->
 
 ```text
  [A]                [Σ(y:B) fib(f, y)]

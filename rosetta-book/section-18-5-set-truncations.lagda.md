@@ -6,7 +6,6 @@ module section-18-5-set-truncations where
 
 An important instance of set quotients in the univalent foundations of mathematics is the notion of set truncation.
 Analogous to the propositional truncation, the set truncation of a type `A` is a map `η:A→ ‖A‖_0` into a set `‖A‖_0` such that any map `f:A→ X` into a set `X` extends uniquely along `η`:
-<!-- rosetta-diagram: 1273e5fb6567; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
 
@@ -30,8 +29,6 @@ We say that a map `f:A→ B` into a set `B` is a **set truncation** if the preco
 _∘ f : (B→ X)→ (A→ X)
 ```
 is an equivalence for every set `X`.
-
-<!-- rosetta-item-end: definition-18.5.1 -->
 
 In the following theorem we prove several conditions that are equivalent to being a set truncation.
 
@@ -65,7 +62,6 @@ for every `x,y:A`.
 
 It remains to prove that (1) implies (2).
 Consider a family `X` of sets over `B`, and consider the commuting square
-<!-- rosetta-diagram: 6bbb9693a0b2; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -94,8 +90,6 @@ _∘ f : (Π(b:B) X(g(b)))→ (Π(a:A) X(g(f(a))))
 is an equivalence for every `g:B→ B`.
 Now we take `g≔ id` to complete the proof that (1) implies (2). ◻
 
-<!-- rosetta-item-end: theorem-18.5.2 -->
-
 ## Corollary 18.5.3
 
 On any universe `𝒰`, there is an operation `‖_‖_0:𝒰→Set_𝒰` such that every type `A` in `𝒰` comes equipped with a map
@@ -110,8 +104,6 @@ The set `‖A‖_0` is called the **set truncation** of `A`.
 *Proof.* By Theorem 18.5.2 it follows that a map `f:A→ B` into a set `B` is a set truncation if and only if it is a quotient map with respect to the equivalence relation `x,y↦‖x=y‖`.
 Given a type `A` in `𝒰`, the quotient of `A` by `x,y↦‖x=y‖` is equivalent to a type in `𝒰` by the replacement axiom. ◻
 
-<!-- rosetta-item-end: corollary-18.5.3 -->
-
 ## Corollary 18.5.4
 
 The set truncation `η:A→‖A‖_0` is surjective and effective with respect to the equivalence relation `x,y↦‖x=y‖`, i.e., we have an equivalence
@@ -119,8 +111,6 @@ The set truncation `η:A→‖A‖_0` is surjective and effective with respect t
 (η(x)=η(y))≃ ‖x=y‖
 ```
 for each `x,y:A`.
-
-<!-- rosetta-item-end: corollary-18.5.4 -->
 
 By this corollary, we may think of the set truncation `‖A‖_0` of `A` as the set of connected components of `A`.
 Indeed, if we have an unspecified identification `‖x=y‖` in `A`, then we think of `x` and `y` as being in the same connected component.
@@ -135,8 +125,6 @@ is-conn(A)≔is-contr‖A‖_0.
 ```
 Furthermore, we say that a map `f:A→ B` is **connected** if all its fibers are connected.
 
-<!-- rosetta-item-end: definition-18.5.5 -->
-
 ## Remark 18.5.6
 
 In particular, every connected type is inhabited, because if `‖A‖_0` is contractible, then we have equivalences
@@ -144,8 +132,6 @@ In particular, every connected type is inhabited, because if `‖A‖_0` is cont
 ‖A‖≃ (‖A‖_0→‖A‖) ≃ (A→ ‖A‖),
 ```
 and the latter type contains the unit of the propositional truncation.
-
-<!-- rosetta-item-end: remark-18.5.6 -->
 
 Using the notion of connectivity, we can add one more property to the list of equivalent characterizations of set truncations given in Theorem 18.5.2.
 
@@ -187,7 +173,6 @@ This completes the proof of (1) implies (2).
 
 For the converse, suppose that `f` is connected, and consider a set `X`.
 Note that we have a commuting square
-<!-- rosetta-diagram: 788b395e94a0; review: pending -->
 
 *Square-shaped diagram (automatic draft).*
 
@@ -206,8 +191,6 @@ In this commuting square, the map on the left is an equivalence since `‖fib(f,
 The top map is an equivalence because `X` is a set, and the right map is an equivalence by Exercise 13.15.
 Therefore it follows that the bottom map is an equivalence, which completes the proof that (2) implies (1). ◻
 
-<!-- rosetta-item-end: theorem-18.5.7 -->
-
 ## Remark 18.5.8
 
 There are truncation operations for every truncation level.
@@ -218,4 +201,3 @@ _∘η : (‖A‖_k→ X)→ (A→ X)
 is an equivalence for every `k`-truncated type `X`.
 To learn more about general `k`-truncations, we refer to Chapter 7 of \[citation: `hottbook`\].
 
-<!-- rosetta-item-end: remark-18.5.8 -->

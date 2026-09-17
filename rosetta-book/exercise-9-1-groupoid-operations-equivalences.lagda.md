@@ -27,8 +27,6 @@ Give their inverses explicitly.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-9-1-inverse-concatenation -->
-
 ```agda
 module _
   {l : Level} {A : UU l}
@@ -37,8 +35,6 @@ module _
   inv-concat : {x y : A} (p : x ＝ y) (z : A) → x ＝ z → y ＝ z
   inv-concat p = concat (inv p)
 ```
-
-<!-- rosetta-agda-block: exercise-9-1-concatenation-inverse-laws -->
 
 ```agda
 module _
@@ -53,8 +49,6 @@ module _
     {x y z : A} (p : x ＝ y) (r : x ＝ z) → p ∙ (inv p ∙ r) ＝ r
   is-section-inv-concat refl r = refl
 ```
-
-<!-- rosetta-agda-block: exercise-9-1-inversion-and-concatenation-equivalences -->
 
 ```agda
 module _
@@ -97,8 +91,6 @@ module _
   pr1 (equiv-inv-concat p z) = inv-concat p z
   pr2 (equiv-inv-concat p z) = is-equiv-inv-concat p z
 ```
-
-<!-- rosetta-agda-block: exercise-9-1-transport-equivalences -->
 
 ```agda
 module _

@@ -18,8 +18,6 @@ Given two pointed types `A` and `B` with base points `a` and `b` respectively, w
 (A→_⋆ B)≔Σ(f:A→ B) f(a)=b.
 ```
 
-<!-- rosetta-item-end: definition-19.4.1 -->
-
 ## Definition 19.4.2
 
 Consider a universe `𝒰`.
@@ -34,8 +32,6 @@ Furthermore, we define for every `A:𝒰_⋆` the **iterated loop space** `Ω^n(
 Ω^n+1(A)≔Ω(Ω^n(A)).
 ```
 
-<!-- rosetta-item-end: definition-19.4.2 -->
-
 ## Example 19.4.3
 
 If `A` is a pointed `1`-type, then the loop space `Ω(A)` is a set.
@@ -43,8 +39,6 @@ Furthermore, it has the structure of a group.
 Its unit is `refl`, and the group operation is given by concatenation of identifications.
 This satisfies the group laws, since the group laws are just a special case of the groupoid laws for identity types, constructed in Section 5.2.
 Thus we see that the loop space of a pointed `1`-type is a group.
-
-<!-- rosetta-item-end: example-19.4.3 -->
 
 If `A` is a pointed type, but not assumed to be `1`-truncated, then we can still get
 
@@ -62,8 +56,6 @@ The unit of the group is `η(refl)` and the group operation is the unique binary
 for every `r,s:Ω^n(A)`.
 The group `π_1(A)` of a pointed type is called the **fundamental group** of `A` at its base point `a:A`.
 
-<!-- rosetta-item-end: definition-19.4.4 -->
-
 ## Remark 19.4.5
 
 Note that for `n=0`, we can still define the set
@@ -71,8 +63,6 @@ Note that for `n=0`, we can still define the set
 π_0(A)≔‖A‖_0.
 ```
 However, this set does not necessarily come equipped with the structure of a group.
-
-<!-- rosetta-item-end: remark-19.4.5 -->
 
 ## Proposition 19.4.6
 
@@ -93,8 +83,6 @@ Using this equivalence, we obtain a group isomorphism
 π_{n+1}(A)≐ ‖Ω(Ω^n(A))‖_0≅‖Ω^n(Ω(A))‖_0 ≐ π_n(Ω(A)).
 ```
  ◻
-
-<!-- rosetta-item-end: proposition-19.4.6 -->
 
 Homotopy groups are important algebraic invariants of a type.
 For example, they can be used to show that two pointed types `A` and `B` are not equivalent by showing that two types `A` and `B` have non-isomorphic homotopy groups.
@@ -124,8 +112,6 @@ The functorial action of `Ω^n` together with the functorial action of set trunc
 ```
 for every pointed map `f:A→_⋆ B`.
 
-<!-- rosetta-item-end: definition-19.4.7 -->
-
 ## Remark 19.4.8
 
 Since action of paths preserves path concatenation, it follows that `Ω^n(f)` preserves path concatenation, for each `n≥ 1`.
@@ -134,8 +120,6 @@ Consequently, the maps
 π_n(f):π_n(A)→π_n(B)
 ```
 are group homomorphisms.
-
-<!-- rosetta-item-end: remark-19.4.8 -->
 
 ## Proposition 19.4.9
 
@@ -151,4 +135,3 @@ for all `n≥ 1`.
 *Proof.* For any pointed equivalence `e:A≃_⋆ B` it follows that `π_n(e)` is also an equivalence.
 Using Lemma 19.3.1, the claim now follows. ◻
 
-<!-- rosetta-item-end: proposition-19.4.9 -->

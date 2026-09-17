@@ -9,7 +9,6 @@ module exercise-22-8-exercise where
 
 For convenience, we will write `x·_{S^1}y≔mul_(S^1)(x,y)` in this exercise.
 Construct the **Mac Lane pentagon** for the circle, i.e. show that the pentagon
-<!-- rosetta-diagram: c6643147c2b2; review: pending -->
 
 *3-by-5 diagram (automatic draft).*
 

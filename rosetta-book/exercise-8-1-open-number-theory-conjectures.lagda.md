@@ -38,14 +38,10 @@ If you have a solution to any of these open problems, you should certainly forma
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-8-1-even -->
-
 ```agda
 is-even-ℕ : ℕ → UU lzero
 is-even-ℕ n = div-ℕ 2 n
 ```
-
-<!-- rosetta-agda-block: exercise-8-1-goldbach -->
 
 ```agda
 Goldbach-conjecture : UU lzero
@@ -53,8 +49,6 @@ Goldbach-conjecture =
   ( n : ℕ) → (le-ℕ 2 n) → (is-even-ℕ n) →
     Σ ℕ (λ p → (is-prime-ℕ p) × (Σ ℕ (λ q → (is-prime-ℕ q) × (p +ℕ q ＝ n))))
 ```
-
-<!-- rosetta-agda-block: exercise-8-1-twin-prime -->
 
 ```agda
 is-twin-prime-ℕ : ℕ → UU lzero
@@ -64,8 +58,6 @@ twin-prime-conjecture : UU lzero
 twin-prime-conjecture =
   (n : ℕ) → Σ ℕ (λ p → (is-twin-prime-ℕ p) × (leq-ℕ n p))
 ```
-
-<!-- rosetta-agda-block: exercise-8-1-collatz -->
 
 ```agda
 iterate-collatz : ℕ → ℕ → ℕ

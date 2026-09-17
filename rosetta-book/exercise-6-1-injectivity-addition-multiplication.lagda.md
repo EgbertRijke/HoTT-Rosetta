@@ -50,8 +50,6 @@ for all `m,n:ℕ`.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-6-1-injectivity-addition-multiplication-block-1 -->
-
 ```agda
 is-zero-ℕ : ℕ → UU lzero
 is-zero-ℕ n = (n ＝ zero-ℕ)
@@ -86,8 +84,6 @@ pr1 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = x
 pr2 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = refl
 ```
 
-<!-- rosetta-agda-block: exercise-6-1-injectivity-addition-multiplication-block-2 -->
-
 ```agda
 abstract
   is-injective-right-add-ℕ :
@@ -103,8 +99,6 @@ abstract
       ( k)
       ( commutative-add-ℕ x k ∙ (p ∙ commutative-add-ℕ k y))
 ```
-
-<!-- rosetta-agda-block: exercise-6-1-injectivity-addition-multiplication-block-3 -->
 
 ```agda
 abstract
@@ -142,8 +136,6 @@ abstract
   ... | pair l refl = is-injective-left-mul-succ-ℕ l p
 ```
 
-<!-- rosetta-agda-block: exercise-6-1-injectivity-addition-multiplication-block-4 -->
-
 ```agda
 abstract
   is-zero-right-is-zero-add-ℕ :
@@ -166,8 +158,6 @@ abstract
     (x y : ℕ) → (is-zero-ℕ x) × (is-zero-ℕ y) → is-zero-ℕ (x +ℕ y)
   is-zero-sum-is-zero-summand-ℕ .zero-ℕ .zero-ℕ (pair refl refl) = refl
 ```
-
-<!-- rosetta-agda-block: exercise-6-1-injectivity-addition-multiplication-block-5 -->
 
 ```agda
 abstract
@@ -193,8 +183,6 @@ abstract
   is-one-mul-ℕ .1 .1 refl refl = refl
 ```
 
-<!-- rosetta-agda-block: exercise-6-1-injectivity-addition-multiplication-block-6 -->
-
 ```agda
 abstract
   is-zero-summand-is-zero-mul-ℕ :
@@ -217,8 +205,6 @@ abstract
   is-zero-mul-ℕ-is-zero-summand x y (inr H) =
     is-zero-mul-ℕ-is-zero-right-summand x y H
 ```
-
-<!-- rosetta-agda-block: exercise-6-1-injectivity-addition-multiplication-block-7 -->
 
 ```agda
 abstract

@@ -60,8 +60,6 @@ Show that `x+dist-ℕ(x,y)=y` for any `x≤ y`.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-6-5-distance-natural-numbers-block-1 -->
-
 ```agda
 ap-add-ℕ :
   {m n m' n' : ℕ} → m ＝ m' → n ＝ n' → m +ℕ n ＝ m' +ℕ n'
@@ -79,8 +77,6 @@ ap-dist-ℕ :
   {m n m' n' : ℕ} → m ＝ m' → n ＝ n' → dist-ℕ m n ＝ dist-ℕ m' n'
 ap-dist-ℕ p q = ap-binary dist-ℕ p q
 ```
-
-<!-- rosetta-agda-block: exercise-6-5-distance-natural-numbers-block-2 -->
 
 ```agda
 abstract
@@ -102,8 +98,6 @@ abstract
   dist-neq-ℕ' m n np = is-successor-is-nonzero-ℕ (dist-neq-ℕ m n np)
 ```
 
-<!-- rosetta-agda-block: exercise-6-5-distance-natural-numbers-block-3 -->
-
 ```agda
 abstract
   is-one-dist-succ-ℕ : (x : ℕ) → is-one-ℕ (dist-ℕ x (succ-ℕ x))
@@ -115,8 +109,6 @@ abstract
   is-one-dist-succ-ℕ' (succ-ℕ x) = is-one-dist-succ-ℕ' x
 ```
 
-<!-- rosetta-agda-block: exercise-6-5-distance-natural-numbers-block-4 -->
-
 ```agda
 abstract
   commutative-dist-ℕ :
@@ -126,8 +118,6 @@ abstract
   commutative-dist-ℕ (succ-ℕ m) zero-ℕ = refl
   commutative-dist-ℕ (succ-ℕ m) (succ-ℕ n) = commutative-dist-ℕ m n
 ```
-
-<!-- rosetta-agda-block: exercise-6-5-distance-natural-numbers-block-5 -->
 
 ```agda
 abstract
@@ -141,8 +131,6 @@ abstract
   right-unit-law-dist-ℕ zero-ℕ = refl
   right-unit-law-dist-ℕ (succ-ℕ n) = refl
 ```
-
-<!-- rosetta-agda-block: exercise-6-5-distance-natural-numbers-block-6 -->
 
 ```agda
 abstract
@@ -189,8 +177,6 @@ abstract
     triangle-inequality-dist-ℕ m n k
 ```
 
-<!-- rosetta-agda-block: exercise-6-5-distance-natural-numbers-block-7 -->
-
 ```agda
 abstract
   is-additive-right-inverse-dist-ℕ :
@@ -202,8 +188,6 @@ abstract
     ( left-successor-law-add-ℕ x (dist-ℕ x y)) ∙
     ( ap succ-ℕ (is-additive-right-inverse-dist-ℕ x y H))
 ```
-
-<!-- rosetta-agda-block: exercise-6-5-distance-natural-numbers-block-8 -->
 
 ```agda
 abstract
@@ -248,8 +232,6 @@ abstract
     ( is-difference-dist-ℕ x y H)
 ```
 
-<!-- rosetta-agda-block: exercise-6-5-distance-natural-numbers-block-9 -->
-
 ```agda
 abstract
   dist-add-ℕ : (x y : ℕ) → dist-ℕ x (x +ℕ y) ＝ y
@@ -258,8 +240,6 @@ abstract
   dist-add-ℕ' : (x y : ℕ) → dist-ℕ (x +ℕ y) x ＝ y
   dist-add-ℕ' x y = commutative-dist-ℕ (x +ℕ y) x ∙ dist-add-ℕ x y
 ```
-
-<!-- rosetta-agda-block: exercise-6-5-distance-natural-numbers-block-10 -->
 
 ```agda
 abstract
@@ -320,8 +300,6 @@ abstract
             ( commutative-dist-ℕ z x))))
 ```
 
-<!-- rosetta-agda-block: exercise-6-5-distance-natural-numbers-block-11 -->
-
 ```agda
 abstract
   translation-invariant-dist-ℕ :
@@ -338,8 +316,6 @@ abstract
     ( ap-dist-ℕ (commutative-add-ℕ m k) (commutative-add-ℕ n k)) ∙
     ( translation-invariant-dist-ℕ k m n)
 ```
-
-<!-- rosetta-agda-block: exercise-6-5-distance-natural-numbers-block-12 -->
 
 ```agda
 abstract

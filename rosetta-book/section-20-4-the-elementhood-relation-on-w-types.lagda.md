@@ -21,8 +21,6 @@ Given a W-type `W(A,B)` and a universe `𝒰` containing both `A` and each type 
 ```
 by `(x∈ tree(a,α))≔ Σ(y:B(a)) α(y)=x`.
 
-<!-- rosetta-item-end: definition-20.4.1 -->
-
 Using the elementhood relation on `W(A,B)`, we can reformulate the induction principle to, perhaps, a more recognizable form:
 
 ## Theorem 20.4.2
@@ -90,7 +88,6 @@ h(x,λ y. λ e. i(h,y))
 ≐ h(x,λ y. λ e. h(y,i'(h,y))).
 ```
 The computation rule is therefore satisfied by the identification
-<!-- rosetta-diagram: 4831940baace; review: pending -->
 
 *Linear diagram (automatic draft).*
 
@@ -102,4 +99,3 @@ Arrows:
 ```
  ◻
 
-<!-- rosetta-item-end: theorem-20.4.2 -->

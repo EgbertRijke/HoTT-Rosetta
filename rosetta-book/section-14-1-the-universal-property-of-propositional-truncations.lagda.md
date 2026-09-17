@@ -40,8 +40,6 @@ _∘ f:(P→ Q)→ (A→ Q)
 is an equivalence.
 This property of `f` is called the **universal property of the propositional truncation of `A`**.
 
-<!-- rosetta-agda-block: definition-14.1.1-propositional-truncation -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P)
@@ -56,7 +54,6 @@ module _
   is-propositional-truncation =
     {l : Level} (Q : Prop l) → is-equiv (precomp-Prop Q)
 ```
-<!-- rosetta-item-end: definition-14.1.1 -->
 
 ## Remark 14.1.2
 
@@ -68,7 +65,6 @@ Note that the fiber of the precomposition map `_∘ f:(P→ Q) → (A → Q)` at
 Therefore we see that if `f` satisfies the universal property of the propositional truncation, then these fibers are contractible.
 In other words, for each map `g:A→ Q` into a proposition `Q` there is a unique map `h:P→ Q` for which `h∘ f=g`.
 We also say that every map `g:A→ Q` into a proposition `Q` *extends* uniquely along `f`, as indicated in the diagram
-<!-- rosetta-diagram: cbd3f685da87; review: pending -->
 
 ```text
       [A]
@@ -80,8 +76,6 @@ Arrows:
 - A --g--> Q
 - P --unlabeled--> Q
 ```
-
-<!-- rosetta-agda-block: remark-14.1.2-unique-extensions -->
 
 ```agda
 module _
@@ -95,8 +89,6 @@ module _
     is-contr (Σ ((type-Prop P → type-Prop Q)) (λ h → h ∘ f ＝ g))
 ```
 
-<!-- rosetta-agda-block: remark-14.1.2-contractible-extensions-from-truncation -->
-
 ```agda
 abstract
   universal-property-is-propositional-truncation :
@@ -107,8 +99,6 @@ abstract
     is-contr-map-is-equiv (H Q)
 ```
 
-<!-- rosetta-agda-block: remark-14.1.2-truncation-from-contractible-extensions -->
-
 ```agda
 abstract
   is-propositional-truncation-universal-property :
@@ -118,8 +108,6 @@ abstract
   is-propositional-truncation-universal-property P f H Q =
     is-equiv-is-contr-map (H Q)
 ```
-
-<!-- rosetta-agda-block: remark-14.1.2-extension-map-and-equation -->
 
 ```agda
 abstract
@@ -142,7 +130,6 @@ abstract
       ( center
         ( universal-property-is-propositional-truncation P f is-ptr-f Q g))
 ```
-<!-- rosetta-item-end: remark-14.1.2 -->
 
 ## Remark 14.1.3
 
@@ -157,8 +144,6 @@ In other words, to prove that a map `f:A→ P` into a proposition `P` satisfies 
 ```
 for every proposition `Q`.
 
-<!-- rosetta-agda-block: remark-14.1.3-extension-property -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1}
@@ -169,8 +154,6 @@ module _
   extension-property-propositional-truncation =
     {l : Level} (Q : Prop l) → (A → type-Prop Q) → (type-Prop P → type-Prop Q)
 ```
-
-<!-- rosetta-agda-block: remark-14.1.3-truncation-from-extension -->
 
 ```agda
 abstract
@@ -186,8 +169,6 @@ abstract
       ( up-P Q)
 ```
 
-<!-- rosetta-agda-block: remark-14.1.3-extension-from-truncation -->
-
 ```agda
 extension-property-is-propositional-truncation :
   {l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
@@ -196,7 +177,6 @@ extension-property-is-propositional-truncation :
 extension-property-is-propositional-truncation P f H =
   map-is-propositional-truncation P f H
 ```
-<!-- rosetta-item-end: remark-14.1.3 -->
 
 In the following proposition we show that the propositional truncation of a type `A` is uniquely determined up to equivalence, if it exists.
 In other words, any two propositional truncations of a type `A` must be equivalent.
@@ -225,7 +205,6 @@ For the uniqueness claim, note that the type `P≃ P'` is itself a proposition.
 
 Finally we show that (iii) implies that (i) holds if and only if (ii) holds.
 Suppose we have an equivalence `P≃ P'`, let `Q` be an arbitrary proposition, and consider the triangle
-<!-- rosetta-diagram: 82048488c0ff; review: pending -->
 
 ```text
              [(A→ Q)]
@@ -243,8 +222,6 @@ We see from this triangle that
 ((A→ Q)→ (P→ Q))↔((A → Q) → (P'→ Q)),
 ```
 and this implies that (i) holds if and only if (ii) holds. ◻
-
-<!-- rosetta-agda-block: proposition-14.1.4-propositional-equivalence-type -->
 
 ```agda
 module _
@@ -265,8 +242,6 @@ module _
             ( λ h → is-prop-is-contr (is-contr-Π (λ x → H (h (f x)) x)))))
 ```
 
-<!-- rosetta-agda-block: proposition-14.1.4-equivalence-of-truncations -->
-
 ```agda
 equiv-is-propositional-truncation :
   {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (P' : Prop l3) →
@@ -280,8 +255,6 @@ equiv-is-propositional-truncation P P' f f' H K =
     ( map-is-propositional-truncation P f H P' f')
     ( map-is-propositional-truncation P' f' K P f)
 ```
-
-<!-- rosetta-agda-block: proposition-14.1.4-transfer-of-truncation -->
 
 ```agda
 abstract
@@ -306,7 +279,6 @@ abstract
     is-propositional-truncation-extension-property P f
       ( λ R g → (map-is-propositional-truncation P' f' is-ptr-f' R g) ∘ h)
 ```
-<!-- rosetta-item-end: proposition-14.1.4 -->
 
 ## Remark 14.1.5
 
@@ -316,7 +288,6 @@ Indeed, the type `¬¬ A` is a proposition, and it comes equipped with a map `A�
 It is therefore natural to wonder whether the map `A→¬¬ A` satisfies the universal property of the propositional truncation.
 
 Recall that we have shown in Exercise 4.3 that any map `A→¬¬ Q` extends to a map `¬¬ A→¬¬ Q`, as indicated in the diagram
-<!-- rosetta-diagram: bc6d1f4223fe; review: pending -->
 
 ```text
        [A]
@@ -337,15 +308,11 @@ However, this only gives us a universal property with respect to doubly negated 
 In fact, propositional truncations are not guaranteed to exist in Martin Löf’s dependent type theory, the way it is set up in Chapter I.
 We will therefore add new rules to the type theory to ensure their existence.
 
-<!-- rosetta-agda-block: remark-14.1.5-double-negation-proposition -->
-
 ```agda
 is-prop-double-negation :
   {l : Level} {A : UU l} → is-prop (¬¬ A)
 is-prop-double-negation = is-prop-neg
 ```
-
-<!-- rosetta-agda-block: remark-14.1.5-double-negation-universal-property -->
 
 ```agda
 is-equiv-precomp-double-negation :
@@ -365,4 +332,3 @@ pr1 (equiv-precomp-double-negation A Q) =
 pr2 (equiv-precomp-double-negation A Q) =
   is-equiv-precomp-double-negation A Q
 ```
-<!-- rosetta-item-end: remark-14.1.5 -->

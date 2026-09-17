@@ -27,14 +27,10 @@ for any `x:Fin{k+1}`.
 
 ## Solution
 
-<!-- rosetta-agda-block: exercise-7-4-one-finite -->
-
 ```agda
 one-Fin : (k : ℕ) → Fin (succ-ℕ k)
 one-Fin k = succ-Fin (succ-ℕ k) (zero-Fin k)
 ```
-
-<!-- rosetta-agda-block: exercise-7-4-natural-value-one-finite -->
 
 ```agda
 is-one-nat-one-Fin :
@@ -42,8 +38,6 @@ is-one-nat-one-Fin :
 is-one-nat-one-Fin zero-ℕ = refl
 is-one-nat-one-Fin (succ-ℕ k) = is-one-nat-one-Fin k
 ```
-
-<!-- rosetta-agda-block: exercise-7-4-successor-adds-one -->
 
 ```agda
 is-add-one-succ-Fin' :

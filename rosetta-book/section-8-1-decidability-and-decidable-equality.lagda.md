@@ -37,13 +37,10 @@ is-decidable(A)≔ A+¬ A.
 ```
 A family `P` over a type `A` is said to be **decidable** if `P(x)` is decidable for every `x:A`.
 
-<!-- rosetta-agda-block: definition-8.1.1-decidable -->
-
 ```agda
 is-decidable : {l : Level} (A : UU l) → UU l
 is-decidable A = A + (¬ A)
 ```
-<!-- rosetta-item-end: definition-8.1.1 -->
 
 ## Example 8.1.2
 
@@ -56,8 +53,6 @@ inr(id) : is-decidable(empty).
 ```
 Furthermore, any type `A` equipped with an element `a:A` is decidable because we have `inl(a):is-decidable(A)` for such `A`.
 
-<!-- rosetta-agda-block: example-8.1.2-unit-empty-decidable -->
-
 ```agda
 is-decidable-unit : is-decidable unit
 is-decidable-unit = inl star
@@ -65,7 +60,6 @@ is-decidable-unit = inl star
 is-decidable-empty : is-decidable empty
 is-decidable-empty = inr id
 ```
-<!-- rosetta-item-end: example-8.1.2 -->
 
 ## Example 8.1.3
 
@@ -74,8 +68,6 @@ The principal way to use a hypothesis that `A` is decidable is to proceed by the
 For example, if `A` and `B` are decidable types, then the types `A+B`, `A× B`, and `A→ B` are also decidable.
 This is straightforward to prove directly by pattern-matching on the variables of type `is-decidable(A)` and `is-decidable(B)`.
 When we go through these proofs, the familiar truth table emerges:
-
-<!-- unsupported LaTeX environment: center -->
 
 | 1-5 AA | BB | A+BA+B | A×BA\times B | A→BA\to B |
 | --- | --- | --- | --- | --- |
@@ -86,8 +78,6 @@ When we go through these proofs, the familiar truth table emerges:
 
 Since `A→ B` is decidable whenever both `A` and `B` are decidable, it also follows that the negation `¬ A` of any decidable type `A` is decidable.
 
-<!-- rosetta-agda-block: example-8.1.3-coproduct-decidable -->
-
 ```agda
 is-decidable-coproduct :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
@@ -96,8 +86,6 @@ is-decidable-coproduct (inl a) y = inl (inl a)
 is-decidable-coproduct (inr na) (inl b) = inl (inr b)
 is-decidable-coproduct (inr na) (inr nb) = inr (rec-coproduct na nb)
 ```
-
-<!-- rosetta-agda-block: example-8.1.3-product-decidable -->
 
 ```agda
 is-decidable-product :
@@ -109,8 +97,6 @@ is-decidable-product (inr f) (inl b) = inr (f ∘ pr1)
 is-decidable-product (inr f) (inr g) = inr (f ∘ pr1)
 ```
 
-<!-- rosetta-agda-block: example-8.1.3-evaluation -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A)
@@ -119,8 +105,6 @@ module _
   ev : ((x : A) → B x) → B a
   ev f = f a
 ```
-
-<!-- rosetta-agda-block: example-8.1.3-function-decidable -->
 
 ```agda
 is-decidable-function-type :
@@ -131,14 +115,11 @@ is-decidable-function-type (inl a) (inr nb) = inr (map-neg (ev a) nb)
 is-decidable-function-type (inr f) _ = inl (ex-falso ∘ f)
 ```
 
-<!-- rosetta-agda-block: example-8.1.3-negation-decidable -->
-
 ```agda
 is-decidable-neg :
   {l : Level} {A : UU l} → is-decidable A → is-decidable (¬ A)
 is-decidable-neg d = is-decidable-function-type d is-decidable-empty
 ```
-<!-- rosetta-item-end: example-8.1.3 -->
 
 ## Example 8.1.4
 
@@ -153,8 +134,6 @@ Eq-ℕ(succ-ℕ(m),0) ≐ empty
 ```
 are all decidable, and that the type `Eq-ℕ(succ-ℕ(m),succ-ℕ(n))≐ Eq-ℕ(m,n)` is decidable by the inductive hypothesis.
 
-<!-- rosetta-agda-block: example-8.1.4-equality-natural-decidable -->
-
 ```agda
 is-decidable-Eq-ℕ :
   (m n : ℕ) → is-decidable (Eq-ℕ m n)
@@ -163,8 +142,6 @@ is-decidable-Eq-ℕ zero-ℕ (succ-ℕ n) = inr id
 is-decidable-Eq-ℕ (succ-ℕ m) zero-ℕ = inr id
 is-decidable-Eq-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-Eq-ℕ m n
 ```
-
-<!-- rosetta-agda-block: example-8.1.4-inequality-natural-decidable -->
 
 ```agda
 is-decidable-leq-ℕ :
@@ -175,8 +152,6 @@ is-decidable-leq-ℕ (succ-ℕ m) zero-ℕ = inr id
 is-decidable-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-leq-ℕ m n
 ```
 
-<!-- rosetta-agda-block: example-8.1.4-strict-inequality-natural-decidable -->
-
 ```agda
 is-decidable-le-ℕ :
   (m n : ℕ) → is-decidable (le-ℕ m n)
@@ -185,7 +160,6 @@ is-decidable-le-ℕ zero-ℕ (succ-ℕ n) = inl star
 is-decidable-le-ℕ (succ-ℕ m) zero-ℕ = inr id
 is-decidable-le-ℕ (succ-ℕ m) (succ-ℕ n) = is-decidable-le-ℕ m n
 ```
-<!-- rosetta-item-end: example-8.1.4 -->
 
 The fact that `ℕ` has decidable observational equality also implies that equality itself is decidable on `ℕ`.
 This leads to the general concept of decidable equality, which is important in many results about decidability.
@@ -198,13 +172,10 @@ We will write
 has-decidable-eq(A)≔ Π(x,y:A) is-decidable(x=y).
 ```
 
-<!-- rosetta-agda-block: definition-8.1.5-decidable-equality -->
-
 ```agda
 has-decidable-equality : {l : Level} → UU l → UU l
 has-decidable-equality A = (x y : A) → is-decidable (x ＝ y)
 ```
-<!-- rosetta-item-end: definition-8.1.5 -->
 
 Before we show that `ℕ` has decidable equality, let us show that if `A↔ B` and `A` is decidable, then `B` must be decidable.
 
@@ -227,8 +198,6 @@ g+f̃ : (B+¬ B) → (A+¬ A).
 ```
  ◻
 
-<!-- rosetta-agda-block: lemma-8.1.6-decidability-logical-equivalence -->
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -250,7 +219,6 @@ module _
   iff-is-decidable : A ↔ B → is-decidable A ↔ is-decidable B
   iff-is-decidable e = is-decidable-iff' e , is-decidable-iff' (inv-iff e)
 ```
-<!-- rosetta-item-end: lemma-8.1.6 -->
 
 ## Proposition 8.1.7
 
@@ -264,21 +232,16 @@ Equality on the natural numbers is decidable.
 ```
 The claim therefore follows by Lemma 8.1.6, since we have observed in Example 8.1.4 that `Eq-ℕ(m,n)` is decidable for every `m,n:ℕ`. ◻
 
-<!-- rosetta-agda-block: proposition-8.1.7-natural-decidable-equality -->
-
 ```agda
 has-decidable-equality-ℕ : has-decidable-equality ℕ
 has-decidable-equality-ℕ x y =
   is-decidable-iff (eq-Eq-ℕ x y) Eq-eq-ℕ (is-decidable-Eq-ℕ x y)
 ```
 
-<!-- rosetta-agda-block: proposition-8.5.2-one-decidable -->
-
 ```agda
 is-decidable-is-one-ℕ : (n : ℕ) → is-decidable (is-one-ℕ n)
 is-decidable-is-one-ℕ n = has-decidable-equality-ℕ n 1
 ```
-<!-- rosetta-item-end: proposition-8.1.7 -->
 
 It is certainly not provable with the given rules of type theory that every type has decidable equality.
 In fact, we will show in Theorem 12.3.5 that if a type has decidable equality, then it is a *set*.
@@ -298,8 +261,6 @@ The standard finite type `Fin{k}` has decidable equality for each `k:ℕ`.
 ```
 The type `Eq-Fin_k(x,y)` is decidable, since it is recursively defined using the decidable types `empty` and `unit`. ◻
 
-<!-- rosetta-agda-block: proposition-8.1.8-finite-decidable-equality -->
-
 ```agda
 is-decidable-Eq-Fin : (k : ℕ) (x y : Fin k) → is-decidable (Eq-Fin k x y)
 is-decidable-Eq-Fin (succ-ℕ k) (inl x) (inl y) = is-decidable-Eq-Fin k x y
@@ -315,7 +276,6 @@ has-decidable-equality-Fin k x y =
     ( map-neg (Eq-Fin-eq k))
     ( is-decidable-Eq-Fin k x y)
 ```
-<!-- rosetta-item-end: proposition-8.1.8 -->
 
 We can use the fact that the finite types `Fin{k}` have decidable equality to show that the divisibility relation on `ℕ` is decidable.
 
@@ -331,8 +291,6 @@ Therefore it suffices to show that `d+1| x` is decidable.
 By Theorem 7.4.7 it follows that `d+1| x` holds if and only if we have an identification `[x]_{d+1}=0` in `Fin{d+1}`.
 Therefore the claim follows from the fact that `Fin{d+1}` has decidable equality. ◻
 
-<!-- rosetta-agda-block: theorem-8.1.9-natural-zero-decidable -->
-
 ```agda
 is-decidable-is-zero-ℕ : (n : ℕ) → is-decidable (is-zero-ℕ n)
 is-decidable-is-zero-ℕ n = has-decidable-equality-ℕ n zero-ℕ
@@ -341,8 +299,6 @@ is-decidable-is-zero-ℕ' : (n : ℕ) → is-decidable (is-zero-ℕ' n)
 is-decidable-is-zero-ℕ' n = has-decidable-equality-ℕ zero-ℕ n
 ```
 
-<!-- rosetta-agda-block: theorem-8.1.9-finite-zero-decidable -->
-
 ```agda
 is-decidable-is-zero-Fin :
   {k : ℕ} (x : Fin k) → is-decidable (is-zero-Fin k x)
@@ -350,14 +306,10 @@ is-decidable-is-zero-Fin {succ-ℕ k} x =
   has-decidable-equality-Fin (succ-ℕ k) x (zero-Fin k)
 ```
 
-<!-- rosetta-agda-block: theorem-8.1.9-zero-divisor -->
-
 ```agda
 is-zero-div-zero-ℕ : (x : ℕ) → div-ℕ zero-ℕ x → is-zero-ℕ x
 is-zero-div-zero-ℕ x H = antisymmetric-div-ℕ x zero-ℕ (div-zero-ℕ x) H
 ```
-
-<!-- rosetta-agda-block: theorem-8.1.9-divisibility-modulo -->
 
 ```agda
 is-zero-mod-succ-ℕ :
@@ -374,8 +326,6 @@ div-is-zero-mod-succ-ℕ k x p =
     ( right-unit-law-dist-ℕ x)
 ```
 
-<!-- rosetta-agda-block: theorem-8.1.9-divisibility-decidable -->
-
 ```agda
 is-decidable-div-ℕ : (d x : ℕ) → is-decidable (div-ℕ d x)
 is-decidable-div-ℕ zero-ℕ x =
@@ -389,4 +339,3 @@ is-decidable-div-ℕ (succ-ℕ d) x =
     ( is-zero-mod-succ-ℕ d x)
     ( is-decidable-is-zero-Fin (mod-succ-ℕ d x))
 ```
-<!-- rosetta-item-end: theorem-8.1.9 -->
