@@ -525,10 +525,10 @@ module _
   where
 
   abstract
-    is-contr-Id' : (a : A) → is-contr (Σ A (λ x → x ＝ a))
-    pr1 (pr1 (is-contr-Id' a)) = a
-    pr2 (pr1 (is-contr-Id' a)) = refl
-    pr2 (is-contr-Id' a) (.a , refl) = refl
+    is-torsorial-Id' : (a : A) → is-torsorial (λ x → x ＝ a)
+    pr1 (pr1 (is-torsorial-Id' a)) = a
+    pr2 (pr1 (is-torsorial-Id' a)) = refl
+    pr2 (is-torsorial-Id' a) (.a , refl) = refl
 ```
 
 ## Supplementary definitions

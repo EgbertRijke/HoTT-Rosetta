@@ -154,10 +154,6 @@ Therefore we conclude our proof with Theorem 10.2.3, which shows that the type `
 Note: In agda-unimath we say that `B` is *torsorial* if `Σ A B` is contractible.
 
 ```agda
-is-torsorial :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → UU (l1 ⊔ l2)
-is-torsorial B = is-contr (Σ _ B)
-
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {a : A}
   where
@@ -167,7 +163,7 @@ module _
       is-torsorial B → (f : (x : A) → a ＝ x → B x) → is-fiberwise-equiv f
     fundamental-theorem-id is-torsorial-B f =
       is-fiberwise-equiv-is-equiv-tot
-        ( is-equiv-is-contr (tot f) (is-contr-Id a) is-torsorial-B)
+        ( is-equiv-is-contr (tot f) (is-torsorial-Id a) is-torsorial-B)
 
   abstract
     fundamental-theorem-id' :
@@ -177,7 +173,7 @@ module _
         ( Σ A (Id a))
         ( tot f)
         ( is-equiv-tot-is-fiberwise-equiv is-fiberwise-equiv-f)
-        ( is-contr-Id a)
+        ( is-torsorial-Id a)
 
 is-identity-system-is-contr :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a) →
@@ -223,5 +219,5 @@ module _
         ( Σ A (Id a))
         ( tot (ind-Id a (λ x p → B x) b))
         ( is-equiv-tot-is-fiberwise-equiv H)
-        ( is-contr-Id a)
+        ( is-torsorial-Id a)
 ```

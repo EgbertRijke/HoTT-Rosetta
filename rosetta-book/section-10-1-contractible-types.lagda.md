@@ -102,13 +102,17 @@ For the center of contraction we take
 The contraction is constructed in Proposition 5.5.1. ◻
 
 ```agda
+is-torsorial :
+  {l1 l2 : Level} {B : UU l1} → (B → UU l2) → UU (l1 ⊔ l2)
+is-torsorial E = is-contr (Σ _ E)
+
 module _
   {l : Level} {A : UU l}
   where
 
   abstract
-    is-contr-Id : (a : A) → is-contr (Σ A (λ x → a ＝ x))
-    pr1 (pr1 (is-contr-Id a)) = a
-    pr2 (pr1 (is-contr-Id a)) = refl
-    pr2 (is-contr-Id a) (.a , refl) = refl
+    is-torsorial-Id : (a : A) → is-torsorial (λ x → a ＝ x)
+    pr1 (pr1 (is-torsorial-Id a)) = a
+    pr2 (pr1 (is-torsorial-Id a)) = refl
+    pr2 (is-torsorial-Id a) (.a , refl) = refl
 ```

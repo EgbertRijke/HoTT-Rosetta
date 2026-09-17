@@ -268,11 +268,12 @@ module _
       ( is-contr-equiv
         ( Π-total-fam (λ x y → y ＝ x))
         ( inv-distributive-Π-Σ)
-        ( is-contr-Π is-contr-Id'))
+        ( is-contr-Π is-torsorial-Id'))
       ( id , refl-htpy)) ∘e
     ( equiv-right-swap-Σ) ∘e
     ( equiv-Σ-equiv-base ( λ s → pr1 s ~ id) ( distributive-Π-Σ))
 ```
+
 <!-- rosetta-item-end: corollary-13.2.3 -->
 
 In the final application of distributivity of `Π`-types over `Σ`-types we obtain a general way of constructing identity systems of `Π`-types.

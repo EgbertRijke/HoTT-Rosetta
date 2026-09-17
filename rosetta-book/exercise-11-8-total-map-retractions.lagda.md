@@ -70,7 +70,15 @@ module _
               ( ( inv-htpy (preserves-comp-tot i (pr1 ∘ R))) ∙h
                 ( tot-htpy (pr2 ∘ R)) ∙h
                 ( tot-id B)))
-            ( is-contr-Id a))
-          ( is-contr-Id a))
+            ( is-torsorial-Id a))
+          ( is-torsorial-Id a))
+
+    fundamental-theorem-id-retract :
+      (R : (x : A) → (B x) retract-of (a ＝ x)) →
+      is-fiberwise-equiv (inclusion-retract ∘ R)
+    fundamental-theorem-id-retract R =
+      fundamental-theorem-id-retraction
+        ( inclusion-retract ∘ R)
+        ( retraction-retract ∘ R)
 ```
 

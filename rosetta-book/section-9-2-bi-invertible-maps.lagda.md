@@ -102,6 +102,33 @@ _retract-of_ :
 A retract-of B = retract B A
 
 module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (R : retract B A)
+  where
+
+  inclusion-retract : A → B
+  inclusion-retract = pr1 R
+
+  retraction-retract : retraction inclusion-retract
+  retraction-retract = pr2 R
+
+  map-retraction-retract : B → A
+  map-retraction-retract = map-retraction inclusion-retract retraction-retract
+
+  is-retraction-map-retraction-retract :
+    is-section map-retraction-retract inclusion-retract
+  is-retraction-map-retraction-retract =
+    is-retraction-map-retraction inclusion-retract retraction-retract
+
+  section-retract : section map-retraction-retract
+  pr1 section-retract = inclusion-retract
+  pr2 section-retract = is-retraction-map-retraction-retract
+
+retract-section :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B) → section f → B retract-of A
+retract-section f s = (pr1 s , f , pr2 s)
+
+module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
