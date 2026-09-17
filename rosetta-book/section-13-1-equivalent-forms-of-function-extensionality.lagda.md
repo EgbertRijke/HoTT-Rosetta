@@ -394,7 +394,7 @@ In the following theorem we extend the weak function extensionality principle to
 
 For any type family `B` over `A` one has
 ```text
-(Π(x:A) is-trunc{k}(B(x)))→ is-trunc{k}(Π(x:A) B(x)).
+(Π(x:A) is-trunc_{k}(B(x)))→ is-trunc_{k}(Π(x:A) B(x)).
 ```
 
 ### Proof

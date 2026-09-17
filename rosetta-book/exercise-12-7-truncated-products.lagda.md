@@ -5,6 +5,7 @@ module exercise-12-7-truncated-products where
 
 open import universe-levels
 open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import exercise-10-5-contractible-products
 open import section-12-4-general-truncation-levels
@@ -19,8 +20,8 @@ Show that the following are equivalent:
 1. There are functions
 
    ```text
-     f : B → is-trunc{k+1}(A)
-     g : A → is-trunc{k+1}(B).
+     f : B → is-trunc_{k+1}(A)
+     g : A → is-trunc_{k+1}(B).
    ```
 
 2. The type `A× B` is `(k+1)`-truncated.

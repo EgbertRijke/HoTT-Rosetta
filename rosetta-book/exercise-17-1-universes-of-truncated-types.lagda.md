@@ -13,7 +13,7 @@ Use the univalence axiom to show that the type `Σ(A:𝒰) is-contr(A)` of all c
 
 Use the univalence axiom and Exercises 13.3 and 13.4 to show that the universe of `k`-types
 ```text
-𝒰^{≤ k}≔ Σ(X:𝒰) is-trunc{k}(X)
+𝒰^{≤ k}≔ Σ(X:𝒰) is-trunc_{k}(X)
 ```
 is a `(k+1)`-type, for any `k≥ -2`.
 

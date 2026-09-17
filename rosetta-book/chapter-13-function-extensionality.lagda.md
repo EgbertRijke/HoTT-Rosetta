@@ -60,7 +60,7 @@ In the second application, Theorem 13.5.1, we prove the strong induction princip
 Function extensionality is needed in order to derive the computation rule for the strong induction principle.
 
 Many important consequences of the function extensionality axiom are left as exercises.
-For example, in Exercise 13.3 you are asked to show that both `is-contr(A)` and `is-trunc{k}(A)` are propositions, and in Exercise 13.4 you are asked to show that `is-equiv(f)` is a proposition.
+For example, in Exercise 13.3 you are asked to show that both `is-contr(A)` and `is-trunc_{k}(A)` are propositions, and in Exercise 13.4 you are asked to show that `is-equiv(f)` is a proposition.
 The universal properties of `empty`, `unit`, and `A+B` are left as Exercises 13.6, 13.7 and 13.8.
 A few more advanced properties, such as the fact that post-composition
 ```text
