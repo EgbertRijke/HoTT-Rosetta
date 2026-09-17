@@ -3,6 +3,9 @@
 ```agda
 module exercise-12-3-injective-maps-into-sets where
 
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
+open import exercise-6-3-order-natural-numbers
+open import section-12-1-propositions
 ```
 
 ## Problem statement
@@ -25,3 +28,13 @@ is a proposition for each `d,n:ℕ` such that `d>0`.
 ## Solution
 
 No formalization has been curated yet.
+
+```agda
+abstract
+  is-prop-leq-ℕ :
+    (m n : ℕ) → is-prop (leq-ℕ m n)
+  is-prop-leq-ℕ zero-ℕ zero-ℕ = is-prop-unit
+  is-prop-leq-ℕ zero-ℕ (succ-ℕ n) = is-prop-unit
+  is-prop-leq-ℕ (succ-ℕ m) zero-ℕ = is-prop-empty
+  is-prop-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-prop-leq-ℕ m n
+```

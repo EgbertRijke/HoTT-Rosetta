@@ -17,6 +17,8 @@ open import exercise-7-3-divisibility-factorials
 open import section-9-2-bi-invertible-maps
 open import section-12-1-propositions
 open import section-12-3-sets
+open import exercise-12-3-injective-maps-into-sets
+open import exercise-12-4-coproduct-truncation
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-12-4-coproduct-truncation
 open import exercise-9-1-groupoid-operations-equivalences
@@ -28,60 +30,81 @@ Function extensionality is used to derive the computation rules of the strong in
 ## Theorem 13.5.1
 
 Consider a type family `P` over `ℕ` equipped with
+
 ```text
-p_0 : P(0)
-p_S : Π(n:ℕ) (Π(m:ℕ) (m≤ n)→ P(m))→ P(n+1).
+  p_0 : P(0)
+  p_S : Π(n : ℕ) (Π(m : ℕ) (m ≤ n) → P(m)) → P(n + 1).
 ```
+
 Then there is a dependent function
+
 ```text
-strong-ind-ℕ(p_0,p_S) : Π(n:ℕ) P(n)
+  strong-ind-ℕ(p_0,p_S) : Π(n : ℕ) P(n)
 ```
+
 that satisfies the following computation rules
+
 ```text
-strong-ind-ℕ(p_0,p_S,0) = p_0
-strong-ind-ℕ(p_0,p_S,n+1) = p_S(n,(λ m. λ p. strong-ind-ℕ(p_0,p_S,m))).
+    strong-ind-ℕ(p_0,p_S,0) = p_0
+  strong-ind-ℕ(p_0,p_S,n+1) = p_S(n,(λ m. λ p. strong-ind-ℕ(p_0,p_S,m))).
 ```
 
 In order to construct `strong-ind-ℕ(p_0,p_S)`, we first define the type family `P̃` over `ℕ` by
+
 ```text
-P̃(n)≔ Π(m:ℕ) (m≤ n)→ P(m).
+  P̃(n)≔ Π(m : ℕ) (m ≤ n) → P(m).
 ```
 
 ```agda
 □-≤-ℕ : {l : Level} → (ℕ → UU l) → ℕ → UU l
 □-≤-ℕ P n = (m : ℕ) → (m ≤-ℕ n) → P m
+
+η-□-≤-ℕ : {l : Level} {P : ℕ → UU l} → ((n : ℕ) → P n) → (n : ℕ) → □-≤-ℕ P n
+η-□-≤-ℕ f n m p = f m
+
+ε-□-≤-ℕ :
+  {l : Level} {P : ℕ → UU l} → ((n : ℕ) → □-≤-ℕ P n) → ((n : ℕ) → P n)
+ε-□-≤-ℕ f n = f n n (refl-leq-ℕ n)
 ```
 
 The idea is then to first use `p_0` and `p_S` to construct
+
 ```text
-p̃_0 : P̃(0)
-p̃_S :Π(n:ℕ) P̃(n)→P̃(n+1).
+  p̃_0 : P̃(0)
+  p̃_S : Π(n : ℕ) P̃(n) → P̃(n + 1).
 ```
+
 The ordinary induction principle of `ℕ` then gives a function
+
 ```text
-ind-ℕ(p̃_0,p̃_S):Π(n:ℕ) P̃(n),
+  ind-ℕ(p̃_0,p̃_S) : Π(n : ℕ) P̃(n),
 ```
-which can be used to define a function `Π(n:ℕ) P(n)`.
+
+which can be used to define a function `Π(n : ℕ) P(n)`.
 
 Before we start by the proof of Theorem 13.5.1 we state two lemmas in which we construct `p̃_0` and `p̃_S` with computation rules of their own.
 We will assume a type family `P` over `ℕ` equipped with
+
 ```text
-p_0 : P(0)
-p_S : Π(n:ℕ) P̃(n) → P(n+1),
+  p_0 : P(0)
+  p_S : Π(n : ℕ) P̃(n) → P(n + 1),
 ```
+
 as in the hypotheses of Theorem 13.5.1.
 
 ## Lemma 13.5.2
 
-There is an element `p̃_0:P̃(0)` that satisfies the judgmental equality
+There is an element `p̃_0 : P̃(0)` that satisfies the judgmental equality
+
 ```text
-p̃_0(0,p)≐ p_0
+  p̃_0(0,p) ≐ p_0
 ```
-for any `p:0≤ 0`.
+
+for any `p : 0 ≤ 0`.
 
 ### Proof
 
-*Proof.* The fact that we have such a dependent function `p̃_0` follows immediately by induction on `m` and `p:m≤ 0`. ◻
+The fact that we have such a dependent function `p̃_0` follows immediately by induction on `m` and `p : m ≤ 0`. ◻
 
 ```agda
 zero-strong-ind-ℕ :
@@ -97,102 +120,72 @@ eq-zero-strong-ind-ℕ P p0 t = refl
 ## Lemma 13.5.3
 
 There is a function
+
 ```text
-p̃_S : Π(n:ℕ) P̃(n)→P̃(n+1)
+  p̃_S : Π(n : ℕ) P̃(n) → P̃(n + 1)
 ```
+
 equipped with
 
 1. an identification
-```text
-p̃_S(n,H,m,p) = H(m,q)
-```
-    for every `H:P̃(n)` and every `p:m≤ n+1` and `q:m≤ n`, and
+
+   ```text
+     p̃_S(n,H,m,p) = H(m,q)
+   ```
+    
+   for every `H : P̃(n)` and every `p : m ≤ n + 1` and `q : m ≤ n`, and
 
 2. an identification
-```text
-p̃_S(n,H,n+1,p) = p_S(n,H)
-```
-    for every `p:n+1≤ n+1`.
+
+   ```text
+     p̃_S(n,H,n+1,p) = p_S(n,H)
+   ```
+
+   for every `p : n + 1 ≤ n + 1`.
 
 ### Proof
 
-*Proof.* To define the function `p̃_S(n,H)`, note that there is a function
+To define the function `p̃_S(n,H)`, note that there is a function
+
 ```text
-f : (m≤ n+1)→ (m≤ n)+(m=n+1)(*)
+  f : (m ≤ n + 1) → (m ≤ n) + (m = n + 1)    (*)
 ```
+
 which can be defined by induction on `n` and `m`.
 Using the fact that the domain and codomain of this map are both propositions, this function is easily seen to be an equivalence.
 Therefore we define first a function
+
 ```text
-h(n,H) :Π(m:ℕ) ((m≤ n)+(m=n+1))→ P(m)
+  h(n,H) : Π(m : ℕ) ((m ≤ n) + (m = n + 1)) → P(m)
 ```
-by case analysis on `x:(m≤ n)+(m=n+1)`.
-There are two cases to consider: one where we have `q:m≤ n`, and one where we have `q:m=n+1`.
-Note that in the second case it suffices to make a definition for `q≐ refl`.
+
+by case analysis on `x :(m ≤ n) + (m = n + 1)`.
+There are two cases to consider: one where we have `q : m ≤ n`, and one where we have `q : m = n + 1`.
+Note that in the second case it suffices to make a definition for `q ≐ refl`.
 Therefore we define
+
 ```text
-h(n,H,m,x) =
-cases {
-H(m,q) if x≐inl(q)
-p_S(n,H) if x≐inr(refl).
-}
+  h(n,H,m,x) ≔ cases {H(m,q) if x≐inl(q); p_S(n,H) if x≐inr(refl)}.
 ```
+
 Now we define `p̃_S` by
+
 ```text
-p̃_S(n,H,m,p)≔ h(n,H,m,f(p)),
+  p̃_S(n,H,m,p) ≔ h(n,H,m,f(p)),
 ```
-where `f:(m≤ n+1)→ (m≤ n)+(m=n+1)` is the map we mentioned in (\*).
+
+where `f : (m ≤ n + 1) → (m ≤ n) + (m = n + 1)` is the map we mentioned in (*).
 
 To construct the identifications claimed in (i) and (ii), note that there is an equivalence
+
 ```text
-(p̃_S(n,H,m,p)=y)≃ (h(n,H,m,x)=y),
+  (p̃_S(n,H,m,p) = y) ≃ (h(n,H,m,x) = y),
 ```
-for any `y:P(m)`.
-This equivalence is obtained from the fact that `f(p)=x` for any `x:(m≤ n)+(m=n+1)`, i.e., the fact that `(m≤ n)+(m=n+1)` is a proposition.
+
+for any `y : P(m)`.
+This equivalence is obtained from the fact that `f(p) = x` for any `x : (m ≤ n) + (m = n + 1)`, i.e., the fact that `(m ≤ n) + (m = n + 1)` is a proposition.
 Now the identifications in (i) and (ii) are obtained as a simple consequence of the computation rule for coproducts. ◻
 
-```agda
-abstract
-  is-prop-leq-ℕ :
-    (m n : ℕ) → is-prop (leq-ℕ m n)
-  is-prop-leq-ℕ zero-ℕ zero-ℕ = is-prop-unit
-  is-prop-leq-ℕ zero-ℕ (succ-ℕ n) = is-prop-unit
-  is-prop-leq-ℕ (succ-ℕ m) zero-ℕ = is-prop-empty
-  is-prop-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-prop-leq-ℕ m n
-```
-
-```agda
-is-prop-leq-succ-cases :
-  (m n : ℕ) → is-prop ((m ≤-ℕ n) + (m ＝ succ-ℕ n))
-is-prop-leq-succ-cases m n =
-  is-prop-coproduct
-    ( λ q α →
-      contradiction-leq-ℕ n n (refl-leq-ℕ n)
-        ( concatenate-eq-leq-ℕ n (inv α) q))
-    ( is-prop-leq-ℕ m n)
-    ( is-set-ℕ m (succ-ℕ n))
-```
-
-```agda
-equiv-leq-succ-cases :
-  (m n : ℕ) → (m ≤-ℕ succ-ℕ n) ≃ ((m ≤-ℕ n) + (m ＝ succ-ℕ n))
-equiv-leq-succ-cases m n =
-  equiv-iff-is-prop
-    ( is-prop-leq-ℕ m (succ-ℕ n))
-    ( is-prop-leq-succ-cases m n)
-    ( decide-leq-succ-ℕ m n)
-    ( rec-coproduct
-      ( preserves-leq-succ-ℕ m n)
-      ( leq-eq-ℕ m (succ-ℕ n)))
-```
-
-```agda
-eq-cases-leq-succ :
-  (m n : ℕ) (p : m ≤-ℕ succ-ℕ n) (x : (m ≤-ℕ n) + (m ＝ succ-ℕ n)) →
-  decide-leq-succ-ℕ m n p ＝ x
-eq-cases-leq-succ m n p x =
-  eq-is-prop' (is-prop-leq-succ-cases m n) (decide-leq-succ-ℕ m n p) x
-```
 
 ```agda
 cases-succ-strong-ind-ℕ :
@@ -206,9 +199,13 @@ succ-strong-ind-ℕ :
   (k : ℕ) → (□-≤-ℕ P k) → (□-≤-ℕ P (succ-ℕ k))
 succ-strong-ind-ℕ P pS k H m p =
   cases-succ-strong-ind-ℕ P pS k H m (decide-leq-succ-ℕ m k p)
-```
 
-```agda
+abstract
+  neg-succ-leq-ℕ :
+    (n : ℕ) → ¬ (leq-ℕ (succ-ℕ n) n)
+  neg-succ-leq-ℕ zero-ℕ = id
+  neg-succ-leq-ℕ (succ-ℕ n) = neg-succ-leq-ℕ n
+
 cases-htpy-succ-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
   (k : ℕ) (H : □-≤-ℕ P k) (m : ℕ) (c : (leq-ℕ m k) + (m ＝ succ-ℕ k)) →
@@ -218,7 +215,7 @@ cases-htpy-succ-strong-ind-ℕ :
 cases-htpy-succ-strong-ind-ℕ P pS k H m (inl p) q =
   ap (H m) (eq-is-prop (is-prop-leq-ℕ m k))
 cases-htpy-succ-strong-ind-ℕ P pS k H m (inr α) q =
-  ex-falso (contradiction-leq-ℕ k k (refl-leq-ℕ k) (concatenate-eq-leq-ℕ k (inv α) q))
+  ex-falso (neg-succ-leq-ℕ k (concatenate-eq-leq-ℕ k (inv α) q))
 
 htpy-succ-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) → (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
@@ -234,7 +231,7 @@ cases-eq-succ-strong-ind-ℕ :
   (c : (leq-ℕ (succ-ℕ k) k) + (succ-ℕ k ＝ succ-ℕ k)) →
   ( (cases-succ-strong-ind-ℕ P pS k H (succ-ℕ k) c)) ＝
   ( pS k H)
-cases-eq-succ-strong-ind-ℕ P pS k H (inl p) = ex-falso (contradiction-leq-ℕ k k (refl-leq-ℕ k) p)
+cases-eq-succ-strong-ind-ℕ P pS k H (inl p) = ex-falso (neg-succ-leq-ℕ k p)
 cases-eq-succ-strong-ind-ℕ P pS k H (inr α) =
   ap
     ( (cases-succ-strong-ind-ℕ P pS k H (succ-ℕ k)) ∘ inr)
@@ -249,34 +246,99 @@ eq-succ-strong-ind-ℕ P pS k H p =
   cases-eq-succ-strong-ind-ℕ P pS k H (decide-leq-succ-ℕ (succ-ℕ k) k p)
 ```
 
-```agda
-equiv-identifications-succ-strong-ind-ℕ :
-  {l : Level} (P : ℕ → UU l)
-  (pS : (n : ℕ) → □-≤-ℕ P n → P (succ-ℕ n))
-  (n : ℕ) (H : □-≤-ℕ P n) (m : ℕ) (p : m ≤-ℕ succ-ℕ n)
-  (x : (m ≤-ℕ n) + (m ＝ succ-ℕ n)) (y : P m) →
-  (succ-strong-ind-ℕ P pS n H m p ＝ y) ≃
-  (cases-succ-strong-ind-ℕ P pS n H m x ＝ y)
-equiv-identifications-succ-strong-ind-ℕ P pS n H m p x y =
-  equiv-inv-concat
-    ( ap (cases-succ-strong-ind-ℕ P pS n H m)
-      ( eq-cases-leq-succ m n p x))
-    ( y)
-```
-
 We are now ready to finish the proof of Theorem 13.5.1.
 
-### Proof
+### Proof of Theorem 13.5.1.
+ 
+Using `p̃_0` and `p̃_S`, we obtain by induction on `n` a function
 
-*Proof of Theorem 13.5.1.* Using `p̃_0` and `p̃_S`, we obtain by induction on `n` a function
 ```text
-s̃:Π(n:ℕ) P̃(n)
+  s̃ : Π(n : ℕ) P̃(n)
 ```
+
 satisfying the computation rules
+
 ```text
-s̃(0) ≐ p̃_0
-s̃(n+1) ≐ p̃_S(n,s̃(n)).
+    s̃(0) ≐ p̃_0
+  s̃(n+1) ≐ p̃_S(n,s̃(n)).
 ```
+
+Now we define
+
+```text
+  strong-ind-ℕ(p_0,p_S,n) ≔ s̃(n,n,refl-≤-ℕ(n)),
+```
+
+where `refl-≤-ℕ(n) : n ≤ n` is the proof of reflexivity of `≤`.
+
+It remains to show that `strong-ind-ℕ` satisfies the computation rules of the strong induction principle.
+The identification that computes `strong-ind-ℕ` at `0` is easy to obtain, because we have the judgmental equalities
+
+```text
+  strong-ind-ℕ(p_0,p_S,0) ≐ s̃(0,0,refl-≤-ℕ(0))
+                          ≐ p̃_{0}(0,refl-≤-ℕ(0))
+                          ≐ p_0.
+```
+
+To construct the identification that computes `strong-ind-ℕ` at a successor, we start by a similar computation:
+
+```text
+  strong-ind-ℕ(p_0,p_S,n+1) ≐ s̃(n+1,n+1,refl-≤-ℕ(n+1))
+                            ≐ p̃_S(n,s̃(n),n+1,refl-≤-ℕ(n+1))
+                            = p_S(n,s̃(n)).
+```
+
+The last identification is obtained from Lemma 13.5.3 (ii).
+Therefore we see that, in order to show that
+
+```text
+  p_S(n,s̃(n)) = p_S(n,(λ m. λ p. s̃(m,m,refl-≤-ℕ(m)))),
+```
+
+we need to prove that
+
+```text
+  s̃(n) = λ m. λ p. s̃(m,m,refl-≤-ℕ(m)).
+```
+
+Here we apply function extensionality, so it suffices to show that
+
+```text
+  s̃(n,m,p) = s̃(m,m,refl-≤-ℕ(m))
+```
+
+for every `m : ℕ` and `p : m ≤ n`.
+We proceed by induction on `n : ℕ`.
+The base case is trivial.
+For the inductive step, we note that
+
+```text
+  s̃(n+1,m,p) = p̃_S(n,s̃(n),m,p)
+             = cases {s̃(n,m,p) if m≤ n; p_S(n,s̃(n)) if m=n+1}.
+```
+
+Therefore it follows by the inductive hypothesis that
+
+```text
+  s̃(n+1,m,p) = s̃(m,m,refl-≤-ℕ(m))
+```
+
+if `m ≤ n` holds.
+In the remaining case, where `m = n + 1`, note that we have
+
+```text
+  s̃(n+1,n+1,refl-≤-ℕ(n+1)) = p̃_S(n,s̃(n),n+1,refl-≤-ℕ(n+1))
+                           = p_S(n,s̃(n)).
+```
+
+Therefore we see that we also have an identification
+
+```text
+  s̃(n+1,m,p) = s̃(m,m,refl-≤-ℕ(m))
+```
+
+when `m = n + 1`.
+This completes the proof of the computation rules for the strong induction principle of `ℕ`. ◻
 
 ```agda
 induction-strong-ind-ℕ :
@@ -293,74 +355,7 @@ computation-succ-strong-ind-ℕ :
   ( induction-strong-ind-ℕ P p0 pS (succ-ℕ n)) ＝
   ( pS n (induction-strong-ind-ℕ P p0 pS n))
 computation-succ-strong-ind-ℕ P p0 pS n = refl
-```
 
-Now we define
-```text
-strong-ind-ℕ(p_0,p_S,n) ≔ s̃(n,n,refl-≤-ℕ(n)),
-```
-where `refl-≤-ℕ(n):n≤ n` is the proof of reflexivity of `≤`.
-
-```agda
-ε-□-≤-ℕ :
-  {l : Level} {P : ℕ → UU l} → ((n : ℕ) → □-≤-ℕ P n) → ((n : ℕ) → P n)
-ε-□-≤-ℕ f n = f n n (refl-leq-ℕ n)
-```
-
-It remains to show that `strong-ind-ℕ` satisfies the computation rules of the strong induction principle.
-The identification that computes `strong-ind-ℕ` at `0` is easy to obtain, because we have the judgmental equalities
-```text
-strong-ind-ℕ(p_0,p_S,0) ≐ s̃(0,0,refl-≤-ℕ(0))
-≐ p̃_{0}(0,refl-≤-ℕ(0))
-≐ p_0.
-```
-To construct the identification that computes `strong-ind-ℕ` at a successor, we start by a similar computation:
-```text
-strong-ind-ℕ(p_0,p_S,n+1) ≐ s̃(n+1,n+1,refl-≤-ℕ(n+1))
-≐ p̃_S(n,s̃(n),n+1,refl-≤-ℕ(n+1))
-= p_S(n,s̃(n)).
-```
-The last identification is obtained from Lemma 13.5.3 (ii).
-Therefore we see that, in order to show that
-```text
-p_S(n,s̃(n))=p_S(n,(λ m. λ p. s̃(m,m,refl-≤-ℕ(m)))),
-```
-we need to prove that
-```text
-s̃(n)=λ m. λ p. s̃(m,m,refl-≤-ℕ(m)).
-```
-Here we apply function extensionality, so it suffices to show that
-```text
-s̃(n,m,p)=s̃(m,m,refl-≤-ℕ(m))
-```
-for every `m:ℕ` and `p:m≤ n`.
-We proceed by induction on `n:ℕ`.
-The base case is trivial.
-For the inductive step, we note that
-```text
-s̃(n+1,m,p)=p̃_S(n,s̃(n),m,p)=cases {
-s̃(n,m,p) if m≤ n
-p_S(n,s̃(n)) if m=n+1.
-}
-```
-Therefore it follows by the inductive hypothesis that
-```text
-s̃(n+1,m,p)=s̃(m,m,refl-≤-ℕ(m))
-```
-if `m≤ n` holds.
-In the remaining case, where `m=n+1`, note that we have
-```text
-s̃(n+1,n+1,refl-≤-ℕ(n+1)) = p̃_S(n,s̃(n),n+1,refl-≤-ℕ(n+1))
-= p_S(n,s̃(n)).
-```
-Therefore we see that we also have an identification
-```text
-s̃(n+1,m,p)=s̃(m,m,refl-≤-ℕ(m))
-```
-when `m=n+1`.
-This completes the proof of the computation rules for the strong induction principle of `ℕ`. ◻
-
-```agda
 strong-ind-ℕ :
   {l : Level} → (P : ℕ → UU l) (p0 : P zero-ℕ) →
   (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) (n : ℕ) → P n
@@ -375,6 +370,13 @@ compute-zero-strong-ind-ℕ :
   (pS : (k : ℕ) → (□-≤-ℕ P k) → P (succ-ℕ k)) →
   strong-ind-ℕ P p0 pS zero-ℕ ＝ p0
 compute-zero-strong-ind-ℕ P p0 pS = refl
+
+abstract
+  decide-leq-refl-succ-ℕ :
+    {n : ℕ} → decide-leq-succ-ℕ (succ-ℕ n) n (refl-leq-ℕ n) ＝ inr refl
+  decide-leq-refl-succ-ℕ {zero-ℕ} = refl
+  decide-leq-refl-succ-ℕ {succ-ℕ n} =
+    ap (map-coproduct id (ap succ-ℕ)) decide-leq-refl-succ-ℕ
 
 cases-eq-compute-succ-strong-ind-ℕ :
   { l : Level} (P : ℕ → UU l) (p0 : P zero-ℕ) →
@@ -416,7 +418,7 @@ cases-eq-compute-succ-strong-ind-ℕ P p0 pS n α .(succ-ℕ n) p (inr refl) =
             cases-succ-strong-ind-ℕ P pS k H m (decide-leq-succ-ℕ m k p₁))
           n)
         ( succ-ℕ n))
-      ( eq-cases-leq-succ (succ-ℕ n) n (refl-leq-ℕ n) (inr refl))))
+      ( decide-leq-refl-succ-ℕ)))
 
 eq-compute-succ-strong-ind-ℕ :
   { l : Level} (P : ℕ → UU l) (p0 : P zero-ℕ) →
@@ -460,4 +462,25 @@ total-strong-ind-ℕ :
 pr1 (total-strong-ind-ℕ P p0 pS) = strong-ind-ℕ P p0 pS
 pr1 (pr2 (total-strong-ind-ℕ P p0 pS)) = compute-zero-strong-ind-ℕ P p0 pS
 pr2 (pr2 (total-strong-ind-ℕ P p0 pS)) = compute-succ-strong-ind-ℕ P p0 pS
+```
+
+## Supplement
+
+### Strong recursion
+
+```agda
+module _
+  {l : Level} {A : UU l} (a0 : A) (aS : (k : ℕ) → (□-≤-ℕ (λ _ → A) k) → A)
+  where
+
+  strong-rec-ℕ : ℕ → A
+  strong-rec-ℕ = strong-ind-ℕ (λ _ → A) a0 aS
+
+  compute-zero-strong-rec-ℕ : strong-rec-ℕ 0 ＝ a0
+  compute-zero-strong-rec-ℕ = compute-zero-strong-ind-ℕ (λ _ → A) a0 aS
+
+  compute-succ-strong-rec-ℕ :
+    (n : ℕ) → strong-rec-ℕ (succ-ℕ n) ＝ aS n (λ m _ → strong-rec-ℕ m)
+  compute-succ-strong-rec-ℕ =
+    compute-succ-strong-ind-ℕ (λ _ → A) a0 aS
 ```
