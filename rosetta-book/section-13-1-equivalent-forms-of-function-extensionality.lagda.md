@@ -282,9 +282,7 @@ module _
 funext : function-extensionality
 funext f g =
   is-equiv-is-invertible eq-htpy is-section-eq-htpy is-retraction-eq-htpy'
-```
 
-```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
@@ -301,7 +299,7 @@ module _
   abstract
     is-retraction-eq-htpy :
       {f g : (x : A) → B x} → is-retraction (htpy-eq {f = f} {g}) eq-htpy
-    is-retraction-eq-htpy {f} {g} = is-retraction-map-section-is-equiv (funext f g)
+    is-retraction-eq-htpy {f} {g} = is-retraction-map-inv-is-equiv (funext f g)
 
   eq-htpy-refl-htpy :
     (f : (x : A) → B x) → eq-htpy (refl-htpy {f = f}) ＝ refl
@@ -315,8 +313,6 @@ module _
 ## Remark 13.1.4
 
 The function extensionality axiom is added to type theory by adding the rule
-
-*Proof tree (automatic faithful draft).*
 
 ```text
    Γ, x : A ⊢ B(x) type    Γ ⊢ f : Π(x : A) B(x)    Γ ⊢ g : Π(x : A) B(x)
@@ -353,9 +349,15 @@ abstract
   pr1 (is-contr-Π {A = A} {B = B} H) x = center (H x)
   pr2 (is-contr-Π {A = A} {B = B} H) f =
     eq-htpy (λ x → contraction (H x) (f x))
-```
 
-```agda
+abstract
+  is-prop-Π :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → is-prop (B x)) → is-prop ((x : A) → B x)
+  is-prop-Π H =
+    is-prop-is-proof-irrelevant
+      ( λ f → is-contr-Π (λ x → is-proof-irrelevant-is-prop (H x) (f x)))
+
 abstract
   is-trunc-Π :
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} →
@@ -365,16 +367,6 @@ abstract
     is-trunc-is-equiv k (f ~ g) htpy-eq
       ( funext f g)
       ( is-trunc-Π k (λ x → is-trunc-B x (f x) (g x)))
-```
-
-```agda
-abstract
-  is-prop-Π :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
-    ((x : A) → is-prop (B x)) → is-prop ((x : A) → B x)
-  is-prop-Π H =
-    is-prop-is-proof-irrelevant
-      ( λ f → is-contr-Π (λ x → is-proof-irrelevant-is-prop (H x) (f x)))
 ```
 
 ## Corollary 13.1.6
@@ -389,9 +381,7 @@ abstract
     is-trunc k B → is-trunc k (A → B)
   is-trunc-function-type k {A} {B} is-trunc-B =
     is-trunc-Π k {B = λ (x : A) → B} (λ x → is-trunc-B)
-```
 
-```agda
 abstract
   is-prop-function-type :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
