@@ -347,4 +347,11 @@ module _
 
   precomp-Π : ((b : B) → C b) → ((a : A) → C (f a))
   precomp-Π h a = h (f a)
+
+module _
+  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : Type l3)
+  where
+
+  precomp : (B → C) → (A → C)
+  precomp = _∘ f
 ```

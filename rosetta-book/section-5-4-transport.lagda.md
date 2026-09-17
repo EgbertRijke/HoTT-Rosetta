@@ -5,6 +5,7 @@ module section-5-4-transport where
 
 open import universe-levels renaming (UU to Type)
 
+open import section-2-2-ordinary-function-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
@@ -146,6 +147,17 @@ module _
     tr B p u ＝ v → u ＝ tr B (inv p) v
   eq-transpose-tr' refl q = q
 ```
+
+### Substitution law for transport
+
+```agda
+substitution-law-tr :
+  {l1 l2 l3 : Level} {X : Type l1} {A : Type l2} (B : A → Type l3) (f : X → A)
+  {x y : X} (p : x ＝ y) {x' : B (f x)} →
+  tr B (ap f p) x' ＝ tr (B ∘ f) p x'
+substitution-law-tr B f p {x'} = tr-ap f (λ _ → id) p x'
+```
+
 
 ## Agda-unimath sources
 
