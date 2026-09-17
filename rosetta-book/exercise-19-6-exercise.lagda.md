@@ -12,6 +12,4 @@ Conclude that isomorphic monoids are equal.
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-6 -->
-
 No formalization has been curated yet.

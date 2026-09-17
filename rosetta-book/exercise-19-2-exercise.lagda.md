@@ -16,6 +16,4 @@ f(x^{-1}) = f(x)^{-1}.
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-2 -->
-
 No formalization has been curated yet.

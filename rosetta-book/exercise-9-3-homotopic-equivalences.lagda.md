@@ -21,6 +21,4 @@ Show that for any two homotopic equivalences `e,e':A ≃ B`, their inverses are 
 
 ## Solution
 
-<!-- rosetta-item: exercise-9-3 -->
-
 No formalization has been curated yet.

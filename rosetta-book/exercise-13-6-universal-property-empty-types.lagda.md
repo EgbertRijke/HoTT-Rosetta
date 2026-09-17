@@ -20,6 +20,4 @@ This property is the **universal property of an empty type**.
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-6 -->
-
 No formalization has been curated yet.

@@ -15,8 +15,6 @@ open import exercise-6-3-order-natural-numbers
 open import exercise-6-4-strict-order-natural-numbers
 ```
 
-<!-- rosetta-item: section-8.2 -->
-
 A common way to construct functions and to prove properties about them is by case analysis.
 For example, a famous function of Collatz is specified by case analysis on whether `n` is even or odd:
 ```text
@@ -45,8 +43,6 @@ Putting these ideas together, we obtain the following type theoretical definitio
 
 ## Definition 8.2.1
 
-<!-- rosetta-item: definition-8.2.1 -->
-
 Write `d:Π(n:ℕ) is-decidable(2| n)` for the function deciding `2| n`, given in Theorem 8.1.9.
 
 1. We define a function `h:Π(n:ℕ) (is-decidable(2| n)→ ℕ)` by
@@ -71,8 +67,6 @@ collatz n with is-decidable-div-ℕ 2 n
 <!-- rosetta-item-end: definition-8.2.1 -->
 
 ## Remark 8.2.2
-
-<!-- rosetta-item: remark-8.2.2 -->
 
 The general ideas behind the formal construction of the Collatz function lead to the type theoretic concept of *with-abstraction*.
 With-abstraction is a type-theoretically precise generalization of case analysis.
@@ -112,8 +106,6 @@ Using with-abstraction we can find a slight improvement of the decidability resu
 
 ## Proposition 8.2.3
 
-<!-- rosetta-item: proposition-8.2.3; latex-label: prp:is-decidable-function-type -->
-
 Consider a decidable type `A`, and let `B` be a type equipped with a function
 ```text
 A→is-decidable(B).
@@ -121,8 +113,6 @@ A→is-decidable(B).
 Then the types `A× B` and `A→ B` are also decidable.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.2-proof -->
 
 *Proof.* We only prove the claim about the decidability of `A→ B`, since the claim about the decidability of `A× B` is proven similarly.
 Since `A` is assumed to be decidable, we proceed by case analysis on `A+¬ A`.
@@ -183,8 +173,6 @@ However, if we know in advance that `P(x)` holds for any `m≤ x`, then we can d
 
 ## Proposition 8.2.4
 
-<!-- rosetta-item: proposition-8.2.4; latex-label: prp:is-decidable-pi-type -->
-
 Consider a decidable type family `P` over `ℕ` equipped with a natural number `m` such that the type
 ```text
 Π(x:ℕ) (m≤ x)→ P(x)
@@ -193,8 +181,6 @@ is decidable.
 Then the type `Π(x:ℕ) P(x)` is decidable.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.2-proof-2 -->
 
 *Proof.* Our proof is by induction on `m`, but we will first make sure that the inductive hypothesis will be strong enough by quantifying over all decidable type families over `ℕ`.
 Of course, we cannot do this directly.
@@ -257,8 +243,6 @@ is-decidable-Π-ℕ P d (succ-ℕ m) (inl H) with d zero-ℕ
 
 ## Corollary 8.2.5
 
-<!-- rosetta-item: corollary-8.2.5; latex-label: cor:is-decidable-bounded-pi -->
-
 Consider two decidable families `P` and `Q` over `ℕ`, and suppose that `P` comes equipped with an upper bound `m`.
 Then the type
 ```text
@@ -267,8 +251,6 @@ Then the type
 is decidable.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.2-proof-3 -->
 
 *Proof.* Since `m` is assumed to be an upper bound for `P`, it follows `P(n)→ Q(n)` for any `m≤ n`.
 With this observation we apply Proposition 8.2.4. ◻

@@ -4,8 +4,6 @@
 module section-21-2-the-dependent-universal-property-of-the-circle where
 ```
 
-<!-- rosetta-item: section-21.2 -->
-
 We will now use the induction principle of the circle to derive the *dependent universal property* and the *universal property* of the circle.
 The universal property of the circle states that, for any type `X` the canonical map
 ```text
@@ -25,8 +23,6 @@ The dependent universal property therefore improves on this by stating that this
 
 ## Theorem 21.2.1
 
-<!-- rosetta-item: theorem-21.2.1; latex-label: thm:circle-dependent-universal-property -->
-
 For any type family `P` over the circle, the map
 ```text
 dgen_{S^1}:
@@ -37,8 +33,6 @@ dgen_{S^1}:
 given by `f↦(f(base),apd_{f}(loop))` is an equivalence.
 
 ### Proof
-
-<!-- rosetta-item: subheading-21.2-proof -->
 
 *Proof.* By the induction principle of the circle we know that the map has a section, i.e., we have
 ```text
@@ -96,8 +90,6 @@ As a corollary we obtain the following uniqueness principle for dependent functi
 
 ## Corollary 21.2.2
 
-<!-- rosetta-item: corollary-21.2.2 -->
-
 Consider a type family `P` over the circle, and let
 ```text
 y : P(base)
@@ -132,8 +124,6 @@ It would be tempting to say that it is a direct corollary, but we need to addres
 
 ## Theorem 21.2.3
 
-<!-- rosetta-item: theorem-21.2.3; latex-label: thm:circle_up -->
-
 For each type `X`, the **action on generators**
 ```text
 gen_{S^1}:(S^1→ X)→ Σ(x:X) x=x
@@ -141,8 +131,6 @@ gen_{S^1}:(S^1→ X)→ Σ(x:X) x=x
 given by `f↦ (f(base),ap_{f}(loop))` is an equivalence.
 
 ### Proof
-
-<!-- rosetta-item: subheading-21.2-proof-2 -->
 
 *Proof.* We prove the claim by constructing a commuting triangle
 <!-- rosetta-diagram: f1ff10123b43; review: pending -->
@@ -210,8 +198,6 @@ commutes by path induction on `p`. ◻
 <!-- rosetta-item-end: theorem-21.2.3 -->
 
 ## Corollary 21.2.4
-
-<!-- rosetta-item: corollary-21.2.4 -->
 
 For any loop `l:x=x` in a type `X`, the type of maps `f:S^1→ X` equipped with an identification
 ```text

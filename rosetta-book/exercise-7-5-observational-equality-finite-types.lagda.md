@@ -49,8 +49,6 @@ Show that function `succ-Fin_k:Fin{k}→Fin{k}` is injective, for each `k:ℕ`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-7-5 -->
-
 <!-- rosetta-agda-block: exercise-7-5-observational-equality -->
 
 ```agda

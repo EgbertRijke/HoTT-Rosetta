@@ -4,11 +4,7 @@
 module section-19-2-group-homomorphisms where
 ```
 
-<!-- rosetta-item: section-19.2 -->
-
 ## Definition 19.2.1
-
-<!-- rosetta-item: definition-19.2.1 -->
 
 Let `G` and `H` be (semi)groups.
 A **homomorphism** of (semi)groups from `G` to `H` is a pair `(f,μ_f)` consisting of a function `f:G→ H` between their underlying types, and a homotopy
@@ -26,16 +22,12 @@ for the type of all (semi)group homomorphisms from `G` to `H`.
 
 ## Remark 19.2.2
 
-<!-- rosetta-item: remark-19.2.2; latex-label: rmk:is-set-hom-semigroup -->
-
 Since it is a property for a function to preserve the multiplication of a semigroup, it follows easily that equality of semigroup homomorphisms is equivalent to the type of homotopies between their underlying functions.
 In particular, it follows that the type of homomorphisms of semigroups is a set.
 
 <!-- rosetta-item-end: remark-19.2.2 -->
 
 ## Remark 19.2.3
-
-<!-- rosetta-item: remark-19.2.3; latex-label: rmk:category-semigroup -->
 
 The **identity homomorphism** on a (semi)group `G` is defined to be the pair consisting of
 ```text
@@ -67,8 +59,6 @@ for any composable (semi)group homomorphisms `f`, `g`, and `h`.
 
 ## Definition 19.2.4
 
-<!-- rosetta-item: definition-19.2.4 -->
-
 Let `h:hom(G,H)` be a homomorphism of (semi)groups.
 Then `h` is said to be an **isomorphism** if it comes equipped with an element of type `is-iso(h)`, consisting of triples `(h^{-1},p,q)` consisting of a homomorphism `h^{-1}:hom(H,G)` of semigroups and identifications
 ```text
@@ -86,8 +76,6 @@ In other words, being an isomorphism is a property.
 
 ## Lemma 19.2.5
 
-<!-- rosetta-item: lemma-19.2.5 -->
-
 For any semigroup homomorphism `h:hom(G,H)`, the type
 ```text
 is-iso(h)
@@ -96,8 +84,6 @@ is a proposition.
 It follows that the type `G≅ H` is a set for any two semigroups `G` and `H`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-19.2-proof -->
 
 *Proof.* Let `k` and `k'` be two inverses of `h`.
 In Remark 19.2.2 we have observed that the type of semigroup homomorphisms between any two semigroups is a set.

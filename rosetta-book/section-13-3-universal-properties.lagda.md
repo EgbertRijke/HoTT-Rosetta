@@ -11,8 +11,6 @@ open import section-9-2-bi-invertible-maps
 open import section-13-1-equivalent-forms-of-function-extensionality
 ```
 
-<!-- rosetta-item: section-13.3 -->
-
 The function extensionality principle allows us to prove *universal properties*.
 Universal properties are characterizations of all maps out of or into a given type, so they are very important.
 Among other applications, universal properties characterize a type up to equivalence.
@@ -20,8 +18,6 @@ We prove here the universal properties of dependent pair types and of identity t
 In the exercises, you are asked to prove the universal properties of `unit`, `empty`, and coproducts.
 
 ### The universal property of `Σ`-types
-
-<!-- rosetta-item: subheading-13.3-the-universal-property-of-types -->
 
 The **universal property of `Σ`-types** characterizes maps *out of* a dependent pair type `Σ(x:A) B(x)`.
 It asserts that the map
@@ -34,8 +30,6 @@ We will prove the **dependent universal property** of `Σ`-types, which characte
 
 ## Theorem 13.3.1
 
-<!-- rosetta-item: theorem-13.3.1; latex-label: thm:up-sigma -->
-
 Let `B` be a type family over `A`, and let `C` be a type family over `Σ(x:A) B(x)`.
 Then the map
 ```text
@@ -44,8 +38,6 @@ ev-pair:(Π(z:Σ(x:A) B(x)) C(z))→ (Π(x:A) Π(y:B(x)) C(x,y)),
 given by `f↦λ x. λ y. f(x,y)`, is an equivalence.
 
 ### Proof
-
-<!-- rosetta-item: subheading-13.3-proof -->
 
 *Proof.* The map in the converse direction is obtained by the induction principle of `Σ`-types.
 It is simply the map
@@ -104,8 +96,6 @@ module _
 
 ## Corollary 13.3.2
 
-<!-- rosetta-item: corollary-13.3.2; latex-label: cor:times_up_out -->
-
 Let `A`, `B`, and `X` be types.
 Then the map
 ```text
@@ -130,8 +120,6 @@ module _
 
 ### The universal property of identity types
 
-<!-- rosetta-item: subheading-13.3-the-universal-property-of-identity-types -->
-
 The universal property of identity types is the fact that families of maps out of the identity type are uniquely determined by their action on the reflexivity identification.
 More precisely, the map
 ```text
@@ -143,8 +131,6 @@ We will prove the *dependent* universal property of identity types, a slight gen
 
 ## Theorem 13.3.3
 
-<!-- rosetta-item: theorem-13.3.3; latex-label: thm:yoneda -->
-
 Consider a type `A` equipped with `a:A`, and consider a family of types `B(x,p)` indexed by `x:A` and `p:a=x`.
 Then the map
 ```text
@@ -153,8 +139,6 @@ ev-refl:(Π(x:A) Π(p:a=x) B(x,p))→ B(a,refl),
 given by `λ f. f(a,refl)`, is an equivalence.
 
 ### Proof
-
-<!-- rosetta-item: subheading-13.3-proof-2 -->
 
 *Proof.* The inverse is the function
 ```text

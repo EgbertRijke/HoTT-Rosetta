@@ -4,8 +4,6 @@
 module section-22-2-working-with-descent-data where
 ```
 
-<!-- rosetta-item: section-22.2 -->
-
 The equivalence
 ```text
 (S^1→𝒰)≃ Σ(X:𝒰) X≃ X
@@ -30,8 +28,6 @@ commutes is contractible.
 In the remainder of this section we study arbitrary type families over the circle equipped with such descent data, which will put us in a good position to prove things about the universal cover of the circle.
 
 ## Proposition 22.2.1
-
-<!-- rosetta-item: proposition-22.2.1 -->
 
 Consider a type family `A` over the circle and consider descent data `(X,e)` equipped with an equivalence `α:X≃ A(base)` and a homotopy witnessing that the square
 <!-- rosetta-diagram: 53928bc65cb5; review: pending -->
@@ -58,8 +54,6 @@ Then we have an equivalence
 
 ### Proof
 
-<!-- rosetta-item: subheading-22.2-proof -->
-
 *Proof.* Note that the commutativity of the square implies that
 ```text
 tr_A(loop,α(x))=α(e(x)).
@@ -76,8 +70,6 @@ This type is equivalent to `fib(α, tr_A(loop,α(x)))`, which is contractible be
 In the following proposition we show that sections of a type family `A` equipped with descent data `(X,e)` are equivalently described as fixed points for `e:X≃ X`.
 
 ## Proposition 22.2.2
-
-<!-- rosetta-item: proposition-22.2.2 -->
 
 Consider a type family `A` over the circle and descent data `(X,e)` equipped with an equivalence `α:X≃ A(base)` and a homotopy witnessing that the square
 <!-- rosetta-diagram: 53928bc65cb5; review: pending -->
@@ -116,8 +108,6 @@ in which the top map is an equivalence.
 
 ### Proof
 
-<!-- rosetta-item: subheading-22.2-proof-2 -->
-
 *Proof.* By the dependent universal property of the circle we have an equivalence
 ```text
 (Π(t:S^1) A(t))≃ Σ(x:A(base)) tr_A(loop,x)=x.
@@ -146,8 +136,6 @@ The following corollary can be used to compare type families over the circle.
 In particular, we will use it to compare the identity type of the circle with the universal cover.
 
 ## Corollary 22.2.3
-
-<!-- rosetta-item: corollary-22.2.3 -->
 
 Consider two type families `A` and `B` over the circle equipped with descent data `(X,e)` and `(Y,f)`, equivalences `α:X≃ A(base)` and `β:Y≃ B(base)`, and homotopies `H` and `K` witnessing that the squares
 <!-- rosetta-diagram: 9d6c06d93fe0; review: pending -->
@@ -190,8 +178,6 @@ in which the top map is an equivalence.
 
 ### Proof
 
-<!-- rosetta-item: subheading-22.2-proof-3 -->
-
 *Proof.* The claim follows once we observe that `(Y^X,λ h. f∘ h∘ e^{-1})` is descent data for the family of types `(A(t)→ B(t))` indexed by `t:S^1`.
 Indeed, we have the equivalence `h↦ β∘ h∘α^{-1} : Y^X≃ B(base)^{A(base)}` for which the square
 <!-- rosetta-diagram: 91cf401e21b7; review: pending -->
@@ -214,8 +200,6 @@ commutes. ◻
 <!-- rosetta-item-end: corollary-22.2.3 -->
 
 ## Corollary 22.2.4
-
-<!-- rosetta-item: corollary-22.2.4; latex-label: cor:compute-families-of-maps-universal-cover -->
 
 Consider a type family `A` over the circle and descent data `(X,e)` equipped with an equivalence `α:X≃ A(base)` and a homotopy witnessing that the square
 <!-- rosetta-diagram: 53928bc65cb5; review: pending -->

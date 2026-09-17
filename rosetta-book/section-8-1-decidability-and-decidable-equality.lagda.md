@@ -29,11 +29,7 @@ open import exercise-6-5-distance-natural-numbers
 open import exercise-7-1-divisibility-three-for-two
 ```
 
-<!-- rosetta-item: section-8.1 -->
-
 ## Definition 8.1.1
-
-<!-- rosetta-item: definition-8.1.1 -->
 
 A type `A` is said to be **decidable** if it comes equipped with an element of type
 ```text
@@ -50,8 +46,6 @@ is-decidable A = A + (¬ A)
 <!-- rosetta-item-end: definition-8.1.1 -->
 
 ## Example 8.1.2
-
-<!-- rosetta-item: example-8.1.2 -->
 
 The principal way to show that a type `A` is decidable is to either construct an element `a:A`, or to construct a function `A→empty`.
 For example, the types `unit` and `empty` are decidable.
@@ -74,8 +68,6 @@ is-decidable-empty = inr id
 <!-- rosetta-item-end: example-8.1.2 -->
 
 ## Example 8.1.3
-
-<!-- rosetta-item: example-8.1.3; latex-label: eg:decidability-closure -->
 
 The principal way to use a hypothesis that `A` is decidable is to proceed by the induction principle of coproducts, i.e., to proceed by case analysis.
 
@@ -150,8 +142,6 @@ is-decidable-neg d = is-decidable-function-type d is-decidable-empty
 
 ## Example 8.1.4
 
-<!-- rosetta-item: example-8.1.4; latex-label: eg:is-decidable-EqN -->
-
 Since the empty type and the unit type are both decidable types, it also follows that the types `Eq-ℕ(m,n)`, `m≤ n` and `m<n` are decidable for each `m,n:ℕ`.
 The proofs in each of the three cases is by induction on `m` and `n`.
 
@@ -202,8 +192,6 @@ This leads to the general concept of decidable equality, which is important in m
 
 ## Definition 8.1.5
 
-<!-- rosetta-item: definition-8.1.5 -->
-
 We say that a type `A` has **decidable equality** if the identity type `x=y` is decidable for every `x,y:A`.
 We will write
 ```text
@@ -222,14 +210,10 @@ Before we show that `ℕ` has decidable equality, let us show that if `A↔ B` a
 
 ## Lemma 8.1.6
 
-<!-- rosetta-item: lemma-8.1.6; latex-label: lem:is-decidable-iff -->
-
 Consider two types `A` and `B`, and suppose that `A↔ B`.
 Then `A` is decidable if and only if `B` is decidable.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.1-proof -->
 
 *Proof.* Since we have functions `f:A→ B` and `g:B→ A` by assumption, we obtain by Proposition 4.3.4 the functions
 ```text
@@ -270,13 +254,9 @@ module _
 
 ## Proposition 8.1.7
 
-<!-- rosetta-item: proposition-8.1.7; latex-label: prp:has-decidable-equality-N -->
-
 Equality on the natural numbers is decidable.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.1-proof-2 -->
 
 *Proof.* Recall from Proposition 6.3.3 that we have
 ```text
@@ -308,13 +288,9 @@ For now, it is important to remember that in order to use decidability, we must 
 
 ## Proposition 8.1.8
 
-<!-- rosetta-item: proposition-8.1.8; latex-label: prp:has-decidable-equality-Fin -->
-
 The standard finite type `Fin{k}` has decidable equality for each `k:ℕ`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.1-proof-3 -->
 
 *Proof.* Recall from Exercise 7.5 that we constructed an observational equality relation `Eq-Fin_k` on `Fin{k}` for each `k:ℕ`, which satisfies
 ```text
@@ -345,13 +321,9 @@ We can use the fact that the finite types `Fin{k}` have decidable equality to sh
 
 ## Theorem 8.1.9
 
-<!-- rosetta-item: theorem-8.1.9; latex-label: thm:is-decidable-div-N -->
-
 For any `d,x:ℕ`, the type `d| x` is decidable.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.1-proof-4 -->
 
 *Proof.* Note that `0| x` is decidable because `0| x` if and only if `x=0`, which is decidable by Proposition 8.1.7.
 Therefore it suffices to show that `d+1| x` is decidable.

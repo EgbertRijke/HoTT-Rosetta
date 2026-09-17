@@ -27,6 +27,4 @@ Show that there is no embedding `ℕ↪ Fin{k}`, for any `k:ℕ`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-16-6 -->
-
 No formalization has been curated yet.

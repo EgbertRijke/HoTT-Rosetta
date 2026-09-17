@@ -82,6 +82,4 @@ Show that the rank `(\rank(A,B),\prec)` of `W(A,B)` is extensional.
 
 ## Solution
 
-<!-- rosetta-item: exercise-20-7 -->
-
 No formalization has been curated yet.

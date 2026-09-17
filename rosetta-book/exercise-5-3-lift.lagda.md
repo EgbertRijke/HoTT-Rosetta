@@ -25,7 +25,6 @@ In other words, an identification `p : x = y` in the *base type* `A` *lifts* to
 an identification in `Σ(x : A) B(x)` for every element in `B(x)`, analogous to
 the path lifting property for fibrations in homotopy theory.
 
-
 ## Solution
 
 ```agda

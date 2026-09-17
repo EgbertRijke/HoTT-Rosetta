@@ -22,6 +22,4 @@ Show that the following are equivalent:
 
 ## Solution
 
-<!-- rosetta-item: exercise-18-5 -->
-
 No formalization has been curated yet.

@@ -44,6 +44,4 @@ A→ (A→ A)
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-7 -->
-
 No formalization has been curated yet.

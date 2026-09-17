@@ -11,6 +11,4 @@ Show that the **mere equality** relation given by `x,y↦‖x=y‖` is an equiva
 
 ## Solution
 
-<!-- rosetta-item: exercise-14-2 -->
-
 No formalization has been curated yet.

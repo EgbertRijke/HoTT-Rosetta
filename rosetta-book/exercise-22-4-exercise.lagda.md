@@ -27,6 +27,4 @@ Conclude that a univalent universe containing a circle is not a `1`-type.
 
 ## Solution
 
-<!-- rosetta-item: exercise-22-4 -->
-
 No formalization has been curated yet.

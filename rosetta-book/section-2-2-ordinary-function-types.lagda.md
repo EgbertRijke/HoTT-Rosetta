@@ -57,7 +57,6 @@ in which the derivation `𝒟` makes use of the premises `ℋ₁`, …, `ℋ_n`.
 ```
 
   The effect of such a definition is that we have extended our type theory with a new constant `c `, for which the following inference rules are valid
-  
 
 ```text
    ℋ₁    ℋ₂    ⋯    ℋ_n
@@ -308,7 +307,6 @@ and
   -------------------------
    Γ ⊢ f ∘ id ≐ f : A → B.
 ```
-
 
 ## Proof
 

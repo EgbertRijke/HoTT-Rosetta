@@ -29,8 +29,6 @@ is an equivalence.
 
 ## Solution
 
-<!-- rosetta-item: exercise-10-6 -->
-
 <!-- rosetta-agda-block: exercise-10-6-contractible-base -->
 
 ```agda

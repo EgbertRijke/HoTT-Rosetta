@@ -25,6 +25,4 @@ The (ordinary) **dihedral group** `D_k` is defined to be `D_k≔ D_{ℤ/k}`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-7 -->
-
 No formalization has been curated yet.

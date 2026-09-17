@@ -70,8 +70,6 @@ for each `n:ℕ` and each `x: based-ℕ {k+1}`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-7-10 -->
-
 <!-- rosetta-agda-block: exercise-7-10-based-natural-numbers -->
 
 ```agda

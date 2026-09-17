@@ -15,6 +15,4 @@ Show that there exists a map `f:Fin{k}→ A` such that `η∘ f` is an equivalen
 
 ## Solution
 
-<!-- rosetta-item: exercise-18-8 -->
-
 No formalization has been curated yet.

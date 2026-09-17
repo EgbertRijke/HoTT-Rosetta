@@ -20,6 +20,4 @@ Construct an equivalence
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-14 -->
-
 No formalization has been curated yet.

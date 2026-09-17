@@ -25,6 +25,4 @@ Conclude that if `A` is a proposition, then the identity function `id:A→ A` is
 
 ## Solution
 
-<!-- rosetta-item: exercise-14-5 -->
-
 No formalization has been curated yet.

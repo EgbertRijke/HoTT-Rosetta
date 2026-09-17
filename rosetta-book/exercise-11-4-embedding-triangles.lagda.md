@@ -34,6 +34,4 @@ Show that `f` is an embedding if and only if `g` is an embedding.
 
 ## Solution
 
-<!-- rosetta-item: exercise-11-4 -->
-
 No formalization has been curated yet.

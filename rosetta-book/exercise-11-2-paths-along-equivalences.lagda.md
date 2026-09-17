@@ -30,6 +30,4 @@ In this diagram, the homotopy `G:e∘ e^{-1}~ id` is the homotopy witnessing tha
 
 ## Solution
 
-<!-- rosetta-item: exercise-11-2 -->
-
 No formalization has been curated yet.

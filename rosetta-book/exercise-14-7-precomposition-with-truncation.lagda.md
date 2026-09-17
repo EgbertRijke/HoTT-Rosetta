@@ -16,6 +16,4 @@ given by `f↦ f∘η` is a `k`-truncated map.
 
 ## Solution
 
-<!-- rosetta-item: exercise-14-7 -->
-
 No formalization has been curated yet.

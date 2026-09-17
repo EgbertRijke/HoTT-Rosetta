@@ -4,14 +4,10 @@
 module section-19-4-homotopy-groups-of-types where
 ```
 
-<!-- rosetta-item: section-19.4 -->
-
 Since the identity type gives every type groupoidal structure, we can construct for every type `A` equipped with a base point `a:A` a sequence of groups `π_n(A,a)` indexed by `n≥ 1`.
 In order to construct this sequence of groups, we first define the *loop space* operation, which takes pointed types to pointed types.
 
 ## Definition 19.4.1
-
-<!-- rosetta-item: definition-19.4.1 -->
 
 The type of **pointed types** in a universe `𝒰` is defined as
 ```text
@@ -25,8 +21,6 @@ Given two pointed types `A` and `B` with base points `a` and `b` respectively, w
 <!-- rosetta-item-end: definition-19.4.1 -->
 
 ## Definition 19.4.2
-
-<!-- rosetta-item: definition-19.4.2; latex-label: defn:loop-spaces -->
 
 Consider a universe `𝒰`.
 We define the **loop space** operation
@@ -44,8 +38,6 @@ Furthermore, we define for every `A:𝒰_⋆` the **iterated loop space** `Ω^n(
 
 ## Example 19.4.3
 
-<!-- rosetta-item: example-19.4.3; latex-label: eg:loop-spaces -->
-
 If `A` is a pointed `1`-type, then the loop space `Ω(A)` is a set.
 Furthermore, it has the structure of a group.
 Its unit is `refl`, and the group operation is given by concatenation of identifications.
@@ -57,8 +49,6 @@ Thus we see that the loop space of a pointed `1`-type is a group.
 If `A` is a pointed type, but not assumed to be `1`-truncated, then we can still get
 
 ## Definition 19.4.4
-
-<!-- rosetta-item: definition-19.4.4 -->
 
 Consider a pointed type `A` with base point `a:A`, and let `n≥ 1`.
 Then we define the **`n`-th homotopy group** `π_n(A)` of `A` at `a` to be the group with underlying set
@@ -76,8 +66,6 @@ The group `π_1(A)` of a pointed type is called the **fundamental group** of `A`
 
 ## Remark 19.4.5
 
-<!-- rosetta-item: remark-19.4.5 -->
-
 Note that for `n=0`, we can still define the set
 ```text
 π_0(A)≔‖A‖_0.
@@ -88,16 +76,12 @@ However, this set does not necessarily come equipped with the structure of a gro
 
 ## Proposition 19.4.6
 
-<!-- rosetta-item: proposition-19.4.6; latex-label: prp:homotopy-group-loop-space -->
-
 For any pointed type `A` and any `n≥ 1` we have an isomorphism
 ```text
 π_{n+1}(A)≅ π_n(Ω(A)).
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-19.4-proof -->
 
 *Proof.* First, observe that we have a pointed equivalence
 ```text
@@ -120,8 +104,6 @@ In the final section of this book we will show that the fundamental group of the
 In this section we will show that equivalent types have isomorphic homotopy groups, and that the homotopy groups `π_n(A)` are abelian if `n≥ 2`.
 
 ## Definition 19.4.7
-
-<!-- rosetta-item: definition-19.4.7 -->
 
 Consider a pointed map `f:A→_⋆ B` between two pointed types `A` and `B`, where `p:f(a)=b`.
 Then we define the pointed map
@@ -146,8 +128,6 @@ for every pointed map `f:A→_⋆ B`.
 
 ## Remark 19.4.8
 
-<!-- rosetta-item: remark-19.4.8 -->
-
 Since action of paths preserves path concatenation, it follows that `Ω^n(f)` preserves path concatenation, for each `n≥ 1`.
 Consequently, the maps
 ```text
@@ -159,8 +139,6 @@ are group homomorphisms.
 
 ## Proposition 19.4.9
 
-<!-- rosetta-item: proposition-19.4.9 -->
-
 Consider a pointed equivalence `e:A≃_⋆ B` between two pointed types `A` and `B`.
 Then we obtain group isomorphisms
 ```text
@@ -169,8 +147,6 @@ Then we obtain group isomorphisms
 for all `n≥ 1`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-19.4-proof-2 -->
 
 *Proof.* For any pointed equivalence `e:A≃_⋆ B` it follows that `π_n(e)` is also an equivalence.
 Using Lemma 19.3.1, the claim now follows. ◻

@@ -16,6 +16,4 @@ that extends the (binary) monoid operation to the finite unordered `n`-tuples of
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-11 -->
-
 No formalization has been curated yet.

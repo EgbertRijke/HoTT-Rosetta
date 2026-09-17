@@ -73,6 +73,4 @@ Conclude that the type `Σ(h:A ≃ B) f~ g∘ h` is equivalent to the type of fa
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-15 -->
-
 No formalization has been curated yet.

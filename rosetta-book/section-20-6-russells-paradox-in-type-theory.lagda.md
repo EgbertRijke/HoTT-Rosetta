@@ -4,8 +4,6 @@
 module section-20-6-russells-paradox-in-type-theory where
 ```
 
-<!-- rosetta-item: section-20.6 -->
-
 Russell’s paradox tells us that there cannot be a set of all sets.
 If there were such a set `S`, then we could form the set
 ```text
@@ -27,8 +25,6 @@ The type `W(𝒰,Ty)` is therefore also called the type of **multisets**.
 It was first studied by Aczel in \[citation: `AczelCZF`\], with refinements in \[citation: `AczelGambinoCZF`\], and in the setting of univalent mathematics it has been studied extensively by Gylterud in \[citation: `GylterudMultisets`\].
 
 ## Definition 20.6.1
-
-<!-- rosetta-item: definition-20.6.1 -->
 
 Consider a `𝒰` with universal type family `Ty`.
 We define the type
@@ -70,8 +66,6 @@ We will use a similar condition of smallness for multisets.
 
 ## Definition 20.6.2
 
-<!-- rosetta-item: definition-20.6.2 -->
-
 Let `𝒰` and `𝒱` be universes.
 We say that a multiset `{f(x)| x:A}` in `𝒱` **is `𝒰`-small** if the type `A` is `𝒰`-small and if each mulitset `f(x)` in `𝒱` is `𝒰`-small.
 In other words, the type family
@@ -90,8 +84,6 @@ We begin with a simple lemma.
 
 ## Lemma 20.6.3
 
-<!-- rosetta-item: lemma-20.6.3; latex-label: lem:is-small-comprehension-multiset -->
-
 Consider a `𝒰`-small multiset `{f(x)| x:A}` in `𝒱`, and let `B` be a family of `𝒰`-small types over `A`.
 Then the multiset
 ```text
@@ -100,8 +92,6 @@ Then the multiset
 is again `𝒰`-small.
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.6-proof -->
 
 *Proof.* If the multiset `{f(x)| x:A}` is `𝒰`-small, then the type `A` is `𝒰`-small.
 By the assumption that `B` is a family of `𝒰`-small types together with the fact that `𝒰`-small types are closed under formation of `Σ`-types, it follows that the type
@@ -118,8 +108,6 @@ We will use the univalence axiom to prove this fact.
 
 ## Proposition 20.6.4
 
-<!-- rosetta-item: proposition-20.6.4; latex-label: prp:is-small-elementhood-multiset -->
-
 Consider two univalent universes `𝒰` and `𝒱`, and let `X` and `Y` be `𝒰`-small multisets in `𝒱`.
 We make two claims:
 
@@ -128,8 +116,6 @@ We make two claims:
 2. The type `X∈ Y` is `𝒰`-small.
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.6-proof-2 -->
 
 *Proof.* For the first claim, let `X≐{f(x)| x : A}` and let `Y≐{g(y)| y:B}`.
 The proof is by induction.
@@ -159,8 +145,6 @@ The condition that a multiset `{f(x)| x:A}` in `𝒱` is `𝒰`-small suggests t
 
 ## Definition 20.6.5
 
-<!-- rosetta-item: definition-20.6.5; latex-label: defn:inclusion-small-multisets -->
-
 Given two universes `𝒰` and `𝒱`, we define an inclusion function
 ```text
 i : (Σ(X:M_𝒱) is-small_M_𝒰(X))→M_𝒰,
@@ -175,8 +159,6 @@ for any multiset `{f(x)| x:A}` of which the type `A` is equipped with an equival
 
 ## Proposition 20.6.6
 
-<!-- rosetta-item: proposition-20.6.6; latex-label: prp:is-embedding-inclusion-small-multisets -->
-
 The inclusion function `i` of `𝒰`-small multisets in `𝒱` into the multisets in `𝒰` satisfies the following properties
 
 1. For each `𝒰`-small multiset `X` in `𝒱`, the multiset `i(X)` in `𝒰` is `𝒱`-small.
@@ -190,8 +172,6 @@ The inclusion function `i` of `𝒰`-small multisets in `𝒱` into the multiset
 Consequently, the inclusion function `i` is an embedding.
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.6-proof-3 -->
 
 *Proof.* To see that `i({f(x)| x:A})` is `𝒱`-small for each `𝒰`-small multiset `{f(x)| x:A}` in `𝒱`, note that the assumption that `{f(x)| x:A}` is `𝒰`-small gives us an equivalence `e:A≃ B` and an element `H(x):is-small_M_𝒰(f(x))` for each `x:A`.
 The type `B` is the indexing type of `i({f(x)| x:A})`, and `B` is `𝒱`-small because it is equivalent to the type `A` in `𝒱`.
@@ -239,8 +219,6 @@ Furthermore, the embedding `i` induces equivalences on the elementhood relation 
 
 ## Proposition 20.6.7
 
-<!-- rosetta-item: proposition-20.6.7; latex-label: prp:elementhood-small-multisets -->
-
 Consider a multiset `X` in `𝒰` and a multiset `Y` in `𝒱`.
 Furthermore, suppose that `X` is `𝒱`-small and that `Y` is `𝒰`-small.
 Then we have
@@ -249,8 +227,6 @@ Then we have
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.6-proof-4 -->
 
 *Proof.* Let `X≐{f(x)| x:A}` and `Y≐{g(y)| y:B}`.
 By the assumption that `Y` is `𝒰`-small we have an equivalence `e:B≃ B'` to a type `B'` in `𝒰`.
@@ -270,8 +246,6 @@ We will need one more ingredient: the universal tree, i.e., the multiset of all 
 
 ## Definition 20.6.8
 
-<!-- rosetta-item: definition-20.6.8 -->
-
 Let `𝒰` be a universe.
 Then we define the **universal tree** `Y_𝒰` to be the multiset
 ```text
@@ -283,14 +257,10 @@ in `𝒰^{+}`, where `i:M_𝒰→M_𝒰^+` is the inclusion of the multisets in 
 
 ## Proposition 20.6.9
 
-<!-- rosetta-item: proposition-20.6.9; latex-label: prp:is-small-universal-tree -->
-
 Consider two universes `𝒰` and `𝒱`, and suppose that `𝒰` as well as each `X:𝒰` are `𝒱`-small.
 Then the universal tree `Y_𝒰` is also `𝒱`-small.
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.6-proof-5 -->
 
 *Proof.* To show that the universal tree `{i(X)| X:M_𝒰}` is `𝒱`-small, we first have to show that the type `M_𝒰` is `𝒱`-small.
 This follows from the more general fact that the subuniverse of `𝒱`-small types is closed under the formation of W-types.
@@ -312,14 +282,10 @@ We are finally ready to employ **Russell’s paradox** to prove that a univalent
 
 ## Theorem 20.6.10
 
-<!-- rosetta-item: theorem-20.6.10; latex-label: thm:russell -->
-
 Consider a univalent universe `𝒰`.
 Then `𝒰` cannot be `𝒰`-small.
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.6-proof-6 -->
 
 *Proof.* Suppose that `𝒰` is `𝒰`-small, and consider the multiset
 ```text

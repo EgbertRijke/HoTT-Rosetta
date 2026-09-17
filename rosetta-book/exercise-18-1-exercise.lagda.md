@@ -26,6 +26,4 @@ Use the quotient `bool/~_P` to show that the axiom of choice implies the law of 
 
 ## Solution
 
-<!-- rosetta-item: exercise-18-1 -->
-
 No formalization has been curated yet.

@@ -4,16 +4,12 @@
 module section-16-1-counting-in-type-theory where
 ```
 
-<!-- rosetta-item: section-16.1 -->
-
 When someone counts the elements of a finite set `A`, they go through the elements of `A` one by one, at each stage keeping track of how many elements have been counted so far.
 This process results in the number `|A|` of elements of the set `A`, and moreover it gives a bijection from the standard finite set with `|A|` elements.
 In other words, to count the elements of `A` is to give an equivalence from one of the standard finite sets to the set `A`.
 We turn this into a definition.
 
 ## Definition 16.1.1
-
-<!-- rosetta-item: definition-16.1.1 -->
 
 For each type `A`, we define the type
 ```text
@@ -29,16 +25,12 @@ For instance, different equivalences of type `Fin{k}≃Fin{k}` induce different 
 
 ## Example 16.1.2
 
-<!-- rosetta-item: example-16.1.2 -->
-
 It follows immediately from the definition of countings that every standard finite type can be counted in a canonical way: For any `k:ℕ` we have `(k,id) : count(Fin{k})`.
 It also follows immediately from the definition of countings that types equipped with countings are closed under equivalences.
 
 <!-- rosetta-item-end: example-16.1.2 -->
 
 ## Example 16.1.3
-
-<!-- rosetta-item: example-16.1.3 -->
 
 Suppose `A` comes equipped with a counting `(k,e):count(A)`.
 Then `k=0` if and only if `A` is empty.
@@ -50,16 +42,12 @@ This shows that `Fin{k}≃empty`, and a short argument by induction on `k` yield
 
 ## Example 16.1.4
 
-<!-- rosetta-item: example-16.1.4 -->
-
 A type `A` has one element if and only if it is contractible.
 Indeed, the type `Fin{1}` is contractible, so it follows from the 3-for-2 property of contractible types (Exercise 10.2) that there is an equivalence `Fin{1}≃ A` if and only if `A` is contractible.
 
 <!-- rosetta-item-end: example-16.1.4 -->
 
 ## Example 16.1.5
-
-<!-- rosetta-item: example-16.1.5; latex-label: rmk:count-decidable-proposition -->
 
 A proposition `P` comes equipped with a counting if and only if it is decidable.
 To see this, note that for any type `X`, if we have `(k,e):count(X)`, then it follows that `X` is decidable.
@@ -76,16 +64,12 @@ If `¬ P` holds, then `P` is equivalent to `Fin{0}`.
 
 ## Remark 16.1.6
 
-<!-- rosetta-item: remark-16.1.6; latex-label: rmk:has-decidable-equality-count -->
-
 We also note that any type `A` equipped with a counting `e:Fin{k}≃ A` has decidable equality.
 This follows from Proposition 8.1.8, where we showed that `Fin{k}` has decidable equality, for any `k:ℕ`.
 
 <!-- rosetta-item-end: remark-16.1.6 -->
 
 ## Theorem 16.1.7
-
-<!-- rosetta-item: theorem-16.1.7; latex-label: thm:count -->
 
 We make the following claims about countings:
 
@@ -114,8 +98,6 @@ count(Σ(x:A) P(x))↔ Π(x:A) is-decidable(P(x)).
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-16.1-proof -->
 
 *Proof.* We will first prove the forward direction of (1).
 Then we will prove both claims in (2), and we will prove the reverse direction of claim (1) last.
@@ -194,8 +176,6 @@ Any counting of `A+B` therefore induces countings of `A` and of `B`. ◻
 
 ## Corollary 16.1.8
 
-<!-- rosetta-item: corollary-16.1.8; latex-label: cor:count-prod -->
-
 Consider two types `A` and `B`.
 We make two claims:
 
@@ -208,8 +188,6 @@ A → count(B).
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-16.1-proof-2 -->
 
 *Proof.* The first claim follows from condition (2a) in Theorem 16.1.7, and the second claim follows from condition (2b) in Theorem 16.1.7. ◻
 

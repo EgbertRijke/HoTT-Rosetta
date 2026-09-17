@@ -30,6 +30,4 @@ Prop_𝒰↪Subgroup_𝒰(ℤ/2).
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-8 -->
-
 No formalization has been curated yet.

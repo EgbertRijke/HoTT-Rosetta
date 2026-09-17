@@ -15,6 +15,4 @@ Show that
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-17 -->
-
 No formalization has been curated yet.

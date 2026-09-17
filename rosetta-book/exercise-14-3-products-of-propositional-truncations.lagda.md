@@ -16,6 +16,4 @@ Conclude that
 
 ## Solution
 
-<!-- rosetta-item: exercise-14-3 -->
-
 No formalization has been curated yet.

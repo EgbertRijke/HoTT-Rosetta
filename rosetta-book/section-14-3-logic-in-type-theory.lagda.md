@@ -20,8 +20,6 @@ open import exercise-12-7-truncated-products
 open import exercise-13-8-universal-property-coproducts
 ```
 
-<!-- rosetta-item: section-14.3 -->
-
 In Chapter 7 we interpreted logic in type theory via the Curry-Howard correspondence, which stipulates that disjunction (`∨`) is interpreted by coproducts and the existential quantifier (`∃`) is interpreted by `Σ`-types.
 However, when the existential quantifier is interpreted by `Σ`-types, then it is not possible to express certain concepts correctly, such as finiteness of a type or being in the image a map, and therefore we will add a second interpretation of logic in type theory, where logical propositions are interpreted by type theoretic propositions, i.e., the types of truncation level `-1`.
 
@@ -30,8 +28,6 @@ However, they are not closed under coproducts, and if `P` is a family of proposi
 We will therefore use propositional truncations to interpret disjunctions and existential quantifiers in type theory.
 
 ## Definition 14.3.1
-
-<!-- rosetta-item: definition-14.3.1 -->
 
 Given two propositions `P` and `Q`, we define their **disjunction**
 ```text
@@ -80,8 +76,6 @@ module _
 
 ## Proposition 14.3.2
 
-<!-- rosetta-item: proposition-14.3.2 -->
-
 Consider two propositions `P` and `Q`.
 Then the disjunction `P∨ Q` comes equipped with maps `i:P→ P∨ Q` and `j:Q→ P∨ Q`.
 Moreover, the proposition `P∨ Q` satisfies the universal property of the disjunction: For any proposition `R`, we have
@@ -90,8 +84,6 @@ Moreover, the proposition `P∨ Q` satisfies the universal property of the disju
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-14.3-proof -->
 
 *Proof.* The maps `i` and `j` are defined by
 ```text
@@ -195,8 +187,6 @@ module _
 
 ## Definition 14.3.3
 
-<!-- rosetta-item: definition-14.3.3 -->
-
 Given a family `P` of propositions over a type `A`, we define the **existential quantification**
 ```text
 ∃_{(x:A)}P(x)≔ ‖Σ(x:A) P(x)‖.
@@ -243,8 +233,6 @@ module _
 
 ## Proposition 14.3.4
 
-<!-- rosetta-item: proposition-14.3.4 -->
-
 Consider a family `P` of propositions over a type `A`.
 Then the existential quantification `∃_{(x:A)}P(x)` comes equipped with a dependent function
 ```text
@@ -256,8 +244,6 @@ Furthermore, the proposition `∃_{(x:A)}P(x)` satisfies the universal property 
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-14.3-proof-2 -->
 
 *Proof.* The dependent function `ε : Π(a:A) (P(a)→ ∃_{(x:A)}P(x))` is given by `ε(a,p):=η(a,p)`.
 
@@ -399,7 +385,6 @@ infixr 5 _⇒_
 _⇒_ = hom-Prop
 ```
 
-
 <!-- rosetta-agda-block: section-14.3-table-conjunction -->
 
 ```agda
@@ -423,7 +408,6 @@ module _
   _∧_ : Prop (l1 ⊔ l2)
   _∧_ = conjunction-Prop
 ```
-
 
 <!-- rosetta-agda-block: section-14.3-table-bi-implication -->
 
@@ -450,7 +434,6 @@ module _
   _⇔_ : Prop (l1 ⊔ l2)
   _⇔_ = iff-Prop
 ```
-
 
 <!-- rosetta-agda-block: section-14.3-table-universal-quantification -->
 

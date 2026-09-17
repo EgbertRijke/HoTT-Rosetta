@@ -4,8 +4,6 @@
 module section-17-2-propositional-extensionality where
 ```
 
-<!-- rosetta-item: section-17.2 -->
-
 An important direct consequence of the univalence axiom is the principle of propositional extensionality.
 This principle asserts that any two logically equivalent propositions `P` and `Q` can be identified.
 Propositional extensionality is an important principle on its own, which is sometimes assumed in formal systems without the univalence axiom.
@@ -13,8 +11,6 @@ Propositional extensionality is an important principle on its own, which is some
 In order to prove propositional extensionality, we first observe that the univalence axiom also characterizes the identity type of any subuniverse.
 
 ## Proposition 17.2.1
-
-<!-- rosetta-item: proposition-17.2.1; latex-label: prp:univalence-subuniverse -->
 
 Consider a universe `𝒰`, and let `P` be a family of propositions over `𝒰`.
 Then the family of maps
@@ -24,8 +20,6 @@ equiv-eq:(A=B)→ (pr 1(A) ≃ pr 1(B))
 indexed by `A,B:Σ(X:𝒰) P(X)`, given by `equiv-eq(refl):=id` is an equivalence.
 
 ### Proof
-
-<!-- rosetta-item: subheading-17.2-proof -->
 
 *Proof.* Since `P` is a subuniverse, it follows from Corollary 12.2.4 that the projection map is an embedding.
 Therefore we see that the asserted map is the composite of the equivalences
@@ -46,8 +40,6 @@ Arrows:
 
 ## Remark 17.2.2
 
-<!-- rosetta-item: remark-17.2.2 -->
-
 Often, when `P` is a subuniverse, i.e., a subtype of the a universe `𝒰`, we will also write `A` for the type `pr 1(A)` if `A:Σ(X:𝒰) P(X)`.
 Using this shorthand notation, the equivalence in Proposition 17.2.1 is displayed as
 ```text
@@ -63,8 +55,6 @@ Indeed, if we have `X≃ Y`, then we have `P(X)→ P(Y)` by transporting along t
 
 ## Theorem 17.2.3
 
-<!-- rosetta-item: theorem-17.2.3; latex-label: prp:propositional-extensionality -->
-
 Propositions satisfy **propositional extensionality**: For any two propositions `P` and `Q`, the canonical map
 ```text
 iff-eq:(P=Q)→ (P\iffprop Q)
@@ -73,8 +63,6 @@ defined by `iff-eq(refl):=(id,id)` is an equivalence.
 It follows that the type `Prop_𝒰` of propositions in `𝒰` is a set.
 
 ### Proof
-
-<!-- rosetta-item: subheading-17.2-proof-2 -->
 
 *Proof.* Recall from Exercise 13.3 that `is-prop(X)` is a proposition for any type `X`.
 Proposition 17.2.1 therefore applies, which gives
@@ -87,8 +75,6 @@ The last equivalence follows from Proposition 12.1.4, using the fact that `(P≃
 
 ## Corollary 17.2.4
 
-<!-- rosetta-item: corollary-17.2.4; latex-label: cor:decidable-Prop -->
-
 The type
 ```text
 decidable-Prop_𝒰 ≔ Σ(P:Prop_𝒰) is-decidable(P)
@@ -96,8 +82,6 @@ decidable-Prop_𝒰 ≔ Σ(P:Prop_𝒰) is-decidable(P)
 of decidable propositions in any universe `𝒰` is equivalent to `bool`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-17.2-proof-3 -->
 
 *Proof.* Note that `Σ` distributes from the left over coproducts, so we have an equivalence
 ```text

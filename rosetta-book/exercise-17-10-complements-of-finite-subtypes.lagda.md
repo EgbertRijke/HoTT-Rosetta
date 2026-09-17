@@ -24,6 +24,4 @@ More generally, construct for any `k,l:ℕ` and any `k`-element type `A` an equi
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-10 -->
-
 No formalization has been curated yet.

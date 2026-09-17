@@ -28,6 +28,4 @@ Use the circle to conclude that
 
 ## Solution
 
-<!-- rosetta-item: exercise-22-1 -->
-
 No formalization has been curated yet.

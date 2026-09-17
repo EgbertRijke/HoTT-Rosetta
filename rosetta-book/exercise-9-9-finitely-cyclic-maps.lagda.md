@@ -22,6 +22,4 @@ Show that `succ-Fin:Fin{k}→Fin{k}` is finitely cyclic for any `k:ℕ`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-9-9 -->
-
 No formalization has been curated yet.

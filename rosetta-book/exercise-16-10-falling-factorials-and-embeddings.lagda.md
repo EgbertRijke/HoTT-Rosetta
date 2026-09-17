@@ -25,6 +25,4 @@ Conclude that if `A` and `B` are finite with cardinality `m` and `n`, then the t
 
 ## Solution
 
-<!-- rosetta-item: exercise-16-10 -->
-
 No formalization has been curated yet.

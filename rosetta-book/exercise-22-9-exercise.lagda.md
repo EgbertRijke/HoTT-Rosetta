@@ -20,6 +20,4 @@ is *not* an embedding, showing that the condition that `C` is a set is essential
 
 ## Solution
 
-<!-- rosetta-item: exercise-22-9 -->
-
 No formalization has been curated yet.

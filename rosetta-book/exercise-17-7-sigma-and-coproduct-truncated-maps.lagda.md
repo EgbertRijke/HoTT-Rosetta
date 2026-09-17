@@ -28,6 +28,4 @@ Show that the map `{+}:𝒰×𝒰→𝒰`, which takes `(A,B)` to the coproduct 
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-7 -->
-
 No formalization has been curated yet.

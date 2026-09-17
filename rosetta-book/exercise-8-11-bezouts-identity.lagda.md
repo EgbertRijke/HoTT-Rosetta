@@ -24,6 +24,4 @@ dist-ℕ(kx,ly)=gcd(x,y).
 
 ## Solution
 
-<!-- rosetta-item: exercise-8-11 -->
-
 No formalization has been curated yet.

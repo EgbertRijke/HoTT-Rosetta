@@ -36,6 +36,4 @@ As a converse to Exercise 12.11, show that if `f` and `h` are `k`-truncated, the
 
 ## Solution
 
-<!-- rosetta-item: exercise-15-4 -->
-
 No formalization has been curated yet.

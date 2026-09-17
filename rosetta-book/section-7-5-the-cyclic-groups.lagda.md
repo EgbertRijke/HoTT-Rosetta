@@ -21,16 +21,12 @@ open import section-7-3-the-standard-finite-types
 open import section-7-4-the-natural-numbers-modulo-k-plus-one
 ```
 
-<!-- rosetta-item: section-7.5 -->
-
 We can now define the cyclic groups `ℤ/k` for each `k:ℕ`.
 Note that `ℤ/k` must come equipped with the structure of a quotient `ℤ/{≡}` of `ℤ` by the congruence relation modulo `k`.
 In the case where `k≐ 0`, we have that `x≡ ymod{0}` if and only if `x=y`.
 This motivates the following definition:
 
 ## Definition 7.5.1
-
-<!-- rosetta-item: definition-7.5.1; latex-label: defn:Zk -->
 
 We define the type `ℤ/k` for each `k:ℕ` by
 ```text
@@ -49,8 +45,6 @@ We define the type `ℤ/k` for each `k:ℕ` by
 Recall from Exercise 5.7 that `ℤ/0` already comes equipped with the structure of a group, but the group structure on `ℤ/{(k+1)}` remains to be defined.
 
 ## Definition 7.5.2
-
-<!-- rosetta-item: definition-7.5.2 -->
 
 We define the **addition** operation on `ℤ/{(k+1)}` by
 ```text
@@ -84,8 +78,6 @@ neg-Fin (succ-ℕ k) x =
 
 ## Remark 7.5.3
 
-<!-- rosetta-item: remark-7.5.3 -->
-
 The following congruences modulo `k+1` follow immediately from Proposition 7.4.5:
 ```text
 nat-Fin(0) ≡ 0
@@ -114,8 +106,6 @@ Before we show that addition on `ℤ/{k}` satisfies the group laws, we have to s
 
 ## Proposition 7.5.4
 
-<!-- rosetta-item: proposition-7.5.4 -->
-
 Consider `x,y,x',y':ℕ`.
 If any two of the following three properties hold, then so does the third:
 
@@ -126,8 +116,6 @@ If any two of the following three properties hold, then so does the third:
 3. `x+y≡ x'+y'mod k`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-7.5-proof -->
 
 *Proof.* Recall that the distance function `dist-ℕ` is translation invariant by Exercise 6.5.
 Therefore it follows that
@@ -231,8 +219,6 @@ cong-left-summand-ℕ k {x} {y} {x'} {y'} H K =
 
 ## Theorem 7.5.5
 
-<!-- rosetta-item: theorem-7.5.5 -->
-
 The addition operation on `ℤ/{k}` satisfies the laws of an abelian group:
 ```text
 0+x = x x+0 = x
@@ -241,8 +227,6 @@ The addition operation on `ℤ/{k}` satisfies the laws of an abelian group:
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-7.5-proof-2 -->
 
 *Proof.* The fact that the addition operation on `ℤ/0` satisfies the laws of an abelian group was stated as Exercise 5.7.
 Therefore we will only show that addition on `ℤ/{(k+1)}` satisfies the laws of an abelian group.

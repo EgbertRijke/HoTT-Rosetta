@@ -45,8 +45,6 @@ we have `q=q'` and `r=r'`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-7-9 -->
-
 <!-- rosetta-agda-block: exercise-7-9-bound-successor-finite -->
 
 ```agda

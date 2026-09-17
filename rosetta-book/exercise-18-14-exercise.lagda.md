@@ -24,6 +24,4 @@ Show that the type `Π(x:X) A(x)+B(x)` is equivalent to the type
 
 ## Solution
 
-<!-- rosetta-item: exercise-18-14 -->
-
 No formalization has been curated yet.

@@ -31,6 +31,4 @@ Show that the poset `C` is isomorphic to the poset of subgroups of `ℤ`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-22-11 -->
-
 No formalization has been curated yet.

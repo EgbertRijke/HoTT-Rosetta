@@ -30,8 +30,6 @@ This latter property is the **universal property of the coproduct of `A` and `B`
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-8 -->
-
 <!-- rosetta-agda-block: exercise-13-8-universal-property-coproduct -->
 
 ```agda

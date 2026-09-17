@@ -50,8 +50,6 @@ for all `m,n:ℕ`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-6-1 -->
-
 <!-- rosetta-agda-block: exercise-6-1-injectivity-addition-multiplication-block-1 -->
 
 ```agda

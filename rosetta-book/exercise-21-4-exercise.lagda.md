@@ -25,6 +25,4 @@ is an equivalence.
 
 ## Solution
 
-<!-- rosetta-item: exercise-21-4 -->
-
 No formalization has been curated yet.

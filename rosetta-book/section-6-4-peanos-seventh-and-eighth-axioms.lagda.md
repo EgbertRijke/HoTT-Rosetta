@@ -11,8 +11,6 @@ open import section-5-3-the-action-on-identifications-of-functions
 open import section-6-3-observational-equality-of-the-natural-numbers
 ```
 
-<!-- rosetta-item: section-6.4 -->
-
 Using the observational equality of `ℕ`, we can prove Peano’s seventh and eighth axioms.
 In his *Arithmetices Principia* \[citation: `Peano`\], the natural numbers are based at `1`, but today it is customary to have the natural numbers based at `0`.
 Adapting for this, the seventh and eighth axioms assert that
@@ -26,16 +24,12 @@ Adapting for this, the seventh and eighth axioms assert that
 
 ## Theorem 6.4.1
 
-<!-- rosetta-item: theorem-6.4.1; latex-label: thm:is-injective-succ-N -->
-
 For any two natural numbers `m` and `n`, we have
 ```text
 (m=n)↔ (succ-ℕ(m)=succ-ℕ(n)).
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-6.4-proof -->
 
 *Proof.* The forward implication is given by the action on paths of the successor function
 ```text
@@ -87,13 +81,9 @@ peano-7-ℕ m n = ap-succ-ℕ , is-injective-succ-ℕ
 
 ## Theorem 6.4.2
 
-<!-- rosetta-item: theorem-6.4.2; latex-label: prp:zero-one -->
-
 For any natural number `n`, we have `0≠succ-ℕ(n)`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-6.4-proof-2 -->
 
 *Proof.* By Proposition 6.3.3 it follows that there is a family of maps
 ```text

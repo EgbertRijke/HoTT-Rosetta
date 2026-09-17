@@ -74,6 +74,4 @@ The laws are automatically satisfied, since the circle is a `1`-type.
 
 ## Solution
 
-<!-- rosetta-item: exercise-22-7 -->
-
 No formalization has been curated yet.

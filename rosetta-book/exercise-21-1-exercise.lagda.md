@@ -31,6 +31,4 @@ ind-S^1(f(x),ap_{f}(l))~ f∘ ind-S^1(x,l).
 
 ## Solution
 
-<!-- rosetta-item: exercise-21-1 -->
-
 No formalization has been curated yet.

@@ -4,16 +4,12 @@
 module section-17-5-classical-mathematics-with-the-univalence-axiom where
 ```
 
-<!-- rosetta-item: section-17.5 -->
-
 In classical mathematics, the axiom of choice asserts that for any collection `X` of nonempty sets, there is a choice function `f` such that `f(x)∈ x` for each `x∈ X`.
 The univalence axiom is consistent with the axiom of choice, but we have to be careful in our formulation of the axiom of choice to make it about sets.
 A naive interpretation that would be applicable to all types, such as the assertion that every family `B` of inhabited types has a section, is not consistent with univalence.
 We will use the type `BS_2` of `2`-element types for a counterexample.
 
 ## Proposition 17.5.1
-
-<!-- rosetta-item: proposition-17.5.1; latex-label: prp:Eq-F2 -->
 
 The type
 ```text
@@ -27,8 +23,6 @@ Consequently, the canonical family of maps
 indexed by `X:BS_2`, is a family of equivalences.
 
 ### Proof
-
-<!-- rosetta-item: subheading-17.5-proof -->
 
 *Proof.* By the univalence axiom it follows that the type `Σ(X:BS_2) Fin{2}≃ X` is contractible.
 In order to show that `Σ(X:BS_{2}) X` is contractible, it therefore suffices to show that the map
@@ -53,16 +47,12 @@ and it is a straightforward verification that `f` and `g` are inverse to each ot
 
 ## Corollary 17.5.2
 
-<!-- rosetta-item: corollary-17.5.2; latex-label: cor:no-section-F2 -->
-
 There is no dependent function
 ```text
 Π(X:BS_2) X.
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-17.5-proof-2 -->
 
 *Proof.* By Proposition 17.5.1 and Exercise 13.12, we have an equivalence
 ```text
@@ -82,16 +72,12 @@ In the following corollary we conclude more generally that there is no way to co
 
 ## Corollary 17.5.3
 
-<!-- rosetta-item: corollary-17.5.3; latex-label: cor:no-global-choice -->
-
 If `𝒰` is a univalent universe, then there is no **global choice** function
 ```text
 Π(A:𝒰) ‖A‖→ A.
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-17.5-proof-3 -->
 
 *Proof.* Suppose `f:Π(A:𝒰) ‖A‖→ A`.
 By restricting `f` to the type of `2`-element types in `𝒰`, we obtain a function
@@ -130,8 +116,6 @@ In this book, however, we will not have many applications for the axiom of choic
 
 ## Definition 17.5.4
 
-<!-- rosetta-item: definition-17.5.4 -->
-
 The **axiom of choice** asserts that for any family `B` of inhabited sets indexed by a set `A`, the type of sections of `B` is also inhabited, i.e., it asserts that there is an element of type
 ```text
 AC_{𝒰}(A,B)≔ (Π(x:A) ‖B(x)‖)→‖Π(x:A) B(x)‖,
@@ -145,16 +129,12 @@ It is again inconsistent to assume that every type is decidable.
 
 ## Theorem 17.5.5
 
-<!-- rosetta-item: theorem-17.5.5 -->
-
 There is no **global decidability function**
 ```text
 Π(X:𝒰) is-decidable(X).
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-17.5-proof-4 -->
 
 *Proof.* Suppose there is such a dependent function `d`.
 By restricting `d` to the subuniverse of `2`-element types, we obtain a dependent function
@@ -174,8 +154,6 @@ Therefore, we obtain from `d` a dependent function `Π(X:BS_2) X`, which does no
 The law of excluded middle is really an axiom of propositional logic, and it is indeed consistent with the univalence axiom that every *proposition* is decidable.
 
 ## Definition 17.5.6
-
-<!-- rosetta-item: definition-17.5.6 -->
 
 The **law of excluded middle** asserts that every proposition is decidable, i.e.,
 ```text

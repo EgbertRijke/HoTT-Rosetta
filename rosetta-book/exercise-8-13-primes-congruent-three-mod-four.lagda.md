@@ -11,6 +11,4 @@ Show that there are infinitely many primes `p≡ 3mod 4`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-8-13 -->
-
 No formalization has been curated yet.

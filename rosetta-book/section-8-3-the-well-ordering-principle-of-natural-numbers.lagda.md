@@ -13,16 +13,12 @@ open import section-8-1-decidability-and-decidable-equality
 open import section-8-2-constructions-by-case-analysis
 ```
 
-<!-- rosetta-item: section-8.3 -->
-
 The well-ordering principle of the natural numbers in classical mathematics asserts that any nonempty subset of `ℕ` has a least element.
 To formulate the well-ordering principle in type theory, we will use type families over `ℕ` instead of subsets of `ℕ`.
 Moreover, the classical well-ordering principle tacitly assumes that subsets are decidable.
 The type theoretic well-ordering principle of `ℕ` is therefore formulated using *decidable* families over `ℕ`.
 
 ## Definition 8.3.1
-
-<!-- rosetta-item: definition-8.3.1 -->
 
 Let `P` be a family over `ℕ`, not necessarily decidable.
 
@@ -58,8 +54,6 @@ The well-ordering principle of `ℕ` asserts that such an element exists for any
 
 ## Theorem 8.3.2
 
-<!-- rosetta-item: theorem-8.3.2; latex-label: thm:well-ordering-principle-N -->
-
 Let `P` be a decidable family over `ℕ`, where `d` witnesses that `P` is decidable.
 Then there is a function
 ```text
@@ -67,8 +61,6 @@ w(P,d):(Σ(n:ℕ) P(n))→(Σ(m:ℕ) P(m)×is-lower-bound_P(m)).
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.3-proof -->
 
 *Proof.* By the assumption that there are enough universes (Postulate 6.2.1), there is a universe `𝒰` that contains `P`.
 Instead of proving the claim for the given type family `P`, we will show by induction on `n:ℕ` that there is a function

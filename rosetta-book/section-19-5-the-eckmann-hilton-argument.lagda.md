@@ -4,8 +4,6 @@
 module section-19-5-the-eckmann-hilton-argument where
 ```
 
-<!-- rosetta-item: section-19.5 -->
-
 The Eckmann-Hilton argument is used to show that `π_n(A)` is an abelian group for all `n≥ 2`.
 This is achieved by constructing an identification
 ```text
@@ -17,8 +15,6 @@ Therefore, we must come up with something else.
 
 ## Definition 19.5.1
 
-<!-- rosetta-item: definition-19.5.1 -->
-
 Consider a binary operation `f:A→(B→ C)`.
 The **binary action on paths** of `f` is the family of functions
 ```text
@@ -29,8 +25,6 @@ indexed by `x,x':A` and `y,y':B` given by `ap-binary_f(refl,refl)≔refl`.
 <!-- rosetta-item-end: definition-19.5.1 -->
 
 ## Lemma 19.5.2
-
-<!-- rosetta-item: lemma-19.5.2; latex-label: lem:laws-ap-binary -->
 
 The binary action on paths of `f:A→(B→ C)` satisfies the following laws:
 ```text
@@ -57,15 +51,11 @@ Arrows:
 
 ### Proof
 
-<!-- rosetta-item: subheading-19.5-proof -->
-
 *Proof.* The proof is immediate by identification elimination on `p` and `q`, where applicable. ◻
 
 <!-- rosetta-item-end: lemma-19.5.2 -->
 
 ## Example 19.5.3
-
-<!-- rosetta-item: example-19.5.3 -->
 
 One particular binary operation to which we can apply the binary action on paths is concatenation of identifications
 ```text
@@ -113,8 +103,6 @@ is given by ordinary concatenation of identifications.
 
 ## Lemma 19.5.4
 
-<!-- rosetta-item: lemma-19.5.4; latex-label: lem:unit-laws-horizontal-concat -->
-
 Horizontal concatenation satisfies the following left and right unit laws:
 ```text
 ∙[h]{refl{refl}}{s} = s
@@ -123,8 +111,6 @@ Horizontal concatenation satisfies the following left and right unit laws:
 
 ### Proof
 
-<!-- rosetta-item: subheading-19.5-proof-2 -->
-
 *Proof.* This follows by identification elimination on `r` and `s`, or alternatively via Lemma 19.5.2. ◻
 
 <!-- rosetta-item-end: lemma-19.5.4 -->
@@ -132,8 +118,6 @@ Horizontal concatenation satisfies the following left and right unit laws:
 In the following lemma we establish the **interchange law** for horizontal and vertical concatenation.
 
 ## Lemma 19.5.5
-
-<!-- rosetta-item: lemma-19.5.5; latex-label: lem:interchange-law -->
 
 Consider a diagram of the form
 <!-- rosetta-diagram: 75f5350fa18c; review: pending -->
@@ -162,8 +146,6 @@ Then there is an identification
 
 ### Proof
 
-<!-- rosetta-item: subheading-19.5-proof-3 -->
-
 *Proof.* We use path induction on both `r` and `s`.
 Then it suffices to show that
 ```text
@@ -175,8 +157,6 @@ Using the unit laws for ordinary concatenation, we see that both sides reduce to
 
 ## Theorem 19.5.6
 
-<!-- rosetta-item: theorem-19.5.6 -->
-
 Consider a pointed type `A`, and let `r,s:Ω^2(A)`.
 Then there is an identification
 ```text
@@ -184,8 +164,6 @@ r ∙ s=s ∙ r
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-19.5-proof-4 -->
 
 *Proof.* First we observe that `∙{r}{s}=∙[h]{r}{s}` by the following calculation using the unit laws from Lemma 19.5.4 and the interchange law from Lemma 19.5.5:
 ```text
@@ -205,13 +183,9 @@ These two calculations combined prove the claim. ◻
 
 ## Corollary 19.5.7
 
-<!-- rosetta-item: corollary-19.5.7 -->
-
 For `n≥ 2`, the `n`-th homotopy group of any pointed type is abelian.
 
 ### Proof
-
-<!-- rosetta-item: subheading-19.5-proof-5 -->
 
 *Proof.* By Proposition 19.4.6 it follows that `π_n(A)` is isomorphic to the second homotopy group of some pointed type, for every `n≥ 2`.
 Therefore it suffices to prove the claim for `π_2(A)` for every pointed type `A`.

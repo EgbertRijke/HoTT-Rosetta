@@ -19,6 +19,4 @@ for any `n:ℕ` and any `h:Π(k:ℕ) (Π(m:ℕ) (m<k)→ P(m))→ P(k)`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-11 -->
-
 No formalization has been curated yet.

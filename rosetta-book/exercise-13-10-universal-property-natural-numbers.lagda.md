@@ -15,6 +15,4 @@ is contractible.
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-10 -->
-
 No formalization has been curated yet.

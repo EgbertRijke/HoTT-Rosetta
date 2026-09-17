@@ -25,6 +25,4 @@ The projection `pr 1 : (Σ(y:B) fib(f, y))→ B` is sometimes also called the **
 
 ## Solution
 
-<!-- rosetta-item: exercise-10-8 -->
-
 No formalization has been curated yet.

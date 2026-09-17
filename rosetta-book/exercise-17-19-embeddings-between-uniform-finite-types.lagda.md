@@ -25,6 +25,4 @@ is equivalent to `Fin{8}`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-19 -->
-
 No formalization has been curated yet.

@@ -16,6 +16,4 @@ for every `x,y,z:S^1`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-21-5 -->
-
 No formalization has been curated yet.

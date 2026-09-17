@@ -4,21 +4,15 @@
 module section-22-4-the-fundamental-group-of-the-circle where
 ```
 
-<!-- rosetta-item: section-22.4 -->
-
 We have two goals remaining in this book.
 The first goal is to prove that the universal cover of the circle is an identity system at `base:S^1`, in the sense of Definition 11.2.1.
 Since the universal cover is a family of sets over the circle, this implies that the circle is a `1`-type.
 
 ## Theorem 22.4.1
 
-<!-- rosetta-item: theorem-22.4.1; latex-label: thm:eq-circle -->
-
 The universal cover of the circle is an identity system at `base:S^1`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-22.4-proof -->
 
 *Proof.* By Exercise 13.9 it suffices to show that the map
 ```text
@@ -46,13 +40,9 @@ in which the left map is the equivalence obtained in Corollary 22.2.4 and the bo
 
 ## Corollary 22.4.2
 
-<!-- rosetta-item: corollary-22.4.2 -->
-
 The circle is a `1`-type and not a `0`-type.
 
 ### Proof
-
-<!-- rosetta-item: subheading-22.4-proof-2 -->
 
 *Proof.* To see that the circle is a `1`-type we have to show that `s=t` is a `0`-type for every `s,t:S^1`.
 By Exercise 21.2 it suffices to show that the loop space of the circle is a `0`-type.
@@ -75,8 +65,6 @@ In order to compute the fundamental group of the circle we augment the fundament
 
 ## Proposition 22.4.3
 
-<!-- rosetta-item: proposition-22.4.3; latex-label: prp:fundamental-theorem-id-with-operation -->
-
 Consider a type `A` equipped with a point `a:A`, and consider an identity system `B` on `A` at `a` equipped with `b:B(a)`.
 Furthermore, suppose that there is a binary operation
 ```text
@@ -95,8 +83,6 @@ such that `f(refl)=b`, and for every `p:a=a` and `q:a=x`.
 
 ### Proof
 
-<!-- rosetta-item: subheading-22.4-proof-3 -->
-
 *Proof.* Consider a family of maps `f:(a=x)→ B(x)` indexed by `x:A` such that `f(refl)=b`, and let `p:a=a` and `q:a=x`.
 By induction on `q` it suffices to show that
 ```text
@@ -114,16 +100,12 @@ x↦ x_{E}:ℤ≃E_(S^1)(base).
 
 ## Theorem 22.4.4
 
-<!-- rosetta-item: theorem-22.4.4; latex-label: thm:fundamental-group-circle -->
-
 There is a group isomorphism
 ```text
 π_1(S^1)≅ ℤ.
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-22.4-proof-4 -->
 
 *Proof.* First we observe that, since the circle is a `1`-type, we have an isomorphism of groups `π_1(S^1)≅Ω(S^1)`.
 In order to show that the group `Ω(S^1)` is isomorphic to `ℤ`, we prove that the family of equivalences

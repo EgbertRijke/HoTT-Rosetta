@@ -20,6 +20,4 @@ f(a)≠ g(b)
 
 ## Solution
 
-<!-- rosetta-item: exercise-11-6 -->
-
 No formalization has been curated yet.

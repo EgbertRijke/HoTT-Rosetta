@@ -26,6 +26,4 @@ Show that `is-equiv(f)` is decidable, for any map `f:I→ J` between finite type
 
 ## Solution
 
-<!-- rosetta-item: exercise-16-3 -->
-
 No formalization has been curated yet.

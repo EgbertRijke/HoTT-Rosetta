@@ -11,6 +11,4 @@ Show that `bool` is a set by applying Theorem 12.3.4 with the observational equa
 
 ## Solution
 
-<!-- rosetta-item: exercise-12-1 -->
-
 No formalization has been curated yet.

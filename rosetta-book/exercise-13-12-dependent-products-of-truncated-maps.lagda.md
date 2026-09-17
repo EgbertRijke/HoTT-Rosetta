@@ -50,6 +50,4 @@ In particular, `f` is an equivalence if and only if `f∘_` is an equivalence, a
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-12 -->
-
 No formalization has been curated yet.

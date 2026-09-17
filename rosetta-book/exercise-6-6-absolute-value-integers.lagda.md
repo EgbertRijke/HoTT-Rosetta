@@ -40,8 +40,6 @@ and show that it satisfies the following three properties:
 
 ## Solution
 
-<!-- rosetta-item: exercise-6-6 -->
-
 <!-- rosetta-agda-block: exercise-6-6-absolute-value-integers-block-1 -->
 
 ```agda

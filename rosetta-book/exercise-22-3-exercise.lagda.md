@@ -34,6 +34,4 @@ commutes.
 
 ## Solution
 
-<!-- rosetta-item: exercise-22-3 -->
-
 No formalization has been curated yet.

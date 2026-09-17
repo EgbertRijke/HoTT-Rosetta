@@ -16,6 +16,4 @@ is a group isomorphism.
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-4 -->
-
 No formalization has been curated yet.

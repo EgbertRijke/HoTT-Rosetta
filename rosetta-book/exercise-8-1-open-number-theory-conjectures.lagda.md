@@ -38,8 +38,6 @@ If you have a solution to any of these open problems, you should certainly forma
 
 ## Solution
 
-<!-- rosetta-item: exercise-8-1 -->
-
 <!-- rosetta-agda-block: exercise-8-1-even -->
 
 ```agda

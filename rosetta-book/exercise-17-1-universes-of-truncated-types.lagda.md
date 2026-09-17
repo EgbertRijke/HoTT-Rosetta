@@ -25,6 +25,4 @@ Show that the universe `Set_𝒰` of sets in `𝒰` is not a set.
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-1 -->
-
 No formalization has been curated yet.

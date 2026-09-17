@@ -4,8 +4,6 @@
 module section-18-5-set-truncations where
 ```
 
-<!-- rosetta-item: section-18.5 -->
-
 An important instance of set quotients in the univalent foundations of mathematics is the notion of set truncation.
 Analogous to the propositional truncation, the set truncation of a type `A` is a map `η:A→ ‖A‖_0` into a set `‖A‖_0` such that any map `f:A→ X` into a set `X` extends uniquely along `η`:
 <!-- rosetta-diagram: 1273e5fb6567; review: pending -->
@@ -27,8 +25,6 @@ We first specify what it means for a map `f:A→ B` into a set `B` to be a set t
 
 ## Definition 18.5.1
 
-<!-- rosetta-item: definition-18.5.1 -->
-
 We say that a map `f:A→ B` into a set `B` is a **set truncation** if the precomposition function
 ```text
 _∘ f : (B→ X)→ (A→ X)
@@ -40,8 +36,6 @@ is an equivalence for every set `X`.
 In the following theorem we prove several conditions that are equivalent to being a set truncation.
 
 ## Theorem 18.5.2
-
-<!-- rosetta-item: theorem-18.5.2; latex-label: thm:set-truncation -->
 
 Consider a map `f:A→ B` into a set `B`.
 Then the following are equivalent:
@@ -61,8 +55,6 @@ _∘ f : (Π(b:B) X(b))→(Π(a:A) X(f(a)))
     for every `x,y:A`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-18.5-proof -->
 
 *Proof.* The fact that (2) implies (1) is immediate.
 Moreover, the fact that (1) is equivalent to (3) follows from the fact that any map `h:A→ X` into a set `X` comes equipped with a function
@@ -106,8 +98,6 @@ Now we take `g≔ id` to complete the proof that (1) implies (2). ◻
 
 ## Corollary 18.5.3
 
-<!-- rosetta-item: corollary-18.5.3 -->
-
 On any universe `𝒰`, there is an operation `‖_‖_0:𝒰→Set_𝒰` such that every type `A` in `𝒰` comes equipped with a map
 ```text
 η:A→‖A‖_0
@@ -117,16 +107,12 @@ The set `‖A‖_0` is called the **set truncation** of `A`.
 
 ### Proof
 
-<!-- rosetta-item: subheading-18.5-proof-2 -->
-
 *Proof.* By Theorem 18.5.2 it follows that a map `f:A→ B` into a set `B` is a set truncation if and only if it is a quotient map with respect to the equivalence relation `x,y↦‖x=y‖`.
 Given a type `A` in `𝒰`, the quotient of `A` by `x,y↦‖x=y‖` is equivalent to a type in `𝒰` by the replacement axiom. ◻
 
 <!-- rosetta-item-end: corollary-18.5.3 -->
 
 ## Corollary 18.5.4
-
-<!-- rosetta-item: corollary-18.5.4 -->
 
 The set truncation `η:A→‖A‖_0` is surjective and effective with respect to the equivalence relation `x,y↦‖x=y‖`, i.e., we have an equivalence
 ```text
@@ -142,8 +128,6 @@ For example, any `k`-element set is a type that is in the same connected compone
 
 ## Definition 18.5.5
 
-<!-- rosetta-item: definition-18.5.5 -->
-
 A type `A` is said to be **connected** if its set truncation `‖A‖_0` is contractible.
 We define
 ```text
@@ -154,8 +138,6 @@ Furthermore, we say that a map `f:A→ B` is **connected** if all its fibers are
 <!-- rosetta-item-end: definition-18.5.5 -->
 
 ## Remark 18.5.6
-
-<!-- rosetta-item: remark-18.5.6 -->
 
 In particular, every connected type is inhabited, because if `‖A‖_0` is contractible, then we have equivalences
 ```text
@@ -169,8 +151,6 @@ Using the notion of connectivity, we can add one more property to the list of eq
 
 ## Theorem 18.5.7
 
-<!-- rosetta-item: theorem-18.5.7; latex-label: thm:unit-set-truncation-connected -->
-
 Consider a map `f:A→ B` into a set `B`.
 Then the following are equivalent:
 
@@ -179,8 +159,6 @@ Then the following are equivalent:
 2. The map `f` is connected.
 
 ### Proof
-
-<!-- rosetta-item: subheading-18.5-proof-3 -->
 
 *Proof.* First, suppose that `f` is a set truncation, and consider `b:B`.
 Our goal is to show that the type
@@ -231,8 +209,6 @@ Therefore it follows that the bottom map is an equivalence, which completes the 
 <!-- rosetta-item-end: theorem-18.5.7 -->
 
 ## Remark 18.5.8
-
-<!-- rosetta-item: remark-18.5.8 -->
 
 There are truncation operations for every truncation level.
 That is, we can define for every type `A` a map `η:A→‖A‖_k` such that the map

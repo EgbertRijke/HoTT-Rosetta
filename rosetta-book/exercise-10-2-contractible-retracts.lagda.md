@@ -24,8 +24,6 @@ is-contr(B)→is-contr(A).
 
 ## Solution
 
-<!-- rosetta-item: exercise-10-2 -->
-
 <!-- rosetta-agda-block: exercise-10-2-contractibility-retracts -->
 
 ```agda

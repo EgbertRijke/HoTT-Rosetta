@@ -16,6 +16,4 @@ of locally `𝒱`-small sets `Y` in `𝒰` equipped with a family of connected t
 
 ## Solution
 
-<!-- rosetta-item: exercise-18-11 -->
-
 No formalization has been curated yet.

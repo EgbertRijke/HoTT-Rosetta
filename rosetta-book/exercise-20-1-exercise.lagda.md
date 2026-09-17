@@ -21,6 +21,4 @@ Prove that `W(bool,B)` is not extensional.
 
 ## Solution
 
-<!-- rosetta-item: exercise-20-1 -->
-
 No formalization has been curated yet.

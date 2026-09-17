@@ -28,6 +28,4 @@ is a proposition for each `d,n:ℕ` such that `d>0`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-12-3 -->
-
 No formalization has been curated yet.

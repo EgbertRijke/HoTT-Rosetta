@@ -49,8 +49,6 @@ for each `x:Fin{k}` and each `y:classical-Fin_k`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-7-7 -->
-
 <!-- rosetta-agda-block: exercise-7-7-natural-value-classical-finite -->
 
 ```agda

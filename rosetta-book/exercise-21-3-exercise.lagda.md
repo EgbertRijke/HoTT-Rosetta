@@ -25,6 +25,4 @@ is an embedding.
 
 ## Solution
 
-<!-- rosetta-item: exercise-21-3 -->
-
 No formalization has been curated yet.

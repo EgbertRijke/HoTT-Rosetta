@@ -32,6 +32,4 @@ binom(A, B) ≃ Σ(X:𝒰_B) Σ(Y:𝒰) (X+Y≃ A).
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-13 -->
-
 No formalization has been curated yet.

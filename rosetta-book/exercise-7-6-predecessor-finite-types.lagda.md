@@ -46,8 +46,6 @@ for each `x:Fin{k}`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-7-6 -->
-
 <!-- rosetta-agda-block: exercise-7-6-negative-finite-elements -->
 
 ```agda

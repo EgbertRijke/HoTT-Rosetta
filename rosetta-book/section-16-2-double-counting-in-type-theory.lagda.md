@@ -4,8 +4,6 @@
 module section-16-2-double-counting-in-type-theory where
 ```
 
-<!-- rosetta-item: section-16.2 -->
-
 In combinatorics, counting arguments often proceed by showing that two finite sets are isomorphic—or, in the language of type theory, by showing that two finite types are equivalent.
 The idea here is, of course, that when we count the elements of a type twice correctly, then both countings must result in the same number.
 However, this is something that we must prove before we can use it.
@@ -18,16 +16,12 @@ We will prove this claim as a consequence of the following general fact.
 
 ## Proposition 16.2.1
 
-<!-- rosetta-item: proposition-16.2.1; latex-label: prp:is-injective-maybe -->
-
 For any two types `X` and `Y`, there is a map
 ```text
 (X+unit≃ Y+unit)→ (X≃ Y).
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-16.2-proof -->
 
 *Proof.* We prove the claim in four steps.
 We will write `i` for `inl:X→ X+unit` and also for `inl:Y→ Y+unit`, and we will write `⋆` for `inr(⋆):X+unit` and also for `inr(⋆):Y+unit`.
@@ -116,16 +110,12 @@ Since `i:Y→ Y+unit` is injective, it follows that `f(g(y))=y`.
 
 ## Theorem 16.2.2
 
-<!-- rosetta-item: theorem-16.2.2; latex-label: thm:is-injective-Fin -->
-
 For any two natural numbers `k` and `l`, there is a map
 ```text
 (Fin{k}≃Fin{l})→ (k=l).
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-16.2-proof-2 -->
 
 *Proof.* The proof is by induction on `k` and `l`.
 In the base case, where both `k` and `l` are zero, the claim is obvious.

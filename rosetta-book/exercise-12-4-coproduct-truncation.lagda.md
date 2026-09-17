@@ -35,8 +35,6 @@ Conclude that `ℤ` is a set.
 
 ## Solution
 
-<!-- rosetta-item: exercise-12-4 -->
-
 ### Part (c): mutually exclusive propositions have propositional coproduct
 
 <!-- rosetta-agda-block: exercise-12-4-exclusive-propositions -->

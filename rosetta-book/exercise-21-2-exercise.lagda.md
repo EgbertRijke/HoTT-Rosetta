@@ -41,6 +41,4 @@ In other words, all the embeddings into the circle are of the form `S^1× P→ S
 
 ## Solution
 
-<!-- rosetta-item: exercise-21-2 -->
-
 No formalization has been curated yet.

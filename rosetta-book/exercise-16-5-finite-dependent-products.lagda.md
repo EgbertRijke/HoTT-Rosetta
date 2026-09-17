@@ -42,6 +42,4 @@ Show that if `Π(x:A) B(x)` is finite and if each `B(x)` is finite, then `A` is 
 
 ## Solution
 
-<!-- rosetta-item: exercise-16-5 -->
-
 No formalization has been curated yet.

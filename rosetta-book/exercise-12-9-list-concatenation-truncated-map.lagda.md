@@ -17,6 +17,4 @@ given by `f(x,y)≔concat-list(x,y)` is `0`-truncated.
 
 ## Solution
 
-<!-- rosetta-item: exercise-12-9 -->
-
 No formalization has been curated yet.

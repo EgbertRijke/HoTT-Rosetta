@@ -60,6 +60,4 @@ where `f:A→ B` and `g:X→ Y` are given.
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-2 -->
-
 No formalization has been curated yet.

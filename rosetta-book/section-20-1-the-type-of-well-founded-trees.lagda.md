@@ -4,11 +4,7 @@
 module section-20-1-the-type-of-well-founded-trees where
 ```
 
-<!-- rosetta-item: section-20.1 -->
-
 ## Definition 20.1.1
-
-<!-- rosetta-item: definition-20.1.1 -->
 
 Consider a type family `B` over `A`.
 The **W-type** `W(A,B)` is defined as the inductive type with constructor
@@ -33,16 +29,12 @@ The elements of W-types are called **(well-founded) trees**.
 
 ## Remark 20.1.2
 
-<!-- rosetta-item: remark-20.1.2 -->
-
 Some authors write `sup` for the constructor of a W-type.
 The intuition that `tree(a,α)` is a supremum of the family of elements `α(y)` indexed by `y:B(a)` is, however, somewhat misleading, because `tree(a,α)` does not satisfy the defining properties of a supremum.
 
 <!-- rosetta-item-end: remark-20.1.2 -->
 
 ## Remark 20.1.3
-
-<!-- rosetta-item: remark-20.1.3 -->
 
 When we define a dependent function
 ```text
@@ -59,8 +51,6 @@ The advantage of definitions by pattern matching is that they directly display t
 <!-- rosetta-item-end: remark-20.1.3 -->
 
 ## Remark 20.1.4
-
-<!-- rosetta-item: remark-20.1.4; latex-label: rmk:constant-W -->
 
 For any `x:A`, the function
 ```text
@@ -102,8 +92,6 @@ On the other hand, if each type `B(x)` is inhabited, then there are no such cons
 
 ## Proposition 20.1.5
 
-<!-- rosetta-item: proposition-20.1.5; latex-label: prp:is-empty-W -->
-
 Consider a family `B` of types over `A`.
 Then the following are equivalent:
 
@@ -114,8 +102,6 @@ Then the following are equivalent:
 In particular, if each `B(x)` is inhabited, then `W(A,B)` is empty.
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.1-proof -->
 
 *Proof.* To prove that (i) implies (ii), assume that `¬¬(B(x))` holds for each `x:A`.
 Our goal is to construct a function `f:W(A,B)→ empty`.
@@ -138,8 +124,6 @@ This is impossible, since `W(A,B)` was assumed to be empty. ◻
 <!-- rosetta-item-end: proposition-20.1.5 -->
 
 ## Example 20.1.6
-
-<!-- rosetta-item: example-20.1.6; latex-label: eg:Nat-W -->
 
 Consider the type family `P` over `bool` given by
 ```text
@@ -177,8 +161,6 @@ This completes the construction of the equivalence `ℕ≃ N`.
 
 ## Example 20.1.7
 
-<!-- rosetta-item: example-20.1.7; latex-label: eg:planar-binary-tree-W -->
-
 Consider the type family `B` over `bool` given by
 ```text
 B(false) ≔ empty and B(true) ≔ bool.
@@ -194,8 +176,6 @@ The reason we call the elements of `T_2` oriented binary rooted trees is that in
 <!-- rosetta-item-end: example-20.1.7 -->
 
 ## Example 20.1.8
-
-<!-- rosetta-item: example-20.1.8; latex-label: eg:binary-tree-W -->
 
 Consider the type `A≔ unit+BS_2`, where `BS_2` is the type of `2`-element types.
 We define the family `B` over `A` by pattern matching:
@@ -222,8 +202,6 @@ In the terminology of Exercise 19.10, the constructor `bin-tree` of `Bin-Tree` i
 <!-- rosetta-item-end: example-20.1.8 -->
 
 ## Example 20.1.9
-
-<!-- rosetta-item: example-20.1.9; latex-label: eg:finitely-branching-tree-W -->
 
 The W-type `W(ℕ,Fin)` is the type of **oriented finitely branching rooted trees**.
 On the other hand, we define the type of **(unoriented) finitely branching rooted trees** to be the W-type `W(𝔽,T)`.

@@ -14,8 +14,6 @@ open import section-8-1-decidability-and-decidable-equality
 open import section-8-5-the-infinitude-of-primes
 ```
 
-<!-- rosetta-item: section-8.6 -->
-
 We have shown that the type `is-prime(n)` is decidable for every `n`.
 In other words, there is an element `d(n):is-decidable(is-prime(n))` for every `n`.
 In principle, we can therefore check whether any *specific* natural number `n` is prime by inspecting the element `d(n)`: if it is of the form `inl(x)` for some `x:is-prime(n)`, then `n` is prime; if it is of the form `inr(f)` for some `f:¬is-prime(n)`, then `n` is not prime.
@@ -27,8 +25,6 @@ With the formalization of the material in this book, the proof assistant Agda re
 There is a much better way to do this: *boolean reflection*.
 
 ## Definition 8.6.1
-
-<!-- rosetta-item: definition-8.6.1 -->
 
 For any type `A` we define the map
 ```text
@@ -51,8 +47,6 @@ booleanization (inr f) = false
 
 ## Theorem 8.6.2
 
-<!-- rosetta-item: theorem-8.6.2 -->
-
 For any type `A` and any decision `d:is-decidable(A)`, there is a map
 ```text
 boolean-reflection:(booleanization(d)=true)→ A
@@ -60,8 +54,6 @@ boolean-reflection:(booleanization(d)=true)→ A
 such that `boolean-reflection(inl(a))≐ a`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.6-proof -->
 
 *Proof.* First, recall that by Exercise 6.2 there is a map `γ:(false=true)→ empty`.
 We use this to construct `boolean-reflection` by pattern matching as follows:
@@ -87,8 +79,6 @@ boolean-reflection (inr f) p = ex-falso (Eq-eq-bool p)
 <!-- rosetta-item-end: theorem-8.6.2 -->
 
 ## Remark 8.6.3
-
-<!-- rosetta-item: remark-8.6.3 -->
 
 Since the number 37 is a prime, it follows that the booleanization of the term
 ```text

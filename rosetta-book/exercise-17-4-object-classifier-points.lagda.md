@@ -15,6 +15,4 @@ A≃Σ(B:A→𝒰) is-contr(Σ(a:A) B(a)).
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-4 -->
-
 No formalization has been curated yet.

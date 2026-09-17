@@ -4,14 +4,10 @@
 module section-15-2-surjective-maps where
 ```
 
-<!-- rosetta-item: section-15.2 -->
-
 A map `f:A→ B` is surjective if for every `b:B` there is an *unspecified* element `a:A` that maps to `b`.
 We define this property using the propositional truncation.
 
 ## Definition 15.2.1
-
-<!-- rosetta-item: definition-15.2.1 -->
 
 A map `f:A→ B` is said to be **surjective** if there is an element of type
 ```text
@@ -21,8 +17,6 @@ is-surj(f)≔ Π(b:B) ‖fib(f, b)‖.
 <!-- rosetta-item-end: definition-15.2.1 -->
 
 ## Example 15.2.2
-
-<!-- rosetta-item: example-15.2.2 -->
 
 Any equivalence is a surjective map, since its fibers are contractible.
 More generally, any map that has a section is surjective.
@@ -39,8 +33,6 @@ is an equivalence.
 In the following proposition we show that, if we omit the condition that `B` is a proposition, then `f` satisfies this dependent universal property if and only if `f` is surjective.
 
 ## Proposition 15.2.3
-
-<!-- rosetta-item: proposition-15.2.3; latex-label: prp:surjective -->
 
 Consider a map `f:A→ B`.
 Then the following are equivalent:
@@ -60,8 +52,6 @@ _∘ f : (Π(y:B) P(y))→(Π(x:A) P(f(x)))
     is a `k`-truncated map.
 
 ### Proof
-
-<!-- rosetta-item: subheading-15.2-proof -->
 
 *Proof.* To prove that (i) implies (ii), suppose first that `f` is surjective, and consider the commuting square
 <!-- rosetta-diagram: a2c952277a82; review: pending -->
@@ -124,8 +114,6 @@ As a corollary we obtain that any surjective map into a proposition satisfies th
 
 ## Corollary 15.2.4
 
-<!-- rosetta-item: corollary-15.2.4 -->
-
 For any map `f:A→ P` into a proposition `P`, the following are equivalent:
 
 1. The map `f` satisfies the universal property of the propositional truncation of `A`.
@@ -137,8 +125,6 @@ For any map `f:A→ P` into a proposition `P`, the following are equivalent:
 Using the characterization of surjective maps of Proposition 15.2.3, we can also give a new characterization of the image of a map.
 
 ## Theorem 15.2.5
-
-<!-- rosetta-item: theorem-15.2.5; latex-label: thm:surjective -->
 
 Consider a commuting triangle
 <!-- rosetta-diagram: 5b022cc117de; review: pending -->
@@ -163,8 +149,6 @@ Then the following are equivalent:
 2. The map `q` is surjective.
 
 ### Proof
-
-<!-- rosetta-item: subheading-15.2-proof-2 -->
 
 *Proof.* First assume that `m` satisfies the universal property of the image inclusion of `f`, and consider the composite function
 <!-- rosetta-diagram: a64061e4998b; review: pending -->
@@ -223,13 +207,9 @@ hom-slice_X(m,m') ≃ Π(b:B) fib(m', m(b)) (By \cref{ex:triangle_fib})
 
 ## Corollary 15.2.6
 
-<!-- rosetta-item: corollary-15.2.6 -->
-
 Every map factors uniquely as a surjective map followed by an embedding.
 
 ### Proof
-
-<!-- rosetta-item: subheading-15.2-proof-3 -->
 
 *Proof.* Consider a map `f:A→ X`, and two factorizations
 <!-- rosetta-diagram: 5854a016bb76; review: pending -->

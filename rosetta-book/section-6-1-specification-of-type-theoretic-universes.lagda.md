@@ -4,8 +4,6 @@
 module section-6-1-specification-of-type-theoretic-universes where
 ```
 
-<!-- rosetta-item: section-6.1 -->
-
 A universe consists of a type `𝒰` of which the elements can be thought of as ‘codes’ for types.
 A universe also comes equipped with a type family `Ty` indexed by `𝒰`.
 Given an element `X:𝒰`, we think of the type `Ty(X)` as the type of elements of `X`.
@@ -36,8 +34,6 @@ In Section 20.6 we will use a variant of Russell’s paradox to derive a contrad
 Instead of assuming that the universe contains itself, we will assume that there are plenty of universes: enough universes so that any type family can be obtained by substituting into the universal type family of some universe.
 
 ## Definition 6.1.1
-
-<!-- rosetta-item: definition-6.1.1; latex-label: defn:universe -->
 
 A **universe** in type theory is a type `𝒰` in the empty context, equipped with a type family `Ty` over `𝒰` called a **universal family**, that is closed under the type forming operations in the sense that it comes equipped with the following structure:
 
@@ -95,8 +91,6 @@ If `A` is a type in `𝒰`, we usually write simply `A` for `Ǎ` and also `A` f
 <!-- rosetta-item-end: definition-6.1.1 -->
 
 ## Remark 6.1.2
-
-<!-- rosetta-item: remark-6.1.2 -->
 
 Since ordinary function types are defined as a special case of dependent function types, we don’t have to assume separately that universes are closed under ordinary function types.
 Similarly, it follows from the assumption that universes are closed under dependent pair types that universes are closed under cartesian product types.

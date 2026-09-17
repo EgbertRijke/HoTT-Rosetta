@@ -4,8 +4,6 @@
 module section-18-2-the-universal-property-of-set-quotients where
 ```
 
-<!-- rosetta-item: section-18.2 -->
-
 The quotient `A/R` is constructed as the image of `R`, so we obtain a commuting triangle
 <!-- rosetta-diagram: d1f85deb09a0; review: pending -->
 
@@ -25,8 +23,6 @@ and the embedding `i_R:A/R→Prop_𝒰^A` satisfies the universal property of th
 This universal property is, however, not the usual universal property of the quotient.
 
 ## Definition 18.2.1
-
-<!-- rosetta-item: definition-18.2.1 -->
 
 Consider a map `q:A→ B` into a set `B` satisfying the property that
 ```text
@@ -53,8 +49,6 @@ Arrows:
 
 ## Remark 18.2.2
 
-<!-- rosetta-item: remark-18.2.2 -->
-
 Formally, we express the universal property of the quotient by `R` as follows.
 Consider a map `q:A→ B` that satisfies the property that
 ```text
@@ -74,8 +68,6 @@ It is important to note that the universal property of set quotients is formulat
 <!-- rosetta-item-end: remark-18.2.2 -->
 
 ## Theorem 18.2.3
-
-<!-- rosetta-item: theorem-18.2.3; latex-label: thm:quotient_up -->
 
 Consider a type `A` and a universe `𝒰` containing `A`.
 Furthermore, let `R:A→ (A→ Prop_𝒰)` be an equivalence relation, and consider a map `q:A→ B` into a set `B`, not necessarily in `𝒰`.
@@ -115,8 +107,6 @@ In Theorem 18.2.3 we don’t assume that `B` is in the same universe as `A` and 
 As we will see below, this extra generality only affects the proof that (2) implies (3).
 
 ### Proof
-
-<!-- rosetta-item: subheading-18.2-proof -->
 
 *Proof.* We first show that (2) is equivalent to (3), since this is the easiest part.
 After that, we will show that (1) is equivalent to (2).
@@ -316,8 +306,6 @@ In particular, it follows that `h(q(a))=f(a)` for all `a:A`, which completes the
 
 ## Corollary 18.2.4
 
-<!-- rosetta-item: corollary-18.2.4 -->
-
 Consider an equivalence relation `R` over a type `A`.
 Then the quotient map
 ```text
@@ -332,16 +320,12 @@ This may seem remarkable if you haven’t tried Exercise 17.18 yet, because at f
 
 ## Theorem 18.2.5
 
-<!-- rosetta-item: theorem-18.2.5; latex-label: thm:eqrel-surj -->
-
 For any type `A` and any universe `𝒰` containing `A`, we have an equivalence
 ```text
 Eq-Rel_𝒰(A)≃Σ(X:Set_𝒰) A↠ X.
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-18.2-proof-2 -->
 
 *Proof.* Given an equivalence relation `R:A→(A→Prop_𝒰)` on `A` we first use the replacement axiom, by which the set quotient `A/R` is `𝒰`-small, to obtain a set `Q(R):Set_𝒰`, an equivalence `e:Q(R)≃ A/R`, and a surjective map `f:A→ Q(R)` such that the triangle
 <!-- rosetta-diagram: 8b841b2da315; review: pending -->

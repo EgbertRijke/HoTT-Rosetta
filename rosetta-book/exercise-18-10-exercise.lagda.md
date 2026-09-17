@@ -42,6 +42,4 @@ Arrows:
 
 ## Solution
 
-<!-- rosetta-item: exercise-18-10 -->
-
 No formalization has been curated yet.

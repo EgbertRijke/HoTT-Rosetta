@@ -4,11 +4,7 @@
 module section-18-1-equivalence-relations-and-the-replacement-axiom where
 ```
 
-<!-- rosetta-item: section-18.1 -->
-
 ## Definition 18.1.1
-
-<!-- rosetta-item: definition-18.1.1; latex-label: defn:eq_rel -->
 
 Consider a type `A` and a universe `𝒰`.
 Let `R:A→ (A→Prop_𝒰)` be a binary relation on `A` valued in the propositions in `𝒰`.
@@ -24,8 +20,6 @@ We write `Eq-Rel_𝒰(A)` for the type of all equivalence relations on `A` value
 <!-- rosetta-item-end: definition-18.1.1 -->
 
 ## Definition 18.1.2
-
-<!-- rosetta-item: definition-18.1.2 -->
 
 Let `R:A→ (A→Prop_𝒰)` be an equivalence relation.
 A subtype `P:A→ Prop_𝒰` is said to be an **equivalence class** if it satisfies the condition
@@ -56,8 +50,6 @@ Note that in our characterization of the identity type of `A/R` we make use of p
 
 ## Proposition 18.1.3
 
-<!-- rosetta-item: proposition-18.1.3; latex-label: prp:eq-quotient -->
-
 Let `R:A→ (A→Prop_𝒰)` be an equivalence relation.
 Furthermore, consider `x:A` and an equivalence class `P`.
 Then the canonical map
@@ -67,8 +59,6 @@ Then the canonical map
 is an equivalence.
 
 ### Proof
-
-<!-- rosetta-item: subheading-18.1-proof -->
 
 *Proof.* By Theorem 11.2.2 it suffices to show that the total space
 ```text
@@ -100,8 +90,6 @@ which follows directly from the assumption that `R` is an equivalence relation.�
 
 ## Corollary 18.1.4
 
-<!-- rosetta-item: corollary-18.1.4; latex-label: cor:eq-quotient -->
-
 Consider an equivalence relation `R` on a type `A`, and let `x,y:A`.
 Then there is an equivalence
 ```text
@@ -111,8 +99,6 @@ Then there is an equivalence
 <!-- rosetta-item-end: corollary-18.1.4 -->
 
 ## Remark 18.1.5
-
-<!-- rosetta-item: remark-18.1.5 -->
 
 Notice that type of equivalence classes of an equivalence relation in `𝒰` is a type in the universe `𝒰^+` that contains `𝒰` and every type in `𝒰`, or indeed in any universe `𝒱` containing `𝒰` and every type in `𝒰`.
 Indeed, the type
@@ -139,8 +125,6 @@ In other words, univalent universes are *locally small* in the following sense.
 
 ## Definition 18.1.6
 
-<!-- rosetta-item: definition-18.1.6; latex-label: defn:locally-small-type -->
-
 Consider a universe `𝒰`.
 A type `A` is said to be **locally `𝒰`-small** if the identity type `x=y` is `𝒰`-small for every `x,y:A`.
 We write
@@ -152,8 +136,6 @@ Similarly, a map `f:A→ B` is said to be **locally `𝒰`-small** if all of its
 <!-- rosetta-item-end: definition-18.1.6 -->
 
 ## Example 18.1.7
-
-<!-- rosetta-item: example-18.1.7 -->
 
  
 
@@ -175,15 +157,11 @@ We are now ready to assume the replacement axiom.
 
 ## Axiom 18.1.8
 
-<!-- rosetta-item: axiom-18.1.8; latex-label: axiom:replacement -->
-
 For any universe `𝒰`, we assume that for any map `f:A→ B` from a `𝒰`-small type `A` into a locally `𝒰`-small type `B`, the image of `f` is `𝒰`-small.
 
 <!-- rosetta-item-end: axiom-18.1.8 -->
 
 ## Example 18.1.9
-
-<!-- rosetta-item: example-18.1.9 -->
 
 For any type `A:𝒰`, the type `𝒰_A` of all types in `𝒰` merely equivalent to `A` is equivalent to the image of the constant map `const_A:unit→ 𝒰` is small.
 Since `unit` is small and `𝒰` is locally `𝒰`-small, it follows from the replacement axiom that `𝒰_A` is `𝒰`-small.
@@ -191,8 +169,6 @@ Since `unit` is small and `𝒰` is locally `𝒰`-small, it follows from the re
 <!-- rosetta-item-end: example-18.1.9 -->
 
 ## Example 18.1.10
-
-<!-- rosetta-item: example-18.1.10 -->
 
 The type `𝔽` of all finite types in `𝒰` is equivalent to be the image of the map
 ```text
@@ -203,8 +179,6 @@ Since `ℕ` is `𝒰`-small and `𝒰` is locally `𝒰`-small, it follows from 
 <!-- rosetta-item-end: example-18.1.10 -->
 
 ## Example 18.1.11
-
-<!-- rosetta-item: example-18.1.11 -->
 
 Consider a type `A` in `𝒰` and an equivalence relation `R` on `A` in `𝒰`.
 Then the type `A/R` is `𝒰`-small, since it is equivalent to the image of

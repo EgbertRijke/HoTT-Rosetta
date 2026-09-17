@@ -19,6 +19,4 @@ Show that `ℕ\not≃ Fin{k}` for any `k:ℕ`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-9-2 -->
-
 No formalization has been curated yet.

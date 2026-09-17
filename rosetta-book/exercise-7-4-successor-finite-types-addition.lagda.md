@@ -27,8 +27,6 @@ for any `x:Fin{k+1}`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-7-4 -->
-
 <!-- rosetta-agda-block: exercise-7-4-one-finite -->
 
 ```agda

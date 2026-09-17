@@ -26,6 +26,4 @@ Show that the total space `Σ(t:S^1) E_(S^1)(t)` of the universal cover of the c
 
 ## Solution
 
-<!-- rosetta-item: exercise-22-10 -->
-
 No formalization has been curated yet.

@@ -25,8 +25,6 @@ Define the **prime-counting function** `π:ℕ→ℕ`, which counts for each `n:
 
 ## Solution
 
-<!-- rosetta-item: exercise-8-4 -->
-
 <!-- rosetta-agda-block: exercise-8-4-iterate -->
 
 ```agda

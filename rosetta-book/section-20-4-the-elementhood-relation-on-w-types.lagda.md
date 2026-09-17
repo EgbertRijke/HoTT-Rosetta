@@ -4,8 +4,6 @@
 module section-20-4-the-elementhood-relation-on-w-types where
 ```
 
-<!-- rosetta-item: section-20.4 -->
-
 The elements of a W-type `W(A,B)` are constructed out of families of elements of `W(A,B)` indexed by a type `B(x)` for some `x:A`.
 More precisely, for each `tree(x,α):W(A,B)` we have a family of elements
 ```text
@@ -16,8 +14,6 @@ Thus, we could say that `α(y)` is in `tree(x,α)`, for each `y:B(x)`.
 More abstractly, we can define an elementhood relation on `W(A,B)`.
 
 ## Definition 20.4.1
-
-<!-- rosetta-item: definition-20.4.1 -->
 
 Given a W-type `W(A,B)` and a universe `𝒰` containing both `A` and each type in the family `B`, we define a type-valued relation
 ```text
@@ -31,8 +27,6 @@ Using the elementhood relation on `W(A,B)`, we can reformulate the induction pri
 
 ## Theorem 20.4.2
 
-<!-- rosetta-item: theorem-20.4.2 -->
-
 For any family `P` of types over `W(A,B)`, there is a function
 ```text
 i : (Π(x:W(A,B)) (Π(y:W(A,B)) (y∈ x)→ P(y))→ P(x))→ (Π(x:X) P(x))
@@ -44,8 +38,6 @@ i(h,x)=h(x,λ y. λ e. i(h,y))
 for every `h:Π(x:W(A,B)) (Π(y:W(A,B)) (y∈ x)→ P(y))→ P(x)`, and every `x:W(A,B)`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.4-proof -->
 
 *Proof.* For any type family `P` over `W(A,B)`, we first define a new type family `□ P` over `W(A,B)` given by
 ```text

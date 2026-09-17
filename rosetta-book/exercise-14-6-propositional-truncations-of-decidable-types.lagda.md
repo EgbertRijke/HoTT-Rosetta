@@ -24,6 +24,4 @@ Define a function `g:A→ (π(d)=1)` and show that `g` is a propositional trunca
 
 ## Solution
 
-<!-- rosetta-item: exercise-14-6 -->
-
 No formalization has been curated yet.

@@ -18,6 +18,4 @@ Here, `concat-htpy'(K)` is the function defined by `H↦ H ∙ K`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-1 -->
-
 No formalization has been curated yet.

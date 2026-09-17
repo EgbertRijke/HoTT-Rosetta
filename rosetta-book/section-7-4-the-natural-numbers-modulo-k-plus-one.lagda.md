@@ -24,8 +24,6 @@ open import section-5-4-transport
 open import exercise-6-1-injectivity-addition-multiplication
 ```
 
-<!-- rosetta-item: section-7.4 -->
-
 Given an equivalence relation `~` on a set `A` in classical mathematics, the quotient `A/{~}` comes equipped with a quotient map `q:A→ A/{~}` that satisfies two important properties: (1) The map `q` satisfies the condition
 ```text
 q(x)=q(y)↔ x~ y,
@@ -43,8 +41,6 @@ It is somewhat stronger than the classical notion of surjectivity, because a dep
 To emphasize that the Curry-Howard interpretation of surjectivity is stronger than intended we make the following definition, and we will properly introduce surjective maps in Section 15.2.
 
 ## Definition 7.4.1
-
-<!-- rosetta-item: definition-7.4.1 -->
 
 Consider a function `f:A→ B`.
 We say that `f` is **split surjective** if it comes equipped with an element of type
@@ -77,8 +73,6 @@ We will also define an auxiliary function `skip-zero-Fin_k:Fin{k}→Fin{k+1}`, w
 The map `[_]_{k+1}` is then defined by iterating the successor function.
 
 ## Definition 7.4.2
-
-<!-- rosetta-item: definition-7.4.2 -->
 
  
 
@@ -123,8 +117,6 @@ succ-Fin (succ-ℕ k) (inr star) = zero-Fin k
 
 ## Definition 7.4.3
 
-<!-- rosetta-item: definition-7.4.3 -->
-
 For any `k:ℕ`, we define the map `[_]_{k+1}:ℕ→Fin{k+1}` recursively on `x` by
 ```text
 [0]_{k+1} ≔ 0
@@ -151,8 +143,6 @@ This fact is a consequence of the following simple lemma, that will help us comp
 
 ## Lemma 7.4.4
 
-<!-- rosetta-item: lemma-7.4.4; latex-label: lem:nat-Fin -->
-
 We make three claims:
 
 1. For any `k:ℕ` there is an identification
@@ -173,8 +163,6 @@ nat-Fin(succ-Fin_k(x)) ≡ nat-Fin(x)+1 mod k.
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-7.4-proof -->
 
 *Proof.* For the first claim, we define an identification `α_k:nat-Fin(zero-Fin_k)=0` recursively by
 ```text
@@ -234,16 +222,12 @@ nat-succ-Fin k x = nat-skip-zero-Fin k x
 
 ## Proposition 7.4.5
 
-<!-- rosetta-item: proposition-7.4.5; latex-label: prp:cong-nat-mod-succ -->
-
 For any `x:ℕ` we have
 ```text
 nat-Fin[x]_{k+1}≡ x mod k+1.
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-7.4-proof-2 -->
 
 *Proof.* The proof by induction on `x`.
 The fact that
@@ -301,8 +285,6 @@ We need one more fact before we can prove Theorems 7.4.7 and 7.4.8.
 
 ## Proposition 7.4.6
 
-<!-- rosetta-item: proposition-7.4.6; latex-label: cor:eq-congN -->
-
 For any natural number `x<d` we have
 ```text
 d| x↔ x=0.
@@ -313,8 +295,6 @@ x≡ ymod k↔ x=y.
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-7.4-proof-3 -->
 
 *Proof.* Note that the implication `x=0→ d| x` is trivial, so it suffices to prove the forward implication
 ```text
@@ -381,8 +361,6 @@ eq-cong-nat-Fin (succ-ℕ k) x y H =
 
 ## Theorem 7.4.7
 
-<!-- rosetta-item: theorem-7.4.7; latex-label: thm:effective-mod-k -->
-
 Consider a natural number `k`.
 Then we have
 ```text
@@ -391,8 +369,6 @@ Then we have
 for any `x,y:ℕ`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-7.4-proof-4 -->
 
 *Proof.* First note that, since `nat-Fin` is injective by Proposition 7.3.6, we have
 ```text
@@ -440,8 +416,6 @@ eq-mod-succ-cong-ℕ k x y H =
 
 ## Theorem 7.4.8
 
-<!-- rosetta-item: theorem-7.4.8; latex-label: thm:issec-nat-Fin -->
-
 For any `x:Fin{k+1}` there is an identification
 ```text
 [nat-Fin(x)]_{k+1}=x.
@@ -449,8 +423,6 @@ For any `x:Fin{k+1}` there is an identification
 In other words, the map `[_]_{k+1}:ℕ→ Fin{k+1}` is split surjective.
 
 ### Proof
-
-<!-- rosetta-item: subheading-7.4-proof-5 -->
 
 *Proof.* Since `nat-Fin:Fin{k+1}→ℕ` is injective by Proposition 7.3.6, it suffices to show that
 ```text

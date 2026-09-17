@@ -44,6 +44,4 @@ Show that there can be no sequence of elements `x:ℕ→W(A,B)` such that `x_{n+
 
 ## Solution
 
-<!-- rosetta-item: exercise-20-5 -->
-
 No formalization has been curated yet.

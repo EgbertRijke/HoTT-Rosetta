@@ -19,6 +19,4 @@ Show that `inl:A→ A+B` is an equivalence if and only if `B` is empty, and that
 
 ## Solution
 
-<!-- rosetta-item: exercise-11-1 -->
-
 No formalization has been curated yet.

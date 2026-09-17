@@ -14,6 +14,4 @@ Retr_{Set_𝒰}(A) ≔ Σ(X:Set_𝒰) Σ(i:X→ A) Σ(q:A→ X) q∘ i~ id.
 
 ## Solution
 
-<!-- rosetta-item: exercise-18-3 -->
-
 No formalization has been curated yet.

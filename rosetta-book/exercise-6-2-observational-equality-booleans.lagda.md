@@ -29,8 +29,6 @@ Conclude that `false≠true`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-6-2 -->
-
 <!-- rosetta-agda-block: exercise-6-2-observational-equality-booleans-block-1 -->
 
 ```agda

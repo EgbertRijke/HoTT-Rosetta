@@ -32,8 +32,6 @@ open import section-5-2-the-groupoidal-structure-of-types
 open import exercise-7-10-k-ary-natural-numbers
 ```
 
-<!-- rosetta-item: section-8.4 -->
-
 The greatest common divisor of two natural numbers `a` and `b` is a natural number `gcd(a,b)` that satisfies the property that
 ```text
 x| a\ and\ x| b if and only if x|gcd(a,b)
@@ -49,8 +47,6 @@ We will define it here in Definition 8.4.6 using the well-ordering principle, bu
 Hence we make the following specification of the greatest common divisor.
 
 ## Definition 8.4.1
-
-<!-- rosetta-item: definition-8.4.1; latex-label: defn:is-gcd -->
 
 Consider three natural numbers `a`, `b`, and `d`.
 We say that `d` is a **greatest common divisor** of `a` and `b` if it comes equipped with an element of type
@@ -77,14 +73,10 @@ The property of being a greatest common divisor uniquely characterizes the great
 
 ## Proposition 8.4.2
 
-<!-- rosetta-item: proposition-8.4.2 -->
-
 Suppose `d` and `d'` are both a greatest common divisor of `a` and `b`.
 Then `d=d'`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.4-proof -->
 
 *Proof.* If both `d` and `d'` are a greatest common divisor of `a` and `b`, then both `d` and `d'` divide both `a` and `b`, and hence it follows that `d| d'` and `d'| d`.
 Since the divisibility relation was shown to be a partial order in Exercise 7.2, it follows by antisymmetry that `d=d'`. ◻
@@ -139,8 +131,6 @@ We define this family as follows:
 
 ## Definition 8.4.3
 
-<!-- rosetta-item: definition-8.4.3; latex-label: defn:fam-gcd -->
-
 Given `a,b:ℕ`, we define the type family `M(a,b)` over `ℕ` by
 ```text
 M(a,b,n) ≔ (a+b≠ 0) → (n≠ 0)× (Π(x:ℕ) (x| a)× (x| b) → (x| n)).
@@ -166,13 +156,9 @@ However, in our current setting we have no choice but to prove it.
 
 ## Proposition 8.4.4
 
-<!-- rosetta-item: proposition-8.4.4; latex-label: prp:is-decidable-is-multiple-of-gcd -->
-
 The type family `M(a,b)` is decidable for each `a,b:ℕ`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.4-proof-2 -->
 
 *Proof.* The type `a+b≠ 0` is decidable because it is the negation of the type `a+b=0`, which is decidable by Proposition 8.1.7.
 Therefore it suffices to show that the type
@@ -260,13 +246,9 @@ We prove this in the following lemma.
 
 ## Lemma 8.4.5
 
-<!-- rosetta-item: lemma-8.4.5; latex-label: lem:exists-multiple-of-gcd -->
-
 There is an element of type `M(a,b,a+b)`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.4-proof-3 -->
 
 *Proof.* To construct an element of type `M(a,b,a+b)`, assume that `a+b≠ 0`.
 Then we have tautologically that `a+b≠ 0`, and any common divisor of `a` and `b` is also a divisor of `a+b`. ◻
@@ -282,8 +264,6 @@ abstract
 <!-- rosetta-item-end: lemma-8.4.5 -->
 
 ## Definition 8.4.6
-
-<!-- rosetta-item: definition-8.4.6; latex-label: defn:gcd -->
 
 We define the **greatest common divisor** `gcd:ℕ→ (ℕ→ℕ)` by the well-ordering principle of `ℕ` (Theorem 8.3.2) as the least natural number `n` for which `M(a,b,n)` holds, using the fact that `M(a,b)` is a decidable type family (Proposition 8.4.4) and that `M(a,b,a+b)` always holds (Lemma 8.4.5).
 
@@ -312,13 +292,9 @@ is-lower-bound-gcd-ℕ a b = pr2 (pr2 (GCD-ℕ a b))
 
 ## Lemma 8.4.7
 
-<!-- rosetta-item: lemma-8.4.7; latex-label: lem:is-zero-gcd -->
-
 For any two natural numbers `a` and `b`, we have `gcd(a,b)=0` if and only if `a+b=0`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.4-proof-4 -->
 
 *Proof.* To prove the forward direction, assume that `gcd(a,b)=0`.
 By definition of `gcd(a,b)` we have that `M(a,b,gcd(a,b))` holds.
@@ -364,13 +340,9 @@ abstract
 
 ## Theorem 8.4.8
 
-<!-- rosetta-item: theorem-8.4.8 -->
-
 For any two natural numbers `a` and `b`, the number `gcd(a,b)` is a greatest common divisor of `a` and `b` in the sense of Definition 8.4.1.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.4-proof-5 -->
 
 *Proof.* We give the proof by case analysis on whether `a+b=0`.
 If we assume that `a+b=0`, then it follows that both `a=0` and `b=0`, and by Lemma 8.4.7 it also follows that `gcd(a,b)=0`.

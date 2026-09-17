@@ -4,14 +4,10 @@
 module section-17-4-maps-and-families-of-types where
 ```
 
-<!-- rosetta-item: section-17.4 -->
-
 Using the univalence axiom, we can establish a fundamental relation between maps into a type `A`, and families of types indexed by `A`.
 A special case of this relation asserts that the type of all pairs `(X,e)` consisting of a type `X` and an embedding `e:X↪ A` is equivalent to the type of all subtypes of `A`, i.e., the type of all families `P` of propositions indexed by `A`.
 
 ## Theorem 17.4.1
-
-<!-- rosetta-item: theorem-17.4.1; latex-label: thm:object-classifier -->
 
 For any type `A` and any univalent universe `𝒰` containing `A`, the map
 ```text
@@ -20,8 +16,6 @@ For any type `A` and any univalent universe `𝒰` containing `A`, the map
 given by `(X,f)↦fib_f` is an equivalence.
 
 ### Proof
-
-<!-- rosetta-item: subheading-17.4-proof -->
 
 *Proof.* The map in the converse direction is given by
 ```text
@@ -66,8 +60,6 @@ The following corollary is so important, that we call it again a theorem.
 
 ## Theorem 17.4.2
 
-<!-- rosetta-item: theorem-17.4.2; latex-label: thm:classifier-subuniverse -->
-
 Consider a type `A` and a univalent universe `𝒰` containing `A`.
 Furthermore, let `P` be a family of types indexed by `𝒰`, and write
 ```text
@@ -80,8 +72,6 @@ Then the map
 given by `(X,f,p)↦ λ a. (fib(f, a),p(a))` is an equivalence.
 
 ### Proof
-
-<!-- rosetta-item: subheading-17.4-proof-2 -->
 
 *Proof.* The asserted map is homotopic to the composition of the equivalences
 ```text
@@ -101,8 +91,6 @@ The families `P≔is-decidable` and `P≔count` are examples.
 
 ## Corollary 17.4.3
 
-<!-- rosetta-item: corollary-17.4.3; latex-label: cor:subtype -->
-
 Consider a type `A` and a univalent universe `𝒰` containing `A`.
 Then the map
 ```text
@@ -116,8 +104,6 @@ In other words, a subtype of a type `A` is equivalently described as a type `X` 
 This brings us to an important point about equality of subtypes.
 
 ## Remark 17.4.4
-
-<!-- rosetta-item: remark-17.4.4 -->
 
 By function extensionality and propositional extensionality, it follows that two subtypes `P,Q:A→Prop_𝒰` are the same if and only if
 ```text

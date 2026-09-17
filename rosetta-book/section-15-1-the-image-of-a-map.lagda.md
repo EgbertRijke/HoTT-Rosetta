@@ -4,17 +4,11 @@
 module section-15-1-the-image-of-a-map where
 ```
 
-<!-- rosetta-item: section-15.1 -->
-
 ### The universal property of the image
-
-<!-- rosetta-item: subheading-15.1-the-universal-property-of-the-image -->
 
 Recall from Exercise 13.15 that we made the following definition:
 
 ## Definition 15.1.1
-
-<!-- rosetta-item: definition-15.1.1 -->
 
 Let `f:A→ X` and `g:B→ X` be maps.
 A **morphism from `f` to `g` over `X`** consists of a map `h:A→ B` equipped with a homotopy `H:f~ g∘ h` witnessing that the triangle
@@ -46,8 +40,6 @@ Composition of morphisms over `X` is defined by
 
 ## Definition 15.1.2
 
-<!-- rosetta-item: definition-15.1.2 -->
-
 Consider a commuting triangle
 <!-- rosetta-diagram: fefef7339e9a; review: pending -->
 
@@ -74,13 +66,9 @@ is an equivalence for every embedding `m:B↪ X`.
 
 ## Lemma 15.1.3
 
-<!-- rosetta-item: lemma-15.1.3 -->
-
 For any `f:A→ X` and any embedding `m:B→ X`, the type `hom-slice_X(f,m)` is a proposition.
 
 ### Proof
-
-<!-- rosetta-item: subheading-15.1-proof -->
 
 *Proof.* Recall from Exercise 13.15 that the type `hom-slice_X(f,m)` is equivalent to the type
 ```text
@@ -92,8 +80,6 @@ Thus we see that the type `Π(a:A) fib(m, f(a))` is a product of propositions, h
 <!-- rosetta-item-end: lemma-15.1.3 -->
 
 ## Proposition 15.1.4
-
-<!-- rosetta-item: proposition-15.1.4; latex-label: prp:simplifly-universal-property-image -->
 
 Consider a commuting triangle
 <!-- rosetta-diagram: fefef7339e9a; review: pending -->
@@ -122,21 +108,15 @@ hom-slice_X(f,m)→hom-slice_X(i,m).
 
 ### Proof
 
-<!-- rosetta-item: subheading-15.1-proof-2 -->
-
 *Proof.* Since `hom-slice_X(f,m)` is a proposition for every embedding `m:B→ X`, the claim follows immediately by the observation made in Remark 14.1.2. ◻
 
 <!-- rosetta-item-end: proposition-15.1.4 -->
 
 ### The existence of the image
 
-<!-- rosetta-item: subheading-15.1-the-existence-of-the-image -->
-
 The image of a map `f:A→ X` can be defined using the propositional truncation.
 
 ## Definition 15.1.5
-
-<!-- rosetta-item: definition-15.1.5; latex-label: defn:im -->
 
 For any map `f:A→ X` we define the **image** of `f` to be the type
 ```text
@@ -177,13 +157,9 @@ Arrows:
 
 ## Proposition 15.1.6
 
-<!-- rosetta-item: proposition-15.1.6 -->
-
 The image inclusion `i_f:im(f)→ X` of any map `f:A→ X` is an embedding.
 
 ### Proof
-
-<!-- rosetta-item: subheading-15.1-proof-3 -->
 
 *Proof.* The claim follows directly by Corollary 12.2.4, because the type `‖fib(f, x)‖` is a proposition for each `x:X`. ◻
 
@@ -191,13 +167,9 @@ The image inclusion `i_f:im(f)→ X` of any map `f:A→ X` is an embedding.
 
 ## Theorem 15.1.7
 
-<!-- rosetta-item: theorem-15.1.7; latex-label: thm:im -->
-
 The image inclusion `i_f:im(f)→ X` of any map `f:A→ X` satisfies the universal property of the image inclusion of `f`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-15.1-proof-4 -->
 
 *Proof.* Consider an embedding `m:B↪ X`.
 Note that we have a commuting square
@@ -228,13 +200,9 @@ Therefore we obtain the desired map by the universal property of the proposition
 
 ### The uniqueness of the image
 
-<!-- rosetta-item: subheading-15.1-the-uniqueness-of-the-image -->
-
 We will now show that the universal property of the image implies that the image is determined uniquely up to equivalence.
 
 ## Theorem 15.1.8
-
-<!-- rosetta-item: theorem-15.1.8; latex-label: thm:uniqueness-image -->
 
 Let `f` be a map, and consider two commuting triangles
 <!-- rosetta-diagram: cbfe6369b3e5; review: pending -->
@@ -279,8 +247,6 @@ Arrows:
     commutes is contractible.
 
 ### Proof
-
-<!-- rosetta-item: subheading-15.1-proof-5 -->
 
 *Proof.* First, we show that if (i) and (ii) hold, then (iii) holds.
 Note that the type `hom-slice_X(i,i')` is a proposition, since `i'` is assumed to be an embedding.

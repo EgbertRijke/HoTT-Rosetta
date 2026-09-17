@@ -4,15 +4,11 @@
 module section-15-3-cantor-s-diagonal-argument where
 ```
 
-<!-- rosetta-item: section-15.3 -->
-
 Now that we have introduced surjective maps, we are in position to give Cantor’s famous diagonal argument, which he used to show that there are infinite sets of different cardinality.
 The diagonal argument gives a proof that there is no surjective map from `X` to its power set `P(X)`.
 The power set of a type `X` is of course defined with respect to a universe `𝒰`, as the type of families of propositions in `𝒰` indexed by `X`.
 
 ## Definition 15.3.1
-
-<!-- rosetta-item: definition-15.3.1 -->
 
 Consider a type `X`, and a universe `𝒰`.
 We define the **`𝒰`-power set** of `X` to be
@@ -24,16 +20,12 @@ P_{U}(X)≔ X→Prop_𝒰.
 
 ## Theorem 15.3.2
 
-<!-- rosetta-item: theorem-15.3.2 -->
-
 For any type `X` and any universe `𝒰`, there is no surjective function
 ```text
 f : X → P_{U}(X)
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-15.3-proof -->
 
 *Proof.* Consider a function `f:X→ (X→ Prop_𝒰)`, and suppose that `f` is surjective.
 Following Cantor’s diagonalization argument, we define the subset `P:X→Prop_𝒰` by

@@ -16,6 +16,4 @@ is contractible.
 
 ## Solution
 
-<!-- rosetta-item: exercise-18-2 -->
-
 No formalization has been curated yet.

@@ -4,11 +4,7 @@
 module section-20-3-functoriality-of-w-types where
 ```
 
-<!-- rosetta-item: section-20.3 -->
-
 ## Definition 20.3.1
-
-<!-- rosetta-item: definition-20.3.1 -->
 
 Consider a type family `B` over `A`, and a type family `B'` over `A'`.
 Furthermore, consider a map `f:A'→ A` and a family of equivalences
@@ -25,16 +21,12 @@ W(f,e)(tree(x,α))≔tree(f(x),W(f,g)∘ α∘ e_x^{-1}).
 
 ## Lemma 20.3.2
 
-<!-- rosetta-item: lemma-20.3.2; latex-label: lem:fib-W -->
-
 For any morphism `W(f,e):W(A',B')→W(A,B)` of W-types and any `tree(x,α):W(A,B)`, there is an equivalence
 ```text
 fib(W(f,e), tree(x,α)) ≃ fib(f, x)×Π(b:B(x)) fib(W(f,e), α(b)).
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.3-proof -->
 
 *Proof.* First, note that by the characterization in Theorem 20.2.3 of the identity type of `W(A,B)`, there is an equivalence between the fiber `fib(W(f,e), tree(x,α))` and the type
 ```text
@@ -67,15 +59,11 @@ completing the proof. ◻
 
 ## Theorem 20.3.3
 
-<!-- rosetta-item: theorem-20.3.3 -->
-
 Consider a morphism `W(f,e):W(A,B)→W(A',B')` of W-types.
 If the map `f:A→ A'` is `k`-truncated, then so is the map `W(f,e)`.
 In particular, if `f` is an equivalence or an embedding, then so is `W(f,e)`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.3-proof-2 -->
 
 *Proof.* Suppose that the map `f` is `k`-truncated.
 We will prove recursively that the fibers of the morphism `W(f,e)` on W-types is `k`-truncated.

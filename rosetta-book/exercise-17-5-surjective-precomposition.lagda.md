@@ -22,6 +22,4 @@ Hint: To show that (ii) implies (i), use the assumption with the set `Câ‰”Prop_ð
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-5 -->
-
 No formalization has been curated yet.

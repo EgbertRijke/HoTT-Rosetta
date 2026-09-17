@@ -15,6 +15,4 @@ is connected for every finite type `A`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-18-12 -->
-
 No formalization has been curated yet.

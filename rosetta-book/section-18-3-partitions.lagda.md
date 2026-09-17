@@ -4,8 +4,6 @@
 module section-18-3-partitions where
 ```
 
-<!-- rosetta-item: section-18.3 -->
-
 There are many equivalent ways of stating what an equivalence relation is.
 We saw in Theorem 18.2.5 that the type of equivalence relations on `A` is equivalent to the type of surjective maps out of `A` into a set.
 Here we will show that the type of equivalence relations on `A` is equivalent to the type of partitions of `A`.
@@ -21,8 +19,6 @@ The equivalence of equivalence relations and partitions requires some finesse re
 This is why we set up the definition of partitions in the following way.
 
 ## Definition 18.3.1
-
-<!-- rosetta-item: definition-18.3.1 -->
 
 Let `A` be a type and let `𝒰` and `𝒱` be two universes.
 A **`(𝒰,𝒱)`-partition** of a type `A` is a subset
@@ -42,8 +38,6 @@ Partition_{𝒰,𝒱}(A)≔Σ(P:P_{𝒰}^+(A)→Prop_{𝒱}) is-partition(P)
 
 ## Theorem 18.3.2
 
-<!-- rosetta-item: theorem-18.3.2 -->
-
 Consider a type `A`, a universe `𝒰`, and consider a universe `𝒱` containing both `A` and every type in `𝒰`.
 Then we have an equivalence
 ```text
@@ -51,8 +45,6 @@ Eq-Rel_{𝒰}(A)≃Partition_{𝒰,𝒱}(A).
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-18.3-proof -->
 
 *Proof.* Consider an equivalence relation `R` on `A`.
 Then we define

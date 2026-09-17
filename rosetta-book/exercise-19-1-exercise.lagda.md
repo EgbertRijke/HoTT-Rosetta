@@ -17,6 +17,4 @@ Show that `X` is a group.
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-1 -->
-
 No formalization has been curated yet.

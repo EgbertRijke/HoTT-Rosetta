@@ -24,6 +24,4 @@ Show that `D̃_n` is a set if and only if `n` is not a square.
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-20 -->
-
 No formalization has been curated yet.

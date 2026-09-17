@@ -14,8 +14,6 @@ open import section-5-3-the-action-on-identifications-of-functions
 open import exercise-5-5-semiring-laws-natural-numbers
 ```
 
-<!-- rosetta-item: section-7.1 -->
-
 The *Curry-Howard interpretation* is an interpretation of logic into type theory.
 Recall that in type theory there is no separation between the logical framework and the general theory of collections of mathematical objects the way there is in the more traditional setup with Zermelo-Fraenkel set theory, which is postulated by axioms in first order logic.
 These two aspects of the foundations of mathematics are unified in type theory.
@@ -23,8 +21,6 @@ The idea of the Curry-Howard interpretation is therefore to express propositions
 We illustrate this idea with an example.
 
 ## Example 7.1.1
-
-<!-- rosetta-item: example-7.1.1 -->
 
 A natural number `d` is said to divide a natural number `n` if there exists a natural number `k` such that `d· k=n`.
 To represent the divisibility predicate in type theory, we need to define a *type*
@@ -39,8 +35,6 @@ The interpretation of the existential quantification (`∃`) into type theory vi
 <!-- rosetta-item-end: example-7.1.1 -->
 
 ## Definition 7.1.2
-
-<!-- rosetta-item: definition-7.1.2 -->
 
 Consider two natural numbers `d` and `n`.
 We say that `d` **divides** `n` if there is a element of type
@@ -58,8 +52,6 @@ div-ℕ m n = Σ ℕ (λ k → k *ℕ m ＝ n)
 
 ## Remark 7.1.3
 
-<!-- rosetta-item: remark-7.1.3 -->
-
 This type-theoretical definition of the divisibility relation using `Σ`-types has two important consequences:
 
 1. The principal way to show that `d| n` holds is to construct a pair `(k,p)` consisting of a natural number `k` and an identification `p:d· k=n`.
@@ -70,8 +62,6 @@ We then get to assume a natural number `k` and an identification `p:d· k=n`, in
 <!-- rosetta-item-end: remark-7.1.3 -->
 
 ## Example 7.1.4
-
-<!-- rosetta-item: example-7.1.4; latex-label: rmk:elementary-facts-div -->
 
 Just as existential quantification (`∃`) is translated via the Curry-Howard interpretation to `Σ`-types, the translation of the universal quantification (`∀`) in type theory via the Curry-Howard interpretation is to `Π`-types.
 For example, the assertion that every natural number is divisible by `1` is expressed in type theory as
@@ -115,14 +105,10 @@ In the following proposition we will see examples of how a hypothesis of type `d
 
 ## Proposition 7.1.5
 
-<!-- rosetta-item: proposition-7.1.5; latex-label: prp:div-3-for-2 -->
-
 Consider three natural numbers `d`, `x` and `y`.
 If `d` divides any two of the three numbers `x`, `y`, and `x+y`, then it also divides the third.
 
 ### Proof
-
-<!-- rosetta-item: subheading-7.1-proof -->
 
 *Proof.* We will only show that if `d` divides `x` and `y`, then it divides `x+y`.
 The remaining two claims, that if `d` divides `y` and `x+y` then it divides `x`, and that if `d` divides `x` and `x+y` then it divides `y`, are left as Exercise 7.1.
@@ -240,8 +226,6 @@ We summarize the full Curry-Howard interpretation in the following table.
 | x=yx=y | x=yx=y |
 
 ## Remark 7.1.6
-
-<!-- rosetta-item: remark-7.1.6 -->
 
 We should note, however, that despite the similarities between logic and type theory that are highlighted in the Curry-Howard interpretation, there are also some differences.
 One important difference is that types may contain many elements, whereas in logic, propositions are usually considered to be *proof irrelevant*.

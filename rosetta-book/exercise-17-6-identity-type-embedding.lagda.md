@@ -16,6 +16,4 @@ is an embedding.
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-6 -->
-
 No formalization has been curated yet.

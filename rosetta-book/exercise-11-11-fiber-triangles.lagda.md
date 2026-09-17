@@ -50,6 +50,4 @@ Show that `h` is an equivalence if and only if `fib-triangle(h,H)` is a family o
 
 ## Solution
 
-<!-- rosetta-item: exercise-11-11 -->
-
 No formalization has been curated yet.

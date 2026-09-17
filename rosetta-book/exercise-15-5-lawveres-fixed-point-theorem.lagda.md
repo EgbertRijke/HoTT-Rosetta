@@ -14,6 +14,4 @@ Prove **Lawvere’s fixed point theorem**: For any two types `A` and `B`, if the
 
 ## Solution
 
-<!-- rosetta-item: exercise-15-5 -->
-
 No formalization has been curated yet.

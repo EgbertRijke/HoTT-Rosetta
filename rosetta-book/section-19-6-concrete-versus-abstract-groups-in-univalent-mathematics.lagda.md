@@ -4,8 +4,6 @@
 module section-19-6-concrete-versus-abstract-groups-in-univalent-mathematics where
 ```
 
-<!-- rosetta-item: section-19.6 -->
-
 In univalent mathematics there is another exciting perspective on group theory.
 We won’t be able to go in full details here, but we can sketch some of key ideas.
 To learn more about this beautiful univalent perspective on group theory, I recommend the forthcoming *Symmetry* book \[citation: `symmetrybook`\].
@@ -22,8 +20,6 @@ The pointed type `BG` is also called the **delooping** of `G`, or the **classify
 The fact that the above type is contractible is of course heavily reliant on the univalence axiom.
 
 ## Example 19.6.1
-
-<!-- rosetta-item: example-19.6.1 -->
 
 We have already seen that
 ```text
@@ -99,8 +95,6 @@ To see that this definition makes sense, we use the following generalization of 
 
 ## Theorem 19.6.2
 
-<!-- rosetta-item: theorem-19.6.2; latex-label: thm:truncated-fundamental -->
-
 Consider a connected type `A` equipped with an element `a:A`, and consider a family of types `B(x)` indexed by `x:A`.
 Then the following are equivalent:
 
@@ -117,8 +111,6 @@ f:Π(x:A) (a=x)→ B(x)
     is `(k+1)`-truncated.
 
 ### Proof
-
-<!-- rosetta-item: subheading-19.6-proof -->
 
 *Proof.* Recall from Exercise 12.10 that the total space `Σ(x:A) B(x)` is `(k+1)`-truncated if and only if the base point inclusion
 ```text
@@ -145,16 +137,12 @@ In other words, the action of `G` on `X` is free.
 
 ## Remark 19.6.3
 
-<!-- rosetta-item: remark-19.6.3 -->
-
 Theorem 19.6.2 can be generalized further.
 We include this generalization in Exercise 19.14.
 
 <!-- rosetta-item-end: remark-19.6.3 -->
 
 ## Example 19.6.4
-
-<!-- rosetta-item: example-19.6.4 -->
 
 Consider two sets `A` and `B`, and a universe `𝒰` containing both of them.
 Then the automorphism group `Aut(B)` acts on the decidable embeddings `B↪ᵈ A` by precomposition.
@@ -178,8 +166,6 @@ In other words, the action of `Aut(B)` on `A↠ B` is free.
 <!-- rosetta-item-end: example-19.6.4 -->
 
 ## Example 19.6.5
-
-<!-- rosetta-item: example-19.6.5 -->
 
 In Exercise 17.20 we introduced the type
 ```text

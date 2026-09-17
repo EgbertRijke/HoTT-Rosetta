@@ -4,15 +4,11 @@
 module section-17-3-univalence-implies-function-extensionality where
 ```
 
-<!-- rosetta-item: section-17.3 -->
-
 One of the first applications of the univalence axiom was Voevodsky’s theorem that the univalence axiom on a universe `𝒰` implies function extensionality for types in `𝒰`.
 The proof uses the fact that weak function extensionality implies function extensionality.
 We will also make use of the following lemma.
 
 ## Lemma 17.3.1
-
-<!-- rosetta-item: lemma-17.3.1; latex-label: lem:postcomp-equiv -->
 
 For any equivalence `e:X ≃ Y` in a univalent universe `𝒰`, and any type `A`, the post-composition map
 ```text
@@ -29,8 +25,6 @@ Therefore we give a new proof, using the univalence axiom.
 
 ### Proof
 
-<!-- rosetta-item: subheading-17.3-proof -->
-
 *Proof.* Since `𝒰` is assumed to be a univalent universe, it satisfies by Theorem 17.1.1 the principle of equivalence induction.
 Therefore, it suffices to show that the post-composition map
 ```text
@@ -41,13 +35,9 @@ This post-composition map is of course just the identity map on `A→ X`, so it 
 
 ## Theorem 17.3.2
 
-<!-- rosetta-item: theorem-17.3.2; latex-label: thm:funext-univalence -->
-
 For any universe `𝒰`, the univalence axiom on `𝒰` implies function extensionality on `𝒰`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-17.3-proof-2 -->
 
 *Proof.* Note that by Theorem 13.1.2 it suffices to show that univalence implies weak function extensionality.
 We note that the proof of Theorem 13.1.2 also goes through when it is restricted to types in `𝒰`.

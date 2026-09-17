@@ -22,8 +22,6 @@ open import exercise-12-6-truncated-sigma-types
 open import exercise-12-7-truncated-products
 ```
 
-<!-- rosetta-item: section-14.1 -->
-
 The propositional truncation of a type `A` is a proposition `‖A‖` equipped with a map
 ```text
 η:A→ ‖A‖.
@@ -33,8 +31,6 @@ The complete specification of the propositional truncation includes the universa
 In this section we will specify in full generality when a map `f:A→ P` into a proposition `P` is a propositional truncation.
 
 ## Definition 14.1.1
-
-<!-- rosetta-item: definition-14.1.1 -->
 
 Let `A` be a type, and let `f:A→ P` be a map into a proposition `P`.
 We say that `f` **is a propositional truncation** of `A` if for every proposition `Q`, the precomposition map
@@ -64,8 +60,6 @@ module _
 
 ## Remark 14.1.2
 
-<!-- rosetta-item: remark-14.1.2; latex-label: ex:prop_equiv -->
-
 Using the fact that equivalences are maps that have contractible fibers, we can reformulate the universal property of the propositional truncation.
 Note that the fiber of the precomposition map `_∘ f:(P→ Q) → (A → Q)` at a map `g:A→ Q` is the type.
 ```text
@@ -75,7 +69,6 @@ Therefore we see that if `f` satisfies the universal property of the proposition
 In other words, for each map `g:A→ Q` into a proposition `Q` there is a unique map `h:P→ Q` for which `h∘ f=g`.
 We also say that every map `g:A→ Q` into a proposition `Q` *extends* uniquely along `f`, as indicated in the diagram
 <!-- rosetta-diagram: cbd3f685da87; review: pending -->
-
 
 ```text
       [A]
@@ -153,8 +146,6 @@ abstract
 
 ## Remark 14.1.3
 
-<!-- rosetta-item: remark-14.1.3; latex-label: rmk:simplified-up-trunc-Prop -->
-
 For any two propositions `P` and `P'`, a map `f:P→ P'` is an equivalence if and only if there is a function `g:P'→ P`.
 To see this, simply note that any such function `g` is an inverse of `f`, because any two elements in `P` and any two elements in `P'` are equal.
 
@@ -212,8 +203,6 @@ In other words, any two propositional truncations of a type `A` must be equivale
 
 ## Proposition 14.1.4
 
-<!-- rosetta-item: proposition-14.1.4 -->
-
 Let `A` be a type, and consider two maps
 ```text
 f:A→ P and f':A→ P'
@@ -228,8 +217,6 @@ If any two of the following three assertions hold, so does the third:
 3. There is a (unique) equivalence `P≃ P'`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-14.1-proof -->
 
 *Proof.* We first show that (i) and (ii) together imply (iii).
 If `f` and `f'` are both propositional truncations of `A`, then we have maps `P→ P'` and `P'→ P` by the universal properties of `f` and `f'`.
@@ -322,8 +309,6 @@ abstract
 <!-- rosetta-item-end: proposition-14.1.4 -->
 
 ## Remark 14.1.5
-
-<!-- rosetta-item: remark-14.1.5 -->
 
 One might be tempted to think that a type is inhabited if and only if it is nonempty.
 Recall that a type `A` is nonempty if it satisfies the property `¬¬ A`.

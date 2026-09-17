@@ -25,6 +25,4 @@ Show that for any type `A` with decidable equality and an arbitrary type `B`, an
 
 ## Solution
 
-<!-- rosetta-item: exercise-16-9 -->
-
 No formalization has been curated yet.

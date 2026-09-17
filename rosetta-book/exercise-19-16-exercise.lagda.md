@@ -47,6 +47,4 @@ Show that the type of abstract `G`-torsors is equivalent to the type of families
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-16 -->
-
 No formalization has been curated yet.

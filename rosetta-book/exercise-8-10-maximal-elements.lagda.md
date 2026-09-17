@@ -24,6 +24,4 @@ Use the function of part (b) to give a second construction of the greatest commo
 
 ## Solution
 
-<!-- rosetta-item: exercise-8-10 -->
-
 No formalization has been curated yet.

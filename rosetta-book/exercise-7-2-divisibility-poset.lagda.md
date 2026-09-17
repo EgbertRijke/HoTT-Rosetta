@@ -22,8 +22,6 @@ Show that the divisibility relation satisfies the axioms of a poset, i.e., that 
 
 ## Solution
 
-<!-- rosetta-item: exercise-7-2 -->
-
 <!-- rosetta-agda-block: exercise-7-2-antisymmetric-relation-adapted -->
 
 ```agda

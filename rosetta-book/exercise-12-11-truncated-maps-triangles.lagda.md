@@ -24,6 +24,4 @@ Show that `f` is `k`-truncated if and only if `h` is `k`-truncated.
 
 ## Solution
 
-<!-- rosetta-item: exercise-12-11 -->
-
 No formalization has been curated yet.

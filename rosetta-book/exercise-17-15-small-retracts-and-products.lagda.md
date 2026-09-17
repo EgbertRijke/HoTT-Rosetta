@@ -34,6 +34,4 @@ Show that if the product `A× B` is `𝒰`-small, then so are the types `A` and 
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-15 -->
-
 No formalization has been curated yet.

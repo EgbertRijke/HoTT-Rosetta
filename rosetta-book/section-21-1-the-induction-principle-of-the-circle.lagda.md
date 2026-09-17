@@ -4,8 +4,6 @@
 module section-21-1-the-induction-principle-of-the-circle where
 ```
 
-<!-- rosetta-item: section-21.1 -->
-
 The *circle* is specified as a higher inductive type `S^1` that comes equipped with
 ```text
 base : S^1
@@ -30,8 +28,6 @@ In other words, we obtain a *dependent action on generators* for every section o
 
 ## Definition 21.1.1
 
-<!-- rosetta-item: definition-21.1.1; latex-label: eq:dgen_circle -->
-
 Let `P` be a type family over the circle.
 The **dependent action on generators** is the map
 ```text
@@ -48,8 +44,6 @@ tr_P(loop,u)=u.
 More precisely, the induction principle of the circle is formulated as follows:
 
 ## Definition 21.1.2
-
-<!-- rosetta-item: definition-21.1.2 -->
 
 The **circle** is a type `S^1` that comes equipped with
 ```text
@@ -69,8 +63,6 @@ for the computation rules.
 <!-- rosetta-item-end: definition-21.1.2 -->
 
 ## Remark 21.1.3
-
-<!-- rosetta-item: remark-21.1.3; latex-label: rmk:circle-induction -->
 
 The type of identifications `(u,p)=(u',p')` in the type
 ```text

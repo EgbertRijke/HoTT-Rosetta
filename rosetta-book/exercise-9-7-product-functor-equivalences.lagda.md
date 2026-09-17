@@ -44,6 +44,4 @@ Show that for any two maps `f:A→ A'` and `g:B→ B'`, the following are equiva
 
 ## Solution
 
-<!-- rosetta-item: exercise-9-7 -->
-
 No formalization has been curated yet.

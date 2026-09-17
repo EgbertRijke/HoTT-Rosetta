@@ -14,6 +14,4 @@ is-prime(n)↔ (2≤ n)× Π(x:ℕ) (x| n)→ (x=1)+(x=n).
 
 ## Solution
 
-<!-- rosetta-item: exercise-8-5 -->
-
 No formalization has been curated yet.

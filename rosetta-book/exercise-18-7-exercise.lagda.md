@@ -62,6 +62,4 @@ commute, and show that `h` is a set truncation of `im(f)`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-18-7 -->
-
 No formalization has been curated yet.

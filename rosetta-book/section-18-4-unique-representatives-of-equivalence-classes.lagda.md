@@ -4,15 +4,11 @@
 module section-18-4-unique-representatives-of-equivalence-classes where
 ```
 
-<!-- rosetta-item: section-18.4 -->
-
 A common way to construct set quotients is by showing that the equivalence classes of an equivalence relation have a choice of unique representatives.
 In this section we show that if there is a choice of unique representatives, then the set quotient can be constructed as the type of those representatives.
 An important reason to define set quotients as the type of canonical representatives, if that is possible, is that the universe level of the set quotient can be kept as low as possible without needing to appeal to the replacement axiom.
 
 ## Definition 18.4.1
-
-<!-- rosetta-item: definition-18.4.1 -->
 
 Consider an equivalence relation `R` on a type `A`, and consider a family of types `C(x)` indexed by `x:A`.
 We say that `C` is a **choice of (unique) representatives** of the equivalence classes of `R` if `C` comes equipped with an element of type
@@ -24,8 +20,6 @@ is-choice-of-reps(C) ≔ Π(x:A) is-contr(Σ(y:A) C(y)× R(x,y)).
 
 ## Theorem 18.4.2
 
-<!-- rosetta-item: theorem-18.4.2; latex-label: thm:choice-of-representatives -->
-
 Consider an equivalence relation `R` on a type `A`, and let `C` be a choice of representatives of the equivalence classes of `R`, with `(h(x),c(x),r(x))` at the center of contraction of `Σ(y:A) C(y)× R(x,y)`.
 Then the map
 ```text
@@ -34,8 +28,6 @@ q:A→Σ(x:A) C(x)
 given by `q(x)≔(h(x),c(x))` is a map into a set such that `q(x)=q(y)` for every `x,y:A` such that `R(x,y)` holds, and moreover `q` satisfies the universal property of the set quotient of `A` by `R`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-18.4-proof -->
 
 *Proof.* First, we will use Theorem 12.3.4 to show that the type `Σ(y:A) C(y)` is a set, such that
 ```text
@@ -74,8 +66,6 @@ In particular, we see that `q(pr 1(x,c))=(x,c)`, i.e., that `pr 1` is a section 
 
 ## Example 18.4.3
 
-<!-- rosetta-item: example-18.4.3 -->
-
 In Proposition 7.2.4 we constructed the congruence relations `x≡ y mod k` on the natural numbers for every natural number `k`, and in Theorems 7.4.7 and 7.4.8 we showed that the map
 ```text
 x↦ [x]_{k+1}:ℕ→Fin{k+1}
@@ -111,8 +101,6 @@ This follows from Theorem 7.4.7, since we assumed `x≡ ymod k+1`.
 <!-- rosetta-item-end: example-18.4.3 -->
 
 ## Example 18.4.4
-
-<!-- rosetta-item: example-18.4.4 -->
 
 Consider the type of **(integer) fractions**
 ```text

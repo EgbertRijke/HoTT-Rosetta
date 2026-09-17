@@ -19,6 +19,4 @@ Show that if (i) holds, then (ii) and (iii) are equivalent, and show that if `B`
 
 ## Solution
 
-<!-- rosetta-item: exercise-8-8 -->
-
 No formalization has been curated yet.

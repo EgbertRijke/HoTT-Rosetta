@@ -31,6 +31,4 @@ commutes for every `x,y,z,w:S^1`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-22-8 -->
-
 No formalization has been curated yet.

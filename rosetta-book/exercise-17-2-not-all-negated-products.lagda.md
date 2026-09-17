@@ -15,6 +15,4 @@ is false.
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-2 -->
-
 No formalization has been curated yet.

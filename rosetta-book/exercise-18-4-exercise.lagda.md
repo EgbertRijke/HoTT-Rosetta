@@ -34,6 +34,4 @@ Eq-Rel_𝒰(A)≃ \Sigmadecomposition_{Set_𝒰}(A).
 
 ## Solution
 
-<!-- rosetta-item: exercise-18-4 -->
-
 No formalization has been curated yet.

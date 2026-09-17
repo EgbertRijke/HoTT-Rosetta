@@ -30,6 +30,4 @@ Show that
 
 ## Solution
 
-<!-- rosetta-item: exercise-14-1 -->
-
 No formalization has been curated yet.

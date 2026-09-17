@@ -17,6 +17,4 @@ Use the previous fact along with Proposition 20.6.7 to give a second proof of th
 
 ## Solution
 
-<!-- rosetta-item: exercise-20-4 -->
-
 No formalization has been curated yet.

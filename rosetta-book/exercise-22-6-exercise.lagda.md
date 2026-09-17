@@ -15,6 +15,4 @@ is-contr(A)+is-equiv(i).
 
 ## Solution
 
-<!-- rosetta-item: exercise-22-6 -->
-
 No formalization has been curated yet.

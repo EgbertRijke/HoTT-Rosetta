@@ -26,6 +26,4 @@ and conclude that `{has-inverse}(id[S^1])\not≃{is-equiv(id[S^1])}`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-22-5 -->
-
 No formalization has been curated yet.

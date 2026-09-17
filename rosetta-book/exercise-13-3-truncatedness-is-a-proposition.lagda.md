@@ -17,6 +17,4 @@ Show that for any type `A` and any `k≥-2`, the type `is-trunc_{k}(A)` is a pro
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-3 -->
-
 No formalization has been curated yet.

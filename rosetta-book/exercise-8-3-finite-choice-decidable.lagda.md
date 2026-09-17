@@ -23,8 +23,6 @@ For any family `P` of decidable types indexed by `Fin{k}`, construct a function
 
 ## Solution
 
-<!-- rosetta-item: exercise-8-3 -->
-
 <!-- rosetta-agda-block: exercise-8-3-decidable-family -->
 
 ```agda

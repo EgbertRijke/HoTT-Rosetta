@@ -15,6 +15,4 @@ For any `2`-element type `X`, construct an equivalence
 
 ## Solution
 
-<!-- rosetta-item: exercise-16-8 -->
-
 No formalization has been curated yet.

@@ -29,6 +29,4 @@ Note: the number `\numberofsurjectivemaps{m}{n}` is `n!Stirling(m, n)`, where `S
 
 ## Solution
 
-<!-- rosetta-item: exercise-16-11 -->
-
 No formalization has been curated yet.

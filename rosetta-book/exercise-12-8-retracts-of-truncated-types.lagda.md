@@ -32,8 +32,6 @@ Use Exercise 10.2 to show that if `A` is a retract of a `k`-type `B`, then `A` i
 
 ## Solution
 
-<!-- rosetta-item: exercise-12-8 -->
-
 ### Part (a): identity types of a retract
 
 <!-- rosetta-agda-block: exercise-12-8-retraction-on-identities -->

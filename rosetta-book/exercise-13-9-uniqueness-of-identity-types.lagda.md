@@ -24,6 +24,4 @@ h:Π(x:A) (a=x)→ B(x)
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-9 -->
-
 No formalization has been curated yet.

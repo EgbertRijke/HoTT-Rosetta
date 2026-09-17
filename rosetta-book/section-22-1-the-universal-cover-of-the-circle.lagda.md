@@ -4,8 +4,6 @@
 module section-22-1-the-universal-cover-of-the-circle where
 ```
 
-<!-- rosetta-item: section-22.1 -->
-
 The type of small families over `S^1` is just the function type `S^1→𝒰`.
 Therefore, we may use the universal property of the circle to construct type families over the circle.
 
@@ -19,8 +17,6 @@ Therefore, type families over the circle are equivalently described as pairs `(X
 The type `Σ(X:𝒰) X ≃ X` is also called the type of **descent data** for the circle.
 
 ## Definition 22.1.1
-
-<!-- rosetta-item: definition-22.1.1; latex-label: defn:circle_descent -->
 
 Consider a type `X` and an equivalence `e:X ≃ X`.
 We will construct a dependent type `D(X,e):S^1→𝒰` equipped with an equivalence `x↦ x_{D}:X ≃ D(X,e,base)` for which the square
@@ -50,8 +46,6 @@ We will write `d↦ d_{X}` for the inverse of this equivalence, so that the rela
 hold.
 
 ### Construction
-
-<!-- rosetta-item: subheading-22.1-construction -->
 
 An easy path induction argument reveals that
 ```text
@@ -109,8 +103,6 @@ Its inverse is the predecessor function defined in Exercise 4.1.
 
 ## Definition 22.1.2
 
-<!-- rosetta-item: definition-22.1.2; latex-label: defn:universal-cover-circle -->
-
 The **universal cover** of the circle is defined via Definition 22.1.1 to be the unique dependent type `E_(S^1)≔D(ℤ,succ-ℤ ):S^1→𝒰`. equipped with an equivalence `x↦ x_E:ℤ→E_(S^1)(base)` and a homotopy witnessing that the square
 <!-- rosetta-diagram: 9bc0bea6637a; review: pending -->
 
@@ -138,8 +130,6 @@ The segments of the helix connecting `k` to `k+1` in the total space of the heli
 
 ## Lemma 22.1.3
 
-<!-- rosetta-item: lemma-22.1.3 -->
-
 For any `k:ℤ`, there is an identification
 ```text
 segment-helix_k:(base,k_{E})=(base,succ-ℤ (k)_{E})
@@ -147,8 +137,6 @@ segment-helix_k:(base,k_{E})=(base,succ-ℤ (k)_{E})
 in the total space `Σ(t:S^1) E(t)`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-22.1-proof -->
 
 *Proof.* By Theorem 9.3.4 it suffices to show that
 ```text

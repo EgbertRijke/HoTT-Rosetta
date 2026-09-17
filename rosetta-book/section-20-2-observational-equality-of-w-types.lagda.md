@@ -4,8 +4,6 @@
 module section-20-2-observational-equality-of-w-types where
 ```
 
-<!-- rosetta-item: section-20.2 -->
-
 Each element `x:W(A,B)` has symbol `symbol(x):A` and a family of components `component(x):B(symbol(x))→W(A,B)`.
 Therefore, we have a map
 ```text
@@ -15,13 +13,9 @@ given by `η(x)≔(symbol(x),component(x))`.
 
 ## Proposition 20.2.1
 
-<!-- rosetta-item: proposition-20.2.1; latex-label: prp:algebra-W -->
-
 The map `η:W(A,B)→Σ(x:A) (B(x)→W(A,B))` is an equivalence.
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.2-proof -->
 
 *Proof.* We define
 ```text
@@ -46,8 +40,6 @@ We therefore define the following observational equality relation on `W(A,B)`.
 
 ## Definition 20.2.2
 
-<!-- rosetta-item: definition-20.2.2 -->
-
 Suppose `A` and each `B(x)` are in `𝒰`.
 We define a binary relation
 ```text
@@ -62,8 +54,6 @@ Eq_W(tree(x,α),tree(y,β)) ≔ Σ(p:x=y) Π(z:B(x)) α(z)=β(tr_B(p,z))
 
 ## Theorem 20.2.3
 
-<!-- rosetta-item: theorem-20.2.3; latex-label: thm:EqW -->
-
 The observational equality relation `Eq_W` on `W(A,B)` is reflexive, and the canonical map
 ```text
 (x=y)→ Eq_W(x,y)
@@ -71,8 +61,6 @@ The observational equality relation `Eq_W` on `W(A,B)` is reflexive, and the can
 is an equivalence for each `x,y:W(A,B)`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.2-proof-2 -->
 
 *Proof.* The element `refl-Eq_W(x):Eq_W(x,x)` is defined recursively as
 ```text
@@ -104,14 +92,10 @@ which we have by reflexivity. ◻
 
 ## Theorem 20.2.4
 
-<!-- rosetta-item: theorem-20.2.4 -->
-
 Consider a type family `B` over a type `A`, and let `k:𝕋` be a truncation level.
 If `A` is a `(k+1)`-type, then so is `W(A,B)`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.2-proof-3 -->
 
 *Proof.* Suppose that `A` is a `(k+1)`-type.
 In order to show that `W(A,B)` is a `(k+1)`-type, we have to show that its identity types are `k`-types.

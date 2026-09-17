@@ -54,6 +54,4 @@ Show that the type of normal subgroups of a group `G` is also equivalent to the 
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-17 -->
-
 No formalization has been curated yet.

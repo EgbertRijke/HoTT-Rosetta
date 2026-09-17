@@ -164,7 +164,6 @@ Note that by the computation rule of identity types we have a judgmental
 equality `refl ∙ q ≐ q`.
 Therefore we conclude that
 
-
 ```text
   (refl ∙ q) ∙ r ≐ q ∙ r.
 ```

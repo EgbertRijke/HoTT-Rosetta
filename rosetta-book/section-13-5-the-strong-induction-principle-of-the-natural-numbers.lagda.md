@@ -22,14 +22,10 @@ open import exercise-12-4-coproduct-truncation
 open import exercise-9-1-groupoid-operations-equivalences
 ```
 
-<!-- rosetta-item: section-13.5 -->
-
 In the final application of the function extensionality principle we prove the strong induction principle for the type of natural numbers.
 Function extensionality is used to derive the computation rules of the strong induction principle.
 
 ## Theorem 13.5.1
-
-<!-- rosetta-item: theorem-13.5.1; latex-label: thm:strong-ind-N -->
 
 Consider a type family `P` over `ℕ` equipped with
 ```text
@@ -81,8 +77,6 @@ as in the hypotheses of Theorem 13.5.1.
 
 ## Lemma 13.5.2
 
-<!-- rosetta-item: lemma-13.5.2 -->
-
 There is an element `p̃_0:P̃(0)` that satisfies the judgmental equality
 ```text
 p̃_0(0,p)≐ p_0
@@ -90,8 +84,6 @@ p̃_0(0,p)≐ p_0
 for any `p:0≤ 0`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-13.5-proof -->
 
 *Proof.* The fact that we have such a dependent function `p̃_0` follows immediately by induction on `m` and `p:m≤ 0`. ◻
 
@@ -110,8 +102,6 @@ eq-zero-strong-ind-ℕ P p0 t = refl
 <!-- rosetta-item-end: lemma-13.5.2 -->
 
 ## Lemma 13.5.3
-
-<!-- rosetta-item: lemma-13.5.3; latex-label: lem:succ-strong-ind-N -->
 
 There is a function
 ```text
@@ -132,8 +122,6 @@ p̃_S(n,H,n+1,p) = p_S(n,H)
     for every `p:n+1≤ n+1`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-13.5-proof-2 -->
 
 *Proof.* To define the function `p̃_S(n,H)`, note that there is a function
 ```text
@@ -302,8 +290,6 @@ We are now ready to finish the proof of Theorem 13.5.1.
 
 ### Proof
 
-<!-- rosetta-item: subheading-13.5-proof-3 -->
-
 *Proof of Theorem 13.5.1.* Using `p̃_0` and `p̃_S`, we obtain by induction on `n` a function
 ```text
 s̃:Π(n:ℕ) P̃(n)
@@ -346,7 +332,6 @@ where `refl-≤-ℕ(n):n≤ n` is the proof of reflexivity of `≤`.
   {l : Level} {P : ℕ → UU l} → ((n : ℕ) → □-≤-ℕ P n) → ((n : ℕ) → P n)
 ε-□-≤-ℕ f n = f n n (refl-leq-ℕ n)
 ```
-
 
 It remains to show that `strong-ind-ℕ` satisfies the computation rules of the strong induction principle.
 The identification that computes `strong-ind-ℕ` at `0` is easy to obtain, because we have the judgmental equalities

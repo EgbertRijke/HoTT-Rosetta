@@ -38,8 +38,6 @@ Conclude that `ℤ` has decidable equality.
 
 ## Solution
 
-<!-- rosetta-item: exercise-8-7 -->
-
 <!-- rosetta-agda-block: exercise-8-7-injective-map -->
 
 ```agda

@@ -15,6 +15,4 @@ Show that the type of normal subgroups of `G` in `𝒰` is equivalent to the typ
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-9 -->
-
 No formalization has been curated yet.

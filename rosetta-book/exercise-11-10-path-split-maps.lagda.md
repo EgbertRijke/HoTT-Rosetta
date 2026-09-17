@@ -24,6 +24,4 @@ Show that for any map `f:A→ B` the following are equivalent:
 
 ## Solution
 
-<!-- rosetta-item: exercise-11-10 -->
-
 No formalization has been curated yet.

@@ -51,8 +51,6 @@ x(y+z) = xy+xz (x+y)z = xz+yz.
 
 ## Solution
 
-<!-- rosetta-item: exercise-7-8 -->
-
 <!-- rosetta-agda-block: exercise-7-8-multiplication-finite -->
 
 ```agda

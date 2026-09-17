@@ -11,8 +11,6 @@ open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions
 ```
 
-<!-- rosetta-item: section-6.3 -->
-
 Using universes, we can define many relations on the natural numbers.
 We give here the example of *observational equality* of `ℕ`.
 The idea of observational equality is that, if we want to prove that `m` and `n` are observationally equal, we may do so by looking at `m` and `n`:
@@ -28,8 +26,6 @@ Indeed, it can be used to show that equality of natural numbers is *decidable*, 
 
 ## Definition 6.3.1
 
-<!-- rosetta-item: definition-6.3.1; latex-label: defn:obs_nat -->
-
 We define the **observational equality** of `ℕ` as binary relation `Eq-ℕ:ℕ→(ℕ→𝒰_0)` satisfying
 ```text
 Eq-ℕ(0,0) ≐ unit Eq-ℕ(succ-ℕ(n),0) ≐ empty
@@ -37,8 +33,6 @@ Eq-ℕ(0,succ-ℕ(n)) ≐ empty Eq-ℕ(succ-ℕ(n),succ-ℕ(m)) ≐ Eq-ℕ(n,m).
 ```
 
 ### Construction
-
-<!-- rosetta-item: subheading-6.3-construction -->
 
 We define `Eq-ℕ` by double induction on `ℕ`.
 By the first application of induction it suffices to provide
@@ -81,16 +75,12 @@ Proposition 6.3.3 enables us to do so.
 
 ## Lemma 6.3.2
 
-<!-- rosetta-item: lemma-6.3.2 -->
-
 Observational equality of `ℕ` is a reflexive relation, i.e., we have
 ```text
 refl-Eq-ℕ : Π(n:ℕ) Eq-ℕ(n,n).
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-6.3-proof -->
 
 *Proof.* The function `refl-Eq-ℕ` is defined by induction on `n`, taking
 ```text
@@ -110,16 +100,12 @@ refl-Eq-ℕ (succ-ℕ n) = refl-Eq-ℕ n
 
 ## Proposition 6.3.3
 
-<!-- rosetta-item: proposition-6.3.3; latex-label: prp:Eq-eq-N -->
-
 For any two natural numbers `m` and `n`, we have
 ```text
 (m=n)↔ Eq-ℕ(m,n).
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-6.3-proof-2 -->
 
 *Proof.* The function `(m=n)→Eq-ℕ(m,n)` is defined by the induction principle of identity types, using the reflexivity of `Eq-ℕ`.
 

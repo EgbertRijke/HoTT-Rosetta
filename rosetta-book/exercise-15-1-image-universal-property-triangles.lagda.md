@@ -49,6 +49,4 @@ Show that if `f` is an embedding, then `g` satisfies the universal property of `
 
 ## Solution
 
-<!-- rosetta-item: exercise-15-1 -->
-
 No formalization has been curated yet.

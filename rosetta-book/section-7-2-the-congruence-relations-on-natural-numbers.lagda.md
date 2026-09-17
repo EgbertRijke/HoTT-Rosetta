@@ -15,15 +15,11 @@ open import section-7-1-the-curry-howard-interpretation
 open import exercise-7-1-divisibility-three-for-two
 ```
 
-<!-- rosetta-item: section-7.2 -->
-
 Relations in the Curry-Howard interpretation of logic into type theory are also type valued.
 More specifically, a binary relation on a type `A` is a family of types `R(x,y)` indexed by `x,y:A`.
 Such relations are sometimes called *typal*.
 
 ## Definition 7.2.1
-
-<!-- rosetta-item: definition-7.2.1 -->
 
 Consider a type `A`.
 A **(typal) binary relation** on `A` is defined to be a family of types `R(x,y)` indexed by `x,y:A`.
@@ -115,8 +111,6 @@ dist-ℕ(x+1,0) ≔ x+1 dist-ℕ(x+1,y+1) ≔ dist-ℕ(x,y).
 
 ## Definition 7.2.2
 
-<!-- rosetta-item: definition-7.2.2 -->
-
 Consider three natural numbers `k,x,y:ℕ`.
 We say that `x` is **congruent to `y` modulo `k`** if it comes equipped with an element of type
 ```text
@@ -133,8 +127,6 @@ cong-ℕ k x y = div-ℕ k (dist-ℕ x y)
 <!-- rosetta-item-end: definition-7.2.2 -->
 
 ## Example 7.2.3
-
-<!-- rosetta-item: example-7.2.3 -->
 
 For example, `k≡ 0mod k`.
 To see this, we have to show that `k|dist-ℕ(k,0)`.
@@ -155,13 +147,9 @@ pr2 (cong-zero-ℕ k) =
 
 ## Proposition 7.2.4
 
-<!-- rosetta-item: proposition-7.2.4; latex-label: prp:congruence-eqrel -->
-
 For each `k:ℕ`, the congruence relation modulo `k` is an equivalence relation.
 
 ### Proof
-
-<!-- rosetta-item: subheading-7.2-proof -->
 
 *Proof.* Reflexivity follows from the fact that `dist-ℕ(x,x)=0`, and any number divides `0`.
 Symmetry follows from the fact that `dist-ℕ(x,y)=dist-ℕ(y,x)` for any two natural numbers `x` and `y`.

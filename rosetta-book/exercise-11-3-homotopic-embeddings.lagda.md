@@ -15,6 +15,4 @@ for any `f,g:A→ B`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-11-3 -->
-
 No formalization has been curated yet.

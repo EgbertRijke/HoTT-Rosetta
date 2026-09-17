@@ -4,15 +4,11 @@
 module section-17-6-the-binomial-types where
 ```
 
-<!-- rosetta-item: section-17.6 -->
-
 To wrap up this section on univalence, we will use the univalence axiom to construct for any two types `A` and `B` a type `binom(A, B)` that has properties similar to the binomial coefficients `binom(n, k)`.
 Indeed, we will show that if `A` is an `n`-element type and `B` is a `k`-element type, then `binom(A, B)` is an `binom(n, k)`-element type.
 The binomial types are defined using decidable embeddings.
 
 ## Definition 17.6.1
-
-<!-- rosetta-item: definition-17.6.1 -->
 
 A map `f:A→ B` is said to be **decidable** if it comes equipped with an element of type
 ```text
@@ -24,8 +20,6 @@ We will write `A↪ᵈ B` for the type of **decidable embeddings** from `A` to `
 
 ## Definition 17.6.2
 
-<!-- rosetta-item: definition-17.6.2 -->
-
 Consider a type `A` and a universe `𝒰`.
 We define the **connected component** of `𝒰` at `A` by
 ```text
@@ -36,16 +30,12 @@ We define the **connected component** of `𝒰` at `A` by
 
 ## Example 17.6.3
 
-<!-- rosetta-item: example-17.6.3 -->
-
 Note that type `𝒰_{Fin{n}}` is the type `BS_n` of all `n`-element types.
 Note also that if `A≃ B`, then `𝒰_A≃𝒰_B`.
 
 <!-- rosetta-item-end: example-17.6.3 -->
 
 ## Definition 17.6.4
-
-<!-- rosetta-item: definition-17.6.4; latex-label: defn:binomial-type -->
 
 Consider two types `A` and `B` and a universe `𝒰` containing both `A` and `B`.
 We define the **binomial type** `binom_𝒰(A, B)` by
@@ -57,16 +47,12 @@ binom_𝒰(A, B) ≔ Σ(X:𝒰_B) X↪ᵈ A.
 
 ## Remark 17.6.5
 
-<!-- rosetta-item: remark-17.6.5 -->
-
 We define the binomial types using decidable embeddings because the usual properties of binomial coefficients generalize most naturally under the extra assumption of decidability.
 In particular the binomial theorem for types, which is stated as Exercise 17.14 and generalized in Exercise 18.14, rely on the use of decidable embeddings.
 
 <!-- rosetta-item-end: remark-17.6.5 -->
 
 ## Proposition 17.6.6
-
-<!-- rosetta-item: proposition-17.6.6; latex-label: prp:equiv-binom-type -->
 
 Consider two types `A` and `B`, and a universe `𝒰` containing both `A` and `B`.
 Then we have an equivalence
@@ -77,8 +63,6 @@ from the binomial type `binom_𝒰(A, B)` to the type of decidable subtypes of `
 
 ### Proof
 
-<!-- rosetta-item: subheading-17.6-proof -->
-
 *Proof.* This equivalence follows from Theorem 17.4.2, by which we have
 ```text
 (Σ(X:𝒰) X↪ᵈ A)≃ (A→decidable-Prop_𝒰).
@@ -88,8 +72,6 @@ from the binomial type `binom_𝒰(A, B)` to the type of decidable subtypes of `
 <!-- rosetta-item-end: proposition-17.6.6 -->
 
 ## Remark 17.6.7
-
-<!-- rosetta-item: remark-17.6.7 -->
 
 Combining Corollary 17.2.4 and Proposition 17.6.6, we obtain an equivalence
 ```text
@@ -103,8 +85,6 @@ Therefore we will simply write `binom(A, B)` for `binom_𝒰(A, B)`, if the univ
 
 ## Lemma 17.6.8
 
-<!-- rosetta-item: lemma-17.6.8; latex-label: prp:binomtype-recursion -->
-
 For any two types `A` and `B`, we have equivalences
 ```text
 binom(empty, empty) ≃ unit binom(A+unit, empty) ≃ unit
@@ -112,8 +92,6 @@ binom(empty, B+unit) ≃ empty binom(A+unit, B+unit) ≃ binom(A, B)+binom(A, B+
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-17.6-proof-2 -->
 
 *Proof.* For the first two equivalences, we prove that `binom(X, empty)` is contractible for any type `X`.
 To see this, we first note that the type `𝒰_empty` is contractible.
@@ -151,13 +129,9 @@ binom(A+unit, B+unit) ≃ (Σ(P:A→decidable-Prop_𝒰) ‖B≃Σ(a:A) P(a)‖)
 
 ## Theorem 17.6.9
 
-<!-- rosetta-item: theorem-17.6.9 -->
-
 If `A` and `B` are finite types of cardinality `n` and `k`, respectively, then the type `binom(A, B)` is finite of cardinality `binom(n, k)`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-17.6-proof-3 -->
 
 *Proof.* The claim that the type `binom(A, B)` is finite of cardinality `binom(n, k)` is a proposition, so we may assume `e:Fin{n}≃ A` and `f:Fin{k}≃ B`.
 The claim now follows by induction on `n` and `k`, using Lemma 17.6.8. ◻
@@ -165,8 +139,6 @@ The claim now follows by induction on `n` and `k`, using Lemma 17.6.8. ◻
 <!-- rosetta-item-end: theorem-17.6.9 -->
 
 ## Remark 17.6.10
-
-<!-- rosetta-item: remark-17.6.10 -->
 
 It is perhaps remarkable that the type `Σ(X:𝒰_B) X↪ᵈ A` is a good generalisation of the binomial coefficients to types.
 Note that when `A` and `B` are finite types of cardinality `n` and `k`, respectively, then the type `B↪ᵈ A` has a factor `k!` too many elements.

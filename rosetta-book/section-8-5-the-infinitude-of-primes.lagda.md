@@ -35,8 +35,6 @@ open import section-8-3-the-well-ordering-principle-of-natural-numbers
 open import section-8-4-the-greatest-common-divisor
 ```
 
-<!-- rosetta-item: section-8.5 -->
-
 When the natural numbers are ordered by the divisibility relation, the number `1` is at the bottom.
 Directly above `1` are the prime numbers.
 Above the prime numbers are the multiples of two primes, then the multiples of three primes, and so on.
@@ -130,8 +128,6 @@ is-empty-left-factor-is-empty-product f b a = f (pair a b)
 
 ## Definition 8.5.1
 
-<!-- rosetta-item: definition-8.5.1 -->
-
  
 
 1. Consider two natural numbers `d` and `n`.
@@ -178,13 +174,9 @@ is-prime-ℕ n = (x : ℕ) → (is-proper-divisor-ℕ n x ↔ is-one-ℕ x)
 
 ## Proposition 8.5.2
 
-<!-- rosetta-item: proposition-8.5.2 -->
-
 For any `n:ℕ`, the type `is-prime(n)` is decidable.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.5-proof -->
 
 *Proof.* We will first show that `is-prime(n)↔is-prime'(n)`, where
 ```text
@@ -307,8 +299,6 @@ Therefore there is a least number `n<m` that is relatively prime with any number
 
 ## Definition 8.5.3
 
-<!-- rosetta-item: definition-8.5.3 -->
-
 For any two natural numbers `n` and `m`, we define the type
 ```text
 R(n,m)≔ (n<m)× Π(x:ℕ) (x≤ n)→ ((x| m)→ (x=1)).
@@ -333,13 +323,9 @@ le-in-sieve-of-eratosthenes-ℕ n a = pr1
 
 ## Lemma 8.5.4
 
-<!-- rosetta-item: lemma-8.5.4 -->
-
 The type `R(n,m)` is decidable for each `n,m:ℕ`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.5-proof-2 -->
 
 *Proof.* The type `n<m` and, and for each `x:ℕ` both types `x≤ n` and `(x| m)→ (x=1)` are decidable, so it follows via Corollary 8.2.5 that the product
 ```text
@@ -370,13 +356,9 @@ is-decidable-in-sieve-of-eratosthenes-ℕ n a =
 
 ## Lemma 8.5.5
 
-<!-- rosetta-item: lemma-8.5.5; latex-label: lem:succ-factorial-has-one-bounded-divisor -->
-
 There is an element of type `R(n,{n!}+1)` for each `n:ℕ`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.5-proof-3 -->
 
 *Proof.* The fact that `n<{n!}+1` follows from the fact that `n≤ n!`, which is shown by induction.
 We leave this to the reader, and focus on the second aspect of the claim: that every `x≤ n` that divides `{n!}+1` must be equal to `1`.
@@ -475,13 +457,9 @@ We finally show that there are infinitely many primes.
 
 ## Theorem 8.5.6
 
-<!-- rosetta-item: theorem-8.5.6 -->
-
 For each `n:ℕ`, there is a prime number `p:ℕ` such that `n< p`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-8.5-proof-4 -->
 
 *Proof.* It suffices to show that for each *nonzero* `n:ℕ`, there is a prime number `p:ℕ` such that `n≤ p`.
 Let `n` be a nonzero natural number.

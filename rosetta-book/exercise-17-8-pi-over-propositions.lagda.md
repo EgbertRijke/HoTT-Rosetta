@@ -16,6 +16,4 @@ given by `A↦Π(p:P) A(p)`, is an embedding.
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-8 -->
-
 No formalization has been curated yet.

@@ -22,8 +22,6 @@ open import section-11-4-embeddings
 open import exercise-9-1-groupoid-operations-equivalences
 ```
 
-<!-- rosetta-item: section-14.2 -->
-
 We have given a specification of the propositional truncation of a type `A`, and we have seen that this specification by a universal property determines the propositional truncation up to equivalence if it exists.
 However, the propositional truncation is not guaranteed to exist, so we will add new rules to the type theory that ensure that any type has a propositional truncation.
 We do this by presenting the propositional truncation of a type `A` as a higher inductive type.
@@ -40,8 +38,6 @@ The induction principle of the higher inductive type then tells us how to constr
 The rules for higher inductive types therefore come in four sets, just as the rules for ordinary inductive types in Chapter 4: the formation rule, the constructors, the induction principle, and the computation rules.
 
 ### The formation rules and the constructors
-
-<!-- rosetta-item: subheading-14.2-the-formation-rules-and-the-constructors -->
 
 The formation rule of the propositional truncation postulates that for every type `A` we can form the propositional truncation of `A`.
 The formation rule is therefore as follows:
@@ -95,7 +91,6 @@ postulate
 ║_║₋₁ = type-trunc-Prop
 ```
 
-
 The constructors of a (higher) inductive type tell what structure the type comes equipped with.
 In the case of a higher inductive type there may be point constructors and path constructors.
 The point constructors generate elements of the higher inductive type, and the path constructors generate identifications between those elements.
@@ -129,10 +124,7 @@ postulate
     {l : Level} {A : UU l} → all-elements-equal (║ A ║₋₁)
 ```
 
-
 ## Lemma 14.2.1
-
-<!-- rosetta-item: lemma-14.2.1 -->
 
 For any type `A`, the type `‖A‖` is a proposition.`□`
 
@@ -154,8 +146,6 @@ pr2 (trunc-Prop A) = is-prop-type-trunc-Prop
 <!-- rosetta-item-end: lemma-14.2.1 -->
 
 ### The induction principle and computation rules
-
-<!-- rosetta-item: subheading-14.2-the-induction-principle-and-computation-rules -->
 
 The induction principle for the propositional truncation tells us how to construct dependent functions
 ```text
@@ -185,8 +175,6 @@ tr_P(α(x,y),u)=v
     for any `u:Q(x)` and `v:Q(y)`.
 
 ## Definition 14.2.2
-
-<!-- rosetta-item: definition-14.2.2 -->
 
 The **induction principle** of the propositional truncation `‖A‖` of `A` asserts that for any family `Q` of types over `‖A‖`, if we have
 ```text
@@ -257,8 +245,6 @@ compute-ind-trunc-Prop' P f H = pr2 (induction-trunc-Prop P f H)
 <!-- rosetta-item-end: definition-14.2.2 -->
 
 ## Remark 14.2.3
-
-<!-- rosetta-item: remark-14.2.3 -->
 
 In fact, a family `Q` over `‖A‖` satisfies the second requirement in the induction principle of the propositional truncation if and only if `Q` is a family of propositions.
 To see this, simply note that transporting along `α(x,y)` is an embedding.
@@ -339,20 +325,14 @@ module _
 
 ### The universal property
 
-<!-- rosetta-item: subheading-14.2-the-universal-property -->
-
 We have now completed the description of the propositional truncation as a higher inductive type, so it is time to show that it meets the specification we gave for the propositional truncations.
 In other words, we have to show that the map `η:A→‖A‖` satisfies the universal property of the propositional truncation.
 
 ## Theorem 14.2.4
 
-<!-- rosetta-item: theorem-14.2.4 -->
-
 The map `η:A→‖A‖` satisfies the universal property of the propositional truncation.
 
 ### Proof
-
-<!-- rosetta-item: subheading-14.2-proof -->
 
 *Proof.* In order to prove that `η:A→‖A‖` satisfies the universal property of the propositional truncation of `A`, it suffices to construct a map
 ```text
@@ -432,8 +412,6 @@ One simple application of the universal property of the propositional truncation
 
 ## Proposition 14.2.5
 
-<!-- rosetta-item: proposition-14.2.5 -->
-
 There is a map
 ```text
 ‖_‖:(A→ B)→ (‖A‖→‖B‖)
@@ -445,8 +423,6 @@ for any two types `A` and `B`, such that
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-14.2-proof-2 -->
 
 *Proof.* For any `f:A→ B`, the map `‖f‖:‖A‖→‖B‖` is defined to be the unique extension
 <!-- rosetta-diagram: 5d4d1dc58188; review: pending -->

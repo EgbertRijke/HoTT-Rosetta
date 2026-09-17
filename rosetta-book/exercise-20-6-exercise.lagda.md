@@ -73,6 +73,4 @@ is contractible, for each `P_{A,B}`-algebra `(X,μ)`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-20-6 -->
-
 No formalization has been curated yet.

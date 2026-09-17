@@ -11,6 +11,4 @@ Show that for any univalent universe `𝒰` there is no type `U:𝒰` equipped w
 
 ## Solution
 
-<!-- rosetta-item: exercise-20-2 -->
-
 No formalization has been curated yet.

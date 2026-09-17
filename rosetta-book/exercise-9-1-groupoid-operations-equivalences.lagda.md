@@ -27,8 +27,6 @@ Give their inverses explicitly.
 
 ## Solution
 
-<!-- rosetta-item: exercise-9-1 -->
-
 <!-- rosetta-agda-block: exercise-9-1-inverse-concatenation -->
 
 ```agda

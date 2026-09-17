@@ -4,13 +4,9 @@
 module section-16-3-finite-types where
 ```
 
-<!-- rosetta-item: section-16.3 -->
-
 The type of all finite types is the subtype of the base universe `𝒰_0` consisting of all types `X` for which there exists an unspecified equivalence `Fin{k}≃ X` for some `k:ℕ`.
 
 ## Definition 16.3.1
-
-<!-- rosetta-item: definition-16.3.1; latex-label: defn:finite -->
 
 A type `X` is said to be **finite** if it comes equipped with an element of type
 ```text
@@ -30,8 +26,6 @@ BS_k≔ Σ(X:𝒰_0) ‖Fin{k}≃ X‖.
 
 ## Remark 16.3.2
 
-<!-- rosetta-item: remark-16.3.2 -->
-
 It follows directly from the definition of finiteness that any type `X` equipped with a counting is finite.
 In particular, any `Fin{k}` is finite.
 Furthermore, it follows that if `X` is equivalent to a finite type `Y`, then `X` is also finite.
@@ -50,8 +44,6 @@ In the following proposition we will show that each finite type can be assigned 
 
 ## Theorem 16.3.3
 
-<!-- rosetta-item: theorem-16.3.3 -->
-
 For any type `X`, consider the type `is-finite'(X)` defined by
 ```text
 is-finite'(X) ≔ Σ(k:ℕ) ‖Fin{k}≃ X‖.
@@ -64,8 +56,6 @@ If `X` is a finite type, then the unique number `k` such that `‖Fin{k}≃ X‖
 We write `|X|` for the cardinality of `X`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-16.3-proof -->
 
 *Proof.* We first prove the claim that the type `is-finite'(X)` is a proposition.
 In other words, we need to show that any two natural numbers `k` and `k'` for which there are respective elements of the types `‖Fin{k}≃ X‖` and `‖Fin{k'}≃ X‖`, can be identified.
@@ -97,16 +87,12 @@ given by `e↦ η(k',e)`. ◻
 
 ## Corollary 16.3.4
 
-<!-- rosetta-item: corollary-16.3.4 -->
-
 There is an equivalence
 ```text
 𝔽 ≃ Σ(k:ℕ) BS_k.
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-16.3-proof-2 -->
 
 *Proof.* This equivalence can be obtained by composing the equivalences
 ```text
@@ -122,8 +108,6 @@ Before we do so, we prove the **principle of finite choice**.
 
 ## Proposition 16.3.5
 
-<!-- rosetta-item: proposition-16.3.5; latex-label: prp:finite-choice -->
-
 Consider a type family `B` over a finite type `A`.
 Then there is a **finite choice** map
 ```text
@@ -131,8 +115,6 @@ Then there is a **finite choice** map
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-16.3-proof-3 -->
 
 *Proof.* Note that the type `‖Π(x:A) B(x)‖` is a proposition.
 Therefore we may assume that the type `A` comes equipped with a counting `e:Fin{k}≃ A`.
@@ -155,8 +137,6 @@ This fact together with the inductive hypothesis finishes the proof. ◻
 <!-- rosetta-item-end: proposition-16.3.5 -->
 
 ## Theorem 16.3.6
-
-<!-- rosetta-item: theorem-16.3.6; latex-label: item:coproduct-finite-types -->
 
  
 
@@ -189,8 +169,6 @@ Moreover, if (b) and (c) hold, then (a) holds if and only if `A` is a set and th
 Furthermore, if (b) and (c) hold and `B` has a section, then (a) holds.
 
 ### Proof
-
-<!-- rosetta-item: subheading-16.3-proof-4 -->
 
 *Proof.* To prove claim Theorem 16.3.6, first suppose that both `X` and `Y` are finite.
 Since the type `is-finite(X+Y)` is a proposition, we may assume that `X` and `Y` come equipped with countings.

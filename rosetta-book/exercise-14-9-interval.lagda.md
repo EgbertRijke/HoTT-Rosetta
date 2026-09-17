@@ -59,6 +59,4 @@ Show that `𝕀` is contractible.
 
 ## Solution
 
-<!-- rosetta-item: exercise-14-9 -->
-
 No formalization has been curated yet.

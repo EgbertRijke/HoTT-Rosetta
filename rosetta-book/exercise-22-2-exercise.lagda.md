@@ -29,6 +29,4 @@ Show that for every `t:S^1`, we have an equivalence
 
 ## Solution
 
-<!-- rosetta-item: exercise-22-2 -->
-
 No formalization has been curated yet.

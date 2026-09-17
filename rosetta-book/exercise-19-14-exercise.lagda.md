@@ -33,6 +33,4 @@ For readers familiar with the notion of `k`-connectedness: Conclude that every `
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-14 -->
-
 No formalization has been curated yet.

@@ -4,8 +4,6 @@
 module section-6-2-assuming-enough-universes where
 ```
 
-<!-- rosetta-item: section-6.2 -->
-
 Most of the time we will get by with assuming one universe `𝒰`, and indeed we recommend on a first reading of this text to simply assume that there is one universe `𝒰`.
 However, sometimes we might want to consider the universe `𝒰` itself to be a type in some universe.
 In such situations we cannot get by with a single universe, because the assumption that `𝒰` is a element of itself would lead to inconsistencies like the Russell’s paradox.
@@ -24,8 +22,6 @@ Even though the universe is not an element of itself, it is still convenient if 
 Therefore we will assume that there are sufficiently many universes:
 
 ## Postulate 6.2.1
-
-<!-- rosetta-item: postulate-6.2.1; latex-label: enough-universes -->
 
 We assume that there are **enough universes**, i.e., that for every finite list of types in context
 ```text
@@ -48,8 +44,6 @@ Using the assumption that for any finite list of types in context there is a uni
 
 ## Definition 6.2.2
 
-<!-- rosetta-item: definition-6.2.2 -->
-
 The **base universe** `𝒰_0` is the universe that we obtain using Postulate 6.2.1 with the empty list of types in context.
 
 <!-- rosetta-item-end: definition-6.2.2 -->
@@ -57,8 +51,6 @@ The **base universe** `𝒰_0` is the universe that we obtain using Postulate 6.
 In other words, the base universe is a universe that is closed under all the ways of forming types, but it isn’t specified to contain any further types.
 
 ## Definition 6.2.3
-
-<!-- rosetta-item: definition-6.2.3; latex-label: defn:successor-universe -->
 
 The **successor universe** of a universe `𝒰` is the universe `𝒰^+` obtained using Postulate 6.2.1 with the finite list
 ```text
@@ -69,8 +61,6 @@ X:𝒰 ⊢ T(X) type.
 <!-- rosetta-item-end: definition-6.2.3 -->
 
 ## Remark 6.2.4
-
-<!-- rosetta-item: remark-6.2.4; latex-label: rmk:successor-universe -->
 
 The successor universe `𝒰^+` of `𝒰` therefore contains the type `𝒰` as well as every type in `𝒰`, in the following sense
 ```text
@@ -93,8 +83,6 @@ However, such towers of universes need not be exhaustive in the sense that it mi
 
 ## Definition 6.2.5
 
-<!-- rosetta-item: definition-6.2.5; latex-label: defn:join-universe -->
-
 The **join** of two universes `𝒰` and `𝒱` is the universe `𝒰⊔𝒱` that we obtain using Postulate 6.2.1 with the two types
 ```text
 X:𝒰 ⊢ T_{𝒰}(X) type
@@ -104,8 +92,6 @@ Y:𝒱 ⊢ T_{𝒱}(Y) type.
 <!-- rosetta-item-end: definition-6.2.5 -->
 
 ## Remark 6.2.6
-
-<!-- rosetta-item: remark-6.2.6; latex-label: rmk:join-universe -->
 
 Since the join `𝒰⊔𝒱` contains all the types in `𝒰` and `𝒱`, there are maps
 ```text

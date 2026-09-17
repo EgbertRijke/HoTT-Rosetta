@@ -60,8 +60,6 @@ Show that `x+dist-ℕ(x,y)=y` for any `x≤ y`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-6-5 -->
-
 <!-- rosetta-agda-block: exercise-6-5-distance-natural-numbers-block-1 -->
 
 ```agda

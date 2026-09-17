@@ -29,6 +29,4 @@ Show that the type `A≃ B` is a `k`-type if both `A` and `B` are `k`-types.
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-4 -->
-
 No formalization has been curated yet.

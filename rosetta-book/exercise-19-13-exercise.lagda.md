@@ -19,6 +19,4 @@ Show that the number of connected components in the type of all groups of order 
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-13 -->
-
 No formalization has been curated yet.

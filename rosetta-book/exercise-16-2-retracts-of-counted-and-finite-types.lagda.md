@@ -13,6 +13,4 @@ Conclude that `is-finite(B)→is-finite(A)`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-16-2 -->
-
 No formalization has been curated yet.

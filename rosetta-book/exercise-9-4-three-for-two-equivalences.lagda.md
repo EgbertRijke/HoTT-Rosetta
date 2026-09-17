@@ -87,8 +87,6 @@ Conclude that any section and any retraction of an equivalence is again an equiv
 
 ## Solution
 
-<!-- rosetta-item: exercise-9-4 -->
-
 <!-- rosetta-agda-block: exercise-9-4-section-comp -->
 
 ```agda

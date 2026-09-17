@@ -28,6 +28,4 @@ Conclude that the type `Π(X:BS_2) X≃ X` is also equivalent to `Fin{2}`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-17-12 -->
-
 No formalization has been curated yet.

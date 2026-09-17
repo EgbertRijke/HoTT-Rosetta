@@ -31,8 +31,6 @@ Construct an equivalence
 
 ## Solution
 
-<!-- rosetta-item: exercise-9-5 -->
-
 ### Part (b): swapping dependent families
 
 <!-- rosetta-agda-block: exercise-9-5-right-swap -->

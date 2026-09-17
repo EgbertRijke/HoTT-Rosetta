@@ -19,6 +19,4 @@ for every `x,y:S^1`, where `ē≔inv(e)` is the complex conjugation of `e` on `
 
 ## Solution
 
-<!-- rosetta-item: exercise-21-7 -->
-
 No formalization has been curated yet.

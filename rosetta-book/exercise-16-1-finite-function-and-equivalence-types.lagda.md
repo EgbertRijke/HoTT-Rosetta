@@ -19,6 +19,4 @@ Conclude that if `A` is finite, then `A≃ A` is finite.
 
 ## Solution
 
-<!-- rosetta-item: exercise-16-1 -->
-
 No formalization has been curated yet.

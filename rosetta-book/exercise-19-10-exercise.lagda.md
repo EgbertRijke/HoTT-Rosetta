@@ -35,6 +35,4 @@ Give an informal explanation of this fact in terms fixed points of the concrete 
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-10 -->
-
 No formalization has been curated yet.

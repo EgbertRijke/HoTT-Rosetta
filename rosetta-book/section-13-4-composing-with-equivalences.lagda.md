@@ -18,13 +18,9 @@ open import section-10-4-equivalences-are-contractible-maps
 open import section-13-1-equivalent-forms-of-function-extensionality
 ```
 
-<!-- rosetta-item: section-13.4 -->
-
 We show in the following theorem that a map `f:A→ B` is an equivalence if and only if precomposing by `f` is an equivalence.
 
 ## Theorem 13.4.1
-
-<!-- rosetta-item: theorem-13.4.1; latex-label: ex:equiv_precomp -->
 
 For any map `f:A→ B`, the following are equivalent:
 
@@ -43,8 +39,6 @@ For any map `f:A→ B`, the following are equivalent:
     given by `g↦ g∘ f` is an equivalence.
 
 ### Proof
-
-<!-- rosetta-item: subheading-13.4-proof -->
 
 *Proof.* To show that (i) implies (ii), we first recall from Lemma 10.4.5 that any equivalence is also coherently invertible.
 Therefore `f` comes equipped with

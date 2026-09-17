@@ -22,6 +22,4 @@ Hint: Take some inspiration from Lemma 10.4.5, where one of the homotopies of th
 
 ## Solution
 
-<!-- rosetta-item: exercise-21-8 -->
-
 No formalization has been curated yet.

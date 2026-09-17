@@ -17,6 +17,4 @@ In other words, the group `ℤ` satisfies the universal property of the **free g
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-5 -->
-
 No formalization has been curated yet.

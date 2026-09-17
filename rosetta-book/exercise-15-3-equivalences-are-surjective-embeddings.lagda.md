@@ -16,6 +16,4 @@ Show that the following are equivalent:
 
 ## Solution
 
-<!-- rosetta-item: exercise-15-3 -->
-
 No formalization has been curated yet.

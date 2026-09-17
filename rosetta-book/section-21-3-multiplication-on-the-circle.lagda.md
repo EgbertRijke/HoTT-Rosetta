@@ -4,8 +4,6 @@
 module section-21-3-multiplication-on-the-circle where
 ```
 
-<!-- rosetta-item: section-21.3 -->
-
 One way the circle arises classically, is as the set of complex numbers at distance `1` from the origin.
 It is an elementary fact that `|xy|=|x||y|` for any two complex numbers `x,y∈ℂ`, so it follows that when we multiply two complex numbers that both lie on the unit circle, then the result lies again on the unit circle.
 This operation puts a group structure on the classical circle.
@@ -14,8 +12,6 @@ This suggests that it should also be possible to construct a multiplication on t
 More precisely, we will equip `S^1` with an *H-space structure*, and in the exercises you will be asked to show that this multiplicative structure is associative, commutative, and has inverses.
 
 ## Definition 21.3.1
-
-<!-- rosetta-item: definition-21.3.1 -->
 
 Consider a pointed type `A` with a base point `pt`.
 An **H-space structure** on `(A,pt)` consists of a binary operation `μ:A→ (A→ A)` satisfying the following **coherent unit laws**:
@@ -29,8 +25,6 @@ An **H-space** is a pointed type equipped with an H-space structure.
 <!-- rosetta-item-end: definition-21.3.1 -->
 
 ## Remark 21.3.2
-
-<!-- rosetta-item: remark-21.3.2; latex-label: rmk:hspace -->
 
 The data of an H-space structure is equivalently described by a family of base point preserving maps
 ```text
@@ -50,8 +44,6 @@ We will be using this in our construction of the H-space structure on the circle
 
 ## Theorem 21.3.3
 
-<!-- rosetta-item: theorem-21.3.3; latex-label: defn:hspace-circle -->
-
 There is an H-space structure
 ```text
 mul_(S^1) : S^1→(S^1→S^1)
@@ -62,8 +54,6 @@ coh-unit_{S^1} : left-unit_{S^1}(base)=right-unit_{S^1}(base).
 on the circle.
 
 ### Proof
-
-<!-- rosetta-item: subheading-21.3-proof -->
 
 *Construction.* By Remark 21.3.2 it suffices to construct a dependent function
 ```text
@@ -140,8 +130,6 @@ Now we apply this function to `refl` to obtain the desired identification
 <!-- rosetta-item-end: theorem-21.3.3 -->
 
 ## Remark 21.3.4
-
-<!-- rosetta-item: remark-21.3.4 -->
 
 For some of the exercises below it may be useful to know that the binary operation `mul_(S^1)` is the unique map `S^1→(S^1→S^1)` equipped with an identification
 ```text

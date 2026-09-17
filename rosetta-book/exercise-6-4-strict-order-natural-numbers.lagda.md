@@ -55,8 +55,6 @@ for any `m,n :ℕ`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-6-4 -->
-
 <!-- rosetta-agda-block: exercise-6-4-strict-order-natural-numbers-block-1 -->
 
 ```agda

@@ -21,8 +21,6 @@ open import exercise-10-3-contractible-equivalences
 open import exercise-10-6-dependent-pair-contractible-base
 ```
 
-<!-- rosetta-item: section-13.2 -->
-
 Recall from Section 11.6 that the *structure identity principle* is a way to obtain an identity system on a `Σ`-type.
 Identity systems were defined in Definition 11.2.1.
 In this section we will describe how to obtain identity systems on a `Π`-type.
@@ -30,8 +28,6 @@ We will first show that `Π`-types distribute over `Σ`-types.
 This theorem is sometimes called the *type theoretic principle of choice* because it can be seen as the Curry-Howard interpretation of the axiom of choice.
 
 ## Theorem 13.2.1
-
-<!-- rosetta-item: theorem-13.2.1; latex-label: thm:choice -->
 
 Consider a family of types `C(x,y)` indexed by `x:A` and `y:B(x)`.
 Then the map
@@ -45,8 +41,6 @@ choice(h):=(λ x. pr 1(h(x)),λ x. pr 2(h(x))).
 is an equivalence.
 
 ### Proof
-
-<!-- rosetta-item: subheading-13.2-proof -->
 
 *Proof.* We define the map
 ```text
@@ -169,8 +163,6 @@ The most straightforward consequence is the following.
 
 ## Corollary 13.2.2
 
-<!-- rosetta-item: corollary-13.2.2 -->
-
 For any two types `A` and `B`, and any type family `C` over `B`, we have an equivalence
 ```text
 (A→Σ(y:B) C(y))≃(Σ(f:A→ B) Π(x:A) C(f(x))).
@@ -220,8 +212,6 @@ In the following corollary we use the distributivity of `Π`-types over `Σ`-typ
 
 ## Corollary 13.2.3
 
-<!-- rosetta-item: corollary-13.2.3; latex-label: ex:pi_sec -->
-
 Consider a type family `B` over `A`, and consider the projection map
 ```text
 pr 1:(Σ(x:A) B(x)) → A.
@@ -232,8 +222,6 @@ sec(pr 1)≃Π(x:A) B(x).
 ```
 
 ### Proof
-
-<!-- rosetta-item: subheading-13.2-proof-2 -->
 
 *Proof.* Theorem 13.2.1 gives the first equivalence in the following calculation:
 ```text
@@ -280,8 +268,6 @@ In the final application of distributivity of `Π`-types over `Σ`-types we obta
 
 ## Theorem 13.2.4
 
-<!-- rosetta-item: theorem-13.2.4; latex-label: cor:Eq-Pi -->
-
 Consider a family `B` of types over `A`, and for each `b:B(a)` consider an identity system `E(b)` at `b`.
 Furthermore, consider a dependent function `f:Π(x:A) B(x)`.
 Then the family of types
@@ -291,8 +277,6 @@ Then the family of types
 indexed by `g:Π(x:A) B(x)` is an identity system at `f`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-13.2-proof-3 -->
 
 *Proof.* By Theorem 11.2.2 it suffices to show that the type
 ```text

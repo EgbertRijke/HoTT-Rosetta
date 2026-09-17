@@ -62,8 +62,6 @@ Show that `k≤ min(m,n)` holds if and only if both `k≤ m` and `k≤ n` hold, 
 
 ## Solution
 
-<!-- rosetta-item: exercise-6-3 -->
-
 <!-- rosetta-agda-block: exercise-6-3-order-natural-numbers-block-1 -->
 
 ```agda

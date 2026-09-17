@@ -31,8 +31,6 @@ open import section-14-3-logic-in-type-theory
 open import exercise-6-3-order-natural-numbers
 ```
 
-<!-- rosetta-item: section-14.4 -->
-
 The universal property of the propositional truncation only applies when we want to define a map into a proposition.
 However, in some situations we might want to map the propositional truncation into a type that is not a proposition.
 Here we will see what we might do in such a case.
@@ -54,10 +52,7 @@ module _
     pr1 ∘ map-universal-property-trunc-Prop (Σ X P , is-prop-total-P) f
 ```
 
-
 ## Example 14.4.1
-
-<!-- rosetta-item: example-14.4.1; latex-label: eg:global-choice-decidable-subtype-N -->
 
 Consider a **decidable subtype** `P` of the natural numbers, i.e., a subtype `P:ℕ→Prop_𝒰` such that each `P(n)` is decidable.
 We claim that there is a function
@@ -135,7 +130,6 @@ module _
   pr2 minimal-element-ℕ-Prop = is-prop-minimal-element-ℕ
 ```
 
-
 By the observation that the type in (\*) is a proposition, we may define a map
 ```text
 ‖Σ(x:ℕ) P(x)‖→ Σ(x:ℕ) P(x)×is-lower-bound_P(x)
@@ -168,7 +162,6 @@ abstract
   ε-operator-decidable-subtype-ℕ P d t =
     tot (λ n → pr1) (minimal-element-inhabited-decidable-subtype-ℕ P d t)
 ```
-
 
 As a corollary of this observation, we observe that there is also a map
 ```text
@@ -210,8 +203,6 @@ for any decidable subtype `P` over `Fin{k}`.
 
 ## Remark 14.4.2
 
-<!-- rosetta-item: remark-14.4.2; latex-label: rmk:global-choice -->
-
 The function of type
 ```text
 ‖Σ(x:ℕ) P(x)‖→Σ(x:ℕ) P(x)
@@ -237,8 +228,6 @@ Propositional truncations can therefore also be characterized by the universal p
 The idea is that a map `f:A→ B` into a set `B` extends to a map `‖A‖→ B` if it satisfies `f(x)=f(y)` for all `x,y:A`.
 
 ## Definition 14.4.3
-
-<!-- rosetta-item: definition-14.4.3; latex-label: defn:weakly-constant -->
 
 A map `f:A→ B` is said to be **weakly constant** if it comes equipped with an element of type
 ```text
@@ -274,8 +263,6 @@ module _
 
 ## Remark 14.4.4
 
-<!-- rosetta-item: remark-14.4.4 -->
-
 A constant map `A→ B` is a map of the form `const_b`.
 A map `f:A→ B` is therefore constant if comes equipped with an element `b:B` and a homotopy `f~ const_b`.
 
@@ -300,7 +287,6 @@ module _
     {f : A → B} → is-constant-map f → is-weakly-constant-map f
   is-weakly-constant-map-is-constant-map (b , H) x y = H x ∙ inv (H y)
 ```
-
 
 One of the differences between constant maps and weakly constant maps manifests itself as follows: A type `A` is contractible if and only if the identity map on `A` is constant, while a type `A` is a proposition if and only if the identity map on `A` is weakly constant.
 
@@ -337,8 +323,6 @@ module _
 
 ## Lemma 14.4.5
 
-<!-- rosetta-item: lemma-14.4.5 -->
-
 Consider a commuting triangle
 <!-- rosetta-diagram: e3422d10b67e; review: pending -->
 
@@ -358,8 +342,6 @@ where `B` is an arbitrary type.
 Then the map `f` is weakly constant.
 
 ### Proof
-
-<!-- rosetta-item: subheading-14.4-proof -->
 
 *Proof.* Since `f` is assumed to be homotopic to `g∘ η`, it suffices to show that `g∘η` is weakly constant.
 For any `x,y:A`, we have the identification `α(x,y):η(x)=η(y)` in `‖A‖`.
@@ -402,8 +384,6 @@ We therefore conclude that, in order to define a map `‖A‖→ B` into a set `
 
 ## Theorem 14.4.6
 
-<!-- rosetta-item: theorem-14.4.6; latex-label: ex:weakly-constant-map -->
-
 Let `A` be a type and let `B` be a set.
 Then the map
 ```text
@@ -423,10 +403,7 @@ pr2 (precomp-universal-property-set-quotient-trunc-Prop B is-set-B g) =
   is-weakly-constant-map-precomp-unit-trunc-Prop g
 ```
 
-
 ### Proof
-
-<!-- rosetta-item: subheading-14.4-proof-2 -->
 
 *Proof.* Consider a map `f:A→ B` equipped with `H:Π(x,y:A) f(x)=f(y)`.
 We first show that `f` extends in at most one way to a map `‖A‖→ B`.
@@ -451,7 +428,6 @@ module _
       ( λ z → (g z ＝ h z , is-set-B (g z) (h z)))
       ( inv-htpy H ∙h K)
 ```
-
 
 Since we’ve already proven uniqueness, it remains to construct an extension of the map `f`.
 We first claim that the type

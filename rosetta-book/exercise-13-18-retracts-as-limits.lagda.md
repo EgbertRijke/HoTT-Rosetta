@@ -20,6 +20,4 @@ A≃Σ(x:ℕ→ X) Π(n:ℕ) f(x_{n+1})=x_n.
 
 ## Solution
 
-<!-- rosetta-item: exercise-13-18 -->
-
 No formalization has been curated yet.

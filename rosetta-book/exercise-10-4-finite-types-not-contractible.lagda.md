@@ -11,6 +11,4 @@ Show that `Fin{k}` is not contractible for all `k≠ 1`.
 
 ## Solution
 
-<!-- rosetta-item: exercise-10-4 -->
-
 No formalization has been curated yet.

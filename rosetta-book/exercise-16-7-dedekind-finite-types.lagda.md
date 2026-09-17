@@ -20,6 +20,4 @@ Show that any surjective map `f:X→ X` is an equivalence.
 
 ## Solution
 
-<!-- rosetta-item: exercise-16-7 -->
-
 No formalization has been curated yet.

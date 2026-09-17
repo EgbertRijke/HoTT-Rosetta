@@ -55,6 +55,4 @@ Arrows:
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-15 -->
-
 No formalization has been curated yet.

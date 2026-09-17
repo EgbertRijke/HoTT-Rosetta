@@ -16,6 +16,4 @@ is an injective group homomorphism.
 
 ## Solution
 
-<!-- rosetta-item: exercise-19-3 -->
-
 No formalization has been curated yet.

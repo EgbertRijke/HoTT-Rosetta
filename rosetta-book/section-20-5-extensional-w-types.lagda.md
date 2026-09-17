@@ -4,8 +4,6 @@
 module section-20-5-extensional-w-types where
 ```
 
-<!-- rosetta-item: section-20.5 -->
-
 It is tempting to think that an element `w:W(A,B)` is completely determined by the elements `z:W(A,B)` equipped with a proof `z∈ w`.
 However, this may not be the case.
 For instance, a W-type `W(A,B)` might have *two* unary constructors, e.g., when `A≔ unit+bool` and the family `B` over `A` is given by
@@ -28,8 +26,6 @@ Such W-types are called extensional.
 
 ## Definition 20.5.1
 
-<!-- rosetta-item: definition-20.5.1 -->
-
 We say that a W-type `W(A,B)` is **extensional** if the canonical map
 ```text
 (x=y)→Π(z:W(A,B)) (z∈ x)≃ (z∈ y)
@@ -41,8 +37,6 @@ is an equivalence.
 In the following theorem we give a precise characterization of the inhabited extensional W-types.
 
 ## Theorem 20.5.2
-
-<!-- rosetta-item: theorem-20.5.2; latex-label: thm:extensional-W -->
 
 Consider an inhabited W-type `W(A,B)`.
 Then the following are equivalent:
@@ -59,8 +53,6 @@ tr_B:(x=y)→ (B(x)≃ B(y))
 
 ## Remark 20.5.3
 
-<!-- rosetta-item: remark-20.5.3 -->
-
 Note that if the W-type `W(A,B)` is empty, then it is vacuously extensional.
 However, we saw in Proposition 20.1.5 that any family `B` of inhabited types over `A` gives rise to an empty W-type `W(A,B)`, so there is no hope of showing that `B` is a univalent family if `W(A,B)` is empty.
 
@@ -68,8 +60,6 @@ We also note that a type family `B` over `A` is univalent if and only if the map
 In other words, the claim in Theorem 20.5.2 is that an inhabited W-type `W(A,B)` is extensional if and only if `B` is the canonical type family over a subuniverse `A` of `𝒰`.
 
 ### Proof
-
-<!-- rosetta-item: subheading-20.5-proof -->
 
 *Proof.* We will first show that (ii) is equivalent to the following property:
 
@@ -115,8 +105,6 @@ is contractible, which is the case if and only if the map `(x=y)→(B(x)≃ B(y)
 <!-- rosetta-item-end: remark-20.5.3 -->
 
 ## Example 20.5.4
-
-<!-- rosetta-item: example-20.5.4 -->
 
 The type `N` of Example 20.1.6, the type of binary rooted trees Example 20.1.8, and the type of finitely branching rooted trees Example 20.1.9 are all examples extensional W-types.
 On the other hand, the type of oriented binary rooted trees of Example 20.1.7 and the type of oriented finitely branching rooted trees of Example 20.1.9 are not extensional.

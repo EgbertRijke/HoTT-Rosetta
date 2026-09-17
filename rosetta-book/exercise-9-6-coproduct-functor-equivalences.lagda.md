@@ -35,6 +35,4 @@ Show that if both `f` and `g` are equivalences, then so is `f+g`. (The converse 
 
 ## Solution
 
-<!-- rosetta-item: exercise-9-6 -->
-
 No formalization has been curated yet.

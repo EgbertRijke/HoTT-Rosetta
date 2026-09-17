@@ -15,6 +15,4 @@ Fin{kl} ≃ Fin{k}×Fin{l}.
 
 ## Solution
 
-<!-- rosetta-item: exercise-9-8 -->
-
 No formalization has been curated yet.
