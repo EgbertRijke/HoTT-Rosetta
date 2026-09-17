@@ -29,52 +29,48 @@ Consider a commuting triangle
 
 with `H : f ~ g ∘ h`.
 
+### Exercise 9.4(a)
+
 Suppose that the map `h` has a section `s:B → A`.
 Show that the triangle
 
-_Triangle-shaped diagram (automatic draft)._
-
 ```text
- [B]                 [A]
-
-           [X]
-
-Arrows:
-- B --s--> A
-- B --g--> X
-- A --f--> X
+       s
+  B ------> A
+   \       /
+  g \     / f
+     \   /
+      ∨ ∨
+       X
 ```
 
 commutes, and that `f` has a section if and only if `g` has a section.
 
+### Exercise 9.4(b)
+
 Suppose that the map `g` has a retraction `r:X→ B`.
 Show that the triangle
 
-_Triangle-shaped diagram (automatic draft)._
-
 ```text
- [A]                 [X]
-
-           [B]
-
-Arrows:
-- A --f--> X
-- A --h--> B
-- X --r--> B
+       f
+  A ------> X
+   \       /
+  h \     / r
+     \   /
+      ∨ ∨
+       B
 ```
 
 commutes, and that `f` has a retraction if and only if `h` has a retraction.
 
-(The **3-for-2 property** for equivalences.) Show that if any two of the functions
+### Exercise 9.4(c) The 3-for-2 property for equivalences.
 
-```text
-f, g, h
-```
-
-are equivalences, then so is the third.
+Show that if any two of the functions `f`, `g`, and `h` are equivalences, then so is the third.
 Conclude that any section and any retraction of an equivalence is again an equivalence.
 
-## Solution
+## Solutions
+
+### Exercise 9.4(a)
 
 ```agda
 module _
@@ -94,9 +90,7 @@ module _
   section-comp : section (g ∘ h)
   pr1 section-comp = map-section-comp
   pr2 section-comp = is-section-map-section-comp
-```
 
-```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H' : g ∘ h ~ f) (s : section f)
@@ -115,9 +109,7 @@ module _
     map-section-right-map-triangle'
   pr2 section-right-map-triangle' =
     is-section-map-section-right-map-triangle'
-```
 
-```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h) (s : section f)
@@ -135,9 +127,7 @@ module _
   section-right-map-triangle : section g
   section-right-map-triangle =
     section-right-map-triangle' f g h (inv-htpy H) s
-```
 
-```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h) (t : section h)
@@ -157,6 +147,8 @@ module _
   pr2 (section-left-map-triangle s) = is-section-map-section-left-map-triangle s
 ```
 
+### Exercise 9.4(b)
+
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
@@ -174,9 +166,7 @@ module _
   retraction-comp : retraction (g ∘ h)
   pr1 retraction-comp = map-retraction-comp
   pr2 retraction-comp = is-retraction-map-retraction-comp
-```
 
-```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : g ∘ h ~ f)
@@ -206,9 +196,7 @@ module _
   retraction-top-map-triangle : retraction h
   retraction-top-map-triangle =
     retraction-top-map-triangle' f g h (inv-htpy H) r
-```
 
-```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
@@ -230,6 +218,8 @@ module _
   pr2 retraction-left-map-triangle =
     is-retraction-map-retraction-left-map-triangle
 ```
+
+### Exercise 9.4(c)
 
 ```agda
 module _
@@ -325,4 +315,46 @@ module _
     is-equiv g → is-equiv (g ∘ h) → is-equiv h
   is-equiv-right-factor g h is-equiv-g is-equiv-gh =
     is-equiv-top-map-triangle (g ∘ h) g h refl-htpy is-equiv-g is-equiv-gh
+```
+
+## Supplementary definitions
+
+### If `g ∘ h` has a section then `g` has a section
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (g : B → X) (h : A → B) (s : section (g ∘ h))
+  where
+
+  map-section-left-factor : X → B
+  map-section-left-factor = h ∘ map-section (g ∘ h) s
+
+  is-section-map-section-left-factor : is-section g map-section-left-factor
+  is-section-map-section-left-factor = pr2 s
+
+  section-left-factor : section g
+  pr1 section-left-factor = map-section-left-factor
+  pr2 section-left-factor = is-section-map-section-left-factor
+```
+
+### If `g ∘ f` has a retraction then `f` has a retraction
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
+  (g : B → X) (h : A → B) (r : retraction (g ∘ h))
+  where
+
+  map-retraction-right-factor : B → A
+  map-retraction-right-factor = map-retraction (g ∘ h) r ∘ g
+
+  is-retraction-map-retraction-right-factor :
+    is-retraction h map-retraction-right-factor
+  is-retraction-map-retraction-right-factor =
+    is-retraction-map-retraction (g ∘ h) r
+
+  retraction-right-factor : retraction h
+  pr1 retraction-right-factor = map-retraction-right-factor
+  pr2 retraction-right-factor = is-retraction-map-retraction-right-factor
 ```
