@@ -7,7 +7,7 @@ open import universe-levels
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-5-3-the-action-on-identifications-of-functions
-open import exercise-4-3-negation
+open import exercise-4-3-double-negation-logic
 open import section-12-1-propositions
 ```
 
@@ -43,7 +43,7 @@ Conclude that `ℤ` is a set.
 
 ```agda
 module _
-  {l1 l2 : Level} {P : Type l1} {Q : Type l2}
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2}
   where
 
   abstract

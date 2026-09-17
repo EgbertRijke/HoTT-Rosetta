@@ -127,7 +127,7 @@ In particular we obtain that `id[B]=f∘ h`, showing that `h` is a section of `f
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : B → Type l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3)
   where
 
   precomp-Π : ((b : B) → C b) → ((a : A) → C (f a))
@@ -138,7 +138,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : Type l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU l3)
   where
 
   precomp : (B → C) → (A → C)
@@ -149,30 +149,30 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  dependent-universal-property-equiv : Typeω
+  dependent-universal-property-equiv : UUω
   dependent-universal-property-equiv =
-    {l : Level} (C : B → Type l) → is-equiv (precomp-Π f C)
+    {l : Level} (C : B → UU l) → is-equiv (precomp-Π f C)
 ```
 
 <!-- rosetta-agda-block: theorem-13.4.1-ordinary-precomposition-condition -->
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
-  universal-property-equiv : Typeω
-  universal-property-equiv = {l : Level} (X : Type l) → is-equiv (precomp f X)
+  universal-property-equiv : UUω
+  universal-property-equiv = {l : Level} (X : UU l) → is-equiv (precomp f X)
 ```
 
 <!-- rosetta-agda-block: theorem-13.4.1-dependent-precomposition-coherent-proof -->
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
   abstract
@@ -195,7 +195,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} {f : A → B} (H : is-equiv f)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} (H : is-equiv f)
   where
 
   abstract
@@ -211,8 +211,8 @@ module _
 
 ```agda
 equiv-precomp-Π :
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (e : A ≃ B) →
-  (C : B → Type l3) → ((b : B) → C b) ≃ ((a : A) → C (map-equiv e a))
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
+  (C : B → UU l3) → ((b : B) → C b) ≃ ((a : A) → C (map-equiv e a))
 pr1 (equiv-precomp-Π e C) = precomp-Π (map-equiv e) C
 pr2 (equiv-precomp-Π e C) = is-equiv-precomp-Π-is-equiv (is-equiv-map-equiv e) C
 ```
@@ -222,7 +222,7 @@ pr2 (equiv-precomp-Π e C) = is-equiv-precomp-Π-is-equiv (is-equiv-map-equiv e)
 ```agda
 abstract
   is-equiv-precomp-is-equiv-precomp-Π :
-    {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     dependent-universal-property-equiv f →
     universal-property-equiv f
   is-equiv-precomp-is-equiv-precomp-Π f H C = H (λ _ → C)
@@ -232,7 +232,7 @@ abstract
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
   abstract
@@ -243,7 +243,7 @@ module _
         ( is-equiv-precomp-Π-is-equiv H)
 
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (e : A ≃ B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)
   where
 
   abstract
@@ -252,7 +252,7 @@ module _
     is-equiv-precomp-equiv =
       is-equiv-precomp-is-equiv (map-equiv e) (is-equiv-map-equiv e)
 
-  equiv-precomp : {l3 : Level} (C : Type l3) → (B → C) ≃ (A → C)
+  equiv-precomp : {l3 : Level} (C : UU l3) → (B → C) ≃ (A → C)
   pr1 (equiv-precomp C) = precomp (map-equiv e) C
   pr2 (equiv-precomp C) = is-equiv-precomp-equiv C
 ```
@@ -261,7 +261,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   (H : universal-property-equiv f)
   where
 
@@ -302,7 +302,7 @@ module _
 ```agda
 abstract
   is-equiv-is-equiv-precomp-Π :
-    {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     dependent-universal-property-equiv f →
     is-equiv f
   is-equiv-is-equiv-precomp-Π f H =

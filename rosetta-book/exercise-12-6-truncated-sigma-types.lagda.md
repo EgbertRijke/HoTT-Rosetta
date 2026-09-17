@@ -4,7 +4,11 @@
 module exercise-12-6-truncated-sigma-types where
 
 open import universe-levels
+open import section-5-4-transport
 open import section-4-6-dependent-pair-types
+open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
+open import exercise-10-3-contractible-equivalences
+open import exercise-10-6-dependent-pair-contractible-base
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-4-general-truncation-levels
@@ -43,18 +47,30 @@ Show that the following are equivalent:
 ```agda
 abstract
   is-prop-Σ :
-    {l1 l2 : Level} {A : Type l1} {B : A → Type l2} →
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
     is-prop A → ((x : A) → is-prop (B x)) → is-prop (Σ A B)
-  is-prop-Σ H K =
-    is-trunc-is-emb neg-two-𝕋 pr1 (is-emb-pr1-is-subtype K) H
+  is-prop-Σ H K x y =
+    is-contr-equiv'
+      ( Eq-Σ x y)
+      ( equiv-eq-pair-Σ x y)
+      ( is-contr-Σ'
+        ( H (pr1 x) (pr1 y))
+        ( λ p → K (pr1 y) (tr _ p (pr2 x)) (pr2 y)))
+
+Σ-Prop :
+  {l1 l2 : Level} (P : Prop l1) (Q : type-Prop P → Prop l2) → Prop (l1 ⊔ l2)
+pr1 (Σ-Prop P Q) = Σ (type-Prop P) (λ p → type-Prop (Q p))
+pr2 (Σ-Prop P Q) =
+  is-prop-Σ
+    ( is-prop-type-Prop P)
+    ( λ p → is-prop-type-Prop (Q p))
 ```
 
-<!-- rosetta-agda-block: exercise-12-6-propositional-product -->
 
 ```agda
 abstract
   is-prop-product :
-    {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-prop A → is-prop B → is-prop (A × B)
   is-prop-product H K = is-prop-Σ H (λ x → K)
 ```

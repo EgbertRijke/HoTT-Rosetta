@@ -102,14 +102,14 @@ Therefore we obtain the required homotopy by function extensionality:
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2}
-  (C : (x : A) → B x → Type l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
+  (C : (x : A) → B x → UU l3)
   where
 
-  Π-total-fam : Type (l1 ⊔ l2 ⊔ l3)
+  Π-total-fam : UU (l1 ⊔ l2 ⊔ l3)
   Π-total-fam = (x : A) → Σ (B x) (C x)
 
-  universally-structured-Π : Type (l1 ⊔ l2 ⊔ l3)
+  universally-structured-Π : UU (l1 ⊔ l2 ⊔ l3)
   universally-structured-Π = Σ ((x : A) → B x) (λ f → (x : A) → C x (f x))
 ```
 
@@ -119,7 +119,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : (x : A) → B x → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
   where
 
   map-distributive-Π-Σ : Π-total-fam C → universally-structured-Π C
@@ -180,7 +180,7 @@ For any two types `A` and `B`, and any type family `C` over `B`, we have an equi
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : B → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : B → UU l3}
   where
 
   mapping-into-Σ : (A → Σ B C) → Σ (A → B) (λ f → (x : A) → C (f x))
@@ -208,7 +208,7 @@ Another direct consequence of the distributivity of `Π`-types over `Σ`-types i
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
   where
 
   equiv-Π-fiber-section : ((b : B) → fiber f b) ≃ section f
@@ -259,7 +259,7 @@ and the right-hand side is a product of contractible types. ◻
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   equiv-Π-section-pr1 : section (pr1 {B = B}) ≃ ((x : A) → B x)
@@ -309,7 +309,7 @@ This product is therefore contractible by the weak function extensionality princ
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : (x : A) → B x → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : (x : A) → B x → UU l3}
   (is-torsorial-C : (x : A) → is-contr (Σ (B x) (C x)))
   where
 
@@ -325,8 +325,8 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2}
-  (f : (x : A) → B x) (E : (x : A) → B x → Type l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
+  (f : (x : A) → B x) (E : (x : A) → B x → UU l3)
   (e : (x : A) → E x (f x))
   where
 

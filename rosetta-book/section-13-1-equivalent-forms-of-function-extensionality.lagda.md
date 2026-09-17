@@ -61,7 +61,7 @@ htpy-eq:(f=g)→ (f~ g)
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   htpy-eq : {f g : (x : A) → B x} → f ＝ g → f ~ g
@@ -75,10 +75,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  instance-function-extensionality : (f g : (x : A) → B x) → Type (l1 ⊔ l2)
+  instance-function-extensionality : (f g : (x : A) → B x) → UU (l1 ⊔ l2)
   instance-function-extensionality f g = is-equiv (htpy-eq {f = f} {g})
 ```
 
@@ -86,10 +86,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
-  based-function-extensionality : (f : (x : A) → B x) → Type (l1 ⊔ l2)
+  based-function-extensionality : (f : (x : A) → B x) → UU (l1 ⊔ l2)
   based-function-extensionality f =
     (g : (x : A) → B x) → instance-function-extensionality f g
 ```
@@ -98,11 +98,11 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {f : (x : A) → B x}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {f : (x : A) → B x}
   where
 
   ev-refl-htpy :
-    (C : (g : (x : A) → B x) → f ~ g → Type l3) →
+    (C : (g : (x : A) → B x) → f ~ g → UU l3) →
     ((g : (x : A) → B x) (H : f ~ g) → C g H) → C f refl-htpy
   ev-refl-htpy C φ = φ f refl-htpy
 ```
@@ -111,8 +111,8 @@ module _
 
 ```agda
 induction-principle-homotopies :
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
-  (f : (x : A) → B x) → Typeω
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  (f : (x : A) → B x) → UUω
 induction-principle-homotopies f =
   is-identity-system (f ~_) f (refl-htpy)
 ```
@@ -121,7 +121,7 @@ induction-principle-homotopies f =
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (f : (x : A) → B x)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x)
   where
 
   abstract
@@ -144,7 +144,7 @@ module _
 ```agda
 abstract
   induction-principle-homotopies-is-contr-htpy :
-    {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (f : (x : A) → B x) →
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
     is-contr (Σ ((x : A) → B x) (λ g → f ~ g)) →
     induction-principle-homotopies f
   induction-principle-homotopies-is-contr-htpy f =
@@ -156,7 +156,7 @@ abstract
 ```agda
 abstract
   is-contr-htpy-induction-principle-homotopies :
-    {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (f : (x : A) → B x) →
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
     induction-principle-homotopies f →
     is-contr (Σ ((x : A) → B x) (λ g → f ~ g))
   is-contr-htpy-induction-principle-homotopies f =
@@ -232,9 +232,9 @@ The claim now follows, because retracts of contractible types are contractible b
 <!-- rosetta-agda-block: theorem-13.1.2-universe-extensionality -->
 
 ```agda
-function-extensionality-Level : (l1 l2 : Level) → Type (lsuc l1 ⊔ lsuc l2)
+function-extensionality-Level : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 function-extensionality-Level l1 l2 =
-  {A : Type l1} {B : A → Type l2}
+  {A : UU l1} {B : A → UU l2}
   (f : (x : A) → B x) → based-function-extensionality f
 ```
 
@@ -242,15 +242,15 @@ function-extensionality-Level l1 l2 =
 
 ```agda
 instance-weak-function-extensionality :
-  {l1 l2 : Level} (A : Type l1) (B : A → Type l2) → Type (l1 ⊔ l2)
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2) → UU (l1 ⊔ l2)
 instance-weak-function-extensionality A B =
   ((x : A) → is-contr (B x)) → is-contr ((x : A) → B x)
 
-weak-function-extensionality-Level : (l1 l2 : Level) → Type (lsuc l1 ⊔ lsuc l2)
+weak-function-extensionality-Level : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
 weak-function-extensionality-Level l1 l2 =
-  (A : Type l1) (B : A → Type l2) → instance-weak-function-extensionality A B
+  (A : UU l1) (B : A → UU l2) → instance-weak-function-extensionality A B
 
-weak-function-extensionality : Typeω
+weak-function-extensionality : UUω
 weak-function-extensionality =
   {l1 l2 : Level} → weak-function-extensionality-Level l1 l2
 ```
@@ -305,7 +305,7 @@ We will write `eq-htpy` for its inverse.
 <!-- rosetta-agda-block: axiom-13.1.3-extensionality-predicate -->
 
 ```agda
-function-extensionality : Typeω
+function-extensionality : UUω
 function-extensionality = {l1 l2 : Level} → function-extensionality-Level l1 l2
 ```
 
@@ -315,7 +315,7 @@ function-extensionality = {l1 l2 : Level} → function-extensionality-Level l1 l
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} {f g : (x : A) → B x}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
   where
 
   postulate
@@ -341,7 +341,7 @@ funext f g =
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   equiv-funext : {f g : (x : A) → B x} → (f ＝ g) ≃ (f ~ g)
@@ -415,7 +415,7 @@ Since the `k`-truncated types are closed under equivalences by Proposition 12.4.
 ```agda
 abstract
   is-contr-Π :
-    {l1 l2 : Level} {A : Type l1} {B : A → Type l2} →
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
     ((x : A) → is-contr (B x)) → is-contr ((x : A) → B x)
   pr1 (is-contr-Π {A = A} {B = B} H) x = center (H x)
   pr2 (is-contr-Π {A = A} {B = B} H) f =
@@ -427,7 +427,7 @@ abstract
 ```agda
 abstract
   is-trunc-Π :
-    {l1 l2 : Level} (k : 𝕋) {A : Type l1} {B : A → Type l2} →
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : A → UU l2} →
     ((x : A) → is-trunc k (B x)) → is-trunc k ((x : A) → B x)
   is-trunc-Π neg-two-𝕋 is-trunc-B = is-contr-Π is-trunc-B
   is-trunc-Π (succ-𝕋 k) is-trunc-B f g =
@@ -441,7 +441,7 @@ abstract
 ```agda
 abstract
   is-prop-Π :
-    {l1 l2 : Level} {A : Type l1} {B : A → Type l2} →
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
     ((x : A) → is-prop (B x)) → is-prop ((x : A) → B x)
   is-prop-Π H =
     is-prop-is-proof-irrelevant
@@ -461,7 +461,7 @@ Then `A→ B` is also a `k`-type, for any type `A`.
 ```agda
 abstract
   is-trunc-function-type :
-    {l1 l2 : Level} (k : 𝕋) {A : Type l1} {B : Type l2} →
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} →
     is-trunc k B → is-trunc k (A → B)
   is-trunc-function-type k {A} {B} is-trunc-B =
     is-trunc-Π k {B = λ (x : A) → B} (λ x → is-trunc-B)
@@ -472,7 +472,7 @@ abstract
 ```agda
 abstract
   is-prop-function-type :
-    {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-prop B → is-prop (A → B)
   is-prop-function-type H = is-prop-Π (λ _ → H)
 ```
@@ -488,7 +488,7 @@ Note that it requires function extensionality even just to prove that `¬ P` is 
 <!-- rosetta-agda-block: remark-13.1.7-negations-are-propositions -->
 
 ```agda
-is-prop-neg : {l : Level} {A : Type l} → is-prop (¬ A)
+is-prop-neg : {l : Level} {A : UU l} → is-prop (¬ A)
 is-prop-neg = is-prop-function-type is-prop-empty
 ```
 <!-- rosetta-item-end: remark-13.1.7 -->

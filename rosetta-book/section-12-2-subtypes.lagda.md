@@ -351,24 +351,3 @@ module _
   pr1 (equiv-ap-inclusion-subtype {s} {t}) = ap-inclusion-subtype B s t
   pr2 (equiv-ap-inclusion-subtype {s} {t}) = is-emb-inclusion-subtype s t
 ```
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  abstract
-    is-subtype-is-emb-pr1 : is-emb (pr1 {B = B}) → is-subtype B
-    is-subtype-is-emb-pr1 H x =
-      is-prop-equiv' (equiv-fiber-pr1 B x) (is-prop-map-is-emb H x)
-```
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  is-emb-pr1-is-subtype : is-subtype B → is-emb (pr1 {B = B})
-  is-emb-pr1-is-subtype H =
-    is-emb-inclusion-subtype (λ x → (B x , H x))
-```

@@ -70,7 +70,7 @@ We obtain this homotopy by another application of `Σ`-induction. ◻
 
 ```agda
 module _
-  { l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : Σ A B → Type l3}
+  { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : Σ A B → UU l3}
   where
 
   abstract
@@ -91,7 +91,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {X : UU l3}
   where
 
   is-equiv-ev-pair-nondependent : is-equiv (ev-pair {B = B} {C = λ _ → X})
@@ -117,7 +117,7 @@ given by `f↦λ a. λ b. f(a,b)` is an equivalence.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {X : Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}
   where
 
   is-equiv-ev-product : is-equiv (ev-pair {A = A} {B = λ _ → B} {C = λ _ → X})
@@ -174,7 +174,7 @@ This follows by path induction on `p`, since `path-ind_a(f(a,refl),a,refl)≐ f(
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (a : A) {B : (x : A) → a ＝ x → Type l2}
+  {l1 l2 : Level} {A : UU l1} (a : A) {B : (x : A) → a ＝ x → UU l2}
   where
 
   ev-refl : ((x : A) (p : a ＝ x) → B x p) → B a refl
@@ -208,7 +208,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (a : A) {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} (a : A) {B : A → UU l2}
   where
 
   is-equiv-ev-refl-nondependent :

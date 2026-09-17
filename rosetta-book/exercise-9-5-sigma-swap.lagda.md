@@ -39,7 +39,7 @@ Construct an equivalence
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2} {C : A → Type l3}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
   where
 
   map-right-swap-Σ : Σ (Σ A B) (C ∘ pr1) → Σ (Σ A C) (B ∘ pr1)
