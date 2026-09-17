@@ -8,6 +8,7 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import exercise-10-5-contractible-products
+open import section-12-1-propositions
 open import section-12-4-general-truncation-levels
 open import exercise-12-6-truncated-sigma-types
 ```
@@ -83,4 +84,30 @@ is-trunc-right-factor-product (succ-𝕋 k) {A} {B} H a b b' =
       ( equiv-pair-eq (a , b) (a , b'))
       ( H (a , b) (a , b')))
     ( refl)
+```
+
+## Supplemental definitions
+
+### Propositions are closed under cartesian product types
+
+```agda
+abstract
+  is-prop-product :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    is-prop A → is-prop B → is-prop (A × B)
+  is-prop-product H K = is-prop-Σ H (λ x → K)
+
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
+  where
+
+  type-product-Prop : UU (l1 ⊔ l2)
+  type-product-Prop = type-Prop P × type-Prop Q
+
+  is-prop-product-Prop : is-prop type-product-Prop
+  is-prop-product-Prop =
+    is-prop-product (is-prop-type-Prop P) (is-prop-type-Prop Q)
+
+  product-Prop : Prop (l1 ⊔ l2)
+  product-Prop = (type-product-Prop , is-prop-product-Prop)
 ```

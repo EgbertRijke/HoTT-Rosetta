@@ -13,9 +13,10 @@ open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-3-universal-properties
 open import section-14-1-the-universal-property-of-propositional-truncations
 open import section-14-2-propositional-truncations-as-higher-inductive-types
-open import exercise-4-3-negation
+open import exercise-4-3-double-negation-logic
 open import exercise-9-4-three-for-two-equivalences
 open import exercise-12-6-truncated-sigma-types
+open import exercise-12-7-truncated-products
 open import exercise-13-8-universal-property-coproducts
 ```
 
@@ -41,13 +42,13 @@ P∨ Q ≔ ‖P+Q‖.
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Type l1) (B : Type l2)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2)
   where
 
   disjunction-type-Prop : Prop (l1 ⊔ l2)
   disjunction-type-Prop = trunc-Prop (A + B)
 
-  disjunction-type : Type (l1 ⊔ l2)
+  disjunction-type : UU (l1 ⊔ l2)
   disjunction-type = type-Prop disjunction-type-Prop
 
   is-prop-disjunction-type : is-prop disjunction-type
@@ -64,7 +65,7 @@ module _
   disjunction-Prop : Prop (l1 ⊔ l2)
   disjunction-Prop = disjunction-type-Prop (type-Prop P) (type-Prop Q)
 
-  type-disjunction-Prop : Type (l1 ⊔ l2)
+  type-disjunction-Prop : UU (l1 ⊔ l2)
   type-disjunction-Prop = type-Prop disjunction-Prop
 
   abstract
@@ -102,7 +103,7 @@ j ≔ η∘inr.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   inl-disjunction : A → disjunction-type A B
@@ -130,19 +131,19 @@ The first map is an equivalence by the universal property of the propositional t
 
 ```agda
 ev-disjunction :
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3} →
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
   (disjunction-type A B → C) → (A → C) × (B → C)
 pr1 (ev-disjunction h) = h ∘ inl-disjunction
 pr2 (ev-disjunction h) = h ∘ inr-disjunction
 
 universal-property-disjunction-type :
-  {l1 l2 l3 : Level} → Type l1 → Type l2 → Prop l3 → Typeω
+  {l1 l2 l3 : Level} → UU l1 → UU l2 → Prop l3 → UUω
 universal-property-disjunction-type A B S =
   {l : Level} (R : Prop l) →
   (type-Prop S → type-Prop R) ↔ ((A → type-Prop R) × (B → type-Prop R))
 
 universal-property-disjunction-Prop :
-  {l1 l2 l3 : Level} → Prop l1 → Prop l2 → Prop l3 → Typeω
+  {l1 l2 l3 : Level} → Prop l1 → Prop l2 → Prop l3 → UUω
 universal-property-disjunction-Prop P Q =
   universal-property-disjunction-type (type-Prop P) (type-Prop Q)
 ```
@@ -151,7 +152,7 @@ universal-property-disjunction-Prop P Q =
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   elim-disjunction' :
@@ -170,7 +171,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-equiv-ev-disjunction :
@@ -205,13 +206,13 @@ Given a family `P` of propositions over a type `A`, we define the **existential 
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Type l1) (B : A → Type l2)
+  {l1 l2 : Level} (A : UU l1) (B : A → UU l2)
   where
 
   exists-structure-Prop : Prop (l1 ⊔ l2)
   exists-structure-Prop = trunc-Prop (Σ A B)
 
-  exists-structure : Type (l1 ⊔ l2)
+  exists-structure : UU (l1 ⊔ l2)
   exists-structure = type-Prop exists-structure-Prop
 
   is-prop-exists-structure : is-prop exists-structure
@@ -222,13 +223,13 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Type l1) (P : A → Prop l2)
+  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
   where
 
   exists-Prop : Prop (l1 ⊔ l2)
   exists-Prop = exists-structure-Prop A (type-Prop ∘ P)
 
-  exists : Type (l1 ⊔ l2)
+  exists : UU (l1 ⊔ l2)
   exists = type-Prop exists-Prop
 
   abstract
@@ -264,7 +265,7 @@ Furthermore, the proposition `∃_{(x:A)}P(x)` satisfies the universal property 
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   intro-exists : (a : A) (b : B a) → exists-structure A B
@@ -289,19 +290,19 @@ The first map in this composite is an equivalence by the universal property of t
 
 ```agda
 module _
-  {l1 l2 l3 : Level} (A : Type l1) (B : A → Type l2) (S : Prop l3)
+  {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (S : Prop l3)
   where
 
-  universal-property-exists-structure : Typeω
+  universal-property-exists-structure : UUω
   universal-property-exists-structure =
     {l : Level} (Q : Prop l) →
     (type-Prop S → type-Prop Q) ↔ ((x : A) → B x → type-Prop Q)
 
 module _
-  {l1 l2 l3 : Level} (A : Type l1) (P : A → Prop l2) (S : Prop l3)
+  {l1 l2 l3 : Level} (A : UU l1) (P : A → Prop l2) (S : Prop l3)
   where
 
-  universal-property-exists : Typeω
+  universal-property-exists : UUω
   universal-property-exists =
     universal-property-exists-structure A (type-Prop ∘ P) S
 ```
@@ -310,11 +311,11 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   ev-intro-exists :
-    {C : Type l3} → (exists-structure A B → C) → (x : A) → B x → C
+    {C : UU l3} → (exists-structure A B → C) → (x : A) → B x → C
   ev-intro-exists H x p = H (intro-exists x p)
 
   elim-exists :
@@ -327,7 +328,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   is-equiv-ev-intro-exists :
@@ -351,7 +352,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   up-exists :
@@ -381,7 +382,7 @@ In the following table we give an overview of the interpretation of the logical 
 
 ```agda
 type-hom-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → Type (l1 ⊔ l2)
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
 type-hom-Prop P Q = type-Prop P → type-Prop Q
 
 is-prop-hom-Prop :
@@ -411,7 +412,7 @@ module _
     ( type-Prop P × type-Prop Q ,
       is-prop-product (is-prop-type-Prop P) (is-prop-type-Prop Q))
 
-  type-conjunction-Prop : Type (l1 ⊔ l2)
+  type-conjunction-Prop : UU (l1 ⊔ l2)
   type-conjunction-Prop = type-Prop conjunction-Prop
 
   is-prop-conjunction-Prop :
@@ -431,7 +432,7 @@ module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
 
-  type-iff-Prop : Type (l1 ⊔ l2)
+  type-iff-Prop : UU (l1 ⊔ l2)
   type-iff-Prop = type-Prop P ↔ type-Prop Q
 
   is-prop-iff-Prop : is-prop type-iff-Prop
@@ -455,10 +456,10 @@ module _
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Type l1) (P : A → Prop l2)
+  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
   where
 
-  type-Π-Prop : Type (l1 ⊔ l2)
+  type-Π-Prop : UU (l1 ⊔ l2)
   type-Π-Prop = (x : A) → type-Prop (P x)
 
   is-prop-Π-Prop : is-prop type-Π-Prop

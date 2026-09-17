@@ -89,9 +89,9 @@ X:𝒰⊢ T(‖X‖̌)≐‖T(X)‖ type
 
 ```agda
 postulate
-  type-trunc-Prop : {l : Level} → Type l → Type l
+  type-trunc-Prop : {l : Level} → UU l → UU l
 
-║_║₋₁ : {l : Level} → Type l → Type l
+║_║₋₁ : {l : Level} → UU l → UU l
 ║_║₋₁ = type-trunc-Prop
 ```
 
@@ -111,7 +111,7 @@ In the case of the propositional truncation, there is one point constructor and 
 
 ```agda
 postulate
-  unit-trunc-Prop : {l : Level} {A : Type l} → A → ║ A ║₋₁
+  unit-trunc-Prop : {l : Level} {A : UU l} → A → ║ A ║₋₁
 ```
 
 The point constructor `η` is sometimes called the **unit** of the propositional truncation.
@@ -126,7 +126,7 @@ Therefore it follows immediately that `‖A‖` is a proposition.
 ```agda
 postulate
   all-elements-equal-type-trunc-Prop :
-    {l : Level} {A : Type l} → all-elements-equal (║ A ║₋₁)
+    {l : Level} {A : UU l} → all-elements-equal (║ A ║₋₁)
 ```
 
 
@@ -139,7 +139,7 @@ For any type `A`, the type `‖A‖` is a proposition.`□`
 <!-- rosetta-agda-block: lemma-14.2.1-truncation-is-proposition -->
 
 ```agda
-is-prop-type-trunc-Prop : {l : Level} {A : Type l} → is-prop (║ A ║₋₁)
+is-prop-type-trunc-Prop : {l : Level} {A : UU l} → is-prop (║ A ║₋₁)
 is-prop-type-trunc-Prop =
   is-prop-all-elements-equal all-elements-equal-type-trunc-Prop
 ```
@@ -147,7 +147,7 @@ is-prop-type-trunc-Prop =
 <!-- rosetta-agda-block: lemma-14.2.1-bundled-truncation -->
 
 ```agda
-trunc-Prop : {l : Level} → Type l → Prop l
+trunc-Prop : {l : Level} → UU l → Prop l
 pr1 (trunc-Prop A) = type-trunc-Prop A
 pr2 (trunc-Prop A) = is-prop-type-trunc-Prop
 ```
@@ -206,18 +206,18 @@ equipped with a homotopy `h∘η~ f`.
 
 ```agda
 case-paths-induction-principle-propositional-truncation :
-  { l : Level} {l1 l2 : Level} {A : Type l1}
+  { l : Level} {l1 l2 : Level} {A : UU l1}
   ( P : Prop l2) (α : (p q : type-Prop P) → p ＝ q) (f : A → type-Prop P) →
-  ( B : type-Prop P → Type l) → Type (l ⊔ l2)
+  ( B : type-Prop P → UU l) → UU (l ⊔ l2)
 case-paths-induction-principle-propositional-truncation P α f B =
   (p q : type-Prop P) (x : B p) (y : B q) → tr B (α p q) x ＝ y
 
 induction-principle-propositional-truncation :
-  (l : Level) {l1 l2 : Level} {A : Type l1}
+  (l : Level) {l1 l2 : Level} {A : UU l1}
   (P : Prop l2) (α : (p q : type-Prop P) → p ＝ q) (f : A → type-Prop P) →
-  Type (lsuc l ⊔ l1 ⊔ l2)
+  UU (lsuc l ⊔ l1 ⊔ l2)
 induction-principle-propositional-truncation l {l1} {l2} {A} P α f =
-  ( B : type-Prop P → Type l) →
+  ( B : type-Prop P → UU l) →
   ( g : (x : A) → (B (f x))) →
   ( β : case-paths-induction-principle-propositional-truncation P α f B) →
   Σ ((p : type-Prop P) → B p) (λ h → (x : A) → h (f x) ＝ g x)
@@ -230,7 +230,7 @@ induction-principle-propositional-truncation l {l1} {l2} {A} P α f =
 ```agda
 postulate
   induction-trunc-Prop :
-    {l l1 : Level} {A : Type l1} →
+    {l l1 : Level} {A : UU l1} →
     induction-principle-propositional-truncation l
       (trunc-Prop A) all-elements-equal-type-trunc-Prop unit-trunc-Prop
 ```
@@ -239,7 +239,7 @@ postulate
 
 ```agda
 ind-trunc-Prop' :
-  {l l1 : Level} {A : Type l1} (P : ║ A ║₋₁ → Type l)
+  {l l1 : Level} {A : UU l1} (P : ║ A ║₋₁ → UU l)
   (f : (x : A) → P (unit-trunc-Prop x))
   (H : (x y : ║ A ║₋₁) (u : P x) (v : P y) →
     tr P (all-elements-equal-type-trunc-Prop x y) u ＝ v) →
@@ -247,7 +247,7 @@ ind-trunc-Prop' :
 ind-trunc-Prop' P f H = pr1 (induction-trunc-Prop P f H)
 
 compute-ind-trunc-Prop' :
-  {l l1 : Level} {A : Type l1} (P : ║ A ║₋₁ → Type l)
+  {l l1 : Level} {A : UU l1} (P : ║ A ║₋₁ → UU l)
   (f : (x : A) → P (unit-trunc-Prop x))
   (H : (x y : ║ A ║₋₁) (u : P x) (v : P y) →
     tr P (all-elements-equal-type-trunc-Prop x y) u ＝ v) →
@@ -276,18 +276,18 @@ Since the induction principle of the propositional truncation is only applicable
 ```agda
 abstract
   is-prop-case-paths-induction-principle-propositional-truncation :
-    { l : Level} {l1 l2 : Level} {A : Type l1}
+    { l : Level} {l1 l2 : Level} {A : UU l1}
     ( P : Prop l2) (α : (p q : type-Prop P) → p ＝ q) (f : A → type-Prop P) →
-    ( B : type-Prop P → Type l) →
+    ( B : type-Prop P → UU l) →
     case-paths-induction-principle-propositional-truncation P α f B →
     ( p : type-Prop P) → is-prop (B p)
   is-prop-case-paths-induction-principle-propositional-truncation P α f B β p =
     is-prop-is-proof-irrelevant (λ x → pair (tr B (α p p) x) (β p p x))
 
   case-paths-induction-principle-propositional-truncation-is-prop :
-    { l : Level} {l1 l2 : Level} {A : Type l1}
+    { l : Level} {l1 l2 : Level} {A : UU l1}
     ( P : Prop l2) (α : (p q : type-Prop P) → p ＝ q) (f : A → type-Prop P) →
-    ( B : type-Prop P → Type l) →
+    ( B : type-Prop P → UU l) →
     ( (p : type-Prop P) → is-prop (B p)) →
     case-paths-induction-principle-propositional-truncation P α f B
   case-paths-induction-principle-propositional-truncation-is-prop
@@ -299,13 +299,13 @@ abstract
 
 ```agda
 is-emb-tr-trunc-Prop :
-  {l1 l2 : Level} {A : Type l1} (P : ║ A ║₋₁ → Type l2)
+  {l1 l2 : Level} {A : UU l1} (P : ║ A ║₋₁ → UU l2)
   (x y : ║ A ║₋₁) → is-emb (tr P (all-elements-equal-type-trunc-Prop x y))
 is-emb-tr-trunc-Prop P x y =
   is-emb-is-equiv (is-equiv-tr P (all-elements-equal-type-trunc-Prop x y))
 
 equiv-identifications-tr-trunc-Prop :
-  {l1 l2 : Level} {A : Type l1} (P : ║ A ║₋₁ → Type l2)
+  {l1 l2 : Level} {A : UU l1} (P : ║ A ║₋₁ → UU l2)
   (x y : ║ A ║₋₁) (u v : P x) →
   (tr P (all-elements-equal-type-trunc-Prop x y) u ＝
     tr P (all-elements-equal-type-trunc-Prop x y) v) ≃ (u ＝ v)
@@ -319,7 +319,7 @@ pr2 (equiv-identifications-tr-trunc-Prop P x y u v) =
 
 ```agda
 module _
-  {l l1 : Level} {A : Type l1} (P : ║ A ║₋₁ → Prop l)
+  {l l1 : Level} {A : UU l1} (P : ║ A ║₋₁ → Prop l)
   where
 
   abstract
@@ -372,7 +372,7 @@ However, we have such identifications by the assumption that `Q` is a propositio
 
 ```agda
 module _
-  {l l1 : Level} {A : Type l1} (P : Prop l)
+  {l l1 : Level} {A : UU l1} (P : Prop l)
   where
 
   abstract
@@ -390,7 +390,7 @@ module _
 ```agda
 abstract
   is-propositional-truncation-trunc-Prop :
-    {l : Level} (A : Type l) →
+    {l : Level} (A : UU l) →
     is-propositional-truncation (trunc-Prop A) unit-trunc-Prop
   is-propositional-truncation-trunc-Prop A =
     is-propositional-truncation-extension-property
@@ -404,7 +404,7 @@ abstract
 ```agda
 abstract
   universal-property-trunc-Prop :
-    {l : Level} (A : Type l) →
+    {l : Level} (A : UU l) →
     universal-property-propositional-truncation
       ( trunc-Prop A)
       ( unit-trunc-Prop)
@@ -416,7 +416,7 @@ abstract
 
 abstract
   map-universal-property-trunc-Prop :
-    {l1 l2 : Level} {A : Type l1} (P : Prop l2) →
+    {l1 l2 : Level} {A : UU l1} (P : Prop l2) →
     (A → type-Prop P) → (║ A ║₋₁ → type-Prop P)
   map-universal-property-trunc-Prop {A = A} P f =
     map-is-propositional-truncation
@@ -472,7 +472,7 @@ Hence the homotopies are obtained by uniqueness. ◻
 ```agda
 abstract
   unique-map-trunc-Prop :
-    {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-contr
       ( Σ ( (║ A ║₋₁ → ║ B ║₋₁))
           ( λ h → (h ∘ unit-trunc-Prop) ~ (unit-trunc-Prop ∘ f)))
@@ -485,7 +485,7 @@ abstract
 
 abstract
   map-trunc-Prop :
-    {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     (A → B) → (║ A ║₋₁ → ║ B ║₋₁)
   map-trunc-Prop f =
     pr1 (center (unique-map-trunc-Prop f))
@@ -496,13 +496,13 @@ abstract
 ```agda
 abstract
   htpy-map-trunc-Prop :
-    { l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) →
+    { l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     ( (map-trunc-Prop f) ∘ unit-trunc-Prop) ~ (unit-trunc-Prop ∘ f)
   htpy-map-trunc-Prop f =
     pr2 (center (unique-map-trunc-Prop f))
 
   htpy-uniqueness-map-trunc-Prop :
-    { l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) →
+    { l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     ( h : (║ A ║₋₁ → ║ B ║₋₁)) →
     ( ( h ∘ unit-trunc-Prop) ~ (unit-trunc-Prop ∘ f)) →
     (map-trunc-Prop f) ~ h
@@ -515,7 +515,7 @@ abstract
 ```agda
 abstract
   id-map-trunc-Prop :
-    { l1 : Level} {A : Type l1} → map-trunc-Prop (id {A = A}) ~ id
+    { l1 : Level} {A : UU l1} → map-trunc-Prop (id {A = A}) ~ id
   id-map-trunc-Prop {l1} {A} =
     htpy-uniqueness-map-trunc-Prop id id refl-htpy
 ```
@@ -525,7 +525,7 @@ abstract
 ```agda
 abstract
   preserves-comp-map-trunc-Prop :
-    { l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3}
+    { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
     ( g : B → C) (f : A → B) →
     ( map-trunc-Prop (g ∘ f)) ~
     ( (map-trunc-Prop g) ∘ (map-trunc-Prop f))

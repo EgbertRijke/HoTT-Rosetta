@@ -19,6 +19,7 @@ open import section-13-4-composing-with-equivalences
 open import exercise-4-3-double-negation-logic
 open import exercise-10-1-identity-types-contractible
 open import exercise-12-6-truncated-sigma-types
+open import exercise-12-7-truncated-products
 ```
 
 <!-- rosetta-item: section-14.1 -->
@@ -369,7 +370,7 @@ is-equiv-precomp-double-negation A Q =
   is-equiv-has-converse-is-prop
     ( is-prop-function-type is-prop-double-negation)
     ( is-prop-function-type is-prop-double-negation)
-    ( double-negation-kleisli-map)
+    ( extend-double-negation)
 
 equiv-precomp-double-negation :
   {l1 l2 : Level} (A : UU l1) (Q : UU l2) →
