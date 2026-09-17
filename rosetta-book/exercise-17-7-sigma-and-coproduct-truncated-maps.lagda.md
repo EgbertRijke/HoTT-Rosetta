@@ -16,9 +16,9 @@ For any type `A` in `𝒰`, consider the function
 which takes a family `B` of `𝒰`-small types to its `Σ`-type.
 Show that the following are equivalent:
 
-1.  The type `A` is `k`-truncated.
+1. The type `A` is `k`-truncated.
 
-2.  The map `Σ_A` is `k`-truncated.
+2. The map `Σ_A` is `k`-truncated.
 
 Hint: Construct an equivalence `fib(Σ_A, X)≃ (X→ A)`.
 

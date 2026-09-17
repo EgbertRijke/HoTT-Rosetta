@@ -33,9 +33,9 @@ Show that if `f` is injective, then `‖f‖_0:‖A‖_0→‖B‖_0` is injecti
 
 Show that the following are equivalent
 
-1.  The map `f` is surjective.
+1. The map `f` is surjective.
 
-2.  the map `‖f‖_0:‖A‖_0→‖B‖_0` is surjective.
+2. the map `‖f‖_0:‖A‖_0→‖B‖_0` is surjective.
 
 Construct a map `h:im(f)→im‖f‖_0` such that the squares
 <!-- rosetta-diagram: 48b2b46a6132; review: pending -->

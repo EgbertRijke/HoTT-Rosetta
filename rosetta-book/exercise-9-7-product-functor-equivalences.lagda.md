@@ -32,9 +32,9 @@ H× K:(f× g)~ (f'× g').
 
 Show that for any two maps `f:A→ A'` and `g:B→ B'`, the following are equivalent:
 
-1.  The map `f× g` is an equivalence.
+1. The map `f× g` is an equivalence.
 
-2.  There are functions
+2. There are functions
 ```text
 α : B → is-equiv(f)
 β : A → is-equiv(g).

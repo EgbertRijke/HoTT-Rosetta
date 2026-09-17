@@ -62,9 +62,9 @@ div-ℕ m n = Σ ℕ (λ k → k *ℕ m ＝ n)
 
 This type-theoretical definition of the divisibility relation using `Σ`-types has two important consequences:
 
-1.  The principal way to show that `d| n` holds is to construct a pair `(k,p)` consisting of a natural number `k` and an identification `p:d· k=n`.
+1. The principal way to show that `d| n` holds is to construct a pair `(k,p)` consisting of a natural number `k` and an identification `p:d· k=n`.
 
-2.  The principal way to use a hypothesis `H:d| n` in a proof is to proceed by `Σ`-induction on the variable `H`.
+2. The principal way to use a hypothesis `H:d| n` in a proof is to proceed by `Σ`-induction on the variable `H`.
 We then get to assume a natural number `k` and an identification `p:d· k=n`, in order to proceed with the proof.
 
 <!-- rosetta-item-end: remark-7.1.3 -->

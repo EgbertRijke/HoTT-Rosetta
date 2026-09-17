@@ -134,13 +134,13 @@ is-empty-left-factor-is-empty-product f b a = f (pair a b)
 
  
 
-1.  Consider two natural numbers `d` and `n`.
+1. Consider two natural numbers `d` and `n`.
 Then `d` is said to be a **proper divisor** of `n` if it comes equipped with an element of type
 ```text
 is-proper-divisor(n,d)≔ (d≠ n)× (d| n).
 ```
 
-2.  A natural number `n` is said to be **prime** if it comes equipped with an element of type
+2. A natural number `n` is said to be **prime** if it comes equipped with an element of type
 ```text
 is-prime(n)≔ Π(x:ℕ) is-proper-divisor(n,x)↔ (x=1).
 ```

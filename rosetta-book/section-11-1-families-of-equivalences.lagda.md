@@ -371,9 +371,9 @@ module _
 Suppose that `g` is a family of maps over `f` as in Definition 11.1.5, and suppose that `f` is an equivalence.
 Then the following are equivalent:
 
-1.  The family of maps `g` over `f` is a family of equivalences.
+1. The family of maps `g` over `f` is a family of equivalences.
 
-2.  The map `tot_f(g)` is an equivalence.
+2. The map `tot_f(g)` is an equivalence.
 
 ### Proof
 

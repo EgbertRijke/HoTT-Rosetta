@@ -47,9 +47,9 @@ In the following theorem we give a precise characterization of the inhabited ext
 Consider an inhabited W-type `W(A,B)`.
 Then the following are equivalent:
 
-1.  The W-type `W(A,B)` is extensional.
+1. The W-type `W(A,B)` is extensional.
 
-2.  The family `B` is **univalent** in the sense that the map
+2. The family `B` is **univalent** in the sense that the map
 ```text
 tr_B:(x=y)→ (B(x)≃ B(y))
 ```
@@ -73,7 +73,7 @@ In other words, the claim in Theorem 20.5.2 is that an inhabited W-type `W(A,B)`
 
 *Proof.* We will first show that (ii) is equivalent to the following property:
 
-1.  The map
+1. The map
 ```text
 tr_B : (symbol(x)=y)→ (B(symbol(x))≃ B(y))
 ```

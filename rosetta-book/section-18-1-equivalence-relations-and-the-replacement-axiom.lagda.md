@@ -157,17 +157,17 @@ Similarly, a map `f:A→ B` is said to be **locally `𝒰`-small** if all of its
 
  
 
-1.  Any `𝒰`-small type is also locally `𝒰`-small.
+1. Any `𝒰`-small type is also locally `𝒰`-small.
 
-2.  Any proposition is locally small with respect to any universe `𝒰`.
+2. Any proposition is locally small with respect to any universe `𝒰`.
 
-3.  Any univalent universe `𝒰` is locally `𝒰`-small, because by the univalence axiom we have an equivalence
+3. Any univalent universe `𝒰` is locally `𝒰`-small, because by the univalence axiom we have an equivalence
 ```text
 (A=B)≃ (A≃ B)
 ```
     for each `A,B:𝒰`, and the type `A≃ B` is in `𝒰`.
 
-4.  For any family `B` of locally `𝒰`-small types over a `𝒰`-small type `A`, the dependent product `Π(x:A) B(x)` is locally `𝒰`-small.
+4. For any family `B` of locally `𝒰`-small types over a `𝒰`-small type `A`, the dependent product `Π(x:A) B(x)` is locally `𝒰`-small.
 
 <!-- rosetta-item-end: example-18.1.7 -->
 

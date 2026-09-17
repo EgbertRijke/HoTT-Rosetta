@@ -81,18 +81,18 @@ Consider a type `A` and a universe `𝒰` containing `A`.
 Furthermore, let `R:A→ (A→ Prop_𝒰)` be an equivalence relation, and consider a map `q:A→ B` into a set `B`, not necessarily in `𝒰`.
 Then the following are equivalent.
 
-1.  The map `q` satisfies the property that
+1. The map `q` satisfies the property that
 ```text
 q(x)=q(y)
 ```
     for every `x,y:A` for which `R(x,y)` holds, and moreover `q` satisfies the universal property of the set quotient of `R`.
 
-2.  The map `q` is surjective and **effective**, which means that for each `x,y:A` we have an equivalence
+2. The map `q` is surjective and **effective**, which means that for each `x,y:A` we have an equivalence
 ```text
 (q(x)=q(y))≃ R(x,y).
 ```
 
-3.  The map `R:A→ (A→ Prop_𝒰)` extends along `q` to an embedding
+3. The map `R:A→ (A→ Prop_𝒰)` extends along `q` to an embedding
 <!-- rosetta-diagram: 797f891ee8ed; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*

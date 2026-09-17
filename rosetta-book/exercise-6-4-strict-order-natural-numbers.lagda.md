@@ -32,11 +32,11 @@ The strict ordering relation `<` on `ℕ` is defined recursively by
 
 Show that the strict ordering relation is
 
-1.  antireflexive,
+1. antireflexive,
 
-2.  antisymmetric, and
+2. antisymmetric, and
 
-3.  transitive.
+3. transitive.
 
 Show that `n<n+1` and
 ```text

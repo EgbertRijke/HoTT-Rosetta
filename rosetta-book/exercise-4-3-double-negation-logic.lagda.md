@@ -41,59 +41,59 @@ module _
 
 Show that
 
-1.  `¬ (P × ¬ P)`
+1. `¬ (P × ¬ P)`
 
-2.  `¬ (P ↔ ¬ P)`.
+2. `¬ (P ↔ ¬ P)`.
 
 ### Exercise 4.3(b)
 
 Construct the following maps in the structure of the **double negation monad**:
 
-1.  `P → ¬¬ P`
+1. `P → ¬¬ P`
 
-2.  `(P → Q) → (¬¬ P → ¬¬ Q)`
+2. `(P → Q) → (¬¬ P → ¬¬ Q)`
 
-3.  `(P → ¬¬ Q) → (¬¬ P → ¬¬ Q)`.
+3. `(P → ¬¬ Q) → (¬¬ P → ¬¬ Q)`.
 
 ### Exercise 4.3(c)
 
 Prove that the following double negations of classical laws hold:
 
-1.  `¬¬ (¬¬ P → P)`
+1. `¬¬ (¬¬ P → P)`
 
-2.  `¬¬ (((P → Q) → P) → P)`
+2. `¬¬ (((P → Q) → P) → P)`
 
-3.  `¬¬ ((P → Q) + (Q → P))`
+3. `¬¬ ((P → Q) + (Q → P))`
 
-4.  `¬¬ (P + ¬ P)`.
+4. `¬¬ (P + ¬ P)`.
 
 ### Exercise 4.3(d)
 
 Show that
 
-1.  `(P + ¬ P) → (¬¬ P → P)`
+1. `(P + ¬ P) → (¬¬ P → P)`
 
-2.  `¬¬ (Q → P) ↔ ((P + ¬ P) → (Q → P))`.
+2. `¬¬ (Q → P) ↔ ((P + ¬ P) → (Q → P))`.
 
 ### Exercise 4.3(e)
 
 Prove the following tautologies, showing that `¬ P`, `P → ¬¬ Q`, and `¬¬ P × ¬¬ Q` are **double negation stable**:
 
-1.  `¬¬¬ P → ¬ P`
+1. `¬¬¬ P → ¬ P`
 
-2.  `¬¬ (P → ¬¬ Q) → (P → ¬¬ Q)`
+2. `¬¬ (P → ¬¬ Q) → (P → ¬¬ Q)`
 
-3.  `¬¬ ((¬¬ P) × (¬¬ Q)) → (¬¬ P) × (¬¬ Q)`.
+3. `¬¬ ((¬¬ P) × (¬¬ Q)) → (¬¬ P) × (¬¬ Q)`.
 
 ### Exercise 4.3(f)
 
 Show that
 
-1.  `¬¬ (P × Q) ↔ (¬¬ P) × (¬¬ Q)`
+1. `¬¬ (P × Q) ↔ (¬¬ P) × (¬¬ Q)`
 
-2.  `¬¬ (P + Q) ↔ ¬ (¬ P × ¬ Q)`
+2. `¬¬ (P + Q) ↔ ¬ (¬ P × ¬ Q)`
 
-3.  `¬¬ (P → Q) ↔ (¬¬ P → ¬¬ Q)`.
+3. `¬¬ (P → Q) ↔ (¬¬ P → ¬¬ Q)`.
 
 ## Solutions
 

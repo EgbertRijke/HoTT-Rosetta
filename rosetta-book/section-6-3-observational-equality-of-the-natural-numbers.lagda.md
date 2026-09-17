@@ -17,11 +17,11 @@ Using universes, we can define many relations on the natural numbers.
 We give here the example of *observational equality* of `ℕ`.
 The idea of observational equality is that, if we want to prove that `m` and `n` are observationally equal, we may do so by looking at `m` and `n`:
 
-1.  If both `m` and `n` are `0`, then they are observationally equal.
+1. If both `m` and `n` are `0`, then they are observationally equal.
 
-2.  If one of them is `0` and the other is a successor, then they are not observationally equal.
+2. If one of them is `0` and the other is a successor, then they are not observationally equal.
 
-3.  If both `m` and `n` are successors, say `m≐succ-ℕ(m')` and `n≐ succ-ℕ(n')`, then `m` and `n` are observationally equal if and only if their predecessors `m'` and `n'` are observationally equal.
+3. If both `m` and `n` are successors, say `m≐succ-ℕ(m')` and `n≐ succ-ℕ(n')`, then `m` and `n` are observationally equal if and only if their predecessors `m'` and `n'` are observationally equal.
 
 Thus, observational equality is an inductively defined relation, which gives us an algorithm for checking equality on `ℕ`.
 Indeed, it can be used to show that equality of natural numbers is *decidable*, i.e., there is a program that decides for any two natural numbers `m` and `n` whether they are equal or not.

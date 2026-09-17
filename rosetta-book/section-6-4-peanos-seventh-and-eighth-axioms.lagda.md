@@ -17,12 +17,12 @@ Using the observational equality of `ℕ`, we can prove Peano’s seventh and ei
 In his *Arithmetices Principia* \[citation: `Peano`\], the natural numbers are based at `1`, but today it is customary to have the natural numbers based at `0`.
 Adapting for this, the seventh and eighth axioms assert that
 
-1.  For any two natural numbers `m` and `n`, we have
+1. For any two natural numbers `m` and `n`, we have
 ```text
 (m=n)↔ (succ-ℕ(m)=succ-ℕ(n)).
 ```
 
-2.  For any natural number `n`, we have `0≠succ-ℕ(n)`.
+2. For any natural number `n`, we have `0≠succ-ℕ(n)`.
 
 ## Theorem 6.4.1
 

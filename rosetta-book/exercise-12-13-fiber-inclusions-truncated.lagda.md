@@ -10,9 +10,9 @@ module exercise-12-13-fiber-inclusions-truncated where
 Consider a type `A`.
 Show that the following are equivalent:
 
-1.  The type `A` is `(k+1)`-truncated.
+1. The type `A` is `(k+1)`-truncated.
 
-2.  For any type family `B` over `A` and any `a:A`, the **fiber inclusion**
+2. For any type family `B` over `A` and any `a:A`, the **fiber inclusion**
 ```text
 i_a: B(a)→Σ(x:A) B(x)
 ```

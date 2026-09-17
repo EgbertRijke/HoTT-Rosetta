@@ -15,9 +15,9 @@ _∘ f : (Π(p:P) Q(p))→(Π(x:A) Q(f(x)))
 is an equivalence.
 Show that the following are equivalent:
 
-1.  The map `f` is a propositional truncation.
+1. The map `f` is a propositional truncation.
 
-2.  The map `f` satisfies the dependent universal property of the propositional truncation.
+2. The map `f` satisfies the dependent universal property of the propositional truncation.
 
 ## Solution
 

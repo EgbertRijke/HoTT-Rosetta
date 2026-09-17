@@ -26,12 +26,12 @@ The type theoretic well-ordering principle of `ℕ` is therefore formulated usin
 
 Let `P` be a family over `ℕ`, not necessarily decidable.
 
-1.  We say that a natural number `n` is a **lower bound** for `P` if it comes equipped with an element of type
+1. We say that a natural number `n` is a **lower bound** for `P` if it comes equipped with an element of type
 ```text
 is-lower-bound_P(n)≔ Π(x:ℕ) P(x)→ (n≤ x).
 ```
 
-2.  We say that a natural number `n` is an **upper bound** for `P` if it comes equipped with an element of type
+2. We say that a natural number `n` is an **upper bound** for `P` if it comes equipped with an element of type
 ```text
 is-upper-bound_P(n)≔ Π(x:ℕ) P(x)→ (x≤ n).
 ```

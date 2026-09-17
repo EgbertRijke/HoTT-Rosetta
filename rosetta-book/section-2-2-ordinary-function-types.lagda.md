@@ -24,7 +24,7 @@ A term `f : Π(x:A) B` is a function that takes an argument `x : A` and returns 
 
 If `f : A → B` is a function, then the type `A` is also called the **domain** of `f`, and the type `B` is also called the **codomain** of `f`.
 
-Sometimes we will also write `Bᴬ` for the type `A → B`.  Formally, we make such definitions by adding one more line to the above derivation:
+Sometimes we will also write `Bᴬ` for the type `A → B`. Formally, we make such definitions by adding one more line to the above derivation:
 
 ```text
       Γ ⊢ A type    Γ ⊢ B type

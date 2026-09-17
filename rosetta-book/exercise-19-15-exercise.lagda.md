@@ -10,7 +10,7 @@ module exercise-19-15-exercise where
 Consider a group `G` in a universe `𝒰` and a pointed connected `1`-type `B`.
 In analogy with Theorem 18.2.3, show that the following are equivalent:
 
-1.  The pointed connected `1`-type `B` comes equipped with a group homomorphism
+1. The pointed connected `1`-type `B` comes equipped with a group homomorphism
 ```text
 φ:G → Ω(B)
 ```
@@ -31,12 +31,12 @@ Arrows:
 ```
     commutes.
 
-2.  The pointed connected `1`-type `B` comes equipped with a group isomorphism
+2. The pointed connected `1`-type `B` comes equipped with a group isomorphism
 ```text
 φ:G≅ Ω(B).
 ```
 
-3.  There is an embedding `i:B↪ G-Set_𝒰` such that the triangle
+3. There is an embedding `i:B↪ G-Set_𝒰` such that the triangle
 <!-- rosetta-diagram: ff7792342a61; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*

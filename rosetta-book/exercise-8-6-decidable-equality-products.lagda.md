@@ -20,13 +20,13 @@ open import section-5-4-transport
 Consider two types `A` and `B`.
 Show that the following are equivalent:
 
-1.  There are functions
+1. There are functions
 ```text
 B → has-decidable-eq(A)
 A → has-decidable-eq(B).
 ```
 
-2.  The product `A× B` has decidable equality.
+2. The product `A× B` has decidable equality.
 
 Conclude that if both `A` and `B` have decidable equality, then so does `A× B`.
 

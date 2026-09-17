@@ -89,21 +89,21 @@ This follows from Proposition 8.1.8, where we showed that `Fin{k}` has decidable
 
 We make the following claims about countings:
 
-1.  Consider two types `A` and `B`.
+1. Consider two types `A` and `B`.
 The following are equivalent:
 
-    1.  Both `A` and `B` come equipped with a counting.
+    1. Both `A` and `B` come equipped with a counting.
 
-    2.  The coproduct `A+B` comes equipped with a counting.
+    2. The coproduct `A+B` comes equipped with a counting.
 
-2.  Consider a type family `B` indexed by a type `A`.
+2. Consider a type family `B` indexed by a type `A`.
 Consider the following three conditions:
 
-    1.  The type `A` comes equipped with a counting.
+    1. The type `A` comes equipped with a counting.
 
-    2.  The type `B(x)` comes equipped with a counting, for each `x:A`.
+    2. The type `B(x)` comes equipped with a counting, for each `x:A`.
 
-    3.  The type `Σ(x:A) B(x)` comes equipped with a counting.
+    3. The type `Σ(x:A) B(x)` comes equipped with a counting.
 
 If (a) holds, then (b) holds if and only if (c) holds.
 Furthermore, if both (b) and (c) hold and if `B` comes equipped with a section `f:Π(x:A) B(x)`, then (a) holds.
@@ -199,9 +199,9 @@ Any counting of `A+B` therefore induces countings of `A` and of `B`. ◻
 Consider two types `A` and `B`.
 We make two claims:
 
-1.  If both `A` and `B` come equipped with a counting, then the product `A× B` has a counting.
+1. If both `A` and `B` come equipped with a counting, then the product `A× B` has a counting.
 
-2.  If the product `A× B` comes equipped with a counting, then we have two functions
+2. If the product `A× B` comes equipped with a counting, then we have two functions
 ```text
 B → count(A)
 A → count(B).

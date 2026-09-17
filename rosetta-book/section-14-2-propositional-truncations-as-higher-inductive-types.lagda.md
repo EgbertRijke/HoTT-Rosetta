@@ -32,9 +32,9 @@ The propositional truncation `‖A‖` of a type `A` was one of the first exampl
 The idea of higher inductive types is similar to the idea of ordinary inductive types, with the added feature that constructors of higher inductive types can also be used to generate *identifications*.
 In other words, higher inductive types may be specified by two kinds of constructors:
 
-1.  The *point constructors* are used to generate elements of the higher inductive types.
+1. The *point constructors* are used to generate elements of the higher inductive types.
 
-2.  The *path constructors* are used to generate identifications between elements of the higher inductive type.
+2. The *path constructors* are used to generate identifications between elements of the higher inductive type.
 
 The induction principle of the higher inductive type then tells us how to construct sections of families over it.
 The rules for higher inductive types therefore come in four sets, just as the rules for ordinary inductive types in Chapter 4: the formation rule, the constructors, the induction principle, and the computation rules.
@@ -164,7 +164,7 @@ h:Π(t:‖A‖) Q(t).
 The induction principle will imply that such a dependent function `h` is entirely determined by its behavior on the constructors of `‖A‖`.
 The type `‖A‖` has two constructors: a point constructor `η` and a path constructor `α`, so we have two cases to consider:
 
-1.  Applying `h` to points of the form `η(a)` gives us a dependent function
+1. Applying `h` to points of the form `η(a)` gives us a dependent function
 ```text
 h∘ η : Π(a:A) Q(η(a)).
 ```
@@ -173,7 +173,7 @@ The induction principle of `‖A‖` has therefore the requirement that we can c
 f:Π(a:A) Q(η(a))
 ```
 
-2.  To apply `h` to the paths `α(x,y)`, we need to use the dependent action on paths from Definition 5.4.2.
+2. To apply `h` to the paths `α(x,y)`, we need to use the dependent action on paths from Definition 5.4.2.
 For each `x,y:‖A‖` we obtain an identification
 ```text
 apd_{h}(α(x,y)):tr_Q(α(x,y),h(x))=h(y)

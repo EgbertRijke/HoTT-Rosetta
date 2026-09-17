@@ -107,9 +107,9 @@ On the other hand, if each type `B(x)` is inhabited, then there are no such cons
 Consider a family `B` of types over `A`.
 Then the following are equivalent:
 
-1.  For each `x:A`, the type `B(x)` is nonempty.
+1. For each `x:A`, the type `B(x)` is nonempty.
 
-2.  The `W`-type `W(A,B)` is empty.
+2. The `W`-type `W(A,B)` is empty.
 
 In particular, if each `B(x)` is inhabited, then `W(A,B)` is empty.
 

@@ -28,15 +28,15 @@ We show in the following theorem that a map `f:A→ B` is an equivalence if and 
 
 For any map `f:A→ B`, the following are equivalent:
 
-1.  `f` is an equivalence.
+1. `f` is an equivalence.
 
-2.  For any type family `P` over `B` the map
+2. For any type family `P` over `B` the map
 ```text
 (Π(y:B) P(y))→(Π(x:A) P(f(x)))
 ```
     given by `h↦ h∘ f` is an equivalence.
 
-3.  For any type `X` the map
+3. For any type `X` the map
 ```text
 (B→ X)→ (A→ X)
 ```

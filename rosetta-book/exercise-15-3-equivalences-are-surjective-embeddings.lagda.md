@@ -10,9 +10,9 @@ module exercise-15-3-equivalences-are-surjective-embeddings where
 Consider a map `f:A→ B`.
 Show that the following are equivalent:
 
-1.  `f` is an equivalence.
+1. `f` is an equivalence.
 
-2.  `f` is both surjective and an embedding.
+2. `f` is both surjective and an embedding.
 
 ## Solution
 

@@ -108,7 +108,7 @@ We combine this derivation with the induction principle of `ℕ` to complete the
      m : ℕ ⊢ add-ℕ(m) ≔ ind-ℕ(add-0(m),add-S(m)) : ℕ → ℕ
 ```
 
-The asserted judgmental equalities then hold by the computation rules for `ℕ`.  □
+The asserted judgmental equalities then hold by the computation rules for `ℕ`. □
 
 ```agda
 add-ℕ : ℕ → ℕ → ℕ

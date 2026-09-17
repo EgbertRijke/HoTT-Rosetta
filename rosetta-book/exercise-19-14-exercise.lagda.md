@@ -17,13 +17,13 @@ We say that a type `A:𝒰` is a **`P`-type** if `P(A)` holds, we say that a map
 Now consider a connected type `A:𝒰` equipped with an element `a:A`, and consider a family of types `B(x):𝒰` indexed by `x:A`.
 Show that the following are equivalent:
 
-1.  Every family of maps
+1. Every family of maps
 ```text
 f:Π(x:A) (a=x)→ B(x)
 ```
     is a family of `P`-maps.
 
-2.  The total space
+2. The total space
 ```text
 Σ(x:A) B(x)
 ```

@@ -45,15 +45,15 @@ In the following proposition we show that, if we omit the condition that `B` is 
 Consider a map `f:A→ B`.
 Then the following are equivalent:
 
-1.  The map `f:A→ B` is surjective.
+1. The map `f:A→ B` is surjective.
 
-2.  The map `f:A→ B` satisfies the **dependent universal property of a surjective map**: For any family `P` of propositions over `B`, the precomposition map
+2. The map `f:A→ B` satisfies the **dependent universal property of a surjective map**: For any family `P` of propositions over `B`, the precomposition map
 ```text
 _∘ f : (Π(y:B) P(y))→(Π(x:A) P(f(x)))
 ```
     is an equivalence. In other words, any subtype of `B` that contains all the elements of the form `f(x)` contains all the elements of `B`.
 
-3.  For any `k≥-2`, and for any family `P` of `(k+1)`-truncated types over `B`, the precomposition map
+3. For any `k≥-2`, and for any family `P` of `(k+1)`-truncated types over `B`, the precomposition map
 ```text
 _∘ f : (Π(y:B) P(y))→(Π(x:A) P(f(x)))
 ```
@@ -128,9 +128,9 @@ As a corollary we obtain that any surjective map into a proposition satisfies th
 
 For any map `f:A→ P` into a proposition `P`, the following are equivalent:
 
-1.  The map `f` satisfies the universal property of the propositional truncation of `A`.
+1. The map `f` satisfies the universal property of the propositional truncation of `A`.
 
-2.  The map `f` is surjective.
+2. The map `f` is surjective.
 
 <!-- rosetta-item-end: corollary-15.2.4 -->
 
@@ -158,9 +158,9 @@ Arrows:
 in which `m` is an embedding.
 Then the following are equivalent:
 
-1.  The embedding `m` satisfies the universal property of the image inclusion of `f`.
+1. The embedding `m` satisfies the universal property of the image inclusion of `f`.
 
-2.  The map `q` is surjective.
+2. The map `q` is surjective.
 
 ### Proof
 

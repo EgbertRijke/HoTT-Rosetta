@@ -32,7 +32,7 @@ For any two types `X` and `Y`, there is a map
 *Proof.* We prove the claim in four steps.
 We will write `i` for `inl:X→ X+unit` and also for `inl:Y→ Y+unit`, and we will write `⋆` for `inr(⋆):X+unit` and also for `inr(⋆):Y+unit`.
 
-1.  We first show that for any equivalence `e:X+unit≃ Y+unit` and any `x:X` equipped with an identification `p:e(i(x))=⋆`, that there is an element
+1. We first show that for any equivalence `e:X+unit≃ Y+unit` and any `x:X` equipped with an identification `p:e(i(x))=⋆`, that there is an element
 ```text
 star-value(e,x,p):Y
 ```
@@ -45,7 +45,7 @@ The elements `i(x)` and `⋆` are distinct, so it follows that the elements `e(i
 In particular, we have `e(⋆)≠⋆`.
 Therefore it follows that there is an element `y:Y` equipped with an identification `i(y)=e(⋆)`.
 
-2.  Next, we construct for every equivalence `e:X+unit≃ Y+unit` a map `f:X→ Y` equipped with identifications
+2. Next, we construct for every equivalence `e:X+unit≃ Y+unit` a map `f:X→ Y` equipped with identifications
 ```text
 β : Π(y:Y) (e(i(x))=i(y))→ (f(x)=y)
 γ : Π(p:e(i(x))=⋆) f(x)=star-value(e,x,p).
@@ -74,14 +74,14 @@ f(x) ≐ f'(x,e(i(x)),refl)
 ```
     for any `p:e(i(x))=⋆`.
 
-3.  The inverse function `g:Y→ X` is constructed in the same way as the function `f:X→ Y`, using the equivalence `e^{-1}:Y+unit≃ X+unit`.
+3. The inverse function `g:Y→ X` is constructed in the same way as the function `f:X→ Y`, using the equivalence `e^{-1}:Y+unit≃ X+unit`.
 This function comes equipped with
 ```text
 \delta : Π(x:X) (e^{-1}(i(y))=i(x))→ (g(y)=x)
 ε : Π(p:e^{-1}(i(y))=⋆) g(y)=star-value(e^{-1},y,p).
 ```
 
-4.  It remains to show that `f` and `g` are inverse to each other.
+4. It remains to show that `f` and `g` are inverse to each other.
 The proof that `g` is a retraction of `f` is similar to the proof that `g` is a section of `f`, so we will only prove the latter.
 In other words, we will construct an identification
 ```text

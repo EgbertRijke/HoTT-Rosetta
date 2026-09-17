@@ -46,15 +46,15 @@ In the following theorem we prove several conditions that are equivalent to bein
 Consider a map `f:A→ B` into a set `B`.
 Then the following are equivalent:
 
-1.  The map `f` is a set truncation.
+1. The map `f` is a set truncation.
 
-2.  The map `f` satisfies the **dependent universal property** of the set truncation: For every family `X` of sets over `B`, the precomposition function
+2. The map `f` satisfies the **dependent universal property** of the set truncation: For every family `X` of sets over `B`, the precomposition function
 ```text
 _∘ f : (Π(b:B) X(b))→(Π(a:A) X(f(a)))
 ```
     is an equivalence.
 
-3.  The map `f` is surjective and effective with respect to the equivalence relation `x,y↦‖x=y‖`, i.e., we have equivalences
+3. The map `f` is surjective and effective with respect to the equivalence relation `x,y↦‖x=y‖`, i.e., we have equivalences
 ```text
 (f(x)=f(y))≃ ‖x=y‖
 ```
@@ -174,9 +174,9 @@ Using the notion of connectivity, we can add one more property to the list of eq
 Consider a map `f:A→ B` into a set `B`.
 Then the following are equivalent:
 
-1.  The map `f` is a set truncation.
+1. The map `f` is a set truncation.
 
-2.  The map `f` is connected.
+2. The map `f` is connected.
 
 ### Proof
 

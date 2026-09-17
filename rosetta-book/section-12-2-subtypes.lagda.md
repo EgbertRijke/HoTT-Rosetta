@@ -300,9 +300,9 @@ module _
 Consider a family `B` of types over `A`.
 The following are equivalent:
 
-1.  The map `pr1 : (Σ(x : A) B(x)) → A` is an embedding.
+1. The map `pr1 : (Σ(x : A) B(x)) → A` is an embedding.
 
-2.  The type `B(x)` is a proposition for each `x : A`.
+2. The type `B(x)` is a proposition for each `x : A`.
 
 ### Proof
 

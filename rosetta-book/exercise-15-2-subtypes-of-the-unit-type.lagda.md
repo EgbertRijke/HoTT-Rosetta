@@ -22,9 +22,9 @@ Use this fact to construct an equivalence
 Consider a map `f:A→ P` into a proposition `P`.
 Show that the following are equivalent:
 
-1.  The map `f` is a propositional truncation of `A`.
+1. The map `f` is a propositional truncation of `A`.
 
-2.  The constant map `P→unit` satisfies the universal property of the image of the constant map `A→unit`.
+2. The constant map `P→unit` satisfies the universal property of the image of the constant map `A→unit`.
 
 </div>
 

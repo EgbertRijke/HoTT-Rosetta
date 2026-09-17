@@ -91,9 +91,9 @@ abstract
 Let `A` be a type.
 The following are equivalent:
 
-1.  The type `A` is contractible.
+1. The type `A` is contractible.
 
-2.  The type `A` comes equipped with an element `a:A`, and satisfies singleton induction.
+2. The type `A` comes equipped with an element `a:A`, and satisfies singleton induction.
 
 ### Proof
 

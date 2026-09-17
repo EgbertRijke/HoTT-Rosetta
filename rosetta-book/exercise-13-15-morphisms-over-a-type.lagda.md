@@ -50,15 +50,15 @@ Given a morphism `(h,H):hom-slice_X(f,g)` over `X`, we also say that `α(h,H)` i
 
 Given `(h,H):hom-slice_X(f,g)`, show that the following are equivalent:
 
-1.  The map `h:A→ B` is an equivalence.
+1. The map `h:A→ B` is an equivalence.
 
-2.  The action on fibers
+2. The action on fibers
 ```text
 α(h,H):Π(x:X) fib(f, x)→fib(g, x)
 ```
     is a family of equivalences.
 
-3.  The precomposition function
+3. The precomposition function
 ```text
 _∘ (h,H) : hom-slice_X(g,i)→hom-slice_X(f,i)
 ```

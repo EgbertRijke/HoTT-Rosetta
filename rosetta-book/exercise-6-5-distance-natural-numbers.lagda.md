@@ -40,11 +40,11 @@ In other words, the distance between two natural numbers is the *symmetric diffe
 
 Show that `dist-ℕ` satisfies the axioms of a metric:
 
-1.  `(m=n)↔ (dist-ℕ(m,n)=0)`,
+1. `(m=n)↔ (dist-ℕ(m,n)=0)`,
 
-2.  `dist-ℕ(m,n) = dist-ℕ(n,m)`,
+2. `dist-ℕ(m,n) = dist-ℕ(n,m)`,
 
-3.  `dist-ℕ(m,n) ≤dist-ℕ(m,k)+dist-ℕ(k,n)`.
+3. `dist-ℕ(m,n) ≤dist-ℕ(m,k)+dist-ℕ(k,n)`.
 
 Show that `dist-ℕ(m,n)=dist-ℕ(m,k)+dist-ℕ(k,n)` if and only if either both `m≤ k` and `k≤ n` hold or both `n≤ k` and `k≤ m` hold.
 

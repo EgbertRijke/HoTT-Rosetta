@@ -32,11 +32,11 @@ The ordering relation `≤` on `ℕ` is defined recursively by
 
 Show that `≤` satisfies the axioms of a *poset*, i.e., show that `≤` is
 
-1.  reflexive,
+1. reflexive,
 
-2.  antisymmetric, and
+2. antisymmetric, and
 
-3.  transitive.
+3. transitive.
 
 Show that
 ```text

@@ -33,19 +33,19 @@ By Theorem 11.2.2 there are three equivalent ways of doing this.
 Consider a dependent function `f:Π(x:A) B(x)`.
 The following are equivalent:
 
-1.  The **function extensionality principle** holds at `f`: for each `g:Π(x:A) B(x)`, the family of maps
+1. The **function extensionality principle** holds at `f`: for each `g:Π(x:A) B(x)`, the family of maps
 ```text
 htpy-eq:(f=g)→ (f~ g)
 ```
     defined by `htpy-eq(refl):=refl-htpy_{f}` is a family of equivalences.
 
-2.  The total space
+2. The total space
 ```text
 Σ(g:Π(x:A) B(x)) f~ g
 ```
     is contractible.
 
-3.  The principle of **homotopy induction**: for any family of types `P(g,H)` indexed by `g:Π(x:A) B(x)` and `H:f~ g`, the evaluation function
+3. The principle of **homotopy induction**: for any family of types `P(g,H)` indexed by `g:Π(x:A) B(x)` and `H:f~ g`, the evaluation function
 ```text
 (Π(g:Π(x:A) B(x)) Π(H:f~ g) P(g,H))→ P(f,refl-htpy_f),
 ```
@@ -176,13 +176,13 @@ The following theorem is stated with respect to an arbitrary universe `𝒰`, be
 Consider a universe `𝒰`.
 The following are equivalent:
 
-1.  The function extensionality principle holds in `𝒰`: For every type family `B` over `A` in `𝒰` and any `f,g:Π(x:A) B(x)`, the map
+1. The function extensionality principle holds in `𝒰`: For every type family `B` over `A` in `𝒰` and any `f,g:Π(x:A) B(x)`, the map
 ```text
 htpy-eq : (f=g)→ (f~ g)
 ```
     is an equivalence.
 
-2.  The **weak function extensionality principle** holds in `𝒰`: For every type family `B` over `A` in `𝒰` one has
+2. The **weak function extensionality principle** holds in `𝒰`: For every type family `B` over `A` in `𝒰` one has
 ```text
 (Π(x:A) is-contr(B(x)))→is-contr(Π(x:A) B(x)).
 ```

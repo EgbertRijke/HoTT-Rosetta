@@ -123,9 +123,9 @@ We will use the univalence axiom to prove this fact.
 Consider two univalent universes `𝒰` and `𝒱`, and let `X` and `Y` be `𝒰`-small multisets in `𝒱`.
 We make two claims:
 
-1.  The type `X=Y` is `𝒰`-small.
+1. The type `X=Y` is `𝒰`-small.
 
-2.  The type `X∈ Y` is `𝒰`-small.
+2. The type `X∈ Y` is `𝒰`-small.
 
 ### Proof
 
@@ -179,9 +179,9 @@ for any multiset `{f(x)| x:A}` of which the type `A` is equipped with an equival
 
 The inclusion function `i` of `𝒰`-small multisets in `𝒱` into the multisets in `𝒰` satisfies the following properties
 
-1.  For each `𝒰`-small multiset `X` in `𝒱`, the multiset `i(X)` in `𝒰` is `𝒱`-small.
+1. For each `𝒰`-small multiset `X` in `𝒱`, the multiset `i(X)` in `𝒰` is `𝒱`-small.
 
-2.  The induced map
+2. The induced map
 ```text
 (Σ(X:M_𝒱) is-small_M_𝒰(X))→(Σ(Y:M_𝒰) is-small_M_𝒱(Y))
 ```

@@ -23,22 +23,22 @@ If `x\prec y` holds, we say that `x` has **strictly lower rank** than `y`.
 Show that the rank comparison relation defines a preordering on `W(A,B)`, i.e., show that `\preceq` is reflexive and transitve.
 Furthermore, prove the following properties, in which `<` is the strict ordering on `W(A,B)` defined in Exercise 20.5:
 
-1.  `(x \preceq y) ↔ ∀_{(x'<x)}∃_{(y'<y)} x'\preceq y'`
+1. `(x \preceq y) ↔ ∀_{(x'<x)}∃_{(y'<y)} x'\preceq y'`
 
-2.  `(x < y)→ (x\preceq y)`
+2. `(x < y)→ (x\preceq y)`
 
-3.  `(x < y) → (y \npreceq x)`
+3. `(x < y) → (y \npreceq x)`
 
-4.  `is-constant_W(x)↔ ∀_{(y:W(A,B))} x \preceq y`.
+4. `is-constant_W(x)↔ ∀_{(y:W(A,B))} x \preceq y`.
 
 Show that the relation `\prec` on `W(A,B)` is a strict ordering on `W(A,B)`, i.e., show that it is irreflexive and transitive.
 Furthermore, prove the following properties:
 
-1.  `(x < y)→ (x\prec y)`
+1. `(x < y)→ (x\prec y)`
 
-2.  `(x \prec y)→ (x\preceq y)`
+2. `(x \prec y)→ (x\preceq y)`
 
-3.  `∀_{(y\preceq y')}∀_{(x'\preceq x)}(x\prec y)→ (x'\prec y')`.
+3. `∀_{(y\preceq y')}∀_{(x'\preceq x)}(x\prec y)→ (x'\prec y')`.
 
 </div>
 
@@ -56,11 +56,11 @@ Show that if each `B(x)` is finite, then the rank poset `(\rank(A,B),\preceq)` i
 
 Show that the strict ordering `\prec` extends to a relation `\prec` on `\rank(A,B)` with the following properties:
 
-1.  We have `(x\prec y)↔ (η(x)\precη(y))` for every `x,y:W(A,B)`.
+1. We have `(x\prec y)↔ (η(x)\precη(y))` for every `x,y:W(A,B)`.
 
-2.  We have `(x\prec y)→ (x\preceq y)` for every `x,y:\rank(A,B)`.
+2. We have `(x\prec y)→ (x\preceq y)` for every `x,y:\rank(A,B)`.
 
-3.  The relation `\prec` is transitive and irreflexive on `\rank(A,B)`.
+3. The relation `\prec` is transitive and irreflexive on `\rank(A,B)`.
 
 We will call the strictly ordered set `(R(A,B),\prec)` the **(strict) rank** of the W-type `W(A,B)`.
 

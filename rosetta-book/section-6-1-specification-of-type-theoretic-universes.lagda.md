@@ -41,7 +41,7 @@ Instead of assuming that the universe contains itself, we will assume that there
 
 A **universe** in type theory is a type `𝒰` in the empty context, equipped with a type family `Ty` over `𝒰` called a **universal family**, that is closed under the type forming operations in the sense that it comes equipped with the following structure:
 
-1.  `𝒰` is closed under `Π`, in the sense that it comes equipped with a function
+1. `𝒰` is closed under `Π`, in the sense that it comes equipped with a function
 ```text
 Π̌ :Π(X:𝒰) (Ty(X)→𝒰)→𝒰
 ```
@@ -51,7 +51,7 @@ Ty(Π̌(X,Y))≐ Π(x:Ty(X)) Ty(Y(x)).
 ```
     holds, for every `X:𝒰` and `Y:Ty(X)→𝒰`.
 
-2.  `𝒰` is closed under `Σ` in the sense that it comes equipped with a function
+2. `𝒰` is closed under `Σ` in the sense that it comes equipped with a function
 ```text
 Σ̌ :Π(X:𝒰) (Ty(X)→𝒰)→𝒰
 ```
@@ -61,7 +61,7 @@ Ty(Σ̌(X,Y)) ≐ Σ(x:Ty(X)) Ty(Y(x))
 ```
     holds, for every `X:𝒰` and `Y:Ty(X)→𝒰`.
 
-3.  `𝒰` is closed under identity types, in the sense that it comes equipped with a function
+3. `𝒰` is closed under identity types, in the sense that it comes equipped with a function
 ```text
 Ǐ : Π(X:𝒰) Ty(X)→(Ty(X)→𝒰)
 ```
@@ -71,13 +71,13 @@ Ty(Ǐ(X,x,y))≐ (x = y)
 ```
     holds, for every `X:𝒰` and `x,y:Ty(X)`.
 
-4.  `𝒰` is closed under coproducts, in the sense that it comes equipped with a function
+4. `𝒰` is closed under coproducts, in the sense that it comes equipped with a function
 ```text
 \mathbin{+̌}:𝒰→ (𝒰→𝒰)
 ```
     that satisfies `Ty(X\mathbin{+̌}Y)≐ Ty(X)+Ty(Y)`.
 
-5.  `𝒰` contains elements `empty̌,uniť,ℕ̌:𝒰` that satisfy the judgmental equalities
+5. `𝒰` contains elements `empty̌,uniť,ℕ̌:𝒰` that satisfy the judgmental equalities
 ```text
 Ty(empty̌) ≐ empty
 Ty(uniť) ≐ unit

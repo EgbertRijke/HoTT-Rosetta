@@ -18,9 +18,9 @@ sec(f)×Π(x,y:A) sec(ap{f}(x,y)).
 ```
 Show that for any map `f:A→ B` the following are equivalent:
 
-1.  The map `f` is an equivalence.
+1. The map `f` is an equivalence.
 
-2.  The map `f` is path-split.
+2. The map `f` is path-split.
 
 ## Solution
 

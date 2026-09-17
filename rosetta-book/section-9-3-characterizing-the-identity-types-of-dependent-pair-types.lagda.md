@@ -281,3 +281,60 @@ Since `eq-pair(refl,refl)` computes to `refl`, we may simply take `refl(refl)`. 
   equiv-pair-eq-Σ : (s t : Σ A B) → (s ＝ t) ≃ Eq-Σ s t
   equiv-pair-eq-Σ s t = (pair-eq-Σ , is-equiv-pair-eq-Σ s t)
 ```
+
+## Supplemental definitions
+
+### Characterizing equality of cartesian product types
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  Eq-product : (s t : A × B) → UU (l1 ⊔ l2)
+  Eq-product s t = (pr1 s ＝ pr1 t) × (pr2 s ＝ pr2 t)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  eq-pair' : {s t : A × B} → Eq-product s t → s ＝ t
+  eq-pair' (p , q) = ap-binary pair p q
+
+  eq-pair : {s t : A × B} → pr1 s ＝ pr1 t → pr2 s ＝ pr2 t → s ＝ t
+  eq-pair p q = eq-pair' (p , q)
+
+  pair-eq : {s t : A × B} → s ＝ t → Eq-product s t
+  pr1 (pair-eq α) = ap pr1 α
+  pr2 (pair-eq α) = ap pr2 α
+
+  is-retraction-pair-eq :
+    {s t : A × B} → pair-eq {s} {t} ∘ eq-pair' {s} {t} ~ id
+  is-retraction-pair-eq (refl , refl) = refl
+
+  is-section-pair-eq :
+    {s t : A × B} → eq-pair' {s} {t} ∘ pair-eq {s} {t} ~ id
+  is-section-pair-eq refl = refl
+
+  abstract
+    is-equiv-eq-pair :
+      (s t : A × B) → is-equiv (eq-pair' {s} {t})
+    is-equiv-eq-pair s t =
+      is-equiv-is-invertible pair-eq is-section-pair-eq is-retraction-pair-eq
+
+  equiv-eq-pair :
+    (s t : A × B) → Eq-product s t ≃ (s ＝ t)
+  pr1 (equiv-eq-pair s t) = eq-pair'
+  pr2 (equiv-eq-pair s t) = is-equiv-eq-pair s t
+
+  abstract
+    is-equiv-pair-eq :
+      (s t : A × B) → is-equiv (pair-eq {s} {t})
+    is-equiv-pair-eq s t =
+      is-equiv-is-invertible eq-pair' is-retraction-pair-eq is-section-pair-eq
+
+  equiv-pair-eq :
+    (s t : A × B) → (s ＝ t) ≃ Eq-product s t
+  pr1 (equiv-pair-eq s t) = pair-eq
+  pr2 (equiv-pair-eq s t) = is-equiv-pair-eq s t
+```

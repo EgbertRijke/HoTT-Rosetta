@@ -9,9 +9,9 @@ module exercise-19-1-exercise where
 
 Consider a set `X` equipped with an associative binary operation `μ:X→ (X→ X)`, and suppose that
 
-1.  The type `X` is inhabited, i.e., `‖X‖` holds.
+1. The type `X` is inhabited, i.e., `‖X‖` holds.
 
-2.  The maps `μ(x,_)` and `μ(_,y)` are equivalences, for each `x,y:X`.
+2. The maps `μ(x,_)` and `μ(_,y)` are equivalences, for each `x,y:X`.
 
 Show that `X` is a group.
 

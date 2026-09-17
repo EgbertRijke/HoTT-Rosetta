@@ -16,7 +16,7 @@ open import section-10-4-equivalences-are-contractible-maps
 open import section-12-1-propositions
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-4-composing-with-equivalences
-open import exercise-4-3-negation
+open import exercise-4-3-double-negation-logic
 open import exercise-10-1-identity-types-contractible
 open import exercise-12-6-truncated-sigma-types
 ```
@@ -47,7 +47,7 @@ This property of `f` is called the **universal property of the propositional tru
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (P : Prop l2) (f : A → type-Prop P)
+  {l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P)
   where
 
   precomp-Prop :
@@ -55,7 +55,7 @@ module _
     (type-Prop P → type-Prop Q) → A → type-Prop Q
   precomp-Prop Q g = g ∘ f
 
-  is-propositional-truncation : Typeω
+  is-propositional-truncation : UUω
   is-propositional-truncation =
     {l : Level} (Q : Prop l) → is-equiv (precomp-Prop Q)
 ```
@@ -91,11 +91,11 @@ Arrows:
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1}
+  {l1 l2 : Level} {A : UU l1}
   (P : Prop l2) (f : A → type-Prop P)
   where
 
-  universal-property-propositional-truncation : Typeω
+  universal-property-propositional-truncation : UUω
   universal-property-propositional-truncation =
     {l : Level} (Q : Prop l) (g : A → type-Prop Q) →
     is-contr (Σ ((type-Prop P → type-Prop Q)) (λ h → h ∘ f ＝ g))
@@ -106,7 +106,7 @@ module _
 ```agda
 abstract
   universal-property-is-propositional-truncation :
-    {l1 l2 : Level} {A : Type l1} (P : Prop l2) (f : A → type-Prop P) →
+    {l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
     is-propositional-truncation P f →
     universal-property-propositional-truncation P f
   universal-property-is-propositional-truncation P f H Q =
@@ -118,7 +118,7 @@ abstract
 ```agda
 abstract
   is-propositional-truncation-universal-property :
-    {l1 l2 : Level} {A : Type l1} (P : Prop l2) (f : A → type-Prop P) →
+    {l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
     universal-property-propositional-truncation P f →
     is-propositional-truncation P f
   is-propositional-truncation-universal-property P f H Q =
@@ -130,7 +130,7 @@ abstract
 ```agda
 abstract
   map-is-propositional-truncation :
-    {l1 l2 l3 : Level} {A : Type l1} (P : Prop l2) (f : A → type-Prop P) →
+    {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
     is-propositional-truncation P f →
     (Q : Prop l3) (g : A → type-Prop Q) → (type-Prop P → type-Prop Q)
   map-is-propositional-truncation P f is-ptr-f Q g =
@@ -139,7 +139,7 @@ abstract
         ( universal-property-is-propositional-truncation P f is-ptr-f Q g))
 
   eq-is-propositional-truncation :
-    {l1 l2 l3 : Level} {A : Type l1} (P : Prop l2) (f : A → type-Prop P) →
+    {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
     (is-ptr-f : is-propositional-truncation P f) →
     (Q : Prop l3) (g : A → type-Prop Q) →
     map-is-propositional-truncation P f is-ptr-f Q g ∘ f ＝ g
@@ -169,11 +169,11 @@ for every proposition `Q`.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1}
+  {l1 l2 : Level} {A : UU l1}
   (P : Prop l2) (f : A → type-Prop P)
   where
 
-  extension-property-propositional-truncation : Typeω
+  extension-property-propositional-truncation : UUω
   extension-property-propositional-truncation =
     {l : Level} (Q : Prop l) → (A → type-Prop Q) → (type-Prop P → type-Prop Q)
 ```
@@ -183,7 +183,7 @@ module _
 ```agda
 abstract
   is-propositional-truncation-extension-property :
-    { l1 l2 : Level} {A : Type l1} (P : Prop l2)
+    { l1 l2 : Level} {A : UU l1} (P : Prop l2)
     ( f : A → type-Prop P) →
     extension-property-propositional-truncation P f →
     is-propositional-truncation P f
@@ -198,7 +198,7 @@ abstract
 
 ```agda
 extension-property-is-propositional-truncation :
-  {l1 l2 : Level} {A : Type l1} (P : Prop l2) (f : A → type-Prop P) →
+  {l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
   is-propositional-truncation P f →
   extension-property-propositional-truncation P f
 extension-property-is-propositional-truncation P f H =
@@ -220,11 +220,11 @@ f:A→ P and f':A→ P'
 into two propositions `P` and `P'`.
 If any two of the following three assertions hold, so does the third:
 
-1.  The map `f` is a propositional truncation of `A`.
+1. The map `f` is a propositional truncation of `A`.
 
-2.  The map `f'` is a propositional truncation of `A`.
+2. The map `f'` is a propositional truncation of `A`.
 
-3.  There is a (unique) equivalence `P≃ P'`.
+3. There is a (unique) equivalence `P≃ P'`.
 
 ### Proof
 
@@ -260,7 +260,7 @@ and this implies that (i) holds if and only if (ii) holds. ◻
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
 
   is-prop-equiv-is-prop : is-prop A → is-prop B → is-prop (A ≃ B)
@@ -281,7 +281,7 @@ module _
 
 ```agda
 equiv-is-propositional-truncation :
-  {l1 l2 l3 : Level} {A : Type l1} (P : Prop l2) (P' : Prop l3) →
+  {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (P' : Prop l3) →
   (f : A → type-Prop P) (f' : A → type-Prop P') →
   is-propositional-truncation P f → is-propositional-truncation P' f' →
   type-Prop P ≃ type-Prop P'
@@ -298,7 +298,7 @@ equiv-is-propositional-truncation P P' f f' H K =
 ```agda
 abstract
   is-ptruncation-is-ptruncation-is-equiv :
-    {l1 l2 l3 : Level} {A : Type l1} (P : Prop l2) (P' : Prop l3)
+    {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (P' : Prop l3)
     (f : A → type-Prop P) (f' : A → type-Prop P') (h : (type-Prop P → type-Prop P')) →
     is-equiv h → is-propositional-truncation P f →
     is-propositional-truncation P' f'
@@ -310,7 +310,7 @@ abstract
 
 abstract
   is-ptruncation-is-equiv-is-ptruncation :
-    {l1 l2 l3 : Level} {A : Type l1} (P : Prop l2) (P' : Prop l3)
+    {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (P' : Prop l3)
     (f : A → type-Prop P) (f' : A → type-Prop P') (h : (type-Prop P → type-Prop P')) →
     is-propositional-truncation P' f' → is-equiv h →
     is-propositional-truncation P f
@@ -355,7 +355,7 @@ We will therefore add new rules to the type theory to ensure their existence.
 
 ```agda
 is-prop-double-negation :
-  {l : Level} {A : Type l} → is-prop (¬¬ A)
+  {l : Level} {A : UU l} → is-prop (¬¬ A)
 is-prop-double-negation = is-prop-neg
 ```
 
@@ -363,7 +363,7 @@ is-prop-double-negation = is-prop-neg
 
 ```agda
 is-equiv-precomp-double-negation :
-  {l1 l2 : Level} (A : Type l1) (Q : Type l2) →
+  {l1 l2 : Level} (A : UU l1) (Q : UU l2) →
   is-equiv (precomp (double-negation-introduction {P = A}) (¬¬ Q))
 is-equiv-precomp-double-negation A Q =
   is-equiv-has-converse-is-prop
@@ -372,7 +372,7 @@ is-equiv-precomp-double-negation A Q =
     ( double-negation-kleisli-map)
 
 equiv-precomp-double-negation :
-  {l1 l2 : Level} (A : Type l1) (Q : Type l2) →
+  {l1 l2 : Level} (A : UU l1) (Q : UU l2) →
   ((¬¬ A) → (¬¬ Q)) ≃ (A → (¬¬ Q))
 pr1 (equiv-precomp-double-negation A Q) =
   precomp (double-negation-introduction {P = A}) (¬¬ Q)

@@ -113,9 +113,9 @@ Arrows:
 with `H:f~ i∘ q`, where `i` is an embedding.
 Then the following are equivalent:
 
-1.  The embedding `i` satisfies the universal property of the image inclusion of `f`.
+1. The embedding `i` satisfies the universal property of the image inclusion of `f`.
 
-2.  For every embedding `m:B→ X` there is a map
+2. For every embedding `m:B→ X` there is a map
 ```text
 hom-slice_X(f,m)→hom-slice_X(i,m).
 ```
@@ -144,19 +144,19 @@ im(f) ≔ Σ(x:X) ‖fib(f, x)‖.
 ```
 Furthermore, we define
 
-1.  the **image inclusion**
+1. the **image inclusion**
 ```text
 i_f:im(f)→ X
 ```
     to be the projection `pr 1`,
 
-2.  the map
+2. the map
 ```text
 q_f:A→im(f)
 ```
     to be the map given by `q_f(x)≔(f(x),η(x,refl))`, and
 
-3.  the homotopy `I_f:f~ i_f∘ q_f` witnessing that the triangle
+3. the homotopy `I_f:f~ i_f∘ q_f` witnessing that the triangle
 <!-- rosetta-diagram: 416cb22d0512; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*
@@ -257,11 +257,11 @@ Arrows:
 with `I:f~ i∘ q` and `I':f~ i'∘ q'`, in which `i` and `i'` are assumed to be embeddings.
 Then, if any two of the following three properties hold, so does the third:
 
-1.  The embedding `i` satisfies the universal property of the image inclusion of `f`.
+1. The embedding `i` satisfies the universal property of the image inclusion of `f`.
 
-2.  The embedding `i'` satisfies the universal property of the image inclusion of `f`.
+2. The embedding `i'` satisfies the universal property of the image inclusion of `f`.
 
-3.  The type of equivalences `e:B≃ B'` equipped with a homotopy witnessing that the triangle
+3. The type of equivalences `e:B≃ B'` equipped with a homotopy witnessing that the triangle
 <!-- rosetta-diagram: 61474fb57e1e; review: pending -->
 
 *Triangle-shaped diagram (automatic draft).*

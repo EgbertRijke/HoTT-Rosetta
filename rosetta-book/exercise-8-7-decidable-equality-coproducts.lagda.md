@@ -28,9 +28,9 @@ Show that `(x=y)↔Eq-coproduct(x,y)` for every `x,y:A+B`.
 
 Show that the following are equivalent:
 
-1.  Both `A` and `B` have decidable equality.
+1. Both `A` and `B` have decidable equality.
 
-2.  The coproduct `A+B` has decidable equality.
+2. The coproduct `A+B` has decidable equality.
 
 Conclude that `ℤ` has decidable equality.
 

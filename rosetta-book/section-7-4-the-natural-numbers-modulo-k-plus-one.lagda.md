@@ -82,7 +82,7 @@ The map `[_]_{k+1}` is then defined by iterating the successor function.
 
  
 
-1.  We define the **zero element** `zero-Fin_k:Fin{k+1}` recursively by
+1. We define the **zero element** `zero-Fin_k:Fin{k+1}` recursively by
 ```text
 zero-Fin_0 ≔⋆
 zero-Fin_{k+1} ≔ i(zero-Fin_k).
@@ -90,14 +90,14 @@ zero-Fin_{k+1} ≔ i(zero-Fin_k).
 
 Since there is a mismatch between the index of `zero-Fin_k` and the index of its type, we will often simply write `zero-Fin` or `0` for the zero element of `Fin{k+1}`.
 
-2.  We define the function `skip-zero-Fin_k:Fin{k}→Fin{k+1}` recursively by
+2. We define the function `skip-zero-Fin_k:Fin{k}→Fin{k+1}` recursively by
 
 ```text
 skip-zero-Fin_{k+1}(i(x)) ≔ i(skip-zero-Fin_k(x))
 skip-zero-Fin_{k+1}(⋆) ≔ ⋆.
 ```
 
-3.  We define the **successor function** `succ-Fin_k:Fin{k}→Fin{k}` recursively by
+3. We define the **successor function** `succ-Fin_k:Fin{k}→Fin{k}` recursively by
 
 ```text
 succ-Fin_{k+1}(i(x)) ≔ skip-zero-Fin_k(x)
@@ -155,18 +155,18 @@ This fact is a consequence of the following simple lemma, that will help us comp
 
 We make three claims:
 
-1.  For any `k:ℕ` there is an identification
+1. For any `k:ℕ` there is an identification
 ```text
 nat-Fin(zero-Fin_k) = 0
 ```
 
-2.  For any `k:ℕ` and any `x:Fin{k}`, we have
+2. For any `k:ℕ` and any `x:Fin{k}`, we have
 
 ```text
 nat-Fin(skip-zero-Fin_k(x)) = nat-Fin(x)+1.
 ```
 
-3.  For any `k:ℕ` and any `x:Fin{k}`, we have
+3. For any `k:ℕ` and any `x:Fin{k}`, we have
 
 ```text
 nat-Fin(succ-Fin_k(x)) ≡ nat-Fin(x)+1 mod k.

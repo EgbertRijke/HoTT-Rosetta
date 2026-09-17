@@ -18,20 +18,20 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 
 The predecessor function `pred-Fin_k:Fin{k}→Fin{k}` is defined in three steps, just as in the definition of the successor function on `Fin{k}`.
 
-1.  We define the element `neg-two_k:Fin{k+1}` by
+1. We define the element `neg-two_k:Fin{k+1}` by
 ```text
 neg-two_0 ≔⋆
 neg-two_{k+1} ≔ i(⋆).
 ```
 
-2.  We define the function `skip-neg-two_k:Fin{k}→Fin{k+1}` recursively by
+2. We define the function `skip-neg-two_k:Fin{k}→Fin{k+1}` recursively by
 
 ```text
 skip-neg-two_{k+1}(i(x)) ≔ i(i(x))
 skip-neg-two_{k+1}(⋆) ≔ ⋆.
 ```
 
-3.  Finally, we define the **predecessor function** `pred-Fin_k:Fin{k}→Fin{k}` recursively by
+3. Finally, we define the **predecessor function** `pred-Fin_k:Fin{k}→Fin{k}` recursively by
 
 ```text
 pred-Fin_{k+1}(i(x)) ≔ skip-neg-two_k(pred-Fin_k(x))

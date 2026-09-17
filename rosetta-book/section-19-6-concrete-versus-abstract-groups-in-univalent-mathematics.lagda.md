@@ -104,13 +104,13 @@ To see that this definition makes sense, we use the following generalization of 
 Consider a connected type `A` equipped with an element `a:A`, and consider a family of types `B(x)` indexed by `x:A`.
 Then the following are equivalent:
 
-1.  Every family of maps
+1. Every family of maps
 ```text
 f:Π(x:A) (a=x)→ B(x)
 ```
     is a family of `k`-truncated maps.
 
-2.  The total space
+2. The total space
 ```text
 Σ(x:A) B(x)
 ```

@@ -119,11 +119,11 @@ Before we show that addition on `ℤ/{k}` satisfies the group laws, we have to s
 Consider `x,y,x',y':ℕ`.
 If any two of the following three properties hold, then so does the third:
 
-1.  `x≡ x'mod k`,
+1. `x≡ x'mod k`,
 
-2.  `y≡ y'mod k`,
+2. `y≡ y'mod k`,
 
-3.  `x+y≡ x'+y'mod k`.
+3. `x+y≡ x'+y'mod k`.
 
 ### Proof
 

@@ -49,13 +49,13 @@ Putting these ideas together, we obtain the following type theoretical definitio
 
 Write `d:Π(n:ℕ) is-decidable(2| n)` for the function deciding `2| n`, given in Theorem 8.1.9.
 
-1.  We define a function `h:Π(n:ℕ) (is-decidable(2| n)→ ℕ)` by
+1. We define a function `h:Π(n:ℕ) (is-decidable(2| n)→ ℕ)` by
 ```text
 h(n,inl(m,p)) ≔ m
 h(n,inr(f)) ≔ 3n+1.
 ```
 
-2.  We define the **collatz function** `collatz:ℕ→ ℕ` by
+2. We define the **collatz function** `collatz:ℕ→ ℕ` by
 ```text
 collatz(n)≔ h(n,d(n)).
 ```

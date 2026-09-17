@@ -10,9 +10,9 @@ module exercise-17-5-surjective-precomposition where
 Consider a map `f:A→ B`.
 Show that the following are equivalent:
 
-1.  The map `f` is surjective.
+1. The map `f` is surjective.
 
-2.  For every set `C`, the precomposition function
+2. For every set `C`, the precomposition function
 ```text
 _∘ f:(B→ C)→ (A→ C)
 ```

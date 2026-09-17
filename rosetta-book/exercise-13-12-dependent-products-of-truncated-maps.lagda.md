@@ -26,9 +26,9 @@ is an equivalence.
 Consider a family of maps `f_i:A_i→ B_i` indexed by `i:I`.
 Show that the following are equivalent:
 
-1.  Each `f_i` is `k`-truncated.
+1. Each `f_i` is `k`-truncated.
 
-2.  For every map `α:X→ I`, the map
+2. For every map `α:X→ I`, the map
     ```text
     λ h. λ x. f_{α(x)}(h(x)):(Π(x:X) A_{α(x)})→(Π(x:X) B_{α(x)})
     ```
@@ -36,9 +36,9 @@ Show that the following are equivalent:
 
 Show that for any map `f:A→ B` the following are equivalent:
 
-1.  The map `f` is `k`-truncated.
+1. The map `f` is `k`-truncated.
 
-2.  For every type `X`, the postcomposition function
+2. For every type `X`, the postcomposition function
     ```text
     f∘_ : (X→ A)→ (X→ B)
     ```

@@ -20,11 +20,11 @@ Show that the type-valued relation `<` is transitive and irreflexive.
 Suppose that the type `W(A,B)` is inhabited and suppose that there exists an element `a:A` for which `B(a)` is inhabited.
 Show that the following are equivalent:
 
-1.  The type `x<y` is a proposition for all `x,y:W(A,B)`.
+1. The type `x<y` is a proposition for all `x,y:W(A,B)`.
 
-2.  The type `x∈ y` is a proposition for all `x,y:W(A,B)`.
+2. The type `x∈ y` is a proposition for all `x,y:W(A,B)`.
 
-3.  The type `A` is a set and the type `B(a)` is a proposition for all `a:A`.
+3. The type `A` is a set and the type `B(a)` is a proposition for all `a:A`.
 
 Thus, in general it is not the case that `<` is a relation valued in propositions.
 

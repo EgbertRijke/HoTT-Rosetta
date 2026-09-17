@@ -160,29 +160,29 @@ This fact together with the inductive hypothesis finishes the proof. ◻
 
  
 
-1.  For any two types `X` and `Y`, the following are equivalent:
+1. For any two types `X` and `Y`, the following are equivalent:
 
-    1.  Both `X` and `Y` are finite.
+    1. Both `X` and `Y` are finite.
 
-    2.  The coproduct `X+Y` is finite.
+    2. The coproduct `X+Y` is finite.
 
-2.  For any two types `X` and `Y`, we make two claims:
+2. For any two types `X` and `Y`, we make two claims:
 
-    1.  If both `X` and `Y` are finite, then the cartesian product `X× Y` is finite.
+    1. If both `X` and `Y` are finite, then the cartesian product `X× Y` is finite.
 
-    2.  If the type `X× Y` is finite, then we have two functions
+    2. If the type `X× Y` is finite, then we have two functions
 ```text
 Y → is-finite(X)
 X → is-finite(Y).
 ```
 
-3.  Consider a type family `B` over `A`, and consider the following three conditions:
+3. Consider a type family `B` over `A`, and consider the following three conditions:
 
-    1.  The type `A` is finite.
+    1. The type `A` is finite.
 
-    2.  The type `B(x)` is finite for each `x:A`.
+    2. The type `B(x)` is finite for each `x:A`.
 
-    3.  The type `Σ(x:A) B(x)` is finite.
+    3. The type `Σ(x:A) B(x)` is finite.
 
 If (a) holds, then (b) is equivalent to (c).
 Moreover, if (b) and (c) hold, then (a) holds if and only if `A` is a set and the type `Σ(x:A) ¬ B(x)` is finite.

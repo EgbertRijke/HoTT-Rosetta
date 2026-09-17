@@ -119,13 +119,13 @@ p̃_S : Π(n:ℕ) P̃(n)→P̃(n+1)
 ```
 equipped with
 
-1.  an identification
+1. an identification
 ```text
 p̃_S(n,H,m,p) = H(m,q)
 ```
     for every `H:P̃(n)` and every `p:m≤ n+1` and `q:m≤ n`, and
 
-2.  an identification
+2. an identification
 ```text
 p̃_S(n,H,n+1,p) = p_S(n,H)
 ```

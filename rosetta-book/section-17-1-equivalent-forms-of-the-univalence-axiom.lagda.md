@@ -15,19 +15,19 @@ By the fundamental theorem of identity types, Theorem 11.2.2, it is immediate th
 Consider a universe `𝒰`.
 The following are equivalent:
 
-1.  The universe `𝒰` is **univalent**: For any two types `A,B:𝒰`, the map
+1. The universe `𝒰` is **univalent**: For any two types `A,B:𝒰`, the map
 ```text
 equiv-eq:(A=B)→ (A≃ B)
 ```
     given by `equiv-eq(refl):=id`, is an equivalence.
 
-2.  The type
+2. The type
 ```text
 Σ(B:𝒰) A ≃ B
 ```
     is contractible for each `A:𝒰`.
 
-3.  For any type `A:𝒰`, the family of types `A≃ X` indexed by `X:𝒰` is an identity system on `𝒰`.
+3. For any type `A:𝒰`, the family of types `A≃ X` indexed by `X:𝒰` is an identity system on `𝒰`.
 In other words, the universe `𝒰` satisfies the principle of **equivalence induction**: For every `A:𝒰` and for every type family of types `P(X,e)` indexed by `X:𝒰` and `e:A≃ X`, the map
 ```text
 (Π(X:𝒰) Π(e:A ≃ X) P(X,e))→ P(A,id)
@@ -85,26 +85,26 @@ Similarly, a map `f:A→ B` is said to be **`𝒰`-small** if all of its fibers 
 
  
 
-1.  Any type in `𝒰` is `𝒰`-small.
+1. Any type in `𝒰` is `𝒰`-small.
 
-2.  Any contractible type is `𝒰`-small with respect to any universe `𝒰`.
+2. Any contractible type is `𝒰`-small with respect to any universe `𝒰`.
 
-3.  For any family `P` of `𝒰`-small types over a `𝒰`-small type `A`, the dependent product `Π(x:A) B(x)` is `𝒰`-small.
+3. For any family `P` of `𝒰`-small types over a `𝒰`-small type `A`, the dependent product `Π(x:A) B(x)` is `𝒰`-small.
 
-4.  The type of `𝒰`-small types in `𝒱` is equivalent to the type of `𝒱`-small types in `𝒰`.
+4. The type of `𝒰`-small types in `𝒱` is equivalent to the type of `𝒱`-small types in `𝒰`.
 This follows from the equivalence
 ```text
 (Σ(Y:𝒱) Σ(X:𝒰) Y≃ X) ≃ (Σ(X:𝒰) Σ(Y:𝒱) X≃ Y).
 ```
 
-5.  Any finite type is `𝒰`-small for any universe `𝒰`.
+5. Any finite type is `𝒰`-small for any universe `𝒰`.
 Consequently, we get equivalences
 ```text
 (Σ(X:𝒰) is-finite(X))≃(Σ(Y:𝒱) is-finite(Y))
 ```
     for any two univalent universes `𝒰` and `𝒱`. This observation is the reason why we usually write `𝔽` for the type of finite types (in `𝒰`), without referring to its universe.
 
-6.  In Theorem 20.6.10 we will show that `𝒰` cannot be `𝒰`-small, i.e., that there cannot be a type `U:𝒰` equipped with an equivalence `U≃ 𝒰`.
+6. In Theorem 20.6.10 we will show that `𝒰` cannot be `𝒰`-small, i.e., that there cannot be a type `U:𝒰` equipped with an equivalence `U≃ 𝒰`.
 
 <!-- rosetta-item-end: example-17.1.4 -->
 
