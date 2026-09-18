@@ -8,6 +8,7 @@ open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
+open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
@@ -25,6 +26,7 @@ open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-3-sets
 open import exercise-12-3-injective-maps-into-sets
+open import exercise-12-7-truncated-products
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-5-the-strong-induction-principle-of-the-natural-numbers
 open import section-14-2-propositional-truncations-as-higher-inductive-types
@@ -38,18 +40,6 @@ Here we will see what we might do in such a case.
 
 One strategy, if we want to define a map `‖A‖ → X`, is to find a type family `P` over `X` such that the type `Σ(x : X) P(x)` is a proposition.
 In that case, we may use the universal property of the propositional truncation to obtain a map `‖A‖ → Σ(x : X) P(x)` from a map `A → Σ(x : X) P(x)`, and then we simply compose with the projection map.
-
-```agda
-module _
-  {l1 l2 l3 : Level} {A : UU l1} {X : UU l2}
-  (P : X → UU l3) (is-prop-total-P : is-prop (Σ X P))
-  where
-
-  map-trunc-Prop-via-propositional-subtype :
-    (A → Σ X P) → type-trunc-Prop A → X
-  map-trunc-Prop-via-propositional-subtype f =
-    pr1 ∘ map-universal-property-trunc-Prop (Σ X P , is-prop-total-P) f
-```
 
 ## Example 14.4.1
 
@@ -73,59 +63,95 @@ To see this, note that the type `is-lower-bound_P(x)` is a proposition.
 
 ```agda
 module _
-  {l1 : Level} {P : ℕ → UU l1}
+  {l : Level} (P : ℕ → UU l)
   where
 
-  abstract
-    is-prop-is-lower-bound-ℕ : (x : ℕ) → is-prop (is-lower-bound-ℕ P x)
-    is-prop-is-lower-bound-ℕ x =
-      is-prop-Π (λ y → is-prop-function-type (is-prop-leq-ℕ x y))
+  is-prop-is-lower-bound-ℕ :
+    (n : ℕ) → is-prop (is-lower-bound-ℕ P n)
+  is-prop-is-lower-bound-ℕ n =
+    is-prop-Π (λ x → is-prop-function-type (is-prop-leq-ℕ n x))
 
-  is-lower-bound-ℕ-Prop : (x : ℕ) → Prop l1
-  pr1 (is-lower-bound-ℕ-Prop x) = is-lower-bound-ℕ P x
-  pr2 (is-lower-bound-ℕ-Prop x) = is-prop-is-lower-bound-ℕ x
+  is-lower-bound-ℕ-Prop :
+    (n : ℕ) → Prop l
+  pr1 (is-lower-bound-ℕ-Prop n) = is-lower-bound-ℕ P n
+  pr2 (is-lower-bound-ℕ-Prop n) = is-prop-is-lower-bound-ℕ n
+
+is-largest-lower-bound-ℕ :
+  {l : Level} (P : ℕ → UU l) → ℕ → UU l
+is-largest-lower-bound-ℕ P n =
+  (x : ℕ) → is-lower-bound-ℕ P x ↔ x ≤-ℕ n
+
+is-lower-bound-is-largest-lower-bound-ℕ :
+  {l : Level} (P : ℕ → UU l) (n : ℕ) →
+  is-largest-lower-bound-ℕ P n → is-lower-bound-ℕ P n
+is-lower-bound-is-largest-lower-bound-ℕ P n H =
+  backward-implication (H n) (refl-leq-ℕ n)
+
+leq-is-largest-lower-bound-ℕ :
+  {l : Level} (P : ℕ → UU l) (n : ℕ) →
+  is-largest-lower-bound-ℕ P n →
+  (m : ℕ) → is-lower-bound-ℕ P m → m ≤-ℕ n
+leq-is-largest-lower-bound-ℕ P n H m =
+  forward-implication (H m)
+
+is-largest-lower-bound-is-lower-bound-ℕ :
+  {l : Level} (P : ℕ → UU l) (n : ℕ) →
+  P n → is-lower-bound-ℕ P n → is-largest-lower-bound-ℕ P n
+pr1 (is-largest-lower-bound-is-lower-bound-ℕ P n p H m) K = K n p
+pr2 (is-largest-lower-bound-is-lower-bound-ℕ P n p H m) K x q =
+  transitive-leq-ℕ m n x (H x q) K
+
+module _
+  {l : Level} (P : ℕ → UU l) (n : minimal-element-ℕ P)
+  where
+
+  nat-minimal-element-ℕ : ℕ
+  nat-minimal-element-ℕ = pr1 n
+
+  structure-minimal-element-ℕ : P nat-minimal-element-ℕ
+  structure-minimal-element-ℕ = pr1 (pr2 n)
+
+  is-lower-bound-minimal-element-ℕ : is-lower-bound-ℕ P nat-minimal-element-ℕ
+  is-lower-bound-minimal-element-ℕ = pr2 (pr2 n)
+
+  is-largest-lower-bound-minimal-element-ℕ :
+    is-largest-lower-bound-ℕ P nat-minimal-element-ℕ
+  is-largest-lower-bound-minimal-element-ℕ =
+    is-largest-lower-bound-is-lower-bound-ℕ P
+      ( nat-minimal-element-ℕ)
+      ( structure-minimal-element-ℕ)
+      ( is-lower-bound-minimal-element-ℕ)
 ```
 
 By the assumption that each `P(x)` is a proposition, it now follows that any two natural numbers `x, y : ℕ` that are in `P` and that are both lower bounds of `P` are equal as elements in the type of (*) if and only if they are equal as natural numbers.
 
 ```agda
 module _
-  {l : Level} (P : ℕ → Prop l)
-  where
-
-  equiv-identifications-minimal-element-ℕ :
-    (s t : minimal-element-ℕ (λ n → type-Prop (P n))) →
-    (s ＝ t) ≃ (pr1 s ＝ pr1 t)
-  equiv-identifications-minimal-element-ℕ s t =
-    equiv-ap-inclusion-subtype
-      ( λ n → conjunction-Prop (P n) (is-lower-bound-ℕ-Prop n))
-```
-
-Furthermore, since both `x` and `y` are lower bounds of `P`, it follows that `x ≤ y` and `y ≤ x`, so indeed `x = y` holds.
-
-```agda
-module _
   {l1 : Level} (P : ℕ → Prop l1)
   where
 
-  abstract
-    all-elements-equal-minimal-element-ℕ :
-      all-elements-equal (minimal-element-ℕ (λ n → type-Prop (P n)))
-    all-elements-equal-minimal-element-ℕ
-      s@(pair x (pair p l)) t@(pair y (pair q k)) =
-      map-section-is-equiv
-        ( pr2 (equiv-identifications-minimal-element-ℕ P s t))
-        ( antisymmetric-leq-ℕ x y (l y q) (k x p))
+  all-elements-equal-minimal-element-ℕ :
+    all-elements-equal (minimal-element-ℕ (λ n → type-Prop (P n)))
+  all-elements-equal-minimal-element-ℕ
+    (x , p , l) (y , q , k) =
+    eq-type-subtype
+      ( λ n →
+        product-Prop
+          ( _  , is-prop-type-Prop (P n))
+          ( is-lower-bound-ℕ-Prop (type-Prop ∘ P) n))
+      ( antisymmetric-leq-ℕ x y (l y q) (k x p))
 
-    is-prop-minimal-element-ℕ :
-      is-prop (minimal-element-ℕ (λ n → type-Prop (P n)))
-    is-prop-minimal-element-ℕ =
-      is-prop-all-elements-equal all-elements-equal-minimal-element-ℕ
+  is-prop-minimal-element-ℕ :
+    is-prop (minimal-element-ℕ (λ n → type-Prop (P n)))
+  is-prop-minimal-element-ℕ =
+    is-prop-all-elements-equal all-elements-equal-minimal-element-ℕ
 
   minimal-element-ℕ-Prop : Prop l1
   pr1 minimal-element-ℕ-Prop = minimal-element-ℕ (λ n → type-Prop (P n))
   pr2 minimal-element-ℕ-Prop = is-prop-minimal-element-ℕ
 ```
+
+Furthermore, since both `x` and `y` are lower bounds of `P`, it follows that `x ≤ y` and `y ≤ x`, so indeed `x = y` holds.
 
 By the observation that the type in (*) is a proposition, we may define a map
 
@@ -143,23 +169,19 @@ A map
 was constructed in Theorem 8.3.2 using the decidability of `P`.
 
 ```agda
-abstract
-  minimal-element-inhabited-decidable-subtype-ℕ :
-    {l : Level} (P : ℕ → Prop l)
-    (d : (n : ℕ) → is-decidable (type-Prop (P n))) →
-    type-trunc-Prop (type-subtype P) →
-    minimal-element-ℕ (λ n → type-Prop (P n))
-  minimal-element-inhabited-decidable-subtype-ℕ P d =
-    map-universal-property-trunc-Prop
-      ( minimal-element-ℕ-Prop P)
-      ( well-ordering-principle-ℕ (λ n → type-Prop (P n)) d)
+ε-operator-Hilbert : {l : Level} → UU l → UU l
+ε-operator-Hilbert A = type-trunc-Prop A → A
 
-  ε-operator-decidable-subtype-ℕ :
-    {l : Level} (P : ℕ → Prop l)
-    (d : (n : ℕ) → is-decidable (type-Prop (P n))) →
-    type-trunc-Prop (type-subtype P) → type-subtype P
-  ε-operator-decidable-subtype-ℕ P d t =
-    tot (λ n → pr1) (minimal-element-inhabited-decidable-subtype-ℕ P d t)
+ε-operator-decidable-subtype-ℕ :
+  {l1 : Level} (P : ℕ → Prop l1)
+  (d : (x : ℕ) → is-decidable (type-Prop (P x))) →
+  ε-operator-Hilbert (type-subtype P)
+ε-operator-decidable-subtype-ℕ {l1} P d t =
+  tot
+    ( λ x → pr1)
+    ( apply-universal-property-trunc-Prop t
+      ( minimal-element-ℕ-Prop P)
+      ( λ (n , p) → well-ordering-principle-ℕ (type-Prop ∘ P) d (n , p)))
 ```
 
 As a corollary of this observation, we observe that there is also a map
@@ -214,11 +236,6 @@ we constructed in Example 14.4.1 for decidable subtypes of `ℕ` is a rare case 
 ```
 We say that the type `A` satisfies the **principle of global choice** if there is such a function `‖A‖ → A`.
 Using the univalence axiom, we will see in Corollary 17.5.3 that not every type satisfies the principle of global choice.
-
-```agda
-ε-operator-Hilbert : {l : Level} → UU l → UU l
-ε-operator-Hilbert A = type-trunc-Prop A → A
-```
 
 More generally, we may wish to define a map `‖A‖ → B` where the type `B` is a set.
 In this situation it is helpful to think of the propositional truncation of `A` as the quotient of the type `A` by the equivalence relation that relates every two elements of `A` with each other.

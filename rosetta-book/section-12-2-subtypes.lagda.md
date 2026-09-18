@@ -4,18 +4,21 @@
 module section-12-2-subtypes where
 
 open import universe-levels
+open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-9-2-bi-invertible-maps
+open import exercise-9-5-sigma-swap
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
+open import exercise-10-3-contractible-equivalences
+open import exercise-10-6-dependent-pair-contractible-base
+open import exercise-10-7-fibers-of-projections
 open import section-11-2-the-fundamental-theorem
 open import section-11-4-embeddings
 open import section-12-1-propositions
-open import exercise-10-3-contractible-equivalences
-open import exercise-10-7-fibers-of-projections
 ```
 
 In set theory, a set `y` is said to be a subset of a set `x`, if any element of `y` is an element of `x`, i.e., if the condition
@@ -106,6 +109,94 @@ One reason why subtypes are important and useful, is that for any
 
 in a subtype of `A`, we have `(x,p) = (y,q)` if and only if `x = y`.
 In other words, two terms of a subtype of `A` are equal if and only if they are equal as terms of `A`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  abstract
+    is-torsorial-Eq-subtype :
+      {l3 : Level} {P : A → UU l3} →
+      is-torsorial B → ((x : A) → is-prop (P x)) →
+      (a : A) (b : B a) (p : P a) →
+      is-torsorial (λ (t : Σ A P) → B (pr1 t))
+    is-torsorial-Eq-subtype {P = P} is-torsorial-B is-subtype-P a b p =
+      is-contr-equiv
+        ( Σ (Σ A B) (P ∘ pr1))
+        ( equiv-right-swap-Σ)
+        ( is-contr-equiv
+          ( P a)
+          ( left-unit-law-Σ-is-contr is-torsorial-B (a , b))
+          ( is-proof-irrelevant-is-prop (is-subtype-P a) p))
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {P : A → UU l2}
+  (is-prop-P : (x : A) → is-prop (P x)) {Eq-A : A → UU l3}
+  {a : A} (p : P a) (refl-A : Eq-A a)
+  where
+
+  abstract
+    subtype-identity-principle :
+      {f : (x : A) → a ＝ x → Eq-A x}
+      (h : (z : (Σ A P)) → (a , p) ＝ z → Eq-A (pr1 z)) →
+      ((x : A) → is-equiv (f x)) → (z : Σ A P) → is-equiv (h z)
+    subtype-identity-principle {f} h H =
+      fundamental-theorem-id
+        ( is-torsorial-Eq-subtype
+          ( fundamental-theorem-id' f H)
+          ( is-prop-P)
+          ( a)
+          ( refl-A)
+          ( p))
+        ( h)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} (P : A → Prop l2) {Eq-A : A → UU l3}
+  {a : A} (p : type-Prop (P a)) (refl-A : Eq-A a)
+  where
+
+  map-extensionality-type-subtype :
+    (f : (x : A) → (a ＝ x) ≃ Eq-A x) →
+    (z : Σ A (type-Prop ∘ P)) → (a , p) ＝ z → Eq-A (pr1 z)
+  map-extensionality-type-subtype f .(a , p) refl = refl-A
+
+  extensionality-type-subtype :
+    (f : (x : A) → (a ＝ x) ≃ Eq-A x) →
+    (z : Σ A (type-Prop ∘ P)) → ((a , p) ＝ z) ≃ Eq-A (pr1 z)
+  pr1 (extensionality-type-subtype f z) = map-extensionality-type-subtype f z
+  pr2 (extensionality-type-subtype f z) =
+    subtype-identity-principle
+      ( is-prop-type-Prop ∘ P)
+      ( p)
+      ( refl-A)
+      ( map-extensionality-type-subtype f)
+      ( is-equiv-map-equiv ∘ f)
+      ( z)
+
+  map-inv-extensionality-type-subtype :
+    (f : (x : A) → (a ＝ x) ≃ Eq-A x) →
+    (z : Σ A (type-Prop ∘ P)) → Eq-A (pr1 z) → (a , p) ＝ z
+  map-inv-extensionality-type-subtype f z =
+    map-inv-equiv (extensionality-type-subtype f z)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
+  where
+
+  Eq-type-subtype : (x y : type-subtype P) → UU l1
+  Eq-type-subtype x y = (pr1 x ＝ pr1 y)
+
+  extensionality-type-subtype' :
+    (a b : type-subtype P) → (a ＝ b) ≃ (pr1 a ＝ pr1 b)
+  extensionality-type-subtype' (a , p) =
+    extensionality-type-subtype P p refl (λ x → id-equiv)
+
+  eq-type-subtype :
+    {a b : type-subtype P} → (pr1 a ＝ pr1 b) → a ＝ b
+  eq-type-subtype {a} {b} = map-inv-equiv (extensionality-type-subtype' a b)
+```
+
 This fact is properly expressed using embeddings: we claim that the projection map
 
 ```text

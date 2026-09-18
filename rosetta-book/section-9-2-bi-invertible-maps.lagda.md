@@ -1535,7 +1535,7 @@ module _
 
 We haven’t stated any laws involving function types or dependent function types, because it requires the function extensionality principle to prove them.
 
-## Supplementary definitions
+## Supplement
 
 ### Equivalences induce logical equivalences
 
