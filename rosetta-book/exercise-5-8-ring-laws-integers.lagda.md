@@ -24,10 +24,10 @@ In this exercise we will show that `ℤ` satisfies the axioms of a **ring**, usi
 Show that multiplication on `ℤ` satisfies the following laws for `0` and `1`:
 
 ```text
-  0· x = 0
-  x· 0 = 0
-  1· x = x
-  x· 1 = x.
+  0 · x = 0
+  x · 0 = 0
+  1 · x = x
+  x · 1 = x.
 ```
 
 ### Exercise 5.8(b)

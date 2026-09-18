@@ -98,39 +98,51 @@ module _
   universal-property-propositional-truncation : UUω
   universal-property-propositional-truncation =
     {l : Level} (Q : Prop l) (g : A → type-Prop Q) →
-    is-contr (Σ ((type-Prop P → type-Prop Q)) (λ h → h ∘ f ＝ g))
+    is-contr (Σ (type-hom-Prop P Q) (λ h → h ∘ f ~ g))
 
-  abstract
-    universal-property-is-propositional-truncation :
-      is-propositional-truncation P f →
-      universal-property-propositional-truncation
-    universal-property-is-propositional-truncation H Q =
-      is-contr-map-is-equiv (H Q)
+abstract
+  universal-property-is-propositional-truncation :
+    {l1 l2 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
+    is-propositional-truncation P f →
+    universal-property-propositional-truncation P f
+  universal-property-is-propositional-truncation P f is-ptr-f Q g =
+    is-contr-equiv'
+      ( Σ (type-hom-Prop P Q) (λ h → h ∘ f ＝ g))
+      ( equiv-tot (λ _ → equiv-funext))
+      ( is-contr-map-is-equiv (is-ptr-f Q) g)
 
-  abstract
-    is-propositional-truncation-universal-property :
-      universal-property-propositional-truncation →
-      is-propositional-truncation P f
-    is-propositional-truncation-universal-property H Q =
-      is-equiv-is-contr-map (H Q)
+abstract
+  map-is-propositional-truncation :
+    {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
+    is-propositional-truncation P f →
+    (Q : Prop l3) (g : A → type-Prop Q) → type-hom-Prop P Q
+  map-is-propositional-truncation P f is-ptr-f Q g =
+    pr1
+      ( center
+        ( universal-property-is-propositional-truncation P f is-ptr-f Q g))
 
-  abstract
-    map-is-propositional-truncation :
-      {l3 : Level} → is-propositional-truncation P f →
-      (Q : Prop l3) (g : A → type-Prop Q) → (type-Prop P → type-Prop Q)
-    map-is-propositional-truncation is-ptr-f Q g =
-      pr1
-        ( center
-          ( universal-property-is-propositional-truncation is-ptr-f Q g))
+  htpy-is-propositional-truncation :
+    {l1 l2 l3 : Level} {A : UU l1} (P : Prop l2) (f : A → type-Prop P) →
+    (is-ptr-f : is-propositional-truncation P f) →
+    (Q : Prop l3) (g : A → type-Prop Q) →
+    map-is-propositional-truncation P f is-ptr-f Q g ∘ f ~ g
+  htpy-is-propositional-truncation P f is-ptr-f Q g =
+    pr2
+      ( center
+        ( universal-property-is-propositional-truncation P f is-ptr-f Q g))
 
-    eq-is-propositional-truncation :
-      {l3 : Level} (is-ptr-f : is-propositional-truncation P f) →
-      (Q : Prop l3) (g : A → type-Prop Q) →
-      map-is-propositional-truncation is-ptr-f Q g ∘ f ＝ g
-    eq-is-propositional-truncation is-ptr-f Q g =
-      pr2
-        ( center
-          ( universal-property-is-propositional-truncation is-ptr-f Q g))
+abstract
+  is-propositional-truncation-universal-property :
+    {l1 l2 : Level} {A : UU l1}
+    (P : Prop l2) (f : A → type-Prop P) →
+    universal-property-propositional-truncation P f →
+    is-propositional-truncation P f
+  is-propositional-truncation-universal-property P f up-f Q =
+    is-equiv-is-contr-map
+      ( λ g → is-contr-equiv
+        ( Σ (type-hom-Prop P Q) (λ h → (h ∘ f) ~ g))
+        ( equiv-tot (λ h → equiv-funext))
+        ( up-f Q g))
 ```
 
 ## Remark 14.1.3

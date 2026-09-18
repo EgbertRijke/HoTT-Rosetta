@@ -247,6 +247,19 @@ module _
         is-section (precomp-Π unit-trunc-Prop (type-Prop ∘ P)) (ind-trunc-Prop)
     compute-ind-trunc-Prop h =
       eq-is-prop (is-prop-Π (λ x → is-prop-type-Prop (P (unit-trunc-Prop x))))
+
+module _
+  {l l1 : Level} {A : UU l1} (P : Prop l)
+  where
+
+  abstract
+    rec-trunc-Prop :
+      (A → type-Prop P) → (║ A ║₋₁ → type-Prop P)
+    rec-trunc-Prop = ind-trunc-Prop (λ _ → P)
+
+    compute-rec-trunc-Prop :
+      is-section (precomp unit-trunc-Prop (type-Prop P)) (rec-trunc-Prop)
+    compute-rec-trunc-Prop = compute-ind-trunc-Prop (λ _ → P)
 ```
 
 ## The universal property
@@ -279,21 +292,6 @@ for any `u, v : Q` and any `x, y : ‖A‖`.
 However, we have such identifications by the assumption that `Q` is a proposition, so the proof is complete. ◻
 
 ```agda
-module _
-  {l l1 : Level} {A : UU l1} (P : Prop l)
-  where
-
-  abstract
-    rec-trunc-Prop :
-      (A → type-Prop P) → (║ A ║₋₁ → type-Prop P)
-    rec-trunc-Prop = ind-trunc-Prop (λ _ → P)
-
-    compute-rec-trunc-Prop :
-      is-section (precomp unit-trunc-Prop (type-Prop P)) (rec-trunc-Prop)
-    compute-rec-trunc-Prop = compute-ind-trunc-Prop (λ _ → P)
-```
-
-```agda
 abstract
   is-propositional-truncation-trunc-Prop :
     {l : Level} (A : UU l) →
@@ -303,9 +301,7 @@ abstract
       ( trunc-Prop A)
       ( unit-trunc-Prop)
       ( λ Q → ind-trunc-Prop (λ x → Q))
-```
 
-```agda
 abstract
   universal-property-trunc-Prop :
     {l : Level} (A : UU l) →
@@ -321,7 +317,7 @@ abstract
 abstract
   map-universal-property-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} (P : Prop l2) →
-    (A → type-Prop P) → (║ A ║₋₁ → type-Prop P)
+    (A → type-Prop P) → type-hom-Prop (trunc-Prop A) P
   map-universal-property-trunc-Prop {A = A} P f =
     map-is-propositional-truncation
       ( trunc-Prop A)
@@ -329,6 +325,39 @@ abstract
       ( is-propositional-truncation-trunc-Prop A)
       ( P)
       ( f)
+
+abstract
+  apply-universal-property-trunc-Prop :
+    {l1 l2 : Level} {A : UU l1} (t : ║ A ║₋₁) (P : Prop l2) →
+    (A → type-Prop P) → type-Prop P
+  apply-universal-property-trunc-Prop t P f =
+    map-universal-property-trunc-Prop P f t
+
+abstract
+  apply-twice-universal-property-trunc-Prop' :
+    {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (u : ║ A ║₋₁)
+    (v : (a : A) → ║ B a ║₋₁) (P : Prop l3) →
+    ((a : A) → B a → type-Prop P) → type-Prop P
+  apply-twice-universal-property-trunc-Prop' u v P f =
+    apply-universal-property-trunc-Prop u P
+      ( λ x → apply-universal-property-trunc-Prop (v x) P (f x))
+
+abstract
+  apply-twice-universal-property-trunc-Prop :
+    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (u : ║ A ║₋₁)
+    (v : ║ B ║₋₁) (P : Prop l3) →
+    (A → B → type-Prop P) → type-Prop P
+  apply-twice-universal-property-trunc-Prop u v =
+    apply-twice-universal-property-trunc-Prop' u (λ _ → v)
+
+abstract
+  apply-three-times-universal-property-trunc-Prop :
+    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+    (u : ║ A ║₋₁) (v : ║ B ║₋₁) (w : ║ C ║₋₁) →
+    (P : Prop l4) → (A → B → C → type-Prop P) → type-Prop P
+  apply-three-times-universal-property-trunc-Prop u v w P f =
+    apply-universal-property-trunc-Prop u P
+      ( λ x → apply-twice-universal-property-trunc-Prop v w P (f x))
 ```
 
 One simple application of the universal property of the propositional truncation is that `‖_‖` acts on functions in a functorial way.
@@ -372,24 +401,35 @@ abstract
   unique-map-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
     is-contr
-      ( Σ ( (║ A ║₋₁ → ║ B ║₋₁))
+      ( Σ ( type-hom-Prop (trunc-Prop A) (trunc-Prop B))
           ( λ h → (h ∘ unit-trunc-Prop) ~ (unit-trunc-Prop ∘ f)))
   unique-map-trunc-Prop {l1} {l2} {A} {B} f =
-    is-contr-equiv'
-      ( Σ (║ A ║₋₁ → ║ B ║₋₁)
-        (λ h → (h ∘ unit-trunc-Prop) ＝ (unit-trunc-Prop ∘ f)))
-      ( equiv-tot (λ _ → equiv-funext))
-      ( universal-property-trunc-Prop A (trunc-Prop B) (unit-trunc-Prop ∘ f))
+    universal-property-trunc-Prop A (trunc-Prop B) (unit-trunc-Prop ∘ f)
 
 abstract
   map-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-    (A → B) → (║ A ║₋₁ → ║ B ║₋₁)
+    (A → B) → type-hom-Prop (trunc-Prop A) (trunc-Prop B)
   map-trunc-Prop f =
     pr1 (center (unique-map-trunc-Prop f))
-```
 
-```agda
+abstract
+  map-binary-trunc-Prop :
+    {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
+    (A → B → C) → ║ A ║₋₁ → ║ B ║₋₁ → ║ C ║₋₁
+  map-binary-trunc-Prop {C = C} f |a| |b| =
+    rec-trunc-Prop (trunc-Prop C) (λ a → map-trunc-Prop (f a) |b|) |a|
+
+abstract
+  map-ternary-trunc-Prop :
+    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l3} →
+    (A → B → C → D) → ║ A ║₋₁ → ║ B ║₋₁ → ║ C ║₋₁ → ║ D ║₋₁
+  map-ternary-trunc-Prop {D = D} f |a| |b| |c| =
+    rec-trunc-Prop
+      ( trunc-Prop D)
+      ( λ a → map-binary-trunc-Prop (f a) |b| |c|)
+      ( |a|)
+
 abstract
   htpy-map-trunc-Prop :
     { l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
@@ -404,17 +444,13 @@ abstract
     (map-trunc-Prop f) ~ h
   htpy-uniqueness-map-trunc-Prop f h H =
     htpy-eq (ap pr1 (contraction (unique-map-trunc-Prop f) (pair h H)))
-```
 
-```agda
 abstract
   id-map-trunc-Prop :
     { l1 : Level} {A : UU l1} → map-trunc-Prop (id {A = A}) ~ id
   id-map-trunc-Prop {l1} {A} =
     htpy-uniqueness-map-trunc-Prop id id refl-htpy
-```
 
-```agda
 abstract
   preserves-comp-map-trunc-Prop :
     { l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
