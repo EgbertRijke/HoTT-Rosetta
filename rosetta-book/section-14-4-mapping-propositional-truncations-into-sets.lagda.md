@@ -24,6 +24,7 @@ open import section-11-1-families-of-equivalences
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-3-sets
+open import exercise-12-3-injective-maps-into-sets
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-5-the-strong-induction-principle-of-the-natural-numbers
 open import section-14-2-propositional-truncations-as-higher-inductive-types
