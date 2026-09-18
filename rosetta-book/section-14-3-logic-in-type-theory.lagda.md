@@ -24,14 +24,15 @@ In Chapter 7 we interpreted logic in type theory via the Curry-Howard correspond
 However, when the existential quantifier is interpreted by `Σ`-types, then it is not possible to express certain concepts correctly, such as finiteness of a type or being in the image a map, and therefore we will add a second interpretation of logic in type theory, where logical propositions are interpreted by type theoretic propositions, i.e., the types of truncation level `-1`.
 
 We have seen that the propositions are closed under cartesian products, implication, and dependent products indexed by arbitrary types.
-However, they are not closed under coproducts, and if `P` is a family of propositions over a type `A`, then it is not necessarily the case that `Σ(x:A) P(x)` is a proposition.
+However, they are not closed under coproducts, and if `P` is a family of propositions over a type `A`, then it is not necessarily the case that `Σ(x : A) P(x)` is a proposition.
 We will therefore use propositional truncations to interpret disjunctions and existential quantifiers in type theory.
 
 ## Definition 14.3.1
 
 Given two propositions `P` and `Q`, we define their **disjunction**
+
 ```text
-P∨ Q ≔ ‖P+Q‖.
+  P ∨ Q ≔ ‖P + Q‖.
 ```
 
 ```agda
@@ -47,9 +48,7 @@ module _
 
   is-prop-disjunction-type : is-prop disjunction-type
   is-prop-disjunction-type = is-prop-type-Prop disjunction-type-Prop
-```
 
-```agda
 module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
@@ -72,19 +71,30 @@ module _
 ## Proposition 14.3.2
 
 Consider two propositions `P` and `Q`.
-Then the disjunction `P∨ Q` comes equipped with maps `i:P→ P∨ Q` and `j:Q→ P∨ Q`.
-Moreover, the proposition `P∨ Q` satisfies the universal property of the disjunction: For any proposition `R`, we have
+Then the disjunction `P ∨ Q` comes equipped with maps `i : P → P ∨ Q` and `j : Q → P ∨ Q`.
+Moreover, the proposition `P ∨ Q` satisfies the universal property of the disjunction: For any proposition `R`, we have
+
 ```text
-(P∨ Q→ R)↔ ((P→ R)× (Q→ R)).
+  (P ∨ Q → R) ↔ ((P → R) × (Q → R)).
 ```
 
 ### Proof
 
-*Proof.* The maps `i` and `j` are defined by
+The maps `i` and `j` are defined by
+
 ```text
-i ≔ η∘inl
-j ≔ η∘inr.
+  i ≔ η ∘ inl
+  j ≔ η ∘ inr.
 ```
+
+Now consider the following composition of maps, for an arbitrary proposition `R`:
+
+```text
+               - ∘ η                 h ↦ (h ∘ inl, h ∘ inr)
+  (P ∨ Q → R) -------> (P + Q -> R) -----------------------> (P → R) × (Q → R)
+```
+
+The first map is an equivalence by the universal property of the propositional truncation, and the second map is an equivalence by the universal property of coproducts (Exercise 13.8). ◻
 
 ```agda
 module _
@@ -96,22 +106,7 @@ module _
 
   inr-disjunction : B → disjunction-type A B
   inr-disjunction = unit-trunc-Prop ∘ inr
-```
 
-Now consider the following composition of maps, for an arbitrary proposition `R`:
-
-*Linear diagram (automatic draft).*
-
-```text
-[(P∨ Q→ R)]---->[(P+Q→ R)]---->[(P→ R)× (Q→ R)]
-
-Arrows:
-- (P∨ Q→ R) --_∘η--> (P+Q→ R)
-- (P+Q→ R) --{h ↦ (h∘ inl,h∘ inr)}--> (P→ R)× (Q→ R)
-```
-The first map is an equivalence by the universal property of the propositional truncation, and the second map is an equivalence by the universal property of coproducts (Exercise 13.8). ◻
-
-```agda
 ev-disjunction :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
   (disjunction-type A B → C) → (A → C) × (B → C)
@@ -128,9 +123,7 @@ universal-property-disjunction-Prop :
   {l1 l2 l3 : Level} → Prop l1 → Prop l2 → Prop l3 → UUω
 universal-property-disjunction-Prop P Q =
   universal-property-disjunction-type (type-Prop P) (type-Prop Q)
-```
 
-```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
@@ -145,36 +138,23 @@ module _
   up-disjunction :
     universal-property-disjunction-type A B (disjunction-type-Prop A B)
   up-disjunction R = ev-disjunction , elim-disjunction' R
-```
 
-```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (R : Prop l3)
   where
 
-  is-equiv-ev-disjunction :
-    {l3 : Level} (R : Prop l3) →
-    is-equiv (ev-disjunction {A = A} {B = B} {C = type-Prop R})
-  is-equiv-ev-disjunction R =
-    is-equiv-comp
-      ( ev-inl-inr (λ _ → type-Prop R))
-      ( precomp-Prop (trunc-Prop (A + B)) unit-trunc-Prop R)
-      ( is-propositional-truncation-trunc-Prop (A + B) R)
-      ( universal-property-coproduct (type-Prop R))
-
-  equiv-ev-disjunction :
-    {l3 : Level} (R : Prop l3) →
-    (disjunction-type A B → type-Prop R) ≃
-      ((A → type-Prop R) × (B → type-Prop R))
-  pr1 (equiv-ev-disjunction R) = ev-disjunction
-  pr2 (equiv-ev-disjunction R) = is-equiv-ev-disjunction R
+  elim-disjunction :
+    (A → type-Prop R) → (B → type-Prop R) →
+    disjunction-type A B → type-Prop R
+  elim-disjunction f g = elim-disjunction' R (f , g)
 ```
 
 ## Definition 14.3.3
 
 Given a family `P` of propositions over a type `A`, we define the **existential quantification**
+
 ```text
-∃_{(x:A)}P(x)≔ ‖Σ(x:A) P(x)‖.
+  ∃_{(x : A)}P(x) ≔ ‖Σ(x : A) P(x)‖.
 ```
 
 ```agda
@@ -190,9 +170,7 @@ module _
 
   is-prop-exists-structure : is-prop exists-structure
   is-prop-exists-structure = is-prop-type-Prop exists-structure-Prop
-```
 
-```agda
 module _
   {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
   where
@@ -209,25 +187,7 @@ module _
 
   ∃ : Prop (l1 ⊔ l2)
   ∃ = exists-Prop
-```
 
-## Proposition 14.3.4
-
-Consider a family `P` of propositions over a type `A`.
-Then the existential quantification `∃_{(x:A)}P(x)` comes equipped with a dependent function
-```text
-Π(a:A) (P(a)→ ∃_{(x:A)}P(x)).
-```
-Furthermore, the proposition `∃_{(x:A)}P(x)` satisfies the universal property of the existential quantification: For any proposition `Q`, we have
-```text
-((∃_{(x:A)}P(x))→ Q)↔(Π(x:A) P(x)→ Q).
-```
-
-### Proof
-
-*Proof.* The dependent function `ε : Π(a:A) (P(a)→ ∃_{(x:A)}P(x))` is given by `ε(a,p):=η(a,p)`.
-
-```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
@@ -236,18 +196,32 @@ module _
   intro-exists a b = unit-trunc-Prop (a , b)
 ```
 
-Now consider the following composition of maps
+## Proposition 14.3.4
 
-*Linear diagram (automatic draft).*
+Consider a family `P` of propositions over a type `A`.
+Then the existential quantification `∃_{(x : A)} P(x)` comes equipped with a dependent function
 
 ```text
-[((∃_{(x:A)}P(x))→ Q)]---->[((Σ(x:A) P(x))→ Q)]---->[(Π(x:A) P(x)→ Q)]
-
-Arrows:
-- ((∃_{(x:A)}P(x))→ Q) --unlabeled--> ((Σ(x:A) P(x))→ Q)
-- ((Σ(x:A) P(x))→ Q) --unlabeled--> (Π(x:A) P(x)→ Q)
+  Π(a : A) (P(a) → ∃_{(x : A)} P(x)).
 ```
-The first map in this composite is an equivalence by the universal property of the propositional truncation, and the second map is an equivalence by the universal property of `Σ`-types (Theorem 13.3.1). ◻
+
+Furthermore, the proposition `∃_{(x : A)} P(x)` satisfies the universal property of the existential quantification: For any proposition `Q`, we have
+
+```text
+  ((∃_{(x : A)} P(x)) → Q) ↔ (Π(x : A) P(x) → Q).
+```
+
+### Proof
+
+The dependent function `ε : Π(a : A) (P(a) → ∃_{(x : A)} P(x))` is given by `ε(a,p) ≔ η(a,p)`.
+
+Now consider the following composition of maps:
+
+```text
+  ((∃_{(x : A)} P(x)) → Q) ---> ((Σ(x : A) P(x)) → Q) ---> ((x : A) → P x → Q)
+```
+
+The first map in this composite is an equivalence by the universal property of the propositional truncation, and the second map is an equivalence by the universal property of `Σ`-types (Theorem 13.3.1). ◻
 
 ```agda
 module _
@@ -281,31 +255,16 @@ module _
     (Q : Prop l3) →
     ((x : A) → B x → type-Prop Q) → (exists-structure A B → type-Prop Q)
   elim-exists Q f = map-universal-property-trunc-Prop Q (ind-Σ f)
-```
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
+  abstract
+    is-equiv-ev-intro-exists :
+      (Q : Prop l3) → is-equiv (ev-intro-exists {type-Prop Q})
+    is-equiv-ev-intro-exists Q =
+      is-equiv-has-converse
+        ( function-Prop (exists-structure A B) Q)
+        ( Π-Prop A (λ x → function-Prop (B x) Q))
+        ( elim-exists Q)
 
-  is-equiv-ev-intro-exists :
-    {l3 : Level} (Q : Prop l3) →
-    is-equiv (ev-intro-exists {A = A} {B = B} {C = type-Prop Q})
-  is-equiv-ev-intro-exists Q =
-    is-equiv-comp
-      ( ev-pair {B = B} {C = λ _ → type-Prop Q})
-      ( precomp-Prop (trunc-Prop (Σ A B)) unit-trunc-Prop Q)
-      ( is-propositional-truncation-trunc-Prop (Σ A B) Q)
-      ( is-equiv-ev-pair {C = λ _ → type-Prop Q})
-
-  equiv-ev-intro-exists :
-    {l3 : Level} (Q : Prop l3) →
-    (exists-structure A B → type-Prop Q) ≃ ((x : A) → B x → type-Prop Q)
-  pr1 (equiv-ev-intro-exists Q) = ev-intro-exists
-  pr2 (equiv-ev-intro-exists Q) = is-equiv-ev-intro-exists Q
-```
-
-```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
@@ -319,35 +278,14 @@ In the following table we give an overview of the interpretation of the logical 
 
 | logical connective      | interpretation in type theory |
 |:------------------------|:------------------------------|
-| `⊤`                | `unit`                     |
-| `⊥`                | `empty`                   |
-| `P⇒ Q`      | `P→ Q`                    |
-| `P∧ Q`            | `P× Q`                 |
-| `P∨ Q`             | `‖P+Q‖`                |
-| `P⇔ Q`  | `P↔ Q`        |
-| `∃_{(x:A)}P(x)` | `‖Σ(x:A) P(x)‖`       |
-| `∀_{(x:A)}P(x)` | `Π(x:A) P(x)`             |
-
-### Proposition-valued interpretations in the table
-
-```agda
-type-hom-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
-type-hom-Prop P Q = type-Prop P → type-Prop Q
-
-is-prop-hom-Prop :
-  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
-  is-prop (type-hom-Prop P Q)
-is-prop-hom-Prop P Q = is-prop-function-type (is-prop-type-Prop Q)
-
-hom-Prop :
-  {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
-pr1 (hom-Prop P Q) = type-hom-Prop P Q
-pr2 (hom-Prop P Q) = is-prop-hom-Prop P Q
-
-infixr 5 _⇒_
-_⇒_ = hom-Prop
-```
+| `⊤`                     | `unit`                        |
+| `⊥`                     | `empty`                       |
+| `P ⇒ Q`                 | `P → Q`                       |
+| `P ∧ Q`                 | `P × Q`                       |
+| `P ∨ Q`                 | `‖P + Q‖`                     |
+| `P ⇔ Q`                 | `P ↔ Q`                       |
+| `∃_{(x : A)} P(x)`      | `‖Σ(x : A) P(x)‖`             |
+| `∀_{(x : A)} P(x)`      | `Π(x : A) P(x)`               |
 
 ```agda
 module _
@@ -369,9 +307,7 @@ module _
   infixr 15 _∧_
   _∧_ : Prop (l1 ⊔ l2)
   _∧_ = conjunction-Prop
-```
 
-```agda
 module _
   {l1 l2 : Level} (P : Prop l1) (Q : Prop l2)
   where
@@ -393,20 +329,4 @@ module _
 
   _⇔_ : Prop (l1 ⊔ l2)
   _⇔_ = iff-Prop
-```
-
-```agda
-module _
-  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
-  where
-
-  type-Π-Prop : UU (l1 ⊔ l2)
-  type-Π-Prop = (x : A) → type-Prop (P x)
-
-  is-prop-Π-Prop : is-prop type-Π-Prop
-  is-prop-Π-Prop = is-prop-Π (λ x → is-prop-type-Prop (P x))
-
-  Π-Prop : Prop (l1 ⊔ l2)
-  pr1 Π-Prop = type-Π-Prop
-  pr2 Π-Prop = is-prop-Π-Prop
 ```
