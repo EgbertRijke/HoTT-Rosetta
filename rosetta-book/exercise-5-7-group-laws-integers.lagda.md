@@ -272,7 +272,7 @@ abstract
         by left-inverse-law-add-ℤ x
 ```
 
-## Supplemental definitions
+## Supplements
 
 ### The binary action on identifications of addition on the integers
 

@@ -38,7 +38,7 @@ module _
   right-transpose-eq-concat p refl r s = (inv right-unit ∙ s) ∙ inv right-unit
 ```
 
-## Supplemental definitions
+## Supplements
 
 ```agda
 module _

@@ -86,7 +86,7 @@ module _
 
 The solution of this exercise already appears in our implentation of the proof of Proposition 12.4.5 in [section-12-4-general-truncation-levels].
 
-## Supplemental definitions
+## Supplements
 
 ### Equivalences are injective
 

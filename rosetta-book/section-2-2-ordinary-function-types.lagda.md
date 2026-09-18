@@ -336,7 +336,7 @@ The derivation of the equality `id (f(x))≐ f(x)` in context `Γ,x:A` is as fol
 
 We leave the right unit law as Exercise 2.2.
   
-## Supplemental definitions
+## Supplements
 
 ### The precomposition operation on dependent function
 

@@ -86,7 +86,7 @@ is-trunc-right-factor-product (succ-𝕋 k) {A} {B} H a b b' =
     ( refl)
 ```
 
-## Supplemental definitions
+## Supplements
 
 ### Propositions are closed under cartesian product types
 

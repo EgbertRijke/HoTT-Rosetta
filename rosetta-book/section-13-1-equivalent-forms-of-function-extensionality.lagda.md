@@ -15,10 +15,14 @@ open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
+open import exercise-10-1-identity-types-contractible
+open import exercise-10-2-contractible-retracts
 open import section-11-2-the-fundamental-theorem
 open import section-12-1-propositions
+open import section-12-2-subtypes
 open import section-12-4-general-truncation-levels
-open import exercise-10-2-contractible-retracts
+open import exercise-12-6-truncated-sigma-types
+open import exercise-12-7-truncated-products
 ```
 
 The function extensionality principle characterizes the identity type of an arbitrary dependent function type.
@@ -387,6 +391,38 @@ abstract
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →
     is-prop B → is-prop (A → B)
   is-prop-function-type H = is-prop-Π (λ _ → H)
+
+type-function-Prop :
+  {l1 l2 : Level} → UU l1 → Prop l2 → UU (l1 ⊔ l2)
+type-function-Prop A P = A → type-Prop P
+
+is-prop-function-Prop :
+  {l1 l2 : Level} {A : UU l1} (P : Prop l2) →
+  is-prop (type-function-Prop A P)
+is-prop-function-Prop P =
+  is-prop-function-type (is-prop-type-Prop P)
+
+function-Prop :
+  {l1 l2 : Level} → UU l1 → Prop l2 → Prop (l1 ⊔ l2)
+pr1 (function-Prop A P) = type-function-Prop A P
+pr2 (function-Prop A P) = is-prop-function-Prop P
+
+type-hom-Prop :
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
+type-hom-Prop P = type-function-Prop (type-Prop P)
+
+is-prop-hom-Prop :
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
+  is-prop (type-hom-Prop P Q)
+is-prop-hom-Prop P = is-prop-function-Prop
+
+hom-Prop :
+  {l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
+pr1 (hom-Prop P Q) = type-hom-Prop P Q
+pr2 (hom-Prop P Q) = is-prop-hom-Prop P Q
+
+infixr 5 _⇒_
+_⇒_ = hom-Prop
 ```
 
 ## Remark 13.1.7
@@ -397,9 +433,14 @@ Note that it requires function extensionality even just to prove that `¬ P` is 
 ```agda
 is-prop-neg : {l : Level} {A : UU l} → is-prop (¬ A)
 is-prop-neg = is-prop-function-type is-prop-empty
+
+is-prop-double-negation :
+  {l : Level} {A : UU l} → is-prop (¬¬ A)
+is-prop-double-negation = is-prop-neg
 ```
 
-## Supplemental definitions
+
+## Supplements
 
 ### Dependent function types taking implicit arguments are equivalent to dependent function types taking explicit arguments
 
@@ -433,4 +474,72 @@ module _
   equiv-explicit-implicit-Π : ({x : A} → B x) ≃ ((x : A) → B x)
   pr1 equiv-explicit-implicit-Π = explicit-implicit-Π
   pr2 equiv-explicit-implicit-Π = is-equiv-explicit-implicit-Π
+```
+
+### Products of families of propositions are propositions
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
+  where
+
+  type-Π-Prop : UU (l1 ⊔ l2)
+  type-Π-Prop = (x : A) → type-Prop (P x)
+
+  is-prop-Π-Prop : is-prop type-Π-Prop
+  is-prop-Π-Prop = is-prop-Π (λ x → is-prop-type-Prop (P x))
+
+  Π-Prop : Prop (l1 ⊔ l2)
+  pr1 Π-Prop = type-Π-Prop
+  pr2 Π-Prop = is-prop-Π-Prop
+```
+
+We now repeat the above for implicit Π-types.
+
+```agda
+abstract
+  is-prop-implicit-Π :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → is-prop (B x)) → is-prop ({x : A} → B x)
+  is-prop-implicit-Π H =
+    is-prop-equiv
+      ( ( λ f x → f {x}) ,
+        ( is-equiv-is-invertible (λ g {x} → g x) (refl-htpy) (refl-htpy)))
+      ( is-prop-Π H)
+
+module _
+  {l1 l2 : Level} (A : UU l1) (P : A → Prop l2)
+  where
+
+  type-implicit-Π-Prop : UU (l1 ⊔ l2)
+  type-implicit-Π-Prop = {x : A} → type-Prop (P x)
+
+  is-prop-implicit-Π-Prop : is-prop type-implicit-Π-Prop
+  is-prop-implicit-Π-Prop =
+    is-prop-implicit-Π (λ x → is-prop-type-Prop (P x))
+
+  implicit-Π-Prop : Prop (l1 ⊔ l2)
+  pr1 implicit-Π-Prop = type-implicit-Π-Prop
+  pr2 implicit-Π-Prop = is-prop-implicit-Π-Prop
+```
+
+### The type of equivalences between two propositions is a proposition
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-prop-equiv-is-prop : is-prop A → is-prop B → is-prop (A ≃ B)
+  is-prop-equiv-is-prop H K =
+    is-prop-Σ
+      ( is-prop-function-type K)
+      ( λ f →
+        is-prop-product
+          ( is-prop-Σ
+            ( is-prop-function-type H)
+            ( λ g → is-prop-is-contr (is-contr-Π (λ y → K (f (g y)) y))))
+          ( is-prop-Σ
+            ( is-prop-function-type H)
+            ( λ h → is-prop-is-contr (is-contr-Π (λ x → H (h (f x)) x)))))
 ```

@@ -282,7 +282,7 @@ Since `eq-pair(refl,refl)` computes to `refl`, we may simply take `refl(refl)`. 
   equiv-pair-eq-Σ s t = (pair-eq-Σ , is-equiv-pair-eq-Σ s t)
 ```
 
-## Supplemental definitions
+## Supplements
 
 ### Characterizing equality of cartesian product types
 

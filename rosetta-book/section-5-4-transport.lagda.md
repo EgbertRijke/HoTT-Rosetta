@@ -114,7 +114,7 @@ apd :
 apd f refl = refl
 ```
 
-## Supplemental definitions
+## Supplements
 
 We will occasionally need to know how to trasport along an identification of the form ap_f(p).
 Such a computation is most naturally defined here.
