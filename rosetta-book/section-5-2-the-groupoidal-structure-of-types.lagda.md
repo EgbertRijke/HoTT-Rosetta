@@ -3,7 +3,7 @@
 ```agda
 module section-5-2-the-groupoidal-structure-of-types where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 
 open import section-5-1-the-inductive-definition-of-identity-types
 ```
@@ -54,7 +54,7 @@ the third and fourth variable of `f`, i.e., we define
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   infixl 15 _∙_
@@ -89,7 +89,7 @@ Here we take `inv(refl) ≔ refl`.
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   inv : {x y : A} → x ＝ y → y ＝ x
@@ -179,7 +179,7 @@ are judgmentally equal, so we can simply define `assoc(refl, q, r) ≔ refl`.
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   assoc :
@@ -256,7 +256,7 @@ so we again define `right-inv(refl) ≔ refl`.
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   left-inv : {x y : A} (p : x ＝ y) → inv p ∙ p ＝ refl
@@ -289,11 +289,11 @@ infixl 1 equational-reasoning_
 infixl 0 step-equational-reasoning
 
 equational-reasoning_ :
-  {l : Level} {X : Type l} (x : X) → x ＝ x
+  {l : Level} {X : UU l} (x : X) → x ＝ x
 equational-reasoning x = refl
 
 step-equational-reasoning :
-  {l : Level} {X : Type l} {x y : X} →
+  {l : Level} {X : UU l} {x y : X} →
   (x ＝ y) → (u : X) → (y ＝ u) → (x ＝ u)
 step-equational-reasoning p z q = p ∙ q
 
@@ -304,7 +304,7 @@ syntax step-equational-reasoning p z q = p ＝ z by q
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   inv-inv : {x y : A} (p : x ＝ y) → inv (inv p) ＝ p
@@ -315,7 +315,7 @@ module _
 
 ```agda
 module _
-  {l1 : Level} {A : Type l1}
+  {l1 : Level} {A : UU l1}
   where
 
   is-injective-concat :
@@ -339,7 +339,7 @@ on any type.
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   left-whisker-concat : 
@@ -364,7 +364,7 @@ on any type.
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   right-whisker-concat : 

@@ -3,7 +3,7 @@
 ```agda
 module section-4-3-the-empty-type where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 ```
 
 The empty type is a degenerate example of an inductive type.
@@ -20,9 +20,9 @@ We define the **empty type** to be a type `∅` satisfying the induction princip
 ```
 
 ```agda
-data empty : Type lzero where
+data empty : UU lzero where
 
-ind-empty : {l : Level} {P : empty → Type l} → ((x : empty) → P x)
+ind-empty : {l : Level} {P : empty → UU l} → ((x : empty) → P x)
 ind-empty ()
 ```
 
@@ -35,7 +35,7 @@ It is again a special case of the induction principle that we have a function
 for any type `A`.
 
 ```agda
-ex-falso : {l : Level} {A : Type l} → empty → A
+ex-falso : {l : Level} {A : UU l} → empty → A
 ex-falso = ind-empty
 ```
 
@@ -55,7 +55,7 @@ For any type `A` we define **negation** of `A` by
 ```agda
 infix 25 ¬_
 
-¬_ : {l : Level} → Type l → Type l
+¬_ : {l : Level} → UU l → UU l
 ¬ A = A → empty
 ```
 
@@ -67,7 +67,7 @@ Therefore, we also define
 ```
 
 ```agda
-is-empty : {l : Level} → Type l → Type l
+is-empty : {l : Level} → UU l → UU l
 is-empty A = A → empty
 ```
 
@@ -90,10 +90,10 @@ In type theory, however, note that the type `¬¬ A` is the type of functions
 ```agda
 infix 25 ¬¬_ ¬¬¬_
 
-¬¬_ : {l : Level} → Type l → Type l
+¬¬_ : {l : Level} → UU l → UU l
 ¬¬ P = ¬ ¬ P
 
-¬¬¬_ : {l : Level} → Type l → Type l
+¬¬¬_ : {l : Level} → UU l → UU l
 ¬¬¬ P = ¬ ¬ ¬ P
 ```
 
@@ -146,6 +146,6 @@ We leave it to the reader to construct the corresponding natural deduction tree,
 ```
 
 ```agda
-map-neg : {l1 l2 : Level} {P : Type l1} {Q : Type l2} → (P → Q) → (¬ Q → ¬ P)
+map-neg : {l1 l2 : Level} {P : UU l1} {Q : UU l2} → (P → Q) → (¬ Q → ¬ P)
 map-neg f nq p = nq (f p)
 ```

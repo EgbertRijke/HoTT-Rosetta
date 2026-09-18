@@ -3,7 +3,7 @@
 ```agda
 module section-5-4-transport where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 
 open import section-2-2-ordinary-function-types
 open import section-5-1-the-inductive-definition-of-identity-types
@@ -35,7 +35,7 @@ We construct `tr_B(p)` by induction on `p : x = y`, taking
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x y : A}
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A}
   where
 
   tr : x ＝ y → B x → B y
@@ -63,22 +63,22 @@ Now we can ask whether it is the case that `tr_B(p, f(x)) = f(y)`.
 
 ```agda
 dependent-identification :
-  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x x' : A} (p : x ＝ x') →
-  B x → B x' → Type l2
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x x' : A} (p : x ＝ x') →
+  B x → B x' → UU l2
 dependent-identification B p u v = (tr B p u ＝ v)
 
 refl-dependent-identification :
-  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x : A} {y : B x} →
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x : A} {y : B x} →
   dependent-identification B refl y y
 refl-dependent-identification B = refl
 
 dependent-identification' :
-  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x x' : A} (p : x ＝ x') →
-  B x → B x' → Type l2
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x x' : A} (p : x ＝ x') →
+  B x → B x' → UU l2
 dependent-identification' B p u v = (u ＝ inv-tr B p v)
 
 refl-dependent-identification' :
-  {l1 l2 : Level} {A : Type l1} (B : A → Type l2) {x : A} {y : B x} →
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x : A} {y : B x} →
   dependent-identification' B refl y y
 refl-dependent-identification' B = refl
 ```
@@ -109,7 +109,7 @@ take `apd_f(refl) ≔ refl`.
 
 ```agda
 apd :
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (f : (x : A) → B x) {x y : A}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) {x y : A}
   (p : x ＝ y) → dependent-identification B p (f x) (f y)
 apd f refl = refl
 ```
@@ -121,7 +121,7 @@ Such a computation is most naturally defined here.
 
 ```agda
 tr-ap :
-  {l1 l2 l3 l4 : Level} {A : Type l1} {B : A → Type l2} {C : Type l3} {D : C → Type l4}
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} {C : UU l3} {D : C → UU l4}
   (f : A → C) (g : (x : A) → B x → D (f x))
   {x y : A} (p : x ＝ y) (z : B x) →
   tr D (ap f p) (g x z) ＝ g y (tr B p z)
@@ -134,7 +134,7 @@ tr-ap f g refl z = refl
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   eq-transpose-tr :
@@ -152,7 +152,7 @@ module _
 
 ```agda
 substitution-law-tr :
-  {l1 l2 l3 : Level} {X : Type l1} {A : Type l2} (B : A → Type l3) (f : X → A)
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} (B : A → UU l3) (f : X → A)
   {x y : X} (p : x ＝ y) {x' : B (f x)} →
   tr B (ap f p) x' ＝ tr (B ∘ f) p x'
 substitution-law-tr B f p {x'} = tr-ap f (λ _ → id) p x'

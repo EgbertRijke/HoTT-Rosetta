@@ -3,7 +3,7 @@
 ```agda
 module exercise-4-4-lists where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers 
 open import section-3-2-addition-on-the-natural-numbers
 open import exercise-3-1-multiplication-and-exponentiation
@@ -19,7 +19,7 @@ For any type `A`, we can define the type `list(A)` of **lists** of elements of `
 ```
 
 ```agda
-data list {l : Level} (A : Type l) : Type l where
+data list {l : Level} (A : UU l) : UU l where
   nil : list A
   cons : A → list A → list A
 
@@ -95,7 +95,7 @@ Define a function `reverse-list : list(A) → list(A)` that reverses the order o
 
 ```agda
 ind-list :
-  {l1 l2 : Level} (A : Type l1) → (P : list A → Type l2) → P nil →
+  {l1 l2 : Level} (A : UU l1) → (P : list A → UU l2) → P nil →
   ((a : A) (as : list A) → P as → P (cons a as)) → (x : list A) → P x
 ind-list A P Pnil Pcons nil = Pnil
 ind-list A P Pnil Pcons (cons a as) = Pcons a as (ind-list A P Pnil Pcons as)
@@ -105,7 +105,7 @@ ind-list A P Pnil Pcons (cons a as) = Pcons a as (ind-list A P Pnil Pcons as)
 
 ```agda
 fold-list :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (b : B)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (b : B)
   (μ : A → B → B) → list A → B
 fold-list b μ nil = b
 fold-list b μ (cons a l) = μ a (fold-list b μ l)
@@ -115,14 +115,14 @@ fold-list b μ (cons a l) = μ a (fold-list b μ l)
 
 ```agda
 map-list :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} → (A → B) → list A → list B
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → list A → list B
 map-list f = fold-list nil (λ a → cons (f a))
 ```
 
 ### Exercise 4.4(d)
 
 ```agda
-length-list : {l : Level} {A : Type l} → list A → ℕ
+length-list : {l : Level} {A : UU l} → list A → ℕ
 length-list = fold-list 0 (λ a → succ-ℕ)
 ```
 
@@ -139,21 +139,21 @@ prod-list = fold-list 1 mul-ℕ
 ### Exercise 4.4(f)
 
 ```agda
-concat-list : {l : Level} {A : Type l} → list A → list A → list A
+concat-list : {l : Level} {A : UU l} → list A → list A → list A
 concat-list l1 l2 = (fold-list l2 cons) l1
 ```
 
 ### Exercise 4.4(g)
 
 ```agda
-flatten-list : {l : Level} {A : Type l} → list (list A) → list A
+flatten-list : {l : Level} {A : UU l} → list (list A) → list A
 flatten-list = fold-list nil concat-list
 ```
 
 ### Exercise 4.4(h)
 
 ```agda
-reverse-list : {l : Level} {A : Type} → list A → list A
+reverse-list : {l : Level} {A : UU l} → list A → list A
 reverse-list nil = nil
 reverse-list (cons a l) = concat-list l (cons a nil)
 ```

@@ -3,7 +3,7 @@
 ```agda
 module section-3-1-the-formal-specification-of-the-type-of-natural-numbers where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 ```
 
 The type `ℕ` of **natural numbers** is the archetypal example of an inductive type. 
@@ -44,7 +44,7 @@ The introduction rules for `ℕ` equip it with the **zero element** and the **su
 ```
 
 ```agda
-data ℕ : Type lzero where
+data ℕ : UU lzero where
   zero-ℕ : ℕ
   succ-ℕ : ℕ → ℕ
 
@@ -128,12 +128,12 @@ We conclude that the "official" rule `ℕ-ind` and the rule that presents `ind-�
 
 ```agda
 ind-ℕ :
-  {l : Level} {P : ℕ → Type l} →
+  {l : Level} {P : ℕ → UU l} →
   P 0 → ((n : ℕ) → P n → P (succ-ℕ n)) → ((n : ℕ) → P n)
 ind-ℕ p-zero p-succ 0 = p-zero
 ind-ℕ p-zero p-succ (succ-ℕ n) = p-succ n (ind-ℕ p-zero p-succ n)
 
-rec-ℕ : {l : Level} {A : Type l} → A → (ℕ → A → A) → (ℕ → A)
+rec-ℕ : {l : Level} {A : UU l} → A → (ℕ → A → A) → (ℕ → A)
 rec-ℕ = ind-ℕ
 ```
 

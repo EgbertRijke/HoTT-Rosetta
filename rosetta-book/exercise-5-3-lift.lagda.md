@@ -4,7 +4,7 @@
 module exercise-5-3-lift where
 
 open import universe-levels
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
@@ -29,7 +29,7 @@ the path lifting property for fibrations in homotopy theory.
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2}
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
 
   lift-eq-Σ :

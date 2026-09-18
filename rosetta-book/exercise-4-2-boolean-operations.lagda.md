@@ -3,7 +3,7 @@
 ```agda
 module exercise-4-2-boolean-operations where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 ```
 
 ## Problem statement
@@ -36,18 +36,18 @@ for which the computation rules
 hold.
 
 ```agda
-data bool : Type lzero where
+data bool : UU lzero where
   true false : bool
 
 {-# BUILTIN BOOL bool #-}
 {-# BUILTIN TRUE true #-}
 {-# BUILTIN FALSE false #-}
 
-ind-bool : {l : Level} (P : bool → Type l) → P true → P false → (b : bool) → P b
+ind-bool : {l : Level} (P : bool → UU l) → P true → P false → (b : bool) → P b
 ind-bool P pt pf true = pt
 ind-bool P pt pf false = pf
 
-rec-bool : {l : Level} {P : Type l} → P → P → bool → P
+rec-bool : {l : Level} {P : UU l} → P → P → bool → P
 rec-bool {l} {P} p1 p0 = ind-bool (λ _ → P) p1 p0
 ```
 

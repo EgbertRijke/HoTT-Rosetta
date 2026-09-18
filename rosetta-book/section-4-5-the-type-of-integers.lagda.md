@@ -3,7 +3,7 @@
 ```agda
 module section-4-5-the-type-of-integers where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
@@ -39,7 +39,7 @@ and with the constants
 ```
 
 ```agda
-ℤ : Type lzero
+ℤ : UU lzero
 ℤ = ℕ + (unit + ℕ)
 
 {-# BUILTIN INTEGER ℤ #-}
@@ -98,7 +98,7 @@ where the types of `p_-1`, `p_-S`, `p_0`, `p_1`, and `p_S` are
 
 ```agda
 ind-ℤ :
-  {l : Level} (P : ℤ → Type l) →
+  {l : Level} (P : ℤ → UU l) →
   P neg-one-ℤ →
   ((n : ℕ) → P (in-neg-ℤ n) → P (in-neg-ℤ (succ-ℕ n))) →
   P zero-ℤ →

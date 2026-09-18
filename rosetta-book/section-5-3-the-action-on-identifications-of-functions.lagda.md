@@ -3,7 +3,7 @@
 ```agda
 module section-5-3-the-action-on-identifications-of-functions where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 
 open import section-2-2-ordinary-function-types
 open import section-5-1-the-inductive-definition-of-identity-types
@@ -58,19 +58,19 @@ types, taking
 
 ```agda
 ap :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) {x y : A} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A} →
   x ＝ y → f x ＝ f y
 ap f refl = refl
 
 module _
-  {l : Level} {A : Type l} {x y : A}
+  {l : Level} {A : UU l} {x y : A}
   where
 
   ap-id : (p : x ＝ y) → ap id p ＝ p
   ap-id refl = refl
 
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3} (g : B → C) (f : A → B)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (g : B → C) (f : A → B)
   where
 
   ap-comp : {x y : A} (p : x ＝ y) → ap (g ∘ f) p ＝ (ap g ∘ ap f) p
@@ -114,7 +114,7 @@ taking
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} (f : A → B) (x y : A)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x y : A)
   where
 
   ap-refl : ap f (refl {x = x}) ＝ refl
@@ -134,7 +134,7 @@ module _
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3} (f : A → B → C)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C)
   where
 
   ap-binary :

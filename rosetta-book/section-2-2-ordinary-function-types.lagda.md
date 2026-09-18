@@ -3,7 +3,7 @@
 ```agda
 module section-2-2-ordinary-function-types where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 ```
 
 An important special case of `Π`-types arises when both `A` and `B` are types in context `Γ`. In this case, we can first weaken `B` by `A` and then apply the `Π`-formation rule to obtain the type `A → B` of *ordinary* functions from `A` to `B`, as in the following derivation:
@@ -151,7 +151,7 @@ The identity function therefore satisfies the following inference rules:
 ## Agda implementation
 
 ```agda
-id : {l : Level} {A : Type l} → A → A
+id : {l : Level} {A : UU l} → A → A
 id a = a
 ```
 
@@ -248,7 +248,7 @@ infixr 15 _∘_
 
 _∘_ :
   {l1 l2 l3 : Level}
-  {A : Type l1} {B : A → Type l2} {C : (a : A) → B a → Type l3} →
+  {A : UU l1} {B : A → UU l2} {C : (a : A) → B a → UU l3} →
   ({a : A} → (b : B a) → C a b) → (f : (a : A) → B a) → (a : A) → C a (f a)
 (g ∘ f) a = g (f a)
 ```
@@ -342,14 +342,14 @@ We leave the right unit law as Exercise 2.2.
 
 ```agda
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : B → Type l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → UU l3)
   where
 
   precomp-Π : ((b : B) → C b) → ((a : A) → C (f a))
   precomp-Π h a = h (f a)
 
 module _
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (f : A → B) (C : Type l3)
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : UU l3)
   where
 
   precomp : (B → C) → (A → C)

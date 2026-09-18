@@ -3,7 +3,7 @@
 ```agda
 module section-2-1-the-rules-for-dependent-function-types where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 ```
 
 Consider a section `b` of a family `B` over `A` in context `Γ`, i.e., consider
@@ -89,7 +89,7 @@ This rule asserts that given a dependent function `f : Π(x:A) B(x)` in context 
 
 ```agda
 module _
-  {l1 l2 : Level} {A : Type l1} {B : A → Type l2} (a : A)
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A)
   where
 
   ev : ((x : A) → B x) → B a

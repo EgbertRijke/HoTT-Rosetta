@@ -5,7 +5,7 @@ module section-4-2-the-unit-type where
 
 open import exercise-2-3-constant-maps
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 ```
 
 A straightforward example of an inductive type is the *unit type*, which has just one constructor. 
@@ -34,12 +34,12 @@ for which the computation rule
 holds.
 
 ```agda
-record unit : Type lzero where
+record unit : UU lzero where
   instance constructor star
 
 {-# BUILTIN UNIT unit #-}
 
-ind-unit : {l : Level} {P : unit → Type l} → P star → (x : unit) → P x
+ind-unit : {l : Level} {P : unit → UU l} → P star → (x : unit) → P x
 ind-unit p star = p
 ```
 
@@ -61,7 +61,7 @@ In other words, by the induction principle for the unit type we obtain for every
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
   point : A → (unit → A)
@@ -74,7 +74,7 @@ module _
 
 ```agda
 module _
-  {l : Level} (A : Type l)
+  {l : Level} (A : UU l)
   where
 
   terminal-map : A → unit

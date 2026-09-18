@@ -3,7 +3,7 @@
 ```agda
 module exercise-2-4-swapping-variables where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 ```
 
 ## Problem statement
@@ -36,7 +36,7 @@ Only the first subexercise has a solution in agda-unimath. The second exercise e
 
 ```agda
 swap-Π :
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : A → B → Type l3} →
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : A → B → UU l3} →
   ((x : A) (y : B) → C x y) → ((y : B) (x : A) → C x y)
 swap-Π f y x = f x y
 ```

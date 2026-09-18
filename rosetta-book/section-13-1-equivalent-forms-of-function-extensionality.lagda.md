@@ -386,6 +386,32 @@ abstract
   is-trunc-function-type k {A} {B} is-trunc-B =
     is-trunc-Π k {B = λ (x : A) → B} (λ x → is-trunc-B)
 
+function-type-Truncated-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : Truncated-Type l2 k) →
+  Truncated-Type (l1 ⊔ l2) k
+pr1 (function-type-Truncated-Type A B) = A → type-Truncated-Type B
+pr2 (function-type-Truncated-Type A B) =
+  is-trunc-function-type _ (is-trunc-type-Truncated-Type B)
+
+type-hom-Truncated-Type :
+  (k : 𝕋) {l1 l2 : Level} (A : Truncated-Type l1 k)
+  (B : Truncated-Type l2 k) → UU (l1 ⊔ l2)
+type-hom-Truncated-Type k A B =
+  type-Truncated-Type A → type-Truncated-Type B
+
+is-trunc-type-hom-Truncated-Type :
+  (k : 𝕋) {l1 l2 : Level} (A : Truncated-Type l1 k)
+  (B : Truncated-Type l2 k) →
+  is-trunc k (type-hom-Truncated-Type k A B)
+is-trunc-type-hom-Truncated-Type k A B =
+  is-trunc-function-type k (is-trunc-type-Truncated-Type B)
+
+hom-Truncated-Type :
+  (k : 𝕋) {l1 l2 : Level} (A : Truncated-Type l1 k)
+  (B : Truncated-Type l2 k) → Truncated-Type (l1 ⊔ l2) k
+pr1 (hom-Truncated-Type k A B) = type-hom-Truncated-Type k A B
+pr2 (hom-Truncated-Type k A B) = is-trunc-type-hom-Truncated-Type k A B
+
 abstract
   is-prop-function-type :
     {l1 l2 : Level} {A : UU l1} {B : UU l2} →

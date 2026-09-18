@@ -3,7 +3,7 @@
 ```agda
 module exercise-5-4-mac-lane-pentagon where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
@@ -52,19 +52,19 @@ Show that
 
 ```agda
 module _
-  {l : Level} {A : Type l} {x y z w v : A}
+  {l : Level} {A : UU l} {x y z w v : A}
   where
 
   coherence-pentagon-identifications :
     (top : x ＝ y)
     (top-left : x ＝ z) (top-right : y ＝ w)
-    (bottom-left : z ＝ v) (bottom-right : w ＝ v) → Type l
+    (bottom-left : z ＝ v) (bottom-right : w ＝ v) → UU l
   coherence-pentagon-identifications
     top top-left top-right bottom-left bottom-right =
     top-left ∙ bottom-left ＝ (top ∙ top-right) ∙ bottom-right
 
 mac-lane-pentagon :
-  {l : Level} {A : Type l} {a b c d e : A}
+  {l : Level} {A : UU l} {a b c d e : A}
   (p : a ＝ b) (q : b ＝ c) (r : c ＝ d) (s : d ＝ e) →
   let α₁ = (ap (_∙ s) (assoc p q r))
       α₂ = (assoc p (q ∙ r) s)

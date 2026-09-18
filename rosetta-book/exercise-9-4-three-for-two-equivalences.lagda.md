@@ -317,7 +317,7 @@ module _
     is-equiv-top-map-triangle (g ∘ h) g h refl-htpy is-equiv-g is-equiv-gh
 ```
 
-## Supplementary definitions
+## Supplement
 
 ### If `g ∘ h` has a section then `g` has a section
 
@@ -405,4 +405,96 @@ module _
     is-equiv-is-equiv-retraction :
       (r : retraction f) → is-equiv (map-retraction f r) → is-equiv f
     is-equiv-is-equiv-retraction (g , G) R = is-equiv-is-section R G
+```
+
+## Supplement
+
+### Equivalences in commuting squares
+
+```agda
+is-equiv-equiv :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {f : A → B} {g : X → Y} (i : A ≃ X) (j : B ≃ Y)
+  (H : (map-equiv j ∘ f) ~ (g ∘ map-equiv i)) → is-equiv g → is-equiv f
+is-equiv-equiv {f = f} {g} i j H K =
+  is-equiv-right-factor
+    ( map-equiv j)
+    ( f)
+    ( is-equiv-map-equiv j)
+    ( is-equiv-left-map-triangle
+      ( map-equiv j ∘ f)
+      ( g)
+      ( map-equiv i)
+      ( H)
+      ( is-equiv-map-equiv i)
+      ( K))
+
+is-equiv-equiv' :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  {f : A → B} {g : X → Y} (i : A ≃ X) (j : B ≃ Y)
+  (H : (map-equiv j ∘ f) ~ (g ∘ map-equiv i)) → is-equiv f → is-equiv g
+is-equiv-equiv' {f = f} {g} i j H K =
+  is-equiv-left-factor
+    ( g)
+    ( map-equiv i)
+    ( is-equiv-left-map-triangle
+      ( g ∘ map-equiv i)
+      ( map-equiv j)
+      ( f)
+      ( inv-htpy H)
+      ( K)
+      ( is-equiv-map-equiv j))
+    ( is-equiv-map-equiv i)
+```
+
+We will assume a commuting square
+
+```text
+        h
+    A -----> C
+    |        |
+  f |        | g
+    ∨        ∨
+    B -----> D
+        i
+```
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : C → D) (h : A → C) (i : B → D) (H : (i ∘ f) ~ (g ∘ h))
+  where
+
+  abstract
+    is-equiv-top-is-equiv-left-square :
+      is-equiv i → is-equiv f → is-equiv g → is-equiv h
+    is-equiv-top-is-equiv-left-square Ei Ef Eg =
+      is-equiv-top-map-triangle (i ∘ f) g h H Eg (is-equiv-comp i f Ef Ei)
+
+  abstract
+    is-equiv-top-is-equiv-bottom-square :
+      is-equiv f → is-equiv g → is-equiv i → is-equiv h
+    is-equiv-top-is-equiv-bottom-square Ef Eg Ei =
+      is-equiv-top-map-triangle (i ∘ f) g h H Eg (is-equiv-comp i f Ef Ei)
+
+  abstract
+    is-equiv-bottom-is-equiv-top-square :
+      is-equiv f → is-equiv g → is-equiv h → is-equiv i
+    is-equiv-bottom-is-equiv-top-square Ef Eg Eh =
+      is-equiv-left-factor i f
+        ( is-equiv-left-map-triangle (i ∘ f) g h H Eh Eg)
+        ( Ef)
+
+  abstract
+    is-equiv-left-is-equiv-right-square :
+      is-equiv h → is-equiv i → is-equiv g → is-equiv f
+    is-equiv-left-is-equiv-right-square Eh Ei Eg =
+      is-equiv-right-factor i f Ei
+        ( is-equiv-left-map-triangle (i ∘ f) g h H Eh Eg)
+
+  abstract
+    is-equiv-right-is-equiv-left-square :
+      is-equiv h → is-equiv i → is-equiv f → is-equiv g
+    is-equiv-right-is-equiv-left-square Eh Ei Ef =
+      is-equiv-right-map-triangle (i ∘ f) g h H (is-equiv-comp i f Ef Ei) Eh
 ```

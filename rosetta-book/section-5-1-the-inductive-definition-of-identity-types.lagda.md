@@ -3,7 +3,7 @@
 ```agda
 module section-5-1-the-inductive-definition-of-identity-types where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 ```
 
 ## Definition 5.1.1
@@ -18,15 +18,15 @@ types `a = x` indexed by `x : A`, of which the constructor is
 
 ```agda
 module _
-  {l : Level} {A : Type l}
+  {l : Level} {A : UU l}
   where
 
-  data Id (x : A) : A → Type l where
+  data Id (x : A) : A → UU l where
     instance refl : Id x x
 
   infix 6 _＝_
 
-  _＝_ : A → A → Type l
+  _＝_ : A → A → UU l
   (a ＝ b) = Id a b
 
 {-# BUILTIN EQUALITY Id #-}
@@ -43,8 +43,8 @@ which satisfies `path-ind_a(u, a, refl) ≐ u`, given `u : P(a, refl)`.
 
 ```agda
 ind-Id :
-  {l1 l2 : Level} {A : Type l1}
-  (x : A) (B : (y : A) (p : x ＝ y) → Type l2) →
+  {l1 l2 : Level} {A : UU l1}
+  (x : A) (B : (y : A) (p : x ＝ y) → UU l2) →
   B x refl → (y : A) (p : x ＝ y) → B y p
 ind-Id x B b y refl = b
 ```

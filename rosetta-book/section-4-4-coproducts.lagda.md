@@ -3,7 +3,7 @@
 ```agda
 module section-4-4-coproducts where
 
-open import universe-levels renaming (UU to Type)
+open import universe-levels
 
 open import section-4-3-the-empty-type
 ```
@@ -42,20 +42,20 @@ Sometimes we write `[f,g]` for the function `ind-coprod(f,g)`. The coproduct of 
 ```agda
 infixr 10 _+_
 
-data _+_ {l1 l2 : Level} (A : Type l1) (B : Type l2) : Type (l1 ⊔ l2)
+data _+_ {l1 l2 : Level} (A : UU l1) (B : UU l2) : UU (l1 ⊔ l2)
   where
   inl : A → A + B
   inr : B → A + B
 
 ind-coproduct :
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} (C : A + B → Type l3) →
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (C : A + B → UU l3) →
   ((x : A) → C (inl x)) → ((y : B) → C (inr y)) →
   (t : A + B) → C t
 ind-coproduct C f g (inl x) = f x
 ind-coproduct C f g (inr x) = g x
 
 rec-coproduct :
-  {l1 l2 l3 : Level} {A : Type l1} {B : Type l2} {C : Type l3} →
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
   (A → C) → (B → C) → (A + B) → C
 rec-coproduct {C = C} = ind-coproduct (λ _ → C)
 ```
@@ -92,7 +92,7 @@ for every `f : A → A'` and `g : B → B'`. Indeed, the map `f + g` is defined 
 ```agda
 map-coproduct :
   {l1 l2 l3 l4 : Level}
-  {A : Type l1} {B : Type l2} {A' : Type l3} {B' : Type l4}
+  {A : UU l1} {B : UU l2} {A' : UU l3} {B' : UU l4}
   (f : A → A') (g : B → B') → A + B → A' + B'
 map-coproduct f g (inl x) = inl (f x)
 map-coproduct f g (inr y) = inr (g y)
@@ -135,7 +135,7 @@ The function `f` is simply defined to be the identity function `\idfunc : A → 
 
 ```agda
 module _
-  {l1 l2 : Level} (A : Type l1) (B : Type l2) (H : is-empty A)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) (H : is-empty A)
   where
 
   map-left-unit-law-coproduct-is-empty : A + B → B
@@ -143,12 +143,12 @@ module _
   map-left-unit-law-coproduct-is-empty (inr b) = b
 
 map-left-unit-law-coproduct :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-empty A → A + B → B
 map-left-unit-law-coproduct = map-left-unit-law-coproduct-is-empty _ _
 
 module _
-  {l1 l2 : Level} (A : Type l1) (B : Type l2) (H : is-empty B)
+  {l1 l2 : Level} (A : UU l1) (B : UU l2) (H : is-empty B)
   where
 
   map-right-unit-law-coproduct-is-empty : A + B → A
@@ -156,7 +156,7 @@ module _
   map-right-unit-law-coproduct-is-empty (inr b) = ex-falso (H b)
 
 map-right-unit-law-coproduct :
-  {l1 l2 : Level} {A : Type l1} {B : Type l2} →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-empty B → A + B → A
 map-right-unit-law-coproduct = map-right-unit-law-coproduct-is-empty _ _
 ```

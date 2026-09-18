@@ -8,13 +8,19 @@ open import section-2-2-ordinary-function-types
 open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
+open import exercise-10-3-contractible-equivalences
+open import section-11-1-families-of-equivalences
 open import section-12-1-propositions
+open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
+open import section-13-2-identity-systems-on-pi-types
 open import section-13-4-composing-with-equivalences
 open import exercise-4-3-double-negation-logic
 open import exercise-10-1-identity-types-contractible
@@ -292,4 +298,188 @@ pr1 (equiv-precomp-double-negation A Q) =
   precomp (double-negation-introduction {P = A}) (¬¬ Q)
 pr2 (equiv-precomp-double-negation A Q) =
   is-equiv-precomp-double-negation A Q
+```
+
+## Supplement
+
+Note: In agda-unimath, propositional truncation is defined in terms of the general truncation operations. Therefore, we have to introduce the general truncation operations prior to introducing the propositional truncation operations.
+
+### The condition on a map to be a truncation
+
+```agda
+precomp-Trunc :
+  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
+  (C : Truncated-Type l3 k) →
+  (B → type-Truncated-Type C) → (A → type-Truncated-Type C)
+precomp-Trunc f C = precomp f (type-Truncated-Type C)
+
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1}
+  (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B)
+  where
+
+  is-truncation : UUω
+  is-truncation =
+    {l : Level} (C : Truncated-Type l k) → is-equiv (precomp-Trunc f C)
+
+  equiv-is-truncation :
+    {l3 : Level} (H : is-truncation) (C : Truncated-Type l3 k) →
+    ( type-Truncated-Type B → type-Truncated-Type C) ≃
+    ( A → type-Truncated-Type C)
+  pr1 (equiv-is-truncation H C) = precomp-Trunc f C
+  pr2 (equiv-is-truncation H C) = H C
+```
+
+### The truncation operations
+
+```agda
+postulate
+  type-trunc : {l : Level} (k : 𝕋) → UU l → UU l
+
+postulate
+  is-trunc-type-trunc :
+    {l : Level} {k : 𝕋} {A : UU l} → is-trunc k (type-trunc k A)
+
+trunc : {l : Level} (k : 𝕋) → UU l → Truncated-Type l k
+pr1 (trunc k A) = type-trunc k A
+pr2 (trunc k A) = is-trunc-type-trunc
+
+postulate
+  unit-trunc : {l : Level} {k : 𝕋} {A : UU l} → A → type-trunc k A
+
+postulate
+  is-truncation-trunc :
+    {l : Level} {k : 𝕋} {A : UU l} →
+    is-truncation (trunc k A) unit-trunc
+
+equiv-universal-property-trunc :
+  {l1 l2 : Level} {k : 𝕋} (A : UU l1) (B : Truncated-Type l2 k) →
+  (type-trunc k A → type-Truncated-Type B) ≃ (A → type-Truncated-Type B)
+pr1 (equiv-universal-property-trunc A B) = precomp-Trunc unit-trunc B
+pr2 (equiv-universal-property-trunc A B) = is-truncation-trunc B
+```
+
+### The dependent universal property of truncations
+
+```agda
+precomp-Π-Truncated-Type :
+  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} (f : A → B)
+  (C : B → Truncated-Type l3 k) →
+  ((b : B) → type-Truncated-Type (C b)) →
+  ((a : A) → type-Truncated-Type (C (f a)))
+precomp-Π-Truncated-Type f C h a = h (f a)
+
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1}
+  (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B)
+  where
+
+  dependent-universal-property-truncation : UUω
+  dependent-universal-property-truncation =
+    {l : Level} (X : type-Truncated-Type B → Truncated-Type l k) →
+    is-equiv (precomp-Π-Truncated-Type f X)
+```
+
+### A map into a truncated type is a truncation if and only if it satisfies the dependent universal property of the truncation
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : Truncated-Type l2 k)
+  (f : A → type-Truncated-Type B)
+  where
+
+  abstract
+    dependent-universal-property-truncation-is-truncation :
+      is-truncation B f →
+      dependent-universal-property-truncation B f
+    dependent-universal-property-truncation-is-truncation H X =
+      is-fiberwise-equiv-is-equiv-map-Σ
+        ( λ (h : A → type-Truncated-Type B) →
+          (a : A) → type-Truncated-Type (X (h a)))
+        ( λ (g : type-Truncated-Type B → type-Truncated-Type B) → g ∘ f)
+        ( λ g (s : (b : type-Truncated-Type B) →
+          type-Truncated-Type (X (g b))) (a : A) → s (f a))
+        ( H B)
+        ( is-equiv-equiv
+          ( inv-distributive-Π-Σ)
+          ( inv-distributive-Π-Σ)
+          ( ind-Σ (λ g s → refl))
+          ( H (Σ-Truncated-Type B X)))
+        ( id)
+
+  abstract
+    is-truncation-dependent-universal-property-truncation :
+      dependent-universal-property-truncation B f → is-truncation B f
+    is-truncation-dependent-universal-property-truncation H X = H (λ _ → X)
+
+  section-is-truncation :
+    is-truncation B f →
+    {l3 : Level} (C : Truncated-Type l3 k)
+    (h : A → type-Truncated-Type C) (g : type-hom-Truncated-Type k C B) →
+    f ~ g ∘ h → section g
+  section-is-truncation H C h g K =
+    map-distributive-Π-Σ
+      ( map-inv-is-equiv
+        ( dependent-universal-property-truncation-is-truncation H
+          ( fiber-Truncated-Type C B g))
+        ( λ a → (h a , inv (K a))))
+```
+
+### The `n`-truncations satisfy the dependent universal property of `n`-truncations
+
+```agda
+module _
+  {l1 : Level} {k : 𝕋} {A : UU l1}
+  where
+
+  dependent-universal-property-trunc :
+    dependent-universal-property-truncation (trunc k A) unit-trunc
+  dependent-universal-property-trunc =
+    dependent-universal-property-truncation-is-truncation
+      ( trunc k A)
+      ( unit-trunc)
+      ( is-truncation-trunc)
+
+  equiv-dependent-universal-property-trunc :
+    {l2 : Level} (B : type-trunc k A → Truncated-Type l2 k) →
+    ((x : type-trunc k A) → type-Truncated-Type (B x)) ≃
+    ((a : A) → type-Truncated-Type (B (unit-trunc a)))
+  pr1 (equiv-dependent-universal-property-trunc B) =
+    precomp-Π-Truncated-Type unit-trunc B
+  pr2 (equiv-dependent-universal-property-trunc B) =
+    dependent-universal-property-trunc B
+
+  unique-dependent-function-trunc :
+    {l2 : Level} (B : type-trunc k A → Truncated-Type l2 k)
+    (f : (x : A) → type-Truncated-Type (B (unit-trunc x))) →
+    is-contr
+      ( Σ ( (x : type-trunc k A) → type-Truncated-Type (B x))
+          ( λ h → (h ∘ unit-trunc) ~ f))
+  unique-dependent-function-trunc B f =
+    is-contr-equiv'
+      ( fiber (precomp-Π-Truncated-Type unit-trunc B) f)
+      ( equiv-tot (λ h → equiv-funext))
+      ( is-contr-map-is-equiv (dependent-universal-property-trunc B) f)
+
+  apply-dependent-universal-property-trunc :
+    {l2 : Level} (B : type-trunc k A → Truncated-Type l2 k) →
+    (f : (x : A) → type-Truncated-Type (B (unit-trunc x))) →
+    Σ ( (x : type-trunc k A) → type-Truncated-Type (B x))
+      ( λ h → (h ∘ unit-trunc) ~ f)
+  apply-dependent-universal-property-trunc B f =
+    center (unique-dependent-function-trunc B f)
+
+  function-dependent-universal-property-trunc :
+    {l2 : Level} (B : type-trunc k A → Truncated-Type l2 k) →
+    (f : (x : A) → type-Truncated-Type (B (unit-trunc x))) →
+    (x : type-trunc k A) → type-Truncated-Type (B x)
+  function-dependent-universal-property-trunc B f =
+    pr1 (apply-dependent-universal-property-trunc B f)
+
+  htpy-dependent-universal-property-trunc :
+    {l2 : Level} (B : type-trunc k A → Truncated-Type l2 k) →
+    (f : (x : A) → type-Truncated-Type (B (unit-trunc x))) →
+    ( function-dependent-universal-property-trunc B f ∘ unit-trunc) ~ f
+  htpy-dependent-universal-property-trunc B f =
+    pr2 (apply-dependent-universal-property-trunc B f)
 ```
