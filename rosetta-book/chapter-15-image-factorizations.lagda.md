@@ -17,9 +17,10 @@ The image of a map `f : A → X` can be thought of as the least subtype of `X` t
 More precisely, the image of `f` is an embedding `i : im(f) ↪ X` that fits in a commuting triangle
 
 ```text
+       q
   A ------> im(f)
    \       /
-    \     /
+  f \     / i
      \   /
       ∨ ∨ 
        X
