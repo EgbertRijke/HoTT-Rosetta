@@ -518,9 +518,7 @@ map-universal-property-set-quotient-trunc-Prop' :
   Σ (A → type-Set B) is-weakly-constant-map → type-trunc-Prop A → type-Set B
 map-universal-property-set-quotient-trunc-Prop' B (f , H) =
   map-universal-property-set-quotient-trunc-Prop B f H
-```
 
-```agda
 abstract
   htpy-universal-property-set-quotient-trunc-Prop :
     {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →

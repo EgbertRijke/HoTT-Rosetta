@@ -13,19 +13,16 @@ open import exercise-15-4-surjective-triangles
 open import exercise-15-5-lawveres-fixed-point-theorem
 ```
 
-The image of a map `f:A→ X` can be thought of as the least subtype of `X` that contains all the values of `f`.
-More precisely, the image of `f` is an embedding `i:im(f)↪ X` that fits in a commuting triangle
-
-*Triangle-shaped diagram (automatic draft).*
+The image of a map `f : A → X` can be thought of as the least subtype of `X` that contains all the values of `f`.
+More precisely, the image of `f` is an embedding `i : im(f) ↪ X` that fits in a commuting triangle
 
 ```text
- [A]                [im(f)]
-
-           [X]
-
-Arrows:
-- A --q--> im(f)
-- A --f--> X
-- im(f) --i--> X
+  A ------> im(f)
+   \       /
+    \     /
+     \   /
+      ∨ ∨ 
+       X
 ```
-and satisfies the *universal property* of the image of `f`, which states that if a subtype `B↪ X` contains all the values of `f`, then it contains the image of `f`.
+
+and satisfies the *universal property* of the image of `f`, which states that if a subtype `B ↪ X` contains all the values of `f`, then it contains the image of `f`.
