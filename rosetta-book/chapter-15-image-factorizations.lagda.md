@@ -5,11 +5,11 @@ module chapter-15-image-factorizations where
 
 open import section-15-1-the-image-of-a-map
 open import section-15-2-surjective-maps
-open import section-15-3-cantor-s-diagonal-argument
-open import exercise-15-1-image-universal-property-triangles
-open import exercise-15-2-subtypes-of-the-unit-type
+open import section-15-3-cantors-diagonal-argument
+open import exercise-15-1-universal-property-image
+open import exercise-15-2-propositional-truncations
 open import exercise-15-3-equivalences-are-surjective-embeddings
-open import exercise-15-4-surjective-triangles
+open import exercise-15-4-surjective-maps-in-triangles
 open import exercise-15-5-lawveres-fixed-point-theorem
 ```
 

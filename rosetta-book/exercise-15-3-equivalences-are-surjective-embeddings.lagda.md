@@ -7,7 +7,7 @@ module exercise-15-3-equivalences-are-surjective-embeddings where
 
 ## Problem statement
 
-Consider a map `f:A→ B`.
+Consider a map `f : A → B`.
 Show that the following are equivalent:
 
 1. `f` is an equivalence.
@@ -15,5 +15,3 @@ Show that the following are equivalent:
 2. `f` is both surjective and an embedding.
 
 ## Solution
-
-No formalization has been curated yet.
