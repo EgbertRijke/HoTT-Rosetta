@@ -18,3 +18,5 @@ Construct an equivalence `Fin{n!} ≃ (Fin{n} ≃ Fin{n})`.
 Conclude that if `A` is finite, then `A ≃ A` is finite.
 
 ## Solution
+
+BENCHMARK PROBLEM

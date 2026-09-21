@@ -7,11 +7,15 @@ module exercise-16-11-surjections-between-finite-types where
 
 ## Problem statement
 
+### Exercise 16.11(a)
+
 Consider an arbitrary type `A` and a type `B` with decidable equality.
 Construct an equivalence
 ```text
 ((A+unit)↠(B+unit))≃ (B+unit)×(A↠ B)+(A↠ B+unit).
 ```
+
+### Exercise 16.11(b)
 
 Construct an equivalence `Fin{\numberofsurjectivemaps{m}{n}}≃(Fin{m}↠Fin{n})`, where `\numberofsurjectivemaps{m}{n}` is defined recursively by
 ```text
@@ -25,4 +29,4 @@ Note: the number `\numberofsurjectivemaps{m}{n}` is `n!Stirling(m, n)`, where `S
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

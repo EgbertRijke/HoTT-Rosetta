@@ -19,3 +19,5 @@ Sets `X` such that every embedding `X ↪ X` is an equivalence are also called *
 Show that any surjective map `f : X → X` is an equivalence.
 
 ## Solution
+
+BENCHMARK PROBLEM

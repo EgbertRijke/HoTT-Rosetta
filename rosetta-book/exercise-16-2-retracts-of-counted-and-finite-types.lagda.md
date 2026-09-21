@@ -12,3 +12,5 @@ Show that `count(B) → count(A)`.
 Conclude that `is-finite(B) → is-finite(A)`.
 
 ## Solution
+
+BENCHMARK PROBLEM

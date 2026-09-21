@@ -15,3 +15,5 @@ For any `2`-element type `X`, construct an equivalence
 ```
 
 ## Solution
+
+BENCHMARK PROBLEM

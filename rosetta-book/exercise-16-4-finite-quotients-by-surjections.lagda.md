@@ -15,3 +15,6 @@ Show that the following are equivalent:
 2. The type `B` is finite.
 
 ## Solution
+
+BENCHMARK PROBLEM
+

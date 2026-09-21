@@ -27,3 +27,6 @@ Show that for any type `A` with decidable equality and an arbitrary type `B`, an
 ```
 
 ## Solution
+
+BENCHMARK PROBLEM
+

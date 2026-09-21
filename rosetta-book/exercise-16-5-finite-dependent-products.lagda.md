@@ -50,3 +50,5 @@ Show that if `Π(x : A) B(x)` is finite and if each `B(x)` is finite, then `A` i
    is finite.
 
 ## Solution
+
+BENCHMARK PROBLEM

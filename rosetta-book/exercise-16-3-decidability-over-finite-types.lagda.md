@@ -32,3 +32,5 @@ Show that `is-surj(f)` is decidable, for any map `f : I → J` between finite ty
 Show that `is-equiv(f)` is decidable, for any map `f : I → J` between finite types.
 
 ## Solution
+
+BENCHMARK PROBLEM
