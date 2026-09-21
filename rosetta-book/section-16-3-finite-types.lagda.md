@@ -4,35 +4,42 @@
 module section-16-3-finite-types where
 ```
 
-The type of all finite types is the subtype of the base universe `𝒰_0` consisting of all types `X` for which there exists an unspecified equivalence `Fin{k}≃ X` for some `k:ℕ`.
+The type of all finite types is the subtype of the base universe `𝒰₀` consisting of all types `X` for which there exists an unspecified equivalence `Fin_{k} ≃ X` for some `k : ℕ`.
 
 ## Definition 16.3.1
 
 A type `X` is said to be **finite** if it comes equipped with an element of type
+
 ```text
-is-finite(X) ≔ ‖Σ(k:ℕ) Fin{k}≃ X‖
+  is-finite(X) ≔ ‖Σ(k : ℕ) Fin_{k} ≃ X‖
 ```
+
 The type `𝔽` of all finite types is defined to be
+
 ```text
-𝔽:=Σ(X:𝒰_0) is-finite(X).
+  𝔽 ≔ Σ(X : 𝒰₀) is-finite(X).
 ```
-In other words, the type `𝔽` of finite types is the image of the map `Fin : ℕ → 𝒰_0`.
+
+In other words, the type `𝔽` of finite types is the image of the map `Fin : ℕ → 𝒰₀`.
 We also define the type `BS_k` of **`k`-element types** by
+
 ```text
-BS_k≔ Σ(X:𝒰_0) ‖Fin{k}≃ X‖.
+  BS_k ≔ Σ(X : 𝒰₀) ‖Fin_{k} ≃ X‖.
 ```
 
 ## Remark 16.3.2
 
 It follows directly from the definition of finiteness that any type `X` equipped with a counting is finite.
-In particular, any `Fin{k}` is finite.
+In particular, any `Fin_{k}` is finite.
 Furthermore, it follows that if `X` is equivalent to a finite type `Y`, then `X` is also finite.
 Indeed, we can use the functoriality of the propositional truncation to obtain a function
+
 ```text
-‖Σ(k:ℕ) Fin{k}≃ Y‖→‖Σ(k:ℕ) Fin{k}≃ X‖
+  ‖Σ(k : ℕ) Fin_{k} ≃ Y‖ → ‖Σ(k : ℕ) Fin_{k} ≃ X‖
 ```
-from a map `(Σ(k:ℕ) Fin{k}≃ Y)→(Σ(k:ℕ) Fin{k}≃ X)`.
-Given an equivalence `e:X≃ Y`, such a map is given as the map induced on total spaces from the family of maps `f↦ e^{-1}∘ f`.
+
+from a map `(Σ(k : ℕ) Fin_{k} ≃ Y) → (Σ(k : ℕ) Fin_{k} ≃ X)`.
+Given an equivalence `e : X ≃ Y`, such a map is given as the map induced on total spaces from the family of maps `f ↦ e⁻¹ ∘ f`.
 
 Similarly, it follows that any finite type has decidable equality, and that every finite type is a set.
 
@@ -41,57 +48,68 @@ In the following proposition we will show that each finite type can be assigned 
 ## Theorem 16.3.3
 
 For any type `X`, consider the type `is-finite'(X)` defined by
+
 ```text
-is-finite'(X) ≔ Σ(k:ℕ) ‖Fin{k}≃ X‖.
+  is-finite'(X) ≔ Σ(k : ℕ) ‖Fin_{k} ≃ X‖.
 ```
+
 Then the type `is-finite'(X)` is a proposition, and there is an equivalence
+
 ```text
-is-finite(X)↔is-finite'(X).
+  is-finite(X) ↔ is-finite'(X).
 ```
-If `X` is a finite type, then the unique number `k` such that `‖Fin{k}≃ X‖` is the **cardinality** of `X`.
+
+If `X` is a finite type, then the unique number `k` such that `‖Fin_{k} ≃ X‖` is the **cardinality** of `X`.
 We write `|X|` for the cardinality of `X`.
 
 ### Proof
 
-*Proof.* We first prove the claim that the type `is-finite'(X)` is a proposition.
-In other words, we need to show that any two natural numbers `k` and `k'` for which there are respective elements of the types `‖Fin{k}≃ X‖` and `‖Fin{k'}≃ X‖`, can be identified.
+We first prove the claim that the type `is-finite'(X)` is a proposition.
+In other words, we need to show that any two natural numbers `k` and `k'` for which there are respective elements of the types `‖Fin_{k} ≃ X‖` and `‖Fin_{k'} ≃ X‖`, can be identified.
 
-Since the type of natural numbers is a set, the type `k=k'` is a proposition.
-Therefore, we may assume that we have equivalences `Fin{k}≃ X` and `Fin{k'}≃ X`.
-Consequently, we have an equivalence `Fin{k}≃Fin{k'}`.
-Now it follows from Theorem 16.2.2 that `k=k'`.
+Since the type of natural numbers is a set, the type `k = k'` is a proposition.
+Therefore, we may assume that we have equivalences `Fin_{k} ≃ X` and `Fin_{k'} ≃ X`.
+Consequently, we have an equivalence `Fin_{k} ≃ Fin_{k'}`.
+Now it follows from Theorem 16.2.2 that `k = k'`.
 
 The second claim is that the propositions `is-finite(X)` and `is-finite'(X)` are equivalent, which we will show by constructing functions back and forth.
-Since we have shown that the type `is-finite'(X)` is a proposition, we obtain a map `is-finite(X)→is-finite'(X)` via the universal property of the propositional truncation, from the map
-```text
-(Σ(k:ℕ) Fin{k}≃ X)→ Σ(k:ℕ) ‖Fin{k}≃ X‖
-```
-given by `(k,e)↦ (k,η(e))`.
+Since we have shown that the type `is-finite'(X)` is a proposition, we obtain a map `is-finite(X) → is-finite'(X)` via the universal property of the propositional truncation, from the map
 
-To construct a map `is-finite'(X)→is-finite(X)`, it suffices to construct a map
 ```text
-‖Fin{k'}≃ X‖→ ‖Σ(k:ℕ) Fin{k}≃ X‖
+  (Σ(k : ℕ) Fin_{k} ≃ X) → Σ(k : ℕ) ‖Fin_{k} ≃ X‖
 ```
-for each `k':ℕ`.
+
+given by `(k,e) ↦ (k,η(e))`.
+
+To construct a map `is-finite'(X) → is-finite(X)`, it suffices to construct a map
+
+```text
+  ‖Fin_{k'} ≃ X‖ → ‖Σ(k : ℕ) Fin_{k} ≃ X‖
+```
+
+for each `k' : ℕ`.
 Again by the universal property of the propositional truncation, we obtain this map from the function
+
 ```text
-(Fin{k'}≃ X) → ‖Σ(k:ℕ) Fin{k}≃ X‖
+  (Fin_{k'} ≃ X) → ‖Σ(k : ℕ) Fin_{k} ≃ X‖
 ```
-given by `e↦ η(k',e)`. ◻
+
+given by `e ↦ η(k',e)`. ◻
 
 ## Corollary 16.3.4
 
 There is an equivalence
+
 ```text
-𝔽 ≃ Σ(k:ℕ) BS_k.
+  𝔽 ≃ Σ(k : ℕ) BS_k.
 ```
 
 ### Proof
 
 *Proof.* This equivalence can be obtained by composing the equivalences
 ```text
-Σ(X:𝒰_0) is-finite(X) ≃ Σ(X:𝒰_0) Σ(k:ℕ) ‖Fin{k}≃ X‖
-≃ Σ(k:ℕ) Σ(X:𝒰_0) ‖Fin{k}≃ X‖.
+Σ(X:𝒰₀) is-finite(X) ≃ Σ(X:𝒰₀) Σ(k:ℕ) ‖Fin_{k}≃ X‖
+≃ Σ(k:ℕ) Σ(X:𝒰₀) ‖Fin_{k}≃ X‖.
 ```
  ◻
 
@@ -109,19 +127,19 @@ Then there is a **finite choice** map
 ### Proof
 
 *Proof.* Note that the type `‖Π(x:A) B(x)‖` is a proposition.
-Therefore we may assume that the type `A` comes equipped with a counting `e:Fin{k}≃ A`.
-By this equivalence, it suffices to show that for every type family `B` over `Fin{k}`, there is a map
+Therefore we may assume that the type `A` comes equipped with a counting `e:Fin_{k}≃ A`.
+By this equivalence, it suffices to show that for every type family `B` over `Fin_{k}`, there is a map
 ```text
-(Π(x:Fin{k}) ‖B(x)‖)→‖Π(x:Fin{k}) B(x)‖.
+(Π(x:Fin_{k}) ‖B(x)‖)→‖Π(x:Fin_{k}) B(x)‖.
 ```
 We proceed by induction on `k`.
-In the base case, `Fin{k}` is empty and therefore the type `Π(x:Fin{k}) B(x)` is contractible.
+In the base case, `Fin_{k}` is empty and therefore the type `Π(x:Fin_{k}) B(x)` is contractible.
 The asserted function therefore exists.
 
 For the inductive step, note that by the dependent universal property of coproducts (Exercise 13.8) we have the equivalences
 ```text
-(Π(x:Fin{k+1}) ‖B(x)‖) ≃ (Π(x:Fin{k}) ‖B(i(x))‖)× ‖B(⋆)‖
-‖Π(x:Fin{k}) B(x)‖ ≃ ‖(Π(x:Fin{k}) B(i(x)))× B(⋆)‖.
+(Π(x:Fin_{k+1}) ‖B(x)‖) ≃ (Π(x:Fin_{k}) ‖B(i(x))‖)× ‖B(⋆)‖
+‖Π(x:Fin_{k}) B(x)‖ ≃ ‖(Π(x:Fin_{k}) B(i(x)))× B(⋆)‖.
 ```
 Recall from Exercise 14.3 that `‖X× Y‖≃ ‖X‖×‖Y‖` for any two types `X` and `Y`.
 This fact together with the inductive hypothesis finishes the proof. ◻
@@ -206,13 +224,13 @@ To finish the proof, it suffices to show that there is an element of type
 ‖Π(x:A) B(x)‖
 ```
 using the assumption that `Π(x:A) ‖B(x)‖`.
-To construct such an element, we may assume a counting `e:Fin{k}≃Σ(x:A) B(x)`.
+To construct such an element, we may assume a counting `e:Fin_{k}≃Σ(x:A) B(x)`.
 We claim that there is a function
 ```text
 ‖B(a)‖→ B(a),
 ```
 i.e., that the type `B(a)` satisfies the principle of global choice of Remark 14.4.2 for each `a:A`.
-Recall from Example 14.4.1 that the decidable subtypes of `Fin{k}` satisfy global choice.
+Recall from Example 14.4.1 that the decidable subtypes of `Fin_{k}` satisfy global choice.
 Therefore it also follows that the decidable subtypes of `Σ(x:A) B(x)` satisfy global choice.
 Thus, it suffices to show that `B(x)` is a decidable subtype of `Σ(x:A) B(x)`.
 
