@@ -218,6 +218,7 @@ module _
     is-retraction-map-retraction map-equiv retraction-map-equiv
 ```
 
+
 ## Example 9.2.3
 
 For any type `A`, the identity function `id : A → A` is an equivalence, since it is its own section and its own retraction

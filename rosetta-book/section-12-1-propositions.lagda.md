@@ -301,3 +301,14 @@ module _
     type-Prop P ≃ type-Prop Q
   equiv-iff f g = equiv-iff' (f , g)
 ```
+
+## Supplement
+
+### To show that a type is a proposition we may assume it has an element
+
+```agda
+abstract
+  is-prop-has-element :
+    {l1 : Level} {X : UU l1} → (X → is-prop X) → is-prop X
+  is-prop-has-element f x y = f x x y
+```

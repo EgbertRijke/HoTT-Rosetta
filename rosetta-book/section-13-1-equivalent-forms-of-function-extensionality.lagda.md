@@ -569,3 +569,10 @@ module _
             ( is-prop-function-type H)
             ( λ h → is-prop-is-contr (is-contr-Π (λ x → H (h (f x)) x)))))
 ```
+
+### Equality in negated types
+
+```agda
+eq-neg : {l : Level} {A : UU l} {p q : ¬ A} → p ＝ q
+eq-neg = eq-is-prop is-prop-neg
+```

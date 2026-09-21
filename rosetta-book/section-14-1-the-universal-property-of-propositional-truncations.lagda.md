@@ -293,25 +293,6 @@ However, this only gives us a universal property with respect to doubly negated 
 In fact, propositional truncations are not guaranteed to exist in Martin Löf’s dependent type theory, the way it is set up in Chapter I.
 We will therefore add new rules to the type theory to ensure their existence.
 
-```agda
-is-equiv-precomp-double-negation :
-  {l1 l2 : Level} (A : UU l1) (Q : UU l2) →
-  is-equiv (precomp (double-negation-introduction {P = A}) (¬¬ Q))
-is-equiv-precomp-double-negation A Q =
-  is-equiv-has-converse-is-prop
-    ( is-prop-function-type is-prop-double-negation)
-    ( is-prop-function-type is-prop-double-negation)
-    ( extend-double-negation)
-
-equiv-precomp-double-negation :
-  {l1 l2 : Level} (A : UU l1) (Q : UU l2) →
-  ((¬¬ A) → (¬¬ Q)) ≃ (A → (¬¬ Q))
-pr1 (equiv-precomp-double-negation A Q) =
-  precomp (double-negation-introduction {P = A}) (¬¬ Q)
-pr2 (equiv-precomp-double-negation A Q) =
-  is-equiv-precomp-double-negation A Q
-```
-
 ## Supplement
 
 Note: In agda-unimath, propositional truncation is defined in terms of the general truncation operations. Therefore, we have to introduce the general truncation operations prior to introducing the propositional truncation operations.

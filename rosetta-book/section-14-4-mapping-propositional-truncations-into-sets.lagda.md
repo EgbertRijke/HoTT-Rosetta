@@ -194,14 +194,13 @@ for any decidable subtype `P` over `Fin{k}`.
 
 ```agda
 ε-operator-decidable-subtype-Fin :
-  {l : Level} (k : ℕ) (P : Fin k → Prop l) →
-  ((x : Fin k) → is-decidable (type-Prop (P x))) →
-  type-trunc-Prop (type-subtype P) → type-subtype P
-ε-operator-decidable-subtype-Fin zero-ℕ P d t =
-  ex-falso (map-universal-property-trunc-Prop empty-Prop pr1 t)
-ε-operator-decidable-subtype-Fin {l} (succ-ℕ k) P d t =
+  {l : Level} (k : ℕ) (P : decidable-subtype l (Fin k)) →
+  ε-operator-Hilbert (type-decidable-subtype P)
+ε-operator-decidable-subtype-Fin {l} zero-ℕ P t =
+  ex-falso (apply-universal-property-trunc-Prop t empty-Prop pr1)
+ε-operator-decidable-subtype-Fin {l} (succ-ℕ k) P t =
   map-Σ
-    ( λ x → type-Prop (P x))
+    ( is-in-decidable-subtype P)
     ( mod-succ-ℕ k)
     ( λ x → id)
     ( ε-operator-total-Q
@@ -210,15 +209,17 @@ for any decidable subtype `P` over `Fin{k}`.
           ( type-Prop ∘ Q)
           ( nat-Fin (succ-ℕ k))
           ( λ x →
-            tr (λ y → type-Prop (P y)) (inv (is-section-nat-Fin k x))))
+            tr (is-in-decidable-subtype P) (inv (is-section-nat-Fin k x))))
         ( t)))
   where
   Q : ℕ → Prop l
-  Q n = P (mod-succ-ℕ k n)
+  Q n = subtype-decidable-subtype P (mod-succ-ℕ k n)
   is-decidable-Q : (n : ℕ) → is-decidable (type-Prop (Q n))
-  is-decidable-Q n = d (mod-succ-ℕ k n)
-  ε-operator-total-Q : type-trunc-Prop (type-subtype Q) → type-subtype Q
-  ε-operator-total-Q = ε-operator-decidable-subtype-ℕ Q is-decidable-Q
+  is-decidable-Q n =
+    is-decidable-decidable-subtype P (mod-succ-ℕ k n)
+  ε-operator-total-Q : ε-operator-Hilbert (type-subtype Q)
+  ε-operator-total-Q =
+    ε-operator-decidable-subtype-ℕ Q is-decidable-Q
 ```
 
 ## Remark 14.4.2
@@ -242,6 +243,11 @@ In this situation it is helpful to think of the propositional truncation of `A` 
 Propositional truncations can therefore also be characterized by the universal property of this quotient, which can be used to extend maps `f : A → B` to maps `‖A‖ → B` when the type `B` is a set.
 The idea is that a map `f : A → B` into a set `B` extends to a map `‖A‖ → B` if it satisfies `f(x) = f(y)` for all `x, y : A`.
 
+```agda
+Global-Choice : (l : Level) → UU (lsuc l)
+Global-Choice l = (A : UU l) → ε-operator-Hilbert A
+```
+
 ## Definition 14.4.3
 
 A map `f : A → B` is said to be **weakly constant** if it comes equipped with an element of type
@@ -254,9 +260,7 @@ A map `f : A → B` is said to be **weakly constant** if it comes equipped with 
 is-weakly-constant-map :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
 is-weakly-constant-map {A = A} f = (x y : A) → f x ＝ f y
-```
 
-```agda
 weakly-constant-map : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 weakly-constant-map A B = Σ (A → B) (is-weakly-constant-map)
 
@@ -293,6 +297,19 @@ module _
   is-weakly-constant-map-is-constant-map :
     {f : A → B} → is-constant-map f → is-weakly-constant-map f
   is-weakly-constant-map-is-constant-map (b , H) x y = H x ∙ inv (H y)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B)
+  where
+
+  abstract
+    is-prop-is-weakly-constant-map-Set : is-prop (is-weakly-constant-map f)
+    is-prop-is-weakly-constant-map-Set =
+      is-prop-Π (λ x → is-prop-Π (λ y → is-set-type-Set B (f x) (f y)))
+
+  is-weakly-constant-map-prop-Set : Prop (l1 ⊔ l2)
+  pr1 is-weakly-constant-map-prop-Set = is-weakly-constant-map f
+  pr2 is-weakly-constant-map-prop-Set = is-prop-is-weakly-constant-map-Set
 ```
 
 One of the differences between constant maps and weakly constant maps manifests itself as follows: A type `A` is contractible if and only if the identity map on `A` is constant, while a type `A` is a proposition if and only if the identity map on `A` is weakly constant.
@@ -307,12 +324,6 @@ module _
 
   is-contr-is-constant-id : is-constant-map (id {A = A}) → is-contr A
   is-contr-is-constant-id = tot (λ a → inv-htpy)
-```
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
 
   is-weakly-constant-id-is-prop :
     is-prop A → is-weakly-constant-map (id {A = A})
@@ -354,13 +365,18 @@ in `B`. ◻
 
 ```agda
 is-weakly-constant-map-precomp-unit-trunc-Prop :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  (g : type-trunc-Prop A → B) →
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (g : type-trunc-Prop A → B) →
   is-weakly-constant-map (g ∘ unit-trunc-Prop)
 is-weakly-constant-map-precomp-unit-trunc-Prop g x y =
-  ap g
-    ( all-elements-equal-type-trunc-Prop
-      ( unit-trunc-Prop x) (unit-trunc-Prop y))
+  ap g (eq-is-prop is-prop-type-trunc-Prop)
+
+precomp-universal-property-set-quotient-trunc-Prop :
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) →
+  (type-trunc-Prop A → type-Set B) → Σ (A → type-Set B) is-weakly-constant-map
+pr1 (precomp-universal-property-set-quotient-trunc-Prop B g) =
+  g ∘ unit-trunc-Prop
+pr2 (precomp-universal-property-set-quotient-trunc-Prop B g) =
+  is-weakly-constant-map-precomp-unit-trunc-Prop g
 ```
 
 ```agda
@@ -388,16 +404,6 @@ Then the map
 ```
 
 given by `g ↦ (g ∘ η, λ x. λ y. ap_{g}(α(x,y)))` is an equivalence.
-
-```agda
-precomp-universal-property-set-quotient-trunc-Prop :
-  {l1 l2 : Level} {A : UU l1} (B : UU l2) (is-set-B : is-set B) →
-  (type-trunc-Prop A → B) → Σ (A → B) is-weakly-constant-map
-pr1 (precomp-universal-property-set-quotient-trunc-Prop B is-set-B g) =
-  g ∘ unit-trunc-Prop
-pr2 (precomp-universal-property-set-quotient-trunc-Prop B is-set-B g) =
-  is-weakly-constant-map-precomp-unit-trunc-Prop g
-```
 
 ### Proof
 
@@ -445,37 +451,35 @@ Using the assumption that `f` is weakly constant, we obtain the identification
 ```agda
 abstract
   all-elements-equal-image-is-weakly-constant-map :
-    {l1 l2 : Level} {A : UU l1} (B : UU l2) (is-set-B : is-set B)
-    (f : A → B) → is-weakly-constant-map f →
-    all-elements-equal (Σ B (λ b → type-trunc-Prop (fiber f b)))
-  all-elements-equal-image-is-weakly-constant-map B is-set-B f H (x , s) (y , t) =
-    map-section-is-equiv
-      ( pr2 (equiv-ap-inclusion-subtype (λ b → trunc-Prop (fiber f b))))
-      ( map-universal-property-trunc-Prop
-        ( x ＝ y , is-set-B x y)
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
+    is-weakly-constant-map f →
+    all-elements-equal (Σ (type-Set B) (λ b → type-trunc-Prop (fiber f b)))
+  all-elements-equal-image-is-weakly-constant-map B f H (x , s) (y , t) =
+    eq-type-subtype
+      ( λ b → trunc-Prop (fiber f b))
+      ( apply-universal-property-trunc-Prop s
+        ( Id-Prop B x y)
         ( λ u →
-          map-universal-property-trunc-Prop
-            ( x ＝ y , is-set-B x y)
-            ( λ v → inv (pr2 u) ∙ H (pr1 u) (pr1 v) ∙ pr2 v)
-            ( t))
-        ( s))
+          apply-universal-property-trunc-Prop t
+            ( Id-Prop B x y)
+            ( λ v → inv (pr2 u) ∙ H (pr1 u) (pr1 v) ∙ pr2 v)))
 
 abstract
   is-prop-image-is-weakly-constant-map :
-    {l1 l2 : Level} {A : UU l1} (B : UU l2) (is-set-B : is-set B)
-    (f : A → B) → is-weakly-constant-map f →
-    is-prop (Σ B (λ b → type-trunc-Prop (fiber f b)))
-  is-prop-image-is-weakly-constant-map B is-set-B f H =
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
+    is-weakly-constant-map f →
+    is-prop (Σ (type-Set B) (λ b → type-trunc-Prop (fiber f b)))
+  is-prop-image-is-weakly-constant-map B f H =
     is-prop-all-elements-equal
-      ( all-elements-equal-image-is-weakly-constant-map B is-set-B f H)
+      ( all-elements-equal-image-is-weakly-constant-map B f H)
 
 image-weakly-constant-map-Prop :
-  {l1 l2 : Level} {A : UU l1} (B : UU l2) (is-set-B : is-set B)
-  (f : A → B) → is-weakly-constant-map f → Prop (l1 ⊔ l2)
-pr1 (image-weakly-constant-map-Prop B is-set-B f H) =
-  Σ B (λ b → type-trunc-Prop (fiber f b))
-pr2 (image-weakly-constant-map-Prop B is-set-B f H) =
-  is-prop-image-is-weakly-constant-map B is-set-B f H
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
+  is-weakly-constant-map f → Prop (l1 ⊔ l2)
+pr1 (image-weakly-constant-map-Prop B f H) =
+  Σ (type-Set B) (λ b → type-trunc-Prop (fiber f b))
+pr2 (image-weakly-constant-map-Prop B f H) =
+  is-prop-image-is-weakly-constant-map B f H
 ```
 
 Now we observe that the map `f : A → B` factors uniquely as follows
@@ -501,92 +505,70 @@ Now we obtain the map `pr1 ∘ h : ‖A‖ → B` equipped with the concatenated
 
 ```agda
 map-universal-property-set-quotient-trunc-Prop :
-  {l1 l2 : Level} {A : UU l1} (B : UU l2) (is-set-B : is-set B)
-  (f : A → B) → is-weakly-constant-map f → type-trunc-Prop A → B
-map-universal-property-set-quotient-trunc-Prop B is-set-B f H =
-  pr1 ∘
-  map-universal-property-trunc-Prop
-    ( image-weakly-constant-map-Prop B is-set-B f H)
-    ( λ a → (f a , unit-trunc-Prop (a , refl)))
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
+  is-weakly-constant-map f → type-trunc-Prop A → type-Set B
+map-universal-property-set-quotient-trunc-Prop B f H =
+  ( pr1) ∘
+  ( map-universal-property-trunc-Prop
+    ( image-weakly-constant-map-Prop B f H)
+    ( λ a → (f a , unit-trunc-Prop (a , refl))))
 
 map-universal-property-set-quotient-trunc-Prop' :
-  {l1 l2 : Level} {A : UU l1} (B : UU l2) (is-set-B : is-set B) →
-  Σ (A → B) is-weakly-constant-map → type-trunc-Prop A → B
-map-universal-property-set-quotient-trunc-Prop' B is-set-B (f , H) =
-  map-universal-property-set-quotient-trunc-Prop B is-set-B f H
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) →
+  Σ (A → type-Set B) is-weakly-constant-map → type-trunc-Prop A → type-Set B
+map-universal-property-set-quotient-trunc-Prop' B (f , H) =
+  map-universal-property-set-quotient-trunc-Prop B f H
 ```
 
 ```agda
 abstract
   htpy-universal-property-set-quotient-trunc-Prop :
-    {l1 l2 : Level} {A : UU l1} (B : UU l2) (is-set-B : is-set B)
-    (f : A → B) (H : is-weakly-constant-map f) →
-    map-universal-property-set-quotient-trunc-Prop B is-set-B f H ∘ unit-trunc-Prop ~ f
-  htpy-universal-property-set-quotient-trunc-Prop B is-set-B f H a =
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
+    (H : is-weakly-constant-map f) →
+    map-universal-property-set-quotient-trunc-Prop B f H ∘ unit-trunc-Prop ~ f
+  htpy-universal-property-set-quotient-trunc-Prop B f H a =
     ap
       ( pr1)
       ( eq-is-prop'
-        ( is-prop-image-is-weakly-constant-map B is-set-B f H)
+        ( is-prop-image-is-weakly-constant-map B f H)
         ( map-universal-property-trunc-Prop
-          ( image-weakly-constant-map-Prop B is-set-B f H)
+          ( image-weakly-constant-map-Prop B f H)
           ( λ x → (f x , unit-trunc-Prop (x , refl)))
           ( unit-trunc-Prop a))
         ( f a , unit-trunc-Prop (a , refl)))
-```
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (B : UU l2) (is-set-B : is-set B)
-  (f : A → B)
-  where
-
-  abstract
-    is-prop-is-weakly-constant-map-Set : is-prop (is-weakly-constant-map f)
-    is-prop-is-weakly-constant-map-Set =
-      is-prop-Π (λ x → is-prop-Π (λ y → is-set-B (f x) (f y)))
-
-  is-weakly-constant-map-prop-Set : Prop (l1 ⊔ l2)
-  pr1 is-weakly-constant-map-prop-Set = is-weakly-constant-map f
-  pr2 is-weakly-constant-map-prop-Set = is-prop-is-weakly-constant-map-Set
-```
-
-```agda
-abstract
   is-section-map-universal-property-set-quotient-trunc-Prop :
-    {l1 l2 : Level} {A : UU l1} (B : UU l2) (is-set-B : is-set B) →
-    (precomp-universal-property-set-quotient-trunc-Prop {A = A} B is-set-B ∘
-     map-universal-property-set-quotient-trunc-Prop' B is-set-B) ~ id
-  is-section-map-universal-property-set-quotient-trunc-Prop B is-set-B (f , H) =
-    map-section-is-equiv
-      ( pr2
-        ( equiv-ap-inclusion-subtype
-          ( is-weakly-constant-map-prop-Set B is-set-B)))
-      ( eq-htpy (htpy-universal-property-set-quotient-trunc-Prop B is-set-B f H))
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) →
+    ( ( precomp-universal-property-set-quotient-trunc-Prop {A = A} B) ∘
+      ( map-universal-property-set-quotient-trunc-Prop' B)) ~ id
+  is-section-map-universal-property-set-quotient-trunc-Prop B (f , H) =
+    eq-type-subtype
+      ( is-weakly-constant-map-prop-Set B)
+      ( eq-htpy (htpy-universal-property-set-quotient-trunc-Prop B f H))
 
   is-retraction-map-universal-property-set-quotient-trunc-Prop :
-    {l1 l2 : Level} {A : UU l1} (B : UU l2) (is-set-B : is-set B) →
-    (map-universal-property-set-quotient-trunc-Prop' B is-set-B ∘
-     precomp-universal-property-set-quotient-trunc-Prop {A = A} B is-set-B) ~ id
-  is-retraction-map-universal-property-set-quotient-trunc-Prop B is-set-B g =
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) →
+    ( ( map-universal-property-set-quotient-trunc-Prop' B) ∘
+      ( precomp-universal-property-set-quotient-trunc-Prop {A = A} B)) ~ id
+  is-retraction-map-universal-property-set-quotient-trunc-Prop B g =
     eq-htpy
       ( ind-trunc-Prop
         ( λ x →
-          ( map-universal-property-set-quotient-trunc-Prop' B is-set-B
-              (precomp-universal-property-set-quotient-trunc-Prop B is-set-B g) x ＝ g x ,
-            is-set-B
-              ( map-universal-property-set-quotient-trunc-Prop' B is-set-B
-                (precomp-universal-property-set-quotient-trunc-Prop B is-set-B g) x)
-              ( g x)))
-        ( htpy-universal-property-set-quotient-trunc-Prop B is-set-B
+          Id-Prop B
+            ( map-universal-property-set-quotient-trunc-Prop' B
+              ( precomp-universal-property-set-quotient-trunc-Prop B g)
+              ( x))
+            ( g x))
+        ( htpy-universal-property-set-quotient-trunc-Prop B
           ( g ∘ unit-trunc-Prop)
           ( is-weakly-constant-map-precomp-unit-trunc-Prop g)))
 
   universal-property-set-quotient-trunc-Prop :
-    {l1 l2 : Level} {A : UU l1} (B : UU l2) (is-set-B : is-set B) →
-    is-equiv (precomp-universal-property-set-quotient-trunc-Prop {A = A} B is-set-B)
-  universal-property-set-quotient-trunc-Prop B is-set-B =
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) →
+    is-equiv (precomp-universal-property-set-quotient-trunc-Prop {A = A} B)
+  universal-property-set-quotient-trunc-Prop B =
     is-equiv-is-invertible
-      ( map-universal-property-set-quotient-trunc-Prop' B is-set-B)
-      ( is-section-map-universal-property-set-quotient-trunc-Prop B is-set-B)
-      ( is-retraction-map-universal-property-set-quotient-trunc-Prop B is-set-B)
+      ( map-universal-property-set-quotient-trunc-Prop' B)
+      ( is-section-map-universal-property-set-quotient-trunc-Prop B)
+      ( is-retraction-map-universal-property-set-quotient-trunc-Prop B)
 ```

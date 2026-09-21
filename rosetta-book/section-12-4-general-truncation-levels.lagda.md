@@ -16,9 +16,11 @@ open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
+open import exercise-10-2-contractible-retracts
 open import section-11-4-embeddings
 open import section-11-6-the-structure-identity-principle
-open import exercise-10-2-contractible-retracts
+open import section-12-1-propositions
+open import section-12-3-sets
 open import exercise-12-8-retracts-of-truncated-types
 ```
 
@@ -390,4 +392,36 @@ module _
         ( eq-fiber-fiber-ap f x y p)
         ( is-equiv-eq-fiber-fiber-ap f x y p)
         ( is-trunc-map-f (f y) (x , p) (y , refl))
+```
+
+## Supplement
+
+### The empty type is `k`-truncated for any `k ≥ 1`
+
+```agda
+abstract
+  is-trunc-empty : (k : 𝕋) → is-trunc (succ-𝕋 k) empty
+  is-trunc-empty k ()
+
+empty-Truncated-Type : (k : 𝕋) → Truncated-Type lzero (succ-𝕋 k)
+pr1 (empty-Truncated-Type k) = empty
+pr2 (empty-Truncated-Type k) = is-trunc-empty k
+
+abstract
+  is-trunc-is-empty :
+    {l : Level} (k : 𝕋) {A : UU l} → is-empty A → is-trunc (succ-𝕋 k) A
+  is-trunc-is-empty k f x = ex-falso (f x)
+```
+
+### Any proposition is a set
+
+```agda
+abstract
+  is-set-is-prop :
+    {l : Level} {P : UU l} → is-prop P → is-set P
+  is-set-is-prop = is-trunc-succ-is-trunc neg-one-𝕋
+
+set-Prop :
+  {l : Level} → Prop l → Set l
+set-Prop P = truncated-type-succ-Truncated-Type neg-one-𝕋 P
 ```

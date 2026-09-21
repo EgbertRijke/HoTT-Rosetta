@@ -8,6 +8,7 @@ open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-9-2-bi-invertible-maps
 open import exercise-9-5-sigma-swap
 open import section-10-1-contractible-types
@@ -441,4 +442,18 @@ module _
     (s ＝ t) ≃ (inclusion-subtype B s ＝ inclusion-subtype B t)
   pr1 (equiv-ap-inclusion-subtype {s} {t}) = ap-inclusion-subtype B s t
   pr2 (equiv-ap-inclusion-subtype {s} {t}) = is-emb-inclusion-subtype s t
+```
+
+## Supplement
+
+### The inclusion of a subtype into the ambient type is injective
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : subtype l2 A)
+  where
+
+  is-injective-inclusion-subtype : is-injective (inclusion-subtype B)
+  is-injective-inclusion-subtype =
+    is-injective-is-emb (is-emb-inclusion-subtype B)
 ```

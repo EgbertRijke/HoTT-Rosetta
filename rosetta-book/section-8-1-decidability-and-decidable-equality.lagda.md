@@ -40,6 +40,22 @@ A family `P` over a type `A` is said to be **decidable** if `P(x)` is decidable 
 ```agda
 is-decidable : {l : Level} (A : UU l) → UU l
 is-decidable A = A + (¬ A)
+
+is-decidable-family : {l1 l2 : Level} {A : UU l1} (P : A → UU l2) → UU (l1 ⊔ l2)
+is-decidable-family {A = A} P = (x : A) → is-decidable (P x)
+
+decidable-family : {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
+decidable-family l2 A = Σ (A → UU l2) is-decidable-family
+
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-family l2 A)
+  where
+
+  family-decidable-family : A → UU l2
+  family-decidable-family = pr1 P
+
+  is-decidable-decidable-family : is-decidable-family family-decidable-family
+  is-decidable-decidable-family = pr2 P
 ```
 
 ## Example 8.1.2

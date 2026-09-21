@@ -5,7 +5,9 @@ module section-10-1-contractible-types where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
+open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
@@ -115,4 +117,43 @@ module _
     pr1 (pr1 (is-torsorial-Id a)) = a
     pr2 (pr1 (is-torsorial-Id a)) = refl
     pr2 (is-torsorial-Id a) (.a , refl) = refl
+```
+
+## Supplement
+
+### The negation of being contractible
+
+```agda
+is-not-contractible : {l : Level} → UU l → UU l
+is-not-contractible X = ¬ (is-contr X)
+```
+
+### Noncontractibilities of a type
+
+```agda
+noncontractibility' : {l : Level} → UU l → ℕ → UU l
+noncontractibility' A zero-ℕ = is-empty A
+noncontractibility' A (succ-ℕ k) =
+  Σ A (λ x → Σ A (λ y → noncontractibility' (x ＝ y) k))
+
+noncontractibility : {l : Level} → UU l → UU l
+noncontractibility A = Σ ℕ (noncontractibility' A)
+```
+
+### Empty types are not contractible
+
+```agda
+is-not-contractible-is-empty :
+  {l : Level} {X : UU l} → is-empty X → is-not-contractible X
+is-not-contractible-is-empty H C = H (center C)
+
+is-not-contractible-empty : is-not-contractible empty
+is-not-contractible-empty = is-not-contractible-is-empty id
+
+noncontractibility-is-empty :
+  {l : Level} {X : UU l} → is-empty X → noncontractibility X
+noncontractibility-is-empty H = 0 , H
+
+noncontractibility-empty : noncontractibility empty
+noncontractibility-empty = 0 , id
 ```

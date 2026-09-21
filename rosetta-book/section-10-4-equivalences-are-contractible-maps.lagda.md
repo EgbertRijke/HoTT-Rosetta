@@ -834,4 +834,16 @@ module _
   inv-equiv : B ≃ A
   pr1 inv-equiv = map-inv-equiv
   pr2 inv-equiv = is-equiv-map-inv-equiv
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  retract-equiv : A ≃ B → A retract-of B
+  retract-equiv e =
+    ( map-equiv e , map-inv-equiv e , is-retraction-map-inv-equiv e)
+
+  retract-inv-equiv : B ≃ A → A retract-of B
+  retract-inv-equiv e =
+    ( map-inv-equiv e , map-equiv e , is-section-map-inv-equiv e)
 ```

@@ -202,11 +202,6 @@ f(x+1) ≔ g(x).
  ◻
 
 ```agda
-is-decidable-family : {l1 l2 : Level} {A : UU l1} (P : A → UU l2) → UU (l1 ⊔ l2)
-is-decidable-family {A = A} P = (x : A) → is-decidable (P x)
-```
-
-```agda
 is-decidable-Π-ℕ :
   {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) (m : ℕ) →
   is-decidable ((x : ℕ) → (leq-ℕ m x) → P x) → is-decidable ((x : ℕ) → P x)

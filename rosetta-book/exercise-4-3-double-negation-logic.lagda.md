@@ -113,11 +113,12 @@ no-fixed-points-neg A e =
 ### Exercise 4.3(b)
 
 ```agda
-double-negation-introduction : {l : Level} {P : UU l} → P → ¬¬ P 
-double-negation-introduction p np = np p
+intro-double-negation : {l : Level} {P : UU l} → P → ¬¬ P
+intro-double-negation p f = f p
 
-double-negation-map : {l1 l2 : Level} {P : UU l1} {Q : UU l2} → (P → Q) → (¬¬ P → ¬¬ Q)
-double-negation-map pq nnp nq = nnp (λ p → nq (pq p))
+map-double-negation :
+  {l1 l2 : Level} {P : UU l1} {Q : UU l2} → (P → Q) → ¬¬ P → ¬¬ Q
+map-double-negation f = map-neg (map-neg f)
 
 extend-double-negation :
   {l1 l2 : Level} {P : UU l1} {Q : UU l2} →

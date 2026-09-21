@@ -4,9 +4,12 @@
 module section-11-4-embeddings where
 
 open import universe-levels
+open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-6-4-peanos-seventh-and-eighth-axioms
+open import section-8-1-decidability-and-decidable-equality
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
@@ -136,7 +139,7 @@ module _
   pr2 (emb-equiv e) = is-emb-equiv e
 ```
 
-## Supplementary definitions
+## Supplement
 
 ### An equivalent definition of embeddings
 
@@ -148,4 +151,116 @@ module _
   abstract
     is-emb-is-emb : (A → is-emb f) → is-emb f
     is-emb-is-emb H x y = H x x y
+```
+
+### Embeddings are injective
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-injective-is-emb : {f : A → B} → is-emb f → is-injective f
+  is-injective-is-emb is-emb-f {x} {y} = map-inv-is-equiv (is-emb-f x y)
+
+  is-injective-emb : (e : A ↪ B) → is-injective (map-emb e)
+  is-injective-emb e {x} {y} = map-inv-is-equiv (is-emb-map-emb e x y)
+
+  injection-emb : A ↪ B → injection A B
+  injection-emb (f , H) = (f , is-injective-is-emb H)
+```
+
+### The structure on a map of decidability
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-decidable-map : (A → B) → UU (l1 ⊔ l2)
+  is-decidable-map f = (y : B) → is-decidable (fiber f y)
+```
+
+### The type of decidable maps
+
+```agda
+infix 5 _→ᵈ_
+
+_→ᵈ_ : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+A →ᵈ B = Σ (A → B) (is-decidable-map)
+
+decidable-map : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+decidable-map = _→ᵈ_
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A →ᵈ B)
+  where
+
+  map-decidable-map : A → B
+  map-decidable-map = pr1 f
+
+  is-decidable-decidable-map : is-decidable-map map-decidable-map
+  is-decidable-decidable-map = pr2 f
+```
+
+### The condition on a map of being a decidable embedding
+
+```agda
+is-decidable-emb :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → (X → Y) → UU (l1 ⊔ l2)
+is-decidable-emb f = is-emb f × is-decidable-map f
+
+is-emb-is-decidable-emb :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
+  is-decidable-emb f → is-emb f
+is-emb-is-decidable-emb = pr1
+
+is-decidable-map-is-decidable-emb :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
+  is-decidable-emb f → is-decidable-map f
+is-decidable-map-is-decidable-emb = pr2
+
+is-injective-is-decidable-emb :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} {f : X → Y} →
+  is-decidable-emb f → is-injective f
+is-injective-is-decidable-emb = is-injective-is-emb ∘ is-emb-is-decidable-emb
+```
+
+### The type of decidable embeddings
+
+```agda
+infix 5 _↪ᵈ_
+_↪ᵈ_ : {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
+X ↪ᵈ Y = Σ (X → Y) is-decidable-emb
+
+decidable-emb : {l1 l2 : Level} (X : UU l1) (Y : UU l2) → UU (l1 ⊔ l2)
+decidable-emb = _↪ᵈ_
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ↪ᵈ Y)
+  where
+
+  map-decidable-emb : X → Y
+  map-decidable-emb = pr1 e
+
+  is-decidable-emb-map-decidable-emb :
+    is-decidable-emb map-decidable-emb
+  is-decidable-emb-map-decidable-emb = pr2 e
+
+  is-emb-map-decidable-emb : is-emb map-decidable-emb
+  is-emb-map-decidable-emb =
+    is-emb-is-decidable-emb is-decidable-emb-map-decidable-emb
+
+  is-decidable-map-map-decidable-emb :
+    is-decidable-map map-decidable-emb
+  is-decidable-map-map-decidable-emb =
+    is-decidable-map-is-decidable-emb is-decidable-emb-map-decidable-emb
+
+  is-injective-map-decidable-emb :
+    is-injective map-decidable-emb
+  is-injective-map-decidable-emb =
+    is-injective-is-decidable-emb is-decidable-emb-map-decidable-emb
+
+  emb-decidable-emb : X ↪ Y
+  emb-decidable-emb = map-decidable-emb , is-emb-map-decidable-emb
 ```

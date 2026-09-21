@@ -4,6 +4,8 @@
 module section-5-1-the-inductive-definition-of-identity-types where
 
 open import universe-levels
+
+open import section-4-3-the-empty-type
 ```
 
 ## Definition 5.1.1
@@ -135,3 +137,15 @@ and similarly we have elimination and computation rules.
 ## Agda-unimath sources
 
 - The identity type and its induction principle are defined in `foundation-core.identity-types`
+
+## Supplement
+
+### Negated equality
+
+```agda
+nonequal : {l : Level} {A : UU l} → A → A → UU l
+nonequal x y = ¬ (x ＝ y)
+
+infix 6 _≠_
+_≠_ = nonequal
+```
