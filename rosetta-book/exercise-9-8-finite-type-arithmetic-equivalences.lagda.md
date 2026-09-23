@@ -6,8 +6,12 @@ module exercise-9-8-finite-type-arithmetic-equivalences where
 open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers
+open import exercise-3-1-multiplication-and-exponentiation
 open import section-4-4-coproducts
+open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
+open import section-5-3-the-action-on-identifications-of-functions
 open import section-7-3-the-standard-finite-types
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
@@ -15,6 +19,7 @@ open import exercise-9-4-three-for-two-equivalences
 open import exercise-9-6-coproduct-functor-equivalences
 open import section-10-4-equivalences-are-contractible-maps
 open import section-13-1-equivalent-forms-of-function-extensionality
+open import exercise-13-4-equivalence-structure-is-a-proposition
 ```
 
 ## Problem statement
@@ -81,4 +86,14 @@ abstract
         ( compute-map-inv-compute-coproduct-Fin k l)
         ( refl-htpy)
         ( x)))
+
+product-Fin : (k l : ℕ) → Fin k × Fin l ≃ Fin (k *ℕ l)
+product-Fin zero-ℕ l = left-absorption-product (Fin l)
+product-Fin (succ-ℕ k) l =
+  ( ( compute-coproduct-Fin (k *ℕ l) l) ∘e
+    ( equiv-coproduct (product-Fin k l) left-unit-law-product)) ∘e
+  ( right-distributive-product-coproduct)
+
+Fin-mul-ℕ : (k l : ℕ) → (Fin (k *ℕ l)) ≃ ((Fin k) × (Fin l))
+Fin-mul-ℕ k l = inv-equiv (product-Fin k l)
 ```
