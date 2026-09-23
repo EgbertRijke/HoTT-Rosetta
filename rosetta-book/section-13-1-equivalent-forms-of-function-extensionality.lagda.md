@@ -483,11 +483,27 @@ Note that it requires function extensionality even just to prove that `¬ P` is 
 is-prop-neg : {l : Level} {A : UU l} → is-prop (¬ A)
 is-prop-neg = is-prop-function-type is-prop-empty
 
+neg-type-Prop : {l1 : Level} → UU l1 → Prop l1
+neg-type-Prop A = ¬ A , is-prop-neg
+
+neg-Prop : {l1 : Level} → Prop l1 → Prop l1
+neg-Prop P = neg-type-Prop (type-Prop P)
+
+type-neg-Prop : {l1 : Level} → Prop l1 → UU l1
+type-neg-Prop P = type-Prop (neg-Prop P)
+
+infix 25 ¬'_
+
+¬'_ : {l1 : Level} → Prop l1 → Prop l1
+¬'_ = neg-Prop
+
+eq-neg : {l : Level} {A : UU l} {p q : ¬ A} → p ＝ q
+eq-neg = eq-is-prop is-prop-neg
+
 is-prop-double-negation :
   {l : Level} {A : UU l} → is-prop (¬¬ A)
 is-prop-double-negation = is-prop-neg
 ```
-
 
 ## Supplements
 
@@ -638,11 +654,4 @@ module _
           ( is-prop-Σ
             ( is-prop-function-type H)
             ( λ h → is-prop-is-contr (is-contr-Π (λ x → H (h (f x)) x)))))
-```
-
-### Equality in negated types
-
-```agda
-eq-neg : {l : Level} {A : UU l} {p q : ¬ A} → p ＝ q
-eq-neg = eq-is-prop is-prop-neg
 ```
