@@ -1,3 +1,7 @@
+# HoTT Rosetta Benchmark
+
+Benchmark problems are marked in the exercise files as "BENCHMARK PROBLEM".
+
 Currently unsolved (auto)formalization exercises can be found in the following files:
 
 - rosetta-book/exercise-8-5-characterization-prime.lagda.md
@@ -69,10 +73,6 @@ The following files contain partial solutions but not full solutions:
 
 - rosetta-book/exercise-4-3-double-negation-logic.lagda.md
 - rosetta-book/exercise-8-7-decidable-equality-coproducts.lagda.md
-- rosetta-book/exercise-9-5-sigma-swap.lagda.md
 - rosetta-book/exercise-10-7-fibers-of-projections.lagda.md
 - rosetta-book/exercise-12-4-coproduct-truncation.lagda.md
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md
-- rosetta-book/exercise-12-8-retracts-of-truncated-types.lagda.md
-
-Some benchmark problems are marked in the exercise files as "BENCHMARK PROBLEM".
