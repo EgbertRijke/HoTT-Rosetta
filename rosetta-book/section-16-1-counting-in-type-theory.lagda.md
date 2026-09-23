@@ -9,11 +9,15 @@ open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
+open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-3-the-action-on-identifications-of-functions
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-7-3-the-standard-finite-types
 open import section-7-4-the-natural-numbers-modulo-k-plus-one
 open import exercise-7-5-observational-equality-finite-types
+open import section-8-1-decidability-and-decidable-equality
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
@@ -21,6 +25,7 @@ open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-3-contractible-equivalences
 open import exercise-10-4-finite-types-not-contractible
+open import section-12-1-propositions
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import exercise-12-4-coproduct-truncation
@@ -217,10 +222,74 @@ Conversely, if `P` is decidable, then we can construct a counting of `P` by case
 If `P` holds, then it is contractible and hence equivalent to `Fin_{1}`.
 If `¬ P` holds, then `P` is equivalent to `Fin_{0}`.
 
+```agda
+is-decidable-count :
+  {l : Level} {X : UU l} → count X → is-decidable X
+is-decidable-count (pair zero-ℕ e) =
+  inr (is-empty-is-zero-number-of-elements-count (pair zero-ℕ e) refl)
+is-decidable-count (pair (succ-ℕ k) e) =
+  inl (map-equiv e (zero-Fin k))
+
+count-is-decidable-is-prop :
+  {l : Level} {A : UU l} → is-prop A → is-decidable A → count A
+count-is-decidable-is-prop H (inl x) =
+  count-is-contr (is-proof-irrelevant-is-prop H x)
+count-is-decidable-is-prop H (inr f) = count-is-empty f
+
+count-type-Decidable-Prop :
+  {l1 : Level} (P : Prop l1) →
+  is-decidable (type-Prop P) → count (type-Prop P)
+count-type-Decidable-Prop P (inl p) =
+  count-is-contr (is-proof-irrelevant-is-prop (is-prop-type-Prop P) p)
+count-type-Decidable-Prop P (inr f) = count-is-empty f
+```
+
 ## Remark 16.1.6
 
 We also note that any type `A` equipped with a counting `e : Fin_{k} ≃ A` has decidable equality.
 This follows from Proposition 8.1.8, where we showed that `Fin_{k}` has decidable equality, for any `k : ℕ`.
+
+```agda
+abstract
+  has-decidable-equality-injection :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    injection A B →
+    has-decidable-equality B →
+    has-decidable-equality A
+  has-decidable-equality-injection (f , H) d x y =
+    is-decidable-iff H (ap f) (d (f x) (f y))
+
+abstract
+  has-decidable-equality-retract-of :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    A retract-of B →
+    has-decidable-equality B →
+    has-decidable-equality A
+  has-decidable-equality-retract-of (i , r , R) =
+    has-decidable-equality-injection
+      ( i , is-injective-has-retraction i r R)
+
+abstract
+  has-decidable-equality-equiv :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
+    has-decidable-equality B →
+    has-decidable-equality A
+  has-decidable-equality-equiv e =
+    has-decidable-equality-retract-of (retract-equiv e)
+
+abstract
+  has-decidable-equality-equiv' :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B) →
+    has-decidable-equality A →
+    has-decidable-equality B
+  has-decidable-equality-equiv' e =
+    has-decidable-equality-retract-of (retract-inv-equiv e)
+
+has-decidable-equality-count :
+  {l : Level} {X : UU l} → count X → has-decidable-equality X
+has-decidable-equality-count (k , e) =
+  has-decidable-equality-equiv' e (has-decidable-equality-Fin k)
+```
 
 ## Theorem 16.1.7
 

@@ -14,7 +14,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-8-14-fields-integers-modulo-prime.lagda.md
 - rosetta-book/exercise-8-15-cofibonacci-sequence.lagda.md
 - rosetta-book/exercise-9-2-nonequivalences-booleans-natural-numbers.lagda.md
-- rosetta-book/exercise-9-6-coproduct-functor-equivalences.lagda.md
 - rosetta-book/exercise-9-7-product-functor-equivalences.lagda.md
 - rosetta-book/exercise-9-8-finite-type-arithmetic-equivalences.lagda.md
 - rosetta-book/exercise-9-9-finitely-cyclic-maps.lagda.md
