@@ -7,11 +7,13 @@ open import universe-levels
 
 open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
+open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-7-3-the-standard-finite-types
 open import section-7-4-the-natural-numbers-modulo-k-plus-one
+open import exercise-7-5-observational-equality-finite-types
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
@@ -22,6 +24,7 @@ open import exercise-10-4-finite-types-not-contractible
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import exercise-12-4-coproduct-truncation
+open import exercise-12-8-retracts-of-truncated-types
 ```
 
 When someone counts the elements of a finite set `A`, they go through the elements of `A` one by one, at each stage keeping track of how many elements have been counted so far.
