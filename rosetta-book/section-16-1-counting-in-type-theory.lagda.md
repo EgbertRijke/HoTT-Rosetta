@@ -82,7 +82,7 @@ module _
 ```
 
 Note that the type `count(A)` is often not a proposition.
-For instance, different equivalences of type `Fin_{k} ≃ Fin_{k}` induce different elements of type `count(Fin{k})`.
+For instance, different equivalences of type `Fin_{k} ≃ Fin_{k}` induce different elements of type `count(Fin_{k})`.
 
 ## Example 16.1.2
 

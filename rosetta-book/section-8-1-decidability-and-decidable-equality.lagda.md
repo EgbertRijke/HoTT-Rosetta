@@ -355,3 +355,23 @@ is-decidable-div-ℕ (succ-ℕ d) x =
     ( is-zero-mod-succ-ℕ d x)
     ( is-decidable-is-zero-Fin (mod-succ-ℕ d x))
 ```
+
+## Supplement
+
+### Discrete types
+
+```agda
+Discrete-Type : (l : Level) → UU (lsuc l)
+Discrete-Type l = Σ (UU l) has-decidable-equality
+
+module _
+  {l : Level} (X : Discrete-Type l)
+  where
+
+  type-Discrete-Type : UU l
+  type-Discrete-Type = pr1 X
+
+  has-decidable-equality-type-Discrete-Type :
+    has-decidable-equality type-Discrete-Type
+  has-decidable-equality-type-Discrete-Type = pr2 X
+```
