@@ -3,6 +3,7 @@
 ```agda
 module exercise-5-7-group-laws-integers where
 
+open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-4-coproducts
@@ -376,4 +377,22 @@ abstract
         by inv (pred-neg-ℤ (in-pos-ℤ n +ℤ l))
       ＝ pred-ℤ (neg-ℤ (inr (inr n)) +ℤ neg-ℤ l)
         by ap pred-ℤ (distributive-neg-add-ℤ (inr (inr n)) l)
+```
+
+## Supplement
+
+### The predicates of being zero, of being one, and of being negative one
+
+```agda
+is-zero-ℤ : ℤ → UU lzero
+is-zero-ℤ x = (x ＝ zero-ℤ)
+
+eq-is-zero-ℤ : {a b : ℤ} → is-zero-ℤ a → is-zero-ℤ b → a ＝ b
+eq-is-zero-ℤ {a} {b} H K = H ∙ inv K
+
+is-one-ℤ : ℤ → UU lzero
+is-one-ℤ x = (x ＝ one-ℤ)
+
+is-neg-one-ℤ : ℤ → UU lzero
+is-neg-one-ℤ x = (x ＝ neg-one-ℤ)
 ```
