@@ -203,3 +203,16 @@ rec-product = ind-product
 The projection maps are defined similarly to the projection maps of `Σ`-types.
 When one thinks of types as propositions, then `A × B` is interpreted as the
 conjunction of `A` and `B`.
+
+## Supplement
+
+### Families on dependent pair types
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  fam-Σ : ((x : A) → B x → UU l3) → Σ A B → UU l3
+  fam-Σ C (x , y) = C x y
+```

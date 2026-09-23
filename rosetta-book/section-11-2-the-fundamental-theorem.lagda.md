@@ -4,16 +4,19 @@
 module section-11-2-the-fundamental-theorem where
 
 open import universe-levels
+open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
+open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import section-10-2-singleton-induction
-open import section-11-1-families-of-equivalences
-open import exercise-10-3-contractible-equivalences
-open import section-2-2-ordinary-function-types
-open import section-9-1-homotopies
+open import exercise-10-1-identity-types-contractible
 open import exercise-10-2-contractible-retracts
+open import exercise-10-3-contractible-equivalences
+open import section-11-1-families-of-equivalences
 ```
 
 The fundamental theorem of identity types (Theorem 11.2.2) is a general theorem that can be used to characterize the identity type of a given type.
@@ -220,4 +223,36 @@ module _
         ( tot (ind-Id a (λ x p → B x) b))
         ( is-equiv-tot-is-fiberwise-equiv H)
         ( is-torsorial-Id a)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A) (b : B a)
+  where
+
+  map-section-is-identity-system-is-torsorial :
+    is-torsorial B →
+    {l3 : Level} (P : (x : A) (y : B x) → UU l3) →
+    P a b → (x : A) (y : B x) → P x y
+  map-section-is-identity-system-is-torsorial H P p x y =
+    tr (fam-Σ P) (eq-is-contr H) p
+
+  is-section-map-section-is-identity-system-is-torsorial :
+    (H : is-torsorial B) →
+    {l3 : Level} (P : (x : A) (y : B x) → UU l3) →
+    is-section
+      ( ev-refl-identity-system b)
+      ( map-section-is-identity-system-is-torsorial H P)
+  is-section-map-section-is-identity-system-is-torsorial H P p =
+    ap
+      ( λ t → tr (fam-Σ P) t p)
+      ( eq-is-contr'
+        ( is-prop-is-contr H (a , b) (a , b))
+        ( eq-is-contr H)
+        ( refl))
+
+  abstract
+    is-identity-system-is-torsorial :
+      is-torsorial B → is-identity-system B a b
+    is-identity-system-is-torsorial H P =
+      ( map-section-is-identity-system-is-torsorial H P ,
+        is-section-map-section-is-identity-system-is-torsorial H P)
 ```

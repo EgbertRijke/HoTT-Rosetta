@@ -17,6 +17,8 @@ open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-1-identity-types-contractible
 open import exercise-10-2-contractible-retracts
+open import exercise-10-3-contractible-equivalences
+open import section-11-1-families-of-equivalences
 open import section-11-2-the-fundamental-theorem
 open import section-12-1-propositions
 open import section-12-2-subtypes
@@ -312,7 +314,28 @@ module _
   equiv-eq-htpy : {f g : (x : A) → B x} → (f ~ g) ≃ (f ＝ g)
   pr1 (equiv-eq-htpy {f} {g}) = eq-htpy
   pr2 (equiv-eq-htpy {f} {g}) = is-equiv-eq-htpy f g
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x)
+  where
+
+  abstract
+    is-torsorial-htpy : is-torsorial (λ g → f ~ g)
+    is-torsorial-htpy =
+      is-contr-equiv'
+        ( Σ ((x : A) → B x) (λ g → f ＝ g))
+        ( equiv-tot (λ g → equiv-funext))
+        ( is-torsorial-Id f)
+
+  abstract
+    is-torsorial-htpy' : is-torsorial (λ g → g ~ f)
+    is-torsorial-htpy' =
+      is-contr-equiv'
+        ( Σ ((x : A) → B x) (λ g → g ＝ f))
+        ( equiv-tot (λ g → equiv-funext))
+        ( is-torsorial-Id' f)
 ```
+
 
 ## Remark 13.1.4
 
@@ -500,6 +523,53 @@ module _
   equiv-explicit-implicit-Π : ({x : A} → B x) ≃ ((x : A) → B x)
   pr1 equiv-explicit-implicit-Π = explicit-implicit-Π
   pr2 equiv-explicit-implicit-Π = is-equiv-explicit-implicit-Π
+```
+
+### Homotopy induction is equivalent to function extensionality
+
+```agda
+abstract
+  induction-principle-homotopies-based-function-extensionality :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
+    based-function-extensionality f →
+    induction-principle-homotopies f
+  induction-principle-homotopies-based-function-extensionality f funext-f =
+    is-identity-system-is-torsorial f
+      ( refl-htpy)
+      ( is-torsorial-htpy f)
+
+abstract
+  based-function-extensionality-induction-principle-homotopies :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (f : (x : A) → B x) →
+    induction-principle-homotopies f →
+    based-function-extensionality f
+  based-function-extensionality-induction-principle-homotopies f ind-htpy-f =
+    fundamental-theorem-id-is-identity-system f
+      ( refl-htpy)
+      ( ind-htpy-f)
+      ( λ _ → htpy-eq)
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  abstract
+    induction-principle-htpy :
+      (f : (x : A) → B x) → induction-principle-homotopies f
+    induction-principle-htpy f =
+      induction-principle-homotopies-based-function-extensionality f (funext f)
+
+    ind-htpy :
+      {l3 : Level} (f : (x : A) → B x)
+      (C : (g : (x : A) → B x) → f ~ g → UU l3) →
+      C f refl-htpy → {g : (x : A) → B x} (H : f ~ g) → C g H
+    ind-htpy f C t {g} = pr1 (induction-principle-htpy f C) t g
+
+    compute-ind-htpy :
+      {l3 : Level} (f : (x : A) → B x)
+      (C : (g : (x : A) → B x) → f ~ g → UU l3) →
+      (c : C f refl-htpy) → ind-htpy f C c refl-htpy ＝ c
+    compute-ind-htpy f C = pr2 (induction-principle-htpy f C)
 ```
 
 ### Products of families of propositions are propositions

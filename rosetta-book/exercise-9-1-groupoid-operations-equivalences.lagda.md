@@ -16,13 +16,15 @@ open import section-5-4-transport
 ## Problem statement
 
 Show that the functions
+
 ```text
-inv :(x = y)→(y = x)
-concat(p) : (y = z)→(x = z)
-concat'(q) : (x = y) → (x = z)
-tr_B(p) :B(x)→ B(y)
+         inv : (x = y) → (y = x)
+   concat(p) : (y = z) → (x = z)
+  concat'(q) : (x = y) → (x = z)
+     tr_B(p) : B(x) → B(y)
 ```
-are equivalences, where `concat'(q,p)≔ p ∙ q`.
+
+are equivalences, where `concat'(q,p) ≔ p ∙ q`.
 Give their inverses explicitly.
 
 ## Solution
@@ -34,12 +36,6 @@ module _
 
   inv-concat : {x y : A} (p : x ＝ y) (z : A) → x ＝ z → y ＝ z
   inv-concat p = concat (inv p)
-```
-
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
 
   is-retraction-inv-concat :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) → inv p ∙ (p ∙ q) ＝ q
@@ -48,12 +44,19 @@ module _
   is-section-inv-concat :
     {x y z : A} (p : x ＝ y) (r : x ＝ z) → p ∙ (inv p ∙ r) ＝ r
   is-section-inv-concat refl r = refl
-```
 
-```agda
-module _
-  {l : Level} {A : UU l}
-  where
+  is-retraction-inv-concat' :
+    {x y z : A} (q : y ＝ z) (p : x ＝ y) → (p ∙ q) ∙ inv q ＝ p
+  is-retraction-inv-concat' refl refl = refl
+
+  is-section-inv-concat' :
+    {x y z : A} (q : y ＝ z) (r : x ＝ z) → (r ∙ inv q) ∙ q ＝ r
+  is-section-inv-concat' refl refl = refl
+
+  cancellation-inv-inv-concat :
+    {x y z : A} (p : x ＝ y) (q : x ＝ z) →
+    p ∙ inv (inv q ∙ p) ＝ q
+  cancellation-inv-inv-concat refl refl = refl
 
   abstract
     is-equiv-inv : (x y : A) → is-equiv (λ (p : x ＝ y) → inv p)
@@ -90,9 +93,7 @@ module _
     {x y : A} (p : x ＝ y) (z : A) → (x ＝ z) ≃ (y ＝ z)
   pr1 (equiv-inv-concat p z) = inv-concat p z
   pr2 (equiv-inv-concat p z) = is-equiv-inv-concat p z
-```
 
-```agda
 module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A}
   where

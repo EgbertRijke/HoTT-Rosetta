@@ -201,6 +201,16 @@ module _
     (f : (x : A) → B x) {g h : (x : A) → B x} →
     g ~ h → f ~ g → f ~ h
   concat-htpy' f K H = H ∙h K
+
+  concat-inv-htpy :
+    {f g : (x : A) → B x} →
+    f ~ g → (h : (x : A) → B x) → f ~ h → g ~ h
+  concat-inv-htpy = concat-htpy ∘ inv-htpy
+
+  concat-inv-htpy' :
+    (f : (x : A) → B x) {g h : (x : A) → B x} →
+    g ~ h → f ~ h → f ~ g
+  concat-inv-htpy' f K = concat-htpy' f (inv-htpy K)
 ```
 
 ## Proposition 9.1.6
@@ -477,4 +487,21 @@ module _
   right-whisker-comp² :
     (α : {x : A} → H {x} ~ H' {x}) (h : (x : A) → B x) → H ·r h ~ H' ·r h
   right-whisker-comp² α h = α ·r h
+```
+
+### Coherences of commuting triangles of homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  {f g h : (x : A) → B x}
+  where
+
+  coherence-triangle-homotopies :
+    (left : f ~ h) (right : g ~ h) (top : f ~ g) → UU (l1 ⊔ l2)
+  coherence-triangle-homotopies left right top = left ~ top ∙h right
+
+  coherence-triangle-homotopies' :
+    (left : f ~ h) (right : g ~ h) (top : f ~ g) → UU (l1 ⊔ l2)
+  coherence-triangle-homotopies' left right top = top ∙h right ~ left
 ```

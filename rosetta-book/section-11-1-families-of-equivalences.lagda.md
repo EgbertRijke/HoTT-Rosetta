@@ -16,6 +16,7 @@ open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import exercise-10-3-contractible-equivalences
+open import exercise-10-8-fiber-replacement
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 ```
 
@@ -172,6 +173,42 @@ module _
 
   is-fiberwise-equiv : (f : (x : A) → B x → C x) → UU (l1 ⊔ l2 ⊔ l3)
   is-fiberwise-equiv f = (x : A) → is-equiv (f x)
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1}
+  where
+
+  fiberwise-equiv : (B : A → UU l2) (C : A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  fiberwise-equiv B C = Σ ((x : A) → B x → C x) is-fiberwise-equiv
+
+  map-fiberwise-equiv :
+    {B : A → UU l2} {C : A → UU l3} →
+    fiberwise-equiv B C → (a : A) → B a → C a
+  map-fiberwise-equiv = pr1
+
+  is-fiberwise-equiv-fiberwise-equiv :
+    {B : A → UU l2} {C : A → UU l3} →
+    (e : fiberwise-equiv B C) →
+    is-fiberwise-equiv (map-fiberwise-equiv e)
+  is-fiberwise-equiv-fiberwise-equiv = pr2
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1}
+  where
+
+  fam-equiv : (B : A → UU l2) (C : A → UU l3) → UU (l1 ⊔ l2 ⊔ l3)
+  fam-equiv B C = (x : A) → B x ≃ C x
+
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  (e : fam-equiv B C)
+  where
+
+  map-fam-equiv : (x : A) → B x → C x
+  map-fam-equiv x = map-equiv (e x)
+
+  is-equiv-map-fam-equiv : is-fiberwise-equiv map-fam-equiv
+  is-equiv-map-fam-equiv x = is-equiv-map-equiv (e x)
 
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
@@ -450,4 +487,24 @@ module _
           ( triangle-map-Σ D f g)
           ( is-equiv-map-Σ-map-base f D H)
           ( K))
+```
+
+## Supplement
+
+### Any commuting triangle induces a map on fibers
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
+  where
+
+  fiber-triangle :
+    (x : X) → fiber f x → fiber g x
+  fiber-triangle .(f a) (a , refl) = (h a , inv (H a))
+
+  square-tot-fiber-triangle :
+    ( h ∘ map-equiv-total-fiber f) ~
+    ( map-equiv-total-fiber g ∘ tot fiber-triangle)
+  square-tot-fiber-triangle (.(f a) , a , refl) = refl
 ```
