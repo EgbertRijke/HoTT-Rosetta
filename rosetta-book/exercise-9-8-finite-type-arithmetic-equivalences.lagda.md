@@ -3,11 +3,18 @@
 ```agda
 module exercise-9-8-finite-type-arithmetic-equivalences where
 
+open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers
 open import section-4-4-coproducts
+open import section-5-1-the-inductive-definition-of-identity-types
 open import section-7-3-the-standard-finite-types
+open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import exercise-9-4-three-for-two-equivalences
+open import exercise-9-6-coproduct-functor-equivalences
+open import section-10-4-equivalences-are-contractible-maps
+open import section-13-1-equivalent-forms-of-function-extensionality
 ```
 
 ## Problem statement

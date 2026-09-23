@@ -114,18 +114,38 @@ taking
 
 ```agda
 module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x y : A)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) (x : A)
   where
 
   ap-refl : ap f (refl {x = x}) ＝ refl
   ap-refl = refl
 
-  ap-inv : (p : x ＝ y) → ap f (inv p) ＝ inv (ap f p)
-  ap-inv refl = refl
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)
+  where
 
   ap-concat :
     {x y z : A} (p : x ＝ y) (q : y ＝ z) → ap f (p ∙ q) ＝ ap f p ∙ ap f q
   ap-concat refl q = refl
+
+  inv-ap-concat :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) → ap f p ∙ ap f q ＝ ap f (p ∙ q)
+  inv-ap-concat p q = inv (ap-concat p q)
+
+  compute-right-refl-ap-concat :
+    {x y : A} (p : x ＝ y) →
+    ap-concat p refl ＝ ap (ap f) right-unit ∙ inv right-unit
+  compute-right-refl-ap-concat refl = refl
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A}
+  where
+
+  ap-inv : (p : x ＝ y) → ap f (inv p) ＝ inv (ap f p)
+  ap-inv refl = refl
+
+  inv-ap-inv : (p : x ＝ y) → inv (ap f p) ＝ ap f (inv p)
+  inv-ap-inv p = inv (ap-inv p)
 ```
 
 ## Supplementary definitions

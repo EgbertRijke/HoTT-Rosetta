@@ -9,7 +9,9 @@ open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-6-4-peanos-seventh-and-eighth-axioms
+open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
@@ -17,6 +19,7 @@ open import exercise-10-1-identity-types-contractible
 open import exercise-10-3-contractible-equivalences
 open import exercise-10-5-contractible-products
 open import section-11-1-families-of-equivalences
+open import section-11-2-the-fundamental-theorem
 open import section-11-4-embeddings
 open import section-12-1-propositions
 open import section-12-2-subtypes
@@ -132,8 +135,75 @@ module _
 
 ### Exercise 13.4(d)
 
-BENCHMARK PROBLEM
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  htpy-equiv : A ≃ B → A ≃ B → UU (l1 ⊔ l2)
+  htpy-equiv e e' = (map-equiv e) ~ (map-equiv e')
+
+  _~e_ = htpy-equiv
+
+  extensionality-equiv : (f g : A ≃ B) → (f ＝ g) ≃ htpy-equiv f g
+  extensionality-equiv f =
+    extensionality-type-subtype
+      ( is-equiv-Prop)
+      ( pr2 f)
+      ( refl-htpy' (pr1 f))
+      ( λ g → equiv-funext)
+
+  abstract
+    is-torsorial-htpy-equiv :
+      (e : A ≃ B) → is-torsorial (htpy-equiv e)
+    is-torsorial-htpy-equiv e =
+      fundamental-theorem-id'
+        ( map-equiv ∘ extensionality-equiv e)
+        ( is-equiv-map-equiv ∘ extensionality-equiv e)
+
+  refl-htpy-equiv : (e : A ≃ B) → htpy-equiv e e
+  refl-htpy-equiv e = refl-htpy
+
+  eq-htpy-equiv : {e e' : A ≃ B} → htpy-equiv e e' → e ＝ e'
+  eq-htpy-equiv {e} {e'} = map-inv-equiv (extensionality-equiv e e')
+
+  htpy-eq-equiv : {e e' : A ≃ B} → e ＝ e' → htpy-equiv e e'
+  htpy-eq-equiv {e} {e'} = map-equiv (extensionality-equiv e e')
+
+  htpy-eq-map-equiv :
+    {e e' : A ≃ B} → (map-equiv e) ＝ (map-equiv e') → htpy-equiv e e'
+  htpy-eq-map-equiv = htpy-eq
+```
 
 ### Exercise 13.4(e)
 
 BENCHMARK PROBLEM
+
+## Supplement
+
+### Taking the inverse equivalence distributes over composition
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3}
+  where
+
+  distributive-inv-comp-equiv :
+    (e : X ≃ Y) (f : Y ≃ Z) →
+    inv-equiv (f ∘e e) ＝ (inv-equiv e) ∘e (inv-equiv f)
+  distributive-inv-comp-equiv e f =
+    eq-htpy-equiv
+      ( λ x →
+        map-eq-transpose-equiv-inv
+          ( f ∘e e)
+          ( ( ap (λ g → map-equiv g x) (inv (right-inverse-law-equiv f))) ∙
+            ( ap
+              ( λ g → map-equiv (f ∘e (g ∘e (inv-equiv f))) x)
+              ( inv (right-inverse-law-equiv e)))))
+
+  distributive-map-inv-comp-equiv :
+    (e : X ≃ Y) (f : Y ≃ Z) →
+    map-inv-equiv (f ∘e e) ＝ map-inv-equiv e ∘ map-inv-equiv f
+  distributive-map-inv-comp-equiv e f =
+    ap map-equiv (distributive-inv-comp-equiv e f)
+```

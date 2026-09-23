@@ -418,7 +418,7 @@ module _
 
   right-whisker-concat-htpy :
     {f g h : (x : A) → B x} {H I : f ~ g} → H ~ I → (J : g ~ h) → H ∙h J ~ I ∙h J
-  right-whisker-concat-htpy J K x = right-whisker-concat (K x) (J x)
+  right-whisker-concat-htpy J K x = right-whisker-concat (J x) (K x)
 
   right-unwhisker-concat-htpy :
     {f g h : (x : A) → B x} {H I : f ~ g} (J : g ~ h) → H ∙h J ~ I ∙h J → H ~ I

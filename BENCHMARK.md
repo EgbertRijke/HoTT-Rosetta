@@ -18,7 +18,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-9-8-finite-type-arithmetic-equivalences.lagda.md
 - rosetta-book/exercise-9-9-finitely-cyclic-maps.lagda.md
 - rosetta-book/exercise-11-1-coproduct-embeddings.lagda.md
-- rosetta-book/exercise-11-2-paths-along-equivalences.lagda.md
 - rosetta-book/exercise-11-5-composite-embeddings-equivalences.lagda.md
 - rosetta-book/exercise-11-6-embeddings-from-coproducts.lagda.md
 - rosetta-book/exercise-11-7-coproduct-functor-reflection.lagda.md

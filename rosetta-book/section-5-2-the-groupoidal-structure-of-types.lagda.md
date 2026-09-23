@@ -371,10 +371,26 @@ module _
   where
 
   right-whisker-concat : 
-    {x y z : A} {p q : x ＝ y} (r : y ＝ z) → p ＝ q → p ∙ r ＝ q ∙ r
-  right-whisker-concat α refl = refl
+    {x y z : A} {p q : x ＝ y} → p ＝ q →  (r : y ＝ z) → p ∙ r ＝ q ∙ r
+  right-whisker-concat refl α = refl
 
   right-unwhisker-concat :
-    {x y z : A} {p q : x ＝ y} (r : y ＝ z) → p ∙ r ＝ q ∙ r → p ＝ q
+    {x y z : A} {p q : x ＝ y} → (r : y ＝ z) → p ∙ r ＝ q ∙ r → p ＝ q
   right-unwhisker-concat r = is-injective-concat' r
+```
+
+### Commuting triangles of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  coherence-triangle-identifications :
+    (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) → UU l
+  coherence-triangle-identifications left right top = (left ＝ top ∙ right)
+
+  coherence-triangle-identifications' :
+    (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) → UU l
+  coherence-triangle-identifications' left right top = (top ∙ right ＝ left)
 ```
