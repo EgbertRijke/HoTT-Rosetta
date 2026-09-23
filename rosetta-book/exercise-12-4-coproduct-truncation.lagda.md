@@ -19,6 +19,7 @@ open import section-7-3-the-standard-finite-types
 open import exercise-7-3-divisibility-factorials
 open import exercise-7-5-observational-equality-finite-types
 open import section-8-1-decidability-and-decidable-equality
+open import exercise-8-7-decidable-equality-coproducts
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import exercise-10-1-identity-types-contractible
