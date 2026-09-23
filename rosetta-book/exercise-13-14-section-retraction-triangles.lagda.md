@@ -27,4 +27,4 @@ Show that if `g` has a retraction, then `retr(h)` is a retract of `sec(f)`.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

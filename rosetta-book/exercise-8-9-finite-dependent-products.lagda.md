@@ -15,4 +15,4 @@ Show that if each `B(x)` has decidable equality, then `Π(x:Fin{k}) B(x)` also h
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

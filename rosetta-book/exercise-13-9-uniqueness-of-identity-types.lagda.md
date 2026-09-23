@@ -24,4 +24,4 @@ h:Π(x:A) (a=x)→ B(x)
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

@@ -39,4 +39,4 @@ Show that for any two maps `f:A→ A'` and `g:B→ B'`, the following are equiva
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

@@ -15,4 +15,4 @@ has a section for each `x,y:A`, then `f` is an embedding.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

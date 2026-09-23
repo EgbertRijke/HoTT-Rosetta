@@ -20,4 +20,4 @@ This property is the **universal property of an empty type**.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

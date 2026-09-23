@@ -16,4 +16,4 @@ Show that the following are equivalent:
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

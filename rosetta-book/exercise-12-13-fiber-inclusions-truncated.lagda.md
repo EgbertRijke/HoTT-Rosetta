@@ -22,4 +22,4 @@ In particular, if `A` is a set then any fiber inclusion `i_a:B(a)→Σ(x:A) B(x)
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

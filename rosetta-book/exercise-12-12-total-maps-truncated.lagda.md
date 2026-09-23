@@ -20,4 +20,4 @@ tot(f):(Σ(x:A) B(x))→(Σ(x:A) C(x))
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

@@ -18,4 +18,4 @@ Show that `succ-Fin:Fin{k}→Fin{k}` is finitely cyclic for any `k:ℕ`.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

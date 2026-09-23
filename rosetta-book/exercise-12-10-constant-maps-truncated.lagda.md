@@ -11,4 +11,4 @@ Show that a type `A` is a `(k+1)`-type if and only if the map `const_x:unit→ A
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

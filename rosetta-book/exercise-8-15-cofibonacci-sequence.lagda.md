@@ -17,4 +17,4 @@ Hint: for `m>0`, `G_m` is the least `x>0` such that `m| F_x`.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

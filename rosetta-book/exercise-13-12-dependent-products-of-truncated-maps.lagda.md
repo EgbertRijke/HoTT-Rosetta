@@ -81,6 +81,8 @@ In particular, `f` is an equivalence if and only if `f ∘ -` is an equivalence,
 
 ### Exercise 13.12(a)
 
+PARTIAL BENCHMARK PROBLEM
+
 ```agda
 map-Π :
   {l1 l2 l3 : Level}

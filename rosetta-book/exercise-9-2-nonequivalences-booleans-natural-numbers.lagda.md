@@ -15,4 +15,4 @@ Show that `ℕ\not≃ Fin{k}` for any `k:ℕ`.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

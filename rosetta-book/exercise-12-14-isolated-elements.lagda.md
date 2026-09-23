@@ -20,4 +20,4 @@ Conclude that if `a` is isolated, then the map `const_a:unit→ A` is an embeddi
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

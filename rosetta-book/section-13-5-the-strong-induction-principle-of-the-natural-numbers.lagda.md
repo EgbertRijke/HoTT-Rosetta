@@ -17,7 +17,6 @@ open import exercise-7-3-divisibility-factorials
 open import section-9-2-bi-invertible-maps
 open import section-12-1-propositions
 open import section-12-3-sets
-open import exercise-12-3-injective-maps-into-sets
 open import exercise-12-4-coproduct-truncation
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-12-4-coproduct-truncation
@@ -132,7 +131,7 @@ equipped with
    ```text
      p̃_S(n,H,m,p) = H(m,q)
    ```
-    
+
    for every `H : P̃(n)` and every `p : m ≤ n + 1` and `q : m ≤ n`, and
 
 2. an identification
@@ -174,7 +173,7 @@ Now we define `p̃_S` by
   p̃_S(n,H,m,p) ≔ h(n,H,m,f(p)),
 ```
 
-where `f : (m ≤ n + 1) → (m ≤ n) + (m = n + 1)` is the map we mentioned in (*).
+where `f : (m ≤ n + 1) → (m ≤ n) + (m = n + 1)` is the map we mentioned in (\*).
 
 To construct the identifications claimed in (i) and (ii), note that there is an equivalence
 
@@ -185,7 +184,6 @@ To construct the identifications claimed in (i) and (ii), note that there is an 
 for any `y : P(m)`.
 This equivalence is obtained from the fact that `f(p) = x` for any `x : (m ≤ n) + (m = n + 1)`, i.e., the fact that `(m ≤ n) + (m = n + 1)` is a proposition.
 Now the identifications in (i) and (ii) are obtained as a simple consequence of the computation rule for coproducts. ◻
-
 
 ```agda
 cases-succ-strong-ind-ℕ :
@@ -249,7 +247,7 @@ eq-succ-strong-ind-ℕ P pS k H p =
 We are now ready to finish the proof of Theorem 13.5.1.
 
 ### Proof of Theorem 13.5.1.
- 
+
 Using `p̃_0` and `p̃_S`, we obtain by induction on `n` a function
 
 ```text

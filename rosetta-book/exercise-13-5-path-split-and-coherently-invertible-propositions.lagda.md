@@ -21,4 +21,4 @@ Note: We will use this fact in Exercise 22.5 to show that there are types for wh
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

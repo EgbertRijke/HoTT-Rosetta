@@ -29,4 +29,4 @@ In this diagram, the homotopy `G:e∘ e^{-1}~ id` is the homotopy witnessing tha
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
