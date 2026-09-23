@@ -14,6 +14,7 @@ open import section-5-1-the-inductive-definition-of-identity-types
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-7-3-the-standard-finite-types
 open import exercise-7-5-observational-equality-finite-types
+open import exercise-8-7-decidable-equality-coproducts
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
@@ -61,17 +62,6 @@ by double induction on the coproduct, postulating
 
 The relation `Eq-coproduct_{A,B}` is also called the **observational equality of coproducts**.
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  data Eq-coproduct : A + B → A + B → UU (l1 ⊔ l2)
-    where
-    Eq-eq-coproduct-inl : {x y : A} → x ＝ y → Eq-coproduct (inl x) (inl y)
-    Eq-eq-coproduct-inr : {x y : B} → x ＝ y → Eq-coproduct (inr x) (inr y)
-```
-
 ## Lemma 11.5.3
 
 The observational equality relation `Eq-coproduct_{A,B}` on `A+B` is reflexive, and therefore there is a map
@@ -87,23 +77,6 @@ The reflexivity term `ρ` is constructed by induction on `t : A + B`, using
 ```text
   ρ(inl(x)) ≔ refl : Eq-coproduct_{A,B}(inl(x),inl(x))
   ρ(inr(y)) ≔ refl : Eq-coproduct_{A,B}(inr(y),inr(y)).
-```
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  refl-Eq-coproduct : (x : A + B) → Eq-coproduct x x
-  refl-Eq-coproduct (inl x) = Eq-eq-coproduct-inl refl
-  refl-Eq-coproduct (inr x) = Eq-eq-coproduct-inr refl
-
-  Eq-eq-coproduct : (x y : A + B) → x ＝ y → Eq-coproduct x y
-  Eq-eq-coproduct x .x refl = refl-Eq-coproduct x
-
-  eq-Eq-coproduct : (x y : A + B) → Eq-coproduct x y → x ＝ y
-  eq-Eq-coproduct .(inl x) .(inl x) (Eq-eq-coproduct-inl {x} {.x} refl) = refl
-  eq-Eq-coproduct .(inr x) .(inr x) (Eq-eq-coproduct-inr {x} {.x} refl) = refl
 ```
 
 To show that `Eq-coproduct-eq` is a family of equivalences, we will use the fundamental theorem of identity types, Theorem 11.2.2.
@@ -183,22 +156,6 @@ module _
 ### The left and right inclusions are injective
 
 ```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-injective-inl : is-injective {B = A + B} inl
-  is-injective-inl refl = refl
-
-  is-injective-inr : is-injective {B = A + B} inr
-  is-injective-inr refl = refl
-
-  neq-inl-inr : {x : A} {y : B} → inl x ≠ inr y
-  neq-inl-inr ()
-
-  neq-inr-inl : {x : B} {y : A} → inr x ≠ inl y
-  neq-inr-inl ()
-
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
