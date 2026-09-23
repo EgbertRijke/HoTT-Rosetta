@@ -44,3 +44,16 @@ Show that
 const : {l1 l2 : Level} (A : UU l1) {B : UU l2} → B → A → B
 const A b x = b
 ```
+
+## Supplement
+
+### The diagonal
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1) (X : UU l2)
+  where
+
+  diagonal-exponential : A → X → A
+  diagonal-exponential = const X
+```

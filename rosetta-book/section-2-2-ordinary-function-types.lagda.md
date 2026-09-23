@@ -355,3 +355,15 @@ module _
   precomp : (B → C) → (A → C)
   precomp = _∘ f
 ```
+
+### Postcomposition of dependent functions
+
+```agda
+module _
+  {l1 l2 l3 : Level} (A : UU l1) {X : A → UU l2} {Y : A → UU l3}
+  where
+
+  postcomp-Π : ({a : A} → X a → Y a) → ((a : A) → X a) → ((a : A) → Y a)
+  postcomp-Π f = f ∘_
+```
+

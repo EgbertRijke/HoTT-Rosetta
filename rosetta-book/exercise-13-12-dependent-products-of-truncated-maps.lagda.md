@@ -10,6 +10,7 @@ open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-4-transport
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import exercise-9-1-groupoid-operations-equivalences
 open import exercise-9-4-three-for-two-equivalences
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
@@ -18,6 +19,7 @@ open import section-11-1-families-of-equivalences
 open import exercise-12-8-retracts-of-truncated-types
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-2-identity-systems-on-pi-types
+open import section-13-4-composing-with-equivalences
 ```
 
 ## Problem statement
@@ -224,12 +226,8 @@ module _
 
 ### Exercise 13.12(c)
 
-```agda
-
-```
+BENCHMARK PROBLEM
 
 ### Exercise 13.12(d)
 
-```agda
-
-```
+BENCHMARK PROBLEM

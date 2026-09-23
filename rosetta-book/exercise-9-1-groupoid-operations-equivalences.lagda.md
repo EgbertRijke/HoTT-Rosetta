@@ -94,6 +94,37 @@ module _
   pr1 (equiv-inv-concat p z) = inv-concat p z
   pr2 (equiv-inv-concat p z) = is-equiv-inv-concat p z
 
+  inv-concat' : (x : A) {y z : A} → y ＝ z → x ＝ z → x ＝ y
+  inv-concat' x q = concat' x (inv q)
+
+  abstract
+    is-equiv-concat' :
+      (x : A) {y z : A} (q : y ＝ z) → is-equiv (concat' x q)
+    is-equiv-concat' x q =
+      is-equiv-is-invertible
+        ( inv-concat' x q)
+        ( is-section-inv-concat' q)
+        ( is-retraction-inv-concat' q)
+
+  abstract
+    is-equiv-inv-concat' :
+      (x : A) {y z : A} (q : y ＝ z) → is-equiv (inv-concat' x q)
+    is-equiv-inv-concat' x q =
+      is-equiv-is-invertible
+        ( concat' x q)
+        ( is-retraction-inv-concat' q)
+        ( is-section-inv-concat' q)
+
+  equiv-concat' :
+    (x : A) {y z : A} (q : y ＝ z) → (x ＝ y) ≃ (x ＝ z)
+  pr1 (equiv-concat' x q) = concat' x q
+  pr2 (equiv-concat' x q) = is-equiv-concat' x q
+
+  equiv-inv-concat' :
+    (x : A) {y z : A} (q : y ＝ z) → (x ＝ z) ≃ (x ＝ y)
+  pr1 (equiv-inv-concat' x q) = inv-concat' x q
+  pr2 (equiv-inv-concat' x q) = is-equiv-inv-concat' x q
+
 module _
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {x y : A}
   where

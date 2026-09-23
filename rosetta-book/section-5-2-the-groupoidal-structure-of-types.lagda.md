@@ -63,6 +63,9 @@ module _
 
   concat : {x y : A} → x ＝ y → (z : A) → y ＝ z → x ＝ z
   concat p z q = p ∙ q
+
+  concat' : (x : A) {y z : A} → y ＝ z → x ＝ y → x ＝ z
+  concat' x q p = p ∙ q
 ```
 
 ## Definition 5.2.2
