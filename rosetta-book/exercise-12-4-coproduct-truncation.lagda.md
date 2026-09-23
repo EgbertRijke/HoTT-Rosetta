@@ -15,6 +15,7 @@ open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import exercise-6-3-order-natural-numbers
+open import section-7-3-the-standard-finite-types
 open import exercise-7-3-divisibility-factorials
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
@@ -188,4 +189,29 @@ eq-cases-leq-succ :
   decide-leq-succ-ℕ m n p ＝ x
 eq-cases-leq-succ m n p x =
   eq-is-prop' (is-prop-leq-succ-cases m n) (decide-leq-succ-ℕ m n p) x
+```
+
+### The unit type is a set
+
+```agda
+abstract
+  is-set-unit : is-set unit
+  is-set-unit = is-trunc-succ-is-trunc neg-one-𝕋 is-prop-unit
+
+unit-Set : Set lzero
+unit-Set = unit , is-set-unit
+```
+
+### The standard finite types are sets
+
+The following code is not copied verbatim from agda-unimath. In agda-unimath, the standard finite types are defined as sets, whereas in this book the topic of sets is introduced much later than the standard finite types.
+
+```agda
+is-set-Fin : (n : ℕ) → is-set (Fin n)
+is-set-Fin zero-ℕ = is-set-empty
+is-set-Fin (succ-ℕ n) = is-set-coproduct (is-set-Fin n) is-set-unit
+
+Fin-Set : (n : ℕ) → Set lzero
+pr1 (Fin-Set n) = Fin n
+pr2 (Fin-Set n) = is-set-Fin n
 ```

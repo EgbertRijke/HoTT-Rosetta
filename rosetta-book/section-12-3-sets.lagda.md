@@ -340,3 +340,15 @@ abstract
 pr1 ℕ-Set = ℕ
 pr2 ℕ-Set = is-set-ℕ
 ```
+
+### The empty type is a set
+
+```agda
+is-set-empty : is-set empty
+is-set-empty ()
+
+empty-Set : Set lzero
+pr1 empty-Set = empty
+pr2 empty-Set = is-set-empty
+```
+

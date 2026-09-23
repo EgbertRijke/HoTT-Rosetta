@@ -2,6 +2,23 @@
 
 ```agda
 module section-16-1-counting-in-type-theory where
+
+open import universe-levels
+
+open import section-2-2-ordinary-function-types
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
+open import section-4-3-the-empty-type
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-7-3-the-standard-finite-types
+open import section-7-4-the-natural-numbers-modulo-k-plus-one
+open import section-9-1-homotopies
+open import section-9-2-bi-invertible-maps
+open import exercise-9-4-three-for-two-equivalences
+open import section-10-4-equivalences-are-contractible-maps
+open import section-12-3-sets
+open import section-12-4-general-truncation-levels
+open import exercise-12-4-coproduct-truncation
 ```
 
 When someone counts the elements of a finite set `A`, they go through the elements of `A` one by one, at each stage keeping track of how many elements have been counted so far.
@@ -20,6 +37,47 @@ For each type `A`, we define the type
 The elements of `count(A)` are called **countings** of `A`.
 When we have `(k,e) : count(A)`, we also say that `A` **has `k` elements**.
 
+```agda
+count : {l : Level} → UU l → UU l
+count X = Σ ℕ (λ k → Fin k ≃ X)
+
+module _
+  {l : Level} {X : UU l} (e : count X)
+  where
+
+  number-of-elements-count : ℕ
+  number-of-elements-count = pr1 e
+
+  equiv-count : Fin number-of-elements-count ≃ X
+  equiv-count = pr2 e
+
+  map-equiv-count : Fin number-of-elements-count → X
+  map-equiv-count = map-equiv equiv-count
+
+  map-inv-equiv-count : X → Fin number-of-elements-count
+  map-inv-equiv-count = map-inv-equiv equiv-count
+
+  is-section-map-inv-equiv-count : (map-equiv-count ∘ map-inv-equiv-count) ~ id
+  is-section-map-inv-equiv-count = is-section-map-inv-equiv equiv-count
+
+  is-retraction-map-inv-equiv-count :
+    (map-inv-equiv-count ∘ map-equiv-count) ~ id
+  is-retraction-map-inv-equiv-count = is-retraction-map-inv-equiv equiv-count
+
+  inv-equiv-count : X ≃ Fin number-of-elements-count
+  inv-equiv-count = inv-equiv equiv-count
+
+  is-set-type-count : is-set X
+  is-set-type-count =
+    is-set-equiv'
+      ( Fin number-of-elements-count)
+      ( equiv-count)
+      ( is-set-Fin number-of-elements-count)
+
+  set-type-count : Set l
+  set-type-count = (X , is-set-type-count)
+```
+
 Note that the type `count(A)` is often not a proposition.
 For instance, different equivalences of type `Fin_{k} ≃ Fin_{k}` induce different elements of type `count(Fin{k})`.
 
@@ -28,6 +86,41 @@ For instance, different equivalences of type `Fin_{k} ≃ Fin_{k}` induce differ
 It follows immediately from the definition of countings that every standard finite type can be counted in a canonical way: For any `k : ℕ` we have `(k,id) : count(Fin_{k})`.
 It also follows immediately from the definition of countings that types equipped with countings are closed under equivalences.
 
+```agda
+count-Fin : (k : ℕ) → count (Fin k)
+pr1 (count-Fin k) = k
+pr2 (count-Fin k) = id-equiv
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  abstract
+    equiv-count-equiv :
+      (e : X ≃ Y) (f : count X) → Fin (number-of-elements-count f) ≃ Y
+    equiv-count-equiv e f = e ∘e (equiv-count f)
+
+  count-equiv : X ≃ Y → count X → count Y
+  pr1 (count-equiv e f) = number-of-elements-count f
+  pr2 (count-equiv e f) = equiv-count-equiv e f
+
+  abstract
+    equiv-count-equiv' :
+      (e : X ≃ Y) (f : count Y) → Fin (number-of-elements-count f) ≃ X
+    equiv-count-equiv' e f = inv-equiv e ∘e (equiv-count f)
+
+  count-equiv' : X ≃ Y → count Y → count X
+  pr1 (count-equiv' e f) = number-of-elements-count f
+  pr2 (count-equiv' e f) = equiv-count-equiv' e f
+
+  count-is-equiv : {f : X → Y} → is-equiv f → count X → count Y
+  count-is-equiv H = count-equiv (_ , H)
+
+  count-is-equiv' :
+    {f : X → Y} → is-equiv f → count Y → count X
+  count-is-equiv' H = count-equiv' (_ , H)
+```
+
 ## Example 16.1.3
 
 Suppose `A` comes equipped with a counting `(k,e) : count(A)`.
@@ -35,6 +128,37 @@ Then `k = 0` if and only if `A` is empty.
 Indeed, the inverse of `e` is a map `e⁻¹ : A → empty`.
 Conversely, if we have `f : is-empty(A)`, then the map `f : A → empty` is automatically an equivalence.
 This shows that `Fin_{k} ≃ empty`, and a short argument by induction on `k` yields that `k = 0`.
+
+```agda
+is-zero-ℕ : ℕ → UU lzero
+is-zero-ℕ n = (n ＝ zero-ℕ)
+
+is-zero-ℕ' : ℕ → UU lzero
+is-zero-ℕ' n = (zero-ℕ ＝ n)
+
+abstract
+  is-empty-is-zero-number-of-elements-count :
+    {l : Level} {X : UU l} (e : count X) →
+    is-zero-ℕ (number-of-elements-count e) → is-empty X
+  is-empty-is-zero-number-of-elements-count (.0 , e) refl x =
+    map-inv-equiv e x
+
+abstract
+  is-zero-number-of-elements-count-is-empty :
+    {l : Level} {X : UU l} (e : count X) →
+    is-empty X → is-zero-ℕ (number-of-elements-count e)
+  is-zero-number-of-elements-count-is-empty (0 , e) H = refl
+  is-zero-number-of-elements-count-is-empty (succ-ℕ k , e) H =
+    ex-falso (H (map-equiv e (zero-Fin k)))
+
+count-is-empty :
+  {l : Level} {X : UU l} → is-empty X → count X
+pr1 (count-is-empty H) = 0
+pr2 (count-is-empty H) = inv-equiv (H , is-equiv-is-empty' H)
+
+count-empty : count empty
+count-empty = count-Fin 0
+```
 
 ## Example 16.1.4
 
@@ -85,7 +209,7 @@ Consider the following three conditions:
    Consequently, if `P` is a subtype of a type `A` equipped with a counting, then we have
 
    ```text
-     count(Σ(x:A) P(x))↔ Π(x:A) is-decidable(P(x)).
+     count(Σ(x : A) P(x))↔ Π(x : A) is-decidable(P(x)).
    ```
 
 ### Proof
