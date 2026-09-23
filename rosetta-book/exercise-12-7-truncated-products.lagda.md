@@ -31,6 +31,8 @@ Conclude with Exercise 10.5 that, if both `A` and `B` come equipped with an elem
 
 ## Solution
 
+PARTIAL BENCHMARK PROBLEM
+
 ```agda
 abstract
   is-trunc-product :

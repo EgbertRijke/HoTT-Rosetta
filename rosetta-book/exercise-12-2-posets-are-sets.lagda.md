@@ -16,4 +16,4 @@ Show that the underlying type of any poset is a set.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

@@ -20,4 +20,4 @@ dist-ℕ(kx,ly)=gcd(x,y).
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

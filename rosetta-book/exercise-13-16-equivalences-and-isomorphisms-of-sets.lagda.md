@@ -18,4 +18,4 @@ K : g∘ f = id[A].
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

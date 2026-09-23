@@ -16,4 +16,4 @@ Conclude that
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

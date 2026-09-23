@@ -19,4 +19,4 @@ for any `n:ℕ` and any `h:Π(k:ℕ) (Π(m:ℕ) (m<k)→ P(m))→ P(k)`.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

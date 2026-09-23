@@ -17,6 +17,7 @@ open import section-8-1-decidability-and-decidable-equality
 ## Problem statement
 
 Consider two types `A` and `B`, and consider the observational equality `Eq-coproduct` on the coproduct `A+B` defined by
+
 ```text
 Eq-coproduct(inl(x),inl(x')) ≔ x= x' Eq-coproduct(inl(x),inr(y')) ≔ empty
 Eq-coproduct(inr(y),inl(x')) ≔ empty Eq-coproduct(inr(y),inr(y')) ≔ y = y'.
@@ -33,6 +34,8 @@ Show that the following are equivalent:
 Conclude that `ℤ` has decidable equality.
 
 ## Solution
+
+PARTIAL BENCHMARK PROBLEM
 
 ```agda
 is-injective : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)

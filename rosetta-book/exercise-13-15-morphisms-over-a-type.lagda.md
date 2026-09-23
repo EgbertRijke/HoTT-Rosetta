@@ -42,7 +42,7 @@ In other words, the type `hom-slice_X(f,g)` is the type of maps `h : A → B` eq
    \       /
   f \     / h
      \   /
-      ∨ ∨ 
+      ∨ ∨
        X
 
 ```
@@ -108,7 +108,7 @@ Given `(h,H) : hom-slice_X(f,g)`, show that the following are equivalent:
    ```text
      α(h,H):Π(x:X) fib(f, x)→fib(g, x)
    ```
-    
+
    is a family of equivalences.
 
 3. The precomposition function
@@ -116,7 +116,7 @@ Given `(h,H) : hom-slice_X(f,g)`, show that the following are equivalent:
    ```text
      - ∘ (h,H) : hom-slice_X(g,i) → hom-slice_X(f,i)
    ```
-    
+
    given by `(k,K) ∘ (h,H) ≔ (k ∘ h,H ∙ (K · h))` is an equivalence for each map `i : C → X`.
 
 Conclude that the type `Σ(h : A ≃ B) f ~ g ∘ h` is equivalent to the type of families of equivalences
@@ -127,9 +127,13 @@ Conclude that the type `Σ(h : A ≃ B) f ~ g ∘ h` is equivalent to the type o
 
 ## Solutions
 
+### Exercise 13.15(a)
+
 BENCHMARK PROBLEM
 
 ### Exercise 13.15(b)
+
+PARTIAL BENCHMARK PROBLEM
 
 ### Morphisms in the slice are equivalently described as families of maps between fibers
 
@@ -194,6 +198,10 @@ module _
   pr1 equiv-hom-slice-fiberwise-hom = hom-slice-fiberwise-hom
   pr2 equiv-hom-slice-fiberwise-hom = is-equiv-hom-slice-fiberwise-hom
 ```
+
+### Exercise 13.15(c)
+
+BENCHMARK PROBLEM
 
 ## Supplement
 

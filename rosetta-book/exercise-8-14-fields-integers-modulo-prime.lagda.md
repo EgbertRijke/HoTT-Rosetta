@@ -18,4 +18,4 @@ x^{-1}x = 1 xx^{-1} = 1.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

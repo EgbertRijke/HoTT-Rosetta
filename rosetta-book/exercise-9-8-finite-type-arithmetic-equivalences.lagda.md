@@ -15,4 +15,4 @@ Fin{kl} ≃ Fin{k}×Fin{l}.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

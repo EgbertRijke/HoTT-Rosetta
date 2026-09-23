@@ -14,4 +14,4 @@ Show that *`Π`-types distribute over coproducts*, i.e., construct for any type 
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

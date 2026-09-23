@@ -20,4 +20,4 @@ Use the function of part (b) to give a second construction of the greatest commo
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

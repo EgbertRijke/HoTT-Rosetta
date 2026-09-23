@@ -19,7 +19,7 @@ Use the fact that `¬ P` is defined as the type `P → empty` of functions from 
 
 ```agda
 iff : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
-iff A B = (A → B) × (B → A) 
+iff A B = (A → B) × (B → A)
 
 infixr 15 _↔_
 
@@ -100,7 +100,7 @@ Show that
 ### Exercise 4.3(a)
 
 ```agda
-law-of-non-contradiction : {l : Level} {P : UU l} → ¬ (P × ¬ P) 
+law-of-non-contradiction : {l : Level} {P : UU l} → ¬ (P × ¬ P)
 law-of-non-contradiction (p , np) = np p
 
 no-fixed-points-neg :
@@ -154,7 +154,9 @@ is-irrefutable-is-decidable :
 is-irrefutable-is-decidable H = H (inr (H ∘ inl))
 ```
 
-### Exercise 4.4(d)
+### Exercise 4.3(d)
+
+PARTIAL BENCHMARK PROBLEM
 
 ```agda
 double-negation-elim-is-decidable :
@@ -163,9 +165,9 @@ double-negation-elim-is-decidable (inl x) p = x
 double-negation-elim-is-decidable (inr x) p = ex-falso (p x)
 ```
 
-Statemets 2 and 3 are missing.
+### Exercise 4.3(e)
 
-### Exercise 4.4(e)
+PARTIAL BENCHMARK PROBLEM
 
 ```agda
 double-negation-elim-neg :
@@ -173,11 +175,9 @@ double-negation-elim-neg :
 double-negation-elim-neg A f p = f (ev p)
 ```
 
-Statements 2 and 3 are missing.
+### Exercise 4.3(f)
 
-### Exercise 4.4(f)
-
-Statements 1, 2, and 3 are missing.
+BENCHMARK PROBLEM
 
 ## Supplementary definitions
 

@@ -30,4 +30,4 @@ Show that if both `f` and `g` are equivalences, then so is `f+g`. (The converse 
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
