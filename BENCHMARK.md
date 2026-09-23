@@ -63,7 +63,6 @@ The following files contain partially solved (auto)formalization exercises, whic
 - rosetta-book/exercise-12-4-coproduct-truncation.lagda.md
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md
 - rosetta-book/exercise-12-7-truncated-products.lagda.md
-- rosetta-book/exercise-13-4-equivalence-structure-is-a-proposition.lagda.md
 - rosetta-book/exercise-13-7-universal-property-contractible-types.lagda.md
 - rosetta-book/exercise-13-12-dependent-products-of-truncated-maps.lagda.md
 - rosetta-book/exercise-13-15-morphisms-over-a-type.lagda.md
