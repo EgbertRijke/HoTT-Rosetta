@@ -15,7 +15,6 @@ Currently unsolved (auto)formalization exercises can be found in the following f
 - rosetta-book/exercise-9-7-product-functor-equivalences.lagda.md
 - rosetta-book/exercise-9-8-finite-type-arithmetic-equivalences.lagda.md
 - rosetta-book/exercise-9-9-finitely-cyclic-maps.lagda.md
-- rosetta-book/exercise-10-4-finite-types-not-contractible.lagda.md
 - rosetta-book/exercise-10-5-contractible-products.lagda.md
 - rosetta-book/exercise-10-8-fiber-replacement.lagda.md
 - rosetta-book/exercise-11-1-coproduct-embeddings.lagda.md
@@ -75,3 +74,5 @@ The following files contain partial solutions but not full solutions:
 - rosetta-book/exercise-12-4-coproduct-truncation.lagda.md
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md
 - rosetta-book/exercise-12-8-retracts-of-truncated-types.lagda.md
+
+Some benchmark problems are marked in the exercise files as "BENCHMARK PROBLEM".

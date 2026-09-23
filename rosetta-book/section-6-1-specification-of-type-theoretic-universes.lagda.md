@@ -6,21 +6,23 @@ module section-6-1-specification-of-type-theoretic-universes where
 
 A universe consists of a type `𝒰` of which the elements can be thought of as ‘codes’ for types.
 A universe also comes equipped with a type family `Ty` indexed by `𝒰`.
-Given an element `X:𝒰`, we think of the type `Ty(X)` as the type of elements of `X`.
+Given an element `X : 𝒰`, we think of the type `Ty(X)` as the type of elements of `X`.
 The family `Ty` is called the **universal type family**.
 
 One of the distinguishing features of universes is that they are closed under all the type constructors.
 Given a universe `𝒰` with universal type family `Ty`, how do we express that `𝒰` is closed under `Σ`-types, for example?
 Recall that a `Σ`-type is formed using a type `A` and a type family `B` over `A`.
 Thus, if `A` is a type in `𝒰` and `B` is a family of types in `𝒰`, we would like to express that the `Σ`-type is also a type in `𝒰`.
-However, we cannot just assert that `Σ(x:A) B(x)` is an element of the universe, because type theory carefully distinguishes between types and elements.
+However, we cannot just assert that `Σ(x : A) B(x)` is an element of the universe, because type theory carefully distinguishes between types and elements.
 
 We express that `𝒰` is closed under `Σ`-types using a new operation `Σ̌`, which takes two arguments.
 The first argument is an element `X:𝒰`, and the second argument is a family of types in `𝒰` indexed by the elements of `X`, i.e., a map `Ty(X)→𝒰`.
 Thus we say that `𝒰` is closed under `Σ`-types by asserting that `𝒰` comes equipped with an operation
+
 ```text
-Σ̌ : Π(X:𝒰) (Ty(X)→𝒰)→𝒰
+  Σ̌ : Π(X : 𝒰) (Ty(X) → 𝒰) → 𝒰
 ```
+
 Furthermore, we ask that the element `Σ̌(X,Y):𝒰` satisfies the judgmental equality
 ```text
 Ty(Σ̌(X,Y))≐Σ(x:Ty(X)) Ty(Y(x)).
@@ -38,14 +40,18 @@ Instead of assuming that the universe contains itself, we will assume that there
 A **universe** in type theory is a type `𝒰` in the empty context, equipped with a type family `Ty` over `𝒰` called a **universal family**, that is closed under the type forming operations in the sense that it comes equipped with the following structure:
 
 1. `𝒰` is closed under `Π`, in the sense that it comes equipped with a function
-```text
-Π̌ :Π(X:𝒰) (Ty(X)→𝒰)→𝒰
-```
-    for which the judgmental equality
-```text
-Ty(Π̌(X,Y))≐ Π(x:Ty(X)) Ty(Y(x)).
-```
-    holds, for every `X:𝒰` and `Y:Ty(X)→𝒰`.
+
+   ```text
+     Π̌ : Π(X : 𝒰) (Ty(X) → 𝒰) → 𝒰
+   ```
+
+   for which the judgmental equality
+
+   ```text
+     Ty(Π̌(X,Y))≐ Π(x:Ty(X)) Ty(Y(x)).
+   ```
+
+   holds, for every `X:𝒰` and `Y:Ty(X)→𝒰`.
 
 2. `𝒰` is closed under `Σ` in the sense that it comes equipped with a function
 ```text
@@ -69,9 +75,9 @@ Ty(Ǐ(X,x,y))≐ (x = y)
 
 4. `𝒰` is closed under coproducts, in the sense that it comes equipped with a function
 ```text
-\mathbin{+̌}:𝒰→ (𝒰→𝒰)
+ +̌ : 𝒰 → (𝒰 → 𝒰)
 ```
-    that satisfies `Ty(X\mathbin{+̌}Y)≐ Ty(X)+Ty(Y)`.
+    that satisfies `Ty(X +̌ Y)≐ Ty(X)+Ty(Y)`.
 
 5. `𝒰` contains elements `empty̌,uniť,ℕ̌:𝒰` that satisfy the judgmental equalities
 ```text

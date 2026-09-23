@@ -102,12 +102,8 @@ module _
 
 ### Exercise 10.7(b)
 
-```agda
-
-```
+BENCHMARK PROBLEM
 
 ### Exercise 10.7(c)
 
-```agda
-
-```
+BENCHMARK PROBLEM

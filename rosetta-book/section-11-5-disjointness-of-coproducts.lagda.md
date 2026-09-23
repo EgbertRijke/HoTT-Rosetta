@@ -5,16 +5,21 @@ module section-11-5-disjointness-of-coproducts where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
+open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-6-4-peanos-seventh-and-eighth-axioms
+open import section-7-3-the-standard-finite-types
+open import exercise-7-5-observational-equality-finite-types
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-11-2-the-fundamental-theorem
+open import section-12-1-propositions
 ```
 
 In our third application of the fundamental theorem of identity types, we characterize the identity types of coproducts.
@@ -323,4 +328,58 @@ module _
       is-equiv map-compute-eq-coproduct-inr-inr
     is-equiv-map-compute-eq-coproduct-inr-inr =
       is-equiv-map-equiv compute-eq-coproduct-inr-inr
+```
+
+### Characterization of equality of the standard finite types
+
+```agda
+is-prop-Eq-Fin : (k : ℕ) → (x : Fin k) → (y : Fin k) → is-prop (Eq-Fin k x y)
+is-prop-Eq-Fin (succ-ℕ k) (inl x) (inl y) = is-prop-Eq-Fin k x y
+is-prop-Eq-Fin (succ-ℕ k) (inr x) (inl y) = is-prop-empty
+is-prop-Eq-Fin (succ-ℕ k) (inl x) (inr y) = is-prop-empty
+is-prop-Eq-Fin (succ-ℕ k) (inr x) (inr y) = is-prop-unit
+
+extensionality-Fin :
+  (k : ℕ)
+  (x y : Fin k) →
+  (x ＝ y) ≃ (Eq-Fin k x y)
+pr1 (extensionality-Fin k x y) = Eq-Fin-eq k
+pr2 (extensionality-Fin k x y) =
+  is-equiv-has-converse-is-prop
+    ( is-set-Fin k x y)
+    ( is-prop-Eq-Fin k x y)
+    ( eq-Eq-Fin k)
+
+is-decidable-Eq-Fin : (k : ℕ) (x y : Fin k) → is-decidable (Eq-Fin k x y)
+is-decidable-Eq-Fin (succ-ℕ k) (inl x) (inl y) = is-decidable-Eq-Fin k x y
+is-decidable-Eq-Fin (succ-ℕ k) (inl x) (inr y) = is-decidable-empty
+is-decidable-Eq-Fin (succ-ℕ k) (inr x) (inl y) = is-decidable-empty
+is-decidable-Eq-Fin (succ-ℕ k) (inr x) (inr y) = is-decidable-unit
+
+has-decidable-equality-Fin :
+  (k : ℕ) (x y : Fin k) → is-decidable (x ＝ y)
+has-decidable-equality-Fin k x y =
+  map-coproduct
+    ( eq-Eq-Fin k)
+    ( map-neg (Eq-Fin-eq k))
+    ( is-decidable-Eq-Fin k x y)
+
+Fin-Discrete-Type : ℕ → Discrete-Type lzero
+pr1 (Fin-Discrete-Type k) = Fin k
+pr2 (Fin-Discrete-Type k) = has-decidable-equality-Fin k
+
+is-decidable-is-zero-Fin :
+  {k : ℕ} (x : Fin k) → is-decidable (is-zero-Fin k x)
+is-decidable-is-zero-Fin {succ-ℕ k} x =
+  has-decidable-equality-Fin (succ-ℕ k) x (zero-Fin k)
+
+is-decidable-is-neg-one-Fin :
+  {k : ℕ} (x : Fin k) → is-decidable (is-neg-one-Fin k x)
+is-decidable-is-neg-one-Fin {succ-ℕ k} x =
+  has-decidable-equality-Fin (succ-ℕ k) x (neg-one-Fin k)
+
+is-decidable-is-one-Fin :
+  {k : ℕ} (x : Fin k) → is-decidable (is-one-Fin k x)
+is-decidable-is-one-Fin {succ-ℕ k} x =
+  has-decidable-equality-Fin (succ-ℕ k) x (one-Fin k)
 ```

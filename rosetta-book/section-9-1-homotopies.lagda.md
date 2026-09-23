@@ -88,8 +88,6 @@ By Remark 9.1.1 we have a homotopy
 We will use homotopies, for example, to express the commutativity of diagrams.
 For example, we say that a triangle
 
-*Triangle-shaped diagram (automatic draft).*
-
 ```text
       h
   A ----> B
@@ -352,7 +350,7 @@ module _
   _·r_ = right-whisker-comp
 ```
 
-## Supplementary definitions
+## Supplement
 
 ### Transposition of homotopies
 

@@ -84,7 +84,7 @@ module _
 
 ### Exercise 12.8(b)
 
-The solution of this exercise already appears in our implentation of the proof of Proposition 12.4.5 in [section-12-4-general-truncation-levels].
+The solution of this exercise already appears in our implentation of the proof of Proposition 12.4.5 in `section-12-4-general-truncation-levels`.
 
 ## Supplements
 

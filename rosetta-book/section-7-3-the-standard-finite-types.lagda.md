@@ -12,6 +12,7 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-4-strict-order-natural-numbers
 ```
 
@@ -159,9 +160,6 @@ The inclusion function `nat-Fin_k : Fin{k}→ ℕ` is injective, for each `k:ℕ
 where `f:(nat-Fin_{k+1}(i(x))=nat-Fin_{k+1}(⋆))→empty` and `g:(nat-Fin_{k+1}(⋆)=nat-Fin_{k+1}(i(y)))→empty` are obtained from the fact that `nat-Fin_{k+1}(i(z))≐nat-Fin_k(z)<k` for any `z:Fin{k}`, and the fact that `nat-Fin_{k+1}(⋆)≐ k`. ◻
 
 ```agda
-is-injective : {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
-is-injective {l1} {l2} {A} {B} f = {x y : A} → f x ＝ f y → x ＝ y
-
 is-injective-nat-Fin : (k : ℕ) → is-injective (nat-Fin k)
 is-injective-nat-Fin (succ-ℕ k) {inl x} {inl y} p =
   ap inl (is-injective-nat-Fin k p)

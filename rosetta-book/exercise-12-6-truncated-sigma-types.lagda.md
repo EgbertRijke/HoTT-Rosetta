@@ -117,4 +117,6 @@ abstract
 
 ### Exercise 12.6(b)
 
-We formalized the forward direction in the previous part. However, the statement that if `f : A → B` is a `k`-truncated map into a `k`-truncated type `B` is not formalized as such. It is a consequence of thigs that are in the library, so we leave this open for the benchmark.
+BENCHMARK PROBLEM
+
+We formalized the forward direction in the previous part. However, the statement that if `f : A → B` is a `k`-truncated map into a `k`-truncated type `B` is not formalized as such.

@@ -47,18 +47,6 @@ for each `x:Fin{k}`.
 ## Solution
 
 ```agda
-neg-one-Fin : (k : ℕ) → Fin (succ-ℕ k)
-neg-one-Fin k = inr star
-
-is-neg-one-Fin : (k : ℕ) → Fin k → UU lzero
-is-neg-one-Fin (succ-ℕ k) x = x ＝ neg-one-Fin k
-
-neg-two-Fin : (k : ℕ) → Fin (succ-ℕ k)
-neg-two-Fin zero-ℕ = inr star
-neg-two-Fin (succ-ℕ k) = inl (inr star)
-```
-
-```agda
 skip-neg-two-Fin :
   (k : ℕ) → Fin k → Fin (succ-ℕ k)
 skip-neg-two-Fin (succ-ℕ k) (inl x) = inl (inl x)

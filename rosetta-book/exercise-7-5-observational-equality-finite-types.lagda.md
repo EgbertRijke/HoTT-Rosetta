@@ -11,6 +11,7 @@ open import section-4-4-coproducts
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-7-3-the-standard-finite-types
 open import section-7-4-the-natural-numbers-modulo-k-plus-one
 ```

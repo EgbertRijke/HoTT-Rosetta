@@ -80,7 +80,7 @@ module _
 
 ### Exercise 12.4(b)
 
-Agda-unimath does not seem to contain the solution to this exercise.
+BENCHMARK PROBLEM
 
 ### Exercise 12.4(c)
 

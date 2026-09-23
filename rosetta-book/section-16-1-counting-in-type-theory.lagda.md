@@ -15,7 +15,10 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
+open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
+open import exercise-10-3-contractible-equivalences
+open import exercise-10-4-finite-types-not-contractible
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import exercise-12-4-coproduct-truncation
@@ -164,6 +167,39 @@ count-empty = count-Fin 0
 
 A type `A` has one element if and only if it is contractible.
 Indeed, the type `Fin_{1}` is contractible, so it follows from the 3-for-2 property of contractible types (Exercise 10.2) that there is an equivalence `Fin_{1} ≃ A` if and only if `A` is contractible.
+
+```agda
+count-is-contr :
+  {l : Level} {X : UU l} → is-contr X → count X
+pr1 (count-is-contr H) = 1
+pr2 (count-is-contr H) = equiv-is-contr is-contr-Fin-1 H
+
+abstract
+  is-contr-is-one-number-of-elements-count :
+    {l : Level} {X : UU l} (e : count X) →
+    is-one-ℕ (number-of-elements-count e) → is-contr X
+  is-contr-is-one-number-of-elements-count (.1 , e) refl =
+    is-contr-equiv' (Fin 1) e is-contr-Fin-1
+
+abstract
+  is-one-number-of-elements-count-is-contr :
+    {l : Level} {X : UU l} (e : count X) →
+    is-contr X → is-one-ℕ (number-of-elements-count e)
+  is-one-number-of-elements-count-is-contr (0 , e) H =
+    ex-falso (map-inv-equiv e (center H))
+  is-one-number-of-elements-count-is-contr (1 , e) H =
+    refl
+  is-one-number-of-elements-count-is-contr (succ-ℕ (succ-ℕ k) , e) H =
+    ex-falso
+      ( Eq-Fin-eq (succ-ℕ (succ-ℕ k))
+        ( is-injective-equiv e
+          ( eq-is-contr' H
+            ( map-equiv e (zero-Fin (succ-ℕ k)))
+            ( map-equiv e (neg-one-Fin (succ-ℕ k))))))
+
+count-unit : count unit
+count-unit = count-is-contr is-contr-unit
+```
 
 ## Example 16.1.5
 
