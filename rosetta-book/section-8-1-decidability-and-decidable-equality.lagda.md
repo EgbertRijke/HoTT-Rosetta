@@ -4,6 +4,7 @@
 module section-8-1-decidability-and-decidable-equality where
 
 open import universe-levels
+open import section-2-1-the-rules-for-dependent-function-types
 open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
@@ -96,8 +97,6 @@ When we go through these proofs, the familiar truth table emerges:
 | `inr(f)` | `inl(b)` | `inl(inr(b))` | `inr(f∘pr 1)` | `inl(ex-falso∘ f)` |
 | `inr(f)` | `inr(g)` | `inr[f,g]` | `inr(f∘pr 1)` | `inl(ex-falso∘ f)` |
 
-Since `A → B` is decidable whenever both `A` and `B` are decidable, it also follows that the negation `¬ A` of any decidable type `A` is decidable.
-
 ```agda
 is-decidable-coproduct :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
@@ -115,15 +114,25 @@ is-decidable-product (inl a) (inl b) = inl (a , b)
 is-decidable-product (inl a) (inr g) = inr (g ∘ pr2)
 is-decidable-product (inr f) (inl b) = inr (f ∘ pr1)
 is-decidable-product (inr f) (inr g) = inr (f ∘ pr1)
-```
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (a : A)
-  where
+is-decidable-product' :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-decidable A → (A → is-decidable B) → is-decidable (A × B)
+is-decidable-product' (inl a) d =
+  rec-coproduct (λ b → inl (a , b)) (λ nb → inr (nb ∘ pr2)) (d a)
+is-decidable-product' (inr na) d = inr (na ∘ pr1)
 
-  ev : ((x : A) → B x) → B a
-  ev f = f a
+is-decidable-left-factor :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-decidable (A × B) → B → is-decidable A
+is-decidable-left-factor (inl (x , y)) b = inl x
+is-decidable-left-factor (inr f) b = inr (λ a → f (a , b))
+
+is-decidable-right-factor :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-decidable (A × B) → A → is-decidable B
+is-decidable-right-factor (inl (x , y)) a = inl y
+is-decidable-right-factor (inr f) a = inr (λ b → f (a , b))
 ```
 
 ```agda
@@ -133,12 +142,27 @@ is-decidable-function-type :
 is-decidable-function-type (inl a) (inl b) = inl (λ _ → b)
 is-decidable-function-type (inl a) (inr nb) = inr (map-neg (ev a) nb)
 is-decidable-function-type (inr f) _ = inl (ex-falso ∘ f)
+
+is-decidable-function-type' :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+  is-decidable A → (A → is-decidable B) → is-decidable (A → B)
+is-decidable-function-type' (inl a) d =
+  rec-coproduct (λ b → inl (λ _ → b)) (λ nb → inr (map-neg (ev a) nb)) (d a)
+is-decidable-function-type' (inr na) d = inl (ex-falso ∘ na)
 ```
+
+Since `A → B` is decidable whenever both `A` and `B` are decidable, it also follows that the negation `¬ A` of any decidable type `A` is decidable.
 
 ```agda
 is-decidable-neg :
   {l : Level} {A : UU l} → is-decidable A → is-decidable (¬ A)
 is-decidable-neg d = is-decidable-function-type d is-decidable-empty
+```
+
+```agda
+is-decidable-double-negation :
+  {l : Level} {A : UU l} → is-decidable A → is-decidable (¬¬ A)
+is-decidable-double-negation d = is-decidable-neg (is-decidable-neg d)
 ```
 
 ## Example 8.1.4
@@ -265,11 +289,27 @@ The claim therefore follows by Lemma 8.1.6, since we have observed in Example 8.
 has-decidable-equality-ℕ : has-decidable-equality ℕ
 has-decidable-equality-ℕ x y =
   is-decidable-iff (eq-Eq-ℕ x y) Eq-eq-ℕ (is-decidable-Eq-ℕ x y)
-```
 
-```agda
+is-decidable-is-zero-ℕ : (n : ℕ) → is-decidable (is-zero-ℕ n)
+is-decidable-is-zero-ℕ n = has-decidable-equality-ℕ n zero-ℕ
+
+is-decidable-is-zero-ℕ' : (n : ℕ) → is-decidable (is-zero-ℕ' n)
+is-decidable-is-zero-ℕ' n = has-decidable-equality-ℕ zero-ℕ n
+
+is-decidable-is-nonzero-ℕ : (n : ℕ) → is-decidable (is-nonzero-ℕ n)
+is-decidable-is-nonzero-ℕ n =
+  is-decidable-neg (is-decidable-is-zero-ℕ n)
+
 is-decidable-is-one-ℕ : (n : ℕ) → is-decidable (is-one-ℕ n)
 is-decidable-is-one-ℕ n = has-decidable-equality-ℕ n 1
+
+is-decidable-is-one-ℕ' : (n : ℕ) → is-decidable (is-one-ℕ' n)
+is-decidable-is-one-ℕ' n = has-decidable-equality-ℕ 1 n
+
+is-decidable-is-not-one-ℕ :
+  (x : ℕ) → is-decidable (is-not-one-ℕ x)
+is-decidable-is-not-one-ℕ x =
+  is-decidable-neg (is-decidable-is-one-ℕ x)
 ```
 
 It is certainly not provable with the given rules of type theory that every type has decidable equality.
@@ -306,6 +346,21 @@ has-decidable-equality-Fin k x y =
     ( eq-Eq-Fin k)
     ( map-neg (Eq-Fin-eq k))
     ( is-decidable-Eq-Fin k x y)
+
+is-decidable-is-zero-Fin :
+  {k : ℕ} (x : Fin k) → is-decidable (is-zero-Fin k x)
+is-decidable-is-zero-Fin {succ-ℕ k} x =
+  has-decidable-equality-Fin (succ-ℕ k) x (zero-Fin k)
+
+is-decidable-is-neg-one-Fin :
+  {k : ℕ} (x : Fin k) → is-decidable (is-neg-one-Fin k x)
+is-decidable-is-neg-one-Fin {succ-ℕ k} x =
+  has-decidable-equality-Fin (succ-ℕ k) x (neg-one-Fin k)
+
+is-decidable-is-one-Fin :
+  {k : ℕ} (x : Fin k) → is-decidable (is-one-Fin k x)
+is-decidable-is-one-Fin {succ-ℕ k} x =
+  has-decidable-equality-Fin (succ-ℕ k) x (one-Fin k)
 ```
 
 We can use the fact that the finite types `Fin{k}` have decidable equality to show that the divisibility relation on `ℕ` is decidable.
@@ -321,14 +376,6 @@ Therefore it suffices to show that `d + 1 | x` is decidable.
 
 By Theorem 7.4.7 it follows that `d + 1 | x` holds if and only if we have an identification `[x]_{d + 1}=0` in `Fin{d + 1}`.
 Therefore the claim follows from the fact that `Fin{d + 1}` has decidable equality. ◻
-
-```agda
-is-decidable-is-zero-ℕ : (n : ℕ) → is-decidable (is-zero-ℕ n)
-is-decidable-is-zero-ℕ n = has-decidable-equality-ℕ n zero-ℕ
-
-is-decidable-is-zero-ℕ' : (n : ℕ) → is-decidable (is-zero-ℕ' n)
-is-decidable-is-zero-ℕ' n = has-decidable-equality-ℕ zero-ℕ n
-```
 
 ```agda
 is-decidable-is-zero-Fin :
@@ -389,4 +436,19 @@ module _
   has-decidable-equality-type-Discrete-Type :
     has-decidable-equality type-Discrete-Type
   has-decidable-equality-type-Discrete-Type = pr2 X
+```
+
+### ℕ is a discrete type
+ 
+```agda
+ℕ-Discrete-Type : Discrete-Type lzero
+ℕ-Discrete-Type = (ℕ , has-decidable-equality-ℕ)
+```
+
+### The standard finite types are discrete types
+
+```agda
+Fin-Discrete-Type : ℕ → Discrete-Type lzero
+pr1 (Fin-Discrete-Type k) = Fin k
+pr2 (Fin-Discrete-Type k) = has-decidable-equality-Fin k
 ```
