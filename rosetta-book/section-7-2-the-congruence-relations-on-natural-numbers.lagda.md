@@ -47,6 +47,10 @@ A **(typal) equivalence relation** on `A` is a reflexive, symmetric, and transit
 Relation : {l1 : Level} (l : Level) (A : UU l1) → UU (l1 ⊔ lsuc l)
 Relation l A = A → A → UU l
 
+total-space-Relation :
+  {l1 l : Level} {A : UU l1} → Relation l A → UU (l1 ⊔ l)
+total-space-Relation {A = A} R = Σ (A × A) λ (a , a') → R a a'
+
 module _
   {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
@@ -102,6 +106,9 @@ We say that `x` is **congruent to `y` modulo `k`** if it comes equipped with an 
 cong-ℕ :
   ℕ → ℕ → ℕ → UU lzero
 cong-ℕ k x y = div-ℕ k (dist-ℕ x y)
+
+_≡_mod-ℕ_ : ℕ → ℕ → ℕ → UU lzero
+x ≡ y mod-ℕ k = cong-ℕ k x y
 ```
 
 ## Example 7.2.3
@@ -157,15 +164,15 @@ refl-cong-ℕ : (k : ℕ) → is-reflexive (cong-ℕ k)
 pr1 (refl-cong-ℕ k x) = zero-ℕ
 pr2 (refl-cong-ℕ k x) =
   (left-zero-law-mul-ℕ (succ-ℕ k)) ∙ (inv (dist-eq-ℕ x x refl))
-```
 
-```agda
+cong-identification-ℕ :
+  (k : ℕ) {x y : ℕ} → x ＝ y → x ≡ y mod-ℕ k
+cong-identification-ℕ k {x} refl = refl-cong-ℕ k x
+
 symmetric-cong-ℕ : (k : ℕ) → is-symmetric (cong-ℕ k)
-pr1 (symmetric-cong-ℕ k x y (pair d p)) = d
-pr2 (symmetric-cong-ℕ k x y (pair d p)) = p ∙ (commutative-dist-ℕ x y)
-```
+pr1 (symmetric-cong-ℕ k x y (d , p)) = d
+pr2 (symmetric-cong-ℕ k x y (d , p)) = p ∙ (symmetric-dist-ℕ x y)
 
-```agda
 transitive-cong-ℕ : (k : ℕ) → is-transitive (cong-ℕ k)
 transitive-cong-ℕ k x y z e d with is-total-dist-ℕ x y z
 transitive-cong-ℕ k x y z e d | inl α =

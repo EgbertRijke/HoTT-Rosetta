@@ -325,13 +325,12 @@ abstract
 ### For any three natural numbers x, y, and z, one of d(x,y), d(x,z), and d(y,z) is the sum of the other two
 
 ```agda
-abstract
-  cases-dist-ℕ :
-    (x y z : ℕ) → UU lzero
-  cases-dist-ℕ x y z =
-    ( (dist-ℕ x y) +ℕ (dist-ℕ y z) ＝ dist-ℕ x z) +
-    ( ( (dist-ℕ y z) +ℕ (dist-ℕ x z) ＝ dist-ℕ x y) +
-      ( (dist-ℕ x z) +ℕ (dist-ℕ x y) ＝ dist-ℕ y z))
+cases-dist-ℕ :
+  (x y z : ℕ) → UU lzero
+cases-dist-ℕ x y z =
+  ( dist-ℕ x y +ℕ dist-ℕ y z ＝ dist-ℕ x z) +
+  ( ( dist-ℕ y z +ℕ dist-ℕ x z ＝ dist-ℕ x y) +
+    ( dist-ℕ x z +ℕ dist-ℕ x y ＝ dist-ℕ y z))
 
 abstract
   is-total-dist-ℕ :
