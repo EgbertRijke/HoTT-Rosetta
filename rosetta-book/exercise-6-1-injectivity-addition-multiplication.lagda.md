@@ -61,34 +61,6 @@ for all `m,n:ℕ`.
 ### Exercise 6.1(a)
 
 ```agda
-is-zero-ℕ' : ℕ → UU lzero
-is-zero-ℕ' n = (zero-ℕ ＝ n)
-
-is-successor-ℕ : ℕ → UU lzero
-is-successor-ℕ n = Σ ℕ (λ y → n ＝ succ-ℕ y)
-
-is-one-ℕ : ℕ → UU lzero
-is-one-ℕ n = (n ＝ 1)
-
-is-one-ℕ' : ℕ → UU lzero
-is-one-ℕ' n = (1 ＝ n)
-
-is-not-one-ℕ : ℕ → UU lzero
-is-not-one-ℕ n = ¬ (is-one-ℕ n)
-
-is-not-one-ℕ' : ℕ → UU lzero
-is-not-one-ℕ' n = ¬ (is-one-ℕ' n)
-
-is-nonzero-is-successor-ℕ : {x : ℕ} → is-successor-ℕ x → is-nonzero-ℕ x
-is-nonzero-is-successor-ℕ (x , refl) ()
-
-is-successor-is-nonzero-ℕ : {x : ℕ} → is-nonzero-ℕ x → is-successor-ℕ x
-is-successor-is-nonzero-ℕ {zero-ℕ} H = ex-falso (H refl)
-pr1 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = x
-pr2 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = refl
-```
-
-```agda
 abstract
   is-injective-right-add-ℕ :
     (k : ℕ) {x y : ℕ} → x +ℕ k ＝ y +ℕ k → x ＝ y

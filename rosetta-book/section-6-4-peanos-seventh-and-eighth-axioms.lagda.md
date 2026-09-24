@@ -118,6 +118,18 @@ is-zero-ℕ n = (n ＝ zero-ℕ)
 is-zero-ℕ' : ℕ → UU lzero
 is-zero-ℕ' n = (zero-ℕ ＝ n)
 
+is-one-ℕ : ℕ → UU lzero
+is-one-ℕ n = (n ＝ 1)
+
+is-one-ℕ' : ℕ → UU lzero
+is-one-ℕ' n = (1 ＝ n)
+
+is-not-one-ℕ : ℕ → UU lzero
+is-not-one-ℕ n = ¬ (is-one-ℕ n)
+
+is-not-one-ℕ' : ℕ → UU lzero
+is-not-one-ℕ' n = ¬ (is-one-ℕ' n)
+
 is-successor-ℕ : ℕ → UU lzero
 is-successor-ℕ n = Σ ℕ (λ y → n ＝ succ-ℕ y)
 
