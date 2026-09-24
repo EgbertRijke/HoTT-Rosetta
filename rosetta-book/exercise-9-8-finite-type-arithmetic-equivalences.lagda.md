@@ -97,3 +97,31 @@ product-Fin (succ-ℕ k) l =
 Fin-mul-ℕ : (k l : ℕ) → (Fin (k *ℕ l)) ≃ ((Fin k) × (Fin l))
 Fin-mul-ℕ k l = inv-equiv (product-Fin k l)
 ```
+
+## Supplement
+
+### Computing the inclusion of a coproduct of standard finite types into the natural numbers
+
+```agda
+abstract
+  nat-coproduct-Fin :
+    (n m : ℕ) (x : Fin n + Fin m) →
+    nat-Fin (n +ℕ m) (map-compute-coproduct-Fin n m x) ＝
+    ind-coproduct _ (nat-Fin n) (λ i → n +ℕ (nat-Fin m i)) x
+  nat-coproduct-Fin n zero-ℕ (inl x) = refl
+  nat-coproduct-Fin n (succ-ℕ m) (inl x) = nat-coproduct-Fin n m (inl x)
+  nat-coproduct-Fin n (succ-ℕ m) (inr (inl x)) = nat-coproduct-Fin n m (inr x)
+  nat-coproduct-Fin n (succ-ℕ m) (inr (inr _)) = refl
+
+abstract
+  nat-inl-coproduct-Fin :
+    (n m : ℕ) (i : Fin n) →
+    nat-Fin (n +ℕ m) (inl-coproduct-Fin n m i) ＝ nat-Fin n i
+  nat-inl-coproduct-Fin n m i = nat-coproduct-Fin n m (inl i)
+
+abstract
+  nat-inr-coproduct-Fin :
+    (n m : ℕ) (i : Fin m) →
+    nat-Fin (n +ℕ m) (inr-coproduct-Fin n m i) ＝ n +ℕ (nat-Fin m i)
+  nat-inr-coproduct-Fin n m i = nat-coproduct-Fin n m (inr i)
+```

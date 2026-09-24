@@ -7,6 +7,7 @@ open import universe-levels
 
 open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
+open import section-3-2-addition-on-the-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
@@ -21,6 +22,8 @@ open import section-8-1-decidability-and-decidable-equality
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
+open import exercise-9-6-coproduct-functor-equivalences
+open import exercise-9-8-finite-type-arithmetic-equivalences
 open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-3-contractible-equivalences
@@ -401,6 +404,60 @@ It remains to prove the converse direction of (1).
 Note that the forward direction of the first claim in (2) implies that countings on a type `X` induce countings on any decidable subtype of `X`.
 Note that both `A` and `B` are decidable subtypes of the coproduct `A + B`.
 Any counting of `A + B` therefore induces countings of `A` and of `B`. ◻
+
+```agda
+count-coproduct :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
+  count X → count Y → count (X + Y)
+pr1 (count-coproduct (pair k e) (pair l f)) = k +ℕ l
+pr2 (count-coproduct (pair k e) (pair l f)) =
+  (equiv-coproduct e f) ∘e (inv-equiv (compute-coproduct-Fin k l))
+
+abstract
+  number-of-elements-count-coproduct :
+    {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : count X) (f : count Y) →
+    number-of-elements-count (count-coproduct e f) ＝
+    (number-of-elements-count e) +ℕ (number-of-elements-count f)
+  number-of-elements-count-coproduct (pair k e) (pair l f) = refl
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (cA : count A) (cB : count B)
+  where
+
+  map-equiv-count-coproduct-inl-coproduct-Fin :
+    map-equiv-count (count-coproduct cA cB) ∘
+    inl-coproduct-Fin
+      ( number-of-elements-count cA)
+      ( number-of-elements-count cB) ~
+    inl ∘ map-equiv-count cA
+  map-equiv-count-coproduct-inl-coproduct-Fin a =
+    ap
+      ( map-coproduct _ _)
+      ( is-retraction-map-inv-equiv
+        ( compute-coproduct-Fin
+          ( number-of-elements-count cA)
+          ( number-of-elements-count cB))
+        ( inl a))
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (cA : count A) (cB : count B)
+  where
+
+  map-equiv-count-coproduct-inr-coproduct-Fin :
+    map-equiv-count (count-coproduct cA cB) ∘
+    inr-coproduct-Fin
+      ( number-of-elements-count cA)
+      ( number-of-elements-count cB) ~
+    inr ∘ map-equiv-count cB
+  map-equiv-count-coproduct-inr-coproduct-Fin b =
+    ap
+      ( map-coproduct _ _)
+      ( is-retraction-map-inv-equiv
+        ( compute-coproduct-Fin
+          ( number-of-elements-count cA)
+          ( number-of-elements-count cB))
+        ( inr b))
+```
 
 ## Corollary 16.1.8
 
