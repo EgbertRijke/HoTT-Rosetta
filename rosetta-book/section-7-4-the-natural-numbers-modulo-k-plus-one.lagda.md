@@ -12,6 +12,7 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-3-order-natural-numbers
 open import exercise-6-4-strict-order-natural-numbers
 open import exercise-6-5-distance-natural-numbers
@@ -255,10 +256,6 @@ nat-Fin[x+1]_{k+1} ≐ nat-Fin(succ-Fin_{k+1}[x]_{k+1})  by definition of [_]_{k
  ◻
 
 ```agda
-cong-identification-ℕ :
-  (k : ℕ) {x y : ℕ} → x ＝ y → cong-ℕ k x y
-cong-identification-ℕ k {x} refl = refl-cong-ℕ k x
-
 cong-nat-succ-Fin :
   (k : ℕ) (x : Fin k) →
   cong-ℕ k (nat-Fin k (succ-Fin k x)) (succ-ℕ (nat-Fin k x))

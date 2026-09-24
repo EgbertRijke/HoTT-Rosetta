@@ -8,6 +8,7 @@ open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers
+open import exercise-3-1-multiplication-and-exponentiation
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
@@ -15,6 +16,7 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-7-3-the-standard-finite-types
 open import section-7-4-the-natural-numbers-modulo-k-plus-one
@@ -25,6 +27,7 @@ open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import exercise-9-4-three-for-two-equivalences
 open import exercise-9-6-coproduct-functor-equivalences
+open import exercise-9-7-product-functor-equivalences
 open import exercise-9-8-finite-type-arithmetic-equivalences
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
@@ -152,12 +155,6 @@ Conversely, if we have `f : is-empty(A)`, then the map `f : A → empty` is auto
 This shows that `Fin_{k} ≃ empty`, and a short argument by induction on `k` yields that `k = 0`.
 
 ```agda
-is-zero-ℕ : ℕ → UU lzero
-is-zero-ℕ n = (n ＝ zero-ℕ)
-
-is-zero-ℕ' : ℕ → UU lzero
-is-zero-ℕ' n = (zero-ℕ ＝ n)
-
 abstract
   is-empty-is-zero-number-of-elements-count :
     {l : Level} {X : UU l} (e : count X) →
@@ -505,9 +502,7 @@ module _
           ( number-of-elements-count cA)
           ( number-of-elements-count cB))
         ( inr b))
-```
 
-```agda
 count-Σ-Fin :
   {l : Level} (k : ℕ) {B : Fin k → UU l} →
   ((x : Fin k) → count (B x)) → count (Σ (Fin k) B)
@@ -648,11 +643,7 @@ abstract
     number-of-elements-count (count-Σ e f) ＝
     sum-count-ℕ e (λ x → number-of-elements-count (f x))
   number-of-elements-count-Σ (pair k e) f = number-of-elements-count-Σ' k e f
-```
 
-### If `A` and `Σ A B` can be counted, then each `B x` can be counted
-
-```agda
 count-fiber-count-Σ :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
   has-decidable-equality A → count (Σ A B) → (x : A) → count (B x)
@@ -667,11 +658,7 @@ count-fiber-count-Σ-count-base :
   count A → count (Σ A B) → (x : A) → count (B x)
 count-fiber-count-Σ-count-base e f x =
   count-fiber-count-Σ (has-decidable-equality-count e) f x
-```
 
-### If `Σ A B` and each `B x` can be counted, and if `B` has a section, then `A` can be counted
-
-```agda
 count-fiber-map-section-family :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
   count (Σ A B) → ((x : A) → count (B x)) →
@@ -692,22 +679,7 @@ count-base-count-Σ b e f =
   count-equiv
     ( equiv-total-fiber (map-section-family b))
     ( count-Σ e (count-fiber-map-section-family b e f))
-```
 
-More generally, if `Σ A B` and each `B x` can be counted, then `A` can be
-counted if and only if the type `Σ (x : A), ¬ (B x)` can be counted. However, to
-avoid having to invoke function extensionality, we show that if `Σ A B` and each
-`B x` can be counted, then `A` can be counted if and only if
-
-```text
-  count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (f x)))),
-```
-
-where `f : (x : A) → count (B x)`. Thus, we have a precise characterization of
-when the elements of `A` can be counted, if it is given that `Σ A B` and each
-`B x` can be counted.
-
-```agda
 section-count-base-count-Σ' :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → count (Σ A B) →
   (f : (x : A) → count (B x)) →
@@ -747,101 +719,6 @@ is-decidable-count-Σ e f x =
   is-decidable-count (count-fiber-count-Σ-count-base e f x)
 ```
 
-```agda
-abstract
-  double-counting-Σ :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
-    (count-B : (x : A) → count (B x)) (count-C : count (Σ A B)) →
-    number-of-elements-count count-C ＝
-    sum-count-ℕ count-A (λ x → number-of-elements-count (count-B x))
-  double-counting-Σ count-A count-B count-C =
-    ( double-counting count-C (count-Σ count-A count-B)) ∙
-    ( number-of-elements-count-Σ count-A count-B)
-
-abstract
-  sum-number-of-elements-count-fiber-count-Σ :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (e : count A)
-    (f : count (Σ A B)) →
-    sum-count-ℕ e
-      ( λ x → number-of-elements-count (count-fiber-count-Σ-count-base e f x)) ＝
-    number-of-elements-count f
-  sum-number-of-elements-count-fiber-count-Σ e f =
-    ( inv
-      ( number-of-elements-count-Σ e (count-fiber-count-Σ-count-base e f))) ∙
-    ( double-counting (count-Σ e (count-fiber-count-Σ-count-base e f)) f)
-
-abstract
-  double-counting-fiber-count-Σ :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
-    (count-B : (x : A) → count (B x)) (count-C : count (Σ A B)) (x : A) →
-    number-of-elements-count (count-B x) ＝
-    number-of-elements-count (count-fiber-count-Σ-count-base count-A count-C x)
-  double-counting-fiber-count-Σ count-A count-B count-C x =
-    double-counting
-      ( count-B x)
-      ( count-fiber-count-Σ-count-base count-A count-C x)
-
-abstract
-  sum-number-of-elements-count-base-count-Σ :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
-    (count-ΣAB : count (Σ A B)) (count-B : (x : A) → count (B x)) →
-    sum-count-ℕ
-      ( count-base-count-Σ b count-ΣAB count-B)
-      ( λ x → number-of-elements-count (count-B x)) ＝
-    number-of-elements-count count-ΣAB
-  sum-number-of-elements-count-base-count-Σ b count-ΣAB count-B =
-    ( inv
-      ( number-of-elements-count-Σ
-        ( count-base-count-Σ b count-ΣAB count-B)
-        ( count-B))) ∙
-    ( double-counting
-      ( count-Σ (count-base-count-Σ b count-ΣAB count-B) count-B)
-      ( count-ΣAB))
-
-abstract
-  double-counting-base-count-Σ :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
-    (count-A : count A) (count-B : (x : A) → count (B x))
-    (count-ΣAB : count (Σ A B)) →
-    number-of-elements-count (count-base-count-Σ b count-ΣAB count-B) ＝
-    number-of-elements-count count-A
-  double-counting-base-count-Σ b count-A count-B count-ΣAB =
-    double-counting (count-base-count-Σ b count-ΣAB count-B) count-A
-
-abstract
-  sum-number-of-elements-count-base-count-Σ' :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-ΣAB : count (Σ A B)) →
-    ( count-B : (x : A) → count (B x)) →
-    ( count-nB :
-      count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (count-B x))))) →
-    sum-count-ℕ
-      ( count-base-count-Σ' count-ΣAB count-B count-nB)
-      ( λ x → number-of-elements-count (count-B x)) ＝
-    number-of-elements-count count-ΣAB
-  sum-number-of-elements-count-base-count-Σ' count-ΣAB count-B count-nB =
-    ( inv
-      ( number-of-elements-count-Σ
-        ( count-base-count-Σ' count-ΣAB count-B count-nB)
-        ( count-B))) ∙
-    ( double-counting
-      ( count-Σ
-        ( count-base-count-Σ' count-ΣAB count-B count-nB)
-        ( count-B))
-      ( count-ΣAB))
-
-abstract
-  double-counting-base-count-Σ' :
-    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)
-    ( count-B : (x : A) → count (B x)) (count-ΣAB : count (Σ A B)) →
-    ( count-nB :
-      count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (count-B x))))) →
-    number-of-elements-count
-      ( count-base-count-Σ' count-ΣAB count-B count-nB) ＝
-    number-of-elements-count count-A
-  double-counting-base-count-Σ' count-A count-B count-ΣAB count-nB =
-    double-counting (count-base-count-Σ' count-ΣAB count-B count-nB) count-A
-```
-
 ## Corollary 16.1.8
 
 Consider two types `A` and `B`.
@@ -860,3 +737,64 @@ We make two claims:
 
 The first claim follows from condition (2a) in Theorem 16.1.7, and the second claim follows from condition (2b) in Theorem 16.1.7. ◻
 
+```agda
+count-product :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count X → count Y → count (X × Y)
+pr1 (count-product (pair k e) (pair l f)) = k *ℕ l
+pr2 (count-product (pair k e) (pair l f)) =
+  (equiv-product e f) ∘e (inv-equiv (product-Fin k l))
+
+abstract
+  number-of-elements-count-product :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (count-A : count A)
+    (count-B : count B) →
+    number-of-elements-count (count-product count-A count-B) ＝
+    number-of-elements-count count-A *ℕ number-of-elements-count count-B
+  number-of-elements-count-product (pair k e) (pair l f) = refl
+
+equiv-left-factor :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (y : Y) →
+  (Σ (X × Y) (λ t → pr2 t ＝ y)) ≃ X
+equiv-left-factor {l1} {l2} {X} {Y} y =
+  ( ( right-unit-law-product) ∘e
+    ( equiv-tot
+      ( λ x → equiv-is-contr (is-torsorial-Id' y) is-contr-unit))) ∘e
+  ( associative-Σ)
+
+count-left-factor :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (X × Y) → Y → count X
+count-left-factor e y =
+  count-equiv
+    ( equiv-left-factor y)
+    ( count-Σ e
+      ( λ z →
+        count-eq
+          ( has-decidable-equality-right-factor
+            ( has-decidable-equality-count e)
+            ( pr1 z))
+          ( pr2 z)
+          ( y)))
+
+count-right-factor :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (X × Y) → X → count Y
+count-right-factor e x =
+  count-left-factor (count-equiv commutative-product e) x
+
+abstract
+  product-number-of-elements-product :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (count-AB : count (A × B)) →
+    (a : A) (b : B) →
+    ( number-of-elements-count (count-left-factor count-AB b)) *ℕ
+    ( number-of-elements-count (count-right-factor count-AB a)) ＝
+    ( number-of-elements-count count-AB)
+  product-number-of-elements-product count-AB a b =
+    ( inv
+      ( number-of-elements-count-product
+        ( count-left-factor count-AB b)
+        ( count-right-factor count-AB a))) ∙
+    ( double-counting
+      ( count-product
+        ( count-left-factor count-AB b)
+        ( count-right-factor count-AB a))
+      ( count-AB))
+```
