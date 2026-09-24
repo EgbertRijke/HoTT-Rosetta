@@ -58,6 +58,7 @@ The phrase "BENCHMARK PROBLEM" is also used to indicate when a multipart problem
 The following files contain partially solved (auto)formalization exercises, which do not yet have full solutions:
 
 - rosetta-book/exercise-4-3-double-negation-logic.lagda.md
+- rosetta-book/exercise-6-5-distance-natural-numbers.lagda.md
 - rosetta-book/exercise-10-7-fibers-of-projections.lagda.md
 - rosetta-book/exercise-12-4-coproduct-truncation.lagda.md
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md

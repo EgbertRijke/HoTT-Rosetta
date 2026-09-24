@@ -15,13 +15,15 @@ open import section-5-1-the-inductive-definition-of-identity-types
 Define observational equality `Eq-bool` by induction on the booleans.
 
 Show that
+
 ```text
-(x=y)↔ Eq-bool(x,y)
+(x=y) ↔ Eq-bool(x,y)
 ```
+
 for any `x,y:bool`.
 
-Show that `b≠neg-bool(b)` for any `b:bool`.
-Conclude that `false≠true`.
+Show that `b ≠ neg-bool(b)` for any `b:bool`.
+Conclude that `false ≠ true`.
 
 ## Solution
 
@@ -55,7 +57,7 @@ neq-true-false-bool ()
 ```
 
 ```agda
-neq-neg-bool : (b : bool) → ¬ (b ＝ neg-bool b)
+neq-neg-bool : (b : bool) → b ≠ neg-bool b
 neq-neg-bool true ()
 neq-neg-bool false ()
 ```

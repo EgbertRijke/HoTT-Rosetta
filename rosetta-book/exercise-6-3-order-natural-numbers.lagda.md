@@ -17,18 +17,24 @@ open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-6-the-laws-of-addition-on-natural-numbers
 open import exercise-5-5-semiring-laws-natural-numbers
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-1-injectivity-addition-multiplication
 ```
 
 ## Problem statement
 
 The ordering relation `≤` on `ℕ` is defined recursively by
+
 ```text
-(0≤0) ≔ unit (0≤ n+1) ≔ unit
-(m+1≤0) ≔ empty (m+1≤ n+1) ≔ (m≤ n).
+(0 ≤ 0) ≔ unit
+(0 ≤ n+1) ≔ unit
+(m+1 ≤ 0) ≔ empty
+(m+1 ≤ n+1) ≔ (m ≤ n).
 ```
 
-Show that `≤` satisfies the axioms of a *poset*, i.e., show that `≤` is
+### Exercise 6.3(a)
+
+Show that `≤` satisfies the axioms of a _poset_, i.e., show that `≤` is
 
 1. reflexive,
 
@@ -36,25 +42,39 @@ Show that `≤` satisfies the axioms of a *poset*, i.e., show that `≤` is
 
 3. transitive.
 
-Show that
-```text
-(m≤ n)+(n≤ m)
-```
-for any `m,n:ℕ`.
+### Exercise 6.3(b)
 
 Show that
+
+```text
+(m ≤ n) + (n ≤ m)
+```
+
+for any `m,n:ℕ`.
+
+### Exercise 6.3(c)
+
+Show that
+
 ```text
 (m ≤ n) ↔ (m+k ≤ n+k)
 ```
+
 holds for any `m,n,k:ℕ`.
 
+### Exercise 6.3(d)
+
 Show that
+
 ```text
 (m ≤ n) ↔ (m·(k+1) ≤ n·(k+1))
 ```
+
 holds for any `m,n,k:ℕ`.
 
-Show that `k≤ min(m,n)` holds if and only if both `k≤ m` and `k≤ n` hold, and show that `max(m,n)≤ k` holds if and only if both `m≤ k` and `n≤ k` hold.
+### Exercise 6.3(e)
+
+Show that `k ≤ min(m,n)` holds if and only if both `k ≤ m` and `k ≤ n` hold, and show that `max(m,n) ≤ k` holds if and only if both `m ≤ k` and `n ≤ k` hold.
 
 ## Solution
 
@@ -82,6 +102,8 @@ concatenate-eq-leq-ℕ :
 concatenate-eq-leq-ℕ n refl H = H
 ```
 
+### Exercise 6.3(a)
+
 ```agda
 refl-leq-ℕ : (n : ℕ) → n ≤-ℕ n
 refl-leq-ℕ zero-ℕ = star
@@ -105,6 +127,8 @@ antisymmetric-leq-ℕ (succ-ℕ m) (succ-ℕ n) p q =
   ap succ-ℕ (antisymmetric-leq-ℕ m n p q)
 ```
 
+### Exercise 6.3(b)
+
 ```agda
 linear-leq-ℕ :
   (m n : ℕ) → (m ≤-ℕ n) + (n ≤-ℕ m)
@@ -114,68 +138,7 @@ linear-leq-ℕ (succ-ℕ m) zero-ℕ = inr star
 linear-leq-ℕ (succ-ℕ m) (succ-ℕ n) = linear-leq-ℕ m n
 ```
 
-```agda
-cases-order-three-elements-ℕ :
-  (x y z : ℕ) → UU lzero
-cases-order-three-elements-ℕ x y z =
-  ( ( leq-ℕ x y × leq-ℕ y z) +
-    ( leq-ℕ x z × leq-ℕ z y)) +
-  ( ( ( leq-ℕ y z × leq-ℕ z x) +
-      ( leq-ℕ y x × leq-ℕ x z)) +
-    ( ( leq-ℕ z x × leq-ℕ x y) +
-      ( leq-ℕ z y × leq-ℕ y x)))
-
-order-three-elements-ℕ :
-  (x y z : ℕ) → cases-order-three-elements-ℕ x y z
-order-three-elements-ℕ zero-ℕ zero-ℕ zero-ℕ =
-  inl (inl (star , star))
-order-three-elements-ℕ zero-ℕ zero-ℕ (succ-ℕ z) =
-  inl (inl (star , star))
-order-three-elements-ℕ zero-ℕ (succ-ℕ y) zero-ℕ =
-  inl (inr (star , star))
-order-three-elements-ℕ zero-ℕ (succ-ℕ y) (succ-ℕ z) =
-  inl (map-coproduct (pair star) (pair star) (linear-leq-ℕ y z))
-order-three-elements-ℕ (succ-ℕ x) zero-ℕ zero-ℕ =
-  inr (inl (inl (star , star)))
-order-three-elements-ℕ (succ-ℕ x) zero-ℕ (succ-ℕ z) =
-  inr (inl (map-coproduct (pair star) (pair star) (linear-leq-ℕ z x)))
-order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) zero-ℕ =
-  inr (inr (map-coproduct (pair star) (pair star) (linear-leq-ℕ x y)))
-order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) =
-  order-three-elements-ℕ x y z
-```
-
-```agda
-leq-zero-ℕ :
-  (n : ℕ) → zero-ℕ ≤-ℕ n
-leq-zero-ℕ n = star
-
-is-zero-leq-zero-ℕ :
-  (x : ℕ) → x ≤-ℕ zero-ℕ → is-zero-ℕ x
-is-zero-leq-zero-ℕ zero-ℕ star = refl
-
-is-zero-leq-zero-ℕ' :
-  (x : ℕ) → x ≤-ℕ zero-ℕ → is-zero-ℕ' x
-is-zero-leq-zero-ℕ' zero-ℕ star = refl
-
-abstract
-  succ-leq-ℕ : (n : ℕ) → n ≤-ℕ (succ-ℕ n)
-  succ-leq-ℕ zero-ℕ = star
-  succ-leq-ℕ (succ-ℕ n) = succ-leq-ℕ n
-
-  preserves-leq-succ-ℕ :
-    (m n : ℕ) → m ≤-ℕ n → m ≤-ℕ (succ-ℕ n)
-  preserves-leq-succ-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) (succ-leq-ℕ n) p
-```
-
-```agda
-abstract
-  contradiction-leq-ℕ : (m n : ℕ) → m ≤-ℕ n → ¬ ((succ-ℕ n) ≤-ℕ m)
-  contradiction-leq-ℕ (succ-ℕ m) (succ-ℕ n) H K = contradiction-leq-ℕ m n H K
-
-  contradiction-leq-ℕ' : (m n : ℕ) → (succ-ℕ n) ≤-ℕ m → ¬ (m ≤-ℕ n)
-  contradiction-leq-ℕ' m n K H = contradiction-leq-ℕ m n H K
-```
+### Exercise 6.3(c)
 
 ```agda
 abstract
@@ -191,19 +154,6 @@ abstract
       ( preserves-leq-left-add-ℕ k m n H)
       ( commutative-add-ℕ n k)
 
-  preserves-leq-add-ℕ :
-    {m m' n n' : ℕ} → m ≤-ℕ m' → n ≤-ℕ n' → (m +ℕ n) ≤-ℕ (m' +ℕ n')
-  preserves-leq-add-ℕ {m} {m'} {n} {n'} H K =
-    transitive-leq-ℕ
-      ( m +ℕ n)
-      ( m' +ℕ n)
-      ( m' +ℕ n')
-      ( preserves-leq-right-add-ℕ m' n n' K)
-      ( preserves-leq-left-add-ℕ n m m' H)
-```
-
-```agda
-abstract
   reflects-leq-left-add-ℕ :
     (k m n : ℕ) → (m +ℕ k) ≤-ℕ (n +ℕ k) → m ≤-ℕ n
   reflects-leq-left-add-ℕ zero-ℕ m n = id
@@ -219,22 +169,7 @@ abstract
         ( commutative-add-ℕ k n))
 ```
 
-```agda
-abstract
-  leq-add-ℕ : (m n : ℕ) → m ≤-ℕ (m +ℕ n)
-  leq-add-ℕ m zero-ℕ = refl-leq-ℕ m
-  leq-add-ℕ m (succ-ℕ n) =
-    transitive-leq-ℕ
-      ( m)
-      ( m +ℕ n)
-      ( succ-ℕ (m +ℕ n))
-      ( succ-leq-ℕ (m +ℕ n))
-      ( leq-add-ℕ m n)
-
-  leq-add-ℕ' : (m n : ℕ) → m ≤-ℕ (n +ℕ m)
-  leq-add-ℕ' m n =
-    concatenate-leq-eq-ℕ m (leq-add-ℕ m n) (commutative-add-ℕ m n)
-```
+### Exercise 6.3(d)
 
 ```agda
 abstract
@@ -254,16 +189,6 @@ abstract
       ( commutative-mul-ℕ k m)
       ( preserves-leq-left-mul-ℕ k m n H)
       ( commutative-mul-ℕ n k)
-
-  preserves-leq-mul-ℕ :
-    (m m' n n' : ℕ) → m ≤-ℕ m' → n ≤-ℕ n' → (m *ℕ n) ≤-ℕ (m' *ℕ n')
-  preserves-leq-mul-ℕ m m' n n' H K =
-    transitive-leq-ℕ
-      ( m *ℕ n)
-      ( m' *ℕ n)
-      ( m' *ℕ n')
-      ( preserves-leq-right-mul-ℕ m' n n' K)
-      ( preserves-leq-left-mul-ℕ n m m' H)
 ```
 
 ```agda
@@ -288,6 +213,8 @@ abstract
         ( H)
         ( commutative-mul-ℕ (succ-ℕ k) n))
 ```
+
+### Exercise 6.3(e)
 
 ```agda
 min-ℕ : ℕ → (ℕ → ℕ)
@@ -374,4 +301,112 @@ abstract
   right-leq-max-ℕ : (m n : ℕ) → leq-ℕ n (max-ℕ m n)
   right-leq-max-ℕ m n =
     leq-right-leq-max-ℕ (max-ℕ m n) m n (refl-leq-ℕ (max-ℕ m n))
+```
+
+## Supplement
+
+```agda
+cases-order-three-elements-ℕ :
+  (x y z : ℕ) → UU lzero
+cases-order-three-elements-ℕ x y z =
+  ( ( leq-ℕ x y × leq-ℕ y z) +
+    ( leq-ℕ x z × leq-ℕ z y)) +
+  ( ( ( leq-ℕ y z × leq-ℕ z x) +
+      ( leq-ℕ y x × leq-ℕ x z)) +
+    ( ( leq-ℕ z x × leq-ℕ x y) +
+      ( leq-ℕ z y × leq-ℕ y x)))
+
+order-three-elements-ℕ :
+  (x y z : ℕ) → cases-order-three-elements-ℕ x y z
+order-three-elements-ℕ zero-ℕ zero-ℕ zero-ℕ =
+  inl (inl (star , star))
+order-three-elements-ℕ zero-ℕ zero-ℕ (succ-ℕ z) =
+  inl (inl (star , star))
+order-three-elements-ℕ zero-ℕ (succ-ℕ y) zero-ℕ =
+  inl (inr (star , star))
+order-three-elements-ℕ zero-ℕ (succ-ℕ y) (succ-ℕ z) =
+  inl (map-coproduct (pair star) (pair star) (linear-leq-ℕ y z))
+order-three-elements-ℕ (succ-ℕ x) zero-ℕ zero-ℕ =
+  inr (inl (inl (star , star)))
+order-three-elements-ℕ (succ-ℕ x) zero-ℕ (succ-ℕ z) =
+  inr (inl (map-coproduct (pair star) (pair star) (linear-leq-ℕ z x)))
+order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) zero-ℕ =
+  inr (inr (map-coproduct (pair star) (pair star) (linear-leq-ℕ x y)))
+order-three-elements-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) =
+  order-three-elements-ℕ x y z
+```
+
+```agda
+leq-zero-ℕ :
+  (n : ℕ) → zero-ℕ ≤-ℕ n
+leq-zero-ℕ n = star
+
+is-zero-leq-zero-ℕ :
+  (x : ℕ) → x ≤-ℕ zero-ℕ → is-zero-ℕ x
+is-zero-leq-zero-ℕ zero-ℕ star = refl
+
+is-zero-leq-zero-ℕ' :
+  (x : ℕ) → x ≤-ℕ zero-ℕ → is-zero-ℕ' x
+is-zero-leq-zero-ℕ' zero-ℕ star = refl
+
+abstract
+  succ-leq-ℕ : (n : ℕ) → n ≤-ℕ (succ-ℕ n)
+  succ-leq-ℕ zero-ℕ = star
+  succ-leq-ℕ (succ-ℕ n) = succ-leq-ℕ n
+
+  preserves-leq-succ-ℕ :
+    (m n : ℕ) → m ≤-ℕ n → m ≤-ℕ (succ-ℕ n)
+  preserves-leq-succ-ℕ m n p = transitive-leq-ℕ m n (succ-ℕ n) (succ-leq-ℕ n) p
+```
+
+```agda
+abstract
+  contradiction-leq-ℕ : (m n : ℕ) → m ≤-ℕ n → ¬ ((succ-ℕ n) ≤-ℕ m)
+  contradiction-leq-ℕ (succ-ℕ m) (succ-ℕ n) H K = contradiction-leq-ℕ m n H K
+
+  contradiction-leq-ℕ' : (m n : ℕ) → (succ-ℕ n) ≤-ℕ m → ¬ (m ≤-ℕ n)
+  contradiction-leq-ℕ' m n K H = contradiction-leq-ℕ m n H K
+```
+
+```agda
+abstract
+  preserves-leq-add-ℕ :
+    {m m' n n' : ℕ} → m ≤-ℕ m' → n ≤-ℕ n' → (m +ℕ n) ≤-ℕ (m' +ℕ n')
+  preserves-leq-add-ℕ {m} {m'} {n} {n'} H K =
+    transitive-leq-ℕ
+      ( m +ℕ n)
+      ( m' +ℕ n)
+      ( m' +ℕ n')
+      ( preserves-leq-right-add-ℕ m' n n' K)
+      ( preserves-leq-left-add-ℕ n m m' H)
+```
+
+```agda
+abstract
+  leq-add-ℕ : (m n : ℕ) → m ≤-ℕ (m +ℕ n)
+  leq-add-ℕ m zero-ℕ = refl-leq-ℕ m
+  leq-add-ℕ m (succ-ℕ n) =
+    transitive-leq-ℕ
+      ( m)
+      ( m +ℕ n)
+      ( succ-ℕ (m +ℕ n))
+      ( succ-leq-ℕ (m +ℕ n))
+      ( leq-add-ℕ m n)
+
+  leq-add-ℕ' : (m n : ℕ) → m ≤-ℕ (n +ℕ m)
+  leq-add-ℕ' m n =
+    concatenate-leq-eq-ℕ m (leq-add-ℕ m n) (commutative-add-ℕ m n)
+```
+
+```agda
+abstract
+  preserves-leq-mul-ℕ :
+    (m m' n n' : ℕ) → m ≤-ℕ m' → n ≤-ℕ n' → (m *ℕ n) ≤-ℕ (m' *ℕ n')
+  preserves-leq-mul-ℕ m m' n n' H K =
+    transitive-leq-ℕ
+      ( m *ℕ n)
+      ( m' *ℕ n)
+      ( m' *ℕ n')
+      ( preserves-leq-right-mul-ℕ m' n n' K)
+      ( preserves-leq-left-mul-ℕ n m m' H)
 ```

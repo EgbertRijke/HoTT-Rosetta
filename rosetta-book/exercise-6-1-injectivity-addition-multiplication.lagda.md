@@ -21,43 +21,51 @@ open import section-6-4-peanos-seventh-and-eighth-axioms
 
 ## Problem statement
 
+### Exercise 6.1(a)
+
 Show that
+
 ```text
-(m=n) ↔ (m+k=n+k)
-(m=n) ↔ (m·(k+1)=n·(k+1))
+(m = n) ↔ (m+k = n+k)
+(m = n) ↔ (m·(k+1) = n · (k+1))
 ```
-for all `m,n,k:ℕ`.
+
+for all `m,n,k : ℕ`.
 In other words, adding `k` and multiplying by `k+1` are injective functions.
 
-Show that
-```text
-(m+n=0) ↔ (m=0)× (n=0)
-(mn=0) ↔ (m=0)+(n=0)
-(mn=1) ↔ (m=1)× (n=1)
-```
-for all `m,n:ℕ`.
+### Exercise 6.1(b)
 
 Show that
+
 ```text
-m ≠ m+(n+1)
-m+1 ≠ (m+1)(n+2)
+(m + n = 0) ↔ (m = 0) × (n = 0)
+(m · n = 0) ↔ (m = 0) + (n = 0)
+(m · n = 1) ↔ (m = 1) × (n = 1)
 ```
+
+for all `m,n:ℕ`.
+
+### Exercise 6.1(c)
+
+Show that
+
+```text
+m ≠ m + (n + 1)
+m + 1 ≠ (m + 1)(n + 2)
+```
+
 for all `m,n:ℕ`.
 
 ## Solution
 
-```agda
-is-zero-ℕ : ℕ → UU lzero
-is-zero-ℕ n = (n ＝ zero-ℕ)
+### Exercise 6.1(a)
 
+```agda
 is-zero-ℕ' : ℕ → UU lzero
 is-zero-ℕ' n = (zero-ℕ ＝ n)
 
 is-successor-ℕ : ℕ → UU lzero
 is-successor-ℕ n = Σ ℕ (λ y → n ＝ succ-ℕ y)
-
-is-nonzero-ℕ : ℕ → UU lzero
-is-nonzero-ℕ n = ¬ (is-zero-ℕ n)
 
 is-one-ℕ : ℕ → UU lzero
 is-one-ℕ n = (n ＝ 1)
@@ -132,6 +140,8 @@ abstract
   ... | pair l refl = is-injective-left-mul-succ-ℕ l p
 ```
 
+### Exercise 6.1(b)
+
 ```agda
 abstract
   is-zero-right-is-zero-add-ℕ :
@@ -201,6 +211,8 @@ abstract
   is-zero-mul-ℕ-is-zero-summand x y (inr H) =
     is-zero-mul-ℕ-is-zero-right-summand x y H
 ```
+
+### Exercise 6.1(c)
 
 ```agda
 abstract

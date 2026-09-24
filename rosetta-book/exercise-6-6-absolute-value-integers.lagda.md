@@ -20,6 +20,7 @@ open import exercise-5-5-semiring-laws-natural-numbers
 open import exercise-5-6-successor-predecessor-integers
 open import exercise-5-7-group-laws-integers
 open import exercise-5-8-ring-laws-integers
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-1-injectivity-addition-multiplication
 open import exercise-6-3-order-natural-numbers
 ```
@@ -27,23 +28,22 @@ open import exercise-6-3-order-natural-numbers
 ## Problem statement
 
 Construct the **absolute value function**
+
 ```text
-|_|:ℤ→ℕ
+|_| : ℤ → ℕ
 ```
+
 and show that it satisfies the following three properties:
 
-1. `(x=0)↔ (|x|=0)`,
+1. `(x = 0) ↔ (|x| = 0)`,
 
-2. `|x+y|≤ |x|+|y|`,
+2. `|x + y| ≤ |x|+|y|`,
 
-3. `|xy|=|x||y|`.
+3. `|xy| = |x||y|`.
 
 ## Solution
 
 ```agda
-is-zero-ℤ : ℤ → UU lzero
-is-zero-ℤ x = (x ＝ zero-ℤ)
-
 int-ℕ : ℕ → ℤ
 int-ℕ zero-ℕ = zero-ℤ
 int-ℕ (succ-ℕ n) = in-pos-ℤ n

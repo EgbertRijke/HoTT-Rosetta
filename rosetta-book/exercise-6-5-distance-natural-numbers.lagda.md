@@ -18,6 +18,7 @@ open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-4-transport
 open import section-5-6-the-laws-of-addition-on-natural-numbers
 open import exercise-5-5-semiring-laws-natural-numbers
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-1-injectivity-addition-multiplication
 open import exercise-6-3-order-natural-numbers
 open import exercise-6-4-strict-order-natural-numbers
@@ -26,33 +27,46 @@ open import exercise-6-4-strict-order-natural-numbers
 ## Problem statement
 
 The **distance function**
+
 ```text
 dist-ℕ : ℕ → (ℕ → ℕ)
 ```
+
 is defined recursively by
+
 ```text
 dist-ℕ(0,0) ≔ 0 dist-ℕ(0,n+1) ≔ n+1
 dist-ℕ(m+1,0) ≔ m+1 dist-ℕ(m+1,n+1) ≔ dist-ℕ(m,n).
 ```
-In other words, the distance between two natural numbers is the *symmetric difference* between them.
+
+In other words, the distance between two natural numbers is the _symmetric difference_ between them.
+
+### Exercise 6.5(a)
 
 Show that `dist-ℕ` satisfies the axioms of a metric:
 
-1. `(m=n)↔ (dist-ℕ(m,n)=0)`,
+1. `(m=n) ↔ (dist-ℕ(m,n)=0)`,
 
 2. `dist-ℕ(m,n) = dist-ℕ(n,m)`,
 
-3. `dist-ℕ(m,n) ≤dist-ℕ(m,k)+dist-ℕ(k,n)`.
+3. `dist-ℕ(m,n) ≤ dist-ℕ(m,k) + dist-ℕ(k,n)`.
 
-Show that `dist-ℕ(m,n)=dist-ℕ(m,k)+dist-ℕ(k,n)` if and only if either both `m≤ k` and `k≤ n` hold or both `n≤ k` and `k≤ m` hold.
-
-Show that `dist-ℕ` is translation invariant and linear:
-```text
-dist-ℕ(a+m,a+n) = dist-ℕ(m,n),
-dist-ℕ(k· m,k· n) =k·dist-ℕ(m,n).
-```
+### Exercise 6.5(b)
 
 Show that `x+dist-ℕ(x,y)=y` for any `x≤ y`.
+
+### Exercise 6.5(c)
+
+Show that `dist-ℕ(m,n) = dist-ℕ(m,k) + dist-ℕ(k,n)` if and only if either both `m ≤ k` and `k ≤ n` hold or both `n ≤ k` and `k ≤ m` hold.
+
+### Exercise 6.5(d)
+
+Show that `dist-ℕ` is translation invariant and linear:
+
+```text
+dist-ℕ(a+m,a+n) = dist-ℕ(m,n),
+dist-ℕ(k· m,k· n) = k·dist-ℕ(m,n).
+```
 
 ## Solution
 
@@ -74,6 +88,8 @@ ap-dist-ℕ :
 ap-dist-ℕ p q = ap-binary dist-ℕ p q
 ```
 
+### Exercise 6.5(a)
+
 ```agda
 abstract
   eq-dist-ℕ : (m n : ℕ) → is-zero-ℕ (dist-ℕ m n) → m ＝ n
@@ -92,17 +108,6 @@ abstract
 
   dist-neq-ℕ' : (m n : ℕ) → ¬ (m ＝ n) → is-successor-ℕ (dist-ℕ m n)
   dist-neq-ℕ' m n np = is-successor-is-nonzero-ℕ (dist-neq-ℕ m n np)
-```
-
-```agda
-abstract
-  is-one-dist-succ-ℕ : (x : ℕ) → is-one-ℕ (dist-ℕ x (succ-ℕ x))
-  is-one-dist-succ-ℕ zero-ℕ = refl
-  is-one-dist-succ-ℕ (succ-ℕ x) = is-one-dist-succ-ℕ x
-
-  is-one-dist-succ-ℕ' : (x : ℕ) → is-one-ℕ (dist-ℕ (succ-ℕ x) x)
-  is-one-dist-succ-ℕ' zero-ℕ = refl
-  is-one-dist-succ-ℕ' (succ-ℕ x) = is-one-dist-succ-ℕ' x
 ```
 
 ```agda
@@ -173,6 +178,8 @@ abstract
     triangle-inequality-dist-ℕ m n k
 ```
 
+### Exercise 6.5(b)
+
 ```agda
 abstract
   is-additive-right-inverse-dist-ℕ :
@@ -185,57 +192,9 @@ abstract
     ( ap succ-ℕ (is-additive-right-inverse-dist-ℕ x y H))
 ```
 
-```agda
-abstract
-  rewrite-left-add-dist-ℕ :
-    (x y z : ℕ) → x +ℕ y ＝ z → x ＝ dist-ℕ y z
-  rewrite-left-add-dist-ℕ zero-ℕ zero-ℕ .zero-ℕ refl = refl
-  rewrite-left-add-dist-ℕ zero-ℕ (succ-ℕ y) .(succ-ℕ (zero-ℕ +ℕ y)) refl =
-    ( inv (dist-eq-ℕ' y)) ∙
-    ( inv (ap (dist-ℕ (succ-ℕ y)) (left-unit-law-add-ℕ (succ-ℕ y))))
-  rewrite-left-add-dist-ℕ (succ-ℕ x) zero-ℕ .(succ-ℕ x) refl = refl
-  rewrite-left-add-dist-ℕ (succ-ℕ x) (succ-ℕ y) ._ refl =
-    rewrite-left-add-dist-ℕ (succ-ℕ x) y ((succ-ℕ x) +ℕ y) refl
+### Exercise 6.5(c)
 
-  rewrite-left-dist-add-ℕ :
-    (x y z : ℕ) → y ≤-ℕ z → x ＝ dist-ℕ y z → x +ℕ y ＝ z
-  rewrite-left-dist-add-ℕ .(dist-ℕ y z) y z H refl =
-    ( commutative-add-ℕ (dist-ℕ y z) y) ∙
-    ( is-additive-right-inverse-dist-ℕ y z H)
-
-  rewrite-right-add-dist-ℕ :
-    (x y z : ℕ) → x +ℕ y ＝ z → y ＝ dist-ℕ x z
-  rewrite-right-add-dist-ℕ x y z p =
-    rewrite-left-add-dist-ℕ y x z (commutative-add-ℕ y x ∙ p)
-
-  rewrite-right-dist-add-ℕ :
-    (x y z : ℕ) → x ≤-ℕ z → y ＝ dist-ℕ x z → x +ℕ y ＝ z
-  rewrite-right-dist-add-ℕ x .(dist-ℕ x z) z H refl =
-    is-additive-right-inverse-dist-ℕ x z H
-
-  is-difference-dist-ℕ :
-    (x y : ℕ) → x ≤-ℕ y → x +ℕ (dist-ℕ x y) ＝ y
-  is-difference-dist-ℕ zero-ℕ zero-ℕ H = refl
-  is-difference-dist-ℕ zero-ℕ (succ-ℕ y) H = left-unit-law-add-ℕ (succ-ℕ y)
-  is-difference-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
-    ( left-successor-law-add-ℕ x (dist-ℕ x y)) ∙
-    ( ap succ-ℕ (is-difference-dist-ℕ x y H))
-
-  is-difference-dist-ℕ' :
-    (x y : ℕ) → x ≤-ℕ y → (dist-ℕ x y) +ℕ x ＝ y
-  is-difference-dist-ℕ' x y H =
-    ( commutative-add-ℕ (dist-ℕ x y) x) ∙
-    ( is-difference-dist-ℕ x y H)
-```
-
-```agda
-abstract
-  dist-add-ℕ : (x y : ℕ) → dist-ℕ x (x +ℕ y) ＝ y
-  dist-add-ℕ x y = inv (rewrite-right-add-dist-ℕ x y (x +ℕ y) refl)
-
-  dist-add-ℕ' : (x y : ℕ) → dist-ℕ (x +ℕ y) x ＝ y
-  dist-add-ℕ' x y = commutative-dist-ℕ (x +ℕ y) x ∙ dist-add-ℕ x y
-```
+PARTIAL BENCHMARK PROBLEM
 
 ```agda
 abstract
@@ -250,51 +209,9 @@ abstract
     ap succ-ℕ (is-additive-right-inverse-dist-ℕ y z H2)
   triangle-equality-dist-ℕ (succ-ℕ x) (succ-ℕ y) (succ-ℕ z) H1 H2 =
     triangle-equality-dist-ℕ x y z H1 H2
-
-cases-dist-ℕ :
-  (x y z : ℕ) → UU lzero
-cases-dist-ℕ x y z =
-  ( (dist-ℕ x y) +ℕ (dist-ℕ y z) ＝ dist-ℕ x z) +
-  ( ( (dist-ℕ y z) +ℕ (dist-ℕ x z) ＝ dist-ℕ x y) +
-    ( (dist-ℕ x z) +ℕ (dist-ℕ x y) ＝ dist-ℕ y z))
-
-abstract
-  is-total-dist-ℕ :
-    (x y z : ℕ) → cases-dist-ℕ x y z
-  is-total-dist-ℕ x y z with order-three-elements-ℕ x y z
-  is-total-dist-ℕ x y z | inl (inl (pair H1 H2)) =
-    inl (triangle-equality-dist-ℕ x y z H1 H2)
-  is-total-dist-ℕ x y z | inl (inr (pair H1 H2)) =
-    inr
-      ( inl
-        ( ( commutative-add-ℕ (dist-ℕ y z) (dist-ℕ x z)) ∙
-          ( ( ap ((dist-ℕ x z) +ℕ_) (commutative-dist-ℕ y z)) ∙
-            ( triangle-equality-dist-ℕ x z y H1 H2))))
-  is-total-dist-ℕ x y z | inr (inl (inl (pair H1 H2))) =
-    inr
-      ( inl
-        ( ( ap ((dist-ℕ y z) +ℕ_) (commutative-dist-ℕ x z)) ∙
-          ( ( triangle-equality-dist-ℕ y z x H1 H2) ∙
-            ( commutative-dist-ℕ y x))))
-  is-total-dist-ℕ x y z | inr (inl (inr (pair H1 H2))) =
-    inr
-      ( inr
-        ( ( ap ((dist-ℕ x z) +ℕ_) (commutative-dist-ℕ x y)) ∙
-          ( ( commutative-add-ℕ (dist-ℕ x z) (dist-ℕ y x)) ∙
-            ( triangle-equality-dist-ℕ y x z H1 H2))))
-  is-total-dist-ℕ x y z | inr (inr (inl (pair H1 H2))) =
-    inr
-      ( inr
-        ( ( ap (_+ℕ (dist-ℕ x y)) (commutative-dist-ℕ x z)) ∙
-          ( ( triangle-equality-dist-ℕ z x y H1 H2) ∙
-            ( commutative-dist-ℕ z y))))
-  is-total-dist-ℕ x y z | inr (inr (inr (pair H1 H2))) =
-    inl
-      ( ( ap-add-ℕ (commutative-dist-ℕ x y) (commutative-dist-ℕ y z)) ∙
-        ( ( commutative-add-ℕ (dist-ℕ y x) (dist-ℕ z y)) ∙
-          ( ( triangle-equality-dist-ℕ z y x H1 H2) ∙
-            ( commutative-dist-ℕ z x))))
 ```
+
+### Exercise 6.5(d)
 
 ```agda
 abstract
@@ -353,4 +270,116 @@ abstract
     ( commutative-mul-ℕ (dist-ℕ x y) k) ∙
     ( ( left-distributive-mul-dist-ℕ x y k) ∙
       ( ap-dist-ℕ (commutative-mul-ℕ k x) (commutative-mul-ℕ k y)))
+```
+
+## Supplement
+
+```agda
+abstract
+  is-one-dist-succ-ℕ : (x : ℕ) → is-one-ℕ (dist-ℕ x (succ-ℕ x))
+  is-one-dist-succ-ℕ zero-ℕ = refl
+  is-one-dist-succ-ℕ (succ-ℕ x) = is-one-dist-succ-ℕ x
+
+  is-one-dist-succ-ℕ' : (x : ℕ) → is-one-ℕ (dist-ℕ (succ-ℕ x) x)
+  is-one-dist-succ-ℕ' zero-ℕ = refl
+  is-one-dist-succ-ℕ' (succ-ℕ x) = is-one-dist-succ-ℕ' x
+```
+
+```agda
+abstract
+  rewrite-left-add-dist-ℕ :
+    (x y z : ℕ) → x +ℕ y ＝ z → x ＝ dist-ℕ y z
+  rewrite-left-add-dist-ℕ zero-ℕ zero-ℕ .zero-ℕ refl = refl
+  rewrite-left-add-dist-ℕ zero-ℕ (succ-ℕ y) .(succ-ℕ (zero-ℕ +ℕ y)) refl =
+    ( inv (dist-eq-ℕ' y)) ∙
+    ( inv (ap (dist-ℕ (succ-ℕ y)) (left-unit-law-add-ℕ (succ-ℕ y))))
+  rewrite-left-add-dist-ℕ (succ-ℕ x) zero-ℕ .(succ-ℕ x) refl = refl
+  rewrite-left-add-dist-ℕ (succ-ℕ x) (succ-ℕ y) ._ refl =
+    rewrite-left-add-dist-ℕ (succ-ℕ x) y ((succ-ℕ x) +ℕ y) refl
+
+  rewrite-left-dist-add-ℕ :
+    (x y z : ℕ) → y ≤-ℕ z → x ＝ dist-ℕ y z → x +ℕ y ＝ z
+  rewrite-left-dist-add-ℕ .(dist-ℕ y z) y z H refl =
+    ( commutative-add-ℕ (dist-ℕ y z) y) ∙
+    ( is-additive-right-inverse-dist-ℕ y z H)
+
+  rewrite-right-add-dist-ℕ :
+    (x y z : ℕ) → x +ℕ y ＝ z → y ＝ dist-ℕ x z
+  rewrite-right-add-dist-ℕ x y z p =
+    rewrite-left-add-dist-ℕ y x z (commutative-add-ℕ y x ∙ p)
+
+  rewrite-right-dist-add-ℕ :
+    (x y z : ℕ) → x ≤-ℕ z → y ＝ dist-ℕ x z → x +ℕ y ＝ z
+  rewrite-right-dist-add-ℕ x .(dist-ℕ x z) z H refl =
+    is-additive-right-inverse-dist-ℕ x z H
+
+  is-difference-dist-ℕ :
+    (x y : ℕ) → x ≤-ℕ y → x +ℕ (dist-ℕ x y) ＝ y
+  is-difference-dist-ℕ zero-ℕ zero-ℕ H = refl
+  is-difference-dist-ℕ zero-ℕ (succ-ℕ y) H = left-unit-law-add-ℕ (succ-ℕ y)
+  is-difference-dist-ℕ (succ-ℕ x) (succ-ℕ y) H =
+    ( left-successor-law-add-ℕ x (dist-ℕ x y)) ∙
+    ( ap succ-ℕ (is-difference-dist-ℕ x y H))
+
+  is-difference-dist-ℕ' :
+    (x y : ℕ) → x ≤-ℕ y → (dist-ℕ x y) +ℕ x ＝ y
+  is-difference-dist-ℕ' x y H =
+    ( commutative-add-ℕ (dist-ℕ x y) x) ∙
+    ( is-difference-dist-ℕ x y H)
+```
+
+```agda
+abstract
+  dist-add-ℕ : (x y : ℕ) → dist-ℕ x (x +ℕ y) ＝ y
+  dist-add-ℕ x y = inv (rewrite-right-add-dist-ℕ x y (x +ℕ y) refl)
+
+  dist-add-ℕ' : (x y : ℕ) → dist-ℕ (x +ℕ y) x ＝ y
+  dist-add-ℕ' x y = commutative-dist-ℕ (x +ℕ y) x ∙ dist-add-ℕ x y
+```
+
+```agda
+abstract
+  cases-dist-ℕ :
+    (x y z : ℕ) → UU lzero
+  cases-dist-ℕ x y z =
+    ( (dist-ℕ x y) +ℕ (dist-ℕ y z) ＝ dist-ℕ x z) +
+    ( ( (dist-ℕ y z) +ℕ (dist-ℕ x z) ＝ dist-ℕ x y) +
+      ( (dist-ℕ x z) +ℕ (dist-ℕ x y) ＝ dist-ℕ y z))
+
+abstract
+  is-total-dist-ℕ :
+    (x y z : ℕ) → cases-dist-ℕ x y z
+  is-total-dist-ℕ x y z with order-three-elements-ℕ x y z
+  is-total-dist-ℕ x y z | inl (inl (pair H1 H2)) =
+    inl (triangle-equality-dist-ℕ x y z H1 H2)
+  is-total-dist-ℕ x y z | inl (inr (pair H1 H2)) =
+    inr
+      ( inl
+        ( ( commutative-add-ℕ (dist-ℕ y z) (dist-ℕ x z)) ∙
+          ( ( ap ((dist-ℕ x z) +ℕ_) (commutative-dist-ℕ y z)) ∙
+            ( triangle-equality-dist-ℕ x z y H1 H2))))
+  is-total-dist-ℕ x y z | inr (inl (inl (pair H1 H2))) =
+    inr
+      ( inl
+        ( ( ap ((dist-ℕ y z) +ℕ_) (commutative-dist-ℕ x z)) ∙
+          ( ( triangle-equality-dist-ℕ y z x H1 H2) ∙
+            ( commutative-dist-ℕ y x))))
+  is-total-dist-ℕ x y z | inr (inl (inr (pair H1 H2))) =
+    inr
+      ( inr
+        ( ( ap ((dist-ℕ x z) +ℕ_) (commutative-dist-ℕ x y)) ∙
+          ( ( commutative-add-ℕ (dist-ℕ x z) (dist-ℕ y x)) ∙
+            ( triangle-equality-dist-ℕ y x z H1 H2))))
+  is-total-dist-ℕ x y z | inr (inr (inl (pair H1 H2))) =
+    inr
+      ( inr
+        ( ( ap (_+ℕ (dist-ℕ x y)) (commutative-dist-ℕ x z)) ∙
+          ( ( triangle-equality-dist-ℕ z x y H1 H2) ∙
+            ( commutative-dist-ℕ z y))))
+  is-total-dist-ℕ x y z | inr (inr (inr (pair H1 H2))) =
+    inl
+      ( ( ap-add-ℕ (commutative-dist-ℕ x y) (commutative-dist-ℕ y z)) ∙
+        ( ( commutative-add-ℕ (dist-ℕ y x) (dist-ℕ z y)) ∙
+          ( ( triangle-equality-dist-ℕ z y x H1 H2) ∙
+            ( commutative-dist-ℕ z x))))
 ```
