@@ -7,6 +7,7 @@ open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
+open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
@@ -14,7 +15,7 @@ open import section-6-3-observational-equality-of-the-natural-numbers
 ```
 
 Using the observational equality of `ℕ`, we can prove Peano’s seventh and eighth axioms.
-In his *Arithmetices Principia* \[citation: `Peano`\], the natural numbers are based at `1`, but today it is customary to have the natural numbers based at `0`.
+In his _Arithmetices Principia_ \[citation: `Peano`\], the natural numbers are based at `1`, but today it is customary to have the natural numbers based at `0`.
 Adapting for this, the seventh and eighth axioms assert that
 
 1. For any two natural numbers `m` and `n`, we have
@@ -67,9 +68,9 @@ Therefore, we obtain
 
 ```text
       succ-ℕ(m) = succ-ℕ(n) ------> m = n
+                |                     ∧
                 |                     |
-                |                     |
-                ∨                     ∨
+                ∨                     |
   Eq-ℕ(succ-ℕ(m),succ-ℕ(n)) ----> Eq-ℕ(m,n)
                              id
 ```
@@ -81,13 +82,12 @@ ap-succ-ℕ : {m n : ℕ} → m ＝ n → succ-ℕ m ＝ succ-ℕ n
 ap-succ-ℕ = ap succ-ℕ
 
 is-injective-succ-ℕ : is-injective succ-ℕ
-is-injective-succ-ℕ {m} {n} p = eq-Eq-ℕ m n (Eq-eq-ℕ p)
+is-injective-succ-ℕ refl = refl
 
 peano-7-ℕ :
-  (m n : ℕ) →
-  ((m ＝ n) → succ-ℕ m ＝ succ-ℕ n) ×
-  ((succ-ℕ m ＝ succ-ℕ n) → m ＝ n)
-peano-7-ℕ m n = ap-succ-ℕ , is-injective-succ-ℕ
+  (m n : ℕ) → ((m ＝ n) ↔ (succ-ℕ m ＝ succ-ℕ n))
+pr1 (peano-7-ℕ m n) refl = refl
+pr2 (peano-7-ℕ m n) = is-injective-succ-ℕ
 ```
 
 ## Theorem 6.4.2
