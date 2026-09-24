@@ -503,3 +503,33 @@ module _
     (left : f ~ h) (right : g ~ h) (top : f ~ g) → UU (l1 ⊔ l2)
   coherence-triangle-homotopies' left right top = top ∙h right ~ left
 ```
+
+### Homotopies preserve the laws of the action on identity types
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  where
+
+  ap-concat-htpy :
+    (H : f ~ g) {K K' : g ~ h} → K ~ K' → H ∙h K ~ H ∙h K'
+  ap-concat-htpy H L x = ap (concat (H x) (h x)) (L x)
+
+  ap-concat-htpy' :
+    {H H' : f ~ g} (K : g ~ h) → H ~ H' → H ∙h K ~ H' ∙h K
+  ap-concat-htpy' K L x =
+    ap (concat' (f x) (K x)) (L x)
+
+  ap-binary-concat-htpy :
+    {H H' : f ~ g} {K K' : g ~ h} → H ~ H' → K ~ K' → H ∙h K ~ H' ∙h K'
+  ap-binary-concat-htpy {H} {H'} {K} {K'} HH KK =
+    ap-concat-htpy H KK ∙h ap-concat-htpy' K' HH
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g : (x : A) → B x}
+  {H H' : f ~ g}
+  where
+
+  ap-inv-htpy : H ~ H' → inv-htpy H ~ inv-htpy H'
+  ap-inv-htpy K x = ap inv (K x)
+```

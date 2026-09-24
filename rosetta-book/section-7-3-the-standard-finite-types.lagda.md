@@ -16,78 +16,115 @@ open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-4-strict-order-natural-numbers
 ```
 
-The standard finite sets are classically defined as the sets `{x∈ℕ| x<k}`.
-This leads to the question of how to interpret a subset `{x∈ A| P(x)}` in type theory.
+The standard finite sets are classically defined as the sets `{x ∈ ℕ | x < k}`.
+This leads to the question of how to interpret a subset `{x ∈ A | P(x)}` in type theory.
 
-Since type theory is set up in such a way that elements come equipped with their types, subsets aren’t formed the same way as in set theory, where the comprehension axiom is used to form the set `{x∈ A| P(x)}` for any predicate `P` over `A`.
+Since type theory is set up in such a way that elements come equipped with their types, subsets aren’t formed the same way as in set theory, where the comprehension axiom is used to form the set `{x ∈ A | P(x)}` for any predicate `P` over `A`.
 The Curry-Howard interpretation dictates that predicates are interpreted as dependent types.
-Therefore, a set of elements `x∈ A` such that `P(x)` holds is interpreted in type theory as the type of terms `x:A` equipped with an element (a proof) `p:P(x)`.
-In other words, we interpret a subset `{x∈ A| P(x)}` as the type `Σ(x:A) P(x)`.
+Therefore, a set of elements `x ∈ A` such that `P(x)` holds is interpreted in type theory as the type of terms `x : A` equipped with an element (a proof) `p : P(x)`.
+In other words, we interpret a subset `{x ∈ A | P(x)}` as the type `Σ(x : A) P(x)`.
 
 ## Remark 7.3.1
 
-The alert reader may now have observed that the interpretation of a subset `{x∈ A| P(x)}` in type theory is the same as the interpretation of the proposition `∃_{(x∈ A)}P(x)`, while indeed the subset `{x∈ A| P(x)}` has a substantially different role in mathematics than the proposition `∃_{(x∈ A)}P(x)`.
+The alert reader may now have observed that the interpretation of a subset `{x ∈ A | P(x)}` in type theory is the same as the interpretation of the proposition `∃_{(x ∈ A)} P(x)`, while indeed the subset `{x ∈ A | P(x)}` has a substantially different role in mathematics than the proposition `∃_{(x ∈ A)} P(x)`.
 This points at a slight problem of the Curry-Howard interpretation of the existential quantifier.
 While the Curry-Howard interpretation of the existential quantifier is nevertheless useful and important, we will reinterpret the existential quantifier in type theory in Section 14.3.
 
 ```agda
 classical-Fin : ℕ → UU lzero
 classical-Fin k = Σ ℕ (λ x → le-ℕ x k)
+
+nat-classical-Fin : (k : ℕ) → classical-Fin k → ℕ
+nat-classical-Fin k = pr1
+
+Eq-classical-Fin : (k : ℕ) (x y : classical-Fin k) → UU lzero
+Eq-classical-Fin k x y = nat-classical-Fin k x ＝ nat-classical-Fin k y
+
+eq-succ-classical-Fin :
+  (k : ℕ) (x y : classical-Fin k) →
+  x ＝ y →
+  Id
+    { A = classical-Fin (succ-ℕ k)}
+    ( pair (succ-ℕ (pr1 x)) (pr2 x))
+    ( pair (succ-ℕ (pr1 y)) (pr2 y))
+eq-succ-classical-Fin k x .x refl = refl
+
+eq-Eq-classical-Fin :
+  (k : ℕ) (x y : classical-Fin k) → Eq-classical-Fin k x y → x ＝ y
+eq-Eq-classical-Fin (succ-ℕ k) (pair zero-ℕ _) (pair zero-ℕ _) e = refl
+eq-Eq-classical-Fin (succ-ℕ k) (pair (succ-ℕ x) p) (pair (succ-ℕ y) q) e =
+  eq-succ-classical-Fin k
+    ( pair x p)
+    ( pair y q)
+    ( eq-Eq-classical-Fin k (pair x p) (pair y q) (is-injective-succ-ℕ e))
+
+Eq-eq-classical-Fin :
+  (k : ℕ) (x y : classical-Fin k) → x ＝ y → Eq-classical-Fin k x y
+Eq-eq-classical-Fin k x y refl = refl
 ```
 
 Since subsets are interpreted as `Σ`-types, the ‘classical’ definition of the standard finite types is
+
 ```text
-classical-Fin_k:=Σ(x:ℕ) x<k.
+  classical-Fin_k ≔ Σ(x : ℕ) x < k.
 ```
+
 This is a perfectly fine definition of the standard finite types.
 However, the usual definition of the standard finite types in Martin-Löf’s dependent type theory is a more direct, recursive definition, which takes full advantage of the inductive constructions of dependent type theory.
 
 ## Definition 7.3.2
 
 We define the type family `Fin` of the **standard finite types** over `ℕ` recursively by
+
 ```text
-Fin{0} ≔ empty
-Fin{k+1} ≔ Fin{k}+unit.
+      Fin_{0} ≔ empty
+  Fin_{k + 1} ≔ Fin_{k} + unit.
 ```
-We will write `i` for the inclusion `inl:Fin{k}→Fin{k+1}` and we will write `⋆` for the point `inr(⋆)`.
+
+We will write `i` for the inclusion `inl : Fin_{k} → Fin_{k + 1}` and we will write `⋆` for the point `inr(⋆)`.
 
 ```agda
 Fin : ℕ → UU lzero
 Fin zero-ℕ = empty
 Fin (succ-ℕ n) = Fin n + unit
-```
 
-```agda
 inl-Fin :
   (k : ℕ) → Fin k → Fin (succ-ℕ k)
 inl-Fin k = inl
 ```
 
-In Exercise 7.7 you will be asked to show that the types `classical-Fin_k` and `Fin{k}` are isomorphic.
+In Exercise 7.7 you will be asked to show that the types `classical-Fin_k` and `Fin_{k}` are isomorphic.
 
 ## Remark 7.3.3
 
-The type family `Fin` over `ℕ` can be given its own induction principle, which is, at least for the time being, the principal way to make constructions on `Fin{k}` for arbitrary `k:ℕ` and to prove properties about those constructions.
+The type family `Fin` over `ℕ` can be given its own induction principle, which is, at least for the time being, the principal way to make constructions on `Fin_{k}` for arbitrary `k : ℕ` and to prove properties about those constructions.
 The induction principle of the standard finite types tells us that the family of standard finite types is inductively generated by
+
 ```text
-i : Fin{k}→Fin{k+1}
-⋆ : Fin{k+1}.
+  i : Fin_{k} → Fin_{k+1}
+  ⋆ : Fin_{k+1}.
 ```
-In other words, we can define a dependent function `f:Π(k:ℕ) Π(x:Fin{k}) P_k(x)` by defining
+
+In other words, we can define a dependent function `f : Π(k : ℕ) Π(x : Fin_{k}) P_k(x)` by defining
+
 ```text
-g_k : Π(x:Fin{k}) P_k(x)→ P_{k+1}(i(x))
-p_k : P_{k+1}(⋆)
+  g_k : Π(x : Fin_{k}) P_k(x) → P_{k + 1}(i(x))
+  p_k : P_{k + 1}(⋆)
 ```
-for each `k:ℕ`.
+
+for each `k : ℕ`.
 The function `f` defined in this way then satisfies the judgmental equalities
+
 ```text
-f_{k+1}(i(x)) ≐ g_k(x,f_k(x))
-f_{k+1}(⋆) ≐ p_k.
+  f_{k + 1}(i(x)) ≐ g_k(x,f_k(x))
+     f_{k + 1}(⋆) ≐ p_k.
 ```
+
 These judgmental equalities completely determine the function `f`, and therefore we may also present such inductive definitions by pattern matching:
+
 ```text
-f_{k+1}(i(x)) ≔ g_k(x,f_k(x))
-f_{k+1}(⋆) ≔ p_k.
+  f_{k + 1}(i(x)) ≔ g_k(x,f_k(x))
+     f_{k + 1}(⋆) ≔ p_k.
 ```
 
 ```agda
@@ -102,15 +139,16 @@ ind-Fin g p {succ-ℕ k} (inr star) = p {k}
 We will often use definitions by pattern matching for two reasons: (i) such definitions are concise, and (ii) they display the judgmental equalities that hold for the defined object.
 Those judgmental equalities are the only thing we know about that object, and proving a claim about it often amounts to finding a way to apply these judgmental equalities.
 
-To illustrate this way of working with the standard finite types, we define the inclusion functions `Fin{k}→ℕ`, and show that these are injective.
+To illustrate this way of working with the standard finite types, we define the inclusion functions `Fin_{k} → ℕ`, and show that these are injective.
 In order to show that `nat-Fin_k` is injective, we will also show that `nat-Fin_k` is bounded.
 
 ## Definition 7.3.4
 
-We define the inclusion `nat-Fin_k : Fin{k}→ℕ` inductively by
+We define the inclusion `nat-Fin_k : Fin_{k} → ℕ` inductively by
+
 ```text
-nat-Fin_{k+1}(i(x)) ≔ nat-Fin_{k}(x)
-nat-Fin_{k+1}(⋆) ≔ k.
+  nat-Fin_{k + 1}(i(x)) ≔ nat-Fin_{k}(x)
+     nat-Fin_{k + 1}(⋆) ≔ k.
 ```
 
 ```agda
@@ -121,17 +159,17 @@ nat-Fin (succ-ℕ k) (inr x) = k
 
 ## Lemma 7.3.5
 
-The function `nat-Fin:Fin{k}→ℕ` is bounded, in the sense that `nat-Fin(x)< k` for each `x:Fin{k}`.
+The function `nat-Fin : Fin_{k} → ℕ` is bounded, in the sense that `nat-Fin(x) < k` for each `x : Fin_{k}`.
 
 ### Proof
 
-*Proof.* The proof is by induction.
+The proof is by induction.
 In the base case there is nothing to show.
-In the inductive step, we have the inequalities `nat-Fin_{k+1}(i(x))≐nat-Fin_{k}(x)<k<k+1`, where the first inequality holds by the inductive hypothesis, and we also have
+In the inductive step, we have the inequalities `nat-Fin_{k + 1}(i(x)) ≐ nat-Fin_{k}(x) < k < k + 1`, where the first inequality holds by the inductive hypothesis, and we also have
+
 ```text
-nat-Fin_{k+1}(⋆)≐ k<k+1.
+  nat-Fin_{k + 1}(⋆) ≐ k < k + 1. ◻
 ```
- ◻
 
 ```agda
 strict-upper-bound-nat-Fin : (k : ℕ) (x : Fin k) → le-ℕ (nat-Fin k x) k
@@ -148,16 +186,20 @@ strict-upper-bound-nat-Fin (succ-ℕ k) (inr star) =
 
 ## Proposition 7.3.6
 
-The inclusion function `nat-Fin_k : Fin{k}→ ℕ` is injective, for each `k:ℕ`.
+The inclusion function `nat-Fin_k : Fin_{k} → ℕ` is injective, for each `k : ℕ`.
 
 ### Proof
 
-*Proof.* We define a function `α_k(x,y):(nat-Fin_k(x)=nat-Fin_k(y))→ (x=y)` recursively by
+We define a function `α_k(x,y) : (nat-Fin_k(x) = nat-Fin_k(y)) → (x = y)` recursively by
+
 ```text
-α_{k+1}(i(x),i(y),p) ≔ ap_{i}(α_k(x,y,p)) α_{k+1}(i(x),⋆,p) ≔ ex-falso(f(p))
-α_{k+1}(⋆,i(y),p) ≔ ex-falso(g(p)) α_{k+1}(⋆,⋆,p) ≔ refl,
+  α_{k + 1}(i(x),i(y),p) ≔ ap_{i}(α_k(x,y,p))
+     α_{k + 1}(i(x),⋆,p) ≔ ex-falso(f(p))
+     α_{k + 1}(⋆,i(y),p) ≔ ex-falso(g(p))
+        α_{k + 1}(⋆,⋆,p) ≔ refl,
 ```
-where `f:(nat-Fin_{k+1}(i(x))=nat-Fin_{k+1}(⋆))→empty` and `g:(nat-Fin_{k+1}(⋆)=nat-Fin_{k+1}(i(y)))→empty` are obtained from the fact that `nat-Fin_{k+1}(i(z))≐nat-Fin_k(z)<k` for any `z:Fin{k}`, and the fact that `nat-Fin_{k+1}(⋆)≐ k`. ◻
+
+where `f : (nat-Fin_{k + 1}(i(x)) = nat-Fin_{k + 1}(⋆)) → empty` and `g : (nat-Fin_{k + 1}(⋆) = nat-Fin_{k + 1}(i(y))) → empty` are obtained from the fact that `nat-Fin_{k + 1}(i(z)) ≐ nat-Fin_k(z) < k` for any `z : Fin_{k}`, and the fact that `nat-Fin_{k + 1}(⋆) ≐ k`. ◻
 
 ```agda
 is-injective-nat-Fin : (k : ℕ) → is-injective (nat-Fin k)

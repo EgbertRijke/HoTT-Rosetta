@@ -14,6 +14,7 @@ open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-1-families-of-equivalences
 open import section-11-2-the-fundamental-theorem
+open import section-11-6-the-structure-identity-principle
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-9-4-three-for-two-equivalences
 open import exercise-9-5-sigma-swap
@@ -256,8 +257,6 @@ Another direct consequence of the distributivity of `Π`-types over `Σ`-types i
   Π(b : B) fib(f, b) ≃ Σ(g : B → A) f ∘ g ~ id.
 ```
 
-### Products of fibers and sections
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -340,6 +339,22 @@ This gives an equivalence
 and the right-hand side is a product of contractible types. ◻
 
 ```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  map-section-family : ((x : A) → B x) → (A → Σ A B)
+  pr1 (map-section-family b a) = a
+  pr2 (map-section-family b a) = b a
+
+  htpy-map-section-family :
+    (b : (x : A) → B x) → (pr1 ∘ map-section-family b) ~ id
+  htpy-map-section-family b a = refl
+
+  section-dependent-function : ((x : A) → B x) → section (pr1 {B = B})
+  pr1 (section-dependent-function b) = map-section-family b
+  pr2 (section-dependent-function b) = htpy-map-section-family b
+
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
   where
