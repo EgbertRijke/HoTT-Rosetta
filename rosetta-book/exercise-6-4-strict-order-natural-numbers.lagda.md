@@ -16,6 +16,7 @@ open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-6-the-laws-of-addition-on-natural-numbers
 open import exercise-5-5-semiring-laws-natural-numbers
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-1-injectivity-addition-multiplication
 open import exercise-6-3-order-natural-numbers
 ```
@@ -23,10 +24,15 @@ open import exercise-6-3-order-natural-numbers
 ## Problem statement
 
 The strict ordering relation `<` on `ℕ` is defined recursively by
+
 ```text
-(0<0) ≔ empty (0< n+1) ≔ unit
-(m+1<0) ≔ empty (m+1< n+1) ≔ (m< n).
+(0 < 0) ≔ empty
+(0 < n + 1) ≔ unit
+(m + 1 < 0) ≔ empty
+(m + 1 < n + 1) ≔ (m < n).
 ```
+
+### Exercise 6.4(a)
 
 Show that the strict ordering relation is
 
@@ -36,17 +42,25 @@ Show that the strict ordering relation is
 
 3. transitive.
 
-Show that `n<n+1` and
+### Exercise 6.4(b)
+
+Show that `n < n+1` and
+
 ```text
-(m<n)→ (m<n+1)
+(m < n)→ (m < n+1)
 ```
-for any `m,n:ℕ`.
+
+for any `m,n : ℕ`.
+
+### Exercise 6.4(c)
 
 Show that
+
 ```text
-(m<n) ↔ (m+1≤ n)
-(m<n) ↔ (n \nleq m)
+(m < n) ↔ (m+1 ≤ n)
+(m < n) ↔ (n \nleq m)
 ```
+
 for any `m,n :ℕ`.
 
 ## Solution
@@ -95,6 +109,8 @@ abstract
   contradiction-le-one-ℕ (succ-ℕ n) ()
 ```
 
+### Exercise 6.4(a)
+
 ```agda
 abstract
   irreflexive-le-ℕ : (n : ℕ) → ¬ (n <-ℕ n)
@@ -113,6 +129,8 @@ abstract
   transitive-le-ℕ (succ-ℕ n) (succ-ℕ m) (succ-ℕ l) p q =
     transitive-le-ℕ n m l p q
 ```
+
+### Exercise 6.4(b)
 
 ```agda
 abstract
@@ -141,6 +159,8 @@ abstract
   concatenate-le-leq-ℕ {succ-ℕ x} {succ-ℕ y} {succ-ℕ z} H K =
     concatenate-le-leq-ℕ {x} {y} {z} H K
 ```
+
+### Exercise 6.4(c)
 
 ```agda
 abstract

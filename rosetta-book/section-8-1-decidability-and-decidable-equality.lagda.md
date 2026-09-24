@@ -15,6 +15,7 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-3-order-natural-numbers
 open import exercise-6-4-strict-order-natural-numbers
 open import section-7-1-the-curry-howard-interpretation

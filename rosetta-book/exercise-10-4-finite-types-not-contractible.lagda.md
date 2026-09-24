@@ -11,6 +11,7 @@ open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-7-3-the-standard-finite-types
 open import section-7-4-the-natural-numbers-modulo-k-plus-one
 open import exercise-8-7-decidable-equality-coproducts
@@ -31,18 +32,6 @@ Show that `Fin_{k}` is not contractible for all `k ≠ 1`.
 ## Solution
 
 ```agda
-is-one-ℕ : ℕ → UU lzero
-is-one-ℕ n = (n ＝ 1)
-
-is-one-ℕ' : ℕ → UU lzero
-is-one-ℕ' n = (1 ＝ n)
-
-is-not-one-ℕ : ℕ → UU lzero
-is-not-one-ℕ n = ¬ (is-one-ℕ n)
-
-is-not-one-ℕ' : ℕ → UU lzero
-is-not-one-ℕ' n = ¬ (is-one-ℕ' n)
-
 is-not-contractible-Fin :
   (k : ℕ) → is-not-one-ℕ k → is-not-contractible (Fin k)
 is-not-contractible-Fin zero-ℕ f = is-not-contractible-empty

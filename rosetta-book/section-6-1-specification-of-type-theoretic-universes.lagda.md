@@ -24,14 +24,16 @@ Thus we say that `𝒰` is closed under `Σ`-types by asserting that `𝒰` come
 ```
 
 Furthermore, we ask that the element `Σ̌(X,Y):𝒰` satisfies the judgmental equality
+
 ```text
-Ty(Σ̌(X,Y))≐Σ(x:Ty(X)) Ty(Y(x)).
+Ty(Σ̌(X,Y)) ≐ Σ (x : Ty(X)) Ty(Y(x)).
 ```
-This judgmental equality asserts that the element `Σ̌(X,Y)` of the universe `𝒰` *represents* the `Σ`-type `Σ(x:Ty(X)) Ty(Y(x))`.
+
+This judgmental equality asserts that the element `Σ̌(X,Y)` of the universe `𝒰` _represents_ the `Σ`-type `Σ (x : Ty(X)) Ty(Y(x))`.
 
 We will similarly assume that universes are closed under `Π`-types and the other ways of forming types.
 However, there is an important restriction: it would be inconsistent to assume that the universe is contained in itself.
-One way of thinking about this is that universes are types of *small* types, and it cannot be the case that the universe is small with respect to itself.
+One way of thinking about this is that universes are types of _small_ types, and it cannot be the case that the universe is small with respect to itself.
 In Section 20.6 we will use a variant of Russell’s paradox to derive a contradiction when `𝒰` is assumed to be (equivalent to a type) in `𝒰`.
 Instead of assuming that the universe contains itself, we will assume that there are plenty of universes: enough universes so that any type family can be obtained by substituting into the universal type family of some universe.
 
@@ -48,49 +50,61 @@ A **universe** in type theory is a type `𝒰` in the empty context, equipped wi
    for which the judgmental equality
 
    ```text
-     Ty(Π̌(X,Y))≐ Π(x:Ty(X)) Ty(Y(x)).
+     Ty(Π̌(X,Y)) ≐ Π(x:Ty(X)) Ty(Y(x)).
    ```
 
    holds, for every `X:𝒰` and `Y:Ty(X)→𝒰`.
 
 2. `𝒰` is closed under `Σ` in the sense that it comes equipped with a function
-```text
-Σ̌ :Π(X:𝒰) (Ty(X)→𝒰)→𝒰
-```
-    for which the judgmental equality
-```text
-Ty(Σ̌(X,Y)) ≐ Σ(x:Ty(X)) Ty(Y(x))
-```
-    holds, for every `X:𝒰` and `Y:Ty(X)→𝒰`.
+
+   ```text
+   Σ̌ :Π(X:𝒰) (Ty(X)→𝒰)→𝒰
+   ```
+
+   for which the judgmental equality
+
+   ```text
+   Ty(Σ̌(X,Y)) ≐ Σ(x:Ty(X)) Ty(Y(x))
+   ```
+
+   holds, for every `X:𝒰` and `Y:Ty(X)→𝒰`.
 
 3. `𝒰` is closed under identity types, in the sense that it comes equipped with a function
-```text
-Ǐ : Π(X:𝒰) Ty(X)→(Ty(X)→𝒰)
-```
-    for which the judgmental equality
-```text
-Ty(Ǐ(X,x,y))≐ (x = y)
-```
-    holds, for every `X:𝒰` and `x,y:Ty(X)`.
+
+   ```text
+   Ǐ : Π(X:𝒰) Ty(X)→(Ty(X)→𝒰)
+   ```
+
+   for which the judgmental equality
+
+   ```text
+   Ty(Ǐ(X,x,y))≐ (x = y)
+   ```
+
+   holds, for every `X : 𝒰` and `x,y : Ty(X)`.
 
 4. `𝒰` is closed under coproducts, in the sense that it comes equipped with a function
-```text
- +̌ : 𝒰 → (𝒰 → 𝒰)
-```
-    that satisfies `Ty(X +̌ Y)≐ Ty(X)+Ty(Y)`.
+
+   ```text
+   +̌ : 𝒰 → (𝒰 → 𝒰)
+   ```
+
+   that satisfies `Ty(X +̌ Y) ≐ Ty(X) + Ty(Y)`.
 
 5. `𝒰` contains elements `empty̌,uniť,ℕ̌:𝒰` that satisfy the judgmental equalities
-```text
-Ty(empty̌) ≐ empty
-Ty(uniť) ≐ unit
-Ty(ℕ̌) ≐ ℕ.
-```
+   ```text
+   Ty(empty̌) ≐ empty
+   Ty(uniť) ≐ unit
+   Ty(ℕ̌) ≐ ℕ.
+   ```
 
 Consider a universe `𝒰` and a type `A` in context `Γ`.
 We say that `A` is a type in `𝒰`, or that `𝒰` **contains** `A`, if `𝒰` comes equipped with an element `Ǎ:𝒰` in context `Γ`, for which the judgment
+
 ```text
 Γ⊢Ty(Ǎ)≐ A type
 ```
+
 holds.
 If `A` is a type in `𝒰`, we usually write simply `A` for `Ǎ` and also `A` for `Ty(Ǎ)`.
 
@@ -98,4 +112,3 @@ If `A` is a type in `𝒰`, we usually write simply `A` for `Ǎ` and also `A` f
 
 Since ordinary function types are defined as a special case of dependent function types, we don’t have to assume separately that universes are closed under ordinary function types.
 Similarly, it follows from the assumption that universes are closed under dependent pair types that universes are closed under cartesian product types.
-

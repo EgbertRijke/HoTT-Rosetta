@@ -162,6 +162,18 @@ module _
   ap-binary {x} {x'} p {y} {y'} q = ap (λ r → f r y) p ∙ ap (f x') q
 ```
 
+### The action of functions on higher identifications
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A}
+  {p q : x ＝ y} (f : A → B) (α : p ＝ q)
+  where
+
+  ap² : ap f p ＝ ap f q
+  ap² = ap (ap f) α
+```
+
 ## Agda-unimath sources
 
 - The action on identifications of functions, with all its identifications, is defined in `foundation.action-on-identifications-functions`

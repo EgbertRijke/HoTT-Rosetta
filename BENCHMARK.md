@@ -14,7 +14,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-8-14-fields-integers-modulo-prime.lagda.md
 - rosetta-book/exercise-8-15-cofibonacci-sequence.lagda.md
 - rosetta-book/exercise-9-2-nonequivalences-booleans-natural-numbers.lagda.md
-- rosetta-book/exercise-9-7-product-functor-equivalences.lagda.md
 - rosetta-book/exercise-9-9-finitely-cyclic-maps.lagda.md
 - rosetta-book/exercise-11-1-coproduct-embeddings.lagda.md
 - rosetta-book/exercise-11-5-composite-embeddings-equivalences.lagda.md
@@ -58,6 +57,7 @@ The phrase "BENCHMARK PROBLEM" is also used to indicate when a multipart problem
 The following files contain partially solved (auto)formalization exercises, which do not yet have full solutions:
 
 - rosetta-book/exercise-4-3-double-negation-logic.lagda.md
+- rosetta-book/exercise-6-5-distance-natural-numbers.lagda.md
 - rosetta-book/exercise-10-7-fibers-of-projections.lagda.md
 - rosetta-book/exercise-12-4-coproduct-truncation.lagda.md
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md

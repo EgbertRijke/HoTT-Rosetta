@@ -8,31 +8,43 @@ open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers
+open import exercise-3-1-multiplication-and-exponentiation
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-7-3-the-standard-finite-types
 open import section-7-4-the-natural-numbers-modulo-k-plus-one
 open import exercise-7-5-observational-equality-finite-types
 open import section-8-1-decidability-and-decidable-equality
+open import exercise-8-6-decidable-equality-products
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import exercise-9-4-three-for-two-equivalences
 open import exercise-9-6-coproduct-functor-equivalences
+open import exercise-9-7-product-functor-equivalences
 open import exercise-9-8-finite-type-arithmetic-equivalences
 open import section-10-1-contractible-types
+open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-3-contractible-equivalences
 open import exercise-10-4-finite-types-not-contractible
+open import exercise-10-6-dependent-pair-contractible-base
+open import exercise-10-7-fibers-of-projections
+open import exercise-10-8-fiber-replacement
+open import section-11-1-families-of-equivalences
 open import section-12-1-propositions
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import exercise-12-4-coproduct-truncation
 open import exercise-12-8-retracts-of-truncated-types
+open import section-13-2-identity-systems-on-pi-types
 ```
 
 When someone counts the elements of a finite set `A`, they go through the elements of `A` one by one, at each stage keeping track of how many elements have been counted so far.
@@ -144,12 +156,6 @@ Conversely, if we have `f : is-empty(A)`, then the map `f : A → empty` is auto
 This shows that `Fin_{k} ≃ empty`, and a short argument by induction on `k` yields that `k = 0`.
 
 ```agda
-is-zero-ℕ : ℕ → UU lzero
-is-zero-ℕ n = (n ＝ zero-ℕ)
-
-is-zero-ℕ' : ℕ → UU lzero
-is-zero-ℕ' n = (zero-ℕ ＝ n)
-
 abstract
   is-empty-is-zero-number-of-elements-count :
     {l : Level} {X : UU l} (e : count X) →
@@ -292,6 +298,46 @@ has-decidable-equality-count :
   {l : Level} {X : UU l} → count X → has-decidable-equality X
 has-decidable-equality-count (k , e) =
   has-decidable-equality-equiv' e (has-decidable-equality-Fin k)
+
+cases-count-eq :
+  {l : Level} {X : UU l} (d : has-decidable-equality X) {x y : X}
+  (e : is-decidable (x ＝ y)) → count (x ＝ y)
+cases-count-eq d {x} {y} (inl p) =
+  count-is-contr
+    ( is-proof-irrelevant-is-prop (is-set-has-decidable-equality d x y) p)
+cases-count-eq d (inr f) =
+  count-is-empty f
+
+count-eq :
+  {l : Level} {X : UU l} → has-decidable-equality X → (x y : X) → count (x ＝ y)
+count-eq d x y = cases-count-eq d (d x y)
+
+cases-number-of-elements-count-eq' :
+  {l : Level} {X : UU l} {x y : X} →
+  is-decidable (x ＝ y) → ℕ
+cases-number-of-elements-count-eq' (inl p) = 1
+cases-number-of-elements-count-eq' (inr f) = 0
+
+number-of-elements-count-eq' :
+  {l : Level} {X : UU l} (d : has-decidable-equality X) (x y : X) → ℕ
+number-of-elements-count-eq' d x y =
+  cases-number-of-elements-count-eq' (d x y)
+
+cases-number-of-elements-count-eq :
+  {l : Level} {X : UU l} (d : has-decidable-equality X) {x y : X}
+  (e : is-decidable (x ＝ y)) →
+  number-of-elements-count (cases-count-eq d e) ＝
+  cases-number-of-elements-count-eq' e
+cases-number-of-elements-count-eq d (inl p) = refl
+cases-number-of-elements-count-eq d (inr f) = refl
+
+abstract
+  number-of-elements-count-eq :
+    {l : Level} {X : UU l} (d : has-decidable-equality X) (x y : X) →
+    number-of-elements-count (count-eq d x y) ＝
+    number-of-elements-count-eq' d x y
+  number-of-elements-count-eq d x y =
+    cases-number-of-elements-count-eq d (d x y)
 ```
 
 ## Theorem 16.1.7
@@ -457,6 +503,221 @@ module _
           ( number-of-elements-count cA)
           ( number-of-elements-count cB))
         ( inr b))
+
+count-Σ-Fin :
+  {l : Level} (k : ℕ) {B : Fin k → UU l} →
+  ((x : Fin k) → count (B x)) → count (Σ (Fin k) B)
+count-Σ-Fin 0 f = count-is-empty pr1
+count-Σ-Fin (succ-ℕ k) {B} f =
+  count-equiv'
+    ( ( equiv-coproduct id-equiv (left-unit-law-Σ (B ∘ inr))) ∘e
+      ( right-distributive-Σ-coproduct B))
+    ( count-coproduct (count-Σ-Fin k (f ∘ inl)) (f (inr star)))
+
+count-Σ' :
+  {l1 l2 : Level} (k : ℕ) {A : UU l1} {B : A → UU l2} →
+  (e : Fin k ≃ A) → ((x : A) → count (B x)) → count (Σ A B)
+count-Σ' k {B = B} e f =
+  count-equiv (equiv-Σ-equiv-base B e) (count-Σ-Fin k (f ∘ map-equiv e))
+
+abstract
+  equiv-count-Σ' :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    (k : ℕ) (e : Fin k ≃ A) (f : (x : A) → count (B x)) →
+    Fin (number-of-elements-count (count-Σ' k e f)) ≃ Σ A B
+  equiv-count-Σ' k e f = pr2 (count-Σ' k e f)
+
+fin-sequence : {l : Level} → UU l → ℕ → UU l
+fin-sequence A n = Fin n → A
+
+module _
+  {l : Level} {A : UU l}
+  where
+
+  empty-fin-sequence : fin-sequence A 0
+  empty-fin-sequence ()
+
+  head-fin-sequence : (n : ℕ) → fin-sequence A (succ-ℕ n) → A
+  head-fin-sequence n v = v (neg-one-Fin n)
+
+  last-fin-sequence : (n : ℕ) → fin-sequence A (succ-ℕ n) → A
+  last-fin-sequence n v = v (zero-Fin n)
+
+  tail-fin-sequence :
+    (n : ℕ) → fin-sequence A (succ-ℕ n) → fin-sequence A n
+  tail-fin-sequence n v = v ∘ (inl-Fin n)
+
+  init-fin-sequence :
+    (n : ℕ) → fin-sequence A (succ-ℕ n) → fin-sequence A n
+  init-fin-sequence n v = v ∘ skip-zero-Fin n
+
+  cons-fin-sequence :
+    (n : ℕ) → A → fin-sequence A n → fin-sequence A (succ-ℕ n)
+  cons-fin-sequence n a v (inl x) = v x
+  cons-fin-sequence n a v (inr x) = a
+
+  snoc-fin-sequence :
+    (n : ℕ) → fin-sequence A n → A → fin-sequence A (succ-ℕ n)
+  snoc-fin-sequence zero-ℕ v a i = a
+  snoc-fin-sequence (succ-ℕ n) v a (inl x) =
+    snoc-fin-sequence n (tail-fin-sequence n v) a x
+  snoc-fin-sequence (succ-ℕ n) v a (inr x) = head-fin-sequence n v
+
+  in-fin-sequence : (n : ℕ) → A → fin-sequence A n → UU l
+  in-fin-sequence n a v = Σ (Fin n) (λ k → a ＝ v k)
+
+  index-in-fin-sequence :
+    (n : ℕ) (x : A) (v : fin-sequence A n) →
+    in-fin-sequence n x v → Fin n
+  index-in-fin-sequence n x v I = pr1 I
+
+  eq-component-fin-sequence-index-in-fin-sequence :
+    (n : ℕ) (x : A) (v : fin-sequence A n) (I : in-fin-sequence n x v) →
+    x ＝ v (index-in-fin-sequence n x v I)
+  eq-component-fin-sequence-index-in-fin-sequence n x v I = pr2 I
+
+count-Σ :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  count A → ((x : A) → count (B x)) → count (Σ A B)
+pr1 (count-Σ (pair k e) f) = number-of-elements-count (count-Σ' k e f)
+pr2 (count-Σ (pair k e) f) = equiv-count-Σ' k e f
+
+module _
+  {l : Level} (M : Monoid l)
+  where
+
+  fin-sequence-type-Monoid : ℕ → UU l
+  fin-sequence-type-Monoid = fin-sequence (type-Monoid M)
+
+  head-fin-sequence-type-Monoid :
+    (n : ℕ) → fin-sequence-type-Monoid (succ-ℕ n) → type-Monoid M
+  head-fin-sequence-type-Monoid n v = head-fin-sequence n v
+
+  tail-fin-sequence-type-Monoid :
+    (n : ℕ) → fin-sequence-type-Monoid (succ-ℕ n) → fin-sequence-type-Monoid n
+  tail-fin-sequence-type-Monoid = tail-fin-sequence
+
+  cons-fin-sequence-type-Monoid :
+    (n : ℕ) → type-Monoid M →
+    fin-sequence-type-Monoid n → fin-sequence-type-Monoid (succ-ℕ n)
+  cons-fin-sequence-type-Monoid = cons-fin-sequence
+
+  snoc-fin-sequence-type-Monoid :
+    (n : ℕ) → fin-sequence-type-Monoid n → type-Monoid M →
+    fin-sequence-type-Monoid (succ-ℕ n)
+  snoc-fin-sequence-type-Monoid = snoc-fin-sequence
+
+product-fin-sequence-type-Monoid :
+  {l : Level} (M : Monoid l) (n : ℕ) →
+  ( fin-sequence-type-Monoid M n) → type-Monoid M
+product-fin-sequence-type-Monoid M zero-ℕ f = unit-Monoid M
+product-fin-sequence-type-Monoid M (succ-ℕ n) f =
+  mul-Monoid M
+    ( product-fin-sequence-type-Monoid M n (f ∘ inl-Fin n))
+    ( f (inr star))
+
+sum-fin-sequence-ℕ : (k : ℕ) → (Fin k → ℕ) → ℕ
+sum-fin-sequence-ℕ = product-fin-sequence-type-Monoid ℕ-Monoid
+
+sum-count-ℕ : {l : Level} {A : UU l} (e : count A) → (f : A → ℕ) → ℕ
+sum-count-ℕ (k , Fin-k≃A) f = sum-fin-sequence-ℕ k (f ∘ map-equiv Fin-k≃A)
+
+abstract
+  number-of-elements-count-Σ' :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (k : ℕ) (e : Fin k ≃ A) →
+    (f : (x : A) → count (B x)) →
+    number-of-elements-count (count-Σ' k e f) ＝
+    sum-fin-sequence-ℕ k (λ x → number-of-elements-count (f (map-equiv e x)))
+  number-of-elements-count-Σ' zero-ℕ e f = refl
+  number-of-elements-count-Σ' (succ-ℕ k) e f =
+    ( number-of-elements-count-coproduct
+      ( count-Σ' k id-equiv (λ x → f (map-equiv e (inl x))))
+      ( f (map-equiv e (inr star)))) ∙
+    ( ap
+      ( _+ℕ (number-of-elements-count (f (map-equiv e (inr star)))))
+      ( number-of-elements-count-Σ' k id-equiv (λ x → f (map-equiv e (inl x)))))
+
+abstract
+  number-of-elements-count-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (e : count A)
+    (f : (x : A) → count (B x)) →
+    number-of-elements-count (count-Σ e f) ＝
+    sum-count-ℕ e (λ x → number-of-elements-count (f x))
+  number-of-elements-count-Σ (pair k e) f = number-of-elements-count-Σ' k e f
+
+count-fiber-count-Σ :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  has-decidable-equality A → count (Σ A B) → (x : A) → count (B x)
+count-fiber-count-Σ {B = B} d f x =
+  count-equiv
+    ( equiv-fiber-pr1 B x)
+    ( count-Σ f
+      ( λ z → count-eq d (pr1 z) x))
+
+count-fiber-count-Σ-count-base :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  count A → count (Σ A B) → (x : A) → count (B x)
+count-fiber-count-Σ-count-base e f x =
+  count-fiber-count-Σ (has-decidable-equality-count e) f x
+
+count-fiber-map-section-family :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
+  count (Σ A B) → ((x : A) → count (B x)) →
+  (t : Σ A B) → count (fiber (map-section-family b) t)
+count-fiber-map-section-family {l1} {l2} {A} {B} b e f (pair y z) =
+  count-equiv'
+    ( ( ( left-unit-law-Σ-is-contr
+            ( is-torsorial-Id' y)
+            ( pair y refl)) ∘e
+        ( inv-associative-Σ)) ∘e
+      ( equiv-tot (λ x → equiv-pair-eq-Σ (pair x (b x)) (pair y z))))
+    ( count-eq (has-decidable-equality-count (f y)) (b y) z)
+
+count-base-count-Σ :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (b : (x : A) → B x) →
+  count (Σ A B) → ((x : A) → count (B x)) → count A
+count-base-count-Σ b e f =
+  count-equiv
+    ( equiv-total-fiber (map-section-family b))
+    ( count-Σ e (count-fiber-map-section-family b e f))
+
+section-count-base-count-Σ' :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → count (Σ A B) →
+  (f : (x : A) → count (B x)) →
+  count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (f x)))) →
+  (x : A) → (B x) + (is-zero-ℕ (number-of-elements-count (f x)))
+section-count-base-count-Σ' e f g x with
+  is-decidable-is-zero-ℕ (number-of-elements-count (f x))
+... | inl p = inr p
+... | inr H with is-successor-is-nonzero-ℕ H
+... | (pair k p) = inl (map-equiv-count (f x) (tr Fin (inv p) (zero-Fin k)))
+
+count-base-count-Σ' :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} → count (Σ A B) →
+  (f : (x : A) → count (B x)) →
+  count (Σ A (λ x → is-zero-ℕ (number-of-elements-count (f x)))) → count A
+count-base-count-Σ' {l1} {l2} {A} {B} e f g =
+  count-base-count-Σ
+    ( section-count-base-count-Σ' e f g)
+    ( count-equiv'
+      ( left-distributive-Σ-coproduct)
+      ( count-coproduct e g))
+    ( λ x →
+      count-coproduct
+        ( f x)
+        ( count-eq has-decidable-equality-ℕ
+          ( number-of-elements-count (f x))
+          ( zero-ℕ)))
+```
+
+### If `A` can be counted and `Σ A P` can be counted for a subtype of `A`, then `P` is decidable
+
+```agda
+is-decidable-count-Σ :
+  {l1 l2 : Level} {X : UU l1} {P : X → UU l2} →
+  count X → count (Σ X P) → (x : X) → is-decidable (P x)
+is-decidable-count-Σ e f x =
+  is-decidable-count (count-fiber-count-Σ-count-base e f x)
 ```
 
 ## Corollary 16.1.8
@@ -477,3 +738,46 @@ We make two claims:
 
 The first claim follows from condition (2a) in Theorem 16.1.7, and the second claim follows from condition (2b) in Theorem 16.1.7. ◻
 
+```agda
+count-product :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count X → count Y → count (X × Y)
+pr1 (count-product (pair k e) (pair l f)) = k *ℕ l
+pr2 (count-product (pair k e) (pair l f)) =
+  (equiv-product e f) ∘e (inv-equiv (product-Fin k l))
+
+abstract
+  number-of-elements-count-product :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (count-A : count A)
+    (count-B : count B) →
+    number-of-elements-count (count-product count-A count-B) ＝
+    number-of-elements-count count-A *ℕ number-of-elements-count count-B
+  number-of-elements-count-product (pair k e) (pair l f) = refl
+
+equiv-left-factor :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (y : Y) →
+  (Σ (X × Y) (λ t → pr2 t ＝ y)) ≃ X
+equiv-left-factor {l1} {l2} {X} {Y} y =
+  ( ( right-unit-law-product) ∘e
+    ( equiv-tot
+      ( λ x → equiv-is-contr (is-torsorial-Id' y) is-contr-unit))) ∘e
+  ( associative-Σ)
+
+count-left-factor :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (X × Y) → Y → count X
+count-left-factor e y =
+  count-equiv
+    ( equiv-left-factor y)
+    ( count-Σ e
+      ( λ z →
+        count-eq
+          ( has-decidable-equality-right-factor
+            ( has-decidable-equality-count e)
+            ( pr1 z))
+          ( pr2 z)
+          ( y)))
+
+count-right-factor :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (X × Y) → X → count Y
+count-right-factor e x =
+  count-left-factor (count-equiv commutative-product e) x
+```
