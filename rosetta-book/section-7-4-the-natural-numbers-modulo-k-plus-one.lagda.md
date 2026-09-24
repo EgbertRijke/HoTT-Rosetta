@@ -129,6 +129,14 @@ neg-two-Fin zero-ℕ = inr star
 neg-two-Fin (succ-ℕ k) = inl (inr star)
 ```
 
+```agda
+one-Fin : (k : ℕ) → Fin (succ-ℕ k)
+one-Fin k = succ-Fin (succ-ℕ k) (zero-Fin k)
+
+is-one-Fin : (k : ℕ) → Fin k → UU lzero
+is-one-Fin (succ-ℕ k) x = x ＝ one-Fin k
+```
+
 ## Definition 7.4.3
 
 For any `k:ℕ`, we define the map `[_]_{k+1}:ℕ→Fin{k+1}` recursively on `x` by
