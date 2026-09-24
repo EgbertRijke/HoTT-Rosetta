@@ -18,6 +18,7 @@ open import section-6-3-observational-equality-of-the-natural-numbers
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-7-3-the-standard-finite-types
 open import section-8-1-decidability-and-decidable-equality
+open import section-12-1-propositions
 ```
 
 ## Problem statement
@@ -172,4 +173,44 @@ is-decidable-is-neg-one-ℤ x = has-decidable-equality-ℤ x neg-one-ℤ
 ℤ-Discrete-Type : Discrete-Type lzero
 pr1 ℤ-Discrete-Type = ℤ
 pr2 ℤ-Discrete-Type = has-decidable-equality-ℤ
+```
+
+## Supplement
+
+### The predicates of being on the left and on the right
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  is-left-Prop : X + Y → Prop lzero
+  is-left-Prop (inl x) = unit-Prop
+  is-left-Prop (inr x) = empty-Prop
+
+  is-left : X + Y → UU lzero
+  is-left x = type-Prop (is-left-Prop x)
+
+  is-prop-is-left : (x : X + Y) → is-prop (is-left x)
+  is-prop-is-left x = is-prop-type-Prop (is-left-Prop x)
+
+  is-right-Prop : X + Y → Prop lzero
+  is-right-Prop (inl x) = empty-Prop
+  is-right-Prop (inr x) = unit-Prop
+
+  is-right : X + Y → UU lzero
+  is-right x = type-Prop (is-right-Prop x)
+
+  is-prop-is-right : (x : X + Y) → is-prop (is-right x)
+  is-prop-is-right x = is-prop-type-Prop (is-right-Prop x)
+
+  is-left-or-is-right : (x : X + Y) → is-left x + is-right x
+  is-left-or-is-right (inl x) = inl star
+  is-left-or-is-right (inr x) = inr star
+
+  left-is-left : (x : X + Y) → is-left x → X
+  left-is-left (inl x) _ = x
+
+  right-is-right : (x : X + Y) → is-right x → Y
+  right-is-right (inr y) _ = y
 ```

@@ -11,6 +11,7 @@ open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-3-the-action-on-identifications-of-functions
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-7-3-the-standard-finite-types
 open import exercise-7-5-observational-equality-finite-types
@@ -19,7 +20,10 @@ open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
+open import exercise-10-3-contractible-equivalences
+open import section-11-1-families-of-equivalences
 open import section-11-2-the-fundamental-theorem
+open import section-11-4-embeddings
 open import section-12-1-propositions
 ```
 
@@ -286,3 +290,40 @@ module _
     is-equiv-map-compute-eq-coproduct-inr-inr =
       is-equiv-map-equiv compute-eq-coproduct-inr-inr
 ```
+
+### The left and right inclusions into a coproduct are embeddings
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  abstract
+    is-emb-inl : is-emb (inl {A = A} {B = B})
+    is-emb-inl x =
+      fundamental-theorem-id
+        ( is-contr-equiv
+          ( Σ A (Id x))
+          ( equiv-tot (compute-eq-coproduct-inl-inl x))
+          ( is-torsorial-Id x))
+        ( λ y → ap inl)
+
+  emb-inl : A ↪ (A + B)
+  pr1 emb-inl = inl
+  pr2 emb-inl = is-emb-inl
+
+  abstract
+    is-emb-inr : is-emb (inr {A = A} {B = B})
+    is-emb-inr x =
+      fundamental-theorem-id
+        ( is-contr-equiv
+          ( Σ B (Id x))
+          ( equiv-tot (compute-eq-coproduct-inr-inr x))
+          ( is-torsorial-Id x))
+        ( λ y → ap inr)
+
+  emb-inr : B ↪ (A + B)
+  pr1 emb-inr = inr
+  pr2 emb-inr = is-emb-inr
+```
+
