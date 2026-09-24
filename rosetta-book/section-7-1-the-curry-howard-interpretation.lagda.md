@@ -218,3 +218,14 @@ To address this dissimilarity between general types and logic, we will introduce
 In Chapter 12 we will define the type `is-prop(A)`, which expresses the property that the type `A` is a proposition.
 Furthermore, we will introduce the *propositional truncation* operation in Chapter 14, which we will use to interpret logic into type theory in such a way that all logical assertions are interpreted as types that satisfy the condition of being a proposition.
 
+## Supplements
+
+### `0 | x` implies `x = 0` and `x | 1` implies `x = 1`
+
+```agda
+is-zero-div-zero-ℕ : (x : ℕ) → div-ℕ zero-ℕ x → is-zero-ℕ x
+is-zero-div-zero-ℕ x H = antisymmetric-div-ℕ x zero-ℕ (div-zero-ℕ x) H
+
+is-zero-is-zero-div-ℕ : (x y : ℕ) → div-ℕ x y → is-zero-ℕ x → is-zero-ℕ y
+is-zero-is-zero-div-ℕ .zero-ℕ y d refl = is-zero-div-zero-ℕ y d
+```
