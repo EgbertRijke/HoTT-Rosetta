@@ -25,7 +25,7 @@ open import section-11-1-families-of-equivalences
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-3-sets
-open import exercise-12-3-injective-maps-into-sets
+open import exercise-12-4-coproduct-truncation
 open import exercise-12-7-truncated-products
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-5-the-strong-induction-principle-of-the-natural-numbers
@@ -51,7 +51,7 @@ We claim that there is a function
 ```
 
 Of course, we cannot directly use the universal property of the propositional truncation here.
-However, there is at most one *minimal* natural number `x` in `P`.
+However, there is at most one _minimal_ natural number `x` in `P`.
 In other words, we claim that the type
 
 ```text
@@ -123,7 +123,7 @@ module _
       ( is-lower-bound-minimal-element-ℕ)
 ```
 
-By the assumption that each `P(x)` is a proposition, it now follows that any two natural numbers `x, y : ℕ` that are in `P` and that are both lower bounds of `P` are equal as elements in the type of (*) if and only if they are equal as natural numbers.
+By the assumption that each `P(x)` is a proposition, it now follows that any two natural numbers `x, y : ℕ` that are in `P` and that are both lower bounds of `P` are equal as elements in the type of (\*) if and only if they are equal as natural numbers.
 
 ```agda
 module _
@@ -153,7 +153,7 @@ module _
 
 Furthermore, since both `x` and `y` are lower bounds of `P`, it follows that `x ≤ y` and `y ≤ x`, so indeed `x = y` holds.
 
-By the observation that the type in (*) is a proposition, we may define a map
+By the observation that the type in (\*) is a proposition, we may define a map
 
 ```text
   ‖Σ(x : ℕ) P(x)‖ → Σ(x : ℕ) P(x) × is-lower-bound_P(x)
@@ -235,6 +235,7 @@ we constructed in Example 14.4.1 for decidable subtypes of `ℕ` is a rare case 
 ```text
   ‖A‖ → A.
 ```
+
 We say that the type `A` satisfies the **principle of global choice** if there is such a function `‖A‖ → A`.
 Using the univalence axiom, we will see in Corollary 17.5.3 that not every type satisfies the principle of global choice.
 

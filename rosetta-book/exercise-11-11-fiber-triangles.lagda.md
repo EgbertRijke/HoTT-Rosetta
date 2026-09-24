@@ -44,4 +44,4 @@ Show that `h` is an equivalence if and only if `fib-triangle(h,H)` is a family o
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

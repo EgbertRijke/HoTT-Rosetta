@@ -137,6 +137,15 @@ module _
   emb-equiv : (A ≃ B) → (A ↪ B)
   pr1 (emb-equiv e) = map-equiv e
   pr2 (emb-equiv e) = is-emb-equiv e
+
+  equiv-ap :
+    (e : A ≃ B) (x y : A) → (x ＝ y) ≃ (map-equiv e x ＝ map-equiv e y)
+  pr1 (equiv-ap e x y) = ap (map-equiv e)
+  pr2 (equiv-ap e x y) = is-emb-is-equiv (is-equiv-map-equiv e) x y
+
+  map-inv-equiv-ap :
+    (e : A ≃ B) (x y : A) → map-equiv e x ＝ map-equiv e y → x ＝ y
+  map-inv-equiv-ap e x y = map-inv-equiv (equiv-ap e x y)
 ```
 
 ## Supplement

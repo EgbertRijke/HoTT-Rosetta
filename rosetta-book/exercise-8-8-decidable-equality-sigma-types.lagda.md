@@ -19,4 +19,4 @@ Show that if (i) holds, then (ii) and (iii) are equivalent, and show that if `B`
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

@@ -8,8 +8,12 @@ open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
+open import section-5-3-the-action-on-identifications-of-functions
 open import section-6-4-peanos-seventh-and-eighth-axioms
+open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
@@ -17,9 +21,13 @@ open import exercise-10-1-identity-types-contractible
 open import exercise-10-3-contractible-equivalences
 open import exercise-10-5-contractible-products
 open import section-11-1-families-of-equivalences
+open import section-11-2-the-fundamental-theorem
 open import section-11-4-embeddings
+open import exercise-11-2-paths-along-equivalences
 open import section-12-1-propositions
 open import section-12-2-subtypes
+open import section-12-4-general-truncation-levels
+open import exercise-12-6-truncated-sigma-types
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-2-identity-systems-on-pi-types
 open import section-13-4-composing-with-equivalences
@@ -132,8 +140,195 @@ module _
 
 ### Exercise 13.4(d)
 
-BENCHMARK PROBLEM
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  htpy-equiv : A ≃ B → A ≃ B → UU (l1 ⊔ l2)
+  htpy-equiv e e' = (map-equiv e) ~ (map-equiv e')
+
+  _~e_ = htpy-equiv
+
+  extensionality-equiv : (f g : A ≃ B) → (f ＝ g) ≃ htpy-equiv f g
+  extensionality-equiv f =
+    extensionality-type-subtype
+      ( is-equiv-Prop)
+      ( pr2 f)
+      ( refl-htpy' (pr1 f))
+      ( λ g → equiv-funext)
+
+  abstract
+    is-torsorial-htpy-equiv :
+      (e : A ≃ B) → is-torsorial (htpy-equiv e)
+    is-torsorial-htpy-equiv e =
+      fundamental-theorem-id'
+        ( map-equiv ∘ extensionality-equiv e)
+        ( is-equiv-map-equiv ∘ extensionality-equiv e)
+
+  refl-htpy-equiv : (e : A ≃ B) → htpy-equiv e e
+  refl-htpy-equiv e = refl-htpy
+
+  eq-htpy-equiv : {e e' : A ≃ B} → htpy-equiv e e' → e ＝ e'
+  eq-htpy-equiv {e} {e'} = map-inv-equiv (extensionality-equiv e e')
+
+  htpy-eq-equiv : {e e' : A ≃ B} → e ＝ e' → htpy-equiv e e'
+  htpy-eq-equiv {e} {e'} = map-equiv (extensionality-equiv e e')
+
+  htpy-eq-map-equiv :
+    {e e' : A ≃ B} → (map-equiv e) ＝ (map-equiv e') → htpy-equiv e e'
+  htpy-eq-map-equiv = htpy-eq
+```
 
 ### Exercise 13.4(e)
 
-BENCHMARK PROBLEM
+### The type of equivalences between truncated types is truncated
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-trunc-equiv-is-trunc :
+    (k : 𝕋) → is-trunc k A → is-trunc k B → is-trunc k (A ≃ B)
+  is-trunc-equiv-is-trunc k H K =
+    is-trunc-Σ
+      ( is-trunc-function-type k K)
+      ( λ f →
+        is-trunc-Σ
+          ( is-trunc-Σ
+            ( is-trunc-function-type k H)
+            ( λ g →
+              is-trunc-Π k (λ y → is-trunc-Id K (f (g y)) y)))
+          ( λ _ →
+            is-trunc-Σ
+              ( is-trunc-function-type k H)
+              ( λ h →
+                is-trunc-Π k (λ x → is-trunc-Id H (h (f x)) x))))
+
+type-equiv-Truncated-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : Truncated-Type l1 k) (B : Truncated-Type l2 k) →
+  UU (l1 ⊔ l2)
+type-equiv-Truncated-Type A B =
+  type-Truncated-Type A ≃ type-Truncated-Type B
+
+is-trunc-type-equiv-Truncated-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : Truncated-Type l1 k) (B : Truncated-Type l2 k) →
+  is-trunc k (type-equiv-Truncated-Type A B)
+is-trunc-type-equiv-Truncated-Type A B =
+  is-trunc-equiv-is-trunc _
+    ( is-trunc-type-Truncated-Type A)
+    ( is-trunc-type-Truncated-Type B)
+
+equiv-Truncated-Type :
+  {l1 l2 : Level} {k : 𝕋} (A : Truncated-Type l1 k) (B : Truncated-Type l2 k) →
+  Truncated-Type (l1 ⊔ l2) k
+pr1 (equiv-Truncated-Type A B) = type-equiv-Truncated-Type A B
+pr2 (equiv-Truncated-Type A B) = is-trunc-type-equiv-Truncated-Type A B
+```
+
+## Supplement
+
+### The groupoid laws for equivalences
+
+#### Composition of equivalences is associative
+
+```agda
+associative-comp-equiv :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
+  (e : A ≃ B) (f : B ≃ C) (g : C ≃ D) →
+  ((g ∘e f) ∘e e) ＝ (g ∘e (f ∘e e))
+associative-comp-equiv e f g = eq-equiv-eq-map-equiv refl
+```
+
+#### Unit laws for composition of equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  left-unit-law-equiv : (e : X ≃ Y) → (id-equiv ∘e e) ＝ e
+  left-unit-law-equiv e = eq-equiv-eq-map-equiv refl
+
+  right-unit-law-equiv : (e : X ≃ Y) → (e ∘e id-equiv) ＝ e
+  right-unit-law-equiv e = eq-equiv-eq-map-equiv refl
+```
+
+#### A coherence law for the unit laws for composition of equivalences
+
+```agda
+coh-unit-laws-equiv :
+  {l : Level} {X : UU l} →
+  left-unit-law-equiv (id-equiv {A = X}) ＝
+  right-unit-law-equiv (id-equiv {A = X})
+coh-unit-laws-equiv = ap eq-equiv-eq-map-equiv refl
+```
+
+#### Inverse laws for composition of equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  left-inverse-law-equiv : (e : X ≃ Y) → ((inv-equiv e) ∘e e) ＝ id-equiv
+  left-inverse-law-equiv e =
+    eq-htpy-equiv (is-retraction-map-inv-is-equiv (is-equiv-map-equiv e))
+
+  right-inverse-law-equiv : (e : X ≃ Y) → (e ∘e (inv-equiv e)) ＝ id-equiv
+  right-inverse-law-equiv e =
+    eq-htpy-equiv (is-section-map-inv-is-equiv (is-equiv-map-equiv e))
+```
+
+#### `inv-equiv` is a fibered involution on equivalences
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  inv-inv-equiv : (e : X ≃ Y) → (inv-equiv (inv-equiv e)) ＝ e
+  inv-inv-equiv e = eq-equiv-eq-map-equiv refl
+
+  inv-inv-equiv' : (e : Y ≃ X) → (inv-equiv (inv-equiv e)) ＝ e
+  inv-inv-equiv' e = eq-equiv-eq-map-equiv refl
+
+  is-equiv-inv-equiv : is-equiv (inv-equiv {A = X} {B = Y})
+  is-equiv-inv-equiv =
+    is-equiv-is-invertible
+      ( inv-equiv)
+      ( inv-inv-equiv')
+      ( inv-inv-equiv)
+
+  equiv-inv-equiv : (X ≃ Y) ≃ (Y ≃ X)
+  pr1 equiv-inv-equiv = inv-equiv
+  pr2 equiv-inv-equiv = is-equiv-inv-equiv
+```
+
+#### Taking the inverse equivalence distributes over composition
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} {Z : UU l3}
+  where
+
+  distributive-inv-comp-equiv :
+    (e : X ≃ Y) (f : Y ≃ Z) →
+    inv-equiv (f ∘e e) ＝ (inv-equiv e) ∘e (inv-equiv f)
+  distributive-inv-comp-equiv e f =
+    eq-htpy-equiv
+      ( λ x →
+        map-eq-transpose-equiv-inv
+          ( f ∘e e)
+          ( ( ap (λ g → map-equiv g x) (inv (right-inverse-law-equiv f))) ∙
+            ( ap
+              ( λ g → map-equiv (f ∘e (g ∘e (inv-equiv f))) x)
+              ( inv (right-inverse-law-equiv e)))))
+
+  distributive-map-inv-comp-equiv :
+    (e : X ≃ Y) (f : Y ≃ Z) →
+    map-inv-equiv (f ∘e e) ＝ map-inv-equiv e ∘ map-inv-equiv f
+  distributive-map-inv-comp-equiv e f =
+    ap map-equiv (distributive-inv-comp-equiv e f)
+```

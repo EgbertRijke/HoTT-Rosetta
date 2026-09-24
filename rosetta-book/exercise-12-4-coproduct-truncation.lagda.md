@@ -19,6 +19,7 @@ open import section-7-3-the-standard-finite-types
 open import exercise-7-3-divisibility-factorials
 open import exercise-7-5-observational-equality-finite-types
 open import section-8-1-decidability-and-decidable-equality
+open import exercise-8-7-decidable-equality-coproducts
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import exercise-10-1-identity-types-contractible
@@ -26,7 +27,6 @@ open import section-11-5-disjointness-of-coproducts
 open import section-12-1-propositions
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
-open import exercise-12-3-injective-maps-into-sets
 ```
 
 ## Problem statement
@@ -165,6 +165,13 @@ pr2 (coproduct-Set (A , is-set-A) (B , is-set-B)) =
 ### Propositional case distinctions about inequalities of natural numbers
 
 ```agda
+is-prop-leq-ℕ :
+  (m n : ℕ) → is-prop (leq-ℕ m n)
+is-prop-leq-ℕ zero-ℕ zero-ℕ = is-prop-unit
+is-prop-leq-ℕ zero-ℕ (succ-ℕ n) = is-prop-unit
+is-prop-leq-ℕ (succ-ℕ m) zero-ℕ = is-prop-empty
+is-prop-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-prop-leq-ℕ m n
+
 is-prop-leq-succ-cases :
   (m n : ℕ) → is-prop ((m ≤-ℕ n) + (m ＝ succ-ℕ n))
 is-prop-leq-succ-cases m n =
@@ -237,19 +244,4 @@ pr2 (extensionality-Fin k x y) =
 Fin-Discrete-Type : ℕ → Discrete-Type lzero
 pr1 (Fin-Discrete-Type k) = Fin k
 pr2 (Fin-Discrete-Type k) = has-decidable-equality-Fin k
-
-is-decidable-is-zero-Fin :
-  {k : ℕ} (x : Fin k) → is-decidable (is-zero-Fin k x)
-is-decidable-is-zero-Fin {succ-ℕ k} x =
-  has-decidable-equality-Fin (succ-ℕ k) x (zero-Fin k)
-
-is-decidable-is-neg-one-Fin :
-  {k : ℕ} (x : Fin k) → is-decidable (is-neg-one-Fin k x)
-is-decidable-is-neg-one-Fin {succ-ℕ k} x =
-  has-decidable-equality-Fin (succ-ℕ k) x (neg-one-Fin k)
-
-is-decidable-is-one-Fin :
-  {k : ℕ} (x : Fin k) → is-decidable (is-one-Fin k x)
-is-decidable-is-one-Fin {succ-ℕ k} x =
-  has-decidable-equality-Fin (succ-ℕ k) x (one-Fin k)
 ```

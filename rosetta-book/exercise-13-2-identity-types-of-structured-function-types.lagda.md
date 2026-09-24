@@ -56,4 +56,4 @@ where `f:A→ B` and `g:X→ Y` are given.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

@@ -19,4 +19,4 @@ Show that any increasing list `l` of primes of which the product is `n` is equal
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

@@ -18,33 +18,20 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 
 ## Problem statement
 
-The observational equality on `Fin{k}` is a binary relation
+The observational equality on `Fin_{k}` is a binary relation
+
 ```text
-Eq-Fin_{k}:Fin{k}→(Fin{k}→𝒰_0)
+  Eq-Fin_{k}:Fin_{k}→(Fin_{k}→𝒰_0)
 ```
+
 defined recursively by
+
 ```text
-Eq-Fin_{k+1}(i(x),i(y)) ≔ Eq-Fin_k(x,y) Eq-Fin_{k+1}(i(x),⋆) ≔ empty
-Eq-Fin_{k+1}(⋆,i(y)) ≔ empty Eq-Fin_{k+1}(⋆,⋆) ≔ unit.
+  Eq-Fin_{k+1}(i(x),i(y)) ≔ Eq-Fin_k(x,y)
+  Eq-Fin_{k+1}(i(x),⋆) ≔ empty
+  Eq-Fin_{k+1}(⋆,i(y)) ≔ empty
+  Eq-Fin_{k+1}(⋆,⋆) ≔ unit.
 ```
-
-Show that
-```text
-(x=y)↔ Eq-Fin_k(x,y)
-```
-for any two elements `x,y:Fin{k}`.
-
-Show that the function `i:Fin{k}→Fin{k+1}` is injective, for each `k:ℕ`.
-
-Show that
-```text
-succ-Fin_{k+1}(i(x))≠ 0
-```
-for any `x:Fin{k}`.
-
-Show that function `succ-Fin_k:Fin{k}→Fin{k}` is injective, for each `k:ℕ`.
-
-## Solution
 
 ```agda
 Eq-Fin : (k : ℕ) → Fin k → Fin k → UU lzero
@@ -52,6 +39,41 @@ Eq-Fin (succ-ℕ k) (inl x) (inl y) = Eq-Fin k x y
 Eq-Fin (succ-ℕ k) (inl x) (inr y) = empty
 Eq-Fin (succ-ℕ k) (inr x) (inl y) = empty
 Eq-Fin (succ-ℕ k) (inr x) (inr y) = unit
+```
+
+### Exercise 7.5(a)
+
+Show that
+
+```text
+  (x = y) ↔ Eq-Fin_k(x,y)
+```
+
+for any two elements `x, y : Fin_{k}`.
+
+### Exercise 7.5(b)
+
+Show that the function `i : Fin_{k} → Fin_{k + 1}` is injective, for each `k : ℕ`.
+
+### Exercise 7.5(c)
+
+Show that
+
+```text
+  succ-Fin_{k+1}(i(x)) ≠ 0
+```
+
+for any `x : Fin_{k}`.
+
+### Exercise 7.5(d)
+
+Show that function `succ-Fin_k : Fin_{k} → Fin_{k}` is injective, for each `k : ℕ`.
+
+## Solutions
+
+### Exercise 7.5(a)
+
+```agda
 refl-Eq-Fin : (k : ℕ) (x : Fin k) → Eq-Fin k x x
 refl-Eq-Fin (succ-ℕ k) (inl x) = refl-Eq-Fin k x
 refl-Eq-Fin (succ-ℕ k) (inr x) = star
@@ -65,29 +87,16 @@ eq-Eq-Fin (succ-ℕ k) {inl x} {inl y} e = ap inl (eq-Eq-Fin k e)
 eq-Eq-Fin (succ-ℕ k) {inr star} {inr star} star = refl
 ```
 
-```agda
-is-zero-Fin : (k : ℕ) → Fin k → UU lzero
-is-zero-Fin (succ-ℕ k) x = x ＝ zero-Fin k
-
-is-zero-Fin' : (k : ℕ) → Fin k → UU lzero
-is-zero-Fin' (succ-ℕ k) x = zero-Fin k ＝ x
-
-is-nonzero-Fin : (k : ℕ) → Fin k → UU lzero
-is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
-```
+### Exercise 7.5(b)
 
 ```agda
 is-injective-inl-Fin : (k : ℕ) → is-injective (inl-Fin k)
 is-injective-inl-Fin k refl = refl
 ```
 
-```agda
-neq-zero-skip-zero-Fin :
-  {k : ℕ} {x : Fin k} →
-  is-nonzero-Fin (succ-ℕ k) (skip-zero-Fin k x)
-neq-zero-skip-zero-Fin {succ-ℕ k} {inl x} p =
-  neq-zero-skip-zero-Fin {k = k} {x = x} (is-injective-inl-Fin (succ-ℕ k) p)
+### Exercise 7.5(c)
 
+```agda
 neq-zero-succ-Fin :
   {k : ℕ} {x : Fin k} →
   is-nonzero-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl-Fin k x))
@@ -95,6 +104,8 @@ neq-zero-succ-Fin {succ-ℕ k} {inl x} p =
   neq-zero-succ-Fin (is-injective-inl-Fin (succ-ℕ k) p)
 neq-zero-succ-Fin {succ-ℕ k} {inr star} ()
 ```
+
+### Exercise 7.5(d)
 
 ```agda
 is-injective-skip-zero-Fin : (k : ℕ) → is-injective (skip-zero-Fin k)

@@ -19,4 +19,4 @@ Show that `f+g` is an embedding if and only if both `f` and `g` are embeddings.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

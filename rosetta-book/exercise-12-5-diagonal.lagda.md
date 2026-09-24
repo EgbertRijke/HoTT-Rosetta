@@ -20,4 +20,4 @@ Show that `A` is `(k+1)`-truncated if and only if `\delta_A:A→ A× A` is `k`-t
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

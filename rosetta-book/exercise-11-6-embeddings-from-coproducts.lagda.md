@@ -20,4 +20,4 @@ f(a)≠ g(b)
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

@@ -100,6 +100,15 @@ zero-Fin : (k : ℕ) → Fin (succ-ℕ k)
 zero-Fin zero-ℕ = inr star
 zero-Fin (succ-ℕ k) = inl (zero-Fin k)
 
+is-zero-Fin : (k : ℕ) → Fin k → UU lzero
+is-zero-Fin (succ-ℕ k) x = x ＝ zero-Fin k
+
+is-zero-Fin' : (k : ℕ) → Fin k → UU lzero
+is-zero-Fin' (succ-ℕ k) x = zero-Fin k ＝ x
+
+is-nonzero-Fin : (k : ℕ) → Fin k → UU lzero
+is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
+
 skip-zero-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
 skip-zero-Fin (succ-ℕ k) (inl x) = inl (skip-zero-Fin k x)
 skip-zero-Fin (succ-ℕ k) (inr star) = inr star

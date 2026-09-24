@@ -55,4 +55,4 @@ Show that `𝕀` is contractible.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

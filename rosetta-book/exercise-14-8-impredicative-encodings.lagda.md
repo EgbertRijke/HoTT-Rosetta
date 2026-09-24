@@ -31,4 +31,4 @@ only satisfies the universal property of the propositional truncation with respe
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
