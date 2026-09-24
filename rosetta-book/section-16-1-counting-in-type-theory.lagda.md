@@ -22,6 +22,7 @@ open import section-7-3-the-standard-finite-types
 open import section-7-4-the-natural-numbers-modulo-k-plus-one
 open import exercise-7-5-observational-equality-finite-types
 open import section-8-1-decidability-and-decidable-equality
+open import exercise-8-6-decidable-equality-products
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
@@ -779,22 +780,4 @@ count-right-factor :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (X × Y) → X → count Y
 count-right-factor e x =
   count-left-factor (count-equiv commutative-product e) x
-
-abstract
-  product-number-of-elements-product :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} (count-AB : count (A × B)) →
-    (a : A) (b : B) →
-    ( number-of-elements-count (count-left-factor count-AB b)) *ℕ
-    ( number-of-elements-count (count-right-factor count-AB a)) ＝
-    ( number-of-elements-count count-AB)
-  product-number-of-elements-product count-AB a b =
-    ( inv
-      ( number-of-elements-count-product
-        ( count-left-factor count-AB b)
-        ( count-right-factor count-AB a))) ∙
-    ( double-counting
-      ( count-product
-        ( count-left-factor count-AB b)
-        ( count-right-factor count-AB a))
-      ( count-AB))
 ```
