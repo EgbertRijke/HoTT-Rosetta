@@ -44,30 +44,16 @@ A **(typal) equivalence relation** on `A` is a reflexive, symmetric, and transit
 ```agda
 Relation : {l1 : Level} (l : Level) (A : UU l1) → UU (l1 ⊔ lsuc l)
 Relation l A = A → A → UU l
-```
 
-```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
 
   is-reflexive : UU (l1 ⊔ l2)
   is-reflexive = (x : A) → R x x
-```
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
-  where
 
   is-symmetric : UU (l1 ⊔ l2)
   is-symmetric = (x y : A) → R x y → R y x
-```
-
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
-  where
 
   is-transitive : UU (l1 ⊔ l2)
   is-transitive = (x y z : A) → R y z → R x y → R x z

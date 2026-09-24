@@ -243,3 +243,11 @@ abstract
 ## Agda-unimath sources
 
 - The proofs of the unit laws, the succesor laws, and both associativity and commutativity of addition are given in `elementary-number-theory.addition-natural-numbers`
+
+## Supplement
+
+```agda
+ap-add-ℕ :
+  {m n m' n' : ℕ} → m ＝ m' → n ＝ n' → m +ℕ n ＝ m' +ℕ n'
+ap-add-ℕ p q = ap-binary add-ℕ p q
+```
