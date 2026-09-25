@@ -25,10 +25,6 @@ Complete the proof of Proposition 7.1.5.
 ## Solution
 
 ```agda
-concatenate-div-eq-ℕ :
-  {x y z : ℕ} → div-ℕ x y → y ＝ z → div-ℕ x z
-concatenate-div-eq-ℕ p refl = p
-
 div-left-summand-ℕ :
   (d x y : ℕ) → div-ℕ d y → div-ℕ d (x +ℕ y) → div-ℕ d x
 div-left-summand-ℕ zero-ℕ x y (pair m q) (pair n p) =
