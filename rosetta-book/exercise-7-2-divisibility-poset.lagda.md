@@ -71,3 +71,15 @@ abstract
   pr2 (transitive-div-ℕ x y z (pair l q) (pair k p)) =
     associative-mul-ℕ l k x ∙ (ap (l *ℕ_) p ∙ q)
 ```
+
+## Supplements
+
+### `0 | x` implies `x = 0` and `x | 1` implies `x = 1`
+
+```agda
+is-zero-div-zero-ℕ : (x : ℕ) → div-ℕ zero-ℕ x → is-zero-ℕ x
+is-zero-div-zero-ℕ x H = antisymmetric-div-ℕ x zero-ℕ (div-zero-ℕ x) H
+
+is-zero-is-zero-div-ℕ : (x y : ℕ) → div-ℕ x y → is-zero-ℕ x → is-zero-ℕ y
+is-zero-is-zero-div-ℕ .zero-ℕ y d refl = is-zero-div-zero-ℕ y d
+```
