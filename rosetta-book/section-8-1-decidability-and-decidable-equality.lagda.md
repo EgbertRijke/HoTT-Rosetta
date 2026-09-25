@@ -15,9 +15,11 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+-- open import exercise-6-1-injectivity-addition-multiplication
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-3-order-natural-numbers
 open import exercise-6-4-strict-order-natural-numbers
+open import exercise-6-5-distance-natural-numbers
 open import section-7-1-the-curry-howard-interpretation
 open import section-7-2-the-congruence-relations-on-natural-numbers
 open import section-7-3-the-standard-finite-types
@@ -25,9 +27,8 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 open import section-7-5-the-cyclic-groups
 open import exercise-7-5-observational-equality-finite-types
 open import section-6-3-observational-equality-of-the-natural-numbers
-open import exercise-6-1-injectivity-addition-multiplication
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-7-2-divisibility-poset
-open import exercise-6-5-distance-natural-numbers
 open import exercise-7-1-divisibility-three-for-two
 ```
 
@@ -377,33 +378,6 @@ Therefore it suffices to show that `d + 1 | x` is decidable.
 
 By Theorem 7.4.7 it follows that `d + 1 | x` holds if and only if we have an identification `[x]_{d + 1}=0` in `Fin{d + 1}`.
 Therefore the claim follows from the fact that `Fin{d + 1}` has decidable equality. ◻
-
-```agda
-is-decidable-is-zero-Fin :
-  {k : ℕ} (x : Fin k) → is-decidable (is-zero-Fin k x)
-is-decidable-is-zero-Fin {succ-ℕ k} x =
-  has-decidable-equality-Fin (succ-ℕ k) x (zero-Fin k)
-```
-
-```agda
-is-zero-div-zero-ℕ : (x : ℕ) → div-ℕ zero-ℕ x → is-zero-ℕ x
-is-zero-div-zero-ℕ x H = antisymmetric-div-ℕ x zero-ℕ (div-zero-ℕ x) H
-```
-
-```agda
-is-zero-mod-succ-ℕ :
-  (k x : ℕ) → div-ℕ (succ-ℕ k) x → is-zero-Fin (succ-ℕ k) (mod-succ-ℕ k x)
-is-zero-mod-succ-ℕ k x d =
-  eq-mod-succ-cong-ℕ k x zero-ℕ
-    ( concatenate-div-eq-ℕ d (inv (right-unit-law-dist-ℕ x)))
-
-div-is-zero-mod-succ-ℕ :
-  (k x : ℕ) → is-zero-Fin (succ-ℕ k) (mod-succ-ℕ k x) → div-ℕ (succ-ℕ k) x
-div-is-zero-mod-succ-ℕ k x p =
-  concatenate-div-eq-ℕ
-    ( cong-eq-mod-succ-ℕ k x zero-ℕ p)
-    ( right-unit-law-dist-ℕ x)
-```
 
 ```agda
 is-decidable-div-ℕ : (d x : ℕ) → is-decidable (div-ℕ d x)
