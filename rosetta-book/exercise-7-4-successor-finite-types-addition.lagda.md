@@ -29,11 +29,6 @@ for any `x:Fin{k+1}`.
 ## Solution
 
 ```agda
-one-Fin : (k : ℕ) → Fin (succ-ℕ k)
-one-Fin k = succ-Fin (succ-ℕ k) (zero-Fin k)
-```
-
-```agda
 is-one-nat-one-Fin :
   (k : ℕ) → is-one-ℕ (nat-Fin (succ-ℕ (succ-ℕ k)) (one-Fin (succ-ℕ k)))
 is-one-nat-one-Fin zero-ℕ = refl
