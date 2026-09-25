@@ -15,6 +15,7 @@ open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-6-the-laws-of-addition-on-natural-numbers
 open import exercise-5-5-semiring-laws-natural-numbers
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-1-injectivity-addition-multiplication
 open import exercise-6-3-order-natural-numbers
 open import exercise-6-4-strict-order-natural-numbers
@@ -131,7 +132,7 @@ abstract opaque
     ( ap
       ( _+ℕ (remainder-euclidean-division-ℕ (succ-ℕ k) x))
       ( ( pr2 (cong-euclidean-division-ℕ (succ-ℕ k) x)) ∙
-        ( commutative-dist-ℕ x
+        ( symmetric-dist-ℕ x
           ( remainder-euclidean-division-ℕ (succ-ℕ k) x)))) ∙
     ( is-difference-dist-ℕ' (remainder-euclidean-division-ℕ (succ-ℕ k) x) x
       ( leq-nat-mod-succ-ℕ k x))
