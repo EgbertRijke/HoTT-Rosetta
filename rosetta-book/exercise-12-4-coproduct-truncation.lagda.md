@@ -240,8 +240,4 @@ pr2 (extensionality-Fin k x y) =
     ( is-set-Fin k x y)
     ( is-prop-Eq-Fin k x y)
     ( eq-Eq-Fin k)
-
-Fin-Discrete-Type : ℕ → Discrete-Type lzero
-pr1 (Fin-Discrete-Type k) = Fin k
-pr2 (Fin-Discrete-Type k) = has-decidable-equality-Fin k
 ```
