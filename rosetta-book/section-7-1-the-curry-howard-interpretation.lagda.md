@@ -12,6 +12,7 @@ open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import exercise-5-5-semiring-laws-natural-numbers
+open import section-6-4-peanos-seventh-and-eighth-axioms
 ```
 
 The *Curry-Howard interpretation* is an interpretation of logic into type theory.
@@ -43,6 +44,21 @@ d| n≔ Σ(k:ℕ) d· k=n.
 ```agda
 div-ℕ : ℕ → ℕ → UU lzero
 div-ℕ m n = Σ ℕ (λ k → k *ℕ m ＝ n)
+```
+### Concatenating equality and divisibility
+
+```agda
+concatenate-eq-div-ℕ :
+  {x y z : ℕ} → x ＝ y → div-ℕ y z → div-ℕ x z
+concatenate-eq-div-ℕ refl p = p
+
+concatenate-div-eq-ℕ :
+  {x y z : ℕ} → div-ℕ x y → y ＝ z → div-ℕ x z
+concatenate-div-eq-ℕ p refl = p
+
+concatenate-eq-div-eq-ℕ :
+  {x y z w : ℕ} → x ＝ y → div-ℕ y z → z ＝ w → div-ℕ x w
+concatenate-eq-div-eq-ℕ refl p refl = p
 ```
 
 ## Remark 7.1.3
@@ -217,15 +233,3 @@ This means that to establish the truth of a proposition it only matters *whether
 To address this dissimilarity between general types and logic, we will introduce in Chapter II a more refined way of interpreting logic into type theory.
 In Chapter 12 we will define the type `is-prop(A)`, which expresses the property that the type `A` is a proposition.
 Furthermore, we will introduce the *propositional truncation* operation in Chapter 14, which we will use to interpret logic into type theory in such a way that all logical assertions are interpreted as types that satisfy the condition of being a proposition.
-
-## Supplements
-
-### `0 | x` implies `x = 0` and `x | 1` implies `x = 1`
-
-```agda
-is-zero-div-zero-ℕ : (x : ℕ) → div-ℕ zero-ℕ x → is-zero-ℕ x
-is-zero-div-zero-ℕ x H = antisymmetric-div-ℕ x zero-ℕ (div-zero-ℕ x) H
-
-is-zero-is-zero-div-ℕ : (x y : ℕ) → div-ℕ x y → is-zero-ℕ x → is-zero-ℕ y
-is-zero-is-zero-div-ℕ .zero-ℕ y d refl = is-zero-div-zero-ℕ y d
-```
