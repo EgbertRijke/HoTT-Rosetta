@@ -414,6 +414,22 @@ eq-mod-succ-cong-ℕ k x y H =
           (cong-nat-mod-succ-ℕ k y)) H)
       (cong-nat-mod-succ-ℕ k x))
 ```
+### `k + 1` divides `x` if and only if `x ≡ 0` modulo `k + 1`
+
+```agda
+is-zero-mod-succ-ℕ :
+  (k x : ℕ) → div-ℕ (succ-ℕ k) x → is-zero-Fin (succ-ℕ k) (mod-succ-ℕ k x)
+is-zero-mod-succ-ℕ k x d =
+  eq-mod-succ-cong-ℕ k x zero-ℕ
+    ( concatenate-div-eq-ℕ d (inv (right-unit-law-dist-ℕ x)))
+
+div-is-zero-mod-succ-ℕ :
+  (k x : ℕ) → is-zero-Fin (succ-ℕ k) (mod-succ-ℕ k x) → div-ℕ (succ-ℕ k) x
+div-is-zero-mod-succ-ℕ k x p =
+  concatenate-div-eq-ℕ
+    ( cong-eq-mod-succ-ℕ k x zero-ℕ p)
+    ( right-unit-law-dist-ℕ x)
+```
 
 ## Theorem 7.4.8
 
