@@ -70,8 +70,8 @@ The successor universe `𝒰^+` of `𝒰` therefore contains the type `𝒰` as 
 ```text
 ⊢ 𝒰̌ : 𝒰^+
 ⊢ T^+(𝒰̌) ≐ 𝒰 type
-X:𝒰 ⊢ Ť(X) : 𝒰^+
-X:𝒰 ⊢ T^+(Ť(X)) ≐ T(X) type.
+X : 𝒰 ⊢ Ť(X) : 𝒰^+
+X : 𝒰 ⊢ T^+(Ť(X)) ≐ T(X) type.
 ```
 
 In particular, we obtain a function `i:𝒰 → 𝒰^+` that includes the types in `𝒰` into `𝒰^+`, given by
@@ -94,8 +94,8 @@ However, such towers of universes need not be exhaustive in the sense that it mi
 The **join** of two universes `𝒰` and `𝒱` is the universe `𝒰⊔𝒱` that we obtain using Postulate 6.2.1 with the two types
 
 ```text
-X:𝒰 ⊢ T_{𝒰}(X) type
-Y:𝒱 ⊢ T_{𝒱}(Y) type.
+X : 𝒰 ⊢ T_{𝒰}(X) type
+Y : 𝒱 ⊢ T_{𝒱}(Y) type.
 ```
 
 ## Remark 6.2.6
@@ -108,4 +108,4 @@ j : 𝒱 → 𝒰⊔𝒱
 ```
 
 Note that we don’t postulate any relations between the universes.
-In general it will therefore be the case that the universes `(𝒰⊔𝒱)⊔W` and `𝒰⊔(𝒱⊔W)` will be unrelated.
+In general it will therefore be the case that the universes `(𝒰 ⊔ 𝒱) ⊔ W` and `𝒰 ⊔ (𝒱 ⊔ W)` will be unrelated.

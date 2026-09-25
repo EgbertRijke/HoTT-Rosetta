@@ -26,7 +26,7 @@ Thus we say that `𝒰` is closed under `Σ`-types by asserting that `𝒰` come
 Furthermore, we ask that the element `Σ̌(X,Y):𝒰` satisfies the judgmental equality
 
 ```text
-Ty(Σ̌(X,Y)) ≐ Σ (x : Ty(X)) Ty(Y(x)).
+Ty(Σ̌(X, Y)) ≐ Σ (x : Ty(X)) Ty(Y(x)).
 ```
 
 This judgmental equality asserts that the element `Σ̌(X,Y)` of the universe `𝒰` _represents_ the `Σ`-type `Σ (x : Ty(X)) Ty(Y(x))`.
@@ -102,7 +102,7 @@ Consider a universe `𝒰` and a type `A` in context `Γ`.
 We say that `A` is a type in `𝒰`, or that `𝒰` **contains** `A`, if `𝒰` comes equipped with an element `Ǎ:𝒰` in context `Γ`, for which the judgment
 
 ```text
-Γ⊢Ty(Ǎ)≐ A type
+Γ ⊢ Ty(Ǎ) ≐ A type
 ```
 
 holds.
