@@ -3,6 +3,7 @@
 ```agda
 module section-8-2-constructions-by-case-analysis where
 
+open import section-2-1-the-rules-for-dependent-function-types
 open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import exercise-3-1-multiplication-and-exponentiation

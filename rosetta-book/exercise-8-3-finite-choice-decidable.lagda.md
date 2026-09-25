@@ -24,11 +24,6 @@ For any family `P` of decidable types indexed by `Fin{k}`, construct a function
 ## Solution
 
 ```agda
-is-decidable-family : {l1 l2 : Level} {A : UU l1} (P : A → UU l2) → UU (l1 ⊔ l2)
-is-decidable-family {A = A} P = (x : A) → is-decidable (P x)
-```
-
-```agda
 exists-not-not-for-all-Fin :
   {l : Level} (k : ℕ) {P : Fin k → UU l} → (is-decidable-family P) →
   ¬ ((x : Fin k) → P x) → Σ (Fin k) (λ x → ¬ (P x))

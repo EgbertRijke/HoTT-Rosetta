@@ -68,7 +68,7 @@ module _
   point a x = a
 ```
 
-## Supporting definitions
+## Supplement
 
 ### The terminal map out of a type
 

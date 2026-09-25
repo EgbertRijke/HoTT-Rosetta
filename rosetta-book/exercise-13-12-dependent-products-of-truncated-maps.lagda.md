@@ -5,7 +5,9 @@ module exercise-13-12-dependent-products-of-truncated-maps where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
+open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-4-transport
 open import section-9-1-homotopies
@@ -16,6 +18,9 @@ open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-3-contractible-equivalences
 open import section-11-1-families-of-equivalences
+open import section-11-4-embeddings
+open import section-12-2-subtypes
+open import section-12-4-general-truncation-levels
 open import exercise-12-8-retracts-of-truncated-types
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-2-identity-systems-on-pi-types
@@ -81,8 +86,6 @@ In particular, `f` is an equivalence if and only if `f ∘ -` is an equivalence,
 
 ### Exercise 13.12(a)
 
-PARTIAL BENCHMARK PROBLEM
-
 ```agda
 map-Π :
   {l1 l2 l3 : Level}
@@ -92,35 +95,35 @@ map-Π :
   ((i : I) → B i)
 map-Π f h i = f i (h i)
 
-map-Π' :
-  {l1 l2 l3 l4 : Level}
-  {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  {J : UU l4} (α : J → I) →
-  ((i : I) → A i → B i) →
-  ((j : J) → A (α j)) →
-  ((j : J) → B (α j))
-map-Π' α f = map-Π (f ∘ α)
-
-map-implicit-Π :
-  {l1 l2 l3 : Level}
-  {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  (f : (i : I) → A i → B i) →
-  ({i : I} → A i) →
-  ({i : I} → B i)
-map-implicit-Π f h {i} = map-Π f (λ i → h {i}) i
-
 compute-fiber-map-Π :
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   (f : (i : I) → A i → B i) (h : (i : I) → B i) →
   ((i : I) → fiber (f i) (h i)) ≃ fiber (map-Π f) h
 compute-fiber-map-Π f h = equiv-tot (λ _ → equiv-eq-htpy) ∘e distributive-Π-Σ
 
-compute-fiber-map-Π' :
-  {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  {J : UU l4} (α : J → I) (f : (i : I) → A i → B i)
-  (h : (j : J) → B (α j)) →
-  ((j : J) → fiber (f (α j)) (h j)) ≃ fiber (map-Π' α f) h
-compute-fiber-map-Π' α f = compute-fiber-map-Π (f ∘ α)
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  where
+
+  abstract
+    is-trunc-map-map-Π :
+      (k : 𝕋) (f : (i : I) → A i → B i) →
+      ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π f)
+    is-trunc-map-map-Π k f H h =
+      is-trunc-equiv' k
+        ( (i : I) → fiber (f i) (h i))
+        ( compute-fiber-map-Π f h)
+        ( is-trunc-Π k (λ i → H i (h i)))
+
+  abstract
+    is-emb-map-Π :
+      {f : (i : I) → A i → B i} → ((i : I) → is-emb (f i)) → is-emb (map-Π f)
+    is-emb-map-Π {f} H =
+      is-emb-is-prop-map
+        ( is-trunc-map-map-Π neg-one-𝕋 f (λ i → is-prop-map-is-emb (H i)))
+
+  emb-Π : ((i : I) → A i ↪ B i) → ((i : I) → A i) ↪ ((i : I) → B i)
+  emb-Π f = (map-Π (map-emb ∘ f) , is-emb-map-Π (is-emb-map-emb ∘ f))
 
 module _
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
@@ -132,14 +135,6 @@ module _
       ((i : I) → is-contr-map (f i)) → is-contr-map (map-Π f)
     is-contr-map-map-Π-is-fiberwise-contr-map H g =
       is-contr-equiv' _ (compute-fiber-map-Π _ g) (is-contr-Π (λ i → H i (g i)))
-```
-
-### Exercise 13.12(b)
-
-```agda
-module _
-  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
-  where
 
   abstract
     is-equiv-map-Π-is-fiberwise-equiv :
@@ -155,23 +150,6 @@ module _
     ( map-Π (λ i → map-equiv (e i)) ,
       is-equiv-map-Π-is-fiberwise-equiv (λ i → is-equiv-map-equiv (e i)))
 
-  is-equiv-map-implicit-Π-is-fiberwise-equiv :
-      {f : (i : I) → A i → B i} → is-fiberwise-equiv f →
-      is-equiv (map-implicit-Π f)
-  is-equiv-map-implicit-Π-is-fiberwise-equiv is-equiv-f =
-    is-equiv-comp _ _
-      ( is-equiv-explicit-implicit-Π)
-      ( is-equiv-comp _ _
-        ( is-equiv-map-Π-is-fiberwise-equiv is-equiv-f)
-        ( is-equiv-implicit-explicit-Π))
-
-  equiv-implicit-Π-equiv-family :
-    (e : (i : I) → (A i) ≃ (B i)) → ({i : I} → A i) ≃ ({i : I} → B i)
-  equiv-implicit-Π-equiv-family e =
-    ( equiv-implicit-explicit-Π) ∘e
-    ( equiv-Π-equiv-family e) ∘e
-    ( equiv-explicit-implicit-Π)
-
 module _
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
   where
@@ -185,7 +163,11 @@ module _
       ( equiv-Π-equiv-family e)
       ( ( is-section-map-inv-equiv (equiv-Π-equiv-family e) f) ∙
         ( eq-htpy (λ x → inv (is-section-map-inv-equiv (e x) (f x)))))
+```
 
+### Exercise 13.12(b)
+
+```agda
 module _
   {l1 l2 l3 l4 : Level}
   {A' : UU l1} {B' : A' → UU l2} {A : UU l3} (B : A → UU l4)
@@ -228,8 +210,105 @@ module _
 
 ### Exercise 13.12(c)
 
+```agda
+map-Π' :
+  {l1 l2 l3 l4 : Level}
+  {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  {J : UU l4} (α : J → I) →
+  ((i : I) → A i → B i) →
+  ((j : J) → A (α j)) →
+  ((j : J) → B (α j))
+map-Π' α f = map-Π (f ∘ α)
+
+compute-fiber-map-Π' :
+  {l1 l2 l3 l4 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  {J : UU l4} (α : J → I) (f : (i : I) → A i → B i)
+  (h : (j : J) → B (α j)) →
+  ((j : J) → fiber (f (α j)) (h j)) ≃ fiber (map-Π' α f) h
+compute-fiber-map-Π' α f = compute-fiber-map-Π (f ∘ α)
+```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  where
+
+  is-trunc-map-map-Π' :
+    (k : 𝕋) {l4 : Level} {J : UU l4} (α : J → I) (f : (i : I) → A i → B i) →
+    ((i : I) → is-trunc-map k (f i)) → is-trunc-map k (map-Π' α f)
+  is-trunc-map-map-Π' k {J = J} α f H h =
+    is-trunc-equiv' k
+      ( (j : J) → fiber (f (α j)) (h j))
+      ( compute-fiber-map-Π' α f h)
+      ( is-trunc-Π k (λ j → H (α j) (h j)))
+
+  is-trunc-map-is-trunc-map-map-Π'-lzero :
+    (k : 𝕋) (f : (i : I) → A i → B i) →
+    ({J : UU lzero} (α : J → I) → is-trunc-map k (map-Π' α f)) →
+    (i : I) → is-trunc-map k (f i)
+  is-trunc-map-is-trunc-map-map-Π'-lzero k f H i b =
+    is-trunc-equiv' k
+      ( fiber (map-Π (λ _ → f i)) (point b))
+      ( equiv-Σ
+        ( λ a → f i a ＝ b)
+        ( equiv-universal-property-unit (A i))
+        ( λ h →
+          equiv-ap
+            ( equiv-universal-property-unit (B i))
+            ( map-Π (λ _ → f i) h)
+            ( point b)))
+      ( H (λ _ → i) (point b))
+
+  is-trunc-map-is-trunc-map-map-Π' :
+    (k : 𝕋) (f : (i : I) → A i → B i) →
+    ({l : Level} {J : UU l} (α : J → I) → is-trunc-map k (map-Π' α f)) →
+    (i : I) → is-trunc-map k (f i)
+  is-trunc-map-is-trunc-map-map-Π' k f H i b =
+    is-trunc-map-is-trunc-map-map-Π'-lzero k f H i b
+
+  is-emb-map-Π' :
+    {l4 : Level} {J : UU l4} (α : J → I) (f : (i : I) → A i → B i) →
+    ((i : I) → is-emb (f i)) → is-emb (map-Π' α f)
+  is-emb-map-Π' α f H =
+    is-emb-is-prop-map
+      ( is-trunc-map-map-Π' neg-one-𝕋 α f (λ i → is-prop-map-is-emb (H i)))
+```
+
 BENCHMARK PROBLEM
 
 ### Exercise 13.12(d)
 
 BENCHMARK PROBLEM
+
+## Supplement
+
+```agda
+map-implicit-Π :
+  {l1 l2 l3 : Level}
+  {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  (f : (i : I) → A i → B i) →
+  ({i : I} → A i) →
+  ({i : I} → B i)
+map-implicit-Π f h {i} = map-Π f (λ i → h {i}) i
+
+module _
+  {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} {B : I → UU l3}
+  where
+
+  is-equiv-map-implicit-Π-is-fiberwise-equiv :
+      {f : (i : I) → A i → B i} → is-fiberwise-equiv f →
+      is-equiv (map-implicit-Π f)
+  is-equiv-map-implicit-Π-is-fiberwise-equiv is-equiv-f =
+    is-equiv-comp _ _
+      ( is-equiv-explicit-implicit-Π)
+      ( is-equiv-comp _ _
+        ( is-equiv-map-Π-is-fiberwise-equiv is-equiv-f)
+        ( is-equiv-implicit-explicit-Π))
+
+  equiv-implicit-Π-equiv-family :
+    (e : (i : I) → (A i) ≃ (B i)) → ({i : I} → A i) ≃ ({i : I} → B i)
+  equiv-implicit-Π-equiv-family e =
+    ( equiv-implicit-explicit-Π) ∘e
+    ( equiv-Π-equiv-family e) ∘e
+    ( equiv-explicit-implicit-Π)
+```

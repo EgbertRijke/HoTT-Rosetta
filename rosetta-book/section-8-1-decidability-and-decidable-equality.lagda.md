@@ -117,13 +117,6 @@ is-decidable-product (inl a) (inr g) = inr (g ∘ pr2)
 is-decidable-product (inr f) (inl b) = inr (f ∘ pr1)
 is-decidable-product (inr f) (inr g) = inr (f ∘ pr1)
 
-is-decidable-product' :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  is-decidable A → (A → is-decidable B) → is-decidable (A × B)
-is-decidable-product' (inl a) d =
-  rec-coproduct (λ b → inl (a , b)) (λ nb → inr (nb ∘ pr2)) (d a)
-is-decidable-product' (inr na) d = inr (na ∘ pr1)
-
 is-decidable-left-factor :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} →
   is-decidable (A × B) → B → is-decidable A
@@ -144,13 +137,6 @@ is-decidable-function-type :
 is-decidable-function-type (inl a) (inl b) = inl (λ _ → b)
 is-decidable-function-type (inl a) (inr nb) = inr (map-neg (ev a) nb)
 is-decidable-function-type (inr f) _ = inl (ex-falso ∘ f)
-
-is-decidable-function-type' :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  is-decidable A → (A → is-decidable B) → is-decidable (A → B)
-is-decidable-function-type' (inl a) d =
-  rec-coproduct (λ b → inl (λ _ → b)) (λ nb → inr (map-neg (ev a) nb)) (d a)
-is-decidable-function-type' (inr na) d = inl (ex-falso ∘ na)
 ```
 
 Since `A → B` is decidable whenever both `A` and `B` are decidable, it also follows that the negation `¬ A` of any decidable type `A` is decidable.
