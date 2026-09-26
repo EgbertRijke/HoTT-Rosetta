@@ -365,5 +365,12 @@ module _
 
   postcomp-Π : ({a : A} → X a → Y a) → ((a : A) → X a) → ((a : A) → Y a)
   postcomp-Π f = f ∘_
+
+module _
+  {l1 l2 l3 : Level} (A : UU l1) {X : UU l2} {Y : UU l3}
+  where
+
+  postcomp : (X → Y) → (A → X) → (A → Y)
+  postcomp f = postcomp-Π A f
 ```
 

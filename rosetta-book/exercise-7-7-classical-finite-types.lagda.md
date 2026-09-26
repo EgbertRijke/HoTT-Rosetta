@@ -46,38 +46,6 @@ for each `x:Fin{k}` and each `y:classical-Fin_k`.
 ## Solution
 
 ```agda
-nat-classical-Fin : (k : ℕ) → classical-Fin k → ℕ
-nat-classical-Fin k = pr1
-```
-
-```agda
-Eq-classical-Fin : (k : ℕ) (x y : classical-Fin k) → UU lzero
-Eq-classical-Fin k x y = nat-classical-Fin k x ＝ nat-classical-Fin k y
-
-eq-succ-classical-Fin :
-  (k : ℕ) (x y : classical-Fin k) →
-  x ＝ y →
-  Id
-    { A = classical-Fin (succ-ℕ k)}
-    ( pair (succ-ℕ (pr1 x)) (pr2 x))
-    ( pair (succ-ℕ (pr1 y)) (pr2 y))
-eq-succ-classical-Fin k x .x refl = refl
-
-eq-Eq-classical-Fin :
-  (k : ℕ) (x y : classical-Fin k) → Eq-classical-Fin k x y → x ＝ y
-eq-Eq-classical-Fin (succ-ℕ k) (pair zero-ℕ _) (pair zero-ℕ _) e = refl
-eq-Eq-classical-Fin (succ-ℕ k) (pair (succ-ℕ x) p) (pair (succ-ℕ y) q) e =
-  eq-succ-classical-Fin k
-    ( pair x p)
-    ( pair y q)
-    ( eq-Eq-classical-Fin k (pair x p) (pair y q) (is-injective-succ-ℕ e))
-
-Eq-eq-classical-Fin :
-  (k : ℕ) (x y : classical-Fin k) → x ＝ y → Eq-classical-Fin k x y
-Eq-eq-classical-Fin k x y refl = refl
-```
-
-```agda
 standard-classical-Fin : (k : ℕ) → classical-Fin k → Fin k
 standard-classical-Fin (succ-ℕ k) (pair x H) = mod-succ-ℕ k x
 

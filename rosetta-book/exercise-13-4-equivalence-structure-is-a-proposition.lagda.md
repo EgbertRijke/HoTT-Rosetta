@@ -332,3 +332,35 @@ module _
   distributive-map-inv-comp-equiv e f =
     ap map-equiv (distributive-inv-comp-equiv e f)
 ```
+
+### Precomposition of equivalences by an equivalence is an equivalence
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  is-retraction-precomp-equiv-inv-equiv :
+    (e : A ≃ B) (f : B ≃ C) → (f ∘e e) ∘e inv-equiv e ＝ f
+  is-retraction-precomp-equiv-inv-equiv e f =
+    eq-htpy-equiv (λ x → ap (map-equiv f) (is-section-map-inv-equiv e x))
+
+  is-section-precomp-equiv-inv-equiv :
+    (e : A ≃ B) (f : A ≃ C) → (f ∘e inv-equiv e) ∘e e ＝ f
+  is-section-precomp-equiv-inv-equiv e f =
+    eq-htpy-equiv (λ x → ap (map-equiv f) (is-retraction-map-inv-equiv e x))
+
+  is-equiv-precomp-equiv-equiv :
+    (e : A ≃ B) → is-equiv (λ (f : B ≃ C) → f ∘e e)
+  is-equiv-precomp-equiv-equiv e =
+    is-equiv-is-invertible
+      ( _∘e inv-equiv e)
+      ( is-section-precomp-equiv-inv-equiv e)
+      ( is-retraction-precomp-equiv-inv-equiv e)
+
+equiv-precomp-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} →
+  (A ≃ B) → (C : UU l3) → (B ≃ C) ≃ (A ≃ C)
+pr1 (equiv-precomp-equiv e C) = _∘e e
+pr2 (equiv-precomp-equiv e C) = is-equiv-precomp-equiv-equiv e
+```

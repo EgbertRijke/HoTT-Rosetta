@@ -93,14 +93,6 @@ abstract
 ```
 
 ```agda
-nonequal : {l : Level} {A : UU l} → A → A → UU l
-nonequal x y = ¬ (x ＝ y)
-
-infix 6 _≠_
-_≠_ = nonequal
-```
-
-```agda
 abstract
   le-leq-neq-ℕ : {x y : ℕ} → x ≤-ℕ y → x ≠ y → le-ℕ x y
   le-leq-neq-ℕ {x} {y} x≤y x≠y =
@@ -328,11 +320,6 @@ We leave this to the reader, and focus on the second aspect of the claim: that e
 To see this, note that any divisor of `{n!}+1` is automatically nonzero, and recall that any nonzero `x≤ n` divides `n!` by Exercise 7.3.
 Therefore it follows that any `x≤ n` that divides `{n!}+1` also divides `n!`, and consequently it divides `1` as well.
 Now we are done, because if `x` divides `1` then `x=1`. ◻
-
-```agda
-is-zero-is-zero-div-ℕ : (x y : ℕ) → div-ℕ x y → is-zero-ℕ x → is-zero-ℕ y
-is-zero-is-zero-div-ℕ .zero-ℕ y d refl = is-zero-div-zero-ℕ y d
-```
 
 ```agda
 abstract

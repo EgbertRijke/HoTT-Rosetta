@@ -12,6 +12,7 @@ open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-1-injectivity-addition-multiplication
 open import exercise-6-3-order-natural-numbers
 open import exercise-6-4-strict-order-natural-numbers
