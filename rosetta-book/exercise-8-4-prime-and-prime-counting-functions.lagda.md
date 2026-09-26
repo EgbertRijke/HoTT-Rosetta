@@ -15,9 +15,9 @@ open import section-8-5-the-infinitude-of-primes
 
 ## Problem statement
 
-Define the **prime function** `prime:ℕ→ℕ` for which `prime(n)` is the `n`-th prime.
+Define the **prime function** `prime : ℕ → ℕ` for which `prime(n)` is the `n`-th prime.
 
-Define the **prime-counting function** `π:ℕ→ℕ`, which counts for each `n:ℕ` the number of primes `p≤ n`.
+Define the **prime-counting function** `π : ℕ → ℕ`, which counts for each `n : ℕ` the number of primes `p ≤ n`.
 
 ## Solution
 
