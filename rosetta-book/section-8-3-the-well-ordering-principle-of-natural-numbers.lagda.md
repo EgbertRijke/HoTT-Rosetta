@@ -23,13 +23,15 @@ The type theoretic well-ordering principle of `ℕ` is therefore formulated usin
 Let `P` be a family over `ℕ`, not necessarily decidable.
 
 1. We say that a natural number `n` is a **lower bound** for `P` if it comes equipped with an element of type
+
 ```text
-is-lower-bound_P(n)≔ Π(x:ℕ) P(x)→ (n≤ x).
+is-lower-bound_P(n) ≔ Π(x : ℕ) P(x) → (n ≤ x).
 ```
 
 2. We say that a natural number `n` is an **upper bound** for `P` if it comes equipped with an element of type
+
 ```text
-is-upper-bound_P(n)≔ Π(x:ℕ) P(x)→ (x≤ n).
+is-upper-bound_P(n)≔ Π(x : ℕ) P(x) → (x ≤ n).
 ```
 
 ```agda
@@ -38,53 +40,63 @@ is-lower-bound-ℕ :
 is-lower-bound-ℕ P n = (m : ℕ) → P m → leq-ℕ n m
 ```
 
+A minimal element of `P` is therefore a natural number `n` for which `P(n)` holds, and which is also a lower bound for `P`.
+
 ```agda
 minimal-element-ℕ :
   {l : Level} (P : ℕ → UU l) → UU l
 minimal-element-ℕ P = Σ ℕ (λ n → (P n) × (is-lower-bound-ℕ P n))
 ```
 
-A minimal element of `P` is therefore a natural number `n` for which `P(n)` holds, and which is also a lower bound for `P`.
 The well-ordering principle of `ℕ` asserts that such an element exists for any decidable family `P`, as soon as `P(n)` holds for some `n`.
 
 ## Theorem 8.3.2
 
 Let `P` be a decidable family over `ℕ`, where `d` witnesses that `P` is decidable.
 Then there is a function
+
 ```text
-w(P,d):(Σ(n:ℕ) P(n))→(Σ(m:ℕ) P(m)×is-lower-bound_P(m)).
+w(P, d) : (Σ(n : ℕ) P(n)) → (Σ(m : ℕ) P(m) × is-lower-bound_P(m)).
 ```
 
 ### Proof
 
 *Proof.* By the assumption that there are enough universes (Postulate 6.2.1), there is a universe `𝒰` that contains `P`.
-Instead of proving the claim for the given type family `P`, we will show by induction on `n:ℕ` that there is a function
+Instead of proving the claim for the given type family `P`, we will show by induction on `n : ℕ` that there is a function
+
 ```text
-Q(n)→ (Σ(m:ℕ) Q(m)×is-lower-bound_Q(m))(*)
+Q(n) → (Σ(m : ℕ) Q(m) × is-lower-bound_Q(m))   (*)
 ```
-for every decidable family `Q:ℕ→𝒰`.
-Note that we are now also quantifying over the decidable families `Q:ℕ→𝒰`.
+
+for every decidable family `Q : ℕ → 𝒰`.
+Note that we are now also quantifying over the decidable families `Q : ℕ → 𝒰`.
 This slightly strengthens the inductive hypothesis, which we will be able to exploit.
 
 The base case is trivial, since `0` is a lower bound of every type family over `ℕ`.
-For the inductive step, assume that (\*) holds for every decidable type family `Q:ℕ→ 𝒰`.
-Furthermore, let `Q:ℕ→𝒰` be a decidable type family equipped with an element `q:Q(succ-ℕ(n))`.
+For the inductive step, assume that (\*) holds for every decidable type family `Q : ℕ → 𝒰`.
+Furthermore, let `Q : ℕ → 𝒰` be a decidable type family equipped with an element `q : Q(succ-ℕ(n))`.
 Our goal is to construct an element of type
+
 ```text
-Σ(m:ℕ) Q(m)×is-lower-bound_Q(m).
+Σ(m : ℕ) Q(m) × is-lower-bound_Q(m).
 ```
+
 Since `Q(0)` is assumed to be decidable, it suffices to construct a function
+
 ```text
-(Q(0)+¬ Q(0))→ Σ(m:ℕ) Q(m)×is-lower-bound_Q(m).
+(Q(0) + ¬Q(0)) → Σ(m : ℕ) Q(m) × is-lower-bound_Q(m).
 ```
-Therefore we can proceed by case analysis on `Q(0)+¬ Q(0)`.
+
+Therefore we can proceed by case analysis on `Q(0) + ¬Q(0)`.
 In the case where we have an element of type `Q(0)`, it follows immediately that `0` must be minimal.
-In the case where `¬ Q(0)`, we consider the decidable subset `Q'` of `ℕ` given by
+In the case where `¬Q(0)`, we consider the decidable subset `Q'` of `ℕ` given by
+
 ```text
-Q'(n)≔ Q(succ-ℕ(n)).
+Q'(n) ≔ Q(succ-ℕ(n)).
 ```
-Since we have `q:Q'(n)`, we obtain a minimal element in `Q'` by the inductive hypothesis.
-Of course, by the assumption that `Q(0)` doesn’t hold, the minimal element of `Q'` is also the minimal element of `Q`. ◻
+
+Since we have `q : Q'(n)`, we obtain a minimal element in `Q'` by the inductive hypothesis.
+Of course, by the assumption that `Q(0)` doesn’t hold, the minimal element of `Q'` is also the minimal element of `Q`. ◻
 
 ```agda
 is-minimal-element-succ-ℕ :
@@ -123,4 +135,9 @@ well-ordering-principle-ℕ P d (pair (succ-ℕ n) p) =
       ( λ m → P (succ-ℕ m))
       ( λ m → d (succ-ℕ m))
       ( pair n p))
+
+number-well-ordering-principle-ℕ :
+  {l : Level} (P : ℕ → UU l) (d : is-decidable-family P) (nP : Σ ℕ P) → ℕ
+number-well-ordering-principle-ℕ P d nP =
+  pr1 (well-ordering-principle-ℕ P d nP)
 ```
