@@ -65,7 +65,7 @@ w(P, d) : (Σ(n : ℕ) P(n)) → (Σ(m : ℕ) P(m) × is-lower-bound_P(m)).
 Instead of proving the claim for the given type family `P`, we will show by induction on `n : ℕ` that there is a function
 
 ```text
-Q(n) → (Σ(m : ℕ) Q(m) × is-lower-bound_Q(m))   (*)
+Q(n) → (Σ(m : ℕ) Q(m) × is-lower-bound_Q(m))   (★)
 ```
 
 for every decidable family `Q : ℕ → 𝒰`.
@@ -73,7 +73,7 @@ Note that we are now also quantifying over the decidable families `Q : ℕ → �
 This slightly strengthens the inductive hypothesis, which we will be able to exploit.
 
 The base case is trivial, since `0` is a lower bound of every type family over `ℕ`.
-For the inductive step, assume that (\*) holds for every decidable type family `Q : ℕ → 𝒰`.
+For the inductive step, assume that (★) holds for every decidable type family `Q : ℕ → 𝒰`.
 Furthermore, let `Q : ℕ → 𝒰` be a decidable type family equipped with an element `q : Q(succ-ℕ(n))`.
 Our goal is to construct an element of type
 
