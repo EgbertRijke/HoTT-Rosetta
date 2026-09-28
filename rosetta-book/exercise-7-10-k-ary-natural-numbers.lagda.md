@@ -93,24 +93,6 @@ is-empty-based-zero-ℕ (unary-op-based-ℕ .zero-ℕ () n)
 ```
 
 ```agda
-abstract
-  leq-mul-ℕ :
-    (k x : ℕ) → x ≤-ℕ (x *ℕ (succ-ℕ k))
-  leq-mul-ℕ k x =
-    concatenate-eq-leq-ℕ
-      ( x *ℕ (succ-ℕ k))
-      ( inv (right-unit-law-mul-ℕ x))
-      ( preserves-leq-right-mul-ℕ x 1 (succ-ℕ k) (leq-zero-ℕ k))
-
-  leq-mul-ℕ' :
-    (k x : ℕ) → x ≤-ℕ ((succ-ℕ k) *ℕ x)
-  leq-mul-ℕ' k x =
-    concatenate-leq-eq-ℕ x
-      ( leq-mul-ℕ k x)
-      ( commutative-mul-ℕ x (succ-ℕ k))
-```
-
-```agda
 cong-unary-op-ℕ :
   (k : ℕ) (x : Fin k) (n : ℕ) →
   cong-ℕ k (unary-op-ℕ k x n) (nat-Fin k x)
