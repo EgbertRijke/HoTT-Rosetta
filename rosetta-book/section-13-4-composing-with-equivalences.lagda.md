@@ -17,6 +17,7 @@ open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-11-10-path-split-maps
+open import section-12-1-propositions
 open import section-13-1-equivalent-forms-of-function-extensionality
 ```
 
@@ -308,4 +309,23 @@ abstract
     is-equiv f
   is-equiv-is-equiv-precomp-Π f H =
     is-equiv-is-equiv-precomp f (is-equiv-precomp-is-equiv-precomp-Π f H)
+```
+
+## Supplement
+
+### A map between propositions is an equivalence if precomposition of functions into propositions by that map is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) (f : type-Prop P → type-Prop Q)
+  where
+
+  universal-property-equiv-Prop : UUω
+  universal-property-equiv-Prop =
+    {l : Level} (R : Prop l) → is-equiv (precomp f (type-Prop R))
+
+  is-equiv-is-equiv-precomp-Prop :
+    universal-property-equiv-Prop → is-equiv f
+  is-equiv-is-equiv-precomp-Prop =
+    is-equiv-is-equiv-precomp-structured-type is-prop P Q f
 ```

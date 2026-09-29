@@ -5,6 +5,7 @@ module exercise-10-6-dependent-pair-contractible-base where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
+open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
@@ -117,4 +118,13 @@ module _
       eq-pair-Σ
         ( inv (eq-is-contr H))
         ( eq-transpose-tr (eq-is-contr H) (eq-is-contr K))
+```
+
+### Contractibility of dependent sums over the unit type
+
+```agda
+abstract
+  is-contr-Σ-unit :
+    {l : Level} {B : unit → UU l} → is-contr (B star) → is-contr (Σ unit B)
+  is-contr-Σ-unit = is-contr-Σ is-contr-unit star
 ```

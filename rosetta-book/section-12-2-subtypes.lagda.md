@@ -5,6 +5,7 @@ module section-12-2-subtypes where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
+open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions
@@ -456,4 +457,12 @@ module _
   is-injective-inclusion-subtype : is-injective (inclusion-subtype B)
   is-injective-inclusion-subtype =
     is-injective-is-emb (is-emb-inclusion-subtype B)
+```
+
+### The complement of a type family
+
+```agda
+complement :
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → UU (l1 ⊔ l2)
+complement {l1} {l2} {A} B = Σ A (is-empty ∘ B)
 ```

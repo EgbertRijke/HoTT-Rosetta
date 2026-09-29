@@ -8,8 +8,10 @@ open import section-2-1-the-rules-for-dependent-function-types
 open import section-2-2-ordinary-function-types
 open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
+open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-8-1-decidability-and-decidable-equality
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
@@ -22,7 +24,9 @@ open import section-11-1-families-of-equivalences
 open import section-11-2-the-fundamental-theorem
 open import section-12-1-propositions
 open import section-12-2-subtypes
+open import section-12-3-sets
 open import section-12-4-general-truncation-levels
+open import exercise-12-4-coproduct-truncation
 open import exercise-12-6-truncated-sigma-types
 open import exercise-12-7-truncated-products
 ```
@@ -654,4 +658,59 @@ module _
           ( is-prop-Σ
             ( is-prop-function-type H)
             ( λ h → is-prop-is-contr (is-contr-Π (λ x → H (h (f x)) x)))))
+
+type-equiv-Prop :
+  { l1 l2 : Level} (P : Prop l1) (Q : Prop l2) → UU (l1 ⊔ l2)
+type-equiv-Prop P Q = (type-Prop P) ≃ (type-Prop Q)
+
+abstract
+  is-prop-type-equiv-Prop :
+    {l1 l2 : Level} (P : Prop l1) (Q : Prop l2) →
+    is-prop (type-equiv-Prop P Q)
+  is-prop-type-equiv-Prop P Q =
+    is-prop-equiv-is-prop (is-prop-type-Prop P) (is-prop-type-Prop Q)
+
+equiv-Prop :
+  { l1 l2 : Level} → Prop l1 → Prop l2 → Prop (l1 ⊔ l2)
+pr1 (equiv-Prop P Q) = type-equiv-Prop P Q
+pr2 (equiv-Prop P Q) = is-prop-type-equiv-Prop P Q
+```
+
+### Having decidable equality is a property
+
+```agda
+abstract
+  is-prop-has-decidable-equality :
+    {l1 : Level} {X : UU l1} → is-prop (has-decidable-equality X)
+  is-prop-has-decidable-equality {l1} {X} =
+    is-prop-has-element
+      ( λ d →
+        is-prop-Π
+        ( λ x →
+          is-prop-Π
+          ( λ y →
+            is-prop-coproduct
+            ( intro-double-negation)
+            ( is-set-has-decidable-equality d x y)
+            ( is-prop-neg))))
+
+has-decidable-equality-Prop :
+  {l1 : Level} (X : UU l1) → Prop l1
+pr1 (has-decidable-equality-Prop X) = has-decidable-equality X
+pr2 (has-decidable-equality-Prop X) = is-prop-has-decidable-equality
+```
+
+### Being empty is a proposition
+
+```agda
+is-property-is-empty : {l : Level} {A : UU l} → is-prop (is-empty A)
+is-property-is-empty = is-prop-function-type is-prop-empty
+
+is-empty-Prop : {l1 : Level} → UU l1 → Prop l1
+pr1 (is-empty-Prop A) = is-empty A
+pr2 (is-empty-Prop A) = is-property-is-empty
+
+is-nonempty-Prop : {l1 : Level} → UU l1 → Prop l1
+pr1 (is-nonempty-Prop A) = is-nonempty A
+pr2 (is-nonempty-Prop A) = is-property-is-empty
 ```

@@ -13,6 +13,7 @@ open import section-5-4-transport
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
+open import section-10-4-equivalences-are-contractible-maps
 open import section-11-1-families-of-equivalences
 open import section-12-1-propositions
 open import section-12-4-general-truncation-levels
@@ -463,4 +464,82 @@ abstract
       ( (map-trunc-Prop g) ∘ (map-trunc-Prop f))
       ( ( (map-trunc-Prop g) ·l (htpy-map-trunc-Prop f)) ∙h
         ( ( htpy-map-trunc-Prop g) ·r f))
+```
+
+## Supplement
+
+### Inhabited types
+
+```agda
+is-inhabited-Prop : {l : Level} → UU l → Prop l
+is-inhabited-Prop X = trunc-Prop X
+
+is-inhabited : {l : Level} → UU l → UU l
+is-inhabited X = type-Prop (is-inhabited-Prop X)
+
+is-property-is-inhabited : {l : Level} (X : UU l) → is-prop (is-inhabited X)
+is-property-is-inhabited X = is-prop-type-Prop (is-inhabited-Prop X)
+
+Inhabited-Type : (l : Level) → UU (lsuc l)
+Inhabited-Type l = Σ (UU l) is-inhabited
+
+module _
+  {l : Level} (X : Inhabited-Type l)
+  where
+
+  type-Inhabited-Type : UU l
+  type-Inhabited-Type = pr1 X
+
+  is-inhabited-type-Inhabited-Type : type-trunc-Prop type-Inhabited-Type
+  is-inhabited-type-Inhabited-Type = pr2 X
+```
+
+### Families of inhabited types
+
+```agda
+Fam-Inhabited-Types :
+  {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
+Fam-Inhabited-Types l2 X = X → Inhabited-Type l2
+
+module _
+  {l1 l2 : Level} {X : UU l1} (Y : Fam-Inhabited-Types l2 X)
+  where
+
+  type-Fam-Inhabited-Types : X → UU l2
+  type-Fam-Inhabited-Types x = type-Inhabited-Type (Y x)
+
+  is-inhabited-type-Fam-Inhabited-Types :
+    (x : X) → type-trunc-Prop (type-Fam-Inhabited-Types x)
+  is-inhabited-type-Fam-Inhabited-Types x =
+    is-inhabited-type-Inhabited-Type (Y x)
+
+  total-Fam-Inhabited-Types : UU (l1 ⊔ l2)
+  total-Fam-Inhabited-Types = Σ X type-Fam-Inhabited-Types
+```
+
+### The functorial action of propositional truncations preserves equivalences
+
+```agda
+abstract
+  map-equiv-trunc-Prop :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    (A ≃ B) → type-trunc-Prop A → type-trunc-Prop B
+  map-equiv-trunc-Prop e = map-trunc-Prop (map-equiv e)
+
+abstract
+  map-inv-equiv-trunc-Prop :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    (A ≃ B) → type-trunc-Prop B → type-trunc-Prop A
+  map-inv-equiv-trunc-Prop e = map-equiv-trunc-Prop (inv-equiv e)
+
+abstract
+  equiv-trunc-Prop :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    (A ≃ B) → (type-trunc-Prop A ≃ type-trunc-Prop B)
+  pr1 (equiv-trunc-Prop e) = map-equiv-trunc-Prop e
+  pr2 (equiv-trunc-Prop e) =
+    is-equiv-has-converse-is-prop
+      ( is-prop-type-trunc-Prop)
+      ( is-prop-type-trunc-Prop)
+      ( map-inv-equiv-trunc-Prop e)
 ```
