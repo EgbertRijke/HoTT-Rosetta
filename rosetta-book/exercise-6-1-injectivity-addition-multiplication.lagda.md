@@ -7,6 +7,7 @@ open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers
 open import exercise-3-1-multiplication-and-exponentiation
+open import exercise-3-3-triangular-numbers-and-factorials
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
@@ -16,6 +17,7 @@ open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-6-the-laws-of-addition-on-natural-numbers
 open import exercise-5-5-semiring-laws-natural-numbers
+open import section-6-3-observational-equality-of-the-natural-numbers
 open import section-6-4-peanos-seventh-and-eighth-axioms
 ```
 
@@ -204,4 +206,39 @@ abstract
       ( ( p) ∙
         ( ( right-successor-law-mul-ℕ (succ-ℕ m) (succ-ℕ n)) ∙
           ( ap ((succ-ℕ m) +ℕ_) (left-successor-law-mul-ℕ m (succ-ℕ n)))))
+```
+
+## Supplement
+
+### The product of two natural numbers is nonzero if and only if both are nonzero
+
+```agda
+abstract
+  is-nonzero-mul-ℕ :
+    (x y : ℕ) → is-nonzero-ℕ x → is-nonzero-ℕ y → is-nonzero-ℕ (x *ℕ y)
+  is-nonzero-mul-ℕ x y H K p =
+    K (is-injective-left-mul-ℕ x H (p ∙ (inv (right-zero-law-mul-ℕ x))))
+
+  is-nonzero-left-factor-mul-ℕ :
+    (x y : ℕ) → is-nonzero-ℕ (x *ℕ y) → is-nonzero-ℕ x
+  is-nonzero-left-factor-mul-ℕ .zero-ℕ y H refl = H (left-zero-law-mul-ℕ y)
+
+  is-nonzero-right-factor-mul-ℕ :
+    (x y : ℕ) → is-nonzero-ℕ (x *ℕ y) → is-nonzero-ℕ y
+  is-nonzero-right-factor-mul-ℕ x .zero-ℕ H refl = H (right-zero-law-mul-ℕ x)
+```
+
+### All factorials are nonzero
+
+```agda
+abstract
+  is-nonzero-factorial-ℕ :
+    (x : ℕ) → is-nonzero-ℕ (factorial-ℕ x)
+  is-nonzero-factorial-ℕ zero-ℕ = Eq-eq-ℕ
+  is-nonzero-factorial-ℕ (succ-ℕ x) =
+    is-nonzero-mul-ℕ
+      ( factorial-ℕ x)
+      ( succ-ℕ x)
+      ( is-nonzero-factorial-ℕ x)
+      ( is-nonzero-succ-ℕ x)
 ```
