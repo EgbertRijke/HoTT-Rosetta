@@ -262,6 +262,7 @@ div-quotient-div-ℕ :
 pr1 (div-quotient-div-ℕ d x (u , p)) = d
 pr2 (div-quotient-div-ℕ d x (u , p)) = commutative-mul-ℕ d u ∙ p
 ```
+
 ### If `x` is nonzero and `d | x`, then `d ≤ x`
 
 ```agda
