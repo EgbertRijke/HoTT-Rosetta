@@ -197,6 +197,10 @@ symmetric-cong-ℕ : (k : ℕ) → is-symmetric (cong-ℕ k)
 pr1 (symmetric-cong-ℕ k x y (d , p)) = d
 pr2 (symmetric-cong-ℕ k x y (d , p)) = p ∙ (symmetric-dist-ℕ x y)
 
+cong-zero-ℕ' : (k : ℕ) → cong-ℕ k zero-ℕ k
+cong-zero-ℕ' k =
+  symmetric-cong-ℕ k k zero-ℕ (cong-zero-ℕ k)
+
 transitive-cong-ℕ : (k : ℕ) → is-transitive (cong-ℕ k)
 transitive-cong-ℕ k x y z e d with is-total-dist-ℕ x y z
 transitive-cong-ℕ k x y z e d | inl α =
@@ -207,4 +211,22 @@ transitive-cong-ℕ k x y z e d | inr (inl α) =
 transitive-cong-ℕ k x y z e d | inr (inr α) =
   div-left-summand-ℕ k (dist-ℕ x z) (dist-ℕ x y) d
     ( concatenate-div-eq-ℕ e (inv α))
+```
+
+## Supplements
+
+```agda
+concatenate-cong-eq-cong-ℕ :
+  {k x1 x2 x3 x4 : ℕ} →
+  cong-ℕ k x1 x2 → x2 ＝ x3 → cong-ℕ k x3 x4 → cong-ℕ k x1 x4
+concatenate-cong-eq-cong-ℕ {k} {x} {y} {.y} {z} H refl K =
+  transitive-cong-ℕ k x y z K H
+
+concatenate-eq-cong-eq-cong-eq-ℕ :
+  (k : ℕ) {x1 x2 x3 x4 x5 x6 : ℕ} →
+  x1 ＝ x2 → cong-ℕ k x2 x3 → x3 ＝ x4 →
+  cong-ℕ k x4 x5 → x5 ＝ x6 → cong-ℕ k x1 x6
+concatenate-eq-cong-eq-cong-eq-ℕ k
+  {x} {.x} {y} {.y} {z} {.z} refl H refl K refl =
+  transitive-cong-ℕ k x y z K H
 ```
