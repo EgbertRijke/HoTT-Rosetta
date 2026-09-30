@@ -20,6 +20,7 @@ open import exercise-10-2-contractible-retracts
 open import section-11-4-embeddings
 open import section-11-6-the-structure-identity-principle
 open import section-12-1-propositions
+open import section-12-2-subtypes
 open import section-12-3-sets
 open import exercise-12-8-retracts-of-truncated-types
 ```
@@ -344,6 +345,40 @@ abstract
     {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A ↪ B) →
     is-trunc (succ-𝕋 k) B → is-trunc (succ-𝕋 k) A
   is-trunc-emb k f = is-trunc-is-emb k (map-emb f) (is-emb-map-emb f)
+
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} (P : subtype l2 A)
+  where
+
+  abstract
+    is-trunc-type-subtype :
+      is-trunc (succ-𝕋 k) A → is-trunc (succ-𝕋 k) (type-subtype P)
+    is-trunc-type-subtype =
+      is-trunc-is-emb k
+        ( inclusion-subtype P)
+        ( is-emb-inclusion-subtype P)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
+  where
+
+  abstract
+    is-prop-type-subtype : is-prop A → is-prop (type-subtype P)
+    is-prop-type-subtype = is-trunc-type-subtype neg-two-𝕋 P
+
+  abstract
+    is-set-type-subtype : is-set A → is-set (type-subtype P)
+    is-set-type-subtype = is-trunc-type-subtype neg-one-𝕋 P
+
+prop-subprop :
+  {l1 l2 : Level} (A : Prop l1) (P : subtype l2 (type-Prop A)) → Prop (l1 ⊔ l2)
+pr1 (prop-subprop A P) = type-subtype P
+pr2 (prop-subprop A P) = is-prop-type-subtype P (is-prop-type-Prop A)
+
+set-subset :
+  {l1 l2 : Level} (A : Set l1) (P : subtype l2 (type-Set A)) → Set (l1 ⊔ l2)
+pr1 (set-subset A P) = type-subtype P
+pr2 (set-subset A P) = is-set-type-subtype P (is-set-type-Set A)
 ```
 
 We end this section with a theorem that characterizes `(k + 1)`-truncated maps.
@@ -448,4 +483,43 @@ abstract
 set-Prop :
   {l : Level} → Prop l → Set l
 set-Prop P = truncated-type-succ-Truncated-Type neg-one-𝕋 P
+```
+
+### 0-maps
+
+```agda
+module _
+  {l1 l2 : Level}
+  where
+
+  is-0-map : {A : UU l1} {B : UU l2} → (A → B) → UU (l1 ⊔ l2)
+  is-0-map {A} {B} f = (y : B) → is-set (fiber f y)
+
+  0-map : (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
+  0-map A B = Σ (A → B) is-0-map
+
+  map-0-map : {A : UU l1} {B : UU l2} → 0-map A B → A → B
+  map-0-map = pr1
+
+  is-0-map-map-0-map :
+    {A : UU l1} {B : UU l2} (f : 0-map A B) → is-0-map (map-0-map f)
+  is-0-map-map-0-map = pr2
+```
+
+### 1-types
+
+```agda
+is-1-type : {l : Level} → UU l → UU l
+is-1-type = is-trunc one-𝕋
+
+1-Type : (l : Level) → UU (lsuc l)
+1-Type l = Σ (UU l) is-1-type
+
+type-1-Type : {l : Level} → 1-Type l → UU l
+type-1-Type = pr1
+
+abstract
+  is-1-type-type-1-Type :
+    {l : Level} (A : 1-Type l) → is-1-type (type-1-Type A)
+  is-1-type-type-1-Type = pr2
 ```

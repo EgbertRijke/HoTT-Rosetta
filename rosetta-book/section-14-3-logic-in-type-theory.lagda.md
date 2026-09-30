@@ -5,12 +5,14 @@ module section-14-3-logic-in-type-theory where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
+open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import exercise-4-3-double-negation-logic
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-8-1-decidability-and-decidable-equality
+open import exercise-8-7-decidable-equality-coproducts
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import section-10-3-contractible-maps
@@ -703,4 +705,50 @@ module _
     X ≃ type-decidable-subtype decidable-subtype-decidable-emb
   inv-compute-type-decidable-subtype-decidable-emb =
     inv-equiv-total-fiber (map-decidable-emb f)
+```
+
+### The decidable subtypes of left and right elements in a coproduct type
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-decidable-is-left : (x : A + B) → is-decidable (is-left x)
+  is-decidable-is-left (inl x) = is-decidable-unit
+  is-decidable-is-left (inr x) = is-decidable-empty
+
+  is-left-Decidable-Prop : A + B → Decidable-Prop lzero
+  pr1 (is-left-Decidable-Prop x) = is-left x
+  pr1 (pr2 (is-left-Decidable-Prop x)) = is-prop-is-left x
+  pr2 (pr2 (is-left-Decidable-Prop x)) = is-decidable-is-left x
+
+  is-decidable-is-right : (x : A + B) → is-decidable (is-right x)
+  is-decidable-is-right (inl x) = is-decidable-empty
+  is-decidable-is-right (inr x) = is-decidable-unit
+
+  is-right-Decidable-Prop : A + B → Decidable-Prop lzero
+  pr1 (is-right-Decidable-Prop x) = is-right x
+  pr1 (pr2 (is-right-Decidable-Prop x)) = is-prop-is-right x
+  pr2 (pr2 (is-right-Decidable-Prop x)) = is-decidable-is-right x
+```
+
+### Being inhabited or empty is a proposition
+
+```agda
+is-inhabited-or-empty : {l1 : Level} → UU l1 → UU l1
+is-inhabited-or-empty A = type-trunc-Prop A + is-empty A
+
+abstract
+  is-property-is-inhabited-or-empty :
+    {l1 : Level} (A : UU l1) → is-prop (is-inhabited-or-empty A)
+  is-property-is-inhabited-or-empty A =
+    is-prop-coproduct
+      ( λ t → apply-universal-property-trunc-Prop t empty-Prop)
+      ( is-prop-type-trunc-Prop)
+      ( is-prop-neg)
+
+is-inhabited-or-empty-Prop : {l1 : Level} → UU l1 → Prop l1
+pr1 (is-inhabited-or-empty-Prop A) = is-inhabited-or-empty A
+pr2 (is-inhabited-or-empty-Prop A) = is-property-is-inhabited-or-empty A
 ```

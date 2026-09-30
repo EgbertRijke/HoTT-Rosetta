@@ -23,6 +23,7 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 open import exercise-7-5-observational-equality-finite-types
 open import section-8-1-decidability-and-decidable-equality
 open import exercise-8-6-decidable-equality-products
+open import exercise-8-7-decidable-equality-coproducts
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
@@ -40,11 +41,15 @@ open import exercise-10-7-fibers-of-projections
 open import exercise-10-8-fiber-replacement
 open import section-11-1-families-of-equivalences
 open import section-12-1-propositions
+open import section-12-2-subtypes
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import exercise-12-4-coproduct-truncation
 open import exercise-12-8-retracts-of-truncated-types
 open import section-13-2-identity-systems-on-pi-types
+open import section-14-2-propositional-truncations-as-higher-inductive-types
+open import section-14-3-logic-in-type-theory
+open import exercise-14-5-propositional-truncations-with-sections
 ```
 
 When someone counts the elements of a finite set `A`, they go through the elements of `A` one by one, at each stage keeping track of how many elements have been counted so far.
@@ -452,6 +457,56 @@ Note that both `A` and `B` are decidable subtypes of the coproduct `A + B`.
 Any counting of `A + B` therefore induces countings of `A` and of `B`. ◻
 
 ```agda
+abstract
+  count-decidable-subtype-Fin :
+    {l : Level} (k : ℕ) →
+    (P : decidable-subtype l (Fin k)) → count (type-decidable-subtype P)
+  count-decidable-subtype-Fin 0 P = count-is-empty pr1
+  count-decidable-subtype-Fin (succ-ℕ k) P
+    with is-decidable-decidable-subtype P (inr star)
+  ... | inl p =
+    count-equiv'
+      ( right-distributive-Σ-coproduct (is-in-decidable-subtype P))
+      ( pair
+        ( succ-ℕ
+          ( number-of-elements-count (count-decidable-subtype-Fin k (P ∘ inl))))
+        ( equiv-coproduct
+          ( equiv-count (count-decidable-subtype-Fin k (P ∘ inl)))
+          ( equiv-is-contr
+            ( is-contr-unit)
+            ( is-contr-Σ-unit
+              ( is-proof-irrelevant-is-in-decidable-subtype P (inr star) p)))))
+  ... | inr f =
+    count-equiv'
+      ( right-distributive-Σ-coproduct (is-in-decidable-subtype P))
+      ( count-equiv'
+        ( right-unit-law-coproduct-is-empty
+          ( Σ (Fin k) (is-in-decidable-subtype P ∘ inl))
+          ( Σ unit (is-in-decidable-subtype P ∘ inr))
+          ( λ (* , p) → f p))
+        ( count-decidable-subtype-Fin k (P ∘ inl)))
+
+count-decidable-subtype' :
+  {l1 l2 : Level} {X : UU l1} (P : decidable-subtype l2 X) →
+  (k : ℕ) (e : Fin k ≃ X) → count (type-decidable-subtype P)
+count-decidable-subtype' P k e =
+  count-equiv
+    ( equiv-Σ-equiv-base (is-in-decidable-subtype P) e)
+    ( count-decidable-subtype-Fin k (P ∘ map-equiv e))
+
+count-decidable-subtype :
+  {l1 l2 : Level} {X : UU l1} (P : decidable-subtype l2 X) →
+  count X → count (type-decidable-subtype P)
+count-decidable-subtype P e =
+  count-decidable-subtype' P
+    ( number-of-elements-count e)
+    ( equiv-count e)
+
+number-of-elements-decidable-subtype :
+  {l1 l2 : Level} {X : UU l1} (P : decidable-subtype l2 X) (e : count X) → ℕ
+number-of-elements-decidable-subtype P e =
+  number-of-elements-count (count-decidable-subtype P e)
+
 count-coproduct :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} →
   count X → count Y → count (X + Y)
@@ -503,6 +558,78 @@ module _
           ( number-of-elements-count cA)
           ( number-of-elements-count cB))
         ( inr b))
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  map-equiv-left-summand : Σ (X + Y) is-left → X
+  map-equiv-left-summand = ind-Σ left-is-left
+
+  map-inv-equiv-left-summand : X → Σ (X + Y) is-left
+  pr1 (map-inv-equiv-left-summand x) = inl x
+  pr2 (map-inv-equiv-left-summand x) = star
+
+  is-section-map-inv-equiv-left-summand :
+    (map-equiv-left-summand ∘ map-inv-equiv-left-summand) ~ id
+  is-section-map-inv-equiv-left-summand x = refl
+
+  is-retraction-map-inv-equiv-left-summand :
+    (map-inv-equiv-left-summand ∘ map-equiv-left-summand) ~ id
+  is-retraction-map-inv-equiv-left-summand (inl x , star) = refl
+  is-retraction-map-inv-equiv-left-summand (inr x , ())
+
+  equiv-left-summand : (Σ (X + Y) is-left) ≃ X
+  pr1 equiv-left-summand = map-equiv-left-summand
+  pr2 equiv-left-summand =
+    is-equiv-is-invertible
+      map-inv-equiv-left-summand
+      is-section-map-inv-equiv-left-summand
+      is-retraction-map-inv-equiv-left-summand
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  map-equiv-right-summand : Σ (X + Y) is-right → Y
+  map-equiv-right-summand = ind-Σ right-is-right
+
+  map-inv-equiv-right-summand : Y → Σ (X + Y) is-right
+  pr1 (map-inv-equiv-right-summand y) = inr y
+  pr2 (map-inv-equiv-right-summand y) = star
+
+  is-section-map-inv-equiv-right-summand :
+    map-equiv-right-summand ∘ map-inv-equiv-right-summand ~ id
+  is-section-map-inv-equiv-right-summand y = refl
+
+  is-retraction-map-inv-equiv-right-summand :
+    map-inv-equiv-right-summand ∘ map-equiv-right-summand ~ id
+  is-retraction-map-inv-equiv-right-summand (inl x , ())
+  is-retraction-map-inv-equiv-right-summand (inr x , star) = refl
+
+  equiv-right-summand : Σ (X + Y) is-right ≃ Y
+  pr1 equiv-right-summand = map-equiv-right-summand
+  pr2 equiv-right-summand =
+    is-equiv-is-invertible
+      map-inv-equiv-right-summand
+      is-section-map-inv-equiv-right-summand
+      is-retraction-map-inv-equiv-right-summand
+
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  count-left-summand : count (X + Y) → count X
+  count-left-summand e =
+    count-equiv
+      ( equiv-left-summand)
+      ( count-decidable-subtype is-left-Decidable-Prop e)
+
+  count-right-summand : count (X + Y) → count Y
+  count-right-summand e =
+    count-equiv
+      ( equiv-right-summand)
+      ( count-decidable-subtype is-right-Decidable-Prop e)
 
 count-Σ-Fin :
   {l : Level} (k : ℕ) {B : Fin k → UU l} →
@@ -780,4 +907,53 @@ count-right-factor :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} → count (X × Y) → X → count Y
 count-right-factor e x =
   count-left-factor (count-equiv commutative-product e) x
+```
+
+## Supplement
+
+### If the elements of a subtype of a type equipped with a counting can be counted, then the subtype is decidable
+
+```agda
+is-decidable-count-subtype :
+  {l1 l2 : Level} {X : UU l1} (P : subtype l2 X) → count X →
+  count (type-subtype P) → (x : X) → is-decidable (type-Prop (P x))
+is-decidable-count-subtype P e f x =
+  is-decidable-count
+    ( count-equiv
+      ( equiv-fiber-pr1 (type-Prop ∘ P) x)
+      ( count-decidable-subtype
+        ( λ y →
+          pair
+            ( pr1 y ＝ x)
+            ( pair
+              ( is-set-type-count e (pr1 y) x)
+              ( has-decidable-equality-count e (pr1 y) x)))
+        ( f)))
+```
+
+### Types with a count are either inhabited or empty
+
+```agda
+is-inhabited-or-empty-count :
+  {l1 : Level} {A : UU l1} → count A → is-inhabited-or-empty A
+is-inhabited-or-empty-count (0 , e) =
+  inr (is-empty-is-zero-number-of-elements-count (0 , e) refl)
+is-inhabited-or-empty-count (succ-ℕ k , e) =
+  inl (unit-trunc-Prop (map-equiv e (zero-Fin k)))
+```
+
+### If the elements of a type can be counted, then the elements of its propositional truncation can be counted
+
+```agda
+count-type-trunc-Prop :
+  {l1 : Level} {A : UU l1} → count A → count (type-trunc-Prop A)
+count-type-trunc-Prop (0 , e) =
+  count-is-empty
+    ( is-empty-type-trunc-Prop
+      ( is-empty-is-zero-number-of-elements-count (0 , e) refl))
+count-type-trunc-Prop (succ-ℕ k , e) =
+  count-is-contr
+    ( is-proof-irrelevant-is-prop
+      ( is-prop-type-trunc-Prop)
+      ( unit-trunc-Prop (map-equiv e (zero-Fin k))))
 ```

@@ -69,6 +69,9 @@ Therefore, we also define
 ```agda
 is-empty : {l : Level} → UU l → UU l
 is-empty A = A → empty
+
+is-nonempty : {l : Level} → UU l → UU l
+is-nonempty A = is-empty (is-empty A)
 ```
 
 ### Remark 4.3.3

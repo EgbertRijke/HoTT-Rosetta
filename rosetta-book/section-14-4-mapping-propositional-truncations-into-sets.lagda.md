@@ -21,6 +21,7 @@ open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
+open import section-10-4-equivalences-are-contractible-maps
 open import section-11-1-families-of-equivalences
 open import section-12-1-propositions
 open import section-12-2-subtypes
@@ -182,6 +183,18 @@ was constructed in Theorem 8.3.2 using the decidability of `P`.
     ( apply-universal-property-trunc-Prop t
       ( minimal-element-ℕ-Prop P)
       ( λ (n , p) → well-ordering-principle-ℕ (type-Prop ∘ P) d (n , p)))
+
+ε-operator-equiv :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
+  ε-operator-Hilbert X → ε-operator-Hilbert Y
+ε-operator-equiv e f =
+  (map-equiv e ∘ f) ∘ (map-trunc-Prop (map-inv-equiv e))
+
+ε-operator-equiv' :
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
+  ε-operator-Hilbert Y → ε-operator-Hilbert X
+ε-operator-equiv' e f =
+  (map-inv-equiv e ∘ f) ∘ (map-trunc-Prop (map-equiv e))
 ```
 
 As a corollary of this observation, we observe that there is also a map

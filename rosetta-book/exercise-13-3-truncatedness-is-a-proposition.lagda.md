@@ -11,6 +11,7 @@ open import section-10-1-contractible-types
 open import exercise-10-1-identity-types-contractible
 open import exercise-10-6-dependent-pair-contractible-base
 open import section-12-1-propositions
+open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
 ```
@@ -81,4 +82,17 @@ abstract
 is-prop-Prop : {l : Level} (A : UU l) → Prop l
 pr1 (is-prop-Prop A) = is-prop A
 pr2 (is-prop-Prop A) = is-property-is-prop A
+```
+
+### Being a set is a property
+
+```agda
+abstract
+  is-prop-is-set :
+    {l : Level} (A : UU l) → is-prop (is-set A)
+  is-prop-is-set = is-property-is-trunc zero-𝕋
+
+is-set-Prop : {l : Level} → UU l → Prop l
+pr1 (is-set-Prop A) = is-set A
+pr2 (is-set-Prop A) = is-prop-is-set A
 ```
