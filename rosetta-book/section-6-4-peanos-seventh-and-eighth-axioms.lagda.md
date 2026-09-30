@@ -5,6 +5,8 @@ module section-6-4-peanos-seventh-and-eighth-axioms where
 
 open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
+open import exercise-3-1-multiplication-and-exponentiation
+open import exercise-3-3-triangular-numbers-and-factorials
 open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
 open import exercise-4-3-double-negation-logic
@@ -167,4 +169,22 @@ eq-pred-is-nonzero-ℕ n H =
 
 peano-8-ℕ : (n : ℕ) → zero-ℕ ＝ succ-ℕ n → empty
 peano-8-ℕ n p = is-nonzero-is-successor-ℕ (n , p) refl
+```
+
+## Supplements
+
+### Basic nonequalities
+
+```agda
+is-nonzero-one-ℕ : is-nonzero-ℕ 1
+is-nonzero-one-ℕ ()
+
+is-not-one-zero-ℕ : is-not-one-ℕ zero-ℕ
+is-not-one-zero-ℕ ()
+
+is-nonzero-two-ℕ : is-nonzero-ℕ 2
+is-nonzero-two-ℕ ()
+
+is-not-one-two-ℕ : is-not-one-ℕ 2
+is-not-one-two-ℕ ()
 ```
