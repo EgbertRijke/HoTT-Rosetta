@@ -81,6 +81,19 @@ le-is-proper-divisor-ℕ x y H K =
 ```agda
 is-prime-ℕ : ℕ → UU lzero
 is-prime-ℕ n = (x : ℕ) → (is-proper-divisor-ℕ n x ↔ is-one-ℕ x)
+
+Prime-ℕ : UU lzero
+Prime-ℕ = Σ ℕ is-prime-ℕ
+
+module _
+  (p : Prime-ℕ)
+  where
+
+  nat-Prime-ℕ : ℕ
+  nat-Prime-ℕ = pr1 p
+
+  is-prime-Prime-ℕ : is-prime-ℕ nat-Prime-ℕ
+  is-prime-Prime-ℕ = pr2 p
 ```
 
 ## Proposition 8.5.2
@@ -95,9 +108,38 @@ For any `n : ℕ`, the type `is-prime(n)` is decidable.
 is-prime'(n) ≔ (n ≠ 1) × Π(x : ℕ) is-proper-divisor(n, x) → (x = 1).
 ```
 
+```agda
+is-one-is-proper-divisor-ℕ : ℕ → UU lzero
+is-one-is-proper-divisor-ℕ n =
+  (x : ℕ) → is-proper-divisor-ℕ n x → is-one-ℕ x
+
+is-prime-easy-ℕ : ℕ → UU lzero
+is-prime-easy-ℕ n = (is-not-one-ℕ n) × (is-one-is-proper-divisor-ℕ n)
+```
+
 For the forward direction, simply note that `1` is not a proper divisor of itself, and therefore `1` is not a prime.
+
+```agda
+abstract
+  is-not-one-is-prime-ℕ : (n : ℕ) → is-prime-ℕ n → is-not-one-ℕ n
+  is-not-one-is-prime-ℕ n H p = pr1 (pr2 (H 1) refl) (inv p)
+```
+
 For the converse direction, suppose that `n ≠ 1` and that any proper divisor of `n` is `1`.
 Then it follows that `1` is a proper divisor of `n`, which implies that `n` is prime.
+
+```agda
+abstract
+  is-prime-easy-is-prime-ℕ : (n : ℕ) → is-prime-ℕ n → is-prime-easy-ℕ n
+  pr1 (is-prime-easy-is-prime-ℕ n H) = is-not-one-is-prime-ℕ n H
+  pr2 (is-prime-easy-is-prime-ℕ n H) x = forward-implication (H x)
+
+  is-prime-is-prime-easy-ℕ : (n : ℕ) → is-prime-easy-ℕ n → is-prime-ℕ n
+  pr1 (is-prime-is-prime-easy-ℕ n H x) = pr2 H x
+  pr1 (pr2 (is-prime-is-prime-easy-ℕ n H .(succ-ℕ zero-ℕ)) refl) q =
+    pr1 H (inv q)
+  pr2 (pr2 (is-prime-is-prime-easy-ℕ n H .(succ-ℕ zero-ℕ)) refl) = div-one-ℕ n
+```
 
 Now we proceed by showing that the type `is-prime'(n)` is decidable for every `n : ℕ`.
 The proof is by case analysis on whether `n = 0` or `n ≠ 0`.
@@ -121,54 +163,6 @@ Since the types `(x ≠ n) × (x | n)` and `x = 1` are decidable, it follows fro
 
 for any `x : ℕ`.
 This follows from the implication `(x | n) → (x ≤ n)`, which holds because we have assumed that `n ≠ 0`. ◻
-
-```agda
-is-one-div-one-ℕ : (x : ℕ) → div-ℕ x 1 → is-one-ℕ x
-is-one-div-one-ℕ x H = antisymmetric-div-ℕ x 1 H (div-one-ℕ x)
-```
-
-```agda
-is-proper-divisor-one-is-proper-divisor-ℕ :
-  {n x : ℕ} → is-proper-divisor-ℕ n x → is-proper-divisor-ℕ n 1
-pr1 (is-proper-divisor-one-is-proper-divisor-ℕ {.1} {x} H) refl =
-  pr1 H (is-one-div-one-ℕ x (pr2 H))
-pr1 (pr2 (is-proper-divisor-one-is-proper-divisor-ℕ {n} {x} H)) = n
-pr2 (pr2 (is-proper-divisor-one-is-proper-divisor-ℕ {n} {x} H)) =
-  right-unit-law-mul-ℕ n
-```
-
-```agda
-is-one-is-proper-divisor-ℕ : ℕ → UU lzero
-is-one-is-proper-divisor-ℕ n =
-  (x : ℕ) → is-proper-divisor-ℕ n x → is-one-ℕ x
-
-is-prime-easy-ℕ : ℕ → UU lzero
-is-prime-easy-ℕ n = (is-not-one-ℕ n) × (is-one-is-proper-divisor-ℕ n)
-```
-
-```agda
-abstract
-  is-not-one-is-prime-ℕ : (n : ℕ) → is-prime-ℕ n → is-not-one-ℕ n
-  is-not-one-is-prime-ℕ n H p = pr1 (pr2 (H 1) refl) (inv p)
-```
-
-```agda
-abstract
-  is-prime-easy-is-prime-ℕ : (n : ℕ) → is-prime-ℕ n → is-prime-easy-ℕ n
-  pr1 (is-prime-easy-is-prime-ℕ n H) = is-not-one-is-prime-ℕ n H
-  pr2 (is-prime-easy-is-prime-ℕ n H) x = forward-implication (H x)
-
-  is-prime-is-prime-easy-ℕ : (n : ℕ) → is-prime-easy-ℕ n → is-prime-ℕ n
-  pr1 (is-prime-is-prime-easy-ℕ n H x) = pr2 H x
-  pr1 (pr2 (is-prime-is-prime-easy-ℕ n H .(succ-ℕ zero-ℕ)) refl) q =
-    pr1 H (inv q)
-  pr2 (pr2 (is-prime-is-prime-easy-ℕ n H .(succ-ℕ zero-ℕ)) refl) = div-one-ℕ n
-```
-
-```agda
-is-not-one-two-ℕ : is-not-one-ℕ 2
-is-not-one-two-ℕ ()
-```
 
 ```agda
 is-decidable-is-prime-easy-ℕ : (n : ℕ) → is-decidable (is-prime-easy-ℕ n)
@@ -209,12 +203,12 @@ R(n, m) ≔ (n < m) × Π(x : ℕ) (x ≤ n) → ((x | m) → (x = 1)).
 
 ```agda
 is-one-is-divisor-below-ℕ : ℕ → ℕ → UU lzero
-is-one-is-divisor-below-ℕ n a =
-  (x : ℕ) → leq-ℕ x n → div-ℕ x a → is-one-ℕ x
+is-one-is-divisor-below-ℕ n m =
+  (x : ℕ) → leq-ℕ x n → div-ℕ x m → is-one-ℕ x
 
 in-sieve-of-eratosthenes-ℕ : ℕ → ℕ → UU lzero
-in-sieve-of-eratosthenes-ℕ n a =
-  (le-ℕ n a) × (is-one-is-divisor-below-ℕ n a)
+in-sieve-of-eratosthenes-ℕ n m =
+  (le-ℕ n m) × (is-one-is-divisor-below-ℕ n m)
 
 le-in-sieve-of-eratosthenes-ℕ :
   (n a : ℕ) → in-sieve-of-eratosthenes-ℕ n a → le-ℕ n a
@@ -250,7 +244,7 @@ is-decidable-in-sieve-of-eratosthenes-ℕ n a =
           ( is-decidable-div-ℕ x a)
           ( is-decidable-is-one-ℕ x))
       ( n)
-      ( λ x → section-2-2-ordinary-function-types.id))
+      ( λ x → id))
 ```
 
 ## Lemma 8.5.5
@@ -265,45 +259,6 @@ We leave this to the reader, and focus on the second aspect of the claim: that e
 To see this, note that any divisor of `n! + 1` is automatically nonzero, and recall that any nonzero `x ≤ n` divides `n!` by Exercise 7.3.
 Therefore it follows that any `x ≤ n` that divides `n! +1` also divides `n!`, and consequently it divides `1` as well.
 Now we are done, because if `x` divides `1` then `x = 1`. ◻
-
-```agda
-abstract
-  is-one-div-ℕ : (x y : ℕ) → div-ℕ x y → div-ℕ x (succ-ℕ y) → is-one-ℕ x
-  is-one-div-ℕ x y H K = is-one-div-one-ℕ x (div-right-summand-ℕ x y 1 H K)
-```
-
-```agda
-abstract
-  is-nonzero-mul-ℕ :
-    (x y : ℕ) → is-nonzero-ℕ x → is-nonzero-ℕ y → is-nonzero-ℕ (x *ℕ y)
-  is-nonzero-mul-ℕ x y H K p =
-    K (is-injective-left-mul-ℕ x H (p ∙ (inv (right-zero-law-mul-ℕ x))))
-```
-
-```agda
-abstract
-  is-nonzero-factorial-ℕ :
-    (x : ℕ) → is-nonzero-ℕ (factorial-ℕ x)
-  is-nonzero-factorial-ℕ zero-ℕ = Eq-eq-ℕ
-  is-nonzero-factorial-ℕ (succ-ℕ x) =
-    is-nonzero-mul-ℕ
-      ( factorial-ℕ x)
-      ( succ-ℕ x)
-      ( is-nonzero-factorial-ℕ x)
-      ( is-nonzero-succ-ℕ x)
-```
-
-```agda
-abstract
-  leq-factorial-ℕ :
-    (n : ℕ) → leq-ℕ n (factorial-ℕ n)
-  leq-factorial-ℕ zero-ℕ = leq-zero-ℕ 1
-  leq-factorial-ℕ (succ-ℕ n) =
-    leq-mul-is-nonzero-ℕ'
-      ( factorial-ℕ n)
-      ( succ-ℕ n)
-      ( is-nonzero-factorial-ℕ n)
-```
 
 ```agda
 in-sieve-of-eratosthenes-succ-factorial-ℕ :
@@ -372,6 +327,11 @@ Since `¬R(n, x)` holds, we conclude now that `n ≮ x`.
 To finish the proof, it follows that `x ≤ n`. ◻
 
 ```agda
+Infinitude-Of-Primes-ℕ : UU lzero
+Infinitude-Of-Primes-ℕ = (n : ℕ) → Σ ℕ (λ p → is-prime-ℕ p × le-ℕ n p)
+```
+
+```agda
 abstract
   is-one-is-proper-divisor-two-ℕ : is-one-is-proper-divisor-ℕ 2
   is-one-is-proper-divisor-two-ℕ zero-ℕ (pair f (pair k p)) =
@@ -389,11 +349,6 @@ pr2 is-prime-easy-two-ℕ = is-one-is-proper-divisor-two-ℕ
 is-prime-two-ℕ : is-prime-ℕ 2
 is-prime-two-ℕ =
   is-prime-is-prime-easy-ℕ 2 is-prime-easy-two-ℕ
-```
-
-```agda
-Infinitude-Of-Primes-ℕ : UU lzero
-Infinitude-Of-Primes-ℕ = (n : ℕ) → Σ ℕ (λ p → is-prime-ℕ p × le-ℕ n p)
 ```
 
 ```agda
