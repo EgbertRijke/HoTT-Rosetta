@@ -60,7 +60,17 @@ module _
   where
 
   is-split-surjective : (A → B) → UU (l1 ⊔ l2)
-  is-split-surjective f = (b : B) → Σ A (λ x → f x ＝ b)
+  is-split-surjective f = (b : B) → Σ A (λ a → f a ＝ b)
+
+  split-surjection : UU (l1 ⊔ l2)
+  split-surjection = Σ (A → B) is-split-surjective
+
+  map-split-surjection : split-surjection → (A → B)
+  map-split-surjection = pr1
+
+  is-split-surjective-split-surjection :
+    (f : split-surjection) → is-split-surjective (map-split-surjection f)
+  is-split-surjective-split-surjection = pr2
 ```
 
 Martin-Löf’s dependent type theory doesn’t have a general way of forming quotients of types.
@@ -115,15 +125,21 @@ is-zero-Fin' (succ-ℕ k) x = zero-Fin k ＝ x
 
 is-nonzero-Fin : (k : ℕ) → Fin k → UU lzero
 is-nonzero-Fin (succ-ℕ k) x = ¬ (is-zero-Fin (succ-ℕ k) x)
+```
 
+```agda
 skip-zero-Fin : (k : ℕ) → Fin k → Fin (succ-ℕ k)
 skip-zero-Fin (succ-ℕ k) (inl x) = inl (skip-zero-Fin k x)
 skip-zero-Fin (succ-ℕ k) (inr star) = inr star
+```
 
+```agda
 succ-Fin : (k : ℕ) → Fin k → Fin k
 succ-Fin (succ-ℕ k) (inl x) = skip-zero-Fin k x
 succ-Fin (succ-ℕ k) (inr star) = zero-Fin k
+```
 
+```agda
 neg-one-Fin : (k : ℕ) → Fin (succ-ℕ k)
 neg-one-Fin k = inr star
 
@@ -241,22 +257,44 @@ nat-Fin(succ-Fin_{k + 1}(⋆)) ≐ nat-Fin(0)      by definition of succ-Fin
 is-zero-nat-zero-Fin : {k : ℕ} → nat-Fin (succ-ℕ k) (zero-Fin k) ＝ zero-ℕ
 is-zero-nat-zero-Fin {zero-ℕ} = refl
 is-zero-nat-zero-Fin {succ-ℕ k} = is-zero-nat-zero-Fin {k}
+```
 
+```agda
 nat-skip-zero-Fin :
   (k : ℕ) (x : Fin k) →
   nat-Fin (succ-ℕ k) (skip-zero-Fin k x) ＝ succ-ℕ (nat-Fin k x)
 nat-skip-zero-Fin (succ-ℕ k) (inl x) = nat-skip-zero-Fin k x
 nat-skip-zero-Fin (succ-ℕ k) (inr star) = refl
+```
 
+```agda
 nat-succ-Fin :
   (k : ℕ) (x : Fin k) →
   nat-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x)) ＝ succ-ℕ (nat-Fin k x)
 nat-succ-Fin k x = nat-skip-zero-Fin k x
+
+cong-nat-succ-Fin :
+  (k : ℕ) (x : Fin k) →
+  cong-ℕ k (nat-Fin k (succ-Fin k x)) (succ-ℕ (nat-Fin k x))
+cong-nat-succ-Fin (succ-ℕ k) (inl x) =
+  cong-identification-ℕ
+    ( succ-ℕ k)
+    { nat-Fin (succ-ℕ k) (succ-Fin (succ-ℕ k) (inl x))}
+    { succ-ℕ (nat-Fin k x)}
+    ( nat-succ-Fin k x)
+cong-nat-succ-Fin (succ-ℕ k) (inr _) =
+  concatenate-eq-cong-ℕ
+    ( succ-ℕ k)
+    { nat-Fin (succ-ℕ k) (zero-Fin k)}
+    { zero-ℕ}
+    { succ-ℕ k}
+    ( is-zero-nat-zero-Fin {k})
+    ( cong-zero-ℕ' (succ-ℕ k))
 ```
 
 ## Proposition 7.4.5
 
-For any `x:ℕ` we have
+For any `x : ℕ` we have
 
 ```text
 nat-Fin[x]_{k + 1} ≡ x mod (k + 1).
@@ -289,17 +327,6 @@ nat-Fin[x + 1]_{k + 1} ≐ nat-Fin(succ-Fin_{k + 1}[x]_{k + 1})  by definition o
 ◻
 
 ```agda
-cong-nat-succ-Fin :
-  (k : ℕ) (x : Fin k) →
-  cong-ℕ k (nat-Fin k (succ-Fin k x)) (succ-ℕ (nat-Fin k x))
-cong-nat-succ-Fin (succ-ℕ k) (inl x) =
-  cong-identification-ℕ
-    (succ-ℕ k)
-    (nat-succ-Fin k x)
-cong-nat-succ-Fin (succ-ℕ k) (inr star) =
-  tr (λ z → cong-ℕ (succ-ℕ k) z (succ-ℕ k)) (inv (is-zero-nat-zero-Fin {k}))
-    (symmetric-cong-ℕ (succ-ℕ k) (succ-ℕ k) zero-ℕ (cong-zero-ℕ (succ-ℕ k)))
-
 cong-nat-mod-succ-ℕ :
   (k x : ℕ) → cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
 cong-nat-mod-succ-ℕ k zero-ℕ =
@@ -379,19 +406,6 @@ eq-cong-le-dist-ℕ :
   (k x y : ℕ) → le-ℕ (dist-ℕ x y) k → cong-ℕ k x y → x ＝ y
 eq-cong-le-dist-ℕ k x y H K =
   eq-dist-ℕ x y (is-zero-div-ℕ k (dist-ℕ x y) H K)
-
-eq-cong-le-ℕ :
-  (k x y : ℕ) → le-ℕ x k → le-ℕ y k → cong-ℕ k x y → x ＝ y
-eq-cong-le-ℕ k x y H K =
-  eq-cong-le-dist-ℕ k x y (strict-upper-bound-dist-ℕ k x y H K)
-
-eq-cong-nat-Fin :
-  (k : ℕ) (x y : Fin k) → cong-ℕ k (nat-Fin k x) (nat-Fin k y) → x ＝ y
-eq-cong-nat-Fin (succ-ℕ k) x y H =
-  is-injective-nat-Fin (succ-ℕ k)
-    (eq-cong-le-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y)
-      (strict-upper-bound-nat-Fin (succ-ℕ k) x)
-      (strict-upper-bound-nat-Fin (succ-ℕ k) y) H)
 ```
 
 ## Theorem 7.4.7
@@ -422,12 +436,23 @@ nat-Fin[x]_{k + 1} = nat-Fin[y]_{k + 1} ↔ nat-Fin[x]_{k + 1} ≡ nat-Fin[y]_{k
 The latter condition is by Proposition 7.4.5 equivalent to the condition that `x ≡ y mod (k + 1)`. ◻
 
 ```agda
-concatenate-cong-eq-cong-ℕ :
-  {k x1 x2 x3 x4 : ℕ} →
-  cong-ℕ k x1 x2 → x2 ＝ x3 → cong-ℕ k x3 x4 → cong-ℕ k x1 x4
-concatenate-cong-eq-cong-ℕ {k} {x} {y} {.y} {z} H refl K =
-  transitive-cong-ℕ k x y z K H
+eq-cong-le-ℕ :
+  (k x y : ℕ) → le-ℕ x k → le-ℕ y k → cong-ℕ k x y → x ＝ y
+eq-cong-le-ℕ k x y H K =
+  eq-cong-le-dist-ℕ k x y (strict-upper-bound-dist-ℕ k x y H K)
+```
 
+```agda
+eq-cong-nat-Fin :
+  (k : ℕ) (x y : Fin k) → cong-ℕ k (nat-Fin k x) (nat-Fin k y) → x ＝ y
+eq-cong-nat-Fin (succ-ℕ k) x y H =
+  is-injective-nat-Fin (succ-ℕ k)
+    (eq-cong-le-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) x) (nat-Fin (succ-ℕ k) y)
+      (strict-upper-bound-nat-Fin (succ-ℕ k) x)
+      (strict-upper-bound-nat-Fin (succ-ℕ k) y) H)
+```
+
+```agda
 cong-eq-mod-succ-ℕ :
   (k x y : ℕ) → mod-succ-ℕ k x ＝ mod-succ-ℕ k y → cong-ℕ (succ-ℕ k) x y
 cong-eq-mod-succ-ℕ k x y p =
@@ -450,23 +475,6 @@ eq-mod-succ-cong-ℕ k x y H =
           (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)) y
           (cong-nat-mod-succ-ℕ k y)) H)
       (cong-nat-mod-succ-ℕ k x))
-```
-
-### `k + 1` divides `x` if and only if `x ≡ 0` modulo `k + 1`
-
-```agda
-is-zero-mod-succ-ℕ :
-  (k x : ℕ) → div-ℕ (succ-ℕ k) x → is-zero-Fin (succ-ℕ k) (mod-succ-ℕ k x)
-is-zero-mod-succ-ℕ k x d =
-  eq-mod-succ-cong-ℕ k x zero-ℕ
-    ( concatenate-div-eq-ℕ d (inv (right-unit-law-dist-ℕ x)))
-
-div-is-zero-mod-succ-ℕ :
-  (k x : ℕ) → is-zero-Fin (succ-ℕ k) (mod-succ-ℕ k x) → div-ℕ (succ-ℕ k) x
-div-is-zero-mod-succ-ℕ k x p =
-  concatenate-div-eq-ℕ
-    ( cong-eq-mod-succ-ℕ k x zero-ℕ p)
-    ( right-unit-law-dist-ℕ x)
 ```
 
 ## Theorem 7.4.8
@@ -510,7 +518,9 @@ is-section-nat-Fin k x =
         ( mod-succ-ℕ k (nat-Fin (succ-ℕ k) x)))
       ( strict-upper-bound-nat-Fin (succ-ℕ k) x)
       ( cong-nat-mod-succ-ℕ k (nat-Fin (succ-ℕ k) x)))
+```
 
+```agda
 is-split-surjective-mod-succ-ℕ :
   (k : ℕ) → is-split-surjective (mod-succ-ℕ k)
 pr1 (is-split-surjective-mod-succ-ℕ k x) = nat-Fin (succ-ℕ k) x
