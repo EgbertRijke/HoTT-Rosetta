@@ -8,6 +8,7 @@ open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers
 open import exercise-3-1-multiplication-and-exponentiation
+open import exercise-3-3-triangular-numbers-and-factorials
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
@@ -439,4 +440,18 @@ abstract
     (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (k *ℕ x)
   leq-mul-is-nonzero-ℕ' k x H with is-successor-is-nonzero-ℕ H
   ... | (l , refl) = leq-mul-ℕ' l x
+```
+
+### `n ≤ n!`
+
+```agda
+abstract
+  leq-factorial-ℕ :
+    (n : ℕ) → leq-ℕ n (factorial-ℕ n)
+  leq-factorial-ℕ zero-ℕ = leq-zero-ℕ 1
+  leq-factorial-ℕ (succ-ℕ n) =
+    leq-mul-is-nonzero-ℕ'
+      ( factorial-ℕ n)
+      ( succ-ℕ n)
+      ( is-nonzero-factorial-ℕ n)
 ```
