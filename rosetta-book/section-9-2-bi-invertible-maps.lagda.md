@@ -1061,10 +1061,6 @@ module _
 
   left-absorption-product : (empty × A) ≃ empty
   left-absorption-product = left-absorption-Σ (λ x → A)
-
-is-empty-left-factor-is-empty-product :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty (A × B) → B → is-empty A
-is-empty-left-factor-is-empty-product f b a = f (pair a b)
 ```
 
 ### The equivalence `Σ(x : A) ∅ ≃ ∅`
