@@ -7,13 +7,20 @@ open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
+open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import exercise-9-1-groupoid-operations-equivalences
+open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-3-contractible-equivalences
 open import section-11-1-families-of-equivalences
+open import section-11-2-the-fundamental-theorem
+open import section-11-6-the-structure-identity-principle
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-21-1-the-induction-principle-of-the-circle
 ```
@@ -55,7 +62,7 @@ The dependent universal property therefore improves on this by stating that this
 For any type family `P` over the circle, the map
 
 ```text
-dgen_{S¹}: (Π(x:S¹) P(x)) → (Σ(y:P(base)) tr_P(loop,y) = y)
+dgen_{S¹}: (Π(x : S¹) P(x)) → (Σ(y : P(base)) tr_P(loop,y) = y)
 ```
 
 given by `f ↦ (f(base),apd_{f}(loop))` is an equivalence.
@@ -65,8 +72,8 @@ given by `f ↦ (f(base),apd_{f}(loop))` is an equivalence.
 _Proof._ By the induction principle of the circle we know that the map has a section, i.e., we have
 
 ```text
-ind-S¹ : (Σ(y:P(base)) tr_P(loop,y)=y) → (Π(x:S¹) P(x))
-comp_S¹ : dgen_{S¹}∘ind-S¹~id
+ind-S¹ : (Σ(y : P(base)) tr_P(loop,y) = y) → (Π(x : S¹) P(x))
+comp_S¹ : dgen_{S¹} ∘ ind-S¹ ~ id
 ```
 
 Therefore it remains to construct a homotopy
@@ -227,6 +234,24 @@ gen_{S¹} : (S¹ → X) → Σ(x:X) x = x
 
 given by `f ↦ (f(base),ap_{f}(loop))` is an equivalence.
 
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X) (Y : UU l2)
+  where
+
+  ev-free-loop : (X → Y) → free-loop Y
+  pr1 (ev-free-loop f) = f (base-free-loop α)
+  pr2 (ev-free-loop f) = ap f (loop-free-loop α)
+
+module _
+  {l1 : Level} {X : UU l1} (α : free-loop X)
+  where
+
+  universal-property-circle : UUω
+  universal-property-circle =
+    {l : Level} (Y : UU l) → is-equiv (ev-free-loop α Y)
+```
+
 ### Proof
 
 _Proof._ We prove the claim by constructing a commuting triangle
@@ -234,8 +259,8 @@ _Proof._ We prove the claim by constructing a commuting triangle
 ```text
                    [(S¹→ X)]
                   /          \
-   gen_{S¹}      /             \  dgen_{S¹}
-                V               V
+   gen_{S¹}      /            \  dgen_{S¹}
+                V              V
      [(Σ(x:X) x=x)]  ---≃--->  [(Σ(x:X) tr_{const_X}(loop,x)=x)]
 ```
 
@@ -258,30 +283,80 @@ l ↦ tr-const_X(loop,x) ∙ l,
 indexed by `x : X`.
 Since concatenating by a path is an equivalence, it follows by Theorem 11.1.3 that the induced map on total spaces is indeed an equivalence.
 
-To show that the triangle commutes, it suffices to construct for any `f:S¹→ X` an identification witnessing that the triangle
-
-_Triangle-shaped diagram (automatic draft)._
+To show that the triangle commutes, it suffices to construct for any `f : S¹ → X` an identification witnessing that the triangle
 
 ```text
 [tr_{const_X}(loop,f(base))] --{tr-const_X(loop,f(base))}--> [f(base)]
-              \                                         /
- apd_{f}(loop) \                                      /  ap_{f}(loop
-                V                                   V
-                              [f(base)]
+                          \                                 /
+              apd_{f}(loop) \                              /  ap_{f}(loop
+                              V                          V
+                                      [f(base)]
 ```
 
 commutes.
-This again follows from general considerations: for any `f:A→ B` and any `p:a=a'` in `A`, the triangle
+This again follows from general considerations: for any `f : A → B` and any `p : a = a'` in `A`, the triangle
 
 ```text
 [tr_{const_B}(p,f(a))] --tr-const_B(p,f(a))--> [f(a)]
-                  \                              /
-        apd_{f}(p) \                           /  ap_{f}(p)
-                    V                         V
+                     \                         /
+            apd_{f}(p) \                      /  ap_{f}(p)
+                         V                  V
                               [f(a')]
 ```
 
 commutes by path induction on `p`. ◻
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X) (Y : UU l2)
+  where
+
+  compute-free-dependent-loop-constant-type-family :
+    free-loop Y ≃ free-dependent-loop α (λ x → Y)
+  compute-free-dependent-loop-constant-type-family =
+    equiv-tot
+      ( λ y → equiv-concat (tr-constant-type-family (loop-free-loop α) y) y)
+
+  map-compute-free-dependent-loop-constant-type-family :
+    free-loop Y → free-dependent-loop α (λ x → Y)
+  map-compute-free-dependent-loop-constant-type-family =
+    map-equiv compute-free-dependent-loop-constant-type-family
+
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X) (Y : UU l2)
+  where
+
+  triangle-comparison-free-loop :
+    map-compute-free-dependent-loop-constant-type-family α Y ∘
+    ev-free-loop α Y ~
+    ev-free-loop-Π α (λ _ → Y)
+  triangle-comparison-free-loop f =
+    eq-Eq-free-dependent-loop α
+      ( λ x → Y)
+      ( map-compute-free-dependent-loop-constant-type-family α Y
+        ( ev-free-loop α Y f))
+      ( ev-free-loop-Π α (λ x → Y) f)
+      ( refl ,
+        right-unit ∙ (inv (apd-constant-type-family f (loop-free-loop α))))
+
+module _
+  {l1 : Level} {X : UU l1} (α : free-loop X)
+  where
+
+  abstract
+    universal-property-dependent-universal-property-circle :
+      dependent-universal-property-circle α →
+      universal-property-circle α
+    universal-property-dependent-universal-property-circle dup-circle Y =
+      is-equiv-top-map-triangle
+        ( ev-free-loop-Π α (λ x → Y))
+        ( map-compute-free-dependent-loop-constant-type-family α Y)
+        ( ev-free-loop α Y)
+        ( inv-htpy (triangle-comparison-free-loop α Y))
+        ( is-equiv-map-equiv
+          ( compute-free-dependent-loop-constant-type-family α Y))
+        ( dup-circle (λ x → Y))
+```
 
 ## Corollary 21.2.4
 
@@ -302,3 +377,59 @@ and an identification `β` witnessing that the square
 ```
 
 commutes, is contractible.
+
+```agda
+module _
+  {l1 : Level} {X : UU l1}
+  where
+
+  Eq-free-loop : (α α' : free-loop X) → UU l1
+  Eq-free-loop (pair x α) α' =
+    Σ (x ＝ base-free-loop α') (λ p → α ∙ p ＝ p ∙ (loop-free-loop α'))
+
+  refl-Eq-free-loop : (α : free-loop X) → Eq-free-loop α α
+  pr1 (refl-Eq-free-loop (pair x α)) = refl
+  pr2 (refl-Eq-free-loop (pair x α)) = right-unit
+
+  Eq-eq-free-loop : (α α' : free-loop X) → α ＝ α' → Eq-free-loop α α'
+  Eq-eq-free-loop α .α refl = refl-Eq-free-loop α
+
+  abstract
+    is-torsorial-Eq-free-loop :
+      (α : free-loop X) → is-torsorial (Eq-free-loop α)
+    is-torsorial-Eq-free-loop (pair x α) =
+      is-torsorial-Eq-structure
+        ( is-torsorial-Id x)
+        ( pair x refl)
+        ( is-contr-is-equiv'
+          ( Σ (x ＝ x) (λ α' → α ＝ α'))
+          ( tot (λ α' α → right-unit ∙ α))
+          ( is-equiv-tot-is-fiberwise-equiv
+            ( λ α' → is-equiv-concat right-unit α'))
+          ( is-torsorial-Id α))
+
+  abstract
+    is-equiv-Eq-eq-free-loop :
+      (α α' : free-loop X) → is-equiv (Eq-eq-free-loop α α')
+    is-equiv-Eq-eq-free-loop α =
+      fundamental-theorem-id
+        ( is-torsorial-Eq-free-loop α)
+        ( Eq-eq-free-loop α)
+
+module _
+  {l1 : Level} {X : UU l1} (α : free-loop X)
+  where
+
+  abstract
+    uniqueness-universal-property-circle :
+      universal-property-circle α →
+      {l2 : Level} (Y : UU l2) (α' : free-loop Y) →
+      is-contr (Σ (X → Y) (λ f → Eq-free-loop (ev-free-loop α Y f) α'))
+    uniqueness-universal-property-circle up-circle Y α' =
+      is-contr-is-equiv'
+        ( fiber (ev-free-loop α Y) α')
+        ( tot (λ f → Eq-eq-free-loop (ev-free-loop α Y f) α'))
+        ( is-equiv-tot-is-fiberwise-equiv
+          ( λ f → is-equiv-Eq-eq-free-loop (ev-free-loop α Y f) α'))
+        ( is-contr-map-is-equiv (up-circle Y) α')
+```

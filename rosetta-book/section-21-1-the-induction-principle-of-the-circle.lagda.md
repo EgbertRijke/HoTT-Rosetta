@@ -54,7 +54,7 @@ Let `P` be a type family over the circle.
 The **dependent action on generators** is the map
 
 ```text
-dgen_{S¹} : (Π(x : S¹) P(x))→(Σ(u:P(base)) tr_P(loop,u) = u)
+dgen_{S¹} : (Π(x : S¹) P(x)) → (Σ(u : P(base)) tr_P(loop,u) = u)
 ```
 
 given by `dgen_{S¹}(f)≔(f(base),apd_{f}(loop))`.
@@ -99,49 +99,12 @@ module _
   loop-free-dependent-loop = pr2
 
 module _
-  {l1 l2 : Level} {X : UU l1} (α : free-loop X) (Y : UU l2)
-  where
-
-  ev-free-loop : (X → Y) → free-loop Y
-  pr1 (ev-free-loop f) = f (base-free-loop α)
-  pr2 (ev-free-loop f) = ap f (loop-free-loop α)
-
-module _
-  {l1 : Level} {X : UU l1} (α : free-loop X)
-  where
-
-  universal-property-circle : UUω
-  universal-property-circle =
-    {l : Level} (Y : UU l) → is-equiv (ev-free-loop α Y)
-
-module _
   {l1 l2 : Level} {X : UU l1} (α : free-loop X) (P : X → UU l2)
   where
 
   ev-free-loop-Π : ((x : X) → P x) → free-dependent-loop α P
   pr1 (ev-free-loop-Π f) = f (base-free-loop α)
   pr2 (ev-free-loop-Π f) = apd f (loop-free-loop α)
-
-module _
-  {l1 : Level} {X : UU l1} (α : free-loop X)
-  where
-
-  induction-principle-circle : UUω
-  induction-principle-circle =
-    {l2 : Level} (P : X → UU l2) → section (ev-free-loop-Π α P)
-
-module _
-  {l1 l2 : Level} {X : UU l1} (α : free-loop X)
-  (H : induction-principle-circle α) (P : X → UU l2)
-  (β : free-dependent-loop α P)
-  where
-
-  function-induction-principle-circle : (x : X) → P x
-  function-induction-principle-circle = pr1 (H P) β
-
-  compute-induction-principle-circle :
-    (ev-free-loop-Π α P function-induction-principle-circle) ＝ β
-  compute-induction-principle-circle = pr2 (H P) β
 
 ```
 
@@ -186,6 +149,27 @@ comp_S¹ : dgen_{S¹} ∘ ind-S¹ ~ id
 for the computation rules.
 
 ```agda
+module _
+  {l1 : Level} {X : UU l1} (α : free-loop X)
+  where
+
+  induction-principle-circle : UUω
+  induction-principle-circle =
+    {l2 : Level} (P : X → UU l2) → section (ev-free-loop-Π α P)
+
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X)
+  (H : induction-principle-circle α) (P : X → UU l2)
+  (β : free-dependent-loop α P)
+  where
+
+  function-induction-principle-circle : (x : X) → P x
+  function-induction-principle-circle = pr1 (H P) β
+
+  compute-induction-principle-circle :
+    (ev-free-loop-Π α P function-induction-principle-circle) ＝ β
+  compute-induction-principle-circle = pr2 (H P) β
+
 postulate
   ind-𝕊¹ : induction-principle-circle free-loop-𝕊¹
 ```
