@@ -143,13 +143,6 @@ module _
     (ev-free-loop-Π α P function-induction-principle-circle) ＝ β
   compute-induction-principle-circle = pr2 (H P) β
 
-module _
-  {l1 : Level} {X : UU l1} (α : free-loop X)
-  where
-
-  dependent-universal-property-circle : UUω
-  dependent-universal-property-circle =
-    {l2 : Level} (P : X → UU l2) → is-equiv (ev-free-loop-Π α P)
 ```
 
 ## Definition 21.1.2

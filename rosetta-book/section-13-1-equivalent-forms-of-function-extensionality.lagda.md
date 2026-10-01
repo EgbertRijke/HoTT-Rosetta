@@ -10,7 +10,9 @@ open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
 open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
 open import section-8-1-decidability-and-decidable-equality
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
@@ -61,7 +63,8 @@ The following are equivalent:
    ```text
      (Π(g : Π(x : A) B(x)) Π(H : f ~ g) P(g,H)) → P(f,refl-htpy_{f}),
    ```
-    given by `s ↦ s(f,refl-htpy_{f})`, has a section.
+
+   given by `s ↦ s(f,refl-htpy_{f})`, has a section.
 
 ### Proof
 
@@ -135,7 +138,7 @@ abstract
     is-torsorial-is-identity-system f refl-htpy
 ```
 
-There is, however, yet a fourth condition equivalent to the function extensionality principle: the *weak* function extensionality principle.
+There is, however, yet a fourth condition equivalent to the function extensionality principle: the _weak_ function extensionality principle.
 The weak function extensionality principle asserts that any dependent product of contractible types is again contractible.
 
 The following theorem is stated with respect to an arbitrary universe `𝒰`, because we will use it in Theorem 17.3.2 to show that the univalence axiom implies function extensionality.
@@ -150,7 +153,7 @@ The following are equivalent:
    ```text
      htpy-eq : (f = g) → (f ~ g)
    ```
-    
+
    is an equivalence.
 
 2. The **weak function extensionality principle** holds in `𝒰`: For every type family `B` over `A` in `𝒰` one has
@@ -340,7 +343,6 @@ module _
         ( is-torsorial-Id' f)
 ```
 
-
 ## Remark 13.1.4
 
 The function extensionality axiom is added to type theory by adding the rule
@@ -510,6 +512,26 @@ is-prop-double-negation = is-prop-neg
 ```
 
 ## Supplements
+
+### The type family of identifications between values of two dependent functions
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {P : X → UU l2} (f g : (x : X) → P x)
+  where
+
+  eq-value : X → UU l2
+  eq-value x = (f x ＝ g x)
+
+  {-# INLINE eq-value #-}
+
+  map-compute-dependent-identification-eq-value :
+    {x y : X} (p : x ＝ y) (q : eq-value x) (r : eq-value y) →
+    apd f p ∙ r ＝ ap (tr P p) q ∙ apd g p →
+    dependent-identification eq-value p q r
+  map-compute-dependent-identification-eq-value refl q r =
+    inv ∘ (concat' r (right-unit ∙ ap-id q))
+```
 
 ### Dependent function types taking implicit arguments are equivalent to dependent function types taking explicit arguments
 
