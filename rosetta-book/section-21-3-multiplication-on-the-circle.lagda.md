@@ -2,6 +2,18 @@
 
 ```agda
 module section-21-3-multiplication-on-the-circle where
+
+open import universe-levels
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-3-the-action-on-identifications-of-functions
+open import section-9-2-bi-invertible-maps
+open import exercise-9-1-groupoid-operations-equivalences
+open import exercise-9-4-three-for-two-equivalences
+open import section-10-4-equivalences-are-contractible-maps
+open import section-11-1-families-of-equivalences
+open import section-13-1-equivalent-forms-of-function-extensionality
+open import section-19-4-homotopy-groups-of-types
 ```
 
 One way the circle arises classically, is as the set of complex numbers at distance `1` from the origin.
@@ -22,7 +34,129 @@ right-unit_μ(x) : μ(x,pt)= x
 coh-unit_μ : left-unit_μ(pt) = right-unit_μ(pt).
 ```
 
+```agda
+module _
+  {l : Level} {A : UU l} (μ : A → A → A) (e : A)
+  where
+
+  left-unit-law : UU l
+  left-unit-law = (x : A) → μ e x ＝ x
+
+  right-unit-law : UU l
+  right-unit-law = (x : A) → μ x e ＝ x
+
+  coh-unit-laws : left-unit-law → right-unit-law → UU l
+  coh-unit-laws α β = (α e ＝ β e)
+
+  unit-laws : UU l
+  unit-laws = left-unit-law × right-unit-law
+
+  coherent-unit-laws : UU l
+  coherent-unit-laws =
+    Σ left-unit-law (λ α → Σ right-unit-law (coh-unit-laws α))
+
+is-unital : {l : Level} {A : UU l} (μ : A → A → A) → UU l
+is-unital {A = A} μ = Σ A (unit-laws μ)
+
+is-coherently-unital : {l : Level} {A : UU l} (μ : A → A → A) → UU l
+is-coherently-unital {A = A} μ = Σ A (coherent-unit-laws μ)
+
+coherent-unit-laws-mul-Pointed-Type :
+  {l : Level} (A : Pointed-Type l)
+  (μ : (x y : type-Pointed-Type A) → type-Pointed-Type A) → UU l
+coherent-unit-laws-mul-Pointed-Type A μ =
+  coherent-unit-laws μ (point-Pointed-Type A)
+
+coherent-unital-mul-Pointed-Type :
+  {l : Level} → Pointed-Type l → UU l
+coherent-unital-mul-Pointed-Type A =
+  Σ ( type-Pointed-Type A → type-Pointed-Type A → type-Pointed-Type A)
+    ( coherent-unit-laws-mul-Pointed-Type A)
+
+```
+
 An **H-space** is a pointed type equipped with an H-space structure.
+
+```agda
+H-Space : (l : Level) → UU (lsuc l)
+H-Space l =
+  Σ (Pointed-Type l) coherent-unital-mul-Pointed-Type
+
+make-H-Space :
+  {l : Level} →
+  (X : Pointed-Type l) → coherent-unital-mul-Pointed-Type X → H-Space l
+make-H-Space X μ = (X , μ)
+
+{-# INLINE make-H-Space #-}
+
+module _
+  {l : Level} (M : H-Space l)
+  where
+
+  pointed-type-H-Space : Pointed-Type l
+  pointed-type-H-Space = pr1 M
+
+  type-H-Space : UU l
+  type-H-Space = type-Pointed-Type pointed-type-H-Space
+
+  unit-H-Space : type-H-Space
+  unit-H-Space = point-Pointed-Type pointed-type-H-Space
+
+  coherent-unital-mul-H-Space :
+    coherent-unital-mul-Pointed-Type pointed-type-H-Space
+  coherent-unital-mul-H-Space = pr2 M
+
+  mul-H-Space :
+    type-H-Space → type-H-Space → type-H-Space
+  mul-H-Space = pr1 coherent-unital-mul-H-Space
+
+  mul-H-Space' :
+    type-H-Space → type-H-Space → type-H-Space
+  mul-H-Space' x y = mul-H-Space y x
+
+  ap-mul-H-Space :
+    {a b c d : type-H-Space} → a ＝ b → c ＝ d →
+    mul-H-Space a c ＝ mul-H-Space b d
+  ap-mul-H-Space p q = ap-binary mul-H-Space p q
+
+  coherent-unit-laws-mul-H-Space :
+    coherent-unit-laws mul-H-Space unit-H-Space
+  coherent-unit-laws-mul-H-Space =
+    pr2 coherent-unital-mul-H-Space
+
+  left-unit-law-mul-H-Space :
+    (x : type-H-Space) →
+    mul-H-Space unit-H-Space x ＝ x
+  left-unit-law-mul-H-Space =
+    pr1 coherent-unit-laws-mul-H-Space
+
+  right-unit-law-mul-H-Space :
+    (x : type-H-Space) →
+    mul-H-Space x unit-H-Space ＝ x
+  right-unit-law-mul-H-Space =
+    pr1 (pr2 coherent-unit-laws-mul-H-Space)
+
+  coh-unit-laws-mul-H-Space :
+    left-unit-law-mul-H-Space unit-H-Space ＝
+    right-unit-law-mul-H-Space unit-H-Space
+  coh-unit-laws-mul-H-Space =
+    pr2 (pr2 coherent-unit-laws-mul-H-Space)
+
+  unit-laws-mul-H-Space :
+    unit-laws mul-H-Space unit-H-Space
+  pr1 unit-laws-mul-H-Space = left-unit-law-mul-H-Space
+  pr2 unit-laws-mul-H-Space = right-unit-law-mul-H-Space
+
+  is-unital-mul-H-Space : is-unital mul-H-Space
+  pr1 is-unital-mul-H-Space = unit-H-Space
+  pr2 is-unital-mul-H-Space = unit-laws-mul-H-Space
+
+  is-coherently-unital-mul-H-Space :
+    is-coherently-unital mul-H-Space
+  pr1 is-coherently-unital-mul-H-Space = unit-H-Space
+  pr2 is-coherently-unital-mul-H-Space =
+    coherent-unit-laws-mul-H-Space
+```
 
 ## Remark 21.3.2
 
@@ -42,6 +176,52 @@ Note that for any identification `α : x = y` in `A` and two base-point preservi
 ```
 
 This function is easily constructed by identification elimination on `α`.
+
+```agda
+module _
+  {l : Level} (A : Pointed-Type l)
+  where
+
+  ev-endo-Pointed-Type : endo-Pointed-Type (type-Pointed-Type A) →∗ A
+  pr1 ev-endo-Pointed-Type = ev-point-Pointed-Type A
+  pr2 ev-endo-Pointed-Type = refl
+
+  pointed-section-ev-point-Pointed-Type : UU l
+  pointed-section-ev-point-Pointed-Type =
+    pointed-section ev-endo-Pointed-Type
+
+  compute-pointed-section-ev-point-Pointed-Type :
+    pointed-section-ev-point-Pointed-Type ≃ coherent-unital-mul-Pointed-Type A
+  compute-pointed-section-ev-point-Pointed-Type =
+    ( equiv-tot
+      ( λ x →
+        equiv-Σ
+          ( λ α →
+            Σ ( right-unit-law x (point-Pointed-Type A))
+              ( coh-unit-laws x (point-Pointed-Type A) α))
+          ( equiv-funext)
+          ( λ _ → equiv-tot (λ _ → equiv-right-unwhisker-concat refl)))) ∘e
+    ( associative-Σ)
+
+module _
+  {l : Level} (A : H-Space l)
+  where
+
+  ev-endo-H-Space :
+    endo-Pointed-Type (type-H-Space A) →∗ pointed-type-H-Space A
+  ev-endo-H-Space = ev-endo-Pointed-Type (pointed-type-H-Space A)
+
+  pointed-section-ev-endo-H-Space : pointed-section ev-endo-H-Space
+  pointed-section-ev-endo-H-Space =
+    map-inv-equiv
+      ( compute-pointed-section-ev-point-Pointed-Type (pointed-type-H-Space A))
+      ( coherent-unital-mul-H-Space A)
+
+  section-ev-endo-H-Space : section (map-pointed-map ev-endo-H-Space)
+  section-ev-endo-H-Space =
+    section-pointed-section ev-endo-H-Space pointed-section-ev-endo-H-Space
+```
+
 We will be using this in our construction of the H-space structure on the circle.
 
 ## Theorem 21.3.3
