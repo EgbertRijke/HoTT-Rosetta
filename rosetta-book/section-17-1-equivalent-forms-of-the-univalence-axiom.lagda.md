@@ -124,6 +124,34 @@ module _
   compute-map-eq-ap :
     (p : x ＝ y) → map-eq (ap B p) ＝ tr B p
   compute-map-eq-ap p = ap map-equiv (compute-equiv-eq-ap p)
+
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+
+  ev-id-equiv :
+    (P : (B : UU l1) → (A ≃ B) → UU l2) →
+    ((B : UU l1) (e : A ≃ B) → P B e) → P A id-equiv
+  ev-id-equiv P f = f A id-equiv
+
+module _
+  {l1 : Level} (A : UU l1)
+  where
+
+  induction-principle-equivalences : UUω
+  induction-principle-equivalences =
+    is-identity-system (λ (B : UU l1) → A ≃ B) A id-equiv
+
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  abstract
+    is-identity-system-is-torsorial-equiv :
+      is-torsorial (λ (B : UU l1) → A ≃ B) →
+      is-identity-system (A ≃_) A id-equiv
+    is-identity-system-is-torsorial-equiv =
+      is-identity-system-is-torsorial A id-equiv
 ```
 
 One way to see that the univalence axiom is plausible, is by observing that all type constructors preserve equivalences.
@@ -216,6 +244,25 @@ module _
         ( Σ (UU l) (λ X → X ＝ A))
         ( equiv-tot (λ X → equiv-univalence))
         ( is-torsorial-Id' A)
+
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  abstract
+    is-identity-system-equiv : induction-principle-equivalences A
+    is-identity-system-equiv =
+      is-identity-system-is-torsorial-equiv (is-torsorial-equiv A)
+
+  ind-equiv :
+    {l2 : Level} (P : (B : UU l1) → A ≃ B → UU l2) →
+    P A id-equiv → {B : UU l1} (e : A ≃ B) → P B e
+  ind-equiv P p {B} = pr1 (is-identity-system-equiv P) p B
+
+  compute-ind-equiv :
+    {l2 : Level} (P : (B : UU l1) → A ≃ B → UU l2) →
+    (u : P A id-equiv) → ind-equiv P u id-equiv ＝ u
+  compute-ind-equiv P = pr2 (is-identity-system-equiv P)
 ```
 
 As a first application of the univalence axiom, let us show that for any type `A` the type of types in a univalent universe `𝒰` that are equivalent to `A` is a proposition.

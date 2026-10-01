@@ -2,6 +2,20 @@
 
 ```agda
 module section-17-3-univalence-implies-function-extensionality where
+
+open import universe-levels
+open import section-2-2-ordinary-function-types
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-4-transport
+open import section-9-1-homotopies
+open import section-9-2-bi-invertible-maps
+open import section-10-3-contractible-maps
+open import section-10-4-equivalences-are-contractible-maps
+open import exercise-10-2-contractible-retracts
+open import exercise-10-7-fibers-of-projections
+open import section-13-1-equivalent-forms-of-function-extensionality
+open import section-17-1-equivalent-forms-of-the-univalence-axiom
 ```
 
 One of the first applications of the univalence axiom was Voevodsky’s theorem that the univalence axiom on a universe `𝒰` implies function extensionality for types in `𝒰`.
@@ -33,7 +47,16 @@ Therefore, it suffices to show that the post-composition map
 ```
 
 is an equivalence.
-This post-composition map is of course just the identity map on `A → X`, so it is indeed an equivalence. ◻
+This post-composition map is of course just the identity map on `A → X`, so it is indeed an equivalence. ◻
+
+```agda
+abstract
+  is-equiv-postcomp-univalence :
+    {l1 l2 : Level} {X Y : UU l1} (A : UU l2) (e : X ≃ Y) →
+    is-equiv (postcomp A (map-equiv e))
+  is-equiv-postcomp-univalence A =
+    ind-equiv (λ Y e → is-equiv (postcomp A (map-equiv e))) is-equiv-id
+```
 
 ## Theorem 17.3.2
 
@@ -103,3 +126,28 @@ We simply compute
 
 Thus we see that `r ∘ i ≐ id` by an application of the `η`-rule for `Π`-types.
 Therefore we simply define `H(f) ≔ refl`. ◻
+
+```agda
+retract-compute-fiber-id-postcomp-pr1 :
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+  ((a : A) → B a) retract-of (fiber (postcomp A (pr1 {B = B})) id)
+retract-compute-fiber-id-postcomp-pr1 {B = B} =
+  ( λ f → ((λ x → (x , f x)) , refl)) ,
+  ( λ h x → tr B (htpy-eq (pr2 h) x) (pr2 (pr1 h x))) ,
+  ( refl-htpy)
+
+abstract
+  weak-funext-univalence : {l : Level} → weak-function-extensionality-Level l l
+  weak-funext-univalence A B is-contr-B =
+    is-contr-retract-of
+      ( fiber (postcomp A pr1) id)
+      ( retract-compute-fiber-id-postcomp-pr1)
+      ( is-contr-map-is-equiv
+        ( is-equiv-postcomp-univalence A (equiv-pr1 is-contr-B))
+        ( id))
+
+abstract
+  funext-univalence :
+    {l : Level} → function-extensionality-Level l l
+  funext-univalence f = funext-weak-funext weak-funext-univalence f
+```
