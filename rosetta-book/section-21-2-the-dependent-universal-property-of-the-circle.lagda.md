@@ -55,7 +55,7 @@ The dependent universal property therefore improves on this by stating that this
 For any type family `P` over the circle, the map
 
 ```text
-dgen_{S¹}: (Π(x:S¹) P(x)) → (Σ(y:P(base)) tr_P(loop,y) = y)
+dgen_{S¹}: (Π(x : S¹) P(x)) → (Σ(y : P(base)) tr_P(loop,y) = y)
 ```
 
 given by `f ↦ (f(base),apd_{f}(loop))` is an equivalence.
@@ -65,8 +65,8 @@ given by `f ↦ (f(base),apd_{f}(loop))` is an equivalence.
 _Proof._ By the induction principle of the circle we know that the map has a section, i.e., we have
 
 ```text
-ind-S¹ : (Σ(y:P(base)) tr_P(loop,y)=y) → (Π(x:S¹) P(x))
-comp_S¹ : dgen_{S¹}∘ind-S¹~id
+ind-S¹ : (Σ(y : P(base)) tr_P(loop,y) = y) → (Π(x : S¹) P(x))
+comp_S¹ : dgen_{S¹} ∘ ind-S¹ ~ id
 ```
 
 Therefore it remains to construct a homotopy
@@ -234,8 +234,8 @@ _Proof._ We prove the claim by constructing a commuting triangle
 ```text
                    [(S¹→ X)]
                   /          \
-   gen_{S¹}      /             \  dgen_{S¹}
-                V               V
+   gen_{S¹}      /            \  dgen_{S¹}
+                V              V
      [(Σ(x:X) x=x)]  ---≃--->  [(Σ(x:X) tr_{const_X}(loop,x)=x)]
 ```
 
@@ -258,14 +258,14 @@ l ↦ tr-const_X(loop,x) ∙ l,
 indexed by `x : X`.
 Since concatenating by a path is an equivalence, it follows by Theorem 11.1.3 that the induced map on total spaces is indeed an equivalence.
 
-To show that the triangle commutes, it suffices to construct for any `f:S¹→ X` an identification witnessing that the triangle
+To show that the triangle commutes, it suffices to construct for any `f : S¹ → X` an identification witnessing that the triangle
 
 ```text
 [tr_{const_X}(loop,f(base))] --{tr-const_X(loop,f(base))}--> [f(base)]
-              \                                         /
- apd_{f}(loop) \                                      /  ap_{f}(loop
-                V                                   V
-                              [f(base)]
+                          \                                 /
+              apd_{f}(loop) \                              /  ap_{f}(loop
+                              V                          V
+                                      [f(base)]
 ```
 
 commutes.
