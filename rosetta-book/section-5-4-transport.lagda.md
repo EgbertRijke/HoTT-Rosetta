@@ -11,7 +11,7 @@ open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 ```
 
-Dependent types also come with an action on identifications:  the *transport*
+Dependent types also come with an action on identifications: the _transport_
 functions.
 Given an identification `p : x = y` in the base type `A`, we can transport any
 element `b : B(x)` to the fiber `B(y)`.
@@ -51,13 +51,13 @@ Thus we see that type theory cannot distinguish between identified elements `x`
 and `y`, because for any type family `B` over `A` one obtains an element of
 `B(y)` from the elements of `B(x)`.
 
-As an application of the transport function we construct the *dependent* action
+As an application of the transport function we construct the _dependent_ action
 on paths of a dependent function `f : Π(x : A) B(x)`.
 Note that for such a dependent function `f`, and an identification `p : x = y`,
 it does not make sense to directly compare `f(x)` and `f(y)`, since the type of
 `f(x)` is `B(x)` whereas the type of `f(y)` is `B(y)`, which might not be
 exactly the same type.
-However, we can first *transport* `f(x)` along `p`, so that we obtain the
+However, we can first _transport_ `f(x)` along `p`, so that we obtain the
 element `tr_B(p, f(x))` which is of type `B(y)`.
 Now we can ask whether it is the case that `tr_B(p, f(x)) = f(y)`.
 
@@ -158,6 +158,26 @@ substitution-law-tr :
 substitution-law-tr B f p {x'} = tr-ap f (λ _ → id) p x'
 ```
 
+### Transport in a standard constant type family
+
+```agda
+constant-type-family : {l1 l2 : Level} (A : UU l1) (B : UU l2) → A → UU l2
+constant-type-family A B a = B
+
+tr-constant-type-family :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {x y : A} (p : x ＝ y) (b : B) →
+  dependent-identification (constant-type-family A B) p b b
+tr-constant-type-family refl b = refl
+```
+
+### Dependent action on paths of sections of standard constant type families
+
+```agda
+apd-constant-type-family :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A} (p : x ＝ y) →
+  apd f p ＝ tr-constant-type-family p (f x) ∙ ap f p
+apd-constant-type-family f refl = refl
+```
 
 ## Agda-unimath sources
 
