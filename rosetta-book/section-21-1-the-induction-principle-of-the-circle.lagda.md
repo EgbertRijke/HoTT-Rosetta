@@ -2,6 +2,10 @@
 
 ```agda
 module section-21-1-the-induction-principle-of-the-circle where
+
+open import universe-levels
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
 ```
 
 The _circle_ is specified as a higher inductive type `S¹` that comes equipped with
@@ -22,7 +26,7 @@ f : Π(x : S¹) P(x)
 
 of an arbitrary type family `P` over `S¹`.
 To see what the induction principle of the circle should be, we start with an arbitrary section `f : Π(x : S¹) P(x)` and see how it acts on the constructors of `S¹`.
-By applying `f` to the base point of the circle, we obtain an element `f(base):P(base)`.
+By applying `f` to the base point of the circle, we obtain an element `f(base) : P(base)`.
 Moreover, using the dependent action on paths of `f` of Definition 5.4.2 we also obtain an identification
 
 ```text
@@ -51,6 +55,21 @@ tr_P(loop,u)=u.
 
 More precisely, the induction principle of the circle is formulated as follows:
 
+```agda
+free-loop : {l1 : Level} (X : UU l1) → UU l1
+free-loop X = Σ X (λ x → x ＝ x)
+
+module _
+  {l1 : Level} {X : UU l1}
+  where
+
+  base-free-loop : free-loop X → X
+  base-free-loop = pr1
+
+  loop-free-loop : (α : free-loop X) → base-free-loop α ＝ base-free-loop α
+  loop-free-loop = pr2
+```
+
 ## Definition 21.1.2
 
 The **circle** is a type `S¹` that comes equipped with
@@ -60,10 +79,32 @@ base : S¹
 loop : base = base,
 ```
 
+```agda
+postulate
+  𝕊¹ : UU lzero
+
+postulate
+  base-𝕊¹ : 𝕊¹
+
+postulate
+  loop-𝕊¹ : base-𝕊¹ ＝ base-𝕊¹
+
+free-loop-𝕊¹ : free-loop 𝕊¹
+free-loop-𝕊¹ = base-𝕊¹ , loop-𝕊¹
+
+𝕊¹-Pointed-Type : Pointed-Type lzero
+𝕊¹-Pointed-Type = 𝕊¹ , base-𝕊¹
+```
+
 and satisfies the **induction principle of the circle**, which provides for each type family `P` over `S¹` a map
 
 ```text
 ind-S¹ : (Σ (u:P(base)) tr_P(loop,u) = u) → (Π (x : S¹) P(x)),
+```
+
+```agda
+postulate
+  ind-𝕊¹ : induction-principle-circle free-loop-𝕊¹
 ```
 
 and a homotopy witnessing that `ind-S¹` is a section of `dgen_{S¹}`
