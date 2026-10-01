@@ -260,8 +260,6 @@ Since concatenating by a path is an equivalence, it follows by Theorem 11.1.3 th
 
 To show that the triangle commutes, it suffices to construct for any `f:S¹→ X` an identification witnessing that the triangle
 
-_Triangle-shaped diagram (automatic draft)._
-
 ```text
 [tr_{const_X}(loop,f(base))] --{tr-const_X(loop,f(base))}--> [f(base)]
               \                                         /
@@ -271,13 +269,13 @@ _Triangle-shaped diagram (automatic draft)._
 ```
 
 commutes.
-This again follows from general considerations: for any `f:A→ B` and any `p:a=a'` in `A`, the triangle
+This again follows from general considerations: for any `f : A → B` and any `p : a = a'` in `A`, the triangle
 
 ```text
 [tr_{const_B}(p,f(a))] --tr-const_B(p,f(a))--> [f(a)]
-                  \                              /
-        apd_{f}(p) \                           /  ap_{f}(p)
-                    V                         V
+                     \                         /
+            apd_{f}(p) \                      /  ap_{f}(p)
+                         V                  V
                               [f(a')]
 ```
 
