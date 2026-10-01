@@ -15,8 +15,8 @@ open import section-8-5-the-infinitude-of-primes
 ```
 
 We have shown that the type `is-prime(n)` is decidable for every `n`.
-In other words, there is an element `d(n):is-decidable(is-prime(n))` for every `n`.
-In principle, we can therefore check whether any *specific* natural number `n` is prime by inspecting the element `d(n)`: if it is of the form `inl(x)` for some `x:is-prime(n)`, then `n` is prime; if it is of the form `inr(f)` for some `f:¬is-prime(n)`, then `n` is not prime.
+In other words, there is an element `d(n) : is-decidable(is-prime(n))` for every `n`.
+In principle, we can therefore check whether any *specific* natural number `n` is prime by inspecting the element `d(n)`: if it is of the form `inl(x)` for some `x : is-prime(n)`, then `n` is prime; if it is of the form `inr(f)` for some `f : ¬is-prime(n)`, then `n` is not prime.
 In other words, we evaluate the element `d(n)` using the computation rules of type theory, and then we see whether `n` is prime or not.
 
 Computers can perform such evaluations, but it is often unfeasible to carry out such evaluations by hand.
@@ -27,10 +27,13 @@ There is a much better way to do this: *boolean reflection*.
 ## Definition 8.6.1
 
 For any type `A` we define the map
+
 ```text
-booleanization:is-decidable(A)→bool
+booleanization : is-decidable(A) → bool
 ```
+
 by
+
 ```text
 booleanization(inl(a)) ≔ true
 booleanization(inr(f)) ≔ false.
@@ -44,21 +47,24 @@ booleanization (inr f) = false
 
 ## Theorem 8.6.2
 
-For any type `A` and any decision `d:is-decidable(A)`, there is a map
+For any type `A` and any decision `d : is-decidable(A)`, there is a map
+
 ```text
-boolean-reflection:(booleanization(d)=true)→ A
+boolean-reflection : (booleanization(d) = true) → A
 ```
-such that `boolean-reflection(inl(a))≐ a`.
+
+such that `boolean-reflection(inl(a)) ≐ a`.
 
 ### Proof
 
-*Proof.* First, recall that by Exercise 6.2 there is a map `γ:(false=true)→ empty`.
+First, recall that by Exercise 6.2 there is a map `γ : (false = true) → empty`.
 We use this to construct `boolean-reflection` by pattern matching as follows:
 ```text
-boolean-reflection(inl(a),p) ≔ a
-boolean-reflection(inr(f),p) ≔ ex-falso(γ(p)).
+boolean-reflection(inl(a), p) ≔ a
+boolean-reflection(inr(f), p) ≔ ex-falso(γ(p)).
 ```
- ◻
+
+◻
 
 ```agda
 inv-boolean-reflection :
@@ -75,19 +81,25 @@ boolean-reflection (inr f) p = ex-falso (Eq-eq-bool p)
 ## Remark 8.6.3
 
 Since the number 37 is a prime, it follows that the booleanization of the term
+
 ```text
-d(37):is-decidable(is-prime(37))
+d(37) : is-decidable(is-prime(37))
 ```
-has the value `booleanization(d(37))≐true`.
+
+has the value `booleanization(d(37)) ≐ true`.
 By boolean reflection it therefore follows that
+
 ```text
-is-prime-thirty-seven≔ boolean-reflection(d(37),refl):is-prime(37).(*)
+is-prime-thirty-seven ≔ boolean-reflection(d(37), refl) : is-prime(37).
 ```
+
 The term in `is-prime-thirty-seven` does not, however, contain any explicit information as to why the number 37 is prime.
-The reason that it type checks is simply that `d(37)` is judgmentally equal to some term of the form `inl(t):is-decidable(is-prime(37))` and therefore it follows that `refl` is an identification of type
+The reason that it type checks is simply that `d(37)` is judgmentally equal to some term of the form `inl(t) : is-decidable(is-prime(37))` and therefore it follows that `refl` is an identification of type
+
 ```text
-booleanization(d(37))=true.
+booleanization(d(37)) = true.
 ```
+
 To see that `is-prime-thirty-seven` is indeed an element of type `is-prime(37)` therefore requires us to evaluate the term `d(37)`.
 This is not doable by hand.
 Computer proof assistants, however, are capable of performing this task.
