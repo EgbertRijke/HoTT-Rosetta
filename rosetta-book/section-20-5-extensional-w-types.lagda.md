@@ -99,7 +99,7 @@ When `x` is of the form `tree(a, α)`, the type `z ∈ x` is just the fiber `fib
 Using this observation, we see that the above type is equivalent to the type
 
 ```text
-Σ(b : A) Σ(β : B(b) → W(A, B)) Π(z : W(A, B)) fib(α, z) ≃ fib(β, z).  (★)
+Σ(b : A) Σ(β : B(b) → W(A, B)) Π(z : W(A, B)) fib(α, z) ≃ fib(β, z).
 ```
 
 By Exercise 13.15 it follows that this type is equivalent to the type
