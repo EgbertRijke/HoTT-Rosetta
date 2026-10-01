@@ -21,7 +21,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-11-7-coproduct-functor-reflection.lagda.md
 - rosetta-book/exercise-11-9-embedding-from-path-sections.lagda.md
 - rosetta-book/exercise-11-11-fiber-triangles.lagda.md
-- rosetta-book/exercise-12-1-booleans-are-sets.lagda.md
 - rosetta-book/exercise-12-2-posets-are-sets.lagda.md
 - rosetta-book/exercise-12-3-injective-maps-into-sets.lagda.md
 - rosetta-book/exercise-12-5-diagonal.lagda.md
@@ -32,7 +31,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-12-14-isolated-elements.lagda.md
 - rosetta-book/exercise-13-2-identity-types-of-structured-function-types.lagda.md
 - rosetta-book/exercise-13-5-path-split-and-coherently-invertible-propositions.lagda.md
-- rosetta-book/exercise-13-6-universal-property-empty-types.lagda.md
 - rosetta-book/exercise-13-9-uniqueness-of-identity-types.lagda.md
 - rosetta-book/exercise-13-10-universal-property-natural-numbers.lagda.md
 - rosetta-book/exercise-13-11-ordinal-induction-natural-numbers.lagda.md

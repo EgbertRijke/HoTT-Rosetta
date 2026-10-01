@@ -5,6 +5,7 @@ module section-10-4-equivalences-are-contractible-maps where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
+open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
@@ -13,6 +14,7 @@ open import exercise-5-2-inverse-concatenation-maps
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
+open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 ```
@@ -846,4 +848,15 @@ module _
   retract-inv-equiv : B ≃ A → A retract-of B
   retract-inv-equiv e =
     ( map-inv-equiv e , map-equiv e , is-section-map-inv-equiv e)
+```
+
+### Equivalences into empty types
+
+```agda
+equiv-is-empty :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty A → is-empty B → A ≃ B
+equiv-is-empty f g =
+  ( inv-equiv (pair g (is-equiv-is-empty g id))) ∘e
+  ( pair f (is-equiv-is-empty f id))
+
 ```

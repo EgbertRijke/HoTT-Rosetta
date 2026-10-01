@@ -178,3 +178,27 @@ module _
   pr2 (inv-right-unit-law-Σ-is-contr H) =
     is-equiv-map-inv-right-unit-law-Σ-is-contr H
 ```
+
+## Supplement
+
+### The right unit law of cartesian product types with respect to contractible types
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (is-contr-B : is-contr B)
+  where
+
+  right-unit-law-product-is-contr : A × B ≃ A
+  right-unit-law-product-is-contr = right-unit-law-Σ-is-contr (λ _ → is-contr-B)
+
+  inv-right-unit-law-product-is-contr : A ≃ A × B
+  inv-right-unit-law-product-is-contr =
+    inv-equiv right-unit-law-product-is-contr
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (H : A → is-contr B)
+  where
+
+  right-unit-law-product-is-contr' : A × B ≃ A
+  right-unit-law-product-is-contr' = right-unit-law-Σ-is-contr H
+```

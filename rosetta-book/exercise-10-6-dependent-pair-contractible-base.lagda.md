@@ -14,8 +14,10 @@ open import section-5-4-transport
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
+open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-2-singleton-induction
+open import exercise-10-7-fibers-of-projections
 ```
 
 ## Problem statement
@@ -127,4 +129,40 @@ abstract
   is-contr-Σ-unit :
     {l : Level} {B : unit → UU l} → is-contr (B star) → is-contr (Σ unit B)
   is-contr-Σ-unit = is-contr-Σ is-contr-unit star
+```
+
+### The left unit law of cartesian product types with respect to contractible types
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (is-contr-A : is-contr A)
+  where
+
+  left-unit-law-product-is-contr : A × B ≃ B
+  left-unit-law-product-is-contr =
+    left-unit-law-Σ-is-contr is-contr-A (center is-contr-A)
+
+  inv-left-unit-law-product-is-contr : B ≃ A × B
+  inv-left-unit-law-product-is-contr =
+    inv-left-unit-law-Σ-is-contr is-contr-A (center is-contr-A)
+
+  is-equiv-pr2-product-is-contr : is-equiv (pr2 {B = λ _ → B})
+  is-equiv-pr2-product-is-contr =
+    is-equiv-comp
+      ( pr1)
+      ( map-commutative-product)
+      ( is-equiv-map-commutative-product)
+      ( is-equiv-pr1-is-contr (λ _ → is-contr-A))
+
+  equiv-pr2-product-is-contr : (A × B) ≃ B
+  pr1 equiv-pr2-product-is-contr = pr2
+  pr2 equiv-pr2-product-is-contr = is-equiv-pr2-product-is-contr
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (H : B → is-contr A)
+  where
+
+  left-unit-law-product-is-contr' : A × B ≃ B
+  left-unit-law-product-is-contr' =
+    right-unit-law-product-is-contr' H ∘e commutative-product
 ```
