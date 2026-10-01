@@ -42,83 +42,19 @@ At the top of this ordering we find `0`.
 For any natural number `n`, the numbers strictly below `n` are the proper divisors of `n`.
 A prime number is therefore a number of which has exactly one proper divisor.
 
-### Agda prerequisites for Section 8.5
-
-```agda
-abstract
-  leq-mul-ℕ :
-    (k x : ℕ) → x ≤-ℕ (x *ℕ (succ-ℕ k))
-  leq-mul-ℕ k x =
-    concatenate-eq-leq-ℕ
-      ( x *ℕ (succ-ℕ k))
-      ( inv (right-unit-law-mul-ℕ x))
-      ( preserves-leq-right-mul-ℕ x 1 (succ-ℕ k) (leq-zero-ℕ k))
-
-  leq-mul-ℕ' :
-    (k x : ℕ) → x ≤-ℕ ((succ-ℕ k) *ℕ x)
-  leq-mul-ℕ' k x =
-    concatenate-leq-eq-ℕ x
-      ( leq-mul-ℕ k x)
-      ( commutative-mul-ℕ x (succ-ℕ k))
-
-  leq-mul-is-nonzero-ℕ :
-    (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (x *ℕ k)
-  leq-mul-is-nonzero-ℕ k x H with is-successor-is-nonzero-ℕ H
-  ... | (l , refl) = leq-mul-ℕ l x
-
-  leq-mul-is-nonzero-ℕ' :
-    (k x : ℕ) → is-nonzero-ℕ k → x ≤-ℕ (k *ℕ x)
-  leq-mul-is-nonzero-ℕ' k x H with is-successor-is-nonzero-ℕ H
-  ... | (l , refl) = leq-mul-ℕ' l x
-```
-
-```agda
-eq-or-le-leq-ℕ :
-  (x y : ℕ) → leq-ℕ x y → ((x ＝ y) + (le-ℕ x y))
-eq-or-le-leq-ℕ zero-ℕ zero-ℕ H = inl refl
-eq-or-le-leq-ℕ zero-ℕ (succ-ℕ y) H = inr star
-eq-or-le-leq-ℕ (succ-ℕ x) (succ-ℕ y) H =
-  map-coproduct (ap succ-ℕ) section-2-2-ordinary-function-types.id (eq-or-le-leq-ℕ x y H)
-```
-
-```agda
-abstract
-  leq-div-succ-ℕ-8-5 : (d x : ℕ) → div-ℕ d (succ-ℕ x) → leq-ℕ d (succ-ℕ x)
-  leq-div-succ-ℕ-8-5 d x (pair (succ-ℕ k) p) =
-    concatenate-leq-eq-ℕ d (leq-mul-ℕ' k d) p
-
-  leq-div-ℕ : (d x : ℕ) → is-nonzero-ℕ x → div-ℕ d x → leq-ℕ d x
-  leq-div-ℕ d x f H with is-successor-is-nonzero-ℕ f
-  ... | (pair y refl) = leq-div-succ-ℕ-8-5 d y H
-```
-
-```agda
-abstract
-  le-leq-neq-ℕ : {x y : ℕ} → x ≤-ℕ y → x ≠ y → le-ℕ x y
-  le-leq-neq-ℕ {x} {y} x≤y x≠y =
-    rec-coproduct (ex-falso ∘ x≠y) section-2-2-ordinary-function-types.id
-      (eq-or-le-leq-ℕ x y x≤y)
-```
-
-```agda
-is-empty-left-factor-is-empty-product :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty (A × B) → B → is-empty A
-is-empty-left-factor-is-empty-product f b a = f (pair a b)
-```
-
 ## Definition 8.5.1
-
- 
 
 1. Consider two natural numbers `d` and `n`.
 Then `d` is said to be a **proper divisor** of `n` if it comes equipped with an element of type
+
 ```text
-is-proper-divisor(n,d)≔ (d≠ n)× (d| n).
-```
+is-proper-divisor(n, d) ≔ (d ≠ n) × (d | n).
+``` 
 
 2. A natural number `n` is said to be **prime** if it comes equipped with an element of type
+
 ```text
-is-prime(n)≔ Π(x:ℕ) is-proper-divisor(n,x)↔ (x=1).
+is-prime(n) ≔ Π(x : ℕ) is-proper-divisor(n, x) ↔ (x = 1).
 ```
 
 ```agda
@@ -145,54 +81,31 @@ le-is-proper-divisor-ℕ x y H K =
 ```agda
 is-prime-ℕ : ℕ → UU lzero
 is-prime-ℕ n = (x : ℕ) → (is-proper-divisor-ℕ n x ↔ is-one-ℕ x)
+
+Prime-ℕ : UU lzero
+Prime-ℕ = Σ ℕ is-prime-ℕ
+
+module _
+  (p : Prime-ℕ)
+  where
+
+  nat-Prime-ℕ : ℕ
+  nat-Prime-ℕ = pr1 p
+
+  is-prime-Prime-ℕ : is-prime-ℕ nat-Prime-ℕ
+  is-prime-Prime-ℕ = pr2 p
 ```
 
 ## Proposition 8.5.2
 
-For any `n:ℕ`, the type `is-prime(n)` is decidable.
+For any `n : ℕ`, the type `is-prime(n)` is decidable.
 
 ### Proof
 
-*Proof.* We will first show that `is-prime(n)↔is-prime'(n)`, where
+*Proof.* We will first show that `is-prime(n) ↔ is-prime'(n)`, where
+
 ```text
-is-prime'(n)≔ (n≠ 1)× Π(x:ℕ) is-proper-divisor(n,x)→ (x=1).
-```
-For the forward direction, simply note that `1` is not a proper divisor of itself, and therefore `1` is not a prime.
-For the converse direction, suppose that `n≠ 1` and that any proper divisor of `n` is `1`.
-Then it follows that `1` is a proper divisor of `n`, which implies that `n` is prime.
-
-Now we proceed by showing that the type `is-prime'(n)` is decidable for every `n:ℕ`.
-The proof is by case analysis on whether `n=0` or `n≠ 0`.
-In the case where `n=0`, note that any nonzero number is a proper divisor of `0`, and therefore `is-prime'(0)` doesn’t hold.
-In particular, `is-prime'(0)` is decidable.
-
-Now suppose that `n≠ 0`.
-In order to show that the type `is-prime'(n)` is decidable, note that the type `n≠ 1` is decidable since it is the negation of the decidable type `n=1`.
-Therefore it suffices to show that the type
-```text
-Π(x:ℕ) is-proper-divisor(n,x)→ (x=1)
-```
-is decidable.
-Since the types `(x≠ n)× (x| n)` and `x=1` are decidable, it follows from Corollary 8.2.5 that it suffices to check that
-```text
-((x≠ n)× (x| n))→ (x≤ n)
-```
-for any `x:ℕ`.
-This follows from the implication `(x| n)→ (x≤ n)`, which holds because we have assumed that `n≠ 0`. ◻
-
-```agda
-is-one-div-one-ℕ : (x : ℕ) → div-ℕ x 1 → is-one-ℕ x
-is-one-div-one-ℕ x H = antisymmetric-div-ℕ x 1 H (div-one-ℕ x)
-```
-
-```agda
-is-proper-divisor-one-is-proper-divisor-ℕ :
-  {n x : ℕ} → is-proper-divisor-ℕ n x → is-proper-divisor-ℕ n 1
-pr1 (is-proper-divisor-one-is-proper-divisor-ℕ {.1} {x} H) refl =
-  pr1 H (is-one-div-one-ℕ x (pr2 H))
-pr1 (pr2 (is-proper-divisor-one-is-proper-divisor-ℕ {n} {x} H)) = n
-pr2 (pr2 (is-proper-divisor-one-is-proper-divisor-ℕ {n} {x} H)) =
-  right-unit-law-mul-ℕ n
+is-prime'(n) ≔ (n ≠ 1) × Π(x : ℕ) is-proper-divisor(n, x) → (x = 1).
 ```
 
 ```agda
@@ -204,11 +117,16 @@ is-prime-easy-ℕ : ℕ → UU lzero
 is-prime-easy-ℕ n = (is-not-one-ℕ n) × (is-one-is-proper-divisor-ℕ n)
 ```
 
+For the forward direction, simply note that `1` is not a proper divisor of itself, and therefore `1` is not a prime.
+
 ```agda
 abstract
   is-not-one-is-prime-ℕ : (n : ℕ) → is-prime-ℕ n → is-not-one-ℕ n
   is-not-one-is-prime-ℕ n H p = pr1 (pr2 (H 1) refl) (inv p)
 ```
+
+For the converse direction, suppose that `n ≠ 1` and that any proper divisor of `n` is `1`.
+Then it follows that `1` is a proper divisor of `n`, which implies that `n` is prime.
 
 ```agda
 abstract
@@ -223,10 +141,28 @@ abstract
   pr2 (pr2 (is-prime-is-prime-easy-ℕ n H .(succ-ℕ zero-ℕ)) refl) = div-one-ℕ n
 ```
 
-```agda
-is-not-one-two-ℕ : is-not-one-ℕ 2
-is-not-one-two-ℕ ()
+Now we proceed by showing that the type `is-prime'(n)` is decidable for every `n : ℕ`.
+The proof is by case analysis on whether `n = 0` or `n ≠ 0`.
+In the case where `n = 0`, note that any nonzero number is a proper divisor of `0`, and therefore `is-prime'(0)` doesn’t hold.
+In particular, `is-prime'(0)` is decidable.
+
+Now suppose that `n ≠ 0`.
+In order to show that the type `is-prime'(n)` is decidable, note that the type `n ≠ 1` is decidable since it is the negation of the decidable type `n = 1`.
+Therefore it suffices to show that the type
+
+```text
+Π(x : ℕ) is-proper-divisor(n, x) → (x = 1)
 ```
+
+is decidable.
+Since the types `(x ≠ n) × (x | n)` and `x = 1` are decidable, it follows from Corollary 8.2.5 that it suffices to check that
+
+```text
+((x ≠ n) × (x | n))→ (x ≤ n)
+```
+
+for any `x : ℕ`.
+This follows from the implication `(x | n) → (x ≤ n)`, which holds because we have assumed that `n ≠ 0`. ◻
 
 ```agda
 is-decidable-is-prime-easy-ℕ : (n : ℕ) → is-decidable (is-prime-easy-ℕ n)
@@ -253,25 +189,26 @@ is-decidable-is-prime-ℕ n =
     ( is-decidable-is-prime-easy-ℕ n)
 ```
 
-The proof that there are infinitely many primes proceeds by constructing a prime number larger than `n`, for any `n:ℕ`.
-The number `n!+1` is relatively prime with any number `x≤ n`.
-Therefore there is a least number `n<m` that is relatively prime with any number `x≤ n`, and it follows that this number `m` must be prime.
+The proof that there are infinitely many primes proceeds by constructing a prime number larger than `n`, for any `n : ℕ`.
+The number `n! + 1` is relatively prime with any number `x ≤ n`.
+Therefore there is a least number `n < m` that is relatively prime with any number `x ≤ n`, and it follows that this number `m` must be prime.
 
 ## Definition 8.5.3
 
 For any two natural numbers `n` and `m`, we define the type
+
 ```text
-R(n,m)≔ (n<m)× Π(x:ℕ) (x≤ n)→ ((x| m)→ (x=1)).
+R(n, m) ≔ (n < m) × Π(x : ℕ) (x ≤ n) → ((x | m) → (x = 1)).
 ```
 
 ```agda
 is-one-is-divisor-below-ℕ : ℕ → ℕ → UU lzero
-is-one-is-divisor-below-ℕ n a =
-  (x : ℕ) → leq-ℕ x n → div-ℕ x a → is-one-ℕ x
+is-one-is-divisor-below-ℕ n m =
+  (x : ℕ) → leq-ℕ x n → div-ℕ x m → is-one-ℕ x
 
 in-sieve-of-eratosthenes-ℕ : ℕ → ℕ → UU lzero
-in-sieve-of-eratosthenes-ℕ n a =
-  (le-ℕ n a) × (is-one-is-divisor-below-ℕ n a)
+in-sieve-of-eratosthenes-ℕ n m =
+  (le-ℕ n m) × (is-one-is-divisor-below-ℕ n m)
 
 le-in-sieve-of-eratosthenes-ℕ :
   (n a : ℕ) → in-sieve-of-eratosthenes-ℕ n a → le-ℕ n a
@@ -280,15 +217,17 @@ le-in-sieve-of-eratosthenes-ℕ n a = pr1
 
 ## Lemma 8.5.4
 
-The type `R(n,m)` is decidable for each `n,m:ℕ`.
+The type `R(n, m)` is decidable for each `n, m : ℕ`.
 
 ### Proof
 
-*Proof.* The type `n<m` and, and for each `x:ℕ` both types `x≤ n` and `(x| m)→ (x=1)` are decidable, so it follows via Corollary 8.2.5 that the product
+*Proof.* The type `n < m` and, and for each `x : ℕ` both types `x ≤ n` and `(x | m) → (x = 1)` are decidable, so it follows via Corollary 8.2.5 that the product
+
 ```text
-Π(x:ℕ) (x≤ n)→ ((x| m)→ (x=1))
+Π(x : ℕ) (x ≤ n) → ((x | m) → (x = 1))
 ```
-is decidable. ◻
+
+is decidable. ◻
 
 ```agda
 is-decidable-in-sieve-of-eratosthenes-ℕ :
@@ -305,60 +244,21 @@ is-decidable-in-sieve-of-eratosthenes-ℕ n a =
           ( is-decidable-div-ℕ x a)
           ( is-decidable-is-one-ℕ x))
       ( n)
-      ( λ x → section-2-2-ordinary-function-types.id))
+      ( λ x → id))
 ```
 
 ## Lemma 8.5.5
 
-There is an element of type `R(n,{n!}+1)` for each `n:ℕ`.
+There is an element of type `R(n, n! + 1)` for each `n : ℕ`.
 
 ### Proof
 
-*Proof.* The fact that `n<{n!}+1` follows from the fact that `n≤ n!`, which is shown by induction.
-We leave this to the reader, and focus on the second aspect of the claim: that every `x≤ n` that divides `{n!}+1` must be equal to `1`.
+*Proof.* The fact that `n < n! + 1` follows from the fact that `n ≤ n!`, which is shown by induction.
+We leave this to the reader, and focus on the second aspect of the claim: that every `x ≤ n` that divides `n! + 1` must be equal to `1`.
 
-To see this, note that any divisor of `{n!}+1` is automatically nonzero, and recall that any nonzero `x≤ n` divides `n!` by Exercise 7.3.
-Therefore it follows that any `x≤ n` that divides `{n!}+1` also divides `n!`, and consequently it divides `1` as well.
-Now we are done, because if `x` divides `1` then `x=1`. ◻
-
-```agda
-abstract
-  is-one-div-ℕ : (x y : ℕ) → div-ℕ x y → div-ℕ x (succ-ℕ y) → is-one-ℕ x
-  is-one-div-ℕ x y H K = is-one-div-one-ℕ x (div-right-summand-ℕ x y 1 H K)
-```
-
-```agda
-abstract
-  is-nonzero-mul-ℕ :
-    (x y : ℕ) → is-nonzero-ℕ x → is-nonzero-ℕ y → is-nonzero-ℕ (x *ℕ y)
-  is-nonzero-mul-ℕ x y H K p =
-    K (is-injective-left-mul-ℕ x H (p ∙ (inv (right-zero-law-mul-ℕ x))))
-```
-
-```agda
-abstract
-  is-nonzero-factorial-ℕ :
-    (x : ℕ) → is-nonzero-ℕ (factorial-ℕ x)
-  is-nonzero-factorial-ℕ zero-ℕ = Eq-eq-ℕ
-  is-nonzero-factorial-ℕ (succ-ℕ x) =
-    is-nonzero-mul-ℕ
-      ( factorial-ℕ x)
-      ( succ-ℕ x)
-      ( is-nonzero-factorial-ℕ x)
-      ( is-nonzero-succ-ℕ x)
-```
-
-```agda
-abstract
-  leq-factorial-ℕ :
-    (n : ℕ) → leq-ℕ n (factorial-ℕ n)
-  leq-factorial-ℕ zero-ℕ = leq-zero-ℕ 1
-  leq-factorial-ℕ (succ-ℕ n) =
-    leq-mul-is-nonzero-ℕ'
-      ( factorial-ℕ n)
-      ( succ-ℕ n)
-      ( is-nonzero-factorial-ℕ n)
-```
+To see this, note that any divisor of `n! + 1` is automatically nonzero, and recall that any nonzero `x ≤ n` divides `n!` by Exercise 7.3.
+Therefore it follows that any `x ≤ n` that divides `n! +1` also divides `n!`, and consequently it divides `1` as well.
+Now we are done, because if `x` divides `1` then `x = 1`. ◻
 
 ```agda
 in-sieve-of-eratosthenes-succ-factorial-ℕ :
@@ -393,35 +293,43 @@ We finally show that there are infinitely many primes.
 
 ## Theorem 8.5.6
 
-For each `n:ℕ`, there is a prime number `p:ℕ` such that `n< p`.
+For each `n : ℕ`, there is a prime number `p : ℕ` such that `n < p`.
 
 ### Proof
 
-*Proof.* It suffices to show that for each *nonzero* `n:ℕ`, there is a prime number `p:ℕ` such that `n≤ p`.
+*Proof.* It suffices to show that for each *nonzero* `n : ℕ`, there is a prime number `p : ℕ` such that `n ≤ p`.
 Let `n` be a nonzero natural number.
 
-Since the type `R(n,m)` is decidable for each `m:ℕ`, and since `R(n,{n!}+1)` holds by Lemma 8.5.5, it follows by the well-ordering principle of `ℕ` (Theorem 8.3.2) that there is a minimal `m:ℕ` such that `R(n,m)` holds.
+Since the type `R(n, m)` is decidable for each `m : ℕ`, and since `R(n, n! + 1)` holds by Lemma 8.5.5, it follows by the well-ordering principle of `ℕ` (Theorem 8.3.2) that there is a minimal `m : ℕ` such that `R(n, m)` holds.
 In order to prove the theorem, we will show that this number `m` is prime, i.e., that there is an element of type
+
 ```text
-(m≠ 1)× Π(x:ℕ) is-proper-divisor(m,x)→ (x=1).
+(m ≠ 1) × Π(x : ℕ) is-proper-divisor(m, x) → (x = 1).
 ```
 
-First, we note that `m≠ 1` because `n<m` holds by construction, and `n` is assumed to be nonzero.
+First, we note that `m ≠ 1` because `n < m` holds by construction, and `n` is assumed to be nonzero.
 Therefore it suffices to show that `1` is the only proper divisor of `m`.
 Let `x` be a proper divisor of `m`.
-Since `R(n,m)` holds by construction, we will prove that `x=1` by showing that `x≤ n` holds.
+Since `R(n, m)` holds by construction, we will prove that `x = 1` by showing that `x ≤ n` holds.
 
-Since `m` is nonzero, it follows from the assumption that `x| m` that `x<m`.
-By minimality of `m`, it therefore follows that `¬ R(n,x)` holds.
+Since `m` is nonzero, it follows from the assumption that `x | m` that `x < m`.
+By minimality of `m`, it therefore follows that `¬R(n, x)` holds.
 However, any divisor of `x` is also a divisor of `m` by transitivity of the divisibility relation.
-Therefore it follows that any `y≤ n` that divides `x` must be `1`.
+Therefore it follows that any `y ≤ n` that divides `x` must be `1`.
 In other words:
+
 ```text
-Π(y:ℕ) (y≤ n)→ ((y| x)→ (y=1))
+Π(y : ℕ) (y ≤ n) → ((y | x) → (y = 1))
 ```
+
 holds.
-Since `¬ R(n,x)` holds, we conclude now that `n≮ x`.
-To finish the proof, it follows that `x≤ n`. ◻
+Since `¬R(n, x)` holds, we conclude now that `n ≮ x`.
+To finish the proof, it follows that `x ≤ n`. ◻
+
+```agda
+Infinitude-Of-Primes-ℕ : UU lzero
+Infinitude-Of-Primes-ℕ = (n : ℕ) → Σ ℕ (λ p → is-prime-ℕ p × le-ℕ n p)
+```
 
 ```agda
 abstract
@@ -441,11 +349,6 @@ pr2 is-prime-easy-two-ℕ = is-one-is-proper-divisor-two-ℕ
 is-prime-two-ℕ : is-prime-ℕ 2
 is-prime-two-ℕ =
   is-prime-is-prime-easy-ℕ 2 is-prime-easy-two-ℕ
-```
-
-```agda
-Infinitude-Of-Primes-ℕ : UU lzero
-Infinitude-Of-Primes-ℕ = (n : ℕ) → Σ ℕ (λ p → is-prime-ℕ p × le-ℕ n p)
 ```
 
 ```agda

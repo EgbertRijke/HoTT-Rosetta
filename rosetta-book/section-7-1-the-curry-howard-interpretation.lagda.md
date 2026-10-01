@@ -7,12 +7,15 @@ open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers
 open import exercise-3-1-multiplication-and-exponentiation
+open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import exercise-5-5-semiring-laws-natural-numbers
 open import section-6-4-peanos-seventh-and-eighth-axioms
+open import exercise-6-1-injectivity-addition-multiplication
+open import exercise-6-3-order-natural-numbers
 ```
 
 The *Curry-Howard interpretation* is an interpretation of logic into type theory.
@@ -44,8 +47,10 @@ d| n≔ Σ(k:ℕ) d· k=n.
 ```agda
 div-ℕ : ℕ → ℕ → UU lzero
 div-ℕ m n = Σ ℕ (λ k → k *ℕ m ＝ n)
+
+quotient-div-ℕ : (x y : ℕ) → div-ℕ x y → ℕ
+quotient-div-ℕ x y H = pr1 H
 ```
-### Concatenating equality and divisibility
 
 ```agda
 concatenate-eq-div-ℕ :
@@ -233,3 +238,55 @@ This means that to establish the truth of a proposition it only matters *whether
 To address this dissimilarity between general types and logic, we will introduce in Chapter II a more refined way of interpreting logic into type theory.
 In Chapter 12 we will define the type `is-prop(A)`, which expresses the property that the type `A` is a proposition.
 Furthermore, we will introduce the *propositional truncation* operation in Chapter 14, which we will use to interpret logic into type theory in such a way that all logical assertions are interpreted as types that satisfy the condition of being a proposition.
+
+## Supplements
+
+### If `x` divides `y`, then the quotient times `x` is `y`
+
+```agda
+eq-quotient-div-ℕ :
+  (x y : ℕ) (H : div-ℕ x y) → (quotient-div-ℕ x y H) *ℕ x ＝ y
+eq-quotient-div-ℕ x y H = pr2 H
+
+eq-quotient-div-ℕ' :
+  (x y : ℕ) (H : div-ℕ x y) → x *ℕ (quotient-div-ℕ x y H) ＝ y
+eq-quotient-div-ℕ' x y H =
+  commutative-mul-ℕ x (quotient-div-ℕ x y H) ∙ eq-quotient-div-ℕ x y H
+```
+
+### If `x` divides `y`, the quotient also divides `y`
+
+```agda
+div-quotient-div-ℕ :
+  (d x : ℕ) (H : div-ℕ d x) → div-ℕ (quotient-div-ℕ d x H) x
+pr1 (div-quotient-div-ℕ d x (u , p)) = d
+pr2 (div-quotient-div-ℕ d x (u , p)) = commutative-mul-ℕ d u ∙ p
+```
+
+### If `x` is nonzero and `d | x`, then `d ≤ x`
+
+```agda
+abstract
+  leq-div-succ-ℕ : (d x : ℕ) → div-ℕ d (succ-ℕ x) → leq-ℕ d (succ-ℕ x)
+  leq-div-succ-ℕ d x (pair (succ-ℕ k) p) =
+    concatenate-leq-eq-ℕ d (leq-mul-ℕ' k d) p
+
+  leq-div-ℕ : (d x : ℕ) → is-nonzero-ℕ x → div-ℕ d x → leq-ℕ d x
+  leq-div-ℕ d x f H with is-successor-is-nonzero-ℕ f
+  ... | (pair y refl) = leq-div-succ-ℕ d y H
+
+  leq-quotient-div-ℕ :
+    (d x : ℕ) → is-nonzero-ℕ x → (H : div-ℕ d x) →
+    leq-ℕ (quotient-div-ℕ d x H) x
+  leq-quotient-div-ℕ d x f H =
+    leq-div-ℕ (quotient-div-ℕ d x H) x f (div-quotient-div-ℕ d x H)
+
+  leq-quotient-div-ℕ' :
+    (d x : ℕ) → is-nonzero-ℕ d → (H : div-ℕ d x) →
+    leq-ℕ (quotient-div-ℕ d x H) x
+  leq-quotient-div-ℕ' d zero-ℕ f (zero-ℕ , p) = star
+  leq-quotient-div-ℕ' d zero-ℕ f (succ-ℕ n , p) =
+    f (is-zero-right-is-zero-add-ℕ _ d p)
+  leq-quotient-div-ℕ' d (succ-ℕ x) f H =
+    leq-quotient-div-ℕ d (succ-ℕ x) (is-nonzero-succ-ℕ x) H
+```

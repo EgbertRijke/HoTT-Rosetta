@@ -4,6 +4,7 @@
 module exercise-6-4-strict-order-natural-numbers where
 
 open import universe-levels
+open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers
 open import exercise-3-1-multiplication-and-exponentiation
@@ -210,4 +211,33 @@ abstract
     (x y : ℕ) → leq-ℕ x y → le-ℕ x (succ-ℕ y)
   le-succ-leq-ℕ zero-ℕ y H = star
   le-succ-leq-ℕ (succ-ℕ x) (succ-ℕ y) H = le-succ-leq-ℕ x y H
+```
+### `x ≤ y` if and only if `(x ＝ y) + (x < y)`
+
+```agda
+eq-or-le-leq-ℕ :
+  (x y : ℕ) → leq-ℕ x y → ((x ＝ y) + (le-ℕ x y))
+eq-or-le-leq-ℕ zero-ℕ zero-ℕ H = inl refl
+eq-or-le-leq-ℕ zero-ℕ (succ-ℕ y) H = inr star
+eq-or-le-leq-ℕ (succ-ℕ x) (succ-ℕ y) H =
+  map-coproduct (ap succ-ℕ) id (eq-or-le-leq-ℕ x y H)
+
+eq-or-le-leq-ℕ' :
+  (x y : ℕ) → leq-ℕ x y → ((y ＝ x) + (le-ℕ x y))
+eq-or-le-leq-ℕ' x y H = map-coproduct inv id (eq-or-le-leq-ℕ x y H)
+
+abstract
+  leq-eq-or-le-ℕ :
+    (x y : ℕ) → ((x ＝ y) + (le-ℕ x y)) → leq-ℕ x y
+  leq-eq-or-le-ℕ x .x (inl refl) = refl-leq-ℕ x
+  leq-eq-or-le-ℕ x y (inr l) = leq-le-ℕ x y l
+```
+
+### If `x ≤ y` and `x ≠ y` then `x < y`
+
+```agda
+abstract
+  le-leq-neq-ℕ : {x y : ℕ} → x ≤-ℕ y → x ≠ y → le-ℕ x y
+  le-leq-neq-ℕ {x} {y} x≤y x≠y =
+    rec-coproduct (ex-falso ∘ x≠y) id (eq-or-le-leq-ℕ x y x≤y)
 ```

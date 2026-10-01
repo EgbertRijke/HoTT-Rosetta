@@ -107,8 +107,32 @@ cong-ℕ :
   ℕ → ℕ → ℕ → UU lzero
 cong-ℕ k x y = div-ℕ k (dist-ℕ x y)
 
-_≡_mod-ℕ_ : ℕ → ℕ → ℕ → UU lzero
-x ≡ y mod-ℕ k = cong-ℕ k x y
+_≡_mod_ : ℕ → ℕ → ℕ → UU lzero
+x ≡ y mod k = cong-ℕ k x y
+
+concatenate-eq-cong-eq-ℕ :
+  (k : ℕ) {x1 x2 x3 x4 : ℕ} →
+  x1 ＝ x2 → cong-ℕ k x2 x3 → x3 ＝ x4 → cong-ℕ k x1 x4
+concatenate-eq-cong-eq-ℕ k refl H refl = H
+
+concatenate-eq-cong-ℕ :
+  (k : ℕ) {x1 x2 x3 : ℕ} →
+  x1 ＝ x2 → cong-ℕ k x2 x3 → cong-ℕ k x1 x3
+concatenate-eq-cong-ℕ k refl H = H
+
+concatenate-cong-eq-ℕ :
+  (k : ℕ) {x1 x2 x3 : ℕ} →
+  cong-ℕ k x1 x2 → x2 ＝ x3 → cong-ℕ k x1 x3
+concatenate-cong-eq-ℕ k H refl = H
+
+is-indiscrete-cong-one-ℕ :
+  (x y : ℕ) → cong-ℕ 1 x y
+is-indiscrete-cong-one-ℕ x y = div-one-ℕ (dist-ℕ x y)
+
+is-discrete-cong-zero-ℕ :
+  (x y : ℕ) → cong-ℕ zero-ℕ x y → x ＝ y
+is-discrete-cong-zero-ℕ x y (pair k p) =
+  eq-dist-ℕ x y ((inv p) ∙ (right-zero-law-mul-ℕ k))
 ```
 
 ## Example 7.2.3
@@ -166,12 +190,16 @@ pr2 (refl-cong-ℕ k x) =
   (left-zero-law-mul-ℕ (succ-ℕ k)) ∙ (inv (dist-eq-ℕ x x refl))
 
 cong-identification-ℕ :
-  (k : ℕ) {x y : ℕ} → x ＝ y → x ≡ y mod-ℕ k
+  (k : ℕ) {x y : ℕ} → x ＝ y → cong-ℕ k x y
 cong-identification-ℕ k {x} refl = refl-cong-ℕ k x
 
 symmetric-cong-ℕ : (k : ℕ) → is-symmetric (cong-ℕ k)
 pr1 (symmetric-cong-ℕ k x y (d , p)) = d
 pr2 (symmetric-cong-ℕ k x y (d , p)) = p ∙ (symmetric-dist-ℕ x y)
+
+cong-zero-ℕ' : (k : ℕ) → cong-ℕ k zero-ℕ k
+cong-zero-ℕ' k =
+  symmetric-cong-ℕ k k zero-ℕ (cong-zero-ℕ k)
 
 transitive-cong-ℕ : (k : ℕ) → is-transitive (cong-ℕ k)
 transitive-cong-ℕ k x y z e d with is-total-dist-ℕ x y z
@@ -183,4 +211,22 @@ transitive-cong-ℕ k x y z e d | inr (inl α) =
 transitive-cong-ℕ k x y z e d | inr (inr α) =
   div-left-summand-ℕ k (dist-ℕ x z) (dist-ℕ x y) d
     ( concatenate-div-eq-ℕ e (inv α))
+```
+
+## Supplements
+
+```agda
+concatenate-cong-eq-cong-ℕ :
+  {k x1 x2 x3 x4 : ℕ} →
+  cong-ℕ k x1 x2 → x2 ＝ x3 → cong-ℕ k x3 x4 → cong-ℕ k x1 x4
+concatenate-cong-eq-cong-ℕ {k} {x} {y} {.y} {z} H refl K =
+  transitive-cong-ℕ k x y z K H
+
+concatenate-eq-cong-eq-cong-eq-ℕ :
+  (k : ℕ) {x1 x2 x3 x4 x5 x6 : ℕ} →
+  x1 ＝ x2 → cong-ℕ k x2 x3 → x3 ＝ x4 →
+  cong-ℕ k x4 x5 → x5 ＝ x6 → cong-ℕ k x1 x6
+concatenate-eq-cong-eq-cong-eq-ℕ k
+  {x} {.x} {y} {.y} {z} {.z} refl H refl K refl =
+  transitive-cong-ℕ k x y z K H
 ```

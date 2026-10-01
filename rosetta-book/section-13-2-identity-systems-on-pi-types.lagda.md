@@ -7,6 +7,7 @@ open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-7-4-the-natural-numbers-modulo-k-plus-one
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
@@ -258,22 +259,6 @@ Another direct consequence of the distributivity of `Π`-types over `Σ`-types i
 ```
 
 ```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : UU l2}
-  where
-
-  is-split-surjective : (A → B) → UU (l1 ⊔ l2)
-  is-split-surjective f = (b : B) → fiber f b
-
-  split-surjection : UU (l1 ⊔ l2)
-  split-surjection = Σ (A → B) is-split-surjective
-
-  map-split-surjection : split-surjection → (A → B)
-  map-split-surjection = pr1
-
-  is-split-surjective-split-surjection :
-    (f : split-surjection) → is-split-surjective (map-split-surjection f)
-  is-split-surjective-split-surjection = pr2
 
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B)

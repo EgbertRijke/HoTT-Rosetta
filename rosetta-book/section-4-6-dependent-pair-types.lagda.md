@@ -4,6 +4,7 @@
 module section-4-6-dependent-pair-types where
 
 open import universe-levels
+open import section-4-3-the-empty-type
 ```
 
 Given a type family `B` over `A`, we may consider pairs `(a,b)` of
@@ -215,4 +216,12 @@ module _
 
   fam-Σ : ((x : A) → B x → UU l3) → Σ A B → UU l3
   fam-Σ C (x , y) = C x y
+```
+
+### Part of the left absorption law for cartesian products
+
+```agda
+is-empty-left-factor-is-empty-product :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty (A × B) → B → is-empty A
+is-empty-left-factor-is-empty-product f b a = f (pair a b)
 ```

@@ -10,11 +10,13 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
 open import exercise-5-5-semiring-laws-natural-numbers
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-1-injectivity-addition-multiplication
 open import section-7-1-the-curry-howard-interpretation
 open import section-7-2-the-congruence-relations-on-natural-numbers
+open import exercise-7-1-divisibility-three-for-two
 ```
 
 ## Problem statement
@@ -82,4 +84,33 @@ is-zero-div-zero-ℕ x H = antisymmetric-div-ℕ x zero-ℕ (div-zero-ℕ x) H
 
 is-zero-is-zero-div-ℕ : (x y : ℕ) → div-ℕ x y → is-zero-ℕ x → is-zero-ℕ y
 is-zero-is-zero-div-ℕ .zero-ℕ y d refl = is-zero-div-zero-ℕ y d
+```
+
+### If `x` divides `y` then `x` divides any multiple of `y`
+
+```agda
+div-mul-ℕ :
+  (k x y : ℕ) → div-ℕ x y → div-ℕ x (k *ℕ y)
+div-mul-ℕ k x y H =
+  transitive-div-ℕ x y (k *ℕ y) (pair k refl) H
+
+div-mul-ℕ' :
+  (k x y : ℕ) → div-ℕ x y → div-ℕ x (y *ℕ k)
+div-mul-ℕ' k x y H =
+  tr (div-ℕ x) (commutative-mul-ℕ k y) (div-mul-ℕ k x y H)
+```
+
+### `x | 1` implies `x ＝ 1`
+
+```agda
+is-one-div-one-ℕ : (x : ℕ) → div-ℕ x 1 → is-one-ℕ x
+is-one-div-one-ℕ x H = antisymmetric-div-ℕ x 1 H (div-one-ℕ x)
+```
+
+### If `d` divides both `x` and `x + 1`, then `d ＝ 1`
+
+```agda
+abstract
+  is-one-div-ℕ : (x y : ℕ) → div-ℕ x y → div-ℕ x (succ-ℕ y) → is-one-ℕ x
+  is-one-div-ℕ x y H K = is-one-div-one-ℕ x (div-right-summand-ℕ x y 1 H K)
 ```

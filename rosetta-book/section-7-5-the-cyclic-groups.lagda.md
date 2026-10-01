@@ -131,21 +131,6 @@ This shows that (i) and (iii) together imply (ii).
 The remaining claim, that (ii) and (iii) together imply (i), follows by commutativity of addition from the fact that (i) and (iii) together imply (ii). ◻
 
 ```agda
-concatenate-eq-cong-eq-ℕ :
-  (k : ℕ) {x1 x2 x3 x4 : ℕ} →
-  x1 ＝ x2 → cong-ℕ k x2 x3 → x3 ＝ x4 → cong-ℕ k x1 x4
-concatenate-eq-cong-eq-ℕ k refl H refl = H
-
-concatenate-eq-cong-ℕ :
-  (k : ℕ) {x1 x2 x3 : ℕ} →
-  x1 ＝ x2 → cong-ℕ k x2 x3 → cong-ℕ k x1 x3
-concatenate-eq-cong-ℕ k refl H = H
-
-concatenate-cong-eq-ℕ :
-  (k : ℕ) {x1 x2 x3 : ℕ} →
-  cong-ℕ k x1 x2 → x2 ＝ x3 → cong-ℕ k x1 x3
-concatenate-cong-eq-ℕ k H refl = H
-
 translation-invariant-cong-ℕ :
   (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (z +ℕ x) (z +ℕ y)
 pr1 (translation-invariant-cong-ℕ k x y z (pair d p)) = d
