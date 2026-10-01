@@ -7,6 +7,7 @@ open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-3-the-action-on-identifications-of-functions
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
@@ -226,6 +227,24 @@ gen_{S¹} : (S¹ → X) → Σ(x:X) x = x
 ```
 
 given by `f ↦ (f(base),ap_{f}(loop))` is an equivalence.
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X) (Y : UU l2)
+  where
+
+  ev-free-loop : (X → Y) → free-loop Y
+  pr1 (ev-free-loop f) = f (base-free-loop α)
+  pr2 (ev-free-loop f) = ap f (loop-free-loop α)
+
+module _
+  {l1 : Level} {X : UU l1} (α : free-loop X)
+  where
+
+  universal-property-circle : UUω
+  universal-property-circle =
+    {l : Level} (Y : UU l) → is-equiv (ev-free-loop α Y)
+```
 
 ### Proof
 
