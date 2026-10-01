@@ -63,17 +63,6 @@ module _
 
   is-transitive : UU (l1 ⊔ l2)
   is-transitive = (x y z : A) → R y z → R x y → R x z
-
-is-equivalence-relation :
-  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A) → UU (l1 ⊔ l2)
-is-equivalence-relation R =
-  is-reflexive R ×
-  is-symmetric R ×
-  is-transitive R
-
-equivalence-relation :
-  (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
-equivalence-relation l A = Σ (Relation l A) is-equivalence-relation
 ```
 
 To define the congruence relation modulo `k` in type theory using the Curry-Howard interpretation, we will define for any three natural numbers `x`, `y`, and `k`, a *type*

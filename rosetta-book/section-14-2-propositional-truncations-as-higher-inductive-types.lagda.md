@@ -16,6 +16,7 @@ open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-1-families-of-equivalences
 open import section-12-1-propositions
+open import section-12-2-subtypes
 open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-4-composing-with-equivalences
@@ -542,4 +543,62 @@ abstract
       ( is-prop-type-trunc-Prop)
       ( is-prop-type-trunc-Prop)
       ( map-inv-equiv-trunc-Prop e)
+```
+
+### Inhabited subtypes
+
+```agda
+is-inhabited-subtype-Prop :
+  {l1 l2 : Level} {A : UU l1} → subtype l2 A → Prop (l1 ⊔ l2)
+is-inhabited-subtype-Prop P = is-inhabited-Prop (type-subtype P)
+
+is-inhabited-subtype :
+  {l1 l2 : Level} {A : UU l1} → subtype l2 A → UU (l1 ⊔ l2)
+is-inhabited-subtype P = type-Prop (is-inhabited-subtype-Prop P)
+
+inhabited-subtype :
+  {l1 : Level} (l2 : Level) → UU l1 → UU (l1 ⊔ lsuc l2)
+inhabited-subtype l2 A = type-subtype (is-inhabited-subtype-Prop {l2 = l2} {A})
+
+module _
+  {l1 l2 : Level} {A : UU l1} (P : inhabited-subtype l2 A)
+  where
+
+  subtype-inhabited-subtype : subtype l2 A
+  subtype-inhabited-subtype = pr1 P
+
+  is-inhabited-subtype-inhabited-subtype :
+    is-inhabited-subtype subtype-inhabited-subtype
+  is-inhabited-subtype-inhabited-subtype = pr2 P
+
+  type-inhabited-subtype : UU (l1 ⊔ l2)
+  type-inhabited-subtype = type-subtype subtype-inhabited-subtype
+
+  inhabited-type-inhabited-subtype : Inhabited-Type (l1 ⊔ l2)
+  pr1 inhabited-type-inhabited-subtype = type-inhabited-subtype
+  pr2 inhabited-type-inhabited-subtype =
+    is-inhabited-subtype-inhabited-subtype
+
+  is-in-inhabited-subtype : A → UU l2
+  is-in-inhabited-subtype = is-in-subtype subtype-inhabited-subtype
+
+  is-prop-is-in-inhabited-subtype :
+    (x : A) → is-prop (is-in-inhabited-subtype x)
+  is-prop-is-in-inhabited-subtype =
+    is-prop-is-in-subtype subtype-inhabited-subtype
+
+  inclusion-inhabited-subtype : type-inhabited-subtype → A
+  inclusion-inhabited-subtype = inclusion-subtype subtype-inhabited-subtype
+
+  ap-inclusion-inhabited-subtype :
+    (x y : type-inhabited-subtype) →
+    x ＝ y → (inclusion-inhabited-subtype x ＝ inclusion-inhabited-subtype y)
+  ap-inclusion-inhabited-subtype =
+    ap-inclusion-subtype subtype-inhabited-subtype
+
+  is-in-inhabited-subtype-inclusion-inhabited-subtype :
+    (x : type-inhabited-subtype) →
+    is-in-inhabited-subtype (inclusion-inhabited-subtype x)
+  is-in-inhabited-subtype-inclusion-inhabited-subtype =
+    is-in-subtype-inclusion-subtype subtype-inhabited-subtype
 ```

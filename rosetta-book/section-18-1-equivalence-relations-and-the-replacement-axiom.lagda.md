@@ -2,6 +2,14 @@
 
 ```agda
 module section-18-1-equivalence-relations-and-the-replacement-axiom where
+
+open import universe-levels
+open import section-4-6-dependent-pair-types
+open import section-7-2-the-congruence-relations-on-natural-numbers
+open import section-12-1-propositions
+open import exercise-12-7-truncated-products
+open import section-13-1-equivalent-forms-of-function-extensionality
+open import section-14-2-propositional-truncations-as-higher-inductive-types
 ```
 
 ## Definition 18.1.1
@@ -18,6 +26,149 @@ We say that `R` is an **equivalence relation** if `R` comes equipped with
 
 witnessing that `R` is reflexive, symmetric, and transitive.
 We write `Eq-Rel_𝒰(A)` for the type of all equivalence relations on `A` valued in the propositions in `𝒰`.
+
+```agda
+Relation-Prop :
+  (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
+Relation-Prop l A = A → A → Prop l
+
+type-Relation-Prop :
+  {l1 l2 : Level} {A : UU l1} → Relation-Prop l2 A → Relation l2 A
+type-Relation-Prop R x y = pr1 (R x y)
+
+is-prop-type-Relation-Prop :
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A) →
+  (x y : A) → is-prop (type-Relation-Prop R x y)
+is-prop-type-Relation-Prop R x y = pr2 (R x y)
+
+total-space-Relation-Prop :
+  {l : Level} {l1 : Level} {A : UU l1} → Relation-Prop l A → UU (l ⊔ l1)
+total-space-Relation-Prop {A = A} R =
+  Σ (A × A) λ (a , a') → type-Relation-Prop R a a'
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
+  where
+
+  is-reflexive-Relation-Prop : UU (l1 ⊔ l2)
+  is-reflexive-Relation-Prop = is-reflexive (type-Relation-Prop R)
+
+  is-prop-is-reflexive-Relation-Prop : is-prop is-reflexive-Relation-Prop
+  is-prop-is-reflexive-Relation-Prop =
+    is-prop-Π (λ x → is-prop-type-Relation-Prop R x x)
+
+  is-reflexive-prop-Relation-Prop : Prop (l1 ⊔ l2)
+  is-reflexive-prop-Relation-Prop =
+    (is-reflexive-Relation-Prop , is-prop-is-reflexive-Relation-Prop)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
+  where
+
+  is-symmetric-Relation-Prop : UU (l1 ⊔ l2)
+  is-symmetric-Relation-Prop = is-symmetric (type-Relation-Prop R)
+
+  is-prop-is-symmetric-Relation-Prop : is-prop is-symmetric-Relation-Prop
+  is-prop-is-symmetric-Relation-Prop =
+    is-prop-Π
+      ( λ x →
+        is-prop-Π (λ y → is-prop-Π (λ r → is-prop-type-Relation-Prop R y x)))
+
+  is-symmetric-prop-Relation-Prop : Prop (l1 ⊔ l2)
+  is-symmetric-prop-Relation-Prop =
+    (is-symmetric-Relation-Prop , is-prop-is-symmetric-Relation-Prop)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A)
+  where
+
+  is-transitive-Relation-Prop : UU (l1 ⊔ l2)
+  is-transitive-Relation-Prop = is-transitive (type-Relation-Prop R)
+
+  is-prop-is-transitive-Relation-Prop : is-prop is-transitive-Relation-Prop
+  is-prop-is-transitive-Relation-Prop =
+    is-prop-Π
+      ( λ x →
+        is-prop-Π
+          ( λ y → 
+            is-prop-Π
+              ( λ z → 
+                is-prop-function-type
+                  ( is-prop-function-type (is-prop-type-Relation-Prop R x z)))))
+
+is-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A) → UU (l1 ⊔ l2)
+is-equivalence-relation R =
+  is-reflexive-Relation-Prop R ×
+  is-symmetric-Relation-Prop R ×
+  is-transitive-Relation-Prop R
+
+equivalence-relation :
+  (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
+equivalence-relation l A = Σ (Relation-Prop l A) is-equivalence-relation
+
+prop-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1} → equivalence-relation l2 A → Relation-Prop l2 A
+prop-equivalence-relation = pr1
+
+sim-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1} → equivalence-relation l2 A → A → A → UU l2
+sim-equivalence-relation R = type-Relation-Prop (prop-equivalence-relation R)
+
+abstract
+  is-prop-sim-equivalence-relation :
+    {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A) (x y : A) →
+    is-prop (sim-equivalence-relation R x y)
+  is-prop-sim-equivalence-relation R =
+    is-prop-type-Relation-Prop (prop-equivalence-relation R)
+
+is-prop-is-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1} (R : Relation-Prop l2 A) →
+  is-prop (is-equivalence-relation R)
+is-prop-is-equivalence-relation R =
+  is-prop-product
+    ( is-prop-is-reflexive-Relation-Prop R)
+    ( is-prop-product
+      ( is-prop-is-symmetric-Relation-Prop R)
+      ( is-prop-is-transitive-Relation-Prop R))
+
+is-equivalence-relation-Prop :
+  {l1 l2 : Level} {A : UU l1} → Relation-Prop l2 A → Prop (l1 ⊔ l2)
+pr1 (is-equivalence-relation-Prop R) = is-equivalence-relation R
+pr2 (is-equivalence-relation-Prop R) = is-prop-is-equivalence-relation R
+
+is-equivalence-relation-prop-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A) →
+  is-equivalence-relation (prop-equivalence-relation R)
+is-equivalence-relation-prop-equivalence-relation R = pr2 R
+
+refl-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1}
+  (R : equivalence-relation l2 A) →
+  is-reflexive (sim-equivalence-relation R)
+refl-equivalence-relation R =
+  pr1 (is-equivalence-relation-prop-equivalence-relation R)
+
+symmetric-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1}
+  (R : equivalence-relation l2 A) →
+  is-symmetric (sim-equivalence-relation R)
+symmetric-equivalence-relation R =
+  pr1 (pr2 (is-equivalence-relation-prop-equivalence-relation R))
+
+transitive-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1}
+  (R : equivalence-relation l2 A) → is-transitive (sim-equivalence-relation R)
+transitive-equivalence-relation R =
+  pr2 (pr2 (is-equivalence-relation-prop-equivalence-relation R))
+
+inhabited-subtype-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1} →
+  equivalence-relation l2 A → A → inhabited-subtype l2 A
+pr1 (inhabited-subtype-equivalence-relation R x) = prop-equivalence-relation R x
+pr2 (inhabited-subtype-equivalence-relation R x) =
+  unit-trunc-Prop (x , refl-equivalence-relation R x)
+```
 
 ## Definition 18.1.2
 
