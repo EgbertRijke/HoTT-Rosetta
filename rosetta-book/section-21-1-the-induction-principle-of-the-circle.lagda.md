@@ -6,9 +6,17 @@ module section-21-1-the-induction-principle-of-the-circle where
 open import universe-levels
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-4-transport
+open import exercise-9-1-groupoid-operations-equivalences
 open import section-9-2-bi-invertible-maps
+open import section-10-1-contractible-types
+open import exercise-10-3-contractible-equivalences
+open import section-10-4-equivalences-are-contractible-maps
+open import section-11-1-families-of-equivalences
+open import section-11-2-the-fundamental-theorem
+open import section-11-6-the-structure-identity-principle
 open import section-19-4-homotopy-groups-of-types
 ```
 
@@ -176,11 +184,6 @@ and satisfies the **induction principle of the circle**, which provides for each
 ind-S¹ : (Σ (u:P(base)) tr_P(loop,u) = u) → (Π (x : S¹) P(x)),
 ```
 
-```agda
-postulate
-  ind-𝕊¹ : induction-principle-circle free-loop-𝕊¹
-```
-
 and a homotopy witnessing that `ind-S¹` is a section of `dgen_{S¹}`
 
 ```text
@@ -189,9 +192,14 @@ comp_S¹ : dgen_{S¹} ∘ ind-S¹ ~ id
 
 for the computation rules.
 
+```agda
+postulate
+  ind-𝕊¹ : induction-principle-circle free-loop-𝕊¹
+```
+
 ## Remark 21.1.3
 
-The type of identifications `(u,p)=(u',p')` in the type
+The type of identifications `(u,p) = (u',p')` in the type
 
 ```text
 Σ(u : P(base)) tr_P(loop,u) = u
@@ -225,3 +233,55 @@ apd_f loop|                                     | p'
 ```
 
 commutes.
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X) (P : X → UU l2)
+  where
+
+  Eq-free-dependent-loop : (p p' : free-dependent-loop α P) → UU l2
+  Eq-free-dependent-loop (pair y p) p' =
+    Σ ( y ＝ base-free-dependent-loop α P p')
+      ( λ q →
+        ( p ∙ q) ＝
+        ( ( ap (tr P (loop-free-loop α)) q) ∙
+          ( loop-free-dependent-loop α P p')))
+
+  refl-Eq-free-dependent-loop :
+    (p : free-dependent-loop α P) → Eq-free-dependent-loop p p
+  pr1 (refl-Eq-free-dependent-loop (pair y p)) = refl
+  pr2 (refl-Eq-free-dependent-loop (pair y p)) = right-unit
+
+  Eq-free-dependent-loop-eq :
+    ( p p' : free-dependent-loop α P) → p ＝ p' → Eq-free-dependent-loop p p'
+  Eq-free-dependent-loop-eq p .p refl = refl-Eq-free-dependent-loop p
+
+  abstract
+    is-torsorial-Eq-free-dependent-loop :
+      ( p : free-dependent-loop α P) → is-torsorial (Eq-free-dependent-loop p)
+    is-torsorial-Eq-free-dependent-loop (pair y p) =
+      is-torsorial-Eq-structure
+        ( is-torsorial-Id y)
+        ( pair y refl)
+        ( is-contr-is-equiv'
+          ( Σ (tr P (loop-free-loop α) y ＝ y) (λ p' → p ＝ p'))
+          ( tot (λ p' α → right-unit ∙ α))
+          ( is-equiv-tot-is-fiberwise-equiv
+            ( λ p' → is-equiv-concat right-unit p'))
+          ( is-torsorial-Id p))
+
+  abstract
+    is-equiv-Eq-free-dependent-loop-eq :
+      (p p' : free-dependent-loop α P) →
+      is-equiv (Eq-free-dependent-loop-eq p p')
+    is-equiv-Eq-free-dependent-loop-eq p =
+      fundamental-theorem-id
+        ( is-torsorial-Eq-free-dependent-loop p)
+        ( Eq-free-dependent-loop-eq p)
+
+  eq-Eq-free-dependent-loop :
+    (p p' : free-dependent-loop α P) →
+    Eq-free-dependent-loop p p' → p ＝ p'
+  eq-Eq-free-dependent-loop p p' =
+    map-inv-is-equiv (is-equiv-Eq-free-dependent-loop-eq p p')
+```
