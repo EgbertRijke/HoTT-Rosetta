@@ -8,6 +8,7 @@ open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
+open import section-5-3-the-action-on-identifications-of-functions
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-5-4-transport
@@ -154,4 +155,106 @@ module _
 
   equiv-inv-tr : x ＝ y → B y ≃ B x
   equiv-inv-tr p = (tr B (inv p) , is-equiv-inv-tr p)
+```
+
+## Supplement
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  conjugate-right-unit :
+    {x y : A} {p q : x ＝ y} (s : p ＝ q) →
+    inv right-unit ∙ ap (_∙ refl) s ∙ right-unit ＝ s
+  conjugate-right-unit refl =
+    ap (_∙ right-unit) right-unit ∙ left-inv right-unit
+```
+
+```agda
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  is-section-is-injective-concat :
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} →
+    is-section (ap (concat p z)) (is-injective-concat p {q} {r})
+  is-section-is-injective-concat refl refl = refl
+
+  is-retraction-is-injective-concat :
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} →
+    is-retraction (ap (concat p z)) (is-injective-concat p {q} {r})
+  is-retraction-is-injective-concat refl refl = refl
+
+  is-equiv-is-injective-concat :
+    {x y z : A} (p : x ＝ y) {q r : y ＝ z} →
+    is-equiv (is-injective-concat p {q} {r})
+  is-equiv-is-injective-concat {z = z} p =
+    is-equiv-is-invertible
+      ( ap (concat p z))
+      ( is-retraction-is-injective-concat p)
+      ( is-section-is-injective-concat p)
+
+  cases-is-section-is-injective-concat' :
+    {x y : A} {p q : x ＝ y} (s : p ＝ q) →
+    ( ap
+      ( concat' x refl)
+      ( is-injective-concat' refl (right-unit ∙ (s ∙ inv right-unit)))) ＝
+    ( right-unit ∙ (s ∙ inv right-unit))
+  cases-is-section-is-injective-concat' {p = refl} refl = refl
+
+  abstract
+    is-section-is-injective-concat' :
+      {x y z : A} (r : y ＝ z) {p q : x ＝ y} →
+      is-section (ap (concat' x r)) (is-injective-concat' r {p} {q})
+    is-section-is-injective-concat' refl {p} {q} s =
+      ( ap (λ u → ap (concat' _ refl) (is-injective-concat' refl u)) (inv α)) ∙
+      ( ( cases-is-section-is-injective-concat'
+          ( inv right-unit ∙ (s ∙ right-unit))) ∙
+        ( α))
+      where
+      α :
+        ( ( right-unit) ∙
+          ( ( inv right-unit ∙ (s ∙ right-unit)) ∙
+            ( inv right-unit))) ＝
+        ( s)
+      α =
+        ( ap
+          ( concat right-unit (q ∙ refl))
+          ( ( assoc (inv right-unit) (s ∙ right-unit) (inv right-unit)) ∙
+            ( ap
+              ( concat (inv right-unit) (q ∙ refl))
+              ( ( assoc s right-unit (inv right-unit)) ∙
+                ( ap (concat s (q ∙ refl)) (right-inv right-unit)) ∙
+                ( right-unit))))) ∙
+        ( inv (assoc right-unit (inv right-unit) s)) ∙
+        ( ( ap (concat' (p ∙ refl) s) (right-inv right-unit)))
+
+  is-retraction-is-injective-concat' :
+    {x y z : A} (r : y ＝ z) {p q : x ＝ y} →
+    is-retraction (ap (concat' x r)) (is-injective-concat' r {p} {q})
+  is-retraction-is-injective-concat' refl = conjugate-right-unit
+
+  is-equiv-is-injective-concat' :
+    {x y z : A} (r : y ＝ z) {p q : x ＝ y} →
+    is-equiv (is-injective-concat' r {p} {q})
+  is-equiv-is-injective-concat' {x} r =
+    is-equiv-is-invertible
+      ( ap (concat' x r))
+      ( is-retraction-is-injective-concat' r)
+      ( is-section-is-injective-concat' r)
+```
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A} {p p' : x ＝ y} (q : y ＝ z)
+  where
+
+  is-equiv-right-unwhisker-concat :
+    is-equiv (λ (α : p ∙ q ＝ p' ∙ q) → right-unwhisker-concat q α)
+  is-equiv-right-unwhisker-concat = is-equiv-is-injective-concat' q
+
+  equiv-right-unwhisker-concat : (p ∙ q ＝ p' ∙ q) ≃ (p ＝ p')
+  equiv-right-unwhisker-concat =
+    ( right-unwhisker-concat q , is-equiv-right-unwhisker-concat)
 ```

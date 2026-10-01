@@ -12,7 +12,7 @@ Consider a section `b` of a family `B` over `A` in context `Γ`, i.e., consider
   Γ, x : A ⊢ b(x) : B(x).
 ```
 
-From one point of view, such a section `b` is an operation or assignment `x ↦ b(x)`, or a program, that takes as input `x : A` and produces a term `b(x) : B(x)`. From a more mathematical point of view we see `b` as a choice of an element of each `B(x)`. In other words, we may see `b` as a function that takes `x : A` to `b(x) : B(x)`. Note that the type `B(x)` of the output may depend on `x : A`. The assignment `x ↦ b(x)` is in this sense a *dependent* function. The type of all such dependent functions is called the **dependent function type**, and we will write
+From one point of view, such a section `b` is an operation or assignment `x ↦ b(x)`, or a program, that takes as input `x : A` and produces a term `b(x) : B(x)`. From a more mathematical point of view we see `b` as a choice of an element of each `B(x)`. In other words, we may see `b` as a function that takes `x : A` to `b(x) : B(x)`. Note that the type `B(x)` of the output may depend on `x : A`. The assignment `x ↦ b(x)` is in this sense a _dependent_ function. The type of all such dependent functions is called the **dependent function type**, and we will write
 
 ```text
   Π(x:A) B(x)
@@ -20,10 +20,10 @@ From one point of view, such a section `b` is an operation or assignment `x ↦ 
 
 for the type of dependent functions. There are four principal rules for `Π`-types:
 
-1. The *formation rule*, which tells us how we may form dependent function types.
-2. The *introduction rule*, which tells us how to introduce new terms of dependent function types.
-3. The *elimination rule*, which tells us how to use arbitrary terms of dependent function types.
-4. The *computation rules*, which tell us how the introduction and elimination rules interact. These computation rules guarantee that every term of a dependent function type is indeed a dependent function taking the values by which it is defined.
+1. The _formation rule_, which tells us how we may form dependent function types.
+2. The _introduction rule_, which tells us how to introduce new terms of dependent function types.
+3. The _elimination rule_, which tells us how to use arbitrary terms of dependent function types.
+4. The _computation rules_, which tell us how the introduction and elimination rules interact. These computation rules guarantee that every term of a dependent function type is indeed a dependent function taking the values by which it is defined.
 
 In the cases of the formation rule, the introduction rule, and the elimination rule, we also need rules that assert that all the constructions respect judgmental equality. Those rules are called **congruence rules**, and they are part of the specification of dependent function types.
 
@@ -71,7 +71,7 @@ which asserts that
 
 ## The `Π`-elimination rule
 
-The elimination rule for dependent function types provides us with a way to *use* dependent functions. The way to use a dependent function is to evaluate it at an argument of the domain type. The `Π`-elimination rule is therefore also called the **evaluation rule**:
+The elimination rule for dependent function types provides us with a way to _use_ dependent functions. The way to use a dependent function is to evaluate it at an argument of the domain type. The `Π`-elimination rule is therefore also called the **evaluation rule**:
 
 ```text
     Γ ⊢ f : Π(x:A) B(x)
@@ -115,3 +115,17 @@ Second, we postulate a rule that asserts that all elements of a `Π`-type are (d
 ```
 
 In other words, the computation rules (`β` and `η`) for dependent function types postulate that `λ`-abstraction rule and the evaluation rule are mutual inverses. This completes the specification of dependent function types.
+
+## Supplement
+
+### Evaluation at a point
+
+```agda
+ev-point :
+  {l1 l2 : Level} {A : UU l1} (a : A) {P : A → UU l2} → ((x : A) → P x) → P a
+ev-point a f = f a
+
+ev-point' :
+  {l1 l2 : Level} {A : UU l1} (a : A) {X : UU l2} → (A → X) → X
+ev-point' a f = f a
+```
