@@ -69,7 +69,7 @@ Therefore it suffices to construct an identification `α : g(base) = f(base)` eq
               |                                     |
 apd_{g}(loop) |                                     | apd_{f}(loop)
               v                                     v
-         [g(base)]     --------α------------->  [f(base)"]
+         [g(base)]     --------α------------->  [f(base)]
 ```
 commutes.
 Notice that we get exactly such a pair `(α,β)` from the computation rule of the circle, by Remark 21.1.3. ◻
@@ -167,7 +167,6 @@ For any loop `l : x = x` in a type `X`, the type of maps `f : S¹ → X` equippe
 α : f(base) = x
 ```
 and an identification `β` witnessing that the square
-
 
 ```text
           [f(base)]--α--> [x]
