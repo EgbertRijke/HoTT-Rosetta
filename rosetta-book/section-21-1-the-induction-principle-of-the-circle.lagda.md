@@ -6,6 +6,10 @@ module section-21-1-the-induction-principle-of-the-circle where
 open import universe-levels
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
+open import section-9-2-bi-invertible-maps
+open import section-19-4-homotopy-groups-of-types
 ```
 
 The _circle_ is specified as a higher inductive type `S¹` that comes equipped with
@@ -68,6 +72,76 @@ module _
 
   loop-free-loop : (α : free-loop X) → base-free-loop α ＝ base-free-loop α
   loop-free-loop = pr2
+
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X) (P : X → UU l2)
+  where
+
+  free-dependent-loop : UU l2
+  free-dependent-loop =
+    Σ ( P (base-free-loop α)) (λ p₀ → tr P (loop-free-loop α) p₀ ＝ p₀)
+
+  base-free-dependent-loop : free-dependent-loop → P (base-free-loop α)
+  base-free-dependent-loop = pr1
+
+  loop-free-dependent-loop :
+    (β : free-dependent-loop) →
+    ( tr P (loop-free-loop α) (base-free-dependent-loop β)) ＝
+    ( base-free-dependent-loop β)
+  loop-free-dependent-loop = pr2
+
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X) (Y : UU l2)
+  where
+
+  ev-free-loop : (X → Y) → free-loop Y
+  pr1 (ev-free-loop f) = f (base-free-loop α)
+  pr2 (ev-free-loop f) = ap f (loop-free-loop α)
+
+module _
+  {l1 : Level} {X : UU l1} (α : free-loop X)
+  where
+
+  universal-property-circle : UUω
+  universal-property-circle =
+    {l : Level} (Y : UU l) → is-equiv (ev-free-loop α Y)
+
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X) (P : X → UU l2)
+  where
+
+  ev-free-loop-Π : ((x : X) → P x) → free-dependent-loop α P
+  pr1 (ev-free-loop-Π f) = f (base-free-loop α)
+  pr2 (ev-free-loop-Π f) = apd f (loop-free-loop α)
+
+module _
+  {l1 : Level} {X : UU l1} (α : free-loop X)
+  where
+
+  induction-principle-circle : UUω
+  induction-principle-circle =
+    {l2 : Level} (P : X → UU l2) → section (ev-free-loop-Π α P)
+
+module _
+  {l1 l2 : Level} {X : UU l1} (α : free-loop X)
+  (H : induction-principle-circle α) (P : X → UU l2)
+  (β : free-dependent-loop α P)
+  where
+
+  function-induction-principle-circle : (x : X) → P x
+  function-induction-principle-circle = pr1 (H P) β
+
+  compute-induction-principle-circle :
+    (ev-free-loop-Π α P function-induction-principle-circle) ＝ β
+  compute-induction-principle-circle = pr2 (H P) β
+
+module _
+  {l1 : Level} {X : UU l1} (α : free-loop X)
+  where
+
+  dependent-universal-property-circle : UUω
+  dependent-universal-property-circle =
+    {l2 : Level} (P : X → UU l2) → is-equiv (ev-free-loop-Π α P)
 ```
 
 ## Definition 21.1.2
