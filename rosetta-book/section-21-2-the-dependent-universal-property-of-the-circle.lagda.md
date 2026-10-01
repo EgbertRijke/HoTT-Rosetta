@@ -25,10 +25,7 @@ The dependent universal property therefore improves on this by stating that this
 
 For any type family `P` over the circle, the map
 ```text
-dgen_{S¹}:
-(Π(x:S¹) P(x))
-→
-(Σ(y:P(base)) tr_P(loop,y) = y)
+dgen_{S¹}: (Π(x:S¹) P(x)) → (Σ(y:P(base)) tr_P(loop,y) = y)
 ```
 given by `f ↦ (f(base),apd_{f}(loop))` is an equivalence.
 
