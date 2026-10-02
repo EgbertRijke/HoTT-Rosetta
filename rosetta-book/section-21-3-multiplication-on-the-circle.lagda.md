@@ -4,16 +4,23 @@
 module section-21-3-multiplication-on-the-circle where
 
 open import universe-levels
+open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
+open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-1-groupoid-operations-equivalences
 open import exercise-9-4-three-for-two-equivalences
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-1-families-of-equivalences
+open import section-12-3-sets
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-19-4-homotopy-groups-of-types
+open import section-21-1-the-induction-principle-of-the-circle
+open import section-21-2-the-dependent-universal-property-of-the-circle
 ```
 
 One way the circle arises classically, is as the set of complex numbers at distance `1` from the origin.
@@ -38,28 +45,6 @@ coh-unit_μ : left-unit_μ(pt) = right-unit_μ(pt).
 module _
   {l : Level} {A : UU l} (μ : A → A → A) (e : A)
   where
-
-  left-unit-law : UU l
-  left-unit-law = (x : A) → μ e x ＝ x
-
-  right-unit-law : UU l
-  right-unit-law = (x : A) → μ x e ＝ x
-
-  coh-unit-laws : left-unit-law → right-unit-law → UU l
-  coh-unit-laws α β = (α e ＝ β e)
-
-  unit-laws : UU l
-  unit-laws = left-unit-law × right-unit-law
-
-  coherent-unit-laws : UU l
-  coherent-unit-laws =
-    Σ left-unit-law (λ α → Σ right-unit-law (coh-unit-laws α))
-
-is-unital : {l : Level} {A : UU l} (μ : A → A → A) → UU l
-is-unital {A = A} μ = Σ A (unit-laws μ)
-
-is-coherently-unital : {l : Level} {A : UU l} (μ : A → A → A) → UU l
-is-coherently-unital {A = A} μ = Σ A (coherent-unit-laws μ)
 
 coherent-unit-laws-mul-Pointed-Type :
   {l : Level} (A : Pointed-Type l)
@@ -312,6 +297,71 @@ Now we apply this function to `refl` to obtain the desired identification
 ```
 
  ◻
+
+```agda
+loop-htpy-𝕊¹ : (x : 𝕊¹) → x ＝ x
+loop-htpy-𝕊¹ =
+  function-apply-dependent-universal-property-𝕊¹
+    ( eq-value id id)
+    ( loop-𝕊¹)
+    ( map-compute-dependent-identification-eq-value-id-id
+      ( loop-𝕊¹)
+      ( loop-𝕊¹)
+      ( loop-𝕊¹)
+      ( refl))
+
+compute-base-loop-htpy-𝕊¹ : loop-htpy-𝕊¹ base-𝕊¹ ＝ loop-𝕊¹
+compute-base-loop-htpy-𝕊¹ =
+  base-dependent-universal-property-𝕊¹
+    ( eq-value id id)
+    ( loop-𝕊¹)
+    ( map-compute-dependent-identification-eq-value-id-id
+      ( loop-𝕊¹)
+      ( loop-𝕊¹)
+      ( loop-𝕊¹)
+      ( refl))
+
+Mul-Π-𝕊¹ : 𝕊¹ → UU lzero
+Mul-Π-𝕊¹ x = 𝕊¹-Pointed-Type →∗ (𝕊¹ , x)
+
+dependent-identification-Mul-Π-𝕊¹ :
+  {x : 𝕊¹} (p : base-𝕊¹ ＝ x) (q : Mul-Π-𝕊¹ base-𝕊¹) (r : Mul-Π-𝕊¹ x) →
+  (H : pr1 q ~ pr1 r) →
+  pr2 q ∙ p ＝ H base-𝕊¹ ∙ pr2 r →
+  tr Mul-Π-𝕊¹ p q ＝ r
+dependent-identification-Mul-Π-𝕊¹ refl q r H u =
+  eq-pointed-htpy q r (H , inv right-unit ∙ u)
+
+eq-id-id-𝕊¹-Pointed-Type :
+  tr Mul-Π-𝕊¹ loop-𝕊¹ id-pointed-map ＝ id-pointed-map
+eq-id-id-𝕊¹-Pointed-Type =
+  dependent-identification-Mul-Π-𝕊¹ loop-𝕊¹
+    ( id-pointed-map)
+    ( id-pointed-map)
+    ( loop-htpy-𝕊¹)
+    ( inv compute-base-loop-htpy-𝕊¹ ∙ inv right-unit)
+
+mul-Π-𝕊¹ : Π-𝕊¹ (Mul-Π-𝕊¹) (id-pointed-map) (eq-id-id-𝕊¹-Pointed-Type)
+mul-Π-𝕊¹ =
+  apply-dependent-universal-property-𝕊¹
+    ( Mul-Π-𝕊¹)
+    ( id-pointed-map)
+    ( eq-id-id-𝕊¹-Pointed-Type)
+
+mul-𝕊¹ : 𝕊¹ → 𝕊¹ → 𝕊¹
+mul-𝕊¹ x = pr1 (pr1 mul-Π-𝕊¹ x)
+
+left-unit-law-mul-𝕊¹ : (x : 𝕊¹) → mul-𝕊¹ base-𝕊¹ x ＝ x
+left-unit-law-mul-𝕊¹ = htpy-eq (ap pr1 (pr1 (pr2 mul-Π-𝕊¹)))
+
+right-unit-law-mul-𝕊¹ : (x : 𝕊¹) → mul-𝕊¹ x base-𝕊¹ ＝ x
+right-unit-law-mul-𝕊¹ x = pr2 (pr1 mul-Π-𝕊¹ x)
+
+coh-unit-laws-𝕊¹ : coherent-unit-laws mul-𝕊¹ base-𝕊¹
+coh-unit-laws-𝕊¹ =
+    coherent-unit-laws-unit-laws mul-𝕊¹
+        (left-unit-law-mul-𝕊¹ , right-unit-law-mul-𝕊¹)
+```
 
 ## Remark 21.3.4
 

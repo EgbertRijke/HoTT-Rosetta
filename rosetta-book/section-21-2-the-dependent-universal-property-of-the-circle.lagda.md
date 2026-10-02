@@ -170,6 +170,11 @@ module _
         ( compute-induction-principle-circle α ind-circle P)
         ( is-retraction-ind-circle ind-circle P)
 
+dependent-universal-property-𝕊¹ :
+  dependent-universal-property-circle free-loop-𝕊¹
+dependent-universal-property-𝕊¹ =
+  dependent-universal-property-induction-principle-circle free-loop-𝕊¹ ind-𝕊¹
+
 ```
 
 As a corollary we obtain the following uniqueness principle for dependent functions defined by the induction principle of the circle.
@@ -219,6 +224,49 @@ module _
       ( is-equiv-tot-is-fiberwise-equiv
         (λ h → is-equiv-Eq-free-dependent-loop-eq α P (ev-free-loop-Π α P h) k))
       ( is-contr-map-is-equiv (dup-circle P) k)
+
+uniqueness-dependent-universal-property-𝕊¹ :
+  {l : Level} {P : 𝕊¹ → UU l} (k : free-dependent-loop free-loop-𝕊¹ P) →
+  is-contr
+    ( Σ ( (x : 𝕊¹) → P x)
+        ( λ h →
+          Eq-free-dependent-loop free-loop-𝕊¹ P
+            ( ev-free-loop-Π free-loop-𝕊¹ P h) k))
+uniqueness-dependent-universal-property-𝕊¹ {l} {P} =
+  uniqueness-dependent-universal-property-circle
+    free-loop-𝕊¹
+    dependent-universal-property-𝕊¹
+
+module _
+  {l : Level} (P : 𝕊¹ → UU l) (p0 : P base-𝕊¹) (α : tr P loop-𝕊¹ p0 ＝ p0)
+  where
+
+  Π-𝕊¹ : UU l
+  Π-𝕊¹ =
+    Σ ( (x : 𝕊¹) → P x)
+      ( λ h →
+        Eq-free-dependent-loop free-loop-𝕊¹ P
+          ( ev-free-loop-Π free-loop-𝕊¹ P h) (p0 , α))
+
+  apply-dependent-universal-property-𝕊¹ : Π-𝕊¹
+  apply-dependent-universal-property-𝕊¹ =
+    center (uniqueness-dependent-universal-property-𝕊¹ (p0 , α))
+
+  function-apply-dependent-universal-property-𝕊¹ : (x : 𝕊¹) → P x
+  function-apply-dependent-universal-property-𝕊¹ =
+    pr1 apply-dependent-universal-property-𝕊¹
+
+  base-dependent-universal-property-𝕊¹ :
+    function-apply-dependent-universal-property-𝕊¹ base-𝕊¹ ＝ p0
+  base-dependent-universal-property-𝕊¹ =
+    pr1 (pr2 apply-dependent-universal-property-𝕊¹)
+
+  loop-dependent-universal-property-𝕊¹ :
+    ( apd function-apply-dependent-universal-property-𝕊¹ loop-𝕊¹ ∙
+      base-dependent-universal-property-𝕊¹) ＝
+    ( ap (tr P loop-𝕊¹) base-dependent-universal-property-𝕊¹ ∙ α)
+  loop-dependent-universal-property-𝕊¹ =
+    pr2 (pr2 apply-dependent-universal-property-𝕊¹)
 ```
 
 Now we use the dependent universal property to derive the ordinary universal property of the circle.

@@ -2,6 +2,26 @@
 
 ```agda
 module section-20-1-the-type-of-well-founded-trees where
+
+open import universe-levels
+open import section-2-2-ordinary-function-types
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
+open import section-4-2-the-unit-type
+open import section-4-3-the-empty-type
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-3-the-action-on-identifications-of-functions
+open import section-7-3-the-standard-finite-types
+open import section-9-1-homotopies
+open import section-9-2-bi-invertible-maps
+open import section-10-1-contractible-types
+open import section-12-1-propositions
+open import section-13-1-equivalent-forms-of-function-extensionality
+open import section-14-2-propositional-truncations-as-higher-inductive-types
+
+open import exercise-4-2-boolean-operations
+open import exercise-6-2-observational-equality-booleans
+open import exercise-13-6-universal-property-empty-types
 ```
 
 ## Definition 20.1.1
@@ -32,6 +52,24 @@ ind_W(h, tree(x, α)) ≐ h(x, α, λ y. ind_W(h, α(y))).
 ```
 
 The elements of W-types are called **(well-founded) trees**.
+
+```agda
+data 𝕎 {l1 l2 : Level} (A : UU l1) (B : A → UU l2) : UU (l1 ⊔ l2) where
+  tree-𝕎 : (x : A) (α : B x → 𝕎 A B) → 𝕎 A B
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  shape-𝕎 : 𝕎 A B → A
+  shape-𝕎 (tree-𝕎 x α) = x
+
+  component-𝕎 : (x : 𝕎 A B) → B (shape-𝕎 x) → 𝕎 A B
+  component-𝕎 (tree-𝕎 x α) = α
+
+  η-𝕎 : (x : 𝕎 A B) → tree-𝕎 (shape-𝕎 x) (component-𝕎 x) ＝ x
+  η-𝕎 (tree-𝕎 x α) = refl
+```
 
 ## Remark 20.1.2
 
@@ -102,6 +140,18 @@ is-constant_W : W(A, B) → Prop_𝒰
 
 is defined by `is-constant_W(w) ≔ is-empty(B(arity(w)))`.
 
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  constant-𝕎 : (x : A) → is-empty (B x) → 𝕎 A B
+  constant-𝕎 x h = tree-𝕎 x (ex-falso ∘ h)
+
+  is-constant-𝕎 : 𝕎 A B → UU l2
+  is-constant-𝕎 x = is-empty (B (shape-𝕎 x))
+```
+
 On the other hand, if each type `B(x)` is inhabited, then there are no such constants and we will see in the following proposition that the W-type `W(A, B)` is empty in this case.
 
 ## Proposition 20.1.5
@@ -139,6 +189,19 @@ In other words, assume a function `h : B(x) → empty`.
 Then we have the constant element `c_x(h) : W(A, B)`.
 This is impossible, since `W(A, B)` was assumed to be empty. ◻
 
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  is-empty-𝕎 : ((x : A) → type-trunc-Prop (B x)) → is-empty (𝕎 A B)
+  is-empty-𝕎 H (tree-𝕎 x α) =
+    apply-universal-property-trunc-Prop
+      ( H x)
+      ( empty-Prop)
+      ( λ y → is-empty-𝕎 H (α y))
+```
+
 ## Example 20.1.6
 
 Consider the type family `P` over `bool` given by
@@ -154,6 +217,17 @@ More formally, we define the zero element `z : N` and the successor function `s 
 
 ```text
 z ≔ tree(false, ex-falso)  and  s(x) ≔ tree(true, const_x).
+```
+
+```agda
+Nat-𝕎 : UU lzero
+Nat-𝕎 = 𝕎 bool (Eq-bool true)
+
+zero-Nat-𝕎 : Nat-𝕎
+zero-Nat-𝕎 = constant-𝕎 false id
+
+succ-Nat-𝕎 : Nat-𝕎 → Nat-𝕎
+succ-Nat-𝕎 x = tree-𝕎 true (λ y → x)
 ```
 
 Thus, we obtain a function `f : ℕ → N` that satisfies `f(0) ≐ z` and `f(succ-ℕ(n)) ≐ s(f(n))`.
@@ -183,6 +257,51 @@ p(tree(true, α)) : tree(true, const_{α(⋆)}) = tree(true, α)
 by the fact that `const_{α(⋆)} = α` for any map `α : unit → N`.
 This completes the construction of the equivalence `ℕ ≃ N`.
 
+```agda
+Nat-𝕎-ℕ : ℕ → Nat-𝕎
+Nat-𝕎-ℕ zero-ℕ = zero-Nat-𝕎
+Nat-𝕎-ℕ (succ-ℕ x) = succ-Nat-𝕎 (Nat-𝕎-ℕ x)
+
+ℕ-Nat-𝕎 : Nat-𝕎 → ℕ
+ℕ-Nat-𝕎 (tree-𝕎 true α) = succ-ℕ (ℕ-Nat-𝕎 (α star))
+ℕ-Nat-𝕎 (tree-𝕎 false α) = zero-ℕ
+
+is-section-ℕ-Nat-𝕎 : (Nat-𝕎-ℕ ∘ ℕ-Nat-𝕎) ~ id
+is-section-ℕ-Nat-𝕎 (tree-𝕎 true α) =
+  ap
+    ( tree-𝕎 true)
+    ( eq-htpy H)
+  where
+  H : (z : unit) → Nat-𝕎-ℕ (ℕ-Nat-𝕎 (α star)) ＝ α z
+  H star = is-section-ℕ-Nat-𝕎 (α star)
+is-section-ℕ-Nat-𝕎 (tree-𝕎 false α) =
+  ap (tree-𝕎 false) (eq-is-contr (universal-property-empty' Nat-𝕎))
+
+is-retraction-ℕ-Nat-𝕎 : (ℕ-Nat-𝕎 ∘ Nat-𝕎-ℕ) ~ id
+is-retraction-ℕ-Nat-𝕎 zero-ℕ = refl
+is-retraction-ℕ-Nat-𝕎 (succ-ℕ x) = ap succ-ℕ (is-retraction-ℕ-Nat-𝕎 x)
+
+is-equiv-Nat-𝕎-ℕ : is-equiv Nat-𝕎-ℕ
+is-equiv-Nat-𝕎-ℕ =
+  is-equiv-is-invertible
+    ℕ-Nat-𝕎
+    is-section-ℕ-Nat-𝕎
+    is-retraction-ℕ-Nat-𝕎
+
+equiv-Nat-𝕎-ℕ : ℕ ≃ Nat-𝕎
+equiv-Nat-𝕎-ℕ = pair Nat-𝕎-ℕ is-equiv-Nat-𝕎-ℕ
+
+is-equiv-ℕ-Nat-𝕎 : is-equiv ℕ-Nat-𝕎
+is-equiv-ℕ-Nat-𝕎 =
+  is-equiv-is-invertible
+    Nat-𝕎-ℕ
+    is-retraction-ℕ-Nat-𝕎
+    is-section-ℕ-Nat-𝕎
+
+equiv-ℕ-Nat-𝕎 : Nat-𝕎 ≃ ℕ
+equiv-ℕ-Nat-𝕎 = pair ℕ-Nat-𝕎 is-equiv-ℕ-Nat-𝕎
+```
+
 ## Example 20.1.7
 
 Consider the type family `B` over `bool` given by
@@ -200,6 +319,31 @@ node : T_2
 
 We leave the construction of the equivalence `T_2 ≃ W(bool, B)` as Exercise 20.1.
 The reason we call the elements of `T_2` oriented binary rooted trees is that in a tree of the form `[T_1, T_2]` we can see by inspection which branch is on the left and which branch is on the right.
+
+```agda
+PBT-𝕎 : UU lzero
+PBT-𝕎 = 𝕎 bool P
+  where
+  P : bool → UU lzero
+  P true = bool
+  P false = empty
+
+root-PBT-𝕎 : PBT-𝕎
+root-PBT-𝕎 = constant-𝕎 false id
+
+join-PBT-𝕎 : (x y : PBT-𝕎) → PBT-𝕎
+join-PBT-𝕎 x y = tree-𝕎 true α
+  where
+  α : bool → PBT-𝕎
+  α true = x
+  α false = y
+```
+
+```agda
+data Planar-Bin-Tree : UU lzero where
+  root-PBT : Planar-Bin-Tree
+  join-PBT : (x y : Planar-Bin-Tree) → Planar-Bin-Tree
+```
 
 ## Example 20.1.8
 
@@ -231,6 +375,8 @@ bin-tree(bool, ind-bool(T_2, T_1))
 can always be identified.
 In the terminology of Exercise 19.10, the constructor `bin-tree` of `Bin-Tree` is equivalently described as a commutative binary operation on `Bin-Tree`.
 
+<!-- MISSING AGDA CODE -->
+
 ## Example 20.1.9
 
 The W-type `W(ℕ, Fin)` is the type of **oriented finitely branching rooted trees**.
@@ -238,3 +384,7 @@ On the other hand, we define the type of **(unoriented) finitely branching roote
 The qualitive difference between the types of oriented and unoriented finitely branching rooted trees is similar to the qualitative difference between types of oriented and unoriented binary rooted trees.
 In the type of oriented finitely branching rooted trees, we record the ordering of the branches while in the type of unoriented finitely branching rooted trees there are identifications between trees that have the same branches up to permutation.
 
+```agda
+plane-tree-𝕎 : UU lzero
+plane-tree-𝕎 = 𝕎 ℕ Fin
+```

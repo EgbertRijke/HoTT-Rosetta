@@ -22,7 +22,7 @@ open import section-10-3-contractible-maps
 In Theorem 10.4.6 we will show the converse to Theorem 10.3.5, i.e., we will show that any equivalence is a contractible map.
 We will do this in two steps.
 
-First we introduce a new notion of *coherently invertible map*, for which we can easily show that such maps have contractible fibers.
+First we introduce a new notion of _coherently invertible map_, for which we can easily show that such maps have contractible fibers.
 Then we show that any equivalence is a coherently invertible map.
 
 Recall that an invertible map is a map `f : A → B` equipped with `g : B → A` and homotopies
@@ -344,6 +344,11 @@ nat-htpy-id :
   {l : Level} {A : UU l} {f : A → A} (H : f ~ id)
   {x y : A} (p : x ＝ y) → H x ∙ p ＝ ap f p ∙ H y
 nat-htpy-id H refl = right-unit
+
+inv-nat-htpy-id :
+  {l : Level} {A : UU l} {f : A → A} (H : f ~ id)
+  {x y : A} (p : x ＝ y) → ap f p ∙ H y ＝ H x ∙ p
+inv-nat-htpy-id H p = inv (nat-htpy-id H p)
 ```
 
 ```agda
@@ -390,7 +395,7 @@ In order to construct a homotopy `f · H ~ G' · f`, it suffices to show that th
 ```text
                        G(fgf(x))
              fgfgf(x) =========== fgf(x)
-                 ∥                  ∥ 
+                 ∥                  ∥
   ap_f(H(gf(x))) ∥                  ∥ ap_f(H(x))
                  ∥                  ∥
               fgf(x) ============= f(x)
@@ -533,7 +538,7 @@ module _
     pr2 (is-torsorial-Id' a) (.a , refl) = refl
 ```
 
-## Supplementary definitions
+## Supplement
 
 ### The predicate of being a transpose coherently invertible map
 

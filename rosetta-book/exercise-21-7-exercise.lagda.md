@@ -9,14 +9,14 @@ module exercise-21-7-exercise where
 
 Show that for any multiplicative operation
 ```text
-μ:S^1→(S^1→S^1)
+μ : S¹ → (S¹ → S¹)
 ```
-that satisfies the condition that `μ(x,_)` and `μ(_,x)` are equivalences for any `x:S^1`, there is an element `e:S^1` such that
+that satisfies the condition that `μ(x,_)` and `μ(_,x)` are equivalences for any `x : S¹`, there is an element `e : S¹` such that
 ```text
-μ(x,y)=mul_(S^1)(x,mul_(S^1)(ē,y))
+μ(x,y) = mul_(S¹)(x,mul_(S¹)(ē,y))
 ```
-for every `x,y:S^1`, where `ē≔inv(e)` is the complex conjugation of `e` on `S^1`.
+for every `x,y : S¹`, where `ē ≔ inv(e)` is the complex conjugation of `e` on `S¹`.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
