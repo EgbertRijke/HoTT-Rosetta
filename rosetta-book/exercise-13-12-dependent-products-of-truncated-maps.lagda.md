@@ -5,6 +5,7 @@ module exercise-13-12-dependent-products-of-truncated-maps where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
@@ -22,6 +23,7 @@ open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-3-contractible-equivalences
 open import section-11-1-families-of-equivalences
 open import section-11-4-embeddings
+open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-4-general-truncation-levels
 open import exercise-12-8-retracts-of-truncated-types
@@ -685,4 +687,309 @@ equiv-dependent-identification-contraction-total-space'
             ( equiv-contraction-total-space c x e'))
           ( map-inv-equiv (equiv-contraction-total-space c x e) h)
           ( map-inv-equiv (equiv-contraction-total-space c x e') h')))))
+```
+
+### Telescopes
+
+```agda
+data
+  telescope : (l : Level) → ℕ → UUω
+  where
+  base-telescope :
+    {l1 : Level} → UU l1 → telescope l1 0
+  cons-telescope :
+    {l1 l2 : Level} {n : ℕ} {X : UU l1} →
+    (X → telescope l2 n) → telescope (l1 ⊔ l2) (succ-ℕ n)
+
+open telescope public
+
+prepend-telescope :
+  {l1 l2 : Level} {n : ℕ} →
+  (A : UU l1) → ({x : A} → telescope l2 n) → telescope (l1 ⊔ l2) (succ-ℕ n)
+prepend-telescope A B = cons-telescope {X = A} (λ x → B {x})
+```
+
+From the agda-unimath library:
+
+```text
+To have Agda infer telescopes, we help it along using
+[instance arguments](https://agda.readthedocs.io/en/latest/language/instance-arguments.html).
+These are a special kind of implicit argument that are resolved by _the instance
+resolution algorithm_. We register building blocks, called _instances_, for this
+algorithm to use below. Then Agda will attempt to use those to construct
+telescopes of the appropriate kind when asked to.
+```
+
+The agda-unimath library defines instances of telescopes
+up to length 18. We choose to define instances of telescopes up to length 8.
+
+```agda
+instance-telescope : {l : Level} {n : ℕ} → {{telescope l n}} → telescope l n
+instance-telescope {{x}} = x
+
+instance
+  instance-telescope⁰ : {l : Level} {X : UU l} → telescope l 0
+  instance-telescope⁰ {X = X} = base-telescope X
+
+  instance-telescope¹ :
+    { l1 l : Level} {A1 : UU l1} {X : A1 → UU l} → telescope (l1 ⊔ l) 1
+  instance-telescope¹ {X = X} =
+    cons-telescope (λ x → instance-telescope⁰ {X = X x})
+
+  instance-telescope² :
+    { l1 l2 l : Level} {A1 : UU l1} {A2 : A1 → UU l2}
+    { X : (x1 : A1) → A2 x1 → UU l} → telescope (l1 ⊔ l2 ⊔ l) 2
+  instance-telescope² {X = X} =
+    cons-telescope (λ x → instance-telescope¹ {X = X x})
+
+  instance-telescope³ :
+    { l1 l2 l3 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { X : (x1 : A1) (x2 : A2 x1) (x2 : A3 x1 x2) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l) 3
+  instance-telescope³ {X = X} =
+    cons-telescope (λ x → instance-telescope² {X = X x})
+
+  instance-telescope⁴ :
+    { l1 l2 l3 l4 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { X : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l) 4
+  instance-telescope⁴ {X = X} =
+    cons-telescope (λ x → instance-telescope³ {X = X x})
+
+  instance-telescope⁵ :
+    { l1 l2 l3 l4 l5 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l) 5
+  instance-telescope⁵ {X = X} =
+    cons-telescope (λ x → instance-telescope⁴ {X = X x})
+
+  instance-telescope⁶ :
+    { l1 l2 l3 l4 l5 l6 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l) 6
+  instance-telescope⁶ {X = X} =
+    cons-telescope (λ x → instance-telescope⁵ {X = X x})
+
+  instance-telescope⁷ :
+    { l1 l2 l3 l4 l5 l6 l7 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l) 7
+  instance-telescope⁷ {X = X} =
+    cons-telescope (λ x → instance-telescope⁶ {X = X x})
+
+  instance-telescope⁸ :
+    { l1 l2 l3 l4 l5 l6 l7 l8 l : Level}
+    { A1 : UU l1} {A2 : A1 → UU l2} {A3 : (x1 : A1) → A2 x1 → UU l3}
+    { A4 : (x1 : A1) (x2 : A2 x1) → A3 x1 x2 → UU l4}
+    { A5 : (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3) → UU l5}
+    { A6 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) → UU l6}
+    { A7 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5) → UU l7}
+    { A8 :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) → UU l8}
+    { X :
+      (x1 : A1) (x2 : A2 x1) (x3 : A3 x1 x2) (x4 : A4 x1 x2 x3)
+      (x5 : A5 x1 x2 x3 x4) (x6 : A6 x1 x2 x3 x4 x5)
+      (x7 : A7 x1 x2 x3 x4 x5 x6) (x8 : A8 x1 x2 x3 x4 x5 x6 x7) → UU l} →
+    telescope (l1 ⊔ l2 ⊔ l3 ⊔ l4 ⊔ l5 ⊔ l6 ⊔ l7 ⊔ l8 ⊔ l) 8
+  instance-telescope⁸ {X = X} =
+    cons-telescope (λ x → instance-telescope⁷ {X = X x})
+```
+
+### Transformations on telescopes
+
+Given an operation on universes, we can apply it at the base of the telescope.
+
+```agda
+apply-base-telescope :
+  {l1 : Level} {n : ℕ}
+  (P : {l : Level} → UU l → UU l) → telescope l1 n → telescope l1 n
+apply-base-telescope P (base-telescope A) = base-telescope (P A)
+apply-base-telescope P (cons-telescope A) =
+  cons-telescope (λ x → apply-base-telescope P (A x))
+```
+
+### Iterated dependent products of iterated type families
+
+```agda
+iterated-Π :
+  {l : Level} {n : ℕ} → telescope l n → UU l
+iterated-Π (base-telescope A) = A
+iterated-Π (cons-telescope {X = X} A) = (x : X) → iterated-Π (A x)
+
+iterated-implicit-Π :
+  {l : Level} {n : ℕ} → telescope l n → UU l
+iterated-implicit-Π (base-telescope A) = A
+iterated-implicit-Π (cons-telescope {X = X} A) =
+  {x : X} → iterated-implicit-Π (A x)
+```
+
+### Iterated sections of type families
+
+```agda
+data
+  iterated-section : {l : Level} {n : ℕ} → telescope l n → UUω
+  where
+  base-iterated-section :
+    {l1 : Level} {A : UU l1} → A → iterated-section (base-telescope A)
+  cons-iterated-section :
+    {l1 l2 : Level} {n : ℕ} {X : UU l1} {Y : X → telescope l2 n} →
+    ((x : X) → iterated-section (Y x)) → iterated-section (cons-telescope Y)
+```
+
+### Iterated λ-abstractions
+
+```agda
+iterated-λ :
+  {l : Level} {n : ℕ} {A : telescope l n} →
+  iterated-section A → iterated-Π A
+iterated-λ (base-iterated-section a) = a
+iterated-λ (cons-iterated-section f) x = iterated-λ (f x)
+```
+
+### Transforming iterated products
+
+Given an operation on universes, we can apply it at the codomain of the iterated
+product.
+
+```agda
+apply-codomain-iterated-Π :
+  {l1 : Level} {n : ℕ}
+  (P : {l : Level} → UU l → UU l) → telescope l1 n → UU l1
+apply-codomain-iterated-Π P A = iterated-Π (apply-base-telescope P A)
+
+apply-codomain-iterated-implicit-Π :
+  {l1 : Level} {n : ℕ}
+  (P : {l : Level} → UU l → UU l) → telescope l1 n → UU l1
+apply-codomain-iterated-implicit-Π P A =
+  iterated-implicit-Π (apply-base-telescope P A)
+```
+
+## Properties
+
+### If a dependent product satisfies a property if its codomain does, then iterated dependent products satisfy that property if the codomain does
+
+```agda
+section-iterated-Π-section-Π-section-codomain :
+  (P : {l : Level} → UU l → UU l) →
+  ( {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → P (B x)) → P ((x : A) → B x)) →
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π P A → P (iterated-Π A)
+section-iterated-Π-section-Π-section-codomain P f .0 {{base-telescope A}} H =
+  H
+section-iterated-Π-section-Π-section-codomain P f ._ {{cons-telescope A}} H =
+  f (λ x → section-iterated-Π-section-Π-section-codomain P f _ {{A x}} (H x))
+
+section-iterated-implicit-Π-section-Π-section-codomain :
+  (P : {l : Level} → UU l → UU l) →
+  ( {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → P (B x)) → P ({x : A} → B x)) →
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π P A → P (iterated-implicit-Π A)
+section-iterated-implicit-Π-section-Π-section-codomain
+  P f .0 {{base-telescope A}} H =
+  H
+section-iterated-implicit-Π-section-Π-section-codomain
+  P f ._ {{cons-telescope A}} H =
+  f ( λ x →
+      section-iterated-implicit-Π-section-Π-section-codomain
+        P f _ {{A x}} (H x))
+```
+
+### Multivariable function types are equivalent to multivariable implicit function types
+
+```agda
+equiv-explicit-implicit-iterated-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  iterated-implicit-Π A ≃ iterated-Π A
+equiv-explicit-implicit-iterated-Π .0 ⦃ base-telescope A ⦄ = id-equiv
+equiv-explicit-implicit-iterated-Π ._ ⦃ cons-telescope A ⦄ =
+  equiv-Π-equiv-family (λ x → equiv-explicit-implicit-iterated-Π _ {{A x}}) ∘e
+  equiv-explicit-implicit-Π
+
+equiv-implicit-explicit-iterated-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  iterated-Π A ≃ iterated-implicit-Π A
+equiv-implicit-explicit-iterated-Π n {{A}} =
+  inv-equiv (equiv-explicit-implicit-iterated-Π n {{A}})
+```
+
+### Iterated products of contractible types is contractible
+
+```agda
+is-contr-iterated-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π is-contr A → is-contr (iterated-Π A)
+is-contr-iterated-Π =
+  section-iterated-Π-section-Π-section-codomain is-contr is-contr-Π
+
+is-contr-iterated-implicit-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π is-contr A → is-contr (iterated-implicit-Π A)
+is-contr-iterated-implicit-Π =
+  section-iterated-implicit-Π-section-Π-section-codomain
+    ( is-contr)
+    ( is-contr-implicit-Π)
+```
+
+### Iterated products of propositions are propositions
+
+```agda
+is-prop-iterated-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π is-prop A → is-prop (iterated-Π A)
+is-prop-iterated-Π =
+  section-iterated-Π-section-Π-section-codomain is-prop is-prop-Π
+
+is-prop-iterated-implicit-Π :
+  {l : Level} (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π is-prop A → is-prop (iterated-implicit-Π A)
+is-prop-iterated-implicit-Π =
+  section-iterated-implicit-Π-section-Π-section-codomain
+    ( is-prop)
+    ( is-prop-implicit-Π)
+```
+
+### Iterated products of truncated types are truncated
+
+```agda
+is-trunc-iterated-Π :
+  {l : Level} (k : 𝕋) (n : ℕ) {{A : telescope l n}} →
+  apply-codomain-iterated-Π (is-trunc k) A → is-trunc k (iterated-Π A)
+is-trunc-iterated-Π k =
+  section-iterated-Π-section-Π-section-codomain (is-trunc k) (is-trunc-Π k)
 ```
