@@ -2,23 +2,22 @@
 
 ```agda
 module exercise-21-3-exercise where
-
 ```
 
 ## Problem statement
 
-Show that for any `x:S^1`, both functions
+Show that for any `x : S¹`, both functions
 ```text
-mul_(S^1)(x,_) and mul_(S^1)(_,x)
+mul_(S¹)(x,_) and mul_(S¹)(_,x)
 ```
 are equivalences.
 
 Show that the function
 ```text
-mul_(S^1) : S^1→(S^1→S^1)
+mul_(S¹) : S¹ → (S¹ → S¹)
 ```
 is an embedding.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
