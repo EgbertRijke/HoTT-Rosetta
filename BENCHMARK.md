@@ -56,6 +56,17 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-21-6-exercise.lagda.md
 - rosetta-book/exercise-21-7-exercise.lagda.md
 - rosetta-book/exercise-21-8-exercise.lagda.md
+- rosetta-book/exercise-22-1-exercise.lagda.md
+- rosetta-book/exercise-22-2-exercise.lagda.md
+- rosetta-book/exercise-22-3-exercise.lagda.md
+- rosetta-book/exercise-22-4-exercise.lagda.md
+- rosetta-book/exercise-22-5-exercise.lagda.md
+- rosetta-book/exercise-22-6-exercise.lagda.md
+- rosetta-book/exercise-22-7-exercise.lagda.md
+- rosetta-book/exercise-22-8-exercise.lagda.md
+- rosetta-book/exercise-22-9-exercise.lagda.md
+- rosetta-book/exercise-22-10-exercise.lagda.md
+- rosetta-book/exercise-22-11-exercise.lagda.md
 
 The phrase "BENCHMARK PROBLEM" is also used to indicate when a multipart problem has subparts that are fully unsolved. We write "PARTIAL BENCHMARK PROBLEM" when partial formalized solutions are included.
 

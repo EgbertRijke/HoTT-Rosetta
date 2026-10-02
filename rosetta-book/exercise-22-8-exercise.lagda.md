@@ -7,27 +7,22 @@ module exercise-22-8-exercise where
 
 ## Problem statement
 
-For convenience, we will write `x·_{S^1}y≔mul_(S^1)(x,y)` in this exercise.
+For convenience, we will write `x ·_{S¹} y ≔ mul_(S¹)(x,y)` in this exercise.
 Construct the **Mac Lane pentagon** for the circle, i.e. show that the pentagon
 
-*3-by-5 diagram (automatic draft).*
-
 ```text
-                                       [((x·_{S^1} y)·_{S^1} z)·_{S^1} w]                                            [(x·_{S^1} y)·_{S^1} (z·_{S^1} w)]
-
-[(x·_{S^1} (y·_{S^1} z))·_{S^1} w]                                                                                                                          [x·_{S^1} (y·_{S^1} (z ·_{S^1} w))]
-
-                                                                              [x·_{S^1} ((y·_{S^1} z)·_{S^1} w)]
-
-Arrows:
-- ((x·_{S^1} y)·_{S^1} z)·_{S^1} w --unlabeled--> (x·_{S^1} y)·_{S^1} (z·_{S^1} w)
-- ((x·_{S^1} y)·_{S^1} z)·_{S^1} w --unlabeled--> (x·_{S^1} (y·_{S^1} z))·_{S^1} w
-- (x·_{S^1} y)·_{S^1} (z·_{S^1} w) --unlabeled--> x·_{S^1} (y·_{S^1} (z ·_{S^1} w))
-- (x·_{S^1} (y·_{S^1} z))·_{S^1} w --unlabeled--> x·_{S^1} ((y·_{S^1} z)·_{S^1} w)
-- x·_{S^1} ((y·_{S^1} z)·_{S^1} w) --unlabeled--> x·_{S^1} (y·_{S^1} (z ·_{S^1} w))
+[((x ·_{S¹} y) ·_{S¹} z) ·_{S¹} w] -------------------------> [(x ·_{S¹} y) ·_{S¹} (z ·_{S¹} w)]
+                 |                                                             |
+                 V                                                             V
+[(x ·_{S¹} (y ·_{S¹} z)) ·_{S¹} w]                            [x ·_{S¹} (y ·_{S¹} (z ·_{S¹} w))]
+                 \                                                             ^
+                      \                                                   /
+                          \                                          /
+                               V                                /
+                               [x ·_{S¹} ((y ·_{S¹} z) ·_{S¹} w)]
 ```
-commutes for every `x,y,z,w:S^1`.
+commutes for every `x,y,z,w : S¹`.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
