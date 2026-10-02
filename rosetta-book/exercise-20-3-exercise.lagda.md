@@ -12,4 +12,4 @@ Show that the type `W(A,B)` is equivalent to the type `A`.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
