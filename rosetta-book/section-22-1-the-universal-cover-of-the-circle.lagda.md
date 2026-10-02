@@ -24,7 +24,7 @@ open import section-11-6-the-structure-identity-principle
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import section-17-1-equivalent-forms-of-the-univalence-axiom
-open import section-17-6-the-binomial-types
+open import section-19-1-the-type-of-all-groups
 open import section-19-4-homotopy-groups-of-types
 open import section-21-1-the-induction-principle-of-the-circle
 open import section-21-2-the-dependent-universal-property-of-the-circle

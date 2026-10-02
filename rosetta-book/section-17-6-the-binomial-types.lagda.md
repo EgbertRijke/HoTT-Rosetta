@@ -160,8 +160,3 @@ Therefore it follows that for any two decidable embeddings `f, g : B ↪ᵈ A`, 
 
 From a group theoretic perspective we may observe that the automorphism group `B ≃ B` acts freely on the set of decidable embeddings `B ↪ᵈ A`, and the type `Σ(X : 𝒰_B) X ↪ A` can be viewed as the type of orbits of that action.
 Since this action of `Aut(B)` on `B ↪ᵈ A` is free, we see that the number of orbits is `1/k!` times the number of elements in `B ↪ᵈ A`.
-
-```agda
-Aut : {l : Level} → UU l → UU l
-Aut Y = Y ≃ Y
-```
