@@ -48,6 +48,14 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-14-7-precomposition-with-truncation.lagda.md
 - rosetta-book/exercise-14-8-impredicative-encodings.lagda.md
 - rosetta-book/exercise-14-9-interval.lagda.md
+- rosetta-book/exercise-21-1-exercise.lagda.md
+- rosetta-book/exercise-21-2-exercise.lagda.md
+- rosetta-book/exercise-21-3-exercise.lagda.md
+- rosetta-book/exercise-21-4-exercise.lagda.md
+- rosetta-book/exercise-21-5-exercise.lagda.md
+- rosetta-book/exercise-21-6-exercise.lagda.md
+- rosetta-book/exercise-21-7-exercise.lagda.md
+- rosetta-book/exercise-21-8-exercise.lagda.md
 
 The phrase "BENCHMARK PROBLEM" is also used to indicate when a multipart problem has subparts that are fully unsolved. We write "PARTIAL BENCHMARK PROBLEM" when partial formalized solutions are included.
 
