@@ -48,6 +48,13 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-14-7-precomposition-with-truncation.lagda.md
 - rosetta-book/exercise-14-8-impredicative-encodings.lagda.md
 - rosetta-book/exercise-14-9-interval.lagda.md
+- rosetta-book/exercise-20-1-exercise.lagda.md
+- rosetta-book/exercise-20-2-exercise.lagda.md
+- rosetta-book/exercise-20-3-exercise.lagda.md
+- rosetta-book/exercise-20-4-exercise.lagda.md
+- rosetta-book/exercise-20-5-exercise.lagda.md
+- rosetta-book/exercise-20-6-exercise.lagda.md
+- rosetta-book/exercise-20-7-exercise.lagda.md
 - rosetta-book/exercise-21-1-exercise.lagda.md
 - rosetta-book/exercise-21-2-exercise.lagda.md
 - rosetta-book/exercise-21-3-exercise.lagda.md
