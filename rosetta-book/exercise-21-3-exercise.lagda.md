@@ -6,7 +6,7 @@ module exercise-21-3-exercise where
 
 ## Problem statement
 
-Show that for any `x:S¹`, both functions
+Show that for any `x : S¹`, both functions
 ```text
 mul_(S¹)(x,_) and mul_(S¹)(_,x)
 ```
