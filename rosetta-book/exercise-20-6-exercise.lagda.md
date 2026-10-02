@@ -72,7 +72,7 @@ For any two morphisms `(f,K),(g,L) : hom((X,μ_X),(Y,μ_Y))` of algebras for `P_
 
 ### Exercise 20.6(c)
 
-Show that the W-type `W(A,B)` equipped with the canonical structure `ε` of a `P_{A,B}`-algebra, constructed in Proposition 20.2.1, is initial in the sense that the type
+Show that the W-type `W(A,B)` equipped with the canonical structure `ε` of a `P_{A,B}`-algebra, constructed in Proposition 20.2.1, is a **(homotopy) initial `P_{A,B}`-algebra** in the sense that the type
 
 ```text
 hom((W(A,B),ε),(X,μ))

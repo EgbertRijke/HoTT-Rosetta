@@ -77,7 +77,7 @@ We will call the strictly ordered set `(R(A,B),≺)` the **(strict) rank** of th
 A **strictly ordered set** `(X,<)`, i.e., a set `X` equipped with a transitive, irreflexive relation `<` valued in the propositions, is said to be **well-founded** if for any family `P` of propositions over `X`, the implication
 
 ```text
-(∀_{(x:X)}(∀_{(y < x)}P(y)) → P(x)) → ∀_{(x:X)}P(x).
+(∀_{(x : X)}(∀_{(y < x)}P(y)) → P(x)) → ∀_{(x : X)}P(x).
 ```
 
 holds.
@@ -88,10 +88,10 @@ Show that the rank `(rank(A,B),≺)` of `W(A,B)` is well-founded.
 A strictly ordered set `(X,<)` is said to be **extensional** if the logical equivalence
 
 ```text
-(x=y) ↔ ∀_{(z:X)} (z < x) ↔ (z < y)
+(x = y) ↔ ∀_{(z:X)} (z < x) ↔ (z < y)
 ```
 
-holds for any `x,y:X`.
+holds for any `x,y : X`.
 Show that the rank `(rank(A,B),≺)` of `W(A,B)` is extensional.
 
 ## Solution
