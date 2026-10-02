@@ -54,7 +54,7 @@ For a semigroup `G` the type `is-unital(G)` is a proposition.
 
 *Proof.* Let `G` be a semigroup.
 Note that since `G` is a set, it follows that the types of the left and right unit laws are propositions.
-Therefore it suffices to show that any two elements `e,e':G` satisfying the left and right unit laws can be identified.
+Therefore it suffices to show that any two elements `e,e' : G` satisfying the left and right unit laws can be identified.
 This is easy:
 ```text
 e = μ(e,e') = e'.
@@ -64,12 +64,12 @@ e = μ(e,e') = e'.
 ## Definition 19.1.5
 
 Let `G` be a unital semigroup.
-We say that `G` **has inverses** if it comes equipped with an operation `x ↦  x^{-1}` of type `G→ G`, satisfying the left and right inverse laws
+We say that `G` **has inverses** if it comes equipped with an operation `x ↦  x⁻¹` of type `G→ G`, satisfying the left and right inverse laws
 ```text
-left-inv : Π(x:G) μ(x^{-1},x)=e
-right-inv : Π(x:G) μ(x,x^{-1}) = e.
+left-inv : Π(x:G) μ(x⁻¹,x) = e
+right-inv : Π(x:G) μ(x,x⁻¹) = e.
 ```
-We write `is-group'(G,e)` for the type of such triples `((_)^{-1},left-inv,right-inv)`, and we write
+We write `is-group'(G,e)` for the type of such triples `((_)⁻¹,left-inv,right-inv)`, and we write
 ```text
 is-group(G) ≔ Σ(e : is-unital(G)) is-group'(G,e)
 ```
@@ -88,12 +88,12 @@ Therefore it suffices to show that the type `is-group'(G,e)` is a proposition fo
 Since a semigroup `G` is assumed to be a set, we note that the types of the inverse laws are propositions.
 Therefore it suffices to show that any two inverse operations satisfying the inverse laws are homotopic.
 
-Let `x ↦ x^{-1}` and `x ↦ x^{-1'}` be two inverse operations on a unital semigroup `G`, both satisfying the inverse laws.
+Let `x ↦ x⁻¹` and `x ↦ x^{-1'}` be two inverse operations on a unital semigroup `G`, both satisfying the inverse laws.
 Then we have the following identifications
 ```text
-x^{-1} = μ(e,x^{-1})
-= μ(μ(x^{-1'},x),x^{-1})
-= μ(x^{-1'},μ(x,x^{-1}))
+x⁻¹ = μ(e,x⁻¹)
+= μ(μ(x^{-1'},x),x⁻¹)
+= μ(x^{-1'},μ(x,x⁻¹))
 = μ(x^{-1'},e)
 = x^{-1'}
 ```
