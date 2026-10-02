@@ -13,6 +13,7 @@ open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-4-transport
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import exercise-9-1-groupoid-operations-equivalences
 open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
@@ -501,4 +502,187 @@ module _
   equiv-right-transpose-htpy-concat : (H ∙h K ~ L) ≃ (H ~ L ∙h inv-htpy K)
   pr1 equiv-right-transpose-htpy-concat = right-transpose-htpy-concat H K L
   pr2 equiv-right-transpose-htpy-concat = is-equiv-right-transpose-htpy-concat
+```
+
+### Contractibility of a general total space
+
+```agda
+contraction-total-space :
+  { l1 l2 : Level} {A : UU l1} {B : A → UU l2} (center : Σ A B) →
+  ( x : A) → UU (l1 ⊔ l2)
+contraction-total-space {B = B} center x =
+  ( y : B x) → center ＝ pair x y
+
+path-total-path-fiber :
+  { l1 l2 : Level} {A : UU l1} (B : A → UU l2) (x : A) →
+  { y y' : B x} (q : y' ＝ y) → Id {A = Σ A B} (pair x y) (pair x y')
+path-total-path-fiber B x q = eq-pair-eq-fiber (inv q)
+
+tr-path-total-path-fiber :
+  { l1 l2 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) (x : A) →
+  { y y' : B x} (q : y' ＝ y) (α : c ＝ pair x y') →
+  tr (λ z → c ＝ pair x z) q α ＝ α ∙ inv (path-total-path-fiber B x q)
+tr-path-total-path-fiber c x refl α = inv right-unit
+
+segment-Σ :
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} →
+  { x x' : A} (p : x ＝ x')
+  { F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
+  ( H : map-equiv e' ∘ map-equiv f ~ tr B p ∘ map-equiv e) (y : F) →
+  pair x (map-equiv e y) ＝ pair x' (map-equiv e' (map-equiv f y))
+segment-Σ refl f e e' H y = path-total-path-fiber _ _ (H y)
+
+contraction-total-space' :
+  { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
+  ( x : A) → {F : UU l3} (e : F ≃ B x) → UU (l1 ⊔ l2 ⊔ l3)
+contraction-total-space' c x {F} e =
+  ( y : F) → c ＝ pair x (map-equiv e y)
+
+equiv-tr-contraction-total-space' :
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
+  { x x' : A} (p : x ＝ x') →
+  { F : UU l3} {F' : UU l4} (f : F ≃ F') (e : F ≃ B x) (e' : F' ≃ B x') →
+  ( H : ((map-equiv e') ∘ (map-equiv f)) ~ ((tr B p) ∘ (map-equiv e))) →
+  ( contraction-total-space' c x' e') ≃ (contraction-total-space' c x e)
+equiv-tr-contraction-total-space' c p f e e' H =
+  ( equiv-Π-equiv-family
+    ( λ y → equiv-concat' c (inv (segment-Σ p f e e' H y)))) ∘e
+  ( equiv-precomp-Π f _)
+
+equiv-contraction-total-space :
+  { l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
+  ( x : A) → {F : UU l3} (e : F ≃ B x) →
+  ( contraction-total-space c x) ≃ (contraction-total-space' c x e)
+equiv-contraction-total-space c x e =
+  equiv-precomp-Π e (λ y → c ＝ pair x y)
+
+tr-path-total-tr-coherence :
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) (x : A) →
+  { F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x)
+  ( H : ((map-equiv e') ∘ (map-equiv f)) ~ (map-equiv e)) →
+  (y : F) (α : Id c (pair x (map-equiv e' (map-equiv f y)))) →
+  tr (λ z → c ＝ pair x z) (H y) α ＝ α ∙ (inv (segment-Σ refl f e e' H y))
+tr-path-total-tr-coherence c x f e e' H y α =
+  tr-path-total-path-fiber c x (H y) α
+
+square-tr-contraction-total-space :
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
+  { x x' : A} (p : x ＝ x')
+  { F : UU l3} {F' : UU l4} (f : F ≃ F') (e : F ≃ B x) (e' : F' ≃ B x')
+  ( H : map-equiv e' ∘ map-equiv f ~ tr B p ∘ map-equiv e)
+  (h : contraction-total-space c x) →
+  ( map-equiv
+    ( ( equiv-tr-contraction-total-space' c p f e e' H) ∘e
+      ( equiv-contraction-total-space c x' e') ∘e
+      ( equiv-tr (contraction-total-space c) p))
+    ( h)) ~
+  ( map-equiv (equiv-contraction-total-space c x e) h)
+square-tr-contraction-total-space c refl f e e' H h y =
+  ( inv (tr-path-total-tr-coherence c _ f e e' H y
+    ( h (map-equiv e' (map-equiv f y))))) ∙
+  ( apd h (H y))
+
+dependent-identification-contraction-total-space' :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
+  {x x' : A} (p : x ＝ x') →
+  {F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
+  (H : map-equiv e' ∘ map-equiv f ~ tr B p ∘ map-equiv e) →
+  (h : (y : F) → c ＝ pair x (map-equiv e y)) →
+  (h' : (y' : F') → c ＝ pair x' (map-equiv e' y')) →
+  UU (l1 ⊔ l2 ⊔ l3)
+dependent-identification-contraction-total-space'
+  c {x} {x'} p {F} {F'} f e e' H h h' =
+  ( map-Π (λ y → concat' c (segment-Σ p f e e' H y)) h) ~
+  ( precomp-Π
+    ( map-equiv f)
+    ( λ y' → c ＝ pair x' (map-equiv e' y'))
+    ( h'))
+
+map-dependent-identification-contraction-total-space' :
+    { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
+    { x x' : A} (p : x ＝ x') →
+    { F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
+    ( H : map-equiv e' ∘ map-equiv f ~ tr B p ∘ map-equiv e) →
+    ( h : contraction-total-space' c x e) →
+    ( h' : contraction-total-space' c x' e') →
+    ( dependent-identification-contraction-total-space' c p f e e' H h h') →
+    ( dependent-identification (contraction-total-space c) p
+      ( map-inv-equiv (equiv-contraction-total-space c x e) h)
+      ( map-inv-equiv (equiv-contraction-total-space c x' e') h'))
+map-dependent-identification-contraction-total-space'
+  c {x} {.x} refl f e e' H h h' α =
+  map-inv-equiv
+    ( equiv-ap
+      ( ( equiv-tr-contraction-total-space' c refl f e e' H) ∘e
+        ( equiv-contraction-total-space c x e'))
+      ( map-inv-equiv (equiv-contraction-total-space c x e) h)
+      ( map-inv-equiv (equiv-contraction-total-space c x e') h'))
+    ( ( ( eq-htpy
+          ( square-tr-contraction-total-space c refl f e e' H
+            ( map-inv-equiv (equiv-contraction-total-space c x e) h))) ∙
+        ( is-section-map-inv-is-equiv
+          ( is-equiv-map-equiv (equiv-contraction-total-space c x e))
+          ( h))) ∙
+      ( ( eq-htpy
+          ( right-transpose-htpy-concat h
+            ( segment-Σ refl f e e' H)
+            ( precomp-Π
+              ( map-equiv f)
+              ( λ y' → c ＝ pair x (map-equiv e' y'))
+              ( h'))
+            ( α))) ∙
+        ( inv
+          ( ap
+            ( map-equiv (equiv-tr-contraction-total-space' c refl f e e' H))
+            ( is-section-map-inv-is-equiv
+              ( is-equiv-map-equiv
+                ( equiv-precomp-Π e' (λ y' → c ＝ pair x y')))
+              ( h'))))))
+
+equiv-dependent-identification-contraction-total-space' :
+  { l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} (c : Σ A B) →
+  { x x' : A} (p : x ＝ x') →
+  { F : UU l3} {F' : UU l4} (f : F ≃ F') ( e : F ≃ B x) (e' : F' ≃ B x')
+  ( H : map-equiv e' ∘ map-equiv f ~ tr B p ∘ map-equiv e) →
+  ( h : contraction-total-space' c x e) →
+  ( h' : contraction-total-space' c x' e') →
+  ( dependent-identification (contraction-total-space c) p
+    ( map-inv-equiv (equiv-contraction-total-space c x e) h)
+    ( map-inv-equiv (equiv-contraction-total-space c x' e') h')) ≃
+  ( dependent-identification-contraction-total-space' c p f e e' H h h')
+equiv-dependent-identification-contraction-total-space'
+  c {x} {.x} refl f e e' H h h' =
+  ( inv-equiv
+    ( equiv-right-transpose-htpy-concat h
+      ( segment-Σ refl f e e' H)
+      ( precomp-Π
+        ( map-equiv f)
+        ( λ y' → c ＝ pair x (map-equiv e' y'))
+        ( h')))) ∘e
+  ( ( equiv-funext) ∘e
+    ( ( equiv-concat' h
+        ( ap
+          ( map-equiv (equiv-tr-contraction-total-space' c refl f e e' H))
+          ( is-section-map-inv-is-equiv
+            ( is-equiv-map-equiv
+              ( equiv-precomp-Π e' (λ y' → c ＝ pair x y')))
+            ( h')))) ∘e
+      ( ( equiv-concat
+          ( inv
+            ( ( eq-htpy
+                ( square-tr-contraction-total-space c refl f e e' H
+                  ( map-inv-equiv (equiv-contraction-total-space c x e) h))) ∙
+              ( is-section-map-inv-is-equiv
+                ( is-equiv-map-equiv (equiv-contraction-total-space c x e))
+                ( h))))
+          ( map-equiv
+            ( ( equiv-tr-contraction-total-space' c refl f e e' H) ∘e
+              ( ( equiv-contraction-total-space c x e') ∘e
+                ( inv-equiv (equiv-contraction-total-space c x e'))))
+            ( h'))) ∘e
+        ( equiv-ap
+          ( ( equiv-tr-contraction-total-space' c refl f e e' H) ∘e
+            ( equiv-contraction-total-space c x e'))
+          ( map-inv-equiv (equiv-contraction-total-space c x e) h)
+          ( map-inv-equiv (equiv-contraction-total-space c x e') h')))))
 ```

@@ -141,6 +141,22 @@ We define the **loop space** operation
 ```
 
 by `Ω(A,a)≔(a=a,refl)`.
+
+```agda
+module _
+  {l : Level} (A : Pointed-Type l)
+  where
+
+  type-Ω : UU l
+  type-Ω = point-Pointed-Type A ＝ point-Pointed-Type A
+
+  refl-Ω : type-Ω
+  refl-Ω = refl
+
+  Ω : Pointed-Type l
+  Ω = (type-Ω , refl-Ω)
+```
+
 Furthermore, we define for every `A:𝒰_⋆` the **iterated loop space** `Ω^n(A)` recursively by
 
 ```text
