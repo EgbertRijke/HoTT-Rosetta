@@ -18,8 +18,8 @@ The type `Σ(X : 𝒰) X ≃ X` is also called the type of **descent data** for 
 
 ## Definition 22.1.1
 
-Consider a type `X` and an equivalence `e:X ≃ X`.
-We will construct a dependent type `D(X,e) : S¹→𝒰` equipped with an equivalence `x ↦ x_{D} : X ≃ D(X,e,base)` for which the square
+Consider a type `X` and an equivalence `e : X ≃ X`.
+We will construct a dependent type `D(X,e) : S¹ → 𝒰` equipped with an equivalence `x ↦ x_{D} : X ≃ D(X,e,base)` for which the square
 
 ```text
  [X] --≃-->[D(X,e,base)]
