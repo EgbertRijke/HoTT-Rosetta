@@ -601,6 +601,15 @@ module _
   pr2 equiv-explicit-implicit-Π = is-equiv-explicit-implicit-Π
 ```
 
+```agda
+abstract
+  is-contr-implicit-Π :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    ((x : A) → is-contr (B x)) → is-contr ({x : A} → B x)
+  is-contr-implicit-Π H =
+    is-contr-equiv _ equiv-explicit-implicit-Π (is-contr-Π H)
+```
+
 ### Homotopy induction is equivalent to function extensionality
 
 ```agda
