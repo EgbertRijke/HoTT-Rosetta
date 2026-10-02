@@ -382,3 +382,5 @@ ap_{mul_(S¹)}(loop) |                         | eq-htpy(H)
 ```
 
 commutes, where the homotopy `H : id ~ id` is the one constructed in Theorem 21.3.3.
+
+BENCHMARK PROBLEM
