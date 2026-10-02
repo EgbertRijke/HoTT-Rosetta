@@ -14,6 +14,7 @@ open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-6-the-laws-of-addition-on-natural-numbers
+open import exercise-5-2-inverse-concatenation-maps
 open import section-6-3-observational-equality-of-the-natural-numbers
 open import section-8-1-decidability-and-decidable-equality
 open import section-9-2-bi-invertible-maps
@@ -150,7 +151,7 @@ Let `A` be a type, and let `R : A → A → 𝒰` be a binary relation on `A` sa
    ```text
      R(x,y) → (x = y)
    ```
-   
+
    for each `x, y : A`.
 
 Then any family of maps
@@ -379,11 +380,42 @@ module _
     Σ left-unit-law (λ α → Σ right-unit-law (coh-unit-laws α))
 ```
 
-### Unital binary operations
+### Unital and coherently unital binary operations
 
 ```agda
 is-unital : {l : Level} {A : UU l} (μ : A → A → A) → UU l
 is-unital {A = A} μ = Σ A (unit-laws μ)
+
+is-coherently-unital : {l : Level} {A : UU l} (μ : A → A → A) → UU l
+is-coherently-unital {A = A} μ = Σ A (coherent-unit-laws μ)
+```
+
+### Unit laws can be upgraded to coherent unit laws
+
+```agda
+module _
+  {l : Level} {A : UU l} (μ : A → A → A) {e : A}
+  where
+
+  coherent-unit-laws-unit-laws : unit-laws μ e → coherent-unit-laws μ e
+  pr1 (coherent-unit-laws-unit-laws (H , K)) =
+    H
+  pr1 (pr2 (coherent-unit-laws-unit-laws (H , K))) x =
+    inv (ap (μ x) (K e)) ∙ (ap (μ x) (H e) ∙ K x)
+  pr2 (pr2 (coherent-unit-laws-unit-laws (H , K))) =
+    left-transpose-eq-concat
+      ( ap (μ e) (K e))
+      ( H e)
+      ( ap (μ e) (H e) ∙ K e)
+      ( inv-nat-htpy-id H (K e) ∙ right-whisker-concat (coh-htpy-id H e) (K e))
+
+module _
+  {l : Level} {A : UU l} {μ : A → A → A}
+  where
+
+  is-coherently-unital-is-unital : is-unital μ → is-coherently-unital μ
+  is-coherently-unital-is-unital (e , H) =
+    ( e , coherent-unit-laws-unit-laws μ H)
 ```
 
 ### Semirings

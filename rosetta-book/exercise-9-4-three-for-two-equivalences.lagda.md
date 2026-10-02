@@ -9,8 +9,10 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import exercise-5-2-inverse-concatenation-maps
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import exercise-9-1-groupoid-operations-equivalences
 ```
 
 ## Problem statement
@@ -561,4 +563,48 @@ module _
 
   triangle-retraction : coherence-triangle-maps h (map-retraction g r) f
   triangle-retraction = inv-htpy inv-triangle-retraction
+```
+
+### Transposing inverses is an equivalence
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A}
+  where
+
+  abstract
+    is-equiv-left-transpose-eq-concat :
+      (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
+      is-equiv (left-transpose-eq-concat p q r)
+    is-equiv-left-transpose-eq-concat refl q r = is-equiv-id
+
+  equiv-left-transpose-eq-concat :
+    (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
+    ((p ∙ q) ＝ r) ≃ (q ＝ ((inv p) ∙ r))
+  pr1 (equiv-left-transpose-eq-concat p q r) = left-transpose-eq-concat p q r
+  pr2 (equiv-left-transpose-eq-concat p q r) =
+    is-equiv-left-transpose-eq-concat p q r
+
+  equiv-left-transpose-eq-concat' :
+    (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
+    (p ＝ q ∙ r) ≃ (inv q ∙ p ＝ r)
+  equiv-left-transpose-eq-concat' p q r =
+    equiv-inv _ _ ∘e equiv-left-transpose-eq-concat q r p ∘e equiv-inv _ _
+
+  left-transpose-eq-concat' :
+    (p : x ＝ z) (q : x ＝ y) (r : y ＝ z) →
+    p ＝ q ∙ r → inv q ∙ p ＝ r
+  left-transpose-eq-concat' p q r =
+    map-equiv (equiv-left-transpose-eq-concat' p q r)
+
+  abstract
+    is-equiv-right-transpose-eq-concat :
+      (p : x ＝ y) (q : y ＝ z) (r : x ＝ z) →
+      is-equiv (right-transpose-eq-concat p q r)
+    is-equiv-right-transpose-eq-concat p refl r =
+      is-equiv-comp
+        ( concat' p (inv right-unit))
+        ( concat (inv right-unit) r)
+        ( is-equiv-concat (inv right-unit) r)
+        ( is-equiv-concat' p (inv right-unit))
 ```

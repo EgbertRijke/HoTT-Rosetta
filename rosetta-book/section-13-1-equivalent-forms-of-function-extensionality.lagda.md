@@ -533,6 +533,40 @@ module _
     inv ∘ (concat' r (right-unit ∙ ap-id q))
 ```
 
+### The type family of identifications between values of two ordinary functions
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2} (f g : X → Y)
+  where
+
+  eq-value-function : X → UU l2
+  eq-value-function = eq-value f g
+
+  {-# INLINE eq-value-function #-}
+
+  map-compute-dependent-identification-eq-value-function :
+    {x y : X} (p : x ＝ y) (q : eq-value f g x) (r : eq-value f g y) →
+    ap f p ∙ r ＝ q ∙ ap g p →
+    dependent-identification eq-value-function p q r
+  map-compute-dependent-identification-eq-value-function refl q r =
+    inv ∘ concat' r right-unit
+
+map-compute-dependent-identification-eq-value-id-id :
+  {l1 : Level} {A : UU l1} {a b : A} (p : a ＝ b) (q : a ＝ a) (r : b ＝ b) →
+  p ∙ r ＝ q ∙ p → dependent-identification (eq-value id id) p q r
+map-compute-dependent-identification-eq-value-id-id refl q r s =
+  inv (s ∙ right-unit)
+
+map-compute-dependent-identification-eq-value-comp-id :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (g : B → A) (f : A → B) {a b : A}
+  (p : a ＝ b) (q : eq-value (g ∘ f) id a) (r : eq-value (g ∘ f) id b) →
+  ap g (ap f p) ∙ r ＝ q ∙ p →
+  dependent-identification (eq-value (g ∘ f) id) p q r
+map-compute-dependent-identification-eq-value-comp-id g f refl q r s =
+  inv (s ∙ right-unit)
+```
+
 ### Dependent function types taking implicit arguments are equivalent to dependent function types taking explicit arguments
 
 ```agda

@@ -9,31 +9,26 @@ module exercise-21-2-exercise where
 
 Show that the circle is connected.
 
-Let `P:S^1→Prop` be a family of propositions over the circle.
+Let `P : S¹ → Prop` be a family of propositions over the circle.
 Show that
 ```text
-P(base)→Π(x:S^1) P(x).
+P(base) → Π(x : S¹) P(x).
 ```
 
-Show that any embedding `m:S^1→S^1` is an equivalence.
+Show that any embedding `m : S¹ → S¹` is an equivalence.
 
-Show that for any embedding `m:X→S^1`, there is a proposition `P` and an equivalence `e:X ≃ S^1× P` for which the triangle
-
-*Triangle-shaped diagram (automatic draft).*
+Show that for any embedding `m : X → S¹`, there is a proposition `P` and an equivalence `e : X ≃ S¹ × P` for which the triangle
 
 ```text
- [X]                [S^1× P]
-
-          [S^1]
-
-Arrows:
-- X --m--> S^1
-- X --e--> S^1× P
-- S^1× P --pr 1--> S^1
+ [X]  ----e----> [S¹× P]
+    \             /
+    m \         / pr1
+        V     V
+         [S¹]
 ```
 commutes.
-In other words, all the embeddings into the circle are of the form `S^1× P→ S^1`.
+In other words, all the embeddings into the circle are of the form `S¹ × P → S¹`.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
