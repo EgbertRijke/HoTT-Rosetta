@@ -364,6 +364,8 @@ given by `(f,H) ↦ f(0)` is an equivalence.
 
 ### Proof
 
+BENCHMARK PROBLEM
+
 _Proof._ Note that the fibers of `ev_0` are equivalent to the types that are shown to be contractible in Proposition 22.3.3. ◻
 
 The following corollary will be used to prove that the fundamental cover of the circle is equivalent to the identity type based at `base : S¹`.
@@ -377,3 +379,5 @@ For any type `X` equipped with an equivalence `e : X ≃ X`, the map
 ```
 
 given by `(f,H) ↦ f(0)` is an equivalence.
+
+BENCHMARK PROBLEM

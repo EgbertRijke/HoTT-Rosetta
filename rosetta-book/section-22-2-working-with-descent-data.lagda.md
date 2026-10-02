@@ -166,8 +166,6 @@ e |           | tr_A(loop)
 commutes.
 Then there is a commuting square
 
-_Square-shaped diagram (automatic draft)._
-
 ```text
 [(Π(t:S¹) E_(S¹)(t)→ A(t))]-------------> [Σ(h:ℤ → X) h∘ succ-ℤ ~ e∘ h]
               |                                          |

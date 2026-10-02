@@ -680,7 +680,7 @@ The segments of the helix connecting `k` to `k+1` in the total space of the heli
 For any `k : ℤ`, there is an identification
 
 ```text
-segment-helix_k:(base,k_{E})=(base,succ-ℤ (k)_{E})
+segment-helix_k : (base,k_{E}) = (base,succ-ℤ (k)_{E})
 ```
 
 in the total space `Σ(t : S¹) E(t)`.
@@ -694,4 +694,6 @@ _Proof._ By Theorem 9.3.4 it suffices to show that
 ```
 
 We just take `α ≔ loop`.
-Then we have `tr_{E}(α,k_{E})= succ-ℤ (k)_{E}` by the commuting square provided in the definition of `E`. ◻
+Then we have `tr_{E}(α,k_{E}) = succ-ℤ (k)_{E}` by the commuting square provided in the definition of `E`. ◻
+
+BENCHMARK PROBLEM
