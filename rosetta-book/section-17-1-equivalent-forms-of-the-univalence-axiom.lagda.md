@@ -357,6 +357,9 @@ is-small-map l {B = B} f = (b : B) → is-small l (fiber f b)
 6. In Theorem 20.6.10 we will show that `𝒰` cannot be `𝒰`-small, i.e., that there cannot be a type `U : 𝒰` equipped with an equivalence `U ≃ 𝒰`.
 
 ```agda
+is-small' : {l1 : Level} {A : UU l1} → is-small l1 A
+is-small' {A = A} = (A , id-equiv)
+
 data raise (l : Level) {l1 : Level} (A : UU l1) : UU (l1 ⊔ l) where
   map-raise : A → raise l A
 
@@ -513,6 +516,15 @@ module _
 
   is-small-Prop : Prop (lsuc l ⊔ l1)
   is-small-Prop = (is-small l A , is-prop-is-small)
+
+module _
+  {l1 : Level} (l2 : Level) (X : UU l1)
+  where
+
+  is-contr-is-small-lmax :
+    is-contr (is-small (l1 ⊔ l2) X)
+  pr1 is-contr-is-small-lmax = is-small-lmax l2 X
+  pr2 is-contr-is-small-lmax x = eq-is-prop (is-prop-is-small (l1 ⊔ l2) X)
 ```
 
 ## Corollary 17.1.6
@@ -657,4 +669,69 @@ commutativity-inv-eq-equiv f =
         ( ap
           ( λ e → map-equiv e (inv-equiv f))
           ( inv (right-inverse-law-equiv equiv-univalence)))))
+```
+
+### Locally small types
+
+In the book, locally small types are defined in Definition 18.1.6. However, agda-unimath makes use of this concept in section 17.4, which is imported by section 18.1. Hence we define locally small types here, as a supplement to the file that defines small types.
+
+```agda
+is-locally-small :
+  (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
+is-locally-small l A = (x y : A) → is-small l (x ＝ y)
+
+module _
+  {l l1 : Level} {A : UU l1} (H : is-locally-small l A) (x y : A)
+  where
+
+  type-is-locally-small : UU l
+  type-is-locally-small = pr1 (H x y)
+
+  equiv-is-locally-small : (x ＝ y) ≃ type-is-locally-small
+  equiv-is-locally-small = pr2 (H x y)
+
+  inv-equiv-is-locally-small : type-is-locally-small ≃ (x ＝ y)
+  inv-equiv-is-locally-small = inv-equiv equiv-is-locally-small
+
+  map-equiv-is-locally-small : (x ＝ y) → type-is-locally-small
+  map-equiv-is-locally-small = map-equiv equiv-is-locally-small
+
+  map-inv-equiv-is-locally-small : type-is-locally-small → (x ＝ y)
+  map-inv-equiv-is-locally-small = map-inv-equiv equiv-is-locally-small
+```
+
+### Any small type is locally small
+
+```agda
+is-locally-small-is-small :
+  {l l1 : Level} {A : UU l1} → is-small l A → is-locally-small l A
+pr1 (is-locally-small-is-small (X , e) x y) =
+  map-equiv e x ＝ map-equiv e y
+pr2 (is-locally-small-is-small (X , e) x y) = equiv-ap e x y
+```
+
+### Small types are closed under dependent pair types
+
+```agda
+is-small-Σ :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} →
+  is-small l3 A → ((x : A) → is-small l4 (B x)) → is-small (l3 ⊔ l4) (Σ A B)
+pr1 (is-small-Σ {B = B} (X , e) H) =
+  Σ X (λ x → pr1 (H (map-inv-equiv e x)))
+pr2 (is-small-Σ {B = B} (X , e) H) =
+  equiv-Σ
+    ( λ x → pr1 (H (map-inv-equiv e x)))
+    ( e)
+    ( λ a →
+      ( equiv-tr
+        ( λ t → pr1 (H t))
+        ( inv (is-retraction-map-inv-equiv e a))) ∘e
+      ( pr2 (H a)))
+
+Σ-Small-Type :
+  {l1 l2 l3 l4 : Level} (A : Small-Type l1 l2) →
+  (B : type-Small-Type A → Small-Type l3 l4) → Small-Type (l1 ⊔ l3) (l2 ⊔ l4)
+pr1 (Σ-Small-Type A B) = Σ (type-Small-Type A) (λ a → type-Small-Type (B a))
+pr2 (Σ-Small-Type {l1} {l2} {l3} {l4} A B) =
+  is-small-Σ (is-small-type-Small-Type A) (λ a → is-small-type-Small-Type (B a))
 ```

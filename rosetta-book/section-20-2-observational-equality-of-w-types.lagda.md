@@ -14,9 +14,13 @@ open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-2-the-fundamental-theorem
+open import section-12-3-sets
+open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-2-identity-systems-on-pi-types
 open import section-20-1-the-type-of-well-founded-trees
+
+open import exercise-12-6-truncated-sigma-types
 ```
 
 ## Agda pre-requisites
