@@ -473,3 +473,32 @@ module _
     ( equiv-Π-equiv-family e) ∘e
     ( equiv-explicit-implicit-Π)
 ```
+
+### Transposing homotopies is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {f g h : (x : A) → B x}
+  (H : f ~ g) (K : g ~ h) (L : f ~ h)
+  where
+
+  is-equiv-left-transpose-htpy-concat :
+    is-equiv (left-transpose-htpy-concat H K L)
+  is-equiv-left-transpose-htpy-concat =
+    is-equiv-map-Π-is-fiberwise-equiv
+      ( λ x → is-equiv-left-transpose-eq-concat (H x) (K x) (L x))
+
+  equiv-left-transpose-htpy-concat : (H ∙h K ~ L) ≃ (K ~ inv-htpy H ∙h L)
+  pr1 equiv-left-transpose-htpy-concat = left-transpose-htpy-concat H K L
+  pr2 equiv-left-transpose-htpy-concat = is-equiv-left-transpose-htpy-concat
+
+  is-equiv-right-transpose-htpy-concat :
+    is-equiv (right-transpose-htpy-concat H K L)
+  is-equiv-right-transpose-htpy-concat =
+    is-equiv-map-Π-is-fiberwise-equiv
+      ( λ x → is-equiv-right-transpose-eq-concat (H x) (K x) (L x))
+
+  equiv-right-transpose-htpy-concat : (H ∙h K ~ L) ≃ (H ~ L ∙h inv-htpy K)
+  pr1 equiv-right-transpose-htpy-concat = right-transpose-htpy-concat H K L
+  pr2 equiv-right-transpose-htpy-concat = is-equiv-right-transpose-htpy-concat
+```
