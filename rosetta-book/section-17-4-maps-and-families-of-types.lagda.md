@@ -26,6 +26,7 @@ open import section-11-2-the-fundamental-theorem
 open import section-11-4-embeddings
 open import section-12-1-propositions
 open import section-12-2-subtypes
+open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-2-identity-systems-on-pi-types
@@ -33,9 +34,11 @@ open import section-13-4-composing-with-equivalences
 open import exercise-13-3-truncatedness-is-a-proposition
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import exercise-13-12-dependent-products-of-truncated-maps
+open import section-14-3-logic-in-type-theory
 open import section-15-2-surjective-maps
 open import exercise-15-3-equivalences-are-surjective-embeddings
 open import section-17-1-equivalent-forms-of-the-univalence-axiom
+open import section-17-2-propositional-extensionality
 ```
 
 Using the univalence axiom, we can establish a fundamental relation between maps into a type `A`, and families of types indexed by `A`.
@@ -651,6 +654,7 @@ By function extensionality and propositional extensionality, it follows that two
 ```text
   P(a) ↔ Q(a)
 ```
+
 holds for all `a : A`.
 In other words, two subtypes of `A` are the same if and only if they contain the same elements of `A`.
 
@@ -665,4 +669,122 @@ In other words, two subtypes `(X,f)` and `(Y,g)` of `A` are equal if and only if
 Indeed, this condition is equivalent to the previous condition that two subtypes are the same if and only if they have the same elements.
 
 We see that the combination of the structure identity principle and the univalence axiom automatically characterizes equality of subtypes in the most natural way, and we will see similar natural characterizations of identity types throughout the remainder of this book.
+
+```agda
+Subtype : {l1 : Level} (l2 l3 : Level) (A : UU l1) → UU (l1 ⊔ lsuc l2 ⊔ lsuc l3)
+Subtype l2 l3 A =
+  Σ ( A → Prop l2)
+    ( λ P →
+      Σ ( Σ (UU l3) (λ X → X ↪ A))
+        ( λ i →
+          Σ ( pr1 i ≃ Σ A (type-Prop ∘ P))
+            ( λ e → map-emb (pr2 i) ~ (pr1 ∘ map-equiv e))))
+
+module _
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
+  where
+
+  has-same-elements-subtype-Prop :
+    {l3 : Level} → subtype l3 A → Prop (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-subtype-Prop Q =
+    Π-Prop A (λ x → iff-Prop (P x) (Q x))
+
+  has-same-elements-subtype : {l3 : Level} → subtype l3 A → UU (l1 ⊔ l2 ⊔ l3)
+  has-same-elements-subtype Q = type-Prop (has-same-elements-subtype-Prop Q)
+
+  is-prop-has-same-elements-subtype :
+    {l3 : Level} (Q : subtype l3 A) →
+    is-prop (has-same-elements-subtype Q)
+  is-prop-has-same-elements-subtype Q =
+    is-prop-type-Prop (has-same-elements-subtype-Prop Q)
+
+  refl-has-same-elements-subtype : has-same-elements-subtype P
+  pr1 (refl-has-same-elements-subtype x) = id
+  pr2 (refl-has-same-elements-subtype x) = id
+
+  is-torsorial-has-same-elements-subtype :
+    is-torsorial has-same-elements-subtype
+  is-torsorial-has-same-elements-subtype =
+    is-torsorial-Eq-Π (λ x → is-torsorial-iff (P x))
+
+  has-same-elements-eq-subtype :
+    (Q : subtype l2 A) → (P ＝ Q) → has-same-elements-subtype Q
+  has-same-elements-eq-subtype .P refl =
+    refl-has-same-elements-subtype
+
+  is-equiv-has-same-elements-eq-subtype :
+    (Q : subtype l2 A) → is-equiv (has-same-elements-eq-subtype Q)
+  is-equiv-has-same-elements-eq-subtype =
+    fundamental-theorem-id
+      is-torsorial-has-same-elements-subtype
+      has-same-elements-eq-subtype
+
+  extensionality-subtype :
+    (Q : subtype l2 A) → (P ＝ Q) ≃ has-same-elements-subtype Q
+  pr1 (extensionality-subtype Q) = has-same-elements-eq-subtype Q
+  pr2 (extensionality-subtype Q) = is-equiv-has-same-elements-eq-subtype Q
+
+  eq-has-same-elements-subtype :
+    (Q : subtype l2 A) → has-same-elements-subtype Q → P ＝ Q
+  eq-has-same-elements-subtype Q =
+    map-inv-equiv (extensionality-subtype Q)
+
+module _
+  {l1 l2 l3 : Level} {X : UU l1} (S : subtype l2 X) (T : subtype l3 X)
+  where
+
+  equiv-has-same-elements-type-subtype :
+    has-same-elements-subtype S T → type-subtype S ≃ type-subtype T
+  equiv-has-same-elements-type-subtype H =
+    equiv-tot (λ x → equiv-iff' (S x) (T x) (H x))
+
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  leq-prop-subtype :
+    {l2 l3 : Level} → subtype l2 A → subtype l3 A → Prop (l1 ⊔ l2 ⊔ l3)
+  leq-prop-subtype P Q =
+    Π-Prop A (λ x → hom-Prop (P x) (Q x))
+
+  infix 5 _⊆_
+  _⊆_ :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → UU (l1 ⊔ l2 ⊔ l3)
+  P ⊆ Q = type-Prop (leq-prop-subtype P Q)
+
+  is-prop-leq-subtype :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → is-prop (P ⊆ Q)
+  is-prop-leq-subtype P Q =
+    is-prop-type-Prop (leq-prop-subtype P Q)
+
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  equiv-antisymmetric-leq-subtype :
+    {l2 l3 : Level} (P : subtype l2 A) (Q : subtype l3 A) → P ⊆ Q → Q ⊆ P →
+    (x : A) → is-in-subtype P x ≃ is-in-subtype Q x
+  equiv-antisymmetric-leq-subtype P Q H K x =
+    equiv-iff-is-prop
+      ( is-prop-is-in-subtype P x)
+      ( is-prop-is-in-subtype Q x)
+      ( H x)
+      ( K x)
+
+  antisymmetric-leq-subtype :
+    {l2 : Level} (P Q : subtype l2 A) → P ⊆ Q → Q ⊆ P → P ＝ Q
+  antisymmetric-leq-subtype P Q H K =
+    eq-has-same-elements-subtype P Q (λ x → (H x , K x))
+
+is-set-subtype :
+  {l1 l2 : Level} {A : UU l1} → is-set (subtype l2 A)
+is-set-subtype P Q =
+  is-prop-equiv
+    ( extensionality-subtype P Q)
+    ( is-prop-has-same-elements-subtype P Q)
+
+subtype-Set : {l1 : Level} (l2 : Level) → UU l1 → Set (l1 ⊔ lsuc l2)
+pr1 (subtype-Set l2 A) = subtype l2 A
+pr2 (subtype-Set l2 A) = is-set-subtype
+```
 
