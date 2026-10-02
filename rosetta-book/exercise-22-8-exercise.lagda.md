@@ -15,10 +15,9 @@ Construct the **Mac Lane pentagon** for the circle, i.e. show that the pentagon
                  |                                                             |
                  V                                                             V
 [(x ·_{S¹} (y ·_{S¹} z)) ·_{S¹} w]                            [x ·_{S¹} (y ·_{S¹} (z ·_{S¹} w))]
-                 \                                                             ^
-                      \                                                   /
-                          \                                          /
-                               V                                /
+                      \                                                  /
+                        \                                             /
+                          V                                         V
                                [x ·_{S¹} ((y ·_{S¹} z) ·_{S¹} w)]
 ```
 commutes for every `x,y,z,w : S¹`.
