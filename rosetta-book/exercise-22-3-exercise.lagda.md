@@ -14,12 +14,11 @@ Show that `¬(Π(t : S¹) T(t))`.
 Construct an equivalence `e : S¹ ≃ Σ(t : S¹) T(t)` for which the triangle
 
 ```text
-[S¹] --------e--------> [Σ(t : S¹) T(t)]
-  \                             /
-      \ deg(2)         pr1 /
-           \           /
-               V  V
-               [S¹]
+  [S¹] -------e-----> [Σ(t : S¹) T(t)]
+      \                 /
+deg(2)  \             / pr1
+          V         V
+             [S¹]
 ```
 commutes.
 
