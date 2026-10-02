@@ -85,3 +85,7 @@ The following files contain partially solved (auto)formalization exercises, whic
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md
 - rosetta-book/exercise-12-7-truncated-products.lagda.md
 - rosetta-book/exercise-13-15-morphisms-over-a-type.lagda.md
+
+The main text contains a few missing formalizations that provide further benchmark problems identified with "BENCHMARK PROBLEM".
+
+- rosetta-book/section-21-3-multiplication-on-the-circle.lagda.md (Remark 21.3.4)
