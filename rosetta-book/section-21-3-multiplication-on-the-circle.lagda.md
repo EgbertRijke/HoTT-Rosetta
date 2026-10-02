@@ -357,10 +357,27 @@ left-unit-law-mul-𝕊¹ = htpy-eq (ap pr1 (pr1 (pr2 mul-Π-𝕊¹)))
 right-unit-law-mul-𝕊¹ : (x : 𝕊¹) → mul-𝕊¹ x base-𝕊¹ ＝ x
 right-unit-law-mul-𝕊¹ x = pr2 (pr1 mul-Π-𝕊¹ x)
 
-coh-unit-laws-𝕊¹ : coherent-unit-laws mul-𝕊¹ base-𝕊¹
-coh-unit-laws-𝕊¹ =
-    coherent-unit-laws-unit-laws mul-𝕊¹
-        (left-unit-law-mul-𝕊¹ , right-unit-law-mul-𝕊¹)
+coh-unit-laws-mul-𝕊¹ : coh-unit-laws mul-𝕊¹ base-𝕊¹ left-unit-law-mul-𝕊¹ right-unit-law-mul-𝕊¹
+coh-unit-laws-mul-𝕊¹ = inv ({! pr1 mul-Π-𝕊¹ base-𝕊¹ !} ∙ right-unit)
+  -- inv
+  --   ( coherence-point-htpy-eq-pointed-map
+  --     ( pr1 mul-Π-𝕊¹ base-𝕊¹)
+  --     ( id-pointed-map)
+  --     ( pr1 (pr2 mul-Π-𝕊¹)) ∙
+  --     right-unit)
+
+coherent-unital-mul-𝕊¹-Pointed-Type :
+  coherent-unital-mul-Pointed-Type 𝕊¹-Pointed-Type
+pr1 coherent-unital-mul-𝕊¹-Pointed-Type =
+  mul-𝕊¹
+pr2 coherent-unital-mul-𝕊¹-Pointed-Type =
+  ( left-unit-law-mul-𝕊¹ , right-unit-law-mul-𝕊¹ , coh-unit-laws-mul-𝕊¹)
+
+𝕊¹-H-Space : H-Space lzero
+𝕊¹-H-Space =
+  make-H-Space
+    ( 𝕊¹-Pointed-Type)
+    ( coherent-unital-mul-𝕊¹-Pointed-Type)
 ```
 
 ## Remark 21.3.4

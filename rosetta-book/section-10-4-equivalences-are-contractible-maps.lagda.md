@@ -865,3 +865,21 @@ equiv-is-empty f g =
   ( pair f (is-equiv-is-empty f id))
 
 ```
+
+### Equivalence reasoning
+
+```agda
+infixl 1 equivalence-reasoning_
+infixl 0 step-equivalence-reasoning
+
+equivalence-reasoning_ :
+  {l1 : Level} (X : UU l1) → X ≃ X
+equivalence-reasoning X = id-equiv
+
+step-equivalence-reasoning :
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
+  (X ≃ Y) → (Z : UU l3) → (Y ≃ Z) → (X ≃ Z)
+step-equivalence-reasoning e Z f = f ∘e e
+
+syntax step-equivalence-reasoning e Z f = e ≃ Z by f
+```

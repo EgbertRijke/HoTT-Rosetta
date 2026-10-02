@@ -7,9 +7,12 @@ open import universe-levels
 open import section-4-6-dependent-pair-types
 open import section-7-2-the-congruence-relations-on-natural-numbers
 open import section-12-1-propositions
+open import section-12-2-subtypes
 open import exercise-12-7-truncated-products
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-14-2-propositional-truncations-as-higher-inductive-types
+open import section-14-3-logic-in-type-theory
+open import section-17-4-maps-and-families-of-types
 ```
 
 ## Definition 18.1.1
@@ -193,6 +196,129 @@ Furthermore, we define **equivalence class of `x : A`** to be
 
 which is indeed an equivalence class.
 Sometimes we will write `q_R : A → A/R` for the map `x ↦ [x]_R`.
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  is-equivalence-class-Prop : subtype l2 A → Prop (l1 ⊔ l2)
+  is-equivalence-class-Prop P =
+    ∃ A (λ x → has-same-elements-subtype-Prop P (prop-equivalence-relation R x))
+
+  is-equivalence-class : subtype l2 A → UU (l1 ⊔ l2)
+  is-equivalence-class P = type-Prop (is-equivalence-class-Prop P)
+
+  is-prop-is-equivalence-class :
+    (P : subtype l2 A) → is-prop (is-equivalence-class P)
+  is-prop-is-equivalence-class P =
+    is-prop-type-Prop (is-equivalence-class-Prop P)
+```
+
+### The condition on inhabited subtypes of `A` of being an equivalence class
+
+```agda
+  is-equivalence-class-inhabited-subtype-equivalence-relation :
+    subtype (l1 ⊔ l2) (inhabited-subtype l2 A)
+  is-equivalence-class-inhabited-subtype-equivalence-relation Q =
+    is-equivalence-class-Prop (subtype-inhabited-subtype Q)
+```
+
+### The type of equivalence classes
+
+```agda
+  equivalence-class : UU (l1 ⊔ lsuc l2)
+  equivalence-class = type-subtype is-equivalence-class-Prop
+
+  class : A → equivalence-class
+  pr1 (class x) = prop-equivalence-relation R x
+  pr2 (class x) =
+    unit-trunc-Prop
+      ( x , refl-has-same-elements-subtype (prop-equivalence-relation R x))
+
+  emb-equivalence-class : equivalence-class ↪ subtype l2 A
+  emb-equivalence-class = emb-subtype is-equivalence-class-Prop
+
+  subtype-equivalence-class : equivalence-class → subtype l2 A
+  subtype-equivalence-class = inclusion-subtype is-equivalence-class-Prop
+
+  is-equivalence-class-equivalence-class :
+    (C : equivalence-class) → is-equivalence-class (subtype-equivalence-class C)
+  is-equivalence-class-equivalence-class =
+    is-in-subtype-inclusion-subtype is-equivalence-class-Prop
+
+  is-inhabited-subtype-equivalence-class :
+    (C : equivalence-class) → is-inhabited-subtype (subtype-equivalence-class C)
+  is-inhabited-subtype-equivalence-class (Q , H) =
+    apply-universal-property-trunc-Prop H
+      ( is-inhabited-subtype-Prop (subtype-equivalence-class (Q , H)))
+      ( λ u →
+        unit-trunc-Prop
+          ( pr1 u ,
+            backward-implication
+              ( pr2 u (pr1 u))
+              ( refl-equivalence-relation R (pr1 u))))
+
+  inhabited-subtype-equivalence-class :
+    (C : equivalence-class) → inhabited-subtype l2 A
+  pr1 (inhabited-subtype-equivalence-class C) = subtype-equivalence-class C
+  pr2 (inhabited-subtype-equivalence-class C) =
+    is-inhabited-subtype-equivalence-class C
+
+  is-in-equivalence-class : equivalence-class → (A → UU l2)
+  is-in-equivalence-class P x = type-Prop (subtype-equivalence-class P x)
+
+  abstract
+    is-prop-is-in-equivalence-class :
+      (x : equivalence-class) (a : A) →
+      is-prop (is-in-equivalence-class x a)
+    is-prop-is-in-equivalence-class P x =
+      is-prop-type-Prop (subtype-equivalence-class P x)
+
+  is-in-equivalence-class-Prop : equivalence-class → (A → Prop l2)
+  pr1 (is-in-equivalence-class-Prop P x) = is-in-equivalence-class P x
+  pr2 (is-in-equivalence-class-Prop P x) = is-prop-is-in-equivalence-class P x
+
+  abstract
+    is-set-equivalence-class : is-set equivalence-class
+    is-set-equivalence-class =
+      is-set-type-subtype is-equivalence-class-Prop is-set-subtype
+
+  equivalence-class-Set : Set (l1 ⊔ lsuc l2)
+  pr1 equivalence-class-Set = equivalence-class
+  pr2 equivalence-class-Set = is-set-equivalence-class
+
+  unit-im-equivalence-class :
+    hom-slice (prop-equivalence-relation R) subtype-equivalence-class
+  pr1 unit-im-equivalence-class = class
+  pr2 unit-im-equivalence-class x = refl
+
+  is-surjective-class : is-surjective class
+  is-surjective-class C =
+    map-trunc-Prop
+      ( tot
+        ( λ x p →
+          inv
+            ( eq-type-subtype
+              ( is-equivalence-class-Prop)
+              ( eq-has-same-elements-subtype
+                ( pr1 C)
+                ( prop-equivalence-relation R x)
+                ( p)))))
+      ( pr2 C)
+
+  is-image-equivalence-class :
+    is-image
+      ( prop-equivalence-relation R)
+      ( emb-equivalence-class)
+      ( unit-im-equivalence-class)
+  is-image-equivalence-class =
+    is-image-is-surjective
+      ( prop-equivalence-relation R)
+      ( emb-equivalence-class)
+      ( unit-im-equivalence-class)
+      ( is-surjective-class)
+```
 
 In other words, `A/R` is the image of the map `R : A → (A → Prop_𝒰)`.
 In the following proposition we characterize the identity type of `A/R`.
