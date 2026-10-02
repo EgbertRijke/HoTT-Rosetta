@@ -337,6 +337,8 @@ such that `f(refl) = b`, and for every `p : a = a` and `q : a = x`.
 
 ### Proof
 
+BENCHMARK PROBLEM
+
 _Proof._ Consider a family of maps `f : (a = x) → B(x)` indexed by `x : A` such that `f(refl) = b`, and let `p : a = a` and `q : a = x`.
 By induction on `q` it suffices to show that
 
@@ -362,6 +364,8 @@ There is a group isomorphism
 ```
 
 ### Proof
+
+BENCHMARK PROBLEM
 
 _Proof._ First we observe that, since the circle is a `1`-type, we have an isomorphism of groups `π_1(S¹) ≅ Ω(S¹)`.
 In order to show that the group `Ω(S¹)` is isomorphic to `ℤ`, we prove that the family of equivalences
