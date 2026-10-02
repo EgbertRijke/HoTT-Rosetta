@@ -36,11 +36,11 @@ The next important question is how two elements in the type of groups can be ide
 This question is answered with the help of the univalence axiom: isomorphic groups can be identified.
 This is an instance of the *structure identity principle*, which we covered in Section 11.6.
 
-Identifiying isomorphic groups is a common *informal* practice in classical mathematics.
+Identifying isomorphic groups is a common *informal* practice in classical mathematics.
 For example, by the third isomorphism theorem we have an isomorphism
 ```text
-(G/N)/(K/N)≅ (G/K)
+(G/N)/(K/N) ≅ (G/K)
 ```
-for any sequence `N \trianglelefteq K \trianglelefteq G` of normal subgroups of `G`, and it is common to simply write `(G/N)/(K/N)=G/K`.
+for any sequence `N ⊴ K ⊴ G` of normal subgroups of `G`, and it is common to simply write `(G/N)/(K/N) = G/K`.
 Of course, classical mathematicians know that this convention is incompatible with the axioms of Zermelo-Fraenkel set theory, but that does not stop them from applying this useful abuse of notation.
 In univalent mathematics we make this informal practice precise and formal.

@@ -92,7 +92,7 @@ apd_{x}(g) : gx_⋆ = x_⋆
 
 since the group action of `G` on `X` is given by transport.
 
-Also, notice that a subgroup `H` of `G` determines an inclusion homomorphism `i : H → G`, and this inclusion function corresponds uniquely to a pointed map `Bi : BG → BH`.
+Also, notice that a subgroup `H` of `G` determines an inclusion homomorphism `i : H → G`, and this inclusion function corresponds uniquely to a pointed map `Bi : BH → BG`.
 Since `Ω(Bi)` is an embedding, we note that `Bi` must be a `0`-truncated map.
 Therefore, a concrete subgroup of a concrete group `BG` is defined to be a concrete `G`-set `X` such that the type of orbits is connected.
 Such concrete `G`-sets are called **transitive**.

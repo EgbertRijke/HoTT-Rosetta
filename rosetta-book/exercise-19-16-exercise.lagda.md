@@ -8,6 +8,7 @@ module exercise-19-16-exercise where
 ## Problem statement
 
 Consider a group `G` and a pointed connected `1`-type `B` equipped with a group isomorphism
+
 ```text
 φ : G ≅ Ω(B).
 ```
@@ -15,27 +16,34 @@ Consider a group `G` and a pointed connected `1`-type `B` equipped with a group 
 ### Exercise 19.16(a)
 
 Show that the map
+
 ```text
 ev_⋆ : (B → Set_𝒰) → Σ(X : Set_𝒰) hom(G,Aut(X))
 ```
+
 sending concrete `G`-sets to abstract `G`-sets defined by
+
 ```text
 ev_⋆(X) ≔ (X(⋆),g ↦ tr_X(φ(g)))
 ```
+
 is an equivalence.
 In the remainder of this exercise we will write `gx` for `tr_X(φ(g),x)`.
 
 ### Exercise 19.16(b)
 
-Show that the type `X_G ≔ Π(u : BG) X(u)` of concrete fixed points of `X` is equivalent to the type
+Show that the type `X_G ≔ Π(u : B) X(u)` of concrete fixed points of `X` is equivalent to the type
+
 ```text
-Σ(x : X(⋆)) gx = x
+Σ(x : X(⋆)) Π (g : G) gx = x
 ```
+
 of **fixed points** of the abstract `G`-set `ev_⋆(X)`.
 
 ### Exercise 19.16(c)
 
 Show that the type `X/G` of orbits of `X` is connected if and only if the abstract `G`-set `ev_⋆(X)` is transitive in the sense that
+
 ```text
 ∀(x : X(⋆)) is-surj(g ↦ gx)
 ```
@@ -43,6 +51,7 @@ Show that the type `X/G` of orbits of `X` is connected if and only if the abstra
 ### Exercise 19.16(d)
 
 Show that the type `X/G` of orbits of `X` is a set if and only if the abstract `G`-set `ev_⋆(X)` is free in the sense that
+
 ```text
 ∀(x : X(⋆)) is-inj(g ↦ gx).
 ```
