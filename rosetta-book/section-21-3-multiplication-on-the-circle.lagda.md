@@ -13,9 +13,11 @@ open import section-5-4-transport
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-1-groupoid-operations-equivalences
+open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import exercise-9-4-three-for-two-equivalences
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-1-families-of-equivalences
+open import section-11-6-the-structure-identity-principle
 open import section-12-3-sets
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-19-4-homotopy-groups-of-types
@@ -357,14 +359,16 @@ left-unit-law-mul-𝕊¹ = htpy-eq (ap pr1 (pr1 (pr2 mul-Π-𝕊¹)))
 right-unit-law-mul-𝕊¹ : (x : 𝕊¹) → mul-𝕊¹ x base-𝕊¹ ＝ x
 right-unit-law-mul-𝕊¹ x = pr2 (pr1 mul-Π-𝕊¹ x)
 
-coh-unit-laws-mul-𝕊¹ : coh-unit-laws mul-𝕊¹ base-𝕊¹ left-unit-law-mul-𝕊¹ right-unit-law-mul-𝕊¹
-coh-unit-laws-mul-𝕊¹ = inv ({! pr1 mul-Π-𝕊¹ base-𝕊¹ !} ∙ right-unit)
-  -- inv
-  --   ( coherence-point-htpy-eq-pointed-map
-  --     ( pr1 mul-Π-𝕊¹ base-𝕊¹)
-  --     ( id-pointed-map)
-  --     ( pr1 (pr2 mul-Π-𝕊¹)) ∙
-  --     right-unit)
+coh-unit-laws-mul-𝕊¹ :
+  left-unit-law-mul-𝕊¹ base-𝕊¹ ＝ right-unit-law-mul-𝕊¹ base-𝕊¹
+coh-unit-laws-mul-𝕊¹ =
+  ( fiber-ap-eq-fiber-fiberwise
+    ( λ f → f base-𝕊¹)
+    ( pr1 mul-Π-𝕊¹ base-𝕊¹)
+    ( id-pointed-map)
+    ( ap pr1 (pr1 (pr2 mul-Π-𝕊¹)))
+    ( dependent-identification-eq-pair (pr1 (pr2 mul-Π-𝕊¹)))) ∙
+  right-unit
 
 coherent-unital-mul-𝕊¹-Pointed-Type :
   coherent-unital-mul-Pointed-Type 𝕊¹-Pointed-Type
