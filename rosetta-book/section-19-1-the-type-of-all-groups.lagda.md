@@ -25,15 +25,15 @@ A **semigroup** in a universe `𝒰` is a triple `(G,μ,α)` consisting of a set
 witnessing that `μ` is **associative**.
 We write `Semigroup_𝒰` for the type of all semigroups in `𝒰`, i.e., for the type
 ```text
-Σ(G : Set_𝒰) Σ(μ : G →(G → G)) Π(x,y,z : G) μ(μ(x,y),z) = μ(x,μ(y,z)).
+Σ(G : Set_𝒰) Σ(μ : G → (G → G)) Π(x,y,z : G) μ(μ(x,y),z) = μ(x,μ(y,z)).
 ```
 
 ## Definition 19.1.3
 
-A semigroup `G` is said to be **unital** if it comes equipped with a **unit** `e:G` that satisfies the left and right unit laws
+A semigroup `G` is said to be **unital** if it comes equipped with a **unit** `e : G` that satisfies the left and right unit laws
 ```text
-left-unit : Π(y:G) μ(e,y) = y
-right-unit : Π(x:G) μ(x,e) = x.
+left-unit : Π(y : G) μ(e,y) = y
+right-unit : Π(x : G) μ(x,e) = x.
 ```
 We write `is-unital(G)` for the type of such triples `(e,left-unit,right-unit)`.
 Unital semigroups are also called **monoids**, so we define
@@ -43,7 +43,7 @@ Monoid_𝒰 ≔ Σ(G : Semigroup_𝒰) is-unital(G).
 
 The unit of a semigroup is of course unique once it exists.
 In univalent mathematics we express this fact by asserting that the type `is-unital(G)` is a proposition for each semigroup `G`.
-In other words, being unital is a *property* of semigroups rather than structure on it.
+In other words, being unital is a *property* of semigroups rather than additional structure.
 This is typical for univalent mathematics: we express that a structure is a property by proving that this structure is a proposition.
 
 ## Lemma 19.1.4
@@ -64,10 +64,10 @@ e = μ(e,e') = e'.
 ## Definition 19.1.5
 
 Let `G` be a unital semigroup.
-We say that `G` **has inverses** if it comes equipped with an operation `x ↦  x⁻¹` of type `G→ G`, satisfying the left and right inverse laws
+We say that `G` **has inverses** if it comes equipped with an operation `x ↦ x⁻¹` of type `G → G`, satisfying the left and right inverse laws
 ```text
-left-inv : Π(x:G) μ(x⁻¹,x) = e
-right-inv : Π(x:G) μ(x,x⁻¹) = e.
+left-inv : Π(x : G) μ(x⁻¹,x) = e
+right-inv : Π(x : G) μ(x,x⁻¹) = e.
 ```
 We write `is-group'(G,e)` for the type of such triples `((_)⁻¹,left-inv,right-inv)`, and we write
 ```text
@@ -83,7 +83,7 @@ For any semigroup `G` the type `is-group(G)` is a proposition.
 ### Proof
 
 *Proof.* We have already seen that the type `is-unital(G)` is a proposition.
-Therefore it suffices to show that the type `is-group'(G,e)` is a proposition for any `e:is-unital(G)`.
+Therefore it suffices to show that the type `is-group'(G,e)` is a proposition for any `e : is-unital(G)`.
 
 Since a semigroup `G` is assumed to be a set, we note that the types of the inverse laws are propositions.
 Therefore it suffices to show that any two inverse operations satisfying the inverse laws are homotopic.
@@ -116,4 +116,3 @@ An important special case of the automorphism groups is the **symmetric group**
 ```text
 S_n ≔ Aut(Fin{n}).
 ```
-

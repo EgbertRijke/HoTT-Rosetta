@@ -46,14 +46,15 @@ for any composable (semi)group homomorphisms `f`, `g`, and `h`.
 
 ## Definition 19.2.4
 
-Let `h:hom(G,H)` be a homomorphism of (semi)groups.
-Then `h` is said to be an **isomorphism** if it comes equipped with an element of type `is-iso(h)`, consisting of triples `(h⁻¹,p,q)` consisting of a homomorphism `h⁻¹:hom(H,G)` of semigroups and identifications
+Let `h : hom(G,H)` be a homomorphism of (semi)groups.
+Then `h` is said to be an **isomorphism** if it comes equipped with an element of type `is-iso(h)`, consisting of triples `(h⁻¹,p,q)` consisting of a homomorphism `h⁻¹ : hom(H,G)` of semigroups and identifications
 ```text
-p : h⁻¹ ∘ h=id[G] and q : h ∘ h⁻¹=id[H]
+p : h⁻¹ ∘ h = id[G] and q : h ∘ h⁻¹ = id[H]
 ```
-witnessing that `h⁻¹` satisfies the inverse lawsWe write `G≅ H` for the type of all isomorphisms of semigroups from `G` to `H`, i.e.,
+witnessing that `h⁻¹` satisfies the inverse laws.
+We write `G ≅ H` for the type of all isomorphisms of semigroups from `G` to `H`, i.e.,
 ```text
-G ≅ H ≔ Σ(h : hom(G,H)) Σ(k : hom(H,G)) (k ∘ h = id[G])× (h ∘ k = id[H]).
+G ≅ H ≔ Σ(h : hom(G,H)) Σ(k : hom(H,G)) (k ∘ h = id[G]) × (h ∘ k = id[H]).
 ```
 
 If `f` is an isomorphism, then its inverse is unique.
@@ -61,7 +62,7 @@ In other words, being an isomorphism is a property.
 
 ## Lemma 19.2.5
 
-For any semigroup homomorphism `h:hom(G,H)`, the type
+For any semigroup homomorphism `h : hom(G,H)`, the type
 ```text
 is-iso(h)
 ```
@@ -77,7 +78,6 @@ In Remark 19.2.2 we also observed that the equality type `k = k'` is equivalent 
 We construct a homotopy `k ~ k'` by the usual argument:
 
 ```text
-[k(y)]---->[k(h(k'(y))]---->[k'(y)]
+[k(y)]---->[k(h(k'(y)))]---->[k'(y)]
 ```
  ◻
-

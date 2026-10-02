@@ -11,4 +11,4 @@ Show that the type of `3`-element groups is equivalent to the type of `2`-elemen
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
