@@ -8,8 +8,10 @@ open import universe-levels
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-10-1-contractible-types
+open import section-10-3-contractible-maps
 open import exercise-10-1-identity-types-contractible
 open import exercise-10-6-dependent-pair-contractible-base
+open import section-11-4-embeddings
 open import section-12-1-propositions
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
@@ -95,4 +97,20 @@ abstract
 is-set-Prop : {l : Level} → UU l → Prop l
 pr1 (is-set-Prop A) = is-set A
 pr2 (is-set-Prop A) = is-prop-is-set A
+```
+
+### Being a truncated map is a property
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  where
+
+  is-prop-is-trunc-map : (k : 𝕋) (f : A → B) → is-prop (is-trunc-map k f)
+  is-prop-is-trunc-map k f =
+    is-prop-Π (λ x → is-property-is-trunc k (fiber f x))
+
+  is-trunc-map-Prop : (k : 𝕋) → (A → B) → Prop (l1 ⊔ l2)
+  pr1 (is-trunc-map-Prop k f) = is-trunc-map k f
+  pr2 (is-trunc-map-Prop k f) = is-prop-is-trunc-map k f
 ```
