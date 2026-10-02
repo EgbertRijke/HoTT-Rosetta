@@ -18,27 +18,27 @@ For more about categories we recommend Chapter 9 of \[citation: `hottbook`\].
 
 ## Definition 19.1.2
 
-A **semigroup** in a universe `𝒰` is a triple `(G,μ,α)` consisting of a set `G` in `𝒰` equipped with a binary operation `μ:G→ (G→ G)` and a homotopy
+A **semigroup** in a universe `𝒰` is a triple `(G,μ,α)` consisting of a set `G` in `𝒰` equipped with a binary operation `μ : G → (G → G)` and a homotopy
 ```text
-α : Π(x,y,z:G) μ(μ(x,y),z)=μ(x,μ(y,z))
+α : Π(x,y,z : G) μ(μ(x,y),z) = μ(x,μ(y,z))
 ```
 witnessing that `μ` is **associative**.
 We write `Semigroup_𝒰` for the type of all semigroups in `𝒰`, i.e., for the type
 ```text
-Σ(G:Set_𝒰) Σ(μ:G→(G→ G)) Π(x,y,z:G) μ(μ(x,y),z)=μ(x,μ(y,z)).
+Σ(G : Set_𝒰) Σ(μ : G →(G → G)) Π(x,y,z : G) μ(μ(x,y),z) = μ(x,μ(y,z)).
 ```
 
 ## Definition 19.1.3
 
 A semigroup `G` is said to be **unital** if it comes equipped with a **unit** `e:G` that satisfies the left and right unit laws
 ```text
-left-unit : Π(y:G) μ(e,y)=y
-right-unit : Π(x:G) μ(x,e)=x.
+left-unit : Π(y:G) μ(e,y) = y
+right-unit : Π(x:G) μ(x,e) = x.
 ```
 We write `is-unital(G)` for the type of such triples `(e,left-unit,right-unit)`.
 Unital semigroups are also called **monoids**, so we define
 ```text
-Monoid_𝒰≔Σ(G:Semigroup_𝒰) is-unital(G).
+Monoid_𝒰 ≔ Σ(G : Semigroup_𝒰) is-unital(G).
 ```
 
 The unit of a semigroup is of course unique once it exists.
@@ -54,7 +54,7 @@ For a semigroup `G` the type `is-unital(G)` is a proposition.
 
 *Proof.* Let `G` be a semigroup.
 Note that since `G` is a set, it follows that the types of the left and right unit laws are propositions.
-Therefore it suffices to show that any two elements `e,e':G` satisfying the left and right unit laws can be identified.
+Therefore it suffices to show that any two elements `e,e' : G` satisfying the left and right unit laws can be identified.
 This is easy:
 ```text
 e = μ(e,e') = e'.
@@ -64,14 +64,14 @@ e = μ(e,e') = e'.
 ## Definition 19.1.5
 
 Let `G` be a unital semigroup.
-We say that `G` **has inverses** if it comes equipped with an operation `x↦ x^{-1}` of type `G→ G`, satisfying the left and right inverse laws
+We say that `G` **has inverses** if it comes equipped with an operation `x ↦  x⁻¹` of type `G→ G`, satisfying the left and right inverse laws
 ```text
-left-inv : Π(x:G) μ(x^{-1},x)=e
-right-inv : Π(x:G) μ(x,x^{-1}) = e.
+left-inv : Π(x:G) μ(x⁻¹,x) = e
+right-inv : Π(x:G) μ(x,x⁻¹) = e.
 ```
-We write `is-group'(G,e)` for the type of such triples `((_)^{-1},left-inv,right-inv)`, and we write
+We write `is-group'(G,e)` for the type of such triples `((_)⁻¹,left-inv,right-inv)`, and we write
 ```text
-is-group(G)≔Σ(e:is-unital(G)) is-group'(G,e)
+is-group(G) ≔ Σ(e : is-unital(G)) is-group'(G,e)
 ```
 A **group** is a unital semigroup with inverses.
 We write `Group` for the type of all groups in `𝒰`.
@@ -88,16 +88,16 @@ Therefore it suffices to show that the type `is-group'(G,e)` is a proposition fo
 Since a semigroup `G` is assumed to be a set, we note that the types of the inverse laws are propositions.
 Therefore it suffices to show that any two inverse operations satisfying the inverse laws are homotopic.
 
-Let `x↦ x^{-1}` and `x↦ x^{-1'}` be two inverse operations on a unital semigroup `G`, both satisfying the inverse laws.
+Let `x ↦ x⁻¹` and `x ↦ x^{-1'}` be two inverse operations on a unital semigroup `G`, both satisfying the inverse laws.
 Then we have the following identifications
 ```text
-x^{-1} = μ(e,x^{-1})
-= μ(μ(x^{-1'},x),x^{-1})
-= μ(x^{-1'},μ(x,x^{-1}))
+x⁻¹ = μ(e,x⁻¹)
+= μ(μ(x^{-1'},x),x⁻¹)
+= μ(x^{-1'},μ(x,x⁻¹))
 = μ(x^{-1'},e)
 = x^{-1'}
 ```
-for any `x:G`.
+for any `x : G`.
 Thus the two inverses of `x` are the same, and the claim follows. ◻
 
 ## Example 19.1.7
@@ -109,11 +109,11 @@ The fact that `ℤ` is a set was shown in Exercise 12.4, and the group laws were
 
 Given a set `X`, we define the **automorphism group** of `X` by
 ```text
-Aut(X)≔ (X≃ X).
+Aut(X) ≔ (X ≃ X).
 ```
 The group operation of `Aut(X)` is given by composition of equivalences, and the unit of the group is the identity function.
 An important special case of the automorphism groups is the **symmetric group**
 ```text
-S_n≔ Aut(Fin{n}).
+S_n ≔ Aut(Fin{n}).
 ```
 

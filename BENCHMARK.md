@@ -48,6 +48,13 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-14-7-precomposition-with-truncation.lagda.md
 - rosetta-book/exercise-14-8-impredicative-encodings.lagda.md
 - rosetta-book/exercise-14-9-interval.lagda.md
+- rosetta-book/exercise-20-1-exercise.lagda.md
+- rosetta-book/exercise-20-2-exercise.lagda.md
+- rosetta-book/exercise-20-3-exercise.lagda.md
+- rosetta-book/exercise-20-4-exercise.lagda.md
+- rosetta-book/exercise-20-5-exercise.lagda.md
+- rosetta-book/exercise-20-6-exercise.lagda.md
+- rosetta-book/exercise-20-7-exercise.lagda.md
 - rosetta-book/exercise-21-1-exercise.lagda.md
 - rosetta-book/exercise-21-2-exercise.lagda.md
 - rosetta-book/exercise-21-3-exercise.lagda.md
@@ -78,3 +85,12 @@ The following files contain partially solved (auto)formalization exercises, whic
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md
 - rosetta-book/exercise-12-7-truncated-products.lagda.md
 - rosetta-book/exercise-13-15-morphisms-over-a-type.lagda.md
+
+The main text contains a few missing formalizations that provide further benchmark problems identified with "BENCHMARK PROBLEM".
+
+- rosetta-book/section-21-3-multiplication-on-the-circle.lagda.md (Remark 21.3.4)
+- rosetta-book/section-22-1-the-universal-cover-of-the-circle.lagda.md (Lemma 22.1.3)
+- rosetta-book/section-22-3-the-dependent-universal-property-of-the-integers.lagda.md (Theorem 22.3.5)
+- rosetta-book/section-22-3-the-dependent-universal-property-of-the-integers.lagda.md (Corollary 22.3.6)
+- rosetta-book/section-22-4-the-fundamental-group-of-the-circle.lagda.md (Proposition 22.4.3)
+- rosetta-book/section-22-4-the-fundamental-group-of-the-circle.lagda.md (Theorem 22.4.4)
