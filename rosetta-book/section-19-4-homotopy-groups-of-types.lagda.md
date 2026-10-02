@@ -12,7 +12,12 @@ open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
+open import section-10-4-equivalences-are-contractible-maps
+open import section-11-2-the-fundamental-theorem
+open import section-13-1-equivalent-forms-of-function-extensionality
+open import section-11-6-the-structure-identity-principle
 ```
 
 Since the identity type gives every type groupoidal structure, we can construct for every type `A` equipped with a base point `a:A` a sequence of groups `π_n(A,a)` indexed by `n≥ 1`.
@@ -387,6 +392,19 @@ module _
   coherence-point-pointed-htpy = pr2 H
 ```
 
+### The reflexive pointed homotopy
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  (f : pointed-Π A B)
+  where
+
+  refl-pointed-htpy : pointed-htpy f f
+  pr1 refl-pointed-htpy = refl-htpy
+  pr2 refl-pointed-htpy = refl
+```
+
 ### The pointed type of endomorphisms
 
 ```agda
@@ -451,4 +469,43 @@ module _
         ( is-section-pointed-section)
     coherence-point-is-section-pointed-section =
       coherence-point-pointed-htpy is-pointed-section-pointed-section
+```
+
+### Extensionality of pointed dependent function types by pointed homotopies
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Fam l2 A}
+  (f : pointed-Π A B)
+  where
+
+  abstract
+    is-torsorial-pointed-htpy :
+      is-torsorial (pointed-htpy f)
+    is-torsorial-pointed-htpy =
+      is-torsorial-Eq-structure
+        ( is-torsorial-htpy _)
+        ( function-pointed-Π f , refl-htpy)
+        ( is-torsorial-Id _)
+
+  pointed-htpy-eq :
+    (g : pointed-Π A B) → f ＝ g → f ~∗ g
+  pointed-htpy-eq .f refl = refl-pointed-htpy f
+
+  abstract
+    is-equiv-pointed-htpy-eq :
+      (g : pointed-Π A B) → is-equiv (pointed-htpy-eq g)
+    is-equiv-pointed-htpy-eq =
+      fundamental-theorem-id
+        ( is-torsorial-pointed-htpy)
+        ( pointed-htpy-eq)
+
+  extensionality-pointed-Π :
+    (g : pointed-Π A B) → (f ＝ g) ≃ (f ~∗ g)
+  pr1 (extensionality-pointed-Π g) = pointed-htpy-eq g
+  pr2 (extensionality-pointed-Π g) = is-equiv-pointed-htpy-eq g
+
+  eq-pointed-htpy :
+    (g : pointed-Π A B) → f ~∗ g → f ＝ g
+  eq-pointed-htpy g = map-inv-equiv (extensionality-pointed-Π g)
 ```
