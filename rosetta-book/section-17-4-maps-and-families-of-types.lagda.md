@@ -6,6 +6,7 @@ module section-17-4-maps-and-families-of-types where
 open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
+open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-9-1-homotopies
@@ -788,3 +789,36 @@ pr1 (subtype-Set l2 A) = subtype l2 A
 pr2 (subtype-Set l2 A) = is-set-subtype
 ```
 
+## Supplement
+
+```agda
+module _
+  {l1 l2 l3 : Level} {𝒫 : UU (l1 ⊔ l2) → UU l3}
+  (tr-𝒫 : {X Y : UU (l1 ⊔ l2)} → X ≃ Y → 𝒫 X → 𝒫 Y)
+  {A : UU l1} {B : A → UU l2}
+  where
+
+  forward-implication-structured-equality-duality :
+    ( (x : A) (f : (y : A) → (x ＝ y) → B y) (y : A) → structure-map 𝒫 (f y)) →
+    structure-equality 𝒫 (Σ A B)
+  forward-implication-structured-equality-duality
+    K (x , b) (x' , b') =
+    tr-𝒫
+      ( compute-fiber-map-out-of-identity-type (ind-Id x (λ u _ → B u) b) x' b')
+      ( K x (ind-Id x (λ u _ → B u) b) x' b')
+
+  backward-implication-structured-equality-duality :
+    structure-equality 𝒫 (Σ A B) →
+    ( (x : A) (f : (y : A) → (x ＝ y) → B y) (y : A) → structure-map 𝒫 (f y))
+  backward-implication-structured-equality-duality K x f y b =
+    tr-𝒫
+      ( inv-compute-fiber-map-out-of-identity-type f y b)
+      ( K (x , f x refl) (y , b))
+
+  structured-equality-duality :
+    ( (x : A) (f : (y : A) → (x ＝ y) → B y) (y : A) → structure-map 𝒫 (f y)) ↔
+    ( structure-equality 𝒫 (Σ A B))
+  structured-equality-duality =
+    ( forward-implication-structured-equality-duality ,
+      backward-implication-structured-equality-duality)
+```

@@ -338,3 +338,62 @@ module _
   pr1 inv-compute-fiber-comp = map-inv-compute-fiber-comp
   pr2 inv-compute-fiber-comp = is-equiv-map-inv-compute-fiber-comp
 ```
+
+## Supplement
+
+### Computation of fibers of families of maps out of the identity type
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {a : A} {B : A → UU l2}
+  (f : (x : A) → (a ＝ x) → B x) (x : A) (x' : B x)
+  where
+
+  map-compute-fiber-map-out-of-identity-type :
+    fiber (f x) x' → ((a , f a refl) ＝ (x , x'))
+  map-compute-fiber-map-out-of-identity-type (refl , refl) = refl
+
+  map-inv-compute-fiber-map-out-of-identity-type :
+    ((a , f a refl) ＝ (x , x')) → fiber (f x) x'
+  map-inv-compute-fiber-map-out-of-identity-type refl =
+    refl , refl
+
+  is-section-map-inv-compute-fiber-map-out-of-identity-type :
+    map-compute-fiber-map-out-of-identity-type ∘
+    map-inv-compute-fiber-map-out-of-identity-type ~ id
+  is-section-map-inv-compute-fiber-map-out-of-identity-type refl = refl
+
+  is-retraction-map-inv-compute-fiber-map-out-of-identity-type :
+    map-inv-compute-fiber-map-out-of-identity-type ∘
+    map-compute-fiber-map-out-of-identity-type ~ id
+  is-retraction-map-inv-compute-fiber-map-out-of-identity-type (refl , refl) =
+    refl
+
+  is-equiv-map-compute-fiber-map-out-of-identity-type :
+    is-equiv map-compute-fiber-map-out-of-identity-type
+  is-equiv-map-compute-fiber-map-out-of-identity-type =
+    is-equiv-is-invertible
+      map-inv-compute-fiber-map-out-of-identity-type
+      is-section-map-inv-compute-fiber-map-out-of-identity-type
+      is-retraction-map-inv-compute-fiber-map-out-of-identity-type
+
+  is-equiv-map-inv-compute-fiber-map-out-of-identity-type :
+    is-equiv map-inv-compute-fiber-map-out-of-identity-type
+  is-equiv-map-inv-compute-fiber-map-out-of-identity-type =
+    is-equiv-is-invertible
+      map-compute-fiber-map-out-of-identity-type
+      is-retraction-map-inv-compute-fiber-map-out-of-identity-type
+      is-section-map-inv-compute-fiber-map-out-of-identity-type
+
+  compute-fiber-map-out-of-identity-type :
+    fiber (f x) x' ≃ ((a , f a refl) ＝ (x , x'))
+  compute-fiber-map-out-of-identity-type =
+    ( map-compute-fiber-map-out-of-identity-type ,
+      is-equiv-map-compute-fiber-map-out-of-identity-type)
+
+  inv-compute-fiber-map-out-of-identity-type :
+    ((a , f a refl) ＝ (x , x')) ≃ fiber (f x) x'
+  inv-compute-fiber-map-out-of-identity-type =
+    ( map-inv-compute-fiber-map-out-of-identity-type ,
+      is-equiv-map-inv-compute-fiber-map-out-of-identity-type)
+```
