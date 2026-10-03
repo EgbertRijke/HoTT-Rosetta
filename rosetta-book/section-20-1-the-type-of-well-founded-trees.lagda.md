@@ -375,7 +375,7 @@ bin-tree(bool, ind-bool(T_2, T_1))
 can always be identified.
 In the terminology of Exercise 19.10, the constructor `bin-tree` of `Bin-Tree` is equivalently described as a commutative binary operation on `Bin-Tree`.
 
-<!-- MISSING AGDA CODE -->
+BENCHMARK PROBLEM
 
 ## Example 20.1.9
 
