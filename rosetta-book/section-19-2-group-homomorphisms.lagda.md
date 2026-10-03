@@ -1111,6 +1111,18 @@ module _
     is-prop-is-iso-Large-Precategory f
 
 module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β) {l1 l2 : Level}
+  {X : obj-Large-Precategory C l1} {Y : obj-Large-Precategory C l2}
+  where
+
+  eq-iso-eq-hom-Large-Precategory :
+    (f g : iso-Large-Precategory C X Y) →
+    hom-iso-Large-Precategory C f ＝ hom-iso-Large-Precategory C g → f ＝ g
+  eq-iso-eq-hom-Large-Precategory f g =
+    eq-type-subtype (is-iso-prop-Large-Precategory C)
+
+module _
   {l1 l2 : Level} (G : Semigroup l1) (H : Semigroup l2)
   where
 

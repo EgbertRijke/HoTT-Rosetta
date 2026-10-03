@@ -44,6 +44,7 @@ The indexing type of the truncation levels, which will be equivalent to the type
   -2 : 𝕋
   succ-𝕋 : 𝕋 → 𝕋.
 ```
+
 The natural inclusion `i : ℕ → 𝕋` is defined recursively by
 
 ```text
@@ -396,7 +397,7 @@ The following are equivalent:
    ```text
      ap_{f} : (x = y) → (f(x) = f(y))
    ```
-   
+
    is `k`-truncated.
 
 ### Proof
@@ -485,6 +486,21 @@ set-Prop :
 set-Prop P = truncated-type-succ-Truncated-Type neg-one-𝕋 P
 ```
 
+### If a type embeds into a set, then it is a set
+
+```agda
+abstract
+  is-set-is-emb :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    is-emb f → is-set B → is-set A
+  is-set-is-emb = is-trunc-is-emb neg-one-𝕋
+
+abstract
+  is-set-emb :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↪ B) → is-set B → is-set A
+  is-set-emb = is-trunc-emb neg-one-𝕋
+```
+
 ### 0-maps
 
 ```agda
@@ -522,4 +538,27 @@ abstract
   is-1-type-type-1-Type :
     {l : Level} (A : 1-Type l) → is-1-type (type-1-Type A)
   is-1-type-type-1-Type = pr2
+```
+
+### Contractible types are k-truncated for any k
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  abstract
+    is-trunc-is-contr : (k : 𝕋) → is-contr A → is-trunc k A
+    is-trunc-is-contr neg-two-𝕋 is-contr-A = is-contr-A
+    is-trunc-is-contr (succ-𝕋 k) is-contr-A =
+      is-trunc-succ-is-trunc k (is-trunc-is-contr k is-contr-A)
+```
+
+### Any contractible type is a set
+
+```agda
+abstract
+  is-set-is-contr :
+    {l : Level} {A : UU l} → is-contr A → is-set A
+  is-set-is-contr = is-trunc-is-contr zero-𝕋
 ```

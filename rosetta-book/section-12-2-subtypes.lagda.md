@@ -18,6 +18,7 @@ open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-3-contractible-equivalences
 open import exercise-10-6-dependent-pair-contractible-base
 open import exercise-10-7-fibers-of-projections
+open import section-11-1-families-of-equivalences
 open import section-11-2-the-fundamental-theorem
 open import section-11-4-embeddings
 open import section-12-1-propositions
@@ -30,11 +31,11 @@ In set theory, a set `y` is said to be a subset of a set `x`, if any element of 
 ```
 
 holds.
-We have already noted that type theory is different from set theory in that terms in type theory come equipped with a *unique* type.
+We have already noted that type theory is different from set theory in that terms in type theory come equipped with a _unique_ type.
 Moreover, in set theory the proposition `x ∈ y` is well-formed for any two sets `x` and `y`, whereas in type theory we can only judge that `a : A` by applying the rules of inference of type theory in such a manner that we arrive at the conclusion that `a : A`.
 Because of these differences we must find a different way to talk about subtypes.
 
-Note that in set theory there is a correspondence between the subsets of a set `x`, and the *predicates* on `x`.
+Note that in set theory there is a correspondence between the subsets of a set `x`, and the _predicates_ on `x`.
 A predicate on `x` is just a proposition `P(z)` that varies over the elements `z ∈ x`.
 Indeed, if `y` is a subset of `x`, then the corresponding predicate is the proposition `z ∈ y`.
 Conversely, if `P` is a predicate on `x`, then we obtain the subset
@@ -465,4 +466,23 @@ module _
 complement :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) → UU (l1 ⊔ l2)
 complement {l1} {l2} {A} B = Σ A (is-empty ∘ B)
+```
+
+### Logically equivalent subtypes induce equivalences on the underlying type of a subtype
+
+```agda
+equiv-type-subtype :
+  { l1 l2 l3 : Level} {A : UU l1} {P : A → UU l2} {Q : A → UU l3} →
+  ( is-subtype-P : is-subtype P) (is-subtype-Q : is-subtype Q) →
+  ( f : (x : A) → P x → Q x) →
+  ( g : (x : A) → Q x → P x) →
+  ( Σ A P) ≃ (Σ A Q)
+pr1 (equiv-type-subtype is-subtype-P is-subtype-Q f g) = tot f
+pr2 (equiv-type-subtype is-subtype-P is-subtype-Q f g) =
+  is-equiv-tot-is-fiberwise-equiv
+    ( λ x →
+      is-equiv-has-converse-is-prop
+        ( is-subtype-P x)
+        ( is-subtype-Q x)
+        ( g x))
 ```
