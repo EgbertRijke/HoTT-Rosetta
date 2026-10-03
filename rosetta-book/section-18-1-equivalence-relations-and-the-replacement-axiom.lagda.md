@@ -5,14 +5,25 @@ module section-18-1-equivalence-relations-and-the-replacement-axiom where
 
 open import universe-levels
 open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
 open import section-7-2-the-congruence-relations-on-natural-numbers
+open import section-11-1-families-of-equivalences
+open import section-11-4-embeddings
 open import section-12-1-propositions
 open import section-12-2-subtypes
-open import exercise-12-7-truncated-products
+open import section-12-3-sets
+open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-14-3-logic-in-type-theory
+open import section-15-1-the-image-of-a-map
+open import section-15-2-surjective-maps
 open import section-17-4-maps-and-families-of-types
+
+open import exercise-4-3-double-negation-logic
+open import exercise-12-7-truncated-products
+open import exercise-13-15-morphisms-over-a-type
 ```
 
 ## Definition 18.1.1
