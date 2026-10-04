@@ -19,14 +19,18 @@ open import section-11-4-embeddings
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-13-1-equivalent-forms-of-function-extensionality
+open import section-13-4-composing-with-equivalences
 open import section-17-1-equivalent-forms-of-the-univalence-axiom
 open import section-20-1-the-type-of-well-founded-trees
 open import section-20-2-observational-equality-of-w-types
 open import section-20-3-functoriality-of-w-types
 open import section-20-4-the-elementhood-relation-on-w-types
 
+open import exercise-4-3-double-negation-logic
 open import exercise-9-1-groupoid-operations-equivalences
 open import exercise-9-4-three-for-two-equivalences
+open import exercise-9-7-product-functor-equivalences
+open import exercise-10-6-dependent-pair-contractible-base
 open import exercise-12-7-truncated-products
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import exercise-13-12-dependent-products-of-truncated-maps
@@ -610,4 +614,72 @@ Russell l =
   comprehension-𝕍
     ( universal-multiset-𝕍 l)
     ( λ X → X ∉-𝕍 X)
+```
+
+```agda
+module _
+  {l1 l2 : Level} (H : is-small-universe l2 l1)
+  where
+
+  is-small-Russell : is-small-𝕍 l2 (Russell l1)
+  is-small-Russell =
+    is-small-comprehension-𝕍 l2
+      { lsuc l1}
+      { universal-multiset-𝕍 l1}
+      { λ X → X ∉-𝕍 X}
+      ( is-small-universal-multiset-𝕍 l2 H)
+      ( λ X → is-small-∉-𝕍 l2 (K X) (K X))
+    where
+    K = is-small-multiset-𝕍 (pr2 H)
+
+  resize-Russell : 𝕍 l2
+  resize-Russell = resize-𝕍 (Russell l1) (is-small-Russell)
+
+  is-small-resize-Russell :
+    is-small-𝕍 (lsuc l1) (resize-Russell)
+  is-small-resize-Russell =
+    is-small-resize-𝕍 (Russell l1) (is-small-Russell)
+
+  equiv-Russell-in-Russell :
+    (Russell l1 ∈-𝕍 Russell l1) ≃ (resize-Russell ∈-𝕍 resize-Russell)
+  equiv-Russell-in-Russell =
+    equiv-elementhood-resize-𝕍 (is-small-Russell) (is-small-Russell)
+```
+
+```agda
+module _
+  {l : Level} (H : is-small l (UU l))
+  where
+
+  equiv-in-notin-Russell :
+    (Russell l ∈-𝕍 Russell l) ≃ (Russell l ∉-𝕍 Russell l)
+  equiv-in-notin-Russell =
+    ( equiv-precomp (equiv-Russell-in-Russell K) empty) ∘e
+    ( left-unit-law-Σ-is-contr
+      { B = (λ t → (pr1 t) ∉-𝕍 (pr1 t))}
+      ( is-torsorial-Id' (resize-Russell K))
+      ( resize-Russell K , refl)) ∘e
+    ( inv-associative-Σ) ∘e
+    ( equiv-tot
+      ( λ t →
+        ( commutative-product) ∘e
+        ( equiv-product-right
+          ( inv-equiv
+            ( ( equiv-concat' _ (resize-resize-𝕍 (is-small-Russell K))) ∘e
+              ( eq-resize-𝕍
+                ( is-small-multiset-𝕍 is-small-lsuc t)
+                ( is-small-resize-Russell K))))))) ∘e
+    ( associative-Σ)
+    where
+      K : is-small-universe l l
+      K = (H , (λ X → (X , id-equiv)))
+
+  iff-in-notin-Russell :
+    (Russell l ∈-𝕍 Russell l) ↔ (Russell l ∉-𝕍 Russell l)
+  iff-in-notin-Russell =
+    iff-equiv equiv-in-notin-Russell
+
+  paradox-Russell : empty
+  paradox-Russell =
+    no-fixed-points-neg (Russell l ∈-𝕍 Russell l) iff-in-notin-Russell
 ```
