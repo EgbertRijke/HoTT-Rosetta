@@ -384,6 +384,7 @@ On the other hand, we define the type of **(unoriented) finitely branching roote
 The qualitive difference between the types of oriented and unoriented finitely branching rooted trees is similar to the qualitative difference between types of oriented and unoriented binary rooted trees.
 In the type of oriented finitely branching rooted trees, we record the ordering of the branches while in the type of unoriented finitely branching rooted trees there are identifications between trees that have the same branches up to permutation.
 
+<!-- This agda block does not perfectly match the natural language statement. -->
 ```agda
 plane-tree-𝕎 : UU lzero
 plane-tree-𝕎 = 𝕎 ℕ Fin
