@@ -1,6 +1,7 @@
 # Section 20.6 Russell's paradox in type theory
 
 ```agda
+{-# OPTIONS --lossy-unification #-}
 module section-20-6-russells-paradox-in-type-theory where
 
 open import universe-levels
