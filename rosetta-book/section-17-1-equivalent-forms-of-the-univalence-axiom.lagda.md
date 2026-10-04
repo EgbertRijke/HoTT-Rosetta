@@ -735,3 +735,30 @@ pr1 (Σ-Small-Type A B) = Σ (type-Small-Type A) (λ a → type-Small-Type (B a)
 pr2 (Σ-Small-Type {l1} {l2} {l3} {l4} A B) =
   is-small-Σ (is-small-type-Small-Type A) (λ a → is-small-type-Small-Type (B a))
 ```
+
+### Every type of universe level `l` is `(lsuc l)`-small
+
+```agda
+is-small-lsuc : {l : Level} (X : UU l) → is-small (lsuc l) X
+is-small-lsuc {l} = is-small-lmax (lsuc l)
+```
+
+### Small types are closed under equivalences
+
+```agda
+is-small-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} (B : UU l2) →
+  A ≃ B → is-small l3 B → is-small l3 A
+is-small-equiv B e (X , h) = (X , h ∘e e)
+
+is-small-equiv' :
+  {l1 l2 l3 : Level} (A : UU l1) {B : UU l2} →
+  A ≃ B → is-small l3 A → is-small l3 B
+is-small-equiv' A e = is-small-equiv A (inv-equiv e)
+
+equiv-is-small-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} →
+  A ≃ B → is-small l3 A ≃ is-small l3 B
+equiv-is-small-equiv e =
+  equiv-tot (equiv-precomp-equiv (inv-equiv e))
+```
