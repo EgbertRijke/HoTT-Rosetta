@@ -8,7 +8,7 @@ open import universe-levels
 open import section-5-1-the-inductive-definition-of-identity-types
 ```
 
-We show that identifications can be *concatenated* and *inverted*, which
+We show that identifications can be _concatenated_ and _inverted_, which
 corresponds to the transitivity and symmetry of the identity type.
 
 ## Definition 5.2.1
@@ -103,7 +103,7 @@ module _
 
 The next question is whether the concatenation and inverting operations on
 identifications behave as expected.
-More concretely:  is concatenation of identifications associative, does it
+More concretely: is concatenation of identifications associative, does it
 satisfy the unit laws, and is the inverse of an identification indeed a
 two-sided inverse?
 
@@ -120,7 +120,7 @@ that `(p ∙ q) ∙ r` and `p ∙ (q ∙ r)` are judgmentally equal.
 However, both `(p ∙ q) ∙ r` and `p ∙ (q ∙ r)` are elements of the same
 type: they are identifications of type `x = w`.
 Since the identity type is a type like any other, we can ask whether there is an
-*identification*
+_identification_
 
 ```text
   (p ∙ q) ∙ r = p ∙ (q ∙ r).
@@ -128,7 +128,7 @@ Since the identity type is a type like any other, we can ask whether there is an
 
 This is a very useful idea: While it is often impossible to show that two
 elements of the same type are judgmentally equal, it may be the case that those
-two elements can be *identified*.
+two elements can be _identified_.
 Indeed, we identify two elements by constructing an element of the identity
 type, and we can use all the type theory at our disposal in order to construct
 such an element.
@@ -275,7 +275,7 @@ We have seen that the associator, the unit laws, and the inverse laws, are all
 proven by constructing an identification of identifications.
 And indeed, there is nothing that would stop us from considering identifications
 of those identifications of identifications.
-We can go up as far as we like in the *tower of identity types*, which is
+We can go up as far as we like in the _tower of identity types_, which is
 obtained by iteratively taking identity types.
 
 The iterated identity types give types in homotopy type theory a very intricate
@@ -345,7 +345,7 @@ module _
   {l : Level} {A : UU l}
   where
 
-  left-whisker-concat : 
+  left-whisker-concat :
     {x y z : A} (p : x ＝ y) {q r : y ＝ z} (s : q ＝ r) → p ∙ q ＝ p ∙ r
   left-whisker-concat p refl = refl
 
@@ -370,7 +370,7 @@ module _
   {l : Level} {A : UU l}
   where
 
-  right-whisker-concat : 
+  right-whisker-concat :
     {x y z : A} {p q : x ＝ y} → p ＝ q →  (r : y ＝ z) → p ∙ r ＝ q ∙ r
   right-whisker-concat refl α = refl
 
@@ -393,4 +393,16 @@ module _
   coherence-triangle-identifications' :
     (left : x ＝ z) (right : y ＝ z) (top : x ＝ y) → UU l
   coherence-triangle-identifications' left right top = (top ∙ right ＝ left)
+```
+
+### Commuting squares of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z w : A}
+  (top : x ＝ y) (left : x ＝ z) (right : y ＝ w) (bottom : z ＝ w)
+  where
+
+  coherence-square-identifications : UU l
+  coherence-square-identifications = left ∙ bottom ＝ top ∙ right
 ```

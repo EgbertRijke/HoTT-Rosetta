@@ -29,6 +29,10 @@ module _
   iterate : ℕ → (X → X) → (X → X)
   iterate zero-ℕ f x = x
   iterate (succ-ℕ k) f x = f (iterate k f x)
+
+  iterate' : ℕ → (X → X) → (X → X)
+  iterate' zero-ℕ f x = x
+  iterate' (succ-ℕ k) f x = iterate' k f (f x)
 ```
 
 ```agda

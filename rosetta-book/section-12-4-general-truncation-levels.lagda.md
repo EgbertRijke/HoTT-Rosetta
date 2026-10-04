@@ -11,6 +11,7 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import exercise-8-4-prime-and-prime-counting-functions
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
@@ -561,4 +562,14 @@ abstract
   is-set-is-contr :
     {l : Level} {A : UU l} → is-contr A → is-set A
   is-set-is-contr = is-trunc-is-contr zero-𝕋
+```
+
+### The iterated successor on truncation levels
+
+```agda
+iterate-succ-𝕋 : ℕ → 𝕋 → 𝕋
+iterate-succ-𝕋 n x = iterate' n succ-𝕋 x
+
+iterate-succ-𝕋' : 𝕋 → ℕ → 𝕋
+iterate-succ-𝕋' x n = iterate-succ-𝕋 n x
 ```

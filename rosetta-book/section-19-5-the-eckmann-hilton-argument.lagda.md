@@ -2,6 +2,16 @@
 
 ```agda
 module section-19-5-the-eckmann-hilton-argument where
+
+open import universe-levels
+open import section-2-2-ordinary-function-types
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
+open import section-5-3-the-action-on-identifications-of-functions
+open import exercise-5-2-inverse-concatenation-maps
+open import section-10-4-equivalences-are-contractible-maps
+open import section-19-4-homotopy-groups-of-types
 ```
 
 The Eckmann-Hilton argument is used to show that `π_n(A)` is an abelian group for all `n ≥ 2`.
@@ -75,6 +85,14 @@ In other words, for any two identifications `r : p = p'` and `s : q = q'` as in 
 
 The repeated endpoint labels in these diagrams denote the same points.
 We obtain `r ∙_h s ≔ ap-binary_{_ ∙ _}(r,s) : p ∙ q = p' ∙ q'`.
+
+```agda
+horizontal-concat-Id² :
+  {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} {u v : y ＝ z} →
+  p ＝ q → u ＝ v → p ∙ u ＝ q ∙ v
+horizontal-concat-Id² α β = ap-binary (_∙_) α β
+```
+
 The **vertical concatenation** operation, which concatenates `r : p = p'` and `r' : p' = p''` as in the diagram
 
 ```text
@@ -86,6 +104,12 @@ The **vertical concatenation** operation, which concatenates `r : p = p'` and `r
 ```
 
 is given by ordinary concatenation of identifications.
+
+```agda
+vertical-concat-Id² :
+  {l : Level} {A : UU l} {x y : A} {p q r : x ＝ y} → p ＝ q → q ＝ r → p ＝ r
+vertical-concat-Id² α β = α ∙ β
+```
 
 ## Lemma 19.5.4
 
@@ -189,3 +213,91 @@ The claim now follows, because
 ```
 
  ◻
+
+## Supplement
+
+```agda
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2} (f : A →∗ B)
+  where
+
+  module _
+    (H : is-pointed-equiv f)
+    where
+
+    coherence-point-is-section-map-inv-is-pointed-equiv :
+      coherence-point-unpointed-htpy-pointed-Π
+        ( f ∘∗ pointed-map-inv-is-pointed-equiv f H)
+        ( id-pointed-map)
+        ( is-section-map-inv-is-pointed-equiv f H)
+    coherence-point-is-section-map-inv-is-pointed-equiv =
+      ( right-whisker-concat
+        ( ap-concat
+          ( map-pointed-map f)
+          ( inv (ap _ (preserves-point-pointed-map f)))
+          ( _) ∙
+          ( horizontal-concat-Id²
+            ( ap-inv
+              ( map-pointed-map f)
+              ( ap _ (preserves-point-pointed-map f)) ∙
+              ( inv
+                ( ap
+                  ( inv)
+                  ( ap-comp
+                    ( map-pointed-map f)
+                    ( map-inv-is-pointed-equiv f H)
+                    ( preserves-point-pointed-map f)))))
+            ( inv (coherence-map-inv-is-equiv H (point-Pointed-Type A)))))
+        ( preserves-point-pointed-map f)) ∙
+      ( assoc
+        ( inv
+          ( ap
+            ( map-pointed-map f ∘ map-inv-is-pointed-equiv f H)
+            ( preserves-point-pointed-map f)))
+        ( (is-section-map-inv-is-pointed-equiv f H) _)
+        ( preserves-point-pointed-map f)) ∙
+      ( inv
+        ( ( right-unit) ∙
+          ( left-transpose-eq-concat
+            ( ap
+              ( map-pointed-map f ∘ map-inv-is-pointed-equiv f H)
+              ( preserves-point-pointed-map f))
+            ( (is-section-map-inv-is-pointed-equiv f H) _)
+            ( ( (is-section-map-inv-is-pointed-equiv f H) _) ∙
+              ( preserves-point-pointed-map f))
+            ( ( inv (nat-htpy (is-section-map-inv-is-pointed-equiv f H) _)) ∙
+              ( left-whisker-concat
+                ( (is-section-map-inv-is-pointed-equiv f H) _)
+                ( ap-id (preserves-point-pointed-map f)))))))
+
+    is-pointed-section-pointed-map-inv-is-pointed-equiv :
+      is-pointed-section f (pointed-map-inv-is-pointed-equiv f H)
+    pr1 is-pointed-section-pointed-map-inv-is-pointed-equiv =
+      is-section-map-inv-is-pointed-equiv f H
+    pr2 is-pointed-section-pointed-map-inv-is-pointed-equiv =
+      coherence-point-is-section-map-inv-is-pointed-equiv
+
+module _
+  {l1 l2 : Level} {A : Pointed-Type l1} {B : Pointed-Type l2}
+  (e : A ≃∗ B)
+  where
+
+  is-pointed-section-pointed-map-inv-pointed-equiv :
+    is-pointed-section
+      ( pointed-map-pointed-equiv e)
+      ( pointed-map-inv-pointed-equiv e)
+  is-pointed-section-pointed-map-inv-pointed-equiv =
+    is-pointed-section-pointed-map-inv-is-pointed-equiv
+      ( pointed-map-pointed-equiv e)
+      ( is-pointed-equiv-pointed-equiv e)
+
+  coherence-point-is-section-map-inv-pointed-equiv :
+    coherence-point-unpointed-htpy-pointed-Π
+      ( pointed-map-pointed-equiv e ∘∗ pointed-map-inv-pointed-equiv e)
+      ( id-pointed-map)
+      ( is-section-map-inv-pointed-equiv e)
+  coherence-point-is-section-map-inv-pointed-equiv =
+    coherence-point-is-section-map-inv-is-pointed-equiv
+      ( pointed-map-pointed-equiv e)
+      ( is-pointed-equiv-pointed-equiv e)
+```

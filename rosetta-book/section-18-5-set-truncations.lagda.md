@@ -2,12 +2,19 @@
 
 ```agda
 module section-18-5-set-truncations where
+
+open import universe-levels
+open import section-9-2-bi-invertible-maps
+open import section-12-3-sets
+open import section-12-4-general-truncation-levels
+open import section-13-1-equivalent-forms-of-function-extensionality
+open import section-14-1-the-universal-property-of-propositional-truncations
 ```
 
 An important instance of set quotients in the univalent foundations of mathematics is the notion of set truncation.
 Analogous to the propositional truncation, the set truncation of a type `A` is a map `η:A→ ‖A‖_0` into a set `‖A‖_0` such that any map `f:A→ X` into a set `X` extends uniquely along `η`:
 
-*Triangle-shaped diagram (automatic draft).*
+_Triangle-shaped diagram (automatic draft)._
 
 ```text
   [A]
@@ -19,16 +26,26 @@ Arrows:
 - A --η--> ‖A‖_0
 - ‖A‖_0 --unlabeled--> X
 ```
+
 In other words, the set truncation `η:A→‖A‖_0` is the universal way of mapping `A` into a set.
 We first specify what it means for a map `f:A→ B` into a set `B` to be a set truncation of `A`.
 
 ## Definition 18.5.1
 
 We say that a map `f:A→ B` into a set `B` is a **set truncation** if the precomposition function
+
 ```text
 _∘ f : (B→ X)→ (A→ X)
 ```
+
 is an equivalence for every set `X`.
+
+```agda
+is-set-truncation :
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) → (A → type-Set B) → UUω
+is-set-truncation B f =
+  {l : Level} (C : Set l) → is-equiv (precomp-Set f C)
+```
 
 In the following theorem we prove several conditions that are equivalent to being a set truncation.
 
@@ -40,30 +57,36 @@ Then the following are equivalent:
 1. The map `f` is a set truncation.
 
 2. The map `f` satisfies the **dependent universal property** of the set truncation: For every family `X` of sets over `B`, the precomposition function
+
 ```text
 _∘ f : (Π(b:B) X(b))→(Π(a:A) X(f(a)))
 ```
+
     is an equivalence.
 
 3. The map `f` is surjective and effective with respect to the equivalence relation `x,y↦‖x=y‖`, i.e., we have equivalences
+
 ```text
 (f(x)=f(y))≃ ‖x=y‖
 ```
+
     for every `x,y:A`.
 
 ### Proof
 
-*Proof.* The fact that (2) implies (1) is immediate.
+_Proof._ The fact that (2) implies (1) is immediate.
 Moreover, the fact that (1) is equivalent to (3) follows from the fact that any map `h:A→ X` into a set `X` comes equipped with a function
+
 ```text
 ‖x=y‖→ (h(x)=h(y))
 ```
+
 for every `x,y:A`.
 
 It remains to prove that (1) implies (2).
 Consider a family `X` of sets over `B`, and consider the commuting square
 
-*Square-shaped diagram (automatic draft).*
+_Square-shaped diagram (automatic draft)._
 
 ```text
 [Σ(g:B→ B) Π(b:B) X(g(b))]---->[Σ(h:A→ B) Π(a:A) X(h(a))]
@@ -76,40 +99,73 @@ Arrows:
 - Σ(h:A→ B) Π(a:A) X(h(a)) --≃--> (A→Σ(b:B) X(b))
 - (B→Σ(b:B) X(b)) --_∘ f--> (A→Σ(b:B) X(b))
 ```
+
 The side maps are equivalences by the distributivity of `Π` over `Σ`, and the bottom map is an equivalence by the assumption that `f` is a set truncation.
 Therefore it follows that the top map is an equivalence.
 Furthermore, note that the map
+
 ```text
 _∘ f : (B→ B)→ (A→ B)
 ```
+
 is an equivalence by the assumption that `f` is a set truncation.
 Therefore it follows from Theorem 11.1.6 that the map
+
 ```text
 _∘ f : (Π(b:B) X(g(b)))→ (Π(a:A) X(g(f(a))))
 ```
+
 is an equivalence for every `g:B→ B`.
 Now we take `g≔ id` to complete the proof that (1) implies (2). ◻
 
 ## Corollary 18.5.3
 
 On any universe `𝒰`, there is an operation `‖_‖_0:𝒰→Set_𝒰` such that every type `A` in `𝒰` comes equipped with a map
+
 ```text
 η:A→‖A‖_0
 ```
+
 that satisfies the universal property of the set truncation.
 The set `‖A‖_0` is called the **set truncation** of `A`.
 
 ### Proof
 
-*Proof.* By Theorem 18.5.2 it follows that a map `f:A→ B` into a set `B` is a set truncation if and only if it is a quotient map with respect to the equivalence relation `x,y↦‖x=y‖`.
+_Proof._ By Theorem 18.5.2 it follows that a map `f:A→ B` into a set `B` is a set truncation if and only if it is a quotient map with respect to the equivalence relation `x,y↦‖x=y‖`.
 Given a type `A` in `𝒰`, the quotient of `A` by `x,y↦‖x=y‖` is equivalent to a type in `𝒰` by the replacement axiom. ◻
+
+```agda
+trunc-Set : {l : Level} → UU l → Set l
+trunc-Set = trunc zero-𝕋
+
+type-trunc-Set : {l : Level} → UU l → UU l
+type-trunc-Set = type-trunc zero-𝕋
+
+is-set-type-trunc-Set : {l : Level} {A : UU l} → is-set (type-trunc-Set A)
+is-set-type-trunc-Set = is-trunc-type-trunc
+
+unit-trunc-Set : {l : Level} {A : UU l} → A → type-trunc-Set A
+unit-trunc-Set = unit-trunc
+
+unit-trunc-Set' : {l : Level} (A : UU l) → A → type-trunc-Set A
+unit-trunc-Set' A = unit-trunc-Set
+
+is-set-truncation-trunc-Set :
+  {l1 : Level} (A : UU l1) → is-set-truncation (trunc-Set A) unit-trunc-Set
+is-set-truncation-trunc-Set A = is-truncation-trunc
+
+║_║₀ : {l : Level} → UU l → UU l
+║_║₀ = type-trunc-Set
+```
 
 ## Corollary 18.5.4
 
 The set truncation `η:A→‖A‖_0` is surjective and effective with respect to the equivalence relation `x,y↦‖x=y‖`, i.e., we have an equivalence
+
 ```text
 (η(x)=η(y))≃ ‖x=y‖
 ```
+
 for each `x,y:A`.
 
 By this corollary, we may think of the set truncation `‖A‖_0` of `A` as the set of connected components of `A`.
@@ -120,17 +176,21 @@ For example, any `k`-element set is a type that is in the same connected compone
 
 A type `A` is said to be **connected** if its set truncation `‖A‖_0` is contractible.
 We define
+
 ```text
 is-conn(A)≔is-contr‖A‖_0.
 ```
+
 Furthermore, we say that a map `f:A→ B` is **connected** if all its fibers are connected.
 
 ## Remark 18.5.6
 
 In particular, every connected type is inhabited, because if `‖A‖_0` is contractible, then we have equivalences
+
 ```text
 ‖A‖≃ (‖A‖_0→‖A‖) ≃ (A→ ‖A‖),
 ```
+
 and the latter type contains the unit of the propositional truncation.
 
 Using the notion of connectivity, we can add one more property to the list of equivalent characterizations of set truncations given in Theorem 18.5.2.
@@ -146,35 +206,43 @@ Then the following are equivalent:
 
 ### Proof
 
-*Proof.* First, suppose that `f` is a set truncation, and consider `b:B`.
+_Proof._ First, suppose that `f` is a set truncation, and consider `b:B`.
 Our goal is to show that the type
+
 ```text
 ‖fib(f, b)‖_0
 ```
+
 is contractible.
 Since `f` is surjective by Theorem 18.5.2, there exists an element `a:A` equipped with an identification `f(a)=b`.
 We are proving a proposition, so it suffices to show that `‖fib(f, f(a))‖_0` is contractible.
 At the center of contraction we have
+
 ```text
 η(a,refl):‖fib(f, f(a))‖_0.
 ```
+
 In order to construct the contraction, we use the dependent universal property of the set truncation, by which it suffices to construct a function
+
 ```text
 Π(x:A) Π(p:f(x)=f(a)) η(a,refl)=η(x,p)
 ```
+
 Recall from Theorem 18.5.2 that the map `f` is effective, so we have an equivalence `e:‖x=a‖≃ (f(x)=f(a))` for every `x:A`.
 Furthermore, equality in set truncations are propositions, so we may even eliminate the propositional truncation from `‖x=a‖`.
 Therefore it suffices to prove
+
 ```text
 Π(x:A) Π(p:x=a) η(a,refl)=η(x,e(η(p)))
 ```
+
 This is immediate, since `e(η(refl))=refl`.
 This completes the proof of (1) implies (2).
 
 For the converse, suppose that `f` is connected, and consider a set `X`.
 Note that we have a commuting square
 
-*Square-shaped diagram (automatic draft).*
+_Square-shaped diagram (automatic draft)._
 
 ```text
 [(Π(b:B) ‖fib(f, b)‖_0→ X)]---->[(Π(b:B) fib(f, b)→ X)]
@@ -187,6 +255,7 @@ Arrows:
 - (B→ X) --_∘ f--> (A→ X)
 - (B→ X) --h↦λ b. λ u. h(b)--> (Π(b:B) ‖fib(f, b)‖_0→ X)
 ```
+
 In this commuting square, the map on the left is an equivalence since `‖fib(f, b)‖_0` is contractible for each `b:B`.
 The top map is an equivalence because `X` is a set, and the right map is an equivalence by Exercise 13.15.
 Therefore it follows that the bottom map is an equivalence, which completes the proof that (2) implies (1). ◻
@@ -195,9 +264,10 @@ Therefore it follows that the bottom map is an equivalence, which completes the 
 
 There are truncation operations for every truncation level.
 That is, we can define for every type `A` a map `η:A→‖A‖_k` such that the map
+
 ```text
 _∘η : (‖A‖_k→ X)→ (A→ X)
 ```
+
 is an equivalence for every `k`-truncated type `X`.
 To learn more about general `k`-truncations, we refer to Chapter 7 of \[citation: `hottbook`\].
-

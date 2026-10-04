@@ -511,7 +511,7 @@ is-prop-double-negation :
 is-prop-double-negation = is-prop-neg
 ```
 
-## Supplements
+## Supplement
 
 ### The type family of identifications between values of two dependent functions
 
@@ -778,4 +778,33 @@ pr2 (is-empty-Prop A) = is-property-is-empty
 is-nonempty-Prop : {l1 : Level} → UU l1 → Prop l1
 pr1 (is-nonempty-Prop A) = is-nonempty A
 pr2 (is-nonempty-Prop A) = is-property-is-empty
+```
+
+### The type of functions into a set is a set
+
+```agda
+abstract
+  is-set-function-type :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} →
+    is-set B → is-set (A → B)
+  is-set-function-type = is-trunc-function-type zero-𝕋
+
+hom-Set :
+  {l1 l2 : Level} → Set l1 → Set l2 → UU (l1 ⊔ l2)
+hom-Set A B = type-Set A → type-Set B
+
+is-set-hom-Set :
+  {l1 l2 : Level} (A : Set l1) (B : Set l2) →
+  is-set (hom-Set A B)
+is-set-hom-Set A B = is-set-function-type (is-set-type-Set B)
+
+hom-set-Set :
+  {l1 l2 : Level} → Set l1 → Set l2 → Set (l1 ⊔ l2)
+pr1 (hom-set-Set A B) = hom-Set A B
+pr2 (hom-set-Set A B) = is-set-hom-Set A B
+
+precomp-Set :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : Set l3) →
+  (B → type-Set C) → (A → type-Set C)
+precomp-Set f C = precomp f (type-Set C)
 ```
