@@ -2,6 +2,16 @@
 
 ```agda
 module section-19-6-concrete-versus-abstract-groups-in-univalent-mathematics where
+
+open import universe-levels
+open import section-4-2-the-unit-type
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
+open import section-12-3-sets
+open import section-12-4-general-truncation-levels
+open import section-14-2-propositional-truncations-as-higher-inductive-types
+open import section-18-5-set-truncations
+open import section-19-4-homotopy-groups-of-types
 ```
 
 In univalent mathematics there is another exciting perspective on group theory.
@@ -20,6 +30,155 @@ of pointed connected `1`-types `B` equipped with a group isomorphism from `G` to
 We write `BG` for the unique pointed connected `1`-type whose loop space is isomorphic to `G`.
 The pointed type `BG` is also called the **delooping** of `G`, or the **classifying type** of `G`.
 The fact that the above type is contractible is of course heavily reliant on the univalence axiom.
+
+```agda
+∞-Group : (l : Level) → UU (lsuc l)
+∞-Group l = Σ (Pointed-Type l) (λ X → is-0-connected (type-Pointed-Type X))
+
+module _
+  {l : Level} (G : ∞-Group l)
+  where
+
+  classifying-pointed-type-∞-Group : Pointed-Type l
+  classifying-pointed-type-∞-Group = pr1 G
+
+  classifying-type-∞-Group : UU l
+  classifying-type-∞-Group =
+    type-Pointed-Type classifying-pointed-type-∞-Group
+
+  shape-∞-Group : classifying-type-∞-Group
+  shape-∞-Group =
+    point-Pointed-Type classifying-pointed-type-∞-Group
+
+  point-∞-Group : unit → classifying-type-∞-Group
+  point-∞-Group = point shape-∞-Group
+
+  abstract
+    is-0-connected-classifying-type-∞-Group :
+      is-0-connected classifying-type-∞-Group
+    is-0-connected-classifying-type-∞-Group = pr2 G
+
+--   abstract
+--     mere-eq-classifying-type-∞-Group :
+--       (X Y : classifying-type-∞-Group) → mere-eq X Y
+--     mere-eq-classifying-type-∞-Group =
+--       mere-eq-is-0-connected
+--         is-0-connected-classifying-type-∞-Group
+
+  pointed-type-∞-Group : Pointed-Type l
+  pointed-type-∞-Group = Ω classifying-pointed-type-∞-Group
+
+  type-∞-Group : UU l
+  type-∞-Group = type-Pointed-Type pointed-type-∞-Group
+
+  unit-∞-Group : type-∞-Group
+  unit-∞-Group = point-Pointed-Type pointed-type-∞-Group
+
+  mul-∞-Group : (x y : type-∞-Group) → type-∞-Group
+  mul-∞-Group = mul-Ω classifying-pointed-type-∞-Group
+
+  associative-mul-∞-Group :
+    (x y z : type-∞-Group) →
+    mul-∞-Group (mul-∞-Group x y) z ＝
+    mul-∞-Group x (mul-∞-Group y z)
+  associative-mul-∞-Group = associative-mul-Ω classifying-pointed-type-∞-Group
+
+  left-unit-law-mul-∞-Group :
+    (x : type-∞-Group) → mul-∞-Group unit-∞-Group x ＝ x
+  left-unit-law-mul-∞-Group =
+    left-unit-law-mul-Ω classifying-pointed-type-∞-Group
+
+  right-unit-law-mul-∞-Group :
+    (y : type-∞-Group) → mul-∞-Group y unit-∞-Group ＝ y
+  right-unit-law-mul-∞-Group =
+    right-unit-law-mul-Ω classifying-pointed-type-∞-Group
+
+  coherence-unit-laws-mul-∞-Group :
+    left-unit-law-mul-∞-Group unit-∞-Group ＝
+    right-unit-law-mul-∞-Group unit-∞-Group
+  coherence-unit-laws-mul-∞-Group =
+    coherence-unit-laws-mul-Ω classifying-pointed-type-∞-Group
+
+  inv-∞-Group : type-∞-Group → type-∞-Group
+  inv-∞-Group = inv-Ω classifying-pointed-type-∞-Group
+
+  left-inverse-law-mul-∞-Group :
+    (x : type-∞-Group) → mul-∞-Group (inv-∞-Group x) x ＝ unit-∞-Group
+  left-inverse-law-mul-∞-Group =
+    left-inverse-law-mul-Ω classifying-pointed-type-∞-Group
+
+  right-inverse-law-mul-∞-Group :
+    (x : type-∞-Group) → mul-∞-Group x (inv-∞-Group x) ＝ unit-∞-Group
+  right-inverse-law-mul-∞-Group =
+    right-inverse-law-mul-Ω classifying-pointed-type-∞-Group
+
+Concrete-Group : (l : Level) → UU (lsuc l)
+Concrete-Group l = Σ (∞-Group l) (λ G → is-set (type-∞-Group G))
+
+module _
+  {l : Level} (G : Concrete-Group l)
+  where
+
+  ∞-group-Concrete-Group : ∞-Group l
+  ∞-group-Concrete-Group = pr1 G
+
+  classifying-pointed-type-Concrete-Group : Pointed-Type l
+  classifying-pointed-type-Concrete-Group =
+    classifying-pointed-type-∞-Group ∞-group-Concrete-Group
+
+  classifying-type-Concrete-Group : UU l
+  classifying-type-Concrete-Group =
+    classifying-type-∞-Group ∞-group-Concrete-Group
+
+  shape-Concrete-Group : classifying-type-Concrete-Group
+  shape-Concrete-Group =
+    shape-∞-Group ∞-group-Concrete-Group
+
+  is-0-connected-classifying-type-Concrete-Group :
+    is-0-connected classifying-type-Concrete-Group
+  is-0-connected-classifying-type-Concrete-Group =
+    is-0-connected-classifying-type-∞-Group ∞-group-Concrete-Group
+
+--   mere-eq-classifying-type-Concrete-Group :
+--     (X Y : classifying-type-Concrete-Group) → mere-eq X Y
+--   mere-eq-classifying-type-Concrete-Group =
+--     mere-eq-classifying-type-∞-Group ∞-group-Concrete-Group
+
+  type-Concrete-Group : UU l
+  type-Concrete-Group = type-∞-Group ∞-group-Concrete-Group
+
+  is-set-type-Concrete-Group : is-set type-Concrete-Group
+  is-set-type-Concrete-Group = pr2 G
+
+  set-Concrete-Group : Set l
+  pr1 set-Concrete-Group = type-Concrete-Group
+  pr2 set-Concrete-Group = is-set-type-Concrete-Group
+
+--   abstract
+--     is-1-type-classifying-type-Concrete-Group :
+--       is-trunc one-𝕋 classifying-type-Concrete-Group
+--     is-1-type-classifying-type-Concrete-Group X Y =
+--       apply-universal-property-trunc-Prop
+--         ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group X)
+--         ( is-set-Prop (X ＝ Y))
+--         ( λ where
+--           refl →
+--             apply-universal-property-trunc-Prop
+--               ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group Y)
+--               ( is-set-Prop (shape-Concrete-Group ＝ Y))
+--               ( λ where refl → is-set-type-Concrete-Group))
+
+--   classifying-1-type-Concrete-Group : Truncated-Type l one-𝕋
+--   classifying-1-type-Concrete-Group =
+--     classifying-type-Concrete-Group , is-1-type-classifying-type-Concrete-Group
+--   pr1 classifying-1-type-Concrete-Group = classifying-type-Concrete-Group
+--   pr2 classifying-1-type-Concrete-Group =
+--     is-1-type-classifying-type-Concrete-Group
+
+--   Id-BG-Set :
+--     (X Y : classifying-type-Concrete-Group) → Set l
+--   Id-BG-Set X Y = Id-Set classifying-1-type-Concrete-Group X Y
+```
 
 ## Example 19.6.1
 

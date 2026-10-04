@@ -80,7 +80,7 @@ Note that the fiber of the precomposition map `- ∘ f : (P → Q) → (A → Q)
 
 Therefore we see that if `f` satisfies the universal property of the propositional truncation, then these fibers are contractible.
 In other words, for each map `g : A → Q` into a proposition `Q` there is a unique map `h : P → Q` for which `h ∘ f = g`.
-We also say that every map `g : A → Q` into a proposition `Q` *extends* uniquely along `f`, as indicated in the diagram
+We also say that every map `g : A → Q` into a proposition `Q` _extends_ uniquely along `f`, as indicated in the diagram
 
 ```text
     A
@@ -228,6 +228,7 @@ We see from this triangle that
 ```text
   ((A → Q) → (P → Q)) ↔ ((A → Q) → (P' → Q)),
 ```
+
 and this implies that (i) holds if and only if (ii) holds. ◻
 
 ```agda

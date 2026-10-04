@@ -31,12 +31,12 @@ However, the propositional truncation is not guaranteed to exist, so we will add
 We do this by presenting the propositional truncation of a type `A` as a higher inductive type.
 The propositional truncation `‖A‖` of a type `A` was one of the first examples of a higher inductive type, along with the circle, which we will discuss in Chapters 21 and 22.
 
-The idea of higher inductive types is similar to the idea of ordinary inductive types, with the added feature that constructors of higher inductive types can also be used to generate *identifications*.
+The idea of higher inductive types is similar to the idea of ordinary inductive types, with the added feature that constructors of higher inductive types can also be used to generate _identifications_.
 In other words, higher inductive types may be specified by two kinds of constructors:
 
-1. The *point constructors* are used to generate elements of the higher inductive types.
+1. The _point constructors_ are used to generate elements of the higher inductive types.
 
-2. The *path constructors* are used to generate identifications between elements of the higher inductive type.
+2. The _path constructors_ are used to generate identifications between elements of the higher inductive type.
 
 The induction principle of the higher inductive type then tells us how to construct sections of families over it.
 The rules for higher inductive types therefore come in four sets, just as the rules for ordinary inductive types in Chapter 4: the formation rule, the constructors, the induction principle, and the computation rules.
@@ -136,7 +136,7 @@ The type `‖A‖` has two constructors: a point constructor `η` and a path con
    ```
 
 2. To apply `h` to the paths `α(x,y)`, we need to use the dependent action on paths from Definition 5.4.2.
-For each `x, y : ‖A‖` we obtain an identification
+   For each `x, y : ‖A‖` we obtain an identification
 
    ```text
      apd_{h}(α(x,y)) : tr_Q(α(x,y),h(x)) = h(y)
@@ -147,7 +147,7 @@ For each `x, y : ‖A‖` we obtain an identification
    ```text
      tr_P(α(x,y),u)=v
    ```
-   
+
    for any `u : Q(x)` and `v : Q(y)`.
 
 ## Definition 14.2.2
@@ -275,7 +275,7 @@ The map `η : A → ‖A‖` satisfies the universal property of the proposition
 
 ### Proof
 
-*Proof.* In order to prove that `η : A → ‖A‖` satisfies the universal property of the propositional truncation of `A`, it suffices to construct a map
+_Proof._ In order to prove that `η : A → ‖A‖` satisfies the universal property of the propositional truncation of `A`, it suffices to construct a map
 
 ```text
   (A → Q) → (‖A‖ → Q)
@@ -383,7 +383,7 @@ for any two types `A` and `B`, such that
 
 For any `f : A → B`, the map `‖f‖ : ‖A‖ → ‖B‖` is defined to be the unique extension
 
-*Square-shaped diagram (automatic draft).*
+_Square-shaped diagram (automatic draft)._
 
 ```text
           f
@@ -601,4 +601,24 @@ module _
     is-in-inhabited-subtype (inclusion-inhabited-subtype x)
   is-in-inhabited-subtype-inclusion-inhabited-subtype =
     is-in-subtype-inclusion-subtype subtype-inhabited-subtype
+```
+
+### Mere equality
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  mere-eq-Prop : A → A → Prop l
+  mere-eq-Prop x y = trunc-Prop (x ＝ y)
+
+  mere-eq : A → A → UU l
+  mere-eq x y = type-Prop (mere-eq-Prop x y)
+
+  is-prop-mere-eq : (x y : A) → is-prop (mere-eq x y)
+  is-prop-mere-eq x y = is-prop-type-trunc-Prop
+
+all-elements-merely-equal : {l : Level} → UU l → UU l
+all-elements-merely-equal A = (x y : A) → mere-eq x y
 ```

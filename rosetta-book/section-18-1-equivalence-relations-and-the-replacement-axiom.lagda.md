@@ -8,6 +8,7 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-7-2-the-congruence-relations-on-natural-numbers
+open import section-9-2-bi-invertible-maps
 open import section-11-1-families-of-equivalences
 open import section-11-4-embeddings
 open import section-12-1-propositions
@@ -104,9 +105,9 @@ module _
     is-prop-Π
       ( λ x →
         is-prop-Π
-          ( λ y → 
+          ( λ y →
             is-prop-Π
-              ( λ z → 
+              ( λ z →
                 is-prop-function-type
                   ( is-prop-function-type (is-prop-type-Relation-Prop R x z)))))
 
@@ -422,7 +423,7 @@ Without the replacement axiom, `X[I]` would be a class.
 In type theory, we may similarly ask whether the image of a map `X : I → 𝒰` is `𝒰`-small, assuming that `I` is `𝒰`-small.
 The replacement axiom settles a more general variant of this question.
 The key observation is that the identity types of `𝒰` are `𝒰`-small by the univalence axiom.
-In other words, univalent universes are *locally small* in the following sense.
+In other words, univalent universes are _locally small_ in the following sense.
 
 ## Definition 18.1.6
 
@@ -447,7 +448,7 @@ Similarly, a map `f : A → B` is said to be **locally `𝒰`-small** if all of 
    ```text
      (A = B) ≃ (A ≃ B)
    ```
-    
+
    for each `A, B : 𝒰`, and the type `A ≃ B` is in `𝒰`.
 
 4. For any family `B` of locally `𝒰`-small types over a `𝒰`-small type `A`, the dependent product `Π(x : A) B(x)` is locally `𝒰`-small.
@@ -484,3 +485,52 @@ Then the type `A/R` is `𝒰`-small, since it is equivalent to the image of
 
 which maps the `𝒰`-small type `A` into the locally `𝒰`-small type `A → Prop_𝒰`.
 
+## Supplement
+
+### Effective maps
+
+```agda
+is-effective :
+  {l1 l2 l3 : Level} {A : UU l1} (R : equivalence-relation l2 A) {B : UU l3}
+  (f : A → B) → UU (l1 ⊔ l2 ⊔ l3)
+is-effective {A = A} R f =
+  (x y : A) → (f x ＝ f y) ≃ sim-equivalence-relation R x y
+```
+
+### Maps that are effective and surjective
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  is-surjective-and-effective :
+    {l3 : Level} {B : UU l3} (f : A → B) → UU (l1 ⊔ l2 ⊔ l3)
+  is-surjective-and-effective f = is-surjective f × is-effective R f
+```
+
+### Mere equality is an equivalence relation
+
+```agda
+refl-mere-eq : {l : Level} {A : UU l} → is-reflexive (mere-eq {l} {A})
+refl-mere-eq a = unit-trunc-Prop refl
+
+mere-eq-eq : {l : Level} {A : UU l} {x y : A} → x ＝ y → mere-eq x y
+mere-eq-eq {x = x} refl = refl-mere-eq x
+
+abstract
+  symmetric-mere-eq :
+    {l : Level} {A : UU l} → is-symmetric (mere-eq {l} {A})
+  symmetric-mere-eq _ _ = map-trunc-Prop inv
+
+abstract
+  transitive-mere-eq :
+    {l : Level} {A : UU l} → is-transitive (mere-eq {l} {A})
+  transitive-mere-eq x y z =
+    map-binary-trunc-Prop (λ p q → q ∙ p)
+
+mere-eq-equivalence-relation :
+  {l1 : Level} (A : UU l1) → equivalence-relation l1 A
+mere-eq-equivalence-relation A =
+  ( mere-eq-Prop , refl-mere-eq , symmetric-mere-eq , transitive-mere-eq)
+```
