@@ -100,23 +100,31 @@ p(x) : Σ(k : ℕ) 1 · k = x
 ```
 
 indexed by `x:ℕ`.
-Such an element `p(x)` is constructed as the pair `(x, q(x))`, where the identification `q(x) : 1 · x = x` is obtained from the left unit law of multiplication on `ℕ`, which was constructed in Exercise 5.5.
-
-Similarly, the type theoretic proof that every natural number `k` divides `0`, i.e., that `k | 0`, is the pair `(0, p)` consisting of the natural number `0` and the identification `p : k · 0 = 0` obtained from the right annihilation law of multiplication on `ℕ`.
-This identification was also constructed in Exercise 5.5.
+Such an element `p(x)` is constructed as the pair `(x, q(x))`, where the identification `q(x) : 1 · x = x` is obtained from the left unit law of multiplication on `ℕ`, which was constructed in Exercise 5.5. 
 
 ```agda
 div-one-ℕ :
   (x : ℕ) → div-ℕ 1 x
 pr1 (div-one-ℕ x) = x
 pr2 (div-one-ℕ x) = right-unit-law-mul-ℕ x
+
+div-is-one-ℕ :
+  (k x : ℕ) → is-one-ℕ k → div-ℕ k x
+div-is-one-ℕ .1 x refl = div-one-ℕ x
 ```
+
+Similarly, the type theoretic proof that every natural number `k` divides `0`, i.e., that `k | 0`, is the pair `(0, p)` consisting of the natural number `0` and the identification `p : k · 0 = 0` obtained from the right annihilation law of multiplication on `ℕ`.
+This identification was also constructed in Exercise 5.5.
 
 ```agda
 div-zero-ℕ :
   (k : ℕ) → div-ℕ k 0
 pr1 (div-zero-ℕ k) = 0
 pr2 (div-zero-ℕ k) = left-zero-law-mul-ℕ k
+
+div-is-zero-ℕ :
+  (k x : ℕ) → is-zero-ℕ x → div-ℕ k x
+div-is-zero-ℕ k .zero-ℕ refl = div-zero-ℕ k
 ```
 
 In the following proposition we will see examples of how a hypothesis of type `d | x` can be used.
@@ -158,7 +166,7 @@ The identifications `β` and `γ` are constructed using the action on paths of a
 β ≔ ap_{(λ t. t + d · l)}(p),  and  γ ≔ ap_{(λ t. x + t)}(q)
 ```
 
-To conclude the proof that `d| x+y`, note that we have constructed the pair
+To conclude the proof that `d | x + y`, note that we have constructed the pair
 
 ```text
 (k + l, α ∙ (β ∙ γ)) : Σ(k : ℕ) d · k = x + y.
