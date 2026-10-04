@@ -406,3 +406,68 @@ module _
   coherence-square-identifications : UU l
   coherence-square-identifications = left ∙ bottom ＝ top ∙ right
 ```
+
+### The unit and absorption laws for left whiskering of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  left-unit-law-left-whisker-concat :
+    {x y : A} {p p' : x ＝ y} (α : p ＝ p') →
+    left-whisker-concat refl α ＝ α
+  left-unit-law-left-whisker-concat refl = refl
+
+  right-absorption-law-left-whisker-concat :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    left-whisker-concat p (refl {x = q}) ＝ refl
+  right-absorption-law-left-whisker-concat p q = refl
+```
+
+### The unit and absorption laws for right whiskering of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  right-unit-law-right-whisker-concat :
+    {x y : A} {p p' : x ＝ y} (α : p ＝ p') →
+    right-unit ∙ α ＝ right-whisker-concat α refl ∙ right-unit
+  right-unit-law-right-whisker-concat {p = refl} refl = refl
+
+  left-absorption-law-right-whisker-concat :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) →
+    right-whisker-concat (refl {x = p}) q ＝ refl
+  left-absorption-law-right-whisker-concat p q = refl
+```
+
+### Commutativity of left and right whiskering of identifications
+
+```agda
+module _
+  {l : Level} {A : UU l} {x y z : A} {p p' : x ＝ y} {q q' : y ＝ z}
+  where
+
+  commutative-left-whisker-right-whisker-concat :
+    (β : q ＝ q') (α : p ＝ p') →
+    left-whisker-concat p β ∙ right-whisker-concat α q' ＝
+    right-whisker-concat α q ∙ left-whisker-concat p' β
+  commutative-left-whisker-right-whisker-concat β refl =
+    right-unit
+
+  commutative-right-whisker-left-whisker-concat :
+    (α : p ＝ p') (β : q ＝ q') →
+    right-whisker-concat α q ∙ left-whisker-concat p' β ＝
+    left-whisker-concat p β ∙ right-whisker-concat α q'
+  commutative-right-whisker-left-whisker-concat α refl =
+    right-unit
+
+  compute-inv-commutative-right-whisker-left-whisker-concat :
+    (β : q ＝ q') (α : p ＝ p') →
+    ( inv (commutative-right-whisker-left-whisker-concat α β)) ＝
+    ( commutative-left-whisker-right-whisker-concat β α)
+  compute-inv-commutative-right-whisker-left-whisker-concat refl refl =
+    refl
+```

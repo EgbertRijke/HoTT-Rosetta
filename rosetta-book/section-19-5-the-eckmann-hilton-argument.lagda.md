@@ -9,6 +9,7 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import exercise-5-1-distributive-inv-concat
 open import exercise-5-2-inverse-concatenation-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import section-19-4-homotopy-groups-of-types
@@ -60,6 +61,30 @@ ap_{f(x,_)}(q) |        \ ap-binary_f(p,q)   | ap_{f(x',_)}(q)
 ### Proof
 
 _Proof._ The proof is immediate by identification elimination on `p` and `q`, where applicable. ◻
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C)
+  where
+
+  left-unit-ap-binary :
+    {x : A} {y y' : B} (q : y ＝ y') → ap-binary f refl q ＝ ap (f x) q
+  left-unit-ap-binary _ = refl
+
+  right-unit-ap-binary :
+    {x x' : A} (p : x ＝ x') {y : B} → ap-binary f p refl ＝ ap (λ r → f r y) p
+  right-unit-ap-binary refl = refl
+
+  triangle-ap-binary :
+    {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
+    ap-binary f p q ＝ ap (λ r → f r y) p ∙ ap (f x') q
+  triangle-ap-binary _ _ = refl
+
+  triangle-ap-binary' :
+    {x x' : A} (p : x ＝ x') {y y' : B} (q : y ＝ y') →
+    ap-binary f p q ＝ ap (f x) q ∙ ap (λ r → f r y') p
+  triangle-ap-binary' refl refl = refl
+```
 
 ## Example 19.5.3
 
@@ -124,6 +149,28 @@ r ∙_h refl_refl = r.
 
 _Proof._ This follows by identification elimination on `r` and `s`, or alternatively via Lemma 19.5.2. ◻
 
+```agda
+left-unit-law-vertical-concat-Id² :
+  {l : Level} {A : UU l} {x y : A} {p q : x ＝ y} {β : p ＝ q} →
+  vertical-concat-Id² refl β ＝ β
+left-unit-law-vertical-concat-Id² = left-unit
+
+right-unit-law-vertical-concat-Id² :
+  {l : Level} {A : UU l} {x y : A} {p q : x ＝ y} {α : p ＝ q} →
+  vertical-concat-Id² α refl ＝ α
+right-unit-law-vertical-concat-Id² = right-unit
+
+compute-left-refl-horizontal-concat-Id² :
+  {l : Level} {A : UU l} {x y z : A} {p : x ＝ y} {u v : y ＝ z} (γ : u ＝ v) →
+  horizontal-concat-Id² refl γ ＝ left-whisker-concat p γ
+compute-left-refl-horizontal-concat-Id² refl = refl
+
+compute-right-refl-horizontal-concat-Id² :
+  {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
+  horizontal-concat-Id² α refl ＝ right-whisker-concat α u
+compute-right-refl-horizontal-concat-Id² refl = refl
+```
+
 In the following lemma we establish the **interchange law** for horizontal and vertical concatenation.
 
 ## Lemma 19.5.5
@@ -155,6 +202,19 @@ Then it suffices to show that
 
 Using the unit laws for ordinary concatenation, we see that both sides reduce to `r' ∙_h s'`. ◻
 
+```agda
+interchange-Id² :
+  {l : Level} {A : UU l} {x y z : A} {p q r : x ＝ y} {u v w : y ＝ z}
+  (α : p ＝ q) (β : q ＝ r) (γ : u ＝ v) (δ : v ＝ w) →
+  ( horizontal-concat-Id²
+    ( vertical-concat-Id² α β)
+    ( vertical-concat-Id² γ δ)) ＝
+  ( vertical-concat-Id²
+    ( horizontal-concat-Id² α γ)
+    ( horizontal-concat-Id² β δ))
+interchange-Id² refl _ refl _ = refl
+```
+
 ## Theorem 19.5.6
 
 Consider a pointed type `A`, and let `r,s : Ω^2(A)`.
@@ -184,11 +244,163 @@ r ∙_h s = (refl_refl ∙ r) ∙_h (s ∙ refl_refl)
 
 These two calculations combined prove the claim. ◻
 
+```agda
+module _
+  {l : Level}
+  where
+
+  Ω² : Pointed-Type l → Pointed-Type l
+  Ω² A = iterated-loop-space 2 A
+
+  type-Ω² : {A : UU l} (a : A) → UU l
+  type-Ω² a = refl {x = a} ＝ refl {x = a}
+
+  refl-Ω² : {A : UU l} {a : A} → type-Ω² a
+  refl-Ω² = refl
+
+vertical-concat-Ω² :
+  {l : Level} {A : UU l} {a : A} → type-Ω² a → type-Ω² a → type-Ω² a
+vertical-concat-Ω² α β = vertical-concat-Id² α β
+
+horizontal-concat-Ω² :
+  {l : Level} {A : UU l} {a : A} → type-Ω² a → type-Ω² a → type-Ω² a
+horizontal-concat-Ω² α β = horizontal-concat-Id² α β
+
+module _
+  {l : Level} {A : UU l}
+  where
+
+  left-unit-law-vertical-concat-Ω² :
+    {a : A} {α : type-Ω² a} → vertical-concat-Ω² refl-Ω² α ＝ α
+  left-unit-law-vertical-concat-Ω² = left-unit
+
+  right-unit-law-vertical-concat-Ω² :
+    {a : A} {α : type-Ω² a} → vertical-concat-Ω² α refl-Ω² ＝ α
+  right-unit-law-vertical-concat-Ω² = right-unit
+
+  left-unit-law-horizontal-concat-Ω² :
+    {a : A} {α : type-Ω² a} →
+    horizontal-concat-Ω² refl-Ω² α ＝ α
+  left-unit-law-horizontal-concat-Ω² {α = α} =
+    compute-left-refl-horizontal-concat-Id² α ∙ left-unit-law-left-whisker-concat α
+
+  naturality-right-unit :
+    {x y : A} {p q : x ＝ y} (α : p ＝ q) →
+    coherence-square-identifications
+      ( right-unit)
+      ( right-whisker-concat α refl)
+      ( α)
+      ( right-unit)
+  naturality-right-unit {p = refl} refl = refl
+
+  naturality-right-unit-Ω² :
+    {x : A} (α : type-Ω² x) → right-whisker-concat α refl ＝ α
+  naturality-right-unit-Ω² α = inv right-unit ∙ naturality-right-unit α
+
+  right-unit-law-horizontal-concat-Ω² :
+    {a : A} {α : type-Ω² a} → horizontal-concat-Ω² α refl-Ω² ＝ α
+  right-unit-law-horizontal-concat-Ω² {α = α} =
+    compute-right-refl-horizontal-concat-Id² α ∙ naturality-right-unit-Ω² α
+
+  left-unit-law-left-whisker-Ω² :
+    {a : A} (α : type-Ω² a) → left-whisker-concat (refl-Ω (A , a)) α ＝ α
+  left-unit-law-left-whisker-Ω² α =
+    left-unit-law-left-whisker-concat α
+
+  right-unit-law-right-whisker-Ω² :
+    {a : A} (α : type-Ω² a) → right-whisker-concat α (refl-Ω (A , a)) ＝ α
+  right-unit-law-right-whisker-Ω² α =
+    inv (right-unit-law-right-whisker-concat α ∙ right-unit)
+
+interchange-Ω² :
+  {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω² a) →
+  Id
+    ( horizontal-concat-Ω² (vertical-concat-Ω² α β) (vertical-concat-Ω² γ δ))
+    ( vertical-concat-Ω² (horizontal-concat-Ω² α γ) (horizontal-concat-Ω² β δ))
+interchange-Ω² = interchange-Id²
+
+module _
+  {l : Level} {A : Pointed-Type l}
+  where
+
+  eckmann-hilton-Ω² :
+    (α β : type-Ω² (point-Pointed-Type A)) → α ∙ β ＝ β ∙ α
+  eckmann-hilton-Ω² α β =
+    ( inv
+      ( horizontal-concat-Id²
+        ( left-unit-law-left-whisker-Ω² α)
+        ( right-unit-law-right-whisker-Ω² β))) ∙
+    ( commutative-left-whisker-right-whisker-concat α β) ∙
+    ( horizontal-concat-Id²
+      ( right-unit-law-right-whisker-Ω² β)
+      ( left-unit-law-left-whisker-Ω² α))
+
+  inv-eckmann-hilton-Ω² :
+    (α β : type-Ω² (point-Pointed-Type A)) → α ∙ β ＝ β ∙ α
+  inv-eckmann-hilton-Ω² α β =
+    ( inv
+      ( horizontal-concat-Id²
+        ( right-unit-law-right-whisker-Ω² α)
+        ( left-unit-law-left-whisker-Ω² β))) ∙
+    ( commutative-right-whisker-left-whisker-concat α β) ∙
+    ( horizontal-concat-Id²
+      ( left-unit-law-left-whisker-Ω² β)
+      ( right-unit-law-right-whisker-Ω² α))
+
+  compute-inv-inv-eckmann-hilton-Ω² :
+    (α β : type-Ω² (point-Pointed-Type A)) →
+    inv (inv-eckmann-hilton-Ω² β α) ＝ eckmann-hilton-Ω² α β
+  compute-inv-inv-eckmann-hilton-Ω² α β =
+    ( distributive-inv-concat
+      ( ( inv
+          ( horizontal-concat-Id²
+            ( right-unit-law-right-whisker-Ω² β)
+            ( left-unit-law-left-whisker-Ω² α))) ∙
+        ( commutative-right-whisker-left-whisker-concat β α))
+      ( horizontal-concat-Id²
+        ( left-unit-law-left-whisker-Ω² α)
+        ( right-unit-law-right-whisker-Ω² β))) ∙
+    ( left-whisker-concat
+      ( inv
+        ( horizontal-concat-Id²
+          ( left-unit-law-left-whisker-Ω² α)
+            ( right-unit-law-right-whisker-Ω² β)))
+      ( distributive-inv-concat
+        ( inv
+          ( horizontal-concat-Id²
+            ( right-unit-law-right-whisker-Ω² β)
+            ( left-unit-law-left-whisker-Ω² α)))
+        ( commutative-right-whisker-left-whisker-concat β α))) ∙
+    ( left-whisker-concat
+      ( inv
+        ( horizontal-concat-Id²
+          ( left-unit-law-left-whisker-Ω² α)
+            ( right-unit-law-right-whisker-Ω² β)))
+      ( horizontal-concat-Id²
+        ( compute-inv-commutative-right-whisker-left-whisker-concat α β)
+        ( inv-inv
+          ( horizontal-concat-Id²
+            ( right-unit-law-right-whisker-Ω² β)
+            ( left-unit-law-left-whisker-Ω² α))))) ∙
+    ( inv
+      ( assoc
+        ( inv
+          ( horizontal-concat-Id²
+            ( left-unit-law-left-whisker-Ω² α)
+            ( right-unit-law-right-whisker-Ω² β)))
+        ( commutative-left-whisker-right-whisker-concat α β)
+        ( horizontal-concat-Id²
+          ( right-unit-law-right-whisker-Ω² β)
+          ( left-unit-law-left-whisker-Ω² α))))
+```
+
 ## Corollary 19.5.7
 
 For `n ≥ 2`, the `n`-th homotopy group of any pointed type is abelian.
 
 ### Proof
+
+BENCHMARK PROBLEM
 
 _Proof._ By Proposition 19.4.6 it follows that `π_n(A)` is isomorphic to the second homotopy group of some pointed type, for every `n ≥ 2`.
 Therefore it suffices to prove the claim for `π_2(A)` for every pointed type `A`.
