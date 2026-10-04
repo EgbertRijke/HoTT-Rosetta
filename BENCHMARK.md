@@ -105,6 +105,9 @@ The following files contain partially solved (auto)formalization exercises, whic
 
 The main text contains a few missing formalizations that provide further benchmark problems identified with "BENCHMARK PROBLEM".
 
+- rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Proposition 19.4.6)
+- rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Remark 19.4.8)
+- rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Proposition 19.4.9)
 - rosetta-book/section-20-1-the-type-of-well-founded-trees.lagda.md (Example 20.1.8)
 - rosetta-book/section-20-5-extensional-w-types.lagda.md (Example 20.5.4)
 - rosetta-book/section-21-3-multiplication-on-the-circle.lagda.md (Remark 21.3.4)

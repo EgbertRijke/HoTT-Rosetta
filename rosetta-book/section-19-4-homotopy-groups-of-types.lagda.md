@@ -27,6 +27,7 @@ open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import section-11-6-the-structure-identity-principle
 open import section-18-5-set-truncations
+open import section-19-1-the-type-of-all-groups
 ```
 
 Since the identity type gives every type groupoidal structure, we can construct for every type `A` equipped with a base point `a : A` a sequence of groups `π_n(A,a)` indexed by `n ≥ 1`.
@@ -647,6 +648,43 @@ is-trunc-iterated-loop-space (succ-ℕ n) k A H =
   is-trunc-Ω k
     ( iterated-loop-space n A)
     ( is-trunc-iterated-loop-space n (succ-𝕋 k) A H)
+
+module _
+  {l : Level} (A : Pointed-Type l)
+  where
+
+  loop-space-Set : is-set (type-Ω A) → Set l
+  pr1 (loop-space-Set is-set-Ω) = type-Ω A
+  pr2 (loop-space-Set is-set-Ω) = is-set-Ω
+
+  loop-space-Semigroup : is-set (type-Ω A) → Semigroup l
+  pr1 (loop-space-Semigroup is-set-Ω) = loop-space-Set is-set-Ω
+  pr1 (pr2 (loop-space-Semigroup is-set-Ω)) p q = p ∙ q
+  pr2 (pr2 (loop-space-Semigroup is-set-Ω)) = assoc
+
+  loop-space-Group : is-set (type-Ω A) → Group l
+  pr1 (loop-space-Group is-set-Ω) = loop-space-Semigroup is-set-Ω
+  pr1 (pr1 (pr2 (loop-space-Group is-set-Ω))) = refl
+  pr1 (pr2 (pr1 (pr2 (loop-space-Group is-set-Ω)))) q = left-unit
+  pr2 (pr2 (pr1 (pr2 (loop-space-Group is-set-Ω)))) p = right-unit
+  pr1 (pr2 (pr2 (loop-space-Group is-set-Ω))) = inv
+  pr1 (pr2 (pr2 (pr2 (loop-space-Group is-set-Ω)))) = left-inv
+  pr2 (pr2 (pr2 (pr2 (loop-space-Group is-set-Ω)))) = right-inv
+
+loop-space-1-type-Set :
+  {l : Level} (A : 1-Type l) (a : type-1-Type A) → Set l
+loop-space-1-type-Set A a =
+  loop-space-Set (pair (type-1-Type A) a) (is-1-type-type-1-Type A a a)
+
+loop-space-1-type-Semigroup :
+  {l : Level} (A : 1-Type l) (a : type-1-Type A) → Semigroup l
+loop-space-1-type-Semigroup A a =
+  loop-space-Semigroup (pair (type-1-Type A) a) (is-1-type-type-1-Type A a a)
+
+loop-space-1-type-Group :
+  {l : Level} (A : 1-Type l) (a : type-1-Type A) → Group l
+loop-space-1-type-Group A a =
+  loop-space-Group (pair (type-1-Type A) a) (is-1-type-type-1-Type A a a)
 ```
 
 If `A` is a pointed type, but not assumed to be `1`-truncated, then we can still obtain a group by taking the set truncation of its loop space.
@@ -792,10 +830,12 @@ For any pointed type `A` and any `n ≥ 1` we have an isomorphism
 
 ### Proof
 
+BENCHMARK PROBLEM
+
 _Proof._ First, observe that we have a pointed equivalence
 
 ```text
-Ω(Ω^n(A)) ≃_⋆ Ω^n(Ω(A)).
+Ω(Ω^n(A)) ≃∗ Ω^n(Ω(A)).
 ```
 
 This equivalence is constructed by induction on `n`, and also preserves the concatenation operation.
@@ -892,9 +932,11 @@ Consequently, the maps
 
 are group homomorphisms.
 
+BENCHMARK PROBLEM
+
 ## Proposition 19.4.9
 
-Consider a pointed equivalence `e : A ≃_⋆ B` between two pointed types `A` and `B`.
+Consider a pointed equivalence `e : A ≃∗ B` between two pointed types `A` and `B`.
 Then we obtain group isomorphisms
 
 ```text
@@ -905,7 +947,9 @@ for all `n ≥ 1`.
 
 ### Proof
 
-_Proof._ For any pointed equivalence `e : A ≃_⋆ B` it follows that `π_n(e)` is also an equivalence.
+BENCHMARK PROBLEM
+
+_Proof._ For any pointed equivalence `e : A ≃∗ B` it follows that `π_n(e)` is also an equivalence.
 Using Lemma 19.3.1, the claim now follows. ◻
 
 ## Supplement
