@@ -50,19 +50,36 @@ Relation l A = A → A → UU l
 total-space-Relation :
   {l1 l : Level} {A : UU l1} → Relation l A → UU (l1 ⊔ l)
 total-space-Relation {A = A} R = Σ (A × A) λ (a , a') → R a a'
+```
 
+```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
   where
 
   is-reflexive : UU (l1 ⊔ l2)
   is-reflexive = (x : A) → R x x
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  where
 
   is-symmetric : UU (l1 ⊔ l2)
   is-symmetric = (x y : A) → R x y → R y x
+```
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : Relation l2 A)
+  where
 
   is-transitive : UU (l1 ⊔ l2)
   is-transitive = (x y z : A) → R y z → R x y → R x z
+
+  is-transitive' : UU (l1 ⊔ l2)
+  is-transitive' = {x y z : A} → R y z → R x y → R x z
 ```
 
 To define the congruence relation modulo `k` in type theory using the Curry-Howard interpretation, we will define for any three natural numbers `x`, `y`, and `k`, a *type*
