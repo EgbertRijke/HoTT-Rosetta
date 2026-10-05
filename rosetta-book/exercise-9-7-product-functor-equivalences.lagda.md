@@ -169,3 +169,18 @@ module _
     is-equiv-map-product f g is-equiv-f is-equiv-g
 ```
 
+## Supplement
+
+### Functoriality of products preserves equivalences in either factor
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  where
+
+  equiv-product-left : A ≃ C → A × B ≃ C × B
+  equiv-product-left f = equiv-product f id-equiv
+
+  equiv-product-right : B ≃ C → A × B ≃ A × C
+  equiv-product-right = equiv-product id-equiv
+```

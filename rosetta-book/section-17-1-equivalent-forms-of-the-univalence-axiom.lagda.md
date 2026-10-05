@@ -782,3 +782,10 @@ is-small-logical-equivalence :
 is-small-logical-equivalence H K =
   is-small-product (is-small-function-type H K) (is-small-function-type K H)
 ```
+
+### Every type of universe level `l` is `(lsuc l)`-small
+
+```agda
+is-small-lsuc : {l : Level} (X : UU l) → is-small (lsuc l) X
+is-small-lsuc {l} = is-small-lmax (lsuc l)
+```

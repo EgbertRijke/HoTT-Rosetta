@@ -6,31 +6,33 @@ module section-7-5-the-cyclic-groups where
 open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers
+open import section-4-3-the-empty-type
 open import section-4-5-the-type-of-integers
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
-open import section-5-4-transport
 open import section-5-6-the-laws-of-addition-on-natural-numbers
-open import exercise-5-5-semiring-laws-natural-numbers
-open import exercise-6-4-strict-order-natural-numbers
-open import exercise-6-5-distance-natural-numbers
 open import section-7-2-the-congruence-relations-on-natural-numbers
 open import section-7-3-the-standard-finite-types
 open import section-7-4-the-natural-numbers-modulo-k-plus-one
+
+open import exercise-4-1-arithmetic-operations-integers
+open import exercise-5-7-group-laws-integers  
+open import exercise-6-5-distance-natural-numbers
 ```
 
-We can now define the cyclic groups `ℤ/k` for each `k:ℕ`.
-Note that `ℤ/k` must come equipped with the structure of a quotient `ℤ/{≡}` of `ℤ` by the congruence relation modulo `k`.
-In the case where `k≐ 0`, we have that `x≡ ymod{0}` if and only if `x=y`.
+We can now define the cyclic groups `ℤ / k` for each `k : ℕ`.
+Note that `ℤ / k` must come equipped with the structure of a quotient `ℤ / ≡` of `ℤ` by the congruence relation modulo `k`.
+In the case where `k ≐ 0`, we have that `x ≡ y mod 0` if and only if `x = y`.
 This motivates the following definition:
 
 ## Definition 7.5.1
 
-We define the type `ℤ/k` for each `k:ℕ` by
+We define the type `ℤ / k` for each `k : ℕ` by
+
 ```text
-ℤ/0≔ ℤ and ℤ/{(k+1)}≔Fin{k+1}.
+ℤ / 0 ≔ ℤ and ℤ / (k+1) ≔ Fin{k+1}.
 ```
 
 ```agda
@@ -39,17 +41,40 @@ We define the type `ℤ/k` for each `k:ℕ` by
 ℤ-Mod (succ-ℕ k) = Fin (succ-ℕ k)
 ```
 
-Recall from Exercise 5.7 that `ℤ/0` already comes equipped with the structure of a group, but the group structure on `ℤ/{(k+1)}` remains to be defined.
+```agda
+zero-ℤ-Mod : (k : ℕ) → ℤ-Mod k
+zero-ℤ-Mod zero-ℕ = zero-ℤ
+zero-ℤ-Mod (succ-ℕ k) = zero-Fin k
+
+is-zero-ℤ-Mod : (k : ℕ) → ℤ-Mod k → UU lzero
+is-zero-ℤ-Mod k x = (x ＝ zero-ℤ-Mod k)
+
+is-nonzero-ℤ-Mod : (k : ℕ) → ℤ-Mod k → UU lzero
+is-nonzero-ℤ-Mod k x = ¬ (is-zero-ℤ-Mod k x)
+
+neg-one-ℤ-Mod : (k : ℕ) → ℤ-Mod k
+neg-one-ℤ-Mod zero-ℕ = neg-one-ℤ
+neg-one-ℤ-Mod (succ-ℕ k) = neg-one-Fin k
+
+one-ℤ-Mod : (k : ℕ) → ℤ-Mod k
+one-ℤ-Mod zero-ℕ = one-ℤ
+one-ℤ-Mod (succ-ℕ k) = one-Fin k
+```
+
+Recall from Exercise 5.7 that `ℤ / 0` already comes equipped with the structure of a group, but the group structure on `ℤ / (k + 1)` remains to be defined.
 
 ## Definition 7.5.2
 
-We define the **addition** operation on `ℤ/{(k+1)}` by
+We define the **addition** operation on `ℤ / (k + 1)` by
+
 ```text
-x+y≔[nat-Fin(x)+nat-Fin(y)]_{k+1},
+x + y ≔ [nat-Fin(x) + nat-Fin(y)]_{k + 1},
 ```
-and we define the **additive inverse** operation on `ℤ/{(k+1)}` by
+
+and we define the **additive inverse** operation on `ℤ / (k+1)` by
+
 ```text
--x≔[dist-ℕ(nat-Fin(x),k+1)]_{k+1}.
+-x ≔ [dist-ℕ(nat-Fin(x), k + 1)]_{k + 1}.
 ```
 
 ```agda
@@ -59,6 +84,25 @@ add-Fin (succ-ℕ k) x y =
 
 add-Fin' : (k : ℕ) → Fin k → Fin k → Fin k
 add-Fin' k x y = add-Fin k y x
+
+ap-add-Fin :
+  (k : ℕ) {x y x' y' : Fin k} →
+  x ＝ x' → y ＝ y' → add-Fin k x y ＝ add-Fin k x' y'
+ap-add-Fin k p q = ap-binary (add-Fin k) p q
+```
+
+```agda
+add-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
+add-ℤ-Mod zero-ℕ = add-ℤ
+add-ℤ-Mod (succ-ℕ k) = add-Fin (succ-ℕ k)
+
+add-ℤ-Mod' : (k : ℕ) → ℤ-Mod k → ℤ-Mod k → ℤ-Mod k
+add-ℤ-Mod' k x y = add-ℤ-Mod k y x
+
+ap-add-ℤ-Mod :
+  (k : ℕ) {x x' y y' : ℤ-Mod k} →
+  x ＝ x' → y ＝ y' → add-ℤ-Mod k x y ＝ add-ℤ-Mod k x' y'
+ap-add-ℤ-Mod k p q = ap-binary (add-ℤ-Mod k) p q
 ```
 
 ```agda
@@ -68,13 +112,20 @@ neg-Fin (succ-ℕ k) x =
   mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k))
 ```
 
+```agda
+neg-ℤ-Mod : (k : ℕ) → ℤ-Mod k → ℤ-Mod k
+neg-ℤ-Mod zero-ℕ = neg-ℤ
+neg-ℤ-Mod (succ-ℕ k) = neg-Fin (succ-ℕ k)
+```
+
 ## Remark 7.5.3
 
-The following congruences modulo `k+1` follow immediately from Proposition 7.4.5:
+The following congruences modulo `k + 1` follow immediately from Proposition 7.4.5:
+
 ```text
 nat-Fin(0) ≡ 0
-nat-Fin(x+y) ≡ nat-Fin(x)+nat-Fin(y)
-nat-Fin(-x) ≡ dist-ℕ(nat-Fin(x),k+1).
+nat-Fin(x + y) ≡ nat-Fin(x) + nat-Fin(y)
+nat-Fin(-x) ≡ dist-ℕ(nat-Fin(x), k + 1).
 ```
 
 ```agda
@@ -91,44 +142,49 @@ cong-neg-Fin {succ-ℕ k} x =
   cong-nat-mod-succ-ℕ k (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k))
 ```
 
-Before we show that addition on `ℤ/{k}` satisfies the group laws, we have to show that addition on `ℕ` preserves the congruence relation.
+Before we show that addition on `ℤ / k` satisfies the group laws, we have to show that addition on `ℕ` preserves the congruence relation.
 
 ## Proposition 7.5.4
 
-Consider `x,y,x',y':ℕ`.
+Consider `x, y, x', y' : ℕ`.
 If any two of the following three properties hold, then so does the third:
 
-1. `x≡ x'mod k`,
+1. `x ≡ x' mod k`,
 
-2. `y≡ y'mod k`,
+2. `y ≡ y' mod k`,
 
-3. `x+y≡ x'+y'mod k`.
+3. `x + y ≡ x' + y' mod k`.
 
 ### Proof
-
-*Proof.* Recall that the distance function `dist-ℕ` is translation invariant by Exercise 6.5.
+Recall that the distance function `dist-ℕ` is translation invariant by Exercise 6.5.
 Therefore it follows that
+
 ```text
-a≡ bmod k ↔ a+c≡ b+cmod k.(*)
+a ≡ b mod k ↔ a + c ≡ b + c mod k. (★)
 ```
+
 We will use this observation to prove the claim.
 
-First, suppose that `x≡ x'` and `y≡ y'` modulo `k`.
-Then it follows by (\*) that
+First, suppose that `x ≡ x'` and `y ≡ y'` modulo `k`.
+Then it follows by (★) that
+
 ```text
-x+y≡ x'+y≡ x'+y'.
+x + y ≡ x' + y ≡ x' + y'.
 ```
+
 This shows that (i) and (ii) together imply (iii).
 
-Next, suppose that `x≡ x'` and `x+y≡ x'+y'` modulo `k`.
+Next, suppose that `x ≡ x'` and `x + y ≡ x' + y'` modulo `k`.
 Then it follows that
+
 ```text
-x+y≡ x'+y'≡ x+y'.
+x + y ≡ x' + y' ≡ x + y'.
 ```
-Applying (\*) once more in the reverse direction, we obtain that `y≡ y'` modulo `k`.
+
+Applying (★) once more in the reverse direction, we obtain that `y ≡ y'` modulo `k`.
 This shows that (i) and (iii) together imply (ii).
 
-The remaining claim, that (ii) and (iii) together imply (i), follows by commutativity of addition from the fact that (i) and (iii) together imply (ii). ◻
+The remaining claim, that (ii) and (iii) together imply (i), follows by commutativity of addition from the fact that (i) and (iii) together imply (ii). ◻
 
 ```agda
 translation-invariant-cong-ℕ :
@@ -153,6 +209,35 @@ pr2 (reflects-cong-add-ℕ {k} x {y} {z} (pair d p)) =
 ```
 
 ```agda
+cong-add-ℕ :
+  {k : ℕ} (x y : ℕ) →
+  cong-ℕ
+    ( succ-ℕ k)
+    ( add-ℕ
+      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
+      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
+    ( x +ℕ y)
+cong-add-ℕ {k} x y =
+  transitive-cong-ℕ
+    ( succ-ℕ k)
+    ( add-ℕ
+      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
+      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
+    ( x +ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k y)))
+    ( x +ℕ y)
+    ( translation-invariant-cong-ℕ
+      ( succ-ℕ k)
+      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
+      ( y)
+      ( x)
+      ( cong-nat-mod-succ-ℕ k y))
+    ( translation-invariant-cong-ℕ'
+      ( succ-ℕ k)
+      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k x))
+      ( x)
+      ( nat-Fin (succ-ℕ k) (mod-succ-ℕ k y))
+      ( cong-nat-mod-succ-ℕ k x))
+
 congruence-add-ℕ :
   (k : ℕ) {x y x' y' : ℕ} →
   cong-ℕ k x x' → cong-ℕ k y y' → cong-ℕ k (x +ℕ y) (x' +ℕ y')
@@ -188,47 +273,57 @@ cong-left-summand-ℕ k {x} {y} {x'} {y'} H K =
 
 ## Theorem 7.5.5
 
-The addition operation on `ℤ/{k}` satisfies the laws of an abelian group:
+The addition operation on `ℤ / k` satisfies the laws of an abelian group:
+
 ```text
-0+x = x x+0 = x
-(-x)+x = 0 x+(-x) = 0
-(x+y)+z = x+(y+z) x+y = y+x.
+     0 + x = x                x + 0 = x
+  (-x) + x = 0             x + (-x) = 0
+(x + y) + z = x + (y + z)     x + y = y + x.
 ```
 
 ### Proof
+The fact that the addition operation on `ℤ / 0` satisfies the laws of an abelian group was stated as Exercise 5.7.
+Therefore we will only show that addition on `ℤ / (k + 1)` satisfies the laws of an abelian group.
 
-*Proof.* The fact that the addition operation on `ℤ/0` satisfies the laws of an abelian group was stated as Exercise 5.7.
-Therefore we will only show that addition on `ℤ/{(k+1)}` satisfies the laws of an abelian group.
-
-We first note that by commutativity of addition on `ℕ`, it follows immediately that addition on `ℤ/{(k+1)}` is commutative.
+We first note that by commutativity of addition on `ℕ`, it follows immediately that addition on `ℤ / (k + 1)` is commutative.
 
 To prove associativity, note that by Theorem 7.4.7 it suffices to show that
+
 ```text
-nat-Fin(x+y)+nat-Fin(z)≡nat-Fin(x)+nat-Fin(y+z)mod k+1.
+nat-Fin(x + y) + nat-Fin(z) ≡ nat-Fin(x) + nat-Fin(y + z) mod k + 1.
 ```
-Since addition on `ℤ/{(k+1)}` maps preserves the congruence relation, and since we have the congruences
+
+Since addition on `ℤ/(k + 1)` maps preserves the congruence relation, and since we have the congruences
+
 ```text
-nat-Fin(x+y) ≡ nat-Fin(x)+nat-Fin(y) mod k+1
-nat-Fin(y+z) ≡ nat-Fin(y)+nat-Fin(z) mod k+1,
+nat-Fin(x + y) ≡ nat-Fin(x) + nat-Fin(y) mod k + 1
+nat-Fin(y + z) ≡ nat-Fin(y) + nat-Fin(z) mod k + 1,
 ```
+
 it suffices to show that
+
 ```text
-(nat-Fin(x)+nat-Fin(y))+nat-Fin(z) ≡ nat-Fin(x)+(nat-Fin(y)+nat-Fin(z)) mod k+1.
+(nat-Fin(x) + nat-Fin(y)) + nat-Fin(z) ≡ nat-Fin(x) + (nat-Fin(y) + nat-Fin(z)) mod k + 1.
 ```
+
 This follows immediately by associativity of addition on `ℕ`.
 
-To show that addition on `ℤ/{(k+1)}` satisfies the right unit law, we first observe that it suffices to show that
+To show that addition on `ℤ / (k + 1)` satisfies the right unit law, we first observe that it suffices to show that
+
 ```text
-[nat-Fin(x)+nat-Fin(0)]_{k+1}=[nat-Fin(x)]_{k+1}
+[nat-Fin(x) + nat-Fin(0)]_{k + 1} = [nat-Fin(x)]_{k + 1}
 ```
-because there is an identification `[nat-Fin(x)]_{k+1}=x` by Theorem 7.4.8.
+
+because there is an identification `[nat-Fin(x)]_{k + 1} = x` by Theorem 7.4.8.
 By Theorem 7.4.7 it now suffices tho show that
+
 ```text
-nat-Fin(x)+nat-Fin(0)≡nat-Fin(x)mod k+1.
+nat-Fin(x) + nat-Fin(0) ≡ nat-Fin(x) mod k + 1.
 ```
-This follows immediately from the fact that `nat-Fin(0)=0`.
+
+This follows immediately from the fact that `nat-Fin(0) = 0`.
 The left unit law now follows from the right unit law by commutativity.
-We leave the inverse laws as an exercise. ◻
+We leave the inverse laws as an exercise. ◻
 
 ```agda
 commutative-add-Fin : (k : ℕ) (x y : Fin k) → add-Fin k x y ＝ add-Fin k y x
@@ -303,7 +398,7 @@ right-unit-law-add-Fin k x =
       { x' = nat-Fin (succ-ℕ k) x}
       { y' = zero-ℕ}
       ( refl-cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) x))
-      ( cong-identification-ℕ (succ-ℕ k) (is-zero-nat-zero-Fin {k})))) ∙
+      ( cong-is-zero-nat-zero-Fin {k}))) ∙
   ( is-section-nat-Fin k x)
 
 left-unit-law-add-Fin :
@@ -311,39 +406,27 @@ left-unit-law-add-Fin :
 left-unit-law-add-Fin k x =
   ( commutative-add-Fin (succ-ℕ k) (zero-Fin k) x) ∙
   ( right-unit-law-add-Fin k x)
+```
 
-left-inverse-law-add-Fin :
-  (k : ℕ) (x : Fin (succ-ℕ k)) →
-  add-Fin (succ-ℕ k) (neg-Fin (succ-ℕ k) x) x ＝ zero-Fin k
-left-inverse-law-add-Fin k x =
-  eq-mod-succ-cong-ℕ k
-    ( (nat-Fin (succ-ℕ k) (neg-Fin (succ-ℕ k) x)) +ℕ (nat-Fin (succ-ℕ k) x))
-    ( zero-ℕ)
-    ( concatenate-cong-eq-cong-ℕ
-      { succ-ℕ k}
-      { x1 =
-        add-ℕ
-          ( nat-Fin (succ-ℕ k) (neg-Fin (succ-ℕ k) x))
-          ( nat-Fin (succ-ℕ k) x)}
-      { x2 =
-        (dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k)) +ℕ (nat-Fin (succ-ℕ k) x)}
-      { x3 = succ-ℕ k}
-      { x4 = zero-ℕ}
-      ( translation-invariant-cong-ℕ' (succ-ℕ k)
-        ( nat-Fin (succ-ℕ k) (neg-Fin (succ-ℕ k) x))
-        ( dist-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k))
-        ( nat-Fin (succ-ℕ k) x)
-        ( cong-neg-Fin x))
-      ( is-difference-dist-ℕ' (nat-Fin (succ-ℕ k) x) (succ-ℕ k)
-        ( leq-le-ℕ (nat-Fin (succ-ℕ k) x) (succ-ℕ k)
-          ( strict-upper-bound-nat-Fin (succ-ℕ k) x)))
-      ( symmetric-cong-ℕ (succ-ℕ k) (succ-ℕ k) zero-ℕ
-        ( cong-zero-ℕ (succ-ℕ k))))
+```agda
+associative-add-ℤ-Mod :
+  (k : ℕ) (x y z : ℤ-Mod k) →
+  add-ℤ-Mod k (add-ℤ-Mod k x y) z ＝ add-ℤ-Mod k x (add-ℤ-Mod k y z)
+associative-add-ℤ-Mod zero-ℕ = associative-add-ℤ
+associative-add-ℤ-Mod (succ-ℕ k) = associative-add-Fin (succ-ℕ k)
 
-right-inverse-law-add-Fin :
-  (k : ℕ) (x : Fin (succ-ℕ k)) →
-  add-Fin (succ-ℕ k) x (neg-Fin (succ-ℕ k) x) ＝ zero-Fin k
-right-inverse-law-add-Fin k x =
-  ( commutative-add-Fin (succ-ℕ k) x (neg-Fin (succ-ℕ k) x)) ∙
-  ( left-inverse-law-add-Fin k x)
+commutative-add-ℤ-Mod :
+  (k : ℕ) (x y : ℤ-Mod k) → add-ℤ-Mod k x y ＝ add-ℤ-Mod k y x
+commutative-add-ℤ-Mod zero-ℕ = commutative-add-ℤ
+commutative-add-ℤ-Mod (succ-ℕ k) = commutative-add-Fin (succ-ℕ k)
+
+left-unit-law-add-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → add-ℤ-Mod k (zero-ℤ-Mod k) x ＝ x
+left-unit-law-add-ℤ-Mod zero-ℕ = left-unit-law-add-ℤ
+left-unit-law-add-ℤ-Mod (succ-ℕ k) = left-unit-law-add-Fin k
+
+right-unit-law-add-ℤ-Mod :
+  (k : ℕ) (x : ℤ-Mod k) → add-ℤ-Mod k x (zero-ℤ-Mod k) ＝ x
+right-unit-law-add-ℤ-Mod zero-ℕ = right-unit-law-add-ℤ
+right-unit-law-add-ℤ-Mod (succ-ℕ k) = right-unit-law-add-Fin k
 ```
