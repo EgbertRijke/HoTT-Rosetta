@@ -206,8 +206,7 @@ nat-Fin(succ-Fin_k(x)) ≡ nat-Fin(x) + 1 mod k.
 ```
 
 ### Proof
-
-*Proof.* For the first claim, we define an identification `α_k : nat-Fin(zero-Fin_k) = 0` recursively by
+For the first claim, we define an identification `α_k : nat-Fin(zero-Fin_k) = 0` recursively by
 
 ```text
 α_0 ≔ refl
@@ -301,8 +300,7 @@ nat-Fin[x]_{k + 1} ≡ x mod (k + 1).
 ```
 
 ### Proof
-
-*Proof.* The proof by induction on `x`.
+The proof by induction on `x`.
 The fact that
 
 ```text
@@ -358,8 +356,7 @@ x ≡ y mod k ↔ x = y.
 ```
 
 ### Proof
-
-*Proof.* Note that the implication `x = 0 → d | x` is trivial, so it suffices to prove the forward implication
+Note that the implication `x = 0 → d | x` is trivial, so it suffices to prove the forward implication
 
 ```text
 d | x → x = 0.
@@ -420,8 +417,7 @@ Then we have
 for any `x, y : ℕ`.
 
 ### Proof
-
-*Proof.* First note that, since `nat-Fin` is injective by Proposition 7.3.6, we have
+First note that, since `nat-Fin` is injective by Proposition 7.3.6, we have
 
 ```text
 [x]_{k + 1} = [y]_{k + 1} ↔ nat-Fin[x]_{k + 1} = nat-Fin[y]_{k + 1}.
@@ -488,8 +484,7 @@ For any `x : Fin{k + 1}` there is an identification
 In other words, the map `[_]_{k + 1} : ℕ → Fin{k+1}` is split surjective.
 
 ### Proof
-
-*Proof.* Since `nat-Fin : Fin{k + 1} → ℕ` is injective by Proposition 7.3.6, it suffices to show that
+Since `nat-Fin : Fin{k + 1} → ℕ` is injective by Proposition 7.3.6, it suffices to show that
 
 ```text
 nat-Fin[nat-Fin(x)]_{k + 1} = nat-Fin(x).
@@ -528,6 +523,13 @@ pr2 (is-split-surjective-mod-succ-ℕ k x) = is-section-nat-Fin k x
 ```
 
 ## Supplements
+
+```agda
+cong-is-zero-nat-zero-Fin :
+  {k : ℕ} → cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (zero-Fin k)) zero-ℕ
+cong-is-zero-nat-zero-Fin {k} =
+  cong-identification-ℕ (succ-ℕ k) (is-zero-nat-zero-Fin {k})
+```
 
 ### `k + 1` divides `x` if and only if `x ≡ 0` modulo `k + 1`
 
