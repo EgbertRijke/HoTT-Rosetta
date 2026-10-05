@@ -8,6 +8,7 @@ open import section-2-2-ordinary-function-types
 open import exercise-2-3-constant-maps
 open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
+open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
@@ -710,6 +711,26 @@ pr1 (is-locally-small-is-small (X , e) x y) =
 pr2 (is-locally-small-is-small (X , e) x y) = equiv-ap e x y
 ```
 
+### Small types are closed under equivalences
+
+```agda
+is-small-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} (B : UU l2) →
+  A ≃ B → is-small l3 B → is-small l3 A
+is-small-equiv B e (X , h) = (X , h ∘e e)
+
+is-small-equiv' :
+  {l1 l2 l3 : Level} (A : UU l1) {B : UU l2} →
+  A ≃ B → is-small l3 A → is-small l3 B
+is-small-equiv' A e = is-small-equiv A (inv-equiv e)
+
+equiv-is-small-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} →
+  A ≃ B → is-small l3 A ≃ is-small l3 B
+equiv-is-small-equiv e =
+  equiv-tot (equiv-precomp-equiv (inv-equiv e))
+```
+
 ### Small types are closed under dependent pair types
 
 ```agda
@@ -734,4 +755,30 @@ pr2 (is-small-Σ {B = B} (X , e) H) =
 pr1 (Σ-Small-Type A B) = Σ (type-Small-Type A) (λ a → type-Small-Type (B a))
 pr2 (Σ-Small-Type {l1} {l2} {l3} {l4} A B) =
   is-small-Σ (is-small-type-Small-Type A) (λ a → is-small-type-Small-Type (B a))
+```
+
+### Small types are closed under cartesian products
+
+```agda
+is-small-product :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} →
+  is-small l3 A → is-small l4 B → is-small (l3 ⊔ l4) (A × B)
+is-small-product H K = is-small-Σ H (λ a → K)
+
+product-Small-Type :
+  {l1 l2 l3 l4 : Level} →
+  Small-Type l1 l2 → Small-Type l3 l4 → Small-Type (l1 ⊔ l3) (l2 ⊔ l4)
+pr1 (product-Small-Type A B) = type-Small-Type A × type-Small-Type B
+pr2 (product-Small-Type A B) =
+  is-small-product (is-small-type-Small-Type A) (is-small-type-Small-Type B)
+```
+
+### The type of logical equivalences between small types is small
+
+```agda
+is-small-logical-equivalence :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} →
+  is-small l3 A → is-small l4 B → is-small (l3 ⊔ l4) (A ↔ B)
+is-small-logical-equivalence H K =
+  is-small-product (is-small-function-type H K) (is-small-function-type K H)
 ```

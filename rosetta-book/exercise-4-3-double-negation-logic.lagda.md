@@ -189,3 +189,34 @@ inv-iff :
 pr1 (inv-iff (f , g)) = g
 pr2 (inv-iff (f , g)) = f
 ```
+
+### Composition of logical equivalences
+
+```agda
+infixr 15 _∘iff_
+
+_∘iff_ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
+  (B ↔ C) → (A ↔ B) → (A ↔ C)
+pr1 ((g1 , g2) ∘iff (f1 , f2)) = g1 ∘ f1
+pr2 ((g1 , g2) ∘iff (f1 , f2)) = f2 ∘ g2
+```
+
+### Logical equivalence reasoning
+
+```agda
+infixl 1 logical-equivalence-reasoning_
+infixl 0 step-logical-equivalence-reasoning
+
+logical-equivalence-reasoning_ :
+  {l1 : Level} (X : UU l1) → X ↔ X
+pr1 (logical-equivalence-reasoning X) = id
+pr2 (logical-equivalence-reasoning X) = id
+
+step-logical-equivalence-reasoning :
+  {l1 l2 l3 : Level} {X : UU l1} {Y : UU l2} →
+  (X ↔ Y) → (Z : UU l3) → (Y ↔ Z) → (X ↔ Z)
+step-logical-equivalence-reasoning e Z f = f ∘iff e
+
+syntax step-logical-equivalence-reasoning e Z f = e ↔ Z by f
+```

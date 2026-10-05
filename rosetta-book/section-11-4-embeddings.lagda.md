@@ -11,6 +11,7 @@ open import section-5-3-the-action-on-identifications-of-functions
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-8-1-decidability-and-decidable-equality
 open import section-9-2-bi-invertible-maps
+open import exercise-9-3-homotopic-equivalences
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
@@ -272,4 +273,19 @@ module _
 
   emb-decidable-emb : X ↪ Y
   emb-decidable-emb = map-decidable-emb , is-emb-map-decidable-emb
+```
+
+### The identity map is an embedding
+
+```agda
+module _
+  {l : Level} {A : UU l}
+  where
+
+  is-emb-id : is-emb (id {A = A})
+  is-emb-id x y = is-equiv-htpy-id ap-id
+
+  id-emb : A ↪ A
+  pr1 id-emb = id
+  pr2 id-emb = is-emb-id
 ```

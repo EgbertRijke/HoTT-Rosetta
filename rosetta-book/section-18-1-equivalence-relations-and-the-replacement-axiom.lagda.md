@@ -4,13 +4,20 @@
 module section-18-1-equivalence-relations-and-the-replacement-axiom where
 
 open import universe-levels
+open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-7-2-the-congruence-relations-on-natural-numbers
+open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import exercise-9-4-three-for-two-equivalences
+open import section-10-1-contractible-types
+open import section-10-4-equivalences-are-contractible-maps
 open import section-11-1-families-of-equivalences
+open import section-11-2-the-fundamental-theorem
 open import section-11-4-embeddings
+open import exercise-11-4-embedding-triangles
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-3-sets
@@ -20,6 +27,8 @@ open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-14-3-logic-in-type-theory
 open import section-15-1-the-image-of-a-map
 open import section-15-2-surjective-maps
+open import exercise-15-4-surjective-maps-in-triangles
+open import section-17-1-equivalent-forms-of-the-univalence-axiom
 open import section-17-4-maps-and-families-of-types
 
 open import exercise-4-3-double-negation-logic
@@ -183,6 +192,46 @@ inhabited-subtype-equivalence-relation :
 pr1 (inhabited-subtype-equivalence-relation R x) = prop-equivalence-relation R x
 pr2 (inhabited-subtype-equivalence-relation R x) =
   unit-trunc-Prop (x , refl-equivalence-relation R x)
+
+iff-symmetric-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A) {x y : A} →
+  sim-equivalence-relation R x y ↔ sim-equivalence-relation R y x
+pr1 (iff-symmetric-equivalence-relation R) =
+  symmetric-equivalence-relation R _ _
+pr2 (iff-symmetric-equivalence-relation R) =
+  symmetric-equivalence-relation R _ _
+
+equiv-symmetric-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A) {x y : A} →
+  sim-equivalence-relation R x y ≃ sim-equivalence-relation R y x
+equiv-symmetric-equivalence-relation R =
+  equiv-iff'
+    ( prop-equivalence-relation R _ _)
+    ( prop-equivalence-relation R _ _)
+    ( iff-symmetric-equivalence-relation R)
+
+iff-transitive-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1}
+  (R : equivalence-relation l2 A) {x y z : A} →
+  sim-equivalence-relation R x y →
+  (sim-equivalence-relation R y z ↔ sim-equivalence-relation R x z)
+pr1 (iff-transitive-equivalence-relation R r) s =
+  transitive-equivalence-relation R _ _ _ s r
+pr2 (iff-transitive-equivalence-relation R r) s =
+  transitive-equivalence-relation R _ _ _
+    ( s)
+    ( symmetric-equivalence-relation R _ _ r)
+
+equiv-transitive-equivalence-relation :
+  {l1 l2 : Level} {A : UU l1}
+  (R : equivalence-relation l2 A) {x y z : A} →
+  sim-equivalence-relation R x y →
+  (sim-equivalence-relation R y z ≃ sim-equivalence-relation R x z)
+equiv-transitive-equivalence-relation R r =
+  equiv-iff'
+    ( prop-equivalence-relation R _ _)
+    ( prop-equivalence-relation R _ _)
+    ( iff-transitive-equivalence-relation R r)
 ```
 
 ## Definition 18.1.2
@@ -225,20 +274,12 @@ module _
     (P : subtype l2 A) → is-prop (is-equivalence-class P)
   is-prop-is-equivalence-class P =
     is-prop-type-Prop (is-equivalence-class-Prop P)
-```
 
-### The condition on inhabited subtypes of `A` of being an equivalence class
-
-```agda
   is-equivalence-class-inhabited-subtype-equivalence-relation :
     subtype (l1 ⊔ l2) (inhabited-subtype l2 A)
   is-equivalence-class-inhabited-subtype-equivalence-relation Q =
     is-equivalence-class-Prop (subtype-inhabited-subtype Q)
-```
 
-### The type of equivalence classes
-
-```agda
   equivalence-class : UU (l1 ⊔ lsuc l2)
   equivalence-class = type-subtype is-equivalence-class-Prop
 
@@ -391,6 +432,205 @@ By function extensionality and propositional extensionality, it is equivalent to
 
 which follows directly from the assumption that `R` is an equivalence relation. ◻
 
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  has-same-elements-equivalence-class :
+    (C D : equivalence-class R) → UU (l1 ⊔ l2)
+  has-same-elements-equivalence-class C D =
+    has-same-elements-subtype
+      ( subtype-equivalence-class R C)
+      ( subtype-equivalence-class R D)
+
+  refl-has-same-elements-equivalence-class :
+    (C : equivalence-class R) → has-same-elements-equivalence-class C C
+  refl-has-same-elements-equivalence-class C =
+    refl-has-same-elements-subtype (subtype-equivalence-class R C)
+
+  is-torsorial-has-same-elements-equivalence-class :
+    (C : equivalence-class R) →
+    is-torsorial (has-same-elements-equivalence-class C)
+  is-torsorial-has-same-elements-equivalence-class C =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-has-same-elements-subtype
+        ( subtype-equivalence-class R C))
+      ( is-prop-is-equivalence-class R)
+      ( subtype-equivalence-class R C)
+      ( refl-has-same-elements-equivalence-class C)
+      ( is-equivalence-class-equivalence-class R C)
+
+  has-same-elements-eq-equivalence-class :
+    (C D : equivalence-class R) → (C ＝ D) →
+    has-same-elements-equivalence-class C D
+  has-same-elements-eq-equivalence-class C .C refl =
+    refl-has-same-elements-subtype (subtype-equivalence-class R C)
+
+  is-equiv-has-same-elements-eq-equivalence-class :
+    (C D : equivalence-class R) →
+    is-equiv (has-same-elements-eq-equivalence-class C D)
+  is-equiv-has-same-elements-eq-equivalence-class C =
+    fundamental-theorem-id
+      ( is-torsorial-has-same-elements-equivalence-class C)
+      ( has-same-elements-eq-equivalence-class C)
+
+  extensionality-equivalence-class :
+    (C D : equivalence-class R) →
+    (C ＝ D) ≃ has-same-elements-equivalence-class C D
+  pr1 (extensionality-equivalence-class C D) =
+    has-same-elements-eq-equivalence-class C D
+  pr2 (extensionality-equivalence-class C D) =
+    is-equiv-has-same-elements-eq-equivalence-class C D
+
+  eq-has-same-elements-equivalence-class :
+    (C D : equivalence-class R) →
+    has-same-elements-equivalence-class C D → C ＝ D
+  eq-has-same-elements-equivalence-class C D =
+    map-inv-equiv (extensionality-equivalence-class C D)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  share-common-element-equivalence-class-Prop :
+    (C D : equivalence-class R) → Prop (l1 ⊔ l2)
+  share-common-element-equivalence-class-Prop C D =
+    ∃ ( A)
+      ( λ x →
+        is-in-equivalence-class-Prop R C x ∧ is-in-equivalence-class-Prop R D x)
+
+  share-common-element-equivalence-class :
+    (C D : equivalence-class R) → UU (l1 ⊔ l2)
+  share-common-element-equivalence-class C D =
+    type-Prop (share-common-element-equivalence-class-Prop C D)
+
+  abstract
+    eq-share-common-element-equivalence-class :
+      (C D : equivalence-class R) →
+      share-common-element-equivalence-class C D → C ＝ D
+    eq-share-common-element-equivalence-class C D H =
+      apply-three-times-universal-property-trunc-Prop
+        ( H)
+        ( is-equivalence-class-equivalence-class R C)
+        ( is-equivalence-class-equivalence-class R D)
+        ( Id-Prop (equivalence-class-Set R) C D)
+        ( λ (a , c , d) (v , φ) (w , ψ) →
+          eq-has-same-elements-equivalence-class R C D
+            ( λ x →
+              logical-equivalence-reasoning
+                is-in-equivalence-class R C x
+                  ↔ sim-equivalence-relation R v x
+                    by φ x
+                  ↔ sim-equivalence-relation R a x
+                    by iff-transitive-equivalence-relation R
+                        ( symmetric-equivalence-relation
+                            R _ _ (forward-implication (φ a) c))
+                  ↔ sim-equivalence-relation R w x
+                    by iff-transitive-equivalence-relation R
+                        ( forward-implication (ψ a) d)
+                  ↔ is-in-equivalence-class R D x
+                    by inv-iff (ψ x)))
+
+  eq-class-equivalence-class :
+    (C : equivalence-class R) {a : A} →
+    is-in-equivalence-class R C a → class R a ＝ C
+  eq-class-equivalence-class C {a} H =
+    eq-share-common-element-equivalence-class
+      ( class R a)
+      ( C)
+      ( unit-trunc-Prop (a , refl-equivalence-relation R a , H))
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A) (a : A)
+  where
+
+  center-total-is-in-equivalence-class :
+    Σ (equivalence-class R) (λ P → is-in-equivalence-class R P a)
+  pr1 center-total-is-in-equivalence-class = class R a
+  pr2 center-total-is-in-equivalence-class = refl-equivalence-relation R a
+
+  contraction-total-is-in-equivalence-class :
+    ( t :
+      Σ ( equivalence-class R)
+        ( λ C → is-in-equivalence-class R C a)) →
+    center-total-is-in-equivalence-class ＝ t
+  contraction-total-is-in-equivalence-class (C , H) =
+    eq-type-subtype
+      ( λ D → is-in-equivalence-class-Prop R D a)
+      ( eq-class-equivalence-class R C H)
+
+  abstract
+    is-torsorial-is-in-equivalence-class :
+      is-torsorial (λ P → is-in-equivalence-class R P a)
+    pr1 is-torsorial-is-in-equivalence-class =
+      center-total-is-in-equivalence-class
+    pr2 is-torsorial-is-in-equivalence-class =
+      contraction-total-is-in-equivalence-class
+
+  is-in-equivalence-class-eq-equivalence-class :
+    (q : equivalence-class R) → class R a ＝ q →
+    is-in-equivalence-class R q a
+  is-in-equivalence-class-eq-equivalence-class .(class R a) refl =
+    refl-equivalence-relation R a
+
+  abstract
+    is-equiv-is-in-equivalence-class-eq-equivalence-class :
+      (q : equivalence-class R) →
+      is-equiv (is-in-equivalence-class-eq-equivalence-class q)
+    is-equiv-is-in-equivalence-class-eq-equivalence-class =
+      fundamental-theorem-id
+        ( is-torsorial-is-in-equivalence-class)
+        ( is-in-equivalence-class-eq-equivalence-class)
+
+is-effective :
+  {l1 l2 l3 : Level} {A : UU l1} (R : equivalence-relation l2 A) {B : UU l3}
+  (f : A → B) → UU (l1 ⊔ l2 ⊔ l3)
+is-effective {A = A} R f =
+  (x y : A) → (f x ＝ f y) ≃ sim-equivalence-relation R x y
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  abstract
+    effective-quotient' :
+      (a : A) (q : equivalence-class R) →
+      ( class R a ＝ q) ≃
+      ( is-in-equivalence-class R q a)
+    pr1 (effective-quotient' a q) =
+      is-in-equivalence-class-eq-equivalence-class R a q
+    pr2 (effective-quotient' a q) =
+      is-equiv-is-in-equivalence-class-eq-equivalence-class R a q
+
+  abstract
+    eq-effective-quotient' :
+      (a : A) (q : equivalence-class R) → is-in-equivalence-class R q a →
+      class R a ＝ q
+    eq-effective-quotient' a q =
+      map-inv-is-equiv
+        ( is-equiv-is-in-equivalence-class-eq-equivalence-class R a q)
+
+  abstract
+    is-effective-class :
+      is-effective R (class R)
+    is-effective-class x y =
+      ( equiv-symmetric-equivalence-relation R) ∘e
+      ( effective-quotient' x (class R y))
+
+  abstract
+    apply-effectiveness-class :
+      {x y : A} → class R x ＝ class R y → sim-equivalence-relation R x y
+    apply-effectiveness-class {x} {y} =
+      map-equiv (is-effective-class x y)
+
+  abstract
+    apply-effectiveness-class' :
+      {x y : A} → sim-equivalence-relation R x y → class R x ＝ class R y
+    apply-effectiveness-class' {x} {y} =
+      map-inv-equiv (is-effective-class x y)
+```
+
 ## Corollary 18.1.4
 
 Consider an equivalence relation `R` on a type `A`, and let `x, y : A`.
@@ -485,17 +725,196 @@ Then the type `A/R` is `𝒰`-small, since it is equivalent to the image of
 
 which maps the `𝒰`-small type `A` into the locally `𝒰`-small type `A → Prop_𝒰`.
 
-## Supplement
+```agda
+instance-replacement :
+  (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) →
+  UU (lsuc l ⊔ l1 ⊔ l2)
+instance-replacement l {A = A} {B} f =
+  is-small l A → is-locally-small l B → is-small l (im f)
 
-### Effective maps
+replacement-axiom-Level : (l l1 l2 : Level) → UU (lsuc l ⊔ lsuc l1 ⊔ lsuc l2)
+replacement-axiom-Level l l1 l2 =
+  {A : UU l1} {B : UU l2} (f : A → B) → instance-replacement l f
+
+replacement-axiom : UUω
+replacement-axiom = {l l1 l2 : Level} → replacement-axiom-Level l l1 l2
+```
 
 ```agda
-is-effective :
-  {l1 l2 l3 : Level} {A : UU l1} (R : equivalence-relation l2 A) {B : UU l3}
-  (f : A → B) → UU (l1 ⊔ l2 ⊔ l3)
-is-effective {A = A} R f =
-  (x y : A) → (f x ＝ f y) ≃ sim-equivalence-relation R x y
+postulate
+  replacement : replacement-axiom
 ```
+
+```agda
+replacement' :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-locally-small l1 B → is-small l1 (im f)
+replacement' f = replacement f is-small'
+```
+
+### If `f` is a surjective map from a small type into a locally small type, then replacement implies that the codomain is small
+
+```agda
+is-small-is-surjective :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-surjective f → is-small l3 A → is-locally-small l3 B →
+  is-small l3 B
+is-small-is-surjective {f = f} H K L =
+  is-small-equiv'
+    ( im f)
+    ( equiv-equiv-slice-uniqueness-im f id-emb
+      ( f , refl-htpy)
+      ( is-image-is-surjective f id-emb (f , refl-htpy) H))
+    ( replacement f K L)
+```
+
+### The type of equivalence classes is locally small
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  is-locally-small-equivalence-class :
+    is-locally-small (l1 ⊔ l2) (equivalence-class R)
+  is-locally-small-equivalence-class C D =
+    is-small-equiv
+      ( has-same-elements-equivalence-class R C D)
+      ( extensionality-equivalence-class R C D)
+      ( is-small-Π
+        ( is-small')
+        ( λ x → is-small-logical-equivalence is-small' is-small'))
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  is-small-equivalence-class : is-small (l1 ⊔ l2) (equivalence-class R)
+  is-small-equivalence-class =
+    is-small-is-surjective
+      ( is-surjective-class R)
+      ( is-small-lmax l2 A)
+      ( is-locally-small-equivalence-class R)
+
+  equivalence-class-Small-Type : Small-Type (l1 ⊔ l2) (l1 ⊔ lsuc l2)
+  pr1 equivalence-class-Small-Type = equivalence-class R
+  pr2 equivalence-class-Small-Type = is-small-equivalence-class
+
+  small-equivalence-class : UU (l1 ⊔ l2)
+  small-equivalence-class =
+    small-type-Small-Type equivalence-class-Small-Type
+
+module _
+  {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
+  where
+
+  set-quotient : UU (l1 ⊔ l2)
+  set-quotient = small-type-Small-Type (equivalence-class-Small-Type R)
+
+  compute-set-quotient : equivalence-class R ≃ set-quotient
+  compute-set-quotient =
+    equiv-is-small-type-Small-Type (equivalence-class-Small-Type R)
+
+  set-quotient-equivalence-class : equivalence-class R → set-quotient
+  set-quotient-equivalence-class = map-equiv compute-set-quotient
+
+  equivalence-class-set-quotient : set-quotient → equivalence-class R
+  equivalence-class-set-quotient = map-inv-equiv compute-set-quotient
+
+  is-section-equivalence-class-set-quotient :
+    (set-quotient-equivalence-class ∘ equivalence-class-set-quotient) ~ id
+  is-section-equivalence-class-set-quotient =
+    is-section-map-inv-equiv compute-set-quotient
+
+  is-retraction-equivalence-class-set-quotient :
+    (equivalence-class-set-quotient ∘ set-quotient-equivalence-class) ~ id
+  is-retraction-equivalence-class-set-quotient =
+    is-retraction-map-inv-equiv compute-set-quotient
+
+  emb-equivalence-class-set-quotient : set-quotient ↪ equivalence-class R
+  emb-equivalence-class-set-quotient =
+    emb-equiv (inv-equiv compute-set-quotient)
+
+  emb-set-quotient-equivalence-class : equivalence-class R ↪ set-quotient
+  emb-set-quotient-equivalence-class = emb-equiv compute-set-quotient
+
+  quotient-map : A → set-quotient
+  quotient-map = set-quotient-equivalence-class ∘ class R
+
+  is-surjective-quotient-map : is-surjective quotient-map
+  is-surjective-quotient-map =
+    is-surjective-left-comp-equiv compute-set-quotient (is-surjective-class R)
+
+  surjection-quotient-map : A ↠ set-quotient
+  pr1 surjection-quotient-map = quotient-map
+  pr2 surjection-quotient-map = is-surjective-quotient-map
+
+  emb-subtype-set-quotient : set-quotient ↪ subtype l2 A
+  emb-subtype-set-quotient =
+    comp-emb (emb-equivalence-class R) emb-equivalence-class-set-quotient
+
+  subtype-set-quotient : set-quotient → subtype l2 A
+  subtype-set-quotient =
+    subtype-equivalence-class R ∘ equivalence-class-set-quotient
+
+  is-inhabited-subtype-set-quotient :
+    (x : set-quotient) → is-inhabited-subtype (subtype-set-quotient x)
+  is-inhabited-subtype-set-quotient x =
+    is-inhabited-subtype-equivalence-class R (equivalence-class-set-quotient x)
+
+  inhabited-subtype-set-quotient : set-quotient → inhabited-subtype l2 A
+  inhabited-subtype-set-quotient =
+    inhabited-subtype-equivalence-class R ∘ equivalence-class-set-quotient
+
+  is-in-equivalence-class-set-quotient :
+    (x : set-quotient) → A → UU l2
+  is-in-equivalence-class-set-quotient x =
+    is-in-equivalence-class R (equivalence-class-set-quotient x)
+
+  is-prop-is-in-equivalence-class-set-quotient :
+    (x : set-quotient) (a : A) →
+    is-prop (is-in-equivalence-class-set-quotient x a)
+  is-prop-is-in-equivalence-class-set-quotient x =
+    is-prop-is-in-equivalence-class R (equivalence-class-set-quotient x)
+
+  is-in-equivalence-class-set-quotient-Prop :
+    (x : set-quotient) → (A → Prop l2)
+  is-in-equivalence-class-set-quotient-Prop x =
+    is-in-equivalence-class-Prop R (equivalence-class-set-quotient x)
+
+  is-set-set-quotient : is-set set-quotient
+  is-set-set-quotient =
+    is-set-equiv'
+      ( equivalence-class R)
+      ( compute-set-quotient)
+      ( is-set-equivalence-class R)
+
+  quotient-Set : Set (l1 ⊔ l2)
+  pr1 quotient-Set = set-quotient
+  pr2 quotient-Set = is-set-set-quotient
+
+  unit-im-set-quotient :
+    hom-slice (prop-equivalence-relation R) subtype-set-quotient
+  pr1 unit-im-set-quotient = quotient-map
+  pr2 unit-im-set-quotient =
+    ( ( subtype-equivalence-class R) ·l
+      ( inv-htpy is-retraction-equivalence-class-set-quotient)) ·r
+    ( class R)
+
+  is-image-set-quotient :
+    is-image
+      ( prop-equivalence-relation R)
+      ( emb-subtype-set-quotient)
+      ( unit-im-set-quotient)
+  is-image-set-quotient =
+    is-image-is-surjective
+      ( prop-equivalence-relation R)
+      ( emb-subtype-set-quotient)
+      ( unit-im-set-quotient)
+      ( is-surjective-quotient-map)
+```
+
+## Supplement
 
 ### Maps that are effective and surjective
 
