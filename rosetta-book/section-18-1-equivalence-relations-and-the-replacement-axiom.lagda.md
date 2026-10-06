@@ -8,9 +8,11 @@ open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
+open import section-5-4-transport
 open import section-7-2-the-congruence-relations-on-natural-numbers
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
@@ -29,6 +31,7 @@ open import section-15-1-the-image-of-a-map
 open import section-15-2-surjective-maps
 open import exercise-15-4-surjective-maps-in-triangles
 open import section-17-1-equivalent-forms-of-the-univalence-axiom
+open import section-17-2-propositional-extensionality
 open import section-17-4-maps-and-families-of-types
 
 open import exercise-4-3-double-negation-logic
@@ -384,6 +387,8 @@ As a corollary, we obtain equivalences
 justifying that the quotient `A/R` is defined to be the type of equivalence classes.
 Note that in our characterization of the identity type of `A/R` we make use of propositional extensionality.
 
+Note: In agda-unimath, the type A/R is defined to be a small type equivalent to the type of equivalence classes. We will add its formalization towards the end of this file.
+
 ## Proposition 18.1.3
 
 Let `R : A → (A → Prop_𝒰)` be an equivalence relation.
@@ -677,6 +682,11 @@ We write
 
 Similarly, a map `f : A → B` is said to be **locally `𝒰`-small** if all of its fibers are locally `𝒰`-small.
 
+```agda
+open import section-17-1-equivalent-forms-of-the-univalence-axiom using
+  ( is-locally-small)
+```
+
 ## Example 18.1.7
 
 1. Any `𝒰`-small type is also locally `𝒰`-small.
@@ -693,11 +703,69 @@ Similarly, a map `f : A → B` is said to be **locally `𝒰`-small** if all of 
 
 4. For any family `B` of locally `𝒰`-small types over a `𝒰`-small type `A`, the dependent product `Π(x : A) B(x)` is locally `𝒰`-small.
 
+```agda
+open import section-17-1-equivalent-forms-of-the-univalence-axiom using
+  ( is-locally-small-is-small)
+
+is-locally-small-is-prop :
+  (l : Level) {l1 : Level} {A : UU l1} → is-prop A → is-locally-small l A
+is-locally-small-is-prop l H x y = is-small-is-contr l (H x y)
+
+is-locally-small-UU :
+  {l : Level} → is-locally-small l (UU l)
+pr1 (is-locally-small-UU X Y) = X ≃ Y
+pr2 (is-locally-small-UU X Y) = equiv-univalence
+
+is-locally-small-Π :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} →
+  is-small l3 A → ((x : A) → is-locally-small l4 (B x)) →
+  is-locally-small (l3 ⊔ l4) ((x : A) → B x)
+is-locally-small-Π H K f g =
+  is-small-equiv
+    ( f ~ g)
+    ( equiv-funext)
+    ( is-small-Π H (λ x → K x (f x) (g x)))
+
+Π-Locally-Small-Type :
+  {l1 l2 l3 l4 : Level} (A : Small-Type l1 l2) →
+  (type-Small-Type A → Locally-Small-Type l3 l4) →
+  Locally-Small-Type (l1 ⊔ l3) (l2 ⊔ l4)
+pr1 (Π-Locally-Small-Type A B) =
+  (a : type-Small-Type A) → type-Locally-Small-Type (B a)
+pr2 (Π-Locally-Small-Type A B) =
+  is-locally-small-Π
+    ( is-small-type-Small-Type A)
+    ( is-locally-small-type-Locally-Small-Type ∘ B)
+```
+
 We are now ready to assume the replacement axiom.
 
 ## Axiom 18.1.8
 
 For any universe `𝒰`, we assume that for any map `f : A → B` from a `𝒰`-small type `A` into a locally `𝒰`-small type `B`, the image of `f` is `𝒰`-small.
+
+```agda
+instance-replacement :
+  (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) →
+  UU (lsuc l ⊔ l1 ⊔ l2)
+instance-replacement l {A = A} {B} f =
+  is-small l A → is-locally-small l B → is-small l (im f)
+
+replacement-axiom-Level : (l l1 l2 : Level) → UU (lsuc l ⊔ lsuc l1 ⊔ lsuc l2)
+replacement-axiom-Level l l1 l2 =
+  {A : UU l1} {B : UU l2} (f : A → B) → instance-replacement l f
+
+replacement-axiom : UUω
+replacement-axiom = {l l1 l2 : Level} → replacement-axiom-Level l l1 l2
+
+postulate
+  replacement : replacement-axiom
+
+replacement' :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+  is-locally-small l1 B → is-small l1 (im f)
+replacement' f = replacement f is-small'
+```
 
 ## Example 18.1.9
 
@@ -714,6 +782,53 @@ The type `𝔽` of all finite types in `𝒰` is equivalent to be the image of t
 
 Since `ℕ` is `𝒰`-small and `𝒰` is locally `𝒰`-small, it follows from the replacement axiom that `𝔽` is `𝒰`-small.
 
+```agda
+is-locally-small-Σ :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : A → UU l2} →
+  is-locally-small l3 A → ((x : A) → is-locally-small l4 (B x)) →
+  is-locally-small (l3 ⊔ l4) (Σ A B)
+is-locally-small-Σ {B = B} H K x y =
+  is-small-equiv
+    ( Eq-Σ x y)
+    ( equiv-pair-eq-Σ x y)
+    ( is-small-Σ
+      ( H (pr1 x) (pr1 y))
+      ( λ p → K (pr1 y) (tr B p (pr2 x)) (pr2 y)))
+
+Σ-Locally-Small-Type :
+  {l1 l2 l3 l4 : Level} (A : Locally-Small-Type l1 l2) →
+  (type-Locally-Small-Type A → Locally-Small-Type l3 l4) →
+  Locally-Small-Type (l1 ⊔ l3) (l2 ⊔ l4)
+pr1 (Σ-Locally-Small-Type A B) =
+  Σ (type-Locally-Small-Type A) (type-Locally-Small-Type ∘ B)
+pr2 (Σ-Locally-Small-Type A B) =
+  is-locally-small-Σ
+    ( is-locally-small-type-Locally-Small-Type A)
+    ( is-locally-small-type-Locally-Small-Type ∘ B)
+
+is-locally-small-type-subtype :
+  {l1 l2 l3 : Level} {A : UU l1} (P : subtype l2 A) →
+  is-locally-small l3 A → is-locally-small l3 (type-subtype P)
+is-locally-small-type-subtype {l3 = l3} P H =
+  is-locally-small-Σ H
+    ( λ a → is-locally-small-is-prop l3 (is-prop-is-in-subtype P a))
+
+type-subtype-Locally-Small-Type :
+  {l1 l2 l3 : Level} (A : Locally-Small-Type l1 l2) →
+  subtype l3 (type-Locally-Small-Type A) → Locally-Small-Type l1 (l2 ⊔ l3)
+pr1 (type-subtype-Locally-Small-Type A P) = type-subtype P
+pr2 (type-subtype-Locally-Small-Type A P) =
+  is-locally-small-type-subtype P (is-locally-small-type-Locally-Small-Type A)
+
+is-locally-small-type-subuniverse :
+  {l1 l2 : Level} (P : subuniverse l1 l2) →
+  is-locally-small l1 (type-subuniverse P)
+is-locally-small-type-subuniverse P =
+  is-locally-small-type-subtype P is-locally-small-UU
+```
+
+Note: Agda-unimath does not prove directly that the type of finite types is locally small.
+
 ## Example 18.1.11
 
 Consider a type `A` in `𝒰` and an equivalence relation `R` on `A` in `𝒰`.
@@ -724,35 +839,6 @@ Then the type `A/R` is `𝒰`-small, since it is equivalent to the image of
 ```
 
 which maps the `𝒰`-small type `A` into the locally `𝒰`-small type `A → Prop_𝒰`.
-
-```agda
-instance-replacement :
-  (l : Level) {l1 l2 : Level} {A : UU l1} {B : UU l2} → (A → B) →
-  UU (lsuc l ⊔ l1 ⊔ l2)
-instance-replacement l {A = A} {B} f =
-  is-small l A → is-locally-small l B → is-small l (im f)
-
-replacement-axiom-Level : (l l1 l2 : Level) → UU (lsuc l ⊔ lsuc l1 ⊔ lsuc l2)
-replacement-axiom-Level l l1 l2 =
-  {A : UU l1} {B : UU l2} (f : A → B) → instance-replacement l f
-
-replacement-axiom : UUω
-replacement-axiom = {l l1 l2 : Level} → replacement-axiom-Level l l1 l2
-```
-
-```agda
-postulate
-  replacement : replacement-axiom
-```
-
-```agda
-replacement' :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
-  is-locally-small l1 B → is-small l1 (im f)
-replacement' f = replacement f is-small'
-```
-
-### If `f` is a surjective map from a small type into a locally small type, then replacement implies that the codomain is small
 
 ```agda
 is-small-is-surjective :
@@ -766,11 +852,7 @@ is-small-is-surjective {f = f} H K L =
       ( f , refl-htpy)
       ( is-image-is-surjective f id-emb (f , refl-htpy) H))
     ( replacement f K L)
-```
 
-### The type of equivalence classes is locally small
-
-```agda
 module _
   {l1 l2 : Level} {A : UU l1} (R : equivalence-relation l2 A)
   where

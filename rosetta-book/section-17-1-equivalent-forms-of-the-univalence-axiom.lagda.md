@@ -672,45 +672,6 @@ commutativity-inv-eq-equiv f =
           ( inv (right-inverse-law-equiv equiv-univalence)))))
 ```
 
-### Locally small types
-
-In the book, locally small types are defined in Definition 18.1.6. However, agda-unimath makes use of this concept in section 17.4, which is imported by section 18.1. Hence we define locally small types here, as a supplement to the file that defines small types.
-
-```agda
-is-locally-small :
-  (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
-is-locally-small l A = (x y : A) → is-small l (x ＝ y)
-
-module _
-  {l l1 : Level} {A : UU l1} (H : is-locally-small l A) (x y : A)
-  where
-
-  type-is-locally-small : UU l
-  type-is-locally-small = pr1 (H x y)
-
-  equiv-is-locally-small : (x ＝ y) ≃ type-is-locally-small
-  equiv-is-locally-small = pr2 (H x y)
-
-  inv-equiv-is-locally-small : type-is-locally-small ≃ (x ＝ y)
-  inv-equiv-is-locally-small = inv-equiv equiv-is-locally-small
-
-  map-equiv-is-locally-small : (x ＝ y) → type-is-locally-small
-  map-equiv-is-locally-small = map-equiv equiv-is-locally-small
-
-  map-inv-equiv-is-locally-small : type-is-locally-small → (x ＝ y)
-  map-inv-equiv-is-locally-small = map-inv-equiv equiv-is-locally-small
-```
-
-### Any small type is locally small
-
-```agda
-is-locally-small-is-small :
-  {l l1 : Level} {A : UU l1} → is-small l A → is-locally-small l A
-pr1 (is-locally-small-is-small (X , e) x y) =
-  map-equiv e x ＝ map-equiv e y
-pr2 (is-locally-small-is-small (X , e) x y) = equiv-ap e x y
-```
-
 ### Small types are closed under equivalences
 
 ```agda
@@ -788,4 +749,72 @@ is-small-logical-equivalence H K =
 ```agda
 is-small-lsuc : {l : Level} (X : UU l) → is-small (lsuc l) X
 is-small-lsuc {l} = is-small-lmax (lsuc l)
+```
+
+### Locally small types
+
+In the book, locally small types are defined in Definition 18.1.6. However, agda-unimath makes use of this concept in section 17.4, which is imported by section 18.1. Hence we define locally small types here, as a supplement to the file that defines small types.
+
+```agda
+is-locally-small :
+  (l : Level) {l1 : Level} (A : UU l1) → UU (lsuc l ⊔ l1)
+is-locally-small l A = (x y : A) → is-small l (x ＝ y)
+
+module _
+  {l l1 : Level} {A : UU l1} (H : is-locally-small l A) (x y : A)
+  where
+
+  type-is-locally-small : UU l
+  type-is-locally-small = pr1 (H x y)
+
+  equiv-is-locally-small : (x ＝ y) ≃ type-is-locally-small
+  equiv-is-locally-small = pr2 (H x y)
+
+  inv-equiv-is-locally-small : type-is-locally-small ≃ (x ＝ y)
+  inv-equiv-is-locally-small = inv-equiv equiv-is-locally-small
+
+  map-equiv-is-locally-small : (x ＝ y) → type-is-locally-small
+  map-equiv-is-locally-small = map-equiv equiv-is-locally-small
+
+  map-inv-equiv-is-locally-small : type-is-locally-small → (x ＝ y)
+  map-inv-equiv-is-locally-small = map-inv-equiv equiv-is-locally-small
+```
+
+### Any small type is locally small
+
+```agda
+is-locally-small-is-small :
+  {l l1 : Level} {A : UU l1} → is-small l A → is-locally-small l A
+pr1 (is-locally-small-is-small (X , e) x y) =
+  map-equiv e x ＝ map-equiv e y
+pr2 (is-locally-small-is-small (X , e) x y) = equiv-ap e x y
+```
+
+### The subuniverse of `UU l1`-locally small types in `UU l2`
+
+```agda
+Locally-Small-Type : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+Locally-Small-Type l1 l2 = Σ (UU l2) (is-locally-small l1)
+
+module _
+  {l1 l2 : Level} (A : Locally-Small-Type l1 l2)
+  where
+
+  type-Locally-Small-Type : UU l2
+  type-Locally-Small-Type = pr1 A
+
+  is-locally-small-type-Locally-Small-Type :
+    is-locally-small l1 type-Locally-Small-Type
+  is-locally-small-type-Locally-Small-Type = pr2 A
+
+  small-identity-type-Locally-Small-Type :
+    (x y : type-Locally-Small-Type) → UU l1
+  small-identity-type-Locally-Small-Type =
+    type-is-locally-small is-locally-small-type-Locally-Small-Type
+
+  equiv-is-locally-small-type-Locally-Small-Type :
+    (x y : type-Locally-Small-Type) →
+    (x ＝ y) ≃ small-identity-type-Locally-Small-Type x y
+  equiv-is-locally-small-type-Locally-Small-Type =
+    equiv-is-locally-small is-locally-small-type-Locally-Small-Type
 ```
