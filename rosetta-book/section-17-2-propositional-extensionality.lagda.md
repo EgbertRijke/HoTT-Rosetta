@@ -37,7 +37,6 @@ open import exercise-13-6-universal-property-empty-types
 open import exercise-13-7-universal-property-contractible-types
 open import exercise-13-12-dependent-products-of-truncated-maps
 open import section-14-3-logic-in-type-theory
-open import section-15-3-cantors-diagonal-argument
 open import section-17-1-equivalent-forms-of-the-univalence-axiom
 ```
 
@@ -558,4 +557,18 @@ module _
         ( is-proof-irrelevant-is-prop (is-set-bool true true) refl)
     compute-equiv-bool-Decidable-Prop (P , H , inr np) =
       equiv-is-empty np neq-false-true-bool
+```
+
+### The type of propositions is a set
+
+```agda
+is-set-type-Prop : {l : Level} → is-set (Prop l)
+is-set-type-Prop P Q =
+  is-prop-equiv
+    ( propositional-extensionality P Q)
+    ( is-prop-iff-Prop P Q)
+
+Prop-Set : (l : Level) → Set (lsuc l)
+pr1 (Prop-Set l) = Prop l
+pr2 (Prop-Set l) = is-set-type-Prop
 ```

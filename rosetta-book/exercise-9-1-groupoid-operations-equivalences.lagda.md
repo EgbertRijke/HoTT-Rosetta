@@ -9,9 +9,9 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
-open import section-5-4-transport
 ```
 
 ## Problem statement

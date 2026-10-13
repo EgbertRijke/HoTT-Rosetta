@@ -22,7 +22,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-11-9-embedding-from-path-sections.lagda.md
 - rosetta-book/exercise-11-11-fiber-triangles.lagda.md
 - rosetta-book/exercise-12-2-posets-are-sets.lagda.md
-- rosetta-book/exercise-12-3-injective-maps-into-sets.lagda.md
 - rosetta-book/exercise-12-5-diagonal.lagda.md
 - rosetta-book/exercise-12-9-list-concatenation-truncated-map.lagda.md
 - rosetta-book/exercise-12-10-constant-maps-truncated.lagda.md
@@ -98,6 +97,7 @@ The following files contain partially solved (auto)formalization exercises, whic
 
 - rosetta-book/exercise-4-3-double-negation-logic.lagda.md
 - rosetta-book/exercise-6-5-distance-natural-numbers.lagda.md
+- rosetta-book/exercise-12-3-injective-maps-into-sets.lagda.md
 - rosetta-book/exercise-12-4-coproduct-truncation.lagda.md
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md
 - rosetta-book/exercise-12-7-truncated-products.lagda.md

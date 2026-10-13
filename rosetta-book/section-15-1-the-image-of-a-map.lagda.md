@@ -26,6 +26,8 @@ open import section-11-2-the-fundamental-theorem
 open import section-11-4-embeddings
 open import section-12-1-propositions
 open import section-12-2-subtypes
+open import section-12-3-sets
+open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import section-14-2-propositional-truncations-as-higher-inductive-types
@@ -855,4 +857,35 @@ module _
     ( triangle-hom-slice f (map-emb i) q)
   tetrahedron-hom-equiv-slice-uniqueness-im =
     pr2 htpy-equiv-slice-uniqueness-im
+```
+
+### The image of a map into a truncated type is truncated
+
+```agda
+abstract
+  is-trunc-im :
+    {l1 l2 : Level} (k : 𝕋) {X : UU l1} {A : UU l2} (f : A → X) →
+    is-trunc (succ-𝕋 k) X → is-trunc (succ-𝕋 k) (im f)
+  is-trunc-im k f = is-trunc-emb k (emb-im f)
+
+im-Truncated-Type :
+  {l1 l2 : Level} (k : 𝕋) (X : Truncated-Type l1 (succ-𝕋 k)) {A : UU l2}
+  (f : A → type-Truncated-Type X) → Truncated-Type (l1 ⊔ l2) (succ-𝕋 k)
+pr1 (im-Truncated-Type k X f) = im f
+pr2 (im-Truncated-Type k X f) = is-trunc-im k f (is-trunc-type-Truncated-Type X)
+```
+
+### The image of a map into a set is a set
+
+```agda
+abstract
+  is-set-im :
+    {l1 l2 : Level} {X : UU l1} {A : UU l2} (f : A → X) →
+    is-set X → is-set (im f)
+  is-set-im = is-trunc-im neg-one-𝕋
+
+im-Set :
+  {l1 l2 : Level} (X : Set l1) {A : UU l2}
+  (f : A → type-Set X) → Set (l1 ⊔ l2)
+im-Set X f = im-Truncated-Type (neg-one-𝕋) X f
 ```

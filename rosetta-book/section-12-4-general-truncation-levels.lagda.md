@@ -14,10 +14,12 @@ open import section-5-3-the-action-on-identifications-of-functions
 open import exercise-8-4-prime-and-prime-counting-functions
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-2-contractible-retracts
+open import section-11-1-families-of-equivalences
 open import section-11-4-embeddings
 open import section-11-6-the-structure-identity-principle
 open import section-12-1-propositions
@@ -572,4 +574,19 @@ iterate-succ-𝕋 n x = iterate' n succ-𝕋 x
 
 iterate-succ-𝕋' : 𝕋 → ℕ → 𝕋
 iterate-succ-𝕋' x n = iterate-succ-𝕋 n x
+```
+
+### Truncated maps are closed under homotopies
+
+```agda
+abstract
+  is-trunc-map-htpy :
+    {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+    {f g : A → B} → f ~ g → is-trunc-map k g → is-trunc-map k f
+  is-trunc-map-htpy k {A} {B} {f} {g} H is-trunc-g b =
+    is-trunc-is-equiv k
+      ( Σ A (λ z → g z ＝ b))
+      ( fiber-triangle f g id H b)
+      ( is-fiberwise-equiv-is-equiv-triangle f g id H is-equiv-id b)
+      ( is-trunc-g b)
 ```

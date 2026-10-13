@@ -10,22 +10,30 @@ open import exercise-2-3-constant-maps
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
+open import section-5-3-the-action-on-identifications-of-functions
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-1-groupoid-operations-equivalences
 open import exercise-9-4-three-for-two-equivalences
+open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
+open import section-11-2-the-fundamental-theorem
 open import section-11-4-embeddings
 open import exercise-11-4-embedding-triangles
 open import section-12-1-propositions
 open import section-12-2-subtypes
+open import section-12-3-sets
+open import exercise-12-3-injective-maps-into-sets
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-13-7-universal-property-contractible-types
 open import exercise-13-12-dependent-products-of-truncated-maps
 open import exercise-13-15-morphisms-over-a-type
 open import section-14-2-propositional-truncations-as-higher-inductive-types
+open import section-14-3-logic-in-type-theory
 open import section-15-1-the-image-of-a-map
+open import section-17-1-equivalent-forms-of-the-univalence-axiom
+open import section-17-2-propositional-extensionality
 ```
 
 A map `f : A → B` is surjective if for every `b : B` there is an *unspecified* element `a : A` that maps to `b`.
@@ -652,3 +660,98 @@ Now it follows by Theorem 15.1.8 that the type of `(e,H) : hom-slice_X(i,i')` in
 
 in `hom-slice_X(f,i')`, is contractible. ◻
 
+## Supplement
+
+### Surjective maps are epimorphisms with respect to maps into sets
+
+```agda
+is-epimorphism-Set :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2}
+  (f : A → B) → UUω
+is-epimorphism-Set f =
+  {l : Level} (C : Set l) → is-emb (precomp f (type-Set C))
+
+abstract
+  is-epimorphism-is-surjective-Set :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+    is-surjective f → is-epimorphism-Set f
+  is-epimorphism-is-surjective-Set H C =
+    is-emb-is-injective
+      ( is-set-function-type (is-set-type-Set C))
+      ( λ {g} {h} p →
+        eq-htpy
+          ( λ b →
+            apply-universal-property-trunc-Prop
+              ( H b)
+              ( Id-Prop C (g b) (h b))
+              ( λ u →
+                ( inv (ap g (pr2 u))) ∙
+                ( htpy-eq p (pr1 u)) ∙
+                ( ap h (pr2 u)))))
+```
+
+### Maps that are epimorphisms with respect to maps into sets are surjective
+
+```agda
+abstract
+  is-surjective-is-epimorphism-Set :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+    is-epimorphism-Set f → is-surjective f
+  is-surjective-is-epimorphism-Set {l1} {l2} {A} {B} {f} H b =
+    map-eq
+      ( ap
+        ( pr1)
+        ( htpy-eq
+          ( is-injective-is-emb
+            ( H (Prop-Set (l1 ⊔ l2)))
+            { λ _ → raise-unit-Prop (l1 ⊔ l2)}
+            { λ y → exists-structure-Prop A (λ x → f x ＝ y)}
+            ( eq-htpy
+              ( λ a →
+                eq-iff
+                  ( λ _ → unit-trunc-Prop (a , refl))
+                  ( λ _ → raise-star))))
+          ( b)))
+      ( raise-star)
+```
+
+### Characterization of the identity type of `A ↠ B`
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A ↠ B)
+  where
+
+  htpy-surjection : (A ↠ B) → UU (l1 ⊔ l2)
+  htpy-surjection g = map-surjection f ~ map-surjection g
+
+  refl-htpy-surjection : htpy-surjection f
+  refl-htpy-surjection = refl-htpy
+
+  is-torsorial-htpy-surjection : is-torsorial htpy-surjection
+  is-torsorial-htpy-surjection =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-htpy (map-surjection f))
+      ( is-prop-is-surjective)
+      ( map-surjection f)
+      ( refl-htpy)
+      ( is-surjective-map-surjection f)
+
+  htpy-eq-surjection :
+    (g : A ↠ B) → (f ＝ g) → htpy-surjection g
+  htpy-eq-surjection .f refl = refl-htpy-surjection
+
+  is-equiv-htpy-eq-surjection :
+    (g : A ↠ B) → is-equiv (htpy-eq-surjection g)
+  is-equiv-htpy-eq-surjection =
+    fundamental-theorem-id is-torsorial-htpy-surjection htpy-eq-surjection
+
+  extensionality-surjection :
+    (g : A ↠ B) → (f ＝ g) ≃ htpy-surjection g
+  pr1 (extensionality-surjection g) = htpy-eq-surjection g
+  pr2 (extensionality-surjection g) = is-equiv-htpy-eq-surjection g
+
+  eq-htpy-surjection : (g : A ↠ B) → htpy-surjection g → f ＝ g
+  eq-htpy-surjection g =
+    map-inv-equiv (extensionality-surjection g)
+```

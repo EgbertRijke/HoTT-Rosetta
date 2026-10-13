@@ -312,3 +312,11 @@ abstract
     {l1 : Level} {X : UU l1} → (X → is-prop X) → is-prop X
   is-prop-has-element f x y = f x x y
 ```
+
+### Equal propositions are logically equivalent
+
+```agda
+iff-eq : {l1 : Level} {P Q : Prop l1} → P ＝ Q → (type-Prop P ↔ type-Prop Q)
+pr1 (iff-eq refl) = id
+pr2 (iff-eq refl) = id
+```

@@ -608,3 +608,11 @@ module _
         ( is-equiv-concat (inv right-unit) r)
         ( is-equiv-concat' p (inv right-unit))
 ```
+
+```agda
+convert-eq-values :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} (H : f ~ g)
+  (x y : A) → (f x ＝ f y) ≃ (g x ＝ g y)
+convert-eq-values {f = f} {g} H x y =
+  ( equiv-concat' (g x) (H y)) ∘e (equiv-concat (inv (H x)) (f y))
+```

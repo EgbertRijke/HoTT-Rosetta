@@ -106,10 +106,6 @@ is-prop-is-double-negation-dense-map :
 is-prop-is-double-negation-dense-map f =
   is-prop-type-Prop (is-double-negation-dense-map-Prop f)
 
-iff-eq : {l1 : Level} {P Q : Prop l1} → P ＝ Q → (type-Prop P ↔ type-Prop Q)
-pr1 (iff-eq refl) = id
-pr2 (iff-eq refl) = id
-
 double-negation-type-Prop :
   {l : Level} (A : UU l) → Prop l
 double-negation-type-Prop A = neg-type-Prop (¬ A)

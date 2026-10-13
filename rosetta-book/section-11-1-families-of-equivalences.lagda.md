@@ -508,3 +508,39 @@ module _
     ( map-equiv-total-fiber g ∘ tot fiber-triangle)
   square-tot-fiber-triangle (.(f a) , a , refl) = refl
 ```
+
+```agda
+module _
+  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
+  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
+  where
+
+  abstract
+    is-fiberwise-equiv-is-equiv-triangle :
+      is-equiv h → is-fiberwise-equiv (fiber-triangle f g h H)
+    is-fiberwise-equiv-is-equiv-triangle E =
+      is-fiberwise-equiv-is-equiv-tot
+        ( is-equiv-top-is-equiv-bottom-square
+          ( map-equiv-total-fiber f)
+          ( map-equiv-total-fiber g)
+          ( tot (fiber-triangle f g h H))
+          ( h)
+          ( square-tot-fiber-triangle f g h H)
+          ( is-equiv-map-equiv-total-fiber f)
+          ( is-equiv-map-equiv-total-fiber g)
+          ( E))
+
+  abstract
+    is-equiv-triangle-is-fiberwise-equiv :
+      is-fiberwise-equiv (fiber-triangle f g h H) → is-equiv h
+    is-equiv-triangle-is-fiberwise-equiv E =
+      is-equiv-bottom-is-equiv-top-square
+        ( map-equiv-total-fiber f)
+        ( map-equiv-total-fiber g)
+        ( tot (fiber-triangle f g h H))
+        ( h)
+        ( square-tot-fiber-triangle f g h H)
+        ( is-equiv-map-equiv-total-fiber f)
+        ( is-equiv-map-equiv-total-fiber g)
+        ( is-equiv-tot-is-fiberwise-equiv E)
+```
