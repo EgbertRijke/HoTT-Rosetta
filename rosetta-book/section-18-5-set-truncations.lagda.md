@@ -4,20 +4,30 @@
 module section-18-5-set-truncations where
 
 open import universe-levels
+open import section-2-2-ordinary-function-types
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-7-3-the-standard-finite-types
+open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
+open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-7-fibers-of-projections
 open import section-12-1-propositions
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-13-3-truncatedness-is-a-proposition
+open import exercise-13-4-equivalence-structure-is-a-proposition
 open import section-14-1-the-universal-property-of-propositional-truncations
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-15-2-surjective-maps
+open import section-16-3-finite-types
+open import section-17-1-equivalent-forms-of-the-univalence-axiom
+open import section-17-2-propositional-extensionality
+open import section-17-6-the-binomial-types
 open import section-18-1-equivalence-relations-and-the-replacement-axiom
 open import section-18-2-the-universal-property-of-set-quotients
 ```
@@ -285,6 +295,57 @@ To learn more about general `k`-truncations, we refer to Chapter 7 of \[citation
 
 ## Supplement
 
+### The dependent universal property of set truncations
+
+```agda
+precomp-Π-Set :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : B → Set l3) →
+  ((b : B) → type-Set (C b)) → ((a : A) → type-Set (C (f a)))
+precomp-Π-Set f C h a = h (f a)
+
+dependent-universal-property-set-truncation :
+  {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) → UUω
+dependent-universal-property-set-truncation B f =
+  {l : Level} (X : type-Set B → Set l) → is-equiv (precomp-Π-Set f X)
+
+dependent-universal-property-trunc-Set :
+  {l1 : Level} {A : UU l1} →
+  dependent-universal-property-set-truncation (trunc-Set A) unit-trunc-Set
+dependent-universal-property-trunc-Set = dependent-universal-property-trunc
+
+equiv-dependent-universal-property-trunc-Set :
+  {l1 l2 : Level} {A : UU l1} (B : type-trunc-Set A → Set l2) →
+  ((x : type-trunc-Set A) → type-Set (B x)) ≃
+  ((a : A) → type-Set (B (unit-trunc-Set a)))
+equiv-dependent-universal-property-trunc-Set =
+  equiv-dependent-universal-property-trunc
+
+module _
+  {l1 l2 : Level} {A : UU l1} (B : type-trunc-Set A → Set l2)
+  (f : (x : A) → type-Set (B (unit-trunc-Set x)))
+  where
+
+  Π-trunc-Set : UU (l1 ⊔ l2)
+  Π-trunc-Set =
+    Σ ( (x : type-trunc-Set A) → type-Set (B x))
+      ( λ g → g ∘ unit-trunc-Set ~ f)
+
+  function-dependent-universal-property-trunc-Set :
+    (x : type-trunc-Set A) → type-Set (B x)
+  function-dependent-universal-property-trunc-Set =
+    function-dependent-universal-property-trunc B f
+
+  compute-dependent-universal-property-trunc-Set :
+    function-dependent-universal-property-trunc-Set ∘ unit-trunc-Set ~ f
+  compute-dependent-universal-property-trunc-Set =
+    htpy-dependent-universal-property-trunc B f
+
+  apply-dependent-universal-property-trunc-Set' :
+    (x : type-trunc-Set A) → type-Set (B x)
+  apply-dependent-universal-property-trunc-Set' =
+    map-inv-equiv (equiv-dependent-universal-property-trunc-Set B) f
+```
+
 ### 0-connected types
 
 ```agda
@@ -386,6 +447,12 @@ module _
       {A : UU l} {x y : A} → unit-trunc-Set x ＝ unit-trunc-Set y → mere-eq x y
     apply-effectiveness-unit-trunc-Set {A = A} {x} {y} =
       map-equiv (is-effective-unit-trunc-Set A x y)
+
+  abstract
+    apply-effectiveness-unit-trunc-Set' :
+      {A : UU l} {x y : A} → mere-eq x y → unit-trunc-Set x ＝ unit-trunc-Set y
+    apply-effectiveness-unit-trunc-Set' {A = A} {x} {y} =
+      map-inv-equiv (is-effective-unit-trunc-Set A x y)
 ```
 
 ### Elements of 0-connected types are all merely equal
@@ -396,4 +463,120 @@ abstract
     {l : Level} {A : UU l} → is-0-connected A → all-elements-merely-equal A
   mere-eq-is-0-connected {A = A} H x y =
     apply-effectiveness-unit-trunc-Set (eq-is-contr H)
+```
+
+### A type is 0-connected if it is inhabited and all elements are merely equal
+
+```agda
+abstract
+  is-0-connected-mere-eq :
+    {l : Level} {A : UU l} (a : A) →
+    ((x : A) → mere-eq a x) → is-0-connected A
+  is-0-connected-mere-eq {l} {A} a e =
+    pair
+      ( unit-trunc-Set a)
+      ( apply-dependent-universal-property-trunc-Set'
+        ( λ x → set-Prop (Id-Prop (trunc-Set A) (unit-trunc-Set a) x))
+        ( λ x → apply-effectiveness-unit-trunc-Set' (e x)))
+
+abstract
+  is-0-connected-mere-eq-is-inhabited :
+    {l : Level} {A : UU l} →
+    is-inhabited A → all-elements-merely-equal A → is-0-connected A
+  is-0-connected-mere-eq-is-inhabited H K =
+    apply-universal-property-trunc-Prop H
+      ( is-0-connected-Prop _)
+      ( λ a → is-0-connected-mere-eq a (K a))
+```
+
+### We characterize the identity type of Type-With-Cardinality-ℕ
+
+```agda
+equiv-Type-With-Cardinality-ℕ :
+  {l1 l2 : Level} (k : ℕ) →
+  Type-With-Cardinality-ℕ l1 k →
+  Type-With-Cardinality-ℕ l2 k →
+  UU (l1 ⊔ l2)
+equiv-Type-With-Cardinality-ℕ k X Y =
+  type-Type-With-Cardinality-ℕ k X ≃ type-Type-With-Cardinality-ℕ k Y
+
+id-equiv-Type-With-Cardinality-ℕ :
+  {l : Level} {k : ℕ} (X : Type-With-Cardinality-ℕ l k) →
+  equiv-Type-With-Cardinality-ℕ k X X
+id-equiv-Type-With-Cardinality-ℕ X = id-equiv-component-UU-Level X
+
+equiv-eq-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) {X Y : Type-With-Cardinality-ℕ l k} →
+  X ＝ Y → equiv-Type-With-Cardinality-ℕ k X Y
+equiv-eq-Type-With-Cardinality-ℕ k p = equiv-eq-component-UU-Level p
+
+abstract
+  is-torsorial-equiv-Type-With-Cardinality-ℕ :
+    {l : Level} {k : ℕ} (X : Type-With-Cardinality-ℕ l k) →
+    is-torsorial
+      ( λ (Y : Type-With-Cardinality-ℕ l k) →
+        equiv-Type-With-Cardinality-ℕ k X Y)
+  is-torsorial-equiv-Type-With-Cardinality-ℕ {l} {k} X =
+    is-torsorial-equiv-component-UU-Level X
+
+abstract
+  is-equiv-equiv-eq-Type-With-Cardinality-ℕ :
+    {l : Level} (k : ℕ) (X Y : Type-With-Cardinality-ℕ l k) →
+    is-equiv (equiv-eq-Type-With-Cardinality-ℕ k {X = X} {Y})
+  is-equiv-equiv-eq-Type-With-Cardinality-ℕ k X =
+    is-equiv-equiv-eq-component-UU-Level X
+
+eq-equiv-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) (X Y : Type-With-Cardinality-ℕ l k) →
+  equiv-Type-With-Cardinality-ℕ k X Y → X ＝ Y
+eq-equiv-Type-With-Cardinality-ℕ k X Y =
+  eq-equiv-component-UU-Level X Y
+
+equiv-equiv-eq-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) (X Y : Type-With-Cardinality-ℕ l k) →
+  (X ＝ Y) ≃ equiv-Type-With-Cardinality-ℕ k X Y
+pr1 (equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y) =
+  equiv-eq-Type-With-Cardinality-ℕ k
+pr2 (equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y) =
+  is-equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y
+```
+
+### The type Type-With-Cardinality-ℕ is a 1-type
+
+```agda
+is-1-type-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) → is-1-type (Type-With-Cardinality-ℕ l k)
+is-1-type-Type-With-Cardinality-ℕ k X Y =
+  is-set-equiv
+    ( equiv-Type-With-Cardinality-ℕ k X Y)
+    ( equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y)
+    ( is-set-equiv-is-set
+      ( is-set-type-Type-With-Cardinality-ℕ k X)
+      ( is-set-type-Type-With-Cardinality-ℕ k Y))
+
+Type-With-Cardinality-ℕ-1-Type : (l : Level) (k : ℕ) → 1-Type (lsuc l)
+pr1 (Type-With-Cardinality-ℕ-1-Type l k) = Type-With-Cardinality-ℕ l k
+pr2 (Type-With-Cardinality-ℕ-1-Type l k) =
+  is-1-type-Type-With-Cardinality-ℕ k
+```
+
+### The type Type-With-Cardinality-ℕ is connected
+
+```agda
+abstract
+  is-0-connected-Type-With-Cardinality-ℕ :
+    {l : Level} (n : ℕ) → is-0-connected (Type-With-Cardinality-ℕ l n)
+  is-0-connected-Type-With-Cardinality-ℕ {l} n =
+    is-0-connected-mere-eq
+      ( raise-Fin-Type-With-Cardinality-ℕ l n)
+      ( λ A →
+        map-trunc-Prop
+          ( ( eq-equiv-Type-With-Cardinality-ℕ n
+              ( raise-Fin-Type-With-Cardinality-ℕ l n)
+              ( A)) ∘
+            ( map-equiv
+              ( equiv-precomp-equiv
+                ( inv-equiv (compute-raise l (Fin n)))
+                ( type-Type-With-Cardinality-ℕ n A))))
+          ( pr2 A))
 ```

@@ -57,6 +57,7 @@ open import exercise-14-3-products-of-propositional-truncations
 open import exercise-14-5-propositional-truncations-with-sections
 open import section-16-1-counting-in-type-theory
 open import section-16-2-double-counting-in-type-theory
+open import section-17-1-equivalent-forms-of-the-univalence-axiom
 ```
 
 The type of all finite types is the subtype of the base universe `𝒰₀` consisting of all types `X` for which there exists an unspecified equivalence `Fin_{k} ≃ X` for some `k : ℕ`.
@@ -104,7 +105,6 @@ is-finite-type-Finite-Type :
   {l : Level} (X : Finite-Type l) → is-finite (type-Finite-Type X)
 is-finite-type-Finite-Type = pr2
 ```
-
 
 In other words, the type `𝔽` of finite types is the image of the map `Fin : ℕ → 𝒰₀`.
 We also define the type `BS_k` of **`k`-element types** by
@@ -202,7 +202,6 @@ eq-cardinality H K =
     ( Id-Prop ℕ-Set _ _)
     ( λ e f → is-equivalence-injective-Fin (inv-equiv f ∘e e))
 ```
-
 
 ## Remark 16.3.2
 
@@ -568,11 +567,13 @@ There is an equivalence
 
 ### Proof
 
-*Proof.* This equivalence can be obtained by composing the equivalences
+_Proof._ This equivalence can be obtained by composing the equivalences
+
 ```text
 Σ(X:𝒰₀) is-finite(X) ≃ Σ(X:𝒰₀) Σ(k:ℕ) ‖Fin_{k}≃ X‖
 ≃ Σ(k:ℕ) Σ(X:𝒰₀) ‖Fin_{k}≃ X‖.
 ```
+
  ◻
 
 ```agda
@@ -602,27 +603,32 @@ Before we do so, we prove the **principle of finite choice**.
 
 Consider a type family `B` over a finite type `A`.
 Then there is a **finite choice** map
+
 ```text
 (Π(x:A) ‖B(x)‖)→‖Π(x:A) B(x)‖
 ```
 
 ### Proof
 
-*Proof.* Note that the type `‖Π(x:A) B(x)‖` is a proposition.
+_Proof._ Note that the type `‖Π(x:A) B(x)‖` is a proposition.
 Therefore we may assume that the type `A` comes equipped with a counting `e:Fin_{k}≃ A`.
 By this equivalence, it suffices to show that for every type family `B` over `Fin_{k}`, there is a map
+
 ```text
 (Π(x:Fin_{k}) ‖B(x)‖)→‖Π(x:Fin_{k}) B(x)‖.
 ```
+
 We proceed by induction on `k`.
 In the base case, `Fin_{k}` is empty and therefore the type `Π(x:Fin_{k}) B(x)` is contractible.
 The asserted function therefore exists.
 
 For the inductive step, note that by the dependent universal property of coproducts (Exercise 13.8) we have the equivalences
+
 ```text
 (Π(x:Fin_{k+1}) ‖B(x)‖) ≃ (Π(x:Fin_{k}) ‖B(i(x))‖)× ‖B(⋆)‖
 ‖Π(x:Fin_{k}) B(x)‖ ≃ ‖(Π(x:Fin_{k}) B(i(x)))× B(⋆)‖.
 ```
+
 Recall from Exercise 14.3 that `‖X× Y‖≃ ‖X‖×‖Y‖` for any two types `X` and `Y`.
 This fact together with the inductive hypothesis finishes the proof. ◻
 
@@ -738,28 +744,26 @@ module _
 ## Theorem 16.3.6
 
 1. For any two types `X` and `Y`, the following are equivalent:
+   1. Both `X` and `Y` are finite.
 
-    1. Both `X` and `Y` are finite.
-
-    2. The coproduct `X+Y` is finite.
+   2. The coproduct `X+Y` is finite.
 
 2. For any two types `X` and `Y`, we make two claims:
+   1. If both `X` and `Y` are finite, then the cartesian product `X× Y` is finite.
 
-    1. If both `X` and `Y` are finite, then the cartesian product `X× Y` is finite.
+   2. If the type `X× Y` is finite, then we have two functions
 
-    2. If the type `X× Y` is finite, then we have two functions
 ```text
 Y → is-finite(X)
 X → is-finite(Y).
 ```
 
 3. Consider a type family `B` over `A`, and consider the following three conditions:
+   1. The type `A` is finite.
 
-    1. The type `A` is finite.
+   2. The type `B(x)` is finite for each `x:A`.
 
-    2. The type `B(x)` is finite for each `x:A`.
-
-    3. The type `Σ(x:A) B(x)` is finite.
+   3. The type `Σ(x:A) B(x)` is finite.
 
 If (a) holds, then (b) is equivalent to (c).
 Moreover, if (b) and (c) hold, then (a) holds if and only if `A` is a set and the type `Σ(x:A) ¬ B(x)` is finite.
@@ -767,7 +771,7 @@ Furthermore, if (b) and (c) hold and `B` has a section, then (a) holds.
 
 ### Proof
 
-*Proof.* To prove claim Theorem 16.3.6, first suppose that both `X` and `Y` are finite.
+_Proof._ To prove claim Theorem 16.3.6, first suppose that both `X` and `Y` are finite.
 Since the type `is-finite(X+Y)` is a proposition, we may assume that `X` and `Y` come equipped with countings.
 It follows from Theorem 16.1.7 that `X+Y` has a counting, so it is finite.
 Conversely, suppose that the type `X+Y` is finite.
@@ -779,9 +783,11 @@ The proof of claim (2) is similar to the proof of claim Theorem 16.3.6, hence we
 It remains to prove claim (3).
 First, suppose that the type `A` is finite, and that each `B(x)` is finite.
 By Proposition 16.3.5 we have a map
+
 ```text
 (Π(x:A) is-finite(B(x)))→ ‖Π(x:A) count(B(x))‖.
 ```
+
 Since our goal is to construct an element of a proposition, we may therefore assume that each `B(x)` comes equipped with a counting.
 We may also assume that `A` comes equipped with a counting.
 It follows from Theorem 16.1.7 that the type `Σ(x:A) B(x)` has a counting, so it is finite.
@@ -793,31 +799,39 @@ It follows from Theorem 16.1.7 that `B(a)` has a counting, so it is finite.
 The final claim has two parts.
 First, assume that each `B(x)` is finite, that the type `Σ(x:A) B(x)` is finite, and that the type family `B` has a section `f:Π(x:A) B(x)`.
 It follows that the map
+
 ```text
 A→Σ(x:A) B(x)
 ```
+
 given by `x↦ (x,f(x))` is a decidable embedding, because the fiber at `(x,y)` of this map is equivalent to the identity type `f(x)=y` in `B(x)`, which is a decidable proposition.
 It follows from the fact that (a) and (b) together imply (c) that `A` is finite.
 
 For the remaining part of the final claim, assume that `A` is a set.
 Note that the assumption that each `B(x)` is finite implies that each `B(x)` is either inhabited or empty.
 It follows that we have an equivalence
+
 ```text
 A≃ (Σ(x:A) ‖B(x)‖)+(Σ(x:A) ¬ B(x)).
 ```
+
 We assume that the type `Σ(x:A) ¬ B(x)` is finite.
 In order to show that `A` is finite, it therefore suffices to show that the type `Σ(x:A) ‖B(x)‖` is finite.
 Without loss of generality, we assume that each `B(x)` is inhabited.
 To finish the proof, it suffices to show that there is an element of type
+
 ```text
 ‖Π(x:A) B(x)‖
 ```
+
 using the assumption that `Π(x:A) ‖B(x)‖`.
 To construct such an element, we may assume a counting `e:Fin_{k}≃Σ(x:A) B(x)`.
 We claim that there is a function
+
 ```text
 ‖B(a)‖→ B(a),
 ```
+
 i.e., that the type `B(a)` satisfies the principle of global choice of Remark 14.4.2 for each `a:A`.
 Recall from Example 14.4.1 that the decidable subtypes of `Fin_{k}` satisfy global choice.
 Therefore it also follows that the decidable subtypes of `Σ(x:A) B(x)` satisfy global choice.
@@ -825,9 +839,11 @@ Thus, it suffices to show that `B(x)` is a decidable subtype of `Σ(x:A) B(x)`.
 
 The assumption that `A` is a set implies by Exercise 12.13 that the fiber inclusion `i_a:B(a)→Σ(x:A) B(x)` is an embedding for each `a:A`.
 Furthermore, we note that we have the following equivalence computing the fibers of `i_a` at `(x,y)`:
+
 ```text
 (Σ(z:B(a)) (a,z)=(x,y))≃ (a=x).
 ```
+
 The type on the left hand side is decidable, so it follows that the type `A` has decidable equality.
 We conclude that each `B(a)` is a decidable subtype of `Σ(x:A) B(x)`. ◻
 
@@ -1124,4 +1140,26 @@ is-decidable-is-contr-is-finite H =
     ( is-contr-is-one-number-of-elements-is-finite H)
     ( is-one-number-of-elements-is-finite-is-contr H)
     ( has-decidable-equality-ℕ (number-of-elements-is-finite H) 1)
+```
+
+### The standard finite types in an arbitrary universe
+
+```agda
+raise-Fin : (l : Level) (k : ℕ) → UU l
+raise-Fin l k = raise l (Fin k)
+
+compute-raise-Fin : (l : Level) (k : ℕ) → Fin k ≃ raise-Fin l k
+compute-raise-Fin l k = compute-raise l (Fin k)
+
+map-raise-Fin : (l : Level) (k : ℕ) → Fin k → raise-Fin l k
+map-raise-Fin l k = map-raise
+
+has-cardinality-raise-Fin :
+  {l : Level} (k : ℕ) → has-cardinality-ℕ k (raise-Fin l k)
+has-cardinality-raise-Fin {l} k = unit-trunc-Prop (compute-raise-Fin l k)
+
+raise-Fin-Type-With-Cardinality-ℕ :
+  (l : Level) (k : ℕ) → Type-With-Cardinality-ℕ l k
+pr1 (raise-Fin-Type-With-Cardinality-ℕ l k) = raise-Fin l k
+pr2 (raise-Fin-Type-With-Cardinality-ℕ l k) = has-cardinality-raise-Fin k
 ```

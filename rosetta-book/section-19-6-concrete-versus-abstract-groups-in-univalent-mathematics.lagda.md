@@ -4,6 +4,7 @@
 module section-19-6-concrete-versus-abstract-groups-in-univalent-mathematics where
 
 open import universe-levels
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
@@ -11,7 +12,9 @@ open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import exercise-13-3-truncatedness-is-a-proposition
 open import section-14-2-propositional-truncations-as-higher-inductive-types
+open import section-16-3-finite-types
 open import section-18-5-set-truncations
+open import section-19-1-the-type-of-all-groups
 open import section-19-4-homotopy-groups-of-types
 ```
 
@@ -173,6 +176,90 @@ module _
   pr1 classifying-1-type-Concrete-Group = classifying-type-Concrete-Group
   pr2 classifying-1-type-Concrete-Group =
     is-1-type-classifying-type-Concrete-Group
+
+module _
+  {l : Level} (G : Concrete-Group l)
+  where
+
+  unit-Concrete-Group : type-Concrete-Group G
+  unit-Concrete-Group = unit-∞-Group (∞-group-Concrete-Group G)
+
+  mul-Concrete-Group : (x y : type-Concrete-Group G) → type-Concrete-Group G
+  mul-Concrete-Group = mul-∞-Group (∞-group-Concrete-Group G)
+
+  mul-Concrete-Group' : (x y : type-Concrete-Group G) → type-Concrete-Group G
+  mul-Concrete-Group' x y = mul-Concrete-Group y x
+
+  associative-mul-Concrete-Group :
+    (x y z : type-Concrete-Group G) →
+    ( mul-Concrete-Group (mul-Concrete-Group x y) z) ＝
+    ( mul-Concrete-Group x (mul-Concrete-Group y z))
+  associative-mul-Concrete-Group =
+    associative-mul-∞-Group (∞-group-Concrete-Group G)
+
+  left-unit-law-mul-Concrete-Group :
+    (x : type-Concrete-Group G) → mul-Concrete-Group unit-Concrete-Group x ＝ x
+  left-unit-law-mul-Concrete-Group =
+    left-unit-law-mul-∞-Group (∞-group-Concrete-Group G)
+
+  right-unit-law-mul-Concrete-Group :
+    (y : type-Concrete-Group G) → mul-Concrete-Group y unit-Concrete-Group ＝ y
+  right-unit-law-mul-Concrete-Group =
+    right-unit-law-mul-∞-Group (∞-group-Concrete-Group G)
+
+  coherence-unit-laws-mul-Concrete-Group :
+    left-unit-law-mul-Concrete-Group unit-Concrete-Group ＝
+    right-unit-law-mul-Concrete-Group unit-Concrete-Group
+  coherence-unit-laws-mul-Concrete-Group =
+    coherence-unit-laws-mul-∞-Group (∞-group-Concrete-Group G)
+
+  inv-Concrete-Group : type-Concrete-Group G → type-Concrete-Group G
+  inv-Concrete-Group = inv-∞-Group (∞-group-Concrete-Group G)
+
+  left-inverse-law-mul-Concrete-Group :
+    (x : type-Concrete-Group G) →
+    mul-Concrete-Group (inv-Concrete-Group x) x ＝ unit-Concrete-Group
+  left-inverse-law-mul-Concrete-Group =
+    left-inverse-law-mul-∞-Group (∞-group-Concrete-Group G)
+
+  right-inverse-law-mul-Concrete-Group :
+    (x : type-Concrete-Group G) →
+    mul-Concrete-Group x (inv-Concrete-Group x) ＝ unit-Concrete-Group
+  right-inverse-law-mul-Concrete-Group =
+    right-inverse-law-mul-∞-Group (∞-group-Concrete-Group G)
+
+  has-associative-mul-Concrete-Group :
+    has-associative-mul-Set (set-Concrete-Group G)
+  pr1 has-associative-mul-Concrete-Group = mul-Concrete-Group
+  pr2 has-associative-mul-Concrete-Group = associative-mul-Concrete-Group
+
+  semigroup-Concrete-Group : Semigroup l
+  pr1 semigroup-Concrete-Group = set-Concrete-Group G
+  pr2 semigroup-Concrete-Group = has-associative-mul-Concrete-Group
+
+  is-unital-Concrete-Group : is-unital-Semigroup semigroup-Concrete-Group
+  pr1 is-unital-Concrete-Group = unit-Concrete-Group
+  pr1 (pr2 is-unital-Concrete-Group) = left-unit-law-mul-Concrete-Group
+  pr2 (pr2 is-unital-Concrete-Group) = right-unit-law-mul-Concrete-Group
+
+  is-group-Concrete-Group' :
+    is-group-is-unital-Semigroup
+      ( semigroup-Concrete-Group)
+      ( is-unital-Concrete-Group)
+  pr1 is-group-Concrete-Group' = inv-Concrete-Group
+  pr1 (pr2 is-group-Concrete-Group') = left-inverse-law-mul-Concrete-Group
+  pr2 (pr2 is-group-Concrete-Group') = right-inverse-law-mul-Concrete-Group
+
+  is-group-Concrete-Group : is-group-Semigroup semigroup-Concrete-Group
+  pr1 is-group-Concrete-Group = is-unital-Concrete-Group
+  pr2 is-group-Concrete-Group = is-group-Concrete-Group'
+
+  group-Concrete-Group : Group l
+  pr1 group-Concrete-Group = semigroup-Concrete-Group
+  pr2 group-Concrete-Group = is-group-Concrete-Group
+
+  monoid-Concrete-Group : Monoid l
+  monoid-Concrete-Group = monoid-Group group-Concrete-Group
 ```
 
 ## Example 19.6.1
@@ -185,6 +272,57 @@ S_n ≅ Ω(BS_n),
 
 i.e., that the loop space of the type of all finite types of cardinality `n` is equivalent to the symmetric group `S_n`.
 The type `BS_n` is of course a pointed connected `1`-type, so `BS_n` is indeed the classifying type of the symmetric group `S_n`.
+
+```agda
+module _
+  (l : Level) (n : ℕ)
+  where
+
+  classifying-type-Type-With-Cardinality-ℕ-Concrete-Group : UU (lsuc l)
+  classifying-type-Type-With-Cardinality-ℕ-Concrete-Group =
+    Type-With-Cardinality-ℕ l n
+
+  shape-Type-With-Cardinality-ℕ-Concrete-Group :
+    classifying-type-Type-With-Cardinality-ℕ-Concrete-Group
+  shape-Type-With-Cardinality-ℕ-Concrete-Group =
+    raise-Fin-Type-With-Cardinality-ℕ l n
+
+  classifying-pointed-type-Type-With-Cardinality-ℕ-Concrete-Group :
+    Pointed-Type (lsuc l)
+  classifying-pointed-type-Type-With-Cardinality-ℕ-Concrete-Group =
+    classifying-type-Type-With-Cardinality-ℕ-Concrete-Group ,
+    shape-Type-With-Cardinality-ℕ-Concrete-Group
+
+  is-0-connected-classifying-type-Type-With-Cardinality-ℕ-Concrete-Group :
+    is-0-connected classifying-type-Type-With-Cardinality-ℕ-Concrete-Group
+  is-0-connected-classifying-type-Type-With-Cardinality-ℕ-Concrete-Group =
+    is-0-connected-Type-With-Cardinality-ℕ n
+
+  ∞-group-Type-With-Cardinality-ℕ-Concrete-Group : ∞-Group (lsuc l)
+  ∞-group-Type-With-Cardinality-ℕ-Concrete-Group =
+    classifying-pointed-type-Type-With-Cardinality-ℕ-Concrete-Group ,
+    is-0-connected-classifying-type-Type-With-Cardinality-ℕ-Concrete-Group
+
+  type-Type-With-Cardinality-ℕ-Concrete-Group : UU (lsuc l)
+  type-Type-With-Cardinality-ℕ-Concrete-Group =
+    type-∞-Group ∞-group-Type-With-Cardinality-ℕ-Concrete-Group
+
+  is-set-type-Type-With-Cardinality-ℕ-Concrete-Group :
+    is-set type-Type-With-Cardinality-ℕ-Concrete-Group
+  is-set-type-Type-With-Cardinality-ℕ-Concrete-Group =
+    is-1-type-Type-With-Cardinality-ℕ n
+      ( raise-Fin-Type-With-Cardinality-ℕ l n)
+      ( raise-Fin-Type-With-Cardinality-ℕ l n)
+
+  Type-With-Cardinality-ℕ-Concrete-Group : Concrete-Group (lsuc l)
+  Type-With-Cardinality-ℕ-Concrete-Group =
+    ∞-group-Type-With-Cardinality-ℕ-Concrete-Group ,
+    is-set-type-Type-With-Cardinality-ℕ-Concrete-Group
+
+  Type-With-Cardinality-ℕ-Group : Group (lsuc l)
+  Type-With-Cardinality-ℕ-Group =
+    group-Concrete-Group Type-With-Cardinality-ℕ-Concrete-Group
+```
 
 Since the map
 

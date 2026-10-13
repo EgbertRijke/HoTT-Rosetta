@@ -6,6 +6,7 @@ module section-17-1-equivalent-forms-of-the-univalence-axiom where
 open import universe-levels
 open import section-2-2-ordinary-function-types
 open import exercise-2-3-constant-maps
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
 open import exercise-4-3-double-negation-logic
@@ -46,7 +47,7 @@ The following are equivalent:
    ```text
      equiv-eq : (A = B) → (A ≃ B)
    ```
-    
+
    given by `equiv-eq(refl) ≔ id`, is an equivalence.
 
 2. The type
@@ -54,7 +55,7 @@ The following are equivalent:
    ```text
      Σ(B : 𝒰) A ≃ B
    ```
-    
+
    is contractible for each `A : 𝒰`.
 
 3. For any type `A : 𝒰`, the family of types `A ≃ X` indexed by `X : 𝒰` is an identity system on `𝒰`.
@@ -63,7 +64,7 @@ The following are equivalent:
    ```text
      (Π(X : 𝒰) Π(e : A ≃ X) P(X,e)) → P(A,id)
    ```
-    
+
    given by `f ↦ f(A,id)` has a section.
 
 ### Proof
@@ -169,7 +170,7 @@ Under the same assumptions, we showed in Exercise 13.12 that we obtain an equiva
 ```
 
 Furthermore, for any two elements `x, y : A` any equivalence `e : A ≃ A'` induces an equivalence `(x = y) ≃ (e(x) = e(y))` by Theorem 11.4.2.
-In other words, all the standard type formers within a universe `𝒰` are *equivalence invariant*.
+In other words, all the standard type formers within a universe `𝒰` are _equivalence invariant_.
 Since identity types are not assumed to be propositions, we have the possibility to postulate the univalence axiom.
 
 ## Axiom 17.1.2
@@ -352,7 +353,7 @@ is-small-map l {B = B} f = (b : B) → is-small l (fiber f b)
    ```text
      (Σ(X : 𝒰) is-finite(X)) ≃ (Σ(Y : 𝒱) is-finite(Y))
    ```
-    
+
    for any two univalent universes `𝒰` and `𝒱`. This observation is the reason why we usually write `𝔽` for the type of finite types (in `𝒰`), without referring to its universe.
 
 6. In Theorem 20.6.10 we will show that `𝒰` cannot be `𝒰`-small, i.e., that there cannot be a type `U : 𝒰` equipped with an equivalence `U ≃ 𝒰`.

@@ -4,7 +4,15 @@
 module section-17-6-the-binomial-types where
 
 open import universe-levels
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
 open import section-9-2-bi-invertible-maps
+open import section-10-1-contractible-types
+open import section-10-4-equivalences-are-contractible-maps
+open import section-11-2-the-fundamental-theorem
+open import section-12-2-subtypes
+open import section-16-3-finite-types
+open import section-17-1-equivalent-forms-of-the-univalence-axiom
 ```
 
 To wrap up this section on univalence, we will use the univalence axiom to construct for any two types `A` and `B` a type `(A choose B)` that has properties similar to the binomial coefficients `(n choose k)`.
@@ -28,6 +36,111 @@ We define the **connected component** of `𝒰` at `A` by
 
 ```text
   𝒰_A ≔ Σ(X : 𝒰) ‖A ≃ X‖.
+```
+
+```agda
+component-UU-Level :
+  (l1 : Level) {l2 : Level} (A : UU l2) → UU (lsuc l1 ⊔ l2)
+component-UU-Level l1 A = type-subtype (mere-equiv-Prop {l2 = l1} A)
+
+type-component-UU-Level :
+  {l1 l2 : Level} {A : UU l2} → component-UU-Level l1 A → UU l1
+type-component-UU-Level X = pr1 X
+
+abstract
+  mere-equiv-component-UU-Level :
+    {l1 l2 : Level} {A : UU l2} (X : component-UU-Level l1 A) →
+    mere-equiv A (type-component-UU-Level X)
+  mere-equiv-component-UU-Level X = pr2 X
+
+component-UU :
+  {l1 : Level} (A : UU l1) → UU (lsuc l1)
+component-UU {l1} A = component-UU-Level l1 A
+
+type-component-UU : {l1 : Level} {A : UU l1} (X : component-UU A) → UU l1
+type-component-UU X = type-component-UU-Level X
+
+abstract
+  mere-equiv-component-UU :
+    {l1 : Level} {A : UU l1} (X : component-UU A) →
+    mere-equiv A (type-component-UU X)
+  mere-equiv-component-UU X = mere-equiv-component-UU-Level X
+
+equiv-component-UU-Level :
+  {l1 l2 : Level} {A : UU l2} (X Y : component-UU-Level l1 A) → UU l1
+equiv-component-UU-Level X Y =
+  type-component-UU-Level X ≃ type-component-UU-Level Y
+
+id-equiv-component-UU-Level :
+  {l1 l2 : Level} {A : UU l2} (X : component-UU-Level l1 A) →
+  equiv-component-UU-Level X X
+id-equiv-component-UU-Level X = id-equiv
+
+equiv-eq-component-UU-Level :
+  {l1 l2 : Level} {A : UU l2} {X Y : component-UU-Level l1 A} →
+  X ＝ Y → equiv-component-UU-Level X Y
+equiv-eq-component-UU-Level {X = X} refl =
+  id-equiv-component-UU-Level X
+
+abstract
+  is-torsorial-equiv-component-UU-Level :
+    {l1 l2 : Level} {A : UU l2} (X : component-UU-Level l1 A) →
+    is-torsorial (equiv-component-UU-Level X)
+  is-torsorial-equiv-component-UU-Level X =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-equiv (type-component-UU-Level X))
+      ( λ Y → is-prop-mere-equiv _ Y)
+      ( type-component-UU-Level X)
+      ( id-equiv)
+      ( mere-equiv-component-UU-Level X)
+
+abstract
+  is-equiv-equiv-eq-component-UU-Level :
+    {l1 l2 : Level} {A : UU l2} (X Y : component-UU-Level l1 A) →
+    is-equiv (equiv-eq-component-UU-Level {X = X} {Y})
+  is-equiv-equiv-eq-component-UU-Level X =
+    fundamental-theorem-id
+      ( is-torsorial-equiv-component-UU-Level X)
+      ( λ Y → equiv-eq-component-UU-Level {X = X} {Y})
+
+eq-equiv-component-UU-Level :
+  {l1 l2 : Level} {A : UU l2} (X Y : component-UU-Level l1 A) →
+  equiv-component-UU-Level X Y → X ＝ Y
+eq-equiv-component-UU-Level X Y =
+  map-inv-is-equiv (is-equiv-equiv-eq-component-UU-Level X Y)
+
+equiv-component-UU :
+  {l1 : Level} {A : UU l1} (X Y : component-UU A) → UU l1
+equiv-component-UU X Y = equiv-component-UU-Level X Y
+
+id-equiv-component-UU :
+  {l1 : Level} {A : UU l1} (X : component-UU A) → equiv-component-UU X X
+id-equiv-component-UU X = id-equiv-component-UU-Level X
+
+equiv-eq-component-UU :
+  {l1 : Level} {A : UU l1} {X Y : component-UU A} →
+  X ＝ Y → equiv-component-UU X Y
+equiv-eq-component-UU p = equiv-eq-component-UU-Level p
+
+abstract
+  is-torsorial-equiv-component-UU :
+    {l1 : Level} {A : UU l1} (X : component-UU A) →
+    is-torsorial (equiv-component-UU X)
+  is-torsorial-equiv-component-UU X =
+    is-torsorial-equiv-component-UU-Level X
+
+abstract
+  is-equiv-equiv-eq-component-UU :
+    {l1 : Level} {A : UU l1} (X Y : component-UU A) →
+    is-equiv (equiv-eq-component-UU {X = X} {Y})
+  is-equiv-equiv-eq-component-UU X Y =
+    is-equiv-equiv-eq-component-UU-Level X Y
+
+eq-equiv-component-UU :
+  {l1 : Level} {A : UU l1} (X Y : component-UU A) →
+  equiv-component-UU X Y → X ＝ Y
+eq-equiv-component-UU X Y =
+  eq-equiv-component-UU-Level X Y
 ```
 
 ## Example 17.6.3
