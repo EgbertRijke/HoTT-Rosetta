@@ -9,6 +9,7 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
+open import exercise-13-3-truncatedness-is-a-proposition
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-18-5-set-truncations
 open import section-19-4-homotopy-groups-of-types
@@ -58,12 +59,12 @@ module _
       is-0-connected classifying-type-∞-Group
     is-0-connected-classifying-type-∞-Group = pr2 G
 
---   abstract
---     mere-eq-classifying-type-∞-Group :
---       (X Y : classifying-type-∞-Group) → mere-eq X Y
---     mere-eq-classifying-type-∞-Group =
---       mere-eq-is-0-connected
---         is-0-connected-classifying-type-∞-Group
+  abstract
+    mere-eq-classifying-type-∞-Group :
+      (X Y : classifying-type-∞-Group) → mere-eq X Y
+    mere-eq-classifying-type-∞-Group =
+      mere-eq-is-0-connected
+        is-0-connected-classifying-type-∞-Group
 
   pointed-type-∞-Group : Pointed-Type l
   pointed-type-∞-Group = Ω classifying-pointed-type-∞-Group
@@ -139,10 +140,10 @@ module _
   is-0-connected-classifying-type-Concrete-Group =
     is-0-connected-classifying-type-∞-Group ∞-group-Concrete-Group
 
---   mere-eq-classifying-type-Concrete-Group :
---     (X Y : classifying-type-Concrete-Group) → mere-eq X Y
---   mere-eq-classifying-type-Concrete-Group =
---     mere-eq-classifying-type-∞-Group ∞-group-Concrete-Group
+  mere-eq-classifying-type-Concrete-Group :
+    (X Y : classifying-type-Concrete-Group) → mere-eq X Y
+  mere-eq-classifying-type-Concrete-Group =
+    mere-eq-classifying-type-∞-Group ∞-group-Concrete-Group
 
   type-Concrete-Group : UU l
   type-Concrete-Group = type-∞-Group ∞-group-Concrete-Group
@@ -154,30 +155,24 @@ module _
   pr1 set-Concrete-Group = type-Concrete-Group
   pr2 set-Concrete-Group = is-set-type-Concrete-Group
 
---   abstract
---     is-1-type-classifying-type-Concrete-Group :
---       is-trunc one-𝕋 classifying-type-Concrete-Group
---     is-1-type-classifying-type-Concrete-Group X Y =
---       apply-universal-property-trunc-Prop
---         ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group X)
---         ( is-set-Prop (X ＝ Y))
---         ( λ where
---           refl →
---             apply-universal-property-trunc-Prop
---               ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group Y)
---               ( is-set-Prop (shape-Concrete-Group ＝ Y))
---               ( λ where refl → is-set-type-Concrete-Group))
+  abstract
+    is-1-type-classifying-type-Concrete-Group :
+      is-trunc one-𝕋 classifying-type-Concrete-Group
+    is-1-type-classifying-type-Concrete-Group X Y =
+      apply-universal-property-trunc-Prop
+        ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group X)
+        ( is-set-Prop (X ＝ Y))
+        ( λ where
+          refl →
+            apply-universal-property-trunc-Prop
+              ( mere-eq-classifying-type-Concrete-Group shape-Concrete-Group Y)
+              ( is-set-Prop (shape-Concrete-Group ＝ Y))
+              ( λ where refl → is-set-type-Concrete-Group))
 
---   classifying-1-type-Concrete-Group : Truncated-Type l one-𝕋
---   classifying-1-type-Concrete-Group =
---     classifying-type-Concrete-Group , is-1-type-classifying-type-Concrete-Group
---   pr1 classifying-1-type-Concrete-Group = classifying-type-Concrete-Group
---   pr2 classifying-1-type-Concrete-Group =
---     is-1-type-classifying-type-Concrete-Group
-
---   Id-BG-Set :
---     (X Y : classifying-type-Concrete-Group) → Set l
---   Id-BG-Set X Y = Id-Set classifying-1-type-Concrete-Group X Y
+  classifying-1-type-Concrete-Group : Truncated-Type l one-𝕋
+  pr1 classifying-1-type-Concrete-Group = classifying-type-Concrete-Group
+  pr2 classifying-1-type-Concrete-Group =
+    is-1-type-classifying-type-Concrete-Group
 ```
 
 ## Example 19.6.1

@@ -241,7 +241,7 @@ Then the following are equivalent.
    ```text
      q(x) = q(y)
    ```
-    
+
    for every `x, y : A` for which `R(x,y)` holds, and moreover `q` satisfies the universal property of the set quotient of `R`.
 
 2. The map `q` is surjective and **effective**, which means that for each `x, y : A` we have an equivalence
@@ -262,7 +262,7 @@ Then the following are equivalent.
             ∨ ∨
          Prop_𝒰^A
    ```
-    
+
    and the embedding `i` satisfies the universal property of the image inclusion of `R`.
 
 In Theorem 18.2.3 we don’t assume that `B` is in the same universe as `A` and `R`, because we want to apply it to `B ≔ im(R)`.
@@ -468,7 +468,7 @@ Since `X` is assumed to be a set, our goal of showing that `x = x'` is a propert
 Therefore we may assume that we have `a, a' : A` satisfying
 
 ```text
-   f(a) = x 
+   f(a) = x
    q(a) = b
   f(a') = x'
   q(a') = b.
@@ -1152,7 +1152,7 @@ For any type `A` and any universe `𝒰` containing `A`, we have an equivalence
 
 Given an equivalence relation `R : A → (A → Prop_𝒰)` on `A` we first use the replacement axiom, by which the set quotient `A/R` is `𝒰`-small, to obtain a set `Q(R) : Set_𝒰`, an equivalence `e : Q(R) ≃ A/R`, and a surjective map `f : A → Q(R)` such that the triangle
 
-*Triangle-shaped diagram (automatic draft).*
+_Triangle-shaped diagram (automatic draft)._
 
 ```text
            A
@@ -1753,4 +1753,27 @@ pr1 (equiv-surjection-into-set-equivalence-relation A) =
   surjection-into-set-equivalence-relation
 pr2 (equiv-surjection-into-set-equivalence-relation A) =
   is-equiv-surjection-into-set-equivalence-relation
+```
+
+## Supplement
+
+### Any map into a set reflects mere equality
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (X : Set l2) (f : A → type-Set X)
+  where
+
+  reflects-mere-eq :
+    reflects-equivalence-relation (mere-eq-equivalence-relation A) f
+  reflects-mere-eq {x} {y} r =
+    apply-universal-property-trunc-Prop r
+      ( Id-Prop X (f x) (f y))
+      ( ap f)
+
+  reflecting-map-mere-eq :
+    reflecting-map-equivalence-relation
+      ( mere-eq-equivalence-relation A)
+      ( type-Set X)
+  reflecting-map-mere-eq = (f , reflects-mere-eq)
 ```

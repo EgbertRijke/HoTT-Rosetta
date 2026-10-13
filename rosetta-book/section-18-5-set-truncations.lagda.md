@@ -7,6 +7,9 @@ open import universe-levels
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-9-2-bi-invertible-maps
+open import exercise-9-4-three-for-two-equivalences
+open import section-10-1-contractible-types
+open import exercise-10-7-fibers-of-projections
 open import section-12-1-propositions
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
@@ -14,7 +17,9 @@ open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-13-3-truncatedness-is-a-proposition
 open import section-14-1-the-universal-property-of-propositional-truncations
 open import section-14-2-propositional-truncations-as-higher-inductive-types
+open import section-15-2-surjective-maps
 open import section-18-1-equivalence-relations-and-the-replacement-axiom
+open import section-18-2-the-universal-property-of-set-quotients
 ```
 
 An important instance of set quotients in the univalent foundations of mathematics is the notion of set truncation.
@@ -293,45 +298,102 @@ is-prop-is-0-connected : {l : Level} (A : UU l) → is-prop (is-0-connected A)
 is-prop-is-0-connected A = is-prop-type-Prop (is-0-connected-Prop A)
 ```
 
--- ```agda
--- module \_
--- {l : Level}
--- where
+### Any set truncation is a quotient of the mere equality equivalence relation
 
--- abstract
--- is-surjective-and-effective-unit-trunc-Set :
--- (A : UU l) →
--- is-surjective-and-effective
--- ( mere-eq-equivalence-relation A)
--- ( unit-trunc-Set)
--- is-surjective-and-effective-unit-trunc-Set A =
--- is-surjective-and-effective-is-set-quotient
--- ( mere-eq-equivalence-relation A)
--- ( trunc-Set A)
--- ( unit-trunc-Set ,
--- reflects-mere-eq (trunc-Set A) unit-trunc-Set)
--- ( λ {l} → is-set-quotient-trunc-Set A)
+```agda
+abstract
+  is-set-quotient-is-set-truncation :
+    {l1 l2 : Level} {A : UU l1} (B : Set l2) (f : A → type-Set B) →
+    is-set-truncation B f →
+    is-set-quotient
+      ( mere-eq-equivalence-relation A)
+      ( B)
+      ( reflecting-map-mere-eq B f)
+  is-set-quotient-is-set-truncation {A = A} B f H X =
+    is-equiv-right-factor
+      ( pr1)
+      ( precomp-Set-Quotient
+        ( mere-eq-equivalence-relation A)
+        ( B)
+        ( reflecting-map-mere-eq B f)
+        ( X))
+      ( is-equiv-pr1-is-contr
+        ( λ h →
+          is-proof-irrelevant-is-prop
+            ( is-prop-reflects-equivalence-relation
+              ( mere-eq-equivalence-relation A) X h)
+            ( reflects-mere-eq X h)))
+      ( H X)
+```
 
--- abstract
--- is-effective-unit-trunc-Set :
--- (A : UU l) →
--- is-effective (mere-eq-equivalence-relation A) (unit-trunc-Set {A = A})
--- is-effective-unit-trunc-Set A =
--- pr2 (is-surjective-and-effective-unit-trunc-Set A)
+### The set truncation is the set quotient by the mere equality relation
 
--- abstract
--- apply-effectiveness-unit-trunc-Set :
--- {A : UU l} {x y : A} → unit-trunc-Set x ＝ unit-trunc-Set y → mere-eq x y
--- apply-effectiveness-unit-trunc-Set {A = A} {x} {y} =
--- map-equiv (is-effective-unit-trunc-Set A x y)
--- ```
+```agda
+reflecting-map-mere-eq-unit-trunc-Set :
+  {l : Level} (A : UU l) →
+  reflecting-map-equivalence-relation
+    ( mere-eq-equivalence-relation A)
+    ( type-trunc-Set A)
+reflecting-map-mere-eq-unit-trunc-Set A =
+  pair unit-trunc-Set (reflects-mere-eq (trunc-Set A) unit-trunc-Set)
 
--- ### Elements of 0-connected types are all merely equal
+abstract
+  is-set-quotient-trunc-Set :
+    {l1 : Level} (A : UU l1) →
+    is-set-quotient
+      ( mere-eq-equivalence-relation A)
+      ( trunc-Set A)
+      ( reflecting-map-mere-eq-unit-trunc-Set A)
+  is-set-quotient-trunc-Set A =
+    is-set-quotient-is-set-truncation
+      ( trunc-Set A)
+      ( unit-trunc-Set)
+      ( λ {l} → is-set-truncation-trunc-Set A)
 
--- `agda
--- abstract
---   mere-eq-is-0-connected :
---     {l : Level} {A : UU l} → is-0-connected A → all-elements-merely-equal A
---   mere-eq-is-0-connected {A = A} H x y =
---     apply-effectiveness-unit-trunc-Set (eq-is-contr H)
--- `
+module _
+  {l : Level}
+  where
+
+  abstract
+    is-surjective-and-effective-unit-trunc-Set :
+      (A : UU l) →
+      is-surjective-and-effective
+        ( mere-eq-equivalence-relation A)
+        ( unit-trunc-Set)
+    is-surjective-and-effective-unit-trunc-Set A =
+      is-surjective-and-effective-is-set-quotient
+        ( mere-eq-equivalence-relation A)
+        ( trunc-Set A)
+        ( unit-trunc-Set ,
+          reflects-mere-eq (trunc-Set A) unit-trunc-Set)
+        ( λ {l} → is-set-quotient-trunc-Set A)
+
+  abstract
+    is-surjective-unit-trunc-Set :
+      (A : UU l) → is-surjective (unit-trunc-Set {A = A})
+    is-surjective-unit-trunc-Set A =
+      pr1 (is-surjective-and-effective-unit-trunc-Set A)
+
+  abstract
+    is-effective-unit-trunc-Set :
+      (A : UU l) →
+      is-effective (mere-eq-equivalence-relation A) (unit-trunc-Set {A = A})
+    is-effective-unit-trunc-Set A =
+      pr2 (is-surjective-and-effective-unit-trunc-Set A)
+
+  abstract
+    apply-effectiveness-unit-trunc-Set :
+      {A : UU l} {x y : A} → unit-trunc-Set x ＝ unit-trunc-Set y → mere-eq x y
+    apply-effectiveness-unit-trunc-Set {A = A} {x} {y} =
+      map-equiv (is-effective-unit-trunc-Set A x y)
+```
+
+### Elements of 0-connected types are all merely equal
+
+```agda
+abstract
+  mere-eq-is-0-connected :
+    {l : Level} {A : UU l} → is-0-connected A → all-elements-merely-equal A
+  mere-eq-is-0-connected {A = A} H x y =
+    apply-effectiveness-unit-trunc-Set (eq-is-contr H)
+```

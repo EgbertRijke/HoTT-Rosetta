@@ -1149,4 +1149,3 @@ module _
   eq-relate-same-elements-equivalence-relation S =
     map-inv-equiv (extensionality-equivalence-relation S)
 ```
-
