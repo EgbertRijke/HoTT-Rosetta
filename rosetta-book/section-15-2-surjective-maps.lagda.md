@@ -36,7 +36,7 @@ open import section-17-1-equivalent-forms-of-the-univalence-axiom
 open import section-17-2-propositional-extensionality
 ```
 
-A map `f : A → B` is surjective if for every `b : B` there is an *unspecified* element `a : A` that maps to `b`.
+A map `f : A → B` is surjective if for every `b : B` there is an _unspecified_ element `a : A` that maps to `b`.
 We define this property using the propositional truncation.
 
 ## Definition 15.2.1
@@ -138,7 +138,7 @@ Then the following are equivalent:
    ```text
      - ∘ f : (Π(y : B) P(y)) → (Π(x : A) P(f(x)))
    ```
-    
+
    is an equivalence. In other words, any subtype of `B` that contains all the elements of the form `f(x)` contains all the elements of `B`.
 
 3. For any `k ≥ -2`, and for any family `P` of `(k + 1)`-truncated types over `B`, the precomposition map
@@ -146,7 +146,7 @@ Then the following are equivalent:
    ```text
      - ∘ f : (Π(y : B) P(y)) → (Π(x : A) P(f(x)))
    ```
-   
+
    is a `k`-truncated map.
 
 ### Proof
@@ -498,7 +498,7 @@ Consider a commuting triangle
    \       /
   f \     / m
      \   /
-      ∨ ∨ 
+      ∨ ∨
        X
 
 ```
@@ -528,7 +528,7 @@ By the universal property of `m` there is a unique map `h` for which the triangl
    \       /
   m \     / m ∘ pr1
      \   /
-      ∨ ∨ 
+      ∨ ∨
        X
 
 ```
@@ -646,7 +646,7 @@ Consider a map `f : A → X`, and two factorizations
    \       /          \       /
   f \     / i        f \     / i'
      \   /              \   /
-      ∨ ∨                ∨ ∨ 
+      ∨ ∨                ∨ ∨
        X                  X
 ```
 
@@ -754,4 +754,24 @@ module _
   eq-htpy-surjection : (g : A ↠ B) → htpy-surjection g → f ＝ g
   eq-htpy-surjection g =
     map-inv-equiv (extensionality-surjection g)
+```
+
+### A type family C over B satisfies the universal property of the family of fibers of a map f : A → B if and only if the constant map C b → (fiber f b → C b) is an equivalence for every b : B
+
+In other words, the dependent type C is f-local if its fiber over b is fiber f b-null for every b : B.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {f : A → B} {C : B → UU l3}
+  where
+
+  is-equiv-precomp-Π-fiber-condition :
+    ((b : B) → is-equiv (diagonal-exponential (C b) (fiber f b))) →
+    is-equiv (precomp-Π f C)
+  is-equiv-precomp-Π-fiber-condition H =
+    is-equiv-comp
+      ( ev-lift-family-of-elements-fiber f (λ b _ → C b))
+      ( map-Π (λ b → diagonal-exponential (C b) (fiber f b)))
+      ( is-equiv-map-Π-is-fiberwise-equiv H)
+      ( universal-property-family-of-fibers-fiber f C)
 ```

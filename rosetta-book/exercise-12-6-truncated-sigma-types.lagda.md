@@ -9,9 +9,11 @@ open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-4-transport
 open import section-4-6-dependent-pair-types
 open import section-9-1-homotopies
+open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import section-10-3-contractible-maps
 open import exercise-10-3-contractible-equivalences
+open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-6-dependent-pair-contractible-base
 open import exercise-10-7-fibers-of-projections
 open import section-11-1-families-of-equivalences
@@ -303,4 +305,32 @@ module _
   pr1 (emb-Σ D f g) = map-Σ D (map-emb f) (λ x → map-emb (g x))
   pr2 (emb-Σ D f g) =
     is-emb-map-Σ D (is-emb-map-emb f) (λ x → is-emb-map-emb (g x))
+```
+
+### Any contractible map is k-truncated
+
+```agda
+is-trunc-map-is-contr-map :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {f : A → B} →
+  is-contr-map f → is-trunc-map k f
+is-trunc-map-is-contr-map neg-two-𝕋 H = H
+is-trunc-map-is-contr-map (succ-𝕋 k) H =
+  is-trunc-map-succ-is-trunc-map k (is-trunc-map-is-contr-map k H)
+```
+
+### Any equivalence is k-truncated
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2}
+  where
+
+  is-trunc-map-is-equiv :
+    {f : A → B} → is-equiv f → is-trunc-map k f
+  is-trunc-map-is-equiv H =
+    is-trunc-map-is-contr-map k (is-contr-map-is-equiv H)
+
+  is-trunc-map-equiv :
+    (e : A ≃ B) → is-trunc-map k (map-equiv e)
+  is-trunc-map-equiv e = is-trunc-map-is-equiv (is-equiv-map-equiv e)
 ```

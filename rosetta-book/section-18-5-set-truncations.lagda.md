@@ -5,7 +5,9 @@ module section-18-5-set-truncations where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
+open import exercise-2-3-constant-maps
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
+open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-7-3-the-standard-finite-types
@@ -13,14 +15,18 @@ open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
+open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-7-fibers-of-projections
+open import section-11-1-families-of-equivalences
 open import section-12-1-propositions
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
+open import exercise-12-6-truncated-sigma-types
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-13-3-truncatedness-is-a-proposition
 open import exercise-13-4-equivalence-structure-is-a-proposition
+open import exercise-13-7-universal-property-contractible-types
 open import section-14-1-the-universal-property-of-propositional-truncations
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-15-2-surjective-maps
@@ -359,6 +365,158 @@ is-prop-is-0-connected : {l : Level} (A : UU l) → is-prop (is-0-connected A)
 is-prop-is-0-connected A = is-prop-type-Prop (is-0-connected-Prop A)
 ```
 
+### The predicate of being a k-connected type
+
+```agda
+module _
+  {l : Level} (k : 𝕋) (A : UU l)
+  where
+
+  is-connected-Prop : Prop l
+  is-connected-Prop = is-contr-Prop (type-trunc k A)
+
+  is-connected : UU l
+  is-connected = type-Prop is-connected-Prop
+
+  is-prop-is-connected : is-prop is-connected
+  is-prop-is-connected = is-prop-type-Prop is-connected-Prop
+```
+
+### A type A is k-connected if and only if the map B → (A → B) is an equivalence for every k-truncated type B
+
+```agda
+is-equiv-diagonal-exponential-is-connected :
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : Truncated-Type l2 k) →
+  is-connected k A →
+  is-equiv (diagonal-exponential (type-Truncated-Type B) A)
+is-equiv-diagonal-exponential-is-connected {k = k} {A} B H =
+  is-equiv-comp
+    ( precomp unit-trunc (type-Truncated-Type B))
+    ( diagonal-exponential (type-Truncated-Type B) (type-trunc k A))
+    ( is-equiv-diagonal-exponential-is-contr H (type-Truncated-Type B))
+    ( is-truncation-trunc B)
+
+is-connected-is-equiv-diagonal-exponential :
+  {l1 : Level} {k : 𝕋} {A : UU l1} →
+  ( {l2 : Level} (B : Truncated-Type l2 k) →
+    is-equiv (diagonal-exponential (type-Truncated-Type B) A)) →
+  is-connected k A
+is-connected-is-equiv-diagonal-exponential {k = k} {A} H =
+  tot
+    ( λ x →
+      function-dependent-universal-property-trunc
+        ( Id-Truncated-Type' (trunc k A) x))
+    ( tot
+      ( λ _ → htpy-eq)
+      ( center (is-contr-map-is-equiv (H (trunc k A)) unit-trunc)))
+```
+
+### Connected map
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  is-connected-map-Prop : Prop (l1 ⊔ l2)
+  is-connected-map-Prop =
+    Π-Prop B (λ b → is-connected-Prop k (fiber f b))
+
+  is-connected-map : UU (l1 ⊔ l2)
+  is-connected-map = type-Prop is-connected-map-Prop
+
+  is-prop-is-connected-map : is-prop is-connected-map
+  is-prop-is-connected-map = is-prop-type-Prop is-connected-map-Prop
+```
+
+### Dependent universal property for connected maps
+
+```agda
+module _
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (f : A → B)
+  where
+
+  dependent-universal-property-connected-map : UUω
+  dependent-universal-property-connected-map =
+    {l3 : Level} (P : B → Truncated-Type l3 k) →
+    is-equiv (precomp-Π f (λ b → type-Truncated-Type (P b)))
+
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  (H : is-connected-map k f)
+  where
+
+  abstract
+    dependent-universal-property-is-connected-map :
+      dependent-universal-property-connected-map k f
+    dependent-universal-property-is-connected-map P =
+      is-equiv-precomp-Π-fiber-condition
+        ( λ b → is-equiv-diagonal-exponential-is-connected (P b) (H b))
+```
+
+### Given a k-connected map f then precomposing dependent functions into 2+k+n-truncated types by f is an n-truncated map
+
+```agda
+module _
+  {l1 l2 : Level}
+  {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  abstract
+    is-trunc-map-precomp-Π-is-connected-map :
+      (k n : 𝕋) →
+      is-connected-map k f →
+      {l3 : Level} (P : B → Truncated-Type l3 (add+2-𝕋 k n)) →
+      is-trunc-map n (precomp-Π f (type-Truncated-Type ∘ P))
+    is-trunc-map-precomp-Π-is-connected-map k neg-two-𝕋 H P =
+      is-contr-map-is-equiv
+        ( dependent-universal-property-is-connected-map H P)
+    is-trunc-map-precomp-Π-is-connected-map k (succ-𝕋 n) H P =
+      is-trunc-map-succ-precomp-Π
+        ( λ g h →
+          is-trunc-map-precomp-Π-is-connected-map k n H
+            ( λ b → Id-Truncated-Type (P b) (g b) (h b)))
+
+  abstract
+    is-trunc-map-precomp-Π-is-connected-map' :
+      (k n : 𝕋) →
+      is-connected-map k f →
+      {l3 : Level} (P : B → Truncated-Type l3 (add+2-𝕋 n k)) →
+      is-trunc-map n (precomp-Π f (type-Truncated-Type ∘ P))
+    is-trunc-map-precomp-Π-is-connected-map' k n H P =
+      is-trunc-map-precomp-Π-is-connected-map k n H
+        ( λ x →
+          ( type-Truncated-Type (P x)) ,
+          ( is-trunc-eq
+            ( commutative-add+2-𝕋 n k)
+            ( is-trunc-type-Truncated-Type (P x))))
+```
+
+### Surjective maps are -1-connected
+
+```agda
+is-neg-one-connected-map-is-surjective :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+  is-surjective f → is-connected-map neg-one-𝕋 f
+is-neg-one-connected-map-is-surjective H b =
+  is-proof-irrelevant-is-prop is-prop-type-trunc-Prop (H b)
+```
+
+### Precomposing functions into a family of k+1-types by a surjective map is a k-truncated map
+
+```agda
+is-trunc-map-precomp-Π-is-surjective :
+  {l1 l2 l3 : Level} (k : 𝕋) →
+  {A : UU l1} {B : UU l2} {f : A → B} → is-surjective f →
+  (P : B → Truncated-Type l3 (succ-𝕋 k)) →
+  is-trunc-map k (precomp-Π f (λ b → type-Truncated-Type (P b)))
+is-trunc-map-precomp-Π-is-surjective k H =
+  is-trunc-map-precomp-Π-is-connected-map'
+    ( neg-one-𝕋)
+    ( k)
+    ( is-neg-one-connected-map-is-surjective H)
+```
+
 ### Any set truncation is a quotient of the mere equality equivalence relation
 
 ```agda
@@ -487,6 +645,50 @@ abstract
     apply-universal-property-trunc-Prop H
       ( is-0-connected-Prop _)
       ( λ a → is-0-connected-mere-eq a (K a))
+```
+
+### A type is 0-connected iff any point inclusion is surjective
+
+```agda
+abstract
+  is-0-connected-is-surjective-point :
+    {l1 : Level} {A : UU l1} (a : A) →
+    is-surjective (point a) → is-0-connected A
+  is-0-connected-is-surjective-point a H =
+    is-0-connected-mere-eq a
+      ( λ x →
+        apply-universal-property-trunc-Prop
+          ( H x)
+          ( mere-eq-Prop a x)
+          ( λ u → unit-trunc-Prop (pr2 u)))
+
+abstract
+  is-surjective-point-is-0-connected :
+    {l1 : Level} {A : UU l1} (a : A) →
+    is-0-connected A → is-surjective (point a)
+  is-surjective-point-is-0-connected a H x =
+    apply-universal-property-trunc-Prop
+      ( mere-eq-is-0-connected H a x)
+      ( trunc-Prop (fiber (point a) x))
+      ( λ where refl → unit-trunc-Prop (star , refl))
+```
+
+### If A is 0-connected and B is k+1-truncated then every evaluation map (A → B) → B is k-truncated
+
+```agda
+is-trunc-map-ev-is-connected :
+  {l1 l2 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} (a : A) →
+  is-0-connected A → is-trunc (succ-𝕋 k) B →
+  is-trunc-map k (ev-function B a)
+is-trunc-map-ev-is-connected k {A} {B} a H K =
+  is-trunc-map-comp k
+    ( ev-function B star)
+    ( precomp (point a) B)
+    ( is-trunc-map-is-equiv k
+      ( universal-property-contr-is-contr star is-contr-unit B))
+    ( is-trunc-map-precomp-Π-is-surjective k
+      ( is-surjective-point-is-0-connected a H)
+      ( λ _ → (B , K)))
 ```
 
 ### We characterize the identity type of Type-With-Cardinality-ℕ

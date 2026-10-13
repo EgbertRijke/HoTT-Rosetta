@@ -15,6 +15,7 @@ open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-16-3-finite-types
 open import section-18-5-set-truncations
 open import section-19-1-the-type-of-all-groups
+open import section-19-2-group-homomorphisms
 open import section-19-4-homotopy-groups-of-types
 ```
 
@@ -349,6 +350,125 @@ We can also bring group homomorphisms into the mix: for every group homomorphism
 
 commutes is contractible.
 In other words, every group homomorphism `f : G → H` has a unique **delooping** `Bf : BG → BH`.
+
+```agda
+module _
+  {l1 l2 : Level} (G : ∞-Group l1) (H : ∞-Group l2)
+  where
+
+  hom-∞-Group : UU (l1 ⊔ l2)
+  hom-∞-Group =
+    classifying-pointed-type-∞-Group G →∗ classifying-pointed-type-∞-Group H
+
+  classifying-map-hom-∞-Group :
+    hom-∞-Group → classifying-type-∞-Group G → classifying-type-∞-Group H
+  classifying-map-hom-∞-Group = map-pointed-map
+
+  preserves-point-classifying-map-hom-∞-Group :
+    (f : hom-∞-Group) →
+    classifying-map-hom-∞-Group f (shape-∞-Group G) ＝ shape-∞-Group H
+  preserves-point-classifying-map-hom-∞-Group =
+    preserves-point-pointed-map
+
+  map-hom-∞-Group : hom-∞-Group → type-∞-Group G → type-∞-Group H
+  map-hom-∞-Group = map-Ω
+
+  preserves-unit-map-hom-∞-Group :
+    (f : hom-∞-Group) → map-hom-∞-Group f (unit-∞-Group G) ＝ unit-∞-Group H
+  preserves-unit-map-hom-∞-Group = preserves-refl-map-Ω
+
+  preserves-mul-map-hom-∞-Group :
+    (f : hom-∞-Group) {x y : type-∞-Group G} →
+    map-hom-∞-Group f (mul-∞-Group G x y) ＝
+    mul-∞-Group H (map-hom-∞-Group f x) (map-hom-∞-Group f y)
+  preserves-mul-map-hom-∞-Group = preserves-mul-map-Ω
+
+  preserves-inv-map-hom-∞-Group :
+    (f : hom-∞-Group) (x : type-∞-Group G) →
+    map-hom-∞-Group f (inv-∞-Group G x) ＝ inv-∞-Group H (map-hom-∞-Group f x)
+  preserves-inv-map-hom-∞-Group = preserves-inv-map-Ω
+
+module _
+  {l1 l2 : Level} (G : Concrete-Group l1) (H : Concrete-Group l2)
+  where
+
+  hom-Concrete-Group : UU (l1 ⊔ l2)
+  hom-Concrete-Group =
+    hom-∞-Group (∞-group-Concrete-Group G) (∞-group-Concrete-Group H)
+
+  is-set-hom-Concrete-Group : is-set hom-Concrete-Group
+  is-set-hom-Concrete-Group =
+    is-trunc-map-ev-is-connected
+      ( zero-𝕋)
+      ( shape-Concrete-Group G)
+      ( is-0-connected-classifying-type-Concrete-Group G)
+      ( is-1-type-classifying-type-Concrete-Group H)
+      ( shape-Concrete-Group H)
+
+  hom-set-Concrete-Group : Set (l1 ⊔ l2)
+  pr1 hom-set-Concrete-Group = hom-Concrete-Group
+  pr2 hom-set-Concrete-Group = is-set-hom-Concrete-Group
+
+  classifying-map-hom-Concrete-Group :
+    hom-Concrete-Group →
+    classifying-type-Concrete-Group G → classifying-type-Concrete-Group H
+  classifying-map-hom-Concrete-Group =
+    classifying-map-hom-∞-Group
+      ( ∞-group-Concrete-Group G)
+      ( ∞-group-Concrete-Group H)
+
+  preserves-point-classifying-map-hom-Concrete-Group :
+    (f : hom-Concrete-Group) →
+    classifying-map-hom-Concrete-Group f (shape-Concrete-Group G) ＝
+    shape-Concrete-Group H
+  preserves-point-classifying-map-hom-Concrete-Group =
+    preserves-point-classifying-map-hom-∞-Group
+      ( ∞-group-Concrete-Group G)
+      ( ∞-group-Concrete-Group H)
+
+  map-hom-Concrete-Group :
+    hom-Concrete-Group → type-Concrete-Group G → type-Concrete-Group H
+  map-hom-Concrete-Group =
+    map-hom-∞-Group
+      ( ∞-group-Concrete-Group G)
+      ( ∞-group-Concrete-Group H)
+
+  preserves-unit-map-hom-Concrete-Group :
+    (f : hom-Concrete-Group) →
+    map-hom-Concrete-Group f (unit-Concrete-Group G) ＝ unit-Concrete-Group H
+  preserves-unit-map-hom-Concrete-Group =
+    preserves-unit-map-hom-∞-Group
+      ( ∞-group-Concrete-Group G)
+      ( ∞-group-Concrete-Group H)
+
+  preserves-mul-map-hom-Concrete-Group :
+    (f : hom-Concrete-Group) {x y : type-Concrete-Group G} →
+    ( map-hom-Concrete-Group f (mul-Concrete-Group G x y)) ＝
+    ( mul-Concrete-Group H
+      ( map-hom-Concrete-Group f x)
+      ( map-hom-Concrete-Group f y))
+  preserves-mul-map-hom-Concrete-Group =
+    preserves-mul-map-hom-∞-Group
+      ( ∞-group-Concrete-Group G)
+      ( ∞-group-Concrete-Group H)
+
+  preserves-inv-map-hom-Concrete-Group :
+    (f : hom-Concrete-Group) (x : type-Concrete-Group G) →
+    map-hom-Concrete-Group f (inv-Concrete-Group G x) ＝
+    inv-Concrete-Group H (map-hom-Concrete-Group f x)
+  preserves-inv-map-hom-Concrete-Group =
+    preserves-inv-map-hom-∞-Group
+      ( ∞-group-Concrete-Group G)
+      ( ∞-group-Concrete-Group H)
+
+  hom-group-hom-Concrete-Group :
+    hom-Concrete-Group →
+    hom-Group
+      ( group-Concrete-Group G)
+      ( group-Concrete-Group H)
+  hom-group-hom-Concrete-Group f =
+    pair (map-hom-Concrete-Group f) (preserves-mul-map-hom-Concrete-Group f)
+```
 
 We can do all of group theory in this way.
 For example, traditionally a `G`-set is defined to be a set `X` equipped with a group homomorphism `G → Aut(X)`.

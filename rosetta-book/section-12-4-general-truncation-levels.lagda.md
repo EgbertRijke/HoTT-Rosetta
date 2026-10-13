@@ -113,6 +113,10 @@ is-trunc : {l : Level} (k : 𝕋) → UU l → UU l
 is-trunc neg-two-𝕋 A = is-contr A
 is-trunc (succ-𝕋 k) A = (x y : A) → is-trunc k (x ＝ y)
 
+is-trunc-eq :
+  {l : Level} {k k' : 𝕋} {A : UU l} → k ＝ k' → is-trunc k A → is-trunc k' A
+is-trunc-eq refl H = H
+
 Truncated-Type : (l : Level) → 𝕋 → UU (lsuc l)
 Truncated-Type l k = Σ (UU l) (is-trunc k)
 
@@ -459,6 +463,94 @@ module _
 
 ## Supplement
 
+### The iterated successor on truncation levels
+
+```agda
+iterate-succ-𝕋 : ℕ → 𝕋 → 𝕋
+iterate-succ-𝕋 n x = iterate' n succ-𝕋 x
+
+iterate-succ-𝕋' : 𝕋 → ℕ → 𝕋
+iterate-succ-𝕋' x n = iterate-succ-𝕋 n x
+```
+
+### The double successor of addition on truncation levels
+
+```agda
+add+2-𝕋 : 𝕋 → 𝕋 → 𝕋
+add+2-𝕋 x neg-two-𝕋 = x
+add+2-𝕋 x (succ-𝕋 y) = succ-𝕋 (add+2-𝕋 x y)
+```
+
+### The two definitions of the iterated successor agree
+
+```agda
+module _
+  {l : Level} {X : UU l}
+  where
+
+  reassociate-iterate-succ-ℕ :
+    (k : ℕ) (f : X → X) (x : X) → iterate (succ-ℕ k) f x ＝ iterate k f (f x)
+  reassociate-iterate-succ-ℕ zero-ℕ f x = refl
+  reassociate-iterate-succ-ℕ (succ-ℕ k) f x =
+    ap f (reassociate-iterate-succ-ℕ k f x)
+
+  reassociate-iterate : (k : ℕ) (f : X → X) → iterate k f ~ iterate' k f
+  reassociate-iterate zero-ℕ f x = refl
+  reassociate-iterate (succ-ℕ k) f x =
+    reassociate-iterate-succ-ℕ k f x ∙ reassociate-iterate k f (f x)
+
+reassociate-iterate-succ-𝕋 :
+  (n : ℕ) (k : 𝕋) → iterate-succ-𝕋 (succ-ℕ n) k ＝ succ-𝕋 (iterate-succ-𝕋 n k)
+reassociate-iterate-succ-𝕋 zero-ℕ k = refl
+reassociate-iterate-succ-𝕋 (succ-ℕ n) k =
+  reassociate-iterate-succ-𝕋 n (succ-𝕋 k)
+
+compute-iterate-succ-𝕋 : (n : ℕ) → iterate n succ-𝕋 ~ iterate-succ-𝕋 n
+compute-iterate-succ-𝕋 n = reassociate-iterate n succ-𝕋
+```
+
+### Unit laws for addition of truncation levels
+
+```agda
+left-unit-law-add+2-𝕋 : (k : 𝕋) → add+2-𝕋 neg-two-𝕋 k ＝ k
+left-unit-law-add+2-𝕋 neg-two-𝕋 = refl
+left-unit-law-add+2-𝕋 (succ-𝕋 k) =
+  ap succ-𝕋 (left-unit-law-add+2-𝕋 k)
+
+right-unit-law-add+2-𝕋 : (k : 𝕋) → add+2-𝕋 k neg-two-𝕋 ＝ k
+right-unit-law-add+2-𝕋 neg-two-𝕋 = refl
+right-unit-law-add+2-𝕋 (succ-𝕋 k) = refl
+```
+
+### The balancing law of the successor function over addition
+
+```agda
+balance-succ-add+2-𝕋 : (k r : 𝕋) → add+2-𝕋 (succ-𝕋 k) r ＝ add+2-𝕋 k (succ-𝕋 r)
+balance-succ-add+2-𝕋 k neg-two-𝕋 = refl
+balance-succ-add+2-𝕋 k (succ-𝕋 r) = ap succ-𝕋 (balance-succ-add+2-𝕋 k r)
+
+abstract
+  balance-iterated-succ-add+2-𝕋 :
+    (n : ℕ) (k r : 𝕋) →
+    add+2-𝕋 (iterate-succ-𝕋 n k) r ＝ add+2-𝕋 k (iterate-succ-𝕋 n r)
+  balance-iterated-succ-add+2-𝕋 zero-ℕ k r = refl
+  balance-iterated-succ-add+2-𝕋 (succ-ℕ n) k r =
+    ( balance-iterated-succ-add+2-𝕋 n (succ-𝕋 k) r) ∙
+    ( balance-succ-add+2-𝕋 k (iterate-succ-𝕋 n r)) ∙
+    ( ap (add+2-𝕋 k) (inv (reassociate-iterate-succ-𝕋 n r)))
+```
+
+### The double successor of addition is commutative
+
+```agda
+abstract
+  commutative-add+2-𝕋 : (x y : 𝕋) → add+2-𝕋 x y ＝ add+2-𝕋 y x
+  commutative-add+2-𝕋 neg-two-𝕋 =
+    left-unit-law-add+2-𝕋
+  commutative-add+2-𝕋 (succ-𝕋 x) y =
+    balance-succ-add+2-𝕋 x y ∙ ap succ-𝕋 (commutative-add+2-𝕋 x y)
+```
+
 ### The empty type is `k`-truncated for any `k ≥ 1`
 
 ```agda
@@ -564,16 +656,6 @@ abstract
   is-set-is-contr :
     {l : Level} {A : UU l} → is-contr A → is-set A
   is-set-is-contr = is-trunc-is-contr zero-𝕋
-```
-
-### The iterated successor on truncation levels
-
-```agda
-iterate-succ-𝕋 : ℕ → 𝕋 → 𝕋
-iterate-succ-𝕋 n x = iterate' n succ-𝕋 x
-
-iterate-succ-𝕋' : 𝕋 → ℕ → 𝕋
-iterate-succ-𝕋' x n = iterate-succ-𝕋 n x
 ```
 
 ### Truncated maps are closed under homotopies

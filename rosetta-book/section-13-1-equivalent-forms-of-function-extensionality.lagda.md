@@ -18,6 +18,7 @@ open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import section-10-1-contractible-types
+open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-1-identity-types-contractible
 open import exercise-10-2-contractible-retracts
@@ -807,4 +808,84 @@ precomp-Set :
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) (C : Set l3) →
   (B → type-Set C) → (A → type-Set C)
 precomp-Set f C = precomp f (type-Set C)
+```
+
+### The action on identifications of precomposition of dependent functions
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} (f : A → B) {C : B → UU l3}
+  {g h : (b : B) → C b}
+  where
+
+  coherence-htpy-eq-ap-precomp-Π :
+    coherence-square-maps
+      ( ap (precomp-Π f C) {g} {h})
+      ( htpy-eq)
+      ( htpy-eq)
+      ( precomp-Π f (eq-value g h))
+  coherence-htpy-eq-ap-precomp-Π refl = refl
+```
+
+### In a commuting triangle f ~ g ∘ h, if f and g are truncated maps, then h is a truncated map
+
+```agda
+abstract
+  is-trunc-map-top-map-triangle :
+    {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {X : UU l3}
+    (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
+    is-trunc-map k g → is-trunc-map k f → is-trunc-map k h
+  is-trunc-map-top-map-triangle k {A} f g h H is-trunc-g is-trunc-f b =
+    is-trunc-fam-is-trunc-Σ k
+      ( is-trunc-g (g b))
+      ( is-trunc-is-equiv' k
+        ( Σ A (λ z → g (h z) ＝ g b))
+        ( map-compute-fiber-comp g h (g b))
+        ( is-equiv-map-compute-fiber-comp g h (g b))
+        ( is-trunc-map-htpy k (inv-htpy H) is-trunc-f (g b)))
+      ( b , refl)
+```
+
+### In a commuting square with the left and right maps equivalences, the top map is truncated if and only if the bottom map is truncated
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4}
+  (f : A → B) (g : A → C) (h : B → D) (i : C → D)
+  (H : coherence-square-maps f g h i)
+  where
+
+  is-trunc-map-top-is-trunc-map-bottom-is-equiv :
+    is-equiv g → is-equiv h → is-trunc-map k i → is-trunc-map k f
+  is-trunc-map-top-is-trunc-map-bottom-is-equiv K L M =
+    is-trunc-map-top-map-triangle k (i ∘ g) h f H
+      ( is-trunc-map-is-equiv k L)
+      ( is-trunc-map-comp k i g M
+        ( is-trunc-map-is-equiv k K))
+```
+
+### Precomposing functions Π B C by f : A → B is k+1-truncated if and only if precomposing homotopies is k-truncated
+
+```agda
+module _
+  {l1 l2 l3 : Level} {k : 𝕋} {A : UU l1} {B : UU l2} {f : A → B}
+  {C : B → UU l3}
+  where
+
+  abstract
+    is-trunc-map-succ-precomp-Π :
+      ((g h : (b : B) → C b) → is-trunc-map k (precomp-Π f (eq-value g h))) →
+      is-trunc-map (succ-𝕋 k) (precomp-Π f C)
+    is-trunc-map-succ-precomp-Π H =
+      is-trunc-map-succ-is-trunc-map-ap k (precomp-Π f C)
+        ( λ g h →
+          is-trunc-map-top-is-trunc-map-bottom-is-equiv k
+            ( ap (precomp-Π f C))
+            ( htpy-eq)
+            ( htpy-eq)
+            ( precomp-Π f (eq-value g h))
+            ( coherence-htpy-eq-ap-precomp-Π f)
+            ( funext g h)
+            ( funext (g ∘ f) (h ∘ f))
+            ( H g h))
 ```

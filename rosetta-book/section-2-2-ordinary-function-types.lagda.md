@@ -4,9 +4,10 @@
 module section-2-2-ordinary-function-types where
 
 open import universe-levels
+open import section-2-1-the-rules-for-dependent-function-types
 ```
 
-An important special case of `Π`-types arises when both `A` and `B` are types in context `Γ`. In this case, we can first weaken `B` by `A` and then apply the `Π`-formation rule to obtain the type `A → B` of *ordinary* functions from `A` to `B`, as in the following derivation:
+An important special case of `Π`-types arises when both `A` and `B` are types in context `Γ`. In this case, we can first weaken `B` by `A` and then apply the `Π`-formation rule to obtain the type `A → B` of _ordinary_ functions from `A` to `B`, as in the following derivation:
 
 ```text
    Γ ⊢ A type    Γ ⊢ B type
@@ -42,7 +43,7 @@ More generally, we can make definitions at the end of a derivation if the conclu
 
 ```text
        𝒟
-  ------------   
+  ------------
    Γ ⊢ a : A,
 ```
 
@@ -56,7 +57,7 @@ in which the derivation `𝒟` makes use of the premises `ℋ₁`, …, `ℋ_n`.
    Γ ⊢ c :=  a : A.
 ```
 
-  The effect of such a definition is that we have extended our type theory with a new constant `c `, for which the following inference rules are valid
+The effect of such a definition is that we have extended our type theory with a new constant `c `, for which the following inference rules are valid
 
 ```text
    ℋ₁    ℋ₂    ⋯    ℋ_n
@@ -120,6 +121,15 @@ By the term conversion rules of Exercise 1.1 we can now use the rules for `λ`-a
    Γ ⊢ λ x. f(x) ≐ f : A → B
 ```
 
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (B : UU l2) (a : A)
+  where
+
+  ev-function : (A → B) → B
+  ev-function = ev a
+```
+
 Now we can use these rules to construct some familiar functions, such as the identity function `id : A → A` on an arbitrary type `A`, and the composition `g ∘ f : A → C` of any two functions `f : A → B` and `g : B → C`.
 
 ## Definition 2.2.3
@@ -157,7 +167,7 @@ id a = a
 
 Next, we define the composition of functions. We will introduce the composition operation itself as a function `comp` that takes two arguments: the first argument is a function `g : B → C`, and the second argument is a function `f : A → B`. The output is a function `comp(g,f) : A → C`, for which we often write `g ∘ f`.
 
-## Rermark 2.2.4
+## Remark 2.2.4
 
 Since composition is a function that takes multiple arguments, we need to know how to represent such functions.
 Types of functions with multiple arguments can be formed by iterating the `Π`-formation rule or the `→`-formation rule. For example, a function
@@ -221,11 +231,11 @@ The derivation we use to construct `comp` is as follows:
                     Γ, g : B → C ⊢ λ f. λ x. g(f(x)) : Bᴬ → Cᴬ
                    ---------------------------------------------
                     Γ ⊢ λ g. λ f. λ x. g(f(x)) : Cᴮ → (Bᴬ → Cᴬ)
-               ------------------------------------------------------  
+               ------------------------------------------------------
                 Γ ⊢ comp := λ g. λ f. λ x. g(f(x)) : Cᴮ → (Bᴬ → Cᴬ).
 ```
 
-Note, however, that we haven't derived the rules (a) and (b) yet. These rules assert that the *generic functions* of `A → B` and `B → C` can also be evaluated. The formal derivation of this fact is as follows:
+Note, however, that we haven't derived the rules (a) and (b) yet. These rules assert that the _generic functions_ of `A → B` and `B → C` can also be evaluated. The formal derivation of this fact is as follows:
 
 ```text
        Γ ⊢ A type    Γ ⊢ B type
@@ -335,7 +345,7 @@ The derivation of the equality `id (f(x))≐ f(x)` in context `Γ,x:A` is as fol
 ```
 
 We leave the right unit law as Exercise 2.2.
-  
+
 ## Supplements
 
 ### The precomposition operation on dependent function
@@ -373,4 +383,3 @@ module _
   postcomp : (X → Y) → (A → X) → (A → Y)
   postcomp f = postcomp-Π A f
 ```
-
