@@ -6,12 +6,23 @@ module section-19-5-the-eckmann-hilton-argument where
 open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
+open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import exercise-5-1-distributive-inv-concat
 open import exercise-5-2-inverse-concatenation-maps
+open import section-6-4-peanos-seventh-and-eighth-axioms
+open import section-9-1-homotopies
+open import section-9-2-bi-invertible-maps
+open import exercise-9-1-groupoid-operations-equivalences
+open import exercise-9-4-three-for-two-equivalences
 open import section-10-4-equivalences-are-contractible-maps
+open import section-11-4-embeddings
+open import section-12-3-sets
+open import exercise-12-8-retracts-of-truncated-types
+open import section-19-1-the-type-of-all-groups
+open import section-19-2-group-homomorphisms
 open import section-19-4-homotopy-groups-of-types
 ```
 
@@ -62,7 +73,7 @@ ap_{f(x,_)}(q) |        \ ap-binary_f(p,q)   | ap_{f(x',_)}(q)
 
 _Proof._ The proof is immediate by identification elimination on `p` and `q`, where applicable. ◻
 
-```agda
+````agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C)
   where
@@ -92,7 +103,7 @@ One particular binary operation to which we can apply the binary action on paths
 
 ```text
 _ ∙ _ : (x = y) → ((y = z) → (x = z))
-```
+````
 
 This results in the **horizontal concatenation** operation
 
@@ -512,4 +523,529 @@ module _
     coherence-point-is-section-map-inv-is-pointed-equiv
       ( pointed-map-pointed-equiv e)
       ( is-pointed-equiv-pointed-equiv e)
+```
+
+### Right invertible elements
+
+```agda
+module _
+  {l : Level} (M : Monoid l) (x : type-Monoid M)
+  where
+
+  is-right-inverse-element-Monoid : type-Monoid M → UU l
+  is-right-inverse-element-Monoid y = mul-Monoid M x y ＝ unit-Monoid M
+
+  is-right-invertible-element-Monoid : UU l
+  is-right-invertible-element-Monoid =
+    Σ (type-Monoid M) is-right-inverse-element-Monoid
+
+module _
+  {l : Level} (M : Monoid l) {x : type-Monoid M}
+  where
+
+  section-is-right-invertible-element-Monoid :
+    is-right-invertible-element-Monoid M x → type-Monoid M
+  section-is-right-invertible-element-Monoid = pr1
+
+  is-right-inverse-section-is-right-invertible-element-Monoid :
+    (H : is-right-invertible-element-Monoid M x) →
+    is-right-inverse-element-Monoid M x
+      ( section-is-right-invertible-element-Monoid H)
+  is-right-inverse-section-is-right-invertible-element-Monoid = pr2
+```
+
+### Left invertible elements
+
+```agda
+module _
+  {l : Level} (M : Monoid l) (x : type-Monoid M)
+  where
+
+  is-left-inverse-element-Monoid : type-Monoid M → UU l
+  is-left-inverse-element-Monoid y = mul-Monoid M y x ＝ unit-Monoid M
+
+  is-left-invertible-element-Monoid : UU l
+  is-left-invertible-element-Monoid =
+    Σ (type-Monoid M) is-left-inverse-element-Monoid
+
+module _
+  {l : Level} (M : Monoid l) {x : type-Monoid M}
+  where
+
+  retraction-is-left-invertible-element-Monoid :
+    is-left-invertible-element-Monoid M x → type-Monoid M
+  retraction-is-left-invertible-element-Monoid = pr1
+
+  is-left-inverse-retraction-is-left-invertible-element-Monoid :
+    (H : is-left-invertible-element-Monoid M x) →
+    is-left-inverse-element-Monoid M x
+      ( retraction-is-left-invertible-element-Monoid H)
+  is-left-inverse-retraction-is-left-invertible-element-Monoid = pr2
+```
+
+### Invertible elements in a monoid
+
+```agda
+module _
+  {l : Level} (M : Monoid l) (x : type-Monoid M)
+  where
+
+  is-inverse-element-Monoid : type-Monoid M → UU l
+  is-inverse-element-Monoid y =
+    is-right-inverse-element-Monoid M x y ×
+    is-left-inverse-element-Monoid M x y
+
+  is-invertible-element-Monoid : UU l
+  is-invertible-element-Monoid =
+    Σ (type-Monoid M) is-inverse-element-Monoid
+
+module _
+  {l : Level} (M : Monoid l) {x : type-Monoid M}
+  where
+
+  inv-is-invertible-element-Monoid :
+    is-invertible-element-Monoid M x → type-Monoid M
+  inv-is-invertible-element-Monoid = pr1
+
+  is-right-inverse-inv-is-invertible-element-Monoid :
+    (H : is-invertible-element-Monoid M x) →
+    is-right-inverse-element-Monoid M x (inv-is-invertible-element-Monoid H)
+  is-right-inverse-inv-is-invertible-element-Monoid H = pr1 (pr2 H)
+
+  is-left-inverse-inv-is-invertible-element-Monoid :
+    (H : is-invertible-element-Monoid M x) →
+    is-left-inverse-element-Monoid M x (inv-is-invertible-element-Monoid H)
+  is-left-inverse-inv-is-invertible-element-Monoid H = pr2 (pr2 H)
+```
+
+### Invertible elements in a group
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  is-invertible-element-Group :
+    (x : type-Group G) → is-invertible-element-Monoid (monoid-Group G) x
+  pr1 (is-invertible-element-Group x) = inv-Group G x
+  pr1 (pr2 (is-invertible-element-Group x)) = right-inverse-law-mul-Group G x
+  pr2 (pr2 (is-invertible-element-Group x)) = left-inverse-law-mul-Group G x
+```
+
+### An element x is invertible if and only if z ↦ xz is an equivalence
+
+```agda
+module _
+  {l : Level} (M : Monoid l) {x : type-Monoid M}
+  where
+
+  inv-is-invertible-element-is-equiv-mul-Monoid :
+    is-equiv (mul-Monoid M x) → type-Monoid M
+  inv-is-invertible-element-is-equiv-mul-Monoid H =
+    map-inv-is-equiv H (unit-Monoid M)
+
+  is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid :
+    (H : is-equiv (mul-Monoid M x)) →
+    mul-Monoid M x (inv-is-invertible-element-is-equiv-mul-Monoid H) ＝
+    unit-Monoid M
+  is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid H =
+    is-section-map-inv-is-equiv H (unit-Monoid M)
+
+  is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid :
+    (H : is-equiv (mul-Monoid M x)) →
+    mul-Monoid M (inv-is-invertible-element-is-equiv-mul-Monoid H) x ＝
+    unit-Monoid M
+  is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid H =
+    is-injective-is-equiv H
+      ( ( inv (associative-mul-Monoid M _ _ _)) ∙
+        ( ap
+          ( mul-Monoid' M x)
+          ( is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid H)) ∙
+        ( left-unit-law-mul-Monoid M x) ∙
+        ( inv (right-unit-law-mul-Monoid M x)))
+
+  is-invertible-element-is-equiv-mul-Monoid :
+    is-equiv (mul-Monoid M x) → is-invertible-element-Monoid M x
+  pr1 (is-invertible-element-is-equiv-mul-Monoid H) =
+    inv-is-invertible-element-is-equiv-mul-Monoid H
+  pr1 (pr2 (is-invertible-element-is-equiv-mul-Monoid H)) =
+    is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid H
+  pr2 (pr2 (is-invertible-element-is-equiv-mul-Monoid H)) =
+    is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid H
+
+  left-div-is-invertible-element-Monoid :
+    is-invertible-element-Monoid M x → type-Monoid M → type-Monoid M
+  left-div-is-invertible-element-Monoid H =
+    mul-Monoid M (inv-is-invertible-element-Monoid M H)
+
+  is-section-left-div-is-invertible-element-Monoid :
+    (H : is-invertible-element-Monoid M x) →
+    mul-Monoid M x ∘ left-div-is-invertible-element-Monoid H ~ id
+  is-section-left-div-is-invertible-element-Monoid H y =
+    ( inv (associative-mul-Monoid M _ _ _)) ∙
+    ( ap
+      ( mul-Monoid' M y)
+      ( is-right-inverse-inv-is-invertible-element-Monoid M H)) ∙
+    ( left-unit-law-mul-Monoid M y)
+
+  is-retraction-left-div-is-invertible-element-Monoid :
+    (H : is-invertible-element-Monoid M x) →
+    left-div-is-invertible-element-Monoid H ∘ mul-Monoid M x ~ id
+  is-retraction-left-div-is-invertible-element-Monoid H y =
+    ( inv (associative-mul-Monoid M _ _ _)) ∙
+    ( ap
+      ( mul-Monoid' M y)
+      ( is-left-inverse-inv-is-invertible-element-Monoid M H)) ∙
+    ( left-unit-law-mul-Monoid M y)
+
+  is-equiv-mul-is-invertible-element-Monoid :
+    is-invertible-element-Monoid M x → is-equiv (mul-Monoid M x)
+  is-equiv-mul-is-invertible-element-Monoid H =
+    is-equiv-is-invertible
+      ( left-div-is-invertible-element-Monoid H)
+      ( is-section-left-div-is-invertible-element-Monoid H)
+      ( is-retraction-left-div-is-invertible-element-Monoid H)
+
+  is-equiv-mul-iff-is-invertible-element-Monoid :
+    is-invertible-element-Monoid M x ↔ is-equiv (mul-Monoid M x)
+  is-equiv-mul-iff-is-invertible-element-Monoid =
+    ( is-equiv-mul-is-invertible-element-Monoid ,
+      is-invertible-element-is-equiv-mul-Monoid)
+```
+
+### An element x is invertible if and only if z ↦ zx is an equivalence
+
+```agda
+module _
+  {l : Level} (M : Monoid l) {x : type-Monoid M}
+  where
+
+  inv-is-invertible-element-is-equiv-mul-Monoid' :
+    is-equiv (mul-Monoid' M x) → type-Monoid M
+  inv-is-invertible-element-is-equiv-mul-Monoid' H =
+    map-inv-is-equiv H (unit-Monoid M)
+
+  is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' :
+    (H : is-equiv (mul-Monoid' M x)) →
+    mul-Monoid M (inv-is-invertible-element-is-equiv-mul-Monoid' H) x ＝
+    unit-Monoid M
+  is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' H =
+    is-section-map-inv-is-equiv H (unit-Monoid M)
+
+  is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' :
+    (H : is-equiv (mul-Monoid' M x)) →
+    mul-Monoid M x (inv-is-invertible-element-is-equiv-mul-Monoid' H) ＝
+    unit-Monoid M
+  is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' H =
+    is-injective-is-equiv H
+      ( ( associative-mul-Monoid M _ _ _) ∙
+        ( ap
+          ( mul-Monoid M x)
+          ( is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' H)) ∙
+        ( right-unit-law-mul-Monoid M x) ∙
+        ( inv (left-unit-law-mul-Monoid M x)))
+
+  is-invertible-element-is-equiv-mul-Monoid' :
+    is-equiv (mul-Monoid' M x) → is-invertible-element-Monoid M x
+  pr1 (is-invertible-element-is-equiv-mul-Monoid' H) =
+    inv-is-invertible-element-is-equiv-mul-Monoid' H
+  pr1 (pr2 (is-invertible-element-is-equiv-mul-Monoid' H)) =
+    is-right-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' H
+  pr2 (pr2 (is-invertible-element-is-equiv-mul-Monoid' H)) =
+    is-left-inverse-inv-is-invertible-element-is-equiv-mul-Monoid' H
+
+  right-div-is-invertible-element-Monoid :
+    is-invertible-element-Monoid M x → type-Monoid M → type-Monoid M
+  right-div-is-invertible-element-Monoid H =
+    mul-Monoid' M (inv-is-invertible-element-Monoid M H)
+
+  is-section-right-div-is-invertible-element-Monoid :
+    (H : is-invertible-element-Monoid M x) →
+    mul-Monoid' M x ∘ right-div-is-invertible-element-Monoid H ~ id
+  is-section-right-div-is-invertible-element-Monoid H y =
+    ( associative-mul-Monoid M _ _ _) ∙
+    ( ap
+      ( mul-Monoid M y)
+      ( is-left-inverse-inv-is-invertible-element-Monoid M H)) ∙
+    ( right-unit-law-mul-Monoid M y)
+
+  is-retraction-right-div-is-invertible-element-Monoid :
+    (H : is-invertible-element-Monoid M x) →
+    right-div-is-invertible-element-Monoid H ∘ mul-Monoid' M x ~ id
+  is-retraction-right-div-is-invertible-element-Monoid H y =
+    ( associative-mul-Monoid M _ _ _) ∙
+    ( ap
+      ( mul-Monoid M y)
+      ( is-right-inverse-inv-is-invertible-element-Monoid M H)) ∙
+    ( right-unit-law-mul-Monoid M y)
+
+  is-equiv-mul-is-invertible-element-Monoid' :
+    is-invertible-element-Monoid M x → is-equiv (mul-Monoid' M x)
+  is-equiv-mul-is-invertible-element-Monoid' H =
+    is-equiv-is-invertible
+      ( right-div-is-invertible-element-Monoid H)
+      ( is-section-right-div-is-invertible-element-Monoid H)
+      ( is-retraction-right-div-is-invertible-element-Monoid H)
+
+  is-equiv-mul-iff-is-invertible-element-Monoid' :
+    is-invertible-element-Monoid M x ↔ is-equiv (mul-Monoid' M x)
+  is-equiv-mul-iff-is-invertible-element-Monoid' =
+    ( is-equiv-mul-is-invertible-element-Monoid' ,
+      is-invertible-element-is-equiv-mul-Monoid')
+```
+
+### Multiplication by x from the left is an equivalence
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  left-div-Group : type-Group G → type-Group G → type-Group G
+  left-div-Group x =
+    left-div-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G x)
+
+  ap-left-div-Group :
+    {x x' y y' : type-Group G} → x ＝ x' → y ＝ y' →
+    left-div-Group x y ＝ left-div-Group x' y'
+  ap-left-div-Group p q = ap-binary left-div-Group p q
+
+  is-section-left-div-Group :
+    (x : type-Group G) → (mul-Group G x ∘ left-div-Group x) ~ id
+  is-section-left-div-Group x =
+    is-section-left-div-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G x)
+
+  is-retraction-left-div-Group :
+    (x : type-Group G) → (left-div-Group x ∘ mul-Group G x) ~ id
+  is-retraction-left-div-Group x =
+    is-retraction-left-div-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G x)
+
+  is-equiv-mul-Group : (x : type-Group G) → is-equiv (mul-Group G x)
+  is-equiv-mul-Group x =
+    is-equiv-mul-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G x)
+
+  equiv-mul-Group : (x : type-Group G) → type-Group G ≃ type-Group G
+  pr1 (equiv-mul-Group x) = mul-Group G x
+  pr2 (equiv-mul-Group x) = is-equiv-mul-Group x
+
+  is-equiv-left-div-Group : (x : type-Group G) → is-equiv (left-div-Group x)
+  is-equiv-left-div-Group x =
+    is-equiv-is-invertible
+      ( mul-Group G x)
+      ( is-retraction-left-div-Group x)
+      ( is-section-left-div-Group x)
+
+  equiv-left-div-Group : (x : type-Group G) → type-Group G ≃ type-Group G
+  pr1 (equiv-left-div-Group x) = left-div-Group x
+  pr2 (equiv-left-div-Group x) = is-equiv-left-div-Group x
+```
+
+### Multiplication by x from the right is an equivalence
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  right-div-Group : type-Group G → type-Group G → type-Group G
+  right-div-Group x y =
+    right-div-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G y)
+      ( x)
+
+  ap-right-div-Group :
+    {x x' y y' : type-Group G} → x ＝ x' → y ＝ y' →
+    right-div-Group x y ＝ right-div-Group x' y'
+  ap-right-div-Group p q = ap-binary right-div-Group p q
+
+  is-section-right-div-Group :
+    (x : type-Group G) → (mul-Group' G x ∘ (λ y → right-div-Group y x)) ~ id
+  is-section-right-div-Group x =
+    is-section-right-div-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G x)
+
+  is-retraction-right-div-Group :
+    (x : type-Group G) → ((λ y → right-div-Group y x) ∘ mul-Group' G x) ~ id
+  is-retraction-right-div-Group x =
+    is-retraction-right-div-is-invertible-element-Monoid
+      ( monoid-Group G)
+      ( is-invertible-element-Group G x)
+
+  is-equiv-mul-Group' : (x : type-Group G) → is-equiv (mul-Group' G x)
+  is-equiv-mul-Group' x =
+    is-equiv-is-invertible
+      ( λ y → right-div-Group y x)
+      ( is-section-right-div-Group x)
+      ( is-retraction-right-div-Group x)
+
+  equiv-mul-Group' : (x : type-Group G) → type-Group G ≃ type-Group G
+  pr1 (equiv-mul-Group' x) = mul-Group' G x
+  pr2 (equiv-mul-Group' x) = is-equiv-mul-Group' x
+
+  is-equiv-right-div-Group :
+    (x : type-Group G) → is-equiv (λ y → right-div-Group y x)
+  is-equiv-right-div-Group x =
+    is-equiv-is-invertible
+      ( mul-Group' G x)
+      ( is-retraction-right-div-Group x)
+      ( is-section-right-div-Group x)
+
+  equiv-right-div-Group :
+    (x : type-Group G) → type-Group G ≃ type-Group G
+  pr1 (equiv-right-div-Group x) y = right-div-Group y x
+  pr2 (equiv-right-div-Group x) = is-equiv-right-div-Group x
+```
+
+### Binary equivalences and embeddings
+
+```agda
+fix-left :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
+  A → B → C
+fix-left f a = f a
+
+fix-right :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
+  B → A → C
+fix-right f b a = f a b
+
+is-binary-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
+  (A → B → C) → UU (l1 ⊔ l2 ⊔ l3)
+is-binary-equiv {A = A} {B = B} f =
+  ((b : B) → is-equiv (fix-right f b)) × ((a : A) → is-equiv (fix-left f a))
+
+is-equiv-fix-left :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
+  is-binary-equiv f → {a : A} → is-equiv (fix-left f a)
+is-equiv-fix-left f H {a} = pr2 H a
+
+is-equiv-fix-right :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
+  is-binary-equiv f → {b : B} → is-equiv (fix-right f b)
+is-equiv-fix-right f H {b} = pr1 H b
+
+is-binary-emb :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
+  (A → B → C) → UU (l1 ⊔ l2 ⊔ l3)
+is-binary-emb {A = A} {B = B} f =
+  {x x' : A} {y y' : B} →
+    is-binary-equiv (λ (p : x ＝ x') (q : y ＝ y') → ap-binary f p q)
+```
+
+### Any binary equivalence is a binary embedding
+
+```agda
+is-emb-fix-left-is-binary-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
+  is-binary-equiv f → {a : A} → is-emb (fix-left f a)
+is-emb-fix-left-is-binary-equiv f H {a} =
+  is-emb-is-equiv (is-equiv-fix-left f H)
+
+is-emb-fix-right-is-binary-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C) →
+  is-binary-equiv f → {b : B} → is-emb (fix-right f b)
+is-emb-fix-right-is-binary-equiv f H {b} =
+  is-emb-is-equiv (is-equiv-fix-right f H)
+
+is-binary-emb-is-binary-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {f : A → B → C} →
+  is-binary-equiv f → is-binary-emb f
+is-binary-emb-is-binary-equiv {f = f} H {x} {x'} {y} {y'} =
+  pair
+    ( λ q →
+      is-equiv-left-map-triangle
+        ( λ p → ap-binary f p q)
+        ( concat' (f x y) (ap (fix-left f x') q))
+        ( λ p → ap (fix-right f y) p)
+        ( λ p → triangle-ap-binary f p q)
+        ( is-emb-fix-right-is-binary-equiv f H x x')
+        ( is-equiv-concat' (f x y) (ap (fix-left f x') q)))
+    ( λ p →
+      is-equiv-left-map-triangle
+        ( λ q → ap-binary f p q)
+        ( concat (ap (fix-right f y) p) (f x' y'))
+        ( λ q → ap (fix-left f x') q)
+        ( λ q → triangle-ap-binary f p q)
+        ( is-emb-fix-left-is-binary-equiv f H y y')
+        ( is-equiv-concat (ap (fix-right f y) p) (f x' y')))
+```
+
+### Multiplication is a binary equivalence and a binary embedding
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  is-binary-equiv-mul-Group : is-binary-equiv (mul-Group G)
+  pr1 is-binary-equiv-mul-Group = is-equiv-mul-Group' G
+  pr2 is-binary-equiv-mul-Group = is-equiv-mul-Group G
+
+  is-binary-emb-mul-Group : is-binary-emb (mul-Group G)
+  is-binary-emb-mul-Group =
+    is-binary-emb-is-binary-equiv is-binary-equiv-mul-Group
+
+  is-emb-mul-Group : (x : type-Group G) → is-emb (mul-Group G x)
+  is-emb-mul-Group x = is-emb-is-equiv (is-equiv-mul-Group G x)
+
+  is-emb-mul-Group' : (x : type-Group G) → is-emb (mul-Group' G x)
+  is-emb-mul-Group' x = is-emb-is-equiv (is-equiv-mul-Group' G x)
+
+  is-injective-mul-Group : (x : type-Group G) → is-injective (mul-Group G x)
+  is-injective-mul-Group x = is-injective-is-equiv (is-equiv-mul-Group G x)
+
+  is-injective-mul-Group' : (x : type-Group G) → is-injective (mul-Group' G x)
+  is-injective-mul-Group' x = is-injective-is-equiv (is-equiv-mul-Group' G x)
+```
+
+### Any idempotent element in a group is the unit
+
+```agda
+module _
+  {l : Level} (G : Group l)
+  where
+
+  is-idempotent-Group : type-Group G → UU l
+  is-idempotent-Group x = mul-Group G x x ＝ x
+
+  is-unit-is-idempotent-Group :
+    {x : type-Group G} → is-idempotent-Group x → is-unit-Group G x
+  is-unit-is-idempotent-Group {x} p =
+    is-injective-mul-Group G x (p ∙ inv (right-unit-law-mul-Group G x))
+```
+
+### Group homomorphisms preserve the unit element
+
+```agda
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2)
+  where
+
+  preserves-unit-Group : (type-Group G → type-Group H) → UU l2
+  preserves-unit-Group f = f (unit-Group G) ＝ unit-Group H
+
+  abstract
+    preserves-unit-hom-Group :
+      ( f : hom-Group G H) → preserves-unit-Group (map-hom-Group G H f)
+    preserves-unit-hom-Group f =
+      is-unit-is-idempotent-Group H
+        ( equational-reasoning
+          mul-Group H
+            ( map-hom-Group G H f (unit-Group G))
+            ( map-hom-Group G H f (unit-Group G))
+          ＝ map-hom-Group G H f (mul-Group G (unit-Group G) (unit-Group G))
+            by inv (preserves-mul-hom-Group G H f)
+          ＝ map-hom-Group G H f (unit-Group G)
+            by ap (map-hom-Group G H f) (left-unit-law-mul-Group G _))
 ```

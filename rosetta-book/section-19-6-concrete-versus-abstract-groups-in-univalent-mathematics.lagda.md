@@ -4,12 +4,19 @@
 module section-19-6-concrete-versus-abstract-groups-in-univalent-mathematics where
 
 open import universe-levels
+open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
+open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
+open import section-9-1-homotopies
+open import section-9-2-bi-invertible-maps
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
+open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-13-3-truncatedness-is-a-proposition
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-16-3-finite-types
@@ -17,6 +24,7 @@ open import section-18-5-set-truncations
 open import section-19-1-the-type-of-all-groups
 open import section-19-2-group-homomorphisms
 open import section-19-4-homotopy-groups-of-types
+open import section-19-5-the-eckmann-hilton-argument
 ```
 
 In univalent mathematics there is another exciting perspective on group theory.
@@ -478,14 +486,108 @@ That is, the type of **abstract `G`-sets** is defined to be
 G-Set_𝒰 ≔ Σ(X : Set_𝒰) hom(G,Aut(X)).
 ```
 
+```agda
+module _
+  {l1 : Level} (G : Group l1)
+  where
+
+  action-Group : (l : Level) → UU (l1 ⊔ lsuc l)
+  action-Group l =
+    Σ (Set l) (λ X → hom-Group G (symmetric-Group X))
+
+module _
+  {l1 l2 : Level} (G : Group l1) (X : action-Group G l2)
+  where
+
+  set-action-Group : Set l2
+  set-action-Group = pr1 X
+
+  type-action-Group : UU l2
+  type-action-Group = type-Set set-action-Group
+
+  is-set-type-action-Group : is-set type-action-Group
+  is-set-type-action-Group = is-set-type-Set set-action-Group
+
+  equiv-mul-action-Group : type-Group G → type-action-Group ≃ type-action-Group
+  equiv-mul-action-Group =
+    map-hom-Group G (symmetric-Group set-action-Group) (pr2 X)
+
+  mul-action-Group : type-Group G → type-action-Group → type-action-Group
+  mul-action-Group g = map-equiv (equiv-mul-action-Group g)
+
+  mul-action-Group' : type-action-Group → type-Group G → type-action-Group
+  mul-action-Group' x g = mul-action-Group g x
+
+  preserves-unit-mul-action-Group : mul-action-Group (unit-Group G) ~ id
+  preserves-unit-mul-action-Group =
+    htpy-eq
+      ( ap pr1
+        ( preserves-unit-hom-Group G
+          ( symmetric-Group set-action-Group)
+          ( pr2 X)))
+
+  preserves-mul-action-Group :
+    (g : type-Group G) (h : type-Group G) (x : type-action-Group) →
+    mul-action-Group (mul-Group G g h) x ＝
+    mul-action-Group g (mul-action-Group h x)
+  preserves-mul-action-Group g h =
+    htpy-eq
+      ( ap pr1
+        ( preserves-mul-hom-Group G (symmetric-Group set-action-Group) (pr2 X)))
+
+  transpose-eq-mul-action-Group :
+    (g : type-Group G) (x y : type-action-Group) →
+    mul-action-Group g x ＝ y → x ＝ mul-action-Group (inv-Group G g) y
+  transpose-eq-mul-action-Group g x ._ refl =
+    ( inv
+      ( ( ap (mul-action-Group' x) (left-inverse-law-mul-Group G g)) ∙
+        ( preserves-unit-mul-action-Group x))) ∙
+    ( preserves-mul-action-Group (inv-Group G g) g x)
+```
+
 However, this definition is equivalent to a family `X : BG → Set_𝒰` of sets indexed by the classifying type `BG`.
 Therefore we define **concrete `G`-sets** to be type families `X : BG → Set_𝒰`.
 Given a concrete `G`-set `X : BG → Set_𝒰`, the set being acted upon is the set `X(⋆)`, and the action of `G` on `X(⋆)` is given by transport, since the elements of `G` are equivalent to loops in `BG`.
+
+```agda
+module _
+  {l1 : Level} (l2 : Level) (G : Concrete-Group l1)
+  where
+
+  action-Concrete-Group : UU (l1 ⊔ lsuc l2)
+  action-Concrete-Group = classifying-type-Concrete-Group G → Set l2
+
+module _
+  {l1 l2 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G)
+  where
+
+  set-action-Concrete-Group : Set l2
+  set-action-Concrete-Group = X (shape-Concrete-Group G)
+
+  type-action-Concrete-Group : UU l2
+  type-action-Concrete-Group = type-Set set-action-Concrete-Group
+
+  is-set-type-action-Concrete-Group : is-set type-action-Concrete-Group
+  is-set-type-action-Concrete-Group = is-set-type-Set set-action-Concrete-Group
+
+  mul-action-Concrete-Group :
+    type-Concrete-Group G →
+    type-action-Concrete-Group → type-action-Concrete-Group
+  mul-action-Concrete-Group g x = tr (type-Set ∘ X) g x
+```
 
 The type of **orbits** of a concrete `G`-set `X : BG → Set_𝒰` can then be defined as
 
 ```text
 X/G ≔ Σ(u : BG) X(u)
+```
+
+```agda
+orbit-action-Concrete-Group :
+  {l1 l2 : Level} (G : Concrete-Group l1) (X : action-Concrete-Group l2 G) →
+  UU (l1 ⊔ l2)
+orbit-action-Concrete-Group G X =
+  Σ (classifying-type-Concrete-Group G) (type-Set ∘ X)
 ```
 
 and the type of **fixed points** of `X` can be defined as

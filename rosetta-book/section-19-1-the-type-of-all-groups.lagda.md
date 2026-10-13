@@ -235,6 +235,21 @@ module _
     left-unit-law-mul-Group unit-Group ＝ right-unit-law-mul-Group unit-Group
   coherence-unit-laws-mul-Group =
     eq-is-prop (is-set-type-Group _ _)
+
+  has-inverses-Group :
+    is-group-is-unital-Semigroup semigroup-Group is-unital-Group
+  has-inverses-Group = pr2 is-group-Group
+
+  inv-Group : type-Group → type-Group
+  inv-Group = pr1 has-inverses-Group
+
+  left-inverse-law-mul-Group :
+    (x : type-Group) → mul-Group (inv-Group x) x ＝ unit-Group
+  left-inverse-law-mul-Group = pr1 (pr2 has-inverses-Group)
+
+  right-inverse-law-mul-Group :
+    (x : type-Group) → mul-Group x (inv-Group x) ＝ unit-Group
+  right-inverse-law-mul-Group = pr2 (pr2 has-inverses-Group)
 ```
 
 ## Lemma 19.1.6
