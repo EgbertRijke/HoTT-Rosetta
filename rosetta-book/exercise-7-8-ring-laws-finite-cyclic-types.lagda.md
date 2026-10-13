@@ -70,13 +70,6 @@ cong-mul-Fin {succ-ℕ k} x y =
 ```
 
 ```agda
-ap-add-Fin :
-  (k : ℕ) {x y x' y' : Fin k} →
-  x ＝ x' → y ＝ y' → add-Fin k x y ＝ add-Fin k x' y'
-ap-add-Fin k p q = ap-binary (add-Fin k) p q
-```
-
-```agda
 scalar-invariant-cong-ℕ :
   (k x y z : ℕ) → cong-ℕ k x y → cong-ℕ k (z *ℕ x) (z *ℕ y)
 scalar-invariant-cong-ℕ k x y z =

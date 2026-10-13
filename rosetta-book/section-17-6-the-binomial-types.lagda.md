@@ -4,6 +4,7 @@
 module section-17-6-the-binomial-types where
 
 open import universe-levels
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-9-2-bi-invertible-maps
@@ -11,8 +12,10 @@ open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-2-the-fundamental-theorem
 open import section-12-2-subtypes
+open import section-12-4-general-truncation-levels
 open import section-16-3-finite-types
 open import section-17-1-equivalent-forms-of-the-univalence-axiom
+open import section-17-2-propositional-extensionality
 ```
 
 To wrap up this section on univalence, we will use the univalence axiom to construct for any two types `A` and `B` a type `(A choose B)` that has properties similar to the binomial coefficients `(n choose k)`.
@@ -273,3 +276,76 @@ Therefore it follows that for any two decidable embeddings `f, g : B ↪ᵈ A`, 
 
 From a group theoretic perspective we may observe that the automorphism group `B ≃ B` acts freely on the set of decidable embeddings `B ↪ᵈ A`, and the type `Σ(X : 𝒰_B) X ↪ A` can be viewed as the type of orbits of that action.
 Since this action of `Aut(B)` on `B ↪ᵈ A` is free, we see that the number of orbits is `1/k!` times the number of elements in `B ↪ᵈ A`.
+
+## Supplement
+
+### We characterize the identity type of `Type-With-Cardinality-ℕ`
+
+```agda
+equiv-Type-With-Cardinality-ℕ :
+  {l1 l2 : Level} (k : ℕ) →
+  Type-With-Cardinality-ℕ l1 k →
+  Type-With-Cardinality-ℕ l2 k →
+  UU (l1 ⊔ l2)
+equiv-Type-With-Cardinality-ℕ k X Y =
+  type-Type-With-Cardinality-ℕ k X ≃ type-Type-With-Cardinality-ℕ k Y
+
+id-equiv-Type-With-Cardinality-ℕ :
+  {l : Level} {k : ℕ} (X : Type-With-Cardinality-ℕ l k) →
+  equiv-Type-With-Cardinality-ℕ k X X
+id-equiv-Type-With-Cardinality-ℕ X = id-equiv-component-UU-Level X
+
+equiv-eq-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) {X Y : Type-With-Cardinality-ℕ l k} →
+  X ＝ Y → equiv-Type-With-Cardinality-ℕ k X Y
+equiv-eq-Type-With-Cardinality-ℕ k p = equiv-eq-component-UU-Level p
+
+abstract
+  is-torsorial-equiv-Type-With-Cardinality-ℕ :
+    {l : Level} {k : ℕ} (X : Type-With-Cardinality-ℕ l k) →
+    is-torsorial
+      ( λ (Y : Type-With-Cardinality-ℕ l k) →
+        equiv-Type-With-Cardinality-ℕ k X Y)
+  is-torsorial-equiv-Type-With-Cardinality-ℕ {l} {k} X =
+    is-torsorial-equiv-component-UU-Level X
+
+abstract
+  is-equiv-equiv-eq-Type-With-Cardinality-ℕ :
+    {l : Level} (k : ℕ) (X Y : Type-With-Cardinality-ℕ l k) →
+    is-equiv (equiv-eq-Type-With-Cardinality-ℕ k {X = X} {Y})
+  is-equiv-equiv-eq-Type-With-Cardinality-ℕ k X =
+    is-equiv-equiv-eq-component-UU-Level X
+
+eq-equiv-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) (X Y : Type-With-Cardinality-ℕ l k) →
+  equiv-Type-With-Cardinality-ℕ k X Y → X ＝ Y
+eq-equiv-Type-With-Cardinality-ℕ k X Y =
+  eq-equiv-component-UU-Level X Y
+
+equiv-equiv-eq-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) (X Y : Type-With-Cardinality-ℕ l k) →
+  (X ＝ Y) ≃ equiv-Type-With-Cardinality-ℕ k X Y
+pr1 (equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y) =
+  equiv-eq-Type-With-Cardinality-ℕ k
+pr2 (equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y) =
+  is-equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y
+```
+
+### The type Type-With-Cardinality-ℕ is a 1-type
+
+```agda
+is-1-type-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) → is-1-type (Type-With-Cardinality-ℕ l k)
+is-1-type-Type-With-Cardinality-ℕ k X Y =
+  is-set-equiv
+    ( equiv-Type-With-Cardinality-ℕ k X Y)
+    ( equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y)
+    ( is-set-equiv-is-set
+      ( is-set-type-Type-With-Cardinality-ℕ k X)
+      ( is-set-type-Type-With-Cardinality-ℕ k Y))
+
+Type-With-Cardinality-ℕ-1-Type : (l : Level) (k : ℕ) → 1-Type (lsuc l)
+pr1 (Type-With-Cardinality-ℕ-1-Type l k) = Type-With-Cardinality-ℕ l k
+pr2 (Type-With-Cardinality-ℕ-1-Type l k) =
+  is-1-type-Type-With-Cardinality-ℕ k
+```

@@ -20,6 +20,7 @@ open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-13-3-truncatedness-is-a-proposition
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-16-3-finite-types
+open import section-17-6-the-binomial-types
 open import section-18-5-set-truncations
 open import section-19-1-the-type-of-all-groups
 open import section-19-2-group-homomorphisms

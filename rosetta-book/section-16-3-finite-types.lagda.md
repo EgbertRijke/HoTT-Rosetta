@@ -1163,3 +1163,26 @@ raise-Fin-Type-With-Cardinality-ℕ :
 pr1 (raise-Fin-Type-With-Cardinality-ℕ l k) = raise-Fin l k
 pr2 (raise-Fin-Type-With-Cardinality-ℕ l k) = has-cardinality-raise-Fin k
 ```
+
+### Mere equivalence is symmetric
+
+```agda
+abstract
+  symmetric-mere-equiv :
+    {l1 l2 : Level} (X : UU l1) (Y : UU l2) → mere-equiv X Y → mere-equiv Y X
+  symmetric-mere-equiv X Y =
+    map-universal-property-trunc-Prop
+      ( mere-equiv-Prop Y X)
+      ( λ e → unit-trunc-Prop (inv-equiv e))
+```
+
+### Mere equivalence is transitive
+
+```agda
+abstract
+  transitive-mere-equiv :
+    {l1 l2 l3 : Level} (X : UU l1) (Y : UU l2) (Z : UU l3) →
+    mere-equiv Y Z → mere-equiv X Y → mere-equiv X Z
+  transitive-mere-equiv X Y Z =
+    map-binary-trunc-Prop (_∘e_)
+```
