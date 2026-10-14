@@ -10,26 +10,35 @@ open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
+open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
+open import section-6-3-observational-equality-of-the-natural-numbers
 open import section-7-3-the-standard-finite-types
 open import section-7-4-the-natural-numbers-modulo-k-plus-one
 open import exercise-7-5-observational-equality-finite-types
+open import section-8-1-decidability-and-decidable-equality
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
+open import exercise-10-1-identity-types-contractible
 open import exercise-10-3-contractible-equivalences
+open import exercise-10-4-finite-types-not-contractible
 open import section-11-1-families-of-equivalences
 open import section-11-2-the-fundamental-theorem
 open import section-12-1-propositions
 open import section-12-3-sets
 open import exercise-12-8-retracts-of-truncated-types
+open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-3-universal-properties
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import exercise-13-12-dependent-products-of-truncated-maps
 open import section-14-2-propositional-truncations-as-higher-inductive-types
+open import section-14-3-logic-in-type-theory
+open import section-14-4-mapping-propositional-truncations-into-sets
+open import section-15-3-cantors-diagonal-argument
 open import section-16-3-finite-types
 open import section-17-1-equivalent-forms-of-the-univalence-axiom
 open import section-17-2-propositional-extensionality
@@ -417,7 +426,6 @@ dependent-universal-property-identity-system-type-2-Element-Type X x =
     ( is-contr-pointed-2-Element-Type)
 ```
 
-
 ## Corollary 17.5.2
 
 There is no dependent function
@@ -440,6 +448,25 @@ Recall from Exercise 10.1 that the identity types of contractible types are cont
 On the other hand, it follows from Proposition 17.5.1 that the identity type `Fin₂ = Fin₂` in `BS₂` is equivalent to `Fin₂`.
 This type isn’t contractible by Exercise 10.4.
 We conclude that `BS₂` is not contractible. ◻
+
+```agda
+abstract
+  no-section-type-2-Element-Type :
+    {l : Level} → ¬ ((X : 2-Element-Type l) → type-2-Element-Type X)
+  no-section-type-2-Element-Type {l} f =
+    is-not-contractible-Fin 2
+      ( Eq-eq-ℕ)
+      ( is-contr-equiv
+        ( standard-2-Element-Type l ＝ standard-2-Element-Type l)
+        ( ( inv-equiv equiv-point-eq-2-Element-Type) ∘e
+          ( compute-raise-Fin l 2))
+        ( is-prop-is-contr
+          ( pair
+            ( standard-2-Element-Type l)
+            ( λ X → eq-point-2-Element-Type (f X)))
+          ( standard-2-Element-Type l)
+          ( standard-2-Element-Type l)))
+```
 
 The family `X ↦ X` over `BS₂` is therefore an example of a family of nonempty types for which there are provably no sections.
 In the following corollary we conclude more generally that there is no way to construct an element of an arbitrary inhabited type.
@@ -466,7 +493,19 @@ To see this, consider a type `A : 𝒰` such that `‖Fin₂ ≃ A‖`.
 To obtain an element of type `‖A‖`, we may assume an equivalence `e : Fin₂ ≃ A`.
 Then we have `η(e(0)) : ‖A‖`.
 
-Since every `2`-element type is inhabited, we obtain a function `Π(A : BS₂) A`, which is impossible by Corollary 17.5.2. ◻
+Since every `2`-element type is inhabited, we obtain a function `Π(A : BS₂) A`, which is impossible by Corollary 17.5.2. ◻
+
+### The global choice principle
+
+```agda
+abstract
+  no-global-choice :
+    {l : Level} → ¬ (Global-Choice l)
+  no-global-choice f =
+    no-section-type-2-Element-Type
+      ( λ X →
+        f (pr1 X) (map-trunc-Prop (λ e → map-equiv e (zero-Fin 1)) (pr2 X)))
+```
 
 Corollary 17.5.3 is of philosophical importance.
 It shows that the **principle of global choice** is incompatible with the univalence axiom, i.e., that there is no way to obtain construct a function `‖A‖ → A` for all types `A`.
@@ -503,6 +542,23 @@ The **axiom of choice** asserts that for any family `B` of inhabited sets indexe
 
 for every `A : Set_𝒰` and `B : A → Set_𝒰`.
 
+```agda
+instance-choice : {l1 l2 : Level} (A : UU l1) → (A → UU l2) → UU (l1 ⊔ l2)
+instance-choice A B =
+  ((x : A) → is-inhabited (B x)) → is-inhabited ((x : A) → B x)
+
+instance-choice-Set :
+  {l1 l2 : Level} (A : Set l1) → (type-Set A → Set l2) → UU (l1 ⊔ l2)
+instance-choice-Set A B = instance-choice (type-Set A) (type-Set ∘ B)
+
+level-AC-Set : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
+level-AC-Set l1 l2 =
+  (A : Set l1) (B : type-Set A → Set l2) → instance-choice-Set A B
+
+AC-Set : UUω
+AC-Set = {l1 l2 : Level} → level-AC-Set l1 l2
+```
+
 Similar care has to be taken with the type theoretic formulation of the law of excluded middle.
 It is again inconsistent to assume that every type is decidable.
 
@@ -531,7 +587,31 @@ By Exercise 14.1 we obtain a function
 ```
 
 for each `2`-element type `X`.
-Therefore, we obtain from `d` a dependent function `Π(X : BS₂) X`, which does not exist by Corollary 17.5.2. ◻
+Therefore, we obtain from `d` a dependent function `Π(X : BS₂) X`, which does not exist by Corollary 17.5.2. ◻
+
+```agda
+abstract
+  is-not-decidable-type-2-Element-Type :
+    {l : Level} →
+    ¬ ((X : 2-Element-Type l) → is-decidable (type-2-Element-Type X))
+  is-not-decidable-type-2-Element-Type {l} d =
+    no-section-type-2-Element-Type
+      ( λ X →
+        map-right-unit-law-coproduct-is-empty
+          ( pr1 X)
+          ( ¬ (pr1 X))
+          ( apply-universal-property-trunc-Prop
+            ( pr2 X)
+            ( double-negation-type-Prop (pr1 X))
+            ( λ e → intro-double-negation {l} (map-equiv e (zero-Fin 1))))
+          ( d X))
+
+abstract
+  no-global-decidability :
+    {l : Level} → ¬ ((X : UU l) → is-decidable X)
+  no-global-decidability {l} d =
+    is-not-decidable-type-2-Element-Type (λ X → d (pr1 X))
+```
 
 The law of excluded middle is really an axiom of propositional logic, and it is indeed consistent with the univalence axiom that every *proposition* is decidable.
 
@@ -541,6 +621,17 @@ The **law of excluded middle** asserts that every proposition is decidable, i.e.
 
 ```text
   LEM_𝒰 ≔ Π(P : Prop_𝒰) is-decidable(P).
+```
+
+```agda
+level-LEM : (l : Level) → UU (lsuc l)
+level-LEM l = (P : Prop l) → is-decidable (type-Prop P)
+
+LEM : UUω
+LEM = {l : Level} → level-LEM l
+
+prop-level-LEM : (l : Level) → Prop (lsuc l)
+prop-level-LEM l = Π-Prop (Prop l) (is-decidable-Prop)
 ```
 
 We will again not assume the law of excluded middle, unless we say otherwise.
