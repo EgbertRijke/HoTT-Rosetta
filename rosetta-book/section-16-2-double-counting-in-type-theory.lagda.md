@@ -27,6 +27,7 @@ open import section-11-4-embeddings
 open import section-11-5-disjointness-of-coproducts
 open import section-12-1-propositions
 open import exercise-12-8-retracts-of-truncated-types
+open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import section-16-1-counting-in-type-theory
 ```
@@ -720,4 +721,56 @@ abstract
     number-of-elements-count count-A
   double-counting-base-count-Σ' count-A count-B count-ΣAB count-nB =
     double-counting (count-base-count-Σ' count-ΣAB count-B count-nB) count-A
+```
+
+## Supplement
+
+### The universal property of Maybe
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : Maybe A → UU l2}
+  where
+
+  ev-Maybe :
+    ((x : Maybe A) → B x) → ((x : A) → B (unit-Maybe x)) × B exception-Maybe
+  pr1 (ev-Maybe h) x = h (unit-Maybe x)
+  pr2 (ev-Maybe h) = h exception-Maybe
+
+  ind-Maybe :
+    ((x : A) → B (unit-Maybe x)) × (B exception-Maybe) → (x : Maybe A) → B x
+  ind-Maybe (pair h b) (inl x) = h x
+  ind-Maybe (pair h b) (inr _) = b
+
+  abstract
+    is-section-ind-Maybe : (ev-Maybe ∘ ind-Maybe) ~ id
+    is-section-ind-Maybe (pair h b) = refl
+
+    is-retraction-ind-Maybe' :
+      (h : (x : Maybe A) → B x) → (ind-Maybe (ev-Maybe h)) ~ h
+    is-retraction-ind-Maybe' h (inl x) = refl
+    is-retraction-ind-Maybe' h (inr _) = refl
+
+    is-retraction-ind-Maybe : (ind-Maybe ∘ ev-Maybe) ~ id
+    is-retraction-ind-Maybe h = eq-htpy (is-retraction-ind-Maybe' h)
+
+    dependent-universal-property-Maybe :
+      is-equiv ev-Maybe
+    dependent-universal-property-Maybe =
+      is-equiv-is-invertible
+        ind-Maybe
+        is-section-ind-Maybe
+        is-retraction-ind-Maybe
+
+equiv-dependent-universal-property-Maybe :
+  {l1 l2 : Level} {A : UU l1} (B : Maybe A → UU l2) →
+  ((x : Maybe A) → B x) ≃ (((x : A) → B (unit-Maybe x)) × B exception-Maybe)
+pr1 (equiv-dependent-universal-property-Maybe B) = ev-Maybe
+pr2 (equiv-dependent-universal-property-Maybe B) =
+  dependent-universal-property-Maybe
+
+equiv-universal-property-Maybe :
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} → (Maybe A → B) ≃ ((A → B) × B)
+equiv-universal-property-Maybe {l1} {l2} {A} {B} =
+  equiv-dependent-universal-property-Maybe (λ x → B)
 ```

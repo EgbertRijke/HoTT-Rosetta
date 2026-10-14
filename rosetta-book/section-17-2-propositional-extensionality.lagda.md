@@ -572,3 +572,15 @@ Prop-Set : (l : Level) → Set (lsuc l)
 pr1 (Prop-Set l) = Prop l
 pr2 (Prop-Set l) = is-set-type-Prop
 ```
+
+### The type of decidable propositions is equivalent to the coproduct of the type of true propositions and the type of false propositions
+
+```agda
+split-Decidable-Prop :
+  {l : Level} →
+  Decidable-Prop l ≃
+  ((Σ (Prop l) type-Prop) + (Σ (Prop l) (λ Q → ¬ (type-Prop Q))))
+split-Decidable-Prop {l} =
+  left-distributive-Σ-coproduct ∘e inv-associative-Σ
+```
+

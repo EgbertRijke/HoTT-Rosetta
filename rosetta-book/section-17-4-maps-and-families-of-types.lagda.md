@@ -5,14 +5,19 @@ module section-17-4-maps-and-families-of-types where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
+open import section-4-3-the-empty-type
+open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
+open import exercise-4-2-boolean-operations
 open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import exercise-6-2-observational-equality-booleans
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import exercise-9-5-sigma-swap
+open import exercise-9-7-product-functor-equivalences
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
@@ -21,7 +26,6 @@ open import exercise-10-6-dependent-pair-contractible-base
 open import exercise-10-7-fibers-of-projections
 open import exercise-10-8-fiber-replacement
 open import section-11-6-the-structure-identity-principle
-open import exercise-13-15-morphisms-over-a-type
 open import section-11-1-families-of-equivalences
 open import section-11-2-the-fundamental-theorem
 open import section-11-4-embeddings
@@ -34,6 +38,7 @@ open import section-13-2-identity-systems-on-pi-types
 open import section-13-4-composing-with-equivalences
 open import exercise-13-3-truncatedness-is-a-proposition
 open import exercise-13-4-equivalence-structure-is-a-proposition
+open import exercise-13-15-morphisms-over-a-type
 open import exercise-13-12-dependent-products-of-truncated-maps
 open import section-14-3-logic-in-type-theory
 open import section-15-2-surjective-maps
@@ -821,4 +826,78 @@ module _
   structured-equality-duality =
     ( forward-implication-structured-equality-duality ,
       backward-implication-structured-equality-duality)
+```
+
+### The type of decidable subtypes of `A` is equivalent to the type of all decidable embeddings into a type `A`
+
+```agda
+equiv-Fiber-Decidable-Prop :
+  (l : Level) {l1 : Level} (A : UU l1) →
+  Σ (UU (l1 ⊔ l)) (λ X → X ↪ᵈ A) ≃ (decidable-subtype (l1 ⊔ l) A)
+equiv-Fiber-Decidable-Prop l A =
+  ( equiv-Fiber-structure l is-decidable-prop A) ∘e
+  ( equiv-tot
+    ( λ X →
+      equiv-tot
+        ( λ f →
+          ( inv-distributive-Π-Σ) ∘e
+          ( equiv-product-left (equiv-is-prop-map-is-emb f)))))
+```
+
+### The type of decidable subtypes of `A` is equivalent to mappings `A → bool`
+
+```agda
+module _
+  {l1 l2 : Level} (A : UU l1)
+  where
+
+  map-bool-decidable-subtype-equiv : decidable-subtype l2 A ≃ (A → bool)
+  map-bool-decidable-subtype-equiv = equiv-postcomp A equiv-bool-Decidable-Prop
+
+module _
+  {l1 l2 : Level} {A : UU l1} (P : decidable-subtype l2 A)
+  where
+
+  abstract
+    is-true-map-bool-is-in-decidable-subtype :
+      (a : A) → is-in-decidable-subtype P a →
+      is-true (map-equiv (map-bool-decidable-subtype-equiv A) P a)
+    is-true-map-bool-is-in-decidable-subtype a a∈P with P a
+    ... | (_ , _ , inl a∈P') = refl
+    ... | (_ , _ , inr a∉P) = ex-falso (a∉P a∈P)
+
+    is-in-decidable-subtype-is-true-map-bool :
+      (a : A) → is-true (map-equiv (map-bool-decidable-subtype-equiv A) P a) →
+      is-in-decidable-subtype P a
+    is-in-decidable-subtype-is-true-map-bool a fa=true with P a
+    ... | (_ , _ , inl a∈P) = a∈P
+
+    is-true-map-bool-iff-is-in-decidable-subtype :
+      (a : A) →
+      is-true (map-equiv (map-bool-decidable-subtype-equiv A) P a) ↔
+      is-in-decidable-subtype P a
+    is-true-map-bool-iff-is-in-decidable-subtype a =
+      ( is-in-decidable-subtype-is-true-map-bool a ,
+        is-true-map-bool-is-in-decidable-subtype a)
+
+    is-false-map-bool-is-not-in-decidable-subtype :
+      (a : A) → ¬ (is-in-decidable-subtype P a) →
+      is-false (map-equiv (map-bool-decidable-subtype-equiv A) P a)
+    is-false-map-bool-is-not-in-decidable-subtype a a∉P with P a
+    ... | (_ , _ , inl a∈P) = ex-falso (a∉P a∈P)
+    ... | (_ , _ , inr a∉P') = refl
+
+    is-not-in-decidable-subtype-is-false-map-bool :
+      (a : A) → is-false (map-equiv (map-bool-decidable-subtype-equiv A) P a) →
+      ¬ (is-in-decidable-subtype P a)
+    is-not-in-decidable-subtype-is-false-map-bool a fa=false with P a
+    ... | (_ , _ , inr a∉P) = a∉P
+
+    is-false-map-bool-iff-is-not-in-decidable-subtype :
+      (a : A) →
+      is-false (map-equiv (map-bool-decidable-subtype-equiv A) P a) ↔
+      ¬ (is-in-decidable-subtype P a)
+    is-false-map-bool-iff-is-not-in-decidable-subtype a =
+      ( is-not-in-decidable-subtype-is-false-map-bool a ,
+        is-false-map-bool-is-not-in-decidable-subtype a)
 ```

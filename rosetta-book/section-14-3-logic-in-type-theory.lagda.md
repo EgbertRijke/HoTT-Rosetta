@@ -9,18 +9,24 @@ open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import exercise-4-3-double-negation-logic
+open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-8-1-decidability-and-decidable-equality
 open import exercise-8-7-decidable-equality-coproducts
+open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import exercise-9-1-groupoid-operations-equivalences
 open import exercise-9-4-three-for-two-equivalences
+open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-7-fibers-of-projections
 open import exercise-10-8-fiber-replacement
 open import section-11-1-families-of-equivalences
 open import section-11-4-embeddings
+open import exercise-11-3-homotopic-embeddings
+open import exercise-11-4-embedding-triangles
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-3-sets
@@ -31,6 +37,7 @@ open import exercise-12-7-truncated-products
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-3-universal-properties
 open import exercise-13-3-truncatedness-is-a-proposition
+open import exercise-13-4-equivalence-structure-is-a-proposition
 open import exercise-13-8-universal-property-coproducts
 open import section-14-1-the-universal-property-of-propositional-truncations
 open import section-14-2-propositional-truncations-as-higher-inductive-types
@@ -751,4 +758,144 @@ abstract
 is-inhabited-or-empty-Prop : {l1 : Level} → UU l1 → Prop l1
 pr1 (is-inhabited-or-empty-Prop A) = is-inhabited-or-empty A
 pr2 (is-inhabited-or-empty-Prop A) = is-property-is-inhabited-or-empty A
+```
+
+### Being a decidable embedding is a property
+
+```agda
+abstract
+  is-prop-is-decidable-emb :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) →
+    is-prop (is-decidable-emb f)
+  is-prop-is-decidable-emb f =
+    is-prop-has-element
+      ( λ H →
+        is-prop-product
+          ( is-property-is-emb f)
+          ( is-prop-Π
+            ( λ y → is-prop-is-decidable (is-prop-map-is-emb (pr1 H) y))))
+```
+
+The composite of two decidable maps `g ∘ f` is decidable if `g` is injective.
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {g : B → C} {f : A → B}
+  where
+
+  abstract
+    is-decidable-map-comp :
+      is-injective g →
+      is-decidable-map g →
+      is-decidable-map f →
+      is-decidable-map (g ∘ f)
+    is-decidable-map-comp H G F x =
+      rec-coproduct
+        ( λ u →
+          is-decidable-iff
+            ( λ v → (pr1 v) , ap g (pr2 v) ∙ pr2 u)
+            ( λ w → pr1 w , H (pr2 w ∙ inv (pr2 u)))
+            ( F (pr1 u)))
+        ( λ α → inr (λ t → α (f (pr1 t) , pr2 t)))
+        ( G x)
+```
+
+### Decidable embeddings are closed under composition
+
+```agda
+module _
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3}
+  {g : B → C} {f : A → B}
+  where
+
+  abstract
+    is-decidable-map-comp-is-decidable-emb' :
+      is-decidable-emb g → is-decidable-map f → is-decidable-map (g ∘ f)
+    is-decidable-map-comp-is-decidable-emb' K =
+      is-decidable-map-comp
+        ( is-injective-is-decidable-emb K)
+        ( is-decidable-map-is-decidable-emb K)
+
+  is-decidable-map-comp-is-decidable-emb :
+    is-decidable-emb g → is-decidable-emb f → is-decidable-map (g ∘ f)
+  is-decidable-map-comp-is-decidable-emb K H =
+    is-decidable-map-comp-is-decidable-emb'
+      ( K)
+      ( is-decidable-map-is-decidable-emb H)
+
+  is-decidable-emb-comp :
+    is-decidable-emb g → is-decidable-emb f → is-decidable-emb (g ∘ f)
+  is-decidable-emb-comp K H =
+    ( is-emb-comp _ _ (pr1 K) (pr1 H) ,
+      is-decidable-map-comp-is-decidable-emb K H)
+
+  abstract
+    is-decidable-prop-map-comp :
+      is-decidable-prop-map g →
+      is-decidable-prop-map f →
+      is-decidable-prop-map (g ∘ f)
+    is-decidable-prop-map-comp K H =
+      is-decidable-prop-map-is-decidable-emb
+        ( is-decidable-emb-comp
+          ( is-decidable-emb-is-decidable-prop-map K)
+          ( is-decidable-emb-is-decidable-prop-map H))
+
+comp-decidable-emb :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
+  B ↪ᵈ C → A ↪ᵈ B → A ↪ᵈ C
+comp-decidable-emb (g , G) (f , F) =
+  ( g ∘ f , is-decidable-emb-comp G F)
+
+infixr 15 _∘ᵈ_
+_∘ᵈ_ :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} →
+  B ↪ᵈ C → A ↪ᵈ B → A ↪ᵈ C
+_∘ᵈ_ = comp-decidable-emb
+```
+
+### Equivalences are decidable maps
+
+```agda
+abstract
+  is-decidable-map-is-equiv :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+    is-equiv f → is-decidable-map f
+  is-decidable-map-is-equiv H x = inl (center (is-contr-map-is-equiv H x))
+```
+
+### Equivalences are decidable embeddings
+
+```agda
+abstract
+  is-decidable-emb-is-equiv :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+    is-equiv f → is-decidable-emb f
+  is-decidable-emb-is-equiv H =
+    ( is-emb-is-equiv H , is-decidable-map-is-equiv H)
+```
+
+### Decidable maps are closed under homotopy
+
+```agda
+opaque
+  is-decidable-map-htpy :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
+    f ~ g → is-decidable-map g → is-decidable-map f
+  is-decidable-map-htpy H K b =
+    is-decidable-equiv
+      ( equiv-tot (λ a → equiv-concat (inv (H a)) b))
+      ( K b)
+```
+
+### Decidable embeddings are closed under homotopies
+
+```agda
+abstract
+  is-decidable-emb-htpy :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f g : A → B} →
+    f ~ g → is-decidable-emb g → is-decidable-emb f
+  is-decidable-emb-htpy {f = f} {g} H K =
+    ( is-emb-htpy H (is-emb-is-decidable-emb K) ,
+      is-decidable-map-htpy H (is-decidable-map-is-decidable-emb K))
 ```

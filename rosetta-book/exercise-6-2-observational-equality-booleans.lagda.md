@@ -61,3 +61,19 @@ neq-neg-bool : (b : bool) → b ≠ neg-bool b
 neq-neg-bool true ()
 neq-neg-bool false ()
 ```
+
+## Supplement
+
+### The "is true" predicate on booleans
+
+```agda
+is-true : bool → UU lzero
+is-true = _＝ true
+```
+
+### The "is false" predicate on booleans
+
+```agda
+is-false : bool → UU lzero
+is-false = _＝ false
+```
