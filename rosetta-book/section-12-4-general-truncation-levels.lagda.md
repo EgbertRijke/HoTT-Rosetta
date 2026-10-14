@@ -19,6 +19,7 @@ open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-2-contractible-retracts
+open import exercise-10-7-fibers-of-projections
 open import section-11-1-families-of-equivalences
 open import section-11-4-embeddings
 open import section-11-6-the-structure-identity-principle
@@ -635,6 +636,14 @@ abstract
   is-1-type-type-1-Type = pr2
 ```
 
+### The identity type of a 1-type takes values in sets
+
+```agda
+Id-Set : {l : Level} (X : 1-Type l) (x y : type-1-Type X) → Set l
+pr1 (Id-Set X x y) = (x ＝ y)
+pr2 (Id-Set X x y) = is-1-type-type-1-Type X x y
+```
+
 ### Contractible types are k-truncated for any k
 
 ```agda
@@ -671,4 +680,40 @@ abstract
       ( fiber-triangle f g id H b)
       ( is-fiberwise-equiv-is-equiv-triangle f g id H is-equiv-id b)
       ( is-trunc-g b)
+```
+
+###Projections of families of sets are 0-maps
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1}
+  where
+
+  abstract
+    is-0-map-pr1 :
+      {B : A → UU l2} → ((x : A) → is-set (B x)) → is-0-map (pr1 {B = B})
+    is-0-map-pr1 {B} H x =
+      is-set-equiv (B x) (equiv-fiber-pr1 B x) (H x)
+
+  pr1-0-map :
+    (B : A → Set l2) → 0-map (Σ A (λ x → type-Set (B x))) A
+  pr1 (pr1-0-map B) = pr1
+  pr2 (pr1-0-map B) = is-0-map-pr1 (λ x → is-set-type-Set (B x))
+```
+
+### Any 0-map is faithful
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B}
+  where
+
+  is-0-map-is-faithful : is-faithful f → is-0-map f
+  is-0-map-is-faithful H =
+    is-trunc-map-succ-is-trunc-map-ap neg-one-𝕋 f
+      ( λ x y → is-prop-map-is-emb (H x y))
+
+  is-faithful-is-0-map : is-0-map f → is-faithful f
+  is-faithful-is-0-map H x y =
+    is-emb-is-prop-map (is-trunc-map-ap-is-trunc-map-succ neg-one-𝕋 f H x y)
 ```

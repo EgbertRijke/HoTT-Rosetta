@@ -150,7 +150,7 @@ A ≃ B = equiv A B
 
 ## Remark 9.2.2
 
-An equivalence, as we defined it here, can be thought of as a *bi-invertible map*, since it comes equipped with a separate left and right inverse.
+An equivalence, as we defined it here, can be thought of as a _bi-invertible map_, since it comes equipped with a separate left and right inverse.
 Explicitly, if `f` is an equivalence, then there are
 
 ```text
@@ -217,7 +217,6 @@ module _
   is-retraction-map-retraction-map-equiv =
     is-retraction-map-retraction map-equiv retraction-map-equiv
 ```
-
 
 ## Example 9.2.3
 
@@ -429,8 +428,8 @@ module _
     is-section-map-inv-is-invertible ∘ is-invertible-map-invertible-map
 ```
 
-However, we did *not* define equivalences to be functions that have inverses.
-The reason is that we would like that being an equivalence is a *property*, not a non-trivial structure on the map `f`.
+However, we did _not_ define equivalences to be functions that have inverses.
+The reason is that we would like that being an equivalence is a _property_, not a non-trivial structure on the map `f`.
 This fact requires the function extensionality axiom, but we can already say that if a map `f` is an equivalence, then it has up to homotopy only one section and only one retraction (see Exercise 13.4).
 
 The type `has-inverse(f)` on the other hand, turns out to be homotopically complicated.

@@ -44,7 +44,7 @@ Indeed, `neg-neg-bool` is defined using the induction principle of `bool`, by
   neg-neg-bool(false) ≔ refl.
 ```
 
-Therefore we see that, while we cannot identify `neg-bool ∘ neg-bool` with `id`, we can define a *pointwise identification* between the values of `neg-bool ∘ neg-bool` and `id`.
+Therefore we see that, while we cannot identify `neg-bool ∘ neg-bool` with `id`, we can define a _pointwise identification_ between the values of `neg-bool ∘ neg-bool` and `id`.
 
 ```agda
 is-involution-neg-bool : (b : bool) → neg-bool (neg-bool b) ＝ b
@@ -52,9 +52,9 @@ is-involution-neg-bool true = refl
 is-involution-neg-bool false = refl
 ```
 
-The observations in Remark 9.1.1 are an instance of a general phenomenon in type theory: It is often much easier to construct a *pointwise identification* between the values of two maps, than it is to construct an identification between those two maps.
+The observations in Remark 9.1.1 are an instance of a general phenomenon in type theory: It is often much easier to construct a _pointwise identification_ between the values of two maps, than it is to construct an identification between those two maps.
 In fact, the prevalent notion of sameness of maps is the notion of pointwise identification.
-Since they are so important, we will give them a name and call them *homotopies*.
+Since they are so important, we will give them a name and call them _homotopies_.
 
 ## Definition 9.1.2
 
@@ -141,7 +141,7 @@ module _
 ```
 
 Note that the type of homotopies `f ~ g` is defined for dependent functions, and moreover the type of homotopies is itself a dependent function type.
-The definition of homotopies is therefore set up in such a way that we may also consider homotopies *between* homotopies, and even further homotopies between those higher homotopies.
+The definition of homotopies is therefore set up in such a way that we may also consider homotopies _between_ homotopies, and even further homotopies between those higher homotopies.
 More concretely, if `H, K : f ~ g` are two homotopies, then the type of homotopies `H ~ K` between them is just the type
 
 ```text
@@ -149,7 +149,7 @@ More concretely, if `H, K : f ~ g` are two homotopies, then the type of homotopi
 ```
 
 Since homotopies are pointwise identifications, we can use the groupoidal structure of identity types to also define the groupoidal structure of homotopies.
-In this case, however, we state the groupoid laws as *homotopies* and *homotopies between homotopies* rather than as identifications.
+In this case, however, we state the groupoid laws as _homotopies_ and _homotopies between homotopies_ rather than as identifications.
 
 ## Definition 9.1.5
 
@@ -293,7 +293,7 @@ module _
   inv-htpy-right-inv-htpy = inv-htpy right-inv-htpy
 ```
 
-Apart from the groupoid operations and their laws, we will occasionally need *whiskering* operations.
+Apart from the groupoid operations and their laws, we will occasionally need _whiskering_ operations.
 Whiskering operations are operations that allow us to compose homotopies with functions.
 There are two situations where we want to do this:
 
@@ -485,6 +485,26 @@ module _
   right-whisker-comp² :
     (α : {x : A} → H {x} ~ H' {x}) (h : (x : A) → B x) → H ·r h ~ H' ·r h
   right-whisker-comp² α h = α ·r h
+```
+
+### Pasting commuting squares horizontally
+
+```agda
+module _
+  {l1 l2 l3 l4 l5 l6 : Level}
+  {A : UU l1} {B : UU l2} {C : UU l3} {X : UU l4} {Y : UU l5} {Z : UU l6}
+  (top-left : A → B) (top-right : B → C)
+  (left : A → X) (mid : B → Y) (right : C → Z)
+  (bottom-left : X → Y) (bottom-right : Y → Z)
+  where
+
+  pasting-horizontal-coherence-square-maps :
+    coherence-square-maps top-left left mid bottom-left →
+    coherence-square-maps top-right mid right bottom-right →
+    coherence-square-maps
+      (top-right ∘ top-left) left right (bottom-right ∘ bottom-left)
+  pasting-horizontal-coherence-square-maps sq-left sq-right =
+    (bottom-right ·l sq-left) ∙h (sq-right ·r top-left)
 ```
 
 ### Coherences of commuting triangles of homotopies

@@ -27,7 +27,7 @@ Construct an equivalence
 for every `x : A` and `y : B`, such that the triangle
 
 ```text
-        ap_e(p̃) 
+        ap_e(p̃)
   e(x) ========= e(e⁻¹(y))
       \\       //
      p \\     // G(y)
@@ -202,3 +202,19 @@ module _
   triangle-eq-transpose-equiv-concat refl refl = inv right-unit
 ```
 
+## Supplement
+
+### Inverting horizontal squares horizontally
+
+```agda
+horizontal-inv-equiv-coherence-square-maps :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (top : A ≃ B) (left : A → X) (right : B → Y) (bottom : X ≃ Y) →
+  coherence-square-maps (map-equiv top) left right (map-equiv bottom) →
+  coherence-square-maps (map-inv-equiv top) right left (map-inv-equiv bottom)
+horizontal-inv-equiv-coherence-square-maps top left right bottom H b =
+  map-eq-transpose-equiv-inv
+    ( bottom)
+    ( ( ap right (inv (is-section-map-inv-equiv top b))) ∙
+      ( inv (H (map-inv-equiv top b))))
+```

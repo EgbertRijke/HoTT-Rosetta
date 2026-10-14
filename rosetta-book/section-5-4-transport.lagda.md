@@ -148,6 +148,24 @@ module _
   eq-transpose-tr' refl q = q
 ```
 
+### Transport preserves concatenation of identifications
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  tr-concat :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) (b : B x) →
+    tr B (p ∙ q) b ＝ tr B q (tr B p b)
+  tr-concat refl q b = refl
+
+  comp-tr :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) (b : B x) →
+    tr B q (tr B p b) ＝ tr B (p ∙ q) b
+  comp-tr p q b = inv (tr-concat p q b)
+```
+
 ### Substitution law for transport
 
 ```agda
@@ -177,6 +195,19 @@ apd-constant-type-family :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (f : A → B) {x y : A} (p : x ＝ y) →
   apd f p ＝ tr-constant-type-family p (f x) ∙ ap f p
 apd-constant-type-family f refl = refl
+```
+
+### Computing maps out of identity types as transports
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2} {a : A}
+  (f : (x : A) → a ＝ x → B x)
+  where
+
+  compute-map-out-of-identity-type :
+    (x : A) (p : a ＝ x) → f x p ＝ tr B p (f a refl)
+  compute-map-out-of-identity-type x refl = refl
 ```
 
 ## Agda-unimath sources

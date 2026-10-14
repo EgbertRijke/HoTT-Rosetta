@@ -12,12 +12,15 @@ open import section-4-6-dependent-pair-types
 open import exercise-4-2-boolean-operations
 open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
+open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
 open import exercise-6-2-observational-equality-booleans
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
+open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-3-contractible-equivalences
 open import exercise-10-6-dependent-pair-contractible-base
@@ -584,3 +587,46 @@ split-Decidable-Prop {l} =
   left-distributive-Σ-coproduct ∘e inv-associative-Σ
 ```
 
+## Supplement
+
+### The predicate on maps of being in a subuniverse
+
+```agda
+is-in-subuniverse-map :
+  {l1 l2 l3 : Level} (P : subuniverse (l1 ⊔ l2) l3) {A : UU l1} {B : UU l2} →
+  (A → B) → UU (l2 ⊔ l3)
+is-in-subuniverse-map P {A} {B} f = (b : B) → is-in-subuniverse P (fiber f b)
+```
+
+### The predicate of being separated
+
+```agda
+module _
+  {l1 l2 : Level} (P : subuniverse l1 l2)
+  where
+
+  is-separated-Prop : (X : UU l1) → Prop (l1 ⊔ l2)
+  is-separated-Prop X = Π-Prop X (λ x → Π-Prop X (λ y → P (x ＝ y)))
+
+  is-separated : (X : UU l1) → UU (l1 ⊔ l2)
+  is-separated X = type-Prop (is-separated-Prop X)
+
+  is-prop-is-separated : (X : UU l1) → is-prop (is-separated X)
+  is-prop-is-separated X = is-prop-type-Prop (is-separated-Prop X)
+```
+
+### Subuniverses are closed under equivalences
+
+```agda
+module _
+  {l1 l2 : Level} (P : subuniverse l1 l2) {X Y : UU l1}
+  where
+
+  is-in-subuniverse-equiv :
+    X ≃ Y → is-in-subuniverse P X → is-in-subuniverse P Y
+  is-in-subuniverse-equiv e = tr (is-in-subuniverse P) (eq-equiv e)
+
+  is-in-subuniverse-equiv' :
+    X ≃ Y → is-in-subuniverse P Y → is-in-subuniverse P X
+  is-in-subuniverse-equiv' e = tr (is-in-subuniverse P) (inv (eq-equiv e))
+```
