@@ -26,6 +26,7 @@ open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-2-identity-systems-on-pi-types
+open import exercise-13-3-truncatedness-is-a-proposition
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-14-3-logic-in-type-theory
 open import section-15-1-the-image-of-a-map
@@ -1148,4 +1149,43 @@ module _
     relate-same-elements-equivalence-relation R S → (R ＝ S)
   eq-relate-same-elements-equivalence-relation S =
     map-inv-equiv (extensionality-equivalence-relation S)
+```
+
+### The type of truncated types is locally small
+
+```agda
+is-locally-small-Truncated-Type :
+  {l : Level} (k : 𝕋) → is-locally-small l (Truncated-Type l k)
+is-locally-small-Truncated-Type k =
+  is-locally-small-type-subuniverse (is-trunc-Prop k)
+```
+
+### The type of propositions is locally small
+
+```agda
+is-locally-small-type-Prop :
+  {l : Level} → is-locally-small l (Prop l)
+is-locally-small-type-Prop = is-locally-small-Truncated-Type neg-one-𝕋
+```
+
+### The type of subtypes of a small type is locally small
+
+```agda
+is-locally-small-subtype :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  is-small l2 A → is-locally-small (l2 ⊔ l3) (subtype l3 A)
+is-locally-small-subtype H =
+  is-locally-small-Π H (λ _ → is-locally-small-type-Prop)
+```
+
+### The type of inhabited subtypes of a small type is locally small
+
+```agda
+is-locally-small-inhabited-subtype :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  is-small l2 A → is-locally-small (l2 ⊔ l3) (inhabited-subtype l3 A)
+is-locally-small-inhabited-subtype H =
+  is-locally-small-type-subtype
+    ( is-inhabited-subtype-Prop)
+    ( is-locally-small-subtype H)
 ```

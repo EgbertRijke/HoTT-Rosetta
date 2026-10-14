@@ -40,6 +40,7 @@ open import exercise-13-3-truncatedness-is-a-proposition
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import exercise-13-15-morphisms-over-a-type
 open import exercise-13-12-dependent-products-of-truncated-maps
+open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-14-3-logic-in-type-theory
 open import section-15-2-surjective-maps
 open import exercise-15-3-equivalences-are-surjective-embeddings
@@ -900,4 +901,75 @@ module _
     is-false-map-bool-iff-is-not-in-decidable-subtype a =
       ( is-not-in-decidable-subtype-is-false-map-bool a ,
         is-false-map-bool-is-not-in-decidable-subtype a)
+```
+
+### Characterization of equality of inhabited subtypes
+
+```agda
+has-same-elements-inhabited-subtype-Prop :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  inhabited-subtype l2 A → inhabited-subtype l3 A → Prop (l1 ⊔ l2 ⊔ l3)
+has-same-elements-inhabited-subtype-Prop P Q =
+  has-same-elements-subtype-Prop
+    ( subtype-inhabited-subtype P)
+    ( subtype-inhabited-subtype Q)
+
+has-same-elements-inhabited-subtype :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  inhabited-subtype l2 A → inhabited-subtype l3 A → UU (l1 ⊔ l2 ⊔ l3)
+has-same-elements-inhabited-subtype P Q =
+  type-Prop (has-same-elements-inhabited-subtype-Prop P Q)
+
+is-prop-has-same-elements-inhabited-subtype :
+  {l1 l2 l3 : Level} {A : UU l1} →
+  (P : inhabited-subtype l2 A) (Q : inhabited-subtype l3 A) →
+  is-prop (has-same-elements-inhabited-subtype P Q)
+is-prop-has-same-elements-inhabited-subtype P Q =
+  is-prop-type-Prop (has-same-elements-inhabited-subtype-Prop P Q)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (P : inhabited-subtype l2 A)
+  where
+
+  refl-has-same-elements-inhabited-subtype :
+    has-same-elements-inhabited-subtype P P
+  refl-has-same-elements-inhabited-subtype =
+    refl-has-same-elements-subtype (subtype-inhabited-subtype P)
+
+  is-torsorial-has-same-elements-inhabited-subtype :
+    is-torsorial (has-same-elements-inhabited-subtype P)
+  is-torsorial-has-same-elements-inhabited-subtype =
+    is-torsorial-Eq-subtype
+      ( is-torsorial-has-same-elements-subtype
+        ( subtype-inhabited-subtype P))
+      ( λ Q → is-prop-type-trunc-Prop)
+      ( subtype-inhabited-subtype P)
+      ( refl-has-same-elements-inhabited-subtype)
+      ( is-inhabited-subtype-inhabited-subtype P)
+
+  extensionality-inhabited-subtype :
+    (Q : inhabited-subtype l2 A) → (P ＝ Q) ≃
+    has-same-elements-inhabited-subtype P Q
+  extensionality-inhabited-subtype Q =
+    ( extensionality-subtype
+      ( subtype-inhabited-subtype P)
+      ( subtype-inhabited-subtype Q)) ∘e
+    ( extensionality-type-subtype' is-inhabited-subtype-Prop P Q)
+
+  has-same-elements-eq-inhabited-subtype :
+    (Q : inhabited-subtype l2 A) →
+    (P ＝ Q) → has-same-elements-inhabited-subtype P Q
+  has-same-elements-eq-inhabited-subtype Q =
+    map-equiv (extensionality-inhabited-subtype Q)
+
+  eq-has-same-elements-inhabited-subtype :
+    (Q : inhabited-subtype l2 A) →
+    has-same-elements-inhabited-subtype P Q → P ＝ Q
+  eq-has-same-elements-inhabited-subtype Q =
+    map-inv-equiv (extensionality-inhabited-subtype Q)
+
+  refl-extensionality-inhabited-subtype :
+    map-equiv (extensionality-inhabited-subtype P) refl ＝
+    refl-has-same-elements-inhabited-subtype
+  refl-extensionality-inhabited-subtype = refl
 ```

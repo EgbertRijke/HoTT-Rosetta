@@ -9,6 +9,7 @@ open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-4-transport
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-9-2-bi-invertible-maps
 open import exercise-9-5-sigma-swap
@@ -485,4 +486,43 @@ pr2 (equiv-type-subtype is-subtype-P is-subtype-Q f g) =
         ( is-subtype-P x)
         ( is-subtype-Q x)
         ( g x))
+```
+
+### A subtype is full if and only if the inclusion is an equivalence
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
+  where
+
+  is-full-subtype : UU (l1 ⊔ l2)
+  is-full-subtype = (x : A) → is-in-subtype P x
+
+module _
+  {l1 l2 : Level} {A : UU l1} (P : subtype l2 A)
+  where
+
+  is-equiv-inclusion-is-full-subtype :
+    is-full-subtype P → is-equiv (inclusion-subtype P)
+  is-equiv-inclusion-is-full-subtype H =
+    is-equiv-pr1-is-contr
+      ( λ x → is-proof-irrelevant-is-prop (is-prop-is-in-subtype P x) (H x))
+
+  equiv-inclusion-is-full-subtype :
+    is-full-subtype P → type-subtype P ≃ A
+  pr1 (equiv-inclusion-is-full-subtype H) = inclusion-subtype P
+  pr2 (equiv-inclusion-is-full-subtype H) = is-equiv-inclusion-is-full-subtype H
+
+  inv-equiv-inclusion-is-full-subtype :
+    is-full-subtype P → A ≃ type-subtype P
+  inv-equiv-inclusion-is-full-subtype H =
+    inv-equiv (equiv-inclusion-is-full-subtype H)
+
+  is-full-is-equiv-inclusion-subtype :
+    is-equiv (inclusion-subtype P) → is-full-subtype P
+  is-full-is-equiv-inclusion-subtype H x =
+    tr
+      ( is-in-subtype P)
+      ( is-section-map-inv-is-equiv H x)
+      ( pr2 (map-inv-is-equiv H x))
 ```
