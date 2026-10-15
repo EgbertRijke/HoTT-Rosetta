@@ -365,8 +365,6 @@ pr1 (equiv-precomp-equiv e C) = _∘e e
 pr2 (equiv-precomp-equiv e C) = is-equiv-precomp-equiv-equiv e
 ```
 
-## Supplement
-
 ### Being an embedding is a property
 
 ```agda

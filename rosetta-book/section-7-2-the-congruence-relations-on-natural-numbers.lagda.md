@@ -219,7 +219,7 @@ transitive-cong-ℕ k x y z e d | inr (inr α) =
     ( concatenate-div-eq-ℕ e (inv α))
 ```
 
-## Supplements
+## Supplement
 
 ```agda
 concatenate-cong-eq-cong-ℕ :

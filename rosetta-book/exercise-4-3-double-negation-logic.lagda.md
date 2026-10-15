@@ -179,7 +179,7 @@ double-negation-elim-neg A f p = f (ev p)
 
 BENCHMARK PROBLEM
 
-## Supplementary definitions
+## Supplement
 
 ### The inverse of a logical equivalence
 

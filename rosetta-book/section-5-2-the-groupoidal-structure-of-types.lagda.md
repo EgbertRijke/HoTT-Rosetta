@@ -283,7 +283,7 @@ structure.
 One important way of studying this structure is via the homotopy groups of
 types, a subject that we will gradually be working towards.
 
-## Supplementary definitions
+## Supplement
 
 ### Equational reasoning
 

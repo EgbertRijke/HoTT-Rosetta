@@ -409,8 +409,6 @@ module _
     is-equiv-is-equiv-retraction (g , G) R = is-equiv-is-section R G
 ```
 
-## Supplement
-
 ### Equivalences in commuting squares
 
 ```agda

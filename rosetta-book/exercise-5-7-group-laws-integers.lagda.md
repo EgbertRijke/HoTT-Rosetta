@@ -273,7 +273,7 @@ abstract
         by left-inverse-law-add-ℤ x
 ```
 
-## Supplements
+## Supplement
 
 ### The binary action on identifications of addition on the integers
 
@@ -378,8 +378,6 @@ abstract
       ＝ pred-ℤ (neg-ℤ (inr (inr n)) +ℤ neg-ℤ l)
         by ap pred-ℤ (distributive-neg-add-ℤ (inr (inr n)) l)
 ```
-
-## Supplement
 
 ### The predicates of being zero, of being one, and of being negative one
 

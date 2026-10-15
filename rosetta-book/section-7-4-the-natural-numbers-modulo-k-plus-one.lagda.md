@@ -522,7 +522,7 @@ pr1 (is-split-surjective-mod-succ-ℕ k x) = nat-Fin (succ-ℕ k) x
 pr2 (is-split-surjective-mod-succ-ℕ k x) = is-section-nat-Fin k x
 ```
 
-## Supplements
+## Supplement
 
 ```agda
 cong-is-zero-nat-zero-Fin :

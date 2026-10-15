@@ -114,10 +114,9 @@ apd :
 apd f refl = refl
 ```
 
-## Supplements
+## Supplement
 
-We will occasionally need to know how to trasport along an identification of the form ap_f(p).
-Such a computation is most naturally defined here.
+### The dependent action of a family of maps over a map on identifications in the base type
 
 ```agda
 tr-ap :
@@ -127,8 +126,6 @@ tr-ap :
   tr D (ap f p) (g x z) ＝ g y (tr B p z)
 tr-ap f g refl z = refl
 ```
-
-## Supplement
 
 ### Transposing transport along the inverse of an identification
 

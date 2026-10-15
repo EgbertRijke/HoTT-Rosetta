@@ -898,8 +898,6 @@ apply-codomain-iterated-implicit-Π P A =
   iterated-implicit-Π (apply-base-telescope P A)
 ```
 
-## Properties
-
 ### If a dependent product satisfies a property if its codomain does, then iterated dependent products satisfy that property if the codomain does
 
 ```agda

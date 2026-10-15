@@ -190,7 +190,7 @@ peano-8-ℕ : (n : ℕ) → zero-ℕ ＝ succ-ℕ n → empty
 peano-8-ℕ n p = is-nonzero-is-successor-ℕ (n , p) refl
 ```
 
-## Supplements
+## Supplement
 
 ### Basic nonequalities
 

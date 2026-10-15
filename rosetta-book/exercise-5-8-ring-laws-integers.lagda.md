@@ -325,7 +325,7 @@ abstract
     ( ap-add-ℤ (commutative-mul-ℤ k m) (commutative-mul-ℤ l m))
 ```
 
-## Supplementary definitions
+## Supplement
 
 ### The binary action on identifications of multiplication
 

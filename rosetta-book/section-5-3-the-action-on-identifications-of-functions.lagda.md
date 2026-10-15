@@ -148,7 +148,7 @@ module _
   inv-ap-inv p = inv (ap-inv p)
 ```
 
-## Supplementary definitions
+## Supplement
 
 ### The binary action on identifications
 

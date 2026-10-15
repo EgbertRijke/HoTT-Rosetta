@@ -74,7 +74,7 @@ abstract
     associative-mul-ℕ l k x ∙ (ap (l *ℕ_) p ∙ q)
 ```
 
-## Supplements
+## Supplement
 
 ### `0 | x` implies `x = 0` and `x | 1` implies `x = 1`
 

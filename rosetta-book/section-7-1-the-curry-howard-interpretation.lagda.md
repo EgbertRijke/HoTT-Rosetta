@@ -241,7 +241,7 @@ To address this dissimilarity between general types and logic, we will introduce
 In Chapter 12 we will define the type `is-prop(A)`, which expresses the property that the type `A` is a proposition.
 Furthermore, we will introduce the *propositional truncation* operation in Chapter 14, which we will use to interpret logic into type theory in such a way that all logical assertions are interpreted as types that satisfy the condition of being a proposition.
 
-## Supplements
+## Supplement
 
 ### If `x` divides `y`, then the quotient times `x` is `y`
 
