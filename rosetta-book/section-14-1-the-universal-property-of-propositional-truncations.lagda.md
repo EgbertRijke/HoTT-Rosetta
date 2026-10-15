@@ -512,3 +512,136 @@ module _
   htpy-dependent-universal-property-trunc B f =
     pr2 (apply-dependent-universal-property-trunc B f)
 ```
+
+### The `n`-truncations satisfy the universal property of `n`-truncations
+
+```agda
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1}
+  (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B)
+  where
+
+  universal-property-truncation : UUω
+  universal-property-truncation =
+    {l : Level} (C : Truncated-Type l k) (g : A → type-Truncated-Type C) →
+    is-contr (Σ (type-hom-Truncated-Type k B C) (λ h → h ∘ f ~ g))
+
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1} (B : Truncated-Type l2 k)
+  (f : A → type-Truncated-Type B)
+  where
+
+  abstract
+    is-truncation-universal-property-truncation :
+      universal-property-truncation B f → is-truncation B f
+    is-truncation-universal-property-truncation H C =
+      is-equiv-is-contr-map
+        ( λ g →
+          is-contr-equiv
+            ( Σ (type-hom-Truncated-Type k B C) (λ h → (h ∘ f) ~ g))
+            ( equiv-tot (λ h → equiv-funext))
+            ( H C g))
+
+  abstract
+    universal-property-truncation-is-truncation :
+      is-truncation B f → universal-property-truncation B f
+    universal-property-truncation-is-truncation H C g =
+      is-contr-equiv'
+        ( Σ (type-hom-Truncated-Type k B C) (λ h → (h ∘ f) ＝ g))
+        ( equiv-tot (λ h → equiv-funext))
+        ( is-contr-map-is-equiv (H C) g)
+
+  map-is-truncation :
+    is-truncation B f →
+    {l : Level} (C : Truncated-Type l k) (g : A → type-Truncated-Type C) →
+    type-hom-Truncated-Type k B C
+  map-is-truncation H C g =
+    pr1 (center (universal-property-truncation-is-truncation H C g))
+
+  triangle-is-truncation :
+    (H : is-truncation B f) →
+    {l : Level} (C : Truncated-Type l k) (g : A → type-Truncated-Type C) →
+    map-is-truncation H C g ∘ f ~ g
+  triangle-is-truncation H C g =
+    pr2 (center (universal-property-truncation-is-truncation H C g))
+
+universal-property-trunc :
+  {l1 : Level} (k : 𝕋) (A : UU l1) →
+  universal-property-truncation (trunc k A) unit-trunc
+universal-property-trunc k A =
+  universal-property-truncation-is-truncation
+    ( trunc k A)
+    ( unit-trunc)
+    ( is-truncation-trunc)
+
+module _
+  {l1 l2 : Level} {k : 𝕋} {A : UU l1}
+  where
+
+  apply-universal-property-trunc :
+    (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B) →
+    Σ ( type-trunc k A → type-Truncated-Type B)
+      ( λ h → h ∘ unit-trunc ~ f)
+  apply-universal-property-trunc B f =
+    center
+      ( universal-property-truncation-is-truncation
+        ( trunc k A)
+        ( unit-trunc)
+        ( is-truncation-trunc)
+        ( B)
+        ( f))
+
+  map-universal-property-trunc :
+    (B : Truncated-Type l2 k) → (A → type-Truncated-Type B) →
+    type-trunc k A → type-Truncated-Type B
+  map-universal-property-trunc B f =
+    pr1 (apply-universal-property-trunc B f)
+
+  triangle-universal-property-trunc :
+    (B : Truncated-Type l2 k) (f : A → type-Truncated-Type B) →
+    map-universal-property-trunc B f ∘ unit-trunc ~ f
+  triangle-universal-property-trunc B f =
+    pr2 (apply-universal-property-trunc B f)
+```
+
+### Products of families of truncated types are truncated
+
+```agda
+type-Π-Truncated-Type' :
+  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → Truncated-Type l2 k) →
+  UU (l1 ⊔ l2)
+type-Π-Truncated-Type' k A B = (x : A) → type-Truncated-Type (B x)
+
+is-trunc-type-Π-Truncated-Type' :
+  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → Truncated-Type l2 k) →
+  is-trunc k (type-Π-Truncated-Type' k A B)
+is-trunc-type-Π-Truncated-Type' k A B =
+  is-trunc-Π k (λ x → is-trunc-type-Truncated-Type (B x))
+
+Π-Truncated-Type' :
+  (k : 𝕋) {l1 l2 : Level} (A : UU l1) (B : A → Truncated-Type l2 k) →
+  Truncated-Type (l1 ⊔ l2) k
+pr1 (Π-Truncated-Type' k A B) = type-Π-Truncated-Type' k A B
+pr2 (Π-Truncated-Type' k A B) = is-trunc-type-Π-Truncated-Type' k A B
+
+type-Π-Truncated-Type :
+  (k : 𝕋) {l1 l2 : Level} (A : Truncated-Type l1 k)
+  (B : type-Truncated-Type A → Truncated-Type l2 k) →
+  UU (l1 ⊔ l2)
+type-Π-Truncated-Type k A B =
+  type-Π-Truncated-Type' k (type-Truncated-Type A) B
+
+is-trunc-type-Π-Truncated-Type :
+  (k : 𝕋) {l1 l2 : Level} (A : Truncated-Type l1 k)
+  (B : type-Truncated-Type A → Truncated-Type l2 k) →
+  is-trunc k (type-Π-Truncated-Type k A B)
+is-trunc-type-Π-Truncated-Type k A B =
+  is-trunc-type-Π-Truncated-Type' k (type-Truncated-Type A) B
+
+Π-Truncated-Type :
+  (k : 𝕋) {l1 l2 : Level} (A : Truncated-Type l1 k)
+  (B : type-Truncated-Type A → Truncated-Type l2 k) →
+  Truncated-Type (l1 ⊔ l2) k
+Π-Truncated-Type k A B =
+  Π-Truncated-Type' k (type-Truncated-Type A) B
+```

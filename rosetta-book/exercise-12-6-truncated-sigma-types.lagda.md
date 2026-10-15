@@ -20,6 +20,7 @@ open import section-11-1-families-of-equivalences
 open import section-11-4-embeddings
 open import section-12-1-propositions
 open import section-12-2-subtypes
+open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 ```
 
@@ -333,4 +334,19 @@ module _
   is-trunc-map-equiv :
     (e : A ≃ B) → is-trunc-map k (map-equiv e)
   is-trunc-map-equiv e = is-trunc-map-is-equiv (is-equiv-map-equiv e)
+```
+
+### Sets are closed under dependent pair types
+
+```agda
+abstract
+  is-set-Σ :
+    {l1 l2 : Level} {A : UU l1} {B : A → UU l2} →
+    is-set A → ((x : A) → is-set (B x)) → is-set (Σ A B)
+  is-set-Σ = is-trunc-Σ {k = zero-𝕋}
+
+Σ-Set :
+  {l1 l2 : Level} (A : Set l1) (B : pr1 A → Set l2) → Set (l1 ⊔ l2)
+pr1 (Σ-Set A B) = Σ (type-Set A) (λ x → (type-Set (B x)))
+pr2 (Σ-Set A B) = is-set-Σ (is-set-type-Set A) (λ x → is-set-type-Set (B x))
 ```

@@ -993,3 +993,37 @@ is-trunc-iterated-Π :
 is-trunc-iterated-Π k =
   section-iterated-Π-section-Π-section-codomain (is-trunc k) (is-trunc-Π k)
 ```
+
+### Computing `map-equiv-Π`
+
+```agda
+module _
+  {l1 l2 l3 l4 : Level}
+  {A' : UU l1} {B' : A' → UU l2} {A : UU l3} (B : A → UU l4)
+  (e : A' ≃ A) (f : (a' : A') → B' a' ≃ B (map-equiv e a'))
+  where
+
+  compute-map-equiv-Π :
+    (h : (a' : A') → B' a') (a' : A') →
+    map-equiv-Π B e f h (map-equiv e a') ＝ map-equiv (f a') (h a')
+  compute-map-equiv-Π h a' =
+    ( ap
+      ( λ t →
+        tr B t
+          ( map-equiv
+            ( f (map-inv-equiv e (map-equiv e a')))
+            ( h (map-inv-equiv e (map-equiv e a')))))
+      ( coherence-map-inv-equiv e a')) ∙
+    ( substitution-law-tr B (map-equiv e) (is-retraction-map-inv-equiv e a')) ∙
+    ( α (map-inv-equiv e (map-equiv e a')) (is-retraction-map-inv-equiv e a'))
+    where
+    α :
+      (x : A') (p : x ＝ a') →
+      tr (B ∘ map-equiv e) p (map-equiv (f x) (h x)) ＝ map-equiv (f a') (h a')
+    α x refl = refl
+
+id-map-equiv-Π :
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
+  map-equiv-Π B (id-equiv {A = A}) (λ a → id-equiv {A = B a}) ~ id
+id-map-equiv-Π B h = eq-htpy (compute-map-equiv-Π B id-equiv (λ _ → id-equiv) h)
+```
