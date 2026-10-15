@@ -76,52 +76,6 @@ module _
     (n : ℕ) → Prop l
   pr1 (is-lower-bound-ℕ-Prop n) = is-lower-bound-ℕ P n
   pr2 (is-lower-bound-ℕ-Prop n) = is-prop-is-lower-bound-ℕ n
-
-is-largest-lower-bound-ℕ :
-  {l : Level} (P : ℕ → UU l) → ℕ → UU l
-is-largest-lower-bound-ℕ P n =
-  (x : ℕ) → is-lower-bound-ℕ P x ↔ x ≤-ℕ n
-
-is-lower-bound-is-largest-lower-bound-ℕ :
-  {l : Level} (P : ℕ → UU l) (n : ℕ) →
-  is-largest-lower-bound-ℕ P n → is-lower-bound-ℕ P n
-is-lower-bound-is-largest-lower-bound-ℕ P n H =
-  backward-implication (H n) (refl-leq-ℕ n)
-
-leq-is-largest-lower-bound-ℕ :
-  {l : Level} (P : ℕ → UU l) (n : ℕ) →
-  is-largest-lower-bound-ℕ P n →
-  (m : ℕ) → is-lower-bound-ℕ P m → m ≤-ℕ n
-leq-is-largest-lower-bound-ℕ P n H m =
-  forward-implication (H m)
-
-is-largest-lower-bound-is-lower-bound-ℕ :
-  {l : Level} (P : ℕ → UU l) (n : ℕ) →
-  P n → is-lower-bound-ℕ P n → is-largest-lower-bound-ℕ P n
-pr1 (is-largest-lower-bound-is-lower-bound-ℕ P n p H m) K = K n p
-pr2 (is-largest-lower-bound-is-lower-bound-ℕ P n p H m) K x q =
-  transitive-leq-ℕ m n x (H x q) K
-
-module _
-  {l : Level} (P : ℕ → UU l) (n : minimal-element-ℕ P)
-  where
-
-  nat-minimal-element-ℕ : ℕ
-  nat-minimal-element-ℕ = pr1 n
-
-  structure-minimal-element-ℕ : P nat-minimal-element-ℕ
-  structure-minimal-element-ℕ = pr1 (pr2 n)
-
-  is-lower-bound-minimal-element-ℕ : is-lower-bound-ℕ P nat-minimal-element-ℕ
-  is-lower-bound-minimal-element-ℕ = pr2 (pr2 n)
-
-  is-largest-lower-bound-minimal-element-ℕ :
-    is-largest-lower-bound-ℕ P nat-minimal-element-ℕ
-  is-largest-lower-bound-minimal-element-ℕ =
-    is-largest-lower-bound-is-lower-bound-ℕ P
-      ( nat-minimal-element-ℕ)
-      ( structure-minimal-element-ℕ)
-      ( is-lower-bound-minimal-element-ℕ)
 ```
 
 By the assumption that each `P(x)` is a proposition, it now follows that any two natural numbers `x, y : ℕ` that are in `P` and that are both lower bounds of `P` are equal as elements in the type of (\*) if and only if they are equal as natural numbers.

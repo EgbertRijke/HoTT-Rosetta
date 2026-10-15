@@ -12,6 +12,7 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
+open import section-5-6-the-laws-of-addition-on-natural-numbers
 open import exercise-5-5-semiring-laws-natural-numbers
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-1-injectivity-addition-multiplication
@@ -177,11 +178,10 @@ To conclude the proof that `d | x + y`, note that we have constructed the pair
 ```agda
 div-add-ℕ :
   (d x y : ℕ) → div-ℕ d x → div-ℕ d y → div-ℕ d (x +ℕ y)
-pr1 (div-add-ℕ d x y (pair n p) (pair m q)) = n +ℕ m
-pr2 (div-add-ℕ d x y (pair n p) (pair m q)) =
+pr1 (div-add-ℕ d x y (n , p) (m , q)) = n +ℕ m
+pr2 (div-add-ℕ d x y (n , p) (m , q)) =
   ( right-distributive-mul-add-ℕ n m d) ∙
-  (( ap (λ t → t +ℕ (m *ℕ d)) p) ∙
-  ( ap (λ t → x +ℕ t) q))
+  ( ap-add-ℕ p q)
 ```
 
 The full Curry-Howard interpretation of logic into type theory also involves interpretations of disjunction, conjunction, implication, and equality.

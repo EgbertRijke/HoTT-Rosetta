@@ -146,6 +146,21 @@ eq-pred-is-successor-ℕ n H = inv (pr2 H)
 is-nonzero-ℕ : ℕ → UU lzero
 is-nonzero-ℕ n = ¬ (is-zero-ℕ n)
 
+nonzero-ℕ : UU lzero
+nonzero-ℕ = Σ ℕ is-nonzero-ℕ
+
+ℕ⁺ : UU lzero
+ℕ⁺ = nonzero-ℕ
+
+nat-nonzero-ℕ : nonzero-ℕ → ℕ
+nat-nonzero-ℕ = pr1
+
+nat-ℕ⁺ : ℕ⁺ → ℕ
+nat-ℕ⁺ = nat-nonzero-ℕ
+
+is-nonzero-nat-nonzero-ℕ : (n : nonzero-ℕ) → is-nonzero-ℕ (nat-nonzero-ℕ n)
+is-nonzero-nat-nonzero-ℕ = pr2
+
 is-nonzero-succ-ℕ : (x : ℕ) → is-nonzero-ℕ (succ-ℕ x)
 is-nonzero-succ-ℕ x ()
 
@@ -156,6 +171,10 @@ is-successor-is-nonzero-ℕ : {x : ℕ} → is-nonzero-ℕ x → is-successor-�
 is-successor-is-nonzero-ℕ {zero-ℕ} H = ex-falso (H refl)
 pr1 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = x
 pr2 (is-successor-is-nonzero-ℕ {succ-ℕ x} H) = refl
+
+succ-nonzero-ℕ' : ℕ → nonzero-ℕ
+pr1 (succ-nonzero-ℕ' n) = succ-ℕ n
+pr2 (succ-nonzero-ℕ' n) = is-nonzero-succ-ℕ n
 
 pred-is-nonzero-ℕ :
   (n : ℕ) → is-nonzero-ℕ n → ℕ
