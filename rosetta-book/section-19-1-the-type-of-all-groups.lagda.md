@@ -35,7 +35,7 @@ This is an important observation: in many branches of algebra the objects of stu
 
 A notable exception is formed by categories, which are objects at truncation level `1`, i.e., at the level of _groupoids_.
 We will not cover categories in this book.
-For more about categories we recommend Chapter 9 of \[citation: `hottbook`\].
+For more about categories we recommend Chapter 9 of [the HoTT Book](https://homotopytypetheory.org/book/).
 
 ## Definition 19.1.2
 

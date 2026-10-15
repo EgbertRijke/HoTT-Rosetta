@@ -1057,7 +1057,7 @@ That is, we can define for every type `A` a map `η : A → ‖A‖_k` such that
 ```
 
 is an equivalence for every `k`-truncated type `X`.
-To learn more about general `k`-truncations, we refer to Chapter 7 of \[citation: `hottbook`\].
+To learn more about general `k`-truncations, we refer to Chapter 7 of [the HoTT Book](https://homotopytypetheory.org/book/).
 
 ## Supplement
 

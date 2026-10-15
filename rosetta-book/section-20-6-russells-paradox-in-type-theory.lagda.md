@@ -57,7 +57,7 @@ In fact, it can be used to encode constructive set theory in type theory.
 There is, however, one significant difference with ordinary set theory: the elementhood relation is type-valued.
 In other words, there may be many ways in which `x ∈ y` holds.
 The type `W(𝒰, Ty)` is therefore also called the type of **multisets**.
-It was first studied by Aczel in \[citation: `AczelCZF`\], with refinements in \[citation: `AczelGambinoCZF`\], and in the setting of univalent mathematics it has been studied extensively by Gylterud in \[citation: `GylterudMultisets`\].
+It was first studied by Aczel in [The type theoretic interpretation of constructive set theory](https://doi.org/10.1016/S0049-237X(08)71989-X), with refinements in [The generalised type-theoretic interpretation of constructive set theory](https://doi.org/10.2178/jsl/1140641163), and in the setting of univalent mathematics it has been studied extensively by Gylterud in [From multisets to sets in homotopy type theory](https://doi.org/10.1017/jsl.2017.84).
 
 ## Definition 20.6.1
 

@@ -62,5 +62,5 @@ _^ℕ_ = exp-ℕ
   | ---------------------------- | -------------------------------------------------- |
   | `power-Monoid`               | [`group-theory.powers-of-elements-monoids`](https://unimath.github.io/agda-unimath/group-theory.powers-of-elements-monoids.html)          |
   | `power-Semiring`             | [`ring-theory.powers-of-elements-semirings`](https://unimath.github.io/agda-unimath/ring-theory.powers-of-elements-semirings.html)         |
-  | `power-Commutative-Semiring` | [`commutative-algebra.powers-of-elements-semirings`](https://unimath.github.io/agda-unimath/commutative-algebra.powers-of-elements-commutative-semirings.html) |
+  | `power-Commutative-Semiring` | [`commutative-algebra.powers-of-elements-commutative-semirings`](https://unimath.github.io/agda-unimath/commutative-algebra.powers-of-elements-commutative-semirings.html) |
   | `power-ℕ`                    | [`elementary-number-theory.exponentiation-natural-numbers`](https://unimath.github.io/agda-unimath/elementary-number-theory.exponentiation-natural-numbers.html) |

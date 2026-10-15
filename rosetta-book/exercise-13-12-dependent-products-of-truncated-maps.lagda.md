@@ -713,7 +713,7 @@ From the agda-unimath library:
 
 ```text
 To have Agda infer telescopes, we help it along using
-[instance arguments](https://agda.readthedocs.io/en/latest/language/instance-arguments.html).
+[instance arguments](https://agda.readthedocs.io/en/v2.8.0/language/instance-arguments.html).
 These are a special kind of implicit argument that are resolved by _the instance
 resolution algorithm_. We register building blocks, called _instances_, for this
 algorithm to use below. Then Agda will attempt to use those to construct

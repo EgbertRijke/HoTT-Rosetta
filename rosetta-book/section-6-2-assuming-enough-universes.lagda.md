@@ -17,7 +17,7 @@ R:={x ∈ S| x ∉ x}.
 
 Russell then observed that `R ∈ R` if and only if `R ∉ R`, so we reach a contradiction.
 A variant of this argument reaches a similar contradiction when we assume that `𝒰` is a universe that contains an element `𝒰̌ : 𝒰` such that `T(𝒰̌) ≐ 𝒰`.
-In order to avoid such paradoxes, Russell and Whitehead formulated the _ramified theory of types_ in their book _Principia Mathematica_.
+In order to avoid such paradoxes, Russell and Whitehead formulated the _ramified theory of types_ in their book [Principia Mathematica](https://www.gutenberg.org/ebooks/78050).
 The ramified theory of types is a precursor of Martin Löf’s type theory that we are studying in this book.
 
 Even though the universe is not an element of itself, it is still convenient if every type, including any universe, is in _some_ universe.

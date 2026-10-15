@@ -51,7 +51,7 @@ open import section-19-5-the-eckmann-hilton-argument
 
 In univalent mathematics there is another exciting perspective on group theory.
 We won’t be able to go into full detail here, but we can sketch some of the key ideas.
-To learn more about this beautiful univalent perspective on group theory, I recommend the forthcoming _Symmetry_ book \[citation: `symmetrybook`\].
+To learn more about this beautiful univalent perspective on group theory, I recommend the forthcoming [Symmetry](https://github.com/UniMath/SymmetryBook) book.
 
 We saw in Example 19.4.3 that for every pointed connected `1`-type `X` we obtain a group with underlying type `Ω(X)`.
 All groups can be constructed in this way.

@@ -359,7 +359,7 @@ module _
     H x ∙ is-weakly-constant-map-precomp-unit-trunc-Prop g x y ∙ inv (H y)
 ```
 
-We now show, in a theorem due to Kraus \[citation: `Kraus`\], that any weakly constant map `f : A → B` into a set `B` extends uniquely to a map `‖A‖ → B`.
+We now show, in a theorem due to [Kraus](https://doi.org/10.4230/LIPIcs.CSL.2015.359), that any weakly constant map `f : A → B` into a set `B` extends uniquely to a map `‖A‖ → B`.
 We therefore conclude that, in order to define a map `‖A‖ → B` into a set `B` it suffices to define a map `f : A → B` and show that it is weakly constant.
 
 ## Theorem 14.4.6

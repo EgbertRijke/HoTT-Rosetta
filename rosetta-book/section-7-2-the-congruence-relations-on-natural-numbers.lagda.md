@@ -89,7 +89,7 @@ To define the congruence relation modulo `k` in type theory using the Curry-Howa
 ```
 
 consisting of the proofs that `x` is congruent to `y` modulo `k`.
-We will define this type by directly interpreting Gauss’ definition of the congruence relations in his *Disquisitiones Arithmeticae* \[citation: `Gauss`\]: two numbers `x` and `y` are congruent modulo `k` if `k` divides the symmetric difference `dist-ℕ(x, y)` between `x` and `y`.
+We will define this type by directly interpreting Gauss’ definition of the congruence relations in his [Disquisitiones Arithmeticae](https://doi.org/10.1007/978-1-4939-7560-0): two numbers `x` and `y` are congruent modulo `k` if `k` divides the symmetric difference `dist-ℕ(x, y)` between `x` and `y`.
 Recall that `dist-ℕ(x, y)` was defined in Exercise 6.5 recursively by
 
 ```text
