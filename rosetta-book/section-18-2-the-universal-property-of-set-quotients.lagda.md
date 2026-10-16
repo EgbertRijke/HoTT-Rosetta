@@ -1202,13 +1202,13 @@ Note that the type of identifications `(Y,g) = (X,f)` is by the univalence axiom
 Therefore it suffices to construct a commuting triangle
 
 ```text
-             A
-            / \
-           /   \
-  q_{K_f} /     \ f
-         /       \
-        ∨         ∨
-   A/K_f --------> X
+                A
+               / \
+              /   \
+     q_{K_f} /     \ f
+            /       \
+           ∨         ∨
+        A / K_f ---> X
 ```
 
 We obtain such an equivalence by combining Theorem 18.2.3 and Theorem 15.1.8. ◻
