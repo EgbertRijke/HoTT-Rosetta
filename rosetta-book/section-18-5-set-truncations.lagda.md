@@ -53,12 +53,15 @@ An important instance of set quotients in the univalent foundations of mathemati
 Analogous to the propositional truncation, the set truncation of a type `A` is a map `η : A → ‖A‖₀` into a set `‖A‖₀` such that any map `f : A → X` into a set `X` extends uniquely along `η`:
 
 ```text
-      A
-     |  \
-    η|    \f
-     |      \
-     ∨        ∨
-  ‖A‖₀ ------> X
+    A
+    | \
+    |  \
+  η |   \ f
+    |    \
+    |     \
+    |      \
+    ∨       ∨
+  ‖A‖₀ - -> X
 ```
 
 In other words, the set truncation `η : A → ‖A‖₀` is the universal way of mapping `A` into a set.
