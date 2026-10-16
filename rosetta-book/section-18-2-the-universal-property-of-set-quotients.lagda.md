@@ -46,14 +46,15 @@ open import section-18-1-equivalence-relations-and-the-replacement-axiom
 The quotient `A / R` is constructed as the image of `R`, so we obtain a commuting triangle
 
 ```text
-       q_R
-  A --------> A/R
-   \         /
-    \       /
-   R \     / i_R
-      \   /
-       ∨ ∨
-    Prop_𝒰^A
+                   A
+                  / \
+                 /   \
+            q_R /     \ R
+               /       \
+              /         \
+             ∨           ∨
+           A / R ---↪ Prop_𝒰^A
+                 i_R
 ```
 
 and the embedding `i_R : A / R → Prop_𝒰^A` satisfies the universal property of the image of `R`.
