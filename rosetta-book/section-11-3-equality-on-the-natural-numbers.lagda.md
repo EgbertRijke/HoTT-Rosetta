@@ -89,8 +89,8 @@ for each `m, n : ℕ` equipped with `e : Eq-ℕ(m,n)`.
 We first observe that there is a map
 
 ```text
-                     f
-  Σ(n:ℕ) Eq-ℕ(m,n) ----> Σ(n:ℕ) Eq-ℕ(m+1,n)
+                       f
+  Σ(n : ℕ) Eq-ℕ(m,n) ----> Σ(n : ℕ) Eq-ℕ(m + 1,n)
 ```
 
 given by `(n,e) ↦ (n + 1,e)`.
