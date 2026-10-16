@@ -22,11 +22,9 @@ right-inv_{S¹} : mul_{S¹}(x,inv(x)) = base.
 Moreover, show that the square
 
 ```text
-        [inv(base)]   ---->  [mul_(S¹)(base,inv(base))]
-             |                            |
-             |                            |
-             V                            V
-[mul_(S¹)(inv(base),base)]  ---->      [base]
+          inv(base) ============== mul_{S¹}(base,inv(base))
+              ||                               ||
+  mul_{S¹}(inv(base),base) ================= base
 ```
 commutes.
 
