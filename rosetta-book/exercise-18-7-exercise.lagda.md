@@ -11,8 +11,6 @@ Consider a map `f:A→ B`.
 
 Show that the type of maps `‖f‖_0:‖A‖_0→‖B‖_0` equipped with a homotopy witnessing that the square
 
-*Square-shaped diagram (automatic draft).*
-
 ```text
   [A]  ---->  [B]
    |           |
@@ -35,8 +33,6 @@ Show that the following are equivalent
 2. the map `‖f‖_0:‖A‖_0→‖B‖_0` is surjective.
 
 Construct a map `h:im(f)→im‖f‖_0` such that the squares
-
-*Diagram of two squares pasted horizontally (automatic draft).*
 
 ```text
   [A]  ----> [im(f)] ---->  [B]

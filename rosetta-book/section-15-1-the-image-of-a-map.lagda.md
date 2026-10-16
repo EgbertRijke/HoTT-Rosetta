@@ -457,8 +457,6 @@ Then, if any two of the following three properties hold, so does the third:
 Note that the type `hom-slice_X(i,i')` is a proposition, since `i'` is assumed to be an embedding.
 Therefore it suffices to show that the unique map `h : B → B'` such that the triangle
 
-*Triangle-shaped diagram (automatic draft).*
-
 ```text
        h
   B ------> B'

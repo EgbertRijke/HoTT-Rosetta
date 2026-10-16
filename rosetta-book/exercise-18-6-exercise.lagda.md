@@ -24,17 +24,15 @@ x,y↦ (x≤ y)∧ (y≤ x).
 
 Equip the type `‖A‖_Pos` with the structure of a poset and construct an order preserving map `η : A → ‖A‖_Pos` that satisfies the following universal property: For any poset `P`, any order preserving map `f:A→ P` extends uniquely along `η` to an order preserving map `g:‖A‖_Pos→ P`, as indicated in the following diagram:
 
-*Triangle-shaped diagram (automatic draft).*
-
 ```text
-         [A]         ----> [P]
-          |
-      [‖A‖_Pos]
-
-Arrows:
-- A --f--> P
-- A --η--> ‖A‖_Pos
-- ‖A‖_Pos --unlabeled--> P
+            A
+           / \
+        η /   \ f
+         /     \
+        /       \
+       /         \
+      ∨           ∨
+   ‖A‖_Pos - - -> P
 ```
 
 ## Solution

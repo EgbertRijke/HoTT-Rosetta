@@ -22,17 +22,15 @@ Use this to obtain a map
 Show that if `B` is a `1`-type, then the map `α` is an equivalence.
 In other words, show that every weakly path-constant map `f:A→ B` into a `1`-type `B` has a unique extension
 
-*Triangle-shaped diagram (automatic draft).*
-
 ```text
-  [A]  ----> [B]
-   |
-[‖A‖_0]
-
-Arrows:
-- A --f--> B
-- A --η--> ‖A‖_0
-- ‖A‖_0 --unlabeled--> B
+            A
+           / \
+        η /   \ f
+         /     \
+        /       \
+       /         \
+      ∨           ∨
+    ‖A‖_0  - - -> B
 ```
 
 ## Solution

@@ -383,15 +383,13 @@ for any two types `A` and `B`, such that
 
 For any `f : A → B`, the map `‖f‖ : ‖A‖ → ‖B‖` is defined to be the unique extension
 
-_Square-shaped diagram (automatic draft)._
-
 ```text
           f
     A --------> B
     |           |
   η |           | η
     ∨           ∨
-   ‖A‖ -------> ‖B‖
+   ‖A‖ - - - -> ‖B‖
          ‖f‖
 ```
 

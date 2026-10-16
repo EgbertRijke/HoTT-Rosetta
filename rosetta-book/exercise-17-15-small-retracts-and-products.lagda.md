@@ -11,14 +11,9 @@ Let `𝒰` be a univalent universe.
 
 Consider a section-retraction pair
 
-*Linear diagram (automatic draft).*
-
 ```text
- [A] ----> [X] ----> [A]
-
-Arrows:
-- A --i--> X
-- X --r--> A
+    i       r
+A ----> X ----> A
 ```
 with `H:r∘ i~ id`.
 Show that if `X` is `𝒰`-small, then so is `A`.
