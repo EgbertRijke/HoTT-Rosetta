@@ -199,11 +199,13 @@ Then the type of functions `f : Π(x : S¹) P(x)` equipped with an identificatio
 and an identification `β` witnessing that the square
 
 ```text
-   [tr_P(loop,f(base))]--ap_{tr_P(loop)}(α)-->[tr_P(loop,y)]
-              |                                       |
-apd_{f}(loop) |                                       | p
-              v                                       v
-          [f(base)]      ------α--------------->     [y]
+                                    ap_{tr_P(loop)}(α)
+             tr_P(loop,f(base)) ============================ tr_P(loop,y)
+                      ||                                           ||
+         apd_f(loop)  ||                                           || p
+                      ||                                           ||
+                   f(base) ======================================= y
+                                              α
 ```
 
 commutes, is contractible.
