@@ -24,6 +24,7 @@ open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-3-order-natural-numbers
 open import exercise-6-6-absolute-value-integers
 open import section-7-1-the-curry-howard-interpretation
+open import section-7-4-the-natural-numbers-modulo-k-plus-one
 open import exercise-7-2-divisibility-poset
 open import section-8-1-decidability-and-decidable-equality
 open import section-8-2-constructions-by-case-analysis
@@ -241,6 +242,26 @@ Therefore it suffices to prove that for any `y : ℕ` such that `C(y)` and `x �
 Since `C(y)` holds, we see that `y = nat-Fin([y]ₖ₊₁)`.
 Therefore it suffices to prove that `[x]ₖ₊₁ = [y]ₖ₊₁`.
 This follows from Theorem 7.4.7, since we assumed `x ≡ y mod k + 1`.
+
+```agda
+open import section-7-4-the-natural-numbers-modulo-k-plus-one using
+  ( mod-succ-ℕ; cong-eq-mod-succ-ℕ; eq-mod-succ-cong-ℕ;
+    is-split-surjective-mod-succ-ℕ; is-section-nat-Fin)
+
+abstract
+  is-surjective-is-split-surjective :
+    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
+    is-split-surjective f → is-surjective f
+  is-surjective-is-split-surjective H x =
+    unit-trunc-Prop (H x)
+
+is-surjective-mod-succ-ℕ :
+  (k : ℕ) → is-surjective (mod-succ-ℕ k)
+is-surjective-mod-succ-ℕ k =
+  is-surjective-is-split-surjective (is-split-surjective-mod-succ-ℕ k)
+```
+
+Note: There is no code in agda-unimath showing that ℤ/ₙ is a set quotient.
 
 ## Example 18.4.4
 
