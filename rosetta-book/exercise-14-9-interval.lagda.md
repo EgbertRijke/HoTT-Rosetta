@@ -26,15 +26,13 @@ then there is a section `f : Π(x : 𝕀) P(x)` equipped with identifications
 and an identification `γ` witnessing that the square
 
 ```text
-[tr_P(path,f(source))]---->[tr_P(path,u)]
-          |                      |
-     [f(target)]      ---->     [v]
-
-Arrows:
-- tr_P(path,f(source)) --ap_{tr_P(path)}(α)--> tr_P(path,u)
-- tr_P(path,f(source)) --apd_{f}(path)--> f(target)
-- tr_P(path,u) --p--> v
-- f(target) --β--> v
+                                 ap_{tr_P(path)}(α)
+          tr_P(path,f(source)) ====================== tr_P(path,u)
+                    ||                                      ||
+       apd_f(path)  ||                                      || p
+                    ||                                      ||
+                f(target) ================================= v
+                                          β
 ```
 commutes.
 Note that the constructors of `𝕀` induce a map
