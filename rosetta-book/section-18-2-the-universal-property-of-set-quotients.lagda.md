@@ -1163,14 +1163,14 @@ For any type `A` and any universe `𝒰` containing `A`, we have an equivalence
 Given an equivalence relation `R : A → (A → Prop_𝒰)` on `A` we first use the replacement axiom, by which the set quotient `A / R` is `𝒰`-small, to obtain a set `Q(R) : Set_𝒰`, an equivalence `e : Q(R) ≃ A / R`, and a surjective map `f : A → Q(R)` such that the triangle
 
 ```text
-           A
-          / \
-         /   \
-      f /     \ q
-       /       \
-      ∨         ∨
-  Q(R) --------> A/R
-           e
+              A
+             / \
+            /   \
+         f /     \ q
+          /       \
+         ∨         ∨
+       Q(R) ---> A / R
+             e
 ```
 
 commutes.
