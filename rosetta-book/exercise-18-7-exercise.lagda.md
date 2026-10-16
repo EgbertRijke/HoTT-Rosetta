@@ -36,15 +36,6 @@ Construct a map `h : im(f) → im‖f‖₀` such that the squares
   η |                       h |                         | η
     ∨                         ∨                         ∨
   ‖A‖₀ -----q_{‖f‖₀}-----> im‖f‖₀ -----i_{‖f‖₀}-----> ‖B‖₀
-
-Arrows:
-- A --q_f--> im(f)
-- A --η--> ‖A‖₀
-- im(f) --h--> im‖f‖₀
-- im(f) --i_f--> B
-- B --η--> ‖B‖₀
-- ‖A‖₀ --q_{‖f‖₀}--> im‖f‖₀
-- im‖f‖₀ --i_{‖f‖₀}--> ‖B‖₀
 ```
 commute, and show that `h` is a set truncation of `im(f)`.
 
