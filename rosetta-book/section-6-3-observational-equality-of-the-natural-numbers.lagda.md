@@ -131,11 +131,11 @@ Eq-ℕ(succ-ℕ(m),succ-ℕ(n)) → (succ-ℕ(m) = succ-ℕ(n))
 as the composite
 
 ```text
-[Eq-ℕ(succ-ℕ(m),succ-ℕ(n))]----->[(succ-ℕ(m)=succ-ℕ(n))]
-             |                             ^
-         id  |                             | ap{succ-ℕ}
-             v                             |
-        [Eq-ℕ(m,n)]        --f-->        [(m=n)]
+  [Eq-ℕ(succ-ℕ(m),succ-ℕ(n))] - - - -> [(succ-ℕ(m) = succ-ℕ(n))]
+               |                                   ^
+           id  |                                   | ap{succ-ℕ}
+               v                                   |
+          [Eq-ℕ(m,n)] -----------f-----------> [(m = n)]
 ```
 
 Note that the map on the left is the identity function, because we have the judgmental equality `Eq-ℕ(succ-ℕ(m),succ-ℕ(n)) ≐ Eq-ℕ(m,n)` by definition of `Eq-ℕ`. ◻
