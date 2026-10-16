@@ -23,13 +23,17 @@ given by `h ↦ λ x. λ y. h(Fin 2,(x,y))` is an equivalence.
 In other words, show that every commutative operation `f : A → (A → A)` extends uniquely along the map `f ↦ (Fin 2,f)` as in the diagram
 
 ```text
-                 [A^{Fin 2}]
-                  |           \
-                  |            \ μ
-  f ↦ (Fin 2,f)   |             \
-                  |              \
-                  V               V
-          [Σ(X : BS_2) A^X] - - -> [A]
+                      [A^{Fin 2}]
+                          / \
+                         /   \
+          f ↦ (Fin 2,f) /     \ μ
+                       /       \
+                      /         \
+                     /           \
+                    /             \
+                   /               \
+                  ∨                 ∨
+           [Σ(X : BS₂) A^X] - - -> [A]
 ```
 
 Give an informal explanation of this fact in terms of fixed points of the concrete `ℤ / 2`-action on the set of binary operations `A → (A → A)`.
