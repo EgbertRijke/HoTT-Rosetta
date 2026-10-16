@@ -18,19 +18,19 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 
 ## Problem statement
 
-The observational equality on `Fin_{k}` is a binary relation
+The observational equality on `Finₖ` is a binary relation
 
 ```text
-  Eq-Fin_{k}:Fin_{k}→(Fin_{k}→𝒰_0)
+  Eq-Finₖ : Finₖ → (Finₖ → 𝒰₀)
 ```
 
 defined recursively by
 
 ```text
-  Eq-Fin_{k+1}(i(x),i(y)) ≔ Eq-Fin_k(x,y)
-  Eq-Fin_{k+1}(i(x),⋆) ≔ empty
-  Eq-Fin_{k+1}(⋆,i(y)) ≔ empty
-  Eq-Fin_{k+1}(⋆,⋆) ≔ unit.
+  Eq-Finₖ₊₁(i(x),i(y)) ≔ Eq-Finₖ(x,y)
+  Eq-Finₖ₊₁(i(x),⋆) ≔ empty
+  Eq-Finₖ₊₁(⋆,i(y)) ≔ empty
+  Eq-Finₖ₊₁(⋆,⋆) ≔ unit.
 ```
 
 ```agda
@@ -46,28 +46,28 @@ Eq-Fin (succ-ℕ k) (inr x) (inr y) = unit
 Show that
 
 ```text
-  (x = y) ↔ Eq-Fin_k(x,y)
+  (x = y) ↔ Eq-Finₖ(x,y)
 ```
 
-for any two elements `x, y : Fin_{k}`.
+for any two elements `x, y : Finₖ`.
 
 ### Exercise 7.5(b)
 
-Show that the function `i : Fin_{k} → Fin_{k + 1}` is injective, for each `k : ℕ`.
+Show that the function `i : Finₖ → Finₖ₊₁` is injective, for each `k : ℕ`.
 
 ### Exercise 7.5(c)
 
 Show that
 
 ```text
-  succ-Fin_{k+1}(i(x)) ≠ 0
+  succ-Finₖ₊₁(i(x)) ≠ 0
 ```
 
-for any `x : Fin_{k}`.
+for any `x : Finₖ`.
 
 ### Exercise 7.5(d)
 
-Show that function `succ-Fin_k : Fin_{k} → Fin_{k}` is injective, for each `k : ℕ`.
+Show that function `succ-Finₖ : Finₖ → Finₖ` is injective, for each `k : ℕ`.
 
 ## Solutions
 

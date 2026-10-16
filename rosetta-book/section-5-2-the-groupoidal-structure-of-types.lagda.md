@@ -42,7 +42,7 @@ The function `f(x)` we obtain via identity elimination is explicitly thus
 defined as
 
 ```text
-  f(x) ≔ path-ind_x(λ z. id) : Π(y : A) x = y → Π(z : A) y = z → x = z.
+  f(x) ≔ path-indₓ(λ z. id) : Π(y : A) x = y → Π(z : A) y = z → x = z.
 ```
 
 To finish the construction of `concat`, we use Exercise 2.4 to swap the order of

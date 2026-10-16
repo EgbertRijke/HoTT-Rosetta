@@ -27,8 +27,8 @@ open import exercise-13-4-equivalence-structure-is-a-proposition
 Construct equivalences
 
 ```text
-  Fin_{k+l} ≃ Fin_{k} + Fin_{l}
-   Fin_{kl} ≃ Fin_{k} × Fin_{l}.
+  Finₖ₊ₗ ≃ Finₖ + Finₗ
+   Fin_{kl} ≃ Finₖ × Finₗ.
 ```
 
 ## Solution

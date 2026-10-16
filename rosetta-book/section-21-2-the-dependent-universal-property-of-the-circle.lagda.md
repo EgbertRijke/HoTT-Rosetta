@@ -29,20 +29,20 @@ We will now use the induction principle of the circle to derive the _dependent u
 The universal property of the circle states that, for any type `X` the canonical map
 
 ```text
-(S¹ → X) → (Σ(x:X) x = x)
+(S¹ → X) → (Σ(x : X) x = x)
 ```
 
-given by `f ↦ (f(base),ap_{f}(loop))` is an equivalence.
+given by `f ↦ (f(base),ap_f(loop))` is an equivalence.
 The type `Σ(x : X) x = x` is also called the type of **free loops** in `X`.
 In other words, the universal property of the circle states that a map `S¹ → X` is the same thing as a free loop in `X`.
 
 The _dependent universal property_ of the circle similarly states that for any type family `P` over the circle, the canonical map
 
 ```text
-dgen_{S¹}:(Π(x : S¹) P(x)) → (Σ(y : P(base)) tr_P(loop,y) = y)
+dgen_{S¹} : (Π(x : S¹) P(x)) → (Σ(y : P(base)) tr_P(loop,y) = y)
 ```
 
-given by `f ↦ (f(base),apd_{f}(loop))` is an equivalence.
+given by `f ↦ (f(base),apd_f(loop))` is an equivalence.
 
 ```agda
 module _
@@ -62,10 +62,10 @@ The dependent universal property therefore improves on this by stating that this
 For any type family `P` over the circle, the map
 
 ```text
-dgen_{S¹}: (Π(x : S¹) P(x)) → (Σ(y : P(base)) tr_P(loop,y) = y)
+dgen_{S¹} : (Π(x : S¹) P(x)) → (Σ(y : P(base)) tr_P(loop,y) = y)
 ```
 
-given by `f ↦ (f(base),apd_{f}(loop))` is an equivalence.
+given by `f ↦ (f(base),apd_f(loop))` is an equivalence.
 
 ### Proof
 
@@ -73,7 +73,7 @@ _Proof._ By the induction principle of the circle we know that the map has a sec
 
 ```text
 ind-S¹ : (Σ(y : P(base)) tr_P(loop,y) = y) → (Π(x : S¹) P(x))
-comp_S¹ : dgen_{S¹} ∘ ind-S¹ ~ id
+comp_{S¹} : dgen_{S¹} ∘ ind-S¹ ~ id
 ```
 
 Therefore it remains to construct a homotopy
@@ -91,7 +91,7 @@ ind-S¹(dgen_{S¹}(f)) = f.
 By function extensionality it suffices to construct a homotopy
 
 ```text
-Π(x:S¹) ind-S¹(dgen_{S¹}(f))(x) = f(x).
+Π(x : S¹) ind-S¹(dgen_{S¹}(f))(x) = f(x).
 ```
 
 We proceed by the induction principle of the circle using the family of types `E_{g,f}(x) ≔ g(x) = f(x)` indexed by `x : S¹`, where `g` is the function
@@ -110,7 +110,7 @@ Thus, it suffices to construct
 An argument by path induction on `p` yields that
 
 ```text
-(apd_{g}(p) ∙ r = ap_{tr_P(p)}(q) ∙ apd_{f}(p)) → (tr_{E_{g,f}}(p,q) = r),
+(apd_g(p) ∙ r = ap_{tr_P(p)}(q) ∙ apd_f(p)) → (tr_{E_{g,f}}(p,q) = r),
 ```
 
 for any `f,g : Π(x : X) P(x)` and any `p : x = x'`, `q : g(x) = f(x)` and `r : g(x') = f(x')`.
@@ -185,13 +185,13 @@ Consider a type family `P` over the circle, and let
 
 ```text
 y : P(base)
-p : tr_{P}(loop,y) = y.
+p : tr_P(loop,y) = y.
 ```
 
 Then the type of functions `f : Π(x : S¹) P(x)` equipped with an identification
 
 ```text
-α: f(base) = y
+α : f(base) = y
 ```
 
 and an identification `β` witnessing that the square
@@ -277,10 +277,10 @@ It would be tempting to say that it is a direct corollary, but we need to addres
 For each type `X`, the **action on generators**
 
 ```text
-gen_{S¹} : (S¹ → X) → Σ(x:X) x = x
+gen_{S¹} : (S¹ → X) → Σ(x : X) x = x
 ```
 
-given by `f ↦ (f(base),ap_{f}(loop))` is an equivalence.
+given by `f ↦ (f(base),ap_f(loop))` is an equivalence.
 
 ```agda
 module _
@@ -315,10 +315,10 @@ _Proof._ We prove the claim by constructing a commuting triangle
 in which the bottom map is an equivalence.
 Indeed, once we have such a triangle, we use the fact from Theorem 21.2.1 that `dgen_{S¹}` is an equivalence to conclude that `gen_{S¹}` is an equivalence.
 
-To construct the bottom map, we first observe that for any constant type family `const_B` over a type `A`, any `p:a=a'` in `A`, and any `b:B`, there is an identification
+To construct the bottom map, we first observe that for any constant type family `const_B` over a type `A`, any `p : a = a'` in `A`, and any `b : B`, there is an identification
 
 ```text
-tr-const_B(p,b) : tr_{const_B}(p,b)=b.
+tr-const_B(p,b) : tr_{const_B}(p,b) = b.
 ```
 
 This identification is easily constructed by path induction on `p`.

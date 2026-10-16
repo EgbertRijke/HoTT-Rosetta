@@ -50,7 +50,7 @@ open import section-18-2-the-universal-property-of-set-quotients
 ```
 
 An important instance of set quotients in the univalent foundations of mathematics is the notion of set truncation.
-Analogous to the propositional truncation, the set truncation of a type `A` is a map `η:A→ ‖A‖₀` into a set `‖A‖₀` such that any map `f:A→ X` into a set `X` extends uniquely along `η`:
+Analogous to the propositional truncation, the set truncation of a type `A` is a map `η : A → ‖A‖₀` into a set `‖A‖₀` such that any map `f : A → X` into a set `X` extends uniquely along `η`:
 
 ```text
       A
@@ -61,8 +61,8 @@ Analogous to the propositional truncation, the set truncation of a type `A` is a
   ‖A‖₀ ------> X
 ```
 
-In other words, the set truncation `η:A→‖A‖₀` is the universal way of mapping `A` into a set.
-We first specify what it means for a map `f:A→ B` into a set `B` to be a set truncation of `A`.
+In other words, the set truncation `η : A → ‖A‖₀` is the universal way of mapping `A` into a set.
+We first specify what it means for a map `f : A → B` into a set `B` to be a set truncation of `A`.
 
 ## Definition 18.5.1
 
@@ -433,7 +433,7 @@ module _
 
 By this corollary, we may think of the set truncation `‖A‖₀` of `A` as the set of connected components of `A`.
 Indeed, if we have an unspecified identification `‖x = y‖` in `A`, then we think of `x` and `y` as being in the same connected component.
-For example, any `k`-element set is a type that is in the same connected component of `𝒰` as the type `Fin_{k}`.
+For example, any `k`-element set is a type that is in the same connected component of `𝒰` as the type `Finₖ`.
 
 ## Definition 18.5.5
 
@@ -1050,10 +1050,10 @@ module _
 ## Remark 18.5.8
 
 There are truncation operations for every truncation level.
-That is, we can define for every type `A` a map `η : A → ‖A‖_k` such that the map
+That is, we can define for every type `A` a map `η : A → ‖A‖ₖ` such that the map
 
 ```text
-  - ∘ η : (‖A‖_k → X) → (A → X)
+  - ∘ η : (‖A‖ₖ → X) → (A → X)
 ```
 
 is an equivalence for every `k`-truncated type `X`.

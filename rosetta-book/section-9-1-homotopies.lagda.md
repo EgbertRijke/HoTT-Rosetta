@@ -23,7 +23,7 @@ The following example illustrates a case where type theory provides no rules to 
 
 ## Remark 9.1.1
 
-Consider the negation function `neg-bool : bool→bool` on the booleans, which was defined in Exercise 4.2.
+Consider the negation function `neg-bool : bool → bool` on the booleans, which was defined in Exercise 4.2.
 Type theory does not provide any means to show that
 
 ```text
@@ -218,7 +218,7 @@ Homotopies satisfy the groupoid laws:
 1. Concatenation of homotopies is associative up to homotopy, i.e., there is a homotopy
 
    ```text
-     assoc-htpy(H,K,L) : (H ∙ K) ∙ L~H ∙ (K ∙ L)
+     assoc-htpy(H,K,L) : (H ∙ K) ∙ L ~ H ∙ (K ∙ L)
    ```
 
    for any homotopies `H : f ~ g`, `K : g ~ h` and `L : h ~ i`.
@@ -311,7 +311,7 @@ We define the following **whiskering** operations on homotopies:
    We define
 
    ```text
-     h · H ≔ λ x. ap_{h}(H(x)) : h ∘ f ~ h ∘ g.
+     h · H ≔ λ x. apₕ(H(x)) : h ∘ f ~ h ∘ g.
    ```
 
 2. Suppose `f : A → B` and `H : g ~ h` for two functions `g, h : B → C`.
@@ -380,7 +380,7 @@ module _
 Left whiskering of homotopies with respect to concatenation is an operation
 
 ```text
-  (H : f ~ g) {I J : g ~ h} → I ~ J → H ∙h I ~ H ∙h J.
+  (H : f ~ g) {I J : g ~ h} → I ~ J → H ∙ h I ~ H ∙ h J.
 ```
 
 We implement the left whiskering operation of homotopies with respect to
@@ -405,7 +405,7 @@ module _
 Right whiskering of homotopies with respect to concatenation is an operation
 
 ```text
-  {H I : f ~ g} → H ~ I → (J : g ~ h) → H ∙h J ~ I ∙h J.
+  {H I : f ~ g} → H ~ I → (J : g ~ h) → H ∙ h J ~ I ∙ h J.
 ```
 
 We implement the right whiskering operation of homotopies with respect to

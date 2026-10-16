@@ -22,9 +22,9 @@ Recall from Definition 6.3.1 that `Eq-ℕ` is defined by
 
 ```text
       Eq-ℕ(0,0) ≔ unit
-    Eq-ℕ(0,n+1) ≔ empty
-    Eq-ℕ(m+1,0) ≔ empty
-  Eq-ℕ(m+1,n+1) ≔ Eq-ℕ(m,n).
+    Eq-ℕ(0,n + 1) ≔ empty
+    Eq-ℕ(m + 1,0) ≔ empty
+  Eq-ℕ(m + 1,n + 1) ≔ Eq-ℕ(m,n).
 ```
 
 This relation is an equivalence relation.
@@ -32,7 +32,7 @@ In particular, the reflexivity term `refl-Eq-ℕ(m) : Eq-ℕ(m,m)` is defined in
 
 ```text
     refl-Eq-ℕ(0) ≔ ⋆
-  refl-Eq-ℕ(m+1) ≔ refl-Eq-ℕ(m).
+  refl-Eq-ℕ(m + 1) ≔ refl-Eq-ℕ(m).
 ```
 
 Using the reflexivity term, we obtain a canonical map
@@ -82,7 +82,7 @@ If one of `m` and `n` is zero and the other is a successor, then the type `Eq-�
 The inductive step remains, in which we have to define the identification
 
 ```text
-  γ(m+1,n+1,e) : (m+1,refl-Eq-ℕ(m+1)) = (n+1,e)
+  γ(m + 1,n + 1,e) : (m + 1,refl-Eq-ℕ(m + 1)) = (n + 1,e)
 ```
 
 for each `m, n : ℕ` equipped with `e : Eq-ℕ(m,n)`.
@@ -93,17 +93,17 @@ We first observe that there is a map
   Σ(n:ℕ) Eq-ℕ(m,n) ----> Σ(n:ℕ) Eq-ℕ(m+1,n)
 ```
 
-given by `(n,e) ↦ (n+1,e)`.
+given by `(n,e) ↦ (n + 1,e)`.
 With this definition of `f` we have
 
 ```text
-  f(m,refl-Eq-ℕ(m)) ≐ (m+1,refl-Eq-ℕ(m+1)).
+  f(m,refl-Eq-ℕ(m)) ≐ (m + 1,refl-Eq-ℕ(m + 1)).
 ```
 
 Therefore we can define
 
 ```text
-  γ(m+1,n+1,e) ≔ ap_{f}(γ(m,n,e)). ◻
+  γ(m + 1,n + 1,e) ≔ ap_f(γ(m,n,e)). ◻
 ```
 
 ```agda

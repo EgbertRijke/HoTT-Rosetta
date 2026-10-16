@@ -523,7 +523,7 @@ If we had a function
 the dependent action on paths of `f` would give an identification
 
 ```text
-  apd_{f}(p) : succ-Fin₂(f(Fin₂,p,H))=f(Fin₂,p,η(0)).
+  apd_f(p) : succ-Fin₂(f(Fin₂,p,H)) = f(Fin₂,p,η(0)).
 ```
 
 In other words, it would give us a fixed point for the successor function on `Fin₂`.
@@ -537,7 +537,7 @@ In this book, however, we will not have many applications for the axiom of choic
 The **axiom of choice** asserts that for any family `B` of inhabited sets indexed by a set `A`, the type of sections of `B` is also inhabited, i.e., it asserts that there is an element of type
 
 ```text
-  AC_{𝒰}(A,B) ≔ (Π(x : A) ‖B(x)‖) → ‖Π(x : A) B(x)‖,
+  AC_𝒰(A,B) ≔ (Π(x : A) ‖B(x)‖) → ‖Π(x : A) B(x)‖,
 ```
 
 for every `A : Set_𝒰` and `B : A → Set_𝒰`.

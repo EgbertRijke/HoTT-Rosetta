@@ -38,32 +38,32 @@ open import exercise-13-7-universal-property-contractible-types
 
 ### Exercise 13.12(a)
 
-Consider a family of `k`-truncated maps `f_i : A_i → B_i` indexed by `i : I`.
+Consider a family of `k`-truncated maps `fᵢ : Aᵢ → Bᵢ` indexed by `i : I`.
 Show that the map
 
 ```text
-  λ h. λ i. f_i(h(i)) : (Π(i : I) A_i) → (Π(i : I) B_i)
+  λ h. λ i. fᵢ(h(i)) : (Π(i : I) Aᵢ) → (Π(i : I) Bᵢ)
 ```
 
 is also `k`-truncated.
 
 ### Exercise 13.12(b)
 
-Consider an equivalence `e : I ≃ J`, and a family of equivalences `f_i : A_i ≃ B_{e(i)}` indexed by `i : I`, where `A` is a family of types indexed by `I` and `B` family of types indexed by `J`.
+Consider an equivalence `e : I ≃ J`, and a family of equivalences `fᵢ : Aᵢ ≃ B_{e(i)}` indexed by `i : I`, where `A` is a family of types indexed by `I` and `B` family of types indexed by `J`.
 Show that the map
 
 ```text
-  λ h. λ j. f_{e⁻¹(j)}(h(e⁻¹(j))) : (Π(i : I) A_i) → (Π(j : J) B_j)
+  λ h. λ j. f_{e⁻¹(j)}(h(e⁻¹(j))) : (Π(i : I) Aᵢ) → (Π(j : J) Bⱼ)
 ```
 
 is an equivalence.
 
 ### Exercise 13.12(c)
 
-Consider a family of maps `f_i : A_i → B_i` indexed by `i : I`.
+Consider a family of maps `fᵢ : Aᵢ → Bᵢ` indexed by `i : I`.
 Show that the following are equivalent:
 
-1. Each `f_i` is `k`-truncated.
+1. Each `fᵢ` is `k`-truncated.
 
 2. For every map `α : X → I`, the map
 

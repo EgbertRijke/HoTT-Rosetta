@@ -35,7 +35,7 @@ For any map `f : A → B`, the following are equivalent:
      (Π(y : B) P(y)) → (Π(x : A) P(f(x)))
    ```
    
-   given by `h↦ h∘ f` is an equivalence.
+   given by `h ↦ h ∘ f` is an equivalence.
 
 3. For any type `X` the map
 
@@ -75,16 +75,16 @@ In other words, we have to show that
 
 for any `x : A`.
 Now we use the additional homotopy `K` from our assumption that `f` is coherently invertible.
-Since we have `K(x) : G(f(x)) = ap_{f}(H(x))` it suffices to show that
+Since we have `K(x) : G(f(x)) = ap_f(H(x))` it suffices to show that
 
 ```text
-  tr_P(ap_{f}(H(x)),h(g(f(x)))) = h(x).
+  tr_P(ap_f(H(x)),h(g(f(x)))) = h(x).
 ```
 
 A simple path-induction argument yields that
 
 ```text
-  tr_P(ap_{f}(p)) ~ tr_{P∘ f}(p)
+  tr_P(ap_f(p)) ~ tr_{P ∘ f}(p)
 ```
 
 for any path `p : x = y` in `A`, so it suffices to construct an identification
@@ -93,7 +93,7 @@ for any path `p : x = y` in `A`, so it suffices to construct an identification
   tr_{P ∘ f}(H(x),h(g(f(x)))) = h(x).
 ```
 
-We have such an identification by `apd_{h}(H(x))`.
+We have such an identification by `apdₕ(H(x))`.
 
 To see that `φ` is a retraction of `- ∘ f`, let `h : Π(y : B) P(y)`.
 By function extensionality it suffices to construct a homotopy `φ(h ∘ f) ~ h`.
@@ -104,7 +104,7 @@ In other words, we have to show that
 ```
 
 for any `y : B`.
-We have such an identification by `apd_{h}(G(y))`.
+We have such an identification by `apdₕ(G(y))`.
 This completes the proof that (i) implies (ii).
 
 Note that (iii) is an immediate consequence of (ii), since we can just choose `P` to be the constant family `X`.
@@ -118,7 +118,7 @@ Suppose that
 
 is an equivalence for every type `X`.
 Then its fibers are contractible by Theorem 10.4.6.
-In particular, choosing `X≐ A` we see that the fiber
+In particular, choosing `X ≐ A` we see that the fiber
 
 ```text
   fib(- ∘ f, id[A]) ≐ Σ(h : B → A) h ∘ f = id

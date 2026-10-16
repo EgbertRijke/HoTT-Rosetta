@@ -19,11 +19,11 @@ Arrows:
 - A --f--> X
 - B --g--> X
 ```
-with a homotopy `H:f~ g∘ h` witnessing that the triangle commutes.
+with a homotopy `H : f ~ g ∘ h` witnessing that the triangle commutes.
 
 Construct a family of maps
 ```text
-fib-triangle(h,H):Π(x:X) fib(f, x)→fib(g, x),
+fib-triangle(h,H) : Π(x : X) fib(f, x) → fib(g, x),
 ```
 for which the square
 

@@ -76,7 +76,7 @@ For any family of maps `f : Π(x : A) B(x) → C(x)` and any `t : Σ(x : A) C(x)
 We first define
 
 ```text
-  φ : Π(t:Σ(x:A) C(x)) fib(tot(f), t)→fib(f(pr1(t)), pr2(t))
+  φ : Π(t : Σ(x : A) C(x)) fib(tot(f), t) → fib(f(pr1(t)), pr2(t))
 ```
 
 by pattern matching by
@@ -91,7 +91,7 @@ For the proof that `φ(t)` is an equivalence, for each `t : Σ(x : A) C(x)`, we 
   ψ(t) : fib(f(pr1(t)),pr2(t)) → fib(tot(f),t)
 ```
 
-equipped with homotopies `G(t):φ(t)∘ψ(t)~id` and `H(t):ψ(t)∘φ(t)~id`.
+equipped with homotopies `G(t) : φ(t) ∘ ψ(t) ~ id` and `H(t) : ψ(t) ∘ φ(t) ~ id`.
 Each of these definitions is given by pattern matching, as follows:
 
 ```text

@@ -75,7 +75,7 @@ Consider a family `P` of types over `X`.
 Show that the map
 
 ```text
-  (Π(x:X) fib(f,x) → P(x)) → (Π(a : A) P(f(a)))
+  (Π(x : X) fib(f,x) → P(x)) → (Π(a : A) P(f(a)))
 ```
 
 given by `h ↦ h_{f(a)}(a,refl)` is an equivalence.
@@ -106,7 +106,7 @@ Given `(h,H) : hom-slice_X(f,g)`, show that the following are equivalent:
 2. The action on fibers
 
    ```text
-     α(h,H):Π(x:X) fib(f, x)→fib(g, x)
+     α(h,H) : Π(x : X) fib(f, x) → fib(g, x)
    ```
 
    is a family of equivalences.
@@ -122,7 +122,7 @@ Given `(h,H) : hom-slice_X(f,g)`, show that the following are equivalent:
 Conclude that the type `Σ(h : A ≃ B) f ~ g ∘ h` is equivalent to the type of families of equivalences
 
 ```text
-  Π(x:X) fib(f,x) ≃ fib(g,x).
+  Π(x : X) fib(f,x) ≃ fib(g,x).
 ```
 
 ## Solutions

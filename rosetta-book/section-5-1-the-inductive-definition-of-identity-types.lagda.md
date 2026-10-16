@@ -38,10 +38,10 @@ The induction principle of the identity type postulates that for any family of
 types `P(x, p)` indexed by `x : A` and `p : a = x`, there is a function
 
 ```text
-  path-ind_a : P(a, refl) → Π(x : A) Π(p : a = x) P(x, p)
+  path-indₐ : P(a, refl) → Π(x : A) Π(p : a = x) P(x, p)
 ```
 
-which satisfies `path-ind_a(u, a, refl) ≐ u`, given `u : P(a, refl)`.
+which satisfies `path-indₐ(u, a, refl) ≐ u`, given `u : P(a, refl)`.
 
 ```agda
 ind-Id :
@@ -98,7 +98,7 @@ The induction principle is now given by the elimination rule:
 ```text
       Γ ⊢ a : A           Γ, x : A, p : a = x ⊢ P(x, p) type
   --------------------------------------------------------------
-    Γ ⊢ path-ind_a : P(a, refl) → Π(x : A) Π(p : a = x) P(x, p)
+    Γ ⊢ path-indₐ : P(a, refl) → Π(x : A) Π(p : a = x) P(x, p)
 ```
 
 And finally the computation rule is:
@@ -106,7 +106,7 @@ And finally the computation rule is:
 ```text
      Γ ⊢ a : A           Γ, x : A, p : a = x ⊢ P(x, p) type
   -------------------------------------------------------------
-   Γ, u : P(a, refl) ⊢ path-ind_a(u, a, refl) ≐ u : P(a, refl)
+   Γ, u : P(a, refl) ⊢ path-indₐ(u, a, refl) ≐ u : P(a, refl)
 ```
 
 ## Remark 5.1.4

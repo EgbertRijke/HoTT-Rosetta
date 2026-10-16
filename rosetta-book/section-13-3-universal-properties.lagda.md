@@ -140,20 +140,20 @@ given by `λ f. f(a,refl)`, is an equivalence.
 The inverse is the function
 
 ```text
-  path-ind_a : B(a,refl) → Π(x : A) Π(p : a = x) B(x,p).
+  path-indₐ : B(a,refl) → Π(x : A) Π(p : a = x) B(x,p).
 ```
 
-It is immediate from the computation rule of the path induction principle that `ev-refl ∘ path-ind_a ~ id`.
+It is immediate from the computation rule of the path induction principle that `ev-refl ∘ path-indₐ ~ id`.
 
-To see that `path-ind_a ∘ ev-refl ~ id`, let `f : Π(x : A) (a = x) → B(x,p)`.
-To show that `path-ind_a(f(a,refl)) = f` we apply function extensionality twice.
+To see that `path-indₐ ∘ ev-refl ~ id`, let `f : Π(x : A) (a = x) → B(x,p)`.
+To show that `path-indₐ(f(a,refl)) = f` we apply function extensionality twice.
 Therefore it suffices to show that
 
 ```text
-  Π(x : A) Π(p : a = x) path-ind_a(f(a,refl),x,p) = f(x,p).
+  Π(x : A) Π(p : a = x) path-indₐ(f(a,refl),x,p) = f(x,p).
 ```
 
-This follows by path induction on `p`, since `path-ind_a(f(a,refl),a,refl) ≐ f(a,refl)` by the computation rule of path induction. ◻
+This follows by path induction on `p`, since `path-indₐ(f(a,refl),a,refl) ≐ f(a,refl)` by the computation rule of path induction. ◻
 
 ```agda
 module _

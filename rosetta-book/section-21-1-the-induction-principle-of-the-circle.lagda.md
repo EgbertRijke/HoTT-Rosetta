@@ -42,7 +42,7 @@ By applying `f` to the base point of the circle, we obtain an element `f(base) :
 Moreover, using the dependent action on paths of `f` of Definition 5.4.2 we also obtain an identification
 
 ```text
-apd_{f}(loop) : tr_P(loop,f(base)) = f(base)
+apd_f(loop) : tr_P(loop,f(base)) = f(base)
 ```
 
 in the type `P(base)`.
@@ -57,12 +57,12 @@ The **dependent action on generators** is the map
 dgen_{S¹} : (Π(x : S¹) P(x)) → (Σ(u : P(base)) tr_P(loop,u) = u)
 ```
 
-given by `dgen_{S¹}(f)≔(f(base),apd_{f}(loop))`.
+given by `dgen_{S¹}(f) ≔ (f(base),apd_f(loop))`.
 
 The induction principle of the circle states that in order to construct a section `f : Π (x : S¹) P(x)`, it suffices to provide an element `u : P(base)` and an identification
 
 ```text
-tr_P(loop,u)=u.
+tr_P(loop,u) = u.
 ```
 
 More precisely, the induction principle of the circle is formulated as follows:
@@ -137,13 +137,13 @@ free-loop-𝕊¹ = base-𝕊¹ , loop-𝕊¹
 and satisfies the **induction principle of the circle**, which provides for each type family `P` over `S¹` a map
 
 ```text
-ind-S¹ : (Σ (u:P(base)) tr_P(loop,u) = u) → (Π (x : S¹) P(x)),
+ind-S¹ : (Σ (u : P(base)) tr_P(loop,u) = u) → (Π (x : S¹) P(x)),
 ```
 
 and a homotopy witnessing that `ind-S¹` is a section of `dgen_{S¹}`
 
 ```text
-comp_S¹ : dgen_{S¹} ∘ ind-S¹ ~ id
+comp_{S¹} : dgen_{S¹} ∘ ind-S¹ ~ id
 ```
 
 for the computation rules.
@@ -193,10 +193,10 @@ is equivalent to the type of pairs `(α,β)` consisting of an identification `α
 ```
 
 commutes.
-Therefore it follows from the induction principle of the circle that for any `(u,p) : Σ (u:P(base)) tr_P(loop,u)=u`, there is a dependent function `f:Π (x : S¹) P(x)` equipped with an identification
+Therefore it follows from the induction principle of the circle that for any `(u,p) : Σ (u : P(base)) tr_P(loop,u) = u`, there is a dependent function `f : Π (x : S¹) P(x)` equipped with an identification
 
 ```text
-α : f(base)=u,
+α : f(base) = u,
 ```
 
 and an identification `β` witnessing that the square

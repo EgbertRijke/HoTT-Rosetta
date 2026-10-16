@@ -34,7 +34,7 @@ The basic idea is that we define a sequence of pairs of integers, which will be
 consecutive Fibonacci numbers. This would be a function of type `ℕ → ℕ × ℕ`.
 
 Such a function is easy to give with induction, using the map `ℕ × ℕ → ℕ × ℕ` that
-takes a pair `(m,n)` to the pair `(n,n+m)`. Starting the iteration with `(0,1)`
+takes a pair `(m,n)` to the pair `(n,n + m)`. Starting the iteration with `(0,1)`
 we obtain the Fibonacci sequence by taking the first projection.
 
 However, we haven't defined cartesian products or booleans yet. Therefore we

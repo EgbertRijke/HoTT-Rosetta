@@ -85,7 +85,7 @@ module _
   pr2 equiv-fiber = is-equiv-map-equiv-fiber
 ```
 
-In other words, the fiber of `f` at `b` is the type of `a:A` that get mapped by `f` to `b`.
+In other words, the fiber of `f` at `b` is the type of `a : A` that get mapped by `f` to `b`.
 One may think of the fiber as a type theoretic version of the preimage of a point.
 
 It will be useful to have a characterization of the identity type of a fiber.
@@ -102,7 +102,7 @@ Then we obtain a triangle
            y
 ```
 
-so we may consider the type of identifications `β : p = ap_{f}(α) ∙ p'`.
+so we may consider the type of identifications `β : p = ap_f(α) ∙ p'`.
 We will show that the type of all identifications `(x,p) = (x',p')` is equivalent to the type of such pairs `(α,β)`.
 
 ## Definition 10.3.2
@@ -111,7 +111,7 @@ Let `f : A → B` be a map, and let `(x,p), (x',p') : fib(f, y)` for some `y : B
 Then we define
 
 ```text
-  Eq-fib_f((x,p),(x',p')) ≔ Σ(α : x = x') p = ap_{f}(α) ∙ p'
+  Eq-fib_f((x,p),(x',p')) ≔ Σ(α : x = x') p = ap_f(α) ∙ p'
 ```
 
 The relation `Eq-fib_f : fib(f,y) → fib(f,y) → 𝒰` is a reflexive relation, since we have

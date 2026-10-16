@@ -125,7 +125,7 @@ Given `a, b : ℕ`, we define the type family `M(a, b)` over `ℕ` by
 M(a, b, n) ≔ (a + b ≠ 0) → (n ≠ 0) × (Π(x : ℕ) (x | a) × (x | b) → (x | n)).
 ```
 
-In other words, if `a + b=0` then the type `Σ(n : ℕ) M(a, b, n)` consist of all the natural numbers.
+In other words, if `a + b = 0` then the type `Σ(n : ℕ) M(a, b, n)` consist of all the natural numbers.
 On the other hand, if `a + b ≠ 0` it consists of the nonzero natural numbers `n` with the property that any common divisor of `a` and `b` also divides `n`.
 These are exactly the nonzero multiples of the greatest common divisor of `a` and `b`.
 
@@ -256,7 +256,7 @@ is-lower-bound-gcd-ℕ a b = pr2 (pr2 (GCD-ℕ a b))
 
 ## Lemma 8.4.7
 
-For any two natural numbers `a` and `b`, we have `gcd(a, b)=0` if and only if `a + b = 0`.
+For any two natural numbers `a` and `b`, we have `gcd(a, b) = 0` if and only if `a + b = 0`.
 
 ### Proof
 

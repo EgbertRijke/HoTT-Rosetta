@@ -39,7 +39,7 @@ Then there are equivalences
   (inl(x) = inl(x')) ≃ (x = x')
   (inl(x) = inr(y')) ≃ ∅
   (inr(y) = inl(x')) ≃ ∅
-  (inr(y) = inr(y')) ≃ (y=y')
+  (inr(y) = inr(y')) ≃ (y = y')
 ```
 
 for any `x, x' : A` and `y, y' : B`.
@@ -68,7 +68,7 @@ The relation `Eq-coproduct_{A,B}` is also called the **observational equality of
 
 ## Lemma 11.5.3
 
-The observational equality relation `Eq-coproduct_{A,B}` on `A+B` is reflexive, and therefore there is a map
+The observational equality relation `Eq-coproduct_{A,B}` on `A + B` is reflexive, and therefore there is a map
 
 ```text
   Eq-coproduct-eq : Π(s, t : A + B) (s = t) → Eq-coproduct_{A,B}(s,t).

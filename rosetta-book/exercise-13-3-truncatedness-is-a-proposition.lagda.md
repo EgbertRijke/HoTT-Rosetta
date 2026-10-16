@@ -26,7 +26,7 @@ Show that for any type `A` the type `is-contr(A)` is a proposition.
 
 ### Exercise 13.3(b)
 
-Show that for any type `A` and any `k ≥ -2`, the type `is-trunc_{k}(A)` is a proposition.
+Show that for any type `A` and any `k ≥ -2`, the type `is-truncₖ(A)` is a proposition.
 
 ## Solutions
 

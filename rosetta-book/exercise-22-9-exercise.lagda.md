@@ -9,12 +9,12 @@ module exercise-22-9-exercise where
 
 Recall from Exercise 17.5 that if `f : A → B` is a surjective map, then the precomposition map
 ```text
-_∘ f : (B → C) → (A → C)
+_ ∘ f : (B → C) → (A → C)
 ```
 is an embedding for every set `C`.
 Give an example of a surjective map `f : A → B`, such that the precomposition function
 ```text
-_∘ f : (B → S¹) → (A → S¹)
+_ ∘ f : (B → S¹) → (A → S¹)
 ```
 is *not* an embedding, showing that the condition that `C` is a set is essential.
 

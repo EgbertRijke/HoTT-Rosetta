@@ -7,20 +7,20 @@ module exercise-18-10-exercise where
 
 ## Problem statement
 
-A map `f:A → B` is called **weakly path-constant** if it comes equipped with an element of type
+A map `f : A → B` is called **weakly path-constant** if it comes equipped with an element of type
 ```text
-is-weakly-path-constant(f) : Π(x,y:A) Π(p,q:x=y) ap_{f}(p)=ap_{f}(q).
+is-weakly-path-constant(f) : Π(x,y : A) Π(p,q : x = y) ap_f(p) = ap_f(q).
 ```
-In other words, `f` is weakly path-constant if for each `x,y:A` the map `ap{f}:(x=y)→ (f(x)=f(y))` is weakly constant in the sense of Definition 14.4.3.
+In other words, `f` is weakly path-constant if for each `x,y : A` the map `ap{f} : (x = y) → (f(x) = f(y))` is weakly constant in the sense of Definition 14.4.3.
 
-Show that every map `‖A‖_0→ B` is weakly path-constant.
+Show that every map `‖A‖₀ → B` is weakly path-constant.
 Use this to obtain a map
 ```text
-α : (‖A‖_0→ B)→(Σ(f:A→ B) is-weakly-path-constant(f)).
+α : (‖A‖₀ → B) → (Σ(f : A → B) is-weakly-path-constant(f)).
 ```
 
 Show that if `B` is a `1`-type, then the map `α` is an equivalence.
-In other words, show that every weakly path-constant map `f:A→ B` into a `1`-type `B` has a unique extension
+In other words, show that every weakly path-constant map `f : A → B` into a `1`-type `B` has a unique extension
 
 ```text
             A

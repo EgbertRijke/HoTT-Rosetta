@@ -16,14 +16,14 @@ Thus, if `A` is a type in `𝒰` and `B` is a family of types in `𝒰`, we woul
 However, we cannot just assert that `Σ(x : A) B(x)` is an element of the universe, because type theory carefully distinguishes between types and elements.
 
 We express that `𝒰` is closed under `Σ`-types using a new operation `Σ̌`, which takes two arguments.
-The first argument is an element `X:𝒰`, and the second argument is a family of types in `𝒰` indexed by the elements of `X`, i.e., a map `Ty(X)→𝒰`.
+The first argument is an element `X : 𝒰`, and the second argument is a family of types in `𝒰` indexed by the elements of `X`, i.e., a map `Ty(X) → 𝒰`.
 Thus we say that `𝒰` is closed under `Σ`-types by asserting that `𝒰` comes equipped with an operation
 
 ```text
   Σ̌ : Π(X : 𝒰) (Ty(X) → 𝒰) → 𝒰
 ```
 
-Furthermore, we ask that the element `Σ̌(X,Y):𝒰` satisfies the judgmental equality
+Furthermore, we ask that the element `Σ̌(X,Y) : 𝒰` satisfies the judgmental equality
 
 ```text
 Ty(Σ̌(X, Y)) ≐ Σ (x : Ty(X)) Ty(Y(x)).
@@ -50,35 +50,35 @@ A **universe** in type theory is a type `𝒰` in the empty context, equipped wi
    for which the judgmental equality
 
    ```text
-     Ty(Π̌(X,Y)) ≐ Π(x:Ty(X)) Ty(Y(x)).
+     Ty(Π̌(X,Y)) ≐ Π(x : Ty(X)) Ty(Y(x)).
    ```
 
-   holds, for every `X:𝒰` and `Y:Ty(X)→𝒰`.
+   holds, for every `X : 𝒰` and `Y : Ty(X) → 𝒰`.
 
 2. `𝒰` is closed under `Σ` in the sense that it comes equipped with a function
 
    ```text
-   Σ̌ :Π(X:𝒰) (Ty(X)→𝒰)→𝒰
+   Σ̌ : Π(X : 𝒰) (Ty(X) → 𝒰) → 𝒰
    ```
 
    for which the judgmental equality
 
    ```text
-   Ty(Σ̌(X,Y)) ≐ Σ(x:Ty(X)) Ty(Y(x))
+   Ty(Σ̌(X,Y)) ≐ Σ(x : Ty(X)) Ty(Y(x))
    ```
 
-   holds, for every `X:𝒰` and `Y:Ty(X)→𝒰`.
+   holds, for every `X : 𝒰` and `Y : Ty(X) → 𝒰`.
 
 3. `𝒰` is closed under identity types, in the sense that it comes equipped with a function
 
    ```text
-   Ǐ : Π(X:𝒰) Ty(X)→(Ty(X)→𝒰)
+   Ǐ : Π(X : 𝒰) Ty(X) → (Ty(X) → 𝒰)
    ```
 
    for which the judgmental equality
 
    ```text
-   Ty(Ǐ(X,x,y))≐ (x = y)
+   Ty(Ǐ(X,x,y)) ≐ (x = y)
    ```
 
    holds, for every `X : 𝒰` and `x,y : Ty(X)`.
@@ -86,12 +86,12 @@ A **universe** in type theory is a type `𝒰` in the empty context, equipped wi
 4. `𝒰` is closed under coproducts, in the sense that it comes equipped with a function
 
    ```text
-   +̌ : 𝒰 → (𝒰 → 𝒰)
+   + ̌ : 𝒰 → (𝒰 → 𝒰)
    ```
 
-   that satisfies `Ty(X +̌ Y) ≐ Ty(X) + Ty(Y)`.
+   that satisfies `Ty(X + ̌ Y) ≐ Ty(X) + Ty(Y)`.
 
-5. `𝒰` contains elements `empty̌,uniť,ℕ̌:𝒰` that satisfy the judgmental equalities
+5. `𝒰` contains elements `empty̌,uniť,ℕ̌ : 𝒰` that satisfy the judgmental equalities
    ```text
    Ty(empty̌) ≐ empty
    Ty(uniť) ≐ unit
@@ -99,7 +99,7 @@ A **universe** in type theory is a type `𝒰` in the empty context, equipped wi
    ```
 
 Consider a universe `𝒰` and a type `A` in context `Γ`.
-We say that `A` is a type in `𝒰`, or that `𝒰` **contains** `A`, if `𝒰` comes equipped with an element `Ǎ:𝒰` in context `Γ`, for which the judgment
+We say that `A` is a type in `𝒰`, or that `𝒰` **contains** `A`, if `𝒰` comes equipped with an element `Ǎ : 𝒰` in context `Γ`, for which the judgment
 
 ```text
 Γ ⊢ Ty(Ǎ) ≐ A type

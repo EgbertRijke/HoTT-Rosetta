@@ -69,7 +69,7 @@ For example, the types `unit` and `empty` are decidable.
 Indeed, we have
 
 ```text
-inl(⋆) :is-decidable(unit)
+inl(⋆) : is-decidable(unit)
 inr(id) : is-decidable(empty).
 ```
 
@@ -94,9 +94,9 @@ When we go through these proofs, the familiar truth table emerges:
 | A | B | A + B | A × B | A → B |
 | --- | --- | --- | --- | --- |
 | `inl(a)` | `inl(b)` | `inl(inl(a))` | `inl(a,b)` | `inl(λ x. b)` |
-| `inl(a)` | `inr(g)` | `inl(inl(a))` | `inr(g∘ pr 2)` | `inr(λ h. g(h(a)))` |
-| `inr(f)` | `inl(b)` | `inl(inr(b))` | `inr(f∘pr 1)` | `inl(ex-falso∘ f)` |
-| `inr(f)` | `inr(g)` | `inr[f,g]` | `inr(f∘pr 1)` | `inl(ex-falso∘ f)` |
+| `inl(a)` | `inr(g)` | `inl(inl(a))` | `inr(g ∘ pr 2)` | `inr(λ h. g(h(a)))` |
+| `inr(f)` | `inl(b)` | `inl(inr(b))` | `inr(f ∘ pr 1)` | `inl(ex-falso ∘ f)` |
+| `inr(f)` | `inr(g)` | `inr[f,g]` | `inr(f ∘ pr 1)` | `inl(ex-falso ∘ f)` |
 
 ```agda
 is-decidable-coproduct :
@@ -270,7 +270,7 @@ Equality on the natural numbers is decidable.
 (m = n) ↔ Eq-ℕ(m, n).
 ```
 
-The claim therefore follows by Lemma 8.1.6, since we have observed in Example 8.1.4 that `Eq-ℕ(m, n)` is decidable for every `m , n :ℕ`. ◻
+The claim therefore follows by Lemma 8.1.6, since we have observed in Example 8.1.4 that `Eq-ℕ(m, n)` is decidable for every `m , n : ℕ`. ◻
 
 ```agda
 has-decidable-equality-ℕ : has-decidable-equality ℕ
@@ -311,13 +311,13 @@ The standard finite type `Fin{k}` has decidable equality for each `k : ℕ`.
 
 ### Proof
 
-*Proof.* Recall from Exercise 7.5 that we constructed an observational equality relation `Eq-Fin_k` on `Fin{k}` for each `k : ℕ`, which satisfies
+*Proof.* Recall from Exercise 7.5 that we constructed an observational equality relation `Eq-Finₖ` on `Fin{k}` for each `k : ℕ`, which satisfies
 
 ```text
-(x = y) ↔ Eq-Fin_k(x, y).
+(x = y) ↔ Eq-Finₖ(x, y).
 ```
 
-The type `Eq-Fin_k(x, y)` is decidable, since it is recursively defined using the decidable types `empty` and `unit`. ◻
+The type `Eq-Finₖ(x, y)` is decidable, since it is recursively defined using the decidable types `empty` and `unit`. ◻
 
 ```agda
 is-decidable-Eq-Fin : (k : ℕ) (x y : Fin k) → is-decidable (Eq-Fin k x y)
@@ -361,7 +361,7 @@ For any `d, x : ℕ`, the type `d | x` is decidable.
 *Proof.* Note that `0 | x` is decidable because `0 | x` if and only if `x = 0`, which is decidable by Proposition 8.1.7.
 Therefore it suffices to show that `d + 1 | x` is decidable.
 
-By Theorem 7.4.7 it follows that `d + 1 | x` holds if and only if we have an identification `[x]_{d + 1}=0` in `Fin{d + 1}`.
+By Theorem 7.4.7 it follows that `d + 1 | x` holds if and only if we have an identification `[x]_{d + 1} = 0` in `Fin{d + 1}`.
 Therefore the claim follows from the fact that `Fin{d + 1}` has decidable equality. ◻
 
 ```agda

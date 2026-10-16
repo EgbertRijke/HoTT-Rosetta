@@ -219,7 +219,7 @@ Using this shorthand notation, the equivalence in Proposition 17.2.1 is displaye
 ```
 
 Important examples of subuniverses include the subuniverse `Prop_𝒰` of propositions in `𝒰`, the subuniverse `Set_𝒰` of sets in `𝒰`, and the subuniverse `𝒰^{≤ k}` of `k`-truncated types in `𝒰`.
-The subuniverse `𝔽` of finite types in `𝒰₀`, and the subuniverses `BS_k` of `k`-element types are further important subuniverses to which Proposition 17.2.1 applies.
+The subuniverse `𝔽` of finite types in `𝒰₀`, and the subuniverses `BSₖ` of `k`-element types are further important subuniverses to which Proposition 17.2.1 applies.
 Note that by the univalence axiom, any subuniverse is automatically closed under equivalences.
 Indeed, if we have `X ≃ Y`, then we have `P(X) → P(Y)` by transporting along the equality `X = Y` induced by univalence.
 

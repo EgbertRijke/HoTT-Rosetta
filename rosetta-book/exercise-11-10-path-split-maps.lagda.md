@@ -19,14 +19,14 @@ open import section-11-4-embeddings
 (Shulman) We say that a map `f : A → B` is **path-split** if `f` has a section, and for each `x, y : A` the map
 
 ```text
-  ap_{f}(x,y) : (x = y) → (f(x) = f(y))
+  ap_f(x,y) : (x = y) → (f(x) = f(y))
 ```
 
 also has a section.
 We write `is-path-split(f)` for the type
 
 ```text
-  sec(f) × Π(x, y : A) sec(ap_{f}(x,y)).
+  sec(f) × Π(x, y : A) sec(ap_f(x,y)).
 ```
 
 Show that for any map `f : A → B` the following are equivalent:

@@ -41,7 +41,7 @@ Russell’s paradox tells us that there cannot be a set of all sets.
 If there were such a set `S`, then we could form the set
 
 ```text
-R ≔ {x ∈ S| x ∉ x},
+R ≔ {x ∈ S | x ∉ x},
 ```
 
 for which we have `R ∈ R ↔ R ∉ R`, a contradiction.
@@ -78,20 +78,20 @@ and the elements of `M_𝒰` are called **multisets in `𝒰`**.
 We will write
 
 ```text
-{f(x)| x : A}
+{f(x) | x : A}
 ```
 
 for the multiset in `𝒰` of the form `tree(A, f)`.
-More generally, given an element `t(x_0, …, x_n) : M_𝒰` in context `x_0 : A_0, …, x_n : A_n(x_0, …, x_{n-1})`, where each `A_i` is in `𝒰`, we will write
+More generally, given an element `t(x₀, …, xₙ) : M_𝒰` in context `x₀ : A₀, …, xₙ : Aₙ(x₀, …, xₙ₋₁)`, where each `Aᵢ` is in `𝒰`, we will write
 
 ```text
-{t(x_0, …, x_n) | x_0 : A_0, …, x_n : A_n(x_0, …, x_{n-1})}
+{t(x₀, …, xₙ) | x₀ : A₀, …, xₙ : Aₙ(x₀, …, xₙ₋₁)}
 ```
 
 for the multiset in `𝒰` of the form
 
 ```text
-tree(Σ(x_0 : A_0) ⋯ A_n(x_0, …, x_{n-1}), λ (x_0, …, x_n). t(x_0, …, x_n)).
+tree(Σ(x₀ : A₀) ⋯ Aₙ(x₀, …, xₙ₋₁), λ (x₀, …, xₙ). t(x₀, …, xₙ)).
 ```
 
 Given a multiset `X ≐ {f(x) | x : A}` in `𝒰`, the **cardinality** of `X` is the type `A`, and the **elements** of `X` are the multisets `f(x)` in `𝒰`, for each `x : A`.
@@ -135,7 +135,7 @@ We will use a similar condition of smallness for multisets.
 ## Definition 20.6.2
 
 Let `𝒰` and `𝒱` be universes.
-We say that a multiset `{f(x) | x:A}` in `𝒱` **is `𝒰`-small** if the type `A` is `𝒰`-small and if each mulitset `f(x)` in `𝒱` is `𝒰`-small.
+We say that a multiset `{f(x) | x : A}` in `𝒱` **is `𝒰`-small** if the type `A` is `𝒰`-small and if each mulitset `f(x)` in `𝒱` is `𝒰`-small.
 In other words, the type family
 
 ```text
@@ -211,7 +211,7 @@ We make two claims:
 ### Proof
 For the first claim, let `X ≐ {f(x) | x : A}` and let `Y ≐ {g(y) | y : B}`.
 The proof is by induction.
-Via Theorem 20.2.3 it follows that the type `X=Y` is equivalent to the type
+Via Theorem 20.2.3 it follows that the type `X = Y` is equivalent to the type
 
 ```text
 Σ(p : A = B) Π(x : A) f(x) = g(equiv-eq(p)).
@@ -502,7 +502,7 @@ Then we define the **universal tree** `Y_𝒰` to be the multiset
 Y_𝒰 := {i(X) | X : M_𝒰}
 ```
 
-in `𝒰⁺`, where `i : M_𝒰 → M_{𝒰⁺}` is the inclusion of the multisets in `𝒰` to the multisets in `𝒰⁺` given by the fact that each multiset in `𝒰` is `𝒰⁺`-small.
+in `𝒰⁺`, where `i : M_𝒰 → M_𝒰⁺` is the inclusion of the multisets in `𝒰` to the multisets in `𝒰⁺` given by the fact that each multiset in `𝒰` is `𝒰⁺`-small.
 
 ```agda
 is-small-multiset-𝕍 :
@@ -528,7 +528,7 @@ Then the universal tree `Y_𝒰` is also `𝒱`-small.
 ### Proof
 To show that the universal tree `{i(X) | X : M_𝒰}` is `𝒱`-small, we first have to show that the type `M_𝒰` is `𝒱`-small.
 This follows from the more general fact that the subuniverse of `𝒱`-small types is closed under the formation of W-types.
-Indeed, if a type `A` is `𝒱`-small, and if `B(x)` is `𝒱`-small for each `x : A`, then we have an equivalence `α : A ≃ A'` to a type `A'` in `𝒱`, and for each `x' : A'` we have an equivalence `B(α⁻¹(x'))≃ B'(x')` in `𝒱`.
+Indeed, if a type `A` is `𝒱`-small, and if `B(x)` is `𝒱`-small for each `x : A`, then we have an equivalence `α : A ≃ A'` to a type `A'` in `𝒱`, and for each `x' : A'` we have an equivalence `B(α⁻¹(x')) ≃ B'(x')` in `𝒱`.
 These equivalences induce an equivalence
 
 ```text
@@ -591,7 +591,7 @@ Suppose that `𝒰` is `𝒰`-small, and consider the multiset
 R ≔ {i(X) | X : M_𝒰, H : X ∉ X}
 ```
 
-in `𝒰⁺`, where `i : M_𝒰 → M_{𝒰⁺}` is the inclusion of the multisets in `𝒰` to the multisets in `𝒰⁺` given by the fact that each multiset in `𝒰` is `𝒰⁺`-small.
+in `𝒰⁺`, where `i : M_𝒰 → M_𝒰⁺` is the inclusion of the multisets in `𝒰` to the multisets in `𝒰⁺` given by the fact that each multiset in `𝒰` is `𝒰⁺`-small.
 
 First, we note that `R` is `𝒰`-small.
 This follows from Lemma 20.6.3, using the fact that the universal tree `{i(X) | X : M_𝒰}` is `𝒰`-small by Proposition 20.6.9, and the fact that `X ∈ X` is `𝒰`-small by Proposition 20.6.4.

@@ -17,12 +17,12 @@ Define observational equality `Eq-bool` by induction on the booleans.
 Show that
 
 ```text
-(x=y) ↔ Eq-bool(x,y)
+(x = y) ↔ Eq-bool(x,y)
 ```
 
-for any `x,y:bool`.
+for any `x,y : bool`.
 
-Show that `b ≠ neg-bool(b)` for any `b:bool`.
+Show that `b ≠ neg-bool(b)` for any `b : bool`.
 Conclude that `false ≠ true`.
 
 ## Solution

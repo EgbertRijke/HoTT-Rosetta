@@ -117,7 +117,7 @@ i'(h, tree(a, f), f(b), (b, refl)) := h(f(b), i'(h, f(b)))
 j'(h, tree(a, f), f(b), (b, refl)) := refl.
 ```
 
-Now we define `i(h):=ε(h,i'(h))`.
+Now we define `i(h) := ε(h,i'(h))`.
 Note that we have the judgmental equalities
 
 ```text

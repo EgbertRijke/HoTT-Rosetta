@@ -19,7 +19,7 @@ Arrows:
 - A --f--> X
 - B --g--> X
 ```
-with `H:f~ g∘ h`.
+with `H : f ~ g ∘ h`.
 
 Show that if `h` has a section, then `sec(g)` is a retract of `sec(f)`.
 

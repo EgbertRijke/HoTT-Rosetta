@@ -288,7 +288,7 @@ module _
 ## Definition 22.1.1
 
 Consider a type `X` and an equivalence `e : X ≃ X`.
-We will construct a dependent type `D(X,e) : S¹ → 𝒰` equipped with an equivalence `x ↦ x_{D} : X ≃ D(X,e,base)` for which the square
+We will construct a dependent type `D(X,e) : S¹ → 𝒰` equipped with an equivalence `x ↦ x_D : X ≃ D(X,e,base)` for which the square
 
 ```text
  [X] --≃-->[D(X,e,base)]
@@ -299,11 +299,11 @@ e |             | tr_{D(X,e)}(loop)
 ```
 
 commutes.
-We will write `d ↦ d_{X}` for the inverse of this equivalence, so that the relations
+We will write `d ↦ d_X` for the inverse of this equivalence, so that the relations
 
 ```text
-(x_{D})_X = x (e(x)_{D}) = tr_{D(X,e)}(loop,x_{D})
-(d_X)_{D} = d (tr_{D(X,e)}(d))_X = e(d_X)
+(x_D)_X = x (e(x)_D) = tr_{D(X,e)}(loop,x_D)
+(d_X)_D = d (tr_{D(X,e)}(d))_X = e(d_X)
 ```
 
 hold.
@@ -313,7 +313,7 @@ hold.
 An easy path induction argument reveals that
 
 ```text
-equiv-eq(ap_{P}(loop)) = tr_P(loop)
+equiv-eq(ap_P(loop)) = tr_P(loop)
 ```
 
 for each dependent type `P : S¹ → 𝒰`.
@@ -339,10 +339,10 @@ For convenience, we invert this identification.
 Now we observe that the type of identifications in `Σ(X : 𝒰) X ≃ X` can be characterized by
 
 ```text
-((X,e)=(X',e'))≃ Σ(α:X≃ X') e'∘ α~ α∘ e'.
+((X,e) = (X',e')) ≃ Σ(α : X ≃ X') e' ∘ α ~ α ∘ e'.
 ```
 
-This implies that we obtain an equivalence `x ↦ x_{D} : X ≃ D(X,e,base)` such that the square
+This implies that we obtain an equivalence `x ↦ x_D : X ≃ D(X,e,base)` such that the square
 
 ```text
  [X] --x↦ x_{D}-->[D(X,e,base)]
@@ -609,7 +609,7 @@ Its inverse is the predecessor function defined in Exercise 4.1.
 
 ## Definition 22.1.2
 
-The **universal cover** of the circle is defined via Definition 22.1.1 to be the unique dependent type `E_(S¹) ≔ D(ℤ,succ-ℤ ) : S¹ → 𝒰`. equipped with an equivalence `x ↦ x_E : ℤ → E_(S¹)(base)` and a homotopy witnessing that the square
+The **universal cover** of the circle is defined via Definition 22.1.1 to be the unique dependent type `E_{S¹} ≔ D(ℤ,succ-ℤ ) : S¹ → 𝒰`. equipped with an equivalence `x ↦ x_E : ℤ → E_{S¹}(base)` and a homotopy witnessing that the square
 
 ```text
       [ℤ] --x ↦ x_E-->[E_(S¹)(base)]
@@ -669,18 +669,18 @@ module _
       map-equiv compute-fiber-universal-cover-circle
 ```
 
-We will occasionally write `y ↦ y_ℤ` for the inverse of `x ↦ x_{E}`.
+We will occasionally write `y ↦ y_ℤ` for the inverse of `x ↦ x_E`.
 
 The picture of the universal cover is that of a helix over the circle.
 This picture emerges from the path liftings of `loop` in the total space.
-The segments of the helix connecting `k` to `k+1` in the total space of the helix, are constructed in the following lemma.
+The segments of the helix connecting `k` to `k + 1` in the total space of the helix, are constructed in the following lemma.
 
 ## Lemma 22.1.3
 
 For any `k : ℤ`, there is an identification
 
 ```text
-segment-helix_k : (base,k_{E}) = (base,succ-ℤ (k)_{E})
+segment-helixₖ : (base,k_E) = (base,succ-ℤ (k)_E)
 ```
 
 in the total space `Σ(t : S¹) E(t)`.
@@ -690,10 +690,10 @@ in the total space `Σ(t : S¹) E(t)`.
 _Proof._ By Theorem 9.3.4 it suffices to show that
 
 ```text
-Π(k : ℤ) Σ(α : base = base) tr_{E}(α,k_{E}) = succ-ℤ (k)_{E}.
+Π(k : ℤ) Σ(α : base = base) tr_E(α,k_E) = succ-ℤ (k)_E.
 ```
 
 We just take `α ≔ loop`.
-Then we have `tr_{E}(α,k_{E}) = succ-ℤ (k)_{E}` by the commuting square provided in the definition of `E`. ◻
+Then we have `tr_E(α,k_E) = succ-ℤ (k)_E` by the commuting square provided in the definition of `E`. ◻
 
 BENCHMARK PROBLEM

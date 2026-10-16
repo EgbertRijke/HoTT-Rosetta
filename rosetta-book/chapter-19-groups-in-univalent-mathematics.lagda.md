@@ -39,8 +39,8 @@ This is an instance of the *structure identity principle*, which we covered in S
 Identifying isomorphic groups is a common *informal* practice in classical mathematics.
 For example, by the third isomorphism theorem we have an isomorphism
 ```text
-(G/N)/(K/N) ≅ (G/K)
+(G / N) / (K / N) ≅ (G / K)
 ```
-for any sequence `N ⊴ K ⊴ G` of normal subgroups of `G`, and it is common to simply write `(G/N)/(K/N) = G/K`.
+for any sequence `N ⊴ K ⊴ G` of normal subgroups of `G`, and it is common to simply write `(G / N) / (K / N) = G / K`.
 Of course, classical mathematicians know that this convention is incompatible with the axioms of Zermelo-Fraenkel set theory, but that does not stop them from applying this useful abuse of notation.
 In univalent mathematics we make this informal practice precise and formal.

@@ -99,9 +99,9 @@ In this conversion rule, the context `Γ, x : A, Δ` is just any extension of
 the context `Γ, x : A`, i.e., it is a context of the form
 
 ```text
-  x₁ : A₁, …, x_{n-1} : A_{n-1},
+  x₁ : A₁, …, xₙ₋₁ : Aₙ₋₁,
   x : A,
-  x_{n+1} : A_{n+1}, …, x_{n+m} : A_{n+m}.
+  xₙ₊₁ : Aₙ₊₁, …, xₙ₊ₘ : Aₙ₊ₘ.
 ```
 
 Similarly, there are variable conversion rules for judgmental equality of
@@ -125,7 +125,7 @@ section.
 Consider an element `f(x) : B(x)` indexed by `x : A` in context `Γ`, and
 suppose we also have an element `a : A`.
 Then we can simultaneously substitute `a` for all occurrences of `x` in
-`f(x)` to obtain a new element `f[a/x]`, which has type `B[a/x]`.
+`f(x)` to obtain a new element `f[a / x]`, which has type `B[a / x]`.
 A precise definition of substitution requires us to get too deep into the
 theory of the syntax of type theory, but a mathematician is of course no
 stranger to substitution.
@@ -144,21 +144,21 @@ described above.
 Suppose we have a type
 
 ```text
-  Γ, x : A, y₁ : B₁, …, y_n : B_n ⊢ C type
+  Γ, x : A, y₁ : B₁, …, yₙ : Bₙ ⊢ C type
 ```
 
 and an element `a : A` in context `Γ`.
 Then we can simultaneously substitute `a` for all occurrences of `x` in the
-types `B₁, …, B_n` and `C`, to obtain
+types `B₁, …, Bₙ` and `C`, to obtain
 
 ```text
-  Γ, y₁ : B₁[a/x], …, y_n : B_n[a/x] ⊢ C[a/x] type.
+  Γ, y₁ : B₁[a / x], …, yₙ : Bₙ[a / x] ⊢ C[a / x] type.
 ```
 
-Note that the variables `y₁, …, y_n` are assigned new types after performing
+Note that the variables `y₁, …, yₙ` are assigned new types after performing
 the substitution of `a` for `x`.
 Similarly, we can substitute `a` for `x` in an element `c : C` to obtain the
-element `c[a/x] : C[a/x]`, and we can substitute `a` for `x` in a judgmental
+element `c[a / x] : C[a / x]`, and we can substitute `a` for `x` in a judgmental
 equality thesis, either of types or elements, by simply substituting on both
 sides of the equation.
 The **substitution rule** is therefore stated using a generic judgment `𝒥`:
@@ -166,7 +166,7 @@ The **substitution rule** is therefore stated using a generic judgment `𝒥`:
 ```text
   Γ ⊢ a : A    Γ, x : A, Δ ⊢ 𝒥
   -------------------------------- S
-      Γ, Δ[a/x] ⊢ 𝒥[a/x]
+      Γ, Δ[a / x] ⊢ 𝒥[a / x]
 ```
 
 Furthermore, we add two more congruence rules for substitution, postulating
@@ -176,25 +176,25 @@ types and elements:
 ```text
   Γ ⊢ a ≐ a' : A    Γ, x : A, Δ ⊢ B type
   --------------------------------------
-       Γ, Δ[a/x] ⊢ B[a/x] ≐ B[a'/x] type
+       Γ, Δ[a / x] ⊢ B[a / x] ≐ B[a' / x] type
 
   Γ ⊢ a ≐ a' : A    Γ, x : A, Δ ⊢ b : B
   -------------------------------------
-       Γ, Δ[a/x] ⊢ b[a/x] ≐ b[a'/x] : B[a/x].
+       Γ, Δ[a / x] ⊢ b[a / x] ≐ b[a' / x] : B[a / x].
 ```
 
-To see that these rules make sense, we observe that both `B[a/x]` and
-`B[a'/x]` are types in context `Δ[a/x]`, provided that `a ≐ a'`.
+To see that these rules make sense, we observe that both `B[a / x]` and
+`B[a' / x]` are types in context `Δ[a / x]`, provided that `a ≐ a'`.
 This is immediate by recursion on the length of `Δ`.
 
 ## Definition 1.3.1
 
 When `B` is a family of types over `A` in context `Γ`, and if we have `a : A`,
-then we also say that `B[a/x]` is the **fiber** of `B` at `a`.
+then we also say that `B[a / x]` is the **fiber** of `B` at `a`.
 We will usually write `B(a)` for the fiber of `B` at `a`.
 
 When `b` is a section of the family `B` over `A` in context `Γ`, we call the
-element `b[a/x]` the **value** of `b` at `a`.
+element `b[a / x]` the **value** of `b` at `a`.
 Again, we will usually write `b(a)` for the value of `b` at `a`.
 
 ## Weakening

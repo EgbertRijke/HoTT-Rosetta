@@ -12,10 +12,10 @@ module exercise-13-18-retracts-as-limits where
 ```text
  [A] --i--> [X] --r--> [A]
 ```
-with `H:r∘ i~ id` and define `f≔ i∘ r`.
+with `H : r ∘ i ~ id` and define `f ≔ i ∘ r`.
 Construct an equivalence
 ```text
-A≃Σ(x:ℕ→ X) Π(n:ℕ) f(x_{n+1})=x_n.
+A ≃ Σ(x : ℕ → X) Π(n : ℕ) f(xₙ₊₁) = xₙ.
 ```
 
 ## Solution

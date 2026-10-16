@@ -45,10 +45,10 @@ Show that the strict ordering relation is
 
 ### Exercise 6.4(b)
 
-Show that `n < n+1` and
+Show that `n < n + 1` and
 
 ```text
-(m < n)→ (m < n+1)
+(m < n) → (m < n + 1)
 ```
 
 for any `m,n : ℕ`.
@@ -58,11 +58,11 @@ for any `m,n : ℕ`.
 Show that
 
 ```text
-(m < n) ↔ (m+1 ≤ n)
+(m < n) ↔ (m + 1 ≤ n)
 (m < n) ↔ (n ≰ m)
 ```
 
-for any `m,n :ℕ`.
+for any `m,n : ℕ`.
 
 ## Solution
 

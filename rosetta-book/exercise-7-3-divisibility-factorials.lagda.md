@@ -28,9 +28,9 @@ open import exercise-7-2-divisibility-poset
 
 Construct a dependent function
 ```text
-Π(x:ℕ) (x≠ 0)→ ((x≤ n)→ (x| n!))
+Π(x : ℕ) (x ≠ 0) → ((x ≤ n) → (x | n!))
 ```
-for every `n:ℕ`.
+for every `n : ℕ`.
 
 ## Solution
 

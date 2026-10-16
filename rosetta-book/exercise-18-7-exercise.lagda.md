@@ -7,9 +7,9 @@ module exercise-18-7-exercise where
 
 ## Problem statement
 
-Consider a map `f:A→ B`.
+Consider a map `f : A → B`.
 
-Show that the type of maps `‖f‖_0:‖A‖_0→‖B‖_0` equipped with a homotopy witnessing that the square
+Show that the type of maps `‖f‖₀ : ‖A‖₀ → ‖B‖₀` equipped with a homotopy witnessing that the square
 
 ```text
   [A]  ---->  [B]
@@ -24,15 +24,15 @@ Arrows:
 ```
 commutes is contractible.
 
-Show that if `f` is injective, then `‖f‖_0:‖A‖_0→‖B‖_0` is injective.
+Show that if `f` is injective, then `‖f‖₀ : ‖A‖₀ → ‖B‖₀` is injective.
 
 Show that the following are equivalent
 
 1. The map `f` is surjective.
 
-2. the map `‖f‖_0:‖A‖_0→‖B‖_0` is surjective.
+2. the map `‖f‖₀ : ‖A‖₀ → ‖B‖₀` is surjective.
 
-Construct a map `h:im(f)→im‖f‖_0` such that the squares
+Construct a map `h : im(f) → im‖f‖₀` such that the squares
 
 ```text
   [A]  ----> [im(f)] ---->  [B]

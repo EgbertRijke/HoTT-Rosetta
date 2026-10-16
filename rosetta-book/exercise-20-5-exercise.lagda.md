@@ -9,18 +9,18 @@ module exercise-20-5-exercise where
 
 ### Exercise 20.5(a)
 
-For each `x:W(A,B)`, let `{x <(_)} : W(A,B) → 𝒰` be the type family generated inductively by the following constructors:
+For each `x : W(A,B)`, let `{x < (_)} : W(A,B) → 𝒰` be the type family generated inductively by the following constructors:
 
 ```text
 i : Π(y : W(A,B)) (x ∈ y) → (x < y)
-j : Π(y,z : W(A,B)) (y ∈ z) → ((x<y) → (x<z)).
+j : Π(y,z : W(A,B)) (y ∈ z) → ((x < y) → (x < z)).
 ```
 
 Show that the type-valued relation `<` is transitive and irreflexive.
 
 ### Exercise 20.5(b)
 
-Suppose that the type `W(A,B)` is inhabited and suppose that there exists an element `a:A` for which `B(a)` is inhabited.
+Suppose that the type `W(A,B)` is inhabited and suppose that there exists an element `a : A` for which `B(a)` is inhabited.
 Show that the following are equivalent:
 
 1. The type `x < y` is a proposition for all `x,y : W(A,B)`.
@@ -49,7 +49,7 @@ for all `x : W(A,B)`.
 
 ### Exercise 20.5(d)
 
-Show that there can be no sequence of elements `x : ℕ → W(A,B)` such that `x_{n+1} < x_n` for all `n : ℕ`.
+Show that there can be no sequence of elements `x : ℕ → W(A,B)` such that `xₙ₊₁ < xₙ` for all `n : ℕ`.
 
 ## Solution
 

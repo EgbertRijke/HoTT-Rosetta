@@ -38,7 +38,7 @@ However, this is something that we must prove before we can use it.
 In other words, we must show that
 
 ```text
-  (Fin_{k} ≃ Fin_{l}) → (k = l)
+  (Finₖ ≃ Finₗ) → (k = l)
 ```
 for any two natural numbers `k` and `l`.
 We will prove this claim as a consequence of the following general fact.
@@ -147,7 +147,7 @@ We will write `i` for `inl : X → X + unit` and also for `inl : Y → Y + unit`
    ```text
      e(i(g(y))) = e(i(star-value(e⁻¹,y,p)))
                 = e(e^{-1}(⋆))
-                =⋆.
+                = ⋆.
    ```
 
    Using the identification `γ(q)`, we obtain
@@ -566,15 +566,15 @@ compute-equiv-equiv-Maybe-id-equiv = eq-htpy-equiv refl-htpy
 For any two natural numbers `k` and `l`, there is a map
 
 ```text
-  (Fin_{k} ≃ Fin_{l}) → (k = l).
+  (Finₖ ≃ Finₗ) → (k = l).
 ```
 
 ### Proof
 
 The proof is by induction on `k` and `l`.
 In the base case, where both `k` and `l` are zero, the claim is obvious.
-If `k` is zero and `l` is a successor, then we have `0 : Fin_{l}`.
-Any equivalence `e : Fin_{k} ≃ Fin_{l}` now gives us the element
+If `k` is zero and `l` is a successor, then we have `0 : Finₗ`.
+Any equivalence `e : Finₖ ≃ Finₗ` now gives us the element
 
 ```text
   e⁻¹(0) : empty,

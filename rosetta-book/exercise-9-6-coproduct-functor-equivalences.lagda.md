@@ -30,7 +30,7 @@ Recall from Remark 4.4.2 that coproducts have a **functorial action**, i.e., tha
 
 ### Exercise 9.6(a)
 
-Show that `id_A + id_B ~ id_{A+B}`.
+Show that `id_A + id_B ~ id_{A + B}`.
 
 ### Exercise 9.6(b)
 

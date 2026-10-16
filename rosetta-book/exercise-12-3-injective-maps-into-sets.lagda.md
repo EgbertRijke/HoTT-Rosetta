@@ -17,7 +17,7 @@ open import section-12-3-sets
 
 ### Exercise 12.3(a)
 
-Show that any injective map `f:A → B` into a set `B` is an embedding, and conclude that `A` is automatically a set in this case.
+Show that any injective map `f : A → B` into a set `B` is an embedding, and conclude that `A` is automatically a set in this case.
 
 ### Exercise 12.3(b)
 

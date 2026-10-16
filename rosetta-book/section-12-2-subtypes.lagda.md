@@ -204,7 +204,7 @@ module _
 This fact is properly expressed using embeddings: we claim that the projection map
 
 ```text
-  pr1 : (Σ(x:A) P(x))→ A
+  pr1 : (Σ(x : A) P(x)) → A
 ```
 
 is an embedding, for any subtype `P` of `A`.
@@ -241,7 +241,7 @@ This suffices, because the converse follows from the fact that `e⁻¹ : B → A
 Since `e` is assumed to be an equivalence, it follows by Theorem 11.4.2 that
 
 ```text
-  ap_{e} : (x = y) → (e(x) = e(y))
+  apₑ : (x = y) → (e(x) = e(y))
 ```
 
 is an equivalence for any `x, y : A`.

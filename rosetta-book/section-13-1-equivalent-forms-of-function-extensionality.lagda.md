@@ -49,7 +49,7 @@ The following are equivalent:
      htpy-eq : (f = g) → (f ~ g)
    ```
 
-   defined by `htpy-eq(refl) ≔ refl-htpy_{f}` is a family of equivalences.
+   defined by `htpy-eq(refl) ≔ refl-htpy_f` is a family of equivalences.
 
 2. The total space
 
@@ -62,10 +62,10 @@ The following are equivalent:
 3. The principle of **homotopy induction**: for any family of types `P(g,H)` indexed by `g : Π(x : A) B(x)` and `H : f ~ g`, the evaluation function
 
    ```text
-     (Π(g : Π(x : A) B(x)) Π(H : f ~ g) P(g,H)) → P(f,refl-htpy_{f}),
+     (Π(g : Π(x : A) B(x)) Π(H : f ~ g) P(g,H)) → P(f,refl-htpy_f),
    ```
 
-   given by `s ↦ s(f,refl-htpy_{f})`, has a section.
+   given by `s ↦ s(f,refl-htpy_f)`, has a section.
 
 ### Proof
 
@@ -165,7 +165,7 @@ The following are equivalent:
 
 ### Proof
 
-First, we show that function extensionality implies weak function extensionality, suppose that each `B(a)` is contractible with center of contraction `c(a)` and contraction `C_a : Π(y : B(a)) c(a) = y`.
+First, we show that function extensionality implies weak function extensionality, suppose that each `B(a)` is contractible with center of contraction `c(a)` and contraction `Cₐ : Π(y : B(a)) c(a) = y`.
 Then we take `c ≔ λ a. c(a)` to be the center of contraction of `Π(x : A) B(x)`.
 To construct the contraction we have to define a term of type
 
@@ -175,7 +175,7 @@ To construct the contraction we have to define a term of type
 
 Let `f : Π(x : A) B(x)`.
 By function extensionality we have a map `(c ~ f) → (c = f)`, so it suffices to construct a term of type `c ~ f`.
-Here we take `λ a. C_a(f(a))`.
+Here we take `λ a. Cₐ(f(a))`.
 This completes the proof that function extensionality implies weak function extensionality.
 
 It remains to show that weak function extensionality implies function extensionality.
@@ -361,7 +361,7 @@ In the following theorem we extend the weak function extensionality principle to
 For any type family `B` over `A` one has
 
 ```text
-  (Π(x : A) is-trunc_{k}(B(x))) → is-trunc_{k}(Π(x : A) B(x)).
+  (Π(x : A) is-truncₖ(B(x))) → is-truncₖ(Π(x : A) B(x)).
 ```
 
 ### Proof

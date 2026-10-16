@@ -10,7 +10,7 @@ module exercise-22-7-exercise where
 Show that the multiplicative operation on the circle is associative, i.e. construct an identification
 ```text
 assoc_{S¹}(x,y,z) :
-mul_(S¹)(mul_(S¹)(x,y),z) = mul_(S¹)(x,mul_(S¹)(y,z))
+mul_{S¹}(mul_{S¹}(x,y),z) = mul_{S¹}(x,mul_{S¹}(y,z))
 ```
 for any `x,y,z : S¹`.
 

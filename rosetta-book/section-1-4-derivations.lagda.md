@@ -12,11 +12,11 @@ We give two examples of derivations: a derivation showing that any variable
 can be changed to a fresh one, and a derivation showing that any two variables
 that do not mutually depend on one another can be swapped in order.
 
-Given a derivation with hypotheses `ℋ₁, …, ℋ_n` and conclusion
+Given a derivation with hypotheses `ℋ₁, …, ℋₙ` and conclusion
 `𝒞`, we can form a new inference rule
 
 ```text
-  ℋ₁    ⋯    ℋ_n
+  ℋ₁    ⋯    ℋₙ
   --------------
         𝒞.
 ```
@@ -32,8 +32,8 @@ We show that this is the case by showing that the inference rule
 
 ```text
   Γ, x : A, Δ ⊢ 𝒥
-  ------------------------------------- x'/x
-  Γ, x' : A, Δ[x'/x] ⊢ 𝒥[x'/x]
+  ------------------------------------- x' / x
+  Γ, x' : A, Δ[x' / x] ⊢ 𝒥[x' / x]
 ```
 
 is derivable, where `x'` is a variable that does not occur in the context
@@ -53,7 +53,7 @@ the generic element:
 
   Γ, x' : A ⊢ x' : A    Γ, x' : A, x : A, Δ ⊢ 𝒥
   ------------------------------------------------ S
-      Γ, x' : A, Δ[x'/x] ⊢ 𝒥[x'/x]
+      Γ, x' : A, Δ[x' / x] ⊢ 𝒥[x' / x]
 ```
 
 In this derivation it is the application of the weakening rule where we have
@@ -87,7 +87,7 @@ then we can change the variable `y` to a fresh variable `y'` and weaken the
 judgment to obtain the judgment
 
 ```text
-  Γ, y : B, x : A, y' : B, Δ[y'/y] ⊢ 𝒥[y'/y].
+  Γ, y : B, x : A, y' : B, Δ[y' / y] ⊢ 𝒥[y' / y].
 ```
 
 Now we can substitute `y` for `y'` to obtain the desired judgment
@@ -102,13 +102,13 @@ The formal derivation is as follows:
   Γ, y : B, x : A ⊢ y : B
 
   Γ ⊢ B type    Γ, x : A, y : B, Δ ⊢ 𝒥
-  ------------------------------------ y'/y
-  Γ, x : A, y' : B, Δ[y'/y] ⊢ 𝒥[y'/y]
+  ------------------------------------ y' / y
+  Γ, x : A, y' : B, Δ[y' / y] ⊢ 𝒥[y' / y]
   ------------------------------------------------ W
-  Γ, y : B, x : A, y' : B, Δ[y'/y] ⊢ 𝒥[y'/y]
+  Γ, y : B, x : A, y' : B, Δ[y' / y] ⊢ 𝒥[y' / y]
 
   Γ, y : B, x : A ⊢ y : B
-  Γ, y : B, x : A, y' : B, Δ[y'/y] ⊢ 𝒥[y'/y]
+  Γ, y : B, x : A, y' : B, Δ[y' / y] ⊢ 𝒥[y' / y]
   ------------------------------------------------ S
   Γ, y : B, x : A, Δ ⊢ 𝒥
 ```

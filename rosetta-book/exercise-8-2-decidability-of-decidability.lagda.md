@@ -14,7 +14,7 @@ open import section-8-1-decidability-and-decidable-equality
 
 Show that
 ```text
-is-decidable(is-decidable(P))→is-decidable(P)
+is-decidable(is-decidable(P)) → is-decidable(P)
 ```
 for any type `P`.
 

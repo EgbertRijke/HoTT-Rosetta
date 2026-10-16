@@ -8,12 +8,12 @@ A mathematical argument or construction consists of a sequence of deductive step
 Such steps can be represented by **inference rules**, which are written in the form
 
 ```text
-   ℋ₁    ℋ₂    ⋯    ℋ_n
+   ℋ₁    ℋ₂    ⋯    ℋₙ
   -----------------------
              𝒞.
 ```
 
-Inference rules contain above the horizontal line a finite list `ℋ₁`, `ℋ₂`, ⋯, `ℋ_n` of *judgments* for the **premises**, and below the horizontal line a single judgment `𝒞` for the **conclusion**.
+Inference rules contain above the horizontal line a finite list `ℋ₁`, `ℋ₂`, ⋯, `ℋₙ` of *judgments* for the **premises**, and below the horizontal line a single judgment `𝒞` for the **conclusion**.
 The system of dependent type theory is described by a set of such inference rules.
 
 A straightforward example of an inference rule that we will encounter in Chapter 2 when we introduce function types, is the inference rule
@@ -75,20 +75,20 @@ Hypothetical elements are commonly called **variables**.
 A **context** is a finite list of **variable declarations**
 
 ```text
-  x₁ : A₁, x₂ : A₂(x₁), …, x_n : A_n(x₁,…,x_{n-1})          (✲)
+  x₁ : A₁, x₂ : A₂(x₁), …, xₙ : Aₙ(x₁,…,xₙ₋₁)          (✲)
 ```
 
 satisfying the condition that for each `1 ≤ k ≤ n` we can derive the judgment
 
 ```text
-  x₁ : A₁, …, x_{k-1} : A_{k-1}(x₁,…,x_{k-2})⊢ A_k(x₁,…,x_{k-1}) Type,
+  x₁ : A₁, …, xₖ₋₁ : Aₖ₋₁(x₁,…,xₖ₋₂) ⊢ Aₖ(x₁,…,xₖ₋₁) Type,
 ```
 
 using the inference rules of type theory.
-We may use variable names other than `x₁,…,x_n`, as long as no variable is declared more than once.
+We may use variable names other than `x₁,…,xₙ`, as long as no variable is declared more than once.
 
 The condition in Definition 1.1.2 that each of the hypothetical elements is assigned a type, is checked recursively.
-In other words, to check that a list of variable declarations as in Equation (✲) is a context, one starts on the left and works their way to the right, verifying that each hypothetical elements `x_k` is assigned a type. 
+In other words, to check that a list of variable declarations as in Equation (✲) is a context, one starts on the left and works their way to the right, verifying that each hypothetical elements `xₖ` is assigned a type.
 
 Note that there is a context of length `0`, the **empty context**, which declares no variables.
 This context satisfies the requirement in Definition 1.1.2 vacuously.

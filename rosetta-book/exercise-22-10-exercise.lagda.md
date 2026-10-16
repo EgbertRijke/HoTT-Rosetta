@@ -7,18 +7,18 @@ module exercise-22-10-exercise where
 
 ## Problem statement
 
-In this exercise we give an alternative proof that the total space of `E_(S¹)` is contractible.
+In this exercise we give an alternative proof that the total space of `E_{S¹}` is contractible.
 
 Construct a function
 ```text
-h : Π(k : ℤ) (base,0_{E}) = (base,k_{E})
+h : Π(k : ℤ) (base,0_E) = (base,k_E)
 ```
 equipped with a homotopy
 ```text
-H : Π(k : ℤ) h(succ-ℤ(k)_{E}) = h(k) ∙ segment-helix(k).
+H : Π(k : ℤ) h(succ-ℤ(k)_E) = h(k) ∙ segment-helix(k).
 ```
 
-Show that the total space `Σ(t : S¹) E_(S¹)(t)` of the universal cover of the circle is contractible.
+Show that the total space `Σ(t : S¹) E_{S¹}(t)` of the universal cover of the circle is contractible.
 
 ## Solution
 

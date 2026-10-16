@@ -26,9 +26,9 @@ B → has-decidable-eq(A)
 A → has-decidable-eq(B).
 ```
 
-2. The product `A× B` has decidable equality.
+2. The product `A × B` has decidable equality.
 
-Conclude that if both `A` and `B` have decidable equality, then so does `A× B`.
+Conclude that if both `A` and `B` have decidable equality, then so does `A × B`.
 
 ## Solution
 

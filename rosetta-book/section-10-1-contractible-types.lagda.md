@@ -85,7 +85,7 @@ abstract
 
 ## Theorem 10.1.4
 
-For any `a:A`, the type
+For any `a : A`, the type
 
 ```text
   Σ(x : A) a = x

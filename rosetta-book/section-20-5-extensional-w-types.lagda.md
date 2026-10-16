@@ -247,7 +247,7 @@ Note that the type `Σ(β : B(y) → W(A, B)) α ~ e ∘ β` is contractible for
 Therefore, it follows that the above type is contractible if and only if the type
 
 ```text
-Σ(y:A) B(x) ≃ B(y)
+Σ(y : A) B(x) ≃ B(y)
 ```
 
 is contractible, which is the case if and only if the map `(x = y) → (B(x) ≃ B(y))` is an equivalence for all `y : A`. ◻

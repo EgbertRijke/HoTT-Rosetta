@@ -31,7 +31,7 @@ is-lower-bound_P(n) ≔ Π(x : ℕ) P(x) → (n ≤ x).
 2. We say that a natural number `n` is an **upper bound** for `P` if it comes equipped with an element of type
 
 ```text
-is-upper-bound_P(n)≔ Π(x : ℕ) P(x) → (x ≤ n).
+is-upper-bound_P(n) ≔ Π(x : ℕ) P(x) → (x ≤ n).
 ```
 
 ```agda

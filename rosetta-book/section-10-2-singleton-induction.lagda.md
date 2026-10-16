@@ -23,7 +23,7 @@ Therefore we can prove an induction principle for contractible types that is sim
 
 ## Definition 10.2.1
 
-Suppose `A` comes equipped with an element `a:A`.
+Suppose `A` comes equipped with an element `a : A`.
 Then we say that `A` satisfies **singleton induction** if for every type family `B` over `A`, the map
 
 ```text
@@ -34,8 +34,8 @@ defined by `ev-pt(f) ≔ f(a)` has a section.
 In other words, if `A` satisfies singleton induction we have a function and a homotopy
 
 ```text
-   ind-sing_{a} : B(a) → Π(x : A) B(x)
-  comp-sing_{a} : ev-pt ∘ ind-sing_{a} ~ id
+   ind-singₐ : B(a) → Π(x : A) B(x)
+  comp-singₐ : ev-pt ∘ ind-singₐ ~ id
 ```
 
 for any type family `B` over `A`.
@@ -93,7 +93,7 @@ The following are equivalent:
 
 1. The type `A` is contractible.
 
-2. The type `A` comes equipped with an element `a:A`, and satisfies singleton induction.
+2. The type `A` comes equipped with an element `a : A`, and satisfies singleton induction.
 
 ### Proof
 
@@ -111,18 +111,18 @@ To show that `A` satisfies singleton induction let `B` be a type family over `A`
 Our goal is to define
 
 ```text
-  ind-sing_a(b) : Π(x : A) B(x).
+  ind-singₐ(b) : Π(x : A) B(x).
 ```
 
 Let `x : A`.
 Since we have an identification `C(x) : a = x`, and an element `b` in `B(a)`, we may transport `b` along the path `C(x)` to obtain
 
 ```text
-  ind-sing_a(b,x) ≔ tr_B(C(x),b) : B(x).
+  ind-singₐ(b,x) ≔ tr_B(C(x),b) : B(x).
 ```
 
-Therefore, the function `ind-sing_a(b)` is defined to be the dependent function `λ x. tr_B(C(x),b)`.
-Now we have to show that `ind-sing_a(b,a) = b`.
+Therefore, the function `ind-singₐ(b)` is defined to be the dependent function `λ x. tr_B(C(x),b)`.
+Now we have to show that `ind-singₐ(b,a) = b`.
 Then we have the identifications
 
 ```text
@@ -138,10 +138,10 @@ For the center of contraction we take the element `a : A`.
 By singleton induction applied to `B(x) ≔ a = x` we have the map
 
 ```text
-  ind-sing_{a} : a = a → Π(x : A) a = x.
+  ind-singₐ : a = a → Π(x : A) a = x.
 ```
 
-Therefore `ind-sing_{a}(refl)` is a contraction. ◻
+Therefore `ind-singₐ(refl)` is a contraction. ◻
 
 ```agda
 ind-singleton :

@@ -29,7 +29,7 @@ Consider a type `X`, and a universe `𝒰`.
 We define the **`𝒰`-power set** of `X` to be
 
 ```text
-  𝒫_{U}(X) ≔ X → Prop_𝒰.
+  𝒫_U(X) ≔ X → Prop_𝒰.
 ```
 
 ```agda
@@ -43,7 +43,7 @@ powerset = subtype
 For any type `X` and any universe `𝒰`, there is no surjective function
 
 ```text
-  f : X → 𝒫_{U}(X)
+  f : X → 𝒫_U(X)
 ```
 
 ### Proof

@@ -326,7 +326,7 @@ For any `x, y : A`, we have the identification `α(x,y) : η(x) = η(y)` in `‖
 Using the action on paths of `g`, we obtain the identification
 
 ```text
-  ap_{g}(α(x,y)) : g(η(x)) = g(η(y))
+  ap_g(α(x,y)) : g(η(x)) = g(η(y))
 ```
 
 in `B`. ◻
@@ -371,13 +371,13 @@ Then the map
   (‖A‖ → B) → Σ(f : A → B) Π(x, y : A) f(x) = f(y)
 ```
 
-given by `g ↦ (g ∘ η, λ x. λ y. ap_{g}(α(x,y)))` is an equivalence.
+given by `g ↦ (g ∘ η, λ x. λ y. ap_g(α(x,y)))` is an equivalence.
 
 ### Proof
 
 Consider a map `f : A → B` equipped with `H : Π(x, y : A) f(x) = f(y)`.
 We first show that `f` extends in at most one way to a map `‖A‖ → B`.
-Let `g, h : ‖A‖ → B` be two maps equipped with homotopies `f ~ g ∘ η` and `f ~ h∘ η`.
+Let `g, h : ‖A‖ → B` be two maps equipped with homotopies `f ~ g ∘ η` and `f ~ h ∘ η`.
 In order to construct a homotopy `g ~ h`, note that each identity type `g(x) = h(x)` is a proposition by the assumption that `B` is a set.
 We can therefore construct a homotopy `g ~ h` by the induction principle of propositional truncations.
 By the induction principle, it suffices to construct a homotopy `g ∘ η ~ h ∘ η`, which we obtain from the homotopies `f ~ g ∘ η` and `f ~ h ∘ η`.

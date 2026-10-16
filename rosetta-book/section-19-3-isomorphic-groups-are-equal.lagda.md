@@ -210,7 +210,7 @@ is contractible.
 Since the type of isomorphisms from `G` to `H` is equivalent to the type of multiplication-preserving equivalences from `G` to `H` it suffices to show that the type
 
 ```text
-Σ(H : Semigroup_𝒰) Σ(e : G ≃ H) Π(x,y : G) e(μ_G(x,y)) = μ_{H}(e(x),e(y))
+Σ(H : Semigroup_𝒰) Σ(e : G ≃ H) Π(x,y : G) e(μ_G(x,y)) = μ_H(e(x),e(y))
 ```
 
 is contractible.

@@ -10,15 +10,15 @@ module exercise-14-9-interval where
 In this exercise we introduce the **interval** as a higher inductive type `𝕀`, equipped with two point constructors and one path constructor
 ```text
 source,target : 𝕀
-path : source=target.
+path : source = target.
 ```
 The induction principle of `𝕀` asserts that for any type family `P` over `𝕀`, if we have
 ```text
 u : P(source)
 v : P(target)
-p : tr_P(path,u)=v,
+p : tr_P(path,u) = v,
 ```
-then there is a section `f:Π(x:𝕀) P(x)` equipped with identifications
+then there is a section `f : Π(x : 𝕀) P(x)` equipped with identifications
 ```text
 α : f(source) = u
 β : f(target) = v
@@ -39,13 +39,13 @@ Arrows:
 commutes.
 Note that the constructors of `𝕀` induce a map
 ```text
-ε: (Π(x:𝕀) P(x))→ (Σ(u:P(source)) Σ(v:P(target)) tr_P(path,u)=v).
+ε : (Π(x : 𝕀) P(x)) → (Σ(u : P(source)) Σ(v : P(target)) tr_P(path,u) = v).
 ```
-given by `f↦ (f(source),f(target),apd_{f}(path))`.
+given by `f ↦ (f(source),f(target),apd_f(path))`.
 
-Characterize the identity types of the codomain of the map `ε` in the following way: Construct an equivalence from the type `(u,v,q)=(u',v',q')` to the type
+Characterize the identity types of the codomain of the map `ε` in the following way: Construct an equivalence from the type `(u,v,q) = (u',v',q')` to the type
 ```text
-Σ(α:u=u') Σ(β:v=v') q ∙ β=ap_{tr_P(path)}(α) ∙ q',
+Σ(α : u = u') Σ(β : v = v') q ∙ β = ap_{tr_P(path)}(α) ∙ q',
 ```
 for any `(u,v,q)` and `(u',v',q')` in the codomain of `ε`.
 

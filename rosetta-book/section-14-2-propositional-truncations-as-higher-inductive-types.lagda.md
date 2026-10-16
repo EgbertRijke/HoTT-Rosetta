@@ -139,13 +139,13 @@ The type `‖A‖` has two constructors: a point constructor `η` and a path con
    For each `x, y : ‖A‖` we obtain an identification
 
    ```text
-     apd_{h}(α(x,y)) : tr_Q(α(x,y),h(x)) = h(y)
+     apdₕ(α(x,y)) : tr_Q(α(x,y),h(x)) = h(y)
    ```
 
    in the type `Q(y)`. Note, however, that `h(x)` and `h(y)` are not determined by our choice of `f : Π(a : A) Q(η(a))`. The second requirement of the induction principle of `‖A‖` is therefore that, no matter what values `h` takes, they must always be related via the dependent action on paths of `h`. This second requirement is therefore that
 
    ```text
-     tr_P(α(x,y),u)=v
+     tr_P(α(x,y),u) = v
    ```
 
    for any `u : Q(x)` and `v : Q(y)`.

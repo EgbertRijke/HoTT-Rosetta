@@ -245,13 +245,13 @@ Let `R : A → (A → Prop_𝒰)` be an equivalence relation.
 A subtype `P : A → Prop_𝒰` is said to be an **equivalence class** if it satisfies the condition
 
 ```text
-  is-equivalence-class(P) ≔ ∃_{(x:A)}∀_{(y:A)}P(y) ↔ R(x,y).
+  is-equivalence-class(P) ≔ ∃_{(x : A)}∀_{(y : A)}P(y) ↔ R(x,y).
 ```
 
-We define `A/R` to be the type of equivalence classes, i.e., we define
+We define `A / R` to be the type of equivalence classes, i.e., we define
 
 ```text
-  A/R ≔ Σ(P : A → Prop_𝒰) is-equivalence-class(P).
+  A / R ≔ Σ(P : A → Prop_𝒰) is-equivalence-class(P).
 ```
 
 Furthermore, we define **equivalence class of `x : A`** to be
@@ -261,7 +261,7 @@ Furthermore, we define **equivalence class of `x : A`** to be
 ```
 
 which is indeed an equivalence class.
-Sometimes we will write `q_R : A → A/R` for the map `x ↦ [x]_R`.
+Sometimes we will write `q_R : A → A / R` for the map `x ↦ [x]_R`.
 
 ```agda
 module _
@@ -378,16 +378,16 @@ module _
       ( is-surjective-class)
 ```
 
-In other words, `A/R` is the image of the map `R : A → (A → Prop_𝒰)`.
-In the following proposition we characterize the identity type of `A/R`.
+In other words, `A / R` is the image of the map `R : A → (A → Prop_𝒰)`.
+In the following proposition we characterize the identity type of `A / R`.
 As a corollary, we obtain equivalences
 
 ```text
   ([x]_R = [y]_R) ≃ R(x,y),
 ```
 
-justifying that the quotient `A/R` is defined to be the type of equivalence classes.
-Note that in our characterization of the identity type of `A/R` we make use of propositional extensionality.
+justifying that the quotient `A / R` is defined to be the type of equivalence classes.
+Note that in our characterization of the identity type of `A / R` we make use of propositional extensionality.
 
 Note: In agda-unimath, the type A/R is defined to be a small type equivalent to the type of equivalence classes. We will add its formalization towards the end of this file.
 
@@ -408,13 +408,13 @@ is an equivalence.
 By Theorem 11.2.2 it suffices to show that the total space
 
 ```text
-  Σ(P : A/R) P(x)
+  Σ(P : A / R) P(x)
 ```
 
 is contractible.
 The center of contraction is of course `[x]_R`, which satisfies `[x]_R(x)` by reflexivity of `R`.
 It remains to construct a contraction.
-Since `Σ(P : A/R) P(x)` is a subtype of `A/R`, we construct a contraction by showing that
+Since `Σ(P : A / R) P(x)` is a subtype of `A / R`, we construct a contraction by showing that
 
 ```text
   [x]_R = P
@@ -658,12 +658,12 @@ Indeed, the type
 
 of propositions in `𝒰` is a type in `𝒱`.
 It follows that the type `A → Prop_𝒰` is a type in `𝒱`.
-The type of equivalence classes of an equivalence relation `R` on `A` in `𝒰` is a subtype of `A → Prop_𝒰` in `𝒰`, so we conclude that `A/R` is a type in `𝒱`.
+The type of equivalence classes of an equivalence relation `R` on `A` in `𝒰` is a subtype of `A → Prop_𝒰` in `𝒰`, so we conclude that `A / R` is a type in `𝒱`.
 
 In classical mathematics, on the other hand, we consider the class of equivalence classes of an equivalence relation to be a (small) set.
 We will introduce the replacement axiom in order to ensure that set quotients in type theory are small.
 
-Recall that in set theory, the replacement axiom asserts that for any family of sets `{X_i}_{i ∈ I}` indexed by a set `I`, there is a set `X[I]` consisting of precisely those sets `x` for which there exists an `i ∈ I` such that `x ∈ X_i`.
+Recall that in set theory, the replacement axiom asserts that for any family of sets `{Xᵢ}_{i ∈ I}` indexed by a set `I`, there is a set `X[I]` consisting of precisely those sets `x` for which there exists an `i ∈ I` such that `x ∈ Xᵢ`.
 In other words: the image of a set-indexed family of sets is again a set.
 Without the replacement axiom, `X[I]` would be a class.
 
@@ -834,7 +834,7 @@ Note: Agda-unimath does not prove directly that the type of finite types is loca
 ## Example 18.1.11
 
 Consider a type `A` in `𝒰` and an equivalence relation `R` on `A` in `𝒰`.
-Then the type `A/R` is `𝒰`-small, since it is equivalent to the image of
+Then the type `A / R` is `𝒰`-small, since it is equivalent to the image of
 
 ```text
   R : A → (A → Prop_𝒰),

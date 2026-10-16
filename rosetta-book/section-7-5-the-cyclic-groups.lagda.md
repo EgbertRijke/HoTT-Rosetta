@@ -32,7 +32,7 @@ This motivates the following definition:
 We define the type `ℤ / k` for each `k : ℕ` by
 
 ```text
-ℤ / 0 ≔ ℤ and ℤ / (k+1) ≔ Fin{k+1}.
+ℤ / 0 ≔ ℤ and ℤ / (k + 1) ≔ Fin{k + 1}.
 ```
 
 ```agda
@@ -68,13 +68,13 @@ Recall from Exercise 5.7 that `ℤ / 0` already comes equipped with the structur
 We define the **addition** operation on `ℤ / (k + 1)` by
 
 ```text
-x + y ≔ [nat-Fin(x) + nat-Fin(y)]_{k + 1},
+x + y ≔ [nat-Fin(x) + nat-Fin(y)]ₖ₊₁,
 ```
 
-and we define the **additive inverse** operation on `ℤ / (k+1)` by
+and we define the **additive inverse** operation on `ℤ / (k + 1)` by
 
 ```text
--x ≔ [dist-ℕ(nat-Fin(x), k + 1)]_{k + 1}.
+-x ≔ [dist-ℕ(nat-Fin(x), k + 1)]ₖ₊₁.
 ```
 
 ```agda
@@ -293,7 +293,7 @@ To prove associativity, note that by Theorem 7.4.7 it suffices to show that
 nat-Fin(x + y) + nat-Fin(z) ≡ nat-Fin(x) + nat-Fin(y + z) mod k + 1.
 ```
 
-Since addition on `ℤ/(k + 1)` maps preserves the congruence relation, and since we have the congruences
+Since addition on `ℤ / (k + 1)` maps preserves the congruence relation, and since we have the congruences
 
 ```text
 nat-Fin(x + y) ≡ nat-Fin(x) + nat-Fin(y) mod k + 1
@@ -311,10 +311,10 @@ This follows immediately by associativity of addition on `ℕ`.
 To show that addition on `ℤ / (k + 1)` satisfies the right unit law, we first observe that it suffices to show that
 
 ```text
-[nat-Fin(x) + nat-Fin(0)]_{k + 1} = [nat-Fin(x)]_{k + 1}
+[nat-Fin(x) + nat-Fin(0)]ₖ₊₁ = [nat-Fin(x)]ₖ₊₁
 ```
 
-because there is an identification `[nat-Fin(x)]_{k + 1} = x` by Theorem 7.4.8.
+because there is an identification `[nat-Fin(x)]ₖ₊₁ = x` by Theorem 7.4.8.
 By Theorem 7.4.7 it now suffices tho show that
 
 ```text

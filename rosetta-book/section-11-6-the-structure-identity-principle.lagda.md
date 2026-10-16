@@ -268,7 +268,7 @@ To illustrate this use of the structure identity principle, we give an alternati
 We claim that
 
 ```text
-  ((x,p) = (y,q)) ≃ fib(ap{f}, p ∙ q⁻¹) ≐ Σ(α : x = y) ap_{f}(α) = p ∙ q⁻¹.
+  ((x,p) = (y,q)) ≃ fib(ap{f}, p ∙ q⁻¹) ≐ Σ(α : x = y) ap_f(α) = p ∙ q⁻¹.
 ```
 
 To see this, we apply Theorem 11.6.2.

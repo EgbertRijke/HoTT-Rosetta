@@ -10,14 +10,14 @@ module exercise-20-7-exercise where
 Consider the **rank comparison relation** `≼ : W(A,B) → (W(A,B) → Prop_𝒰)` defined recursively by
 
 ```text
-(tree(a,α) ≼ (b,β)) ≔ ∀_{(x:B(a))}∃_{(y:B(b))} α(x) ≼ β(y).
+(tree(a,α) ≼ (b,β)) ≔ ∀_{(x : B(a))}∃_{(y : B(b))} α(x) ≼ β(y).
 ```
 
 If `x ≼ y` holds, we say that `x` has **lower rank** than `y`.
 Furthermore, we define the **strict rank comparison relation** `{≺}` on `W(A,B)` by
 
 ```text
-(x ≺ y)≔ ∃_{(z ∈ y)}x ≼ z.
+(x ≺ y) ≔ ∃_{(z ∈ y)}x ≼ z.
 ```
 
 If `x ≺ y` holds, we say that `x` has **strictly lower rank** than `y`.
@@ -29,11 +29,11 @@ Furthermore, prove the following properties, in which `<` is the strict ordering
 
 1. `(x ≼ y) ↔ ∀_{(x' < x)}∃_{(y' < y)} x' ≼ y'`
 
-2. `(x < y)→ (x ≼ y)`
+2. `(x < y) → (x ≼ y)`
 
 3. `(x < y) → ¬(y ≼ x)`
 
-4. `is-constant_W(x) ↔ ∀_{(y:W(A,B))} x ≼ y`.
+4. `is-constant_W(x) ↔ ∀_{(y : W(A,B))} x ≼ y`.
 
 ### Exercise 20.7(b)
 
@@ -88,7 +88,7 @@ Show that the rank `(rank(A,B),≺)` of `W(A,B)` is well-founded.
 A strictly ordered set `(X,<)` is said to be **extensional** if the logical equivalence
 
 ```text
-(x = y) ↔ ∀_{(z:X)} (z < x) ↔ (z < y)
+(x = y) ↔ ∀_{(z : X)} (z < x) ↔ (z < y)
 ```
 
 holds for any `x,y : X`.

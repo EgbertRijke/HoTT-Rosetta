@@ -40,7 +40,7 @@ Furthermore, consider two elements `x,y : X`.
 Then we have an equivalence
 
 ```text
-ᾱ : (e(x) = y) ≃ (tr_{A}(loop,α(x)) = α(y)).
+ᾱ : (e(x) = y) ≃ (tr_A(loop,α(x)) = α(y)).
 ```
 
 ### Proof
@@ -64,7 +64,7 @@ In the following proposition we show that sections of a type family `A` equipped
 
 ## Proposition 22.2.2
 
-Consider a type family `A` over the circle and descent data `(X,e)` equipped with an equivalence `α:X≃ A(base)` and a homotopy witnessing that the square
+Consider a type family `A` over the circle and descent data `(X,e)` equipped with an equivalence `α : X ≃ A(base)` and a homotopy witnessing that the square
 
 ```text
  [X] --α-->[A(base)]
@@ -92,7 +92,7 @@ in which the top map is an equivalence.
 _Proof._ By the dependent universal property of the circle we have an equivalence
 
 ```text
-(Π(t : S¹) A(t)) ≃ Σ(x:A(base)) tr_A(loop,x) = x.
+(Π(t : S¹) A(t)) ≃ Σ(x : A(base)) tr_A(loop,x) = x.
 ```
 
 This equivalence fits in a commuting triangle
@@ -105,7 +105,7 @@ This equivalence fits in a commuting triangle
 [Σ(x : X) e(x) = x] --{tot_α(ᾱ)}--> [Σ(x : A(base)) tr_A(loop,x) = x]
 ```
 
-where the map on the left is given by `s ↦ (α^{-1}(s(base)),ᾱ^{-1}(apd_{s}(loop)))`.
+where the map on the left is given by `s ↦ (α^{-1}(s(base)),ᾱ^{-1}(apdₛ(loop)))`.
 The bottom map and the map on the right are equivalences, so it follows by the 3-for-2 property of equivalences that the map on the left is an equivalence. ◻
 
 The following corollary can be used to compare type families over the circle.
@@ -138,7 +138,7 @@ in which the top map is an equivalence.
 
 ### Proof
 
-_Proof._ The claim follows once we observe that `(Y^X,λ h. f∘ h∘ e^{-1})` is descent data for the family of types `(A(t) → B(t))` indexed by `t : S¹`.
+_Proof._ The claim follows once we observe that `(Y^X,λ h. f ∘ h ∘ e^{-1})` is descent data for the family of types `(A(t) → B(t))` indexed by `t : S¹`.
 Indeed, we have the equivalence `h ↦ β ∘ h ∘ α^{-1} : Y^X ≃ B(base)^{A(base)}` for which the square
 
 ```text
@@ -176,7 +176,7 @@ Then there is a commuting square
 
 in which the top map is an equivalence.
 
-In other words, a family of maps `E_(S¹)(t) → A(t)` indexed by `t : S¹` is equivalently described as a map `h : ℤ → X` for which the square
+In other words, a family of maps `E_{S¹}(t) → A(t)` indexed by `t : S¹` is equivalently described as a map `h : ℤ → X` for which the square
 
 ```text
       [ℤ] --h--> [X]

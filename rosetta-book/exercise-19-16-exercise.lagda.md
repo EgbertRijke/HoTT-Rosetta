@@ -42,7 +42,7 @@ of **fixed points** of the abstract `G`-set `ev_⋆(X)`.
 
 ### Exercise 19.16(c)
 
-Show that the type `X/G` of orbits of `X` is connected if and only if the abstract `G`-set `ev_⋆(X)` is transitive in the sense that
+Show that the type `X / G` of orbits of `X` is connected if and only if the abstract `G`-set `ev_⋆(X)` is transitive in the sense that
 
 ```text
 ∀(x : X(⋆)) is-surj(g ↦ gx)
@@ -50,7 +50,7 @@ Show that the type `X/G` of orbits of `X` is connected if and only if the abstra
 
 ### Exercise 19.16(d)
 
-Show that the type `X/G` of orbits of `X` is a set if and only if the abstract `G`-set `ev_⋆(X)` is free in the sense that
+Show that the type `X / G` of orbits of `X` is a set if and only if the abstract `G`-set `ev_⋆(X)` is free in the sense that
 
 ```text
 ∀(x : X(⋆)) is-inj(g ↦ gx).

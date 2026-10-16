@@ -15,12 +15,12 @@ Consider a section-retraction pair
     i       r
 A ----> X ----> A
 ```
-with `H:r∘ i~ id`.
+with `H : r ∘ i ~ id`.
 Show that if `X` is `𝒰`-small, then so is `A`.
 Hint: Use Exercise 13.18.
 
 Consider two inhabited types `A` and `B`.
-Show that if the product `A× B` is `𝒰`-small, then so are the types `A` and `B`.
+Show that if the product `A × B` is `𝒰`-small, then so are the types `A` and `B`.
 
 ## Solution
 

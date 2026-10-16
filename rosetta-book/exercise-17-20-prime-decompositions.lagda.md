@@ -9,14 +9,14 @@ module exercise-17-20-prime-decompositions where
 
 For any natural number `n` consider the type
 ```text
-D̃_n≔Σ(X:BS_2) Σ(Y:X→𝔽) (Fin{n}≃Π(x:X) Y(x)).
+D̃ₙ ≔ Σ(X : BS₂) Σ(Y : X → 𝔽) (Fin{n} ≃ Π(x : X) Y(x)).
 ```
 
-Show that `D̃_{1}≃ BS_2`.
+Show that `D̃₁ ≃ BS₂`.
 
-Show that `D̃_{n}` is contractible if and only if `n` is prime.
+Show that `D̃ₙ` is contractible if and only if `n` is prime.
 
-Show that `D̃_n` is a set if and only if `n` is not a square.
+Show that `D̃ₙ` is a set if and only if `n` is not a square.
 
 ## Solution
 

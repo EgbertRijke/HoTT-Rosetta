@@ -9,9 +9,9 @@ module exercise-13-2-identity-types-of-structured-function-types where
 
 Characterize the identity types of the following types:
 
-The type `Σ(h:A→ B) h(a)=b` of **pointed maps**, where `a:A` and `b:B` are given.
+The type `Σ(h : A → B) h(a) = b` of **pointed maps**, where `a : A` and `b : B` are given.
 
-The type `Σ(h:A→ B) f~ g∘ h` of commuting triangles
+The type `Σ(h : A → B) f ~ g ∘ h` of commuting triangles
 
 ```text
  [A]                 [B]
@@ -23,9 +23,9 @@ Arrows:
 - A --f--> X
 - B --g--> X
 ```
-where `f:A→ X` and `g:B→ X` are given.
+where `f : A → X` and `g : B → X` are given.
 
-The type `Σ(h:X→ Y) h∘ f~ g` of commuting triangles
+The type `Σ(h : X → Y) h ∘ f ~ g` of commuting triangles
 
 ```text
            [A]
@@ -37,9 +37,9 @@ Arrows:
 - A --g--> Y
 - X --h--> Y
 ```
-where `f:A→ X` and `g:A→ Y` are given.
+where `f : A → X` and `g : A → Y` are given.
 
-The type `Σ(i:A→ X) Σ(j:B→ Y) j∘ f~ g∘ i` of commuting squares
+The type `Σ(i : A → X) Σ(j : B → Y) j ∘ f ~ g ∘ i` of commuting squares
 
 ```text
  [A] ----> [X]
@@ -52,7 +52,7 @@ Arrows:
 - X --g--> Y
 - B --j--> Y
 ```
-where `f:A→ B` and `g:X→ Y` are given.
+where `f : A → B` and `g : X → Y` are given.
 
 ## Solution
 

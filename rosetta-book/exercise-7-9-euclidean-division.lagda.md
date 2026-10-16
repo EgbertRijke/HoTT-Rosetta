@@ -29,16 +29,16 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 
 (Euclidean division) Consider two natural numbers `a` and `b`.
 
-Construct two natural numbers `q` and `r` such that `(b≠ 0) → (r<b)`, along with an identification
+Construct two natural numbers `q` and `r` such that `(b ≠ 0) → (r < b)`, along with an identification
 ```text
-a=qb+r.
+a = qb + r.
 ```
 
-Show that for any four natural numbers `q,q'` and `r,r'` such that the implications `(b≠ 0) → (r<b)` and `(b≠ 0)→ (r'<b)` hold, and for which there are identifications
+Show that for any four natural numbers `q,q'` and `r,r'` such that the implications `(b ≠ 0) → (r < b)` and `(b ≠ 0) → (r' < b)` hold, and for which there are identifications
 ```text
-a=qb+r and a=q'b+r',
+a = qb + r and a = q'b + r',
 ```
-we have `q=q'` and `r=r'`.
+we have `q = q'` and `r = r'`.
 
 ## Solution
 

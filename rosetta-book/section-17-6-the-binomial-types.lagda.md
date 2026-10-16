@@ -181,7 +181,7 @@ eq-equiv-component-UU X Y =
 
 ## Example 17.6.3
 
-Note that type `𝒰_{Fin{n}}` is the type `BS_n` of all `n`-element types.
+Note that type `𝒰_{Fin{n}}` is the type `BSₙ` of all `n`-element types.
 Note also that if `A ≃ B`, then `𝒰_A ≃ 𝒰_B`.
 
 ## Definition 17.6.4
@@ -365,7 +365,7 @@ Therefore it follows that
 
 The type of decidable embeddings `∅ ↪ᵈ X` is contractible, because the type `∅ → X` is contractible with the map `ex-falso : ∅ → X` at the center of contraction, which is of course a decidable embedding.
 
-Next, the fact that the binomial type `(∅ choose B+1)` is empty follows from the fact that the type of maps `X → ∅` is empty for any type `X` merely equivalent to `B + 1`.
+Next, the fact that the binomial type `(∅ choose B + 1)` is empty follows from the fact that the type of maps `X → ∅` is empty for any type `X` merely equivalent to `B + 1`.
 
 For the last equivalence we will use Proposition 17.6.6.
 Using the universal property of `A + 1`, we see that
@@ -723,7 +723,7 @@ One reason why it works is that the identity type of `Σ(X : 𝒰_B) X ↪ᵈ A`
 Therefore it follows that for any two decidable embeddings `f, g : B ↪ᵈ A`, if `f` and `g` are the same up to a permutation on `B`, then we get an identification `(B,f) = (B,g)` in the type `Σ(X : 𝒰_B) X ↪ᵈ A`.
 
 From a group theoretic perspective we may observe that the automorphism group `B ≃ B` acts freely on the set of decidable embeddings `B ↪ᵈ A`, and the type `Σ(X : 𝒰_B) X ↪ A` can be viewed as the type of orbits of that action.
-Since this action of `Aut(B)` on `B ↪ᵈ A` is free, we see that the number of orbits is `1/k!` times the number of elements in `B ↪ᵈ A`.
+Since this action of `Aut(B)` on `B ↪ᵈ A` is free, we see that the number of orbits is `1 / k!` times the number of elements in `B ↪ᵈ A`.
 
 ## Supplement
 

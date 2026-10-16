@@ -22,5 +22,5 @@ open import exercise-22-11-exercise
 
 In this section we use the univalence axiom to construct the *universal cover* of the circle and show that the loop space of the circle is equivalent to `ℤ`.
 The universal cover of the circle is a family of sets over the circle with contractible total space.
-Classically, the universal cover is described as a map `ℝ→S^1` that winds the real line around the circle.
-In homotopy type theory the universal cover is constructed as a map `S^1→Set` into the univalent type of all sets, and we will use the dependent universal property of the circle to show that its total space is contractible.
+Classically, the universal cover is described as a map `ℝ → S^1` that winds the real line around the circle.
+In homotopy type theory the universal cover is constructed as a map `S^1 → Set` into the univalent type of all sets, and we will use the dependent universal property of the circle to show that its total space is contractible.

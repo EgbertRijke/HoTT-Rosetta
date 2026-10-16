@@ -19,12 +19,12 @@ open import section-7-5-the-cyclic-groups
 
 ## Problem statement
 
-Define `1≔[1]_{k+1}:Fin{k+1}`.
+Define `1 ≔ [1]ₖ₊₁ : Fin{k + 1}`.
 Show that
 ```text
-succ-Fin_{k+1}(x)=x+1
+succ-Finₖ₊₁(x) = x + 1
 ```
-for any `x:Fin{k+1}`.
+for any `x : Fin{k + 1}`.
 
 ## Solution
 

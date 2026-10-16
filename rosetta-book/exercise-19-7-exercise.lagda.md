@@ -21,7 +21,7 @@ inr(x)⁻¹ ≔ inr(x).
 ```
 Show that `D_A` equipped with these operations is a group.
 The group `D_A` is called the **generalized dihedral group** on `A`.
-The (ordinary) **dihedral group** `D_k` is defined to be `D_k ≔ D_{ℤ/k}`.
+The (ordinary) **dihedral group** `Dₖ` is defined to be `Dₖ ≔ D_{ℤ / k}`.
 
 ## Solution
 

@@ -26,7 +26,7 @@ open import section-19-2-group-homomorphisms
 open import section-19-4-homotopy-groups-of-types
 ```
 
-The Eckmann-Hilton argument is used to show that `π_n(A)` is an abelian group for all `n ≥ 2`.
+The Eckmann-Hilton argument is used to show that `πₙ(A)` is an abelian group for all `n ≥ 2`.
 This is achieved by constructing an identification
 
 ```text
@@ -108,7 +108,7 @@ _ ∙ _ : (x = y) → ((y = z) → (x = z))
 This results in the **horizontal concatenation** operation
 
 ```text
-_ ∙_h _ : (p = p') → ((q = q') → (p ∙ q = p' ∙ q')).
+_ ∙ₕ _ : (p = p') → ((q = q') → (p ∙ q = p' ∙ q')).
 ```
 
 In other words, for any two identifications `r : p = p'` and `s : q = q'` as in the diagram
@@ -120,7 +120,7 @@ In other words, for any two identifications `r : p = p'` and `s : q = q'` as in 
 ```
 
 The repeated endpoint labels in these diagrams denote the same points.
-We obtain `r ∙_h s ≔ ap-binary_{_ ∙ _}(r,s) : p ∙ q = p' ∙ q'`.
+We obtain `r ∙ₕ s ≔ ap-binary_{_ ∙ _}(r,s) : p ∙ q = p' ∙ q'`.
 
 ```agda
 horizontal-concat-Id² :
@@ -152,8 +152,8 @@ vertical-concat-Id² α β = α ∙ β
 Horizontal concatenation satisfies the following left and right unit laws:
 
 ```text
-refl_refl ∙_h s = s
-r ∙_h refl_refl = r.
+refl_refl ∙ₕ s = s
+r ∙ₕ refl_refl = r.
 ```
 
 ### Proof
@@ -199,7 +199,7 @@ Consider a diagram of the form
 Then there is an identification
 
 ```text
-(r ∙ r') ∙_h (s ∙ s') = (r ∙_h s) ∙ (r' ∙_h s').
+(r ∙ r') ∙ₕ (s ∙ s') = (r ∙ₕ s) ∙ (r' ∙ₕ s').
 ```
 
 ### Proof
@@ -208,10 +208,10 @@ _Proof._ We use path induction on both `r` and `s`.
 Then it suffices to show that
 
 ```text
-(refl ∙ r') ∙_h (refl ∙ s') = (refl ∙_h refl) ∙ (r' ∙_h s')
+(refl ∙ r') ∙ₕ (refl ∙ s') = (refl ∙ₕ refl) ∙ (r' ∙ₕ s')
 ```
 
-Using the unit laws for ordinary concatenation, we see that both sides reduce to `r' ∙_h s'`. ◻
+Using the unit laws for ordinary concatenation, we see that both sides reduce to `r' ∙ₕ s'`. ◻
 
 ```agda
 interchange-Id² :
@@ -237,19 +237,19 @@ r ∙ s = s ∙ r
 
 ### Proof
 
-_Proof._ First we observe that `r ∙ s = r ∙_h s` by the following calculation using the unit laws from Lemma 19.5.4 and the interchange law from Lemma 19.5.5:
+_Proof._ First we observe that `r ∙ s = r ∙ₕ s` by the following calculation using the unit laws from Lemma 19.5.4 and the interchange law from Lemma 19.5.5:
 
 ```text
-r ∙ s = (r ∙_h refl_refl) ∙ (refl_refl ∙_h s)
-= (r ∙ refl_refl) ∙_h (refl_refl ∙ s)
-= r ∙_h s
+r ∙ s = (r ∙ₕ refl_refl) ∙ (refl_refl ∙ₕ s)
+= (r ∙ refl_refl) ∙ₕ (refl_refl ∙ s)
+= r ∙ₕ s
 ```
 
-Similarly, we observe that `r ∙_h s = s ∙ r` by the following calculation:
+Similarly, we observe that `r ∙ₕ s = s ∙ r` by the following calculation:
 
 ```text
-r ∙_h s = (refl_refl ∙ r) ∙_h (s ∙ refl_refl)
-= (refl_refl ∙_h s) ∙ (r ∙_h refl_refl)
+r ∙ₕ s = (refl_refl ∙ r) ∙ₕ (s ∙ refl_refl)
+= (refl_refl ∙ₕ s) ∙ (r ∙ₕ refl_refl)
 = s ∙ r.
 ```
 
@@ -413,13 +413,13 @@ For `n ≥ 2`, the `n`-th homotopy group of any pointed type is abelian.
 
 BENCHMARK PROBLEM
 
-_Proof._ By Proposition 19.4.6 it follows that `π_n(A)` is isomorphic to the second homotopy group of some pointed type, for every `n ≥ 2`.
-Therefore it suffices to prove the claim for `π_2(A)` for every pointed type `A`.
+_Proof._ By Proposition 19.4.6 it follows that `πₙ(A)` is isomorphic to the second homotopy group of some pointed type, for every `n ≥ 2`.
+Therefore it suffices to prove the claim for `π₂(A)` for every pointed type `A`.
 
 Our goal is to show that
 
 ```text
-Π(r,s : π_2(A)) rs = sr.
+Π(r,s : π₂(A)) rs = sr.
 ```
 
 Since we are constructing an identification in a set, we can use the dependent universal property of `0`-truncation on both `r` and `s`, stated in Theorem 18.5.2.

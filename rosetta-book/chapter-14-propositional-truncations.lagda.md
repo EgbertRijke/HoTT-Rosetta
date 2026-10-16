@@ -19,7 +19,7 @@ open import exercise-14-9-interval
 ```
 
 It is common in mathematics to express the property that a certain type of objects is inhabited, without imposing extra structure on those objects.
-For example, when we assert the property that a set is finite, then we only claim that there exists a bijection to a standard finite set `{0, …, n-1}` for some `n`, not that the set is equipped with such a bijection.
+For example, when we assert the property that a set is finite, then we only claim that there exists a bijection to a standard finite set `{0, …, n - 1}` for some `n`, not that the set is equipped with such a bijection.
 There is indeed a conceptual difference between a finite set and a set equipped with a bijection to a standard finite set.
 The latter concept is that of a finite *totally ordered* set.
 This difference is due to the fact that finiteness is a property, whereas there may be many different bijections to a standard finite set.

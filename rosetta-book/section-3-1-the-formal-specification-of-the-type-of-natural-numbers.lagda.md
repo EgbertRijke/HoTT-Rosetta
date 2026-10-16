@@ -71,14 +71,14 @@ The type theoretical induction principle of `ℕ` is therefore formulated using 
 
 ```text
    n : ℕ ⊢ P(n) type
-   ⊢ p_0 : P(0)
+   ⊢ p₀ : P(0)
    ⊢ p_S : Π(n : ℕ) P(n) → P(succ-ℕ(n))
   --------------------------------------
        ⊢ ind-ℕ : Π(n : ℕ) P(n)
 ```
 
 In other words, the type theoretical induction principle of `ℕ` tells us what we need to do in order to construct a dependent function `Π(n : ℕ) P(n)`.
-Just as in the classical induction principle, there are two things to be constructed given a type family `P` over `ℕ`: in the **base case** we need to construct an element `p_0 : P(0)`, and for the **inductive step** we need to construct a function of type `P(n) → P(succ-ℕ(n))` for all `n : ℕ`.
+Just as in the classical induction principle, there are two things to be constructed given a type family `P` over `ℕ`: in the **base case** we need to construct an element `p₀ : P(0)`, and for the **inductive step** we need to construct a function of type `P(n) → P(succ-ℕ(n))` for all `n : ℕ`.
 
 ### Remark 3.1.2
 
@@ -97,21 +97,21 @@ To see that indeed we get such a function from the rule `ℕ-ind`, we use generi
 First, we let `Γ'` be the context
 
 ```text
-  Γ, p_0 : P(0), p_S : Π(n : ℕ) P(n) → P(succ-ℕ(n)).
+  Γ, p₀ : P(0), p_S : Π(n : ℕ) P(n) → P(succ-ℕ(n)).
 ```
 
 By weakening we obtain that
 
 ```text
   Γ', n : ℕ ⊢ P(n) type
-  Γ' ⊢ p_0 : P(0)
+  Γ' ⊢ p₀ : P(0)
   Γ' ⊢ p_S : Π(n : ℕ) P(n) → P(succ-ℕ(n)).
 ```
 
 Therefore, the induction principle of `ℕ` provides us with a dependent function
 
 ```text
-  Γ' ⊢ ind-ℕ(p_0, p_S) : Π(n : ℕ) P(n).
+  Γ' ⊢ ind-ℕ(p₀, p_S) : Π(n : ℕ) P(n).
 ```
 
 Now we proceed by `λ`-abstraction twice to obtain a function
@@ -142,7 +142,7 @@ rec-ℕ = ind-ℕ
 The computation rules for `ℕ` postulate that the dependent function
 
 ```text
-  ind-ℕ(p_0, p_S) : Π(n : ℕ) P(n)
+  ind-ℕ(p₀, p_S) : Π(n : ℕ) P(n)
 ```
 
 behaves as expected when it is applied to `0` or a successor.
@@ -152,20 +152,20 @@ The computation rule for the base case is
 
 ```text
    Γ, n : ℕ ⊢ P(n) type
-   Γ ⊢ p_0 : P(0)
+   Γ ⊢ p₀ : P(0)
    Γ ⊢ p_S : Π(n : ℕ) P(n) → P(succ-ℕ(n))
   ----------------------------------------
-   Γ ⊢ ind-ℕ(p_0, p_S,0) ≐ p_0 : P(0).
+   Γ ⊢ ind-ℕ(p₀, p_S,0) ≐ p₀ : P(0).
 ```
 
 The computation rule for the inductive step has the same premises as the computation rule for the base case:
 
 ```text
    Γ, n : ℕ ⊢ P(n) type
-   Γ ⊢ p_0 : P(0)
+   Γ ⊢ p₀ : P(0)
    Γ ⊢ p_S : Π(n : ℕ) P(n) → P(succ-ℕ(n))
   -------------------------------------------------------------------------------------
-   Γ, n : ℕ ⊢  ind-ℕ(p_0, p_S, succ-ℕ(n)) ≐ p_S(n, ind-ℕ(p_0, p_S, n)) : P(succ-ℕ(n)).
+   Γ, n : ℕ ⊢  ind-ℕ(p₀, p_S, succ-ℕ(n)) ≐ p_S(n, ind-ℕ(p₀, p_S, n)) : P(succ-ℕ(n)).
 ```
 
 This completes the formal specification of the type `ℕ` of natural numbers.

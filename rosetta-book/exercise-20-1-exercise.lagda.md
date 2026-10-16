@@ -13,7 +13,7 @@ Let `B : bool → 𝒰` be the type family defined in Example 20.1.7.
 Construct an equivalence
 
 ```text
-T_2 ≃ W(bool,B).
+T₂ ≃ W(bool,B).
 ```
 
 ### Exercise 20.1(b)

@@ -33,7 +33,7 @@ with `H : f ~ g ∘ h`.
 
 ### Exercise 9.4(a)
 
-Suppose that the map `h` has a section `s:B → A`.
+Suppose that the map `h` has a section `s : B → A`.
 Show that the triangle
 
 ```text
@@ -50,7 +50,7 @@ commutes, and that `f` has a section if and only if `g` has a section.
 
 ### Exercise 9.4(b)
 
-Suppose that the map `g` has a retraction `r:X→ B`.
+Suppose that the map `g` has a retraction `r : X → B`.
 Show that the triangle
 
 ```text

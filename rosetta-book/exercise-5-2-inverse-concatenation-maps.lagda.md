@@ -14,7 +14,7 @@ open import section-5-2-the-groupoidal-structure-of-types
 For any `p : x = y`, `q : y = z`, and `r : x = z`, construct maps
 
 ```text
-  inv-con(p,q,r)  :  (p ∙ q = r) → (q = p⁻¹ ∙ r) \\
+  inv-con(p,q,r)  :  (p ∙ q = r) → (q = p⁻¹ ∙ r)
   con-inv(p,q,r)  :  (p ∙ q = r) → (p = r ∙ q⁻¹).
 ```
 

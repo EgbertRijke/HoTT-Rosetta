@@ -128,7 +128,7 @@ Therefore, it follows that any `x : A` such that `B(x)` is empty induces a const
 More precisely, if we are given a map `h : B(x) → empty`, then we can define the **constant**
 
 ```text
-c_x(h) ≔ tree(x, ex-falso ∘ h).
+cₓ(h) ≔ tree(x, ex-falso ∘ h).
 ```
 
 The elements of `w : W(A, B)` for which the type `B(arity(w))` is empty are called the **constants** of `W(A, B)`.
@@ -186,7 +186,7 @@ so we obtain the desired function from the assumption that `¬¬(B(x))` holds fo
 To prove that (ii) implies (i), suppose that `W(A, B)` is empty and let `x : A`.
 To show that `¬¬(B(x))` holds, assume that `¬(B(x))` holds.
 In other words, assume a function `h : B(x) → empty`.
-Then we have the constant element `c_x(h) : W(A, B)`.
+Then we have the constant element `cₓ(h) : W(A, B)`.
 This is impossible, since `W(A, B)` was assumed to be empty. ◻
 
 ```agda
@@ -216,7 +216,7 @@ The idea is that the constructor `tree` of `W(bool, P)` splits into one nullary 
 More formally, we define the zero element `z : N` and the successor function `s : N → N` by
 
 ```text
-z ≔ tree(false, ex-falso)  and  s(x) ≔ tree(true, const_x).
+z ≔ tree(false, ex-falso)  and  s(x) ≔ tree(true, constₓ).
 ```
 
 ```agda
@@ -313,12 +313,12 @@ B(false) ≔ empty  and  B(true) ≔ bool.
 Then the W-type `W(bool, B)` is equivalent to the type of **oriented binary rooted trees**, which is the inductive type with constructors
 
 ```text
-node : T_2
-{[_, _]} : T_2 → (T_2 → T_2).
+node : T₂
+{[_, _]} : T₂ → (T₂ → T₂).
 ```
 
-We leave the construction of the equivalence `T_2 ≃ W(bool, B)` as Exercise 20.1.
-The reason we call the elements of `T_2` oriented binary rooted trees is that in a tree of the form `[T_1, T_2]` we can see by inspection which branch is on the left and which branch is on the right.
+We leave the construction of the equivalence `T₂ ≃ W(bool, B)` as Exercise 20.1.
+The reason we call the elements of `T₂` oriented binary rooted trees is that in a tree of the form `[T₁, T₂]` we can see by inspection which branch is on the left and which branch is on the right.
 
 ```agda
 PBT-𝕎 : UU lzero
@@ -347,7 +347,7 @@ data Planar-Bin-Tree : UU lzero where
 
 ## Example 20.1.8
 
-Consider the type `A ≔ unit + BS_2`, where `BS_2` is the type of `2`-element types.
+Consider the type `A ≔ unit + BS₂`, where `BS₂` is the type of `2`-element types.
 We define the family `B` over `A` by pattern matching:
 
 ```text
@@ -360,16 +360,16 @@ We can also present the type of binary rooted trees as an inductive type with th
 
 ```text
 node : Bin-Tree
-bin-tree : Π(X : BS_2) Bin-Tree^X → Bin-Tree.
+bin-tree : Π(X : BS₂) Bin-Tree^X → Bin-Tree.
 ```
 
 There is an important qualitative difference between the type of oriented binary rooted trees and the type of binary rooted trees.
-Given two distinct oriented binary rooted trees `T_1` and `T_2`, the two oriented binary rooted trees `[T_1,T_2]` and `[T_2,T_1]` will also be distinct.
-On the other hand, given two binary rooted trees `T_1` and `T_2`, the binary rooted trees
+Given two distinct oriented binary rooted trees `T₁` and `T₂`, the two oriented binary rooted trees `[T₁,T₂]` and `[T₂,T₁]` will also be distinct.
+On the other hand, given two binary rooted trees `T₁` and `T₂`, the binary rooted trees
 
 ```text
-bin-tree(bool, ind-bool(T_1, T_2))
-bin-tree(bool, ind-bool(T_2, T_1))
+bin-tree(bool, ind-bool(T₁, T₂))
+bin-tree(bool, ind-bool(T₂, T₁))
 ```
 
 can always be identified.

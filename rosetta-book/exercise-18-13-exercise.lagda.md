@@ -10,7 +10,7 @@ module exercise-18-13-exercise where
 Consider two types `A` and `B`.
 The **Stirling type of the second kind** is the type
 ```text
-Stirling(A, B):=Σ(X:𝒰_B) A↠ X.
+Stirling(A, B) := Σ(X : 𝒰_B) A ↠ X.
 ```
 
 Show that if `B` is a `k`-type, then the type `Stirling(A, B)` is also a `k`-type.
@@ -18,7 +18,7 @@ Show that if `B` is a `k`-type, then the type `Stirling(A, B)` is also a `k`-typ
 Suppose that `B` has decidable equality.
 Construct an equivalence
 ```text
-Stirling(A+unit, B+unit)≃ (B+unit)×Stirling(A, B+unit)+Stirling(A, B)
+Stirling(A + unit, B + unit) ≃ (B + unit) × Stirling(A, B + unit) + Stirling(A, B)
 ```
 
 Suppose that `A` and `B` are finite types of cardinality `n` and `k`.

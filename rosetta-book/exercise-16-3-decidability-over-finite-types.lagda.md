@@ -7,14 +7,14 @@ module exercise-16-3-decidability-over-finite-types where
 
 ## Problem statement
 
-Consider a family of decidable types `A_i` indexed by a finite type `I`.
+Consider a family of decidable types `Aᵢ` indexed by a finite type `I`.
 
 ### Exercise 16.3(a)
 
 Show that the dependent product
 
 ```text
-  Π(i : I) A_i
+  Π(i : I) Aᵢ
 ```
 
 is decidable.

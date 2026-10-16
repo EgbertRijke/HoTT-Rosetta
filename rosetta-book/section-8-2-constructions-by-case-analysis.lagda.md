@@ -96,7 +96,7 @@ In other words, `f(x)` is defined to be `h(x, y)` with `g(x)` for `y`.
 The definition of the Collatz function can therefore be given by with-abstraction as
 
 ```text
-collatz(n) with [d(n) / y]≔ h(x,y).
+collatz(n) with [d(n) / y] ≔ h(x,y).
 ```
 
 However, recall that the function `h` was defined by pattern matching on `y`.
@@ -126,7 +126,7 @@ Then the types `A × B` and `A → B` are also decidable.
 ### Proof
 
 *Proof.* We only prove the claim about the decidability of `A → B`, since the claim about the decidability of `A × B` is proven similarly.
-Since `A` is assumed to be decidable, we proceed by case analysis on `A+ ¬A`.
+Since `A` is assumed to be decidable, we proceed by case analysis on `A + ¬A`.
 In the case where we have `f : ¬A`, we have the functions
 
 ```text
@@ -223,7 +223,7 @@ In the case where `¬Π(x : ℕ) Q'(x)`, it follows that `¬Π(x : ℕ) Q(x)`, a
 
 ```text
 f(0) ≔ q
-f(x+1) ≔ g(x).
+f(x + 1) ≔ g(x).
 ```
 
 ◻

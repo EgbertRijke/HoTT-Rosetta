@@ -7,20 +7,20 @@ module exercise-17-12-automorphisms-of-k-element-types where
 
 ## Problem statement
 
-Show that for `k≠ 2`, the type
+Show that for `k ≠ 2`, the type
 ```text
-Π(X:BS_k) X→ X
+Π(X : BSₖ) X → X
 ```
 is contractible.
-Conclude that the type `Π(X:BS_k) X≃ X` is also contractible.
+Conclude that the type `Π(X : BSₖ) X ≃ X` is also contractible.
 Hint: Use Exercise 17.11.
 
 Show that the type
 ```text
-Π(X:BS_2) X→ X
+Π(X : BS₂) X → X
 ```
 is equivalent to `Fin{2}`.
-Conclude that the type `Π(X:BS_2) X≃ X` is also equivalent to `Fin{2}`.
+Conclude that the type `Π(X : BS₂) X ≃ X` is also equivalent to `Fin{2}`.
 
 ## Solution
 

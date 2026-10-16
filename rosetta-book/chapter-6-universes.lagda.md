@@ -18,14 +18,14 @@ open import exercise-6-6-absolute-value-integers
 To complete our specification of dependent type theory, we introduce type theoretic *universes*.
 Universes can be thought of as types that consist of types.
 In reality, however, a universe consists of a type `𝒰` equipped with a type family `Ty` over `𝒰`.
-For any `X:𝒰` we think of `X` as an *encoding* of the type `Ty(X)`.
+For any `X : 𝒰` we think of `X` as an *encoding* of the type `Ty(X)`.
 The type family `Ty` is called a *universal type family*.
 
 There are several reasons to equip type theory with universes.
 One important reason is that it enables us to define new type families over inductive types, using their induction principle.
 We use this way of defining type families to define many familiar relations over `ℕ`, such as the ordering relations `≤` and `<`.
 We also introduce a relation `Eq-ℕ` called the *observational equality* on `ℕ`.
-This equivalence relation can be used to show that `0≠1`.
+This equivalence relation can be used to show that `0 ≠ 1`.
 
 The idea of introducing an observational equality relation for a particular type is that it should help us thinking about the identity type.
 The identity type has been introduced in a very generic and uniform way.

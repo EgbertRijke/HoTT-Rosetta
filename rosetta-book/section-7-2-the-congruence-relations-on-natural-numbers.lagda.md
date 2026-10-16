@@ -94,9 +94,9 @@ Recall that `dist-ℕ(x, y)` was defined in Exercise 6.5 recursively by
 
 ```text
       dist-ℕ(0,0) ≔ 0 
-    dist-ℕ(0,y+1) ≔ y+1
-    dist-ℕ(x+1,0) ≔ x+1
-  dist-ℕ(x+1,y+1) ≔ dist-ℕ(x,y).
+    dist-ℕ(0,y + 1) ≔ y + 1
+    dist-ℕ(x + 1,0) ≔ x + 1
+  dist-ℕ(x + 1,y + 1) ≔ dist-ℕ(x,y).
 ```
 
 ## Definition 7.2.2

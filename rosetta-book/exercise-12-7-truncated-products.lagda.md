@@ -21,11 +21,11 @@ Show that the following are equivalent:
 1. There are functions
 
    ```text
-     f : B → is-trunc_{k+1}(A)
-     g : A → is-trunc_{k+1}(B).
+     f : B → is-truncₖ₊₁(A)
+     g : A → is-truncₖ₊₁(B).
    ```
 
-2. The type `A× B` is `(k+1)`-truncated.
+2. The type `A × B` is `(k + 1)`-truncated.
 
 Conclude with Exercise 10.5 that, if both `A` and `B` come equipped with an element, then both `A` and `B` are `k`-truncated if and only if the product `A × B` is `k`-truncated.
 

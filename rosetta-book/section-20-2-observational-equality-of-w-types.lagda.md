@@ -221,7 +221,7 @@ is an equivalence for each `x, y : W(A, B)`.
 The element `refl-Eq_W(x) : Eq_W(x, x)` is defined recursively as
 
 ```text
-refl-Eq_W(tree(x, α))≔ (refl, refl-htpy_α).
+refl-Eq_W(tree(x, α)) ≔ (refl, refl-htpy_α).
 ```
 
 This proof of reflexivity induces the canonical map `(x = y) → Eq_W(x, y)`.
@@ -242,7 +242,7 @@ h : Π(y : W(A, B)) Π(p : Eq_W(x, y)) (x, refl-Eq_W(x)) = (y, p).
 By the induction principle of W-types, it suffices to define
 
 ```text
-h(tree(y, β), (p, H))≔ (x, (refl, refl-htpy)) = (y, (p, H)).
+h(tree(y, β), (p, H)) ≔ (x, (refl, refl-htpy)) = (y, (p, H)).
 ```
 
 Here we proceed by identification elimination on `p : x = y`, followed by homotopy induction on the homotopy `H : α ~ β`.

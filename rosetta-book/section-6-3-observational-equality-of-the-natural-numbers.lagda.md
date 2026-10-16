@@ -26,7 +26,7 @@ Indeed, it can be used to show that equality of natural numbers is _decidable_, 
 
 ## Definition 6.3.1
 
-We define the **observational equality** of `ℕ` as binary relation `Eq-ℕ : ℕ → (ℕ → 𝒰_0)` satisfying
+We define the **observational equality** of `ℕ` as binary relation `Eq-ℕ : ℕ → (ℕ → 𝒰₀)` satisfying
 
 ```text
 Eq-ℕ(0,0) ≐ unit
@@ -41,19 +41,19 @@ We define `Eq-ℕ` by double induction on `ℕ`.
 By the first application of induction it suffices to provide
 
 ```text
-E_0 : ℕ→𝒰_0
-E_S : ℕ→ ((ℕ→𝒰_0)→(ℕ→𝒰_0))
+E₀ : ℕ → 𝒰₀
+E_S : ℕ → ((ℕ → 𝒰₀) → (ℕ → 𝒰₀))
 ```
 
-We define `E_0` by induction, taking `E_{00}≔ unit` and `E_{0S}(n,X,m)≔ empty`.
-The resulting family `E_0` satisfies
+We define `E₀` by induction, taking `E₀₀ ≔ unit` and `E_{0S}(n,X,m) ≔ empty`.
+The resulting family `E₀` satisfies
 
 ```text
-E_0(0) ≐ unit
-E_0(succ-ℕ(n)) ≐ empty.
+E₀(0) ≐ unit
+E₀(succ-ℕ(n)) ≐ empty.
 ```
 
-We define `E_S` by induction, taking `E_{S0}≔ empty` and `E_{SS}(n,X,m)≔ X(m)`.
+We define `E_S` by induction, taking `E_{S0} ≔ empty` and `E_{SS}(n,X,m) ≔ X(m)`.
 The resulting family `E_S` satisfies
 
 ```text
@@ -64,7 +64,7 @@ E_S(n,X,succ-ℕ(m)) ≐ X(m)
 Therefore we have by the computation rule for the first induction that the judgmental equality
 
 ```text
-Eq-ℕ(0,m) ≐ E_0(m)
+Eq-ℕ(0,m) ≐ E₀(m)
 Eq-ℕ(succ-ℕ(n),m) ≐ E_S(n,Eq-ℕ(n),m)
 ```
 
@@ -111,21 +111,21 @@ refl-Eq-ℕ (succ-ℕ n) = refl-Eq-ℕ n
 For any two natural numbers `m` and `n`, we have
 
 ```text
-(m=n) ↔ Eq-ℕ(m,n).
+(m = n) ↔ Eq-ℕ(m,n).
 ```
 
 ### Proof
 
-_Proof._ The function `(m=n) → Eq-ℕ(m,n)` is defined by the induction principle of identity types, using the reflexivity of `Eq-ℕ`.
+_Proof._ The function `(m = n) → Eq-ℕ(m,n)` is defined by the induction principle of identity types, using the reflexivity of `Eq-ℕ`.
 
-The converse `Eq-ℕ(m,n) → (m=n)` is defined by induction on `m` and `n`.
-If both `m` and `n` are zero, we have `refl:0=0`.
-If one of `m` and `n` is zero and the other is a successor, then `Eq-ℕ(m,n)` is empty and we have a function `empty → (m=n)` by the induction principle of the empty type.
-In the inductive step, suppose we have a function `f : Eq-ℕ(m,n) → (m=n)`.
+The converse `Eq-ℕ(m,n) → (m = n)` is defined by induction on `m` and `n`.
+If both `m` and `n` are zero, we have `refl : 0 = 0`.
+If one of `m` and `n` is zero and the other is a successor, then `Eq-ℕ(m,n)` is empty and we have a function `empty → (m = n)` by the induction principle of the empty type.
+In the inductive step, suppose we have a function `f : Eq-ℕ(m,n) → (m = n)`.
 Then we can define a function
 
 ```text
-Eq-ℕ(succ-ℕ(m),succ-ℕ(n)) → (succ-ℕ(m)=succ-ℕ(n))
+Eq-ℕ(succ-ℕ(m),succ-ℕ(n)) → (succ-ℕ(m) = succ-ℕ(n))
 ```
 
 as the composite

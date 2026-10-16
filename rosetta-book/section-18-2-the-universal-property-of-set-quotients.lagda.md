@@ -43,7 +43,7 @@ open import section-17-2-propositional-extensionality
 open import section-18-1-equivalence-relations-and-the-replacement-axiom
 ```
 
-The quotient `A/R` is constructed as the image of `R`, so we obtain a commuting triangle
+The quotient `A / R` is constructed as the image of `R`, so we obtain a commuting triangle
 
 ```text
        q_R
@@ -56,7 +56,7 @@ The quotient `A/R` is constructed as the image of `R`, so we obtain a commuting 
     Prop_𝒰^A
 ```
 
-and the embedding `i_R : A/R → Prop_𝒰^A` satisfies the universal property of the image of `R`.
+and the embedding `i_R : A / R → Prop_𝒰^A` satisfies the universal property of the image of `R`.
 This universal property is, however, not the usual universal property of the quotient.
 
 ## Definition 18.2.1
@@ -224,7 +224,7 @@ Then there is for any set `X` a map
 This map takes a function `h : B → X` to the pair
 
 ```text
-  q^⋆(h) ≔ (h ∘ q, λ x. λ y. λ r. ap_{h}(H_{x,y}(r))).
+  q^⋆(h) ≔ (h ∘ q, λ x. λ y. λ r. apₕ(H_{x,y}(r))).
 ```
 
 The universal property of the set quotient of `R` asserts that the map `q^⋆` is an equivalence for every set `X`.
@@ -279,8 +279,8 @@ Moreover, we have
 
 ```text
   R(x,y) ≃ R(x) = R(y)
-         ≃ i(q(x))=i(q(y))
-         ≃ q(x)=q(y)
+         ≃ i(q(x)) = i(q(y))
+         ≃ q(x) = q(y)
 ```
 
 In this calculation, the first equivalence holds by Corollary 18.1.4; the second equivalence holds since we have a homotopy `R ~ i ∘ q`; and the third equivalence holds since `i` is an embedding.
@@ -299,7 +299,7 @@ Nevertheless, observe that by the assumption that `q` is surjective and effectiv
 To see this, first note that `is-small_U(X)` is a proposition for any type `X` by Proposition 17.1.5.
 Using the assumption that `q` is surjective, it follows from Proposition 15.2.3 that it suffices to show that `q(a) = q(a')` is `𝒰`-small for each `a, a' : A`.
 This follows by the assumption that `q` is effective.
-In particular, the identity type `b=q(a)` is a `𝒰`-small proposition, for every `b : B` and `a : A`.
+In particular, the identity type `b = q(a)` is a `𝒰`-small proposition, for every `b : B` and `a : A`.
 Let us write `s(b,a)` for the element of type `is-small_𝒰(b = q(a))`.
 
 Now consider a universe `𝒱` containing `B`.
@@ -315,7 +315,7 @@ by `j(b,a) ≔ (b = q(a),s(b,a))`, and now we obtain `i` from `j` by defining
   i(b,a) := pr 1(s(b,a)).
 ```
 
-Note that we have an equivalence `i(b,a)≃ (b = q(a))` for every `b : B` and `a : A`.
+Note that we have an equivalence `i(b,a) ≃ (b = q(a))` for every `b : B` and `a : A`.
 Then the triangle
 
 ```text
@@ -459,7 +459,7 @@ By Exercise 17.5 it follows that there is at most one such an extension, so it s
 In order to construct an extension, we will construct for every `b : B` a term `x : X` satisfying the property
 
 ```text
-  P(x) ≔ ∃_{(a : A)} (f(a) = x)∧ (q(a) = b).
+  P(x) ≔ ∃_{(a : A)} (f(a) = x) ∧ (q(a) = b).
 ```
 
 Before we make this construction, we first observe that there is at most one such `x`, i.e., that the type of `x : X` satisfying `P(x)` is in fact a proposition.
@@ -1036,7 +1036,7 @@ Consider an equivalence relation `R` over a type `A`.
 Then the quotient map
 
 ```text
-  q : A → A/R
+  q : A → A / R
 ```
 
 is surjective and effective, and it satisfies the universal property of the set quotient.
@@ -1150,7 +1150,7 @@ For any type `A` and any universe `𝒰` containing `A`, we have an equivalence
 
 ### Proof
 
-Given an equivalence relation `R : A → (A → Prop_𝒰)` on `A` we first use the replacement axiom, by which the set quotient `A/R` is `𝒰`-small, to obtain a set `Q(R) : Set_𝒰`, an equivalence `e : Q(R) ≃ A/R`, and a surjective map `f : A → Q(R)` such that the triangle
+Given an equivalence relation `R : A → (A → Prop_𝒰)` on `A` we first use the replacement axiom, by which the set quotient `A / R` is `𝒰`-small, to obtain a set `Q(R) : Set_𝒰`, an equivalence `e : Q(R) ≃ A / R`, and a surjective map `f : A → Q(R)` such that the triangle
 
 ```text
            A

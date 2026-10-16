@@ -23,25 +23,25 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 
 Recall that
 ```text
-classical-Fin_k:=Σ(x:ℕ) x<k.
+classical-Finₖ := Σ(x : ℕ) x < k.
 ```
 
 Show that
 ```text
-(x=y)↔ (pr 1(x)=pr 1(y))
+(x = y) ↔ (pr 1(x) = pr 1(y))
 ```
-for each `x,y:classical-Fin_k`.
+for each `x,y : classical-Finₖ`.
 
-By Lemma 7.3.5 it follows that the map `nat-Fin :Fin{k}→ℕ` induces a map `nat-Fin:Fin{k}→classical-Fin_k`.
+By Lemma 7.3.5 it follows that the map `nat-Fin : Fin{k} → ℕ` induces a map `nat-Fin : Fin{k} → classical-Finₖ`.
 Construct a map
 ```text
-α_k:classical-Fin_k → Fin{k}
+αₖ : classical-Finₖ → Fin{k}
 ```
-for each `k:ℕ`, and show that
+for each `k : ℕ`, and show that
 ```text
-α_k(nat-Fin(x)) = x and nat-Fin(α_k(y)) = y
+αₖ(nat-Fin(x)) = x and nat-Fin(αₖ(y)) = y
 ```
-for each `x:Fin{k}` and each `y:classical-Fin_k`.
+for each `x : Fin{k}` and each `y : classical-Finₖ`.
 
 ## Solution
 

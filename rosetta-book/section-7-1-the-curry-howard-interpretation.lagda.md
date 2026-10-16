@@ -45,7 +45,7 @@ Consider two natural numbers `d` and `n`.
 We say that `d` **divides** `n` if there is a element of type
 
 ```text
-d|  n ≔ Σ(k : ℕ) d · k = n.
+d |  n ≔ Σ(k : ℕ) d · k = n.
 ```
 
 ```agda
@@ -88,7 +88,7 @@ For example, the assertion that every natural number is divisible by `1` is expr
 Π(x : ℕ) 1 | x.
 ```
 
-In other words, in order to show that every number `x:ℕ` is divisible by `1` we need to construct a dependent function
+In other words, in order to show that every number `x : ℕ` is divisible by `1` we need to construct a dependent function
 
 ```text
 λ x. p(x) : Π(x : ℕ) 1 | x.
@@ -100,7 +100,7 @@ We do this by constructing an element
 p(x) : Σ(k : ℕ) 1 · k = x
 ```
 
-indexed by `x:ℕ`.
+indexed by `x : ℕ`.
 Such an element `p(x)` is constructed as the pair `(x, q(x))`, where the identification `q(x) : 1 · x = x` is obtained from the left unit law of multiplication on `ℕ`, which was constructed in Exercise 5.5. 
 
 ```agda
@@ -137,7 +137,7 @@ If `d` divides any two of the three numbers `x`, `y`, and `x + y`, then it also 
 
 ### Proof
 We will only show that if `d` divides `x` and `y`, then it divides `x + y`.
-The remaining two claims, that if `d` divides `y` and `x+y` then it divides `x`, and that if `d` divides `x` and `x + y` then it divides `y`, are left as Exercise 7.1.
+The remaining two claims, that if `d` divides `y` and `x + y` then it divides `x`, and that if `d` divides `x` and `x + y` then it divides `y`, are left as Exercise 7.1.
 
 Suppose that `d` divides both `x` and `y`.
 By assumption we have elements
@@ -157,7 +157,7 @@ d · (k + l) = x + y.
 We construct such an identification as a concatenation `α ∙ (β ∙ γ)`, where the types of the identifications `α`, `β`, and `γ` are as follows:
 
 ```text
-d · (k + l) ==α== (d · k) + (d · l) ==β== x + d · l ==γ== x + y
+d · (k + l) == α == (d · k) + (d · l) == β == x + d · l == γ == x + y
 ```
 
 The identification `α` is obtained from the fact that multiplication on `ℕ` distributes over addition, which was shown in Exercise 5.5.
@@ -213,7 +213,7 @@ To interpret conjunction into type theory we observe that the introduction rule 
 P ∧ Q         P      Q
 ```
 
-Product types possess such structure, where we have the pairing operation `pair : A → (B → A × B)` and the projections `pr_1 : A × B → A` and `pr_2 : A × B → B` give interpretations of the introduction and elimination rules for conjunction.
+Product types possess such structure, where we have the pairing operation `pair : A → (B → A × B)` and the projections `pr₁ : A × B → A` and `pr₂ : A × B → B` give interpretations of the introduction and elimination rules for conjunction.
 The Curry-Howard interpretation of conjunction into type theory is therefore by products.
 We summarize the full Curry-Howard interpretation in the following table.
 
@@ -228,8 +228,8 @@ We summarize the full Curry-Howard interpretation in the following table.
 | P ∧ Q | A × B |
 | P ⇒ Q | A → B |
 | ¬P | `A → empty` |
-| ∃x P(x) | `Σ(x:A) B(x)` |
-| ∀x P(x) | `Π(x:A) B(x)` |
+| ∃x P(x) | `Σ(x : A) B(x)` |
+| ∀x P(x) | `Π(x : A) B(x)` |
 | x = y | x = y |
 
 ## Remark 7.1.6

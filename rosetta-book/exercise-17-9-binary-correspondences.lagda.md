@@ -8,20 +8,20 @@ module exercise-17-9-binary-correspondences where
 ## Problem statement
 
 Consider two types `A` and `B` and a universe `𝒰` containing both `A` and `B`.
-A **binary correspondence** `R:A→(B→𝒰)` is said to be a **function** if it satisfies the condition
+A **binary correspondence** `R : A → (B → 𝒰)` is said to be a **function** if it satisfies the condition
 ```text
-is-function(R)≔Π(a:A) is-contr(Σ(b:B) R(a,b)),
+is-function(R) ≔ Π(a : A) is-contr(Σ(b : B) R(a,b)),
 ```
-and `R` is said to be an **opposite function** if the **opposite correspondence** `R^op:B→(A→𝒰)` given by `R^op(b,a)≔ R(a,b)` is functional.
+and `R` is said to be an **opposite function** if the **opposite correspondence** `R^op : B → (A → 𝒰)` given by `R^op(b,a) ≔ R(a,b)` is functional.
 
 Construct an equivalence
 ```text
-(A→ B)≃ Σ(R:A→(B→𝒰)) is-function(R).
+(A → B) ≃ Σ(R : A → (B → 𝒰)) is-function(R).
 ```
 
 Construct an equivalence
 ```text
-(A≃ B)≃Σ(R:A→ (B→𝒰)) is-function(R)×is-function(R^op).
+(A ≃ B) ≃ Σ(R : A → (B → 𝒰)) is-function(R) × is-function(R^op).
 ```
 
 ## Solution

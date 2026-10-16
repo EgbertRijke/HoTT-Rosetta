@@ -171,7 +171,7 @@ Let `f : Π(x, y : A) R(x,y) → (x = y)`.
 Since `R` is assumed to be reflexive, we also have a family of maps
 
 ```text
-  path-ind_x(ρ(x)) : Π(y : A) (x = y) → R(x,y).
+  path-indₓ(ρ(x)) : Π(y : A) (x = y) → R(x,y).
 ```
 
 Since each `R(x,y)` is assumed to be a proposition, it therefore follows that each `R(x,y)` is a retract of `x = y`.

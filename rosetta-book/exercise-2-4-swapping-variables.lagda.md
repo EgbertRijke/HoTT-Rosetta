@@ -15,7 +15,7 @@ Define the **swap function**
 ```text
    Γ ⊢ A type   Γ ⊢ B type   Γ, x : A, y : B ⊢ C(x,y) type
   ---------------------------------------------------------
-   Γ ⊢ σ : (Π(x:A) Π(y:B) C(x,y)) → (Π(y:B) Π(x:A) C(x,y))
+   Γ ⊢ σ : (Π(x : A) Π(y : B) C(x,y)) → (Π(y : B) Π(x : A) C(x,y))
 ```
 
 that swaps the order of the arguments.
@@ -27,7 +27,7 @@ Show that
 ```text
        Γ ⊢ A type   Γ ⊢ B type   Γ, x : A, y : B ⊢ C(x,y) type
   ------------------------------------------------------------------
-   Γ ⊢ σ ∘ σ ≐ id : (Π(x:A) Π(y:B) C(x,y)) → (Π(x:A) Π(y:B) C(x,y))
+   Γ ⊢ σ ∘ σ ≐ id : (Π(x : A) Π(y : B) C(x,y)) → (Π(x : A) Π(y : B) C(x,y))
 ```
 
 ## Solution

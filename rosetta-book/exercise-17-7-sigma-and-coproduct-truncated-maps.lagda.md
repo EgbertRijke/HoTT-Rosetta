@@ -18,9 +18,9 @@ Show that the following are equivalent:
 
 2. The map `Σ_A` is `k`-truncated.
 
-Hint: Construct an equivalence `fib(Σ_A, X)≃ (X→ A)`.
+Hint: Construct an equivalence `fib(Σ_A, X) ≃ (X → A)`.
 
-Show that the map `{+}:𝒰×𝒰→𝒰`, which takes `(A,B)` to the coproduct `A+B`, is `0`-truncated.
+Show that the map `{+} : 𝒰 × 𝒰 → 𝒰`, which takes `(A,B)` to the coproduct `A + B`, is `0`-truncated.
 
 ## Solution
 

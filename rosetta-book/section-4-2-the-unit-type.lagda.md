@@ -57,7 +57,7 @@ Then the induction principle of the unit type provides a function
   ind_𝟙 : A → (𝟙 → A).
 ```
 
-In other words, by the induction principle for the unit type we obtain for every `x : A` a function `pt_x ≔ ind_𝟙(x) : 𝟙 → A`.
+In other words, by the induction principle for the unit type we obtain for every `x : A` a function `ptₓ ≔ ind_𝟙(x) : 𝟙 → A`.
 
 ```agda
 module _

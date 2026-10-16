@@ -18,7 +18,7 @@ open import section-8-1-decidability-and-decidable-equality
 
 For any family `P` of decidable types indexed by `Fin{k}`, construct a function
 ```text
-¬(Π(x:Fin{k}) P(x))→Σ(x:Fin{k}) ¬ P(x).
+¬(Π(x : Fin{k}) P(x)) → Σ(x : Fin{k}) ¬ P(x).
 ```
 
 ## Solution

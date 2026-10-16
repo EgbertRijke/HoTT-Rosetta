@@ -25,5 +25,5 @@ It is now up to us to start developing some mathematics in it, and Martin-Löf�
 The fundamental idea that is used to develop basic mathematics in type theory is the Curry-Howard interpretation.
 This is a translation of logic into type theory, which we will use to express concepts of mathematics such as divisibility, the congruence relations, and so on.
 
-We will also introduce the family `Fin` of the standard finite types, indexed by `ℕ`, and show how each `Fin{k+1}` can be equipped with the group structure of integers modulo `k+1`.
+We will also introduce the family `Fin` of the standard finite types, indexed by `ℕ`, and show how each `Fin{k + 1}` can be equipped with the group structure of integers modulo `k + 1`.
 Our goal here is to demonstrate how to do those things in type theory, so we will aim for a high degree of accuracy.

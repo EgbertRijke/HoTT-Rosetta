@@ -10,19 +10,19 @@ module exercise-14-1-propositional-truncation-properties where
 Let `A` be a type.
 Show that
 
-`‖‖A‖‖↔‖A‖`.
+`‖‖A‖‖ ↔ ‖A‖`.
 
-`‖is-decidable(A)‖↔is-decidable‖A‖`.
+`‖is-decidable(A)‖ ↔ is-decidable‖A‖`.
 
-`is-decidable(A)→ (‖A‖→ A)`.
+`is-decidable(A) → (‖A‖ → A)`.
 
-`¬¬‖A‖↔¬¬ A`.
+`¬¬‖A‖ ↔ ¬¬ A`.
 
-`‖A‖∨‖B‖↔ ‖A+B‖`.
+`‖A‖ ∨ ‖B‖ ↔ ‖A + B‖`.
 
-`∃_{(x:A)}‖B(x)‖↔ ‖Σ(x:A) B(x)‖`.
+`∃_{(x : A)}‖B(x)‖ ↔ ‖Σ(x : A) B(x)‖`.
 
-`¬¬(‖A‖→ A)`.
+`¬¬(‖A‖ → A)`.
 
 ## Solution
 

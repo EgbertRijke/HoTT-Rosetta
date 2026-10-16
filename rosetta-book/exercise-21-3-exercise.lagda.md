@@ -8,13 +8,13 @@ module exercise-21-3-exercise where
 
 Show that for any `x : S¹`, both functions
 ```text
-mul_(S¹)(x,_) and mul_(S¹)(_,x)
+mul_{S¹}(x,_) and mul_{S¹}(_,x)
 ```
 are equivalences.
 
 Show that the function
 ```text
-mul_(S¹) : S¹ → (S¹ → S¹)
+mul_{S¹} : S¹ → (S¹ → S¹)
 ```
 is an embedding.
 

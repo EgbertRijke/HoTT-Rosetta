@@ -28,21 +28,21 @@ open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-13-12-dependent-products-of-truncated-maps
 ```
 
-The dependent universal property precisely characterizes sections of families over the integers, for those families `A(k)` indexed by `k : ℤ` that come equipped with families of equivalences `A(k) ≃ A(k+1)` for all `k : ℤ`.
+The dependent universal property precisely characterizes sections of families over the integers, for those families `A(k)` indexed by `k : ℤ` that come equipped with families of equivalences `A(k) ≃ A(k + 1)` for all `k : ℤ`.
 
 ## Lemma 22.3.1
 
-Let `B` be a family over `ℤ`, equipped with an element `b_0:B(0)`, and an equivalence
+Let `B` be a family over `ℤ`, equipped with an element `b₀ : B(0)`, and an equivalence
 
 ```text
-e_k : B(k) ≃ B(succ-ℤ(k))
+eₖ : B(k) ≃ B(succ-ℤ(k))
 ```
 
 for each `k : ℤ`.
-Then there is a dependent function `f : Π(k : ℤ) B(k)` equipped with identifications `f(0) = b_0` and
+Then there is a dependent function `f : Π(k : ℤ) B(k)` equipped with identifications `f(0) = b₀` and
 
 ```text
-f(succ-ℤ(k)) = e_k(f(k))
+f(succ-ℤ(k)) = eₖ(f(k))
 ```
 
 for any `k : ℤ`.
@@ -53,9 +53,9 @@ _Proof._ The map is defined using the induction principle for the integers, stat
 First we take
 
 ```text
-f(-1) ≔ e_{-1}^{-1}(b_0)
-f(0) ≔ b_0
-f(1) ≔ e_0(b_0).
+f(-1) ≔ e₋₁^{-1}(b₀)
+f(0) ≔ b₀
+f(1) ≔ e₀(b₀).
 ```
 
 For the induction step on the negative integers we use
@@ -128,7 +128,7 @@ succ-ℤ  |          | e
 ```
 
 commutes.
-In particular, if we take `A ≔ (x=x)` for some `x : X`, then for any `p : x = x` we have the equivalence `λ q. p ∙ q : (x = x) → (x = x)`.
+In particular, if we take `A ≔ (x = x)` for some `x : X`, then for any `p : x = x` we have the equivalence `λ q. p ∙ q : (x = x) → (x = x)`.
 This equivalence induces a map
 
 ```text
@@ -158,7 +158,7 @@ e : Π(k : ℤ) B(k) ≃ B(succ-ℤ (k)).
 Then the type
 
 ```text
-Σ(f : Π(k : ℤ) B(k)) (f(0) = b) × Π(k : ℤ) f(succ-ℤ (k)) = e_k(f(k))
+Σ(f : Π(k : ℤ) B(k)) (f(0) = b) × Π(k : ℤ) f(succ-ℤ (k)) = eₖ(f(k))
 ```
 
 is contractible.
@@ -172,7 +172,7 @@ Note that the type `(f,p,H) = (f',p',H')` is equivalent to the type of triples `
 ```text
 K : f ~ f'
 α : K(0) = p ∙ (p')^{-1}
-β : Π(k : ℤ) K(succ-ℤ (k)) = (H(k) ∙ ap_{e_k}(K(k))) ∙ H'(k)^{-1}.
+β : Π(k : ℤ) K(succ-ℤ (k)) = (H(k) ∙ ap_{eₖ}(K(k))) ∙ H'(k)^{-1}.
 ```
 
 We obtain such a triple by applying Lemma 22.3.1 to the family `C` over `ℤ` given by `C(k) ≔ f(k) = f'(k)`, which comes equipped with the base point
@@ -184,10 +184,10 @@ p ∙ (p')^{-1} : C(0),
 and the family of equivalences
 
 ```text
-Π(k:ℤ) C(k) ≃ C(succ-ℤ (k))
+Π(k : ℤ) C(k) ≃ C(succ-ℤ (k))
 ```
 
-given by `r ↦ (H(k) ∙ ap_{e_k}(r)) ∙ H'(k)^{-1}`. ◻
+given by `r ↦ (H(k) ∙ ap_{eₖ}(r)) ∙ H'(k)^{-1}`. ◻
 
 ```agda
 ELIM-ℤ :
@@ -325,10 +325,10 @@ One way of phrasing it is that `ℤ` is the _initial type equipped with a point 
 
 ## Corollary 22.3.4
 
-For any type `X` equipped with a base point `x_0 : X` and an automorphism `e : X ≃ X`, the type
+For any type `X` equipped with a base point `x₀ : X` and an automorphism `e : X ≃ X`, the type
 
 ```text
-Σ(f : ℤ → X) (f(0) = x_0)× ((f ∘ succ-ℤ) ~ (e∘ f))
+Σ(f : ℤ → X) (f(0) = x₀) × ((f ∘ succ-ℤ) ~ (e ∘ f))
 ```
 
 is contractible.
@@ -357,7 +357,7 @@ e : Π(k : ℤ) A(k) ≃ A(succ-ℤ(k)),
 the map
 
 ```text
-ev_0 : (Σ(f : Π(k : ℤ) A(k)) Π(k : ℤ) f(succ-ℤ(k)) = e_k(f(k))) → A(0)
+ev₀ : (Σ(f : Π(k : ℤ) A(k)) Π(k : ℤ) f(succ-ℤ(k)) = eₖ(f(k))) → A(0)
 ```
 
 given by `(f,H) ↦ f(0)` is an equivalence.
@@ -366,7 +366,7 @@ given by `(f,H) ↦ f(0)` is an equivalence.
 
 BENCHMARK PROBLEM
 
-_Proof._ Note that the fibers of `ev_0` are equivalent to the types that are shown to be contractible in Proposition 22.3.3. ◻
+_Proof._ Note that the fibers of `ev₀` are equivalent to the types that are shown to be contractible in Proposition 22.3.3. ◻
 
 The following corollary will be used to prove that the fundamental cover of the circle is equivalent to the identity type based at `base : S¹`.
 

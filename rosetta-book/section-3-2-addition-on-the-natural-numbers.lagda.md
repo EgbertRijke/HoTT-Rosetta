@@ -11,7 +11,7 @@ Many of those properties, however, require a few more ingredients of Martin-Löf
 For example, the traditional inductive proof that the triangular numbers can be calculated by
 
 ```text
-  1 + ⋯ + n = n(n + 1)/2
+  1 + ⋯ + n = n(n + 1) / 2
 ```
 
 is analogous in type theory, but it requires the identity type to state this equation.
@@ -50,17 +50,17 @@ The induction principle of `ℕ` is used with the family of types `P(n) ≔ ℕ`
 Therefore, we need to construct
 
 ```text
-  m : ℕ ⊢ add-0 (m) : ℕ,
+  m : ℕ ⊢ add - 0 (m) : ℕ,
   m : ℕ ⊢ add-S (m) : ℕ → (ℕ → ℕ),
 ```
 
 in order to obtain
 
 ```text
-  m : ℕ ⊢ add-ℕ(m) ≔ ind-ℕ(add-0(m),add-S(m)) : ℕ → ℕ.
+  m : ℕ ⊢ add-ℕ(m) ≔ ind-ℕ(add - 0(m),add-S(m)) : ℕ → ℕ.
 ```
 
-The element `add-0(m) : ℕ` in context `m : ℕ` is of course defined to be `m : ℕ`, i.e., by the generic element, because adding zero should just be the identity function.
+The element `add - 0(m) : ℕ` in context `m : ℕ` is of course defined to be `m : ℕ`, i.e., by the generic element, because adding zero should just be the identity function.
 To see how the function `add-S(m) : ℕ → (ℕ → ℕ)` should be defined, we look at the specification of `add-ℕ(m)` when it is applied to a successor:
 
 ```text
@@ -76,7 +76,7 @@ This shows us that we should define
 because with this definition we will have
 
 ```text
-  add-ℕ(m,succ-ℕ(n)) ≐ ind-ℕ(add-0(m),add-S(m),succ-ℕ(n))
+  add-ℕ(m,succ-ℕ(n)) ≐ ind-ℕ(add - 0(m),add-S(m),succ-ℕ(n))
                      ≐ add-S(m,n,add-ℕ(m,n))
                      ≐ succ-ℕ(add-ℕ(m,n)).
 ```
@@ -101,11 +101,11 @@ We combine this derivation with the induction principle of `ℕ` to complete the
 ```text
                ⋮                               ⋮
   --------------------------  --------------------------------
-   m : ℕ ⊢ add-0(m) ≔ m : ℕ    m : ℕ ⊢ add-S(m) : ℕ → (ℕ → ℕ)
+   m : ℕ ⊢ add - 0(m) ≔ m : ℕ    m : ℕ ⊢ add-S(m) : ℕ → (ℕ → ℕ)
   ------------------------------------------------------------
-      m : ℕ ⊢ ind-ℕ(add-0(m),add-S(m)) : ℕ → ℕ
+      m : ℕ ⊢ ind-ℕ(add - 0(m),add-S(m)) : ℕ → ℕ
     -----------------------------------------------------
-     m : ℕ ⊢ add-ℕ(m) ≔ ind-ℕ(add-0(m),add-S(m)) : ℕ → ℕ
+     m : ℕ ⊢ add-ℕ(m) ≔ ind-ℕ(add - 0(m),add-S(m)) : ℕ → ℕ
 ```
 
 The asserted judgmental equalities then hold by the computation rules for `ℕ`. □

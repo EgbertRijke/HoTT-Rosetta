@@ -561,7 +561,7 @@ The type
 is equivalent to the type
 
 ```text
-  Σ(Q : P_𝒰⁺(A)) Π(y:A) Q(y) ↔ R(x,y)
+  Σ(Q : P_𝒰⁺(A)) Π(y : A) Q(y) ↔ R(x,y)
 ```
 
 since the proposition `∃_{(z : A)} ∀_{(y : A)} Q(y) ↔ R(z,y)` is equivalent to the type `Π(y : A) Q(y) ↔ R(x,y)`, given an element `q : Q(x)`.

@@ -31,7 +31,7 @@ Let `A` be a type equipped with a term `a : A`.
 A **(unary) identity system** on `A` at `a` consists of a type family `B` over `A` equipped with `b : B(a)`, such that for any family of types `P(x,y)` indexed by `x : A` and `y : B(x)`, the function
 
 ```text
-  h ↦ h(a,b) : (Π(x : A) Π(y : B(x)) P(x,y))→ P(a,b)
+  h ↦ h(a,b) : (Π(x : A) Π(y : B(x)) P(x,y)) → P(a,b)
 ```
 
 has a section.
@@ -82,7 +82,7 @@ The theorem asserts conditions that are equivalent to `f` being a family of equi
 In the setup of the fundamental theorem of identity types we can always construct the family of maps
 
 ```text
-  f ≔ path-ind_a(b) : Π(x : A) (a = x) → B(x)
+  f ≔ path-indₐ(b) : Π(x : A) (a = x) → B(x)
 ```
 
 for which the judgmental equality `f(a,refl) ≐ b` holds.
@@ -94,7 +94,7 @@ Occasionally we will also use the third equivalent statement.
 
 ## Theorem 11.2.2
 
-Let `A` be a type with `a:A`, and let `B` be a type family over `A` equipped with a point `b : B(a)`.
+Let `A` be a type with `a : A`, and let `B` be a type family over `A` equipped with a point `b : B(a)`.
 Furthermore, consider a family of maps
 
 ```text
@@ -119,7 +119,7 @@ Then the following are equivalent:
 In particular, we see that for any `b : B(a)`, the canonical family of maps
 
 ```text
-  path-ind_a(b) : Π(x : A) (a = x) → B(x)
+  path-indₐ(b) : Π(x : A) (a = x) → B(x)
 ```
 
 is a family of equivalences if and only if `Σ(x : A) B(x)` is contractible.

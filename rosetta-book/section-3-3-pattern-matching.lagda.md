@@ -25,14 +25,14 @@ It is therefore convenient to present the definition of `add-ℕ` recursively in
 More generally, if we want to define a dependent function `f : Π(n : ℕ) P(n)` by induction on `n`, using
 
 ```text
-  p_0 : P(0)
+  p₀ : P(0)
   p_S : Π(n : ℕ)  P(n) → P(succ-ℕ(n)),
 ```
 
 we can present that definition by writing
 
 ```text
-          f(0) ≔ p_0
+          f(0) ≔ p₀
   f(succ-ℕ(n)) ≔ p_S(n,f(n)). 
 ```
 

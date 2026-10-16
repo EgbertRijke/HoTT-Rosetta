@@ -203,17 +203,17 @@ module _
 In Proposition 7.2.4 we constructed the congruence relations `x ≡ y mod k` on the natural numbers for every natural number `k`, and in Theorems 7.4.7 and 7.4.8 we showed that the map
 
 ```text
-  x ↦ [x]_{k+1} : ℕ → Fin_{k+1}
+  x ↦ [x]ₖ₊₁ : ℕ → Finₖ₊₁
 ```
 
 is effective and split surjective.
 By Theorem 18.2.3 it follows that the map
 
 ```text
-  x ↦ [x]_{k+1} : ℕ → Fin_{k+1}
+  x ↦ [x]ₖ₊₁ : ℕ → Finₖ₊₁
 ```
 
-satisfies the universal property of the set quotient of the equivalence relation `x, y ↦ x ≡ y mod k+1`.
+satisfies the universal property of the set quotient of the equivalence relation `x, y ↦ x ≡ y mod k + 1`.
 
 We also claim that there is a choice of representatives of the congruence relations.
 We define our choice of representatives by
@@ -222,25 +222,25 @@ We define our choice of representatives by
   C(y) ≔ fib(nat-Fin, y),
 ```
 
-where `nat-Fin : Fin_{k+1} → ℕ` is the inclusion of `Fin_{k+1}` into `ℕ` constructed in Definition 7.3.4.
+where `nat-Fin : Finₖ₊₁ → ℕ` is the inclusion of `Finₖ₊₁` into `ℕ` constructed in Definition 7.3.4.
 To see that `C` is a choice of representatives, we have to prove that
 
 ```text
-  Σ(y : ℕ) C(y) × (x ≡ y mod k+1)
+  Σ(y : ℕ) C(y) × (x ≡ y mod k + 1)
 ```
 
 is contractible for each `x : ℕ`.
-At the center of contraction we have the triple `(nat-Fin([x]_{k+1}),([x]_{k+1},refl),p)` where `p : x ≡ nat-Fin([x]_{k+1}) mod k+1` is the proof obtained via Theorems 7.4.7 and 7.4.8.
-In order to construct the contraction, note that both `C(y)` and `x ≡ y mod k+1` are propositions for each `y : ℕ`.
-Therefore it suffices to prove that for any `y : ℕ` such that `C(y)` and `x ≡ y mod k+1` hold, we have
+At the center of contraction we have the triple `(nat-Fin([x]ₖ₊₁),([x]ₖ₊₁,refl),p)` where `p : x ≡ nat-Fin([x]ₖ₊₁) mod k + 1` is the proof obtained via Theorems 7.4.7 and 7.4.8.
+In order to construct the contraction, note that both `C(y)` and `x ≡ y mod k + 1` are propositions for each `y : ℕ`.
+Therefore it suffices to prove that for any `y : ℕ` such that `C(y)` and `x ≡ y mod k + 1` hold, we have
 
 ```text
-  nat-Fin([x]_{k+1}) = y.
+  nat-Fin([x]ₖ₊₁) = y.
 ```
 
-Since `C(y)` holds, we see that `y = nat-Fin([y]_{k+1})`.
-Therefore it suffices to prove that `[x]_{k+1} = [y]_{k+1}`.
-This follows from Theorem 7.4.7, since we assumed `x ≡ y mod k+1`.
+Since `C(y)` holds, we see that `y = nat-Fin([y]ₖ₊₁)`.
+Therefore it suffices to prove that `[x]ₖ₊₁ = [y]ₖ₊₁`.
+This follows from Theorem 7.4.7, since we assumed `x ≡ y mod k + 1`.
 
 ## Example 18.4.4
 
@@ -275,37 +275,37 @@ It is therefore safe to assume that `y > 0`.
 We claim that
 
 ```text
-  (x/gcd(x,y), y/gcd(x,y)) : Q
+  (x / gcd(x,y), y / gcd(x,y)) : Q
 ```
 
 satisfies `C` and is equivalent to `(x,y)`.
-It is immediate that `y/gcd(x,y) > 0` and that `(x,y) ~ (x/gcd(x,y),y/gcd(x,y))`.
-The fact that `x/gcd(x,y)` and `y/gcd(x,y)` are coprime follows from the fact that
+It is immediate that `y / gcd(x,y) > 0` and that `(x,y) ~ (x / gcd(x,y),y / gcd(x,y))`.
+The fact that `x / gcd(x,y)` and `y / gcd(x,y)` are coprime follows from the fact that
 
 ```text
-  gcd(x/d,y/d) = gcd(x,y)/d
+  gcd(x / d,y / d) = gcd(x,y) / d
 ```
 
 for any common divisor `d` of `x` and `y`.
 
-To construct a contraction, let `(x',y'):Q` such that `C(x',y')` and `(x,y) ~ (x',y')`.
+To construct a contraction, let `(x',y') : Q` such that `C(x',y')` and `(x,y) ~ (x',y')`.
 Since `C(q)` and `(x,y) ~ q` are propositions for every `q : Q` it suffices to show that
 
 ```text
-  x' = x/gcd(x,y) and y' = y/gcd(x,y).
+  x' = x / gcd(x,y) and y' = y / gcd(x,y).
 ```
 
 Since `x'` and `y'` are assumed to be coprime, it follows from the equation
 
 ```text
-  x'y/gcd(x,y) = xy'/gcd(x,y)
+  x'y / gcd(x,y) = xy' / gcd(x,y)
 ```
 
-that `x'` divides `x/gcd(x,y)`.
-Similarly `x/gcd(x,y)` and `y/gcd(x,y)` are coprime, it follows from the same equation that `x/gcd(x,y)` divides `x'`, so we conclude that `ux' = x/gcd(x,y)` for some `u = ± 1`.
-The fact that `vy' = y/gcd(x,y)` for some `v = ± 1` is proven similarly.
+that `x'` divides `x / gcd(x,y)`.
+Similarly `x / gcd(x,y)` and `y / gcd(x,y)` are coprime, it follows from the same equation that `x / gcd(x,y)` divides `x'`, so we conclude that `ux' = x / gcd(x,y)` for some `u = ± 1`.
+The fact that `vy' = y / gcd(x,y)` for some `v = ± 1` is proven similarly.
 However, since both `y` and `y'` are positive, and the `gcd(x,y)` of any two integers is positive, it follows that `v = 1`.
-Using the assumption that `x'y/gcd(x,y) = xy'/gcd(x,y)`, this allows us to deduce that also `u = 1`.
+Using the assumption that `x'y / gcd(x,y) = xy' / gcd(x,y)`, this allows us to deduce that also `u = 1`.
 
 We define the type of **rational numbers** by
 
@@ -313,8 +313,8 @@ We define the type of **rational numbers** by
   ℚ ≔ Σ((x,y) : Q) (y > 0) ∧ gcd(x,y) = 1,
 ```
 
-and we define the quotient map `(x,y) ↦ x/y : Q → ℚ` to be the quotient map `q` in Theorem 18.4.2.
-By Theorem 18.4.2 it also follows that `(x,y) ↦ x/y` satisfies the universal property of the set quotient of the equivalence relation `~` on `Q`.
+and we define the quotient map `(x,y) ↦ x / y : Q → ℚ` to be the quotient map `q` in Theorem 18.4.2.
+By Theorem 18.4.2 it also follows that `(x,y) ↦ x / y` satisfies the universal property of the set quotient of the equivalence relation `~` on `Q`.
 
 ```agda
 is-nonzero-prop-ℤ : ℤ → Prop lzero

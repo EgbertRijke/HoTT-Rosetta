@@ -28,12 +28,12 @@ open import section-6-4-peanos-seventh-and-eighth-axioms
 Show that
 
 ```text
-(m = n) ↔ (m+k = n+k)
-(m = n) ↔ (m·(k+1) = n · (k+1))
+(m = n) ↔ (m + k = n + k)
+(m = n) ↔ (m · (k + 1) = n · (k + 1))
 ```
 
 for all `m,n,k : ℕ`.
-In other words, adding `k` and multiplying by `k+1` are injective functions.
+In other words, adding `k` and multiplying by `k + 1` are injective functions.
 
 ### Exercise 6.1(b)
 
@@ -45,7 +45,7 @@ Show that
 (m · n = 1) ↔ (m = 1) × (n = 1)
 ```
 
-for all `m,n:ℕ`.
+for all `m,n : ℕ`.
 
 ### Exercise 6.1(c)
 
@@ -56,7 +56,7 @@ m ≠ m + (n + 1)
 m + 1 ≠ (m + 1)(n + 2)
 ```
 
-for all `m,n:ℕ`.
+for all `m,n : ℕ`.
 
 ## Solution
 

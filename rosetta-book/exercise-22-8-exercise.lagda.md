@@ -7,7 +7,7 @@ module exercise-22-8-exercise where
 
 ## Problem statement
 
-For convenience, we will write `x ·_{S¹} y ≔ mul_(S¹)(x,y)` in this exercise.
+For convenience, we will write `x ·_{S¹} y ≔ mul_{S¹}(x,y)` in this exercise.
 Construct the **Mac Lane pentagon** for the circle, i.e. show that the pentagon
 
 ```text

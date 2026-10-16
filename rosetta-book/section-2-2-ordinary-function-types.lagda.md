@@ -14,13 +14,13 @@ An important special case of `Π`-types arises when both `A` and `B` are types i
   -------------------------- W
       Γ , x : A ⊢ B type
      -------------------- Π
-      Γ ⊢ Π(x:A) B type.
+      Γ ⊢ Π(x : A) B type.
 ```
 
-A term `f : Π(x:A) B` is a function that takes an argument `x : A` and returns `f(x) : B`. In other words, terms of type `Π(x:A) B` are indeed ordinary functions from `A` to `B`. Therefore, we define the type `A → B` of **(ordinary) functions** from `A` to `B` by
+A term `f : Π(x : A) B` is a function that takes an argument `x : A` and returns `f(x) : B`. In other words, terms of type `Π(x : A) B` are indeed ordinary functions from `A` to `B`. Therefore, we define the type `A → B` of **(ordinary) functions** from `A` to `B` by
 
 ```text
-  A → B := Π(x:A) B.
+  A → B := Π(x : A) B.
 ```
 
 If `f : A → B` is a function, then the type `A` is also called the **domain** of `f`, and the type `B` is also called the **codomain** of `f`.
@@ -32,9 +32,9 @@ Sometimes we will also write `Bᴬ` for the type `A → B`. Formally, we make su
      -------------------------- W
          Γ, x : A ⊢ B type
         ------------------- Π
-         Γ ⊢ Π(x:A) B type
+         Γ ⊢ Π(x : A) B type
   ------------------------------
-   Γ ⊢ A → B :=  Π(x:A) B type.
+   Γ ⊢ A → B :=  Π(x : A) B type.
 ```
 
 ## Remark 2.2.1
@@ -47,7 +47,7 @@ More generally, we can make definitions at the end of a derivation if the conclu
    Γ ⊢ a : A,
 ```
 
-in which the derivation `𝒟` makes use of the premises `ℋ₁`, …, `ℋ_n`. If we wish to make a definition `c := a`, then we can extend the derivation tree with
+in which the derivation `𝒟` makes use of the premises `ℋ₁`, …, `ℋₙ`. If we wish to make a definition `c := a`, then we can extend the derivation tree with
 
 ```text
           𝒟
@@ -60,13 +60,13 @@ in which the derivation `𝒟` makes use of the premises `ℋ₁`, …, `ℋ_n`.
 The effect of such a definition is that we have extended our type theory with a new constant `c `, for which the following inference rules are valid
 
 ```text
-   ℋ₁    ℋ₂    ⋯    ℋ_n
+   ℋ₁    ℋ₂    ⋯    ℋₙ
   -----------------------
-        Γ ⊢ c :A
+        Γ ⊢ c : A
 ```
 
 ```text
-   ℋ₁    ℋ₂    ⋯    ℋ_n
+   ℋ₁    ℋ₂    ⋯    ℋₙ
   -----------------------
       Γ ⊢ c ≐ a : A
 ```
@@ -82,7 +82,7 @@ In our example of the definition of the ordinary function type `A → B`, we the
 ```text
     Γ ⊢ A type    Γ ⊢ B type
   ----------------------------
-   Γ ⊢ A → B ≐ Π(x:A) B type.
+   Γ ⊢ A → B ≐ Π(x : A) B type.
 ```
 
 There are of course many such definitions throughout the development of dependent type theory, the univalent foundations of mathematics, and synthetic homotopy theory. They are all included in the index at the end of this book.
@@ -178,13 +178,13 @@ Types of functions with multiple arguments can be formed by iterating the `Π`-f
 
 takes two arguments: first it takes an argument `x : A`, and the output `f(x)` has type `B → C`. This is again a function type, so `f(x)` is a function that takes an argument `y : B`, and its output `f(x)(y)` has type `C`. We will usually write `f(x,y)` for `f(x)(y)`.
 
-Similarly, when `C(x,y)` is a family of types indexed by `x : A` and `y : B(x)`, then we can form the dependent function type `Π(x:A) Π(y:B(x)) C(x,y)`. In the special case where `C(x,y)` is a family of types indexed by two elements `x, y : A` of the same type, then we often write
+Similarly, when `C(x,y)` is a family of types indexed by `x : A` and `y : B(x)`, then we can form the dependent function type `Π(x : A) Π(y : B(x)) C(x,y)`. In the special case where `C(x,y)` is a family of types indexed by two elements `x, y : A` of the same type, then we often write
 
 ```text
-  Π(x,y:A) C(x,y)
+  Π(x,y : A) C(x,y)
 ```
 
-for the type `Π(x:A) Π(y:A) C(x,y)`.
+for the type `Π(x : A) Π(y : A) C(x,y)`.
 
 With the idea of iterating function types, we see that type of the composition operation `comp` is
 
@@ -293,7 +293,7 @@ The main idea of the proof is that both `((h ∘ g) ∘ f)(x)` and `(h ∘ (g �
                            ----------------------------------------
                             Γ, x : A ⊢ h(g(f(x))) ≐ h(g(f(x))) : D
                          ---------------------------------------------
-                          Γ, x : A ⊢ (h∘ g)(f(x)) ≐ h((g ∘ f)(x)) : D
+                          Γ, x : A ⊢ (h ∘ g)(f(x)) ≐ h((g ∘ f)(x)) : D
                       ----------------------------------------------------
                        Γ, x : A ⊢ ((h ∘ g) ∘ f)(x) ≐ (h ∘ (g ∘ f))(x) : D
                       ----------------------------------------------------
@@ -332,7 +332,7 @@ Note that it suffices to derive that `id (f(x)) ≐ f(x)` in context `Γ, x : A`
                        Γ ⊢ id ∘ f ≐ f : A → B.
 ```
 
-The derivation of the equality `id (f(x))≐ f(x)` in context `Γ,x:A` is as follows:
+The derivation of the equality `id (f(x)) ≐ f(x)` in context `Γ,x : A` is as follows:
 
 ```text
                                                    Γ ⊢ B type

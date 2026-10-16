@@ -79,20 +79,20 @@ Therefore it is possible to derive an induction principle especially tailored fo
 This induction principle asserts that for any type family `P` over `ℤ`, we can define a dependent function `f : Π(k : ℤ) P(k)` recursively by
 
 ```text
-  f(-1_ℤ)                ≔ p_-1
+  f(-1_ℤ)                ≔ p₋₁
   f(in-neg-ℤ(succ-ℕ(n))) ≔ p_-S(n , f(in-neg-ℤ(n)))
-  f(0_ℤ)                 ≔ p_0
-  f(1_ℤ)                 ≔ p_1
+  f(0_ℤ)                 ≔ p₀
+  f(1_ℤ)                 ≔ p₁
   f(in-pos-ℤ(succ-ℕ(n))) ≔ p_S(n , f(in-pos-ℤ(n))),
 ```
 
-where the types of `p_-1`, `p_-S`, `p_0`, `p_1`, and `p_S` are
+where the types of `p₋₁`, `p_-S`, `p₀`, `p₁`, and `p_S` are
 
 ```text
-  p_-1 : P(-1_ℤ)
+  p₋₁ : P(-1_ℤ)
   p_-S : Π(n : ℕ) P(in-neg-ℤ(n)) → P(in-neg-ℤ(succ-ℕ(n)))
-  p_0  : P(0_ℤ)
-  p_1  : P(1_ℤ)
+  p₀  : P(0_ℤ)
+  p₁  : P(1_ℤ)
   p_S  : Π(n : ℕ) P(in-pos-ℤ(n)) → P(in-pos-ℤ(succ-ℕ(n))).
 ```
 

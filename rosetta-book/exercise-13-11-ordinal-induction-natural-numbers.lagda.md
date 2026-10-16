@@ -9,13 +9,13 @@ module exercise-13-11-ordinal-induction-natural-numbers where
 
 Show that `ℕ` satisfies **ordinal induction**, i.e., construct for any type family `P` over `ℕ` a function `ord-ind` of type
 ```text
-(Π(k:ℕ) (Π(m:ℕ) (m< k) → P(m))→ P(k)) → Π(n:ℕ) P(n).
+(Π(k : ℕ) (Π(m : ℕ) (m < k) → P(m)) → P(k)) → Π(n : ℕ) P(n).
 ```
 Moreover, prove that
 ```text
-ord-ind(h,n)=h(n,λ m. λ p. ord-ind(h,m))
+ord-ind(h,n) = h(n,λ m. λ p. ord-ind(h,m))
 ```
-for any `n:ℕ` and any `h:Π(k:ℕ) (Π(m:ℕ) (m<k)→ P(m))→ P(k)`.
+for any `n : ℕ` and any `h : Π(k : ℕ) (Π(m : ℕ) (m < k) → P(m)) → P(k)`.
 
 ## Solution
 

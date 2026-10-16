@@ -7,10 +7,10 @@ module exercise-14-4-dependent-universal-property-truncations where
 
 ## Problem statement
 
-Consider a map `f:A→ P` into a proposition `P`.
+Consider a map `f : A → P` into a proposition `P`.
 We say that `f` satisfies the **dependent universal property of the propositional truncation** of `A`, if for any family `Q` of propositions over `P`, the precomposition function
 ```text
-_∘ f : (Π(p:P) Q(p))→(Π(x:A) Q(f(x)))
+_ ∘ f : (Π(p : P) Q(p)) → (Π(x : A) Q(f(x)))
 ```
 is an equivalence.
 Show that the following are equivalent:

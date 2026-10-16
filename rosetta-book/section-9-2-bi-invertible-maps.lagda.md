@@ -240,7 +240,7 @@ module _
 
 ## Example 9.2.4
 
-Since we have seen in Remark 9.1.1 that the negation function `neg-bool:bool→bool` on the booleans is its own inverse, it follows that `neg-bool` is an equivalence.
+Since we have seen in Remark 9.1.1 that the negation function `neg-bool : bool → bool` on the booleans is its own inverse, it follows that `neg-bool` is an equivalence.
 
 ```agda
 is-involution :
@@ -309,7 +309,7 @@ pr1 equiv-neg-ℤ = neg-ℤ
 pr2 equiv-neg-ℤ = is-equiv-neg-ℤ
 ```
 
-The same holds for the finite types: the maps `succ-Fin_{k}`, `pred-Fin_{k}`, `add-Fin_{k}(x)` and `neg-Fin_{k}` are all equivalences on `Fin{k}`.
+The same holds for the finite types: the maps `succ-Finₖ`, `pred-Finₖ`, `add-Finₖ(x)` and `neg-Finₖ` are all equivalences on `Fin{k}`.
 
 ```agda
 is-equiv-succ-Fin : (k : ℕ) → is-equiv (succ-Fin k)
@@ -462,7 +462,7 @@ First we construct for any equivalence `f` with right inverse `g` and left inver
 For any `y : B`, we have
 
 ```text
-        H(g(y))⁻¹          ap_h(G(y))
+        H(g(y))⁻¹          apₕ(G(y))
   g(y) =========== hfg(y) ============ h(y)
 ```
 

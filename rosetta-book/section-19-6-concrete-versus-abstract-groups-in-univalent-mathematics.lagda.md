@@ -58,7 +58,7 @@ All groups can be constructed in this way.
 In fact, for every group `G` in `𝒰` the type
 
 ```text
-Σ(B : Pointed-Connected-1-Type_𝒰) G ≅ Ω(B)
+Σ(B : Pointed-Connected - 1-Type_𝒰) G ≅ Ω(B)
 ```
 
 of pointed connected `1`-types `B` equipped with a group isomorphism from `G` to `Ω(B)` is contractible.
@@ -298,11 +298,11 @@ module _
 We have already seen that
 
 ```text
-S_n ≅ Ω(BS_n),
+Sₙ ≅ Ω(BSₙ),
 ```
 
-i.e., that the loop space of the type of all finite types of cardinality `n` is equivalent to the symmetric group `S_n`.
-The type `BS_n` is of course a pointed connected `1`-type, so `BS_n` is indeed the classifying type of the symmetric group `S_n`.
+i.e., that the loop space of the type of all finite types of cardinality `n` is equivalent to the symmetric group `Sₙ`.
+The type `BSₙ` is of course a pointed connected `1`-type, so `BSₙ` is indeed the classifying type of the symmetric group `Sₙ`.
 
 ```agda
 module _
@@ -358,7 +358,7 @@ module _
 Since the map
 
 ```text
-Ω : Pointed-Connected-1-Type_𝒰 → Group_𝒰
+Ω : Pointed-Connected - 1-Type_𝒰 → Group_𝒰
 ```
 
 is an equivalence, we obtain two perspectives on the type of all groups.
@@ -626,7 +626,7 @@ module _
 The type of **orbits** of a concrete `G`-set `X : BG → Set_𝒰` can then be defined as
 
 ```text
-X/G ≔ Σ(u : BG) X(u)
+X / G ≔ Σ(u : BG) X(u)
 ```
 
 ```agda
@@ -658,12 +658,12 @@ fixed-point-action-Concrete-Group :
 fixed-point-action-Concrete-Group G X = (u : classifying-type-Concrete-Group G) → (type-Set ∘ X) u
 ```
 
-To see that these definitions make sense, note that the fiber inclusion `X(⋆) → X/G` maps each element in the `G`-set `X` to its orbit.
+To see that these definitions make sense, note that the fiber inclusion `X(⋆) → X / G` maps each element in the `G`-set `X` to its orbit.
 The fiber inclusion is surjective by Exercise 18.5, and it maps two elements `x,y : X(⋆)` to the same orbit precisely when there is a group element `g` such that `gx = y`.
 Similarly, for the type of fixed points notice that each `x : X_G` determines an element `x_⋆ : X(⋆)`, which comes equipped with an identification
 
 ```text
-apd_{x}(g) : gx_⋆ = x_⋆
+apdₓ(g) : gx_⋆ = x_⋆
 ```
 
 since the group action of `G` on `X` is given by transport.
@@ -981,7 +981,7 @@ module _
     preserves-shape-classifying-inclusion-subgroup-Concrete-Group G H
 ```
 
-Dually, we say that a concrete `G`-set `X` is **free** if the type of orbits `X/G` is a set.
+Dually, we say that a concrete `G`-set `X` is **free** if the type of orbits `X / G` is a set.
 
 ```agda
 module _
@@ -1322,33 +1322,33 @@ BENCHMARK PROBLEM
 In Exercise 17.20 we introduced the type
 
 ```text
-D̃_n ≔ Σ(X : BS_2) Σ(Y : X → 𝔽) (Fin{n} ≃ Π(x : X) Y(x)).
+D̃ₙ ≔ Σ(X : BS₂) Σ(Y : X → 𝔽) (Fin{n} ≃ Π(x : X) Y(x)).
 ```
 
-Notice that this type is the type of orbits of the `ℤ/2`-set `D_n` given by
+Notice that this type is the type of orbits of the `ℤ / 2`-set `Dₙ` given by
 
 ```text
-D_n(X) ≔ Σ(Y : X → 𝔽) (Fin{n} ≃ Π(x : X) Y(x)).
+Dₙ(X) ≔ Σ(Y : X → 𝔽) (Fin{n} ≃ Π(x : X) Y(x)).
 ```
 
 The fact that this is a family of sets is a nice exercise.
-Note that there is a surjective morphism of `ℤ/2`-sets from `D_n(Fin{2})` to the `ℤ/2` set of divisors of `n`, where the action is given by `d ↦ n/d`.
-The concrete `ℤ/2`-action `D_n` is transitive precisely when `n` is either `1` or a prime, and it is free precisely when `n` is not a square.
+Note that there is a surjective morphism of `ℤ / 2`-sets from `Dₙ(Fin{2})` to the `ℤ / 2` set of divisors of `n`, where the action is given by `d ↦ n / d`.
+The concrete `ℤ / 2`-action `Dₙ` is transitive precisely when `n` is either `1` or a prime, and it is free precisely when `n` is not a square.
 Combining these two observations, we see that `n` is prime if and only if this action is both transitive and free.
-In other words, `n` is prime if and only if the type `D̃_n` of orbits is contractible.
+In other words, `n` is prime if and only if the type `D̃ₙ` of orbits is contractible.
 
 BENCHMARK PROBLEM
 
 `G`-sets which are both transitive and free are very special.
 Such `G`-sets are called **`G`-torsors**.
-Note that a `G`-set `X` is a `G`-torsor if and only if the type of orbits `X/G` is contractible.
+Note that a `G`-set `X` is a `G`-torsor if and only if the type of orbits `X / G` is contractible.
 By the fundamental theorem of identity types, this implies that the family of maps
 
 ```text
 Π(v : BG) (u = v) → X(v)
 ```
 
-is a family of equivalences, where `(u,x)` is the center of contraction of `X/G`.
+is a family of equivalences, where `(u,x)` is the center of contraction of `X / G`.
 It follows that a concrete `G`-set `X : BG → Set_𝒰` is a `G`-torsor if and only if it is in the image of
 
 ```text

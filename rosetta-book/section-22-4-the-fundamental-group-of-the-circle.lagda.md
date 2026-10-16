@@ -36,7 +36,7 @@ The universal cover of the circle is an identity system at `base : S¹`.
 _Proof._ By Exercise 13.9 it suffices to show that the map
 
 ```text
-f ↦ f(0_{E}) : (Π(t : S¹) E_(S¹)(t) → A(t)) → A(base)
+f ↦ f(0_E) : (Π(t : S¹) E_{S¹}(t) → A(t)) → A(base)
 ```
 
 is an equivalence for every type family `A` over the circle.
@@ -299,7 +299,7 @@ Furthermore, since `ℤ` is a `0`-type and not a `(-1)`-type, it follows that th
 Our second goal is to construct a group isomorphism
 
 ```text
-π_1(S¹) ≅ ℤ.
+π₁(S¹) ≅ ℤ.
 ```
 
 However, Theorem 22.4.1 doesn’t immediately show that the fundamental group of the circle is `ℤ`.
@@ -352,7 +352,7 @@ We are now ready to prove that the fundamental group of the circle is `ℤ`.
 Recall from Definition 22.1.2 that we write `y ↦ y_ℤ` for the inverse of the equivalence
 
 ```text
-x ↦ x_{E} : ℤ ≃ E_(S¹)(base).
+x ↦ x_E : ℤ ≃ E_{S¹}(base).
 ```
 
 ## Theorem 22.4.4
@@ -360,21 +360,21 @@ x ↦ x_{E} : ℤ ≃ E_(S¹)(base).
 There is a group isomorphism
 
 ```text
-π_1(S¹) ≅ ℤ.
+π₁(S¹) ≅ ℤ.
 ```
 
 ### Proof
 
 BENCHMARK PROBLEM
 
-_Proof._ First we observe that, since the circle is a `1`-type, we have an isomorphism of groups `π_1(S¹) ≅ Ω(S¹)`.
+_Proof._ First we observe that, since the circle is a `1`-type, we have an isomorphism of groups `π₁(S¹) ≅ Ω(S¹)`.
 In order to show that the group `Ω(S¹)` is isomorphic to `ℤ`, we prove that the family of equivalences
 
 ```text
-α : Π(t : S¹) (base = t) → E_(S¹)(t)
+α : Π(t : S¹) (base = t) → E_{S¹}(t)
 ```
 
-given by `α(refl) ≔ 0_{E}` satisfies
+given by `α(refl) ≔ 0_E` satisfies
 
 ```text
 α(p ∙ q)_ℤ = α(p)_ℤ + α(q)_ℤ
@@ -385,27 +385,27 @@ for every `p,q : Ω(S¹)`.
 To see that the claim holds, note that by Proposition 22.4.3 it suffices to construct a binary operation
 
 ```text
-μ : E_(S¹)(base) → (E_(S¹)(x) → E_(S¹)(x))
+μ : E_{S¹}(base) → (E_{S¹}(x) → E_{S¹}(x))
 ```
 
-equipped with a homotopy `μ(_,0_{E}) ~ id`, such that
+equipped with a homotopy `μ(_,0_E) ~ id`, such that
 
 ```text
-μ(k_{E},l_{E}) = (k+l)_{E}
+μ(k_E,l_E) = (k + l)_E
 ```
 
 holds for every `k,l : ℤ`.
 Equivalently, it suffices to construct for each `k : ℤ` a function
 
 ```text
-μ(k_{E}) : E_(S¹)(x) → E_(S¹)(x)
+μ(k_E) : E_{S¹}(x) → E_{S¹}(x)
 ```
 
-indexed by `x : S¹` equipped with an identification `μ(k_{E},l_{E}) = (k+l)_{E}` for each `k,l : ℤ`.
+indexed by `x : S¹` equipped with an identification `μ(k_E,l_E) = (k + l)_E` for each `k,l : ℤ`.
 Since we have
 
 ```text
-k+(l+1) = (k+l)+1
+k + (l + 1) = (k + l) + 1
 ```
 
 for all `k,l : ℤ`, such a function is obtained at once from Corollary 22.2.4. ◻

@@ -62,7 +62,7 @@ We turn this into a definition.
 For each type `A`, we define the type
 
 ```text
-  count(A) ≔ Σ(k : ℕ) (Fin_{k} ≃ A).
+  count(A) ≔ Σ(k : ℕ) (Finₖ ≃ A).
 ```
 
 The elements of `count(A)` are called **countings** of `A`.
@@ -110,11 +110,11 @@ module _
 ```
 
 Note that the type `count(A)` is often not a proposition.
-For instance, different equivalences of type `Fin_{k} ≃ Fin_{k}` induce different elements of type `count(Fin_{k})`.
+For instance, different equivalences of type `Finₖ ≃ Finₖ` induce different elements of type `count(Finₖ)`.
 
 ## Example 16.1.2
 
-It follows immediately from the definition of countings that every standard finite type can be counted in a canonical way: For any `k : ℕ` we have `(k,id) : count(Fin_{k})`.
+It follows immediately from the definition of countings that every standard finite type can be counted in a canonical way: For any `k : ℕ` we have `(k,id) : count(Finₖ)`.
 It also follows immediately from the definition of countings that types equipped with countings are closed under equivalences.
 
 ```agda
@@ -158,7 +158,7 @@ Suppose `A` comes equipped with a counting `(k,e) : count(A)`.
 Then `k = 0` if and only if `A` is empty.
 Indeed, the inverse of `e` is a map `e⁻¹ : A → empty`.
 Conversely, if we have `f : is-empty(A)`, then the map `f : A → empty` is automatically an equivalence.
-This shows that `Fin_{k} ≃ empty`, and a short argument by induction on `k` yields that `k = 0`.
+This shows that `Finₖ ≃ empty`, and a short argument by induction on `k` yields that `k = 0`.
 
 ```agda
 abstract
@@ -188,7 +188,7 @@ count-empty = count-Fin 0
 ## Example 16.1.4
 
 A type `A` has one element if and only if it is contractible.
-Indeed, the type `Fin_{1}` is contractible, so it follows from the 3-for-2 property of contractible types (Exercise 10.2) that there is an equivalence `Fin_{1} ≃ A` if and only if `A` is contractible.
+Indeed, the type `Fin₁` is contractible, so it follows from the 3-for-2 property of contractible types (Exercise 10.2) that there is an equivalence `Fin₁ ≃ A` if and only if `A` is contractible.
 
 ```agda
 count-is-contr :
@@ -229,12 +229,12 @@ A proposition `P` comes equipped with a counting if and only if it is decidable.
 To see this, note that for any type `X`, if we have `(k,e) : count(X)`, then it follows that `X` is decidable.
 This is shown by induction on `k`.
 In the case where `k = 0`, it follows that `X` is empty, and hence that `X` is decidable.
-In the case where `k` is a successor, the bijection `e : Fin_{k} ≃ X` gives us the element `e(⋆) : X`.
+In the case where `k` is a successor, the bijection `e : Finₖ ≃ X` gives us the element `e(⋆) : X`.
 Again we conclude that `X` is decidable.
 
 Conversely, if `P` is decidable, then we can construct a counting of `P` by case analysis on `d : P + ¬ P`.
-If `P` holds, then it is contractible and hence equivalent to `Fin_{1}`.
-If `¬ P` holds, then `P` is equivalent to `Fin_{0}`.
+If `P` holds, then it is contractible and hence equivalent to `Fin₁`.
+If `¬ P` holds, then `P` is equivalent to `Fin₀`.
 
 ```agda
 is-decidable-count :
@@ -260,8 +260,8 @@ count-type-Decidable-Prop P (inr f) = count-is-empty f
 
 ## Remark 16.1.6
 
-We also note that any type `A` equipped with a counting `e : Fin_{k} ≃ A` has decidable equality.
-This follows from Proposition 8.1.8, where we showed that `Fin_{k}` has decidable equality, for any `k : ℕ`.
+We also note that any type `A` equipped with a counting `e : Finₖ ≃ A` has decidable equality.
+This follows from Proposition 8.1.8, where we showed that `Finₖ` has decidable equality, for any `k : ℕ`.
 
 ```agda
 abstract
@@ -371,7 +371,7 @@ Consider the following three conditions:
    Consequently, if `P` is a subtype of a type `A` equipped with a counting, then we have
 
    ```text
-     count(Σ(x : A) P(x))↔ Π(x : A) is-decidable(P(x)).
+     count(Σ(x : A) P(x)) ↔ Π(x : A) is-decidable(P(x)).
    ```
 
 ### Proof
@@ -379,7 +379,7 @@ Consider the following three conditions:
 We will first prove the forward direction of (1).
 Then we will prove both claims in (2), and we will prove the reverse direction of claim (1) last.
 
-For the forward direction of claim (1), suppose we have equivalences `e : Fin_{k} ≃ A` and `f : Fin_{l} ≃ B`.
+For the forward direction of claim (1), suppose we have equivalences `e : Finₖ ≃ A` and `f : Finₗ ≃ B`.
 The equivalences `e` and `f` induce via Exercises 9.6 and 9.8 a composite equivalence
 
 ```text
@@ -389,7 +389,7 @@ The equivalences `e` and `f` induce via Exercises 9.6 and 9.8 a composite equiva
 
 from which we obtain an element of type `count(A + B)`.
 
-Next, we will prove the forward direction in the first claim of (2), i.e., we will prove that if `A` comes equipped with an equivalence `e : Fin_{k} ≃ A`, and if `B` is a family of types over `A` equipped with
+Next, we will prove the forward direction in the first claim of (2), i.e., we will prove that if `A` comes equipped with an equivalence `e : Finₖ ≃ A`, and if `B` is a family of types over `A` equipped with
 
 ```text
   f : Π(x : A) count(B(x)),
@@ -402,15 +402,15 @@ For the inductive step, note `Σ` distributes from the right over coproducts.
 This gives an equivalence
 
 ```text
-  Σ(x : A) B(x) ≃ Σ(x : Fin_{k+1}) B(e(x))
-                ≃ (Σ(x : Fin_{k}) B(e(inl(x)))) + B(e(inr(⋆))).
+  Σ(x : A) B(x) ≃ Σ(x : Finₖ₊₁) B(e(x))
+                ≃ (Σ(x : Finₖ) B(e(inl(x)))) + B(e(inr(⋆))).
 ```
 
-The type `Σ(x : Fin_{k}) B(e(inl(x)))` has a counting by the inductive hypothesis, and the type `B(e(inr(⋆)))` has a counting by assumption.
+The type `Σ(x : Finₖ) B(e(inl(x)))` has a counting by the inductive hypothesis, and the type `B(e(inr(⋆)))` has a counting by assumption.
 Therefore, it follows that the total space `Σ(x : A) B(x)` has a counting.
 
 Now we will prove the converse direction of the first claim in (2).
-Suppose that `A` comes equipped with `e : Fin_{k} ≃ A`, and that `Σ(x : A) B(x)` comes equipped with `f : Fin_{l} ≃ Σ(x : A) B(x)`.
+Suppose that `A` comes equipped with `e : Finₖ ≃ A`, and that `Σ(x : A) B(x)` comes equipped with `f : Finₗ ≃ Σ(x : A) B(x)`.
 By Example 16.1.5 it suffices to show that, for `a : A`, the type `B(a)` is a decidable subtype of `Σ(x : A) B(x)`.
 Consider the map
 
@@ -422,7 +422,7 @@ given by `b ↦ (a,b)`.
 For `(x,y) : Σ(x : A) B(x)`, we have the equivalences
 
 ```text
-  fib_i(x,y) ≃ Σ(b : B(a)) (a,b) = (x,y)
+  fibᵢ(x,y) ≃ Σ(b : B(a)) (a,b) = (x,y)
              ≃ Σ(b : B(a)) Σ(p : a = x) tr_B(p,b) = y
              ≃ Σ(p : a = x) fib(tr_B(p), y)
              ≃ a = x.

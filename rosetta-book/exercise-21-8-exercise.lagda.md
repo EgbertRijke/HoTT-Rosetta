@@ -9,8 +9,8 @@ module exercise-21-8-exercise where
 
 Consider a pointed type `(A,pt)` equipped with a **noncoherent H-space structure** `(μ,H,K)` consisting of a binary operation `μ : A → (A → A)` and homotopies
 ```text
-H : Π(y:A) μ(pt,y) = y
-K : Π(x:A) μ(x,pt) = x.
+H : Π(y : A) μ(pt,y) = y
+K : Π(x : A) μ(x,pt) = x.
 ```
 Show that the homotopy `K` can be adjusted to a new homotopy `K' : Π(x : A) μ(x,pt) = x` in such a way that
 ```text

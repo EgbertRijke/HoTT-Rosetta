@@ -206,7 +206,7 @@ In order to construct a contraction, it suffices to construct a dependent functi
   Π(x : A) Π(p : f(x) = y) Eq-fib_f((g(y),G(y)),(x,p)).
 ```
 
-By path induction on `p:f(x)=y` it suffices to construct a dependent function of type
+By path induction on `p : f(x) = y` it suffices to construct a dependent function of type
 
 ```text
   Π(x : A) Eq-fib_f((g(f(x)),G(f(x))),(x,refl)).
@@ -215,13 +215,13 @@ By path induction on `p:f(x)=y` it suffices to construct a dependent function of
 By definition of `Eq-fib_f`, we have to construct for each `x : A` an identification `α : g(f(x)) = x` equipped with a further identification
 
 ```text
-  G(f(x)) = ap_{f}(α) ∙ refl.
+  G(f(x)) = ap_f(α) ∙ refl.
 ```
 
 Such a dependent function is constructed as `λ x. (H(x),K'(x))`, where the homotopy `H : g ∘ f ~ id` is given by assumption, and the homotopy
 
 ```text
-  K' : Π(x : A) G(f(x)) = ap_{f}(H(x)) ∙ refl
+  K' : Π(x : A) G(f(x)) = ap_f(H(x)) ∙ refl
 ```
 
 is defined as
@@ -281,7 +281,7 @@ Let `f, g : A → B` be functions, and consider `H : f ~ g` and `p : x = y` in `
 We define the identification
 
 ```text
-  nat-htpy(H,p) : ap_{f}(p) ∙ H(y) = H(x) ∙ ap_{g}(p)
+  nat-htpy(H,p) : ap_f(p) ∙ H(y) = H(x) ∙ ap_g(p)
 ```
 
 witnessing that the square
@@ -304,10 +304,10 @@ This square is also called the **naturality square** of the homotopy `H` at `p`.
 By path induction on `p` it suffices to construct an identification
 
 ```text
-  ap_{f}(refl) ∙ H(x) = H(x) ∙ ap_{g}(refl)
+  ap_f(refl) ∙ H(x) = H(x) ∙ ap_g(refl)
 ```
 
-since `ap_{f}(refl) ≐ refl` and `ap_{g}(refl) ≐ refl`, and since `refl ∙ H(x) ≐ H(x)`, we see that the path `right-unit(H(x))⁻¹` is of the asserted type.
+since `ap_f(refl) ≐ refl` and `ap_g(refl) ≐ refl`, and since `refl ∙ H(x) ≐ H(x)`, we see that the path `right-unit(H(x))⁻¹` is of the asserted type.
 
 ```agda
 nat-htpy :
@@ -320,7 +320,7 @@ nat-htpy H refl = right-unit
 ## Definition 10.4.4
 
 Consider `f : A → A` and `H : f ~ id`.
-We construct an identification `H(f(x)) = ap_{f}(H(x))`, for any `x : A`.
+We construct an identification `H(f(x)) = ap_f(H(x))`, for any `x : A`.
 
 ### Construction
 
@@ -337,7 +337,7 @@ By the naturality of homotopies with respect to identifications the square
 ```
 
 commutes.
-This gives the desired identification `H(f(x)) = ap_{f}(H(x))`.
+This gives the desired identification `H(f(x)) = ap_f(H(x))`.
 
 ```agda
 nat-htpy-id :

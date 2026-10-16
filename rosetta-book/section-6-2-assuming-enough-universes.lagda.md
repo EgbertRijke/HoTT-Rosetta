@@ -12,7 +12,7 @@ Russell’s paradox is the famous argument that there cannot be a set of all set
 If there were such a set `S`, then we could consider Russell’s subset
 
 ```text
-R:={x ∈ S| x ∉ x}.
+R := {x ∈ S | x ∉ x}.
 ```
 
 Russell then observed that `R ∈ R` if and only if `R ∉ R`, so we reach a contradiction.
@@ -28,19 +28,19 @@ Therefore we will assume that there are sufficiently many universes:
 We assume that there are **enough universes**, i.e., that for every finite list of types in context
 
 ```text
-Γ_1 ⊢ A_1 type ⋯ Γ_n ⊢ A_n type,
+Γ₁ ⊢ A₁ type ⋯ Γₙ ⊢ Aₙ type,
 ```
 
-there is a universe `𝒰` that contains each `A_i` in the sense that `𝒰` comes equipped with
+there is a universe `𝒰` that contains each `Aᵢ` in the sense that `𝒰` comes equipped with
 
 ```text
-Γ_i ⊢ Ǎ_i : 𝒰
+Γᵢ ⊢ Ǎᵢ : 𝒰
 ```
 
 for which the judgment
 
 ```text
-Γ_i ⊢ Ty(Ǎ_i) ≐ A_i type
+Γᵢ ⊢ Ty(Ǎᵢ) ≐ Aᵢ type
 ```
 
 holds.
@@ -50,13 +50,13 @@ Using the assumption that for any finite list of types in context there is a uni
 
 ## Definition 6.2.2
 
-The **base universe** `𝒰_0` is the universe that we obtain using Postulate 6.2.1 with the empty list of types in context.
+The **base universe** `𝒰₀` is the universe that we obtain using Postulate 6.2.1 with the empty list of types in context.
 
 In other words, the base universe is a universe that is closed under all the ways of forming types, but it isn’t specified to contain any further types.
 
 ## Definition 6.2.3
 
-The **successor universe** of a universe `𝒰` is the universe `𝒰^+` obtained using Postulate 6.2.1 with the finite list
+The **successor universe** of a universe `𝒰` is the universe `𝒰^ +` obtained using Postulate 6.2.1 with the finite list
 
 ```text
 ⊢ 𝒰 type
@@ -65,16 +65,16 @@ X : 𝒰 ⊢ T(X) type.
 
 ## Remark 6.2.4
 
-The successor universe `𝒰^+` of `𝒰` therefore contains the type `𝒰` as well as every type in `𝒰`, in the following sense
+The successor universe `𝒰^ +` of `𝒰` therefore contains the type `𝒰` as well as every type in `𝒰`, in the following sense
 
 ```text
-⊢ 𝒰̌ : 𝒰^+
-⊢ T^+(𝒰̌) ≐ 𝒰 type
-X : 𝒰 ⊢ Ť(X) : 𝒰^+
-X : 𝒰 ⊢ T^+(Ť(X)) ≐ T(X) type.
+⊢ 𝒰̌ : 𝒰^ +
+⊢ T^ + (𝒰̌) ≐ 𝒰 type
+X : 𝒰 ⊢ Ť(X) : 𝒰^ +
+X : 𝒰 ⊢ T^ + (Ť(X)) ≐ T(X) type.
 ```
 
-In particular, we obtain a function `i:𝒰 → 𝒰^+` that includes the types in `𝒰` into `𝒰^+`, given by
+In particular, we obtain a function `i : 𝒰 → 𝒰^ +` that includes the types in `𝒰` into `𝒰^ +`, given by
 
 ```text
 i ≔ λ X. Ť(X).
@@ -83,7 +83,7 @@ i ≔ λ X. Ť(X).
 Using successor universes we can create an infinite tower
 
 ```text
-𝒰, 𝒰^+, 𝒰^{++}, …
+𝒰, 𝒰^ +, 𝒰^{++}, …
 ```
 
 of universes, starting at any universe `𝒰`, in which each universe is contained in the next.
@@ -91,20 +91,20 @@ However, such towers of universes need not be exhaustive in the sense that it mi
 
 ## Definition 6.2.5
 
-The **join** of two universes `𝒰` and `𝒱` is the universe `𝒰⊔𝒱` that we obtain using Postulate 6.2.1 with the two types
+The **join** of two universes `𝒰` and `𝒱` is the universe `𝒰 ⊔ 𝒱` that we obtain using Postulate 6.2.1 with the two types
 
 ```text
-X : 𝒰 ⊢ T_{𝒰}(X) type
-Y : 𝒱 ⊢ T_{𝒱}(Y) type.
+X : 𝒰 ⊢ T_𝒰(X) type
+Y : 𝒱 ⊢ T_𝒱(Y) type.
 ```
 
 ## Remark 6.2.6
 
-Since the join `𝒰⊔𝒱` contains all the types in `𝒰` and `𝒱`, there are maps
+Since the join `𝒰 ⊔ 𝒱` contains all the types in `𝒰` and `𝒱`, there are maps
 
 ```text
-i : 𝒰 → 𝒰⊔𝒱
-j : 𝒱 → 𝒰⊔𝒱
+i : 𝒰 → 𝒰 ⊔ 𝒱
+j : 𝒱 → 𝒰 ⊔ 𝒱
 ```
 
 Note that we don’t postulate any relations between the universes.

@@ -37,7 +37,7 @@ and show that it satisfies the following three properties:
 
 1. `(x = 0) ↔ (|x| = 0)`,
 
-2. `|x + y| ≤ |x|+|y|`,
+2. `|x + y| ≤ |x| + |y|`,
 
 3. `|xy| = |x||y|`.
 

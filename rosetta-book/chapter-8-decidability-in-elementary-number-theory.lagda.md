@@ -26,11 +26,11 @@ open import exercise-8-14-fields-integers-modulo-prime
 open import exercise-8-15-cofibonacci-sequence
 ```
 
-Martin-Löf’s dependent type theory is a foundation for constructive mathematics, but in constructive mathematics there is no way to show that `P∨¬ P` holds for an arbitrary proposition `P`.
-Likewise, in type theory there is no way to construct an element of type `A+¬ A` for an arbitrary type `A`.
-Consequently, if we want to reason by case analysis over whether `A` is empty or nonempty, we first have to *show* that `A+¬ A` holds.
+Martin-Löf’s dependent type theory is a foundation for constructive mathematics, but in constructive mathematics there is no way to show that `P ∨ ¬ P` holds for an arbitrary proposition `P`.
+Likewise, in type theory there is no way to construct an element of type `A + ¬ A` for an arbitrary type `A`.
+Consequently, if we want to reason by case analysis over whether `A` is empty or nonempty, we first have to *show* that `A + ¬ A` holds.
 
-A type `A` that comes equipped with an element of type `A+¬ A` is said to be *decidable*.
+A type `A` that comes equipped with an element of type `A + ¬ A` is said to be *decidable*.
 Even though we cannot show that all types are decidable, many types are indeed decidable.
 Examples include the empty type and any type that comes equipped with a point, such as the type of natural numbers.
 

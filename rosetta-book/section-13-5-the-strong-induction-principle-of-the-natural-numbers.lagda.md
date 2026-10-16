@@ -31,27 +31,27 @@ Function extensionality is used to derive the computation rules of the strong in
 Consider a type family `P` over `ℕ` equipped with
 
 ```text
-  p_0 : P(0)
+  p₀ : P(0)
   p_S : Π(n : ℕ) (Π(m : ℕ) (m ≤ n) → P(m)) → P(n + 1).
 ```
 
 Then there is a dependent function
 
 ```text
-  strong-ind-ℕ(p_0,p_S) : Π(n : ℕ) P(n)
+  strong-ind-ℕ(p₀,p_S) : Π(n : ℕ) P(n)
 ```
 
 that satisfies the following computation rules
 
 ```text
-    strong-ind-ℕ(p_0,p_S,0) = p_0
-  strong-ind-ℕ(p_0,p_S,n+1) = p_S(n,(λ m. λ p. strong-ind-ℕ(p_0,p_S,m))).
+    strong-ind-ℕ(p₀,p_S,0) = p₀
+  strong-ind-ℕ(p₀,p_S,n + 1) = p_S(n,(λ m. λ p. strong-ind-ℕ(p₀,p_S,m))).
 ```
 
-In order to construct `strong-ind-ℕ(p_0,p_S)`, we first define the type family `P̃` over `ℕ` by
+In order to construct `strong-ind-ℕ(p₀,p_S)`, we first define the type family `P̃` over `ℕ` by
 
 ```text
-  P̃(n)≔ Π(m : ℕ) (m ≤ n) → P(m).
+  P̃(n) ≔ Π(m : ℕ) (m ≤ n) → P(m).
 ```
 
 ```agda
@@ -66,26 +66,26 @@ In order to construct `strong-ind-ℕ(p_0,p_S)`, we first define the type family
 ε-□-≤-ℕ f n = f n n (refl-leq-ℕ n)
 ```
 
-The idea is then to first use `p_0` and `p_S` to construct
+The idea is then to first use `p₀` and `p_S` to construct
 
 ```text
-  p̃_0 : P̃(0)
+  p̃₀ : P̃(0)
   p̃_S : Π(n : ℕ) P̃(n) → P̃(n + 1).
 ```
 
 The ordinary induction principle of `ℕ` then gives a function
 
 ```text
-  ind-ℕ(p̃_0,p̃_S) : Π(n : ℕ) P̃(n),
+  ind-ℕ(p̃₀,p̃_S) : Π(n : ℕ) P̃(n),
 ```
 
 which can be used to define a function `Π(n : ℕ) P(n)`.
 
-Before we start by the proof of Theorem 13.5.1 we state two lemmas in which we construct `p̃_0` and `p̃_S` with computation rules of their own.
+Before we start by the proof of Theorem 13.5.1 we state two lemmas in which we construct `p̃₀` and `p̃_S` with computation rules of their own.
 We will assume a type family `P` over `ℕ` equipped with
 
 ```text
-  p_0 : P(0)
+  p₀ : P(0)
   p_S : Π(n : ℕ) P̃(n) → P(n + 1),
 ```
 
@@ -93,17 +93,17 @@ as in the hypotheses of Theorem 13.5.1.
 
 ## Lemma 13.5.2
 
-There is an element `p̃_0 : P̃(0)` that satisfies the judgmental equality
+There is an element `p̃₀ : P̃(0)` that satisfies the judgmental equality
 
 ```text
-  p̃_0(0,p) ≐ p_0
+  p̃₀(0,p) ≐ p₀
 ```
 
 for any `p : 0 ≤ 0`.
 
 ### Proof
 
-The fact that we have such a dependent function `p̃_0` follows immediately by induction on `m` and `p : m ≤ 0`. ◻
+The fact that we have such a dependent function `p̃₀` follows immediately by induction on `m` and `p : m ≤ 0`. ◻
 
 ```agda
 zero-strong-ind-ℕ :
@@ -137,7 +137,7 @@ equipped with
 2. an identification
 
    ```text
-     p̃_S(n,H,n+1,p) = p_S(n,H)
+     p̃_S(n,H,n + 1,p) = p_S(n,H)
    ```
 
    for every `p : n + 1 ≤ n + 1`.
@@ -158,13 +158,13 @@ Therefore we define first a function
   h(n,H) : Π(m : ℕ) ((m ≤ n) + (m = n + 1)) → P(m)
 ```
 
-by case analysis on `x :(m ≤ n) + (m = n + 1)`.
+by case analysis on `x : (m ≤ n) + (m = n + 1)`.
 There are two cases to consider: one where we have `q : m ≤ n`, and one where we have `q : m = n + 1`.
 Note that in the second case it suffices to make a definition for `q ≐ refl`.
 Therefore we define
 
 ```text
-  h(n,H,m,x) ≔ cases {H(m,q) if x≐inl(q); p_S(n,H) if x≐inr(refl)}.
+  h(n,H,m,x) ≔ cases {H(m,q) if x ≐ inl(q); p_S(n,H) if x ≐ inr(refl)}.
 ```
 
 Now we define `p̃_S` by
@@ -248,7 +248,7 @@ We are now ready to finish the proof of Theorem 13.5.1.
 
 ### Proof of Theorem 13.5.1.
 
-Using `p̃_0` and `p̃_S`, we obtain by induction on `n` a function
+Using `p̃₀` and `p̃_S`, we obtain by induction on `n` a function
 
 ```text
   s̃ : Π(n : ℕ) P̃(n)
@@ -257,14 +257,14 @@ Using `p̃_0` and `p̃_S`, we obtain by induction on `n` a function
 satisfying the computation rules
 
 ```text
-    s̃(0) ≐ p̃_0
-  s̃(n+1) ≐ p̃_S(n,s̃(n)).
+    s̃(0) ≐ p̃₀
+  s̃(n + 1) ≐ p̃_S(n,s̃(n)).
 ```
 
 Now we define
 
 ```text
-  strong-ind-ℕ(p_0,p_S,n) ≔ s̃(n,n,refl-≤-ℕ(n)),
+  strong-ind-ℕ(p₀,p_S,n) ≔ s̃(n,n,refl-≤-ℕ(n)),
 ```
 
 where `refl-≤-ℕ(n) : n ≤ n` is the proof of reflexivity of `≤`.
@@ -273,16 +273,16 @@ It remains to show that `strong-ind-ℕ` satisfies the computation rules of the 
 The identification that computes `strong-ind-ℕ` at `0` is easy to obtain, because we have the judgmental equalities
 
 ```text
-  strong-ind-ℕ(p_0,p_S,0) ≐ s̃(0,0,refl-≤-ℕ(0))
-                          ≐ p̃_{0}(0,refl-≤-ℕ(0))
-                          ≐ p_0.
+  strong-ind-ℕ(p₀,p_S,0) ≐ s̃(0,0,refl-≤-ℕ(0))
+                          ≐ p̃₀(0,refl-≤-ℕ(0))
+                          ≐ p₀.
 ```
 
 To construct the identification that computes `strong-ind-ℕ` at a successor, we start by a similar computation:
 
 ```text
-  strong-ind-ℕ(p_0,p_S,n+1) ≐ s̃(n+1,n+1,refl-≤-ℕ(n+1))
-                            ≐ p̃_S(n,s̃(n),n+1,refl-≤-ℕ(n+1))
+  strong-ind-ℕ(p₀,p_S,n + 1) ≐ s̃(n + 1,n + 1,refl-≤-ℕ(n + 1))
+                            ≐ p̃_S(n,s̃(n),n + 1,refl-≤-ℕ(n + 1))
                             = p_S(n,s̃(n)).
 ```
 
@@ -311,28 +311,28 @@ The base case is trivial.
 For the inductive step, we note that
 
 ```text
-  s̃(n+1,m,p) = p̃_S(n,s̃(n),m,p)
-             = cases {s̃(n,m,p) if m≤ n; p_S(n,s̃(n)) if m=n+1}.
+  s̃(n + 1,m,p) = p̃_S(n,s̃(n),m,p)
+             = cases {s̃(n,m,p) if m ≤ n; p_S(n,s̃(n)) if m = n + 1}.
 ```
 
 Therefore it follows by the inductive hypothesis that
 
 ```text
-  s̃(n+1,m,p) = s̃(m,m,refl-≤-ℕ(m))
+  s̃(n + 1,m,p) = s̃(m,m,refl-≤-ℕ(m))
 ```
 
 if `m ≤ n` holds.
 In the remaining case, where `m = n + 1`, note that we have
 
 ```text
-  s̃(n+1,n+1,refl-≤-ℕ(n+1)) = p̃_S(n,s̃(n),n+1,refl-≤-ℕ(n+1))
+  s̃(n + 1,n + 1,refl-≤-ℕ(n + 1)) = p̃_S(n,s̃(n),n + 1,refl-≤-ℕ(n + 1))
                            = p_S(n,s̃(n)).
 ```
 
 Therefore we see that we also have an identification
 
 ```text
-  s̃(n+1,m,p) = s̃(m,m,refl-≤-ℕ(m))
+  s̃(n + 1,m,p) = s̃(m,m,refl-≤-ℕ(m))
 ```
 
 when `m = n + 1`.

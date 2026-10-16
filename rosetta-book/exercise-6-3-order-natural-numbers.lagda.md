@@ -28,9 +28,9 @@ The ordering relation `≤` on `ℕ` is defined recursively by
 
 ```text
 (0 ≤ 0) ≔ unit
-(0 ≤ n+1) ≔ unit
-(m+1 ≤ 0) ≔ empty
-(m+1 ≤ n+1) ≔ (m ≤ n).
+(0 ≤ n + 1) ≔ unit
+(m + 1 ≤ 0) ≔ empty
+(m + 1 ≤ n + 1) ≔ (m ≤ n).
 ```
 
 ### Exercise 6.3(a)
@@ -51,27 +51,27 @@ Show that
 (m ≤ n) + (n ≤ m)
 ```
 
-for any `m,n:ℕ`.
+for any `m,n : ℕ`.
 
 ### Exercise 6.3(c)
 
 Show that
 
 ```text
-(m ≤ n) ↔ (m+k ≤ n+k)
+(m ≤ n) ↔ (m + k ≤ n + k)
 ```
 
-holds for any `m,n,k:ℕ`.
+holds for any `m,n,k : ℕ`.
 
 ### Exercise 6.3(d)
 
 Show that
 
 ```text
-(m ≤ n) ↔ (m·(k+1) ≤ n·(k+1))
+(m ≤ n) ↔ (m · (k + 1) ≤ n · (k + 1))
 ```
 
-holds for any `m,n,k:ℕ`.
+holds for any `m,n,k : ℕ`.
 
 ### Exercise 6.3(e)
 

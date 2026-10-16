@@ -23,7 +23,7 @@ Construct an equivalence `Fin{nₘ} ≃ (Fin{m} ↪ Fin{n})`, where `nₘ` is th
            0₀ ≔ 1
         0ₘ₊₁ ≔ 0
      (n + 1)₀ ≔ 1
-  (n + 1)ₘ₊₁ ≔ (n+1)nₘ.
+  (n + 1)ₘ₊₁ ≔ (n + 1)nₘ.
 ```
 
 Conclude that if `A` and `B` are finite with cardinality `m` and `n`, then the type `A ↪ B` is finite with cardinality `nₘ`.

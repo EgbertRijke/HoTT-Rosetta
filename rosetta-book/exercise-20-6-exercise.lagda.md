@@ -10,7 +10,7 @@ module exercise-20-6-exercise where
 ([Awodey, Gambino, and Sojakova](https://doi.org/10.1145/3006383)) For any type family `B` over `A`, the **polynomial endofunctor** `P_{A,B}` acts on types by
 
 ```text
-P_{A,B}(X) ≔ Σ(x:A) X^{B(x)},
+P_{A,B}(X) ≔ Σ(x : A) X^{B(x)},
 ```
 
 and it takes a map `h : X → Y` to the map
@@ -26,7 +26,7 @@ Furthermore, there is a canonical map
 (h ~ h') → (P_{A,B}(h) ~ P_{A,B}(h'))
 ```
 
-taking a homotopy `H : h~ h'` to a homotopy `P_{A,B}(H) : P_{A,B}(h) ~ P_{A,B}(h')`.
+taking a homotopy `H : h ~ h'` to a homotopy `P_{A,B}(H) : P_{A,B}(h) ~ P_{A,B}(h')`.
 
 A type `X` is said to be equipped with the **structure of an algebra** for the polynomial endofunctor `P_{A,B}` if `X` comes equipped with a map
 

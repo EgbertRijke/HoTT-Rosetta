@@ -94,17 +94,17 @@ truncation-level-ℕ = succ-𝕋 ∘ truncation-level-minus-one-ℕ
 We define `is-trunc : 𝕋 → 𝒰 → 𝒰` recursively by
 
 ```text
-     is-trunc_{-2}(A) ≔ is-contr(A)
-  is-trunc_{k + 1}(A) ≔ Π(x, y : A) is-trunc_{k}(x = y).
+     is-trunc₋₂(A) ≔ is-contr(A)
+  is-truncₖ₊₁(A) ≔ Π(x, y : A) is-truncₖ(x = y).
 ```
 
-For any type `A`, we say that `A` is **`k`-truncated**, or a **`k`-type**, if there is a term of type `is-trunc_{k}(A)`.
+For any type `A`, we say that `A` is **`k`-truncated**, or a **`k`-type**, if there is a term of type `is-truncₖ(A)`.
 We also say that a type `A` is a **proper `(k + 1)`-type** if `A` is a `(k + 1)`-type and not a `k`-type.
 
 Given a universe `𝒰`, we define the universe `𝒰^{≤ k}` of `k`-truncated types by
 
 ```text
-  𝒰^{≤ k} ≔ Σ(X : 𝒰) is-trunc_{k}(X).
+  𝒰^{≤ k} ≔ Σ(X : 𝒰) is-truncₖ(X).
 ```
 
 Furthermore, we say that a map `f : A → B` is `k`-truncated if its fibers are `k`-truncated.
@@ -159,18 +159,18 @@ module _
 
 There is a subtlety in the definition of `is-trunc` regarding universes.
 Note that the truncation levels are defined with respect to a universe `𝒰`.
-To be completely precise, we should therefore write `is-trunc_{k}^{𝒰}(A)` for the type `is-trunc_{k}(A)` defined with respect to the universe `𝒰`.
+To be completely precise, we should therefore write `is-truncₖ^{𝒰}(A)` for the type `is-truncₖ(A)` defined with respect to the universe `𝒰`.
 If `A` is also contained in a second universe `𝒱`, then it is legitimate to ask whether
 
 ```text
-  is-trunc_{k}^{𝒰}(A)↔is-trunc_{k}^{𝒱}(A).
+  is-truncₖ^{𝒰}(A) ↔ is-truncₖ^{𝒱}(A).
 ```
 
 A simple inductive argument shows that this is indeed the case, where the base case follows from the judgmental equalities
 
 ```text
-  is-trunc_{-2}^{𝒰}(A) ≐ Σ(x : A) Π(y : A) x = y
-  is-trunc_{-2}^{𝒱}(A) ≐ Σ(x : A) Π(y : A) x = y.
+  is-trunc₋₂^{𝒰}(A) ≐ Σ(x : A) Π(y : A) x = y
+  is-trunc₋₂^{𝒱}(A) ≐ Σ(x : A) Π(y : A) x = y.
 ```
 
 We may therefore safely omit explicit reference to the universes when considering truncatedness of a type.
@@ -249,7 +249,7 @@ For the inductive step, assume that the `k`-types are stable under equivalences,
 In Theorem 11.4.2 we have seen that
 
 ```text
-  ap_{e} : (x = y) → (e(x) = e(y))
+  apₑ : (x = y) → (e(x) = e(y))
 ```
 
 is an equivalence for any `x, y : A`.
@@ -333,7 +333,7 @@ If `f : A → B` is an embedding, and `B` is a `(k + 1)`-type, then so is `A`.
 By the assumption that `f` is an embedding, the action on paths
 
 ```text
-  ap_{f} : (x = y) → (f(x) = f(y))
+  ap_f : (x = y) → (f(x) = f(y))
 ```
 
 is an equivalence for every `x, y : A`.
@@ -403,7 +403,7 @@ The following are equivalent:
 2. For each `x, y : A`, the map
 
    ```text
-     ap_{f} : (x = y) → (f(x) = f(y))
+     ap_f : (x = y) → (f(x) = f(y))
    ```
 
    is `k`-truncated.
@@ -413,29 +413,29 @@ The following are equivalent:
 First we show that for any `s, t : fib(f,b)` there is an equivalence
 
 ```text
-  (s = t) ≃ fib(ap_{f}, pr2(s) ∙ pr2(t)⁻¹)
+  (s = t) ≃ fib(ap_f, pr2(s) ∙ pr2(t)⁻¹)
 ```
 
 We do this by `Σ`-induction on `s` and `t`, and then we calculate
 
 ```text
   ((x,p) = (y,q)) ≃ Eq-fib_f((x,p),(y,q))
-  ≐ Σ(α : x = y) p = ap_{f}(α) ∙ q
-  ≃ Σ(α : x = y) ap_{f}(α) ∙ q = p
-  ≃ Σ(α : x = y) ap_{f}(α) = p ∙ q⁻¹
-  ≐ fib(ap_{f}, p ∙ q⁻¹).
+  ≐ Σ(α : x = y) p = ap_f(α) ∙ q
+  ≃ Σ(α : x = y) ap_f(α) ∙ q = p
+  ≃ Σ(α : x = y) ap_f(α) = p ∙ q⁻¹
+  ≐ fib(ap_f, p ∙ q⁻¹).
 ```
 
-By these equivalences, it follows that if `ap_{f}` is `k`-truncated, then for each `s, t : fib(f,b)` the identity type `s=t` is equivalent to a `k`-truncated type, and therefore we obtain by Proposition 12.4.5 that `f` is `(k + 1)`-truncated.
+By these equivalences, it follows that if `ap_f` is `k`-truncated, then for each `s, t : fib(f,b)` the identity type `s = t` is equivalent to a `k`-truncated type, and therefore we obtain by Proposition 12.4.5 that `f` is `(k + 1)`-truncated.
 
 For the converse, note that we have equivalences
 
 ```text
-  fib(ap_{f},p) ≃ ((x,p) = (y,refl)).
+  fib(ap_f,p) ≃ ((x,p) = (y,refl)).
 ```
 
 It follows that if `f` is `(k + 1)`-truncated, then the identity type `(x,p) = (y,refl)` in `fib(f,f(y))` is `k`-truncated for any `p : f(x) = f(y)`.
-We conclude by Proposition 12.4.5 that the fiber `fib(ap_{f},p)` is `k`-truncated. ◻
+We conclude by Proposition 12.4.5 that the fiber `fib(ap_f,p)` is `k`-truncated. ◻
 
 ```agda
 module _

@@ -158,7 +158,7 @@ is decidable.
 Since the types `(x ≠ n) × (x | n)` and `x = 1` are decidable, it follows from Corollary 8.2.5 that it suffices to check that
 
 ```text
-((x ≠ n) × (x | n))→ (x ≤ n)
+((x ≠ n) × (x | n)) → (x ≤ n)
 ```
 
 for any `x : ℕ`.
@@ -257,7 +257,7 @@ There is an element of type `R(n, n! + 1)` for each `n : ℕ`.
 We leave this to the reader, and focus on the second aspect of the claim: that every `x ≤ n` that divides `n! + 1` must be equal to `1`.
 
 To see this, note that any divisor of `n! + 1` is automatically nonzero, and recall that any nonzero `x ≤ n` divides `n!` by Exercise 7.3.
-Therefore it follows that any `x ≤ n` that divides `n! +1` also divides `n!`, and consequently it divides `1` as well.
+Therefore it follows that any `x ≤ n` that divides `n! + 1` also divides `n!`, and consequently it divides `1` as well.
 Now we are done, because if `x` divides `1` then `x = 1`. ◻
 
 ```agda

@@ -128,7 +128,7 @@ Our goal is to show that
 Note that we have the judgmental equalities
 
 ```text
-  succ-ℕ(m) + succ-ℕ(n) ≐ succ-ℕ(succ-ℕ(m) + n) \\
+  succ-ℕ(m) + succ-ℕ(n) ≐ succ-ℕ(succ-ℕ(m) + n)
   succ-ℕ(m + succ-ℕ(n)) ≐ succ-ℕ(succ-ℕ(m + n))
 ```
 
@@ -210,7 +210,7 @@ Addition on the natural numbers is commutative, i.e., for any two natural
 numbers `m` and `n` there is an identification
 
 ```text
-  commutative-add-ℕ(m,n) :  m+n=n+m.
+  commutative-add-ℕ(m,n) :  m + n = n + m.
 ```
 
 ## Proof

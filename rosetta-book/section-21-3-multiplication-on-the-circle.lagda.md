@@ -38,8 +38,8 @@ Consider a pointed type `A` with a base point `pt`.
 An **H-space structure** on `(A,pt)` consists of a binary operation `μ : A → (A → A)` satisfying the following **coherent unit laws**:
 
 ```text
-left-unit_μ(y) : μ(pt,y)= y
-right-unit_μ(x) : μ(x,pt)= x
+left-unit_μ(y) : μ(pt,y) = y
+right-unit_μ(x) : μ(x,pt) = x
 coh-unit_μ : left-unit_μ(pt) = right-unit_μ(pt).
 ```
 
@@ -150,7 +150,7 @@ module _
 The data of an H-space structure is equivalently described by a family of base point preserving maps
 
 ```text
-μ : Π(x:A) Σ(f : A → A) f(pt)=x
+μ : Π(x : A) Σ(f : A → A) f(pt) = x
 ```
 
 equipped with an identification `μ_pt = (id,refl)`.
@@ -216,9 +216,9 @@ We will be using this in our construction of the H-space structure on the circle
 There is an H-space structure
 
 ```text
-mul_(S¹) : S¹ → (S¹ → S¹)
-left-unit_{S¹} : Π(y : S¹) mul_(S¹)(base,y) = y
-right-unit_{S¹} : Π(x : S¹) mul_(S¹)(x,base) = x
+mul_{S¹} : S¹ → (S¹ → S¹)
+left-unit_{S¹} : Π(y : S¹) mul_{S¹}(base,y) = y
+right-unit_{S¹} : Π(x : S¹) mul_{S¹}(x,base) = x
 coh-unit_{S¹} : left-unit_{S¹}(base) = right-unit_{S¹}(base).
 ```
 
@@ -239,7 +239,7 @@ Let `P` be the family of types given by `P(x) ≔ Σ(f : S¹ → S¹) f(base) = 
 By the dependent universal property of the circle there is a unique
 
 ```text
-μ : Π(x : S¹) Σ(f : S¹ → S¹) f(base)=x
+μ : Π(x : S¹) Σ(f : S¹ → S¹) f(base) = x
 ```
 
 equipped with an identification `α : μ(base) = (id,refl)` and an identification witnessing that the square
@@ -253,12 +253,12 @@ apd_{μ}(loop) |                                | τ(H,r)
 ```
 
 commutes.
-In this square, `τ` is the function from Remark 21.3.2, and the homotopy `H : id ~ id` equipped with an identification `r:loop = H(base) ∙ refl` remain to be defined.
+In this square, `τ` is the function from Remark 21.3.2, and the homotopy `H : id ~ id` equipped with an identification `r : loop = H(base) ∙ refl` remain to be defined.
 
 We use the dependent universal property of the circle with respect to the family `E_{id,id}` given by
 
 ```text
-E_{id,id}(x) ≔ (x=x),
+E_{id,id}(x) ≔ (x = x),
 ```
 
 to define `H` as the unique homotopy equipped with an identification
@@ -278,18 +278,18 @@ apd_{H}(loop) |                                                         | γ
 ```
 
 commutes.
-Now it remains to define the path `γ:tr_{E_{id,id}}(loop,loop)=loop` in the above square.
+Now it remains to define the path `γ : tr_{E_{id,id}}(loop,loop) = loop` in the above square.
 To proceed, we first observe that a simple path induction argument yields a function
 
 ```text
-(p ∙ r=q ∙ p) → (tr_{E_{id,id}}(p,q)=r),
+(p ∙ r = q ∙ p) → (tr_{E_{id,id}}(p,q) = r),
 ```
 
 for any `p : base = x`, `q : base = base` and `r : x = x`.
 In particular, we have a function
 
 ```text
-(loop ∙ loop=loop ∙ loop)→(tr_{E_{id,id}}(loop,loop) = loop).
+(loop ∙ loop = loop ∙ loop) → (tr_{E_{id,id}}(loop,loop) = loop).
 ```
 
 Now we apply this function to `refl` to obtain the desired identification
@@ -386,13 +386,13 @@ pr2 coherent-unital-mul-𝕊¹-Pointed-Type =
 
 ## Remark 21.3.4
 
-For some of the exercises below it may be useful to know that the binary operation `mul_(S¹)` is the unique map `S¹ → (S¹ → S¹)` equipped with an identification
+For some of the exercises below it may be useful to know that the binary operation `mul_{S¹}` is the unique map `S¹ → (S¹ → S¹)` equipped with an identification
 
 ```text
-base-mul_(S¹) : mul_(S¹)(base) = id
+base-mul_{S¹} : mul_{S¹}(base) = id
 ```
 
-and an identification `loop-mul_(S¹)` witnessing that the square
+and an identification `loop-mul_{S¹}` witnessing that the square
 
 ```text
          [mul_(S¹)(base)]--base-mul_(S¹)--> [id]
