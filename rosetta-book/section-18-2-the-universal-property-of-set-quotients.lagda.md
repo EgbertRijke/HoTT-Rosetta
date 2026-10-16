@@ -72,13 +72,14 @@ for all `x, y : A`.
 We say that `q : A → B` **is a set quotient** of `R`, or that `q` satisfies the **universal property of the set quotient by `R`**, if for every map `f : A → X` into a set `X` such that `f(x) = f(y)` whenever `R(x,y)` holds, there is a unique extension
 
 ```text
-     A
+    A
     | \
     |  \
   q |   \ f
     |    \
-    ∨     ∨
-    B ---> X
+    |     \
+    ∨      ∨
+    B - -> X
 ```
 
 ```agda
