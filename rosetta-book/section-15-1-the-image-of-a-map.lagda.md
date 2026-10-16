@@ -359,7 +359,7 @@ Note that we have a commuting square
                         ∨                                    ∨
   (Π(x : X) fib(i_f, x) → fib(m,x)) ----> (Π(x : X) fib(f,x) → fib(m,x))
              
-                              h ↦ λ x. h_x ∘ φ_x
+                              h ↦ λ x. hₓ ∘ φₓ
 ```
 
 in which all four types are propositions, and the vertical maps are equivalences.
