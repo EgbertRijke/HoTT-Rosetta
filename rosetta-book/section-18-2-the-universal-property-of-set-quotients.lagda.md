@@ -389,13 +389,16 @@ for any `x, y : A` satisfying `R(x,y)`, because if `R(x,y)` holds, then `q(x) = 
 Since `im(q)` is a set, we may apply the universal property of `q` and we obtain a unique extension of `q_q` along `q`
 
 ```text
-     A
+    A
     | \
     |  \
   q |   \ q_q
     |    \
-    ∨     ∨
-    B ---> im(q)
+    |     \
+    |      \
+    |       \
+    ∨        ∨
+    B - -> im(q)
        h
 ```
 
