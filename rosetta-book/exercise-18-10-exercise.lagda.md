@@ -30,7 +30,7 @@ In other words, show that every weakly path-constant map `f : A → B` into a `1
         /       \
        /         \
       ∨           ∨
-    ‖A‖_0  - - -> B
+    ‖A‖₀ - - - -> B
 ```
 
 ## Solution
