@@ -358,11 +358,14 @@ commutes.
 This again follows from general considerations: for any `f : A → B` and any `p : a = a'` in `A`, the triangle
 
 ```text
-[tr_{const_B}(p,f(a))] --tr-const_B(p,f(a))--> [f(a)]
-                     \                         /
-            apd_{f}(p) \                      /  ap_{f}(p)
-                         V                  V
-                              [f(a')]
+                           tr-const_B(p,f(a))
+        tr_{const_B}(p,f(a)) ================ f(a)
+                           \\                 //
+                  apd_f(p)  \\               //  ap_f(p)
+                             \\             //
+                              \\           //
+                               \\         //
+                                   f(a')
 ```
 
 commutes by path induction on `p`. ◻
