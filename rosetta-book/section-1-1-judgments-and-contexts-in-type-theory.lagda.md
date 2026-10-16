@@ -82,7 +82,7 @@ satisfying the condition that for each `1 ≤ k ≤ n` we can derive the judgmen
 
 ```text
   x₁ : A₁, …, x_{k-1} : A_{k-1}(x₁,…,x_{k-2})⊢ A_k(x₁,…,x_{k-1}) Type,
-```text
+```
 
 using the inference rules of type theory.
 We may use variable names other than `x₁,…,x_n`, as long as no variable is declared more than once.

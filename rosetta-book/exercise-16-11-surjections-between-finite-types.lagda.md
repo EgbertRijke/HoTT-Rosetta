@@ -17,15 +17,15 @@ Construct an equivalence
 
 ### Exercise 16.11(b)
 
-Construct an equivalence `Fin{\numberofsurjectivemaps{m}{n}}≃(Fin{m}↠Fin{n})`, where `\numberofsurjectivemaps{m}{n}` is defined recursively by
+Construct an equivalence `Fin{S(m,n)}≃(Fin{m}↠Fin{n})`, where `S(m,n)` is defined recursively by
 ```text
-\numberofsurjectivemaps{0}{0} ≔ 1
-\numberofsurjectivemaps{0}{n+1} ≔ 0
-\numberofsurjectivemaps{m+1}{0} ≔ 0
-\numberofsurjectivemaps{m+1}{n+1} ≔ (n+1)\numberofsurjectivemaps{m}{n}+\numberofsurjectivemaps{m}{n+1}.
+S(0,0) ≔ 1
+S(0,n+1) ≔ 0
+S(m+1,0) ≔ 0
+S(m+1,n+1) ≔ (n+1)S(m,n)+S(m,n+1).
 ```
-Conclude that if `A` and `B` are finite with cardinality `m` and `n`, then the type `A↠ B` is finite with cardinality `\numberofsurjectivemaps{m}{n}`.
-Note: the number `\numberofsurjectivemaps{m}{n}` is `n!Stirling(m, n)`, where `Stirling(m, n)` is the **Stirling number of the second kind** at `(m,n)`.
+Conclude that if `A` and `B` are finite with cardinality `m` and `n`, then the type `A↠ B` is finite with cardinality `S(m,n)`.
+Note: the number `S(m,n)` is `n!Stirling(m, n)`, where `Stirling(m, n)` is the **Stirling number of the second kind** at `(m,n)`.
 
 ## Solution
 

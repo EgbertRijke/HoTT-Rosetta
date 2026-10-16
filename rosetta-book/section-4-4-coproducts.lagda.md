@@ -131,7 +131,7 @@ for any two types `A` and `B`.
     g : B → A.
 ```
 
-The function `f` is simply defined to be the identity function `\idfunc : A → A`. Recall that we have assumed that `B` is empty, so we have a function `b̃ : B → ∅`. Furthermore, we always have the function `\exfalso : ∅ → A`. Therefore, we can define `g≔ \exfalso\circ b̃` to complete the proof.
+The function `f` is simply defined to be the identity function `id : A → A`. Recall that we have assumed that `B` is empty, so we have a function `b̃ : B → ∅`. Furthermore, we always have the function `ex-falso : ∅ → A`. Therefore, we can define `g ≔ ex-falso ∘ b̃` to complete the proof.
 
 ```agda
 module _

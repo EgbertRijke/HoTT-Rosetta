@@ -102,7 +102,7 @@ infix 25 ¬¬_ ¬¬¬_
 
 This type is quite different from the type `A` itself, and with the given rules of type theory it is not possible to construct a function `¬¬ A → A` unless more is known about the type `A`.
 In other words, before one can prove by contradiction that there is an element in `A`, one has to construct a function `¬¬ A → A`, and it depends on the specific type `A` whether this is possible at all.
-In \cref{ex:dne-is-decidable} we will see a situation where we can indeed construct a function `¬¬ A → A`.
+In [Exercise 4.3(d)](exercise-4-3-double-negation-logic.lagda.md#exercise-43d) we will see a situation where we can indeed construct a function `¬¬ A → A`.
 In practice, however, we will rarely use double negation elimination.
 
 ### Proposition 4.3.4

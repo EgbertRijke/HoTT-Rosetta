@@ -12,7 +12,7 @@ A **binary correspondence** `R:A→(B→𝒰)` is said to be a **function** if i
 ```text
 is-function(R)≔Π(a:A) is-contr(Σ(b:B) R(a,b)),
 ```
-and `R` is said to be an **opposite function** if the **opposite correspondence** `\op{R}:B→(A→𝒰)` given by `\op{R}(b,a)≔ R(a,b)` is functional.
+and `R` is said to be an **opposite function** if the **opposite correspondence** `R^op:B→(A→𝒰)` given by `R^op(b,a)≔ R(a,b)` is functional.
 
 Construct an equivalence
 ```text
@@ -21,7 +21,7 @@ Construct an equivalence
 
 Construct an equivalence
 ```text
-(A≃ B)≃Σ(R:A→ (B→𝒰)) is-function(R)×is-function(\op{R}).
+(A≃ B)≃Σ(R:A→ (B→𝒰)) is-function(R)×is-function(R^op).
 ```
 
 ## Solution

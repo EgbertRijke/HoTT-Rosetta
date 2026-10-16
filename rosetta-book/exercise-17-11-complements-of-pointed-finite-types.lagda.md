@@ -9,7 +9,7 @@ module exercise-17-11-complements-of-pointed-finite-types where
 
 For any type `A`, construct an equivalence
 ```text
-𝒰_A ≃ \sum_{(X:𝒰_{A+unit})}binom(X, unit).
+𝒰_A ≃ Σ(X:𝒰_{A+unit}) binom(X, unit).
 ```
 
 For any `k:ℕ`, construct an equivalence

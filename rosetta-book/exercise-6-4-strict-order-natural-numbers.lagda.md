@@ -59,7 +59,7 @@ Show that
 
 ```text
 (m < n) ↔ (m+1 ≤ n)
-(m < n) ↔ (n \nleq m)
+(m < n) ↔ (n ≰ m)
 ```
 
 for any `m,n :ℕ`.

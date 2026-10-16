@@ -41,7 +41,7 @@ mul-ℕ' x y = mul-ℕ y x
 
 ## Solution to Exercise 3.1(b)
 
-**Note.** Our definition of `exp-ℕ` is a reimplementation of the function `power-Monoid` in agda-unimath. A reimplementation was necessary, so as to avoid loading the theory of semirings, which is built on the theory of monoids, which is in turn built on a large portion of the foundation files, the development of which is the purpose of this book and which could therefore not be superseeded.
+**Note.** Our definition of `exp-ℕ` is a reimplementation of the function `power-Monoid` in agda-unimath. A reimplementation was necessary, so as to avoid loading the theory of semirings, which is built on the theory of monoids, which is in turn built on a large portion of the foundation files, the development of which is the purpose of this book and which could therefore not be superseded.
 
 ```agda
 exp-ℕ : ℕ → ℕ → ℕ
