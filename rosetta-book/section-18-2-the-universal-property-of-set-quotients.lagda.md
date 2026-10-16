@@ -322,14 +322,15 @@ Note that we have an equivalence `i(b,a) ≃ (b = q(a))` for every `b : B` and `
 Then the triangle
 
 ```text
-        q
-  A --------> A/R
-   \         /
-    \       /
-   R \     / i
-      \   /
-       ∨ ∨
-    Prop_𝒰^A
+                   A
+                  / \
+                 /   \
+              q /     \ R
+               /       \
+              /         \
+             ∨           ∨
+             B -----> Prop_𝒰^A
+                  i
 ```
 
 commutes, since we have an equivalence
