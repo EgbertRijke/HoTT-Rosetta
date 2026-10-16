@@ -27,7 +27,7 @@ Construct an equivalence
 for every `x : A` and `y : B`, such that the triangle
 
 ```text
-        ap_e(p̃)
+         apₑ(p̃)
   e(x) ========= e(e⁻¹(y))
       \\       //
      p \\     // G(y)
