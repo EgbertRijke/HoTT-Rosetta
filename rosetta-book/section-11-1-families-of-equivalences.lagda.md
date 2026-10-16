@@ -417,13 +417,12 @@ Then the following are equivalent:
 Note that we have a commuting triangle
 
 ```text
-                tot_f(g)
-  Σ(x:A) C(x) -----------> Σ(y:B) D(y)
-             \            /
-       tot(g) \          / λ (x,z). (f(x),z)
-               \        /
-                ∨      ∨
-             Σ(x:A) D(f(x))
+                   tot_f(g)
+  Σ(x : A) C(x) ------------> Σ(y : B) D(y)
+              \                 ^
+        tot(g) \               / λ (x,z). (f(x),z)
+                v             /
+              Σ(x : A) D(f(x))
 ```
 
 By the assumption that `f` is an equivalence, it follows that the map
