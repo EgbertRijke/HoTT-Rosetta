@@ -383,8 +383,8 @@ For the forward direction of claim (1), suppose we have equivalences `e : Finₖ
 The equivalences `e` and `f` induce via Exercises 9.6 and 9.8 a composite equivalence
 
 ```text
-          ≃                       ≃
-  A + B ----> Fin_{k} + Fin_{l} ----> Fin_{k+l}
+          ≃                 ≃
+  A + B ----> Finₖ + Finₗ ----> Finₖ₊ₗ
 ```
 
 from which we obtain an element of type `count(A + B)`.
