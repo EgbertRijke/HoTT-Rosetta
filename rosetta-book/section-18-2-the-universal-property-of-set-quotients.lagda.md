@@ -411,13 +411,16 @@ Now we have to show that the map `q` is effective, i.e., that `q(x) = q(y)` is e
 We first apply the universal property of `q` to obtain for each `x : A` an extension of `R(x)` along `q`
 
 ```text
-     A
+    A
     | \
     |  \
   q |   \ R(x)
     |    \
-    ∨     ∨
-    B ---> Prop_𝒰
+    |     \
+    |      \
+    |       \
+    ∨        ∨
+    B - -> Prop_𝒰
       R̃(x)
 ```
 
