@@ -32,11 +32,13 @@ Concrete-Subgroup_𝒰(G,⋆) ≃ Subgroup_𝒰(G).
 Show that `G` acts on `Concrete-Subgroup_𝒰(G,⋆)` by conjugation, i.e., show that for any `g : G` we have a commuting square
 
 ```text
-    [Concrete-Subgroup_𝒰(G,⋆)] ---- g ----> [Concrete-Subgroup_𝒰(G,⋆)]
-                 |                                  |
-              ≃  |                                  | ≃
-                 V                                  V
-         [Subgroup_𝒰(G)] --H↦{ghg⁻¹ | h ∈ H}--> [Subgroup_𝒰(G)]
+                                       g
+   [Concrete-Subgroup_𝒰(G,⋆)] -----------------> [Concrete-Subgroup_𝒰(G,⋆)]
+                |                                             |
+              ≃ |                                             | ≃
+                ∨                                             ∨
+         [Subgroup_𝒰(G)] ----------------------------> [Subgroup_𝒰(G)]
+                              H ↦ {ghg⁻¹ | h ∈ H}
 ```
 
 ### Exercise 19.17(c)
