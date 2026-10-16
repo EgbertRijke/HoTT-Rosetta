@@ -309,11 +309,17 @@ module _
 _Proof._ We prove the claim by constructing a commuting triangle
 
 ```text
-                   [(S¹→ X)]
-                  /          \
-   gen_{S¹}      /            \  dgen_{S¹}
-                V              V
-     [(Σ(x:X) x=x)]  ---≃--->  [(Σ(x:X) tr_{const_X}(loop,x)=x)]
+                            (S¹ → X)
+                               / \
+                              /   \
+                   gen_{S¹}  /     \ dgen_{S¹}
+                            /       \
+                           /         \
+                          /           \
+                         /             \
+                        ∨               ∨
+                (Σ(x : X) x = x) ----> (Σ(x : X) tr_{const_X}(loop,x) = x)
+                                   ≃
 ```
 
 in which the bottom map is an equivalence.
