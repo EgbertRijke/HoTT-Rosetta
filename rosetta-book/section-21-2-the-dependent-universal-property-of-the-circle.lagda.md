@@ -433,11 +433,13 @@ For any loop `l : x = x` in a type `X`, the type of maps `f : S¹ → X` equippe
 and an identification `β` witnessing that the square
 
 ```text
-          [f(base)]--α--> [x]
-              |            |
- ap_{f}(loop) |            | l
-              v            v
-          [f(base)]--α--> [x]
+                                 α
+                 f(base) ================== x
+                    ||                      ||
+        ap_f(loop)  ||                      || l
+                    ||                      ||
+                 f(base) ================== x
+                                 α
 ```
 
 commutes, is contractible.
