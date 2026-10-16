@@ -585,8 +585,8 @@ Similarly, if `k` is a successor and `l` is zero, we obtain `e(0) : empty`, whic
 If both `k` and `l` are a successor, then we have by Proposition 16.2.1 the composite
 
 ```text
-  (Fin_{k+1} ≃ Fin_{l+1}) ---> (Fin_{k} ≃ Fin_{l}) ---> (k = l) ---> (k+1 = l+1)
-                                                                               ◻
+  (Finₖ₊₁ ≃ Finₗ₊₁) ---> (Finₖ ≃ Finₗ) ---> (k = l) ---> (k + 1 = l + 1)
+                                                                       ◻
 ```
 
 ```agda
