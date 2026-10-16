@@ -85,14 +85,14 @@ given by `h ↦ h_{f(a)}(a,refl)` is an equivalence.
 Construct three equivalences `α`, `β`, and `γ` as shown in the following diagram, and show that this triangle commutes:
 
 ```text
-                              hom-slice_(f,g)
-                                /         \
-                               /           \
-                            α /             \ β
-                             /               \
-                            ∨                 ∨
-  Π(x:A) fib(f,x) → fib(g,x) ----------------> Π(a:A) fib(g,f(a))
-                                     γ
+                                hom-slice_X(f,g)
+                                  /           \
+                                 /             \
+                              α /               \ β
+                               /                 \
+                              /                   \
+                             v                     v
+  (Π(x : X) fib(f,x) → fib(g,x)) ------γ-------> Π(a : A) fib(g,f(a))
 ```
 
 Given a morphism `(h,H) : hom-slice_X(f,g)` over `X`, we also say that `α(h,H)` is its **action on fibers**.
