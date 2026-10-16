@@ -10,14 +10,13 @@ module exercise-11-11-fiber-triangles where
 Consider a triangle
 
 ```text
- [A]                 [B]
-
-           [X]
-
-Arrows:
-- A --h--> B
-- A --f--> X
-- B --g--> X
+         h
+    A ------> B
+     \       /
+    f \     / g
+       \   /
+        v v
+         X
 ```
 with a homotopy `H : f ~ g ∘ h` witnessing that the triangle commutes.
 
