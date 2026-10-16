@@ -245,11 +245,13 @@ By the dependent universal property of the circle there is a unique
 equipped with an identification `α : μ(base) = (id,refl)` and an identification witnessing that the square
 
 ```text
-[tr_P(loop,μ(base))]--ap_{tr_P(loop)}(α)-->[tr_P(loop,(id,refl))]
-              |                                |
-apd_{μ}(loop) |                                | τ(H,r)
-              V                                V
-          [μ(base)]  -----α---------->  [(id,refl)]
+                           ap_{tr_P(loop)}(α)
+      tr_P(loop,μ(base)) ====================== tr_P(loop,(id,refl))
+               ||                                         ||
+  apd_μ(loop)  ||                                         || τ(H,r)
+               ||                                         ||
+            μ(base) ================================= (id,refl)
+                                    α
 ```
 
 commutes.
@@ -270,11 +272,13 @@ to define `H` as the unique homotopy equipped with an identification
 and an identification `β` witnessing that the square
 
 ```text
-[tr_{E_{id,id}}(loop,H(base))]--ap_{tr_{E_{id,id}}(loop)}(α)-->[tr_{E_{id,id}}(loop,loop)]
-              |                                                         |
-apd_{H}(loop) |                                                         | γ
-              V                                                         V
-          [H(base)]      -----------------α--------------->           [loop]
+                                 ap_{tr_{E_{id,id}}(loop)}(α)
+  tr_{E_{id,id}}(loop,H(base)) ================================ tr_{E_{id,id}}(loop,loop)
+                ||                                                          ||
+   apd_H(loop)  ||                                                          || γ
+                ||                                                          ||
+             H(base) ==================================================== loop
+                                               α
 ```
 
 commutes.
@@ -395,11 +399,13 @@ base-mul_{S¹} : mul_{S¹}(base) = id
 and an identification `loop-mul_{S¹}` witnessing that the square
 
 ```text
-         [mul_(S¹)(base)]--base-mul_(S¹)--> [id]
-                    |                         |
-ap_{mul_(S¹)}(loop) |                         | eq-htpy(H)
-                    V                         V
-         [mul_(S¹)(base)]--base-mul_(S¹)--> [id]
+                                 base-mul_{S¹}
+                mul_{S¹}(base) ================= id
+                       ||                         ||
+  ap_{mul_{S¹}}(loop)  ||                         || eq-htpy(H)
+                       ||                         ||
+                mul_{S¹}(base) ================= id
+                                 base-mul_{S¹}
 ```
 
 commutes, where the homotopy `H : id ~ id` is the one constructed in Theorem 21.3.3.
