@@ -12,15 +12,11 @@ Consider a map `f : A → B`.
 Show that the type of maps `‖f‖₀ : ‖A‖₀ → ‖B‖₀` equipped with a homotopy witnessing that the square
 
 ```text
-  [A]  ---->  [B]
-   |           |
-[‖A‖_0]---->[‖B‖_0]
-
-Arrows:
-- A --f--> B
-- A --η--> ‖A‖_0
-- B --η--> ‖B‖_0
-- ‖A‖_0 --‖f‖_0--> ‖B‖_0
+    A ---------f----------> B
+    |                       |
+  η |                       | η
+    ∨                       ∨
+  ‖A‖₀ ------‖f‖₀-------> ‖B‖₀
 ```
 commutes is contractible.
 
@@ -35,18 +31,20 @@ Show that the following are equivalent
 Construct a map `h : im(f) → im‖f‖₀` such that the squares
 
 ```text
-  [A]  ----> [im(f)] ---->  [B]
-   |            |            |
-[‖A‖_0]---->[im‖f‖_0]---->[‖B‖_0]
+    A --------q_f---------> im(f) --------i_f---------> B
+    |                         |                         |
+  η |                       h |                         | η
+    ∨                         ∨                         ∨
+  ‖A‖₀ -----q_{‖f‖₀}-----> im‖f‖₀ -----i_{‖f‖₀}-----> ‖B‖₀
 
 Arrows:
 - A --q_f--> im(f)
-- A --η--> ‖A‖_0
-- im(f) --h--> im‖f‖_0
+- A --η--> ‖A‖₀
+- im(f) --h--> im‖f‖₀
 - im(f) --i_f--> B
-- B --η--> ‖B‖_0
-- ‖A‖_0 --q_{‖f‖_0}--> im‖f‖_0
-- im‖f‖_0 --i_{‖f‖_0}--> ‖B‖_0
+- B --η--> ‖B‖₀
+- ‖A‖₀ --q_{‖f‖₀}--> im‖f‖₀
+- im‖f‖₀ --i_{‖f‖₀}--> ‖B‖₀
 ```
 commute, and show that `h` is a set truncation of `im(f)`.
 
