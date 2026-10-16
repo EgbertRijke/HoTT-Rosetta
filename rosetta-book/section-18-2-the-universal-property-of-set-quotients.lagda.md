@@ -255,14 +255,15 @@ Then the following are equivalent.
 3. The map `R : A → (A → Prop_𝒰)` extends along `q` to an embedding
 
    ```text
-            q_R
-       A --------> A/R
-        \         /
-         \       /
-        R \     / i_R
-           \   /
-            ∨ ∨
-         Prop_𝒰^A
+                      A
+                     / \
+                    /   \
+                 q /     \ R
+                  /       \
+                 /         \
+                ∨           ∨
+                B - - -> Prop_𝒰^A
+                     i
    ```
 
    and the embedding `i` satisfies the universal property of the image inclusion of `R`.
