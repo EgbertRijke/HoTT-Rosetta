@@ -43,11 +43,13 @@ is an equivalence for every type family `A` over the circle.
 Note that we have a commuting triangle
 
 ```text
-                                 [(Π(t:S¹) E_(S¹)(t)→ A(t))]
-                                 /                         \
-                               /                            \ f ↦ f(0_{E})
-                             V                                V
-[Σ(h:ℤ→ A(base)) h∘succ-ℤ~ tr_A(loop)∘ h]--{(h,H)↦ h(0)}-->[A(base)]
+                                            (Π(t : S¹) E_{S¹}(t) → A(t))
+                                                    /           \
+                                                   /             \ f ↦ f(0_E)
+                                                  /               \
+                                                 v                 v
+    Σ(h : ℤ → A(base)) h ∘ succ-ℤ ~ tr_A(loop) ∘ h ---------------> A(base)
+                                                    (h,H) ↦ h(0)
 ```
 
 in which the left map is the equivalence obtained in Corollary 22.2.4 and the bottom map is an equivalence by Corollary 22.3.6. ◻
