@@ -37,14 +37,14 @@ For any two maps `f : A → X` and `g : B → X`, define the type of **morphisms
 In other words, the type `hom-slice_X(f,g)` is the type of maps `h : A → B` equipped with a homotopy witnessing that the triangle
 
 ```text
-       h
-  A ------> B
-   \       /
-  f \     / h
-     \   /
-      ∨ ∨
-       X
-
+          h
+    A - - - ->  B
+     \         /
+    f \       / g
+       \     /
+        \   /
+         v v
+          X
 ```
 
 commutes.
