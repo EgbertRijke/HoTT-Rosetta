@@ -838,14 +838,14 @@ For the converse, suppose that `f` is connected, and consider a set `X`.
 Note that we have a commuting square
 
 ```text
-                        h ↦ λ b. λ t. h(b,η(t))
+                               h ↦ λ b. λ t. h(b,η(t))
 
-      (Π(b : B) ‖fib(f,b)‖₀ → X) ----> (Π(b : B) fib(f,b) → X)
-                   |                             |
-  h↦λ b. λ u. h(b) |                             | h ↦ λ a. h(f(a),(a,refl))
-                   ∨                             ∨
-                (B → X) --------------------> (A → X)
-                                 - ∘ f
+          (Π(b : B) ‖fib(f,b)‖₀ → X) ----------> (Π(b : B) fib(f,b) → X)
+                      ↑                                     |
+  h ↦ λ b. λ u. h(b)  |                                     | h ↦ λ a. h(f(a),(a,refl))
+                      |                                     ∨
+                   (B → X) ----------------------------> (A → X)
+                                       - ∘ f
 ```
 
 In this commuting square, the map on the left is an equivalence since `‖fib(f,b)‖₀` is contractible for each `b : B`.
