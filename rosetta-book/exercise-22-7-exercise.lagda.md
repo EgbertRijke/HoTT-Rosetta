@@ -17,27 +17,33 @@ for any `x,y,z : S¹`.
 Show that the associator satisfies unit laws, in the sense that the following triangles commute:
 
 ```text
-[mul_(S¹)(mul_(S¹)(base,x),y)] ----> [mul_(S¹)(base,mul_(S¹)(x,y))]
-                   \                            /
-                     \                        /
-                       V                    V
-                           [mul_(S¹)(x,y)]
+  mul_{S¹}(mul_{S¹}(base,x),y) ============== mul_{S¹}(base,mul_{S¹}(x,y))
+                            \\                 //
+                             \\               //
+                              \\             //
+                               \\           //
+                                \\         //
+                                mul_{S¹}(x,y)
 ```
 
 ```text
-[mul_(S¹)(mul_(S¹)(x,base),y)] ----> [mul_(S¹)(x,mul_(S¹)(base,y))]
-                   \                            /
-                     \                        /
-                       V                    V
-                           [mul_(S¹)(x,y)]
+  mul_{S¹}(mul_{S¹}(x,base),y) ============== mul_{S¹}(x,mul_{S¹}(base,y))
+                            \\                 //
+                             \\               //
+                              \\             //
+                               \\           //
+                                \\         //
+                                mul_{S¹}(x,y)
 ```
 
 ```text
-[mul_(S¹)(mul_(S¹)(x,y),base)] ----> [mul_(S¹)(x,mul_(S¹)(y,base))]
-                   \                            /
-                     \                        /
-                       V                    V
-                           [mul_(S¹)(x,y)]
+  mul_{S¹}(mul_{S¹}(x,y),base) ============== mul_{S¹}(x,mul_{S¹}(y,base))
+                            \\                 //
+                             \\               //
+                              \\             //
+                               \\           //
+                                \\         //
+                                mul_{S¹}(x,y)
 ```
 
 State the laws that compute
