@@ -344,11 +344,14 @@ Since concatenating by a path is an equivalence, it follows by Theorem 11.1.3 th
 To show that the triangle commutes, it suffices to construct for any `f : S¹ → X` an identification witnessing that the triangle
 
 ```text
-[tr_{const_X}(loop,f(base))] --{tr-const_X(loop,f(base))}--> [f(base)]
-                          \                                 /
-              apd_{f}(loop) \                              /  ap_{f}(loop
-                              V                          V
-                                      [f(base)]
+                              tr-const_X(loop,f(base))
+        tr_{const_X}(loop,f(base)) =============== f(base)
+                                \\                 //
+                    apd_f(loop)  \\               //  ap_f(loop)
+                                  \\             //
+                                   \\           //
+                                    \\         //
+                                       f(base)
 ```
 
 commutes.
