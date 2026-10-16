@@ -181,7 +181,7 @@ eq-equiv-component-UU X Y =
 
 ## Example 17.6.3
 
-Note that type `𝒰_{Fin{n}}` is the type `BSₙ` of all `n`-element types.
+Note that type `𝒰_{Fin n}` is the type `BSₙ` of all `n`-element types.
 Note also that if `A ≃ B`, then `𝒰_A ≃ 𝒰_B`.
 
 ## Definition 17.6.4
@@ -375,7 +375,7 @@ Using the universal property of `A + 1`, we see that
   ≃ Σ(P : A → decidable-Prop_𝒰) Σ(Q : decidable-Prop_𝒰) ‖(B + 1) ≃ Σ(a : A) P(a) + Q‖.
 ```
 
-Using the fact that `decidable-Prop_𝒰 ≃ Fin{2}`, observe that we have an equivalence
+Using the fact that `decidable-Prop_𝒰 ≃ Fin 2`, observe that we have an equivalence
 
 ```text
   Σ(Q : decidable-Prop_𝒰) ‖(B + 1) ≃ (Σ(a : A) P(a) + Q)‖
@@ -600,7 +600,7 @@ If `A` and `B` are finite types of cardinality `n` and `k`, respectively, then t
 
 ### Proof
 
-The claim that the type `(A choose B)` is finite of cardinality `(n choose k)` is a proposition, so we may assume `e : Fin{n} ≃ A` and `f : Fin{k} ≃ B`.
+The claim that the type `(A choose B)` is finite of cardinality `(n choose k)` is a proposition, so we may assume `e : Fin n ≃ A` and `f : Fin k ≃ B`.
 The claim now follows by induction on `n` and `k`, using Lemma 17.6.8. ◻
 
 ```agda

@@ -32,16 +32,16 @@ Show that
 ```
 for each `x,y : classical-Finₖ`.
 
-By Lemma 7.3.5 it follows that the map `nat-Fin : Fin{k} → ℕ` induces a map `nat-Fin : Fin{k} → classical-Finₖ`.
+By Lemma 7.3.5 it follows that the map `nat-Fin : Fin k → ℕ` induces a map `nat-Fin : Fin k → classical-Finₖ`.
 Construct a map
 ```text
-αₖ : classical-Finₖ → Fin{k}
+αₖ : classical-Finₖ → Fin k
 ```
 for each `k : ℕ`, and show that
 ```text
 αₖ(nat-Fin(x)) = x and nat-Fin(αₖ(y)) = y
 ```
-for each `x : Fin{k}` and each `y : classical-Finₖ`.
+for each `x : Fin k` and each `y : classical-Finₖ`.
 
 ## Solution
 

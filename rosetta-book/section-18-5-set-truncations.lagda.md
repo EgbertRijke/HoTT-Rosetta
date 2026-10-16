@@ -436,7 +436,7 @@ module _
 
 By this corollary, we may think of the set truncation `‖A‖₀` of `A` as the set of connected components of `A`.
 Indeed, if we have an unspecified identification `‖x = y‖` in `A`, then we think of `x` and `y` as being in the same connected component.
-For example, any `k`-element set is a type that is in the same connected component of `𝒰` as the type `Finₖ`.
+For example, any `k`-element set is a type that is in the same connected component of `𝒰` as the type `Fin k`.
 
 ## Definition 18.5.5
 

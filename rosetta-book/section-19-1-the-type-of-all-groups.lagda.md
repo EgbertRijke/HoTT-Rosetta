@@ -417,5 +417,5 @@ pr2 (pr2 (symmetric-Group X)) = is-group-symmetric-Semigroup' X
 An important special case of the automorphism groups is the **symmetric group**
 
 ```text
-Sₙ ≔ Aut(Fin{n}).
+Sₙ ≔ Aut(Fin n).
 ```

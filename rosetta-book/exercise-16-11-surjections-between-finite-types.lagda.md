@@ -17,7 +17,7 @@ Construct an equivalence
 
 ### Exercise 16.11(b)
 
-Construct an equivalence `Fin{S(m,n)} ≃ (Fin{m} ↠ Fin{n})`, where `S(m,n)` is defined recursively by
+Construct an equivalence `Fin (S(m,n)) ≃ (Fin m ↠ Fin n)`, where `S(m,n)` is defined recursively by
 ```text
 S(0,0) ≔ 1
 S(0,n + 1) ≔ 0

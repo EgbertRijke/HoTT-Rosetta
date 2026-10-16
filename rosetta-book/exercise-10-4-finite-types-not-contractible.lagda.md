@@ -27,7 +27,7 @@ open import section-12-2-subtypes
 
 ## Problem statement
 
-Show that `Finₖ` is not contractible for all `k ≠ 1`.
+Show that `Fin k` is not contractible for all `k ≠ 1`.
 
 ## Solution
 

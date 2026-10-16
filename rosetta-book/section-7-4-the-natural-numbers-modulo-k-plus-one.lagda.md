@@ -74,38 +74,38 @@ module _
 ```
 
 Martin-Löf’s dependent type theory doesn’t have a general way of forming quotients of types.
-However, in the specific case of the congruence relations on `ℕ` we can define the type of natural numbers modulo `k + 1` as the standard finite type `Fin{k + 1}`.
-We will show that `Fin{k + 1}` comes equipped with a map
+However, in the specific case of the congruence relations on `ℕ` we can define the type of natural numbers modulo `k + 1` as the standard finite type `Fin (k + 1)`.
+We will show that `Fin (k + 1)` comes equipped with a map
 
 ```text
-[_]_(k + 1) : ℕ → Fin{k + 1}
+[_]_(k + 1) : ℕ → Fin (k + 1)
 ```
 
 for each `k : ℕ`, and we will show in Theorems 7.4.7 and 7.4.8 that this map satisfies conditions (1) and (2) in the split surjective sense.
 
-To prepare for the definition of the quotient map `[_]ₖ₊₁`, we will first define a zero element of `Fin{k + 1}` and successor function on each `Fin{k}`.
-We will also define an auxiliary function `skip-zero-Finₖ : Fin{k} → Fin{k + 1}`, which is used in the definition of the successor function.
+To prepare for the definition of the quotient map `[_]ₖ₊₁`, we will first define a zero element of `Fin (k + 1)` and successor function on each `Fin k`.
+We will also define an auxiliary function `skip-zero-Finₖ : Fin k → Fin (k + 1)`, which is used in the definition of the successor function.
 The map `[_]ₖ₊₁` is then defined by iterating the successor function.
 
 ## Definition 7.4.2
 
-1. We define the **zero element** `zero-Finₖ : Fin{k + 1}` recursively by
+1. We define the **zero element** `zero-Finₖ : Fin (k + 1)` recursively by
 
 ```text
 zero-Fin₀ ≔ ⋆
 zero-Finₖ₊₁ ≔ i(zero-Finₖ).
 ```
 
-Since there is a mismatch between the index of `zero-Finₖ` and the index of its type, we will often simply write `zero-Fin` or `0` for the zero element of `Fin{k + 1}`.
+Since there is a mismatch between the index of `zero-Finₖ` and the index of its type, we will often simply write `zero-Fin` or `0` for the zero element of `Fin (k + 1)`.
 
-2. We define the function `skip-zero-Finₖ : Fin{k} → Fin{k + 1}` recursively by
+2. We define the function `skip-zero-Finₖ : Fin k → Fin (k + 1)` recursively by
 
 ```text
 skip-zero-Finₖ₊₁(i(x)) ≔ i(skip-zero-Finₖ(x))
 skip-zero-Finₖ₊₁(⋆) ≔ ⋆.
 ```
 
-3. We define the **successor function** `succ-Finₖ : Fin{k} → Fin{k}` recursively by
+3. We define the **successor function** `succ-Finₖ : Fin k → Fin k` recursively by
 
 ```text
 succ-Finₖ₊₁(i(x)) ≔ skip-zero-Finₖ(x)
@@ -161,7 +161,7 @@ is-one-Fin (succ-ℕ k) x = x ＝ one-Fin k
 
 ## Definition 7.4.3
 
-For any `k : ℕ`, we define the map `[_]ₖ₊₁ : ℕ → Fin{k + 1}` recursively on `x` by
+For any `k : ℕ`, we define the map `[_]ₖ₊₁ : ℕ → Fin (k + 1)` recursively on `x` by
 
 ```text
 [0]ₖ₊₁ ≔ 0
@@ -181,7 +181,7 @@ mod-three-ℕ = mod-succ-ℕ 2
 ```
 
 Our next intermediate goal is to show that `x ≡ nat-Fin[x]ₖ₊₁ mod (k + 1)` for any natural number `x`.
-This fact is a consequence of the following simple lemma, that will help us compute with the maps `nat-Fin : Fin{k} → ℕ`.
+This fact is a consequence of the following simple lemma, that will help us compute with the maps `nat-Fin : Fin k → ℕ`.
 
 ## Lemma 7.4.4
 
@@ -193,13 +193,13 @@ We make three claims:
 nat-Fin(zero-Finₖ) = 0
 ```
 
-2. For any `k : ℕ` and any `x : Fin{k}`, we have
+2. For any `k : ℕ` and any `x : Fin k`, we have
 
 ```text
 nat-Fin(skip-zero-Finₖ(x)) = nat-Fin(x) + 1.
 ```
 
-3. For any `k : ℕ` and any `x : Fin{k}`, we have
+3. For any `k : ℕ` and any `x : Fin k`, we have
 
 ```text
 nat-Fin(succ-Finₖ(x)) ≡ nat-Fin(x) + 1 mod k.
@@ -475,16 +475,16 @@ eq-mod-succ-cong-ℕ k x y H =
 
 ## Theorem 7.4.8
 
-For any `x : Fin{k + 1}` there is an identification
+For any `x : Fin (k + 1)` there is an identification
 
 ```text
 [nat-Fin(x)]ₖ₊₁ = x.
 ```
 
-In other words, the map `[_]ₖ₊₁ : ℕ → Fin{k + 1}` is split surjective.
+In other words, the map `[_]ₖ₊₁ : ℕ → Fin (k + 1)` is split surjective.
 
 ### Proof
-Since `nat-Fin : Fin{k + 1} → ℕ` is injective by Proposition 7.3.6, it suffices to show that
+Since `nat-Fin : Fin (k + 1) → ℕ` is injective by Proposition 7.3.6, it suffices to show that
 
 ```text
 nat-Fin[nat-Fin(x)]ₖ₊₁ = nat-Fin(x).

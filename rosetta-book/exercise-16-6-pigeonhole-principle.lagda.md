@@ -27,7 +27,7 @@ Prove the **pigeonhole principle**, i.e., show that
 
 ### Exercise 16.6(c)
 
-Show that there is no embedding `ℕ ↪ Finₖ`, for any `k : ℕ`.
+Show that there is no embedding `ℕ ↪ Fin k`, for any `k : ℕ`.
 
 ## Solution
 

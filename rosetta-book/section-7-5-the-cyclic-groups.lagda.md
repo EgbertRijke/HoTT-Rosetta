@@ -32,7 +32,7 @@ This motivates the following definition:
 We define the type `ℤ / k` for each `k : ℕ` by
 
 ```text
-ℤ / 0 ≔ ℤ and ℤ / (k + 1) ≔ Fin{k + 1}.
+ℤ / 0 ≔ ℤ and ℤ / (k + 1) ≔ Fin (k + 1).
 ```
 
 ```agda

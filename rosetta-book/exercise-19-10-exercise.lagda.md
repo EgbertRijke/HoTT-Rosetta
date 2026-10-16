@@ -19,14 +19,14 @@ If `A` is a set, show that the map
 ((Σ(X : BS₂) A^X) → A) → (Σ(f : A → (A → A)) Π(x,y : A) f(x,y) = f(y,x))
 ```
 
-given by `h ↦ λ x. λ y. h(Fin{2},(x,y))` is an equivalence.
-In other words, show that every commutative operation `f : A → (A → A)` extends uniquely along the map `f ↦ (Fin{2},f)` as in the diagram
+given by `h ↦ λ x. λ y. h(Fin 2,(x,y))` is an equivalence.
+In other words, show that every commutative operation `f : A → (A → A)` extends uniquely along the map `f ↦ (Fin 2,f)` as in the diagram
 
 ```text
-                 [A^{Fin{2}}]
+                 [A^{Fin 2}]
                   |           \
                   |            \ μ
-  f ↦ (Fin{2},f)  |             \
+  f ↦ (Fin 2,f)   |             \
                   |              \
                   V               V
           [Σ(X : BS_2) A^X] - - -> [A]

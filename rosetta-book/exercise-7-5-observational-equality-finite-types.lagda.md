@@ -18,10 +18,10 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 
 ## Problem statement
 
-The observational equality on `Finₖ` is a binary relation
+The observational equality on `Fin k` is a binary relation
 
 ```text
-  Eq-Finₖ : Finₖ → (Finₖ → 𝒰₀)
+  Eq-Finₖ : Fin k → (Fin k → 𝒰₀)
 ```
 
 defined recursively by
@@ -49,11 +49,11 @@ Show that
   (x = y) ↔ Eq-Finₖ(x,y)
 ```
 
-for any two elements `x, y : Finₖ`.
+for any two elements `x, y : Fin k`.
 
 ### Exercise 7.5(b)
 
-Show that the function `i : Finₖ → Finₖ₊₁` is injective, for each `k : ℕ`.
+Show that the function `i : Fin k → Fin (k + 1)` is injective, for each `k : ℕ`.
 
 ### Exercise 7.5(c)
 
@@ -63,11 +63,11 @@ Show that
   succ-Finₖ₊₁(i(x)) ≠ 0
 ```
 
-for any `x : Finₖ`.
+for any `x : Fin k`.
 
 ### Exercise 7.5(d)
 
-Show that function `succ-Finₖ : Finₖ → Finₖ` is injective, for each `k : ℕ`.
+Show that function `succ-Finₖ : Fin k → Fin k` is injective, for each `k : ℕ`.
 
 ## Solutions
 

@@ -9,7 +9,7 @@ module exercise-17-10-complements-of-finite-subtypes where
 
 For any `k : ℕ`, show that the type
 ```text
-Σ(X : BSₖ₊₁) Fin{k} ↪ X
+Σ(X : BSₖ₊₁) Fin k ↪ X
 ```
 is contractible.
 

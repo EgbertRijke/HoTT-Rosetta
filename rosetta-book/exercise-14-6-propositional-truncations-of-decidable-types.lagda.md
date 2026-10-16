@@ -11,7 +11,7 @@ Consider a type `A` equipped with an element `d : is-decidable(A)`.
 
 Define a function `f : A → Σ(x : A) inl(x) = d` and show that `f` is a propositional truncation of `A`.
 
-Consider the function `π : is-decidable(A) → Fin{2}` defined by
+Consider the function `π : is-decidable(A) → Fin 2` defined by
 ```text
 π(inl(x)) := 1
 π(inr(x)) := 0.

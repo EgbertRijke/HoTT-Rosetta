@@ -38,7 +38,7 @@ However, this is something that we must prove before we can use it.
 In other words, we must show that
 
 ```text
-  (Finₖ ≃ Finₗ) → (k = l)
+  (Fin k ≃ Fin l) → (k = l)
 ```
 for any two natural numbers `k` and `l`.
 We will prove this claim as a consequence of the following general fact.
@@ -566,15 +566,15 @@ compute-equiv-equiv-Maybe-id-equiv = eq-htpy-equiv refl-htpy
 For any two natural numbers `k` and `l`, there is a map
 
 ```text
-  (Finₖ ≃ Finₗ) → (k = l).
+  (Fin k ≃ Fin l) → (k = l).
 ```
 
 ### Proof
 
 The proof is by induction on `k` and `l`.
 In the base case, where both `k` and `l` are zero, the claim is obvious.
-If `k` is zero and `l` is a successor, then we have `0 : Finₗ`.
-Any equivalence `e : Finₖ ≃ Finₗ` now gives us the element
+If `k` is zero and `l` is a successor, then we have `0 : Fin l`.
+Any equivalence `e : Fin k ≃ Fin l` now gives us the element
 
 ```text
   e⁻¹(0) : empty,
@@ -585,8 +585,8 @@ Similarly, if `k` is a successor and `l` is zero, we obtain `e(0) : empty`, whic
 If both `k` and `l` are a successor, then we have by Proposition 16.2.1 the composite
 
 ```text
-  (Finₖ₊₁ ≃ Finₗ₊₁) ---> (Finₖ ≃ Finₗ) ---> (k = l) ---> (k + 1 = l + 1)
-                                                                       ◻
+  (Fin (k + 1) ≃ Fin (l + 1)) ---> (Fin k ≃ Fin l) ---> (k = l) ---> (k + 1 = l + 1)
+                                                                                   ◻
 ```
 
 ```agda

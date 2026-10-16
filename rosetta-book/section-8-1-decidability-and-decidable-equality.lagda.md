@@ -307,11 +307,11 @@ For now, it is important to remember that in order to use decidability, we must 
 
 ## Proposition 8.1.8
 
-The standard finite type `Fin{k}` has decidable equality for each `k : ℕ`.
+The standard finite type `Fin k` has decidable equality for each `k : ℕ`.
 
 ### Proof
 
-*Proof.* Recall from Exercise 7.5 that we constructed an observational equality relation `Eq-Finₖ` on `Fin{k}` for each `k : ℕ`, which satisfies
+*Proof.* Recall from Exercise 7.5 that we constructed an observational equality relation `Eq-Finₖ` on `Fin k` for each `k : ℕ`, which satisfies
 
 ```text
 (x = y) ↔ Eq-Finₖ(x, y).
@@ -350,7 +350,7 @@ is-decidable-is-one-Fin {succ-ℕ k} x =
   has-decidable-equality-Fin (succ-ℕ k) x (one-Fin k)
 ```
 
-We can use the fact that the finite types `Fin{k}` have decidable equality to show that the divisibility relation on `ℕ` is decidable.
+We can use the fact that the finite types `Fin k` have decidable equality to show that the divisibility relation on `ℕ` is decidable.
 
 ## Theorem 8.1.9
 
@@ -361,8 +361,8 @@ For any `d, x : ℕ`, the type `d | x` is decidable.
 *Proof.* Note that `0 | x` is decidable because `0 | x` if and only if `x = 0`, which is decidable by Proposition 8.1.7.
 Therefore it suffices to show that `d + 1 | x` is decidable.
 
-By Theorem 7.4.7 it follows that `d + 1 | x` holds if and only if we have an identification `[x]_{d + 1} = 0` in `Fin{d + 1}`.
-Therefore the claim follows from the fact that `Fin{d + 1}` has decidable equality. ◻
+By Theorem 7.4.7 it follows that `d + 1 | x` holds if and only if we have an identification `[x]_{d + 1} = 0` in `Fin (d + 1)`.
+Therefore the claim follows from the fact that `Fin (d + 1)` has decidable equality. ◻
 
 ```agda
 is-decidable-div-ℕ : (d x : ℕ) → is-decidable (div-ℕ d x)

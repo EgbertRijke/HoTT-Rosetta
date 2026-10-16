@@ -15,7 +15,7 @@ A ∖ i ≔ pr 1.
 Now consider a finite type `X` and two arbitrary types `A` and `B`.
 Construct an equivalence
 ```text
-(A + B)^X ≃ Σ(k : ℕ) Σ((Y,i) : binom(X, Fin{k})) A^Y × B^{X ∖ Y}.
+(A + B)^X ≃ Σ(k : ℕ) Σ((Y,i) : binom(X, Fin k)) A^Y × B^{X ∖ Y}.
 ```
 
 ## Solution

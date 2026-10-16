@@ -63,25 +63,25 @@ of pointed `2`-element types is contractible.
 Consequently, the canonical family of maps
 
 ```text
-  (Fin₂ = X) → X
+  (Fin 2 = X) → X
 ```
 indexed by `X : BS₂`, is a family of equivalences.
 
 ### Proof
 
-By the univalence axiom it follows that the type `Σ(X : BS₂) Fin₂ ≃ X` is contractible.
+By the univalence axiom it follows that the type `Σ(X : BS₂) Fin 2 ≃ X` is contractible.
 In order to show that `Σ(X : BS₂) X` is contractible, it therefore suffices to show that the map
 
 ```text
-  f : (Fin₂ ≃ X) → X
+  f : (Fin 2 ≃ X) → X
 ```
 
 given by `f(e) ≔ e(⋆)`, is an equivalence.
-Since being an equivalence is a proposition by Exercise 13.4, we may assume an equivalence `α : Fin₂ ≃ X`, and we proceed by equivalence induction on `α`.
+Since being an equivalence is a proposition by Exercise 13.4, we may assume an equivalence `α : Fin 2 ≃ X`, and we proceed by equivalence induction on `α`.
 Therefore, it suffices to show that the map
 
 ```text
-  f : (Fin₂ ≃ Fin₂) → Fin₂
+  f : (Fin 2 ≃ Fin 2) → Fin 2
 ```
 
 give by `f(e) ≔ e(⋆)` is an equivalence.
@@ -439,13 +439,13 @@ There is no dependent function
 By Proposition 17.5.1 and Exercise 13.12, we have an equivalence
 
 ```text
-  (Π(X : BS₂) Fin₂ = X) ≃ (Π(X : BS₂) X).
+  (Π(X : BS₂) Fin 2 = X) ≃ (Π(X : BS₂) X).
 ```
 
-Note that `Π(X : BS₂) Fin₂ = X` is the type of contractions of `BS₂`, using the center of contraction `Fin₂`.
+Note that `Π(X : BS₂) Fin 2 = X` is the type of contractions of `BS₂`, using the center of contraction `Fin 2`.
 Therefore it suffices to show that `BS₂` is not contractible.
 Recall from Exercise 10.1 that the identity types of contractible types are contractible.
-On the other hand, it follows from Proposition 17.5.1 that the identity type `Fin₂ = Fin₂` in `BS₂` is equivalent to `Fin₂`.
+On the other hand, it follows from Proposition 17.5.1 that the identity type `Fin 2 = Fin 2` in `BS₂` is equivalent to `Fin 2`.
 This type isn’t contractible by Exercise 10.4.
 We conclude that `BS₂` is not contractible. ◻
 
@@ -489,8 +489,8 @@ By restricting `f` to the type of `2`-element types in `𝒰`, we obtain a funct
 ```
 
 Note that every `2`-element type is inhabited, i.e., there is an element of type `‖A‖` for every `2`-element type `A`.
-To see this, consider a type `A : 𝒰` such that `‖Fin₂ ≃ A‖`.
-To obtain an element of type `‖A‖`, we may assume an equivalence `e : Fin₂ ≃ A`.
+To see this, consider a type `A : 𝒰` such that `‖Fin 2 ≃ A‖`.
+To obtain an element of type `‖A‖`, we may assume an equivalence `e : Fin 2 ≃ A`.
 Then we have `η(e(0)) : ‖A‖`.
 
 Since every `2`-element type is inhabited, we obtain a function `Π(A : BS₂) A`, which is impossible by Corollary 17.5.2. ◻
@@ -512,8 +512,8 @@ It shows that the **principle of global choice** is incompatible with the unival
 In other words, we cannot obtain an element of `A` merely from the assumption that the type `A` is inhabited.
 What is the obstruction?
 It is the fact that no such choice of an element of `A` can be invariant under the automorphisms on `A`, i.e., under the self-equivalences on `A`.
-Indeed, in the example where `A` is the `2`-element type `Fin₂` there are no fixed point of the equivalence `succ-Fin₂ : Fin₂ ≃ Fin₂`.
-By the univalence axiom, there is an identification `p : Fin₂ = Fin₂` in `𝒰`, such that `tr(p,x) = succ-Fin₂(x)`.
+Indeed, in the example where `A` is the `2`-element type `Fin 2` there are no fixed point of the equivalence `succ-Fin₂ : Fin 2 ≃ Fin 2`.
+By the univalence axiom, there is an identification `p : Fin 2 = Fin 2` in `𝒰`, such that `tr(p,x) = succ-Fin₂(x)`.
 If we had a function
 
 ```text
@@ -523,10 +523,10 @@ If we had a function
 the dependent action on paths of `f` would give an identification
 
 ```text
-  apd_f(p) : succ-Fin₂(f(Fin₂,p,H)) = f(Fin₂,p,η(0)).
+  apd_f(p) : succ-Fin₂(f(Fin 2,p,H)) = f(Fin 2,p,η(0)).
 ```
 
-In other words, it would give us a fixed point for the successor function on `Fin₂`.
+In other words, it would give us a fixed point for the successor function on `Fin 2`.
 
 This is perhaps a good moment to stress that the axiom of choice is really an axiom about *sets*, not about more general types.
 And indeed, when we restrict the axiom of choice to sets, it turns out to be consistent with the univalence axiom and therefore safe to assume.

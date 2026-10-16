@@ -17,7 +17,7 @@ Show that the type
 ```text
 Π(X : BS₂) (X + X) ↪ (X × X) + unit
 ```
-is equivalent to `Fin{8}`.
+is equivalent to `Fin 8`.
 
 ## Solution
 

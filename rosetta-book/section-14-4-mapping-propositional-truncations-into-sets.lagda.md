@@ -154,10 +154,10 @@ was constructed in Theorem 8.3.2 using the decidability of `P`.
 As a corollary of this observation, we observe that there is also a map
 
 ```text
-  ‖Σ(x : Fin{k}) P(x)‖ → Σ(x : Fin{k}) P(x)
+  ‖Σ(x : Fin k) P(x)‖ → Σ(x : Fin k) P(x)
 ```
 
-for any decidable subtype `P` over `Fin{k}`.
+for any decidable subtype `P` over `Fin k`.
 
 ```agda
 ε-operator-decidable-subtype-Fin :

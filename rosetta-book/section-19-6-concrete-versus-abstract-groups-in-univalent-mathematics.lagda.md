@@ -1322,17 +1322,17 @@ BENCHMARK PROBLEM
 In Exercise 17.20 we introduced the type
 
 ```text
-D̃ₙ ≔ Σ(X : BS₂) Σ(Y : X → 𝔽) (Fin{n} ≃ Π(x : X) Y(x)).
+D̃ₙ ≔ Σ(X : BS₂) Σ(Y : X → 𝔽) (Fin n ≃ Π(x : X) Y(x)).
 ```
 
 Notice that this type is the type of orbits of the `ℤ / 2`-set `Dₙ` given by
 
 ```text
-Dₙ(X) ≔ Σ(Y : X → 𝔽) (Fin{n} ≃ Π(x : X) Y(x)).
+Dₙ(X) ≔ Σ(Y : X → 𝔽) (Fin n ≃ Π(x : X) Y(x)).
 ```
 
 The fact that this is a family of sets is a nice exercise.
-Note that there is a surjective morphism of `ℤ / 2`-sets from `Dₙ(Fin{2})` to the `ℤ / 2` set of divisors of `n`, where the action is given by `d ↦ n / d`.
+Note that there is a surjective morphism of `ℤ / 2`-sets from `Dₙ(Fin 2)` to the `ℤ / 2` set of divisors of `n`, where the action is given by `d ↦ n / d`.
 The concrete `ℤ / 2`-action `Dₙ` is transitive precisely when `n` is either `1` or a prime, and it is free precisely when `n` is not a square.
 Combining these two observations, we see that `n` is prime if and only if this action is both transitive and free.
 In other words, `n` is prime if and only if the type `D̃ₙ` of orbits is contractible.

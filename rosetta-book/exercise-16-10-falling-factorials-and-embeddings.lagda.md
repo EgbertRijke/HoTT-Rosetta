@@ -17,7 +17,7 @@ For any two types `A` and `B`, construct an equivalence
 
 ### Exercise 16.10(b)
 
-Construct an equivalence `Fin{nₘ} ≃ (Fin{m} ↪ Fin{n})`, where `nₘ` is the **`m`-th falling factorial** of `n`, which is defined recursively by
+Construct an equivalence `Fin nₘ ≃ (Fin m ↪ Fin n)`, where `nₘ` is the **`m`-th falling factorial** of `n`, which is defined recursively by
 
 ```text
            0₀ ≔ 1

@@ -11,7 +11,7 @@ Use Exercise 6.2 to show that the constant function `const_b : bool → bool` is
 
 Show that `bool ≄ unit`.
 
-Show that `ℕ ≄ Fin{k}` for any `k : ℕ`.
+Show that `ℕ ≄ Fin k` for any `k : ℕ`.
 
 ## Solution
 

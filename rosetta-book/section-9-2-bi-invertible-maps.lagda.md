@@ -309,7 +309,7 @@ pr1 equiv-neg-ℤ = neg-ℤ
 pr2 equiv-neg-ℤ = is-equiv-neg-ℤ
 ```
 
-The same holds for the finite types: the maps `succ-Finₖ`, `pred-Finₖ`, `add-Finₖ(x)` and `neg-Finₖ` are all equivalences on `Fin{k}`.
+The same holds for the finite types: the maps `succ-Finₖ`, `pred-Finₖ`, `add-Finₖ(x)` and `neg-Finₖ` are all equivalences on `Fin k`.
 
 ```agda
 is-equiv-succ-Fin : (k : ℕ) → is-equiv (succ-Fin k)

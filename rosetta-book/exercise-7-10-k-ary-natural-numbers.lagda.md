@@ -34,8 +34,8 @@ open import section-2-2-ordinary-function-types
 The type `ℕₖ` of **`k`-ary natural numbers** is an inductive type with the following constructors:
 
 ```text
-constant-based-ℕ{k} : Fin{k} → based-ℕ{k}
-unary-op-based-ℕ{k} : Fin{k} → (based-ℕ{k} → based-ℕ{k}).
+constant-based-ℕ{k} : Fin k → based-ℕ{k}
+unary-op-based-ℕ{k} : Fin k → (based-ℕ{k} → based-ℕ{k}).
 ```
 
 A `k`-ary natural number can be converted back into an ordinary natural number via the function `convert-based-ℕ{k} : based-ℕ{k} → ℕ`, which is defined recursively by

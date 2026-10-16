@@ -16,22 +16,22 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 
 ## Problem statement
 
-The predecessor function `pred-Finₖ : Fin{k} → Fin{k}` is defined in three steps, just as in the definition of the successor function on `Fin{k}`.
+The predecessor function `pred-Finₖ : Fin k → Fin k` is defined in three steps, just as in the definition of the successor function on `Fin k`.
 
-1. We define the element `neg-twoₖ : Fin{k + 1}` by
+1. We define the element `neg-twoₖ : Fin (k + 1)` by
 ```text
 neg-two₀ ≔ ⋆
 neg-twoₖ₊₁ ≔ i(⋆).
 ```
 
-2. We define the function `skip-neg-twoₖ : Fin{k} → Fin{k + 1}` recursively by
+2. We define the function `skip-neg-twoₖ : Fin k → Fin (k + 1)` recursively by
 
 ```text
 skip-neg-twoₖ₊₁(i(x)) ≔ i(i(x))
 skip-neg-twoₖ₊₁(⋆) ≔ ⋆.
 ```
 
-3. Finally, we define the **predecessor function** `pred-Finₖ : Fin{k} → Fin{k}` recursively by
+3. Finally, we define the **predecessor function** `pred-Finₖ : Fin k → Fin k` recursively by
 
 ```text
 pred-Finₖ₊₁(i(x)) ≔ skip-neg-twoₖ(pred-Finₖ(x))
@@ -42,7 +42,7 @@ Show that `pred-Finₖ` is an inverse to `succ-Finₖ`, i.e., construct identifi
 ```text
 succ-Finₖ(pred-Finₖ(x)) = x, and pred-Finₖ(succ-Finₖ(x)) = x
 ```
-for each `x : Fin{k}`.
+for each `x : Fin k`.
 
 ## Solution
 

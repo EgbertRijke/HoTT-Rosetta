@@ -203,14 +203,14 @@ module _
 In Proposition 7.2.4 we constructed the congruence relations `x ≡ y mod k` on the natural numbers for every natural number `k`, and in Theorems 7.4.7 and 7.4.8 we showed that the map
 
 ```text
-  x ↦ [x]ₖ₊₁ : ℕ → Finₖ₊₁
+  x ↦ [x]ₖ₊₁ : ℕ → Fin (k + 1)
 ```
 
 is effective and split surjective.
 By Theorem 18.2.3 it follows that the map
 
 ```text
-  x ↦ [x]ₖ₊₁ : ℕ → Finₖ₊₁
+  x ↦ [x]ₖ₊₁ : ℕ → Fin (k + 1)
 ```
 
 satisfies the universal property of the set quotient of the equivalence relation `x, y ↦ x ≡ y mod k + 1`.
@@ -222,7 +222,7 @@ We define our choice of representatives by
   C(y) ≔ fib(nat-Fin, y),
 ```
 
-where `nat-Fin : Finₖ₊₁ → ℕ` is the inclusion of `Finₖ₊₁` into `ℕ` constructed in Definition 7.3.4.
+where `nat-Fin : Fin (k + 1) → ℕ` is the inclusion of `Fin (k + 1)` into `ℕ` constructed in Definition 7.3.4.
 To see that `C` is a choice of representatives, we have to prove that
 
 ```text
