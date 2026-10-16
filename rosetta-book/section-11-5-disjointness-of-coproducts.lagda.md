@@ -24,7 +24,6 @@ open import exercise-10-3-contractible-equivalences
 open import section-11-1-families-of-equivalences
 open import section-11-2-the-fundamental-theorem
 open import section-11-4-embeddings
-open import section-12-1-propositions
 ```
 
 In our third application of the fundamental theorem of identity types, we characterize the identity types of coproducts.

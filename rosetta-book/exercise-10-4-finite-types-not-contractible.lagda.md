@@ -20,9 +20,7 @@ open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import exercise-10-1-identity-types-contractible
 open import exercise-10-3-contractible-equivalences
-open import section-11-5-disjointness-of-coproducts
 open import section-12-1-propositions
-open import section-12-2-subtypes
 ```
 
 ## Problem statement
