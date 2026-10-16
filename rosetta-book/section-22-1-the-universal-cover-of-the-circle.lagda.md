@@ -320,11 +320,13 @@ for each dependent type `P : S¹ → 𝒰`.
 Therefore we see that the triangle
 
 ```text
-                    [(S¹→ 𝒰)]
-                   /          \
-        gen_{S¹} /              \ desc_{S¹}
-               V                  V
-[Σ(X:𝒰) X=X]--tot(λ X. equiv-eq_{X,X})-->[Σ(X:𝒰) X ≃ X]
+                             (S¹ → 𝒰)
+                           /           \
+                gen_{S¹}  /             \ desc_{S¹}
+                         /               \
+                        v                 v
+           Σ(X : 𝒰) X = X --------------> Σ(X : 𝒰) X ≃ X
+                     tot(λ X. equiv-eq_{X,X})
 ```
 
 commutes, where the map `desc_{S¹}` is given by `P ↦ (P(base),tr_P(loop))` and the bottom map is an equivalence by the univalence axiom and Theorem 11.1.3.
@@ -345,11 +347,13 @@ Now we observe that the type of identifications in `Σ(X : 𝒰) X ≃ X` can be
 This implies that we obtain an equivalence `x ↦ x_D : X ≃ D(X,e,base)` such that the square
 
 ```text
- [X] --x↦ x_{D}-->[D(X,e,base)]
-  |                    |
-e |                    | tr_{D(X,e)}(loop)
-  V                    V
- [X] --x↦ x_{D}-->[D(X,e,base)]
+           x ↦ x_D
+     X -------------> D(X,e,base)
+     |                     |
+  e  |                     | tr_{D(X,e)}(loop)
+     v                     v
+     X -------------> D(X,e,base)
+           x ↦ x_D
 ```
 
 commutes.
@@ -612,11 +616,13 @@ Its inverse is the predecessor function defined in Exercise 4.1.
 The **universal cover** of the circle is defined via Definition 22.1.1 to be the unique dependent type `E_{S¹} ≔ D(ℤ,succ-ℤ ) : S¹ → 𝒰`. equipped with an equivalence `x ↦ x_E : ℤ → E_{S¹}(base)` and a homotopy witnessing that the square
 
 ```text
-      [ℤ] --x ↦ x_E-->[E_(S¹)(base)]
-       |                   |
-succ-ℤ |                   | tr_{E_(S¹)}(loop)
-       V                   V
-      [ℤ] --x ↦ x_E-->[E_(S¹)(base)]
+                x ↦ x_E
+          ℤ -------------> E_{S¹}(base)
+          |                      |
+  succ-ℤ  |                      | tr_{E_{S¹}}(loop)
+          v                      v
+          ℤ -------------> E_{S¹}(base)
+                x ↦ x_E
 ```
 
 commutes.
