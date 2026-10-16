@@ -27,15 +27,12 @@ fib-triangle(h,H) : Π(x : X) fib(f, x) → fib(g, x),
 for which the square
 
 ```text
-[Σ(x:X) fib(f, x)]---->[Σ(x:X) fib(g, x)]
-        |                      |
-       [A]        ---->       [B]
-
-Arrows:
-- Σ(x:X) fib(f, x) --tot(fib-triangle(h,H))--> Σ(x:X) fib(g, x)
-- Σ(x:X) fib(f, x) --unlabeled--> A
-- Σ(x:X) fib(g, x) --unlabeled--> B
-- A --h--> B
+                        tot(fib-triangle(h,H))
+  Σ(x : X) fib(f, x) ---------------------------> Σ(x : X) fib(g, x)
+           |                                               |
+           |                                               |
+           v                                               v
+           A ---------------------h----------------------> B
 ```
 commutes, where the vertical maps are as constructed in Exercise 10.8.
 
