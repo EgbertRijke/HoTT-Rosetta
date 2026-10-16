@@ -78,11 +78,12 @@ commutes.
 Then there is a commuting square
 
 ```text
-  [Π(t:S¹) A(t)]----> [Σ(x:X) e(x)=x]
-         |                   |
-ev_base  |                   | pr1
-         V                   V
-     [A(base)] --α^{-1}-->  [X]
+    Π(t : S¹) A(t) -------------> Σ(x : X) e(x) = x
+           |                              |
+  ev_base  |                              | pr₁
+           v                              v
+        A(base) ------------------------> X
+                           α⁻¹
 ```
 
 in which the top map is an equivalence.
@@ -98,11 +99,13 @@ _Proof._ By the dependent universal property of the circle we have an equivalenc
 This equivalence fits in a commuting triangle
 
 ```text
-                    [Π(t : S¹) A(t)]
-                   /                \
-                  /                  \ dgen_{S¹}
-                 V                    V
-[Σ(x : X) e(x) = x] --{tot_α(ᾱ)}--> [Σ(x : A(base)) tr_A(loop,x) = x]
+                      Π(t : S¹) A(t)
+                       /           \
+                      /             \ dgen_{S¹}
+                     /               \
+                    v                 v
+    Σ(x : X) e(x) = x ---------------> Σ(x : A(base)) tr_A(loop,x) = x
+                         tot_α(ᾱ)
 ```
 
 where the map on the left is given by `s ↦ (α^{-1}(s(base)),ᾱ^{-1}(apdₛ(loop)))`.
@@ -127,11 +130,12 @@ commute, respectively.
 Then there is a commuting square
 
 ```text
-[(Π(t:S¹) A(t)→ B(t))]  ----------> [Σ(h:X→ Y) h∘ e~ f∘ h]
-           |                                 |
-   ev_base |                                 | pr1
-           V                                 V
-  [(A(base)→ B(base))] --h↦β^{-1}∘h∘α--> [(X→ Y)]
+  (Π(t : S¹) A(t) → B(t)) -------------> Σ(h : X → Y) h ∘ e ~ f ∘ h
+             |                                        |
+    ev_base  |                                        | pr₁
+             v                                        v
+    (A(base) → B(base)) -------------------------> (X → Y)
+                              h ↦ β⁻¹ ∘ h ∘ α
 ```
 
 in which the top map is an equivalence.
@@ -142,11 +146,13 @@ _Proof._ The claim follows once we observe that `(Y^X,λ h. f ∘ h ∘ e^{-1})`
 Indeed, we have the equivalence `h ↦ β ∘ h ∘ α^{-1} : Y^X ≃ B(base)^{A(base)}` for which the square
 
 ```text
-            [Y^X]--h↦β∘h∘α^{-1}-->[B(base)^{A(base)}]
-              |                           |
-h↦f∘h∘e^{-1}  |                           | tr_{t ↦ A(t) → B(t)}(loop)
-              V                           V
-            [Y^X]--h↦β∘h∘α^{-1}-->[B(base)^{A(base)}]
+                        h ↦ β ∘ h ∘ α⁻¹
+                  Y^X ------------------> B(base)^{A(base)}
+                   |                              |
+  h ↦ f ∘ h ∘ e⁻¹  |                              | tr_{t ↦ A(t) → B(t)}(loop)
+                   v                              v
+                  Y^X ------------------> B(base)^{A(base)}
+                        h ↦ β ∘ h ∘ α⁻¹
 ```
 
 commutes. ◻
@@ -167,11 +173,12 @@ commutes.
 Then there is a commuting square
 
 ```text
-[(Π(t:S¹) E_(S¹)(t)→ A(t))]-------------> [Σ(h:ℤ → X) h∘ succ-ℤ ~ e∘ h]
-              |                                          |
-      ev_base |                                          | pr1
-              V                                          V
-  [(E_(S¹)(base)→ A(base))] --h↦α^{-1}∘h∘(k↦k_{E})--> [(ℤ → X)]
+  (Π(t : S¹) E_{S¹}(t) → A(t)) -------------> Σ(h : ℤ → X) h ∘ succ-ℤ ~ e ∘ h
+                |                                            |
+       ev_base  |                                            | pr₁
+                v                                            v
+    (E_{S¹}(base) → A(base)) ---------------------------> (ℤ → X)
+                                h ↦ α⁻¹ ∘ h ∘ (k ↦ k_E)
 ```
 
 in which the top map is an equivalence.
