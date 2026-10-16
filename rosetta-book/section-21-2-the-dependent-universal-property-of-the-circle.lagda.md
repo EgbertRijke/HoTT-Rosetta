@@ -117,11 +117,13 @@ for any `f,g : Π(x : X) P(x)` and any `p : x = x'`, `q : g(x) = f(x)` and `r : 
 Therefore it suffices to construct an identification `α : g(base) = f(base)` equipped with an identification `β` witnessing that the square
 
 ```text
-     [tr_P(loop,g(base))]--ap_{tr_P(loop)}(α)-->[tr_P(loop,f(base))]
-              |                                     |
-apd_{g}(loop) |                                     | apd_{f}(loop)
-              v                                     v
-         [g(base)]     --------α------------->  [f(base)]
+                                   ap_{tr_P(loop)}(α)
+             tr_P(loop,g(base)) ========================= tr_P(loop,f(base))
+                      ||                                           ||
+         apd_g(loop)  ||                                           || apd_f(loop)
+                      ||                                           ||
+                   g(base) ==================================== f(base)
+                                            α
 ```
 
 commutes.
