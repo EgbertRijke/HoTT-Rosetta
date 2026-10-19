@@ -20,7 +20,6 @@ open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import exercise-10-1-identity-types-contractible
 open import exercise-10-3-contractible-equivalences
-open import section-12-1-propositions
 ```
 
 ## Problem statement
@@ -70,10 +69,4 @@ pr2 equiv-Fin-1 = is-equiv-map-equiv-Fin-1
 
 is-contr-Fin-1 : is-contr (Fin 1)
 is-contr-Fin-1 = is-contr-equiv unit equiv-Fin-1 is-contr-unit
-
-is-prop-Fin-1 : is-prop (Fin 1)
-is-prop-Fin-1 = is-prop-is-contr is-contr-Fin-1
-
-Fin-1-Prop : Prop lzero
-Fin-1-Prop = (Fin 1 , is-prop-Fin-1)
 ```
