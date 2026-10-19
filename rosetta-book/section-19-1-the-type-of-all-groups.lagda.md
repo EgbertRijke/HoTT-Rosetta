@@ -328,14 +328,6 @@ The type `ℤ` of integers has the structure of a group, with the group operatio
 The fact that `ℤ` is a set was shown in Exercise 12.4, and the group laws were shown in Exercise 5.7.
 
 ```agda
-abstract
-  is-set-ℤ : is-set ℤ
-  is-set-ℤ = is-set-coproduct is-set-ℕ (is-set-coproduct is-set-unit is-set-ℕ)
-
-ℤ-Set : Set lzero
-pr1 ℤ-Set = ℤ
-pr2 ℤ-Set = is-set-ℤ
-
 ℤ-Semigroup : Semigroup lzero
 pr1 ℤ-Semigroup = ℤ-Set
 pr1 (pr2 ℤ-Semigroup) = add-ℤ

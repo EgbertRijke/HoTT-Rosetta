@@ -9,6 +9,7 @@ open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
+open import section-4-5-the-type-of-integers
 open import section-4-6-dependent-pair-types
 open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
@@ -240,4 +241,16 @@ pr2 (extensionality-Fin k x y) =
     ( is-set-Fin k x y)
     ( is-prop-Eq-Fin k x y)
     ( eq-Eq-Fin k)
+```
+
+### The type of integers is a set
+
+```agda
+abstract
+  is-set-ℤ : is-set ℤ
+  is-set-ℤ = is-set-coproduct is-set-ℕ (is-set-coproduct is-set-unit is-set-ℕ)
+
+ℤ-Set : Set lzero
+pr1 ℤ-Set = ℤ
+pr2 ℤ-Set = is-set-ℤ
 ```

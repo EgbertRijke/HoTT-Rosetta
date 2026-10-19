@@ -43,13 +43,13 @@ open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
+open import exercise-12-4-coproduct-truncation
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-14-3-logic-in-type-theory
 open import section-15-2-surjective-maps
 open import exercise-15-3-equivalences-are-surjective-embeddings
 open import section-18-1-equivalence-relations-and-the-replacement-axiom
-open import section-19-1-the-type-of-all-groups
 ```
 
 A common way to construct set quotients is by showing that the equivalence classes of an equivalence relation have a choice of unique representatives.
