@@ -26,7 +26,6 @@ open import section-11-4-embeddings
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-4-general-truncation-levels
-open import exercise-12-8-retracts-of-truncated-types
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-2-identity-systems-on-pi-types
 open import section-13-4-composing-with-equivalences

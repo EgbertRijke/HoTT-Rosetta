@@ -30,7 +30,7 @@ open import section-11-1-families-of-equivalences
 open import section-11-2-the-fundamental-theorem
 open import section-12-1-propositions
 open import section-12-3-sets
-open import exercise-12-8-retracts-of-truncated-types
+open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-3-universal-properties
 open import exercise-13-4-equivalence-structure-is-a-proposition

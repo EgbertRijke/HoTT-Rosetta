@@ -26,7 +26,7 @@ open import section-10-4-equivalences-are-contractible-maps
 open import section-11-4-embeddings
 open import section-11-5-disjointness-of-coproducts
 open import section-12-1-propositions
-open import exercise-12-8-retracts-of-truncated-types
+open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import section-16-1-counting-in-type-theory

@@ -20,7 +20,7 @@ open import exercise-9-4-three-for-two-equivalences
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-4-embeddings
 open import section-12-3-sets
-open import exercise-12-8-retracts-of-truncated-types
+open import section-12-4-general-truncation-levels
 open import section-19-1-the-type-of-all-groups
 open import section-19-2-group-homomorphisms
 open import section-19-4-homotopy-groups-of-types
