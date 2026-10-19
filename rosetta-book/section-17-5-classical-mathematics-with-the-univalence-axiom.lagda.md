@@ -34,6 +34,7 @@ open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-3-universal-properties
 open import exercise-13-4-equivalence-structure-is-a-proposition
+open import exercise-13-7-universal-property-contractible-types
 open import exercise-13-12-dependent-products-of-truncated-maps
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-14-3-logic-in-type-theory
