@@ -80,3 +80,16 @@ module _
   terminal-map : A → unit
   terminal-map = const A star
 ```
+
+### Raising the unit type to another unvierse
+
+```agda
+raise-unit : (l : Level) → UU l
+raise-unit l = raise l unit
+
+raise-star : {l : Level} → raise l unit
+raise-star = map-raise star
+
+raise-terminal-map : {l1 l2 : Level} (A : UU l1) → A → raise-unit l2
+raise-terminal-map {l2 = l2} A = const A raise-star
+```

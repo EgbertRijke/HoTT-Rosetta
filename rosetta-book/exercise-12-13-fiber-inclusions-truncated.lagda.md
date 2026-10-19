@@ -4,6 +4,7 @@
 module exercise-12-13-fiber-inclusions-truncated where
 
 open import universe-levels
+open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-9-2-bi-invertible-maps
@@ -20,7 +21,6 @@ open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
-open import section-17-1-equivalent-forms-of-the-univalence-axiom
 ```
 
 ## Problem statement

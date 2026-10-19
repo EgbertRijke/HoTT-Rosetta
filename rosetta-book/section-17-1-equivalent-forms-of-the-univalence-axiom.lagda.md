@@ -362,9 +362,6 @@ is-small-map l {B = B} f = (b : B) → is-small l (fiber f b)
 is-small' : {l1 : Level} {A : UU l1} → is-small l1 A
 is-small' {A = A} = (A , id-equiv)
 
-data raise (l : Level) {l1 : Level} (A : UU l1) : UU (l1 ⊔ l) where
-  map-raise : A → raise l A
-
 module _
   {l l1 : Level} {A : UU l1}
   where
@@ -402,15 +399,6 @@ module _
 
   is-small-lmax : is-small (l1 ⊔ l2) X
   is-small-lmax = (raise l2 X , compute-raise l2 X)
-
-raise-unit : (l : Level) → UU l
-raise-unit l = raise l unit
-
-raise-star : {l : Level} → raise l unit
-raise-star = map-raise star
-
-raise-terminal-map : {l1 l2 : Level} (A : UU l1) → A → raise-unit l2
-raise-terminal-map {l2 = l2} A = const A raise-star
 
 abstract
   is-contr-raise-unit : {l1 : Level} → is-contr (raise-unit l1)

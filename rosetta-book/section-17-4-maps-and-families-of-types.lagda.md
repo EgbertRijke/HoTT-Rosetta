@@ -5,6 +5,7 @@ module section-17-4-maps-and-families-of-types where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
+open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types

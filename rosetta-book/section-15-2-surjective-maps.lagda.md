@@ -7,6 +7,7 @@ open import universe-levels
 
 open import section-2-2-ordinary-function-types
 open import exercise-2-3-constant-maps
+open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
