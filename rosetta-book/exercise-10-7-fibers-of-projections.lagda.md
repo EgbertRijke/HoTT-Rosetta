@@ -11,10 +11,12 @@ open import section-5-4-transport
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
+open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-3-contractible-equivalences
+open import exercise-10-6-dependent-pair-contractible-base
 ```
 
 ## Problem statement
@@ -201,4 +203,20 @@ module _
 
   right-unit-law-product-is-contr' : A × B ≃ A
   right-unit-law-product-is-contr' = right-unit-law-Σ-is-contr H
+```
+
+### The left unit law of cartesian product types with respect to contractible types
+
+```agda
+module _
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (is-contr-A : is-contr A)
+  where
+
+  left-unit-law-product-is-contr : A × B ≃ B
+  left-unit-law-product-is-contr =
+    left-unit-law-Σ-is-contr is-contr-A (center is-contr-A)
+
+  inv-left-unit-law-product-is-contr : B ≃ A × B
+  inv-left-unit-law-product-is-contr =
+    inv-left-unit-law-Σ-is-contr is-contr-A (center is-contr-A)
 ```
