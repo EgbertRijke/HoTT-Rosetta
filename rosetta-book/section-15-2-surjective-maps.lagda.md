@@ -33,8 +33,6 @@ open import exercise-13-15-morphisms-over-a-type
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-14-3-logic-in-type-theory
 open import section-15-1-the-image-of-a-map
-open import section-17-1-equivalent-forms-of-the-univalence-axiom
-open import section-17-2-propositional-extensionality
 ```
 
 A map `f : A → B` is surjective if for every `b : B` there is an _unspecified_ element `a : A` that maps to `b`.
@@ -689,31 +687,6 @@ abstract
                 ( inv (ap g (pr2 u))) ∙
                 ( htpy-eq p (pr1 u)) ∙
                 ( ap h (pr2 u)))))
-```
-
-### Maps that are epimorphisms with respect to maps into sets are surjective
-
-```agda
-abstract
-  is-surjective-is-epimorphism-Set :
-    {l1 l2 : Level} {A : UU l1} {B : UU l2} {f : A → B} →
-    is-epimorphism-Set f → is-surjective f
-  is-surjective-is-epimorphism-Set {l1} {l2} {A} {B} {f} H b =
-    map-eq
-      ( ap
-        ( pr1)
-        ( htpy-eq
-          ( is-injective-is-emb
-            ( H (Prop-Set (l1 ⊔ l2)))
-            { λ _ → raise-unit-Prop (l1 ⊔ l2)}
-            { λ y → exists-structure-Prop A (λ x → f x ＝ y)}
-            ( eq-htpy
-              ( λ a →
-                eq-iff
-                  ( λ _ → unit-trunc-Prop (a , refl))
-                  ( λ _ → raise-star))))
-          ( b)))
-      ( raise-star)
 ```
 
 ### Characterization of the identity type of `A ↠ B`
