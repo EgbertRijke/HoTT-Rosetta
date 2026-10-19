@@ -18,8 +18,6 @@ open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import exercise-9-6-coproduct-functor-equivalences
 open import section-10-4-equivalences-are-contractible-maps
-open import section-13-1-equivalent-forms-of-function-extensionality
-open import exercise-13-4-equivalence-structure-is-a-proposition
 ```
 
 ## Problem statement
@@ -57,35 +55,6 @@ inr-coproduct-Fin k l = map-compute-coproduct-Fin k l ∘ inr
 
 compute-inl-coproduct-Fin : (k : ℕ) → inl-coproduct-Fin k 0 ~ id
 compute-inl-coproduct-Fin k x = refl
-
-map-compute-map-inv-compute-coproduct-Fin :
-  (k l : ℕ) → Fin (k +ℕ l) → Fin k + Fin l
-map-compute-map-inv-compute-coproduct-Fin k zero-ℕ = inl
-map-compute-map-inv-compute-coproduct-Fin k (succ-ℕ l) =
-  ( map-equiv (associative-coproduct {A = Fin k} {B = Fin l})) ∘
-  ( map-coproduct (map-compute-map-inv-compute-coproduct-Fin k l) id)
-
-abstract
-  compute-map-inv-compute-coproduct-Fin :
-    (k l : ℕ) →
-    map-inv-compute-coproduct-Fin k l ~
-    map-compute-map-inv-compute-coproduct-Fin k l
-  compute-map-inv-compute-coproduct-Fin k zero-ℕ x = refl
-  compute-map-inv-compute-coproduct-Fin k (succ-ℕ l) x =
-    ( htpy-eq
-      ( distributive-map-inv-comp-equiv
-        ( inv-associative-coproduct)
-        ( equiv-coproduct (compute-coproduct-Fin k l) id-equiv))
-      ( x)) ∙
-    ( htpy-eq-equiv
-      ( inv-inv-equiv associative-coproduct)
-      ( map-inv-equiv-coproduct (compute-coproduct-Fin k l) id-equiv x)) ∙
-    ( ap
-      ( map-associative-coproduct)
-      ( htpy-map-coproduct
-        ( compute-map-inv-compute-coproduct-Fin k l)
-        ( refl-htpy)
-        ( x)))
 
 product-Fin : (k l : ℕ) → Fin k × Fin l ≃ Fin (k *ℕ l)
 product-Fin zero-ℕ l = left-absorption-product (Fin l)
