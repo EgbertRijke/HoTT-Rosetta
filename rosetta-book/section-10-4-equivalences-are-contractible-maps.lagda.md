@@ -883,3 +883,10 @@ step-equivalence-reasoning e Z f = f ∘e e
 
 syntax step-equivalence-reasoning e Z f = e ≃ Z by f
 ```
+
+### The inverse equivalence of `compute-raise`
+
+```agda
+inv-compute-raise : (l : Level) {l1 : Level} (A : UU l1) → raise l A ≃ A
+inv-compute-raise l A = inv-equiv (compute-raise l A)
+```

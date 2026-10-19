@@ -57,7 +57,6 @@ open import exercise-14-3-products-of-propositional-truncations
 open import exercise-14-5-propositional-truncations-with-sections
 open import section-16-1-counting-in-type-theory
 open import section-16-2-double-counting-in-type-theory
-open import section-17-1-equivalent-forms-of-the-univalence-axiom
 ```
 
 The type of all finite types is the subtype of the base universe `𝒰₀` consisting of all types `X` for which there exists an unspecified equivalence `Fin k ≃ X` for some `k : ℕ`.

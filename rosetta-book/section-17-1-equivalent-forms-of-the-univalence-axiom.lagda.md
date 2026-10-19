@@ -363,37 +363,6 @@ is-small' : {l1 : Level} {A : UU l1} → is-small l1 A
 is-small' {A = A} = (A , id-equiv)
 
 module _
-  {l l1 : Level} {A : UU l1}
-  where
-
-  map-inv-raise : raise l A → A
-  map-inv-raise (map-raise x) = x
-
-  is-section-map-inv-raise : (map-raise ∘ map-inv-raise) ~ id
-  is-section-map-inv-raise (map-raise x) = refl
-
-  is-retraction-map-inv-raise : (map-inv-raise ∘ map-raise) ~ id
-  is-retraction-map-inv-raise x = refl
-
-  is-equiv-map-raise : is-equiv (map-raise {l} {l1} {A})
-  is-equiv-map-raise =
-    is-equiv-is-invertible
-      map-inv-raise
-      is-section-map-inv-raise
-      is-retraction-map-inv-raise
-
-compute-raise : (l : Level) {l1 : Level} (A : UU l1) → A ≃ raise l A
-pr1 (compute-raise l A) = map-raise
-pr2 (compute-raise l A) = is-equiv-map-raise
-
-inv-compute-raise : (l : Level) {l1 : Level} (A : UU l1) → raise l A ≃ A
-inv-compute-raise l A = inv-equiv (compute-raise l A)
-
-Raise : (l : Level) {l1 : Level} (A : UU l1) → Σ (UU (l1 ⊔ l)) (λ X → A ≃ X)
-pr1 (Raise l A) = raise l A
-pr2 (Raise l A) = compute-raise l A
-
-module _
   {l1 : Level} (l2 : Level) (X : UU l1)
   where
 
