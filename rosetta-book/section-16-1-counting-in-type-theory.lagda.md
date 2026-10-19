@@ -23,7 +23,6 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 open import exercise-7-5-observational-equality-finite-types
 open import section-8-1-decidability-and-decidable-equality
 open import exercise-8-6-decidable-equality-products
-open import exercise-8-7-decidable-equality-coproducts
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types

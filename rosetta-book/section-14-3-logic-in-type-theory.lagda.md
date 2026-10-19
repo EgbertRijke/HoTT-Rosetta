@@ -13,7 +13,6 @@ open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-8-1-decidability-and-decidable-equality
-open import exercise-8-7-decidable-equality-coproducts
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-1-groupoid-operations-equivalences

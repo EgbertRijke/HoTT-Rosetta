@@ -7,6 +7,7 @@ open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
+open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
@@ -319,4 +320,42 @@ abstract
 iff-eq : {l1 : Level} {P Q : Prop l1} → P ＝ Q → (type-Prop P ↔ type-Prop Q)
 pr1 (iff-eq refl) = id
 pr2 (iff-eq refl) = id
+```
+
+### The predicates of being on the left and on the right
+
+```agda
+module _
+  {l1 l2 : Level} {X : UU l1} {Y : UU l2}
+  where
+
+  is-left-Prop : X + Y → Prop lzero
+  is-left-Prop (inl x) = unit-Prop
+  is-left-Prop (inr x) = empty-Prop
+
+  is-left : X + Y → UU lzero
+  is-left x = type-Prop (is-left-Prop x)
+
+  is-prop-is-left : (x : X + Y) → is-prop (is-left x)
+  is-prop-is-left x = is-prop-type-Prop (is-left-Prop x)
+
+  is-right-Prop : X + Y → Prop lzero
+  is-right-Prop (inl x) = empty-Prop
+  is-right-Prop (inr x) = unit-Prop
+
+  is-right : X + Y → UU lzero
+  is-right x = type-Prop (is-right-Prop x)
+
+  is-prop-is-right : (x : X + Y) → is-prop (is-right x)
+  is-prop-is-right x = is-prop-type-Prop (is-right-Prop x)
+
+  is-left-or-is-right : (x : X + Y) → is-left x + is-right x
+  is-left-or-is-right (inl x) = inl star
+  is-left-or-is-right (inr x) = inr star
+
+  left-is-left : (x : X + Y) → is-left x → X
+  left-is-left (inl x) _ = x
+
+  right-is-right : (x : X + Y) → is-right x → Y
+  right-is-right (inr y) _ = y
 ```
