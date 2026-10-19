@@ -25,32 +25,6 @@ Complete the proof of Proposition 7.1.5.
 ## Solution
 
 ```agda
-div-left-summand-ℕ :
-  (d x y : ℕ) → div-ℕ d y → div-ℕ d (x +ℕ y) → div-ℕ d x
-div-left-summand-ℕ zero-ℕ x y (pair m q) (pair n p) =
-  pair zero-ℕ
-    ( ( inv (right-zero-law-mul-ℕ n)) ∙
-      ( p ∙ (ap (x +ℕ_) ((inv q) ∙ (right-zero-law-mul-ℕ m)))))
-pr1 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) = dist-ℕ m n
-pr2 (div-left-summand-ℕ (succ-ℕ d) x y (pair m q) (pair n p)) =
-  is-injective-right-add-ℕ (m *ℕ (succ-ℕ d))
-    ( ( inv
-        ( ( right-distributive-mul-add-ℕ m (dist-ℕ m n) (succ-ℕ d)) ∙
-          ( commutative-add-ℕ
-            ( m *ℕ (succ-ℕ d))
-            ( (dist-ℕ m n) *ℕ (succ-ℕ d))))) ∙
-      ( ( ap
-          ( _*ℕ (succ-ℕ d))
-          ( is-additive-right-inverse-dist-ℕ m n
-            ( reflects-leq-mul-ℕ d m n
-              ( concatenate-eq-leq-eq-ℕ q
-                ( leq-add-ℕ' y x)
-                ( inv p))))) ∙
-        ( p ∙ (ap (x +ℕ_) (inv q)))))
-
-div-right-summand-ℕ :
-  (d x y : ℕ) → div-ℕ d x → div-ℕ d (x +ℕ y) → div-ℕ d y
-div-right-summand-ℕ d x y H1 H2 =
-  div-left-summand-ℕ d y x H1
-    ( concatenate-div-eq-ℕ H2 (commutative-add-ℕ x y))
+open import section-7-1-the-curry-howard-interpretation using
+  (div-left-summand-ℕ; div-right-summand-ℕ)
 ```

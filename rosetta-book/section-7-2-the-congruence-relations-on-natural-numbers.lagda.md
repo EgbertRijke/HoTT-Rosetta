@@ -12,7 +12,6 @@ open import section-5-2-the-groupoidal-structure-of-types
 open import exercise-5-5-semiring-laws-natural-numbers
 open import exercise-6-5-distance-natural-numbers
 open import section-7-1-the-curry-howard-interpretation
-open import exercise-7-1-divisibility-three-for-two
 ```
 
 Relations in the Curry-Howard interpretation of logic into type theory are also type valued.
