@@ -14,7 +14,6 @@ open import exercise-8-7-decidable-equality-coproducts
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
-open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-4-embeddings
 open import section-11-5-disjointness-of-coproducts
@@ -165,99 +164,6 @@ module _
 ```
 
 ## Supplement
-
-### The fibers of `map-coproduct`
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
-  (f : A' → A) (g : B' → B)
-  where
-
-  fiber-map-coproduct-inl-fiber :
-    (x : A) → fiber f x → fiber (map-coproduct f g) (inl x)
-  pr1 (fiber-map-coproduct-inl-fiber x (a' , p)) = inl a'
-  pr2 (fiber-map-coproduct-inl-fiber x (a' , p)) = ap inl p
-
-  fiber-fiber-map-coproduct-inl :
-    (x : A) → fiber (map-coproduct f g) (inl x) → fiber f x
-  pr1 (fiber-fiber-map-coproduct-inl x (inl a' , p)) = a'
-  pr2 (fiber-fiber-map-coproduct-inl x (inl a' , p)) =
-    map-compute-eq-coproduct-inl-inl (f a') x p
-  fiber-fiber-map-coproduct-inl x (inr b' , p) =
-    ex-falso (is-empty-eq-coproduct-inr-inl (g b') x p)
-
-  abstract
-    is-section-fiber-fiber-map-coproduct-inl :
-      (x : A) →
-      fiber-map-coproduct-inl-fiber x ∘ fiber-fiber-map-coproduct-inl x ~ id
-    is-section-fiber-fiber-map-coproduct-inl .(f a') (inl a' , refl) = refl
-    is-section-fiber-fiber-map-coproduct-inl x (inr b' , p) =
-      ex-falso (is-empty-eq-coproduct-inr-inl (g b') x p)
-
-  abstract
-    is-retraction-fiber-fiber-map-coproduct-inl :
-      (x : A) →
-      fiber-fiber-map-coproduct-inl x ∘ fiber-map-coproduct-inl-fiber x ~ id
-    is-retraction-fiber-fiber-map-coproduct-inl .(f a') (a' , refl) = refl
-
-  abstract
-    is-equiv-fiber-map-coproduct-inl-fiber :
-      (x : A) → is-equiv (fiber-map-coproduct-inl-fiber x)
-    is-equiv-fiber-map-coproduct-inl-fiber x =
-      is-equiv-is-invertible
-        ( fiber-fiber-map-coproduct-inl x)
-        ( is-section-fiber-fiber-map-coproduct-inl x)
-        ( is-retraction-fiber-fiber-map-coproduct-inl x)
-
-  compute-fiber-inl-map-coproduct :
-    (x : A) → fiber f x ≃ fiber (map-coproduct f g) (inl x)
-  compute-fiber-inl-map-coproduct x =
-    ( fiber-map-coproduct-inl-fiber x ,
-      is-equiv-fiber-map-coproduct-inl-fiber x)
-
-  fiber-map-coproduct-inr-fiber :
-    (y : B) → fiber g y → fiber (map-coproduct f g) (inr y)
-  pr1 (fiber-map-coproduct-inr-fiber y (b' , p)) = inr b'
-  pr2 (fiber-map-coproduct-inr-fiber y (b' , p)) = ap inr p
-
-  fiber-fiber-map-coproduct-inr :
-    (y : B) → fiber (map-coproduct f g) (inr y) → fiber g y
-  fiber-fiber-map-coproduct-inr y (inl a' , p) =
-    ex-falso (is-empty-eq-coproduct-inl-inr (f a') y p)
-  pr1 (fiber-fiber-map-coproduct-inr y (inr b' , p)) = b'
-  pr2 (fiber-fiber-map-coproduct-inr y (inr b' , p)) =
-    map-compute-eq-coproduct-inr-inr (g b') y p
-
-  abstract
-    is-section-fiber-fiber-map-coproduct-inr :
-      (y : B) →
-      (fiber-map-coproduct-inr-fiber y ∘ fiber-fiber-map-coproduct-inr y) ~ id
-    is-section-fiber-fiber-map-coproduct-inr .(g b') (inr b' , refl) = refl
-    is-section-fiber-fiber-map-coproduct-inr y (inl a' , p) =
-      ex-falso (is-empty-eq-coproduct-inl-inr (f a') y p)
-
-  abstract
-    is-retraction-fiber-fiber-map-coproduct-inr :
-      (y : B) →
-      (fiber-fiber-map-coproduct-inr y ∘ fiber-map-coproduct-inr-fiber y) ~ id
-    is-retraction-fiber-fiber-map-coproduct-inr .(g b') (b' , refl) = refl
-
-  abstract
-    is-equiv-fiber-map-coproduct-inr-fiber :
-      (y : B) → is-equiv (fiber-map-coproduct-inr-fiber y)
-    is-equiv-fiber-map-coproduct-inr-fiber y =
-      is-equiv-is-invertible
-        ( fiber-fiber-map-coproduct-inr y)
-        ( is-section-fiber-fiber-map-coproduct-inr y)
-        ( is-retraction-fiber-fiber-map-coproduct-inr y)
-
-  compute-fiber-inr-map-coproduct :
-    (y : B) → fiber g y ≃ fiber (map-coproduct f g) (inr y)
-  compute-fiber-inr-map-coproduct y =
-    ( fiber-map-coproduct-inr-fiber y ,
-      is-equiv-fiber-map-coproduct-inr-fiber y)
-```
 
 ### The functorial action of coproducts preserves retractions
 
