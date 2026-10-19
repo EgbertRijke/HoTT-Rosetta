@@ -15,8 +15,6 @@ open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import section-10-4-equivalences-are-contractible-maps
-open import section-11-4-embeddings
-open import section-11-5-disjointness-of-coproducts
 ```
 
 ## Problem statement
@@ -161,81 +159,4 @@ module _
   equiv-coproduct e e' =
     ( map-equiv-coproduct e e' ,
       is-equiv-map-coproduct (is-equiv-map-equiv e) (is-equiv-map-equiv e'))
-```
-
-## Supplement
-
-### The functorial action of coproducts preserves retractions
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level}
-  {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
-  {f : A → B} {f' : A' → B'} (r : retraction f) (r' : retraction f')
-  where
-
-  map-retraction-map-coproduct : B + B' → A + A'
-  map-retraction-map-coproduct =
-    map-coproduct (map-retraction f r) (map-retraction f' r')
-
-  is-retraction-retraction-map-coproduct :
-    is-retraction (map-coproduct f f') map-retraction-map-coproduct
-  is-retraction-retraction-map-coproduct =
-    ( inv-htpy
-      ( preserves-comp-map-coproduct
-        ( f)
-        ( map-retraction f r)
-        ( f')
-        ( map-retraction f' r'))) ∙h
-    ( htpy-map-coproduct
-      ( is-retraction-map-retraction f r)
-      ( is-retraction-map-retraction f' r')) ∙h
-    ( id-map-coproduct A A')
-
-  retraction-map-coproduct : retraction (map-coproduct f f')
-  retraction-map-coproduct =
-    ( map-retraction-map-coproduct , is-retraction-retraction-map-coproduct)
-```
-
-### Functoriality of coproducts preserves embeddings
-
-```agda
-module _
-  {l1 l2 l1' l2' : Level} {A : UU l1} {B : UU l2} {A' : UU l1'} {B' : UU l2'}
-  where
-
-abstract
-  is-emb-map-coproduct :
-    {l1 l2 l3 l4 : Level}
-    {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
-    {f : A → B} {g : X → Y} →
-    is-emb f → is-emb g → is-emb (map-coproduct f g)
-  is-emb-map-coproduct {f = f} {g} F G (inl x) (inl y) =
-    is-equiv-left-is-equiv-right-square
-      ( ap (map-coproduct f g))
-      ( ap f)
-      ( map-compute-eq-coproduct-inl-inl x y)
-      ( map-compute-eq-coproduct-inl-inl (f x) (f y))
-      ( λ where refl → refl)
-      ( is-equiv-map-compute-eq-coproduct-inl-inl x y)
-      ( is-equiv-map-compute-eq-coproduct-inl-inl (f x) (f y))
-      ( F x y)
-  is-emb-map-coproduct {f = f} {g} F G (inl x) (inr y) =
-    is-equiv-is-empty
-      ( ap (map-coproduct f g))
-      ( is-empty-eq-coproduct-inl-inr (f x) (g y))
-  is-emb-map-coproduct {f = f} {g} F G (inr x) (inl y) =
-    is-equiv-is-empty
-      ( ap (map-coproduct f g))
-      ( is-empty-eq-coproduct-inr-inl (g x) (f y))
-  is-emb-map-coproduct {f = f} {g} F G (inr x) (inr y) =
-    is-equiv-left-is-equiv-right-square
-      ( ap (map-coproduct f g))
-      ( ap g)
-      ( map-compute-eq-coproduct-inr-inr x y)
-      ( map-compute-eq-coproduct-inr-inr (g x) (g y))
-      ( λ where refl → refl)
-      ( is-equiv-map-compute-eq-coproduct-inr-inr x y)
-      ( is-equiv-map-compute-eq-coproduct-inr-inr (g x) (g y))
-      ( G x y)
 ```
