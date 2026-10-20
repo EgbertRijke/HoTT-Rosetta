@@ -13,12 +13,16 @@ open import section-9-2-bi-invertible-maps
 
 ## Problem statement
 
+### Exercise 9.3(a)
+
 Consider two functions `f, g : A → B` and a homotopy `H : f ~ g`.
 Then
 
 ```text
   is-equiv(f) ↔ is-equiv(g).
 ```
+
+### Exercise 9.3(b)
 
 Show that for any two homotopic equivalences `e, e' : A ≃ B`, their inverses are also homotopic.
 
