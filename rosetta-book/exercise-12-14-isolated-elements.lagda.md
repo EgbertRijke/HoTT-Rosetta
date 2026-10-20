@@ -13,7 +13,11 @@ We say that `a` is an **isolated element** of `A` if it comes equipped with an e
 is-isolated(a) ≔ Π(x : A) (a = x) + (a ≠ x).
 ```
 
+### Exercise 12.14(a)
+
 Show that `a` is isolated if and only if the map `constₐ : unit → A` has decidable fibers.
+
+### Exercise 12.14(b)
 
 Show that if `a` is isolated, then `a = x` is a proposition, for every `x : A`.
 Conclude that if `a` is isolated, then the map `constₐ : unit → A` is an embedding.
