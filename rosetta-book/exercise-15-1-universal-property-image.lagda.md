@@ -44,3 +44,5 @@ over `X`, then `g` satisfies the universal property of the image of `f`.
 Show that if `f` is an embedding, then `g` satisfies the universal property of `f` if and only if `h` is an equivalence.
 
 ## Solutions
+
+BENCHMARK PROBLEM

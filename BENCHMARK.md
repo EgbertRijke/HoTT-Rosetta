@@ -45,6 +45,7 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-14-7-precomposition-with-truncation.lagda.md
 - rosetta-book/exercise-14-8-impredicative-encodings.lagda.md
 - rosetta-book/exercise-14-9-interval.lagda.md
+- rosetta-book/exercise-15-1-universal-property-image.lagda.md
 - rosetta-book/exercise-16-1-finite-function-and-equivalence-types.lagda.md
 - rosetta-book/exercise-16-2-retracts-of-counted-and-finite-types.lagda.md
 - rosetta-book/exercise-16-3-decidability-over-finite-types.lagda.md
