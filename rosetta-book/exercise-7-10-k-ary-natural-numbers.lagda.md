@@ -42,9 +42,15 @@ convert-based-ℕ{k}(constant-based-ℕ {k}(x)) ≔ nat-Fin(x)
 convert-based-ℕ{k}(unary-op-based-ℕ{k}(x,n)) ≔ k(convert-based-ℕ{k}(n) + 1) + nat-Fin(x).
 ```
 
+### Exercise 7.10(a)
+
 Show that the type `based-ℕ{0}` is empty.
 
+### Exercise 7.10(b)
+
 Show that the function `convert-based-ℕ{k} : based-ℕ{k} → ℕ` is injective.
+
+### Exercise 7.10(c)
 
 Show that the function `convert-based-ℕ{k + 1} : based-ℕ{k + 1} → ℕ` has an inverse, i.e. construct a function
 
