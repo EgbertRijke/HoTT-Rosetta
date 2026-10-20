@@ -31,4 +31,13 @@ Show that the universe `Set_𝒰` of sets in `𝒰` is not a set.
 
 ## Solution
 
-BENCHMARK PROBLEM
+PARTIAL BENCHMARK PROBLEM
+
+Part (b) is formalized as `is-trunc-Truncated-Type` in [Remark 17.2.2](section-17-2-propositional-extensionality.lagda.md#remark-1722). Parts (a), (c), and (d) remain to be formalized.
+
+### Exercise 17.1(b)
+
+```agda
+open import section-17-2-propositional-extensionality using
+  ( is-trunc-Truncated-Type)
+```

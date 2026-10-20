@@ -58,7 +58,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-16-9-decidable-embeddings-with-unit.lagda.md
 - rosetta-book/exercise-16-10-falling-factorials-and-embeddings.lagda.md
 - rosetta-book/exercise-16-11-surjections-between-finite-types.lagda.md
-- rosetta-book/exercise-17-1-universes-of-truncated-types.lagda.md
 - rosetta-book/exercise-19-1-exercise.lagda.md
 - rosetta-book/exercise-19-2-exercise.lagda.md
 - rosetta-book/exercise-19-3-exercise.lagda.md
@@ -115,6 +114,7 @@ The following files contain partially solved (auto)formalization exercises, whic
 - rosetta-book/exercise-12-7-truncated-products.lagda.md
 - rosetta-book/exercise-13-15-morphisms-over-a-type.lagda.md
 - rosetta-book/exercise-15-2-propositional-truncations.lagda.md
+- rosetta-book/exercise-17-1-universes-of-truncated-types.lagda.md
 
 The main text contains a few missing formalizations that provide further benchmark problems identified with "BENCHMARK PROBLEM".
 
