@@ -27,13 +27,19 @@ The multiplication operation `x,y ↦ xy` on `ℤ / {(k + 1)}` is defined by
 xy ≔ [nat-Fin(x)nat-Fin(y)]ₖ₊₁.
 ```
 
+### Exercise 7.8(a)
+
 Show that `nat-Fin(xy) ≡ nat-Fin(x)nat-Fin(y)mod{k + 1}` for each `x,y : ℤ / {(k + 1)}`.
+
+### Exercise 7.8(b)
 
 Show that
 ```text
 xy ≡ x'y'mod k
 ```
 for any `x,y,x',y' : ℕ` such that `x ≡ x'` and `y ≡ y' mod k`.
+
+### Exercise 7.8(c)
 
 Show that multiplication on `ℤ / {(k + 1)}` satisfies the laws of a commutative ring:
 ```text
