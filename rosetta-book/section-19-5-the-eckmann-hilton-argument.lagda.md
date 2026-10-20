@@ -73,7 +73,7 @@ ap_{f(x,_)}(q) |        \ ap-binary_f(p,q)   | ap_{f(x',_)}(q)
 
 _Proof._ The proof is immediate by identification elimination on `p` and `q`, where applicable. ◻
 
-````agda
+```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {C : UU l3} (f : A → B → C)
   where
