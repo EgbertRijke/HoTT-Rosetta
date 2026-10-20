@@ -292,6 +292,10 @@ abstract
 
 ### Exercise 6.5(b)
 
+PARTIAL BENCHMARK PROBLEM
+
+The proof below establishes the triangle equality when `m ≤ k ≤ n`. The full if-and-only-if characterization in part (b) remains to be formalized.
+
 ```agda
 abstract
   triangle-equality-dist-ℕ :
