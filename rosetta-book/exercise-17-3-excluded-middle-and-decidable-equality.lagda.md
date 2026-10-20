@@ -11,4 +11,4 @@ Show that the law of excluded middle holds if and only if every set has decidabl
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
