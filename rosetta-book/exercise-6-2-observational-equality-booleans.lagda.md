@@ -12,7 +12,11 @@ open import section-5-1-the-inductive-definition-of-identity-types
 
 ## Problem statement
 
+### Exercise 6.2(a)
+
 Define observational equality `Eq-bool` by induction on the booleans.
+
+### Exercise 6.2(b)
 
 Show that
 
@@ -21,6 +25,8 @@ Show that
 ```
 
 for any `x,y : bool`.
+
+### Exercise 6.2(c)
 
 Show that `b ≠ neg-bool(b)` for any `b : bool`.
 Conclude that `false ≠ true`.
