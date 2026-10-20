@@ -9,7 +9,6 @@ open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
-open import section-10-4-equivalences-are-contractible-maps
 ```
 
 ## Problem statement
@@ -86,7 +85,8 @@ module _
 
   htpy-map-inv-is-equiv :
     {f g : A → B} (H : f ~ g) (F : is-equiv f) (G : is-equiv g) →
-    map-inv-is-equiv F ~ map-inv-is-equiv G
+    map-inv-is-invertible (is-invertible-is-equiv F) ~
+    map-inv-is-invertible (is-invertible-is-equiv G)
   htpy-map-inv-is-equiv H F G =
     htpy-map-inv-is-invertible H
       ( is-invertible-is-equiv F)
