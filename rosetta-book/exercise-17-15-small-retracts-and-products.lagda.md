@@ -28,4 +28,4 @@ Show that if the product `A × B` is `𝒰`-small, then so are the types `A` and
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
