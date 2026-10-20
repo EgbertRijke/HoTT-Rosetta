@@ -17,36 +17,44 @@ open import section-5-6-the-laws-of-addition-on-natural-numbers
 In this exercise we show that the operations of addition and multiplication on
 the natural numbers satisfy the laws of a commutative **semiring**.
 
-1. Show that multiplication satisfies the following laws:
+### Exercise 5.5(a)
 
-   ```text
-     m · 0 = 0
-     m · 1 = m
-     m · succ-ℕ(n) = m + m · n
-     0 · m = 0
-     1 · m = m
-     succ-ℕ(m) · n = m · n + n.
-   ```
+Show that multiplication satisfies the following laws:
 
-2. Show that multiplication on `ℕ` is commutative:
+```text
+  m · 0 = 0
+  m · 1 = m
+  m · succ-ℕ(n) = m + m · n
+  0 · m = 0
+  1 · m = m
+  succ-ℕ(m) · n = m · n + n.
+```
 
-   ```text
-     m · n = n · m.
-   ```
+### Exercise 5.5(b)
 
-3. Show that multiplication on `ℕ` distributes over addition from the left and
-   from the right, i.e., show that we have identifications
+Show that multiplication on `ℕ` is commutative:
 
-   ```text
-     m · (n + k) = m · n + m · k
-     (m + n) · k = m · k + n · k.
-   ```
+```text
+  m · n = n · m.
+```
 
-4. Show that multiplication on `ℕ` is associative:
+### Exercise 5.5(c)
 
-   ```text
-     (m · n) · k = m · (n · k).
-   ```
+Show that multiplication on `ℕ` distributes over addition from the left and
+from the right, i.e., show that we have identifications
+
+```text
+  m · (n + k) = m · n + m · k
+  (m + n) · k = m · k + n · k.
+```
+
+### Exercise 5.5(d)
+
+Show that multiplication on `ℕ` is associative:
+
+```text
+  (m · n) · k = m · (n · k).
+```
 
 ## Solution
 
