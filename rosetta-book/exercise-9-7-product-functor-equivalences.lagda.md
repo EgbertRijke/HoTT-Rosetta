@@ -10,7 +10,6 @@ open import section-5-1-the-inductive-definition-of-identity-types
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
-open import section-10-4-equivalences-are-contractible-maps
 ```
 
 ## Problem statement
@@ -136,23 +135,25 @@ module _
   map-inv-map-product :
     (f : A → C) (g : B → D) → is-equiv f → is-equiv g → C × D → A × B
   map-inv-map-product f g H K =
-    map-product (map-inv-is-equiv H) (map-inv-is-equiv K)
+    map-product
+      ( map-inv-is-invertible (is-invertible-is-equiv H))
+      ( map-inv-is-invertible (is-invertible-is-equiv K))
 
   is-section-map-inv-map-product :
     (f : A → C) (g : B → D) (H : is-equiv f) (K : is-equiv g) →
     map-product f g ∘ map-inv-map-product f g H K ~ id
   is-section-map-inv-map-product f g H K =
     htpy-map-product
-      ( is-section-map-inv-is-equiv H)
-      ( is-section-map-inv-is-equiv K)
+      ( is-section-map-inv-is-invertible (is-invertible-is-equiv H))
+      ( is-section-map-inv-is-invertible (is-invertible-is-equiv K))
 
   is-retraction-map-inv-map-product :
     (f : A → C) (g : B → D) (H : is-equiv f) (K : is-equiv g) →
     map-inv-map-product f g H K ∘ map-product f g ~ id
   is-retraction-map-inv-map-product f g H K =
     htpy-map-product
-      ( is-retraction-map-inv-is-equiv H)
-      ( is-retraction-map-inv-is-equiv K)
+      ( is-retraction-map-inv-is-invertible (is-invertible-is-equiv H))
+      ( is-retraction-map-inv-is-invertible (is-invertible-is-equiv K))
 
   is-equiv-map-product :
     (f : A → C) (g : B → D) →
