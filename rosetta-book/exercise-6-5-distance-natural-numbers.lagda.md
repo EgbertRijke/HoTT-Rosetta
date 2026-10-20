@@ -53,13 +53,9 @@ Show that `dist-ℕ` satisfies the axioms of a metric:
 
 ### Exercise 6.5(b)
 
-Show that `x + dist-ℕ(x,y) = y` for any `x ≤ y`.
-
-### Exercise 6.5(c)
-
 Show that `dist-ℕ(m,n) = dist-ℕ(m,k) + dist-ℕ(k,n)` if and only if either both `m ≤ k` and `k ≤ n` hold or both `n ≤ k` and `k ≤ m` hold.
 
-### Exercise 6.5(d)
+### Exercise 6.5(c)
 
 Show that `dist-ℕ` is translation invariant and linear:
 
@@ -68,7 +64,13 @@ Show that `dist-ℕ` is translation invariant and linear:
   dist-ℕ(k · m,k · n) = k · dist-ℕ(m,n).
 ```
 
+### Exercise 6.5(d)
+
+Show that `x + dist-ℕ(x,y) = y` for any `x ≤ y`.
+
 ## Solutions
+
+The solutions are presented in the order (a), (d), (c), (b), following the dependencies between the proofs.
 
 ```agda
 dist-ℕ : ℕ → ℕ → ℕ
@@ -168,7 +170,7 @@ abstract
     triangle-inequality-dist-ℕ m n k
 ```
 
-### Exercise 6.5(b)
+### Exercise 6.5(d)
 
 ```agda
 abstract
@@ -288,7 +290,7 @@ abstract
       ( ap-dist-ℕ (commutative-mul-ℕ k x) (commutative-mul-ℕ k y)))
 ```
 
-### Exercise 6.5(d)
+### Exercise 6.5(b)
 
 ```agda
 abstract
