@@ -15,4 +15,4 @@ of `k`-truncated types `X` equipped with a surjective map `A ↠ X` is `k`-trunc
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
