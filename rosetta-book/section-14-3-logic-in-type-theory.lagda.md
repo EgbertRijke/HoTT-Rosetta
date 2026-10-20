@@ -16,7 +16,6 @@ open import section-8-1-decidability-and-decidable-equality
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-1-groupoid-operations-equivalences
-open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
@@ -31,14 +30,10 @@ open import section-12-2-subtypes
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import exercise-12-4-coproduct-truncation
-open import exercise-12-6-truncated-sigma-types
 open import exercise-12-7-truncated-products
 open import section-13-1-equivalent-forms-of-function-extensionality
-open import section-13-3-universal-properties
 open import exercise-13-3-truncatedness-is-a-proposition
 open import exercise-13-4-equivalence-structure-is-a-proposition
-open import exercise-13-8-universal-property-coproducts
-open import section-14-1-the-universal-property-of-propositional-truncations
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 ```
 

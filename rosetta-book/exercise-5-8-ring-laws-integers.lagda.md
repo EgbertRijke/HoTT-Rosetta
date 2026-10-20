@@ -4,7 +4,6 @@
 module exercise-5-8-ring-laws-integers where
 
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
-open import section-4-2-the-unit-type
 open import section-4-4-coproducts
 open import section-4-5-the-type-of-integers
 open import exercise-4-1-arithmetic-operations-integers

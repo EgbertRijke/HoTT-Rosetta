@@ -4,14 +4,12 @@
 module section-8-6-boolean-reflection where
 
 open import universe-levels
-open import section-2-2-ordinary-function-types
 open import exercise-4-2-boolean-operations
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-5-1-the-inductive-definition-of-identity-types
 open import exercise-6-2-observational-equality-booleans
 open import section-8-1-decidability-and-decidable-equality
-open import section-8-5-the-infinitude-of-primes
 ```
 
 We have shown that the type `is-prime(n)` is decidable for every `n`.

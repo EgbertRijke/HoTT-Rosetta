@@ -11,11 +11,9 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
-open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-1-families-of-equivalences
 open import section-11-2-the-fundamental-theorem
-open import section-11-6-the-structure-identity-principle
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-9-4-three-for-two-equivalences
 open import exercise-9-5-sigma-swap

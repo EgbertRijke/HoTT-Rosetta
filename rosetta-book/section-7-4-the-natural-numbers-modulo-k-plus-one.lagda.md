@@ -5,7 +5,6 @@ module section-7-4-the-natural-numbers-modulo-k-plus-one where
 
 open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
-open import section-3-2-addition-on-the-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
@@ -22,7 +21,6 @@ open import section-7-3-the-standard-finite-types
 open import exercise-3-1-multiplication-and-exponentiation
 open import section-4-3-the-empty-type
 open import section-5-4-transport
-open import exercise-6-1-injectivity-addition-multiplication
 ```
 
 Given an equivalence relation `~` on a set `A` in classical mathematics, the quotient `A / ~` comes equipped with a quotient map `q : A → A / ~` that satisfies two important properties: (1) The map `q` satisfies the condition

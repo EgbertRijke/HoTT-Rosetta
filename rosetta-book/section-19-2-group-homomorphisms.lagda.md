@@ -14,7 +14,6 @@ open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-2-the-fundamental-theorem
-open import section-11-4-embeddings
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-3-sets

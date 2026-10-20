@@ -14,13 +14,10 @@ open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import exercise-6-3-order-natural-numbers
 open import exercise-7-3-divisibility-factorials
-open import section-9-2-bi-invertible-maps
 open import section-12-1-propositions
 open import section-12-3-sets
 open import exercise-12-4-coproduct-truncation
 open import section-13-1-equivalent-forms-of-function-extensionality
-open import exercise-12-4-coproduct-truncation
-open import exercise-9-1-groupoid-operations-equivalences
 ```
 
 In the final application of the function extensionality principle we prove the strong induction principle for the type of natural numbers.

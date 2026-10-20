@@ -5,8 +5,6 @@ module section-17-1-equivalent-forms-of-the-univalence-axiom where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
-open import exercise-2-3-constant-maps
-open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
 open import exercise-4-3-double-negation-logic
@@ -30,7 +28,6 @@ open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-4-general-truncation-levels
 open import section-13-2-identity-systems-on-pi-types
-open import section-13-4-composing-with-equivalences
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import exercise-13-12-dependent-products-of-truncated-maps
 ```

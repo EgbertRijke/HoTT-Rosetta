@@ -3,12 +3,10 @@
 ```agda
 module exercise-6-1-injectivity-addition-multiplication where
 
-open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers
 open import exercise-3-1-multiplication-and-exponentiation
 open import exercise-3-3-triangular-numbers-and-factorials
-open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types

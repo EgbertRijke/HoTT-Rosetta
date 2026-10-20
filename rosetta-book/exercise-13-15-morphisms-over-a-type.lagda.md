@@ -16,7 +16,6 @@ open import exercise-9-4-three-for-two-equivalences
 open import exercise-9-5-sigma-swap
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
-open import exercise-10-8-fiber-replacement
 open import section-11-1-families-of-equivalences
 open import section-11-6-the-structure-identity-principle
 open import section-12-1-propositions

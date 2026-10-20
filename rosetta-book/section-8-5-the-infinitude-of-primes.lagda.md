@@ -6,8 +6,6 @@ module section-8-5-the-infinitude-of-primes where
 open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
-open import section-3-2-addition-on-the-natural-numbers
-open import exercise-3-1-multiplication-and-exponentiation
 open import exercise-3-3-triangular-numbers-and-factorials
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
@@ -16,23 +14,17 @@ open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
-open import section-5-3-the-action-on-identifications-of-functions
 open import exercise-5-5-semiring-laws-natural-numbers
-open import exercise-6-1-injectivity-addition-multiplication
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-6-3-observational-equality-of-the-natural-numbers
 open import exercise-6-3-order-natural-numbers
 open import exercise-6-4-strict-order-natural-numbers
-open import exercise-6-5-distance-natural-numbers
 open import section-7-1-the-curry-howard-interpretation
-open import exercise-7-1-divisibility-three-for-two
 open import exercise-7-2-divisibility-poset
 open import exercise-7-3-divisibility-factorials
-open import exercise-7-9-euclidean-division
 open import section-8-1-decidability-and-decidable-equality
 open import section-8-2-constructions-by-case-analysis
 open import section-8-3-the-well-ordering-principle-of-natural-numbers
-open import section-8-4-the-greatest-common-divisor
 ```
 
 When the natural numbers are ordered by the divisibility relation, the number `1` is at the bottom.

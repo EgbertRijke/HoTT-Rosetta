@@ -3,7 +3,6 @@
 ```agda
 module exercise-7-6-predecessor-finite-types where
 
-open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-4-coproducts

@@ -14,16 +14,11 @@ open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
-open import section-11-1-families-of-equivalences
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
-open import section-13-4-composing-with-equivalences
 open import section-14-1-the-universal-property-of-propositional-truncations
-open import exercise-10-3-contractible-equivalences
-open import section-11-4-embeddings
-open import exercise-9-1-groupoid-operations-equivalences
 ```
 
 We have given a specification of the propositional truncation of a type `A`, and we have seen that this specification by a universal property determines the propositional truncation up to equivalence if it exists.

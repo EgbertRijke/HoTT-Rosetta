@@ -4,7 +4,6 @@
 module exercise-5-3-lift where
 
 open import universe-levels
-open import universe-levels
 
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types

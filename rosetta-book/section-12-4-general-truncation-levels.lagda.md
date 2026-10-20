@@ -15,7 +15,6 @@ open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-8-4-prime-and-prime-counting-functions
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
-open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps

@@ -5,9 +5,7 @@ module section-14-1-the-universal-property-of-propositional-truncations where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
-open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
-open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-9-1-homotopies
@@ -16,17 +14,14 @@ open import exercise-9-4-three-for-two-equivalences
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
-open import exercise-10-1-identity-types-contractible
 open import exercise-10-3-contractible-equivalences
 open import section-11-1-families-of-equivalences
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-4-general-truncation-levels
 open import exercise-12-6-truncated-sigma-types
-open import exercise-12-7-truncated-products
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-2-identity-systems-on-pi-types
-open import section-13-4-composing-with-equivalences
 open import exercise-13-4-equivalence-structure-is-a-proposition
 ```
 

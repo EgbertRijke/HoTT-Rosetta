@@ -4,9 +4,7 @@
 module exercise-8-4-prime-and-prime-counting-functions where
 
 open import universe-levels
-open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
-open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-8-1-decidability-and-decidable-equality

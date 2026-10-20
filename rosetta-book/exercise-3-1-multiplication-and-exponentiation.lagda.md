@@ -6,7 +6,6 @@ module exercise-3-1-multiplication-and-exponentiation where
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers
 
-open import universe-levels
 ```
 
 ## Problem statement

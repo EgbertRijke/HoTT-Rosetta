@@ -8,7 +8,6 @@ open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
-open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
@@ -29,7 +28,6 @@ open import section-12-3-sets
 open import exercise-12-4-coproduct-truncation
 open import exercise-12-7-truncated-products
 open import section-13-1-equivalent-forms-of-function-extensionality
-open import section-13-5-the-strong-induction-principle-of-the-natural-numbers
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-14-3-logic-in-type-theory
 open import exercise-6-3-order-natural-numbers

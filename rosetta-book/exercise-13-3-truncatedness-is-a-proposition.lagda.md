@@ -11,7 +11,6 @@ open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import exercise-10-1-identity-types-contractible
 open import exercise-10-6-dependent-pair-contractible-base
-open import section-11-4-embeddings
 open import section-12-1-propositions
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels

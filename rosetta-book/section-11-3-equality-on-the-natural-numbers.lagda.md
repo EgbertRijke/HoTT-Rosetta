@@ -3,10 +3,7 @@
 ```agda
 module section-11-3-equality-on-the-natural-numbers where
 
-open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
-open import section-4-2-the-unit-type
-open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions

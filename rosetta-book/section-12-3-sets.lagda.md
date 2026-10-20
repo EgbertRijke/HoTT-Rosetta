@@ -16,14 +16,11 @@ open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-6-the-laws-of-addition-on-natural-numbers
 open import exercise-5-2-inverse-concatenation-maps
 open import section-6-3-observational-equality-of-the-natural-numbers
-open import section-6-4-peanos-seventh-and-eighth-axioms
 open import section-8-1-decidability-and-decidable-equality
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-2-the-fundamental-theorem
-open import section-11-3-equality-on-the-natural-numbers
-open import section-11-4-embeddings
 open import exercise-11-8-total-map-retractions
 open import section-12-1-propositions
 open import section-12-2-subtypes

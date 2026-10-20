@@ -16,7 +16,6 @@ open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-1-injectivity-addition-multiplication
 open import section-7-1-the-curry-howard-interpretation
 open import section-7-2-the-congruence-relations-on-natural-numbers
-open import exercise-7-1-divisibility-three-for-two
 ```
 
 ## Problem statement

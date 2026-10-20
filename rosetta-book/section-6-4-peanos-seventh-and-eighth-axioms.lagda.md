@@ -5,15 +5,12 @@ module section-6-4-peanos-seventh-and-eighth-axioms where
 
 open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
-open import exercise-3-1-multiplication-and-exponentiation
-open import exercise-3-3-triangular-numbers-and-factorials
 open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
 open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
-open import section-6-3-observational-equality-of-the-natural-numbers
 ```
 
 Using the observational equality of `ℕ`, we can prove Peano’s seventh and eighth axioms.

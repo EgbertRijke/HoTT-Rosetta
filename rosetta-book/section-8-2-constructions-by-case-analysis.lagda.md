@@ -13,7 +13,6 @@ open import section-4-6-dependent-pair-types
 open import section-8-1-decidability-and-decidable-equality
 open import universe-levels
 open import exercise-6-3-order-natural-numbers
-open import exercise-6-4-strict-order-natural-numbers
 ```
 
 A common way to construct functions and to prove properties about them is by case analysis.

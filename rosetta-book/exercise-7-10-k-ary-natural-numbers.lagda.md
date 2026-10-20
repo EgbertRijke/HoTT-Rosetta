@@ -7,7 +7,6 @@ open import universe-levels
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-3-2-addition-on-the-natural-numbers
 open import exercise-3-1-multiplication-and-exponentiation
-open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
@@ -20,8 +19,6 @@ open import exercise-6-1-injectivity-addition-multiplication
 open import exercise-6-3-order-natural-numbers
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-4-strict-order-natural-numbers
-open import exercise-6-5-distance-natural-numbers
-open import section-7-1-the-curry-howard-interpretation
 open import section-7-2-the-congruence-relations-on-natural-numbers
 open import section-7-3-the-standard-finite-types
 open import section-7-4-the-natural-numbers-modulo-k-plus-one

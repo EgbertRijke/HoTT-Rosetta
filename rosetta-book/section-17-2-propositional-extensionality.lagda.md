@@ -23,7 +23,6 @@ open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-3-contractible-equivalences
-open import exercise-10-6-dependent-pair-contractible-base
 open import exercise-10-7-fibers-of-projections
 open import section-11-1-families-of-equivalences
 open import section-11-4-embeddings

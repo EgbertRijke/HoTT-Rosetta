@@ -5,15 +5,12 @@ module exercise-9-6-coproduct-functor-equivalences where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
-open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions
-open import exercise-8-7-decidable-equality-coproducts
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
-open import exercise-9-4-three-for-two-equivalences
 ```
 
 ## Problem statement

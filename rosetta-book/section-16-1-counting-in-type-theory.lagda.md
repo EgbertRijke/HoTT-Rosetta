@@ -44,7 +44,6 @@ open import section-12-2-subtypes
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import exercise-12-4-coproduct-truncation
-open import exercise-12-8-retracts-of-truncated-types
 open import section-13-2-identity-systems-on-pi-types
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-14-3-logic-in-type-theory

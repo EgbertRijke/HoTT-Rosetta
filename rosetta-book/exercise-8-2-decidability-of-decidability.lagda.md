@@ -4,8 +4,6 @@
 module exercise-8-2-decidability-of-decidability where
 
 open import universe-levels
-open import section-2-2-ordinary-function-types
-open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-8-1-decidability-and-decidable-equality
 ```

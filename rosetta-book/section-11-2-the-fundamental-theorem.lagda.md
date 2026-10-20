@@ -4,17 +4,14 @@
 module section-11-2-the-fundamental-theorem where
 
 open import universe-levels
-open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-4-transport
-open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
 open import section-10-2-singleton-induction
 open import exercise-10-1-identity-types-contractible
-open import exercise-10-2-contractible-retracts
 open import exercise-10-3-contractible-equivalences
 open import section-11-1-families-of-equivalences
 ```

@@ -9,9 +9,6 @@ open import section-5-1-the-inductive-definition-of-identity-types
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
-open import section-10-1-contractible-types
-open import section-10-4-equivalences-are-contractible-maps
-open import section-11-2-the-fundamental-theorem
 open import section-13-1-equivalent-forms-of-function-extensionality
 ```
 

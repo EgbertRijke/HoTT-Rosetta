@@ -9,9 +9,7 @@ open import section-2-2-ordinary-function-types
 open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
 open import exercise-4-3-double-negation-logic
-open import section-5-1-the-inductive-definition-of-identity-types
 open import section-10-3-contractible-maps
-open import section-11-1-families-of-equivalences
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-13-1-equivalent-forms-of-function-extensionality

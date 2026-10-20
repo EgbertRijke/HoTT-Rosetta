@@ -6,7 +6,6 @@ module section-18-4-unique-representatives-of-equivalence-classes where
 open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
-open import section-3-2-addition-on-the-natural-numbers
 open import exercise-3-1-multiplication-and-exponentiation
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
@@ -23,12 +22,8 @@ open import exercise-5-5-semiring-laws-natural-numbers
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-3-order-natural-numbers
 open import exercise-6-6-absolute-value-integers
-open import section-7-1-the-curry-howard-interpretation
 open import section-7-4-the-natural-numbers-modulo-k-plus-one
-open import exercise-7-2-divisibility-poset
 open import section-8-1-decidability-and-decidable-equality
-open import section-8-2-constructions-by-case-analysis
-open import section-8-3-the-well-ordering-principle-of-natural-numbers
 open import section-8-4-the-greatest-common-divisor
 open import section-9-2-bi-invertible-maps
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types

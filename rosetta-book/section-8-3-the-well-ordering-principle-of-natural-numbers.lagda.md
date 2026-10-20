@@ -10,7 +10,6 @@ open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import exercise-6-3-order-natural-numbers
 open import section-8-1-decidability-and-decidable-equality
-open import section-8-2-constructions-by-case-analysis
 ```
 
 The well-ordering principle of the natural numbers in classical mathematics asserts that any nonempty subset of `ℕ` has a least element.

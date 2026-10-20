@@ -19,9 +19,7 @@ open import section-5-4-transport
 open import section-5-6-the-laws-of-addition-on-natural-numbers
 open import exercise-5-5-semiring-laws-natural-numbers
 open import section-6-4-peanos-seventh-and-eighth-axioms
-open import exercise-6-1-injectivity-addition-multiplication
 open import exercise-6-3-order-natural-numbers
-open import exercise-6-4-strict-order-natural-numbers
 ```
 
 ## Problem statement

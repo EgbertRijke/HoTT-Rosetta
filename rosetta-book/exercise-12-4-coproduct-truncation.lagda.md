@@ -4,14 +4,12 @@
 module exercise-12-4-coproduct-truncation where
 
 open import universe-levels
-open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-5-the-type-of-integers
 open import section-4-6-dependent-pair-types
-open import exercise-4-3-double-negation-logic
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
@@ -19,7 +17,6 @@ open import exercise-6-3-order-natural-numbers
 open import section-7-3-the-standard-finite-types
 open import exercise-7-3-divisibility-factorials
 open import exercise-7-5-observational-equality-finite-types
-open import section-8-1-decidability-and-decidable-equality
 open import exercise-8-7-decidable-equality-coproducts
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types

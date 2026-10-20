@@ -4,8 +4,6 @@
 module exercise-8-6-decidable-equality-products where
 
 open import universe-levels
-open import section-2-2-ordinary-function-types
-open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types

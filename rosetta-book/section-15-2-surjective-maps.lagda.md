@@ -7,7 +7,6 @@ open import universe-levels
 
 open import section-2-2-ordinary-function-types
 open import exercise-2-3-constant-maps
-open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
@@ -31,7 +30,6 @@ open import exercise-13-7-universal-property-contractible-types
 open import exercise-13-12-dependent-products-of-truncated-maps
 open import exercise-13-15-morphisms-over-a-type
 open import section-14-2-propositional-truncations-as-higher-inductive-types
-open import section-14-3-logic-in-type-theory
 open import section-15-1-the-image-of-a-map
 ```
 

@@ -3,15 +3,6 @@
 ```agda
 module exercise-12-8-retracts-of-truncated-types where
 
-open import universe-levels
-open import section-2-2-ordinary-function-types
-open import section-4-6-dependent-pair-types
-open import section-5-1-the-inductive-definition-of-identity-types
-open import section-5-2-the-groupoidal-structure-of-types
-open import section-5-3-the-action-on-identifications-of-functions
-open import section-6-4-peanos-seventh-and-eighth-axioms
-open import section-9-1-homotopies
-open import section-9-2-bi-invertible-maps
 ```
 
 ## Problem statement

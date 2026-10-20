@@ -5,16 +5,11 @@ module section-11-5-disjointness-of-coproducts where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
-open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
-open import section-4-2-the-unit-type
 open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-3-the-action-on-identifications-of-functions
-open import section-6-4-peanos-seventh-and-eighth-axioms
-open import section-7-3-the-standard-finite-types
-open import exercise-7-5-observational-equality-finite-types
 open import exercise-8-7-decidable-equality-coproducts
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps

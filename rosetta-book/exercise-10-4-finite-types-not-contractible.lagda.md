@@ -3,11 +3,9 @@
 ```agda
 module exercise-10-4-finite-types-not-contractible where
 
-open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
-open import section-4-3-the-empty-type
 open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
@@ -18,7 +16,6 @@ open import exercise-8-7-decidable-equality-coproducts
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-10-1-contractible-types
-open import exercise-10-1-identity-types-contractible
 open import exercise-10-3-contractible-equivalences
 ```
 

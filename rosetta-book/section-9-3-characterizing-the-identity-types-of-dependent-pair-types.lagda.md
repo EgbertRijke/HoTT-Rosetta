@@ -5,7 +5,6 @@ module section-9-3-characterizing-the-identity-types-of-dependent-pair-types whe
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
-open import section-4-4-coproducts
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types

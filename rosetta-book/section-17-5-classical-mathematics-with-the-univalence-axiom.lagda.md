@@ -32,7 +32,6 @@ open import section-12-1-propositions
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
-open import section-13-3-universal-properties
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import exercise-13-7-universal-property-contractible-types
 open import exercise-13-12-dependent-products-of-truncated-maps
@@ -41,7 +40,6 @@ open import section-14-3-logic-in-type-theory
 open import section-14-4-mapping-propositional-truncations-into-sets
 open import section-15-3-cantors-diagonal-argument
 open import section-16-3-finite-types
-open import section-17-1-equivalent-forms-of-the-univalence-axiom
 open import section-17-2-propositional-extensionality
 ```
 
