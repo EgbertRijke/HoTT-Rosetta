@@ -16,4 +16,4 @@ given by `A ↦ Π(p : P) A(p)`, is an embedding.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
