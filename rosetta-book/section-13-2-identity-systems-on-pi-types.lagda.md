@@ -451,4 +451,4 @@ module _
   pr2 (extensionality-Π e g) = is-equiv-map-extensionality-Π e g
 ```
 
-Note: Agda-unimath does not contain the proof that Eq-Π is an identity system, even though it is a straightforward corollary of what we have formalized so far.
+Note: Agda-unimath does not contain the proof that `Eq-Π` is an identity system, even though it is a straightforward corollary of what we have formalized so far.

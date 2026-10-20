@@ -662,7 +662,7 @@ Nevertheless, we have seen in Chapter 8 that some propositions are already decid
 
 ## Supplement
 
-### The type Type-With-Cardinality-ℕ is a 1-type
+### The type `Type-With-Cardinality-ℕ` is a 1-type
 
 ```agda
 is-1-type-Type-With-Cardinality-ℕ :

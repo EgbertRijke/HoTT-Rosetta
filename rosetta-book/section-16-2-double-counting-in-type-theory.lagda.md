@@ -725,7 +725,7 @@ abstract
 
 ## Supplement
 
-### The universal property of Maybe
+### The universal property of `Maybe`
 
 ```agda
 module _

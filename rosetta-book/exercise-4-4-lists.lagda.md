@@ -63,7 +63,7 @@ Define the functions
   product-list : list(ℕ) → ℕ,
 ```
 
-where sum-list adds all the elements in a list of natural numbers, and product-list takes their product.
+where `sum-list` adds all the elements in a list of natural numbers, and `product-list` takes their product.
 
 ### Exercise 4.4(f)
 

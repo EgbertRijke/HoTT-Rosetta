@@ -1168,7 +1168,7 @@ is-trunc-map-ev-is-connected k {A} {B} a H K =
       ( λ _ → (B , K)))
 ```
 
-### The type Type-With-Cardinality-ℕ is connected
+### The type `Type-With-Cardinality-ℕ` is connected
 
 ```agda
 abstract

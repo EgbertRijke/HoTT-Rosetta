@@ -20,7 +20,7 @@ Use the induction principle of `ℕ` to define the **Fibonacci sequence** as a f
 ## Solution 
 
 It is possible to use Agda's pattern matching to define the Fibonacci sequence.
-This was done in [section-3-3-pattern-matching].
+This was done in [`section-3-3-pattern-matching`].
 
 However, the exercise asks instead to give a definition of the Fibonacci sequence
 in terms of `ind-ℕ`.

@@ -730,9 +730,9 @@ module _
     map-inv-equiv (extensionality-surjection g)
 ```
 
-### A type family C over B satisfies the universal property of the family of fibers of a map f : A → B if and only if the constant map C b → (fiber f b → C b) is an equivalence for every b : B
+### A type family C over B satisfies the universal property of the family of fibers of a map f : A → B if and only if the constant map C b → (`fiber f b` → C b) is an equivalence for every b : B
 
-In other words, the dependent type C is f-local if its fiber over b is fiber f b-null for every b : B.
+In other words, the dependent type C is f-local if its fiber over b is `fiber f b`-null for every b : B.
 
 ```agda
 module _

@@ -81,7 +81,7 @@ module _
   terminal-map = const A star
 ```
 
-### Raising the unit type to another unvierse
+### Raising the unit type to another universe
 
 ```agda
 raise-unit : (l : Level) → UU l
