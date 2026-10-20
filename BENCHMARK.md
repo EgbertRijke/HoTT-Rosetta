@@ -41,7 +41,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-14-1-propositional-truncation-properties.lagda.md
 - rosetta-book/exercise-14-2-mere-equality.lagda.md
 - rosetta-book/exercise-14-4-dependent-universal-property-truncations.lagda.md
-- rosetta-book/exercise-14-5-propositional-truncations-with-sections.lagda.md
 - rosetta-book/exercise-14-6-propositional-truncations-of-decidable-types.lagda.md
 - rosetta-book/exercise-14-7-precomposition-with-truncation.lagda.md
 - rosetta-book/exercise-14-8-impredicative-encodings.lagda.md
