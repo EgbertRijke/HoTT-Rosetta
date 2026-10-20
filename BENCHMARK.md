@@ -58,6 +58,7 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-16-9-decidable-embeddings-with-unit.lagda.md
 - rosetta-book/exercise-16-10-falling-factorials-and-embeddings.lagda.md
 - rosetta-book/exercise-16-11-surjections-between-finite-types.lagda.md
+- rosetta-book/exercise-17-2-not-all-negated-products.lagda.md
 - rosetta-book/exercise-19-1-exercise.lagda.md
 - rosetta-book/exercise-19-2-exercise.lagda.md
 - rosetta-book/exercise-19-3-exercise.lagda.md
