@@ -16,4 +16,4 @@ of all retracts of `X` is finite.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
