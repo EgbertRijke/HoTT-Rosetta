@@ -16,4 +16,4 @@ is an embedding.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
