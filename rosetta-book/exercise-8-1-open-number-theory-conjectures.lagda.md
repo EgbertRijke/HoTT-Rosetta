@@ -18,9 +18,15 @@ open import section-8-5-the-infinitude-of-primes
 
 ## Problem statement
 
+### Exercise 8.1(a)
+
 State Goldbach’s conjecture in type theory.
 
+### Exercise 8.1(b)
+
 State the twin prime conjecture in type theory.
+
+### Exercise 8.1(c)
 
 State the Collatz conjecture in type theory.
 
