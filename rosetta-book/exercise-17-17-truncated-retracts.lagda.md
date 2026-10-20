@@ -16,4 +16,4 @@ of all retracts of `X` is `k`-truncated.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

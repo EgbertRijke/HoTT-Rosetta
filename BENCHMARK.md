@@ -72,6 +72,7 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-17-14-binomial-theorem.lagda.md
 - rosetta-book/exercise-17-15-small-retracts-and-products.lagda.md
 - rosetta-book/exercise-17-16-finite-retracts.lagda.md
+- rosetta-book/exercise-17-17-truncated-retracts.lagda.md
 - rosetta-book/exercise-19-1-exercise.lagda.md
 - rosetta-book/exercise-19-2-exercise.lagda.md
 - rosetta-book/exercise-19-3-exercise.lagda.md
