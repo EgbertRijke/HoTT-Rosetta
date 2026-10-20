@@ -13,7 +13,11 @@ open import section-8-5-the-infinitude-of-primes
 
 ## Problem statement
 
+### Exercise 8.4(a)
+
 Define the **prime function** `prime : ℕ → ℕ` for which `prime(n)` is the `n`-th prime.
+
+### Exercise 8.4(b)
 
 Define the **prime-counting function** `π : ℕ → ℕ`, which counts for each `n : ℕ` the number of primes `p ≤ n`.
 
