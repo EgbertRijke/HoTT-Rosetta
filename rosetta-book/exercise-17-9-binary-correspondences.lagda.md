@@ -14,10 +14,14 @@ is-function(R) ≔ Π(a : A) is-contr(Σ(b : B) R(a,b)),
 ```
 and `R` is said to be an **opposite function** if the **opposite correspondence** `R^op : B → (A → 𝒰)` given by `R^op(b,a) ≔ R(a,b)` is functional.
 
+### Exercise 17.9(a)
+
 Construct an equivalence
 ```text
 (A → B) ≃ Σ(R : A → (B → 𝒰)) is-function(R).
 ```
+
+### Exercise 17.9(b)
 
 Construct an equivalence
 ```text

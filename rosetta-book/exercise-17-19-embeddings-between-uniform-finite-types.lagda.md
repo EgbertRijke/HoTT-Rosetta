@@ -7,11 +7,15 @@ module exercise-17-19-embeddings-between-uniform-finite-types where
 
 ## Problem statement
 
+### Exercise 17.19(a)
+
 Show that for `k ≥ 3`, the type
 ```text
 Π(X : BSₖ) (X + X) ↪ (X × X) + unit
 ```
 is empty, even though the inequality `2k ≤ k^2 + 1` holds for all `k : ℕ`.
+
+### Exercise 17.19(b)
 
 Show that the type
 ```text

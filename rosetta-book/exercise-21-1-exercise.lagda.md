@@ -7,17 +7,23 @@ module exercise-21-1-exercise where
 
 ## Problem statement
 
+### Exercise 21.1(a)
+
 Show that for any type `X` and any `x : X`, the map
 ```text
 ind-S¹(x,refl) : S¹ → X
 ```
 is homotopic to the constant map `constₓ`.
 
+### Exercise 21.1(b)
+
 Show that
 ```text
 ind-S¹(base,loop) : S¹ → S¹
 ```
 is homotopic to the identity function.
+
+### Exercise 21.1(c)
 
 Consider a map `f : X → Y` and a free loop `(x,l)` in `X`.
 Construct a homotopy

@@ -16,10 +16,14 @@ In other words, the type of all `Σ`-decompositions of `A` is defined by
 Σ-decomp_𝒰(A) ≔ Σ(X : 𝒰) Σ(Y : X → Σ(Z : 𝒰) ‖Z‖) A ≃ Σ(x : X) Y(x).
 ```
 
+### Exercise 18.4(a)
+
 Construct an equivalence
 ```text
 Σ-decomp_𝒰(A) ≃ Σ(X : 𝒰) A ↠ X.
 ```
+
+### Exercise 18.4(b)
 
 A `Σ`-decomposition is said to be **set-indexed** if its indexing type is a set.
 We will write `Σ-decomp_{Set_𝒰}(A)` for the type of all set-indexed `Σ`-decompositions of `A` in `𝒰`.

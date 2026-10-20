@@ -9,6 +9,8 @@ module exercise-18-7-exercise where
 
 Consider a map `f : A → B`.
 
+### Exercise 18.7(a)
+
 Show that the type of maps `‖f‖₀ : ‖A‖₀ → ‖B‖₀` equipped with a homotopy witnessing that the square
 
 ```text
@@ -20,13 +22,19 @@ Show that the type of maps `‖f‖₀ : ‖A‖₀ → ‖B‖₀` equipped wit
 ```
 commutes is contractible.
 
+### Exercise 18.7(b)
+
 Show that if `f` is injective, then `‖f‖₀ : ‖A‖₀ → ‖B‖₀` is injective.
+
+### Exercise 18.7(c)
 
 Show that the following are equivalent
 
 1. The map `f` is surjective.
 
 2. the map `‖f‖₀ : ‖A‖₀ → ‖B‖₀` is surjective.
+
+### Exercise 18.7(d)
 
 Construct a map `h : im(f) → im‖f‖₀` such that the squares
 

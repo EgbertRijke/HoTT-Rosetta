@@ -13,7 +13,11 @@ Consider the type `C` of families `A : S¹ → Set` of sets over the circle equi
 ```
 is connected.
 
+### Exercise 22.11(a)
+
 For any type family `A` over the circle equipped with `a₀ : A(base)`, show that the total space `Σ(t : S¹) A(t)` is connected if and only if `tr_A(loop) : A(base) → A(base)` has a single orbit in the sense that the map `k ↦ tr_A(loop)^k(a₀) : ℤ → A(base)` is surjective.
+
+### Exercise 22.11(b)
 
 Let `(A,a₀)` and `(B,b₀)` be in `C`.
 Show that the type
@@ -22,6 +26,8 @@ Show that the type
 ```
 is a proposition.
 Furthermore, show that this inequality relation gives `C` the structure of a poset.
+
+### Exercise 22.11(c)
 
 Show that the poset `C` is isomorphic to the poset of subgroups of `ℤ`.
 

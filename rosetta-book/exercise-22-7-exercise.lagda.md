@@ -7,12 +7,16 @@ module exercise-22-7-exercise where
 
 ## Problem statement
 
+### Exercise 22.7(a)
+
 Show that the multiplicative operation on the circle is associative, i.e. construct an identification
 ```text
 assoc_{S¹}(x,y,z) :
 mul_{S¹}(mul_{S¹}(x,y),z) = mul_{S¹}(x,mul_{S¹}(y,z))
 ```
 for any `x,y,z : S¹`.
+
+### Exercise 22.7(b)
 
 Show that the associator satisfies unit laws, in the sense that the following triangles commute:
 
@@ -45,6 +49,8 @@ Show that the associator satisfies unit laws, in the sense that the following tr
                                 \\         //
                                 mul_{S¹}(x,y)
 ```
+
+### Exercise 22.7(c)
 
 State the laws that compute
 ```text

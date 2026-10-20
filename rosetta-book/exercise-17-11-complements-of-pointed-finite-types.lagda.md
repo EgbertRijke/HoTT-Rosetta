@@ -7,10 +7,14 @@ module exercise-17-11-complements-of-pointed-finite-types where
 
 ## Problem statement
 
+### Exercise 17.11(a)
+
 For any type `A`, construct an equivalence
 ```text
 𝒰_A ≃ Σ(X : 𝒰_{A + unit}) binom(X, unit).
 ```
+
+### Exercise 17.11(b)
 
 For any `k : ℕ`, construct an equivalence
 ```text

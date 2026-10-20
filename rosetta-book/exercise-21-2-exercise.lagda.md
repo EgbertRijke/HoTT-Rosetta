@@ -7,7 +7,11 @@ module exercise-21-2-exercise where
 
 ## Problem statement
 
+### Exercise 21.2(a)
+
 Show that the circle is connected.
+
+### Exercise 21.2(b)
 
 Let `P : S¹ → Prop` be a family of propositions over the circle.
 Show that
@@ -15,7 +19,11 @@ Show that
 P(base) → Π(x : S¹) P(x).
 ```
 
+### Exercise 21.2(c)
+
 Show that any embedding `m : S¹ → S¹` is an equivalence.
+
+### Exercise 21.2(d)
 
 Show that for any embedding `m : X → S¹`, there is a proposition `P` and an equivalence `e : X ≃ S¹ × P` for which the triangle
 

@@ -9,17 +9,23 @@ module exercise-17-13-binomial-types-and-isolated-points where
 
 Consider a type `A`.
 
+### Exercise 17.13(a)
+
 Recall from Exercise 12.14 that an element `a : A` is isolated if and only if the map `constₐ : unit → A` is a decidable embedding.
 Construct an equivalence
 ```text
 binom(A, unit) ≃ Σ(a : A) is-isolated(a).
 ```
 
+### Exercise 17.13(b)
+
 Construct an equivalence
 ```text
 binom(A, unit) ≃ (Σ(X : 𝒰) (X + unit) ≃ A).
 ```
 Conclude that the map `X ↦ X + unit` on a univalent universe `𝒰` is `0`-truncated.
+
+### Exercise 17.13(c)
 
 More generally, construct an equivalence
 ```text

@@ -7,12 +7,18 @@ module exercise-22-5-exercise where
 
 ## Problem statement
 
+### Exercise 22.5(a)
+
 Construct a family of equivalences
 ```text
 Π(t : S¹) ((t = t) ≃ ℤ).
 ```
 
+### Exercise 22.5(b)
+
 Use Exercise 21.4 to show that `(id[S¹] ~ id[S¹]) ≃ ℤ`.
+
+### Exercise 22.5(c)
 
 Use Exercise 13.5 to show that
 ```text

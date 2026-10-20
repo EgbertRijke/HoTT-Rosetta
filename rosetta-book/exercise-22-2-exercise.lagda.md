@@ -7,16 +7,22 @@ module exercise-22-2-exercise where
 
 ## Problem statement
 
+### Exercise 22.2(a)
+
 Show that for every `x : X`, we have an equivalence
 ```text
 (Σ(f : S¹ → X) f(base) = x) ≃ (x = x)
 ```
+
+### Exercise 22.2(b)
 
 Show that for every `t : S¹`, we have an equivalence
 ```text
 (Σ(f : S¹ → S¹) f(base) = t) ≃ ℤ
 ```
 The base point preserving map `f : S¹ → S¹` corresponding to `k : ℤ` is the degree `k` map on the circle.
+
+### Exercise 22.2(c)
 
 Show that for every `t : S¹`, we have an equivalence
 ```text
