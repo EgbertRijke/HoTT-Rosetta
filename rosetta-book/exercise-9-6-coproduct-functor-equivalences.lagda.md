@@ -14,7 +14,6 @@ open import exercise-8-7-decidable-equality-coproducts
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
-open import section-10-4-equivalences-are-contractible-maps
 ```
 
 ## Problem statement
@@ -110,7 +109,9 @@ module _
 
   map-inv-equiv-coproduct : A ≃ A' → B ≃ B' → A' + B' → A + B
   map-inv-equiv-coproduct f g =
-    map-coproduct (map-inv-equiv f) (map-inv-equiv g)
+    map-coproduct
+      ( map-inv-is-invertible (is-invertible-is-equiv (is-equiv-map-equiv f)))
+      ( map-inv-is-invertible (is-invertible-is-equiv (is-equiv-map-equiv g)))
 
   is-section-map-inv-equiv-coproduct :
     (f : A ≃ A') (g : B ≃ B') →
@@ -120,13 +121,15 @@ module _
   is-section-map-inv-equiv-coproduct f g =
     ( inv-htpy
       ( preserves-comp-map-coproduct
-        ( map-inv-equiv f)
+        ( map-inv-is-invertible (is-invertible-is-equiv (is-equiv-map-equiv f)))
         ( map-equiv f)
-        ( map-inv-equiv g)
+        ( map-inv-is-invertible (is-invertible-is-equiv (is-equiv-map-equiv g)))
         ( map-equiv g))) ∙h
     ( htpy-map-coproduct
-      ( is-section-map-inv-equiv f)
-      ( is-section-map-inv-equiv g)) ∙h
+      ( is-section-map-inv-is-invertible
+        ( is-invertible-is-equiv (is-equiv-map-equiv f)))
+      ( is-section-map-inv-is-invertible
+        ( is-invertible-is-equiv (is-equiv-map-equiv g)))) ∙h
     ( id-map-coproduct A' B')
 
   is-retraction-map-inv-equiv-coproduct :
@@ -138,12 +141,15 @@ module _
     ( inv-htpy
       ( preserves-comp-map-coproduct
         ( map-equiv f)
-        ( map-inv-equiv f)
+        ( map-inv-is-invertible (is-invertible-is-equiv (is-equiv-map-equiv f)))
         ( map-equiv g)
-        ( map-inv-equiv g))) ∙h
+        ( map-inv-is-invertible
+          ( is-invertible-is-equiv (is-equiv-map-equiv g))))) ∙h
     ( htpy-map-coproduct
-      ( is-retraction-map-inv-equiv f)
-      ( is-retraction-map-inv-equiv g)) ∙h
+      ( is-retraction-map-inv-is-invertible
+        ( is-invertible-is-equiv (is-equiv-map-equiv f)))
+      ( is-retraction-map-inv-is-invertible
+        ( is-invertible-is-equiv (is-equiv-map-equiv g)))) ∙h
     ( id-map-coproduct A B)
 
   is-equiv-map-coproduct :
@@ -151,7 +157,9 @@ module _
     is-equiv f → is-equiv g → is-equiv (map-coproduct f g)
   is-equiv-map-coproduct {f} {g} H K =
     is-equiv-is-invertible
-      ( map-coproduct (map-inv-is-equiv H) (map-inv-is-equiv K))
+      ( map-coproduct
+        ( map-inv-is-invertible (is-invertible-is-equiv H))
+        ( map-inv-is-invertible (is-invertible-is-equiv K)))
       ( is-section-map-inv-equiv-coproduct (f , H) (g , K))
       ( is-retraction-map-inv-equiv-coproduct (f , H) (g , K))
 
