@@ -20,4 +20,4 @@ Construct an equivalence
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

@@ -69,6 +69,7 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-17-11-complements-of-pointed-finite-types.lagda.md
 - rosetta-book/exercise-17-12-automorphisms-of-k-element-types.lagda.md
 - rosetta-book/exercise-17-13-binomial-types-and-isolated-points.lagda.md
+- rosetta-book/exercise-17-14-binomial-theorem.lagda.md
 - rosetta-book/exercise-19-1-exercise.lagda.md
 - rosetta-book/exercise-19-2-exercise.lagda.md
 - rosetta-book/exercise-19-3-exercise.lagda.md
