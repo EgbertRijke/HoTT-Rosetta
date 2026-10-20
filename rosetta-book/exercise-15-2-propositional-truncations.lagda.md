@@ -31,3 +31,14 @@ Show that the following are equivalent:
 2. The constant map `P → unit` satisfies the universal property of the image of the constant map `A → unit`.
 
 ## Solution
+
+PARTIAL BENCHMARK PROBLEM
+
+The embedding assertion in part (a) is formalized as `is-subterminal-is-prop` in [Proposition 12.1.3](section-12-1-propositions.lagda.md#proposition-1213). The displayed equivalence in part (a) and the equivalence of conditions in part (b) remain to be formalized.
+
+### Exercise 15.2(a)
+
+```agda
+open import section-12-1-propositions using
+  ( is-subterminal-is-prop)
+```
