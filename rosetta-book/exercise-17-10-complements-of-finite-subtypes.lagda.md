@@ -24,4 +24,4 @@ More generally, construct for any `k,l : ℕ` and any `k`-element type `A` an eq
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
