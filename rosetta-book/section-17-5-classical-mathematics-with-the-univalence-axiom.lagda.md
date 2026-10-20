@@ -43,8 +43,6 @@ open import section-15-3-cantors-diagonal-argument
 open import section-16-3-finite-types
 open import section-17-1-equivalent-forms-of-the-univalence-axiom
 open import section-17-2-propositional-extensionality
-open import section-17-6-the-binomial-types
-
 ```
 
 In classical mathematics, the axiom of choice asserts that for any collection `X` of nonempty sets, there is a choice function `f` such that `f(x) ∈ x` for each `x ∈ X`.
@@ -96,6 +94,55 @@ Using the notation from Section 7.3, we define the inverse map `g` by
 and it is a straightforward verification that `f` and `g` are inverse to each other. ◻
 
 ```agda
+equiv-Type-With-Cardinality-ℕ :
+  {l1 l2 : Level} (k : ℕ) →
+  Type-With-Cardinality-ℕ l1 k →
+  Type-With-Cardinality-ℕ l2 k →
+  UU (l1 ⊔ l2)
+equiv-Type-With-Cardinality-ℕ k X Y =
+  type-Type-With-Cardinality-ℕ k X ≃ type-Type-With-Cardinality-ℕ k Y
+
+id-equiv-Type-With-Cardinality-ℕ :
+  {l : Level} {k : ℕ} (X : Type-With-Cardinality-ℕ l k) →
+  equiv-Type-With-Cardinality-ℕ k X X
+id-equiv-Type-With-Cardinality-ℕ X = id-equiv
+
+equiv-eq-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) {X Y : Type-With-Cardinality-ℕ l k} →
+  X ＝ Y → equiv-Type-With-Cardinality-ℕ k X Y
+equiv-eq-Type-With-Cardinality-ℕ k {X} {Y} p =
+  equiv-eq-subuniverse (has-cardinality-ℕ-Prop k) X Y p
+
+abstract
+  is-torsorial-equiv-Type-With-Cardinality-ℕ :
+    {l : Level} {k : ℕ} (X : Type-With-Cardinality-ℕ l k) →
+    is-torsorial
+      ( λ (Y : Type-With-Cardinality-ℕ l k) →
+        equiv-Type-With-Cardinality-ℕ k X Y)
+  is-torsorial-equiv-Type-With-Cardinality-ℕ {l} {k} X =
+    is-torsorial-equiv-subuniverse (has-cardinality-ℕ-Prop k) X
+
+abstract
+  is-equiv-equiv-eq-Type-With-Cardinality-ℕ :
+    {l : Level} (k : ℕ) (X Y : Type-With-Cardinality-ℕ l k) →
+    is-equiv (equiv-eq-Type-With-Cardinality-ℕ k {X = X} {Y})
+  is-equiv-equiv-eq-Type-With-Cardinality-ℕ k X =
+    is-equiv-equiv-eq-subuniverse (has-cardinality-ℕ-Prop k) X
+
+eq-equiv-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) (X Y : Type-With-Cardinality-ℕ l k) →
+  equiv-Type-With-Cardinality-ℕ k X Y → X ＝ Y
+eq-equiv-Type-With-Cardinality-ℕ k X Y =
+  eq-equiv-subuniverse (has-cardinality-ℕ-Prop k)
+
+equiv-equiv-eq-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) (X Y : Type-With-Cardinality-ℕ l k) →
+  (X ＝ Y) ≃ equiv-Type-With-Cardinality-ℕ k X Y
+pr1 (equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y) =
+  equiv-eq-Type-With-Cardinality-ℕ k
+pr2 (equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y) =
+  is-equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y
+
 has-two-elements-Prop : {l : Level} → UU l → Prop l
 has-two-elements-Prop X = has-cardinality-ℕ-Prop 2 X
 
@@ -171,11 +218,7 @@ set-2-Element-Type :
   {l : Level} → 2-Element-Type l → Set l
 pr1 (set-2-Element-Type X) = type-2-Element-Type X
 pr2 (set-2-Element-Type X) = is-set-type-2-Element-Type X
-```
 
-### Characterizing identifications between general `2`-element types
-
-```agda
 equiv-2-Element-Type :
   {l1 l2 : Level} → 2-Element-Type l1 → 2-Element-Type l2 → UU (l1 ⊔ l2)
 equiv-2-Element-Type X Y = equiv-Type-With-Cardinality-ℕ 2 X Y
@@ -186,20 +229,21 @@ id-equiv-2-Element-Type X = id-equiv
 
 equiv-eq-2-Element-Type :
   {l1 : Level} (X Y : 2-Element-Type l1) → X ＝ Y → equiv-2-Element-Type X Y
-equiv-eq-2-Element-Type X Y = equiv-eq-component-UU-Level
+equiv-eq-2-Element-Type X Y = equiv-eq-Type-With-Cardinality-ℕ 2
 
 abstract
   is-torsorial-equiv-2-Element-Type :
     {l1 : Level} (X : 2-Element-Type l1) →
     is-torsorial (λ (Y : 2-Element-Type l1) → equiv-2-Element-Type X Y)
   is-torsorial-equiv-2-Element-Type X =
-    is-torsorial-equiv-component-UU-Level X
+    is-torsorial-equiv-Type-With-Cardinality-ℕ X
 
 abstract
   is-equiv-equiv-eq-2-Element-Type :
     {l1 : Level} (X Y : 2-Element-Type l1) →
     is-equiv (equiv-eq-2-Element-Type X Y)
-  is-equiv-equiv-eq-2-Element-Type = is-equiv-equiv-eq-component-UU-Level
+  is-equiv-equiv-eq-2-Element-Type = 
+    is-equiv-equiv-eq-Type-With-Cardinality-ℕ 2
 
 eq-equiv-2-Element-Type :
   {l1 : Level} (X Y : 2-Element-Type l1) → equiv-2-Element-Type X Y → X ＝ Y
@@ -210,24 +254,14 @@ extensionality-2-Element-Type :
   {l1 : Level} (X Y : 2-Element-Type l1) → (X ＝ Y) ≃ equiv-2-Element-Type X Y
 pr1 (extensionality-2-Element-Type X Y) = equiv-eq-2-Element-Type X Y
 pr2 (extensionality-2-Element-Type X Y) = is-equiv-equiv-eq-2-Element-Type X Y
-```
 
-### Characterization the identifications of `Fin 2` with a `2`-element type `X`
-
-#### Evaluating an equivalence and an automorphism at `0 : Fin 2`
-
-```agda
 ev-zero-equiv-Fin-2 :
   {l1 : Level} {X : UU l1} → (Fin 2 ≃ X) → X
 ev-zero-equiv-Fin-2 e = map-equiv e (zero-Fin 1)
 
 ev-zero-aut-Fin-2 : (Fin 2 ≃ Fin 2) → Fin 2
 ev-zero-aut-Fin-2 = ev-zero-equiv-Fin-2
-```
 
-#### Evaluating an automorphism at `0 : Fin 2` is an equivalence
-
-```agda
 aut-point-Fin-2 :
   Fin 2 → (Fin 2 ≃ Fin 2)
 aut-point-Fin-2 (inl (inr star)) = id-equiv
@@ -284,11 +318,7 @@ abstract
 equiv-ev-zero-aut-Fin-2 : (Fin 2 ≃ Fin 2) ≃ Fin 2
 pr1 equiv-ev-zero-aut-Fin-2 = ev-zero-aut-Fin-2
 pr2 equiv-ev-zero-aut-Fin-2 = is-equiv-ev-zero-aut-Fin-2
-```
 
-#### If `X` is a `2`-element type, then evaluating an equivalence `Fin 2 ≃ X` at `0` is an equivalence
-
-```agda
 module _
   {l1 : Level} (X : 2-Element-Type l1)
   where
@@ -355,11 +385,7 @@ module _
     htpy-equiv (equiv-point-2-Element-Type (map-equiv e (zero-Fin 1))) e
   is-unique-equiv-point-2-Element-Type e =
     htpy-eq-equiv (is-retraction-map-inv-equiv equiv-ev-zero-equiv-Fin-2 e)
-```
 
-#### The type of pointed `2`-element types of any universe level is contractible
-
-```agda
 Pointed-2-Element-Type : (l : Level) → UU (lsuc l)
 Pointed-2-Element-Type l = Σ (2-Element-Type l) type-2-Element-Type
 
@@ -377,11 +403,7 @@ abstract
       ( is-torsorial-equiv-subuniverse
         ( has-cardinality-ℕ-Prop 2)
         ( standard-2-Element-Type l))
-```
 
-#### Completing the characterization of the identity type of the type of `2`-element types of arbitrary universe level
-
-```agda
 point-eq-2-Element-Type :
   {l : Level} {X : 2-Element-Type l} →
   standard-2-Element-Type l ＝ X → type-2-Element-Type X
@@ -637,3 +659,24 @@ prop-level-LEM l = Π-Prop (Prop l) (is-decidable-Prop)
 
 We will again not assume the law of excluded middle, unless we say otherwise.
 Nevertheless, we have seen in Chapter 8 that some propositions are already decidable without assuming the law of excluded middle, and decidability remains an important concept in type theory and mathematics.
+
+## Supplement
+
+### The type Type-With-Cardinality-ℕ is a 1-type
+
+```agda
+is-1-type-Type-With-Cardinality-ℕ :
+  {l : Level} (k : ℕ) → is-1-type (Type-With-Cardinality-ℕ l k)
+is-1-type-Type-With-Cardinality-ℕ k X Y =
+  is-set-equiv
+    ( equiv-Type-With-Cardinality-ℕ k X Y)
+    ( equiv-equiv-eq-Type-With-Cardinality-ℕ k X Y)
+    ( is-set-equiv-is-set
+      ( is-set-type-Type-With-Cardinality-ℕ k X)
+      ( is-set-type-Type-With-Cardinality-ℕ k Y))
+
+Type-With-Cardinality-ℕ-1-Type : (l : Level) (k : ℕ) → 1-Type (lsuc l)
+pr1 (Type-With-Cardinality-ℕ-1-Type l k) = Type-With-Cardinality-ℕ l k
+pr2 (Type-With-Cardinality-ℕ-1-Type l k) =
+  is-1-type-Type-With-Cardinality-ℕ k
+```
