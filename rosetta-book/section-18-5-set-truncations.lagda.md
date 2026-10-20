@@ -44,7 +44,7 @@ open import section-15-2-surjective-maps
 open import section-16-3-finite-types
 open import section-17-1-equivalent-forms-of-the-univalence-axiom
 open import section-17-2-propositional-extensionality
-open import section-17-6-the-binomial-types
+open import section-17-5-classical-mathematics-with-the-univalence-axiom
 open import section-18-1-equivalence-relations-and-the-replacement-axiom
 open import section-18-2-the-universal-property-of-set-quotients
 ```
