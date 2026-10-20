@@ -34,4 +34,4 @@ binom(A, B) ≃ Σ(X : 𝒰_B) Σ(Y : 𝒰) (X + Y ≃ A).
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
