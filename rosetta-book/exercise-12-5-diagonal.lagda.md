@@ -9,12 +9,18 @@ module exercise-12-5-diagonal where
 
 Let `A` be a type, and let the **diagonal** of `A` be the map `δ_A : A → A × A` given by `λ x. (x,x)`.
 
+### Exercise 12.5(a)
+
 Show that
 ```text
 {is-equiv(δ_A)} ↔ {is-prop(A)}.
 ```
 
+### Exercise 12.5(b)
+
 Construct an equivalence `fib(δ_A, x,y) ≃ (x = y)` for any `x,y : A`.
+
+### Exercise 12.5(c)
 
 Show that `A` is `(k + 1)`-truncated if and only if `δ_A : A → A × A` is `k`-truncated.
 
