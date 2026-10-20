@@ -28,4 +28,4 @@ Conclude that the type `Π(X : BS₂) X ≃ X` is also equivalent to `Fin 2`.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
