@@ -28,4 +28,4 @@ Conclude that the type of pointed finite types is equivalent to the type of fini
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
