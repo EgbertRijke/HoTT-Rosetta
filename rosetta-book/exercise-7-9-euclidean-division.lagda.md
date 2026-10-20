@@ -28,10 +28,14 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 
 (Euclidean division) Consider two natural numbers `a` and `b`.
 
+### Exercise 7.9(a)
+
 Construct two natural numbers `q` and `r` such that `(b ≠ 0) → (r < b)`, along with an identification
 ```text
 a = qb + r.
 ```
+
+### Exercise 7.9(b)
 
 Show that for any four natural numbers `q,q'` and `r,r'` such that the implications `(b ≠ 0) → (r < b)` and `(b ≠ 0) → (r' < b)` hold, and for which there are identifications
 ```text
