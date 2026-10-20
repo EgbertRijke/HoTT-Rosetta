@@ -18,11 +18,15 @@ open import section-11-1-families-of-equivalences
 
 ## Problem statement
 
+### Exercise 11.8(a)
+
 Let `f,g : Π(x : A) B(x) → C(x)` be two families of maps.
 Show that
 ```text
 (Π(x : A) f(x) ~ g(x)) → (tot(f) ~ tot(g)).
 ```
+
+### Exercise 11.8(b)
 
 Let `f : Π(x : A) B(x) → C(x)` and let `g : Π(x : A) C(x) → D(x)`.
 Show that
@@ -30,13 +34,19 @@ Show that
 tot(λ x. g(x) ∘ f(x)) ~ tot(g) ∘ tot(f).
 ```
 
+### Exercise 11.8(c)
+
 For any family `B` over `A`, show that
 ```text
 tot(λ x. id[B(x)]) ~ id.
 ```
 
+### Exercise 11.8(d)
+
 Let `a : A`, and let `B` be a type family over `A`.
 Use Exercise 10.2 to show that if each `B(x)` is a retract of `a = x`, then `B(x)` is equivalent to `a = x` for every `x : A`.
+
+### Exercise 11.8(e)
 
 Conclude that for any family of maps
 ```text
