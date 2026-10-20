@@ -21,7 +21,11 @@ Arrows:
 ```
 with `H : f ~ g ∘ h`.
 
+### Exercise 13.14(a)
+
 Show that if `h` has a section, then `sec(g)` is a retract of `sec(f)`.
+
+### Exercise 13.14(b)
 
 Show that if `g` has a retraction, then `retr(h)` is a retract of `sec(f)`.
 
