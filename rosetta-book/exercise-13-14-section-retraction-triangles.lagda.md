@@ -10,14 +10,13 @@ module exercise-13-14-section-retraction-triangles where
 Consider a commuting triangle
 
 ```text
- [A]                 [B]
-
-           [X]
-
-Arrows:
-- A --h--> B
-- A --f--> X
-- B --g--> X
+       h
+  A ------> B
+   \       /
+  f \     / g
+     \   /
+      ∨ ∨
+       X
 ```
 with `H : f ~ g ∘ h`.
 

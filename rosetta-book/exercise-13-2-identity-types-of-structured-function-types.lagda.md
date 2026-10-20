@@ -18,14 +18,13 @@ The type `Σ(h : A → B) h(a) = b` of **pointed maps**, where `a : A` and `b : 
 The type `Σ(h : A → B) f ~ g ∘ h` of commuting triangles
 
 ```text
- [A]                 [B]
-
-           [X]
-
-Arrows:
-- A --h--> B
-- A --f--> X
-- B --g--> X
+       h
+  A ------> B
+   \       /
+  f \     / g
+     \   /
+      ∨ ∨
+       X
 ```
 where `f : A → X` and `g : B → X` are given.
 
@@ -34,14 +33,13 @@ where `f : A → X` and `g : B → X` are given.
 The type `Σ(h : X → Y) h ∘ f ~ g` of commuting triangles
 
 ```text
-           [A]
-
- [X]                 [Y]
-
-Arrows:
-- A --f--> X
-- A --g--> Y
-- X --h--> Y
+       A
+      / \
+   f /   \ g
+    /     \
+   ∨       ∨
+  X ------> Y
+       h
 ```
 where `f : A → X` and `g : A → Y` are given.
 
@@ -50,15 +48,13 @@ where `f : A → X` and `g : A → Y` are given.
 The type `Σ(i : A → X) Σ(j : B → Y) j ∘ f ~ g ∘ i` of commuting squares
 
 ```text
- [A] ----> [X]
+       i
+  A ------> X
   |         |
- [B] ----> [Y]
-
-Arrows:
-- A --f--> B
-- A --i--> X
-- X --g--> Y
-- B --j--> Y
+f |         | g
+  ∨         ∨
+  B ------> Y
+       j
 ```
 where `f : A → B` and `g : X → Y` are given.
 
