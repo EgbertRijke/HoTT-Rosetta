@@ -62,6 +62,7 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-17-3-excluded-middle-and-decidable-equality.lagda.md
 - rosetta-book/exercise-17-4-object-classifier-points.lagda.md
 - rosetta-book/exercise-17-6-identity-type-embedding.lagda.md
+- rosetta-book/exercise-17-7-sigma-and-coproduct-truncated-maps.lagda.md
 - rosetta-book/exercise-19-1-exercise.lagda.md
 - rosetta-book/exercise-19-2-exercise.lagda.md
 - rosetta-book/exercise-19-3-exercise.lagda.md

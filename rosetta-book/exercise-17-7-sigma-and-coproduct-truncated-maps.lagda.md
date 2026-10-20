@@ -28,4 +28,4 @@ Show that the map `{+} : 𝒰 × 𝒰 → 𝒰`, which takes `(A,B)` to the copr
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
