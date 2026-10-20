@@ -17,11 +17,15 @@ Recall that
 classical-Finₖ := Σ(x : ℕ) x < k.
 ```
 
+### Exercise 7.7(a)
+
 Show that
 ```text
 (x = y) ↔ (pr 1(x) = pr 1(y))
 ```
 for each `x,y : classical-Finₖ`.
+
+### Exercise 7.7(b)
 
 By Lemma 7.3.5 it follows that the map `nat-Fin : Fin k → ℕ` induces a map `nat-Fin : Fin k → classical-Finₖ`.
 Construct a map
