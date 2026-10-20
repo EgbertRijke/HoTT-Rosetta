@@ -17,7 +17,6 @@ open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import exercise-9-6-coproduct-functor-equivalences
-open import section-10-4-equivalences-are-contractible-maps
 ```
 
 ## Problem statement
@@ -42,7 +41,12 @@ map-compute-coproduct-Fin : (k l : ℕ) → (Fin k + Fin l) → Fin (k +ℕ l)
 map-compute-coproduct-Fin k l = map-equiv (compute-coproduct-Fin k l)
 
 inv-compute-coproduct-Fin : (k l : ℕ) → Fin (k +ℕ l) ≃ (Fin k + Fin l)
-inv-compute-coproduct-Fin k l = inv-equiv (compute-coproduct-Fin k l)
+inv-compute-coproduct-Fin k l =
+  ( _ , 
+    is-equiv-is-invertible'
+      ( is-invertible-map-inv-is-invertible
+        ( is-invertible-is-equiv
+          ( is-equiv-map-equiv (compute-coproduct-Fin k l)))))
 
 map-inv-compute-coproduct-Fin : (k l : ℕ) → Fin (k +ℕ l) → Fin k + Fin l
 map-inv-compute-coproduct-Fin k l = map-equiv (inv-compute-coproduct-Fin k l)
@@ -64,7 +68,12 @@ product-Fin (succ-ℕ k) l =
   ( right-distributive-product-coproduct)
 
 Fin-mul-ℕ : (k l : ℕ) → (Fin (k *ℕ l)) ≃ ((Fin k) × (Fin l))
-Fin-mul-ℕ k l = inv-equiv (product-Fin k l)
+Fin-mul-ℕ k l =
+  ( _ , 
+    is-equiv-is-invertible'
+      ( is-invertible-map-inv-is-invertible
+        ( is-invertible-is-equiv
+          ( is-equiv-map-equiv (product-Fin k l)))))
 ```
 
 ## Supplement
