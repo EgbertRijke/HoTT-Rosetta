@@ -34,4 +34,4 @@ Eq-Rel_𝒰(A) ≃ Σ-decomp_{Set_𝒰}(A).
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

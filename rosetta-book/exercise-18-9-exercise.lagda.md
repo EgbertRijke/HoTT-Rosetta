@@ -21,4 +21,4 @@ obtained from the image factorization of `A` is a set truncation of `A`.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

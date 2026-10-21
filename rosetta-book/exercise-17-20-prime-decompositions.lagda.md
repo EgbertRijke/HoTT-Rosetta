@@ -26,4 +26,4 @@ Show that `D̃ₙ` is a set if and only if `n` is not a square.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

@@ -41,4 +41,4 @@ Equip the type `‖A‖_Pos` with the structure of a poset and construct an orde
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

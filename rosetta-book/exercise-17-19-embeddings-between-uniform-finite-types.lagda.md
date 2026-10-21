@@ -25,4 +25,4 @@ is equivalent to `Fin 8`.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

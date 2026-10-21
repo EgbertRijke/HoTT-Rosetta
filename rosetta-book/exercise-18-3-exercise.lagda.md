@@ -14,4 +14,4 @@ Retr_{Set_𝒰}(A) ≔ Σ(X : Set_𝒰) Σ(i : X → A) Σ(q : A → X) q ∘ i 
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

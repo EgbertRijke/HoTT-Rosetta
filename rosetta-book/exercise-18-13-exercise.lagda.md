@@ -32,4 +32,4 @@ Show that the Stirling type `Stirling(A, B)` of the second kind is a finite type
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

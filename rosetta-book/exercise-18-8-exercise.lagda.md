@@ -15,4 +15,4 @@ Show that there exists a map `f : Fin k → A` such that `η ∘ f` is an equiva
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

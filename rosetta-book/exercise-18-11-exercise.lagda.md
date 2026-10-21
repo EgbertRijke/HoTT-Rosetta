@@ -16,4 +16,4 @@ of locally `𝒱`-small sets `Y` in `𝒰` equipped with a family of connected t
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

@@ -24,4 +24,4 @@ Show that the type `Π(x : X) A(x) + B(x)` is equivalent to the type
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

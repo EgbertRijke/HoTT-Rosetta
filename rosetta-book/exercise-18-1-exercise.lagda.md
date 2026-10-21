@@ -28,4 +28,4 @@ Use the quotient `bool / ~_P` to show that the axiom of choice implies the law o
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM

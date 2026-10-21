@@ -49,4 +49,4 @@ commute, and show that `h` is a set truncation of `im(f)`.
 
 ## Solution
 
-No formalization has been curated yet.
+BENCHMARK PROBLEM
