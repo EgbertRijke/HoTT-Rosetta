@@ -42,6 +42,7 @@ open import section-17-2-propositional-extensionality
 open import section-17-4-maps-and-families-of-types
 open import section-17-5-classical-mathematics-with-the-univalence-axiom
 open import section-18-5-set-truncations
+open import exercise-18-5-exercise
 open import section-19-1-the-type-of-all-groups
 open import section-19-2-group-homomorphisms
 open import section-19-3-isomorphic-groups-are-equal

@@ -146,6 +146,7 @@ The following files contain partially solved (auto)formalization exercises, whic
 - rosetta-book/exercise-15-2-propositional-truncations.lagda.md
 - rosetta-book/exercise-17-1-universes-of-truncated-types.lagda.md
 - rosetta-book/exercise-17-5-surjective-precomposition.lagda.md
+- rosetta-book/exercise-18-5-exercise.lagda.md
 
 The main text contains a few missing formalizations that provide further benchmark problems identified with "BENCHMARK PROBLEM".
 
