@@ -100,7 +100,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-19-11-exercise.lagda.md
 - rosetta-book/exercise-19-12-exercise.lagda.md
 - rosetta-book/exercise-19-13-exercise.lagda.md
-- rosetta-book/exercise-19-14-exercise.lagda.md
 - rosetta-book/exercise-19-15-exercise.lagda.md
 - rosetta-book/exercise-19-16-exercise.lagda.md
 - rosetta-book/exercise-19-17-exercise.lagda.md
@@ -147,6 +146,7 @@ The following files contain partially solved (auto)formalization exercises, whic
 - rosetta-book/exercise-17-5-surjective-precomposition.lagda.md
 - rosetta-book/exercise-18-5-exercise.lagda.md
 - rosetta-book/exercise-19-2-exercise.lagda.md
+- rosetta-book/exercise-19-14-exercise.lagda.md
 
 The main text contains a few missing formalizations that provide further benchmark problems identified with "BENCHMARK PROBLEM".
 

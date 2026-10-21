@@ -33,4 +33,11 @@ For readers familiar with the notion of `k`-connectedness: Conclude that every `
 
 ## Solution
 
-BENCHMARK PROBLEM
+PARTIAL BENCHMARK PROBLEM
+
+The equivalence of conditions 1 and 2 is formalized as `extended-fundamental-theorem-id` in the code accompanying [Theorem 19.6.2](section-19-6-concrete-versus-abstract-groups-in-univalent-mathematics.lagda.md#theorem-1962). The final assertion about `k`-connectedness is not formalized.
+
+```agda
+open import section-19-6-concrete-versus-abstract-groups-in-univalent-mathematics using
+  ( extended-fundamental-theorem-id)
+```
