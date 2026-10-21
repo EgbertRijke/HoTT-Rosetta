@@ -89,7 +89,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-18-13-exercise.lagda.md
 - rosetta-book/exercise-18-14-exercise.lagda.md
 - rosetta-book/exercise-19-1-exercise.lagda.md
-- rosetta-book/exercise-19-2-exercise.lagda.md
 - rosetta-book/exercise-19-3-exercise.lagda.md
 - rosetta-book/exercise-19-4-exercise.lagda.md
 - rosetta-book/exercise-19-5-exercise.lagda.md
@@ -147,6 +146,7 @@ The following files contain partially solved (auto)formalization exercises, whic
 - rosetta-book/exercise-17-1-universes-of-truncated-types.lagda.md
 - rosetta-book/exercise-17-5-surjective-precomposition.lagda.md
 - rosetta-book/exercise-18-5-exercise.lagda.md
+- rosetta-book/exercise-19-2-exercise.lagda.md
 
 The main text contains a few missing formalizations that provide further benchmark problems identified with "BENCHMARK PROBLEM".
 

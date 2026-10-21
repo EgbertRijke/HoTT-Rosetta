@@ -16,4 +16,11 @@ f(x⁻¹) = f(x)⁻¹.
 
 ## Solution
 
-BENCHMARK PROBLEM
+PARTIAL BENCHMARK PROBLEM
+
+Preservation of units is formalized as `preserves-unit-hom-Group` in the [supplement to Section 19.5](section-19-5-the-eckmann-hilton-argument.lagda.md#group-homomorphisms-preserve-the-unit-element). Preservation of inverses remains to be formalized.
+
+```agda
+open import section-19-5-the-eckmann-hilton-argument using
+  ( preserves-unit-hom-Group)
+```
