@@ -18,44 +18,11 @@ open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-2-identity-systems-on-pi-types
+open import section-17-4-maps-and-families-of-types
 open import section-20-1-the-type-of-well-founded-trees
 
 open import exercise-12-6-truncated-sigma-types
 ```
-
-## Agda pre-requisites
-
-### The type of polynomial endofunctors
-
-```agda
-polynomial-endofunctor : (l1 l2 : Level) → UU (lsuc l1 ⊔ lsuc l2)
-polynomial-endofunctor l1 l2 = Σ (UU l1) (λ A → (A → UU l2))
-
-module _
-  {l1 l2 : Level} (P : polynomial-endofunctor l1 l2)
-  where
-
-  shape-polynomial-endofunctor : UU l1
-  shape-polynomial-endofunctor = pr1 P
-
-  position-polynomial-endofunctor : shape-polynomial-endofunctor → UU l2
-  position-polynomial-endofunctor = pr2 P
-```
-
-### The action on types of a polynomial endofunctor
-
-```agda
-type-polynomial-endofunctor' :
-  {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (X : UU l3) →
-  UU (l1 ⊔ l2 ⊔ l3)
-type-polynomial-endofunctor' A B X = Σ A (λ x → B x → X)
-
-type-polynomial-endofunctor :
-  {l1 l2 l3 : Level} → polynomial-endofunctor l1 l2 → UU l3 → UU (l1 ⊔ l2 ⊔ l3)
-type-polynomial-endofunctor (A , B) = type-polynomial-endofunctor' A B
-```
-
-### Algebras for polynomial endofunctors
 
 ```agda
 algebra-polynomial-endofunctor :
@@ -79,8 +46,6 @@ module _
     type-algebra-polynomial-endofunctor X
   structure-algebra-polynomial-endofunctor X = pr2 X
 ```
-
-## End of Agda pre-requisites
 
 Each element `x : W(A, B)` has symbol `symbol(x) : A` and a family of components `component(x) : B(symbol(x)) → W(A, B)`.
 Therefore, we have a map
