@@ -19,6 +19,7 @@ open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-4-transport
 open import exercise-5-5-semiring-laws-natural-numbers
+open import exercise-5-7-group-laws-integers
 open import section-6-4-peanos-seventh-and-eighth-axioms
 open import exercise-6-3-order-natural-numbers
 open import exercise-6-6-absolute-value-integers
@@ -568,9 +569,6 @@ is-one-fraction-ℤ x = (x ＝ one-fraction-ℤ)
 
 neg-fraction-ℤ : fraction-ℤ → fraction-ℤ
 neg-fraction-ℤ (d , n) = (neg-ℤ d , n)
-
-is-one-ℤ : ℤ → UU lzero
-is-one-ℤ x = (x ＝ one-ℤ)
 
 is-nonnegative-ℤ : ℤ → UU lzero
 is-nonnegative-ℤ (inl x) = empty
