@@ -21,7 +21,7 @@ Use the fact that `¬ P` is defined as the type `P → empty` of functions from 
 iff : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 iff A B = (A → B) × (B → A)
 
-infixr 15 _↔_
+infix 6 _↔_
 
 _↔_ : {l1 l2 : Level} (A : UU l1) (B : UU l2) → UU (l1 ⊔ l2)
 _↔_ = iff
