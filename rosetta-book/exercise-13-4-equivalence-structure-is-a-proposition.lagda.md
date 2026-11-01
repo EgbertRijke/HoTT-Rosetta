@@ -182,8 +182,6 @@ module _
 
 ### Exercise 13.4(e)
 
-### The type of equivalences between truncated types is truncated
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}

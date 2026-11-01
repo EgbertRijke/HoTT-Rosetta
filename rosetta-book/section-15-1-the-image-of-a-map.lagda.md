@@ -857,8 +857,6 @@ module _
     pr2 htpy-equiv-slice-uniqueness-im
 ```
 
-### The image of a map into a truncated type is truncated
-
 ```agda
 abstract
   is-trunc-im :
@@ -872,8 +870,6 @@ im-Truncated-Type :
 pr1 (im-Truncated-Type k X f) = im f
 pr2 (im-Truncated-Type k X f) = is-trunc-im k f (is-trunc-type-Truncated-Type X)
 ```
-
-### The image of a map into a set is a set
 
 ```agda
 abstract

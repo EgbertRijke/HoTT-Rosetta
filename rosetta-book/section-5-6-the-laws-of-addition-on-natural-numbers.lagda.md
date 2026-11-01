@@ -240,7 +240,7 @@ abstract
     (left-successor-law-add-ℕ x y) ∙ (ap succ-ℕ (commutative-add-ℕ x y))
 ```
 
-## Agda-unimath sources
+Agda-unimath sources:
 
 - The proofs of the unit laws, the succesor laws, and both associativity and commutativity of addition are given in `elementary-number-theory.addition-natural-numbers`
 

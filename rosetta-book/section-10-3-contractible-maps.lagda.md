@@ -270,8 +270,6 @@ module _
         ( is-retraction-map-inv-is-contr-map)
 ```
 
-### Fibers of compositions
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}

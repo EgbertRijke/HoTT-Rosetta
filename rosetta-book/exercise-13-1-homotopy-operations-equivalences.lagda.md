@@ -28,8 +28,6 @@ Here, `concat-htpy'(K)` is the function defined by `H ↦ H ∙ K`.
 
 ## Solution
 
-### Inverting homotopies is an equivalence
-
 ```agda
 is-equiv-inv-htpy :
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
@@ -46,10 +44,6 @@ equiv-inv-htpy :
 pr1 (equiv-inv-htpy f g) = inv-htpy
 pr2 (equiv-inv-htpy f g) = is-equiv-inv-htpy f g
 ```
-
-### Concatenating homotopies by a fixed homotopy is an equivalence
-
-#### Concatenating from the left
 
 ```agda
 is-equiv-concat-htpy :
@@ -68,8 +62,6 @@ equiv-concat-htpy :
 pr1 (equiv-concat-htpy H h) = concat-htpy H h
 pr2 (equiv-concat-htpy H h) = is-equiv-concat-htpy H h
 ```
-
-#### Concatenating from the right
 
 ```agda
 module _

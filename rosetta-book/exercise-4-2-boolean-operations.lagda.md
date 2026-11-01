@@ -91,7 +91,7 @@ or-bool true q = true
 or-bool false q = q
 ```
 
-## Agda-unimath sources
+Agda-unimath sources:
 
 - The definitions of the type of booleans is implemented in `foundation-core.booleans`.
 - The definitions of boolean negation, conjunction, and disjunction are implemented in `foundation.boolean-operations`.

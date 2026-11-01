@@ -39,7 +39,7 @@ factorial-ℕ 0 = 1
 factorial-ℕ (succ-ℕ m) = factorial-ℕ m *ℕ succ-ℕ m
 ```
 
-## Agda-unimath source
+Agda-unimath source:
 
 In agda-unimath, the triangular numbers are defined in multiple ways, which are shown to be equivalent.
 The intended solution here was to define the triangular numbers by induction.

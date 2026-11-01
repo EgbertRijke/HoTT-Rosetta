@@ -22,6 +22,6 @@ binomial-coefficient-ℕ (succ-ℕ n) (succ-ℕ k) =
   (binomial-coefficient-ℕ n k) +ℕ (binomial-coefficient-ℕ n (succ-ℕ k))
 ```
 
-## Agda-unimath sources
+Agda-unimath sources:
 
 - The definition of the binomial coefficient is implemented in `elementary-number-theory.binomial-coefficients`.

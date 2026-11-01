@@ -88,8 +88,6 @@ module _
   universal-property-contr = {l : Level} (X : UU l) → is-equiv (ev {B = λ _ → X} a)
 ```
 
-### 13.7(ii) implies 13.7(iii)
-
 ```agda
 module _
   {l1 : Level} {A : UU l1} (a : A)
@@ -102,8 +100,6 @@ module _
 ```
 
 13.7(iv) is a direct corollary of 13.7(iii) and is not formalized.
-
-### 13.7(iv) implies 13.7(i) and 13.7(iii) implies 13.7(i)
 
 ```agda
 module _
@@ -130,8 +126,6 @@ module _
       is-contr-is-equiv-ev-point (up-contr A)
 ```
 
-### 13.7(ii) implies 13.7(i)
-
 ```agda
 module _
   {l1 : Level} {A : UU l1} (a : A)
@@ -144,8 +138,6 @@ module _
       is-contr-universal-property-contr a
         ( universal-property-dependent-universal-property-contr a dup-contr)
 ```
-
-### 13.7(i) implies 13.7(ii)
 
 ```agda
 module _
@@ -177,8 +169,6 @@ module _
     map-inv-equiv (equiv-dependent-universal-property-contr H P)
 ```
 
-### 13.7(i) implies 13.7(iii)
-
 ```agda
 module _
   {l1 : Level} {A : UU l1} (a : A)
@@ -203,8 +193,6 @@ module _
     map-inv-equiv (equiv-universal-property-contr H X)
 ```
 
-### 13.7(v) implies 13.7(vi)
-
 ```agda
 module _
   {l1 : Level} {A : UU l1}
@@ -217,8 +205,6 @@ module _
     is-equiv-self-diagonal-exponential-is-equiv-diagonal-exponential H = H A
 ```
 
-### 13.7(vi) implies 13.7(i)
-
 ```agda
 module _
   {l1 : Level} {A : UU l1}
@@ -230,8 +216,6 @@ module _
     is-contr-is-equiv-self-diagonal-exponential H =
       tot (λ x → htpy-eq) (center (is-contr-map-is-equiv H id))
 ```
-
-### 13.7(v) implies 13.7(i)
 
 ```agda
 module _
@@ -246,8 +230,6 @@ module _
       is-contr-is-equiv-self-diagonal-exponential
         ( is-equiv-self-diagonal-exponential-is-equiv-diagonal-exponential H)
 ```
-
-### 13.7(i) implies 13.7(v)
 
 ```agda
 module _

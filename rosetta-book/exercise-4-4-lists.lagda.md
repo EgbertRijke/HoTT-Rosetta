@@ -158,7 +158,7 @@ reverse-list nil = nil
 reverse-list (cons a l) = concat-list l (cons a nil)
 ```
 
-## Agda-unimath sources
+Agda-unimath sources:
 
 - The definition of the type of lists, its induction principle, the `fold-list` operation, and the `length-list` operation are implemented in `lists.lists`.
 - The definition of `map-list` is implemented in `lists.functoriality-lists`.

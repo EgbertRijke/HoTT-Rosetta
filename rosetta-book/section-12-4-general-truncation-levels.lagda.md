@@ -57,8 +57,6 @@ The natural inclusion `i : ℕ → 𝕋` is defined recursively by
 
 Of course, we will simply write `-2` for `-2` and `k + 1` for `succ-𝕋(k)`.
 
-### Truncation indices and the natural-number inclusion
-
 ```agda
 data 𝕋 : UU lzero where
   neg-two-𝕋 : 𝕋

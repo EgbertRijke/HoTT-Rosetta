@@ -52,7 +52,7 @@ infixr 45 _^ℕ_
 _^ℕ_ = exp-ℕ
 ```
 
-## Agda-unimath sources
+Agda-unimath sources:
 
 - The definition of multiplication of natural numbers is implemented in `elementary-number-theory.multiplication-natural-numbers`
 - The definition of exponentiation of natural numbers is implemented in `elementary-number-theory.exponentiation-natural-numbers`. This definition fits in the following tower of instantiations, where each next entry is more specialized than the previous:

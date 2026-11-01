@@ -206,8 +206,6 @@ abstract
   le-succ-leq-ℕ zero-ℕ y H = star
   le-succ-leq-ℕ (succ-ℕ x) (succ-ℕ y) H = le-succ-leq-ℕ x y H
 ```
-### `x ≤ y` if and only if `(x ＝ y) + (x < y)`
-
 ```agda
 eq-or-le-leq-ℕ :
   (x y : ℕ) → leq-ℕ x y → ((x ＝ y) + (le-ℕ x y))
@@ -226,8 +224,6 @@ abstract
   leq-eq-or-le-ℕ x .x (inl refl) = refl-leq-ℕ x
   leq-eq-or-le-ℕ x y (inr l) = leq-le-ℕ x y l
 ```
-
-### If `x ≤ y` and `x ≠ y` then `x < y`
 
 ```agda
 abstract

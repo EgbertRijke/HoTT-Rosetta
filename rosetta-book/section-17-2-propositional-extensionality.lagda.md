@@ -561,8 +561,6 @@ module _
       equiv-is-empty np neq-false-true-bool
 ```
 
-### The type of propositions is a set
-
 ```agda
 is-set-type-Prop : {l : Level} → is-set (Prop l)
 is-set-type-Prop P Q =
@@ -574,8 +572,6 @@ Prop-Set : (l : Level) → Set (lsuc l)
 pr1 (Prop-Set l) = Prop l
 pr2 (Prop-Set l) = is-set-type-Prop
 ```
-
-### The type of decidable propositions is equivalent to the coproduct of the type of true propositions and the type of false propositions
 
 ```agda
 split-Decidable-Prop :

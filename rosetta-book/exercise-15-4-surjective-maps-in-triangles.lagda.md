@@ -46,8 +46,6 @@ As a converse to Exercise 12.11, show that if `f` and `h` are `k`-truncated, the
 
 ## Solution
 
-### If a composite is surjective, then so is its left factor
-
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} {X : UU l3}

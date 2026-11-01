@@ -835,8 +835,6 @@ count-base-count-Σ' {l1} {l2} {A} {B} e f g =
           ( zero-ℕ)))
 ```
 
-### If `A` can be counted and `Σ A P` can be counted for a subtype of `A`, then `P` is decidable
-
 ```agda
 is-decidable-count-Σ :
   {l1 l2 : Level} {X : UU l1} {P : X → UU l2} →

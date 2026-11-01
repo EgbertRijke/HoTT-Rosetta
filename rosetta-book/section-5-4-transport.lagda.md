@@ -45,8 +45,6 @@ module _
   inv-tr p = tr (inv p)
 ```
 
-## Prelude to Definition 5.4.2
-
 Thus we see that type theory cannot distinguish between identified elements `x`
 and `y`, because for any type family `B` over `A` one obtains an element of
 `B(y)` from the elements of `B(x)`.

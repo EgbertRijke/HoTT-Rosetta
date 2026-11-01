@@ -142,8 +142,6 @@ module _
 
 ### Exercise 10.7(c)
 
-### Right unit law for dependent pair types
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : A → UU l2}

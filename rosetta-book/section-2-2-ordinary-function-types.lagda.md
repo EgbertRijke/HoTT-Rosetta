@@ -158,8 +158,6 @@ The identity function therefore satisfies the following inference rules:
    Γ ⊢ id ≐ λ x. x : A → A.
 ```
 
-## Agda implementation
-
 ```agda
 id : {l : Level} {A : UU l} → A → A
 id a = a
@@ -248,8 +246,6 @@ Note, however, that we haven't derived the rules (a) and (b) yet. These rules as
 ```
 
 This completes the construction of `comp`.
-
-## Agda implementation
 
 In the implementation we use a slightly more general definition of composition, which allows us to compose dependent functions.
 

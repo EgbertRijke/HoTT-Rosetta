@@ -41,8 +41,6 @@ In this diagram, the homotopy `G : e ∘ e⁻¹ ~ id` is the homotopy witnessing
 
 ## Solution
 
-### Transposing equalities along equivalences
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2} (e : A ≃ B)

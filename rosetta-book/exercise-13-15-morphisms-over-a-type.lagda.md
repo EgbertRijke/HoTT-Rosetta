@@ -134,8 +134,6 @@ BENCHMARK PROBLEM
 
 PARTIAL BENCHMARK PROBLEM
 
-### Morphisms in the slice are equivalently described as families of maps between fibers
-
 ```agda
 module _
   {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}

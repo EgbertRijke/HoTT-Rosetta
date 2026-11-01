@@ -253,7 +253,7 @@ module _
       ( z)
 ```
 
-### Note: It seems that agda-unimath doesn't explicitly develop the equivalence between all 6 statements. Instead, the equivalences that are actually used are formalized and the equivalences that are not used not.
+Note: It seems that agda-unimath doesn't explicitly develop the equivalence between all 6 statements. Instead, the equivalences that are actually used are formalized and the equivalences that are not used not.
 
 ## Example 11.6.3
 

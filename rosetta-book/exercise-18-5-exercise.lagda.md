@@ -47,8 +47,6 @@ PARTIAL BENCHMARK PROBLEM
 
 The implications 1 ⇒ 2 and 2 ⇒ 1 are formalized below as `mere-eq-is-0-connected` and `is-0-connected-mere-eq`, respectively. The equivalence with condition 3 remains to be formalized.
 
-### Elements of 0-connected types are all merely equal
-
 ```agda
 abstract
   mere-eq-is-0-connected :
@@ -56,8 +54,6 @@ abstract
   mere-eq-is-0-connected {A = A} H x y =
     apply-effectiveness-unit-trunc-Set (eq-is-contr H)
 ```
-
-### A type is 0-connected if it is inhabited and all elements are merely equal
 
 ```agda
 abstract

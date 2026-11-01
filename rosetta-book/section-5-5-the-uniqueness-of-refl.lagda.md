@@ -56,13 +56,9 @@ Therefore it suffices to show that
 
 We obtain such an identification by reflexivity.
 
-## Unnumbered Remark
-
 Proposition 5.5.1 shows that there is, up to identification, only one element in
 `Σ`-type of the identity type. Such types are called contractible, and they are 
 the subject of Chapter 10.
-
-## Note
 
 Agda-unimath does not contain code that directly translates to the contents of
 this section. Instead, it directly derives the contractibility of the total space

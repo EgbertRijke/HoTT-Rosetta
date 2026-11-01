@@ -516,8 +516,6 @@ Then we have `η(e(0)) : ‖A‖`.
 
 Since every `2`-element type is inhabited, we obtain a function `Π(A : BS₂) A`, which is impossible by Corollary 17.5.2. ◻
 
-### The global choice principle
-
 ```agda
 abstract
   no-global-choice :

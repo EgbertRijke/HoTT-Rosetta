@@ -99,8 +99,6 @@ module _
   inv refl = refl
 ```
 
-## Prelude to Definition 5.2.3
-
 The next question is whether the concatenation and inverting operations on
 identifications behave as expected.
 More concretely: is concatenation of identifications associative, does it

@@ -134,7 +134,7 @@ We have the following introduction rule
 
 and similarly we have elimination and computation rules.
 
-## Agda-unimath sources
+Agda-unimath sources:
 
 - The identity type and its induction principle are defined in `foundation-core.identity-types`
 

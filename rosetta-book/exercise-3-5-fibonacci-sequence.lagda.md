@@ -64,6 +64,6 @@ Fibo : ℕ → ℕ
 Fibo k = Fibo-function k 0
 ```
 
-## Agda-unimath sources
+Agda-unimath sources:
 
 - The definition of the Fibonacci sequence is implemented in `elementary-number-theory.fibonacci-sequence`.

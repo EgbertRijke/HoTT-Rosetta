@@ -562,8 +562,6 @@ The homotopies `G : α ∘ β ~ id` and `H : β ∘ α ~ id` are then defined by
 
 We encourage the reader to write out the definitions of at least a few of these equivalences.
 
-### The equivalence `∅ + B ≃ B`
-
 ```agda
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2) (H : is-empty A)
@@ -638,8 +636,6 @@ module _
   inv-left-unit-law-coproduct = inv-left-unit-law-coproduct-is-empty empty B id
 ```
 
-### The equivalence `A + ∅ ≃ A`
-
 ```agda
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2) (H : is-empty B)
@@ -713,8 +709,6 @@ module _
     inv-right-unit-law-coproduct-is-empty A empty id
 ```
 
-### The equivalence `A + B ≃ B + A`
-
 ```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
@@ -749,8 +743,6 @@ module _
   pr1 commutative-coproduct = map-commutative-coproduct
   pr2 commutative-coproduct = is-equiv-map-commutative-coproduct
 ```
-
-### The equivalence `(A + B) + C ≃ A + (B + C)`
 
 ```agda
 module _
@@ -803,8 +795,6 @@ module _
   pr2 inv-associative-coproduct = is-equiv-map-inv-associative-coproduct
 ```
 
-### The equivalence `∅ × B ≃ ∅`
-
 ```agda
 module _
   {l : Level} (X : UU l)
@@ -853,8 +843,6 @@ module _
   pr1 left-zero-law-product-is-empty = pr1
   pr2 left-zero-law-product-is-empty = is-equiv-pr1-product-is-empty
 ```
-
-### The equivalence `A × ∅ ≃ ∅`
 
 ```agda
 module _
@@ -905,11 +893,7 @@ module _
   pr2 right-zero-law-product-is-empty = is-equiv-pr2-product-is-empty
 ```
 
-### The equivalence `1 × B ≃ B`
-
-This equivalence is formalized below as an instance of the more general unit law for `Σ`-types
-
-### The equivalence `A × 1 ≃ A`
+The equivalence `1 × B ≃ B` is formalized below as an instance of the more general unit law for `Σ`-types.
 
 ```agda
 module _
@@ -942,8 +926,6 @@ module _
   pr1 right-unit-law-product = map-right-unit-law-product
   pr2 right-unit-law-product = is-equiv-map-right-unit-law-product
 ```
-
-### The equivalence `A × B ≃ B × A`
 
 ```agda
 module _
@@ -978,17 +960,11 @@ module _
   pr2 commutative-product = is-equiv-map-commutative-product
 ```
 
-### The equivalence `(A × B) × C ≃ A × (B × C)`
+We formalize `(A × B) × C ≃ A × (B × C)` as an instance of associativity of `Σ`-types.
 
-We formalize this as an instance of associativity of `Σ`-types
+We formalize `A × (B + C) ≃ (A × B) + (A × C)` below as an instance of left distributivity of `Σ` over coproducts.
 
-### The equivalence `A × (B + C) ≃ (A × B) + (A × C)`
-
-We formalize this below as an instance of left distributivity of `Σ` over coproducts.
-
-### The equivalence `(A + B) × C ≃ (A × C) + (B × C)`
-
-We formalize this below as an instance of right distributivity of `Σ` over coproducts.
+We formalize `(A + B) × C ≃ (A × C) + (B × C)` below as an instance of right distributivity of `Σ` over coproducts.
 
 ## Example 9.2.10
 
@@ -1005,9 +981,7 @@ The absorption laws and unit laws, for instance, are as follows:
 Note that the right absorption law and the right unit law are exactly the same as the right absorption and unit laws for cartesian products.
 The left absorption and unit laws are, however, formulated with a type family `B` over `∅` and over `1`, and therefore they are slightly more general.
 
-### The equivalence `Σ(x : ∅) B(x) ≃ ∅`
-
-The proof uses the fact that any map into an empty type is an equivalence.
+The proof of `Σ(x : ∅) B(x) ≃ ∅` uses the fact that any map into an empty type is an equivalence.
 
 ```agda
 abstract
@@ -1058,8 +1032,6 @@ module _
   left-absorption-product = left-absorption-Σ (λ x → A)
 ```
 
-### The equivalence `Σ(x : A) ∅ ≃ ∅`
-
 ```agda
 module _
   {l : Level} (A : UU l)
@@ -1092,8 +1064,6 @@ is-empty-right-factor-is-empty-product :
   {l1 l2 : Level} {A : UU l1} {B : UU l2} → is-empty (A × B) → A → is-empty B
 is-empty-right-factor-is-empty-product f a b = f (pair a b)
 ```
-
-### The equivalence `Σ(x : 1) B(x) ≃ B(⋆)`
 
 ```agda
 module _
@@ -1180,9 +1150,7 @@ module _
   pr2 inv-left-unit-law-product = is-equiv-map-inv-left-unit-law-product
 ```
 
-### The equivalence `Σ(x : A) 1 ≃ A`
-
-In agda-unimath, this equivalence only exists in a more general form, in which the fibers of the type family over `A` are arbitrary contractible types.
+In agda-unimath, the equivalence `Σ(x : A) 1 ≃ A` only exists in a more general form, in which the fibers of the type family over `A` are arbitrary contractible types.
 
 Commutativity cannot be generalized to `Σ`-types.
 Associativity, on the other hand, can be expressed in two ways:
@@ -1193,8 +1161,6 @@ Associativity, on the other hand, can be expressed in two ways:
 ```
 
 In the first of these equivalences associativity is stated using a type family `C` over `Σ(x : A) B(x)` while in the second it is stated using a family of types `C(x,y)` indexed by `x : A` and `y : B(x)`.
-
-### The equivalence `Σ(w : Σ(x : A) B(x)) C(w) ≃ Σ(x : A) Σ(y : B) C(x,y)`
 
 ```agda
 module _
@@ -1272,8 +1238,6 @@ module _
   inv-associative-product = inv-associative-Σ
 ```
 
-### The equivalence `Σ(w : Σ(x : A) B(x)) C(pr1(w),pr2(w)) ≃ Σ(x : A) Σ(y : B(x)) C(x,y)`
-
 ```agda
 module _
   {l1 l2 l3 : Level} (A : UU l1) (B : A → UU l2) (C : (x : A) → B x → UU l3)
@@ -1328,8 +1292,6 @@ In other words, there are the following two equivalences:
   Σ(x : A) B(x) + C(x) ≃ (Σ(x : A) B(x)) + (Σ(x : A) C(x))
   Σ(w : A + B) C(w) ≃ (Σ(x : A) C(inl(x))) + (Σ(y : B) C(inr(y))).
 ```
-
-### The equivalence `Σ(x : A) B(x) + C(x) ≃ (Σ(x : A) B(x)) + (Σ(x : A) C(x))`
 
 ```agda
 module _
@@ -1424,8 +1386,6 @@ module _
   left-distributive-product-coproduct =
     left-distributive-Σ-coproduct
 ```
-
-### The equivalence `Σ(w : A + B) C(w) ≃ (Σ(x : A) C(inl(x))) + (Σ(y : B) C(inr(y)))`
 
 ```agda
 module _
