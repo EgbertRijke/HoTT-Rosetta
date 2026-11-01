@@ -155,7 +155,7 @@ flatten-list = fold-list nil concat-list
 ```agda
 reverse-list : {l : Level} {A : UU l} → list A → list A
 reverse-list nil = nil
-reverse-list (cons a l) = concat-list l (cons a nil)
+reverse-list (cons a l) = concat-list (reverse-list l) (cons a nil)
 ```
 
 Agda-unimath sources:
