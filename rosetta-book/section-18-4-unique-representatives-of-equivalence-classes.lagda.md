@@ -598,29 +598,6 @@ module _
   is-nonnegative-int-nonnegative-ℤ : is-nonnegative-ℤ int-nonnegative-ℤ
   is-nonnegative-int-nonnegative-ℤ = pr2 p
 
-module _
-  (m n : ℕ)
-  where
-
-  bounded-div-ℕ : UU lzero
-  bounded-div-ℕ = Σ ℕ (λ k → (k ≤-ℕ n) × (k *ℕ m ＝ n))
-
-  quotient-bounded-div-ℕ : bounded-div-ℕ → ℕ
-  quotient-bounded-div-ℕ = pr1
-
-  upper-bound-quotient-bounded-div-ℕ :
-    (H : bounded-div-ℕ) → quotient-bounded-div-ℕ H ≤-ℕ n
-  upper-bound-quotient-bounded-div-ℕ H = pr1 (pr2 H)
-
-  eq-quotient-bounded-div-ℕ :
-    (H : bounded-div-ℕ) → quotient-bounded-div-ℕ H *ℕ m ＝ n
-  eq-quotient-bounded-div-ℕ H = pr2 (pr2 H)
-
-  eq-quotient-bounded-div-ℕ' :
-    (H : bounded-div-ℕ) → m *ℕ quotient-bounded-div-ℕ H ＝ n
-  eq-quotient-bounded-div-ℕ' H =
-    commutative-mul-ℕ m (quotient-bounded-div-ℕ H) ∙ eq-quotient-bounded-div-ℕ H
-
 div-ℤ : ℤ → ℤ → UU lzero
 div-ℤ d x = Σ ℤ (λ k → k *ℤ d ＝ x)
 
