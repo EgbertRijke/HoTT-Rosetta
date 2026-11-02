@@ -20,7 +20,6 @@ open import section-7-2-the-congruence-relations-on-natural-numbers
 open import section-7-3-the-standard-finite-types
 open import exercise-3-1-multiplication-and-exponentiation
 open import section-4-3-the-empty-type
-open import section-5-4-transport
 ```
 
 Given an equivalence relation `~` on a set `A` in classical mathematics, the quotient `A / ~` comes equipped with a quotient map `q : A → A / ~` that satisfies two important properties: (1) The map `q` satisfies the condition
@@ -257,6 +256,13 @@ is-zero-nat-zero-Fin {succ-ℕ k} = is-zero-nat-zero-Fin {k}
 ```
 
 ```agda
+cong-is-zero-nat-zero-Fin :
+  {k : ℕ} → cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (zero-Fin k)) zero-ℕ
+cong-is-zero-nat-zero-Fin {k} =
+  cong-identification-ℕ (succ-ℕ k) (is-zero-nat-zero-Fin {k})
+```
+
+```agda
 nat-skip-zero-Fin :
   (k : ℕ) (x : Fin k) →
   nat-Fin (succ-ℕ k) (skip-zero-Fin k x) ＝ succ-ℕ (nat-Fin k x)
@@ -325,9 +331,7 @@ nat-Fin[x + 1]ₖ₊₁ ≐ nat-Fin(succ-Finₖ₊₁[x]ₖ₊₁)  by definitio
 ```agda
 cong-nat-mod-succ-ℕ :
   (k x : ℕ) → cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
-cong-nat-mod-succ-ℕ k zero-ℕ =
-  tr (λ z → cong-ℕ (succ-ℕ k) z zero-ℕ)
-    (inv (is-zero-nat-zero-Fin {k})) (refl-cong-ℕ (succ-ℕ k) zero-ℕ)
+cong-nat-mod-succ-ℕ k zero-ℕ = cong-is-zero-nat-zero-Fin
 cong-nat-mod-succ-ℕ k (succ-ℕ x) =
   transitive-cong-ℕ
     (succ-ℕ k)
@@ -521,13 +525,6 @@ pr2 (is-split-surjective-mod-succ-ℕ k x) = is-section-nat-Fin k x
 ```
 
 ## Supplement
-
-```agda
-cong-is-zero-nat-zero-Fin :
-  {k : ℕ} → cong-ℕ (succ-ℕ k) (nat-Fin (succ-ℕ k) (zero-Fin k)) zero-ℕ
-cong-is-zero-nat-zero-Fin {k} =
-  cong-identification-ℕ (succ-ℕ k) (is-zero-nat-zero-Fin {k})
-```
 
 ### `k + 1` divides `x` if and only if `x ≡ 0` modulo `k + 1`
 
