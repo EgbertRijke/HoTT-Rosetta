@@ -14,6 +14,8 @@ open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import exercise-6-3-order-natural-numbers
 open import exercise-7-3-divisibility-factorials
+open import section-9-2-bi-invertible-maps
+open import exercise-9-1-groupoid-operations-equivalences
 open import section-12-1-propositions
 open import section-12-3-sets
 open import exercise-12-4-coproduct-truncation
@@ -183,6 +185,34 @@ This equivalence is obtained from the fact that `f(p) = x` for any `x : (m ≤ n
 Now the identifications in (i) and (ii) are obtained as a simple consequence of the computation rule for coproducts. ◻
 
 ```agda
+is-prop-leq-ℕ :
+  (m n : ℕ) → is-prop (leq-ℕ m n)
+is-prop-leq-ℕ zero-ℕ zero-ℕ = is-prop-unit
+is-prop-leq-ℕ zero-ℕ (succ-ℕ n) = is-prop-unit
+is-prop-leq-ℕ (succ-ℕ m) zero-ℕ = is-prop-empty
+is-prop-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-prop-leq-ℕ m n
+
+is-prop-leq-succ-cases :
+  (m n : ℕ) → is-prop ((m ≤-ℕ n) + (m ＝ succ-ℕ n))
+is-prop-leq-succ-cases m n =
+  is-prop-coproduct
+    ( λ q α →
+      contradiction-leq-ℕ n n (refl-leq-ℕ n)
+        ( concatenate-eq-leq-ℕ n (inv α) q))
+    ( is-prop-leq-ℕ m n)
+    ( is-set-ℕ m (succ-ℕ n))
+
+equiv-leq-succ-cases :
+  (m n : ℕ) → (m ≤-ℕ succ-ℕ n) ≃ ((m ≤-ℕ n) + (m ＝ succ-ℕ n))
+equiv-leq-succ-cases m n =
+  equiv-iff-is-prop
+    ( is-prop-leq-ℕ m (succ-ℕ n))
+    ( is-prop-leq-succ-cases m n)
+    ( decide-leq-succ-ℕ m n)
+    ( rec-coproduct
+      ( preserves-leq-succ-ℕ m n)
+      ( leq-eq-ℕ m (succ-ℕ n)))
+
 cases-succ-strong-ind-ℕ :
   {l : Level} (P : ℕ → UU l) (pS : (n : ℕ) → (□-≤-ℕ P n) → P (succ-ℕ n)) (n : ℕ)
   (H : □-≤-ℕ P n) (m : ℕ) (c : (leq-ℕ m n) + (m ＝ succ-ℕ n)) → P m
@@ -194,6 +224,25 @@ succ-strong-ind-ℕ :
   (k : ℕ) → (□-≤-ℕ P k) → (□-≤-ℕ P (succ-ℕ k))
 succ-strong-ind-ℕ P pS k H m p =
   cases-succ-strong-ind-ℕ P pS k H m (decide-leq-succ-ℕ m k p)
+
+eq-cases-leq-succ :
+  (m n : ℕ) (p : m ≤-ℕ succ-ℕ n) (x : (m ≤-ℕ n) + (m ＝ succ-ℕ n)) →
+  decide-leq-succ-ℕ m n p ＝ x
+eq-cases-leq-succ m n p x =
+  eq-is-prop' (is-prop-leq-succ-cases m n) (decide-leq-succ-ℕ m n p) x
+
+equiv-identifications-succ-strong-ind-ℕ :
+  {l : Level} (P : ℕ → UU l)
+  (pS : (n : ℕ) → □-≤-ℕ P n → P (succ-ℕ n))
+  (n : ℕ) (H : □-≤-ℕ P n) (m : ℕ) (p : m ≤-ℕ succ-ℕ n)
+  (x : (m ≤-ℕ n) + (m ＝ succ-ℕ n)) (y : P m) →
+  (succ-strong-ind-ℕ P pS n H m p ＝ y) ≃
+  (cases-succ-strong-ind-ℕ P pS n H m x ＝ y)
+equiv-identifications-succ-strong-ind-ℕ P pS n H m p x y =
+  equiv-inv-concat
+    ( ap (cases-succ-strong-ind-ℕ P pS n H m)
+      ( eq-cases-leq-succ m n p x))
+    ( y)
 
 abstract
   neg-succ-leq-ℕ :

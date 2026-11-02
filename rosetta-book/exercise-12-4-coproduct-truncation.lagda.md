@@ -11,11 +11,8 @@ open import section-4-4-coproducts
 open import section-4-5-the-type-of-integers
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
-open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
-open import exercise-6-3-order-natural-numbers
 open import section-7-3-the-standard-finite-types
-open import exercise-7-3-divisibility-factorials
 open import exercise-7-5-observational-equality-finite-types
 open import exercise-8-7-decidable-equality-coproducts
 open import section-9-2-bi-invertible-maps
@@ -159,44 +156,6 @@ pr2 (coproduct-Set (A , is-set-A) (B , is-set-B)) =
 ```
 
 ## Supplement
-
-### Propositional case distinctions about inequalities of natural numbers
-
-```agda
-is-prop-leq-ℕ :
-  (m n : ℕ) → is-prop (leq-ℕ m n)
-is-prop-leq-ℕ zero-ℕ zero-ℕ = is-prop-unit
-is-prop-leq-ℕ zero-ℕ (succ-ℕ n) = is-prop-unit
-is-prop-leq-ℕ (succ-ℕ m) zero-ℕ = is-prop-empty
-is-prop-leq-ℕ (succ-ℕ m) (succ-ℕ n) = is-prop-leq-ℕ m n
-
-is-prop-leq-succ-cases :
-  (m n : ℕ) → is-prop ((m ≤-ℕ n) + (m ＝ succ-ℕ n))
-is-prop-leq-succ-cases m n =
-  is-prop-coproduct
-    ( λ q α →
-      contradiction-leq-ℕ n n (refl-leq-ℕ n)
-        ( concatenate-eq-leq-ℕ n (inv α) q))
-    ( is-prop-leq-ℕ m n)
-    ( is-set-ℕ m (succ-ℕ n))
-
-equiv-leq-succ-cases :
-  (m n : ℕ) → (m ≤-ℕ succ-ℕ n) ≃ ((m ≤-ℕ n) + (m ＝ succ-ℕ n))
-equiv-leq-succ-cases m n =
-  equiv-iff-is-prop
-    ( is-prop-leq-ℕ m (succ-ℕ n))
-    ( is-prop-leq-succ-cases m n)
-    ( decide-leq-succ-ℕ m n)
-    ( rec-coproduct
-      ( preserves-leq-succ-ℕ m n)
-      ( leq-eq-ℕ m (succ-ℕ n)))
-
-eq-cases-leq-succ :
-  (m n : ℕ) (p : m ≤-ℕ succ-ℕ n) (x : (m ≤-ℕ n) + (m ＝ succ-ℕ n)) →
-  decide-leq-succ-ℕ m n p ＝ x
-eq-cases-leq-succ m n p x =
-  eq-is-prop' (is-prop-leq-succ-cases m n) (decide-leq-succ-ℕ m n p) x
-```
 
 ### The unit type is a set
 
