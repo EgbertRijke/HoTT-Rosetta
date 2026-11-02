@@ -65,10 +65,11 @@ module _
   {l : Level} (P : ℕ → UU l)
   where
 
-  is-prop-is-lower-bound-ℕ :
-    (n : ℕ) → is-prop (is-lower-bound-ℕ P n)
-  is-prop-is-lower-bound-ℕ n =
-    is-prop-Π (λ x → is-prop-function-type (is-prop-leq-ℕ n x))
+  abstract
+    is-prop-is-lower-bound-ℕ :
+      (n : ℕ) → is-prop (is-lower-bound-ℕ P n)
+    is-prop-is-lower-bound-ℕ n =
+      is-prop-Π (λ x → is-prop-function-type (is-prop-leq-ℕ n x))
 
   is-lower-bound-ℕ-Prop :
     (n : ℕ) → Prop l
@@ -83,21 +84,22 @@ module _
   {l1 : Level} (P : ℕ → Prop l1)
   where
 
-  all-elements-equal-minimal-element-ℕ :
-    all-elements-equal (minimal-element-ℕ (λ n → type-Prop (P n)))
-  all-elements-equal-minimal-element-ℕ
-    (x , p , l) (y , q , k) =
-    eq-type-subtype
-      ( λ n →
-        product-Prop
-          ( _  , is-prop-type-Prop (P n))
-          ( is-lower-bound-ℕ-Prop (type-Prop ∘ P) n))
-      ( antisymmetric-leq-ℕ x y (l y q) (k x p))
+  abstract
+    all-elements-equal-minimal-element-ℕ :
+      all-elements-equal (minimal-element-ℕ (λ n → type-Prop (P n)))
+    all-elements-equal-minimal-element-ℕ
+      (x , p , l) (y , q , k) =
+      eq-type-subtype
+        ( λ n →
+          product-Prop
+            ( _  , is-prop-type-Prop (P n))
+            ( is-lower-bound-ℕ-Prop (type-Prop ∘ P) n))
+        ( antisymmetric-leq-ℕ x y (l y q) (k x p))
 
-  is-prop-minimal-element-ℕ :
-    is-prop (minimal-element-ℕ (λ n → type-Prop (P n)))
-  is-prop-minimal-element-ℕ =
-    is-prop-all-elements-equal all-elements-equal-minimal-element-ℕ
+    is-prop-minimal-element-ℕ :
+      is-prop (minimal-element-ℕ (λ n → type-Prop (P n)))
+    is-prop-minimal-element-ℕ =
+      is-prop-all-elements-equal all-elements-equal-minimal-element-ℕ
 
   minimal-element-ℕ-Prop : Prop l1
   pr1 minimal-element-ℕ-Prop = minimal-element-ℕ (λ n → type-Prop (P n))
@@ -125,16 +127,17 @@ was constructed in Theorem 8.3.2 using the decidability of `P`.
 ε-operator-Hilbert : {l : Level} → UU l → UU l
 ε-operator-Hilbert A = type-trunc-Prop A → A
 
-ε-operator-decidable-subtype-ℕ :
-  {l1 : Level} (P : ℕ → Prop l1)
-  (d : (x : ℕ) → is-decidable (type-Prop (P x))) →
-  ε-operator-Hilbert (type-subtype P)
-ε-operator-decidable-subtype-ℕ {l1} P d t =
-  tot
-    ( λ x → pr1)
-    ( apply-universal-property-trunc-Prop t
-      ( minimal-element-ℕ-Prop P)
-      ( λ (n , p) → well-ordering-principle-ℕ (type-Prop ∘ P) d (n , p)))
+abstract
+  ε-operator-decidable-subtype-ℕ :
+    {l1 : Level} (P : ℕ → Prop l1)
+    (d : (x : ℕ) → is-decidable (type-Prop (P x))) →
+    ε-operator-Hilbert (type-subtype P)
+  ε-operator-decidable-subtype-ℕ {l1} P d t =
+    tot
+      ( λ x → pr1)
+      ( apply-universal-property-trunc-Prop t
+        ( minimal-element-ℕ-Prop P)
+        ( λ (n , p) → well-ordering-principle-ℕ (type-Prop ∘ P) d (n , p)))
 
 ε-operator-equiv :
   {l1 l2 : Level} {X : UU l1} {Y : UU l2} (e : X ≃ Y) →
