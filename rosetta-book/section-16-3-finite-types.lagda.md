@@ -669,14 +669,15 @@ module _
         ( trunc-Prop ((x : X) → Y x))
         ( λ e → finite-choice-count e H)
 
-ε-operator-count :
-  {l : Level} {A : UU l} → count A → ε-operator-Hilbert A
-ε-operator-count (0 , e) t =
-  ex-falso
-    ( is-empty-type-trunc-Prop
-      ( is-empty-is-zero-number-of-elements-count (0 , e) refl)
-      ( t))
-ε-operator-count (succ-ℕ k , e) t = map-equiv e (zero-Fin k)
+abstract
+  ε-operator-count :
+    {l : Level} {A : UU l} → count A → ε-operator-Hilbert A
+  ε-operator-count (0 , e) t =
+    ex-falso
+      ( is-empty-type-trunc-Prop
+        ( is-empty-is-zero-number-of-elements-count (0 , e) refl)
+        ( t))
+  ε-operator-count (succ-ℕ k , e) t = map-equiv e (zero-Fin k)
 
 abstract
   ε-operator-decidable-subtype-count :
