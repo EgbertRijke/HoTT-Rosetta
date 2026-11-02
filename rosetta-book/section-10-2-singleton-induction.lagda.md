@@ -157,13 +157,12 @@ compute-ind-singleton :
 compute-ind-singleton a is-contr-A B b =
   ap (λ p → tr B p b) (left-inv (contraction is-contr-A a))
 
-abstract
-  is-singleton-is-contr :
-    {l1 l2 : Level} {A : UU l1} (a : A) → is-contr A → is-singleton l2 A a
-  pr1 (is-singleton-is-contr a is-contr-A B) =
-    ind-singleton a is-contr-A B
-  pr2 (is-singleton-is-contr a is-contr-A B) =
-    compute-ind-singleton a is-contr-A B
+is-singleton-is-contr :
+  {l1 l2 : Level} {A : UU l1} (a : A) → is-contr A → is-singleton l2 A a
+pr1 (is-singleton-is-contr a is-contr-A B) =
+  ind-singleton a is-contr-A B
+pr2 (is-singleton-is-contr a is-contr-A B) =
+  compute-ind-singleton a is-contr-A B
 
 abstract
   is-contr-ind-singleton :
