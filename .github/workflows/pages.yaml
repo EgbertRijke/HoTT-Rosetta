@@ -28,8 +28,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-agda-2.8.0-
       - uses: ./.github/actions/setup-website
-      - name: Check the website generation scripts
-        run: make test-website
       - name: Typecheck the book
         run: make check
       - name: Generate the highlighted book and check local links

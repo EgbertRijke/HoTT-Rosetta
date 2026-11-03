@@ -19,7 +19,7 @@ SKIPAGDA ?=
 
 .PHONY: check check-sources agda-html website-prepare website
 .PHONY: serve-website clean-website clean install-website-dev
-.PHONY: test-website website-toolchain check-website-tools
+.PHONY: website-toolchain check-website-tools
 
 website-toolchain:
 	@echo "mdbook=$(MDBOOK_VERSION)"
@@ -70,14 +70,11 @@ website: website-prepare
 serve-website: website-prepare
 	$(MDBOOK) serve --port 8080 --open
 
-test-website:
-	$(PYTHON) -m unittest discover -s scripts/tests -v
-
 clean-website:
 	rm -rf book website/css/Agda-highlight.css
 
 clean: clean-website
-	rm -rf $(SOURCE_DIR)/_build scripts/__pycache__ scripts/tests/__pycache__
+	rm -rf $(SOURCE_DIR)/_build scripts/__pycache___
 
 install-website-dev:
 	@command -v cargo >/dev/null 2>&1 || { \

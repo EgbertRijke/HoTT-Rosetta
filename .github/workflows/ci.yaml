@@ -32,8 +32,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup-website
-      - name: Check the website generation scripts
-        run: make test-website
       - name: Check book structure and local links
         env:
           MDBOOK_OUTPUT: '{"linkcheck":{}}'

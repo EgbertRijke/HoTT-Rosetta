@@ -4,7 +4,7 @@ const editLink = document.querySelector('.href-git-edit-button');
 if (editLink) {
   const filename = editLink.dataset.source;
   const rootFiles = new Set(['BENCHMARK.md']);
-  const docFiles = new Set(['HOME.md', 'WEBSITE.md', 'CREDITS.md']);
+  const docFiles = new Set(['HOME.md']);
 
   let source;
 
@@ -16,8 +16,6 @@ if (editLink) {
     source = filename;
   } else if (docFiles.has(filename)) {
     source = 'docs/' + filename;
-  } else if (filename === 'LICENSE-agda-unimath.md') {
-    source = 'website/LICENSE-agda-unimath.md';
   } else {
     source = 'rosetta-book/' + filename.replace(/\.md$/, '.lagda.md');
   }
