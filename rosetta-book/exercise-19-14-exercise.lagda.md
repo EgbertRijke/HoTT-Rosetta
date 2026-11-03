@@ -14,7 +14,7 @@ P : 𝒰 → Prop_𝒱
 of a universe `𝒰`.
 We say that a type `A : 𝒰` is a **`P`-type** if `P(A)` holds, we say that a map `f : A → B` is a **`P`-map** if its fibers are `P`-types, and we say that `A` is **`P`-separated** if its identity types are `P`-types.
 
-Now consider a connected type `A : 𝒰` equipped with an element `a : A`, and consider a family of types `B(x) : 𝒰` indexed by `x : A`.
+Now consider a connected type `A : 𝒰` equipped with an element `a : A`, and consider a family of types `B(x) : 𝒰` indexed by `x : A`, such that `B(a)` is an inhabited type.
 Show that the following are equivalent:
 
 1. Every family of maps
