@@ -2,7 +2,7 @@
 
 The HoTT Rosetta pairs natural language and formalized mathematics in homotopy type theory, an extension of Martin-Löf's intensional dependent type theory with Voevodsky's univalence axiom with some higher inductive types.
 
-This repository will ultimately cover the contents of [Egbert Rijke](https://egbertrijke.github.io/)'s book [Introduction to Homotopy Type Theory](https://www.cambridge.org/us/universitypress/subjects/mathematics/logic-categories-and-sets/introduction-homotopy-type-theory) published in November 2025 by Cambridge University Press. The source natural language text comes from the [arXiv version](https://arxiv.org/abs/2212.11082), whose LaTeX source files are included here for convenience.
+This repository covers the contents of [Egbert Rijke](https://egbertrijke.github.io/)'s book [Introduction to Homotopy Type Theory](https://www.cambridge.org/us/universitypress/subjects/mathematics/logic-categories-and-sets/introduction-homotopy-type-theory) published in November 2025 by Cambridge University Press. The source natural language text comes from the [arXiv version](https://arxiv.org/abs/2212.11082), whose LaTeX source files are included here for convenience.
 
 The formalizations are in [agda](https://agda.readthedocs.io/en/latest/getting-started/what-is-agda.html). The code is copied from or derived from the [agda-unimath library](https://unimath.github.io/agda-unimath/).
 
