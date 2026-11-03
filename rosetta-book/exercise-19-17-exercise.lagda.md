@@ -13,7 +13,7 @@ module exercise-19-17-exercise where
 φ : G ≅ Ω(BG).
 ```
 
-Define the `G`-type `Concrete-Subgroup_𝒰(G) : BG → Set_𝒰` of **concrete subgroups** of `G` by
+Define the `G`-type `Concrete-Subgroup_𝒰(G) : BG → Set_{𝒰⁺}` of **concrete subgroups** of `G` by
 
 ```text
 Concrete-Subgroup_𝒰(G,u) ≔ Σ(X : BG → Set_𝒰) Σ(x : X(u)) is-conn(X / G).
