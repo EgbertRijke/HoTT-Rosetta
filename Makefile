@@ -5,7 +5,6 @@ MDBOOK_SRC := book/src
 AGDA ?= agda
 MDBOOK ?= mdbook
 PYTHON ?= python3
-# Keep the generated paths relative to rosetta-book, where its .agda-lib lives.
 AGDAHTMLFLAGS ?= --html --html-highlight=auto --html-dir=../$(MDBOOK_SRC) --css=website/css/Agda.css
 SKIPAGDA ?=
 
@@ -46,7 +45,6 @@ clean-website:
 clean: clean-website
 	rm -rf $(SOURCE_DIR)/_build scripts/__pycache__ scripts/tests/__pycache__
 
-# Keep these versions in sync with .github/actions/setup-website/action.yml.
 install-website-dev:
 	cargo install mdbook --version 0.4.34 --locked
 	cargo install mdbook-linkcheck --version 0.7.7 --locked
