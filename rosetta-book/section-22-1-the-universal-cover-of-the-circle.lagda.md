@@ -341,7 +341,7 @@ For convenience, we invert this identification.
 Now we observe that the type of identifications in `Σ(X : 𝒰) X ≃ X` can be characterized by
 
 ```text
-((X,e) = (X',e')) ≃ Σ(α : X ≃ X') e' ∘ α ~ α ∘ e'.
+((X,e) = (X',e')) ≃ Σ(α : X ≃ X') e' ∘ α ~ α ∘ e.
 ```
 
 This implies that we obtain an equivalence `x ↦ x_D : X ≃ D(X,e,base)` such that the square
