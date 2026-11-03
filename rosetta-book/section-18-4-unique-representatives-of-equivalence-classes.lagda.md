@@ -102,7 +102,7 @@ Note that we have a function
   R(x,y) → ((x,c) = (y,d)),
 ```
 
-since for any `r : R(x,y)` both `(x,c,r)` and `(y,d,r)` are elements of the contractible type `Σ(y : A) C(y) × R(x,y)`.
+since for any `r : R(x,y)` both `(x,c,ρ(x))` and `(y,d,r)` are elements of the contractible type `Σ(y : A) C(y) × R(x,y)`, where `ρ(x) : R(x,x)` is the reflexivity element of `R` at `x`.
 Since `R` is a reflexive relation valued in propositions, the claim follows.
 In particular, it follows that
 
@@ -303,7 +303,7 @@ The fact that `x / gcd(x,y)` and `y / gcd(x,y)` are coprime follows from the fac
   gcd(x / d,y / d) = gcd(x,y) / d
 ```
 
-for any common divisor `d` of `x` and `y`.
+for any positive common divisor `d` of `x` and `y`.
 
 To construct a contraction, let `(x',y') : Q` such that `C(x',y')` and `(x,y) ~ (x',y')`.
 Since `C(q)` and `(x,y) ~ q` are propositions for every `q : Q` it suffices to show that
