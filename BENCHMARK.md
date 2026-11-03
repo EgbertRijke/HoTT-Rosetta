@@ -86,6 +86,7 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-18-9-exercise.lagda.md
 - rosetta-book/exercise-18-10-exercise.lagda.md
 - rosetta-book/exercise-18-11-exercise.lagda.md
+- rosetta-book/exercise-18-12-exercise.lagda.md
 - rosetta-book/exercise-18-13-exercise.lagda.md
 - rosetta-book/exercise-18-14-exercise.lagda.md
 - rosetta-book/exercise-19-1-exercise.lagda.md
