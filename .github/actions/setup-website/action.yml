@@ -1,0 +1,44 @@
+name: Setup mdBook
+description: Install the Rosetta website toolchain declared in the Makefile
+
+runs:
+  using: composite
+  steps:
+    - name: Read website tool versions
+      id: versions
+      shell: bash
+      run: make --no-print-directory website-toolchain >> "$GITHUB_OUTPUT"
+
+    - uses: peaceiris/actions-mdbook@v2
+      with:
+        mdbook-version: ${{ steps.versions.outputs.mdbook }}
+
+    - uses: baptiste0928/cargo-install@v3
+      with:
+        crate: mdbook-pagetoc
+        version: ${{ steps.versions.outputs.pagetoc }}
+
+    - uses: baptiste0928/cargo-install@v3
+      with:
+        crate: mdbook-katex
+        version: ${{ steps.versions.outputs.katex }}
+        locked: false
+        cache-key: mdbook-${{ steps.versions.outputs.mdbook }}
+
+    - uses: baptiste0928/cargo-install@v3
+      with:
+        crate: mdbook-linkcheck
+        version: ${{ steps.versions.outputs.linkcheck }}
+
+    - uses: baptiste0928/cargo-install@v3
+      with:
+        crate: mdbook-catppuccin
+        version: ${{ steps.versions.outputs.catppuccin }}
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Verify the active website tools
+      shell: bash
+      run: make check-website-tools

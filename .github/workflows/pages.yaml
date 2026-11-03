@@ -1,0 +1,58 @@
+name: Build and deploy book website
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Serialize deployments without interrupting a deployment already in progress.
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    # Discover the default branch, so both main and master work without editing.
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-agda
+        with:
+          agda-version: '2.8.0'
+      - uses: actions/cache@v4
+        with:
+          path: rosetta-book/_build
+          key: ${{ runner.os }}-agda-2.8.0-${{ hashFiles('rosetta-book/**') }}
+          restore-keys: |
+            ${{ runner.os }}-agda-2.8.0-
+      - uses: ./.github/actions/setup-website
+      - name: Check the website generation scripts
+        run: make test-website
+      - name: Typecheck the book
+        run: make check
+      - name: Generate the highlighted book and check local links
+        env:
+          MDBOOK_OUTPUT__HTML__GIT_REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
+          MDBOOK_OUTPUT__HTML__EDIT_URL_TEMPLATE: '${{ github.server_url }}/${{ github.repository }}/edit/${{ github.ref_name }}/{path}'
+        run: make website
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: book/html
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

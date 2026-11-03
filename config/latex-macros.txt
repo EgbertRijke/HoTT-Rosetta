@@ -1,0 +1,7 @@
+\Prop:{\mathrm{Prop}}
+\Set:{\mathrm{Set}}
+\Cardinal:{\mathrm{Cardinal}}
+\cardinality:\operatorname{cardinality}
+\Fin:\operatorname{Fin}
+\im:\operatorname{im}
+\ker:\operatorname{ker}

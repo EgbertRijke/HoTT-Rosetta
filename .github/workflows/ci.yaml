@@ -1,0 +1,40 @@
+name: HoTT Rosetta CI
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-agda
+        with:
+          agda-version: '2.8.0'
+      - uses: actions/cache@v4
+        with:
+          path: rosetta-book/_build
+          key: ${{ runner.os }}-agda-2.8.0-${{ hashFiles('rosetta-book/**') }}
+          restore-keys: |
+            ${{ runner.os }}-agda-2.8.0-
+      - name: Typecheck every book module
+        run: make check
+
+  website:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-website
+      - name: Check the website generation scripts
+        run: make test-website
+      - name: Check book structure and local links
+        env:
+          MDBOOK_OUTPUT: '{"linkcheck":{}}'
+        run: make SKIPAGDA=1 website
