@@ -1,3 +1,9 @@
 # Agda build files
 _build/
 *.agdai
+
+# Generated website and Python bytecode
+book/
+website/css/Agda-highlight.css
+__pycache__/
+*.pyc
