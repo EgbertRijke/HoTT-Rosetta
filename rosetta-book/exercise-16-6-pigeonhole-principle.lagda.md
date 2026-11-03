@@ -22,7 +22,7 @@ Show that
 Prove the **pigeonhole principle**, i.e., show that
 
 ```text
-  (n > m) → ∃_{(x, x' : X)} (x ≠ x') × (f(x) = f(x')).
+  (m > n) → ∃_{(x, x' : X)} (x ≠ x') × (f(x) = f(x')).
 ```
 
 ### Exercise 16.6(c)
