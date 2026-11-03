@@ -31,19 +31,24 @@ open import section-7-4-the-natural-numbers-modulo-k-plus-one
 ### Exercise 7.9(a)
 
 Construct two natural numbers `q` and `r` such that `(b ≠ 0) → (r < b)`, along with an identification
+
 ```text
-a = qb + r.
+  a = qb + r.
 ```
 
 ### Exercise 7.9(b)
 
-Show that for any four natural numbers `q,q'` and `r,r'` such that the implications `(b ≠ 0) → (r < b)` and `(b ≠ 0) → (r' < b)` hold, and for which there are identifications
+Show that for any four natural numbers `q, q'` and `r, r'` such that the implications `(b ≠ 0) → (r < b)` and `(b ≠ 0) → (r' < b)` hold, and for which there are identifications
+
 ```text
-a = qb + r and a = q'b + r',
+  a = qb + r and a = q'b + r',
 ```
-we have `q = q'` and `r = r'`.
+
+we have `(b ≠ 0) → (q = q')` and `r = r'`.
 
 ## Solution
+
+### Exercise 7.9(a)
 
 ```agda
 leq-nat-succ-Fin :
@@ -58,9 +63,7 @@ leq-nat-succ-Fin (succ-ℕ k) (inr star) =
     ( succ-ℕ (nat-Fin (succ-ℕ k) (inr star)))
     ( is-zero-nat-zero-Fin {succ-ℕ k})
     ( leq-zero-ℕ (succ-ℕ (nat-Fin (succ-ℕ k) (inr star))))
-```
 
-```agda
 leq-nat-mod-succ-ℕ :
   (k x : ℕ) → leq-ℕ (nat-Fin (succ-ℕ k) (mod-succ-ℕ k x)) x
 leq-nat-mod-succ-ℕ k zero-ℕ =
@@ -72,9 +75,7 @@ leq-nat-mod-succ-ℕ k (succ-ℕ x) =
     ( succ-ℕ x)
     ( leq-nat-mod-succ-ℕ k x)
     ( leq-nat-succ-Fin (succ-ℕ k) (mod-succ-ℕ k x))
-```
 
-```agda
 opaque
   euclidean-division-ℕ :
     (k x : ℕ) → Σ ℕ (λ r → (cong-ℕ k x r) × (is-nonzero-ℕ k → le-ℕ r k))
@@ -140,3 +141,7 @@ abstract opaque
     ( is-difference-dist-ℕ' (remainder-euclidean-division-ℕ (succ-ℕ k) x) x
       ( leq-nat-mod-succ-ℕ k x))
 ```
+
+### Exercise 7.9(b)
+
+BENCHMARK PROBLEM

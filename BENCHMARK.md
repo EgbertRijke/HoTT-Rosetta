@@ -136,6 +136,7 @@ The following files contain partially solved (auto)formalization exercises, whic
 
 - rosetta-book/exercise-4-3-double-negation-logic.lagda.md
 - rosetta-book/exercise-6-5-distance-natural-numbers.lagda.md
+- rosetta-book/exercise-7-9-euclidean-division.lagda.md
 - rosetta-book/exercise-12-3-injective-maps-into-sets.lagda.md
 - rosetta-book/exercise-12-4-coproduct-truncation.lagda.md
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md
