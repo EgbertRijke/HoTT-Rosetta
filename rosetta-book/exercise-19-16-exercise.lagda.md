@@ -45,7 +45,7 @@ of **fixed points** of the abstract `G`-set `ev_⋆(X)`.
 Show that the type `X / G` of orbits of `X` is connected if and only if the abstract `G`-set `ev_⋆(X)` is transitive in the sense that
 
 ```text
-∀(x : X(⋆)) is-surj(g ↦ gx)
+∥X(⋆)∥ × ∀(x : X(⋆)) is-surj(g ↦ gx)
 ```
 
 ### Exercise 19.16(d)
