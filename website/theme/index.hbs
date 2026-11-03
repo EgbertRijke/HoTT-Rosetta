@@ -106,18 +106,6 @@
             html.classList.add('js');
         </script>
 
-        <!-- Hide / unhide sidebar before it is displayed -->
-        <script>
-            var html = document.querySelector('html');
-            var sidebar = 'hidden';
-            if (document.body.clientWidth >= 1080) {
-                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch (e) { }
-                sidebar = sidebar || 'visible';
-            }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
-        </script>
-
 	<input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 	
 	<!-- Hide / unhide sidebar before it is displayed -->
@@ -137,12 +125,20 @@
               sidebar === 'visible';
 	</script>
 	
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+        <script src="{{ path_to_root }}toc.js"></script>
+
+	<nav id="sidebar" class="sidebar" aria-label="Table of contents">
+	  <mdbook-sidebar-scrollbox class="sidebar-scrollbox">
+	  </mdbook-sidebar-scrollbox>
+	  
+	  <noscript>
             <div class="sidebar-scrollbox">
-                {{#toc}}{{/toc}}
+              {{#toc}}{{/toc}}
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
-        </nav>
+	  </noscript>
+	  
+	  <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+	</nav>
 
         <div id="page-wrapper" class="page-wrapper">
 
