@@ -74,7 +74,7 @@ clean-website:
 	rm -rf book website/css/Agda-highlight.css
 
 clean: clean-website
-	rm -rf $(SOURCE_DIR)/_build scripts/__pycache___
+	rm -rf $(SOURCE_DIR)/_build scripts/__pycache__
 
 install-website-dev:
 	@command -v cargo >/dev/null 2>&1 || { \

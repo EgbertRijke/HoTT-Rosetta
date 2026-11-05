@@ -33,6 +33,10 @@ def summary():
         lines.append(entry(chapter))
         lines.extend(entry(child, "  ") for child in children)
 
+    if appendices:
+        lines.extend(["", "# Supporting modules", ""])
+        lines.extend(entry(path) for path in appendices)
+
     lines.append("")
     return "\n".join(lines)
 

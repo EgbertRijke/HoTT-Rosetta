@@ -44,6 +44,17 @@ def rewrite_links(text):
     return "".join(parts)
 
 
+def benchmark_link(match):
+    path, statement = match.groups()
+    label = Path(path).name.removesuffix(SUFFIX)
+    if statement:
+        label += f" ({statement})"
+        # The index names plain numbered headings, such as Proposition 19.4.6.
+        anchor = re.sub(r"[^\w -]", "", statement.lower()).replace(" ", "-")
+        path += "#" + anchor
+    return f"- [{label}]({path})"
+
+
 def prepare(output):
     output.mkdir(parents=True, exist_ok=True)
     for path in (ROOT / "docs").glob("*.md"):
@@ -52,8 +63,10 @@ def prepare(output):
     # ABOUT.md so it cannot override the actual HOME.md landing page.
     shutil.copyfile(ROOT / "README.md", output / "ABOUT.md")
     benchmark = (ROOT / "BENCHMARK.md").read_text(encoding="utf-8")
-    benchmark = re.sub(r"(?m)^- (rosetta-book/[^\s]+\.lagda\.md)\s*$",
-                       lambda m: f"- [{Path(m[1]).stem.removesuffix('.lagda')}]({m[1]})", benchmark)
+    benchmark = re.sub(
+        r"(?m)^- (rosetta-book/[^\s]+\.lagda\.md)(?: \(([^)\n]+)\))?[ \t]*$",
+        benchmark_link, benchmark,
+    )
     (output / "BENCHMARK.md").write_text(benchmark, encoding="utf-8")
     shutil.copyfile(ROOT / "website/LICENSE-agda-unimath.md", output / "LICENSE-agda-unimath.md")
     for directory in ("css", "js", "images"):
