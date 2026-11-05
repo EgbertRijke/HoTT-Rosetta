@@ -40,6 +40,10 @@ Show that
 
 ## Solution
 
+Part (a) is formalized below. Parts (b) and (c) are intended as
+pen-and-paper exercises deriving judgmental equalities; no additional
+formalization is expected.
+
 ```agda
 const : {l1 l2 : Level} (A : UU l1) {B : UU l2} → B → A → B
 const A b x = b
