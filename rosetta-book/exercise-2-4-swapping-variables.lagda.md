@@ -32,7 +32,9 @@ Show that
 
 ## Solution
 
-Only the first subexercise has a solution in agda-unimath. The second exercise exists in agda-unimath as an identification, while the exercise asks for the derivation of a judgmental equality.
+Part (a) is formalized below. Part (b) is intended as a pen-and-paper
+exercise deriving a judgmental equality; no additional formalization is
+expected.
 
 ```agda
 swap-Π :
