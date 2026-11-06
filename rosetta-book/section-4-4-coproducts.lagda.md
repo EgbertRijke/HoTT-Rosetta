@@ -1,4 +1,4 @@
-# Coproducts
+# Section 4.4 Coproducts
 
 ```agda
 module section-4-4-coproducts where
@@ -10,7 +10,7 @@ open import section-4-3-the-empty-type
 
 ## Definition 4.4.1
 
-Let `A` and `B` be types. We define the **coproduct** to be a type that comes equipped with
+Let `A` and `B` be types. We define the **coproduct** `A + B` to be a type that comes equipped with
 
 ```text
   inl : A → A + B

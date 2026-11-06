@@ -75,7 +75,7 @@ neg-bool true = false
 neg-bool false = true
 ```
 
-## Exercise 4.2(b)
+### Exercise 4.2(b)
 
 ```agda
 and-bool : bool → bool → bool
@@ -83,7 +83,7 @@ and-bool true q = q
 and-bool false q = false
 ```
 
-## Exercise 4.2(c)
+### Exercise 4.2(c)
 
 ```agda
 or-bool : bool → bool → bool
@@ -93,5 +93,5 @@ or-bool false q = q
 
 Agda-unimath sources:
 
-- The definitions of the type of booleans is implemented in `foundation-core.booleans`.
+- The type of booleans is implemented in `foundation-core.booleans`.
 - The definitions of boolean negation, conjunction, and disjunction are implemented in `foundation.boolean-operations`.

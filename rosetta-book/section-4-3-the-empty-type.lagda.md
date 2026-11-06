@@ -16,7 +16,7 @@ In other words: if we assume the empty type has a term, then we can prove anythi
 We define the **empty type** to be a type `∅` satisfying the induction principle that for any family of types `P(x)` indexed by `x : ∅`, there is a term
 
 ```text
-  ind_∅ : Π{x : ∅} P(x).
+  ind_∅ : Π(x : ∅) P(x).
 ```
 
 ```agda

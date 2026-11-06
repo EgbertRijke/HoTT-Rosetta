@@ -15,7 +15,7 @@ For any type `A`, we can define the type `list(A)` of **lists** of elements of `
 
 ```text
   nil : list(A)
-  const : A → (list(A) → list(A))
+  cons : A → (list(A) → list(A))
 ```
 
 ```agda
