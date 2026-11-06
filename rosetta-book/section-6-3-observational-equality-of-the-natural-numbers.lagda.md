@@ -45,7 +45,7 @@ E₀ : ℕ → 𝒰₀
 E_S : ℕ → ((ℕ → 𝒰₀) → (ℕ → 𝒰₀))
 ```
 
-We define `E₀` by induction, taking `E₀₀ ≔ unit` and `E_{0S}(n,X,m) ≔ empty`.
+We define `E₀` by induction, taking `E₀₀ ≔ unit` and `E_{0S}(m,Y) ≔ empty`.
 The resulting family `E₀` satisfies
 
 ```text
@@ -53,7 +53,7 @@ E₀(0) ≐ unit
 E₀(succ-ℕ(n)) ≐ empty.
 ```
 
-We define `E_S` by induction, taking `E_{S0} ≔ empty` and `E_{SS}(n,X,m) ≔ X(m)`.
+We define `E_S` by induction, taking `E_{S0} ≔ empty` and `E_{SS}(n,X,m,Y) ≔ X(m)`.
 The resulting family `E_S` satisfies
 
 ```text

@@ -38,6 +38,11 @@ Show that the following are equivalent:
 
 ## Solution
 
+PARTIAL BENCHMARK PROBLEM
+
+The code below characterizes the dependent evaluation property for families `P(x,y)` by contractibility of `Σ(x : A) B(x)`.
+The equivalence stated above, using families `C(x)`, remains to be formalized.
+
 ```agda
 dependent-universal-property-identity-system :
   {l1 l2 : Level} {A : UU l1} (B : A → UU l2) {a : A} (b : B a) → UUω

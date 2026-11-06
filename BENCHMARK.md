@@ -141,6 +141,7 @@ The following files contain partially solved (auto)formalization exercises, whic
 - rosetta-book/exercise-12-4-coproduct-truncation.lagda.md
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md
 - rosetta-book/exercise-12-7-truncated-products.lagda.md
+- rosetta-book/exercise-13-9-uniqueness-of-identity-types.lagda.md
 - rosetta-book/exercise-13-15-morphisms-over-a-type.lagda.md
 - rosetta-book/exercise-15-2-propositional-truncations.lagda.md
 - rosetta-book/exercise-17-1-universes-of-truncated-types.lagda.md
