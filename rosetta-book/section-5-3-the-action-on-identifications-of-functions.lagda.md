@@ -88,7 +88,7 @@ Then there are identifications
   ap-concat(f, p, q) : ap_f(p ∙ q) = ap_f(p) ∙ ap_f(q)
 ```
 
-for every `p : x = y` and `q : x = y`.
+for every `p : x = y` and `q : y = z`.
 
 ## Construction
 

@@ -80,7 +80,7 @@ Now we use the action on paths of `succ-ℕ : ℕ → ℕ` to obtain
 The left unit law is therefore defined by
 
 ```text
-  left-unit-law-add-ℕ(n) ≔ ind-ℕ(refl, λ p. ap_(succ-ℕ)(p)).
+  left-unit-law-add-ℕ(n) ≔ ind-ℕ(refl, λ k. λ p. ap_(succ-ℕ)(p), n).
 ```
 
 ```agda
@@ -242,7 +242,7 @@ abstract
 
 Agda-unimath sources:
 
-- The proofs of the unit laws, the succesor laws, and both associativity and commutativity of addition are given in `elementary-number-theory.addition-natural-numbers`
+- The proofs of the unit laws, the successor laws, and both associativity and commutativity of addition are given in `elementary-number-theory.addition-natural-numbers`
 
 ## Supplement
 

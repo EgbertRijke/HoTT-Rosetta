@@ -23,7 +23,7 @@ in a type `A`.
 In this exercise we will show that the **Mac Lane pentagon** for identifications
 commutes.
 
-## Problem 5.4(a)
+### Exercise 5.4(a)
 
 Construct the five identifications `α₁, …, α₅` in the pentagon
 
@@ -40,7 +40,7 @@ Construct the five identifications `α₁, …, α₅` in the pentagon
 Here `α₁`, `α₂`, and `α₃` run counter-clockwise.
 The identifications `α₄` and `α₅` run clockwise.
 
-## Problem 5.4(b)
+### Exercise 5.4(b)
 
 Show that
 

@@ -20,7 +20,7 @@ For any `p : x = y`, `q : y = z`, and `r : x = z`, construct maps
 
 ## Solution
 
-Agda-unimath uses a different naming for these functions
+Agda-unimath uses different names for these functions.
 
 ```agda
 module _

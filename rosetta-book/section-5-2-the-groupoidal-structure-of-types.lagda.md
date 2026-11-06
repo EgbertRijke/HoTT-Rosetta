@@ -192,7 +192,7 @@ module _
 ## Definition 5.2.4
 
 Let `A` be a type.
-We define the left and right **unit law operations**, which assigns to each `p :
+We define the left and right **unit law operations**, which assign to each `p :
 x = y` the identifications
 
 ```text
