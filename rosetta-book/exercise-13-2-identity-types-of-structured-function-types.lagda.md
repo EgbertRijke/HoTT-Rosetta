@@ -2,7 +2,6 @@
 
 ```agda
 module exercise-13-2-identity-types-of-structured-function-types where
-
 ```
 
 ## Problem statement

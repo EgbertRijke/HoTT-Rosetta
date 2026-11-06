@@ -18,6 +18,7 @@ Consider a commuting triangle
       ∨ ∨
        X
 ```
+
 with `H : f ~ g ∘ h`.
 
 ### Exercise 13.14(a)

@@ -9,8 +9,9 @@ module exercise-13-17-contractible-products-over-decidable-sets where
 
 Suppose that `A : I → 𝒰` is a type family over a set `I` with decidable equality.
 Show that
+
 ```text
-(Π(i : I) is-contr(Aᵢ)) ↔ is-contr(Π(i : I) Aᵢ).
+  (Π(i : I) is-contr(Aᵢ)) ↔ is-contr(Π(i : I) Aᵢ).
 ```
 
 ## Solution
