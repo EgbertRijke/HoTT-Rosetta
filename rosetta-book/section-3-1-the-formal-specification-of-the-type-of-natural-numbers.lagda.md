@@ -70,11 +70,11 @@ In dependent type theory we may think of a type family `P` over `ℕ` as a predi
 The type theoretical induction principle of `ℕ` is therefore formulated using a type family `P` over `ℕ`:
 
 ```text
-   n : ℕ ⊢ P(n) type
-   ⊢ p₀ : P(0)
-   ⊢ p_S : Π(n : ℕ) P(n) → P(succ-ℕ(n))
-  --------------------------------------
-       ⊢ ind-ℕ : Π(n : ℕ) P(n)
+   Γ, n : ℕ ⊢ P(n) type
+   Γ ⊢ p₀ : P(0)
+   Γ ⊢ p_S : Π(n : ℕ) P(n) → P(succ-ℕ(n))
+  ---------------------------------------- ℕ-ind
+   Γ ⊢ ind-ℕ(p₀, p_S) : Π(n : ℕ) P(n)
 ```
 
 In other words, the type theoretical induction principle of `ℕ` tells us what we need to do in order to construct a dependent function `Π(n : ℕ) P(n)`.
@@ -86,8 +86,8 @@ We might alternatively present the induction principle of `ℕ` as the following
 
 ```text
    Γ, n : ℕ ⊢ P(n) type
-  ------------------------------------------------------------------ ℕ-ind
-   ⊢ ind-ℕ : P(0) → (Π(n : ℕ) P(n) → P(succ-ℕ(n))) → Π(n : ℕ) P(n).
+  ------------------------------------------------------------------
+   Γ ⊢ ind-ℕ : P(0) → (Π(n : ℕ) P(n) → P(succ-ℕ(n))) → Π(n : ℕ) P(n).
 ```
 
 In other words, for any type family `P` over `ℕ` there is a *function* `ind-ℕ` that takes two arguments, one for the base case and one for the inductive step, and returns a section of `P`.

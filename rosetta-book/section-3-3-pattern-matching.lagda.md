@@ -58,7 +58,16 @@ For example, an alternative definition of addition on $ℕ$ could be given by pa
                   add-ℕ'(0,0) ≔ 0
           add-ℕ'(0,succ-ℕ(n)) ≔ succ-ℕ(n) 
           add-ℕ'(succ-ℕ(m),0) ≔ succ-ℕ(m)
-  add-ℕ'(succ-ℕ(m),succ-ℕ(n)) ≔ succ-ℕ(succ-ℕ(add-ℕ'(m,n)).
+  add-ℕ'(succ-ℕ(m),succ-ℕ(n)) ≔ succ-ℕ(succ-ℕ(add-ℕ'(m,n))).
+```
+
+```agda
+add-ℕ' : ℕ → ℕ → ℕ
+add-ℕ' 0 0 = 0
+add-ℕ' 0 (succ-ℕ n) = succ-ℕ n
+add-ℕ' (succ-ℕ m) 0 = succ-ℕ m
+add-ℕ' (succ-ℕ m) (succ-ℕ n) =
+  succ-ℕ (succ-ℕ (add-ℕ' m n))
 ```
 
 An example of a definition by iterated pattern matching is the **Fibonacci function** `F : ℕ → ℕ`.

@@ -44,5 +44,5 @@ max-ℕ (succ-ℕ m) (succ-ℕ n) = succ-ℕ (max-ℕ m n)
 
 Agda-unimath sources:
 
-- The definition of the min function is implemented in `elementary-number-theory.minimun-natural-numbers`.
+- The definition of the min function is implemented in `elementary-number-theory.minimum-natural-numbers`.
 - The definition of the max function is implemented in `elementary-number-theory.maximum-natural-numbers`.

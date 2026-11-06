@@ -84,16 +84,16 @@ because with this definition we will have
 The formal derivation for the construction of `add-S` is as follows:
 
 ```text
-                   ------------------
-                    ⊢ succ-ℕ : ℕ → ℕ
-    ----------  ------------------------
-     ⊢ ℕ type    n : ℕ ⊢ succ-ℕ : ℕ → ℕ
-    ------------------------------------
-       m : ℕ, n : ℕ ⊢ succ-ℕ : ℕ → ℕ
-      -------------------------------
-         λ n. succ-ℕ : ℕ → (ℕ → ℕ)
-  ---------------------------------------
-   add-S(m) ≔ λ n. succ-ℕ : ℕ → (ℕ → ℕ).
+                ----------  ------------------
+                 ⊢ ℕ type    ⊢ succ-ℕ : ℕ → ℕ
+  ----------    ------------------------------
+   ⊢ ℕ type       n : ℕ ⊢ succ-ℕ : ℕ → ℕ
+  --------------------------------------------
+          m : ℕ, n : ℕ ⊢ succ-ℕ : ℕ → ℕ
+  --------------------------------------------
+       m : ℕ ⊢ λ n. succ-ℕ : ℕ → (ℕ → ℕ)
+  ----------------------------------------------
+   m : ℕ ⊢ add-S(m) ≔ λ n. succ-ℕ : ℕ → (ℕ → ℕ).
 ```
 
 We combine this derivation with the induction principle of `ℕ` to complete the construction of addition:
@@ -119,9 +119,6 @@ infixl 35 _+ℕ_
 _+ℕ_ = add-ℕ
 
 {-# BUILTIN NATPLUS _+ℕ_ #-}
-
-add-ℕ' : ℕ → ℕ → ℕ
-add-ℕ' m n = add-ℕ n m
 ```
 
 ### Remark 3.2.2
