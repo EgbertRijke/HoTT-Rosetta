@@ -6,7 +6,7 @@ module section-6-2-assuming-enough-universes where
 
 Most of the time we will get by with assuming one universe `𝒰`, and indeed we recommend on a first reading of this text to simply assume that there is one universe `𝒰`.
 However, sometimes we might want to consider the universe `𝒰` itself to be a type in some universe.
-In such situations we cannot get by with a single universe, because the assumption that `𝒰` is a element of itself would lead to inconsistencies like the Russell’s paradox.
+In such situations we cannot get by with a single universe, because the assumption that `𝒰` is an element of itself would lead to inconsistencies like Russell’s paradox.
 
 Russell’s paradox is the famous argument that there cannot be a set of all sets.
 If there were such a set `S`, then we could consider Russell’s subset

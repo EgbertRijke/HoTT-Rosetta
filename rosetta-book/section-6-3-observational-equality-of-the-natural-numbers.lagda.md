@@ -26,7 +26,7 @@ Indeed, it can be used to show that equality of natural numbers is _decidable_, 
 
 ## Definition 6.3.1
 
-We define the **observational equality** of `ℕ` as binary relation `Eq-ℕ : ℕ → (ℕ → 𝒰₀)` satisfying
+We define the **observational equality** of `ℕ` as a binary relation `Eq-ℕ : ℕ → (ℕ → 𝒰₀)` satisfying
 
 ```text
 Eq-ℕ(0,0) ≐ unit
@@ -91,7 +91,7 @@ refl-Eq-ℕ : Π (n : ℕ) Eq-ℕ(n,n).
 
 ### Proof
 
-_Proof._ The function `refl-Eq-ℕ` is defined by induction on `n`, taking
+The function `refl-Eq-ℕ` is defined by induction on `n`, taking
 
 ```text
 refl-Eq-ℕ(0) ≔ ⋆
@@ -116,7 +116,7 @@ For any two natural numbers `m` and `n`, we have
 
 ### Proof
 
-_Proof._ The function `(m = n) → Eq-ℕ(m,n)` is defined by the induction principle of identity types, using the reflexivity of `Eq-ℕ`.
+The function `(m = n) → Eq-ℕ(m,n)` is defined by the induction principle of identity types, using the reflexivity of `Eq-ℕ`.
 
 The converse `Eq-ℕ(m,n) → (m = n)` is defined by induction on `m` and `n`.
 If both `m` and `n` are zero, we have `refl : 0 = 0`.
