@@ -374,7 +374,7 @@ module _
 Left whiskering of homotopies with respect to concatenation is an operation
 
 ```text
-  (H : f ~ g) {I J : g ~ h} → I ~ J → H ∙ h I ~ H ∙ h J.
+  (H : f ~ g) {I J : g ~ h} → I ~ J → H ∙h I ~ H ∙h J.
 ```
 
 We implement the left whiskering operation of homotopies with respect to
@@ -399,7 +399,7 @@ module _
 Right whiskering of homotopies with respect to concatenation is an operation
 
 ```text
-  {H I : f ~ g} → H ~ I → (J : g ~ h) → H ∙ h J ~ I ∙ h J.
+  {H I : f ~ g} → H ~ I → (J : g ~ h) → H ∙h J ~ I ∙h J.
 ```
 
 We implement the right whiskering operation of homotopies with respect to

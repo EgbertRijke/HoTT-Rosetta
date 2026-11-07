@@ -216,7 +216,7 @@ module _
 
 ## Example 9.2.3
 
-For any type `A`, the identity function `id : A → A` is an equivalence, since it is its own section and its own retraction
+For any type `A`, the identity function `id : A → A` is an equivalence, since it is its own section and its own retraction.
 
 ```agda
 module _
@@ -1150,13 +1150,11 @@ module _
   pr2 inv-left-unit-law-product = is-equiv-map-inv-left-unit-law-product
 ```
 
-In agda-unimath, the equivalence `Σ(x : A) 1 ≃ A` only exists in a more general form, in which the fibers of the type family over `A` are arbitrary contractible types.
-
 Commutativity cannot be generalized to `Σ`-types.
 Associativity, on the other hand, can be expressed in two ways:
 
 ```text
-  Σ(w : Σ(x : A) B(x)) C(w) ≃ Σ(x : A) Σ(y : B) C(x,y)
+  Σ(w : Σ(x : A) B(x)) C(w) ≃ Σ(x : A) Σ(y : B(x)) C(x,y)
   Σ(w : Σ(x : A) B(x)) C(pr1(w),pr2(w)) ≃ Σ(x : A) Σ(y : B(x)) C(x,y).
 ```
 
