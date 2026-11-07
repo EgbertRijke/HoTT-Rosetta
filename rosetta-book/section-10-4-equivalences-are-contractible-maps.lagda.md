@@ -415,7 +415,7 @@ Using this identification, we see that it suffices to show that the square
 ```
 
 commutes.
-Now we observe that this is just a naturality square the homotopy `G · f : fgf ~ f`, which commutes by Definition 10.4.3. ◻
+Now we observe that this is just a naturality square of the homotopy `G · f : fgf ~ f`, which commutes by Definition 10.4.3. ◻
 
 ```agda
 module _
