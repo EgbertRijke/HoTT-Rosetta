@@ -15,12 +15,9 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-8-15-cofibonacci-sequence.lagda.md
 - rosetta-book/exercise-9-2-nonequivalences-booleans-natural-numbers.lagda.md
 - rosetta-book/exercise-9-9-finitely-cyclic-maps.lagda.md
-- rosetta-book/exercise-11-1-coproduct-embeddings.lagda.md
-- rosetta-book/exercise-11-5-composite-embeddings-equivalences.lagda.md
 - rosetta-book/exercise-11-6-embeddings-from-coproducts.lagda.md
 - rosetta-book/exercise-11-7-coproduct-functor-reflection.lagda.md
 - rosetta-book/exercise-11-9-embedding-from-path-sections.lagda.md
-- rosetta-book/exercise-11-11-fiber-triangles.lagda.md
 - rosetta-book/exercise-12-2-posets-are-sets.lagda.md
 - rosetta-book/exercise-12-5-diagonal.lagda.md
 - rosetta-book/exercise-12-9-list-concatenation-truncated-map.lagda.md
@@ -139,6 +136,9 @@ The following files contain partially solved (auto)formalization exercises, whic
 - rosetta-book/exercise-7-9-euclidean-division.lagda.md
 - rosetta-book/exercise-9-7-product-functor-equivalences.lagda.md
 - rosetta-book/exercise-10-7-fibers-of-projections.lagda.md
+- rosetta-book/exercise-11-1-coproduct-embeddings.lagda.md
+- rosetta-book/exercise-11-5-composite-embeddings-equivalences.lagda.md
+- rosetta-book/exercise-11-8-total-map-retractions.lagda.md
 - rosetta-book/exercise-12-3-injective-maps-into-sets.lagda.md
 - rosetta-book/exercise-12-4-coproduct-truncation.lagda.md
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md
@@ -154,6 +154,7 @@ The following files contain partially solved (auto)formalization exercises, whic
 
 The main text contains a few missing formalizations that provide further benchmark problems identified with "BENCHMARK PROBLEM".
 
+- rosetta-book/section-11-6-the-structure-identity-principle.lagda.md (Theorem 11.6.2)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Proposition 19.4.6)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Remark 19.4.8)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Proposition 19.4.9)

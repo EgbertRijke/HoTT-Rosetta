@@ -25,6 +25,7 @@ open import exercise-9-4-three-for-two-equivalences
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-4-embeddings
 open import section-11-5-disjointness-of-coproducts
+open import exercise-11-1-coproduct-embeddings
 open import section-12-1-propositions
 open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality

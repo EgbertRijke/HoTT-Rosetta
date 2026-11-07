@@ -20,9 +20,9 @@ open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-2-contractible-retracts
 open import exercise-10-7-fibers-of-projections
-open import section-11-1-families-of-equivalences
 open import section-11-4-embeddings
 open import section-11-6-the-structure-identity-principle
+open import exercise-11-11-fiber-triangles
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-3-sets

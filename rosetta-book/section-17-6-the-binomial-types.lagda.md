@@ -31,6 +31,7 @@ open import exercise-10-8-fiber-replacement
 open import section-11-1-families-of-equivalences
 open import section-11-2-the-fundamental-theorem
 open import section-11-4-embeddings
+open import exercise-11-1-coproduct-embeddings
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-13-4-composing-with-equivalences
@@ -436,18 +437,6 @@ abstract
   is-contr-component-UU-empty : is-contr (component-UU empty)
   is-contr-component-UU-empty =
     is-contr-component-UU-Level-empty lzero
-
-module _
-  {l : Level} {A : UU l}
-  where
-
-  abstract
-    is-emb-ex-falso : is-emb (ex-falso {A = A})
-    is-emb-ex-falso ()
-
-  ex-falso-emb : empty ↪ A
-  pr1 ex-falso-emb = ex-falso
-  pr2 ex-falso-emb = is-emb-ex-falso
 
 abstract
   is-decidable-map-ex-falso :

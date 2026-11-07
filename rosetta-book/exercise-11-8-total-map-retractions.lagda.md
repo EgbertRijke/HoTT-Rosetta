@@ -10,6 +10,7 @@ open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import exercise-10-2-contractible-retracts
 open import exercise-10-3-contractible-equivalences
 open import section-10-1-contractible-types
@@ -22,23 +23,26 @@ open import section-11-1-families-of-equivalences
 
 Let `f,g : Π(x : A) B(x) → C(x)` be two families of maps.
 Show that
+
 ```text
-(Π(x : A) f(x) ~ g(x)) → (tot(f) ~ tot(g)).
+  (Π(x : A) f(x) ~ g(x)) → (tot(f) ~ tot(g)).
 ```
 
 ### Exercise 11.8(b)
 
 Let `f : Π(x : A) B(x) → C(x)` and let `g : Π(x : A) C(x) → D(x)`.
 Show that
+
 ```text
-tot(λ x. g(x) ∘ f(x)) ~ tot(g) ∘ tot(f).
+  tot(λ x. g(x) ∘ f(x)) ~ tot(g) ∘ tot(f).
 ```
 
 ### Exercise 11.8(c)
 
 For any family `B` over `A`, show that
+
 ```text
-tot(λ x. id[B(x)]) ~ id.
+  tot(λ x. id[B(x)]) ~ id.
 ```
 
 ### Exercise 11.8(d)
@@ -49,12 +53,45 @@ Use Exercise 10.2 to show that if each `B(x)` is a retract of `a = x`, then `B(x
 ### Exercise 11.8(e)
 
 Conclude that for any family of maps
+
 ```text
-f : Π(x : A) (a = x) → B(x),
+  f : Π(x : A) (a = x) → B(x),
 ```
+
 if each `f(x)` has a section, then `f` is a family of equivalences.
 
-## Solution
+## Solutions
+
+### Exercise 11.8(a)
+
+```agda
+tot-htpy :
+  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
+  {f g : (x : A) → B x → C x} → (H : (x : A) → f x ~ g x) → tot f ~ tot g
+tot-htpy H (x , y) = eq-pair-eq-fiber (H x y)
+```
+
+### Exercise 11.8(b)
+
+```agda
+preserves-comp-tot :
+  {l1 l2 l3 l4 : Level}
+  {A : UU l1} {B : A → UU l2} {B' : A → UU l3} {B'' : A → UU l4}
+  (f : (x : A) → B x → B' x) (g : (x : A) → B' x → B'' x) →
+  tot (λ x → g x ∘ f x) ~ tot g ∘ tot f
+preserves-comp-tot f g p = refl
+```
+
+### Exercise 11.8(c)
+
+```agda
+tot-id :
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
+  tot (λ x → id) ~ id {A = Σ A B}
+tot-id B p = refl
+```
+
+### Exercise 11.8(d)
 
 ```agda
 module _
@@ -88,3 +125,6 @@ module _
         ( retraction-retract ∘ R)
 ```
 
+### Exercise 11.8(e)
+
+BENCHMARK PROBLEM

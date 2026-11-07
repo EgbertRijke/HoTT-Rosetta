@@ -18,6 +18,7 @@ open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-1-families-of-equivalences
 open import section-11-6-the-structure-identity-principle
+open import exercise-11-11-fiber-triangles
 open import section-12-1-propositions
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-2-identity-systems-on-pi-types

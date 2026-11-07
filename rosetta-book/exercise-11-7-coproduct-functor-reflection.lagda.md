@@ -12,9 +12,11 @@ Consider two maps `f : A → A'` and `g : B → B'`.
 ### Exercise 11.7(a)
 
 Show that if the map
+
 ```text
-f + g : (A + B) → (A' + B')
+  f + g : (A + B) → (A' + B')
 ```
+
 is an equivalence, then so are both `f` and `g` (this is the converse of Exercise 9.6).
 
 ### Exercise 11.7(b)
