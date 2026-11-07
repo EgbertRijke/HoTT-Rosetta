@@ -43,7 +43,7 @@ The interpretation of the existential quantification (`∃`) into type theory vi
 ## Definition 7.1.2
 
 Consider two natural numbers `d` and `n`.
-We say that `d` **divides** `n` if there is a element of type
+We say that `d` **divides** `n` if there is an element of type
 
 ```text
 d |  n ≔ Σ(k : ℕ) d · k = n.
@@ -219,7 +219,7 @@ The full Curry-Howard interpretation of logic into type theory also involves int
 The introduction and elimination rules for disjunction are, for instance,
 
 ```text
-  P       Q         P ⇒ Q   Q ⇒ R
+  P       Q         P ⇒ R   Q ⇒ R
 -----   -----  and  ------------- 
 P ∨ Q   P ∨ Q         P ∨ Q ⇒ R
 ```
@@ -238,7 +238,7 @@ The Curry-Howard interpretation of disjunction into type theory is therefore as 
 To interpret conjunction into type theory we observe that the introduction rule and elimination rules for conjunction are
 
 ```text
-  P         P ∧ Q  P ∧ Q
+P   Q       P ∧ Q  P ∧ Q
 -----  and  -----  -----
 P ∧ Q         P      Q
 ```

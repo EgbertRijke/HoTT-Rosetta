@@ -304,7 +304,7 @@ nat-Fin[x]ₖ₊₁ ≡ x mod (k + 1).
 ```
 
 ### Proof
-The proof by induction on `x`.
+The proof is by induction on `x`.
 The fact that
 
 ```text

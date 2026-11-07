@@ -67,7 +67,7 @@ for any `x : Fin k`.
 
 ### Exercise 7.5(d)
 
-Show that function `succ-Finₖ : Fin k → Fin k` is injective, for each `k : ℕ`.
+Show that the function `succ-Finₖ : Fin k → Fin k` is injective, for each `k : ℕ`.
 
 ## Solutions
 
