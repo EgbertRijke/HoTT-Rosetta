@@ -51,7 +51,7 @@ For any type `A` and any decision `d : is-decidable(A)`, there is a map
 boolean-reflection : (booleanization(d) = true) → A
 ```
 
-such that `boolean-reflection(inl(a)) ≐ a`.
+such that `boolean-reflection(inl(a), p) ≐ a`.
 
 ### Proof
 

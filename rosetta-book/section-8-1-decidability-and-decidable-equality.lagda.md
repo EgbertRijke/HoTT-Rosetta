@@ -149,7 +149,7 @@ is-decidable-double-negation d = is-decidable-neg (is-decidable-neg d)
 ## Example 8.1.4
 
 Since the empty type and the unit type are both decidable types, it also follows that the types `Eq-ℕ(m,n)`, `m ≤ n` and `m < n` are decidable for each `m, n : ℕ`.
-The proofs in each of the three cases is by induction on `m` and `n`.
+The proofs in each of the three cases are by induction on `m` and `n`.
 
 For instance, to show that `Eq-ℕ(m, n)` is decidable for each `m, n : ℕ`, we simply note that the types
 
@@ -214,7 +214,7 @@ Then `A` is decidable if and only if `B` is decidable.
 
 ### Proof
 
-*Proof.* Since we have functions `f : A → B` and `g : B → A` by assumption, we obtain by Proposition 4.3.4 the functions
+Since we have functions `f : A → B` and `g : B → A` by assumption, we obtain by Proposition 4.3.4 the functions
 
 ```text
 f̃ : ¬B → ¬A
@@ -258,7 +258,7 @@ Equality on the natural numbers is decidable.
 
 ### Proof
 
-*Proof.* Recall from Proposition 6.3.3 that we have
+Recall from Proposition 6.3.3 that we have
 
 ```text
 (m = n) ↔ Eq-ℕ(m, n).
@@ -305,7 +305,7 @@ The standard finite type `Fin k` has decidable equality for each `k : ℕ`.
 
 ### Proof
 
-*Proof.* Recall from Exercise 7.5 that we constructed an observational equality relation `Eq-Finₖ` on `Fin k` for each `k : ℕ`, which satisfies
+Recall from Exercise 7.5 that we constructed an observational equality relation `Eq-Finₖ` on `Fin k` for each `k : ℕ`, which satisfies
 
 ```text
 (x = y) ↔ Eq-Finₖ(x, y).
@@ -352,7 +352,7 @@ For any `d, x : ℕ`, the type `d | x` is decidable.
 
 ### Proof
 
-*Proof.* Note that `0 | x` is decidable because `0 | x` if and only if `x = 0`, which is decidable by Proposition 8.1.7.
+Note that `0 | x` is decidable because `0 | x` if and only if `x = 0`, which is decidable by Proposition 8.1.7.
 Therefore it suffices to show that `d + 1 | x` is decidable.
 
 By Theorem 7.4.7 it follows that `d + 1 | x` holds if and only if we have an identification `[x]_{d + 1} = 0` in `Fin (d + 1)`.

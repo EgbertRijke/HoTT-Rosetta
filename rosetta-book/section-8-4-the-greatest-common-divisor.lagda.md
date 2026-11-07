@@ -76,7 +76,7 @@ Then `d = d'`.
 
 ### Proof
 
-*Proof.* If both `d` and `d'` are a greatest common divisor of `a` and `b`, then both `d` and `d'` divide both `a` and `b`, and hence it follows that `d | d'` and `d' | d`.
+If both `d` and `d'` are a greatest common divisor of `a` and `b`, then both `d` and `d'` divide both `a` and `b`, and hence it follows that `d | d'` and `d' | d`.
 Since the divisibility relation was shown to be a partial order in Exercise 7.2, it follows by antisymmetry that `d = d'`. ◻
 
 ```agda
@@ -110,7 +110,7 @@ We can either define the greatest common divisor of `a` and `b` as the greatest 
 Since we already have established the well-ordering principle of `ℕ`, we will opt for the second approach.
 In Exercise 8.10 you will be asked to show that any *bounded* decidable family over `ℕ` has a maximum as soon as it contains some natural number.
 
-In order to correctly define the greatest common divisor using well-ordering principle of `ℕ`, we need a slight modification of the type family in (★).
+In order to correctly define the greatest common divisor using the well-ordering principle of `ℕ`, we need a slight modification of the type family in (★).
 We define this family as follows:
 
 ## Definition 8.4.3
@@ -121,7 +121,7 @@ Given `a, b : ℕ`, we define the type family `M(a, b)` over `ℕ` by
 M(a, b, n) ≔ (a + b ≠ 0) → (n ≠ 0) × (Π(x : ℕ) (x | a) × (x | b) → (x | n)).
 ```
 
-In other words, if `a + b = 0` then the type `Σ(n : ℕ) M(a, b, n)` consist of all the natural numbers.
+In other words, if `a + b = 0` then the type `Σ(n : ℕ) M(a, b, n)` consists of all the natural numbers.
 On the other hand, if `a + b ≠ 0` it consists of the nonzero natural numbers `n` with the property that any common divisor of `a` and `b` also divides `n`.
 These are exactly the nonzero multiples of the greatest common divisor of `a` and `b`.
 
@@ -142,7 +142,7 @@ The type family `M(a, b)` is decidable for each `a, b : ℕ`.
 
 ### Proof
 
-*Proof.* The type `a + b ≠ 0` is decidable because it is the negation of the type `a + b = 0`, which is decidable by Proposition 8.1.7.
+The type `a + b ≠ 0` is decidable because it is the negation of the type `a + b = 0`, which is decidable by Proposition 8.1.7.
 Therefore it suffices to show that the type
 
 ```text
@@ -216,7 +216,7 @@ There is an element of type `M(a, b, a + b)`.
 
 ### Proof
 
-*Proof.* To construct an element of type `M(a, b, a + b)`, assume that `a + b ≠ 0`.
+To construct an element of type `M(a, b, a + b)`, assume that `a + b ≠ 0`.
 Then we have tautologically that `a + b ≠ 0`, and any common divisor of `a` and `b` is also a divisor of `a + b`. ◻
 
 ```agda
@@ -256,7 +256,7 @@ For any two natural numbers `a` and `b`, we have `gcd(a, b) = 0` if and only if 
 
 ### Proof
 
-*Proof.* To prove the forward direction, assume that `gcd(a, b) = 0`.
+To prove the forward direction, assume that `gcd(a, b) = 0`.
 By definition of `gcd(a, b)` we have that `M(a, b, gcd(a, b))` holds.
 More explicitly, the implication
 
@@ -303,7 +303,7 @@ For any two natural numbers `a` and `b`, the number `gcd(a, b)` is a greatest co
 
 ### Proof
 
-*Proof.* We give the proof by case analysis on whether `a + b = 0`.
+We give the proof by case analysis on whether `a + b = 0`.
 If we assume that `a + b = 0`, then it follows that both `a = 0` and `b = 0`, and by Lemma 8.4.7 it also follows that `gcd(a, b) = 0`.
 Since any number divides `0`, the claim follows immediately.
 

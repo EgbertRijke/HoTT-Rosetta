@@ -60,7 +60,7 @@ w(P, d) : (Σ(n : ℕ) P(n)) → (Σ(m : ℕ) P(m) × is-lower-bound_P(m)).
 
 ### Proof
 
-*Proof.* By the assumption that there are enough universes (Postulate 6.2.1), there is a universe `𝒰` that contains `P`.
+By the assumption that there are enough universes (Postulate 6.2.1), there is a universe `𝒰` that contains `P`.
 Instead of proving the claim for the given type family `P`, we will show by induction on `n : ℕ` that there is a function
 
 ```text
@@ -95,7 +95,7 @@ Q'(n) ≔ Q(succ-ℕ(n)).
 ```
 
 Since we have `q : Q'(n)`, we obtain a minimal element in `Q'` by the inductive hypothesis.
-Of course, by the assumption that `Q(0)` doesn’t hold, the minimal element of `Q'` is also the minimal element of `Q`. ◻
+Of course, by the assumption that `Q(0)` doesn’t hold, the successor of the minimal element of `Q'` is the minimal element of `Q`. ◻
 
 ```agda
 is-minimal-element-succ-ℕ :
