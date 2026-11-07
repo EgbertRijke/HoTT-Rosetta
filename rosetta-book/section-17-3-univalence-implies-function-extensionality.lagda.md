@@ -64,7 +64,7 @@ For any universe `𝒰`, the univalence axiom on `𝒰` implies function extensi
 
 ### Proof
 
-*Proof.* Note that by Theorem 13.1.2 it suffices to show that univalence implies weak function extensionality.
+Note that by Theorem 13.1.2 it suffices to show that univalence implies weak function extensionality.
 We note that the proof of Theorem 13.1.2 also goes through when it is restricted to types in `𝒰`.
 
 Suppose that `B : A → 𝒰` is a family of contractible types.
@@ -102,7 +102,7 @@ To see that this definition is correct, we need to know that
   λ x. pr1(x,f(x)) ≐ id.
 ```
 
-This is indeed the case, by the rule `λ`-eq for `Π`-types, on .
+This is indeed the case, by the rule `λ`-eq for `Π`-types.
 
 Next, we define the function `r`.
 Consider a function `h : A → Σ(x : A) B(x)` equipped with an identification `p : pr1 ∘ h = id`.

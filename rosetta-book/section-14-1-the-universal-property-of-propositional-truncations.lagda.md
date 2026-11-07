@@ -67,7 +67,7 @@ Note: The agda-unimath definition of the universal property of propositional tru
 ## Remark 14.1.2
 
 Using the fact that equivalences are maps that have contractible fibers, we can reformulate the universal property of the propositional truncation.
-Note that the fiber of the precomposition map `- ∘ f : (P → Q) → (A → Q)` at a map `g : A → Q` is the type.
+Note that the fiber of the precomposition map `- ∘ f : (P → Q) → (A → Q)` at a map `g : A → Q` is the type
 
 ```text
   Σ(h : P → Q) h ∘ f = g

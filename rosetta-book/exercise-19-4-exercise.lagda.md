@@ -9,9 +9,11 @@ module exercise-19-4-exercise where
 
 Let `X` be a set.
 Show that the map
+
 ```text
 equiv-eq : (X = X) → (X ≃ X)
 ```
+
 is a group isomorphism.
 
 ## Solution

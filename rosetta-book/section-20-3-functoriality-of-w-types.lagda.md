@@ -68,6 +68,7 @@ fib(W(f, e), tree(x, α)) ≃ fib(f, x) × Π(b : B(x)) fib(W(f, e), α(b)).
 ```
 
 ### Proof
+
 First, note that by the characterization in Theorem 20.2.3 of the identity type of `W(A, B)`, there is an equivalence between the fiber `fib(W(f, e), tree(x, α))` and the type
 
 ```text
@@ -170,8 +171,9 @@ If the map `f : A → A'` is `k`-truncated, then so is the map `W(f, e)`.
 In particular, if `f` is an equivalence or an embedding, then so is `W(f, e)`.
 
 ### Proof
+
 Suppose that the map `f` is `k`-truncated.
-We will prove recursively that the fibers of the morphism `W(f, e)` on W-types is `k`-truncated.
+We will prove recursively that the fibers of the morphism `W(f, e)` on W-types are `k`-truncated.
 We saw in Lemma 20.3.2 that there is an equivalence
 
 ```text

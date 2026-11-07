@@ -41,6 +41,7 @@ In other words, we must show that
 ```text
   (Fin k ≃ Fin l) → (k = l)
 ```
+
 for any two natural numbers `k` and `l`.
 We will prove this claim as a consequence of the following general fact.
 
@@ -583,7 +584,7 @@ Any equivalence `e : Fin k ≃ Fin l` now gives us the element
 
 which is of course absurd.
 Similarly, if `k` is a successor and `l` is zero, we obtain `e(0) : empty`, which is again absurd.
-If both `k` and `l` are a successor, then we have by Proposition 16.2.1 the composite
+If both `k` and `l` are successors, then we have by Proposition 16.2.1 the composite
 
 ```text
   (Fin (k + 1) ≃ Fin (l + 1)) ---> (Fin k ≃ Fin l) ---> (k = l) ---> (k + 1 = l + 1)

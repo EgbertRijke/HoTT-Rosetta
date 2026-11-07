@@ -18,6 +18,7 @@ Consider a commuting triangle
       ∨ ∨
        X
 ```
+
 with `H : f ~ g ∘ h`, and suppose that `g` is `k`-truncated.
 Show that `f` is `k`-truncated if and only if `h` is `k`-truncated.
 

@@ -181,7 +181,7 @@ eq-equiv-component-UU X Y =
 
 ## Example 17.6.3
 
-Note that type `𝒰_{Fin n}` is the type `BSₙ` of all `n`-element types.
+Note that the type `𝒰_{Fin n}` is the type `BSₙ` of all `n`-element types.
 Note also that if `A ≃ B`, then `𝒰_A ≃ 𝒰_B`.
 
 ## Definition 17.6.4
@@ -254,7 +254,7 @@ module _
 ## Remark 17.6.5
 
 We define the binomial types using decidable embeddings because the usual properties of binomial coefficients generalize most naturally under the extra assumption of decidability.
-In particular the binomial theorem for types, which is stated as Exercise 17.14 and generalized in Exercise 18.14, rely on the use of decidable embeddings.
+In particular the binomial theorem for types, which is stated as Exercise 17.14 and generalized in Exercise 18.14, relies on the use of decidable embeddings.
 
 ## Proposition 17.6.6
 

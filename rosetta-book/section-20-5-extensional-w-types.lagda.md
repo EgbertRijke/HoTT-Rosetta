@@ -107,11 +107,11 @@ Then the following are equivalent:
 
 2. The family `B` is **univalent** in the sense that the map
 
-```text
-tr_B : (x = y) → (B(x) ≃ B(y))
-```
+   ```text
+   tr_B : (x = y) → (B(x) ≃ B(y))
+   ```
 
-is an equivalence, for every `x, y : A`.
+   is an equivalence, for every `x, y : A`.
 
 ```agda
 is-univalent :
@@ -199,15 +199,16 @@ emb-univalent-family (B , H) = (B , is-emb-is-univalent H)
 ```
 
 ### Proof
+
 We will first show that (ii) is equivalent to the following property:
 
 1. The map
 
-```text
-tr_B : (symbol(x) = y) → (B(symbol(x)) ≃ B(y))
-```
+   ```text
+   tr_B : (symbol(x) = y) → (B(symbol(x)) ≃ B(y))
+   ```
 
-is an equivalence for every `x : W(A, B)` and every `y : A`.
+   is an equivalence for every `x : W(A, B)` and every `y : A`.
 
 Clearly, (ii) implies (ii’).
 For the converse we use the assumption that `W(A, B)` is inhabited.
@@ -362,7 +363,7 @@ module _
 
 ## Example 20.5.4
 
-The type `N` of Example 20.1.6, the type of binary rooted trees Example 20.1.8, and the type of finitely branching rooted trees Example 20.1.9 are all examples extensional W-types.
+The type `N` of Example 20.1.6, the type of binary rooted trees of Example 20.1.8, and the type of finitely branching rooted trees of Example 20.1.9 are all examples of extensional W-types.
 On the other hand, the type of oriented binary rooted trees of Example 20.1.7 and the type of oriented finitely branching rooted trees of Example 20.1.9 are not extensional.
 
 BENCHMARK PROBLEM

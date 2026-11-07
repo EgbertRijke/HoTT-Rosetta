@@ -17,7 +17,7 @@ open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-15-2-surjective-maps
 ```
 
-Now that we have introduced surjective maps, we are in position to give Cantor’s famous diagonal argument, which he used to show that there are infinite sets of different cardinality.
+Now that we have introduced surjective maps, we are in a position to give Cantor’s famous diagonal argument, which he used to show that there are infinite sets of different cardinality.
 The diagonal argument gives a proof that there is no surjective map from `X` to its power set `𝒫(X)`.
 The power set of a type `X` is of course defined with respect to a universe `𝒰`, as the type of families of propositions in `𝒰` indexed by `X`.
 
@@ -67,7 +67,7 @@ The empty type is a proposition, so by the universal property of the proposition
 ```
 
 Consider an element `x : X` equipped with an identification `f(x) = P`.
-Our goal is to construct an element of the empty type, i.e, to reach a contradiction.
+Our goal is to construct an element of the empty type, i.e., to reach a contradiction.
 By the identification `f(x) = P` it follows that
 
 ```text

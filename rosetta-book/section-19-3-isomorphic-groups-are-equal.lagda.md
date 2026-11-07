@@ -46,7 +46,7 @@ Consequently, there is an equivalence
 
 ### Proof
 
-_Proof._ If `h : hom(G,H)` is an isomorphism, then the inverse semigroup homomorphism also provides an inverse of the underlying map of `h`.
+If `h : hom(G,H)` is an isomorphism, then the inverse semigroup homomorphism also provides an inverse of the underlying map of `h`.
 Thus we obtain that `h` is an equivalence.
 For the converse, suppose that the underlying map of `f : G → H` is an equivalence.
 Then its inverse is also a semigroup homomorphism, since we have
@@ -200,7 +200,7 @@ indexed by `H : Semigroup_𝒰` is a family of equivalences.
 
 ### Proof
 
-_Proof._ By the fundamental theorem of identity types Theorem 11.2.2 it suffices to show that the total space
+By the fundamental theorem of identity types Theorem 11.2.2 it suffices to show that the total space
 
 ```text
 Σ(H : Semigroup_𝒰) G ≅ H
@@ -214,7 +214,7 @@ Since the type of isomorphisms from `G` to `H` is equivalent to the type of mult
 ```
 
 is contractible.
-Since `Semigroup_𝒰 ≐ Σ(H : Set_𝒰) has-associative-mul(H)` we are in position to apply the structure identity principle stated in Theorem 11.6.2.
+Since `Semigroup_𝒰 ≐ Σ(H : Set_𝒰) has-associative-mul(H)` we are in a position to apply the structure identity principle stated in Theorem 11.6.2.
 Note that `H ↦ G ≃ H` is an identity system on `Set_𝒰` at the set `G`.
 By condition (v) of Theorem 11.6.2 it therefore suffices to show that the type
 
@@ -353,7 +353,7 @@ The type `Semigroup_𝒰` is a `1`-type.
 
 ### Proof
 
-_Proof._ The identity types of `Semigroup_𝒰` are sets because they are equivalent to the sets of isomorphisms between semigroups. ◻
+The identity types of `Semigroup_𝒰` are sets because they are equivalent to the sets of isomorphisms between semigroups. ◻
 
 ```agda
 is-large-category-Large-Precategory :
@@ -1241,7 +1241,7 @@ is an equivalence.
 
 ### Proof
 
-_Proof._ Let `G` and `H` be groups in `𝒰`, and write `UG` and `UH` for their underlying semigroups, respectively.
+Let `G` and `H` be groups in `𝒰`, and write `UG` and `UH` for their underlying semigroups, respectively.
 Then we have a commuting triangle
 
 ```text

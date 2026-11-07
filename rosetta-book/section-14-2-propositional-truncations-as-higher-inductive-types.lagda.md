@@ -270,7 +270,7 @@ The map `η : A → ‖A‖` satisfies the universal property of the proposition
 
 ### Proof
 
-_Proof._ In order to prove that `η : A → ‖A‖` satisfies the universal property of the propositional truncation of `A`, it suffices to construct a map
+In order to prove that `η : A → ‖A‖` satisfies the universal property of the propositional truncation of `A`, it suffices to construct a map
 
 ```text
   (A → Q) → (‖A‖ → Q)

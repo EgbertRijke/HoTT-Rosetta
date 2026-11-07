@@ -74,7 +74,7 @@ module _
 ## Remark 20.1.2
 
 Some authors write `sup` for the constructor of a W-type.
-The intuition is that `tree(a, α)` is a supremum of the family of elements `α(y)` indexed by `y : B(a)` is, however, somewhat misleading, because `tree(a, α)` does not satisfy the defining properties of a supremum.
+The intuition that `tree(a, α)` is a supremum of the family of elements `α(y)` indexed by `y : B(a)` is, however, somewhat misleading, because `tree(a, α)` does not satisfy the defining properties of a supremum.
 
 ## Remark 20.1.3
 
@@ -92,7 +92,7 @@ f(tree(x, α)) ≔ h(x, α, λ y. f(α(y))),
 ```
 
 which contains all the information to carry out the construction via the induction principle of W-types.
-The advantage of definitions by pattern matching is that they directly display the defining judgmental equality the function being defined.
+The advantage of definitions by pattern matching is that they directly display the defining judgmental equality of the function being defined.
 
 ## Remark 20.1.4
 
@@ -167,7 +167,7 @@ In particular, if each `B(x)` is inhabited, then `W(A, B)` is empty.
 
 ### Proof
 
-*Proof.* To prove that (i) implies (ii), assume that `¬¬(B(x))` holds for each `x : A`.
+To prove that (i) implies (ii), assume that `¬¬(B(x))` holds for each `x : A`.
 Our goal is to construct a function `f : W(A, B) → empty`.
 By the induction principle of W-types it suffices to construct a function of type
 
@@ -231,7 +231,7 @@ succ-Nat-𝕎 x = tree-𝕎 true (λ y → x)
 ```
 
 Thus, we obtain a function `f : ℕ → N` that satisfies `f(0) ≐ z` and `f(succ-ℕ(n)) ≐ s(f(n))`.
-It’s inverse `g : N → ℕ` is defined via the induction principle of W-types by
+Its inverse `g : N → ℕ` is defined via the induction principle of W-types by
 
 ```text
 g(tree(false, α)) ≔ 0
@@ -381,7 +381,7 @@ BENCHMARK PROBLEM
 
 The W-type `W(ℕ, Fin)` is the type of **oriented finitely branching rooted trees**.
 On the other hand, we define the type of **(unoriented) finitely branching rooted trees** to be the W-type `W(𝔽, T)`.
-The qualitive difference between the types of oriented and unoriented finitely branching rooted trees is similar to the qualitative difference between types of oriented and unoriented binary rooted trees.
+The qualitative difference between the types of oriented and unoriented finitely branching rooted trees is similar to the qualitative difference between types of oriented and unoriented binary rooted trees.
 In the type of oriented finitely branching rooted trees, we record the ordering of the branches while in the type of unoriented finitely branching rooted trees there are identifications between trees that have the same branches up to permutation.
 
 <!-- This agda block does not perfectly match the natural language statement. -->

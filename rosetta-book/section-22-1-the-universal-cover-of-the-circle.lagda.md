@@ -613,7 +613,7 @@ Its inverse is the predecessor function defined in Exercise 4.1.
 
 ## Definition 22.1.2
 
-The **universal cover** of the circle is defined via Definition 22.1.1 to be the unique dependent type `E_{S¹} ≔ D(ℤ,succ-ℤ ) : S¹ → 𝒰`. equipped with an equivalence `x ↦ x_E : ℤ → E_{S¹}(base)` and a homotopy witnessing that the square
+The **universal cover** of the circle is defined via Definition 22.1.1 to be the unique dependent type `E_{S¹} ≔ D(ℤ,succ-ℤ) : S¹ → 𝒰` equipped with an equivalence `x ↦ x_E : ℤ → E_{S¹}(base)` and a homotopy witnessing that the square
 
 ```text
                 x ↦ x_E
@@ -693,7 +693,7 @@ in the total space `Σ(t : S¹) E(t)`.
 
 ### Proof
 
-_Proof._ By Theorem 9.3.4 it suffices to show that
+By Theorem 9.3.4 it suffices to show that
 
 ```text
 Π(k : ℤ) Σ(α : base = base) tr_E(α,k_E) = succ-ℤ (k)_E.

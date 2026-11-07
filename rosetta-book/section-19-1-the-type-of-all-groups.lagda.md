@@ -79,7 +79,7 @@ For a semigroup `G` the type `is-unital(G)` is a proposition.
 
 ### Proof
 
-_Proof._ Let `G` be a semigroup.
+Let `G` be a semigroup.
 Note that since `G` is a set, it follows that the types of the left and right unit laws are propositions.
 Therefore it suffices to show that any two elements `e,e' : G` satisfying the left and right unit laws can be identified.
 This is easy:
@@ -258,7 +258,7 @@ For any semigroup `G` the type `is-group(G)` is a proposition.
 
 ### Proof
 
-_Proof._ We have already seen that the type `is-unital(G)` is a proposition.
+We have already seen that the type `is-unital(G)` is a proposition.
 Therefore it suffices to show that the type `is-group'(G,e)` is a proposition for any `e : is-unital(G)`.
 
 Since a semigroup `G` is assumed to be a set, we note that the types of the inverse laws are propositions.

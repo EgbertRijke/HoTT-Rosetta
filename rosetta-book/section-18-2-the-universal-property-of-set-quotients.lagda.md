@@ -463,7 +463,7 @@ Assume (2), and let `f : A → X` be a map into a set `X`, satisfying the proper
 ```
 
 Our goal is to show that the type of extensions of `f` along `q` is contractible.
-By Exercise 17.5 it follows that there is at most one such an extension, so it suffices to construct one.
+By Exercise 17.5 it follows that there is at most one such extension, so it suffices to construct one.
 
 In order to construct an extension, we will construct for every `b : B` a term `x : X` satisfying the property
 

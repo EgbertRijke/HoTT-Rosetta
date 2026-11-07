@@ -16,10 +16,12 @@ Define a function `f : A → Σ(x : A) inl(x) = d` and show that `f` is a propos
 ### Exercise 14.6(b)
 
 Consider the function `π : is-decidable(A) → Fin 2` defined by
+
 ```text
 π(inl(x)) := 1
 π(inr(x)) := 0.
 ```
+
 Define a function `g : A → (π(d) = 1)` and show that `g` is a propositional truncation of `A`.
 
 ## Solution

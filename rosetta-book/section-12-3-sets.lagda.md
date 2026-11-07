@@ -244,7 +244,7 @@ For every `x, y : A`, we first define a type family `R'(x,y) : ((x = y) + (x ≠
 Note that `R'(x,y,q)` is a proposition for each `x, y : A` and `q : (x = y) + (x ≠ y)`.
 Now we define `R(x,y) ≔ R'(x,y,d(x,y))`.
 Then `R` is a reflexive binary relation on `A`, and furthermore each `R(x,y)` is a proposition.
-In order to apply Theorem 12.3.4, it therefore it remains to show that `R` implies identity.
+In order to apply Theorem 12.3.4, it therefore remains to show that `R` implies identity.
 
 Since `R` is defined as an instance of `R'`, it suffices to construct a function
 

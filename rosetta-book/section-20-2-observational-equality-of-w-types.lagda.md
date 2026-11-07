@@ -68,6 +68,7 @@ map-inv-structure-𝕎-Alg (tree-𝕎 x α) = pair x α
 The map `η : W(A, B) → Σ(x : A) (B(x) → W(A, B))` is an equivalence.
 
 ### Proof
+
 We define
 
 ```text
@@ -183,6 +184,7 @@ The observational equality relation `Eq_W` on `W(A, B)` is reflexive, and the ca
 is an equivalence for each `x, y : W(A, B)`.
 
 ### Proof
+
 The element `refl-Eq_W(x) : Eq_W(x, x)` is defined recursively as
 
 ```text
@@ -276,6 +278,7 @@ Consider a type family `B` over a type `A`, and let `k : 𝕋` be a truncation l
 If `A` is a `(k + 1)`-type, then so is `W(A, B)`.
 
 ### Proof
+
 Suppose that `A` is a `(k + 1)`-type.
 In order to show that `W(A, B)` is a `(k + 1)`-type, we have to show that its identity types are `k`-types.
 The proof is by induction on `x, y : W(A, B)`.

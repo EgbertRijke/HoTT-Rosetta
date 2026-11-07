@@ -210,7 +210,7 @@ module _
 
 ## Remark 17.2.2
 
-Often, when `P` is a subuniverse, i.e., a subtype of the a universe `𝒰`, we will also write `A` for the type `pr1(A)` if `A : Σ(X : 𝒰) P(X)`.
+Often, when `P` is a subuniverse, i.e., a subtype of the universe `𝒰`, we will also write `A` for the type `pr1(A)` if `A : Σ(X : 𝒰) P(X)`.
 Using this shorthand notation, the equivalence in Proposition 17.2.1 is displayed as
 
 ```text

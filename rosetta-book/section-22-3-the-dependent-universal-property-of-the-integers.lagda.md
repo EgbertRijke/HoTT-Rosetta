@@ -49,7 +49,7 @@ for any `k : ℤ`.
 
 ### Proof
 
-_Proof._ The map is defined using the induction principle for the integers, stated in Remark 4.5.2.
+The map is defined using the induction principle for the integers, stated in Remark 4.5.2.
 First we take
 
 ```text
@@ -165,7 +165,7 @@ is contractible.
 
 ### Proof
 
-_Proof._ In Lemma 22.3.1 we have already constructed an element of the asserted type.
+In Lemma 22.3.1 we have already constructed an element of the asserted type.
 Therefore it suffices to show that any two elements of this type can be identified.
 Note that the type `(f,p,H) = (f',p',H')` is equivalent to the type of triples `(K,α,β)` consisting of
 
@@ -366,9 +366,9 @@ given by `(f,H) ↦ f(0)` is an equivalence.
 
 BENCHMARK PROBLEM
 
-_Proof._ Note that the fibers of `ev₀` are equivalent to the types that are shown to be contractible in Proposition 22.3.3. ◻
+Note that the fibers of `ev₀` are equivalent to the types that are shown to be contractible in Proposition 22.3.3. ◻
 
-The following corollary will be used to prove that the fundamental cover of the circle is equivalent to the identity type based at `base : S¹`.
+The following corollary will be used to prove that the universal cover of the circle is equivalent to the identity type based at `base : S¹`.
 
 ## Corollary 22.3.6
 

@@ -852,10 +852,10 @@ We make two claims:
 
 2. If the product `A × B` comes equipped with a counting, then we have two functions
 
-```text
-  B → count(A)
-  A → count(B).
-```
+   ```text
+     B → count(A)
+     A → count(B).
+   ```
 
 ### Proof
 

@@ -319,7 +319,7 @@ Since `x'` and `y'` are assumed to be coprime, it follows from the equation
 ```
 
 that `x'` divides `x / gcd(x,y)`.
-Similarly `x / gcd(x,y)` and `y / gcd(x,y)` are coprime, it follows from the same equation that `x / gcd(x,y)` divides `x'`, so we conclude that `ux' = x / gcd(x,y)` for some `u = ± 1`.
+Similarly, since `x / gcd(x,y)` and `y / gcd(x,y)` are coprime, it follows from the same equation that `x / gcd(x,y)` divides `x'`, so we conclude that `ux' = x / gcd(x,y)` for some `u = ± 1`.
 The fact that `vy' = y / gcd(x,y)` for some `v = ± 1` is proven similarly.
 However, since both `y` and `y'` are positive, and the `gcd(x,y)` of any two integers is positive, it follows that `v = 1`.
 Using the assumption that `x'y / gcd(x,y) = xy' / gcd(x,y)`, this allows us to deduce that also `u = 1`.

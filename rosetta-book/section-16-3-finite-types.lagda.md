@@ -392,7 +392,7 @@ pr2 (set-Type-With-Cardinality-ℕ k X) =
   is-set-type-Type-With-Cardinality-ℕ k X
 ```
 
-In the following proposition we will show that each finite type can be assigned a unique cardinality.
+In the following theorem we will show that each finite type can be assigned a unique cardinality.
 
 ## Theorem 16.3.3
 
@@ -566,7 +566,7 @@ There is an equivalence
 
 ### Proof
 
-_Proof._ This equivalence can be obtained by composing the equivalences
+This equivalence can be obtained by composing the equivalences
 
 ```text
 Σ(X : 𝒰₀) is-finite(X) ≃ Σ(X : 𝒰₀) Σ(k : ℕ) ‖Fin k ≃ X‖
@@ -609,7 +609,7 @@ Then there is a **finite choice** map
 
 ### Proof
 
-_Proof._ Note that the type `‖Π(x : A) B(x)‖` is a proposition.
+Note that the type `‖Π(x : A) B(x)‖` is a proposition.
 Therefore we may assume that the type `A` comes equipped with a counting `e : Fin k ≃ A`.
 By this equivalence, it suffices to show that for every type family `B` over `Fin k`, there is a map
 
@@ -765,20 +765,20 @@ X → is-finite(Y).
 
    3. The type `Σ(x : A) B(x)` is finite.
 
-If (a) holds, then (b) is equivalent to (c).
-Moreover, if (b) and (c) hold, then (a) holds if and only if `A` is a set and the type `Σ(x : A) ¬ B(x)` is finite.
-Furthermore, if (b) and (c) hold and `B` has a section, then (a) holds.
+   If (a) holds, then (b) is equivalent to (c).
+   Moreover, if (b) and (c) hold, then (a) holds if and only if `A` is a set and the type `Σ(x : A) ¬ B(x)` is finite.
+   Furthermore, if (b) and (c) hold and `B` has a section, then (a) holds.
 
 ### Proof
 
-_Proof._ To prove claim Theorem 16.3.6, first suppose that both `X` and `Y` are finite.
+To prove claim (1), first suppose that both `X` and `Y` are finite.
 Since the type `is-finite(X + Y)` is a proposition, we may assume that `X` and `Y` come equipped with countings.
 It follows from Theorem 16.1.7 that `X + Y` has a counting, so it is finite.
 Conversely, suppose that the type `X + Y` is finite.
 Since the types `is-finite(X)` and `is-finite(Y)` are both propositions, we may assume that the coproduct `X + Y` comes equipped with a counting.
 Again it follows from Theorem 16.1.7 that the types `X` and `Y` have countings, so they are finite.
 
-The proof of claim (2) is similar to the proof of claim Theorem 16.3.6, hence we omit it.
+The proof of claim (2) is similar to the proof of claim (1), hence we omit it.
 
 It remains to prove claim (3).
 First, suppose that the type `A` is finite, and that each `B(x)` is finite.

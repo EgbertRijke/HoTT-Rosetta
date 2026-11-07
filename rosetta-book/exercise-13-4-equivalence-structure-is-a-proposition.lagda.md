@@ -59,7 +59,7 @@ Show that for any two equivalences `e, e' : A ≃ B`, the canonical map
 
 is an equivalence.
 
-### Exercise 13.4 (e)
+### Exercise 13.4(e)
 
 Show that the type `A ≃ B` is a `k`-type if both `A` and `B` are `k`-types.
 

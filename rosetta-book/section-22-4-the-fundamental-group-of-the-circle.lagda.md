@@ -33,7 +33,7 @@ The universal cover of the circle is an identity system at `base : S¹`.
 
 ### Proof
 
-_Proof._ By Exercise 13.9 it suffices to show that the map
+By Exercise 13.9 it suffices to show that the map
 
 ```text
 f ↦ f(0_E) : (Π(t : S¹) E_{S¹}(t) → A(t)) → A(base)
@@ -292,7 +292,7 @@ The circle is a `1`-type and not a `0`-type.
 
 ### Proof
 
-_Proof._ To see that the circle is a `1`-type we have to show that `s = t` is a `0`-type for every `s,t : S¹`.
+To see that the circle is a `1`-type we have to show that `s = t` is a `0`-type for every `s,t : S¹`.
 By Exercise 21.2 it suffices to show that the loop space of the circle is a `0`-type.
 This is indeed the case, because `ℤ` is a `0`-type, and we have an equivalence `(base = base) ≃ ℤ`.
 
@@ -341,7 +341,7 @@ such that `f(refl) = b`, and for every `p : a = a` and `q : a = x`.
 
 BENCHMARK PROBLEM
 
-_Proof._ Consider a family of maps `f : (a = x) → B(x)` indexed by `x : A` such that `f(refl) = b`, and let `p : a = a` and `q : a = x`.
+Consider a family of maps `f : (a = x) → B(x)` indexed by `x : A` such that `f(refl) = b`, and let `p : a = a` and `q : a = x`.
 By induction on `q` it suffices to show that
 
 ```text
@@ -369,7 +369,7 @@ There is a group isomorphism
 
 BENCHMARK PROBLEM
 
-_Proof._ First we observe that, since the circle is a `1`-type, we have an isomorphism of groups `π₁(S¹) ≅ Ω(S¹)`.
+First we observe that, since the circle is a `1`-type, we have an isomorphism of groups `π₁(S¹) ≅ Ω(S¹)`.
 In order to show that the group `Ω(S¹)` is isomorphic to `ℤ`, we prove that the family of equivalences
 
 ```text
@@ -414,5 +414,5 @@ for all `k,l : ℤ`, such a function is obtained at once from Corollary 22.2.4.�
 
 In order to prove that the fundamental group of the circle is `ℤ`, we first had to use the univalence axiom to construct the universal cover of the circle.
 This proof was originally discovered by Mike Shulman in 2011, and later published in [Calculating the Fundamental Group of the Circle in Homotopy Type Theory](https://doi.org/10.1109/LICS.2013.28).
-Its importance of this proof to the field of homotopy type theory is hard to overestimate.
+The importance of this proof to the field of homotopy type theory is hard to overestimate.
 The proof led to the discovery of the _encode-decode method_, which we presented in this book as the fundamental theorem of identity types, and it was the start of the field that is now sometimes called _synthetic homotopy theory_, where the induction principle for identity types and the univalence axiom are used along with methods from algebraic topology in order to compute algebraic invariants of types.

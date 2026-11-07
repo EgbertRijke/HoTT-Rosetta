@@ -12,10 +12,13 @@ In this exercise we give an alternative proof that the total space of `E_{S¹}` 
 ### Exercise 22.10(a)
 
 Construct a function
+
 ```text
 h : Π(k : ℤ) (base,0_E) = (base,k_E)
 ```
+
 equipped with a homotopy
+
 ```text
 H : Π(k : ℤ) h(succ-ℤ(k)_E) = h(k) ∙ segment-helix(k).
 ```

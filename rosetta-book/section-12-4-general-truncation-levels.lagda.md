@@ -172,7 +172,7 @@ A simple inductive argument shows that this is indeed the case, where the base c
 
 We may therefore safely omit explicit reference to the universes when considering truncatedness of a type.
 
-We show in the following theorem that the truncation levels are successively contained in one another.
+We show in the following proposition that the truncation levels are successively contained in one another.
 
 ## Proposition 12.4.3
 
@@ -723,7 +723,7 @@ abstract
       ( is-trunc-g b)
 ```
 
-###Projections of families of sets are 0-maps
+### Projections of families of sets are 0-maps
 
 ```agda
 module _

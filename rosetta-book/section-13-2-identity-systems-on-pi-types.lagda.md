@@ -370,7 +370,7 @@ indexed by `g : Π(x : A) B(x)` is an identity system at `f`.
 
 ### Proof
 
-*Proof.* By Theorem 11.2.2 it suffices to show that the type
+By Theorem 11.2.2 it suffices to show that the type
 
 ```text
   Σ(g : Π(x : A) B(x)) Π(x : A) E(f(x),g(x))

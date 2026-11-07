@@ -368,7 +368,7 @@ We call such groups **abstract groups**.
 On the other hand, pointed connected `1`-types `B` are **concrete groups** in the sense that they contain an object `⋆ : B`, and the group that `B` represents is the group of self-identifications (i.e., symmetries) of the base point `⋆ : B`.
 Thus we see that when we present a group as a pointed connected `1`-type, then we _concretely_ manifest that group as the group of symmetries of some object.
 
-We can also bring group homomorphisms into the mix: for every group homomorphism `f : G → H` the type of pointed maps `b : BG →_⋆ BH` equipped with a homotopy witnessing
+We can also bring group homomorphisms into the mix: for every group homomorphism `f : G → H` the type of pointed maps `b : BG →_⋆ BH` equipped with a homotopy witnessing that the diagram
 
 ```text
       [G] ----- f ----->  [H]
@@ -1041,14 +1041,16 @@ Then the following are equivalent:
    is a family of `k`-truncated maps.
 
 2. The total space
+
    ```text
    Σ(x : A) B(x)
    ```
+
    is `(k + 1)`-truncated.
 
 ### Proof
 
-_Proof._ Recall from Exercise 12.10 that the total space `Σ(x : A) B(x)` is `(k + 1)`-truncated if and only if the base point inclusion
+Recall from Exercise 12.10 that the total space `Σ(x : A) B(x)` is `(k + 1)`-truncated if and only if the base point inclusion
 
 ```text
 (x,y) : unit → Σ(x : A) B(x)

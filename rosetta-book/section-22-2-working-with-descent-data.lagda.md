@@ -45,7 +45,7 @@ Then we have an equivalence
 
 ### Proof
 
-_Proof._ Note that the commutativity of the square implies that
+Note that the commutativity of the square implies that
 
 ```text
 tr_A(loop,α(x)) = α(e(x)).
@@ -90,7 +90,7 @@ in which the top map is an equivalence.
 
 ### Proof
 
-_Proof._ By the dependent universal property of the circle we have an equivalence
+By the dependent universal property of the circle we have an equivalence
 
 ```text
 (Π(t : S¹) A(t)) ≃ Σ(x : A(base)) tr_A(loop,x) = x.
@@ -142,7 +142,7 @@ in which the top map is an equivalence.
 
 ### Proof
 
-_Proof._ The claim follows once we observe that `(Y^X,λ h. f ∘ h ∘ e^{-1})` is descent data for the family of types `(A(t) → B(t))` indexed by `t : S¹`.
+The claim follows once we observe that `(Y^X,λ h. f ∘ h ∘ e^{-1})` is descent data for the family of types `(A(t) → B(t))` indexed by `t : S¹`.
 Indeed, we have the equivalence `h ↦ β ∘ h ∘ α^{-1} : Y^X ≃ B(base)^{A(base)}` for which the square
 
 ```text

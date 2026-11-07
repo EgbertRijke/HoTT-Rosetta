@@ -45,7 +45,7 @@ R ≔ {x ∈ S | x ∉ x},
 ```
 
 for which we have `R ∈ R ↔ R ∉ R`, a contradiction.
-To reproduce Russell’s paradox in type theory, we first recall a crucial difference between the type theoritic judgment `a : A` and the set theoretic proposition `x ∈ y`.
+To reproduce Russell’s paradox in type theory, we first recall a crucial difference between the type theoretic judgment `a : A` and the set theoretic proposition `x ∈ y`.
 Although the judgment `a : A` plays a similar role in type theory as the elementhood relation, types and their elements are fundamentally different entities, whereas in Zermelo-Fraenkel set theory there are only sets, and the proposition `x ∈ y` can be formed for any two sets `x` and `y`.
 In type theory, there is no relation on the universe that is similar to the elementhood relation.
 
@@ -61,7 +61,7 @@ It was first studied by Aczel in [The type theoretic interpretation of construct
 
 ## Definition 20.6.1
 
-Consider a `𝒰` with universal type family `Ty`.
+Consider a universe `𝒰` with universal type family `Ty`.
 We define the type
 
 ```text
@@ -96,7 +96,7 @@ tree(Σ(x₀ : A₀) ⋯ Aₙ(x₀, …, xₙ₋₁), λ (x₀, …, xₙ). t(x�
 
 Given a multiset `X ≐ {f(x) | x : A}` in `𝒰`, the **cardinality** of `X` is the type `A`, and the **elements** of `X` are the multisets `f(x)` in `𝒰`, for each `x : A`.
 
-In the notation of multisets, the elementhood relation ` ∈ : M_𝒰 → M_𝒰 → 𝒰⁺` is defined 
+In the notation of multisets, the elementhood relation ` ∈ : M_𝒰 → M_𝒰 → 𝒰⁺` is defined by
 
 ```text
 (X ∈ {g(y) | y : B}) ≐ Σ(y : B) g(y) = X.
@@ -135,7 +135,7 @@ We will use a similar condition of smallness for multisets.
 ## Definition 20.6.2
 
 Let `𝒰` and `𝒱` be universes.
-We say that a multiset `{f(x) | x : A}` in `𝒱` **is `𝒰`-small** if the type `A` is `𝒰`-small and if each mulitset `f(x)` in `𝒱` is `𝒰`-small.
+We say that a multiset `{f(x) | x : A}` in `𝒱` **is `𝒰`-small** if the type `A` is `𝒰`-small and if each multiset `f(x)` in `𝒱` is `𝒰`-small.
 In other words, the type family
 
 ```text
@@ -175,6 +175,7 @@ Then the multiset
 is again `𝒰`-small.
 
 ### Proof
+
 If the multiset `{f(x) | x : A}` is `𝒰`-small, then the type `A` is `𝒰`-small.
 By the assumption that `B` is a family of `𝒰`-small types together with the fact that `𝒰`-small types are closed under formation of `Σ`-types, it follows that the type
 
@@ -196,7 +197,7 @@ is-small-comprehension-𝕍 l {l1} {tree-𝕎 A α} {P} (pair (pair X e) H) K =
     ( λ t → H (pr1 t))
 ```
 
-The main purpose of the following lemma is to know that the elementhood relation takes values in the `𝒰`-small types, when it is applied to `𝒰`-small multisets.
+The main purpose of the following proposition is to know that the elementhood relation takes values in the `𝒰`-small types, when it is applied to `𝒰`-small multisets.
 We will use the univalence axiom to prove this fact.
 
 ## Proposition 20.6.4
@@ -209,6 +210,7 @@ We make two claims:
 2. The type `X ∈ Y` is `𝒰`-small.
 
 ### Proof
+
 For the first claim, let `X ≐ {f(x) | x : A}` and let `Y ≐ {g(y) | y : B}`.
 The proof is by induction.
 Via Theorem 20.2.3 it follows that the type `X = Y` is equivalent to the type
@@ -312,21 +314,22 @@ resize-𝕍 (tree-𝕎 A α) (pair (pair A' e) H2) =
 
 ## Proposition 20.6.6
 
-The inclusion function `i` of `𝒰`-small multisets in `𝒱` into the multisets in `𝒰` satisfies the following properties
+The inclusion function `i` of `𝒰`-small multisets in `𝒱` into the multisets in `𝒰` satisfies the following properties:
 
 1. For each `𝒰`-small multiset `X` in `𝒱`, the multiset `i(X)` in `𝒰` is `𝒱`-small.
 
 2. The induced map
 
-```text
-(Σ(X : M_𝒱) is-small_{M_𝒰}(X)) → (Σ(Y : M_𝒰) is-small_{M_𝒱}(Y))
-```
+   ```text
+   (Σ(X : M_𝒱) is-small_{M_𝒰}(X)) → (Σ(Y : M_𝒰) is-small_{M_𝒱}(Y))
+   ```
 
-is an equivalence.
+   is an equivalence.
 
 Consequently, the inclusion function `i` is an embedding.
 
 ### Proof
+
 To see that `i({f(x) | x : A})` is `𝒱`-small for each `𝒰`-small multiset `{f(x) | x : A}` in `𝒱`, note that the assumption that `{f(x) | x : A}` is `𝒰`-small gives us an equivalence `e : A ≃ B` and an element `H(x) : is-small_{M_𝒰}(f(x))` for each `x : A`.
 The type `B` is the indexing type of `i({f(x) | x : A})`, and `B` is `𝒱`-small because it is equivalent to the type `A` in `𝒱`.
 Furthermore, each multiset `i(f(e⁻¹(y)))` is `𝒱`-small by the inductive hypothesis.
@@ -339,7 +342,7 @@ We therefore have inclusion functions
 ```
 
 To see that the maps `i` and `i` are mutual inverses, it suffices to show that `i(i(X)) = X`.
-This follows by induction from the following calculation, where we assume an equivalence `e : A ≃ B` into a `B` in `𝒰`.
+This follows by induction from the following calculation, where we assume an equivalence `e : A ≃ B` into a type `B` in `𝒰`.
 
 ```text
 i(i({f(x) | x : A})) ≐ i({i(f(e⁻¹(y))) | y : B})
@@ -456,6 +459,7 @@ Then we have
 ```
 
 ### Proof
+
 Let `X ≐ {f(x) | x : A}` and `Y ≐ {g(y) | y : B}`.
 By the assumption that `Y` is `𝒰`-small we have an equivalence `e : B ≃ B'` to a type `B'` in `𝒰`.
 Then we have the equivalences
@@ -490,7 +494,7 @@ abstract
         ( eq-resize-𝕍 (K b) H))
 ```
 
-We are now almost in position to reproduce Russell’s paradox.
+We are now almost in a position to reproduce Russell’s paradox.
 We will need one more ingredient: the universal tree, i.e., the multiset of all multisets in `𝒰`.
 
 ## Definition 20.6.8
@@ -526,6 +530,7 @@ Consider two universes `𝒰` and `𝒱`, and suppose that `𝒰` as well as eac
 Then the universal tree `Y_𝒰` is also `𝒱`-small.
 
 ### Proof
+
 To show that the universal tree `{i(X) | X : M_𝒰}` is `𝒱`-small, we first have to show that the type `M_𝒰` is `𝒱`-small.
 This follows from the more general fact that the subuniverse of `𝒱`-small types is closed under the formation of W-types.
 Indeed, if a type `A` is `𝒱`-small, and if `B(x)` is `𝒱`-small for each `x : A`, then we have an equivalence `α : A ≃ A'` to a type `A'` in `𝒱`, and for each `x' : A'` we have an equivalence `B(α⁻¹(x')) ≃ B'(x')` in `𝒱`.
@@ -585,6 +590,7 @@ Consider a univalent universe `𝒰`.
 Then `𝒰` cannot be `𝒰`-small.
 
 ### Proof
+
 Suppose that `𝒰` is `𝒰`-small, and consider the multiset
 
 ```text

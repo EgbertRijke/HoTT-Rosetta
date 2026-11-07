@@ -15,6 +15,7 @@ Show that the circle is connected.
 
 Let `P : S¹ → Prop` be a family of propositions over the circle.
 Show that
+
 ```text
 P(base) → Π(x : S¹) P(x).
 ```
@@ -40,6 +41,7 @@ Show that for any embedding `m : X → S¹`, there is a proposition `P` and an e
                 ∨       ∨
                   [S¹]
 ```
+
 commutes.
 In other words, all the embeddings into the circle are of the form `S¹ × P → S¹`.
 

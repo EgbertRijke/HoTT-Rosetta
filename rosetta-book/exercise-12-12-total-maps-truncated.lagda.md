@@ -13,10 +13,12 @@ Show that the following are equivalent:
 1. For each `x : A` the map `f(x)` is `k`-truncated.
 
 2. The induced map
-```text
-tot(f) : (Σ(x : A) B(x)) → (Σ(x : A) C(x))
-```
-    is `k`-truncated.
+
+   ```text
+   tot(f) : (Σ(x : A) B(x)) → (Σ(x : A) C(x))
+   ```
+
+   is `k`-truncated.
 
 ## Solution
 

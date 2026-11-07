@@ -36,9 +36,11 @@ Show that the following are equivalent:
 2. There is an element of type `‖a = x‖` for any `x : A`.
 
 3. For any family `B` over `A`, the fiber inclusion
+
     ```text
     iₐ : B(a) → Σ(x : A) B(x)
     ```
+
     defined in Exercise 12.13 is surjective.
 
 ## Solution

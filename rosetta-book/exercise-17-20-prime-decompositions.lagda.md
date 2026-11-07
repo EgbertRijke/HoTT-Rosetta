@@ -8,6 +8,7 @@ module exercise-17-20-prime-decompositions where
 ## Problem statement
 
 For any natural number `n` consider the type
+
 ```text
 D̃ₙ ≔ Σ(X : BS₂) Σ(Y : X → 𝔽) (Fin n ≃ Π(x : X) Y(x)).
 ```

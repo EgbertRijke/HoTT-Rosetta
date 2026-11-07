@@ -69,7 +69,7 @@ given by `f ↦ (f(base),apd_f(loop))` is an equivalence.
 
 ### Proof
 
-_Proof._ By the induction principle of the circle we know that the map has a section, i.e., we have
+By the induction principle of the circle we know that the map has a section, i.e., we have
 
 ```text
 ind-S¹ : (Σ(y : P(base)) tr_P(loop,y) = y) → (Π(x : S¹) P(x))
@@ -306,7 +306,7 @@ module _
 
 ### Proof
 
-_Proof._ We prove the claim by constructing a commuting triangle
+We prove the claim by constructing a commuting triangle
 
 ```text
                             (S¹ → X)

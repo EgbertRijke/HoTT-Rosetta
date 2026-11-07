@@ -40,6 +40,6 @@ He also showed, in one of his first applications, that the univalence axiom impl
 One way to think about the univalence axiom is that it *expands* the notion of equality to encapsulate the notion of equivalence.
 It asserts that for each equivalence `e` between two types `X` and `Y` in a universe `𝒰` there is a unique identification `pₑ : X = Y` in the universe `𝒰` such that transporting along `pₑ` in the universal type family over `𝒰` is homotopic to the original equivalence `e : X ≃ Y`.
 
-Since there might be many distinct equivalences between two types `X` and `Y`, there will be equally many identifications those types.
+Since there might be many distinct equivalences between two types `X` and `Y`, there will be equally many identifications between those types.
 The univalence axiom is therefore inconsistent with the commonly assumed axiom that all identity types are propositions, i.e., that all types are sets.
 Indeed, there are two equivalences `bool ≃ bool`, so a univalent universe cannot be a set.

@@ -24,7 +24,7 @@ If `x ≺ y` holds, we say that `x` has **strictly lower rank** than `y`.
 
 ### Exercise 20.7(a)
 
-Show that the rank comparison relation defines a preordering on `W(A,B)`, i.e., show that `≼` is reflexive and transitve.
+Show that the rank comparison relation defines a preordering on `W(A,B)`, i.e., show that `≼` is reflexive and transitive.
 Furthermore, prove the following properties, in which `<` is the strict ordering on `W(A,B)` defined in Exercise 20.5:
 
 1. `(x ≼ y) ↔ ∀_{(x' < x)}∃_{(y' < y)} x' ≼ y'`

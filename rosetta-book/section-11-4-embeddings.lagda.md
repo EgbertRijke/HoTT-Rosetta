@@ -27,7 +27,7 @@ The notion of embedding is the homotopical analogue of the set theoretic notion 
 An **embedding** is a map `f : A → B` that satisfies the property that
 
 ```text
-  ap{f} : (x = y) → (f(x) = f(y))
+  ap_f : (x = y) → (f(x) = f(y))
 ```
 
 is an equivalence, for every `x, y : A`.
@@ -83,7 +83,7 @@ Let `e : A ≃ B` be an equivalence, and let `x : A`.
 Our goal is to show that
 
 ```text
-  ap{e} : (x = y) → (e(x) = e(y))
+  ap_e : (x = y) → (e(x) = e(y))
 ```
 
 is an equivalence for every `y : A`.

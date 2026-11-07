@@ -25,6 +25,7 @@ The type `Σ(h : A → B) f ~ g ∘ h` of commuting triangles
       ∨ ∨
        X
 ```
+
 where `f : A → X` and `g : B → X` are given.
 
 ### Exercise 13.2(c)
@@ -40,6 +41,7 @@ The type `Σ(h : X → Y) h ∘ f ~ g` of commuting triangles
   X ------> Y
        h
 ```
+
 where `f : A → X` and `g : A → Y` are given.
 
 ### Exercise 13.2(d)
@@ -55,6 +57,7 @@ f |         | g
   B ------> Y
        j
 ```
+
 where `f : A → B` and `g : X → Y` are given.
 
 ## Solution

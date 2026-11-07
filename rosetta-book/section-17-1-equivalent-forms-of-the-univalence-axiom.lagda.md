@@ -56,7 +56,7 @@ The following are equivalent:
    is contractible for each `A : 𝒰`.
 
 3. For any type `A : 𝒰`, the family of types `A ≃ X` indexed by `X : 𝒰` is an identity system on `𝒰`.
-   In other words, the universe `𝒰` satisfies the principle of **equivalence induction**: For every `A : 𝒰` and for every type family of types `P(X,e)` indexed by `X : 𝒰` and `e : A ≃ X`, the map
+   In other words, the universe `𝒰` satisfies the principle of **equivalence induction**: For every `A : 𝒰` and for every family of types `P(X,e)` indexed by `X : 𝒰` and `e : A ≃ X`, the map
 
    ```text
      (Π(X : 𝒰) Π(e : A ≃ X) P(X,e)) → P(A,id)
@@ -154,7 +154,7 @@ module _
 ```
 
 One way to see that the univalence axiom is plausible, is by observing that all type constructors preserve equivalences.
-For example, in Theorem 11.1.6 we showed that for any type family `B` over `A` and any type family `B'` over `A'`, if we have an equivalence `e : A ≃ A'` and family of equivalences `f : Π(x : A) B(x) ≃ B'(e(x))`, then we obtain an equivalence
+For example, in Theorem 11.1.6 we showed that for any type family `B` over `A` and any type family `B'` over `A'`, if we have an equivalence `e : A ≃ A'` and a family of equivalences `f : Π(x : A) B(x) ≃ B'(e(x))`, then we obtain an equivalence
 
 ```text
   (Σ(x : A) B(x)) ≃ (Σ(x' : A') B'(x')).

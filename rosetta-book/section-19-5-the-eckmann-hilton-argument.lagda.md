@@ -71,7 +71,7 @@ ap_{f(x,_)}(q) |        \ ap-binary_f(p,q)   | ap_{f(x',_)}(q)
 
 ### Proof
 
-_Proof._ The proof is immediate by identification elimination on `p` and `q`, where applicable. ◻
+The proof is immediate by identification elimination on `p` and `q`, where applicable. ◻
 
 ```agda
 module _
@@ -158,7 +158,7 @@ r ∙ₕ refl_refl = r.
 
 ### Proof
 
-_Proof._ This follows by identification elimination on `r` and `s`, or alternatively via Lemma 19.5.2. ◻
+This follows by identification elimination on `r` and `s`, or alternatively via Lemma 19.5.2. ◻
 
 ```agda
 left-unit-law-vertical-concat-Id² :
@@ -204,7 +204,7 @@ Then there is an identification
 
 ### Proof
 
-_Proof._ We use path induction on both `r` and `s`.
+We use path induction on both `r` and `s`.
 Then it suffices to show that
 
 ```text
@@ -237,7 +237,7 @@ r ∙ s = s ∙ r
 
 ### Proof
 
-_Proof._ First we observe that `r ∙ s = r ∙ₕ s` by the following calculation using the unit laws from Lemma 19.5.4 and the interchange law from Lemma 19.5.5:
+First we observe that `r ∙ s = r ∙ₕ s` by the following calculation using the unit laws from Lemma 19.5.4 and the interchange law from Lemma 19.5.5:
 
 ```text
 r ∙ s = (r ∙ₕ refl_refl) ∙ (refl_refl ∙ₕ s)
@@ -413,7 +413,7 @@ For `n ≥ 2`, the `n`-th homotopy group of any pointed type is abelian.
 
 BENCHMARK PROBLEM
 
-_Proof._ By Proposition 19.4.6 it follows that `πₙ(A)` is isomorphic to the second homotopy group of some pointed type, for every `n ≥ 2`.
+By Proposition 19.4.6 it follows that `πₙ(A)` is isomorphic to the second homotopy group of some pointed type, for every `n ≥ 2`.
 Therefore it suffices to prove the claim for `π₂(A)` for every pointed type `A`.
 
 Our goal is to show that

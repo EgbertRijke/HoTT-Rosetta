@@ -9,6 +9,7 @@ module exercise-12-14-isolated-elements where
 
 Consider a type `A` equipped with an element `a : A`.
 We say that `a` is an **isolated element** of `A` if it comes equipped with an element of type
+
 ```text
 is-isolated(a) ≔ Π(x : A) (a = x) + (a ≠ x).
 ```

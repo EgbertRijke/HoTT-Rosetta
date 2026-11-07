@@ -131,7 +131,7 @@ For any `f : A → X` and any embedding `m : B → X`, the type `hom-slice_X(f,m
 
 ### Proof
 
-*Proof.* Recall from Exercise 13.15 that the type `hom-slice_X(f,m)` is equivalent to the type
+Recall from Exercise 13.15 that the type `hom-slice_X(f,m)` is equivalent to the type
 
 ```text
   Π(a : A) fib(m, f(a)).
@@ -453,7 +453,7 @@ Then, if any two of the following three properties hold, so does the third:
 
 ### Proof
 
-*Proof.* First, we show that if (i) and (ii) hold, then (iii) holds.
+First, we show that if (i) and (ii) hold, then (iii) holds.
 Note that the type `hom-slice_X(i,i')` is a proposition, since `i'` is assumed to be an embedding.
 Therefore it suffices to show that the unique map `h : B → B'` such that the triangle
 

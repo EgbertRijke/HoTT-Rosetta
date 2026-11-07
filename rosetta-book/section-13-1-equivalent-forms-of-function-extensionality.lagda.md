@@ -69,7 +69,7 @@ The following are equivalent:
 
 ### Proof
 
-This theorem follows directly from Theorem 11.2.2. ◻
+This proposition follows directly from Theorem 11.2.2. ◻
 
 ```agda
 module _
@@ -165,7 +165,7 @@ The following are equivalent:
 
 ### Proof
 
-First, we show that function extensionality implies weak function extensionality, suppose that each `B(a)` is contractible with center of contraction `c(a)` and contraction `Cₐ : Π(y : B(a)) c(a) = y`.
+First, we show that function extensionality implies weak function extensionality. Suppose that each `B(a)` is contractible with center of contraction `c(a)` and contraction `Cₐ : Π(y : B(a)) c(a) = y`.
 Then we take `c ≔ λ a. c(a)` to be the center of contraction of `Π(x : A) B(x)`.
 To construct the contraction we have to define a term of type
 
