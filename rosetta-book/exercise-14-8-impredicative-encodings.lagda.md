@@ -19,7 +19,7 @@ P₁ ∧ P₂ ≃ Π(Q : Prop_𝒰) (P₁ → (P₂ → Q)) → Q,
 P₁ ⇒ P₂ ≃ Π(Q : Prop_𝒰) P₁ → ((P₂ → Q) → Q),
 ¬ A ≃ Π(Q : Prop_𝒰) A → Q,
 ∃_{(x : A)}P(x) ≃ Π(Q : Prop_𝒰) (Π(x : A) P(x) → Q) → Q,
-∀_{(x : A)}P(x) ≃ Π(Q : Prop_𝒰) Π(x : A) (P(x) → Q) → Q
+∀_{(x : A)}P(x) ≃ Π(Q : Prop_𝒰) Π(x : A) (P(x) → Q) → Q,
 ‖a = x‖ ≃ Π(Q : A → Prop_𝒰) Q(a) → Q(x).
 ```
 

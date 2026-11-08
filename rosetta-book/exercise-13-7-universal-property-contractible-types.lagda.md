@@ -97,8 +97,6 @@ module _
     dup-contr (λ _ → X)
 ```
 
-13.7(iv) is a direct corollary of 13.7(iii) and is not formalized.
-
 ```agda
 module _
   {l1 : Level} {A : UU l1} (a : A)
@@ -254,7 +252,7 @@ module _
 
 ## Supplement
 
-### A type `A` is contractible if and only if `A → (X → A)` is an equivalence
+### A type `A` is contractible if and only if the constant-function map `A → (X → A)` is an equivalence for every type `X`
 
 ```agda
 module _

@@ -828,7 +828,7 @@ module _
   coherence-htpy-eq-ap-precomp-Π refl = refl
 ```
 
-### In a commuting square with the left and right maps equivalences, the top map is truncated if and only if the bottom map is truncated
+### In a commuting square with the left and right maps equivalences, the top map is truncated if the bottom map is truncated
 
 ```agda
 module _
@@ -846,7 +846,7 @@ module _
         ( is-trunc-map-is-equiv k K))
 ```
 
-### Precomposing functions Π B C by f : A → B is k+1-truncated if and only if precomposing homotopies is k-truncated
+### Precomposing functions `Π B C` by `f : A → B` is `(k + 1)`-truncated if precomposing homotopies is `k`-truncated
 
 ```agda
 module _

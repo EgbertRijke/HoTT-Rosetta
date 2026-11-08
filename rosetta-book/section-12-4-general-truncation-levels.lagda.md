@@ -593,7 +593,7 @@ abstract
     balance-succ-add+2-𝕋 x y ∙ ap succ-𝕋 (commutative-add+2-𝕋 x y)
 ```
 
-### The empty type is `k`-truncated for any `k ≥ 1`
+### The empty type is `k`-truncated for any `k ≥ -1`
 
 ```agda
 abstract

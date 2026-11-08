@@ -324,6 +324,16 @@ However, this only gives us a universal property with respect to doubly negated 
 In fact, propositional truncations are not guaranteed to exist in Martin Löf’s dependent type theory, the way it is set up in Chapter I.
 We will therefore add new rules to the type theory to ensure their existence.
 
+PARTIAL BENCHMARK PROBLEM
+
+The extension map is formalized by `extend-double-negation` in [Exercise 4.3](exercise-4-3-double-negation-logic.lagda.md#exercise-43b).
+The assertion that precomposition with `intro-double-negation` is an equivalence remains to be formalized.
+
+```agda
+open import exercise-4-3-double-negation-logic
+  using (intro-double-negation; extend-double-negation)
+```
+
 ## Supplement
 
 Note: In agda-unimath, propositional truncation is defined in terms of the general truncation operations. Therefore, we have to introduce the general truncation operations prior to introducing the propositional truncation operations.

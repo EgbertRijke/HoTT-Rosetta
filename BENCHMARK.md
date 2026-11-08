@@ -31,7 +31,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-13-16-equivalences-and-isomorphisms-of-sets.lagda.md
 - rosetta-book/exercise-13-18-retracts-as-limits.lagda.md
 - rosetta-book/exercise-14-1-propositional-truncation-properties.lagda.md
-- rosetta-book/exercise-14-2-mere-equality.lagda.md
 - rosetta-book/exercise-14-4-dependent-universal-property-truncations.lagda.md
 - rosetta-book/exercise-14-6-propositional-truncations-of-decidable-types.lagda.md
 - rosetta-book/exercise-14-7-precomposition-with-truncation.lagda.md
@@ -154,6 +153,7 @@ The main text contains a few missing formalizations that provide further benchma
 - rosetta-book/section-11-6-the-structure-identity-principle.lagda.md (Theorem 11.6.2)
 - rosetta-book/section-12-3-sets.lagda.md (Theorem 12.3.4)
 - rosetta-book/section-13-2-identity-systems-on-pi-types.lagda.md (Theorem 13.2.4)
+- rosetta-book/section-14-1-the-universal-property-of-propositional-truncations.lagda.md (Remark 14.1.5)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Proposition 19.4.6)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Remark 19.4.8)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Proposition 19.4.9)

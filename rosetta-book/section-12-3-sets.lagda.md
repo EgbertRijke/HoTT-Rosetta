@@ -422,7 +422,7 @@ module _
     ( e , coherent-unit-laws-unit-laws μ H)
 ```
 
-### Semirings
+### Semigroups
 
 ```agda
 has-associative-mul : {l : Level} (X : UU l) → UU l

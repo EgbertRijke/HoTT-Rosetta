@@ -141,7 +141,7 @@ The inverse is the function
 
 It is immediate from the computation rule of the path induction principle that `ev-refl ∘ path-indₐ ~ id`.
 
-To see that `path-indₐ ∘ ev-refl ~ id`, let `f : Π(x : A) (a = x) → B(x,p)`.
+To see that `path-indₐ ∘ ev-refl ~ id`, let `f : Π(x : A) Π(p : a = x) B(x,p)`.
 To show that `path-indₐ(f(a,refl)) = f` we apply function extensionality twice.
 Therefore it suffices to show that
 

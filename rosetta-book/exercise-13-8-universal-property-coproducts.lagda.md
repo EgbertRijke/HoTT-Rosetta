@@ -18,7 +18,7 @@ Consider two types `A` and `B`.
 Show that the map
 
 ```text
-(Π(z : A + B) P(z)) → (Π(x : A) P(inl(x))) × (Π(y : B) P(inr(b)))
+(Π(z : A + B) P(z)) → (Π(x : A) P(inl(x))) × (Π(y : B) P(inr(y)))
 ```
 
 given by `f ↦ (f ∘ inl,f ∘ inr)` is an equivalence for any type family `P` over `A + B`.

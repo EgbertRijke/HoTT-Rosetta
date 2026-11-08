@@ -11,7 +11,7 @@ Consider a family `B` of `(k + 1)`-truncated types over the propositional trunca
 Show that the map
 
 ```text
-(Π(x : ‖A‖) B(x)) → (Π(x : A) B(x))
+(Π(x : ‖A‖) B(x)) → (Π(x : A) B(η(x)))
 ```
 
 given by `f ↦ f ∘ η` is a `k`-truncated map.
