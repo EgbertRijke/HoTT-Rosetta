@@ -32,6 +32,7 @@ open import section-12-4-general-truncation-levels
 open import exercise-12-4-coproduct-truncation
 open import exercise-12-6-truncated-sigma-types
 open import exercise-12-7-truncated-products
+open import exercise-12-11-truncated-maps-triangles
 ```
 
 The function extensionality principle characterizes the identity type of an arbitrary dependent function type.
@@ -825,25 +826,6 @@ module _
       ( htpy-eq)
       ( precomp-Π f (eq-value g h))
   coherence-htpy-eq-ap-precomp-Π refl = refl
-```
-
-### In a commuting triangle f ~ g ∘ h, if f and g are truncated maps, then h is a truncated map
-
-```agda
-abstract
-  is-trunc-map-top-map-triangle :
-    {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {X : UU l3}
-    (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
-    is-trunc-map k g → is-trunc-map k f → is-trunc-map k h
-  is-trunc-map-top-map-triangle k {A} f g h H is-trunc-g is-trunc-f b =
-    is-trunc-fam-is-trunc-Σ k
-      ( is-trunc-g (g b))
-      ( is-trunc-is-equiv' k
-        ( Σ A (λ z → g (h z) ＝ g b))
-        ( map-compute-fiber-comp g h (g b))
-        ( is-equiv-map-compute-fiber-comp g h (g b))
-        ( is-trunc-map-htpy k (inv-htpy H) is-trunc-f (g b)))
-      ( b , refl)
 ```
 
 ### In a commuting square with the left and right maps equivalences, the top map is truncated if and only if the bottom map is truncated

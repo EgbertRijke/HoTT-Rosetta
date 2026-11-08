@@ -28,7 +28,7 @@ open import section-12-2-subtypes
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import exercise-12-3-injective-maps-into-sets
-open import exercise-12-6-truncated-sigma-types
+open import exercise-12-12-total-maps-truncated
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-4-composing-with-equivalences
 open import exercise-13-3-truncatedness-is-a-proposition

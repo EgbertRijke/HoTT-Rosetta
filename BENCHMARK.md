@@ -22,8 +22,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-12-5-diagonal.lagda.md
 - rosetta-book/exercise-12-9-list-concatenation-truncated-map.lagda.md
 - rosetta-book/exercise-12-10-constant-maps-truncated.lagda.md
-- rosetta-book/exercise-12-11-truncated-maps-triangles.lagda.md
-- rosetta-book/exercise-12-12-total-maps-truncated.lagda.md
 - rosetta-book/exercise-12-14-isolated-elements.lagda.md
 - rosetta-book/exercise-13-2-identity-types-of-structured-function-types.lagda.md
 - rosetta-book/exercise-13-5-path-split-and-coherently-invertible-propositions.lagda.md
@@ -142,7 +140,6 @@ The following files contain partially solved (auto)formalization exercises, whic
 - rosetta-book/exercise-12-3-injective-maps-into-sets.lagda.md
 - rosetta-book/exercise-12-4-coproduct-truncation.lagda.md
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md
-- rosetta-book/exercise-12-7-truncated-products.lagda.md
 - rosetta-book/exercise-13-9-uniqueness-of-identity-types.lagda.md
 - rosetta-book/exercise-13-15-morphisms-over-a-type.lagda.md
 - rosetta-book/exercise-15-2-propositional-truncations.lagda.md
@@ -155,6 +152,7 @@ The following files contain partially solved (auto)formalization exercises, whic
 The main text contains a few missing formalizations that provide further benchmark problems identified with "BENCHMARK PROBLEM".
 
 - rosetta-book/section-11-6-the-structure-identity-principle.lagda.md (Theorem 11.6.2)
+- rosetta-book/section-12-3-sets.lagda.md (Theorem 12.3.4)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Proposition 19.4.6)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Remark 19.4.8)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Proposition 19.4.9)

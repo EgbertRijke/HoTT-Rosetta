@@ -17,6 +17,7 @@ open import section-10-4-equivalences-are-contractible-maps
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import exercise-12-6-truncated-sigma-types
+open import exercise-12-11-truncated-maps-triangles
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import exercise-13-7-universal-property-contractible-types
 open import section-14-2-propositional-truncations-as-higher-inductive-types

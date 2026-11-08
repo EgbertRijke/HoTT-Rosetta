@@ -224,6 +224,11 @@ module _
       is-prop-based-Id-prop-in-based-id x (R x) (p x) (ρ x) (i x)
 ```
 
+PARTIAL BENCHMARK PROBLEM
+
+The conclusion that `A` is a set is formalized by `is-set-prop-in-id`, and `is-equiv-prop-in-id` proves that the given maps `R(x,y) → (x = y)` are equivalences.
+The assertion that every family of maps `(x = y) → R(x,y)` is a family of equivalences remains to be formalized.
+
 ## Theorem 12.3.5
 
 Any type with decidable equality is a set.

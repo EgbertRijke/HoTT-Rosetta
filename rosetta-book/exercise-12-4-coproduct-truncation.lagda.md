@@ -116,6 +116,11 @@ pr2 (coproduct-Prop P Q H) =
   is-prop-coproduct H (is-prop-type-Prop P) (is-prop-type-Prop Q)
 ```
 
+PARTIAL BENCHMARK PROBLEM
+
+The implication `(P → ¬ Q) → is-prop(P + Q)` is formalized by `is-prop-coproduct`.
+The converse remains to be formalized.
+
 ### Exercise 12.4(d)
 
 ```agda
@@ -153,20 +158,24 @@ coproduct-Set :
 pr1 (coproduct-Set (A , is-set-A) (B , is-set-B)) = A + B
 pr2 (coproduct-Set (A , is-set-A) (B , is-set-B)) =
   is-set-coproduct is-set-A is-set-B
-```
 
-## Supplement
-
-### The unit type is a set
-
-```agda
 abstract
   is-set-unit : is-set unit
   is-set-unit = is-trunc-succ-is-trunc neg-one-𝕋 is-prop-unit
 
 unit-Set : Set lzero
 unit-Set = unit , is-set-unit
+
+abstract
+  is-set-ℤ : is-set ℤ
+  is-set-ℤ = is-set-coproduct is-set-ℕ (is-set-coproduct is-set-unit is-set-ℕ)
+
+ℤ-Set : Set lzero
+pr1 ℤ-Set = ℤ
+pr2 ℤ-Set = is-set-ℤ
 ```
+
+## Supplement
 
 ### The standard finite types are sets
 
@@ -197,16 +206,4 @@ pr2 (extensionality-Fin k x y) =
     ( is-set-Fin k x y)
     ( is-prop-Eq-Fin k x y)
     ( eq-Eq-Fin k)
-```
-
-### The type of integers is a set
-
-```agda
-abstract
-  is-set-ℤ : is-set ℤ
-  is-set-ℤ = is-set-coproduct is-set-ℕ (is-set-coproduct is-set-unit is-set-ℕ)
-
-ℤ-Set : Set lzero
-pr1 ℤ-Set = ℤ
-pr2 ℤ-Set = is-set-ℤ
 ```
