@@ -493,6 +493,11 @@ Then the fact that (i) holds if and only if (ii) holds follows from the equivale
   (hom-slice_X(f,m) → hom-slice_X(i,m)) ≃ (hom-slice_X(f,m) → hom-slice_X(i',m)). ◻
 ```
 
+PARTIAL BENCHMARK PROBLEM
+
+The code below proves contractibility with additional compatibility data involving `q` and `q'`.
+Contractibility of the type in (3), without that additional data, remains to be formalized.
+
 ```agda
 module _
   {l1 l2 l3 l4 : Level} {X : UU l1} {A : UU l2} (f : A → X)

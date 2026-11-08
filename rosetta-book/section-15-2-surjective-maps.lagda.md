@@ -200,6 +200,12 @@ This is easy, because we have
   η(x,refl) : ‖fib(f,f(x))‖. ◻
 ```
 
+PARTIAL BENCHMARK PROBLEM
+
+The equivalence of (1) and (2) is formalized below.
+The implication from (1) to (3) is formalized by `is-trunc-map-precomp-Π-is-surjective` in the [supplement to Section 18.5](section-18-5-set-truncations.lagda.md#precomposing-functions-into-a-family-of-k1-types-by-a-surjective-map-is-a-k-truncated-map).
+The implication from (3) to (1) remains to be formalized.
+
 ```agda
 module _
   {l1 l2 l3 : Level} {I : UU l1} {A : I → UU l2} (B : (i : I) → A i → UU l3)
@@ -484,6 +490,8 @@ For any map `f : A → P` into a proposition `P`, the following are equivalent:
 
 2. The map `f` is surjective.
 
+BENCHMARK PROBLEM
+
 Using the characterization of surjective maps of Proposition 15.2.3, we can also give a new characterization of the image of a map.
 
 ## Theorem 15.2.5
@@ -658,6 +666,8 @@ Now it follows by Theorem 15.1.8 that the type of `(e,H) : hom-slice_X(i,i')` in
 
 in `hom-slice_X(f,i')`, is contractible. ◻
 
+BENCHMARK PROBLEM
+
 ## Supplement
 
 ### Surjective maps are epimorphisms with respect to maps into sets
@@ -729,7 +739,7 @@ module _
     map-inv-equiv (extensionality-surjection g)
 ```
 
-### A type family C over B satisfies the universal property of the family of fibers of a map f : A → B if and only if the constant map C b → (`fiber f b` → C b) is an equivalence for every b : B
+### A type family C over B satisfies the universal property of the family of fibers of a map f : A → B if the constant map C b → (`fiber f b` → C b) is an equivalence for every b : B
 
 In other words, the dependent type C is f-local if its fiber over b is `fiber f b`-null for every b : B.
 
