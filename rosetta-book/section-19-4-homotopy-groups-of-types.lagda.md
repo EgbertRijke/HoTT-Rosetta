@@ -808,6 +808,10 @@ module _
   compute-eq-conjugation-tr-type-Ω-refl refl = refl
 ```
 
+PARTIAL BENCHMARK PROBLEM
+
+Note: The underlying pointed set of `πₙ(A)` and the operations on loop spaces are formalized. The group operation and group laws on the set truncation `πₙ(A)` for `n ≥ 1` remain to be formalized.
+
 The group `π₁(A)` of a pointed type is called the **fundamental group** of `A` at its base point `a : A`.
 
 ## Remark 19.4.5

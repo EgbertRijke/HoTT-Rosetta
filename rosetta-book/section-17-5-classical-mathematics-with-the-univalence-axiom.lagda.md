@@ -540,10 +540,10 @@ If we had a function
   f : Π(X : 𝒰) ‖X‖ → X,
 ```
 
-the dependent action on paths of `f` would give an identification
+the dependent action on paths of `f`, together with the fact that `‖Fin 2‖` is a proposition, would give an identification
 
 ```text
-  apd_f(p) : succ-Fin₂(f(Fin 2,p,H)) = f(Fin 2,p,η(0)).
+  succ-Fin₂(f(Fin 2,η(0))) = f(Fin 2,η(0)).
 ```
 
 In other words, it would give us a fixed point for the successor function on `Fin 2`.

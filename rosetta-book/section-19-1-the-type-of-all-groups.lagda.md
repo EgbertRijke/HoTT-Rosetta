@@ -33,7 +33,7 @@ Since semigroups can have at most one unit element and since elements of semigro
 In order to show that isomorphic (semi)groups can be identified, it has to be part of the definition of a (semi)group that its underlying type is a set.
 This is an important observation: in many branches of algebra the objects of study are _set-level_ structures.
 
-A notable exception is formed by categories, which are objects at truncation level `1`, i.e., at the level of _groupoids_.
+A notable exception is formed by (univalent) categories, whose types of objects are `1`-types, i.e., at the level of _groupoids_.
 We will not cover categories in this book.
 For more about categories we recommend Chapter 9 of [the HoTT Book](https://homotopytypetheory.org/book/).
 

@@ -44,10 +44,10 @@ Let `f : A → X` and `g : B → X` be maps.
 A **morphism from `f` to `g` over `X`** consists of a map `h : A → B` equipped with a homotopy `H : f ~ g ∘ h` witnessing that the triangle
 
 ```text
-       q
+       h
   A ------> B
    \       /
-  f \     / i
+  f \     / g
      \   /
       ∨ ∨ 
        X
@@ -88,10 +88,10 @@ pr2 (id-hom-slice f) = refl-htpy
 Consider a commuting triangle
 
 ```text
-      q_f
+       q
   A ------> I
    \       /
-  f \     / i_f
+  f \     / i
      \   /
       ∨ ∨ 
        X
@@ -243,7 +243,7 @@ Furthermore, we define
 
    ```text
          q_f
-     A ------> I
+     A ------> im(f)
       \       /
      f \     / i_f
         \   /

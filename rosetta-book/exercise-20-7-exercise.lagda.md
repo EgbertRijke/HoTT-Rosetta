@@ -10,7 +10,7 @@ module exercise-20-7-exercise where
 Consider the **rank comparison relation** `≼ : W(A,B) → (W(A,B) → Prop_𝒰)` defined recursively by
 
 ```text
-(tree(a,α) ≼ (b,β)) ≔ ∀_{(x : B(a))}∃_{(y : B(b))} α(x) ≼ β(y).
+(tree(a,α) ≼ tree(b,β)) ≔ ∀_{(x : B(a))}∃_{(y : B(b))} α(x) ≼ β(y).
 ```
 
 If `x ≼ y` holds, we say that `x` has **lower rank** than `y`.
@@ -54,7 +54,7 @@ We will write
 ```
 
 for the poset reflection of `(W(A,B),≼)` and its quotient map.
-We will call the poset `(R(A,B),≼)` the **rank poset** of the W-type `W(A,B)`.
+We will call the poset `(rank(A,B),≼)` the **rank poset** of the W-type `W(A,B)`.
 
 ### Exercise 20.7(c)
 
@@ -70,7 +70,7 @@ Show that the strict ordering `≺` extends to a relation `≺` on `rank(A,B)` w
 
 3. The relation `≺` is transitive and irreflexive on `rank(A,B)`.
 
-We will call the strictly ordered set `(R(A,B),≺)` the **(strict) rank** of the W-type `W(A,B)`.
+We will call the strictly ordered set `(rank(A,B),≺)` the **(strict) rank** of the W-type `W(A,B)`.
 
 ### Exercise 20.7(e)
 

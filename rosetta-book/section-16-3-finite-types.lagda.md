@@ -105,7 +105,7 @@ is-finite-type-Finite-Type :
 is-finite-type-Finite-Type = pr2
 ```
 
-In other words, the type `𝔽` of finite types is the image of the map `Fin : ℕ → 𝒰₀`.
+Using the univalence axiom introduced in Section 17.1, the type `𝔽` of finite types can be identified with the image of the map `Fin : ℕ → 𝒰₀`.
 We also define the type `BSₖ` of **`k`-element types** by
 
 ```text
@@ -625,7 +625,7 @@ For the inductive step, note that by the dependent universal property of coprodu
 
 ```text
 (Π(x : Fin (k + 1)) ‖B(x)‖) ≃ (Π(x : Fin k) ‖B(i(x))‖) × ‖B(⋆)‖
-‖Π(x : Fin k) B(x)‖ ≃ ‖(Π(x : Fin k) B(i(x))) × B(⋆)‖.
+‖Π(x : Fin (k + 1)) B(x)‖ ≃ ‖(Π(x : Fin k) B(i(x))) × B(⋆)‖.
 ```
 
 Recall from Exercise 14.3 that `‖X × Y‖ ≃ ‖X‖ × ‖Y‖` for any two types `X` and `Y`.
@@ -765,9 +765,9 @@ X → is-finite(Y).
 
    3. The type `Σ(x : A) B(x)` is finite.
 
-   If (a) holds, then (b) is equivalent to (c).
-   Moreover, if (b) and (c) hold, then (a) holds if and only if `A` is a set and the type `Σ(x : A) ¬ B(x)` is finite.
-   Furthermore, if (b) and (c) hold and `B` has a section, then (a) holds.
+   If the first condition holds, then the second and third conditions are equivalent.
+   Moreover, if the second and third conditions hold, then the first holds if and only if `A` is a set and the type `Σ(x : A) ¬ B(x)` is finite.
+   Furthermore, if the second and third conditions hold and `B` has a section, then the first holds.
 
 ### Proof
 
@@ -805,7 +805,7 @@ A → Σ(x : A) B(x)
 ```
 
 given by `x ↦ (x,f(x))` is a decidable embedding, because the fiber at `(x,y)` of this map is equivalent to the identity type `f(x) = y` in `B(x)`, which is a decidable proposition.
-It follows from the fact that (a) and (b) together imply (c) that `A` is finite.
+It follows from the fact that the first and second conditions together imply the third that `A` is finite.
 
 For the remaining part of the final claim, assume that `A` is a set.
 Note that the assumption that each `B(x)` is finite implies that each `B(x)` is either inhabited or empty.
@@ -1091,9 +1091,13 @@ abstract
         ( h))
 ```
 
+PARTIAL BENCHMARK PROBLEM
+
+Note: The necessary direction of the final equivalence in (3), asserting that `Σ(x : A) ¬ B(x)` is finite when `A` is finite, remains to be formalized. The converse is formalized by `is-finite-base-is-finite-complement`.
+
 ## Supplement
 
-### A finite type is empty if and only if it has 0 elements
+### A finite type with 0 elements is empty
 
 ```agda
 abstract

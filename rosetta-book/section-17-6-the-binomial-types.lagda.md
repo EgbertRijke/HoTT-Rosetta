@@ -710,5 +710,5 @@ One reason why it works is that the identity type of `Σ(X : 𝒰_B) X ↪ᵈ A`
 
 Therefore it follows that for any two decidable embeddings `f, g : B ↪ᵈ A`, if `f` and `g` are the same up to a permutation on `B`, then we get an identification `(B,f) = (B,g)` in the type `Σ(X : 𝒰_B) X ↪ᵈ A`.
 
-From a group theoretic perspective we may observe that the automorphism group `B ≃ B` acts freely on the set of decidable embeddings `B ↪ᵈ A`, and the type `Σ(X : 𝒰_B) X ↪ A` can be viewed as the type of orbits of that action.
+From a group theoretic perspective we may observe that the automorphism group `B ≃ B` acts freely on the set of decidable embeddings `B ↪ᵈ A`, and the type `Σ(X : 𝒰_B) X ↪ᵈ A` can be viewed as the type of orbits of that action.
 Since this action of `Aut(B)` on `B ↪ᵈ A` is free, we see that the number of orbits is `1 / k!` times the number of elements in `B ↪ᵈ A`.

@@ -20,13 +20,13 @@ Show that the following are equivalent:
 
    is an embedding.
 
-Hint: To show that (ii) implies (i), use the assumption with the set `C ≔ Prop_𝒰`, where `𝒰` is a univalent universe containing both `A` and `B`.
+Hint: To show that (2) implies (1), use the assumption with the set `C ≔ Prop_𝒰`, where `𝒰` is a univalent universe containing both `A` and `B`.
 
 ## Solution
 
 PARTIAL BENCHMARK PROBLEM
 
-The implication (i) ⇒ (ii) is formalized as `is-epimorphism-is-surjective-Set` in the [supplement to Section 15.2](section-15-2-surjective-maps.lagda.md#surjective-maps-are-epimorphisms-with-respect-to-maps-into-sets). The converse remains to be formalized.
+The implication (1) ⇒ (2) is formalized as `is-epimorphism-is-surjective-Set` in the [supplement to Section 15.2](section-15-2-surjective-maps.lagda.md#surjective-maps-are-epimorphisms-with-respect-to-maps-into-sets). The converse remains to be formalized.
 
 ```agda
 open import section-15-2-surjective-maps using

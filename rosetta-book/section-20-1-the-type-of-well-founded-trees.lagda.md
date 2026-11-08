@@ -36,7 +36,7 @@ tree : Π(x : A) (B(x) → W(A, B)) → W(A, B).
 The induction principle of the W-type `W(A, B)` asserts that, for any type family `P` over `W(A, B)`, any dependent function
 
 ```text
-h : Π(x : A) Π(α : B(x) → W(A, B)) (Π(y : B(x)) P(α(x))) → P(tree(x, α))
+h : Π(x : A) Π(α : B(x) → W(A, B)) (Π(y : B(x)) P(α(y))) → P(tree(x, α))
 ```
 
 determines a dependent function
@@ -131,14 +131,14 @@ More precisely, if we are given a map `h : B(x) → empty`, then we can define t
 cₓ(h) ≔ tree(x, ex-falso ∘ h).
 ```
 
-The elements of `w : W(A, B)` for which the type `B(arity(w))` is empty are called the **constants** of `W(A, B)`.
+The elements `w : W(A, B)` for which the type `arity(w)` is empty are called the **constants** of `W(A, B)`.
 In other words, the predicate
 
 ```text
 is-constant_W : W(A, B) → Prop_𝒰
 ```
 
-is defined by `is-constant_W(w) ≔ is-empty(B(arity(w)))`.
+is defined by `is-constant_W(w) ≔ is-empty(arity(w))`.
 
 ```agda
 module _
@@ -167,7 +167,7 @@ In particular, if each `B(x)` is inhabited, then `W(A, B)` is empty.
 
 ### Proof
 
-To prove that (i) implies (ii), assume that `¬¬(B(x))` holds for each `x : A`.
+To prove that (1) implies (2), assume that `¬¬(B(x))` holds for each `x : A`.
 Our goal is to construct a function `f : W(A, B) → empty`.
 By the induction principle of W-types it suffices to construct a function of type
 
@@ -183,7 +183,7 @@ This type is judgmentally equal to the type
 
 so we obtain the desired function from the assumption that `¬¬(B(x))` holds for every `x : A`.
 
-To prove that (ii) implies (i), suppose that `W(A, B)` is empty and let `x : A`.
+To prove that (2) implies (1), suppose that `W(A, B)` is empty and let `x : A`.
 To show that `¬¬(B(x))` holds, assume that `¬(B(x))` holds.
 In other words, assume a function `h : B(x) → empty`.
 Then we have the constant element `cₓ(h) : W(A, B)`.
@@ -201,6 +201,10 @@ module _
       ( empty-Prop)
       ( λ y → is-empty-𝕎 H (α y))
 ```
+
+PARTIAL BENCHMARK PROBLEM
+
+Note: The Agda proves the final implication for inhabited arities. The stated equivalence between nonempty arities and an empty W-type remains to be formalized.
 
 ## Example 20.1.6
 
@@ -248,13 +252,16 @@ p(tree(false, α)) : tree(false, ex-falso) = tree(false, α)
 ```
 
 by the fact that `ex-falso = α` for any `α : empty → N`.
-Second, there is an identification
+Second, the induction hypothesis `p(α(⋆)) : f(g(α(⋆))) = α(⋆)` gives the first identification in
 
 ```text
-p(tree(true, α)) : tree(true, const_{α(⋆)}) = tree(true, α)
+f(g(tree(true, α))) ≐ tree(true, const_{f(g(α(⋆)))})
+                    = tree(true, const_{α(⋆)})
+                    = tree(true, α).
 ```
 
-by the fact that `const_{α(⋆)} = α` for any map `α : unit → N`.
+The last identification follows from `const_{α(⋆)} = α` for any map `α : unit → N`.
+Their concatenation defines `p(tree(true, α))`.
 This completes the construction of the equivalence `ℕ ≃ N`.
 
 ```agda
@@ -384,7 +391,10 @@ On the other hand, we define the type of **(unoriented) finitely branching roote
 The qualitative difference between the types of oriented and unoriented finitely branching rooted trees is similar to the qualitative difference between types of oriented and unoriented binary rooted trees.
 In the type of oriented finitely branching rooted trees, we record the ordering of the branches while in the type of unoriented finitely branching rooted trees there are identifications between trees that have the same branches up to permutation.
 
-<!-- This agda block does not perfectly match the natural language statement. -->
+PARTIAL BENCHMARK PROBLEM
+
+Note: The oriented W-type `W(ℕ, Fin)` is formalized. The unoriented W-type `W(𝔽, T)` and the comparison of their identifications under permutations of branches remain to be formalized.
+
 ```agda
 plane-tree-𝕎 : UU lzero
 plane-tree-𝕎 = 𝕎 ℕ Fin

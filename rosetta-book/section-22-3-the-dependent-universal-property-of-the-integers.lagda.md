@@ -129,13 +129,13 @@ succ-ℤ  |          | e
 
 commutes.
 In particular, if we take `A ≔ (x = x)` for some `x : X`, then for any `p : x = x` we have the equivalence `λ q. p ∙ q : (x = x) → (x = x)`.
-This equivalence induces a map
+Using `refl : x = x` as the chosen point, this equivalence induces a map
 
 ```text
 k ↦ p^k : ℤ → (x = x),
 ```
 
-for any `p : x = x`.
+with `p^0 = refl`, for any `p : x = x`.
 This induces the **degree `k` map** on the circle
 
 ```text

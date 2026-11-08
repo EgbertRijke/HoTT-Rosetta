@@ -118,7 +118,7 @@ It remains to construct a homotopy `H : r ∘ i ~ id`.
 We simply compute
 
 ```text
-  r(i(f)) ≐ r(λ x. (x,f(x)),refl)
+  r(i(f),x) ≐ r((λ y. (y,f(y)),refl),x)
           ≐ tr_B(htpy-eq(refl,x),pr2(x,f(x)))
           ≐ tr_B(refl,f(x))
           ≐ f(x).

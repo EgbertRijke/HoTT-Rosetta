@@ -298,6 +298,10 @@ This is indeed the case, because `ℤ` is a `0`-type, and we have an equivalence
 
 Furthermore, since `ℤ` is a `0`-type and not a `(-1)`-type, it follows that the circle is a `1`-type and not a `0`-type. ◻
 
+BENCHMARK PROBLEM
+
+Note: The explicit proofs that the circle is a `1`-type and is not a set remain to be formalized.
+
 Our second goal is to construct a group isomorphism
 
 ```text

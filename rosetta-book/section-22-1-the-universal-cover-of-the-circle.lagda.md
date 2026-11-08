@@ -302,8 +302,10 @@ commutes.
 We will write `d ↦ d_X` for the inverse of this equivalence, so that the relations
 
 ```text
-(x_D)_X = x (e(x)_D) = tr_{D(X,e)}(loop,x_D)
-(d_X)_D = d (tr_{D(X,e)}(d))_X = e(d_X)
+(x_D)_X = x
+(d_X)_D = d
+(e(x)_D) = tr_{D(X,e)}(loop,x_D)
+(tr_{D(X,e)}(loop,d))_X = e(d_X)
 ```
 
 hold.

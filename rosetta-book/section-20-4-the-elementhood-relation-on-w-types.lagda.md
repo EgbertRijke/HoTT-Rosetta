@@ -56,7 +56,7 @@ Using the elementhood relation on `W(A, B)`, we can reformulate the induction pr
 For any family `P` of types over `W(A, B)`, there is a function
 
 ```text
-i : (Π(x : W(A, B)) (Π(y : W(A, B)) (y ∈ x) → P(y)) → P(x)) → (Π(x : X) P(x))
+i : (Π(x : W(A, B)) (Π(y : W(A, B)) (y ∈ x) → P(y)) → P(x)) → (Π(x : W(A, B)) P(x))
 ```
 
 that comes equipped with an identification

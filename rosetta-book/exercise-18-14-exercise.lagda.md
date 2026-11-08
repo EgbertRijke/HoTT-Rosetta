@@ -17,7 +17,7 @@ Furthermore, for `(Y,i) : binom(X, k)`, define
 
 ```text
 X ∖ Y ≔ Σ(x : X) ¬(fib(i, x)).
-i^c ≔ pr 1.
+i^c ≔ pr1.
 ```
 
 Now consider a type `X` and two type families `A` and `B` over `X`, and let `𝒰` be a universe containing `X`, `A`, and `B`.

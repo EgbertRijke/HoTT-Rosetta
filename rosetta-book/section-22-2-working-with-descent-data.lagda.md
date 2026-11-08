@@ -108,8 +108,9 @@ This equivalence fits in a commuting triangle
                          tot_α(ᾱ)
 ```
 
-where the map on the left is given by `s ↦ (α^{-1}(s(base)),ᾱ^{-1}(apdₛ(loop)))`.
-The bottom map and the map on the right are equivalences, so it follows by the 3-for-2 property of equivalences that the map on the left is an equivalence. ◻
+Define the map on the left by composing `dgen_{S¹}` with the inverse of the bottom equivalence `tot_α(ᾱ)`.
+The triangle then commutes, and the map on the left is an equivalence.
+Its first component is `α⁻¹ ∘ ev_base`, up to the inverse laws for `α`, so the square in the statement commutes. ◻
 
 The following corollary can be used to compare type families over the circle.
 In particular, we will use it to compare the identity type of the circle with the universal cover.

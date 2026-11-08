@@ -586,8 +586,8 @@ To see that `R_P` is symmetric, note that if `R_P(x,y)` holds, then `R_P(x)` is 
   Σ(Q : P⁺_𝒰(A)) P(Q) × Q(y).
 ```
 
-By contractibility, this implies that `R(x) = R(y)`, from which we obtain that `R(y,x)` holds.
-To see that `R_P` is transitive we observe similarly that if `R(x,y)` and `R(y,z)` hold, then we have an identification `R(x) = R(y)` and it follows that `R(x,z)` holds.
+By contractibility, this implies that `R_P(x) = R_P(y)`, from which we obtain that `R_P(y,x)` holds.
+To see that `R_P` is transitive we observe similarly that if `R_P(x,y)` and `R_P(y,z)` hold, then we have an identification `R_P(x) = R_P(y)` and it follows that `R_P(x,z)` holds.
 Thus we obtain a map
 
 ```text

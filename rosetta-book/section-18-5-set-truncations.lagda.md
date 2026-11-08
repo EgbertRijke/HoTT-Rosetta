@@ -1048,6 +1048,10 @@ module _
             ( is-trunc-type-Truncated-Type (P x))))
 ```
 
+BENCHMARK PROBLEM
+
+Note: The code gives the dependent universal-property characterization of connected maps. The stated equivalence between being a set truncation and being connected, for an arbitrary map into a set, remains to be formalized.
+
 ## Remark 18.5.8
 
 There are truncation operations for every truncation level.

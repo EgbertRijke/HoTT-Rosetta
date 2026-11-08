@@ -161,7 +161,12 @@ We will write `i` for `inl : X → X + unit` and also for `inl : Y → Y + unit`
                 = i(y).
    ```
 
-   Since `i : Y → Y + unit` is injective, it follows that `f(g(y)) = y`. ◻
+   Since `i : Y → Y + unit` is injective, it follows that `f(g(y)) = y`.
+
+   In the other case, `e⁻¹(i(y)) ≠ ⋆`, there are `x : X` and an identification `p : e⁻¹(i(y)) = i(x)`.
+   By `δ(p)`, we have `g(y) = x`.
+   Applying `e` to `p` and using the inverse law gives `e(i(x)) = i(y)`.
+   By `β`, we therefore have `f(x) = y`, and hence `f(g(y)) = y`. ◻
 
 ```agda
 Maybe : {l : Level} → UU l → UU l
@@ -630,7 +635,7 @@ abstract
     double-counting-equiv count-A count-A' id-equiv
 ```
 
-```text
+```agda
 abstract
   double-counting-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)

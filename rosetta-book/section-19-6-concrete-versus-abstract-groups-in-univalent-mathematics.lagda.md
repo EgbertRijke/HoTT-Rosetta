@@ -59,13 +59,17 @@ All groups can be constructed in this way.
 In fact, for every group `G` in `𝒰` the type
 
 ```text
-Σ(B : Pointed-Connected - 1-Type_𝒰) G ≅ Ω(B)
+Σ(B : Pointed-Connected-1-Type_𝒰) G ≅ Ω(B)
 ```
 
 of pointed connected `1`-types `B` equipped with a group isomorphism from `G` to `Ω(B)` is contractible.
 We write `BG` for the unique pointed connected `1`-type whose loop space is isomorphic to `G`.
 The pointed type `BG` is also called the **delooping** of `G`, or the **classifying type** of `G`.
 The fact that the above type is contractible is of course heavily reliant on the univalence axiom.
+
+PARTIAL BENCHMARK PROBLEM
+
+Note: The construction from abstract groups to concrete groups is formalized later in this section, in a larger universe. The asserted contractibility of the type of deloopings in `𝒰` remains to be formalized.
 
 ```agda
 ∞-Group : (l : Level) → UU (lsuc l)
@@ -359,7 +363,7 @@ module _
 Since the map
 
 ```text
-Ω : Pointed-Connected - 1-Type_𝒰 → Group_𝒰
+Ω : Pointed-Connected-1-Type_𝒰 → Group_𝒰
 ```
 
 is an equivalence, we obtain two perspectives on the type of all groups.
@@ -501,6 +505,8 @@ module _
     pair (map-hom-Concrete-Group f) (preserves-mul-map-hom-Concrete-Group f)
 ```
 
+Note: The map from pointed maps to group homomorphisms is formalized. Its inverse and the asserted equivalence remain to be formalized; the universal-property comparison is part of [Exercise 19.15](exercise-19-15-exercise.lagda.md).
+
 We can do all of group theory in this way.
 For example, traditionally a `G`-set is defined to be a set `X` equipped with a group homomorphism `G → Aut(X)`.
 That is, the type of **abstract `G`-sets** is defined to be
@@ -623,6 +629,8 @@ module _
     type-action-Concrete-Group → type-action-Concrete-Group
   mul-action-Concrete-Group g x = tr (type-Set ∘ X) g x
 ```
+
+Note: Both notions of `G`-set are defined here. The asserted equivalence between them remains the fully open benchmark in [Exercise 19.16(a)](exercise-19-16-exercise.lagda.md#exercise-1916a).
 
 The type of **orbits** of a concrete `G`-set `X : BG → Set_𝒰` can then be defined as
 

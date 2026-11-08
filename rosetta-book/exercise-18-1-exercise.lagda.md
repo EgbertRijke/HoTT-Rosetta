@@ -10,8 +10,10 @@ module exercise-18-1-exercise where
 Consider a proposition `P`, and define the relation `~_P` on `bool` by
 
 ```text
-(true ~_P true) ≔ unit (true ~_P false) ≔ P
-(false ~_P true) ≔ P (false ~_P false) ≔ unit
+(true ~_P true) ≔ unit
+(true ~_P false) ≔ P
+(false ~_P true) ≔ P
+(false ~_P false) ≔ unit
 ```
 
 ### Exercise 18.1(a)

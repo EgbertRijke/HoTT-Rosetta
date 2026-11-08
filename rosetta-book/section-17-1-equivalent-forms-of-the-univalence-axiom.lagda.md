@@ -269,7 +269,7 @@ As a first application of the univalence axiom, let us show that for any type `A
 ## Definition 17.1.3
 
 Consider a univalent universe `𝒰`.
-A type `X` is said to be **`𝒰`-small** if it comes equipped with an element of type
+A type `A` is said to be **`𝒰`-small** if it comes equipped with an element of type
 
 ```text
   is-small_𝒰(A) ≔ Σ(X : 𝒰) A ≃ X.
@@ -335,7 +335,7 @@ is-small-map l {B = B} f = (b : B) → is-small l (fiber f b)
 
 2. Any contractible type is `𝒰`-small with respect to any universe `𝒰`.
 
-3. For any family `P` of `𝒰`-small types over a `𝒰`-small type `A`, the dependent product `Π(x : A) B(x)` is `𝒰`-small.
+3. For any family `B` of `𝒰`-small types over a `𝒰`-small type `A`, the dependent product `Π(x : A) B(x)` is `𝒰`-small.
 
 4. The type of `𝒰`-small types in `𝒱` is equivalent to the type of `𝒱`-small types in `𝒰`.
    This follows from the equivalence
@@ -433,6 +433,10 @@ equiv-Small-Type l1 l2 =
   ( equiv-tot (λ X → equiv-tot (λ Y → equiv-inv-equiv))) ∘e
   ( equiv-left-swap-Σ)
 ```
+
+PARTIAL BENCHMARK PROBLEM
+
+Note: The equivalence in (5) between the types of finite types in different universes remains to be formalized.
 
 ## Proposition 17.1.5
 

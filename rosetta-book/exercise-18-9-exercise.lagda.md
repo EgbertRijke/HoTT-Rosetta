@@ -21,7 +21,7 @@ Show that the map
 q_τ : A → im(τ)
 ```
 
-obtained from the image factorization of `A` is a set truncation of `A`.
+obtained from the image factorization of `τ` is a set truncation of `A`.
 
 ## Solution
 

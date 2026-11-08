@@ -20,7 +20,7 @@ h : Π(k : ℤ) (base,0_E) = (base,k_E)
 equipped with a homotopy
 
 ```text
-H : Π(k : ℤ) h(succ-ℤ(k)_E) = h(k) ∙ segment-helix(k).
+H : Π(k : ℤ) h(succ-ℤ(k)) = h(k) ∙ segment-helix(k).
 ```
 
 ### Exercise 22.10(b)

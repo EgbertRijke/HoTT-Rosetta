@@ -49,7 +49,7 @@ To reproduce Russell’s paradox in type theory, we first recall a crucial diffe
 Although the judgment `a : A` plays a similar role in type theory as the elementhood relation, types and their elements are fundamentally different entities, whereas in Zermelo-Fraenkel set theory there are only sets, and the proposition `x ∈ y` can be formed for any two sets `x` and `y`.
 In type theory, there is no relation on the universe that is similar to the elementhood relation.
 
-However, we have seen in Section 20.5 that it is possible to define an elementhood relation on arbitrary W-types.
+However, we have seen in Section 20.4 that it is possible to define an elementhood relation on arbitrary W-types.
 We will use this elementhood relation on the W-type `W(𝒰, Ty)` to derive a paradox analogous to Russell’s paradox, and we will see that `𝒰` cannot be equivalent to a type in `𝒰`.
 
 The type `W(𝒰, Ty)` possesses a lot of further structure.
@@ -216,14 +216,14 @@ The proof is by induction.
 Via Theorem 20.2.3 it follows that the type `X = Y` is equivalent to the type
 
 ```text
-Σ(p : A = B) Π(x : A) f(x) = g(equiv-eq(p)).
+Σ(p : A = B) Π(x : A) f(x) = g(equiv-eq(p)(x)).
 ```
 
 The type `A = B` is `𝒰`-small because it is equivalent to the type `A ≃ B`, which is `𝒰`-small.
 Therefore it suffices to show that the type
 
 ```text
-Π(x : A) f(x) = g(equiv-eq(p))
+Π(x : A) f(x) = g(equiv-eq(p)(x))
 ```
 
 is `𝒰`-small, for every `p : A = B`.
@@ -354,7 +354,7 @@ i(i({f(x) | x : A})) ≐ i({i(f(e⁻¹(y))) | y : B})
 For the last claim, note that we have factored `i` as an equivalence followed by an embedding
 
 ```text
-(Σ(X : M_𝒱) is-small_{M_𝒰}(X)) --> (Σ(Y : M_𝒰) is-small_{M_𝒱}(Y)) --> M_𝒱
+(Σ(X : M_𝒱) is-small_{M_𝒰}(X)) --> (Σ(Y : M_𝒰) is-small_{M_𝒱}(Y)) --> M_𝒰
 ```
 
 and therefore `i` is an embedding. ◻
@@ -473,7 +473,10 @@ i(X) ∈ {g(y) | y : B} ≐ Σ(y : B) g(y) = i(X)
 
 ◻
 
-<!-- This agda block does not perfectly match the natural language statement. -->
+BENCHMARK PROBLEM
+
+Note: The Agda below proves preservation of elementhood when two multisets in the same universe are resized together. The stated comparison for multisets initially in different universes remains to be formalized.
+
 ```agda
 abstract
   equiv-elementhood-resize-𝕍 :
