@@ -26,6 +26,7 @@ open import section-12-2-subtypes
 open import section-12-3-sets
 open import exercise-12-3-injective-maps-into-sets
 open import section-13-1-equivalent-forms-of-function-extensionality
+open import exercise-13-2-identity-types-of-structured-function-types
 open import exercise-13-7-universal-property-contractible-types
 open import exercise-13-12-dependent-products-of-truncated-maps
 open import exercise-13-15-morphisms-over-a-type

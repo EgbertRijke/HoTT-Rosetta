@@ -272,7 +272,7 @@ module _
     where
 
     htpy-hom-arrow :
-      (k : hom-arrow) → UU (l1 ⊔ l2 ⊔ l3)
+      (k : hom-arrow) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
     htpy-hom-arrow = {!!}
 
     refl-htpy-hom-arrow :

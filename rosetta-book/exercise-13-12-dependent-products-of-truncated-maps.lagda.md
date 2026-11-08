@@ -49,10 +49,12 @@ is also `k`-truncated.
 ### Exercise 13.12(b)
 
 Consider an equivalence `e : I ≃ J`, and a family of equivalences `fᵢ : Aᵢ ≃ B_{e(i)}` indexed by `i : I`, where `A` is a family of types indexed by `I` and `B` is a family of types indexed by `J`.
+Let `ε : e ∘ e⁻¹ ~ id` be the section homotopy.
 Show that the map
 
 ```text
-  λ h. λ j. f_{e⁻¹(j)}(h(e⁻¹(j))) : (Π(i : I) Aᵢ) → (Π(j : J) Bⱼ)
+  λ h. λ j. tr_B(ε(j), f_{e⁻¹(j)}(h(e⁻¹(j)))) :
+    (Π(i : I) Aᵢ) → (Π(j : J) Bⱼ)
 ```
 
 is an equivalence.

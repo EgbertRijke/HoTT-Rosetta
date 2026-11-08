@@ -38,7 +38,7 @@ open import section-17-4-maps-and-families-of-types
 
 open import exercise-4-3-double-negation-logic
 open import exercise-12-7-truncated-products
-open import exercise-13-15-morphisms-over-a-type
+open import exercise-13-2-identity-types-of-structured-function-types
 ```
 
 ## Definition 18.1.1

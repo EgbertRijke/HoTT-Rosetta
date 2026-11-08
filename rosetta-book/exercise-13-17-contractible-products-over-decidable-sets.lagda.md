@@ -16,4 +16,12 @@ Show that
 
 ## Solution
 
-BENCHMARK PROBLEM
+PARTIAL BENCHMARK PROBLEM
+
+The forward implication is formalized by `is-contr-Π` in [Section 13.1](section-13-1-equivalent-forms-of-function-extensionality.lagda.md).
+The converse remains to be formalized.
+
+```agda
+open import section-13-1-equivalent-forms-of-function-extensionality
+  using (is-contr-Π)
+```

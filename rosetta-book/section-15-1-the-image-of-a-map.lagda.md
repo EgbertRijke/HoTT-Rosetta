@@ -3,6 +3,7 @@
 ```agda
 module section-15-1-the-image-of-a-map where
 
+open import exercise-13-2-identity-types-of-structured-function-types
 open import exercise-13-15-morphisms-over-a-type
 
 open import universe-levels

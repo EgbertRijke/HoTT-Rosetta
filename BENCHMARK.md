@@ -23,14 +23,12 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-12-9-list-concatenation-truncated-map.lagda.md
 - rosetta-book/exercise-12-10-constant-maps-truncated.lagda.md
 - rosetta-book/exercise-12-14-isolated-elements.lagda.md
-- rosetta-book/exercise-13-2-identity-types-of-structured-function-types.lagda.md
 - rosetta-book/exercise-13-5-path-split-and-coherently-invertible-propositions.lagda.md
 - rosetta-book/exercise-13-10-universal-property-natural-numbers.lagda.md
 - rosetta-book/exercise-13-11-ordinal-induction-natural-numbers.lagda.md
 - rosetta-book/exercise-13-13-pi-types-distribute-over-coproducts.lagda.md
 - rosetta-book/exercise-13-14-section-retraction-triangles.lagda.md
 - rosetta-book/exercise-13-16-equivalences-and-isomorphisms-of-sets.lagda.md
-- rosetta-book/exercise-13-17-contractible-products-over-decidable-sets.lagda.md
 - rosetta-book/exercise-13-18-retracts-as-limits.lagda.md
 - rosetta-book/exercise-14-1-propositional-truncation-properties.lagda.md
 - rosetta-book/exercise-14-2-mere-equality.lagda.md
@@ -140,8 +138,10 @@ The following files contain partially solved (auto)formalization exercises, whic
 - rosetta-book/exercise-12-3-injective-maps-into-sets.lagda.md
 - rosetta-book/exercise-12-4-coproduct-truncation.lagda.md
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md
+- rosetta-book/exercise-13-2-identity-types-of-structured-function-types.lagda.md
 - rosetta-book/exercise-13-9-uniqueness-of-identity-types.lagda.md
 - rosetta-book/exercise-13-15-morphisms-over-a-type.lagda.md
+- rosetta-book/exercise-13-17-contractible-products-over-decidable-sets.lagda.md
 - rosetta-book/exercise-15-2-propositional-truncations.lagda.md
 - rosetta-book/exercise-17-1-universes-of-truncated-types.lagda.md
 - rosetta-book/exercise-17-5-surjective-precomposition.lagda.md
@@ -153,6 +153,7 @@ The main text contains a few missing formalizations that provide further benchma
 
 - rosetta-book/section-11-6-the-structure-identity-principle.lagda.md (Theorem 11.6.2)
 - rosetta-book/section-12-3-sets.lagda.md (Theorem 12.3.4)
+- rosetta-book/section-13-2-identity-systems-on-pi-types.lagda.md (Theorem 13.2.4)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Proposition 19.4.6)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Remark 19.4.8)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Proposition 19.4.9)
