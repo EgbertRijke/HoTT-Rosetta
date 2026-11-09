@@ -135,17 +135,12 @@ The function `f` is simply defined to be the identity function `id : A → A`. R
 
 ```agda
 module _
-  {l1 l2 : Level} (A : UU l1) (B : UU l2) (H : is-empty A)
+  {l1 l2 : Level} {A : UU l1} {B : UU l2} (H : is-empty A)
   where
 
-  map-left-unit-law-coproduct-is-empty : A + B → B
-  map-left-unit-law-coproduct-is-empty (inl a) = ex-falso (H a)
-  map-left-unit-law-coproduct-is-empty (inr b) = b
-
-map-left-unit-law-coproduct :
-  {l1 l2 : Level} {A : UU l1} {B : UU l2} →
-  is-empty A → A + B → B
-map-left-unit-law-coproduct = map-left-unit-law-coproduct-is-empty _ _
+  map-left-unit-law-coproduct : A + B → B
+  map-left-unit-law-coproduct (inl a) = ex-falso (H a)
+  map-left-unit-law-coproduct (inr b) = b
 
 module _
   {l1 l2 : Level} (A : UU l1) (B : UU l2) (H : is-empty B)

@@ -571,19 +571,19 @@ module _
   map-inv-left-unit-law-coproduct-is-empty = inr
 
   is-section-map-inv-left-unit-law-coproduct-is-empty :
-    ( map-left-unit-law-coproduct-is-empty A B H ∘
+    ( map-left-unit-law-coproduct H ∘
       map-inv-left-unit-law-coproduct-is-empty) ~ id
   is-section-map-inv-left-unit-law-coproduct-is-empty = refl-htpy
 
   is-retraction-map-inv-left-unit-law-coproduct-is-empty :
     ( map-inv-left-unit-law-coproduct-is-empty ∘
-      map-left-unit-law-coproduct-is-empty A B H) ~ id
+      map-left-unit-law-coproduct H) ~ id
   is-retraction-map-inv-left-unit-law-coproduct-is-empty (inl a) =
     ex-falso (H a)
   is-retraction-map-inv-left-unit-law-coproduct-is-empty (inr b) = refl
 
   is-equiv-map-left-unit-law-coproduct-is-empty :
-    is-equiv (map-left-unit-law-coproduct-is-empty A B H)
+    is-equiv (map-left-unit-law-coproduct H)
   is-equiv-map-left-unit-law-coproduct-is-empty =
     is-equiv-is-invertible
       map-inv-left-unit-law-coproduct-is-empty
@@ -591,7 +591,7 @@ module _
       is-retraction-map-inv-left-unit-law-coproduct-is-empty
 
   left-unit-law-coproduct-is-empty : (A + B) ≃ B
-  pr1 left-unit-law-coproduct-is-empty = map-left-unit-law-coproduct-is-empty A B H
+  pr1 left-unit-law-coproduct-is-empty = map-left-unit-law-coproduct H
   pr2 left-unit-law-coproduct-is-empty =
     is-equiv-map-left-unit-law-coproduct-is-empty
 
@@ -599,7 +599,7 @@ module _
     is-equiv inr
   is-equiv-inr-is-empty =
     is-equiv-is-invertible
-      ( map-left-unit-law-coproduct-is-empty A B H)
+      ( map-left-unit-law-coproduct H)
       ( is-retraction-map-inv-left-unit-law-coproduct-is-empty)
       ( is-section-map-inv-left-unit-law-coproduct-is-empty)
 
