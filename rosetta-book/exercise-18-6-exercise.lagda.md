@@ -8,11 +8,14 @@ module exercise-18-6-exercise where
 ## Problem statement
 
 Consider a preorder `(A,≤)`, and define for any `a : A` the order preserving map
+
 ```text
 yₐ : PreOrd((A,≤)^op,{(Prop_𝒰,{→})})
 ```
+
 by `yₐ(x) ≔ (x ≤ a)`.
 Furthermore, define the **poset reflection** `‖A‖_Pos` to be the image of the map
+
 ```text
 a ↦ yₐ : A → PreOrd((A,≤)^op,{(Prop_𝒰,{→})}).
 ```
@@ -20,6 +23,7 @@ a ↦ yₐ : A → PreOrd((A,≤)^op,{(Prop_𝒰,{→})}).
 ### Exercise 18.6(a)
 
 Show that the image of the map `a ↦ yₐ` satisfies the universal property of the set quotient of the equivalence relation
+
 ```text
 x,y ↦ (x ≤ y) ∧ (y ≤ x).
 ```

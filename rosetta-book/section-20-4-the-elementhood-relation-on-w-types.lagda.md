@@ -20,6 +20,7 @@ More precisely, for each `tree(x, α) : W(A, B)` we have a family of elements
 ```text
 α(y) : W(A, B)
 ```
+
 indexed by `y : B(x)`.
 Thus, we could say that `α(y)` is in `tree(x, α)`, for each `y : B(x)`.
 More abstractly, we can define an elementhood relation on `W(A, B)`.
@@ -55,7 +56,7 @@ Using the elementhood relation on `W(A, B)`, we can reformulate the induction pr
 For any family `P` of types over `W(A, B)`, there is a function
 
 ```text
-i : (Π(x : W(A, B)) (Π(y : W(A, B)) (y ∈ x) → P(y)) → P(x)) → (Π(x : X) P(x))
+i : (Π(x : W(A, B)) (Π(y : W(A, B)) (y ∈ x) → P(y)) → P(x)) → (Π(x : W(A, B)) P(x))
 ```
 
 that comes equipped with an identification
@@ -67,10 +68,13 @@ i(h, x) = h(x, λ y. λ e. i(h, y))
 for every `h : Π(x : W(A, B)) (Π(y : W(A, B)) (y ∈ x) → P(y)) → P(x)`, and every `x : W(A, B)`.
 
 ### Proof
+
 For any type family `P` over `W(A, B)`, we first define a new type family `□ P` over `W(A, B)` given by
+
 ```text
 □ P(x) ≔ Π(y : W(A, B)) (y ∈ x) → P(y).
 ```
+
 The family `□ P(x)` comes equipped with a map
 
 ```text
@@ -131,6 +135,7 @@ and
 h(x, λ y. λ e. i(h,y)) ≐ h(x, λ y. λ e. ε(h, i'(h), y))
                        ≐ h(x, λ y. λ e. h(y, i'(h, y))).
 ```
+
 The computation rule is therefore satisfied by the identification
 
 ```text

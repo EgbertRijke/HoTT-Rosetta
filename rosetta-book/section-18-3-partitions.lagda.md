@@ -44,7 +44,7 @@ There are many equivalent ways of stating what an equivalence relation is.
 We saw in Theorem 18.2.5 that the type of equivalence relations on `A` is equivalent to the type of surjective maps out of `A` into a set.
 Here we will show that the type of equivalence relations on `A` is equivalent to the type of partitions of `A`.
 Another type that is equivalent to the type of equivalence relations of `A` is the type of set-indexed `Σ`-decompositions of `A`, i.e., the type of triples `(X, Y, e)` consisting of a set `X`, a family `Y` of inhabited types indexed by `X`, and an equivalence `e : A ≃ Σ(x : X) Y(x)`.
-The fact that the type of equivalence relations on `A` is equivalent to the type of set-indexed `Σ`-decompositions of `A` is stated as Exercise 18.4
+The fact that the type of equivalence relations on `A` is equivalent to the type of set-indexed `Σ`-decompositions of `A` is stated as Exercise 18.4.
 
 In this section we show that equivalence relations on `A` are partitions of `A`.
 Recall that the type of inhabited subtypes of `A` is defined to be
@@ -586,22 +586,22 @@ To see that `R_P` is symmetric, note that if `R_P(x,y)` holds, then `R_P(x)` is 
   Σ(Q : P⁺_𝒰(A)) P(Q) × Q(y).
 ```
 
-By contractibility, this implies that `R(x) = R(y)`, from which we obtain that `R(y,x)` holds.
-To see that `R_P` is transitive we observe similarly that if `R(x,y)` and `R(y,z)` hold, then we have an identification `R(x) = R(y)` and it follows that `R(x,z)` holds.
+By contractibility, this implies that `R_P(x) = R_P(y)`, from which we obtain that `R_P(y,x)` holds.
+To see that `R_P` is transitive we observe similarly that if `R_P(x,y)` and `R_P(y,z)` hold, then we have an identification `R_P(x) = R_P(y)` and it follows that `R_P(x,z)` holds.
 Thus we obtain a map
 
 ```text
   φ : Partition_{𝒰,𝒱}(A) → Eq-Rel_𝒰(A).
 ```
 
-It remains to prove that the maps `ψ` and `φ` are inverse to each other, first let `R` be an equivalence relation.
-In order to show that `φ(ψ(R)) = R` it suffices by univalence to show that the equivalence relation obtained from the partition induced by `R` is given by
+It remains to prove that the maps `ψ` and `φ` are inverse to each other. First, let `R` be an equivalence relation.
+The equivalence relation obtained from the partition induced by `R` is given by
 
 ```text
   R'(x,y) := Σ(Q : P_𝒰⁺(A)) (∃_{(u : A)} ∀_{(v : A)} Q(v) ↔ R(u,v)) × Q(x) × Q(y).
 ```
 
-is equivalent to `R`.
+In order to show that `φ(ψ(R)) = R`, it suffices by univalence to show that `R'` is equivalent to `R`.
 Observe that the proposition `R'(x,y)` is equivalent to `R(x,x) × R(x,y)`, which is equivalent to `R(x,y)`.
 This shows that the composite
 
@@ -925,3 +925,7 @@ equiv-equivalence-relation-partition :
 equiv-equivalence-relation-partition =
   ( equivalence-relation-partition , is-equiv-equivalence-relation-partition)
 ```
+
+PARTIAL BENCHMARK PROBLEM
+
+Note: The Agda formalizes the case where `A`, the relation values, and the predicate selecting partition blocks use the same universe. The stated equivalence with independently specified universes remains to be formalized.

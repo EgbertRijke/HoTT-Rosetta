@@ -16,4 +16,11 @@ Show that the following are equivalent:
 
 ## Solution
 
-BENCHMARK PROBLEM
+PARTIAL BENCHMARK PROBLEM
+
+The implication (2) ⇒ (1) is formalized by `is-equiv-comp` in Exercise 9.4.
+The converse, (1) ⇒ (2), remains to be formalized.
+
+```agda
+open import exercise-9-4-three-for-two-equivalences using (is-equiv-comp)
+```

@@ -20,6 +20,7 @@ Show that the type of maps `‖f‖₀ : ‖A‖₀ → ‖B‖₀` equipped wit
     ∨                       ∨
   ‖A‖₀ ------‖f‖₀-------> ‖B‖₀
 ```
+
 commutes is contractible.
 
 ### Exercise 18.7(b)
@@ -28,11 +29,11 @@ Show that if `f` is injective, then `‖f‖₀ : ‖A‖₀ → ‖B‖₀` is 
 
 ### Exercise 18.7(c)
 
-Show that the following are equivalent
+Show that the following are equivalent:
 
 1. The map `f` is surjective.
 
-2. the map `‖f‖₀ : ‖A‖₀ → ‖B‖₀` is surjective.
+2. The map `‖f‖₀ : ‖A‖₀ → ‖B‖₀` is surjective.
 
 ### Exercise 18.7(d)
 
@@ -45,6 +46,7 @@ Construct a map `h : im(f) → im‖f‖₀` such that the squares
     ∨                         ∨                         ∨
   ‖A‖₀ -----q_{‖f‖₀}-----> im‖f‖₀ -----i_{‖f‖₀}-----> ‖B‖₀
 ```
+
 commute, and show that `h` is a set truncation of `im(f)`.
 
 ## Solution

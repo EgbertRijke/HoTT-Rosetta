@@ -5,6 +5,7 @@ module section-17-1-equivalent-forms-of-the-univalence-axiom where
 
 open import universe-levels
 open import section-2-2-ordinary-function-types
+open import section-3-1-the-formal-specification-of-the-type-of-natural-numbers
 open import section-4-2-the-unit-type
 open import section-4-6-dependent-pair-types
 open import exercise-4-3-double-negation-logic
@@ -12,6 +13,7 @@ open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-4-transport
+open import section-7-3-the-standard-finite-types
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import exercise-9-1-groupoid-operations-equivalences
@@ -30,6 +32,8 @@ open import section-12-4-general-truncation-levels
 open import section-13-2-identity-systems-on-pi-types
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import exercise-13-12-dependent-products-of-truncated-maps
+open import section-14-2-propositional-truncations-as-higher-inductive-types
+open import section-16-3-finite-types
 ```
 
 By the fundamental theorem of identity types, Theorem 11.2.2, it is immediate that the univalence axiom comes in three equivalent forms.
@@ -56,7 +60,7 @@ The following are equivalent:
    is contractible for each `A : 𝒰`.
 
 3. For any type `A : 𝒰`, the family of types `A ≃ X` indexed by `X : 𝒰` is an identity system on `𝒰`.
-   In other words, the universe `𝒰` satisfies the principle of **equivalence induction**: For every `A : 𝒰` and for every type family of types `P(X,e)` indexed by `X : 𝒰` and `e : A ≃ X`, the map
+   In other words, the universe `𝒰` satisfies the principle of **equivalence induction**: For every `A : 𝒰` and for every family of types `P(X,e)` indexed by `X : 𝒰` and `e : A ≃ X`, the map
 
    ```text
      (Π(X : 𝒰) Π(e : A ≃ X) P(X,e)) → P(A,id)
@@ -151,10 +155,28 @@ module _
       is-identity-system (A ≃_) A id-equiv
     is-identity-system-is-torsorial-equiv =
       is-identity-system-is-torsorial A id-equiv
+
+module _
+  {l1 : Level} {A : UU l1}
+  where
+
+  abstract
+    is-torsorial-equiv-induction-principle-equivalences :
+      induction-principle-equivalences A →
+      is-torsorial (λ (B : UU l1) → A ≃ B)
+    is-torsorial-equiv-induction-principle-equivalences =
+      is-torsorial-is-identity-system A id-equiv
+
+  abstract
+    is-torsorial-is-identity-system-equiv :
+      is-identity-system (A ≃_) A id-equiv →
+      is-torsorial (λ (B : UU l1) → A ≃ B)
+    is-torsorial-is-identity-system-equiv =
+      is-torsorial-is-identity-system A id-equiv
 ```
 
 One way to see that the univalence axiom is plausible, is by observing that all type constructors preserve equivalences.
-For example, in Theorem 11.1.6 we showed that for any type family `B` over `A` and any type family `B'` over `A'`, if we have an equivalence `e : A ≃ A'` and family of equivalences `f : Π(x : A) B(x) ≃ B'(e(x))`, then we obtain an equivalence
+For example, in Theorem 11.1.6 we showed that for any type family `B` over `A` and any type family `B'` over `A'`, if we have an equivalence `e : A ≃ A'` and a family of equivalences `f : Π(x : A) B(x) ≃ B'(e(x))`, then we obtain an equivalence
 
 ```text
   (Σ(x : A) B(x)) ≃ (Σ(x' : A') B'(x')).
@@ -269,7 +291,7 @@ As a first application of the univalence axiom, let us show that for any type `A
 ## Definition 17.1.3
 
 Consider a univalent universe `𝒰`.
-A type `X` is said to be **`𝒰`-small** if it comes equipped with an element of type
+A type `A` is said to be **`𝒰`-small** if it comes equipped with an element of type
 
 ```text
   is-small_𝒰(A) ≔ Σ(X : 𝒰) A ≃ X.
@@ -335,7 +357,7 @@ is-small-map l {B = B} f = (b : B) → is-small l (fiber f b)
 
 2. Any contractible type is `𝒰`-small with respect to any universe `𝒰`.
 
-3. For any family `P` of `𝒰`-small types over a `𝒰`-small type `A`, the dependent product `Π(x : A) B(x)` is `𝒰`-small.
+3. For any family `B` of `𝒰`-small types over a `𝒰`-small type `A`, the dependent product `Π(x : A) B(x)` is `𝒰`-small.
 
 4. The type of `𝒰`-small types in `𝒱` is equivalent to the type of `𝒱`-small types in `𝒰`.
    This follows from the equivalence
@@ -434,6 +456,10 @@ equiv-Small-Type l1 l2 =
   ( equiv-left-swap-Σ)
 ```
 
+PARTIAL BENCHMARK PROBLEM
+
+Note: Smallness of individual finite types is formalized below, after [Proposition 17.1.5](#proposition-1715). The equivalence in (5) between the types of finite types in different universes remains to be formalized.
+
 ## Proposition 17.1.5
 
 For any univalent universe `𝒰` and any type `A`, the type `is-small_𝒰(A)` is a proposition.
@@ -481,6 +507,37 @@ module _
     is-contr (is-small (l1 ⊔ l2) X)
   pr1 is-contr-is-small-lmax = is-small-lmax l2 X
   pr2 is-contr-is-small-lmax x = eq-is-prop (is-prop-is-small (l1 ⊔ l2) X)
+
+is-small-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} (B : UU l2) →
+  A ≃ B → is-small l3 B → is-small l3 A
+is-small-equiv B e (X , h) = (X , h ∘e e)
+
+is-small-equiv' :
+  {l1 l2 l3 : Level} (A : UU l1) {B : UU l2} →
+  A ≃ B → is-small l3 A → is-small l3 B
+is-small-equiv' A e = is-small-equiv A (inv-equiv e)
+
+equiv-is-small-equiv :
+  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} →
+  A ≃ B → is-small l3 A ≃ is-small l3 B
+equiv-is-small-equiv e =
+  equiv-tot (equiv-precomp-equiv (inv-equiv e))
+
+is-small-Fin :
+  (l : Level) → (k : ℕ) → is-small l (Fin k)
+pr1 (is-small-Fin l k) = raise-Fin l k
+pr2 (is-small-Fin l k) = compute-raise-Fin l k
+
+is-small-is-finite :
+  {l1 : Level} (l2 : Level) (A : Finite-Type l1) →
+  is-small l2 (type-Finite-Type A)
+is-small-is-finite l2 A =
+  apply-universal-property-trunc-Prop
+    ( is-finite-type-Finite-Type A)
+    ( is-small l2 (type-Finite-Type A) ,
+      is-prop-is-small l2 (type-Finite-Type A))
+    ( λ p → is-small-equiv' (Fin (pr1 p)) (pr2 p) (is-small-Fin l2 (pr1 p)))
 ```
 
 ## Corollary 17.1.6
@@ -625,26 +682,6 @@ commutativity-inv-eq-equiv f =
         ( ap
           ( λ e → map-equiv e (inv-equiv f))
           ( inv (right-inverse-law-equiv equiv-univalence)))))
-```
-
-### Small types are closed under equivalences
-
-```agda
-is-small-equiv :
-  {l1 l2 l3 : Level} {A : UU l1} (B : UU l2) →
-  A ≃ B → is-small l3 B → is-small l3 A
-is-small-equiv B e (X , h) = (X , h ∘e e)
-
-is-small-equiv' :
-  {l1 l2 l3 : Level} (A : UU l1) {B : UU l2} →
-  A ≃ B → is-small l3 A → is-small l3 B
-is-small-equiv' A e = is-small-equiv A (inv-equiv e)
-
-equiv-is-small-equiv :
-  {l1 l2 l3 : Level} {A : UU l1} {B : UU l2} →
-  A ≃ B → is-small l3 A ≃ is-small l3 B
-equiv-is-small-equiv e =
-  equiv-tot (equiv-precomp-equiv (inv-equiv e))
 ```
 
 ### Small types are closed under dependent pair types

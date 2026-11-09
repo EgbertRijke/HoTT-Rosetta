@@ -9,9 +9,11 @@ module exercise-19-3-exercise where
 
 Consider a group `G`.
 Show that the function
+
 ```text
 μ_G : G → (G ≃ G)
 ```
+
 is an injective group homomorphism.
 
 ## Solution

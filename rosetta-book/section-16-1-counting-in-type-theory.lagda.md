@@ -186,7 +186,7 @@ count-empty = count-Fin 0
 ## Example 16.1.4
 
 A type `A` has one element if and only if it is contractible.
-Indeed, the type `Fin 1` is contractible, so it follows from the 3-for-2 property of contractible types (Exercise 10.2) that there is an equivalence `Fin 1 ≃ A` if and only if `A` is contractible.
+Indeed, the type `Fin 1` is contractible, so it follows from the 3-for-2 property of contractible types (Exercise 10.3(b)) that there is an equivalence `Fin 1 ≃ A` if and only if `A` is contractible.
 
 ```agda
 count-is-contr :
@@ -443,10 +443,10 @@ The fibers of `g` can be computed by the following equivalences:
 ```text
   fib_g(x,y) ≃ Σ(a : A) (a,b(a)) = (x,y)
              ≃ Σ(a : A) Σ(p : a = x) tr_B(p,b(a)) = y
-             ≃ tr_B(p,b(x)) = y.
+             ≃ b(x) = y.
 ```
 
-Note that the type `tr_B(p,b(x)) = y` is a decidable proposition by Remark 16.1.6.
+Note that the type `b(x) = y` is a decidable proposition by Remark 16.1.6.
 Now it follows by the forward direction of the first claim in (2) that `A` has a counting.
 
 It remains to prove the converse direction of (1).
@@ -852,10 +852,10 @@ We make two claims:
 
 2. If the product `A × B` comes equipped with a counting, then we have two functions
 
-```text
-  B → count(A)
-  A → count(B).
-```
+   ```text
+     B → count(A)
+     A → count(B).
+   ```
 
 ### Proof
 

@@ -10,7 +10,7 @@ module exercise-20-7-exercise where
 Consider the **rank comparison relation** `≼ : W(A,B) → (W(A,B) → Prop_𝒰)` defined recursively by
 
 ```text
-(tree(a,α) ≼ (b,β)) ≔ ∀_{(x : B(a))}∃_{(y : B(b))} α(x) ≼ β(y).
+(tree(a,α) ≼ tree(b,β)) ≔ ∀_{(x : B(a))}∃_{(y : B(b))} α(x) ≼ β(y).
 ```
 
 If `x ≼ y` holds, we say that `x` has **lower rank** than `y`.
@@ -24,7 +24,7 @@ If `x ≺ y` holds, we say that `x` has **strictly lower rank** than `y`.
 
 ### Exercise 20.7(a)
 
-Show that the rank comparison relation defines a preordering on `W(A,B)`, i.e., show that `≼` is reflexive and transitve.
+Show that the rank comparison relation defines a preordering on `W(A,B)`, i.e., show that `≼` is reflexive and transitive.
 Furthermore, prove the following properties, in which `<` is the strict ordering on `W(A,B)` defined in Exercise 20.5:
 
 1. `(x ≼ y) ↔ ∀_{(x' < x)}∃_{(y' < y)} x' ≼ y'`
@@ -54,11 +54,11 @@ We will write
 ```
 
 for the poset reflection of `(W(A,B),≼)` and its quotient map.
-We will call the poset `(R(A,B),≼)` the **rank poset** of the W-type `W(A,B)`.
+We will call the poset `(rank(A,B),≼)` the **rank poset** of the W-type `W(A,B)`.
 
 ### Exercise 20.7(c)
 
-Show that if each `B(x)` is finite, then the rank poset `(rank(A,B),≼)` is either the empty poset, the poset with one element, or it is isomorphic to the poset `(ℕ,≤)`.
+Assuming the law of excluded middle, show that if each `B(x)` is finite, then the rank poset `(rank(A,B),≼)` is either the empty poset, the poset with one element, or it is isomorphic to the poset `(ℕ,≤)`.
 
 ### Exercise 20.7(d)
 
@@ -70,7 +70,7 @@ Show that the strict ordering `≺` extends to a relation `≺` on `rank(A,B)` w
 
 3. The relation `≺` is transitive and irreflexive on `rank(A,B)`.
 
-We will call the strictly ordered set `(R(A,B),≺)` the **(strict) rank** of the W-type `W(A,B)`.
+We will call the strictly ordered set `(rank(A,B),≺)` the **(strict) rank** of the W-type `W(A,B)`.
 
 ### Exercise 20.7(e)
 

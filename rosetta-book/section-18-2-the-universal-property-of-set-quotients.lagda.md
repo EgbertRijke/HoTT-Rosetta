@@ -28,7 +28,7 @@ open import section-12-2-subtypes
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import exercise-12-3-injective-maps-into-sets
-open import exercise-12-6-truncated-sigma-types
+open import exercise-12-12-total-maps-truncated
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-4-composing-with-equivalences
 open import exercise-13-3-truncatedness-is-a-proposition
@@ -213,7 +213,7 @@ Formally, we express the universal property of the quotient by `R` as follows.
 Consider a map `q : A → B` that satisfies the property that
 
 ```text
-  H : Π(x, y : A) R(x,y) → (f(x) = f(y)).
+  H : Π(x, y : A) R(x,y) → (q(x) = q(y)).
 ```
 
 Then there is for any set `X` a map
@@ -298,7 +298,7 @@ First, we want to define a map
 We would like to define `i(b,a) ≔ (b = q(a))`.
 This direct definition does not go through, however, because the type `B` is not assumed to be in `𝒰`.
 Nevertheless, observe that by the assumption that `q` is surjective and effective, the type `B` is locally `𝒰`-small.
-To see this, first note that `is-small_U(X)` is a proposition for any type `X` by Proposition 17.1.5.
+To see this, first note that `is-small_𝒰(X)` is a proposition for any type `X` by Proposition 17.1.5.
 Using the assumption that `q` is surjective, it follows from Proposition 15.2.3 that it suffices to show that `q(a) = q(a')` is `𝒰`-small for each `a, a' : A`.
 This follows by the assumption that `q` is effective.
 In particular, the identity type `b = q(a)` is a `𝒰`-small proposition, for every `b : B` and `a : A`.
@@ -314,7 +314,7 @@ Then we can define a map
 by `j(b,a) ≔ (b = q(a),s(b,a))`, and now we obtain `i` from `j` by defining
 
 ```text
-  i(b,a) := pr 1(s(b,a)).
+  i(b,a) ≔ pr1(s(b,a)).
 ```
 
 Note that we have an equivalence `i(b,a) ≃ (b = q(a))` for every `b : B` and `a : A`.
@@ -463,7 +463,7 @@ Assume (2), and let `f : A → X` be a map into a set `X`, satisfying the proper
 ```
 
 Our goal is to show that the type of extensions of `f` along `q` is contractible.
-By Exercise 17.5 it follows that there is at most one such an extension, so it suffices to construct one.
+By Exercise 17.5 it follows that there is at most one such extension, so it suffices to construct one.
 
 In order to construct an extension, we will construct for every `b : B` a term `x : X` satisfying the property
 

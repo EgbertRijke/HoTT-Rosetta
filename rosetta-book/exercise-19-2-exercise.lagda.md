@@ -9,6 +9,7 @@ module exercise-19-2-exercise where
 
 Let `f : hom(G,H)` be a group homomorphism.
 Show that `f` preserves units and inverses, i.e., show that
+
 ```text
 f(e_G) = e_H
 f(x⁻¹) = f(x)⁻¹.

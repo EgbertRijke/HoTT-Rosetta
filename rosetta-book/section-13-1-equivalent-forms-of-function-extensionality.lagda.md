@@ -32,6 +32,7 @@ open import section-12-4-general-truncation-levels
 open import exercise-12-4-coproduct-truncation
 open import exercise-12-6-truncated-sigma-types
 open import exercise-12-7-truncated-products
+open import exercise-12-11-truncated-maps-triangles
 ```
 
 The function extensionality principle characterizes the identity type of an arbitrary dependent function type.
@@ -69,7 +70,7 @@ The following are equivalent:
 
 ### Proof
 
-This theorem follows directly from Theorem 11.2.2. ◻
+This proposition follows directly from Theorem 11.2.2. ◻
 
 ```agda
 module _
@@ -165,7 +166,7 @@ The following are equivalent:
 
 ### Proof
 
-First, we show that function extensionality implies weak function extensionality, suppose that each `B(a)` is contractible with center of contraction `c(a)` and contraction `Cₐ : Π(y : B(a)) c(a) = y`.
+First, we show that function extensionality implies weak function extensionality. Suppose that each `B(a)` is contractible with center of contraction `c(a)` and contraction `Cₐ : Π(y : B(a)) c(a) = y`.
 Then we take `c ≔ λ a. c(a)` to be the center of contraction of `Π(x : A) B(x)`.
 To construct the contraction we have to define a term of type
 
@@ -827,26 +828,7 @@ module _
   coherence-htpy-eq-ap-precomp-Π refl = refl
 ```
 
-### In a commuting triangle f ~ g ∘ h, if f and g are truncated maps, then h is a truncated map
-
-```agda
-abstract
-  is-trunc-map-top-map-triangle :
-    {l1 l2 l3 : Level} (k : 𝕋) {A : UU l1} {B : UU l2} {X : UU l3}
-    (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h)) →
-    is-trunc-map k g → is-trunc-map k f → is-trunc-map k h
-  is-trunc-map-top-map-triangle k {A} f g h H is-trunc-g is-trunc-f b =
-    is-trunc-fam-is-trunc-Σ k
-      ( is-trunc-g (g b))
-      ( is-trunc-is-equiv' k
-        ( Σ A (λ z → g (h z) ＝ g b))
-        ( map-compute-fiber-comp g h (g b))
-        ( is-equiv-map-compute-fiber-comp g h (g b))
-        ( is-trunc-map-htpy k (inv-htpy H) is-trunc-f (g b)))
-      ( b , refl)
-```
-
-### In a commuting square with the left and right maps equivalences, the top map is truncated if and only if the bottom map is truncated
+### In a commuting square with the left and right maps equivalences, the top map is truncated if the bottom map is truncated
 
 ```agda
 module _
@@ -864,7 +846,7 @@ module _
         ( is-trunc-map-is-equiv k K))
 ```
 
-### Precomposing functions Π B C by f : A → B is k+1-truncated if and only if precomposing homotopies is k-truncated
+### Precomposing functions `Π B C` by `f : A → B` is `(k + 1)`-truncated if precomposing homotopies is `k`-truncated
 
 ```agda
 module _

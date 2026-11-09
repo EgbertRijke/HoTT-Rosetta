@@ -808,6 +808,10 @@ module _
   compute-eq-conjugation-tr-type-Ω-refl refl = refl
 ```
 
+PARTIAL BENCHMARK PROBLEM
+
+Note: The underlying pointed set of `πₙ(A)` and the operations on loop spaces are formalized. The group operation and group laws on the set truncation `πₙ(A)` for `n ≥ 1` remain to be formalized.
+
 The group `π₁(A)` of a pointed type is called the **fundamental group** of `A` at its base point `a : A`.
 
 ## Remark 19.4.5
@@ -832,7 +836,7 @@ For any pointed type `A` and any `n ≥ 1` we have an isomorphism
 
 BENCHMARK PROBLEM
 
-_Proof._ First, observe that we have a pointed equivalence
+First, observe that we have a pointed equivalence
 
 ```text
 Ω(Ω^n(A)) ≃ ∗ Ω^n(Ω(A)).
@@ -923,7 +927,7 @@ for every pointed map `f : A → ∗ B`.
 
 ## Remark 19.4.8
 
-Since action of paths preserves path concatenation, it follows that `Ω^n(f)` preserves path concatenation, for each `n ≥ 1`.
+Since the action on paths preserves path concatenation, it follows that `Ω^n(f)` preserves path concatenation, for each `n ≥ 1`.
 Consequently, the maps
 
 ```text
@@ -949,7 +953,7 @@ for all `n ≥ 1`.
 
 BENCHMARK PROBLEM
 
-_Proof._ For any pointed equivalence `e : A ≃ ∗ B` it follows that `πₙ(e)` is also an equivalence.
+For any pointed equivalence `e : A ≃ ∗ B` it follows that `πₙ(e)` is also an equivalence.
 Using Lemma 19.3.1, the claim now follows. ◻
 
 ## Supplement

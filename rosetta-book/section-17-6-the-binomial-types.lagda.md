@@ -31,6 +31,7 @@ open import exercise-10-8-fiber-replacement
 open import section-11-1-families-of-equivalences
 open import section-11-2-the-fundamental-theorem
 open import section-11-4-embeddings
+open import exercise-11-1-coproduct-embeddings
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-13-4-composing-with-equivalences
@@ -180,7 +181,7 @@ eq-equiv-component-UU X Y =
 
 ## Example 17.6.3
 
-Note that type `𝒰_{Fin n}` is the type `BSₙ` of all `n`-element types.
+Note that the type `𝒰_{Fin n}` is the type `BSₙ` of all `n`-element types.
 Note also that if `A ≃ B`, then `𝒰_A ≃ 𝒰_B`.
 
 ## Definition 17.6.4
@@ -253,7 +254,7 @@ module _
 ## Remark 17.6.5
 
 We define the binomial types using decidable embeddings because the usual properties of binomial coefficients generalize most naturally under the extra assumption of decidability.
-In particular the binomial theorem for types, which is stated as Exercise 17.14 and generalized in Exercise 18.14, rely on the use of decidable embeddings.
+In particular the binomial theorem for types, which is stated as Exercise 17.14 and generalized in Exercise 18.14, relies on the use of decidable embeddings.
 
 ## Proposition 17.6.6
 
@@ -436,18 +437,6 @@ abstract
   is-contr-component-UU-empty : is-contr (component-UU empty)
   is-contr-component-UU-empty =
     is-contr-component-UU-Level-empty lzero
-
-module _
-  {l : Level} {A : UU l}
-  where
-
-  abstract
-    is-emb-ex-falso : is-emb (ex-falso {A = A})
-    is-emb-ex-falso ()
-
-  ex-falso-emb : empty ↪ A
-  pr1 ex-falso-emb = ex-falso
-  pr2 ex-falso-emb = is-emb-ex-falso
 
 abstract
   is-decidable-map-ex-falso :
@@ -721,5 +710,5 @@ One reason why it works is that the identity type of `Σ(X : 𝒰_B) X ↪ᵈ A`
 
 Therefore it follows that for any two decidable embeddings `f, g : B ↪ᵈ A`, if `f` and `g` are the same up to a permutation on `B`, then we get an identification `(B,f) = (B,g)` in the type `Σ(X : 𝒰_B) X ↪ᵈ A`.
 
-From a group theoretic perspective we may observe that the automorphism group `B ≃ B` acts freely on the set of decidable embeddings `B ↪ᵈ A`, and the type `Σ(X : 𝒰_B) X ↪ A` can be viewed as the type of orbits of that action.
+From a group theoretic perspective we may observe that the automorphism group `B ≃ B` acts freely on the set of decidable embeddings `B ↪ᵈ A`, and the type `Σ(X : 𝒰_B) X ↪ᵈ A` can be viewed as the type of orbits of that action.
 Since this action of `Aut(B)` on `B ↪ᵈ A` is free, we see that the number of orbits is `1 / k!` times the number of elements in `B ↪ᵈ A`.

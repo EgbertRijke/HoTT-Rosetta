@@ -97,7 +97,7 @@ Before we do this, we claim that the identity type
   (X,f) = (Y,g)
 ```
 
-in the type `Σ(X : 𝒰) X → A` is equivalent to the type of pairs `(e,f)` consisting of an equivalence `e : X ≃ Y` equipped with a homotopy `f ~ g ∘ e`.
+in the type `Σ(X : 𝒰) X → A` is equivalent to the type of pairs `(e,H)` consisting of an equivalence `e : X ≃ Y` equipped with a homotopy `H : f ~ g ∘ e`.
 This fact follows from Theorem 11.2.2, because the type
 
 ```text
@@ -673,7 +673,7 @@ Using the structure identity principle, Theorem 11.6.2, we see that the identity
   Σ(e : X ≃ Y) f ~ g ∘ e.
 ```
 
-In other words, two subtypes `(X,f)` and `(Y,g)` of `A` are equal if and only if there is an equivalence `X ≃ Y` that is compatible with the embeddings `f : X ↪ A` and `g : Y ↪ X`.
+In other words, two subtypes `(X,f)` and `(Y,g)` of `A` are equal if and only if there is an equivalence `X ≃ Y` that is compatible with the embeddings `f : X ↪ A` and `g : Y ↪ A`.
 Indeed, this condition is equivalent to the previous condition that two subtypes are the same if and only if they have the same elements.
 
 We see that the combination of the structure identity principle and the univalence axiom automatically characterizes equality of subtypes in the most natural way, and we will see similar natural characterizations of identity types throughout the remainder of this book.

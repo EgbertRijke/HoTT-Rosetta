@@ -204,9 +204,9 @@ and an identification `β` witnessing that the square
 ```text
   [tr_P(loop,f(base))]--ap_{tr_P(loop)}(α)-->[tr_P(loop,u)]
           |                                     |
-apd_f loop|                                     | p'
+apd_f loop|                                     | p
           v                                     v
-       [f(base)]      --------α------------>  [u']
+       [f(base)]      --------α------------>  [u]
 ```
 
 commutes.

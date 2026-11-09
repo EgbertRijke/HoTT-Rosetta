@@ -53,7 +53,7 @@ both only contain the element `w`.
 However, the elements `u` and `v` are distinct in `W(A, B)`.
 
 Something similar happens in the type of oriented binary rooted trees.
-Given two binary rooted trees `S` and `T`, there are two ways to combine `S` and `T` into a new binary tree: we have `[S, T]` and `[T, S]`.
+Given two distinct oriented binary rooted trees `S` and `T`, there are two ways to combine `S` and `T` into a new binary tree: we have `[S, T]` and `[T, S]`.
 Both contain precisely the elements `S` and `T`, but they are distinct.
 Nevertheless, there are many important W-types in which the elements `w` are uniquely determined by the elements `z ∈ w`.
 Such W-types are called extensional.
@@ -107,11 +107,11 @@ Then the following are equivalent:
 
 2. The family `B` is **univalent** in the sense that the map
 
-```text
-tr_B : (x = y) → (B(x) ≃ B(y))
-```
+   ```text
+   tr_B : (x = y) → (B(x) ≃ B(y))
+   ```
 
-is an equivalence, for every `x, y : A`.
+   is an equivalence, for every `x, y : A`.
 
 ```agda
 is-univalent :
@@ -199,9 +199,10 @@ emb-univalent-family (B , H) = (B , is-emb-is-univalent H)
 ```
 
 ### Proof
-We will first show that (ii) is equivalent to the following property:
 
-1. The map
+We will first show that (2) is equivalent to the following property:
+
+(2′) The map
 
 ```text
 tr_B : (symbol(x) = y) → (B(symbol(x)) ≃ B(y))
@@ -209,18 +210,18 @@ tr_B : (symbol(x) = y) → (B(symbol(x)) ≃ B(y))
 
 is an equivalence for every `x : W(A, B)` and every `y : A`.
 
-Clearly, (ii) implies (ii’).
+Clearly, (2) implies (2′).
 For the converse we use the assumption that `W(A, B)` is inhabited.
-Since the property in (ii) is a proposition, we may assume an element `w : W(A, B)`.
+Since the property in (2) is a proposition, we may assume an element `w : W(A, B)`.
 Using `w`, we obtain for every `x : A` the element
 
 ```text
 tree(x, const_w) : W(A, B)
 ```
 
-The symbol of `tree(x, const_w)` is `x`, and therefore the hypothesis that (ii’) holds implies that the map `(x = y) → (B(x) ≃ B(y))` is an equivalence.
-This concludes the proof that (ii) is equivalent to (ii’).
-It remains to show that (i) is equivalent to (ii’).
+The symbol of `tree(x, const_w)` is `x`, and therefore the hypothesis that (2′) holds implies that the map `(x = y) → (B(x) ≃ B(y))` is an equivalence.
+This concludes the proof that (2) is equivalent to (2′).
+It remains to show that (1) is equivalent to (2′).
 
 Let `x : W(A, B)`.
 By the fundamental theorem of identity types, the W-type `W(A, B)` is extensional if and only if the total space
@@ -240,17 +241,17 @@ Using this observation, we see that the above type is equivalent to the type
 By Exercise 13.15 it follows that this type is equivalent to the type
 
 ```text
-Σ(y : A) Σ(β : B(y) → W(A, B)) Σ(e : B(x) ≃ B(y)) α ~ e ∘ β.
+Σ(y : A) Σ(β : B(y) → W(A, B)) Σ(e : B(a) ≃ B(y)) α ~ β ∘ e.
 ```
 
-Note that the type `Σ(β : B(y) → W(A, B)) α ~ e ∘ β` is contractible for any equivalence `e : B(x) ≃ B(y)`.
+Note that the type `Σ(β : B(y) → W(A, B)) α ~ β ∘ e` is contractible for any equivalence `e : B(a) ≃ B(y)`.
 Therefore, it follows that the above type is contractible if and only if the type
 
 ```text
-Σ(y : A) B(x) ≃ B(y)
+Σ(y : A) B(a) ≃ B(y)
 ```
 
-is contractible, which is the case if and only if the map `(x = y) → (B(x) ≃ B(y))` is an equivalence for all `y : A`. ◻
+is contractible, which is the case if and only if the map `(a = y) → (B(a) ≃ B(y))` is an equivalence for all `y : A`. ◻
 
 ```agda
 module _
@@ -362,7 +363,7 @@ module _
 
 ## Example 20.5.4
 
-The type `N` of Example 20.1.6, the type of binary rooted trees Example 20.1.8, and the type of finitely branching rooted trees Example 20.1.9 are all examples extensional W-types.
+The type `N` of Example 20.1.6, the type of binary rooted trees of Example 20.1.8, and the type of finitely branching rooted trees of Example 20.1.9 are all examples of extensional W-types.
 On the other hand, the type of oriented binary rooted trees of Example 20.1.7 and the type of oriented finitely branching rooted trees of Example 20.1.9 are not extensional.
 
 BENCHMARK PROBLEM

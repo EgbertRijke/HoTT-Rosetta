@@ -3,6 +3,7 @@
 ```agda
 module section-15-1-the-image-of-a-map where
 
+open import exercise-13-2-identity-types-of-structured-function-types
 open import exercise-13-15-morphisms-over-a-type
 
 open import universe-levels
@@ -43,10 +44,10 @@ Let `f : A → X` and `g : B → X` be maps.
 A **morphism from `f` to `g` over `X`** consists of a map `h : A → B` equipped with a homotopy `H : f ~ g ∘ h` witnessing that the triangle
 
 ```text
-       q
+       h
   A ------> B
    \       /
-  f \     / i
+  f \     / g
      \   /
       ∨ ∨ 
        X
@@ -87,10 +88,10 @@ pr2 (id-hom-slice f) = refl-htpy
 Consider a commuting triangle
 
 ```text
-      q_f
+       q
   A ------> I
    \       /
-  f \     / i_f
+  f \     / i
      \   /
       ∨ ∨ 
        X
@@ -131,7 +132,7 @@ For any `f : A → X` and any embedding `m : B → X`, the type `hom-slice_X(f,m
 
 ### Proof
 
-*Proof.* Recall from Exercise 13.15 that the type `hom-slice_X(f,m)` is equivalent to the type
+Recall from Exercise 13.15 that the type `hom-slice_X(f,m)` is equivalent to the type
 
 ```text
   Π(a : A) fib(m, f(a)).
@@ -242,7 +243,7 @@ Furthermore, we define
 
    ```text
          q_f
-     A ------> I
+     A ------> im(f)
       \       /
      f \     / i_f
         \   /
@@ -453,7 +454,7 @@ Then, if any two of the following three properties hold, so does the third:
 
 ### Proof
 
-*Proof.* First, we show that if (i) and (ii) hold, then (iii) holds.
+First, we show that if (i) and (ii) hold, then (iii) holds.
 Note that the type `hom-slice_X(i,i')` is a proposition, since `i'` is assumed to be an embedding.
 Therefore it suffices to show that the unique map `h : B → B'` such that the triangle
 
@@ -491,6 +492,11 @@ Then the fact that (i) holds if and only if (ii) holds follows from the equivale
 ```text
   (hom-slice_X(f,m) → hom-slice_X(i,m)) ≃ (hom-slice_X(f,m) → hom-slice_X(i',m)). ◻
 ```
+
+PARTIAL BENCHMARK PROBLEM
+
+The code below proves contractibility with additional compatibility data involving `q` and `q'`.
+Contractibility of the type in (3), without that additional data, remains to be formalized.
 
 ```agda
 module _

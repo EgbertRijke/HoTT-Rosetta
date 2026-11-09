@@ -20,9 +20,9 @@ open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-10-2-contractible-retracts
 open import exercise-10-7-fibers-of-projections
-open import section-11-1-families-of-equivalences
 open import section-11-4-embeddings
 open import section-11-6-the-structure-identity-principle
+open import exercise-11-11-fiber-triangles
 open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-3-sets
@@ -172,7 +172,7 @@ A simple inductive argument shows that this is indeed the case, where the base c
 
 We may therefore safely omit explicit reference to the universes when considering truncatedness of a type.
 
-We show in the following theorem that the truncation levels are successively contained in one another.
+We show in the following proposition that the truncation levels are successively contained in one another.
 
 ## Proposition 12.4.3
 
@@ -593,7 +593,7 @@ abstract
     balance-succ-add+2-𝕋 x y ∙ ap succ-𝕋 (commutative-add+2-𝕋 x y)
 ```
 
-### The empty type is `k`-truncated for any `k ≥ 1`
+### The empty type is `k`-truncated for any `k ≥ -1`
 
 ```agda
 abstract
@@ -723,7 +723,7 @@ abstract
       ( is-trunc-g b)
 ```
 
-###Projections of families of sets are 0-maps
+### Projections of families of sets are 0-maps
 
 ```agda
 module _

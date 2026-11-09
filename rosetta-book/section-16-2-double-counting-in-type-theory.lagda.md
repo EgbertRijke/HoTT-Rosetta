@@ -25,6 +25,7 @@ open import exercise-9-4-three-for-two-equivalences
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-4-embeddings
 open import section-11-5-disjointness-of-coproducts
+open import exercise-11-1-coproduct-embeddings
 open import section-12-1-propositions
 open import section-12-4-general-truncation-levels
 open import section-13-1-equivalent-forms-of-function-extensionality
@@ -40,6 +41,7 @@ In other words, we must show that
 ```text
   (Fin k ≃ Fin l) → (k = l)
 ```
+
 for any two natural numbers `k` and `l`.
 We will prove this claim as a consequence of the following general fact.
 
@@ -159,7 +161,12 @@ We will write `i` for `inl : X → X + unit` and also for `inl : Y → Y + unit`
                 = i(y).
    ```
 
-   Since `i : Y → Y + unit` is injective, it follows that `f(g(y)) = y`. ◻
+   Since `i : Y → Y + unit` is injective, it follows that `f(g(y)) = y`.
+
+   In the other case, `e⁻¹(i(y)) ≠ ⋆`, there are `x : X` and an identification `p : e⁻¹(i(y)) = i(x)`.
+   By `δ(p)`, we have `g(y) = x`.
+   Applying `e` to `p` and using the inverse law gives `e(i(x)) = i(y)`.
+   By `β`, we therefore have `f(x) = y`, and hence `f(g(y)) = y`. ◻
 
 ```agda
 Maybe : {l : Level} → UU l → UU l
@@ -582,7 +589,7 @@ Any equivalence `e : Fin k ≃ Fin l` now gives us the element
 
 which is of course absurd.
 Similarly, if `k` is a successor and `l` is zero, we obtain `e(0) : empty`, which is again absurd.
-If both `k` and `l` are a successor, then we have by Proposition 16.2.1 the composite
+If both `k` and `l` are successors, then we have by Proposition 16.2.1 the composite
 
 ```text
   (Fin (k + 1) ≃ Fin (l + 1)) ---> (Fin k ≃ Fin l) ---> (k = l) ---> (k + 1 = l + 1)
@@ -628,7 +635,7 @@ abstract
     double-counting-equiv count-A count-A' id-equiv
 ```
 
-```text
+```agda
 abstract
   double-counting-Σ :
     {l1 l2 : Level} {A : UU l1} {B : A → UU l2} (count-A : count A)

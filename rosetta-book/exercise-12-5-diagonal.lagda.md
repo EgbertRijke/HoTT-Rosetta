@@ -12,6 +12,7 @@ Let `A` be a type, and let the **diagonal** of `A` be the map `δ_A : A → A ×
 ### Exercise 12.5(a)
 
 Show that
+
 ```text
 {is-equiv(δ_A)} ↔ {is-prop(A)}.
 ```

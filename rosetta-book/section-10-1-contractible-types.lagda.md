@@ -11,6 +11,7 @@ open import section-4-3-the-empty-type
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
+open import section-5-5-the-uniqueness-of-refl
 ```
 
 ## Definition 10.1.1
@@ -111,7 +112,7 @@ module _
     is-torsorial-Id : (a : A) → is-torsorial (λ x → a ＝ x)
     pr1 (pr1 (is-torsorial-Id a)) = a
     pr2 (pr1 (is-torsorial-Id a)) = refl
-    pr2 (is-torsorial-Id a) (.a , refl) = refl
+    pr2 (is-torsorial-Id a) = contraction-total-space-Id a
 ```
 
 ## Supplement

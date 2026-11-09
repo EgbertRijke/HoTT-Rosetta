@@ -40,11 +40,9 @@ Show that if `f` is surjective, then `g` is surjective.
 
 Show that if both `g` and `h` are surjective, then `f` is surjective.
 
-### Exercise 15.4(c)
-
-As a converse to Exercise 12.11, show that if `f` and `h` are `k`-truncated, then `g` is also `k`-truncated.
-
 ## Solution
+
+### Exercise 15.4(a)
 
 ```agda
 module _
@@ -98,10 +96,6 @@ module _
   comp-surjection : B ↠ X → A ↠ B → A ↠ X
   comp-surjection (g , G) (h , H) = g ∘ h , is-surjective-comp G H
 ```
-
-### Exercise 15.4(c)
-
-Note: This exercise is false as stated. For instance, take `A := ∅` and `g` any map. The exercise would imply that `g` is always an embedding, which is certainly not always the case.
 
 ## Supplement
 

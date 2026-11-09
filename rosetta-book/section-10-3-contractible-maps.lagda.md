@@ -94,7 +94,7 @@ Then we obtain a triangle
         ap_f(α)
   f(x) ========= f(x')
       \\       //
-       \\     //
+     p \\     // p'
         \\   //
          \\ //
            y
@@ -187,7 +187,7 @@ The homotopies witnessing that this converse map is indeed a right inverse as we
   pr2 equiv-Eq-eq-fiber = is-equiv-Eq-eq-fiber
 ```
 
-Now we define at the notion of contractible map.
+Now we define the notion of contractible map.
 
 ## Definition 10.3.4
 
@@ -219,7 +219,7 @@ Using the center of contraction of each `fib(f,y)`, we obtain the dependent func
   λ y. (g(y),G(y)) : Π(y : B) fib(f,y).
 ```
 
-Thus, we get map `g : B → A`, and a homotopy `G : Π(y : B) f(g(y)) = y`.
+Thus, we get a map `g : B → A`, and a homotopy `G : Π(y : B) f(g(y)) = y`.
 In other words, we get a section of `f`.
 
 It remains to construct a retraction of `f`.

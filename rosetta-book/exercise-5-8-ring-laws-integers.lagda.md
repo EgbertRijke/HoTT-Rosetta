@@ -37,7 +37,7 @@ Show that multiplication on `ℤ` satisfies the predecessor and successor laws:
     pred(x) · y = x · y - y 
     x · pred(y) = x · y - x
   succ-ℤ(x) · y = x · y + y
-  y · succ-ℤ(y) = x · y + x.
+  x · succ-ℤ(y) = x · y + x.
 ```
 
 ### Exercise 5.8(c)
@@ -51,7 +51,7 @@ Show that multiplication on `ℤ` distributes over addition, both from the left 
 
 ### Exercise 5.8(d)
 
-Show that multiplication on `Z` is associative and commutative:
+Show that multiplication on `ℤ` is associative and commutative:
 
 ```text
   (x · y) · z = x · (y · z)

@@ -57,21 +57,7 @@ module _
         ( λ x y → H (f x) (f y))
         ( λ x → refl)
         ( λ x y → I)
-```
 
-### Exercise 12.3(b)
-
-BENCHMARK PROBLEM
-
-### Exercise 12.3(c)
-
-BENCHMARK PROBLEM
-
-## Supplement
-
-### Any injective map between sets is an embedding
-
-```agda
 module _
   {l1 l2 : Level} {A : UU l1} {B : UU l2}
   where
@@ -101,3 +87,11 @@ emb-injection :
   injection A (type-Set B) → A ↪ (type-Set B)
 emb-injection B = tot (λ f → is-emb-is-injective (is-set-type-Set B))
 ```
+
+### Exercise 12.3(b)
+
+BENCHMARK PROBLEM
+
+### Exercise 12.3(c)
+
+BENCHMARK PROBLEM

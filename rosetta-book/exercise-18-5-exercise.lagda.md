@@ -17,6 +17,7 @@ open import section-10-4-equivalences-are-contractible-maps
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
 open import exercise-12-6-truncated-sigma-types
+open import exercise-12-11-truncated-maps-triangles
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import exercise-13-7-universal-property-contractible-types
 open import section-14-2-propositional-truncations-as-higher-inductive-types
@@ -36,9 +37,11 @@ Show that the following are equivalent:
 2. There is an element of type `‖a = x‖` for any `x : A`.
 
 3. For any family `B` over `A`, the fiber inclusion
+
     ```text
     iₐ : B(a) → Σ(x : A) B(x)
     ```
+
     defined in Exercise 12.13 is surjective.
 
 ## Solution

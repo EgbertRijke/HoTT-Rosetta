@@ -32,7 +32,7 @@ Directly above `1` are the prime numbers.
 Above the prime numbers are the multiples of two primes, then the multiples of three primes, and so on.
 At the top of this ordering we find `0`.
 For any natural number `n`, the numbers strictly below `n` are the proper divisors of `n`.
-A prime number is therefore a number of which has exactly one proper divisor.
+A prime number is therefore a number which has exactly one proper divisor.
 
 ## Definition 8.5.1
 
@@ -94,7 +94,7 @@ For any `n : ℕ`, the type `is-prime(n)` is decidable.
 
 ### Proof
 
-*Proof.* We will first show that `is-prime(n) ↔ is-prime'(n)`, where
+We will first show that `is-prime(n) ↔ is-prime'(n)`, where
 
 ```text
 is-prime'(n) ≔ (n ≠ 1) × Π(x : ℕ) is-proper-divisor(n, x) → (x = 1).
@@ -182,8 +182,9 @@ is-decidable-is-prime-ℕ n =
 ```
 
 The proof that there are infinitely many primes proceeds by constructing a prime number larger than `n`, for any `n : ℕ`.
-The number `n! + 1` is relatively prime with any number `x ≤ n`.
-Therefore there is a least number `n < m` that is relatively prime with any number `x ≤ n`, and it follows that this number `m` must be prime.
+For nonzero `n`, the number `n! + 1` is relatively prime with any nonzero number `x ≤ n`.
+Therefore there is a least number `n < m` that is relatively prime with any nonzero number `x ≤ n`, and it follows that this number `m` must be prime.
+For `n = 0`, we can take the prime `2`.
 
 ## Definition 8.5.3
 
@@ -213,7 +214,7 @@ The type `R(n, m)` is decidable for each `n, m : ℕ`.
 
 ### Proof
 
-*Proof.* The type `n < m` and, and for each `x : ℕ` both types `x ≤ n` and `(x | m) → (x = 1)` are decidable, so it follows via Corollary 8.2.5 that the product
+The type `n < m` and, for each `x : ℕ`, both types `x ≤ n` and `(x | m) → (x = 1)` are decidable, so it follows via Corollary 8.2.5 that the product
 
 ```text
 Π(x : ℕ) (x ≤ n) → ((x | m) → (x = 1))
@@ -245,7 +246,7 @@ There is an element of type `R(n, n! + 1)` for each `n : ℕ`.
 
 ### Proof
 
-*Proof.* The fact that `n < n! + 1` follows from the fact that `n ≤ n!`, which is shown by induction.
+The fact that `n < n! + 1` follows from the fact that `n ≤ n!`, which is shown by induction.
 We leave this to the reader, and focus on the second aspect of the claim: that every `x ≤ n` that divides `n! + 1` must be equal to `1`.
 
 To see this, note that any divisor of `n! + 1` is automatically nonzero, and recall that any nonzero `x ≤ n` divides `n!` by Exercise 7.3.
@@ -289,7 +290,7 @@ For each `n : ℕ`, there is a prime number `p : ℕ` such that `n < p`.
 
 ### Proof
 
-*Proof.* It suffices to show that for each *nonzero* `n : ℕ`, there is a prime number `p : ℕ` such that `n ≤ p`.
+It suffices to show that for each *nonzero* `n : ℕ`, there is a prime number `p : ℕ` such that `n ≤ p`.
 Let `n` be a nonzero natural number.
 
 Since the type `R(n, m)` is decidable for each `m : ℕ`, and since `R(n, n! + 1)` holds by Lemma 8.5.5, it follows by the well-ordering principle of `ℕ` (Theorem 8.3.2) that there is a minimal `m : ℕ` such that `R(n, m)` holds.

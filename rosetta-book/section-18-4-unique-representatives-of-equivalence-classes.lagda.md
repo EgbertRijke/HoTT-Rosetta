@@ -132,6 +132,10 @@ which is contractible with center of contraction `(h(x),c(x),r(x))`.
 Therefore it follows that `q(x) ≐ (h(x),c(x)) = (x,c)`.
 In particular, we see that `q(pr1(x,c)) = (x,c)`, i.e., that `pr1` is a section of `q`. ◻
 
+PARTIAL BENCHMARK PROBLEM
+
+Note: The equivalence between representatives and equivalence classes is formalized below. The specified map `q`, its section, and its universal property as a set quotient remain to be formalized.
+
 ```agda
 module _
   {l1 l2 l3 : Level} {A : UU l1} (R : equivalence-relation l2 A)
@@ -257,7 +261,9 @@ is-surjective-mod-succ-ℕ k =
   is-surjective-is-split-surjective (is-split-surjective-mod-succ-ℕ k)
 ```
 
-Note: There is no code in agda-unimath showing that ℤ/ₙ is a set quotient.
+PARTIAL BENCHMARK PROBLEM
+
+Note: The effectiveness and split surjectivity of `mod-succ-ℕ` are formalized. Its universal property as a set quotient and the stated choice of unique representatives remain to be formalized.
 
 ## Example 18.4.4
 
@@ -319,10 +325,11 @@ Since `x'` and `y'` are assumed to be coprime, it follows from the equation
 ```
 
 that `x'` divides `x / gcd(x,y)`.
-Similarly `x / gcd(x,y)` and `y / gcd(x,y)` are coprime, it follows from the same equation that `x / gcd(x,y)` divides `x'`, so we conclude that `ux' = x / gcd(x,y)` for some `u = ± 1`.
+Similarly, since `x / gcd(x,y)` and `y / gcd(x,y)` are coprime, it follows from the same equation that `x / gcd(x,y)` divides `x'`, so we conclude that `ux' = x / gcd(x,y)` for some `u = ± 1`.
 The fact that `vy' = y / gcd(x,y)` for some `v = ± 1` is proven similarly.
-However, since both `y` and `y'` are positive, and the `gcd(x,y)` of any two integers is positive, it follows that `v = 1`.
-Using the assumption that `x'y / gcd(x,y) = xy' / gcd(x,y)`, this allows us to deduce that also `u = 1`.
+However, since both `y` and `y'` are positive, and `gcd(x,y)` is positive because `y > 0`, it follows that `v = 1`.
+Substituting `y' = y / gcd(x,y)` into `x'(y / gcd(x,y)) = (x / gcd(x,y))y'` and cancelling the positive integer `y / gcd(x,y)` gives `x' = x / gcd(x,y)`.
+This also covers the case `x = 0`.
 
 We define the type of **rational numbers** by
 
@@ -649,3 +656,7 @@ module _
   is-positive-denominator-ℚ : is-positive-ℤ denominator-ℚ
   is-positive-denominator-ℚ = is-positive-denominator-fraction-ℤ fraction-ℚ
 ```
+
+PARTIAL BENCHMARK PROBLEM
+
+Note: The Agda defines fractions with positive denominators and their reduced forms. The choice-of-representatives and set-quotient claims for the stated type `Q`, whose denominators may be any nonzero integers, remain to be formalized.

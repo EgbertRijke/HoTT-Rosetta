@@ -65,7 +65,7 @@ We see that the identity type is not just an inductive type, like the
 inductive types `ℕ`, `∅`, and `𝟙` for example, but it is an inductive
 *family* of types.
 Even though we have a type `a = x` for any `x : A`, the constructor only
-provides an element ` refl : a = a`, identifying `a` with itself.
+provides an element `refl : a = a`, identifying `a` with itself.
 The induction principle then asserts that in order to prove something about all
 identifications of `a` with some `x : A`, it suffices to prove this assertion
 about `refl` only.

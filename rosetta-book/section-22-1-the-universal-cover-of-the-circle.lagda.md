@@ -302,8 +302,10 @@ commutes.
 We will write `d ↦ d_X` for the inverse of this equivalence, so that the relations
 
 ```text
-(x_D)_X = x (e(x)_D) = tr_{D(X,e)}(loop,x_D)
-(d_X)_D = d (tr_{D(X,e)}(d))_X = e(d_X)
+(x_D)_X = x
+(d_X)_D = d
+(e(x)_D) = tr_{D(X,e)}(loop,x_D)
+(tr_{D(X,e)}(loop,d))_X = e(d_X)
 ```
 
 hold.
@@ -613,7 +615,7 @@ Its inverse is the predecessor function defined in Exercise 4.1.
 
 ## Definition 22.1.2
 
-The **universal cover** of the circle is defined via Definition 22.1.1 to be the unique dependent type `E_{S¹} ≔ D(ℤ,succ-ℤ ) : S¹ → 𝒰`. equipped with an equivalence `x ↦ x_E : ℤ → E_{S¹}(base)` and a homotopy witnessing that the square
+The **universal cover** of the circle is defined via Definition 22.1.1 to be the unique dependent type `E_{S¹} ≔ D(ℤ,succ-ℤ) : S¹ → 𝒰` equipped with an equivalence `x ↦ x_E : ℤ → E_{S¹}(base)` and a homotopy witnessing that the square
 
 ```text
                 x ↦ x_E
@@ -693,7 +695,7 @@ in the total space `Σ(t : S¹) E(t)`.
 
 ### Proof
 
-_Proof._ By Theorem 9.3.4 it suffices to show that
+By Theorem 9.3.4 it suffices to show that
 
 ```text
 Π(k : ℤ) Σ(α : base = base) tr_E(α,k_E) = succ-ℤ (k)_E.
@@ -702,4 +704,4 @@ _Proof._ By Theorem 9.3.4 it suffices to show that
 We just take `α ≔ loop`.
 Then we have `tr_E(α,k_E) = succ-ℤ (k)_E` by the commuting square provided in the definition of `E`. ◻
 
-BENCHMARK PROBLEM
+The path `path-total-universal-cover-circle` is formalized in the proof of [Theorem 22.4.1](section-22-4-the-fundamental-group-of-the-circle.lagda.md#theorem-2241).

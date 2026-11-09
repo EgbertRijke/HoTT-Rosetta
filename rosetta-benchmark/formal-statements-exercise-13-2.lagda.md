@@ -1,4 +1,4 @@
-# Formal Statements for Exerecise 13.2
+# Formal Statements for Exercise 13.2
 
 ```agda
 module formal-statements-exercise-13-2 where
@@ -242,7 +242,7 @@ module _
     eq-htpy-hom-coslice = {!!}
 ```
 
-### Exercise 13.2.(d)
+### Exercise 13.2(d)
 
 ```agda
 module _
@@ -272,7 +272,7 @@ module _
     where
 
     htpy-hom-arrow :
-      (k : hom-arrow) → UU (l1 ⊔ l2 ⊔ l3)
+      (k : hom-arrow) → UU (l1 ⊔ l2 ⊔ l3 ⊔ l4)
     htpy-hom-arrow = {!!}
 
     refl-htpy-hom-arrow :

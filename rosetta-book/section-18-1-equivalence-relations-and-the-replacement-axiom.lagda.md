@@ -38,7 +38,7 @@ open import section-17-4-maps-and-families-of-types
 
 open import exercise-4-3-double-negation-logic
 open import exercise-12-7-truncated-products
-open import exercise-13-15-morphisms-over-a-type
+open import exercise-13-2-identity-types-of-structured-function-types
 ```
 
 ## Definition 18.1.1
@@ -254,7 +254,7 @@ We define `A / R` to be the type of equivalence classes, i.e., we define
   A / R ≔ Σ(P : A → Prop_𝒰) is-equivalence-class(P).
 ```
 
-Furthermore, we define **equivalence class of `x : A`** to be
+Furthermore, we define the **equivalence class of `x : A`** to be
 
 ```text
   [x]_R ≔ R(x),
@@ -424,7 +424,7 @@ whenever `P(x)` holds.
 Since `P` is an equivalence class there exists an element `y : A` such that `P = [y]_R`.
 Note that our goal is a proposition, so we may assume that we have such a `y`.
 From the assumption that `P(x)` holds, it follows that `R(x,y)` holds.
-To complete the proof, it therefore is suffices to show that
+To complete the proof, it therefore suffices to show that
 
 ```text
   [x]_R = [y]_R,
@@ -649,7 +649,7 @@ Then there is an equivalence
 
 ## Remark 18.1.5
 
-Notice that type of equivalence classes of an equivalence relation in `𝒰` is a type in the universe `𝒰⁺` that contains `𝒰` and every type in `𝒰`, or indeed in any universe `𝒱` containing `𝒰` and every type in `𝒰`.
+Notice that the type of equivalence classes of an equivalence relation in `𝒰` is a type in the universe `𝒰⁺` that contains `𝒰` and every type in `𝒰`, or indeed in any universe `𝒱` containing `𝒰` and every type in `𝒰`.
 Indeed, the type
 
 ```text
@@ -663,7 +663,7 @@ The type of equivalence classes of an equivalence relation `R` on `A` in `𝒰` 
 In classical mathematics, on the other hand, we consider the class of equivalence classes of an equivalence relation to be a (small) set.
 We will introduce the replacement axiom in order to ensure that set quotients in type theory are small.
 
-Recall that in set theory, the replacement axiom asserts that for any family of sets `{Xᵢ}_{i ∈ I}` indexed by a set `I`, there is a set `X[I]` consisting of precisely those sets `x` for which there exists an `i ∈ I` such that `x ∈ Xᵢ`.
+Recall that in set theory, the replacement axiom asserts that for any family of sets `{Xᵢ}_{i ∈ I}` indexed by a set `I`, there is a set `X[I]` consisting of precisely those sets `x` for which there exists an `i ∈ I` such that `x = Xᵢ`.
 In other words: the image of a set-indexed family of sets is again a set.
 Without the replacement axiom, `X[I]` would be a class.
 
@@ -771,12 +771,16 @@ replacement' f = replacement f is-small'
 
 ## Example 18.1.9
 
-For any type `A : 𝒰`, the type `𝒰_A` of all types in `𝒰` merely equivalent to `A` is equivalent to the image of the constant map `const_A : unit → 𝒰` is small.
+For any type `A : 𝒰`, the type `𝒰_A` of all types in `𝒰` merely equivalent to `A` is equivalent to the image of the constant map `const_A : unit → 𝒰`.
 Since `unit` is small and `𝒰` is locally `𝒰`-small, it follows from the replacement axiom that `𝒰_A` is `𝒰`-small.
+
+BENCHMARK PROBLEM
+
+Note: The identification of `𝒰_A` with this image and the resulting smallness of `𝒰_A` remain to be formalized.
 
 ## Example 18.1.10
 
-The type `𝔽` of all finite types in `𝒰` is equivalent to be the image of the map
+The type `𝔽` of all finite types in `𝒰` is equivalent to the image of the map
 
 ```text
   Fin : ℕ → 𝒰.
@@ -829,7 +833,9 @@ is-locally-small-type-subuniverse P =
   is-locally-small-type-subtype P is-locally-small-UU
 ```
 
-Note: Agda-unimath does not prove directly that the type of finite types is locally small.
+BENCHMARK PROBLEM
+
+Note: The Agda above proves general local-smallness results. The identification of `𝔽` with the image of `Fin` and the resulting smallness of `𝔽` remain to be formalized.
 
 ## Example 18.1.11
 

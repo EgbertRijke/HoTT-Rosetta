@@ -71,7 +71,7 @@ ap_{f(x,_)}(q) |        \ ap-binary_f(p,q)   | ap_{f(x',_)}(q)
 
 ### Proof
 
-_Proof._ The proof is immediate by identification elimination on `p` and `q`, where applicable. ◻
+The proof is immediate by identification elimination on `p` and `q`, where applicable. ◻
 
 ```agda
 module _
@@ -149,6 +149,7 @@ vertical-concat-Id² α β = α ∙ β
 
 ## Lemma 19.5.4
 
+Consider a pointed type `A` and double loops `r,s : Ω^2(A)`.
 Horizontal concatenation satisfies the following left and right unit laws:
 
 ```text
@@ -158,7 +159,25 @@ r ∙ₕ refl_refl = r.
 
 ### Proof
 
-_Proof._ This follows by identification elimination on `r` and `s`, or alternatively via Lemma 19.5.2. ◻
+By Lemma 19.5.2 and the definition of concatenation,
+
+```text
+refl_refl ∙ₕ s = ap_{refl ∙ _}(s) = ap_id(s) = s.
+```
+
+For the right-unit law, write
+
+```text
+ρ(p) ≔ right-unit(p) : p ∙ refl = p.
+```
+
+Naturality of this homotopy (Definition 10.4.3), together with Lemma 19.5.2 and `ap_id(r) = r`, gives
+
+```text
+(r ∙ₕ refl_refl) ∙ ρ(refl) = ρ(refl) ∙ r.
+```
+
+Since `ρ(refl)` is `refl`, the ordinary left and right unit laws give `r ∙ₕ refl_refl = r`. ◻
 
 ```agda
 left-unit-law-vertical-concat-Id² :
@@ -180,82 +199,7 @@ compute-right-refl-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
   horizontal-concat-Id² α refl ＝ right-whisker-concat α u
 compute-right-refl-horizontal-concat-Id² refl = refl
-```
 
-In the following lemma we establish the **interchange law** for horizontal and vertical concatenation.
-
-## Lemma 19.5.5
-
-Consider a diagram of the form
-
-```text
-[x] ----p----> [y] ----q----> [z]
-        ⇓ r            ⇓ s
-[x] ----p'---> [y] ----q'---> [z]
-        ⇓ r'           ⇓ s'
-[x] ----p''--> [y] ----q''--> [z]
-```
-
-Then there is an identification
-
-```text
-(r ∙ r') ∙ₕ (s ∙ s') = (r ∙ₕ s) ∙ (r' ∙ₕ s').
-```
-
-### Proof
-
-_Proof._ We use path induction on both `r` and `s`.
-Then it suffices to show that
-
-```text
-(refl ∙ r') ∙ₕ (refl ∙ s') = (refl ∙ₕ refl) ∙ (r' ∙ₕ s')
-```
-
-Using the unit laws for ordinary concatenation, we see that both sides reduce to `r' ∙ₕ s'`. ◻
-
-```agda
-interchange-Id² :
-  {l : Level} {A : UU l} {x y z : A} {p q r : x ＝ y} {u v w : y ＝ z}
-  (α : p ＝ q) (β : q ＝ r) (γ : u ＝ v) (δ : v ＝ w) →
-  ( horizontal-concat-Id²
-    ( vertical-concat-Id² α β)
-    ( vertical-concat-Id² γ δ)) ＝
-  ( vertical-concat-Id²
-    ( horizontal-concat-Id² α γ)
-    ( horizontal-concat-Id² β δ))
-interchange-Id² refl _ refl _ = refl
-```
-
-## Theorem 19.5.6
-
-Consider a pointed type `A`, and let `r,s : Ω^2(A)`.
-Then there is an identification
-
-```text
-r ∙ s = s ∙ r
-```
-
-### Proof
-
-_Proof._ First we observe that `r ∙ s = r ∙ₕ s` by the following calculation using the unit laws from Lemma 19.5.4 and the interchange law from Lemma 19.5.5:
-
-```text
-r ∙ s = (r ∙ₕ refl_refl) ∙ (refl_refl ∙ₕ s)
-= (r ∙ refl_refl) ∙ₕ (refl_refl ∙ s)
-= r ∙ₕ s
-```
-
-Similarly, we observe that `r ∙ₕ s = s ∙ r` by the following calculation:
-
-```text
-r ∙ₕ s = (refl_refl ∙ r) ∙ₕ (s ∙ refl_refl)
-= (refl_refl ∙ₕ s) ∙ (r ∙ₕ refl_refl)
-= s ∙ r.
-```
-
-These two calculations combined prove the claim. ◻
-
-```agda
 module _
   {l : Level}
   where
@@ -323,6 +267,82 @@ module _
   right-unit-law-right-whisker-Ω² α =
     inv (right-unit-law-right-whisker-concat α ∙ right-unit)
 
+```
+
+In the following lemma we establish the **interchange law** for horizontal and vertical concatenation.
+
+## Lemma 19.5.5
+
+Consider a diagram of the form
+
+```text
+[x] ----p----> [y] ----q----> [z]
+        ⇓ r            ⇓ s
+[x] ----p'---> [y] ----q'---> [z]
+        ⇓ r'           ⇓ s'
+[x] ----p''--> [y] ----q''--> [z]
+```
+
+Then there is an identification
+
+```text
+(r ∙ r') ∙ₕ (s ∙ s') = (r ∙ₕ s) ∙ (r' ∙ₕ s').
+```
+
+### Proof
+
+We use path induction on both `r` and `s`.
+Then it suffices to show that
+
+```text
+(refl ∙ r') ∙ₕ (refl ∙ s') = (refl ∙ₕ refl) ∙ (r' ∙ₕ s')
+```
+
+Using the unit laws for ordinary concatenation, we see that both sides reduce to `r' ∙ₕ s'`. ◻
+
+```agda
+interchange-Id² :
+  {l : Level} {A : UU l} {x y z : A} {p q r : x ＝ y} {u v w : y ＝ z}
+  (α : p ＝ q) (β : q ＝ r) (γ : u ＝ v) (δ : v ＝ w) →
+  ( horizontal-concat-Id²
+    ( vertical-concat-Id² α β)
+    ( vertical-concat-Id² γ δ)) ＝
+  ( vertical-concat-Id²
+    ( horizontal-concat-Id² α γ)
+    ( horizontal-concat-Id² β δ))
+interchange-Id² refl _ refl _ = refl
+```
+
+## Theorem 19.5.6
+
+Consider a pointed type `A`, and let `r,s : Ω^2(A)`.
+Then there is an identification
+
+```text
+r ∙ s = s ∙ r
+```
+
+### Proof
+
+First we observe that `r ∙ s = r ∙ₕ s` by the following calculation using the unit laws from Lemma 19.5.4 and the interchange law from Lemma 19.5.5:
+
+```text
+r ∙ s = (r ∙ₕ refl_refl) ∙ (refl_refl ∙ₕ s)
+= (r ∙ refl_refl) ∙ₕ (refl_refl ∙ s)
+= r ∙ₕ s
+```
+
+Similarly, we observe that `r ∙ₕ s = s ∙ r` by the following calculation:
+
+```text
+r ∙ₕ s = (refl_refl ∙ r) ∙ₕ (s ∙ refl_refl)
+= (refl_refl ∙ₕ s) ∙ (r ∙ₕ refl_refl)
+= s ∙ r.
+```
+
+These two calculations combined prove the claim. ◻
+
+```agda
 interchange-Ω² :
   {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω² a) →
   Id
@@ -413,7 +433,7 @@ For `n ≥ 2`, the `n`-th homotopy group of any pointed type is abelian.
 
 BENCHMARK PROBLEM
 
-_Proof._ By Proposition 19.4.6 it follows that `πₙ(A)` is isomorphic to the second homotopy group of some pointed type, for every `n ≥ 2`.
+By Proposition 19.4.6 it follows that `πₙ(A)` is isomorphic to the second homotopy group of some pointed type, for every `n ≥ 2`.
 Therefore it suffices to prove the claim for `π₂(A)` for every pointed type `A`.
 
 Our goal is to show that

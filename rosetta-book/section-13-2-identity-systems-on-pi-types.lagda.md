@@ -370,7 +370,7 @@ indexed by `g : Π(x : A) B(x)` is an identity system at `f`.
 
 ### Proof
 
-*Proof.* By Theorem 11.2.2 it suffices to show that the type
+By Theorem 11.2.2 it suffices to show that the type
 
 ```text
   Σ(g : Π(x : A) B(x)) Π(x : A) E(f(x),g(x))
@@ -449,4 +449,7 @@ module _
   pr2 (extensionality-Π e g) = is-equiv-map-extensionality-Π e g
 ```
 
-Note: Agda-unimath does not contain the proof that `Eq-Π` is an identity system, even though it is a straightforward corollary of what we have formalized so far.
+PARTIAL BENCHMARK PROBLEM
+
+The contractibility of the total space is formalized by `is-torsorial-Eq-Π`, and `extensionality-Π` gives the corresponding identity-type equivalences.
+The stated identity-system induction principle remains to be formalized.

@@ -17,11 +17,10 @@ open import exercise-9-5-sigma-swap
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import section-11-1-families-of-equivalences
-open import section-11-6-the-structure-identity-principle
+open import exercise-11-11-fiber-triangles
 open import section-12-1-propositions
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import section-13-2-identity-systems-on-pi-types
-open import exercise-13-1-homotopy-operations-equivalences
 open import exercise-13-4-equivalence-structure-is-a-proposition
 ```
 
@@ -49,22 +48,8 @@ In other words, the type `hom-slice_X(f,g)` is the type of maps `h : A → B` eq
 commutes.
 
 ```agda
-module _
-  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-  where
-
-  hom-slice :
-    (A → X) → (B → X) → UU (l1 ⊔ l2 ⊔ l3)
-  hom-slice f g = Σ (A → B) (λ h → f ~ g ∘ h)
-
-  map-hom-slice :
-    (f : A → X) (g : B → X) → hom-slice f g → A → B
-  map-hom-slice f g h = pr1 h
-
-  triangle-hom-slice :
-    (f : A → X) (g : B → X) (h : hom-slice f g) →
-    f ~ g ∘ map-hom-slice f g h
-  triangle-hom-slice f g h = pr2 h
+open import exercise-13-2-identity-types-of-structured-function-types
+  using (hom-slice; map-hom-slice; triangle-hom-slice)
 ```
 
 Consider a family `P` of types over `X`.
@@ -198,49 +183,10 @@ module _
 
 ### Exercise 13.15(c)
 
-BENCHMARK PROBLEM
+PARTIAL BENCHMARK PROBLEM
 
-## Supplement
-
-### Characterizing the identity type of morphisms in the slice over a type
-
-```agda
-module _
-  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-  (f : A → X) (g : B → X)
-  where
-
-  coherence-htpy-hom-slice :
-    (h h' : hom-slice f g) →
-    map-hom-slice f g h ~ map-hom-slice f g h' →
-    UU (l1 ⊔ l2)
-  coherence-htpy-hom-slice h h' H =
-      coherence-triangle-homotopies'
-        ( triangle-hom-slice f g h')
-        ( g ·l H)
-        ( triangle-hom-slice f g h)
-
-  htpy-hom-slice : (h h' : hom-slice f g) → UU (l1 ⊔ l2 ⊔ l3)
-  htpy-hom-slice h h' =
-    Σ ( map-hom-slice f g h ~ map-hom-slice f g h')
-      ( coherence-htpy-hom-slice h h')
-
-  extensionality-hom-slice :
-    (h h' : hom-slice f g) → (h ＝ h') ≃ htpy-hom-slice h h'
-  extensionality-hom-slice (h , H) =
-    extensionality-Σ
-      ( λ {h'} H' (K : h ~ h') → (H ∙h (g ·l K)) ~ H')
-      ( refl-htpy)
-      ( right-unit-htpy)
-      ( λ h' → equiv-funext)
-      ( λ H' → equiv-concat-htpy right-unit-htpy H' ∘e equiv-funext)
-
-  eq-htpy-hom-slice :
-    (h h' : hom-slice f g) → htpy-hom-slice h h' → h ＝ h'
-  eq-htpy-hom-slice h h' = map-inv-equiv (extensionality-hom-slice h h')
-```
-
-### The predicate on a morphism in the slice of being an equivalence
+The equivalence of conditions (1) and (2), and the concluding equivalence of types, are formalized below.
+The equivalence with condition (3) remains to be formalized.
 
 ```agda
 is-equiv-hom-slice :
@@ -248,8 +194,6 @@ is-equiv-hom-slice :
   (f : A → X) (g : B → X) → hom-slice f g → UU (l2 ⊔ l3)
 is-equiv-hom-slice f g h = is-equiv (map-hom-slice f g h)
 ```
-
-### The type of equivalences in the slice
 
 ```agda
 equiv-slice :
@@ -277,8 +221,6 @@ module _
   hom-equiv-slice : hom-slice f g
   hom-equiv-slice = (map-equiv-slice , coh-equiv-slice)
 ```
-
-### A morphism in the slice over `X` is an equivalence if and only if the induced map between fibers is a fiberwise equivalence
 
 ```agda
 module _

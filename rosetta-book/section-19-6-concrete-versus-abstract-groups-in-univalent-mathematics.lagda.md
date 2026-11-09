@@ -13,8 +13,10 @@ open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-2-the-groupoidal-structure-of-types
 open import section-5-3-the-action-on-identifications-of-functions
 open import section-5-4-transport
+open import exercise-5-1-distributive-inv-concat
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
+open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import exercise-9-4-three-for-two-equivalences
 open import exercise-9-5-sigma-swap
 open import section-10-1-contractible-types
@@ -32,12 +34,14 @@ open import section-12-1-propositions
 open import section-12-2-subtypes
 open import section-12-3-sets
 open import section-12-4-general-truncation-levels
+open import exercise-12-4-coproduct-truncation
 open import section-13-1-equivalent-forms-of-function-extensionality
 open import exercise-13-3-truncatedness-is-a-proposition
 open import exercise-13-4-equivalence-structure-is-a-proposition
 open import exercise-13-12-dependent-products-of-truncated-maps
 open import section-14-2-propositional-truncations-as-higher-inductive-types
 open import section-16-3-finite-types
+open import section-17-1-equivalent-forms-of-the-univalence-axiom
 open import section-17-2-propositional-extensionality
 open import section-17-4-maps-and-families-of-types
 open import section-17-5-classical-mathematics-with-the-univalence-axiom
@@ -59,13 +63,17 @@ All groups can be constructed in this way.
 In fact, for every group `G` in `𝒰` the type
 
 ```text
-Σ(B : Pointed-Connected - 1-Type_𝒰) G ≅ Ω(B)
+Σ(B : Pointed-Connected-1-Type_𝒰) G ≅ Ω(B)
 ```
 
 of pointed connected `1`-types `B` equipped with a group isomorphism from `G` to `Ω(B)` is contractible.
 We write `BG` for the unique pointed connected `1`-type whose loop space is isomorphic to `G`.
 The pointed type `BG` is also called the **delooping** of `G`, or the **classifying type** of `G`.
 The fact that the above type is contractible is of course heavily reliant on the univalence axiom.
+
+PARTIAL BENCHMARK PROBLEM
+
+Note: The construction from abstract groups to concrete groups is formalized later in this section, in a larger universe. The asserted contractibility of the type of deloopings in `𝒰` remains to be formalized.
 
 ```agda
 ∞-Group : (l : Level) → UU (lsuc l)
@@ -354,12 +362,533 @@ module _
   Type-With-Cardinality-ℕ-Group : Group (lsuc l)
   Type-With-Cardinality-ℕ-Group =
     group-Concrete-Group Type-With-Cardinality-ℕ-Concrete-Group
+
+raise-Set : (l : Level) {l1 : Level} → Set l1 → Set (l ⊔ l1)
+pr1 (raise-Set l A) = raise l (type-Set A)
+pr2 (raise-Set l A) =
+  is-set-equiv' (type-Set A) (compute-raise l (type-Set A)) (is-set-type-Set A)
+
+module _
+  {l : Level} {A B : UU l}
+  where
+
+  is-trunc-id-is-trunc :
+    (k : 𝕋) → is-trunc k A → is-trunc k B → is-trunc k (A ＝ B)
+  is-trunc-id-is-trunc k is-trunc-A is-trunc-B =
+    is-trunc-equiv k
+      ( A ≃ B)
+      ( equiv-univalence)
+      ( is-trunc-equiv-is-trunc k is-trunc-A is-trunc-B)
+
+module _
+  {l1 l2 : Level} {A : UU l1} (B : A → UU l2)
+  where
+
+  concat-dependent-identification :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) {x' : B x} {y' : B y} {z' : B z} →
+    dependent-identification B p x' y' →
+    dependent-identification B q y' z' →
+    dependent-identification B (p ∙ q) x' z'
+  concat-dependent-identification refl q refl q' = q'
+
+  compute-concat-dependent-identification-left-base-refl :
+    { y z : A} (q : y ＝ z) →
+    { x' y' : B y} {z' : B z} (p' : x' ＝ y') →
+    ( q' : dependent-identification B q y' z') →
+    concat-dependent-identification refl q p' q' ＝ ap (tr B q) p' ∙ q'
+  compute-concat-dependent-identification-left-base-refl q refl q' = refl
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  interchange-concat-eq-pair-Σ :
+    {x y z : A} (p : x ＝ y) (q : y ＝ z) {x' : B x} {y' : B y} {z' : B z} →
+    (p' : dependent-identification B p x' y')
+    (q' : dependent-identification B q y' z') →
+    eq-pair-Σ (p ∙ q) (concat-dependent-identification B p q p' q') ＝
+    ( eq-pair-Σ p p' ∙ eq-pair-Σ q q')
+  interchange-concat-eq-pair-Σ refl q refl q' = refl
+
+module _
+  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
+  where
+
+  interchange-concat-pair-eq-Σ :
+    {x y z : Σ A B} (p : x ＝ y) (q : y ＝ z) →
+    pair-eq-Σ (p ∙ q) ＝
+    ( pr1 (pair-eq-Σ p) ∙ pr1 (pair-eq-Σ q) ,
+      concat-dependent-identification B
+        ( pr1 (pair-eq-Σ p))
+        ( pr1 (pair-eq-Σ q))
+        ( pr2 (pair-eq-Σ p))
+        ( pr2 (pair-eq-Σ q)))
+  interchange-concat-pair-eq-Σ refl q = refl
+
+  pr1-interchange-concat-pair-eq-Σ :
+    {x y z : Σ A B} (p : x ＝ y) (q : y ＝ z) →
+    pr1 (pair-eq-Σ (p ∙ q)) ＝ (pr1 (pair-eq-Σ p) ∙ pr1 (pair-eq-Σ q))
+  pr1-interchange-concat-pair-eq-Σ p q =
+    ap pr1 (interchange-concat-pair-eq-Σ p q)
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β) {l1 l2 l3 : Level}
+  {X : obj-Large-Precategory C l1}
+  {Y : obj-Large-Precategory C l2}
+  {Z : obj-Large-Precategory C l3}
+  {g : hom-Large-Precategory C Y Z}
+  {f : hom-Large-Precategory C X Y}
+  where
+
+  hom-comp-is-iso-Large-Precategory :
+    is-iso-Large-Precategory C g →
+    is-iso-Large-Precategory C f →
+    hom-Large-Precategory C Z X
+  hom-comp-is-iso-Large-Precategory q p =
+    comp-hom-Large-Precategory C
+      ( hom-inv-is-iso-Large-Precategory C f p)
+      ( hom-inv-is-iso-Large-Precategory C g q)
+
+  is-section-comp-is-iso-Large-Precategory :
+    (q : is-iso-Large-Precategory C g)
+    (p : is-iso-Large-Precategory C f) →
+    comp-hom-Large-Precategory C
+      ( comp-hom-Large-Precategory C g f)
+      ( hom-comp-is-iso-Large-Precategory q p) ＝
+    id-hom-Large-Precategory C
+  is-section-comp-is-iso-Large-Precategory q p =
+    ( associative-comp-hom-Large-Precategory C g f _) ∙
+    ( ap
+      ( comp-hom-Large-Precategory C g)
+      ( ( inv
+          ( associative-comp-hom-Large-Precategory C f
+            ( hom-inv-is-iso-Large-Precategory C f p)
+            ( hom-inv-is-iso-Large-Precategory C g q))) ∙
+        ( ap
+          ( λ h → comp-hom-Large-Precategory C h _)
+          ( is-section-hom-inv-is-iso-Large-Precategory C f p)) ∙
+        ( left-unit-law-comp-hom-Large-Precategory C
+          ( hom-inv-is-iso-Large-Precategory C g q)))) ∙
+    ( is-section-hom-inv-is-iso-Large-Precategory C g q)
+
+  is-retraction-comp-is-iso-Large-Precategory :
+    (q : is-iso-Large-Precategory C g)
+    (p : is-iso-Large-Precategory C f) →
+    comp-hom-Large-Precategory C
+      ( hom-comp-is-iso-Large-Precategory q p)
+      ( comp-hom-Large-Precategory C g f) ＝
+    id-hom-Large-Precategory C
+  is-retraction-comp-is-iso-Large-Precategory q p =
+    ( associative-comp-hom-Large-Precategory C
+      ( hom-inv-is-iso-Large-Precategory C f p)
+      ( hom-inv-is-iso-Large-Precategory C g q)
+      ( comp-hom-Large-Precategory C g f)) ∙
+    ( ap
+      ( comp-hom-Large-Precategory
+        ( C)
+        ( hom-inv-is-iso-Large-Precategory C f p))
+      ( ( inv
+          ( associative-comp-hom-Large-Precategory C
+            ( hom-inv-is-iso-Large-Precategory C g q)
+            ( g)
+            ( f))) ∙
+        ( ap
+          ( λ h → comp-hom-Large-Precategory C h f)
+          ( is-retraction-hom-inv-is-iso-Large-Precategory C g q)) ∙
+        ( left-unit-law-comp-hom-Large-Precategory C f))) ∙
+    ( is-retraction-hom-inv-is-iso-Large-Precategory C f p)
+
+  is-iso-comp-is-iso-Large-Precategory :
+    is-iso-Large-Precategory C g → is-iso-Large-Precategory C f →
+    is-iso-Large-Precategory C (comp-hom-Large-Precategory C g f)
+  pr1 (is-iso-comp-is-iso-Large-Precategory q p) =
+    hom-comp-is-iso-Large-Precategory q p
+  pr1 (pr2 (is-iso-comp-is-iso-Large-Precategory q p)) =
+    is-section-comp-is-iso-Large-Precategory q p
+  pr2 (pr2 (is-iso-comp-is-iso-Large-Precategory q p)) =
+    is-retraction-comp-is-iso-Large-Precategory q p
+
+module _
+  {α : Level → Level} {β : Level → Level → Level}
+  (C : Large-Precategory α β) {l1 l2 l3 : Level}
+  {X : obj-Large-Precategory C l1}
+  {Y : obj-Large-Precategory C l2}
+  {Z : obj-Large-Precategory C l3}
+  (g : iso-Large-Precategory C Y Z)
+  (f : iso-Large-Precategory C X Y)
+  where
+
+  hom-comp-iso-Large-Precategory :
+    hom-Large-Precategory C X Z
+  hom-comp-iso-Large-Precategory =
+    comp-hom-Large-Precategory C
+      ( hom-iso-Large-Precategory C g)
+      ( hom-iso-Large-Precategory C f)
+
+  is-iso-comp-iso-Large-Precategory :
+    is-iso-Large-Precategory C hom-comp-iso-Large-Precategory
+  is-iso-comp-iso-Large-Precategory =
+    is-iso-comp-is-iso-Large-Precategory C
+      ( is-iso-iso-Large-Precategory C g)
+      ( is-iso-iso-Large-Precategory C f)
+
+  comp-iso-Large-Precategory :
+    iso-Large-Precategory C X Z
+  pr1 comp-iso-Large-Precategory = hom-comp-iso-Large-Precategory
+  pr2 comp-iso-Large-Precategory = is-iso-comp-iso-Large-Precategory
+
+  hom-inv-comp-iso-Large-Precategory :
+    hom-Large-Precategory C Z X
+  hom-inv-comp-iso-Large-Precategory =
+    hom-inv-iso-Large-Precategory C comp-iso-Large-Precategory
+
+  is-section-inv-comp-iso-Large-Precategory :
+    comp-hom-Large-Precategory C
+      ( hom-comp-iso-Large-Precategory)
+      ( hom-inv-comp-iso-Large-Precategory) ＝
+    id-hom-Large-Precategory C
+  is-section-inv-comp-iso-Large-Precategory =
+    is-section-hom-inv-iso-Large-Precategory C comp-iso-Large-Precategory
+
+  is-retraction-inv-comp-iso-Large-Precategory :
+    comp-hom-Large-Precategory C
+      ( hom-inv-comp-iso-Large-Precategory)
+      ( hom-comp-iso-Large-Precategory) ＝
+    id-hom-Large-Precategory C
+  is-retraction-inv-comp-iso-Large-Precategory =
+    is-retraction-hom-inv-iso-Large-Precategory C comp-iso-Large-Precategory
+
+module _
+  {l1 l2 l3 : Level} (G : Group l1) (H : Group l2) (K : Group l3)
+  where
+
+  comp-iso-Group : iso-Group H K → iso-Group G H → iso-Group G K
+  comp-iso-Group =
+    comp-iso-Large-Precategory Group-Large-Precategory {X = G} {Y = H} {Z = K}
+
+module _
+  {l1 l2 : Level} (G : Group l1) (H : Group l2)
+  where
+
+  inv-iso-Group : iso-Group G H → iso-Group H G
+  inv-iso-Group =
+    inv-iso-Large-Precategory Group-Large-Precategory {X = G} {Y = H}
+
+module _
+  {l : Level} (X : Set l)
+  where
+
+  type-loop-Set : UU (lsuc l)
+  type-loop-Set = type-Set X ＝ type-Set X
+
+  is-set-type-loop-Set : is-set type-loop-Set
+  is-set-type-loop-Set =
+    is-trunc-id-is-trunc zero-𝕋 (is-set-type-Set X) (is-set-type-Set X)
+
+  set-loop-Set : Set (lsuc l)
+  pr1 set-loop-Set = type-loop-Set
+  pr2 set-loop-Set = is-set-type-loop-Set
+
+  has-associative-mul-loop-Set : has-associative-mul-Set (set-loop-Set)
+  pr1 has-associative-mul-loop-Set = _∙_
+  pr2 has-associative-mul-loop-Set = assoc
+
+  loop-semigroup-Set : Semigroup (lsuc l)
+  pr1 loop-semigroup-Set = set-loop-Set
+  pr2 loop-semigroup-Set = has-associative-mul-loop-Set
+
+  is-unital-Semigroup-loop-semigroup-Set :
+    is-unital-Semigroup loop-semigroup-Set
+  pr1 is-unital-Semigroup-loop-semigroup-Set = refl
+  pr1 (pr2 is-unital-Semigroup-loop-semigroup-Set) y = left-unit
+  pr2 (pr2 is-unital-Semigroup-loop-semigroup-Set) x = right-unit
+
+  is-group-loop-semigroup-Set' :
+    is-group-is-unital-Semigroup
+      ( loop-semigroup-Set)
+      ( is-unital-Semigroup-loop-semigroup-Set)
+  pr1 is-group-loop-semigroup-Set' = inv
+  pr1 (pr2 is-group-loop-semigroup-Set') = left-inv
+  pr2 (pr2 is-group-loop-semigroup-Set') = right-inv
+
+  loop-group-Set : Group (lsuc l)
+  pr1 loop-group-Set = loop-semigroup-Set
+  pr1 (pr2 loop-group-Set) = is-unital-Semigroup-loop-semigroup-Set
+  pr2 (pr2 loop-group-Set) = is-group-loop-semigroup-Set'
+
+module _
+  {l : Level}
+  where
+
+  map-hom-symmetric-group-loop-group-Set :
+    (X Y : Set l) →
+    type-Set X ＝ type-Set Y → (type-Set Y) ≃ (type-Set X)
+  map-hom-symmetric-group-loop-group-Set X Y p = equiv-eq (inv p)
+
+  map-hom-inv-symmetric-group-loop-group-Set :
+    (X Y : Set l) →
+    (type-Set X) ≃ (type-Set Y) → type-Set Y ＝ type-Set X
+  map-hom-inv-symmetric-group-loop-group-Set X Y f = inv (eq-equiv f)
+
+  commutative-inv-map-hom-symmetric-group-loop-group-Set :
+    (X Y : UU l) (p : X ＝ Y) (sX : is-set X) (sY : is-set Y) →
+    Id
+      ( map-hom-symmetric-group-loop-group-Set (Y , sY) (X , sX) (inv p))
+      ( inv-equiv
+        ( map-hom-symmetric-group-loop-group-Set (X , sX) (Y , sY) p))
+  commutative-inv-map-hom-symmetric-group-loop-group-Set X .X refl sX sY =
+    ( inv (right-inverse-law-equiv id-equiv)) ∙
+    ( left-unit-law-equiv (inv-equiv id-equiv))
+
+module _
+  {l : Level} (X : Set l)
+  where
+
+  hom-symmetric-group-loop-group-Set :
+    hom-Group (loop-group-Set X) (symmetric-Group X)
+  pr1 hom-symmetric-group-loop-group-Set =
+    map-hom-symmetric-group-loop-group-Set X X
+  pr2 hom-symmetric-group-loop-group-Set {p} {q} =
+    ( ap equiv-eq (distributive-inv-concat p q)) ∙
+    ( inv (compute-equiv-eq-concat (inv q) (inv p)))
+
+  hom-inv-symmetric-group-loop-group-Set :
+    hom-Group (symmetric-Group X) (loop-group-Set X)
+  pr1 hom-inv-symmetric-group-loop-group-Set =
+    map-hom-inv-symmetric-group-loop-group-Set X X
+  pr2 hom-inv-symmetric-group-loop-group-Set {f} {g} =
+    ( ap inv (inv (compute-eq-equiv-comp-equiv g f))) ∙
+    ( distributive-inv-concat (eq-equiv g) (eq-equiv f))
+
+  is-section-hom-inv-symmetric-group-loop-group-Set :
+    Id
+      ( comp-hom-Group
+        ( symmetric-Group X)
+        ( loop-group-Set X)
+        ( symmetric-Group X)
+        ( hom-symmetric-group-loop-group-Set)
+        ( hom-inv-symmetric-group-loop-group-Set))
+      ( id-hom-Group (symmetric-Group X))
+  is-section-hom-inv-symmetric-group-loop-group-Set =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ f →
+          ( ap equiv-eq (inv-inv (eq-equiv f))) ∙
+            ( ap
+              ( λ e → map-equiv e f)
+              ( right-inverse-law-equiv equiv-univalence))))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup
+          ( semigroup-Group (symmetric-Group X))
+          ( semigroup-Group (symmetric-Group X))
+          ( id)))
+
+  is-retraction-hom-inv-symmetric-group-loop-group-Set :
+    Id
+      ( comp-hom-Group
+        ( loop-group-Set X)
+        ( symmetric-Group X)
+        ( loop-group-Set X)
+        ( hom-inv-symmetric-group-loop-group-Set)
+        ( hom-symmetric-group-loop-group-Set))
+      ( id-hom-Group (loop-group-Set X))
+  is-retraction-hom-inv-symmetric-group-loop-group-Set =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ p →
+          ( ap
+            ( inv)
+            ( ap
+              ( λ e → map-equiv e (inv p))
+              ( left-inverse-law-equiv equiv-univalence))) ∙
+            ( inv-inv p)))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup
+          ( semigroup-Group (loop-group-Set X))
+          ( semigroup-Group (loop-group-Set X))
+          ( id)))
+
+  iso-symmetric-group-loop-group-Set :
+    iso-Group (loop-group-Set X) (symmetric-Group X)
+  pr1 iso-symmetric-group-loop-group-Set = hom-symmetric-group-loop-group-Set
+  pr1 (pr2 iso-symmetric-group-loop-group-Set) =
+    hom-inv-symmetric-group-loop-group-Set
+  pr1 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) =
+    is-section-hom-inv-symmetric-group-loop-group-Set
+  pr2 (pr2 (pr2 iso-symmetric-group-loop-group-Set)) =
+    is-retraction-hom-inv-symmetric-group-loop-group-Set
+
+module _
+  (l : Level) (n : ℕ)
+  where
+
+  hom-loop-group-fin-Type-With-Cardinality-ℕ-Group :
+    hom-Group
+      ( Type-With-Cardinality-ℕ-Group l n)
+      ( loop-group-Set (raise-Set l (Fin-Set n)))
+  pr1 hom-loop-group-fin-Type-With-Cardinality-ℕ-Group p =
+    pr1 (pair-eq-Σ p)
+  pr2 hom-loop-group-fin-Type-With-Cardinality-ℕ-Group {p} {q} =
+    pr1-interchange-concat-pair-eq-Σ p q
+
+  hom-inv-loop-group-fin-Type-With-Cardinality-ℕ-Group :
+    hom-Group
+      ( loop-group-Set (raise-Set l (Fin-Set n)))
+      ( Type-With-Cardinality-ℕ-Group l n)
+  pr1 hom-inv-loop-group-fin-Type-With-Cardinality-ℕ-Group p =
+    eq-pair-Σ p (eq-is-prop is-prop-type-trunc-Prop)
+  pr2 hom-inv-loop-group-fin-Type-With-Cardinality-ℕ-Group {p} {q} =
+    ( ap
+      ( λ r → eq-pair-Σ (p ∙ q) r)
+      ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
+      ( interchange-concat-eq-pair-Σ
+        ( p)
+        ( q)
+        ( eq-is-prop is-prop-type-trunc-Prop)
+        ( eq-is-prop is-prop-type-trunc-Prop))
+
+  is-section-hom-inv-loop-group-fin-Type-With-Cardinality-ℕ-Group :
+    Id
+      ( comp-hom-Group
+        ( loop-group-Set (raise-Set l (Fin-Set n)))
+        ( Type-With-Cardinality-ℕ-Group l n)
+        ( loop-group-Set (raise-Set l (Fin-Set n)))
+        ( hom-loop-group-fin-Type-With-Cardinality-ℕ-Group)
+        ( hom-inv-loop-group-fin-Type-With-Cardinality-ℕ-Group))
+      ( id-hom-Group (loop-group-Set (raise-Set l (Fin-Set n))))
+  is-section-hom-inv-loop-group-fin-Type-With-Cardinality-ℕ-Group =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ p →
+          ap pr1
+            ( is-retraction-pair-eq-Σ
+              ( raise-Fin-Type-With-Cardinality-ℕ l n)
+              ( raise-Fin-Type-With-Cardinality-ℕ l n)
+              ( pair p (eq-is-prop is-prop-type-trunc-Prop)))))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup
+          ( semigroup-Group (loop-group-Set (raise-Set l (Fin-Set n))))
+          ( semigroup-Group (loop-group-Set (raise-Set l (Fin-Set n))))
+          ( id)))
+
+  is-retraction-hom-inv-loop-group-fin-Type-With-Cardinality-ℕ-Group :
+    Id
+      ( comp-hom-Group
+        ( Type-With-Cardinality-ℕ-Group l n)
+        ( loop-group-Set (raise-Set l (Fin-Set n)))
+        ( Type-With-Cardinality-ℕ-Group l n)
+        ( hom-inv-loop-group-fin-Type-With-Cardinality-ℕ-Group)
+        ( hom-loop-group-fin-Type-With-Cardinality-ℕ-Group))
+      ( id-hom-Group (Type-With-Cardinality-ℕ-Group l n))
+  is-retraction-hom-inv-loop-group-fin-Type-With-Cardinality-ℕ-Group =
+    eq-pair-Σ
+      ( eq-htpy
+        ( λ p →
+          ( ap
+            ( λ r → eq-pair-Σ (pr1 (pair-eq-Σ p)) r)
+            ( eq-is-prop (is-trunc-Id (is-prop-type-trunc-Prop _ _)))) ∙
+            ( is-section-pair-eq-Σ
+              ( raise-Fin-Type-With-Cardinality-ℕ l n)
+              ( raise-Fin-Type-With-Cardinality-ℕ l n)
+              ( p))))
+      ( eq-is-prop
+        ( is-prop-preserves-mul-Semigroup
+          ( semigroup-Group (Type-With-Cardinality-ℕ-Group l n))
+          ( semigroup-Group (Type-With-Cardinality-ℕ-Group l n))
+          ( id)))
+
+  iso-loop-group-fin-Type-With-Cardinality-ℕ-Group :
+    iso-Group
+      ( Type-With-Cardinality-ℕ-Group l n)
+      ( loop-group-Set (raise-Set l (Fin-Set n)))
+  pr1 iso-loop-group-fin-Type-With-Cardinality-ℕ-Group =
+    hom-loop-group-fin-Type-With-Cardinality-ℕ-Group
+  pr1 (pr2 iso-loop-group-fin-Type-With-Cardinality-ℕ-Group) =
+    hom-inv-loop-group-fin-Type-With-Cardinality-ℕ-Group
+  pr1 (pr2 (pr2 iso-loop-group-fin-Type-With-Cardinality-ℕ-Group)) =
+    is-section-hom-inv-loop-group-fin-Type-With-Cardinality-ℕ-Group
+  pr2 (pr2 (pr2 iso-loop-group-fin-Type-With-Cardinality-ℕ-Group)) =
+    is-retraction-hom-inv-loop-group-fin-Type-With-Cardinality-ℕ-Group
+
+module _
+  {l1 l2 : Level} (X : Set l1) (Y : Set l2) (e : type-Set X ≃ type-Set Y)
+  where
+
+  hom-symmetric-group-equiv-Set :
+    hom-Group (symmetric-Group X) (symmetric-Group Y)
+  pr1 hom-symmetric-group-equiv-Set f = e ∘e (f ∘e inv-equiv e)
+  pr2 hom-symmetric-group-equiv-Set {f} {g} =
+    ( eq-equiv-eq-map-equiv refl) ∙
+    ( ap
+      ( λ h → e ∘e f ∘e h ∘e g ∘e inv-equiv e)
+      ( inv (left-inverse-law-equiv e))) ∙
+    ( eq-equiv-eq-map-equiv refl)
+
+  hom-inv-symmetric-group-equiv-Set :
+    hom-Group (symmetric-Group Y) (symmetric-Group X)
+  pr1 hom-inv-symmetric-group-equiv-Set f = inv-equiv e ∘e f ∘e e
+  pr2 hom-inv-symmetric-group-equiv-Set {f} {g} =
+    ( eq-equiv-eq-map-equiv refl) ∙
+    ( ap
+      ( λ h → inv-equiv e ∘e f ∘e h ∘e g ∘e e)
+      ( inv (right-inverse-law-equiv e))) ∙
+    ( eq-equiv-eq-map-equiv refl)
+
+  is-section-hom-inv-symmetric-group-equiv-Set :
+    comp-hom-Group
+      ( symmetric-Group Y)
+      ( symmetric-Group X)
+      ( symmetric-Group Y)
+      ( hom-symmetric-group-equiv-Set)
+      ( hom-inv-symmetric-group-equiv-Set) ＝
+    id-hom-Group (symmetric-Group Y)
+  is-section-hom-inv-symmetric-group-equiv-Set =
+    eq-type-subtype
+      ( preserves-mul-prop-Semigroup
+        ( semigroup-Group (symmetric-Group Y))
+        ( semigroup-Group (symmetric-Group Y)))
+      ( eq-htpy
+        ( λ f →
+          ( eq-equiv-eq-map-equiv refl) ∙
+          ( ap (λ h → h ∘e f ∘e h) (right-inverse-law-equiv e)) ∙
+          ( eq-equiv-eq-map-equiv refl)))
+
+  is-retraction-hom-inv-symmetric-group-equiv-Set :
+    comp-hom-Group
+      ( symmetric-Group X)
+      ( symmetric-Group Y)
+      ( symmetric-Group X)
+      ( hom-inv-symmetric-group-equiv-Set)
+      ( hom-symmetric-group-equiv-Set) ＝
+    id-hom-Group (symmetric-Group X)
+  is-retraction-hom-inv-symmetric-group-equiv-Set =
+    eq-type-subtype
+      ( preserves-mul-prop-Semigroup
+        ( semigroup-Group (symmetric-Group X))
+        ( semigroup-Group (symmetric-Group X)))
+      ( eq-htpy
+        ( λ f →
+          ( eq-equiv-eq-map-equiv refl) ∙
+          ( ap (λ h → h ∘e f ∘e h) (left-inverse-law-equiv e)) ∙
+          ( eq-equiv-eq-map-equiv refl)))
+
+  iso-symmetric-group-equiv-Set :
+    iso-Group (symmetric-Group X) (symmetric-Group Y)
+  pr1 iso-symmetric-group-equiv-Set =
+    hom-symmetric-group-equiv-Set
+  pr1 (pr2 iso-symmetric-group-equiv-Set) =
+    hom-inv-symmetric-group-equiv-Set
+  pr1 (pr2 (pr2 iso-symmetric-group-equiv-Set)) =
+    is-section-hom-inv-symmetric-group-equiv-Set
+  pr2 (pr2 (pr2 iso-symmetric-group-equiv-Set)) =
+    is-retraction-hom-inv-symmetric-group-equiv-Set
 ```
 
 Since the map
 
 ```text
-Ω : Pointed-Connected - 1-Type_𝒰 → Group_𝒰
+Ω : Pointed-Connected-1-Type_𝒰 → Group_𝒰
 ```
 
 is an equivalence, we obtain two perspectives on the type of all groups.
@@ -368,7 +897,7 @@ We call such groups **abstract groups**.
 On the other hand, pointed connected `1`-types `B` are **concrete groups** in the sense that they contain an object `⋆ : B`, and the group that `B` represents is the group of self-identifications (i.e., symmetries) of the base point `⋆ : B`.
 Thus we see that when we present a group as a pointed connected `1`-type, then we _concretely_ manifest that group as the group of symmetries of some object.
 
-We can also bring group homomorphisms into the mix: for every group homomorphism `f : G → H` the type of pointed maps `b : BG →_⋆ BH` equipped with a homotopy witnessing
+We can also bring group homomorphisms into the mix: for every group homomorphism `f : G → H` the type of pointed maps `b : BG →_⋆ BH` equipped with a homotopy witnessing that the diagram
 
 ```text
       [G] ----- f ----->  [H]
@@ -501,6 +1030,8 @@ module _
     pair (map-hom-Concrete-Group f) (preserves-mul-map-hom-Concrete-Group f)
 ```
 
+Note: The map from pointed maps to group homomorphisms is formalized. Its inverse and the asserted equivalence remain to be formalized; the universal-property comparison is part of [Exercise 19.15](exercise-19-15-exercise.lagda.md).
+
 We can do all of group theory in this way.
 For example, traditionally a `G`-set is defined to be a set `X` equipped with a group homomorphism `G → Aut(X)`.
 That is, the type of **abstract `G`-sets** is defined to be
@@ -596,6 +1127,7 @@ module _
 However, this definition is equivalent to a family `X : BG → Set_𝒰` of sets indexed by the classifying type `BG`.
 Therefore we define **concrete `G`-sets** to be type families `X : BG → Set_𝒰`.
 Given a concrete `G`-set `X : BG → Set_𝒰`, the set being acted upon is the set `X(⋆)`, and the action of `G` on `X(⋆)` is given by transport, since the elements of `G` are equivalent to loops in `BG`.
+Here `gx` denotes `tr_X(g,x)`, which satisfies `(gh)x = h(gx)`; the corresponding abstract left action sends `g` to `tr_X(inv(g))`.
 
 ```agda
 module _
@@ -623,6 +1155,8 @@ module _
     type-action-Concrete-Group → type-action-Concrete-Group
   mul-action-Concrete-Group g x = tr (type-Set ∘ X) g x
 ```
+
+Note: Both notions of `G`-set are defined here. The asserted equivalence between them remains the fully open benchmark in [Exercise 19.16(a)](exercise-19-16-exercise.lagda.md#exercise-1916a).
 
 The type of **orbits** of a concrete `G`-set `X : BG → Set_𝒰` can then be defined as
 
@@ -671,8 +1205,8 @@ since the group action of `G` on `X` is given by transport.
 
 Also, notice that a subgroup `H` of `G` determines an inclusion homomorphism `i : H → G`, and this inclusion function corresponds uniquely to a pointed map `Bi : BH → BG`.
 Since `Ω(Bi)` is an embedding, we note that `Bi` must be a `0`-truncated map.
-Therefore, a concrete subgroup of a concrete group `BG` is defined to be a concrete `G`-set `X` such that the type of orbits is connected.
-Such concrete `G`-sets are called **transitive**.
+A concrete `G`-set `X` is called **transitive** if its type of orbits is connected.
+A concrete subgroup of a concrete group `BG` is a transitive concrete `G`-set `X` equipped with a point in `X(⋆)`.
 
 ```agda
 subgroup-action-∞-Group :
@@ -1041,14 +1575,16 @@ Then the following are equivalent:
    is a family of `k`-truncated maps.
 
 2. The total space
+
    ```text
    Σ(x : A) B(x)
    ```
+
    is `(k + 1)`-truncated.
 
 ### Proof
 
-_Proof._ Recall from Exercise 12.10 that the total space `Σ(x : A) B(x)` is `(k + 1)`-truncated if and only if the base point inclusion
+Recall from Exercise 12.10 that the total space `Σ(x : A) B(x)` is `(k + 1)`-truncated if and only if the base point inclusion
 
 ```text
 (x,y) : unit → Σ(x : A) B(x)

@@ -15,30 +15,22 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-8-15-cofibonacci-sequence.lagda.md
 - rosetta-book/exercise-9-2-nonequivalences-booleans-natural-numbers.lagda.md
 - rosetta-book/exercise-9-9-finitely-cyclic-maps.lagda.md
-- rosetta-book/exercise-11-1-coproduct-embeddings.lagda.md
-- rosetta-book/exercise-11-5-composite-embeddings-equivalences.lagda.md
 - rosetta-book/exercise-11-6-embeddings-from-coproducts.lagda.md
 - rosetta-book/exercise-11-7-coproduct-functor-reflection.lagda.md
 - rosetta-book/exercise-11-9-embedding-from-path-sections.lagda.md
-- rosetta-book/exercise-11-11-fiber-triangles.lagda.md
 - rosetta-book/exercise-12-2-posets-are-sets.lagda.md
 - rosetta-book/exercise-12-5-diagonal.lagda.md
 - rosetta-book/exercise-12-9-list-concatenation-truncated-map.lagda.md
 - rosetta-book/exercise-12-10-constant-maps-truncated.lagda.md
-- rosetta-book/exercise-12-11-truncated-maps-triangles.lagda.md
-- rosetta-book/exercise-12-12-total-maps-truncated.lagda.md
 - rosetta-book/exercise-12-14-isolated-elements.lagda.md
-- rosetta-book/exercise-13-2-identity-types-of-structured-function-types.lagda.md
 - rosetta-book/exercise-13-5-path-split-and-coherently-invertible-propositions.lagda.md
 - rosetta-book/exercise-13-10-universal-property-natural-numbers.lagda.md
 - rosetta-book/exercise-13-11-ordinal-induction-natural-numbers.lagda.md
 - rosetta-book/exercise-13-13-pi-types-distribute-over-coproducts.lagda.md
 - rosetta-book/exercise-13-14-section-retraction-triangles.lagda.md
 - rosetta-book/exercise-13-16-equivalences-and-isomorphisms-of-sets.lagda.md
-- rosetta-book/exercise-13-17-contractible-products-over-decidable-sets.lagda.md
 - rosetta-book/exercise-13-18-retracts-as-limits.lagda.md
 - rosetta-book/exercise-14-1-propositional-truncation-properties.lagda.md
-- rosetta-book/exercise-14-2-mere-equality.lagda.md
 - rosetta-book/exercise-14-4-dependent-universal-property-truncations.lagda.md
 - rosetta-book/exercise-14-6-propositional-truncations-of-decidable-types.lagda.md
 - rosetta-book/exercise-14-7-precomposition-with-truncation.lagda.md
@@ -90,7 +82,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-18-14-exercise.lagda.md
 - rosetta-book/exercise-19-1-exercise.lagda.md
 - rosetta-book/exercise-19-3-exercise.lagda.md
-- rosetta-book/exercise-19-4-exercise.lagda.md
 - rosetta-book/exercise-19-5-exercise.lagda.md
 - rosetta-book/exercise-19-6-exercise.lagda.md
 - rosetta-book/exercise-19-7-exercise.lagda.md
@@ -117,7 +108,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-21-5-exercise.lagda.md
 - rosetta-book/exercise-21-6-exercise.lagda.md
 - rosetta-book/exercise-21-7-exercise.lagda.md
-- rosetta-book/exercise-21-8-exercise.lagda.md
 - rosetta-book/exercise-22-1-exercise.lagda.md
 - rosetta-book/exercise-22-2-exercise.lagda.md
 - rosetta-book/exercise-22-3-exercise.lagda.md
@@ -127,7 +117,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-22-7-exercise.lagda.md
 - rosetta-book/exercise-22-8-exercise.lagda.md
 - rosetta-book/exercise-22-9-exercise.lagda.md
-- rosetta-book/exercise-22-10-exercise.lagda.md
 - rosetta-book/exercise-22-11-exercise.lagda.md
 
 The phrase "BENCHMARK PROBLEM" is also used to indicate when a multipart problem has subparts that are fully unsolved. We write "PARTIAL BENCHMARK PROBLEM" when partial formalized solutions are included.
@@ -137,11 +126,18 @@ The following files contain partially solved (auto)formalization exercises, whic
 - rosetta-book/exercise-4-3-double-negation-logic.lagda.md
 - rosetta-book/exercise-6-5-distance-natural-numbers.lagda.md
 - rosetta-book/exercise-7-9-euclidean-division.lagda.md
+- rosetta-book/exercise-9-7-product-functor-equivalences.lagda.md
+- rosetta-book/exercise-10-7-fibers-of-projections.lagda.md
+- rosetta-book/exercise-11-1-coproduct-embeddings.lagda.md
+- rosetta-book/exercise-11-5-composite-embeddings-equivalences.lagda.md
+- rosetta-book/exercise-11-8-total-map-retractions.lagda.md
 - rosetta-book/exercise-12-3-injective-maps-into-sets.lagda.md
 - rosetta-book/exercise-12-4-coproduct-truncation.lagda.md
 - rosetta-book/exercise-12-6-truncated-sigma-types.lagda.md
-- rosetta-book/exercise-12-7-truncated-products.lagda.md
+- rosetta-book/exercise-13-2-identity-types-of-structured-function-types.lagda.md
+- rosetta-book/exercise-13-9-uniqueness-of-identity-types.lagda.md
 - rosetta-book/exercise-13-15-morphisms-over-a-type.lagda.md
+- rosetta-book/exercise-13-17-contractible-products-over-decidable-sets.lagda.md
 - rosetta-book/exercise-15-2-propositional-truncations.lagda.md
 - rosetta-book/exercise-17-1-universes-of-truncated-types.lagda.md
 - rosetta-book/exercise-17-5-surjective-precomposition.lagda.md
@@ -151,17 +147,38 @@ The following files contain partially solved (auto)formalization exercises, whic
 
 The main text contains a few missing formalizations that provide further benchmark problems identified with "BENCHMARK PROBLEM".
 
+- rosetta-book/section-11-6-the-structure-identity-principle.lagda.md (Theorem 11.6.2)
+- rosetta-book/section-12-3-sets.lagda.md (Theorem 12.3.4)
+- rosetta-book/section-13-2-identity-systems-on-pi-types.lagda.md (Theorem 13.2.4)
+- rosetta-book/section-14-1-the-universal-property-of-propositional-truncations.lagda.md (Remark 14.1.5)
+- rosetta-book/section-15-1-the-image-of-a-map.lagda.md (Theorem 15.1.8)
+- rosetta-book/section-15-2-surjective-maps.lagda.md (Proposition 15.2.3)
+- rosetta-book/section-15-2-surjective-maps.lagda.md (Corollary 15.2.4)
+- rosetta-book/section-15-2-surjective-maps.lagda.md (Corollary 15.2.6)
+- rosetta-book/section-16-3-finite-types.lagda.md (Theorem 16.3.6, part 3: necessity of the finite-complement condition)
+- rosetta-book/section-17-1-equivalent-forms-of-the-univalence-axiom.lagda.md (Example 17.1.4)
+- rosetta-book/section-18-1-equivalence-relations-and-the-replacement-axiom.lagda.md (Example 18.1.9)
+- rosetta-book/section-18-1-equivalence-relations-and-the-replacement-axiom.lagda.md (Example 18.1.10)
+- rosetta-book/section-18-3-partitions.lagda.md (Theorem 18.3.2)
+- rosetta-book/section-18-4-unique-representatives-of-equivalence-classes.lagda.md (Theorem 18.4.2)
+- rosetta-book/section-18-4-unique-representatives-of-equivalence-classes.lagda.md (Example 18.4.3)
+- rosetta-book/section-18-4-unique-representatives-of-equivalence-classes.lagda.md (Example 18.4.4)
+- rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Definition 19.4.4: group structure on homotopy groups)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Proposition 19.4.6)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Remark 19.4.8)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Proposition 19.4.9)
 - rosetta-book/section-19-5-the-eckmann-hilton-argument.lagda.md (Corollary 19.5.7)
+- rosetta-book/section-19-6-concrete-versus-abstract-groups-in-univalent-mathematics.lagda.md (Section 19.6: uniqueness of deloopings in the stated universe)
 - rosetta-book/section-19-6-concrete-versus-abstract-groups-in-univalent-mathematics.lagda.md (Example 19.6.4)
 - rosetta-book/section-19-6-concrete-versus-abstract-groups-in-univalent-mathematics.lagda.md (Example 19.6.5)
+- rosetta-book/section-20-1-the-type-of-well-founded-trees.lagda.md (Proposition 20.1.5)
 - rosetta-book/section-20-1-the-type-of-well-founded-trees.lagda.md (Example 20.1.8)
+- rosetta-book/section-20-1-the-type-of-well-founded-trees.lagda.md (Example 20.1.9)
 - rosetta-book/section-20-5-extensional-w-types.lagda.md (Example 20.5.4)
 - rosetta-book/section-21-3-multiplication-on-the-circle.lagda.md (Remark 21.3.4)
-- rosetta-book/section-22-1-the-universal-cover-of-the-circle.lagda.md (Lemma 22.1.3)
+- rosetta-book/section-22-2-working-with-descent-data.lagda.md (Corollary 22.2.4)
 - rosetta-book/section-22-3-the-dependent-universal-property-of-the-integers.lagda.md (Theorem 22.3.5)
 - rosetta-book/section-22-3-the-dependent-universal-property-of-the-integers.lagda.md (Corollary 22.3.6)
+- rosetta-book/section-22-4-the-fundamental-group-of-the-circle.lagda.md (Corollary 22.4.2)
 - rosetta-book/section-22-4-the-fundamental-group-of-the-circle.lagda.md (Proposition 22.4.3)
 - rosetta-book/section-22-4-the-fundamental-group-of-the-circle.lagda.md (Theorem 22.4.4)

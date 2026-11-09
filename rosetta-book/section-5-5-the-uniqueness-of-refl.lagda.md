@@ -2,6 +2,11 @@
 
 ```agda
 module section-5-5-the-uniqueness-of-refl where
+
+open import universe-levels
+
+open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
 ```
 
 The identity type is an inductive *family* of types.
@@ -56,10 +61,18 @@ Therefore it suffices to show that
 
 We obtain such an identification by reflexivity.
 
+```agda
+abstract
+  contraction-total-space-Id :
+    {l : Level} {A : UU l} (a : A) →
+    (y : Σ A (λ x → a ＝ x)) → (a , refl) ＝ y
+  contraction-total-space-Id a (.a , refl) = refl
+```
+
 Proposition 5.5.1 shows that there is, up to identification, only one element in
 `Σ`-type of the identity type. Such types are called contractible, and they are 
 the subject of Chapter 10.
 
-Agda-unimath does not contain code that directly translates to the contents of
-this section. Instead, it directly derives the contractibility of the total space
-of the identity type.
+This proof is the contraction used in `is-torsorial-Id` in Section 10.1.
+In agda-unimath, that construction appears in
+`foundation-core.torsorial-type-families`.

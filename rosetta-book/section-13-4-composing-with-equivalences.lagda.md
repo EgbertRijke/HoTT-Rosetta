@@ -68,7 +68,7 @@ By function extensionality it suffices to construct a homotopy `φ(h) ∘ f ~ h`
 In other words, we have to show that
 
 ```text
-  tr_P(G(f(x)),h(g(f(x))) = h(x)
+  tr_P(G(f(x)),h(g(f(x)))) = h(x)
 ```
 
 for any `x : A`.

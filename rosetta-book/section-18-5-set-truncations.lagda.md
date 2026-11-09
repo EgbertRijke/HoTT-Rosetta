@@ -822,7 +822,7 @@ In order to construct the contraction, we use the dependent universal property o
 ```
 
 Recall from Theorem 18.5.2 that the map `f` is effective, so we have an equivalence `e : ‖x = a‖ ≃ (f(x) = f(a))` for every `x : A`.
-Furthermore, equality in set truncations are propositions, so we may even eliminate the propositional truncation from `‖x = a‖`.
+Furthermore, equality in set truncations is a proposition, so we may even eliminate the propositional truncation from `‖x = a‖`.
 Therefore it suffices to prove
 
 ```text
@@ -830,7 +830,7 @@ Therefore it suffices to prove
 ```
 
 This is immediate, since `e(η(refl)) = refl`.
-This completes the proof of (1) implies (2).
+This completes the proof that (1) implies (2).
 
 For the converse, suppose that `f` is connected, and consider a set `X`.
 Note that we have a commuting square

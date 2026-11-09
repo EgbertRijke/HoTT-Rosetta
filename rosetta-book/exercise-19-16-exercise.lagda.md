@@ -24,11 +24,11 @@ ev_⋆ : (B → Set_𝒰) → Σ(X : Set_𝒰) hom(G,Aut(X))
 sending concrete `G`-sets to abstract `G`-sets defined by
 
 ```text
-ev_⋆(X) ≔ (X(⋆),g ↦ tr_X(φ(g)))
+ev_⋆(X) ≔ (X(⋆),g ↦ tr_X(inv(φ(g))))
 ```
 
 is an equivalence.
-In the remainder of this exercise we will write `gx` for `tr_X(φ(g),x)`.
+In the remainder of this exercise we will write `gx` for `tr_X(inv(φ(g)),x)`.
 
 ### Exercise 19.16(b)
 

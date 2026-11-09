@@ -1056,7 +1056,7 @@ It follows that the type `G ≅ H` is a set for any two semigroups `G` and `H`.
 
 ### Proof
 
-_Proof._ Let `k` and `k'` be two inverses of `h`.
+Let `k` and `k'` be two inverses of `h`.
 In Remark 19.2.2 we have observed that the type of semigroup homomorphisms between any two semigroups is a set.
 Therefore it follows that the types `h ∘ k = id` and `k ∘ h = id` are propositions, so it suffices to check that `k = k'`.
 In Remark 19.2.2 we also observed that the equality type `k = k'` is equivalent to the type of homotopies `k ~ k'` between their underlying functions.

@@ -19,7 +19,7 @@ A common way to construct functions and to prove properties about them is by cas
 For example, a famous function of Collatz is specified by case analysis on whether `n` is even or odd:
 
 ```text
-collatz(n) = { n / 2    if n is even 
+collatz(n) = { n / 2    if n is even
              { 3n + 1   if n is odd.
 ```
 
@@ -95,7 +95,7 @@ In other words, `f(x)` is defined to be `h(x, y)` with `g(x)` for `y`.
 The definition of the Collatz function can therefore be given by with-abstraction as
 
 ```text
-collatz(n) with [d(n) / y] ≔ h(x,y).
+collatz(n) with [d(n) / y] ≔ h(n,y).
 ```
 
 However, recall that the function `h` was defined by pattern matching on `y`.
@@ -124,7 +124,7 @@ Then the types `A × B` and `A → B` are also decidable.
 
 ### Proof
 
-*Proof.* We only prove the claim about the decidability of `A → B`, since the claim about the decidability of `A × B` is proven similarly.
+We only prove the claim about the decidability of `A → B`, since the claim about the decidability of `A × B` is proven similarly.
 Since `A` is assumed to be decidable, we proceed by case analysis on `A + ¬A`.
 In the case where we have `f : ¬A`, we have the functions
 
@@ -189,7 +189,7 @@ Then the type `Π(x : ℕ) P(x)` is decidable.
 
 ### Proof
 
-*Proof.* Our proof is by induction on `m`, but we will first make sure that the inductive hypothesis will be strong enough by quantifying over all decidable type families over `ℕ`.
+Our proof is by induction on `m`, but we will first make sure that the inductive hypothesis will be strong enough by quantifying over all decidable type families over `ℕ`.
 Of course, we cannot do this directly.
 However, by the assumption that there are enough universes (Postulate 6.2.1), there is a universe `𝒰` that contains `P`.
 We fix this universe, and we will prove by induction on `m` that for every decidable type family `Q : ℕ → 𝒰` for which the type
@@ -200,7 +200,7 @@ We fix this universe, and we will prove by induction on `m` that for every decid
 
 is decidable, the type `Π(x : ℕ) Q(x)` is again decidable.
 
-In the base case, it follows by assumption that the type `Π(x : A) Q(x)` is decidable.
+In the base case, it follows by assumption that the type `Π(x : ℕ) Q(x)` is decidable.
 For the inductive step, let `Q : ℕ → 𝒰` be a decidable type family for which the type
 
 ```text
@@ -259,8 +259,8 @@ is decidable.
 
 ### Proof
 
-*Proof.* Since `m` is assumed to be an upper bound for `P`, it follows `P(n) → Q(n)` for any `m ≤ n`.
-With this observation we apply Proposition 8.2.4. ◻
+Since `m` is assumed to be an upper bound for `P`, it follows that `P(n) → Q(n)` for any `m < n`.
+With this observation we apply Proposition 8.2.4 with `m + 1` in place of `m`. ◻
 
 ```agda
 is-upper-bound-ℕ :

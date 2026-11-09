@@ -67,7 +67,7 @@ Note: The agda-unimath definition of the universal property of propositional tru
 ## Remark 14.1.2
 
 Using the fact that equivalences are maps that have contractible fibers, we can reformulate the universal property of the propositional truncation.
-Note that the fiber of the precomposition map `- ∘ f : (P → Q) → (A → Q)` at a map `g : A → Q` is the type.
+Note that the fiber of the precomposition map `- ∘ f : (P → Q) → (A → Q)` at a map `g : A → Q` is the type
 
 ```text
   Σ(h : P → Q) h ∘ f = g
@@ -323,6 +323,16 @@ given by precomposition by `A → ¬¬ A` is an equivalence.
 However, this only gives us a universal property with respect to doubly negated propositions and there is no way to prove the more general universal property of the propositional truncation for the map `A → ¬¬ A`.
 In fact, propositional truncations are not guaranteed to exist in Martin Löf’s dependent type theory, the way it is set up in Chapter I.
 We will therefore add new rules to the type theory to ensure their existence.
+
+PARTIAL BENCHMARK PROBLEM
+
+The extension map is formalized by `extend-double-negation` in [Exercise 4.3](exercise-4-3-double-negation-logic.lagda.md#exercise-43b).
+The assertion that precomposition with `intro-double-negation` is an equivalence remains to be formalized.
+
+```agda
+open import exercise-4-3-double-negation-logic
+  using (intro-double-negation; extend-double-negation)
+```
 
 ## Supplement
 

@@ -42,7 +42,7 @@ indexed by `x : A'`.
 Then we define the map `W(f, e) : W(A', B') → W(A, B)` of W-types inductively by
 
 ```text
-W(f, e)(tree(x, α)) ≔ tree(f(x), W(f, g) ∘ α ∘ eₓ⁻¹).
+W(f, e)(tree(x, α)) ≔ tree(f(x), W(f, e) ∘ α ∘ eₓ⁻¹).
 ```
 
 ```agda
@@ -68,24 +68,25 @@ fib(W(f, e), tree(x, α)) ≃ fib(f, x) × Π(b : B(x)) fib(W(f, e), α(b)).
 ```
 
 ### Proof
+
 First, note that by the characterization in Theorem 20.2.3 of the identity type of `W(A, B)`, there is an equivalence between the fiber `fib(W(f, e), tree(x, α))` and the type
 
 ```text
 Σ(x' : A') Σ(α' : B'(x') → W(A', B')) Σ(p : f(x') = x)
-Σ(x' : A') Π(b : B(f(x'))) W(f, e)(α'(e_{x'}⁻¹(b))) = α(tr_B(p, b)).
+Π(b : B(f(x'))) W(f, e)(α'(e_{x'}⁻¹(b))) = α(tr_B(p, b)).
 ```
 
 By rearranging the `Σ`-type, we see that this type is equivalent to the type
 
 ```text
 Σ((x', p) : fib(f, x)) Σ(α' : B'(x') → W(A', B'))
-Σ(x' : A') Π(b : B(f(x'))) W(f, e)(α'(e_{x'}⁻¹(b))) = α(tr_B(p, b)).
+Π(b : B(f(x'))) W(f, e)(α'(e_{x'}⁻¹(b))) = α(tr_B(p, b)).
 ```
 
 Therefore, it suffices to show for each `(x', p) : fib(f, x)`, that the type
 
 ```text
-Σ(α' : B'(x') → W(A', B')) Π(b : B(f(x'))) W(f, e)(α'(e_{x'}⁻¹(b))) = α(tr_B(p,b ))
+Σ(α' : B'(x') → W(A', B')) Π(b : B(f(x'))) W(f, e)(α'(e_{x'}⁻¹(b))) = α(tr_B(p,b))
 ```
 
 is equivalent to the type `Π(b : B(x)) fib(W(f, e), α(b))`.
@@ -165,13 +166,14 @@ abstract
 
 ## Theorem 20.3.3
 
-Consider a morphism `W(f, e) : W(A, B) → W(A', B')` of W-types.
-If the map `f : A → A'` is `k`-truncated, then so is the map `W(f, e)`.
+Consider a morphism `W(f, e) : W(A', B') → W(A, B)` of W-types.
+If the map `f : A' → A` is `k`-truncated, then so is the map `W(f, e)`.
 In particular, if `f` is an equivalence or an embedding, then so is `W(f, e)`.
 
 ### Proof
+
 Suppose that the map `f` is `k`-truncated.
-We will prove recursively that the fibers of the morphism `W(f, e)` on W-types is `k`-truncated.
+We will prove recursively that the fibers of the morphism `W(f, e)` on W-types are `k`-truncated.
 We saw in Lemma 20.3.2 that there is an equivalence
 
 ```text

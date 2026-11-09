@@ -19,7 +19,7 @@ element `b : B(x)` to the fiber `B(y)`.
 ## Definition 5.4.1
 
 Let `A` be a type, and let `B` be a type family over `A`.
-We will construct a **transport**
+We will construct a **transport** operation
 
 ```text
   tr_B : Π(x, y : A) x = y → B(x) → B(y).
@@ -207,5 +207,5 @@ module _
 
 ## Agda-unimath sources
 
-- The transport operation for non-dependent functions is defined in `foundation-core.transport-along-identifications`
+- The transport operation is defined in `foundation-core.transport-along-identifications`
 - The dependent action on paths of a dependent function is defined in `foundation.action-on-identifications-dependent-functions`

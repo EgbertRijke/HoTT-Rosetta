@@ -302,7 +302,13 @@ Now we apply this function to `refl` to obtain the desired identification
 γ : tr_{E_{id,id}}(loop,loop) = loop.
 ```
 
- ◻
+Finally, using the identification `α : H(base) = loop` constructed above, define
+
+```text
+r ≔ inv(α) ∙ inv(right-unit(H(base))) : loop = H(base) ∙ refl.
+```
+
+This supplies the remaining input to `τ(H,r)`. ◻
 
 ```agda
 loop-htpy-𝕊¹ : (x : 𝕊¹) → x ＝ x

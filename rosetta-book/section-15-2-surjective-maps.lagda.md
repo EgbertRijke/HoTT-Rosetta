@@ -26,6 +26,7 @@ open import section-12-2-subtypes
 open import section-12-3-sets
 open import exercise-12-3-injective-maps-into-sets
 open import section-13-1-equivalent-forms-of-function-extensionality
+open import exercise-13-2-identity-types-of-structured-function-types
 open import exercise-13-7-universal-property-contractible-types
 open import exercise-13-12-dependent-products-of-truncated-maps
 open import exercise-13-15-morphisms-over-a-type
@@ -148,15 +149,15 @@ Then the following are equivalent:
 
 ### Proof
 
-To prove that (i) implies (ii), suppose first that `f` is surjective, and consider the commuting square
+To prove that (1) implies (2), suppose first that `f` is surjective, and consider the commuting square
 
 ```text
                                     - ∘ f
                (Π(y : B) P(y)) ---------------> (Π(x : A) P(f(x)))
-                        |                            |
+                        |                            ∧
   h ↦ λ y. const_{h(y)} |                            | h ↦ λ x. h(f(x),(x,refl))
                         |                            |
-                        ∨                            ∨
+                        ∨                            |
   (Π(y : B) ‖fib(f,y)‖ → P(y)) ---------------> (Π(y : B) fib(f,y) → P(y))
                                 h ↦ h(-) ∘ η
 ```
@@ -164,9 +165,9 @@ To prove that (i) implies (ii), suppose first that `f` is surjective, and consid
 In this square, the bottom map is an equivalence by Exercise 13.12 and by the universal property of the propositional truncation of `fib(f,y)`.
 The map on the right is an equivalence by Exercise 13.15.
 Furthermore, the map on the left is an equivalence by Exercises 13.12 and 13.7, because the type `‖fib(f,y)‖` is contractible by the assumption that `f` is surjective.
-Therefore it follows that the top map is an equivalence, which completes the proof that (i) implies (ii).
+Therefore it follows that the top map is an equivalence, which completes the proof that (1) implies (2).
 
-The proof that (ii) implies (iii) is by induction on `k`.
+The proof that (2) implies (3) is by induction on `k`.
 The base case holds by assumption.
 For the inductive step, it suffices by Theorem 12.4.7 to show that `ap_{- ∘ f}` is `k`-truncated for any `g, h : Π(y : B) P(y)`.
 Notice that we have a commuting square
@@ -185,7 +186,7 @@ Notice that we have a commuting square
 The vertical maps on the left and right are equivalences by function extensionality, and the bottom map is `k`-truncated by the inductive hypothesis.
 This implies that `ap_{- ∘ f}` is `k`-truncated.
 
-To prove that (iii) implies (i), note that the assumption in (iii) implies that the precomposition function
+To prove that (3) implies (1), note that the assumption in (3) implies that the precomposition function
 
 ```text
   - ∘ f : (Π(y : B) ‖fib(f,y)‖) → (Π(x : A) ‖fib(f,f(x))‖)
@@ -198,6 +199,12 @@ This is easy, because we have
 ```text
   η(x,refl) : ‖fib(f,f(x))‖. ◻
 ```
+
+PARTIAL BENCHMARK PROBLEM
+
+The equivalence of (1) and (2) is formalized below.
+The implication from (1) to (3) is formalized by `is-trunc-map-precomp-Π-is-surjective` in the [supplement to Section 18.5](section-18-5-set-truncations.lagda.md#precomposing-functions-into-a-family-of-k1-types-by-a-surjective-map-is-a-k-truncated-map).
+The implication from (3) to (1) remains to be formalized.
 
 ```agda
 module _
@@ -483,6 +490,8 @@ For any map `f : A → P` into a proposition `P`, the following are equivalent:
 
 2. The map `f` is surjective.
 
+BENCHMARK PROBLEM
+
 Using the characterization of surjective maps of Proposition 15.2.3, we can also give a new characterization of the image of a map.
 
 ## Theorem 15.2.5
@@ -521,7 +530,7 @@ By the universal property of `m` there is a unique map `h` for which the triangl
 
 ```text
        h
-  A ------> Σ(y : B) ∥fib(q,y)∥
+  B ------> Σ(y : B) ∥fib(q,y)∥
    \       /
   m \     / m ∘ pr1
      \   /
@@ -647,8 +656,8 @@ Consider a map `f : A → X`, and two factorizations
        X                  X
 ```
 
-of `f` where `m` and `m'` are embeddings, and `q` and `q'` are surjective.
-Then both `m` and `m'` satisfy the universal property of the image factorization of `f` by Theorem 15.2.5.
+of `f` where `i` and `i'` are embeddings, and `q` and `q'` are surjective.
+Then both `i` and `i'` satisfy the universal property of the image factorization of `f` by Theorem 15.2.5.
 Now it follows by Theorem 15.1.8 that the type of `(e,H) : hom-slice_X(i,i')` in which `e` is an equivalence, equipped with an identification
 
 ```text
@@ -656,6 +665,8 @@ Now it follows by Theorem 15.1.8 that the type of `(e,H) : hom-slice_X(i,i')` in
 ```
 
 in `hom-slice_X(f,i')`, is contractible. ◻
+
+BENCHMARK PROBLEM
 
 ## Supplement
 
@@ -728,7 +739,7 @@ module _
     map-inv-equiv (extensionality-surjection g)
 ```
 
-### A type family C over B satisfies the universal property of the family of fibers of a map f : A → B if and only if the constant map C b → (`fiber f b` → C b) is an equivalence for every b : B
+### A type family C over B satisfies the universal property of the family of fibers of a map f : A → B if the constant map C b → (`fiber f b` → C b) is an equivalence for every b : B
 
 In other words, the dependent type C is f-local if its fiber over b is `fiber f b`-null for every b : B.
 

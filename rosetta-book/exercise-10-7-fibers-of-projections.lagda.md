@@ -4,13 +4,10 @@
 module exercise-10-7-fibers-of-projections where
 
 open import universe-levels
-open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
 open import section-5-1-the-inductive-definition-of-identity-types
 open import section-5-4-transport
-open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
-open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 open import section-10-1-contractible-types
 open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
@@ -142,41 +139,7 @@ module _
 
 ### Exercise 10.7(c)
 
-```agda
-module _
-  {l1 l2 : Level} {A : UU l1} {B : A → UU l2}
-  where
-
-  map-inv-right-unit-law-Σ-is-contr :
-    ((a : A) → is-contr (B a)) → A → Σ A B
-  map-inv-right-unit-law-Σ-is-contr H a = (a , center (H a))
-
-  is-section-map-inv-right-unit-law-Σ-is-contr :
-    (H : (a : A) → is-contr (B a)) →
-    pr1 ∘ map-inv-right-unit-law-Σ-is-contr H ~ id
-  is-section-map-inv-right-unit-law-Σ-is-contr H = refl-htpy
-
-  is-retraction-map-inv-right-unit-law-Σ-is-contr :
-    (H : (a : A) → is-contr (B a)) →
-    map-inv-right-unit-law-Σ-is-contr H ∘ pr1 ~ id
-  is-retraction-map-inv-right-unit-law-Σ-is-contr H (a , b) =
-    eq-pair-eq-fiber (eq-is-contr (H a))
-
-  is-equiv-map-inv-right-unit-law-Σ-is-contr :
-    (H : (a : A) → is-contr (B a)) →
-    is-equiv (map-inv-right-unit-law-Σ-is-contr H)
-  is-equiv-map-inv-right-unit-law-Σ-is-contr H =
-    is-equiv-is-invertible
-      ( pr1)
-      ( is-retraction-map-inv-right-unit-law-Σ-is-contr H)
-      ( is-section-map-inv-right-unit-law-Σ-is-contr H)
-
-  inv-right-unit-law-Σ-is-contr :
-    (H : (a : A) → is-contr (B a)) → A ≃ Σ A B
-  pr1 (inv-right-unit-law-Σ-is-contr H) = map-inv-right-unit-law-Σ-is-contr H
-  pr2 (inv-right-unit-law-Σ-is-contr H) =
-    is-equiv-map-inv-right-unit-law-Σ-is-contr H
-```
+BENCHMARK PROBLEM
 
 ## Supplement
 

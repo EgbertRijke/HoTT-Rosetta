@@ -62,6 +62,7 @@ Consequently, the canonical family of maps
 ```text
   (Fin 2 = X) → X
 ```
+
 indexed by `X : BS₂`, is a family of equivalences.
 
 ### Proof
@@ -81,7 +82,7 @@ Therefore, it suffices to show that the map
   f : (Fin 2 ≃ Fin 2) → Fin 2
 ```
 
-give by `f(e) ≔ e(⋆)` is an equivalence.
+given by `f(e) ≔ e(⋆)` is an equivalence.
 Using the notation from Section 7.3, we define the inverse map `g` by
 
 ```text
@@ -527,11 +528,11 @@ abstract
 ```
 
 Corollary 17.5.3 is of philosophical importance.
-It shows that the **principle of global choice** is incompatible with the univalence axiom, i.e., that there is no way to obtain construct a function `‖A‖ → A` for all types `A`.
+It shows that the **principle of global choice** is incompatible with the univalence axiom, i.e., that there is no way to construct a function `‖A‖ → A` for all types `A`.
 In other words, we cannot obtain an element of `A` merely from the assumption that the type `A` is inhabited.
 What is the obstruction?
 It is the fact that no such choice of an element of `A` can be invariant under the automorphisms on `A`, i.e., under the self-equivalences on `A`.
-Indeed, in the example where `A` is the `2`-element type `Fin 2` there are no fixed point of the equivalence `succ-Fin₂ : Fin 2 ≃ Fin 2`.
+Indeed, in the example where `A` is the `2`-element type `Fin 2` there are no fixed points of the equivalence `succ-Fin₂ : Fin 2 ≃ Fin 2`.
 By the univalence axiom, there is an identification `p : Fin 2 = Fin 2` in `𝒰`, such that `tr(p,x) = succ-Fin₂(x)`.
 If we had a function
 
@@ -539,10 +540,10 @@ If we had a function
   f : Π(X : 𝒰) ‖X‖ → X,
 ```
 
-the dependent action on paths of `f` would give an identification
+the dependent action on paths of `f`, together with the fact that `‖Fin 2‖` is a proposition, would give an identification
 
 ```text
-  apd_f(p) : succ-Fin₂(f(Fin 2,p,H)) = f(Fin 2,p,η(0)).
+  succ-Fin₂(f(Fin 2,η(0))) = f(Fin 2,η(0)).
 ```
 
 In other words, it would give us a fixed point for the successor function on `Fin 2`.

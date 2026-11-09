@@ -14,6 +14,7 @@ Show that for any proposition `P`, the constant map
 ```text
   const_⋆ : P → unit
 ```
+
 is an embedding.
 Use this fact to construct an equivalence
 

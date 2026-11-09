@@ -15,8 +15,9 @@ open import section-10-1-contractible-types
 
 Suppose that `A` is a retract of `B`.
 Show that
+
 ```text
-is-contr(B) → is-contr(A).
+  is-contr(B) → is-contr(A).
 ```
 
 ## Solution

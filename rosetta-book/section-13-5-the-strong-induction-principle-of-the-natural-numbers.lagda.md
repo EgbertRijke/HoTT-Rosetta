@@ -80,7 +80,7 @@ The ordinary induction principle of `ℕ` then gives a function
 
 which can be used to define a function `Π(n : ℕ) P(n)`.
 
-Before we start by the proof of Theorem 13.5.1 we state two lemmas in which we construct `p̃₀` and `p̃_S` with computation rules of their own.
+Before we start the proof of Theorem 13.5.1 we state two lemmas in which we construct `p̃₀` and `p̃_S` with computation rules of their own.
 We will assume a type family `P` over `ℕ` equipped with
 
 ```text
@@ -324,7 +324,7 @@ The identification that computes `strong-ind-ℕ` at `0` is easy to obtain, beca
                           ≐ p₀.
 ```
 
-To construct the identification that computes `strong-ind-ℕ` at a successor, we start by a similar computation:
+To construct the identification that computes `strong-ind-ℕ` at a successor, we start with a similar computation:
 
 ```text
   strong-ind-ℕ(p₀,p_S,n + 1) ≐ s̃(n + 1,n + 1,refl-≤-ℕ(n + 1))

@@ -33,7 +33,7 @@ Since semigroups can have at most one unit element and since elements of semigro
 In order to show that isomorphic (semi)groups can be identified, it has to be part of the definition of a (semi)group that its underlying type is a set.
 This is an important observation: in many branches of algebra the objects of study are _set-level_ structures.
 
-A notable exception is formed by categories, which are objects at truncation level `1`, i.e., at the level of _groupoids_.
+A notable exception is formed by (univalent) categories, whose types of objects are `1`-types, i.e., at the level of _groupoids_.
 We will not cover categories in this book.
 For more about categories we recommend Chapter 9 of [the HoTT Book](https://homotopytypetheory.org/book/).
 
@@ -79,7 +79,7 @@ For a semigroup `G` the type `is-unital(G)` is a proposition.
 
 ### Proof
 
-_Proof._ Let `G` be a semigroup.
+Let `G` be a semigroup.
 Note that since `G` is a set, it follows that the types of the left and right unit laws are propositions.
 Therefore it suffices to show that any two elements `e,e' : G` satisfying the left and right unit laws can be identified.
 This is easy:
@@ -258,7 +258,7 @@ For any semigroup `G` the type `is-group(G)` is a proposition.
 
 ### Proof
 
-_Proof._ We have already seen that the type `is-unital(G)` is a proposition.
+We have already seen that the type `is-unital(G)` is a proposition.
 Therefore it suffices to show that the type `is-group'(G,e)` is a proposition for any `e : is-unital(G)`.
 
 Since a semigroup `G` is assumed to be a set, we note that the types of the inverse laws are propositions.

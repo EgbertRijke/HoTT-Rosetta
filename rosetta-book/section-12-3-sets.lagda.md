@@ -224,6 +224,11 @@ module _
       is-prop-based-Id-prop-in-based-id x (R x) (p x) (ρ x) (i x)
 ```
 
+PARTIAL BENCHMARK PROBLEM
+
+The conclusion that `A` is a set is formalized by `is-set-prop-in-id`, and `is-equiv-prop-in-id` proves that the given maps `R(x,y) → (x = y)` are equivalences.
+The assertion that every family of maps `(x = y) → R(x,y)` is a family of equivalences remains to be formalized.
+
 ## Theorem 12.3.5
 
 Any type with decidable equality is a set.
@@ -244,7 +249,7 @@ For every `x, y : A`, we first define a type family `R'(x,y) : ((x = y) + (x ≠
 Note that `R'(x,y,q)` is a proposition for each `x, y : A` and `q : (x = y) + (x ≠ y)`.
 Now we define `R(x,y) ≔ R'(x,y,d(x,y))`.
 Then `R` is a reflexive binary relation on `A`, and furthermore each `R(x,y)` is a proposition.
-In order to apply Theorem 12.3.4, it therefore it remains to show that `R` implies identity.
+In order to apply Theorem 12.3.4, it therefore remains to show that `R` implies identity.
 
 Since `R` is defined as an instance of `R'`, it suffices to construct a function
 
@@ -417,7 +422,7 @@ module _
     ( e , coherent-unit-laws-unit-laws μ H)
 ```
 
-### Semirings
+### Semigroups
 
 ```agda
 has-associative-mul : {l : Level} (X : UU l) → UU l

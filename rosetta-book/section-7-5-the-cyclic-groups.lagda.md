@@ -293,7 +293,7 @@ To prove associativity, note that by Theorem 7.4.7 it suffices to show that
 nat-Fin(x + y) + nat-Fin(z) ≡ nat-Fin(x) + nat-Fin(y + z) mod k + 1.
 ```
 
-Since addition on `ℤ / (k + 1)` maps preserves the congruence relation, and since we have the congruences
+Since addition on `ℕ` preserves the congruence relation, and since we have the congruences
 
 ```text
 nat-Fin(x + y) ≡ nat-Fin(x) + nat-Fin(y) mod k + 1
@@ -315,7 +315,7 @@ To show that addition on `ℤ / (k + 1)` satisfies the right unit law, we first 
 ```
 
 because there is an identification `[nat-Fin(x)]ₖ₊₁ = x` by Theorem 7.4.8.
-By Theorem 7.4.7 it now suffices tho show that
+By Theorem 7.4.7 it now suffices to show that
 
 ```text
 nat-Fin(x) + nat-Fin(0) ≡ nat-Fin(x) mod k + 1.

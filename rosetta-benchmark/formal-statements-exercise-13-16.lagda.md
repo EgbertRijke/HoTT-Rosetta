@@ -6,6 +6,7 @@ module formal-statements-exercise-13-16 where
 open import universe-levels
 open import section-2-2-ordinary-function-types
 open import section-4-6-dependent-pair-types
+open import section-5-1-the-inductive-definition-of-identity-types
 open import section-9-1-homotopies
 open import section-9-2-bi-invertible-maps
 open import section-12-3-sets
@@ -33,7 +34,7 @@ module _
 
   is-iso-Set :
     (f : hom-Set A B) → UU (l1 ⊔ l2)
-  is-iso-Set f = Σ (hom-Set B A) (λ g → (f ∘ g ~ id) × (g ∘ f ~ id))
+  is-iso-Set f = Σ (hom-Set B A) (λ g → (f ∘ g ＝ id) × (g ∘ f ＝ id))
 
   iso-Set : UU (l1 ⊔ l2)
   iso-Set = Σ (hom-Set A B) is-iso-Set

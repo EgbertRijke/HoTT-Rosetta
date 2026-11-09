@@ -8,8 +8,9 @@ module exercise-9-9-finitely-cyclic-maps where
 ## Problem statement
 
 A map `f : X → X` is said to be **finitely cyclic** if it comes equipped with an element of type
+
 ```text
-is-finitely-cyclic(f) ≔ Π(x,y : X) Σ(k : ℕ) f^k(x) = y.
+  is-finitely-cyclic(f) ≔ Π(x,y : X) Σ(k : ℕ) f^k(x) = y.
 ```
 
 ### Exercise 9.9(a)

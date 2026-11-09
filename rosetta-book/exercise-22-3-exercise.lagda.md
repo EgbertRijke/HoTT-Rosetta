@@ -24,6 +24,7 @@ deg(2)  \             / pr1
           V         V
              [S¹]
 ```
+
 commutes.
 
 ## Solution

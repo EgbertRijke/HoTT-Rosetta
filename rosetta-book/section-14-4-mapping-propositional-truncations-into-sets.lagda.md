@@ -248,7 +248,7 @@ module _
 ## Remark 14.4.4
 
 A constant map `A → B` is a map of the form `const_b`.
-A map `f : A → B` is therefore constant if comes equipped with an element `b : B` and a homotopy `f ~ const_b`.
+A map `f : A → B` is therefore constant if it comes equipped with an element `b : B` and a homotopy `f ~ const_b`.
 
 ```agda
 is-constant-map :

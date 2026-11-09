@@ -9,6 +9,7 @@ module exercise-19-9-exercise where
 
 Recall that a **normal subgroup** `H` of a group `G` is a subgroup of `G` such that `xyx⁻¹` is in `H` for every `y : H` and `x : G`.
 Show that the type of normal subgroups of `G` in `𝒰` is equivalent to the type
+
 ```text
 Σ(H : Group_𝒰) Σ(f : hom(G,H)) is-surj(f).
 ```

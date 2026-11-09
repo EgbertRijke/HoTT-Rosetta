@@ -57,8 +57,8 @@ Show that for any two maps `f : A → A'` and `g : B → B'`, the following are 
 2. There are functions
 
    ```text
-     α : B → is-equiv(f)
-     β : A → is-equiv(g).
+     α : B' → is-equiv(f)
+     β : A' → is-equiv(g).
    ```
 
 ## Solutions
@@ -126,6 +126,11 @@ htpy-map-product H K (a , b) = eq-pair (H a) (K b)
 ```
 
 ### Exercise 9.7(e)
+
+BENCHMARK PROBLEM
+
+The equivalence in part (e) remains to be formalized.
+The code below proves that a product of two equivalences is an equivalence.
 
 ```agda
 module _

@@ -59,8 +59,6 @@ A **dependent identity system** over `C` at `b : B(a)` consists of a type family
 
 equipped with an element `d : D(a,b,c)` such that `y ↦ D(a,y,c)` is an identity system at `b`.
 
-###
-
 Note: It seems agda-unimath doesn't have a definition of dependent identity system.
 
 ## Theorem 11.6.2
@@ -253,7 +251,10 @@ module _
       ( z)
 ```
 
-Note: It seems that agda-unimath doesn't explicitly develop the equivalence between all 6 statements. Instead, the equivalences that are actually used are formalized and the equivalences that are not used not.
+PARTIAL BENCHMARK PROBLEM
+
+The implication (ii) ⇒ (v) is formalized by `is-torsorial-Eq-structure`, and `structure-identity-principle` supplies the forward construction from componentwise equivalences.
+The converse (v) ⇒ (ii) and the full equivalence of the six conditions remain to be formalized.
 
 ## Example 11.6.3
 
@@ -268,7 +269,7 @@ To illustrate this use of the structure identity principle, we give an alternati
 We claim that
 
 ```text
-  ((x,p) = (y,q)) ≃ fib(ap{f}, p ∙ q⁻¹) ≐ Σ(α : x = y) ap_f(α) = p ∙ q⁻¹.
+  ((x,p) = (y,q)) ≃ fib(ap_f, p ∙ q⁻¹) ≐ Σ(α : x = y) ap_f(α) = p ∙ q⁻¹.
 ```
 
 To see this, we apply Theorem 11.6.2.

@@ -14,7 +14,6 @@ open import section-10-3-contractible-maps
 open import section-10-4-equivalences-are-contractible-maps
 open import exercise-9-4-three-for-two-equivalences
 open import exercise-10-3-contractible-equivalences
-open import exercise-10-8-fiber-replacement
 open import section-9-3-characterizing-the-identity-types-of-dependent-pair-types
 ```
 
@@ -42,23 +41,6 @@ module _
 
   tot : Σ A B → Σ A C
   tot (x , y) = (x , f x y)
-
-tot-htpy :
-  {l1 l2 l3 : Level} {A : UU l1} {B : A → UU l2} {C : A → UU l3}
-  {f g : (x : A) → B x → C x} → (H : (x : A) → f x ~ g x) → tot f ~ tot g
-tot-htpy H (x , y) = eq-pair-eq-fiber (H x y)
-
-tot-id :
-  {l1 l2 : Level} {A : UU l1} (B : A → UU l2) →
-  tot (λ x → id) ~ id {A = Σ A B}
-tot-id B p = refl
-
-preserves-comp-tot :
-  {l1 l2 l3 l4 : Level}
-  {A : UU l1} {B : A → UU l2} {B' : A → UU l3} {B'' : A → UU l4}
-  (f : (x : A) → B x → B' x) (g : (x : A) → B' x → B'' x) →
-  tot (λ x → g x ∘ f x) ~ tot g ∘ tot f
-preserves-comp-tot f g p = refl
 ```
 
 ## Lemma 11.1.2
@@ -77,7 +59,7 @@ We first define
   φ : Π(t : Σ(x : A) C(x)) fib(tot(f), t) → fib(f(pr1(t)), pr2(t))
 ```
 
-by pattern matching by
+by pattern matching:
 
 ```text
   φ((x,f(x,y)),((x,y),refl)) ≔ (y,refl).
@@ -161,7 +143,7 @@ The following are equivalent:
 ### Proof
 
 By Theorems 10.3.5 and 10.4.6 it suffices to show that `f(x)` is a contractible map for each `x : A`, if and only if `tot(f)` is a contractible map.
-Thus, we will show that `fib(f(x),c)` is contractible if and only if `fib(tot(f),x,c)` is contractible, for each `x : A` and `c : C(x)`.
+Thus, we will show that `fib(f(x),c)` is contractible if and only if `fib(tot(f),(x,c))` is contractible, for each `x : A` and `c : C(x)`.
 However, by Lemma 11.1.2 these types are equivalent, so the result follows by Exercise 10.3. ◻
 
 ```agda
@@ -293,7 +275,8 @@ We obtain such an equivalence by constructing the following functions and homoto
   H((f(x),z),((x,z),refl)) ≔ refl.
 ```
 
-Now the claim follows, since we see that `φ` is a contractible map if and only if `f` is a contractible map. ◻
+Since `f` is an equivalence, each fiber `fib(f,pr1(t))` is contractible.
+The displayed equivalence therefore shows that every fiber of `σ_f(C)` is contractible, so `σ_f(C)` is an equivalence. ◻
 
 ```agda
 module _
@@ -431,7 +414,7 @@ By the assumption that `f` is an equivalence, it follows that the map
 
 is an equivalence.
 Therefore it follows that `tot_f(g)` is an equivalence if and only if `tot(g)` is an equivalence.
-Now the claim follows, since `tot(g)` is an equivalence if and only if `g` if a family of equivalences. ◻
+Now the claim follows, since `tot(g)` is an equivalence if and only if `g` is a family of equivalences. ◻
 
 ```agda
 module _
@@ -484,60 +467,4 @@ module _
           ( triangle-map-Σ D f g)
           ( is-equiv-map-Σ-map-base f D H)
           ( K))
-```
-
-## Supplement
-
-### Any commuting triangle induces a map on fibers
-
-```agda
-module _
-  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ g ∘ h)
-  where
-
-  fiber-triangle :
-    (x : X) → fiber f x → fiber g x
-  fiber-triangle .(f a) (a , refl) = (h a , inv (H a))
-
-  square-tot-fiber-triangle :
-    ( h ∘ map-equiv-total-fiber f) ~
-    ( map-equiv-total-fiber g ∘ tot fiber-triangle)
-  square-tot-fiber-triangle (.(f a) , a , refl) = refl
-```
-
-```agda
-module _
-  {l1 l2 l3 : Level} {X : UU l1} {A : UU l2} {B : UU l3}
-  (f : A → X) (g : B → X) (h : A → B) (H : f ~ (g ∘ h))
-  where
-
-  abstract
-    is-fiberwise-equiv-is-equiv-triangle :
-      is-equiv h → is-fiberwise-equiv (fiber-triangle f g h H)
-    is-fiberwise-equiv-is-equiv-triangle E =
-      is-fiberwise-equiv-is-equiv-tot
-        ( is-equiv-top-is-equiv-bottom-square
-          ( map-equiv-total-fiber f)
-          ( map-equiv-total-fiber g)
-          ( tot (fiber-triangle f g h H))
-          ( h)
-          ( square-tot-fiber-triangle f g h H)
-          ( is-equiv-map-equiv-total-fiber f)
-          ( is-equiv-map-equiv-total-fiber g)
-          ( E))
-
-  abstract
-    is-equiv-triangle-is-fiberwise-equiv :
-      is-fiberwise-equiv (fiber-triangle f g h H) → is-equiv h
-    is-equiv-triangle-is-fiberwise-equiv E =
-      is-equiv-bottom-is-equiv-top-square
-        ( map-equiv-total-fiber f)
-        ( map-equiv-total-fiber g)
-        ( tot (fiber-triangle f g h H))
-        ( h)
-        ( square-tot-fiber-triangle f g h H)
-        ( is-equiv-map-equiv-total-fiber f)
-        ( is-equiv-map-equiv-total-fiber g)
-        ( is-equiv-tot-is-fiberwise-equiv E)
 ```

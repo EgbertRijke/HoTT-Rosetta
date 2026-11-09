@@ -140,7 +140,7 @@ The type `‖A‖` has two constructors: a point constructor `η` and a path con
    in the type `Q(y)`. Note, however, that `h(x)` and `h(y)` are not determined by our choice of `f : Π(a : A) Q(η(a))`. The second requirement of the induction principle of `‖A‖` is therefore that, no matter what values `h` takes, they must always be related via the dependent action on paths of `h`. This second requirement is therefore that
 
    ```text
-     tr_P(α(x,y),u) = v
+     tr_Q(α(x,y),u) = v
    ```
 
    for any `u : Q(x)` and `v : Q(y)`.
@@ -270,7 +270,7 @@ The map `η : A → ‖A‖` satisfies the universal property of the proposition
 
 ### Proof
 
-_Proof._ In order to prove that `η : A → ‖A‖` satisfies the universal property of the propositional truncation of `A`, it suffices to construct a map
+In order to prove that `η : A → ‖A‖` satisfies the universal property of the propositional truncation of `A`, it suffices to construct a map
 
 ```text
   (A → Q) → (‖A‖ → Q)
@@ -417,7 +417,7 @@ abstract
 
 abstract
   map-ternary-trunc-Prop :
-    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l3} →
+    {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {C : UU l3} {D : UU l4} →
     (A → B → C → D) → ║ A ║₋₁ → ║ B ║₋₁ → ║ C ║₋₁ → ║ D ║₋₁
   map-ternary-trunc-Prop {D = D} f |a| |b| |c| =
     rec-trunc-Prop
