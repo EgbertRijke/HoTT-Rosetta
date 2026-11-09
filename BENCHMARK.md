@@ -181,6 +181,8 @@ The main text contains a few missing formalizations that provide further benchma
 - rosetta-book/section-20-6-russells-paradox-in-type-theory.lagda.md (Proposition 20.6.7)
 - rosetta-book/section-21-3-multiplication-on-the-circle.lagda.md (Remark 21.3.4)
 - rosetta-book/section-22-1-the-universal-cover-of-the-circle.lagda.md (Lemma 22.1.3)
+- rosetta-book/section-22-2-working-with-descent-data.lagda.md (Corollary 22.2.3: computation rule at the base point)
+- rosetta-book/section-22-2-working-with-descent-data.lagda.md (Corollary 22.2.4)
 - rosetta-book/section-22-3-the-dependent-universal-property-of-the-integers.lagda.md (Theorem 22.3.5)
 - rosetta-book/section-22-3-the-dependent-universal-property-of-the-integers.lagda.md (Corollary 22.3.6)
 - rosetta-book/section-22-4-the-fundamental-group-of-the-circle.lagda.md (Corollary 22.4.2)

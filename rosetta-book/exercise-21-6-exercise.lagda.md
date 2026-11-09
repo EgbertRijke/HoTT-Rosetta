@@ -9,7 +9,7 @@ module exercise-21-6-exercise where
 
 ### Exercise 21.6(a)
 
-Show that the circle, equipped with the multiplicative operation `mul_{S¹}` is an abelian group, i.e., construct an inverse operation
+For the multiplication `mul_{S¹}` on the circle, construct an inverse operation
 
 ```text
 inv : S¹ → S¹

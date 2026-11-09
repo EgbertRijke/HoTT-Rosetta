@@ -149,6 +149,7 @@ vertical-concat-Id² α β = α ∙ β
 
 ## Lemma 19.5.4
 
+Consider a pointed type `A` and double loops `r,s : Ω^2(A)`.
 Horizontal concatenation satisfies the following left and right unit laws:
 
 ```text
@@ -158,7 +159,25 @@ r ∙ₕ refl_refl = r.
 
 ### Proof
 
-This follows by identification elimination on `r` and `s`, or alternatively via Lemma 19.5.2. ◻
+By Lemma 19.5.2 and the definition of concatenation,
+
+```text
+refl_refl ∙ₕ s = ap_{refl ∙ _}(s) = ap_id(s) = s.
+```
+
+For the right-unit law, write
+
+```text
+ρ(p) ≔ right-unit(p) : p ∙ refl = p.
+```
+
+Naturality of this homotopy (Definition 10.4.3), together with Lemma 19.5.2 and `ap_id(r) = r`, gives
+
+```text
+(r ∙ₕ refl_refl) ∙ ρ(refl) = ρ(refl) ∙ r.
+```
+
+Since `ρ(refl)` is `refl`, the ordinary left and right unit laws give `r ∙ₕ refl_refl = r`. ◻
 
 ```agda
 left-unit-law-vertical-concat-Id² :
@@ -180,6 +199,74 @@ compute-right-refl-horizontal-concat-Id² :
   {l : Level} {A : UU l} {x y z : A} {p q : x ＝ y} (α : p ＝ q) {u : y ＝ z} →
   horizontal-concat-Id² α refl ＝ right-whisker-concat α u
 compute-right-refl-horizontal-concat-Id² refl = refl
+
+module _
+  {l : Level}
+  where
+
+  Ω² : Pointed-Type l → Pointed-Type l
+  Ω² A = iterated-loop-space 2 A
+
+  type-Ω² : {A : UU l} (a : A) → UU l
+  type-Ω² a = refl {x = a} ＝ refl {x = a}
+
+  refl-Ω² : {A : UU l} {a : A} → type-Ω² a
+  refl-Ω² = refl
+
+vertical-concat-Ω² :
+  {l : Level} {A : UU l} {a : A} → type-Ω² a → type-Ω² a → type-Ω² a
+vertical-concat-Ω² α β = vertical-concat-Id² α β
+
+horizontal-concat-Ω² :
+  {l : Level} {A : UU l} {a : A} → type-Ω² a → type-Ω² a → type-Ω² a
+horizontal-concat-Ω² α β = horizontal-concat-Id² α β
+
+module _
+  {l : Level} {A : UU l}
+  where
+
+  left-unit-law-vertical-concat-Ω² :
+    {a : A} {α : type-Ω² a} → vertical-concat-Ω² refl-Ω² α ＝ α
+  left-unit-law-vertical-concat-Ω² = left-unit
+
+  right-unit-law-vertical-concat-Ω² :
+    {a : A} {α : type-Ω² a} → vertical-concat-Ω² α refl-Ω² ＝ α
+  right-unit-law-vertical-concat-Ω² = right-unit
+
+  left-unit-law-horizontal-concat-Ω² :
+    {a : A} {α : type-Ω² a} →
+    horizontal-concat-Ω² refl-Ω² α ＝ α
+  left-unit-law-horizontal-concat-Ω² {α = α} =
+    compute-left-refl-horizontal-concat-Id² α ∙ left-unit-law-left-whisker-concat α
+
+  naturality-right-unit :
+    {x y : A} {p q : x ＝ y} (α : p ＝ q) →
+    coherence-square-identifications
+      ( right-unit)
+      ( right-whisker-concat α refl)
+      ( α)
+      ( right-unit)
+  naturality-right-unit {p = refl} refl = refl
+
+  naturality-right-unit-Ω² :
+    {x : A} (α : type-Ω² x) → right-whisker-concat α refl ＝ α
+  naturality-right-unit-Ω² α = inv right-unit ∙ naturality-right-unit α
+
+  right-unit-law-horizontal-concat-Ω² :
+    {a : A} {α : type-Ω² a} → horizontal-concat-Ω² α refl-Ω² ＝ α
+  right-unit-law-horizontal-concat-Ω² {α = α} =
+    compute-right-refl-horizontal-concat-Id² α ∙ naturality-right-unit-Ω² α
+
+  left-unit-law-left-whisker-Ω² :
+    {a : A} (α : type-Ω² a) → left-whisker-concat (refl-Ω (A , a)) α ＝ α
+  left-unit-law-left-whisker-Ω² α =
+    left-unit-law-left-whisker-concat α
+
+  right-unit-law-right-whisker-Ω² :
+    {a : A} (α : type-Ω² a) → right-whisker-concat α (refl-Ω (A , a)) ＝ α
+  right-unit-law-right-whisker-Ω² α =
+    inv (right-unit-law-right-whisker-concat α ∙ right-unit)
+
 ```
 
 In the following lemma we establish the **interchange law** for horizontal and vertical concatenation.
@@ -256,73 +343,6 @@ r ∙ₕ s = (refl_refl ∙ r) ∙ₕ (s ∙ refl_refl)
 These two calculations combined prove the claim. ◻
 
 ```agda
-module _
-  {l : Level}
-  where
-
-  Ω² : Pointed-Type l → Pointed-Type l
-  Ω² A = iterated-loop-space 2 A
-
-  type-Ω² : {A : UU l} (a : A) → UU l
-  type-Ω² a = refl {x = a} ＝ refl {x = a}
-
-  refl-Ω² : {A : UU l} {a : A} → type-Ω² a
-  refl-Ω² = refl
-
-vertical-concat-Ω² :
-  {l : Level} {A : UU l} {a : A} → type-Ω² a → type-Ω² a → type-Ω² a
-vertical-concat-Ω² α β = vertical-concat-Id² α β
-
-horizontal-concat-Ω² :
-  {l : Level} {A : UU l} {a : A} → type-Ω² a → type-Ω² a → type-Ω² a
-horizontal-concat-Ω² α β = horizontal-concat-Id² α β
-
-module _
-  {l : Level} {A : UU l}
-  where
-
-  left-unit-law-vertical-concat-Ω² :
-    {a : A} {α : type-Ω² a} → vertical-concat-Ω² refl-Ω² α ＝ α
-  left-unit-law-vertical-concat-Ω² = left-unit
-
-  right-unit-law-vertical-concat-Ω² :
-    {a : A} {α : type-Ω² a} → vertical-concat-Ω² α refl-Ω² ＝ α
-  right-unit-law-vertical-concat-Ω² = right-unit
-
-  left-unit-law-horizontal-concat-Ω² :
-    {a : A} {α : type-Ω² a} →
-    horizontal-concat-Ω² refl-Ω² α ＝ α
-  left-unit-law-horizontal-concat-Ω² {α = α} =
-    compute-left-refl-horizontal-concat-Id² α ∙ left-unit-law-left-whisker-concat α
-
-  naturality-right-unit :
-    {x y : A} {p q : x ＝ y} (α : p ＝ q) →
-    coherence-square-identifications
-      ( right-unit)
-      ( right-whisker-concat α refl)
-      ( α)
-      ( right-unit)
-  naturality-right-unit {p = refl} refl = refl
-
-  naturality-right-unit-Ω² :
-    {x : A} (α : type-Ω² x) → right-whisker-concat α refl ＝ α
-  naturality-right-unit-Ω² α = inv right-unit ∙ naturality-right-unit α
-
-  right-unit-law-horizontal-concat-Ω² :
-    {a : A} {α : type-Ω² a} → horizontal-concat-Ω² α refl-Ω² ＝ α
-  right-unit-law-horizontal-concat-Ω² {α = α} =
-    compute-right-refl-horizontal-concat-Id² α ∙ naturality-right-unit-Ω² α
-
-  left-unit-law-left-whisker-Ω² :
-    {a : A} (α : type-Ω² a) → left-whisker-concat (refl-Ω (A , a)) α ＝ α
-  left-unit-law-left-whisker-Ω² α =
-    left-unit-law-left-whisker-concat α
-
-  right-unit-law-right-whisker-Ω² :
-    {a : A} (α : type-Ω² a) → right-whisker-concat α (refl-Ω (A , a)) ＝ α
-  right-unit-law-right-whisker-Ω² α =
-    inv (right-unit-law-right-whisker-concat α ∙ right-unit)
-
 interchange-Ω² :
   {l : Level} {A : UU l} {a : A} (α β γ δ : type-Ω² a) →
   Id

@@ -49,9 +49,11 @@ def benchmark_link(match):
     label = Path(path).name.removesuffix(SUFFIX)
     if statement:
         label += f" ({statement})"
-        # The index names plain numbered headings, such as Proposition 19.4.6.
-        anchor = re.sub(r"[^\w -]", "", statement.lower()).replace(" ", "-")
-        path += "#" + anchor
+        # Descriptions identify the obligation; anchors name its book heading.
+        heading = re.split(r"[:,]", statement, maxsplit=1)[0]
+        if not heading.startswith("Section "):
+            anchor = re.sub(r"[^\w -]", "", heading.lower()).replace(" ", "-")
+            path += "#" + anchor
     return f"- [{label}]({path})"
 
 

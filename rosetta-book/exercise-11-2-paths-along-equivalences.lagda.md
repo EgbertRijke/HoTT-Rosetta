@@ -202,7 +202,7 @@ module _
 
 ## Supplement
 
-### Inverting horizontal squares horizontally
+### Inverting commuting squares horizontally and vertically
 
 ```agda
 horizontal-inv-equiv-coherence-square-maps :
@@ -215,4 +215,41 @@ horizontal-inv-equiv-coherence-square-maps top left right bottom H b =
     ( bottom)
     ( ( ap right (inv (is-section-map-inv-equiv top b))) ∙
       ( inv (H (map-inv-equiv top b))))
+
+vertical-inv-equiv-coherence-square-maps :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (top : A → B) (left : A ≃ X) (right : B ≃ Y) (bottom : X → Y) →
+  coherence-square-maps top (map-equiv left) (map-equiv right) bottom →
+  coherence-square-maps bottom (map-inv-equiv left) (map-inv-equiv right) top
+vertical-inv-equiv-coherence-square-maps top left right bottom H x =
+  map-eq-transpose-equiv
+    ( right)
+    ( ( inv (H (map-inv-equiv left x))) ∙
+      ( ap bottom (is-section-map-inv-equiv left x)))
+
+coherence-square-maps-inv-equiv :
+  {l1 l2 l3 l4 : Level} {A : UU l1} {B : UU l2} {X : UU l3} {Y : UU l4}
+  (top : A ≃ B) (left : A ≃ X) (right : B ≃ Y) (bottom : X ≃ Y) →
+  coherence-square-maps
+    ( map-equiv top)
+    ( map-equiv left)
+    ( map-equiv right)
+    ( map-equiv bottom) →
+  coherence-square-maps
+    ( map-inv-equiv bottom)
+    ( map-inv-equiv right)
+    ( map-inv-equiv left)
+    ( map-inv-equiv top)
+coherence-square-maps-inv-equiv top left right bottom H =
+  vertical-inv-equiv-coherence-square-maps
+    ( map-inv-equiv top)
+    ( right)
+    ( left)
+    ( map-inv-equiv bottom)
+    ( horizontal-inv-equiv-coherence-square-maps
+      ( top)
+      ( map-equiv left)
+      ( map-equiv right)
+      ( bottom)
+      ( H))
 ```

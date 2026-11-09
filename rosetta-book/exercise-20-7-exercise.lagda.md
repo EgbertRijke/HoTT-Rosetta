@@ -58,7 +58,7 @@ We will call the poset `(rank(A,B),≼)` the **rank poset** of the W-type `W(A,B
 
 ### Exercise 20.7(c)
 
-Show that if each `B(x)` is finite, then the rank poset `(rank(A,B),≼)` is either the empty poset, the poset with one element, or it is isomorphic to the poset `(ℕ,≤)`.
+Assuming the law of excluded middle, show that if each `B(x)` is finite, then the rank poset `(rank(A,B),≼)` is either the empty poset, the poset with one element, or it is isomorphic to the poset `(ℕ,≤)`.
 
 ### Exercise 20.7(d)
 

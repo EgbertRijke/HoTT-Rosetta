@@ -16,15 +16,16 @@ Stirling(A, B) := Σ(X : 𝒰_B) A ↠ X.
 
 ### Exercise 18.13(a)
 
-Show that if `B` is a `k`-type, then the type `Stirling(A, B)` is also a `k`-type.
+Show that if `B` is a `k`-type for `k ≥ -1`, then the type `Stirling(A, B)` is also a `k`-type.
 
 ### Exercise 18.13(b)
 
-Suppose that `B` has decidable equality.
+Suppose that `A` and `B` are finite types.
 Construct an equivalence
 
 ```text
-Stirling(A + unit, B + unit) ≃ (B + unit) × Stirling(A, B + unit) + Stirling(A, B)
+Stirling(A + unit, B + unit) ≃
+  (Σ(X : 𝒰_{B + unit}) X × (A ↠ X)) + Stirling(A, B)
 ```
 
 ### Exercise 18.13(c)
