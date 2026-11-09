@@ -1127,6 +1127,7 @@ module _
 However, this definition is equivalent to a family `X : BG → Set_𝒰` of sets indexed by the classifying type `BG`.
 Therefore we define **concrete `G`-sets** to be type families `X : BG → Set_𝒰`.
 Given a concrete `G`-set `X : BG → Set_𝒰`, the set being acted upon is the set `X(⋆)`, and the action of `G` on `X(⋆)` is given by transport, since the elements of `G` are equivalent to loops in `BG`.
+Here `gx` denotes `tr_X(g,x)`, which satisfies `(gh)x = h(gx)`; the corresponding abstract left action sends `g` to `tr_X(inv(g))`.
 
 ```agda
 module _
@@ -1204,8 +1205,8 @@ since the group action of `G` on `X` is given by transport.
 
 Also, notice that a subgroup `H` of `G` determines an inclusion homomorphism `i : H → G`, and this inclusion function corresponds uniquely to a pointed map `Bi : BH → BG`.
 Since `Ω(Bi)` is an embedding, we note that `Bi` must be a `0`-truncated map.
-Therefore, a concrete subgroup of a concrete group `BG` is defined to be a concrete `G`-set `X` such that the type of orbits is connected.
-Such concrete `G`-sets are called **transitive**.
+A concrete `G`-set `X` is called **transitive** if its type of orbits is connected.
+A concrete subgroup of a concrete group `BG` is a transitive concrete `G`-set `X` equipped with a point in `X(⋆)`.
 
 ```agda
 subgroup-action-∞-Group :

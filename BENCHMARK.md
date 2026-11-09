@@ -82,7 +82,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-18-14-exercise.lagda.md
 - rosetta-book/exercise-19-1-exercise.lagda.md
 - rosetta-book/exercise-19-3-exercise.lagda.md
-- rosetta-book/exercise-19-4-exercise.lagda.md
 - rosetta-book/exercise-19-5-exercise.lagda.md
 - rosetta-book/exercise-19-6-exercise.lagda.md
 - rosetta-book/exercise-19-7-exercise.lagda.md
@@ -160,6 +159,7 @@ The main text contains a few missing formalizations that provide further benchma
 - rosetta-book/section-17-1-equivalent-forms-of-the-univalence-axiom.lagda.md (Example 17.1.4)
 - rosetta-book/section-18-1-equivalence-relations-and-the-replacement-axiom.lagda.md (Example 18.1.9)
 - rosetta-book/section-18-1-equivalence-relations-and-the-replacement-axiom.lagda.md (Example 18.1.10)
+- rosetta-book/section-18-3-partitions.lagda.md (Theorem 18.3.2)
 - rosetta-book/section-18-4-unique-representatives-of-equivalence-classes.lagda.md (Theorem 18.4.2)
 - rosetta-book/section-18-4-unique-representatives-of-equivalence-classes.lagda.md (Example 18.4.3)
 - rosetta-book/section-18-4-unique-representatives-of-equivalence-classes.lagda.md (Example 18.4.4)

@@ -925,3 +925,7 @@ equiv-equivalence-relation-partition :
 equiv-equivalence-relation-partition =
   ( equivalence-relation-partition , is-equiv-equivalence-relation-partition)
 ```
+
+PARTIAL BENCHMARK PROBLEM
+
+Note: The Agda formalizes the case where `A`, the relation values, and the predicate selecting partition blocks use the same universe. The stated equivalence with independently specified universes remains to be formalized.

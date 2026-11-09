@@ -8,14 +8,11 @@ module exercise-19-4-exercise where
 ## Problem statement
 
 Let `X` be a set.
-Show that the map
-
-```text
-equiv-eq : (X = X) → (X ≃ X)
-```
-
-is a group isomorphism.
+Show that the map from `(X = X)` to `(X ≃ X)` sending `p` to `equiv-eq(inv p)` is a group isomorphism.
 
 ## Solution
 
-BENCHMARK PROBLEM
+```agda
+open import section-19-6-concrete-versus-abstract-groups-in-univalent-mathematics
+  using (iso-symmetric-group-loop-group-Set)
+```
