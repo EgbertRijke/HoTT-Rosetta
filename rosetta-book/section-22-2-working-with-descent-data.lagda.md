@@ -400,10 +400,6 @@ Then there is a commuting square
 
 in which the top map is an equivalence.
 
-PARTIAL BENCHMARK PROBLEM
-
-Note: The equivalence is formalized below. Its displayed computation rule at the base point remains to be formalized.
-
 ### Proof
 
 The claim follows once we observe that `(Y^X,λ h. f ∘ h ∘ e^{-1})` is descent data for the family of types `(A(t) → B(t))` indexed by `t : S¹`.

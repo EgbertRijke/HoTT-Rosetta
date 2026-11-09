@@ -704,4 +704,4 @@ By Theorem 9.3.4 it suffices to show that
 We just take `α ≔ loop`.
 Then we have `tr_E(α,k_E) = succ-ℤ (k)_E` by the commuting square provided in the definition of `E`. ◻
 
-BENCHMARK PROBLEM
+The path `path-total-universal-cover-circle` is formalized in the proof of [Theorem 22.4.1](section-22-4-the-fundamental-group-of-the-circle.lagda.md#theorem-2241).

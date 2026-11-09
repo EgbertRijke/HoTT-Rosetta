@@ -109,7 +109,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-21-5-exercise.lagda.md
 - rosetta-book/exercise-21-6-exercise.lagda.md
 - rosetta-book/exercise-21-7-exercise.lagda.md
-- rosetta-book/exercise-21-8-exercise.lagda.md
 - rosetta-book/exercise-22-1-exercise.lagda.md
 - rosetta-book/exercise-22-2-exercise.lagda.md
 - rosetta-book/exercise-22-3-exercise.lagda.md
@@ -119,7 +118,6 @@ The following files contain fully unsolved (auto)formalization exercises:
 - rosetta-book/exercise-22-7-exercise.lagda.md
 - rosetta-book/exercise-22-8-exercise.lagda.md
 - rosetta-book/exercise-22-9-exercise.lagda.md
-- rosetta-book/exercise-22-10-exercise.lagda.md
 - rosetta-book/exercise-22-11-exercise.lagda.md
 
 The phrase "BENCHMARK PROBLEM" is also used to indicate when a multipart problem has subparts that are fully unsolved. We write "PARTIAL BENCHMARK PROBLEM" when partial formalized solutions are included.
@@ -165,7 +163,6 @@ The main text contains a few missing formalizations that provide further benchma
 - rosetta-book/section-18-4-unique-representatives-of-equivalence-classes.lagda.md (Theorem 18.4.2)
 - rosetta-book/section-18-4-unique-representatives-of-equivalence-classes.lagda.md (Example 18.4.3)
 - rosetta-book/section-18-4-unique-representatives-of-equivalence-classes.lagda.md (Example 18.4.4)
-- rosetta-book/section-18-5-set-truncations.lagda.md (Theorem 18.5.7)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Definition 19.4.4: group structure on homotopy groups)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Proposition 19.4.6)
 - rosetta-book/section-19-4-homotopy-groups-of-types.lagda.md (Remark 19.4.8)
@@ -178,10 +175,7 @@ The main text contains a few missing formalizations that provide further benchma
 - rosetta-book/section-20-1-the-type-of-well-founded-trees.lagda.md (Example 20.1.8)
 - rosetta-book/section-20-1-the-type-of-well-founded-trees.lagda.md (Example 20.1.9)
 - rosetta-book/section-20-5-extensional-w-types.lagda.md (Example 20.5.4)
-- rosetta-book/section-20-6-russells-paradox-in-type-theory.lagda.md (Proposition 20.6.7)
 - rosetta-book/section-21-3-multiplication-on-the-circle.lagda.md (Remark 21.3.4)
-- rosetta-book/section-22-1-the-universal-cover-of-the-circle.lagda.md (Lemma 22.1.3)
-- rosetta-book/section-22-2-working-with-descent-data.lagda.md (Corollary 22.2.3: computation rule at the base point)
 - rosetta-book/section-22-2-working-with-descent-data.lagda.md (Corollary 22.2.4)
 - rosetta-book/section-22-3-the-dependent-universal-property-of-the-integers.lagda.md (Theorem 22.3.5)
 - rosetta-book/section-22-3-the-dependent-universal-property-of-the-integers.lagda.md (Corollary 22.3.6)

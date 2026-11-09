@@ -26,4 +26,9 @@ Hint: Take some inspiration from Lemma 10.4.5, where one of the homotopies of th
 
 ## Solution
 
-BENCHMARK PROBLEM
+The construction `coherent-unit-laws-unit-laws` in the supplement to [Section 12.3](section-12-3-sets.lagda.md#supplement) keeps `H` and adjusts `K` to satisfy the required coherence. It applies to arbitrary types.
+
+```agda
+open import section-12-3-sets
+  using (coherent-unit-laws-unit-laws)
+```

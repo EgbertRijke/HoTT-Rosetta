@@ -473,10 +473,6 @@ i(X) ∈ {g(y) | y : B} ≐ Σ(y : B) g(y) = i(X)
 
 ◻
 
-BENCHMARK PROBLEM
-
-Note: The Agda below proves preservation of elementhood when two multisets in the same universe are resized together. The stated comparison for multisets initially in different universes remains to be formalized.
-
 ```agda
 abstract
   equiv-elementhood-resize-𝕍 :

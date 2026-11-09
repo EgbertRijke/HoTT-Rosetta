@@ -29,4 +29,11 @@ Show that the total space `Σ(t : S¹) E_{S¹}(t)` of the universal cover of the
 
 ## Solution
 
-BENCHMARK PROBLEM
+Both parts are formalized in the proof of [Theorem 22.4.1](section-22-4-the-fundamental-group-of-the-circle.lagda.md#theorem-2241). For (a), `Contraction-universal-cover-circle` supplies the paths and their successor law. For (b), `is-torsorial-universal-cover-circle` uses these data to contract the total space.
+
+```agda
+open import section-22-4-the-fundamental-group-of-the-circle
+  using
+    ( Contraction-universal-cover-circle
+    ; is-torsorial-universal-cover-circle)
+```
